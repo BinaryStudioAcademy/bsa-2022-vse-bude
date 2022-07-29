@@ -1,0 +1,35 @@
+{
+  "name": "@vse-bude/mobile",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.8.3",
+    "@vse-bude/shared": "file:../shared/build",
+    "react": "18.0.0",
+    "react-native": "0.69.2",
+    "react-native-config": "^1.4.6",
+    "react-redux": "^8.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/runtime": "^7.12.5",
+    "@react-native-community/eslint-config": "^3.0.3",
+    "@tsconfig/react-native": "^2.0.2",
+    "@types/node": "^18.0.3",
+    "@types/react-native": "^0.69.3",
+    "eslint": "^8.20.0",
+    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-native": "^4.0.0",
+    "metro-react-native-babel-preset": "^0.70.3",
+    "prettier": "^2.7.1",
+    "typescript": "4.7.4"
+  }
+}

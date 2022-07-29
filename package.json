@@ -1,0 +1,36 @@
+{
+  "name": "vse-bude",
+  "engines": {
+    "npm": ">=7.0.0",
+    "node": ">=16.0.0"
+  },
+  "scripts": {
+    "install:all": "npm install && npm run build:shared && npm run install:backend && npm run install:frontend && npm run install:mobile",
+    "install:backend": "cd packages/backend && npm install",
+    "install:frontend": "cd packages/frontend && npm install",
+    "install:mobile": "cd packages/mobile && npm install",
+    "build:shared": "cd packages/shared && npm install && npm run build",
+    "start:backend": "cd packages/backend && npm run start",
+    "start:frontend": "cd fpackages/rontend && npm run start",
+    "start:mobile": "cd packages/mobile && npm run start",
+    "lint:all": "npm run lint:backend && npm run lint:frontend &&  npm run lint:mobile && npm run lint:shared",
+    "lint:backend": "cd packages/backend && npm run lint",
+    "lint:frontend": "cd packages/frontend && npm run lint",
+    "lint:mobile": "cd packages/mobile && npm run lint",
+    "lint:shared": "cd packages/shared && npm run lint",
+    "lint:fix:all": "npm run lint:fix:backend && npm run lint:fix:frontend &&  npm run lint:fix:mobile && npm run lint:fix:shared",
+    "lint:fix:backend": "cd packages/backend && npm run lint:fix",
+    "lint:fix:frontend": "cd packages/frontend && npm run lint:fix",
+    "lint:fix:mobile": "cd packages/mobile && npm run lint:fix",
+    "lint:fix:shared": "cd packages/shared && npm run lint:fix"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.30.5",
+    "@typescript-eslint/parser": "^5.30.5",
+    "eslint": "^8.20.0",
+    "eslint-import-resolver-typescript": "^3.3.0",
+    "eslint-plugin-import": "^2.26.0",
+    "prettier": "^2.7.1",
+    "typescript": "4.7.4"
+  }
+}
