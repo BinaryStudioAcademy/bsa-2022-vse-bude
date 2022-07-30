@@ -5,8 +5,14 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "baseUrl": "./",
     "paths": {
-      "types": ["common/types"],
-      "enums": ["common/enums"]
+      "@types": ["common/types"],
+      "@enums": ["common/enums"],
+      "@constants": ["common/constants"],
+      "@hooks": ["hooks"],
+      "@helpers": ["helpers"],
+      "@components": ["components"],
+      "@services": ["services"],
+      "@primitives": ["components/primitives"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

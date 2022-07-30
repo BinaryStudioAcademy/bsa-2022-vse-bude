@@ -1,9 +1,18 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "noEmit": true,
-    "moduleResolution": "node",
     "baseUrl": "src",
+    "module": "commonjs",
+    "paths": {
+      "@types": ["common/types"],
+      "@enums": ["common/enums"],
+      "@helpers": ["helpers"],
+      "@models": ["data/models"],
+      "@repositories": ["data/repositories"],
+      "@services": ["services"],
+      "@routes": ["api/routes"],
+      "@middlewares": ["api/middlewares"]
+    },
     "outDir": "build"
   }
 }

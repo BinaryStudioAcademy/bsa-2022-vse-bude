@@ -1,7 +1,7 @@
-import { DBClient, log } from 'helpers';
+import { DBClient, log } from '@helpers';
 import { seedUsers } from './user';
 
-const dbClient = new DBClient();
+const dbClient = new DBClient({ log: ['query', 'info', 'warn', 'error'] });
 
 (async () => {
   await seedUsers(dbClient);

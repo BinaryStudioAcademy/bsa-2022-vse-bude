@@ -1,26 +1,28 @@
-import { Layout } from 'components';
-import type { GetStaticProps } from 'next';
-import Link from 'next/link';
+import type { GetServerSideProps } from 'next';
+import { Container } from '@primitives';
+import { Layout } from '@components';
+import { ApiRoutes, Http } from '@vse-bude/shared';
 
-const WithStaticProps = () => (
-  <Layout title="Users List | Next.js + TypeScript Example">
-    <h1>Users List</h1>
-    <p>
-      Example fetching data from inside <code>getStaticProps()</code>.
-    </p>
-    <p>You are currently on: /users</p>
-    <p>
-      <Link href="/">
-        <a>Go home</a>
-      </Link>
-    </p>
+interface UsersProps {
+  users: any[];
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const httpClient = new Http(process.env.NEXT_PUBLIC_API_ROUTE);
+  const users = await httpClient.get({ url: ApiRoutes.USERS });
+
+  return { props: { users } };
+};
+
+const Users = ({ users }: UsersProps) => (
+  <Layout title="Users">
+    <Container>
+      <h1>Users List</h1>
+      <div>
+        <pre>{JSON.stringify(users, null, 4)}</pre>
+      </div>
+    </Container>
   </Layout>
 );
 
-export const getStaticProps: GetStaticProps = async () =>
-  // Example for including static props in a Next.js function component page.
-  // Don't forget to include the respective types for any props passed into
-  // the component.
-  ({ props: { items: [] } });
-
-export default WithStaticProps;
+export default Users;

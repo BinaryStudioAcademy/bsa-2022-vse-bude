@@ -1,6 +1,6 @@
 import type { Http } from '@vse-bude/shared';
 import { ApiRoutes } from '@vse-bude/shared';
-import { http } from 'helpers';
+import { http } from '@helpers';
 
 export const getRandomData = () =>
   http.get({

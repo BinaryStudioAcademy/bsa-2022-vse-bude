@@ -2,24 +2,22 @@
   "name": "@vse-bude/backend",
   "version": "0.0.1",
   "private": true,
-  "main": "./src/server.ts",
   "engines": {
     "npm": ">=7.0.0",
     "node": ">=16.0.0"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=development nodemon -r ts-node --files ./src/server.ts",
-    "add-migration": "npx prisma migrate dev --create-only --name",
-    "migrate": "prisma migrate dev --name",
-    "seed": "ts-node ./src/data/seed",
+    "start": "nodemon -r ts-node --files -r tsconfig-paths/register ./src/server.ts",
+    "migrate:create": "prisma migrate dev --create-only --name",
+    "migrate": "prisma migrate dev",
+    "seed": "ts-node --files -r tsconfig-paths/register ./src/data/seed",
+    "write": "prettier --write '*/**/*.{ts,tsx}'",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix"
   },
   "prisma": {
     "schema": "./src/data/schema.prisma"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@prisma/client": "^4.1.0",
     "@vse-bude/shared": "file:../shared/build",
@@ -31,10 +29,10 @@
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/node": "18.0.6",
-    "cross-env": "^7.0.3",
     "nodemon": "2.0.19",
     "prettier": "^2.7.1",
     "prisma": "^4.1.0",
-    "ts-node": "^10.1.0"
+    "ts-node": "^10.1.0",
+    "tsconfig-paths": "^4.0.0"
   }
 }

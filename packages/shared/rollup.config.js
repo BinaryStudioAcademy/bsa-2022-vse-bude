@@ -19,6 +19,7 @@ export default [
       },
     ],
     plugins: [
+      del({ targets: [outDir] }),
       resolve(),
       commonjs(),
       typescript({ tsconfig: './tsconfig.json' }),

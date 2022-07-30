@@ -1,6 +1,6 @@
 import { styled } from '@nextui-org/react';
 
-export const StyledHeader = styled('header', {
-  padding: '$lg 0',
+export const StyledFooter = styled('footer', {
   background: '$blue100',
+  padding: '$lg 0',
 });

@@ -19,7 +19,7 @@ class Http {
 
   private _storage: Storage;
 
-  constructor(baseUrl: string, storage: Storage) {
+  constructor(baseUrl: string, storage?: Storage) {
     this._baseUrl = baseUrl;
     this._storage = storage;
   }

@@ -1,10 +1,8 @@
-import type { User } from '@prisma/client';
-import type { DBClient } from 'helpers';
-
-const users: User[] = [];
+import type { DBClient } from '@helpers';
+import { users } from './data';
 
 export const seedUsers = async (dbClient: DBClient) => {
-  dbClient.user.createMany({
+  await dbClient.user.createMany({
     data: users,
   });
 };

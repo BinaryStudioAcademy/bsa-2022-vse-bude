@@ -1,7 +1,8 @@
-import { Container } from '@nextui-org/react';
+import { Container } from '@primitives';
+import { StyledFooter } from './styles';
 
 export const Footer = () => (
-  <footer>
+  <StyledFooter>
     <Container>[footer]</Container>
-  </footer>
+  </StyledFooter>
 );

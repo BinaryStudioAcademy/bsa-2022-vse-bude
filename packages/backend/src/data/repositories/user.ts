@@ -1,9 +1,9 @@
-import type { PrismaClient } from '@prisma/client';
+import type { DBClient } from '@helpers';
 
 export class UserRepository {
-  private _bdClient: PrismaClient;
+  private _bdClient: DBClient;
 
-  constructor(bdClient: PrismaClient) {
+  constructor(bdClient: DBClient) {
     this._bdClient = bdClient;
   }
 

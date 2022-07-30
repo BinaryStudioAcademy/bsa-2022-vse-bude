@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
 export interface LayoutProps {
-  title: string;
+  title?: string;
   children: ReactNode;
 }

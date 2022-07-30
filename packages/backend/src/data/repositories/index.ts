@@ -1,4 +1,4 @@
-import type { DBClient } from 'helpers/dbClient';
+import type { DBClient } from '@helpers';
 import { RandomDataRepository } from './random-data';
 import { UserRepository } from './user';
 

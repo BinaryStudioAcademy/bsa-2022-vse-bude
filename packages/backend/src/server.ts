@@ -1,13 +1,13 @@
-import { initRoutes } from 'api/routes';
+import { initRoutes } from '@routes';
 import cors from 'cors';
-import { initRepositories } from 'data/repositories';
 import express, { json } from 'express';
-import { getEnv, log, DBClient } from 'helpers';
-import { initServices } from 'services';
-import { logger } from 'api/middlewares';
+import { initRepositories } from '@repositories';
+import { getEnv, log, DBClient } from '@helpers';
+import { initServices } from '@services';
+import { logger } from '@middlewares';
 
 const app = express();
-const bdClient = new DBClient();
+const bdClient = new DBClient({ log: ['query', 'info', 'warn', 'error'] });
 const repositories = initRepositories(bdClient);
 const services = initServices(repositories);
 const routes = initRoutes(services);
@@ -18,5 +18,5 @@ app
   .use(logger)
   .use(json())
   .use(routes)
-  .listen(port, () => log('server is running'))
-  .close(() => bdClient.$disconnect());
+  .on('close', () => bdClient.$disconnect())
+  .listen(port, () => log('server is running'));

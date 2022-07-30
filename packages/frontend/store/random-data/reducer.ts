@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { HydrateAction } from 'common/types';
+import type { HydrateAction } from '@types';
 import { HYDRATE } from 'next-redux-wrapper';
 import { fetchRandomData } from './actions';
 
