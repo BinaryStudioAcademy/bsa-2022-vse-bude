@@ -2,15 +2,18 @@
   "name": "@vse-bude/backend",
   "version": "0.0.1",
   "private": true,
+  "main": "./src/server.ts",
   "engines": {
     "npm": ">=7.0.0",
     "node": ">=16.0.0"
   },
   "scripts": {
-    "start": "nodemon -r ts-node --files -r tsconfig-paths/register ./src/server.ts",
+    "start": "nodemon -r ts-node --files ./src/server.ts",
+    "build": "tsc && tsc-alias",
+    "serve": "node build/server.js",
     "migrate:create": "prisma migrate dev --create-only --name",
     "migrate": "prisma migrate dev",
-    "seed": "ts-node --files -r tsconfig-paths/register ./src/data/seed",
+    "seed": "ts-node --files ./src/data/seed",
     "write": "prettier --write '*/**/*.{ts,tsx}'",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix"
@@ -33,6 +36,7 @@
     "prettier": "^2.7.1",
     "prisma": "^4.1.0",
     "ts-node": "^10.1.0",
+    "tsc-alias": "^1.7.0",
     "tsconfig-paths": "^4.0.0"
   }
 }

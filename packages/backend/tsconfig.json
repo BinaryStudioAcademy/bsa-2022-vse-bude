@@ -3,6 +3,7 @@
   "compilerOptions": {
     "baseUrl": "src",
     "module": "commonjs",
+    "noEmit": false,
     "paths": {
       "@types": ["common/types"],
       "@enums": ["common/enums"],
@@ -14,5 +15,7 @@
       "@middlewares": ["api/middlewares"]
     },
     "outDir": "build"
-  }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }

@@ -2,7 +2,8 @@
   "name": "@vse-bude/shared",
   "version": "0.0.1",
   "private": true,
-  "main": "index.js",
+  "main": "index.cjs.js",
+  "module": "index.esm.js",
   "types": "index.d.ts",
   "engines": {
     "npm": ">=7.0.0",

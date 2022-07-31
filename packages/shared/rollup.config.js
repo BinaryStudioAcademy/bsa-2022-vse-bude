@@ -15,6 +15,10 @@ export default [
     output: [
       {
         file: `${outDir}/${packageJson.main}`,
+        format: 'cjs',
+      },
+      {
+        file: `${outDir}/${packageJson.module}`,
         format: 'esm',
       },
     ],
