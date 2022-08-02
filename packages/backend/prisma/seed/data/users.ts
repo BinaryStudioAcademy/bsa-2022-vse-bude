@@ -1,4 +1,4 @@
-import type { User } from '@models';
+import type { User } from '@prisma/client';
 
 export const users: User[] = [
   {

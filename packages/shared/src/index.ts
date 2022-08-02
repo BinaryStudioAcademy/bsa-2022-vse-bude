@@ -1,3 +1,3 @@
-export * from './enums';
-export * from './types';
+export * from './common/enums';
+export * from './common/types';
 export * from './helpers';

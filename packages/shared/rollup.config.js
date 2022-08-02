@@ -8,6 +8,7 @@ import copy from 'rollup-plugin-copy';
 
 const packageJson = require('./package.json');
 const outDir = 'build';
+const resolvedFolders = ['common', 'helpers'];
 
 export default [
   {
@@ -44,8 +45,11 @@ export default [
     ],
   },
   {
-    input: `${outDir}/types/${packageJson.types}`,
+    input: `${outDir}/${packageJson.types}`,
     output: [{ file: `${outDir}/index.d.ts`, format: 'esm' }],
-    plugins: [dts(), del({ targets: [`${outDir}/types`], hook: 'buildEnd' })],
+    plugins: [
+      dts(),
+      del({ targets: resolvedFolders.map((folder) => `${outDir}/${folder}`), hook: 'buildEnd' }),
+    ],
   },
 ];

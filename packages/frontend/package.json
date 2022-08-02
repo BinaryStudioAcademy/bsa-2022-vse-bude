@@ -11,6 +11,7 @@
     "build": "next build",
     "serve": "next start",
     "write": "prettier --write '*/**/*.{ts,tsx}'",
+    "prettier": "prettier --check '*/**/*.{ts,tsx}'",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix"
   },

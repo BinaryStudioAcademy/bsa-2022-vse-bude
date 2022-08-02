@@ -18,8 +18,10 @@
   "scripts": {
     "build": "rollup -c",
     "write": "prettier --write '*/**/*.{ts,tsx}'",
+    "prettier": "prettier --check '*/**/*.{ts,tsx}'",
     "lint": "eslint . --ext .ts",
-    "lint:fix": "eslint . --ext .ts --fix"
+    "lint:fix": "eslint . --ext .ts --fix",
+    "postinstall": "npm run build"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^22.0.1",
