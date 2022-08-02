@@ -1,4 +1,4 @@
-import type { UserRepository } from 'data/repositories/user';
+import type { UserRepository } from '@repositories';
 
 export class UserService {
   private _userRepository: UserRepository;

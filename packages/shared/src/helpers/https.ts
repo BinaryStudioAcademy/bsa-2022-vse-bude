@@ -1,5 +1,5 @@
 import queryString from 'query-string';
-import { HttpHeader, HttpMethod, HttpStatusCode, HttpContentType } from '../enums';
+import { HttpHeader, HttpMethod, HttpStatusCode, HttpContentType } from '../common/enums';
 import type {
   DeleteRequestParams,
   GetRequestParams,
@@ -7,7 +7,7 @@ import type {
   PutRequestParams,
   RequestArgs,
   Storage,
-} from '../types';
+} from '../common/types';
 
 interface MakeRequest {
   url: string;

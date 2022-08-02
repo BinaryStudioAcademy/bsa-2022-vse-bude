@@ -13,16 +13,14 @@
     "serve": "node build/server.js",
     "migrate:create": "prisma migrate dev --create-only --name",
     "migrate": "prisma migrate dev",
-    "seed": "ts-node --files ./src/data/seed",
+    "seed": "ts-node --transpile-only --files ./prisma/seed",
     "write": "prettier --write '*/**/*.{ts,tsx}'",
     "lint": "eslint . --ext .ts",
-    "lint:fix": "eslint . --ext .ts --fix"
-  },
-  "prisma": {
-    "schema": "./src/data/schema.prisma"
+    "lint:fix": "eslint . --ext .ts --fix",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
-    "@prisma/client": "^4.1.0",
+    "@prisma/client": "^4.1.1",
     "@vse-bude/shared": "file:../shared/build",
     "cors": "^2.8.5",
     "express": "^4.18.1",
@@ -34,7 +32,7 @@
     "@types/node": "18.0.6",
     "nodemon": "2.0.19",
     "prettier": "^2.7.1",
-    "prisma": "^4.1.0",
+    "prisma": "^4.1.1",
     "ts-node": "^10.1.0",
     "tsc-alias": "^1.7.0",
     "tsconfig-paths": "^4.0.0"

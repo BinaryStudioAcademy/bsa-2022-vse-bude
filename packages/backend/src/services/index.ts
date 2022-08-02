@@ -1,4 +1,4 @@
-import type { Repositories } from 'data/repositories';
+import type { Repositories } from '@repositories';
 import { RandomDataService } from './random-data';
 import { UserService } from './user';
 
@@ -8,3 +8,5 @@ export const initServices = (repositories: Repositories) => ({
 });
 
 export type Services = ReturnType<typeof initServices>;
+
+export { type RandomDataService, type UserService };

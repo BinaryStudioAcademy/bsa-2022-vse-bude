@@ -1,4 +1,4 @@
-import type { RandomDataRepository } from 'data/repositories/random-data';
+import type { RandomDataRepository } from '@repositories';
 
 export class RandomDataService {
   private _randomDataRepository: RandomDataRepository;
