@@ -11,7 +11,7 @@
     "packages/shared"
   ],
   "scripts": {
-    "build:all": "npm run build --workspaces --if-present",
+    "build:all": "npm run build --workspace=packages/shared --workspace=packages/backend --workspace=packages/frontend",
     "build:backend": "npm run build -w packages/backend",
     "build:frontend": "npm run build -w packages/frontend",
     "build:shared": "npm run build -w packages/shared",
