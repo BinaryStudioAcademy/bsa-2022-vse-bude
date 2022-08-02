@@ -22,6 +22,7 @@
     "write:backend": "npm run write -w packages/backend",
     "write:frontend": "npm run write -w packages/frontend",
     "write:mobile": "npm run write -w packages/mobile",
+    "prettier": "npm run prettier --workspaces --if-present",
     "write:shared": "npm run write -w packages/shared",
     "lint:all": "npm run lint --workspaces --if-present",
     "lint:backend": "npm run lint -w packages/backend",

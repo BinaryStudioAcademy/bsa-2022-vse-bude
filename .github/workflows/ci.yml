@@ -1,4 +1,4 @@
-name: CI
+name: Check Pull Request
 
 on:
   pull_request:
@@ -18,13 +18,11 @@ jobs:
           node-version: 16
 
       - name: Install dependencies
-        run: |
-          npm install
+        run: npm install
 
       - name: Lint
-        run: |
-          npm run lint:all
+        run: npm run lint:all
+      - run: npm run prettier
 
       - name: Build
-        run: |
-          npm run build:all
+        run: npm run build:all

@@ -15,6 +15,7 @@
     "migrate": "prisma migrate dev",
     "seed": "ts-node --transpile-only --files ./prisma/seed",
     "write": "prettier --write '*/**/*.{ts,tsx}'",
+    "prettier": "prettier --check '*/**/*.{ts,tsx}'",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
     "postinstall": "prisma generate"
