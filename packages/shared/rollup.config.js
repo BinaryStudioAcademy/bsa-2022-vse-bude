@@ -4,22 +4,26 @@ import typescript from '@rollup/plugin-typescript';
 import dts from 'rollup-plugin-dts';
 import del from 'rollup-plugin-delete';
 import { terser } from 'rollup-plugin-terser';
-import copy from 'rollup-plugin-copy';
+import generatePackageJson from 'rollup-plugin-generate-package-json';
 
 const packageJson = require('./package.json');
 const outDir = 'build';
 const resolvedFolders = ['common', 'helpers'];
 
+const main = 'index.cjs.js';
+const module = 'index.esm.js';
+const types = 'index.d.ts';
+
 export default [
   {
-    input: 'src/index.ts',
+    input: packageJson.main,
     output: [
       {
-        file: `${outDir}/${packageJson.main}`,
+        file: `${outDir}/${main}`,
         format: 'cjs',
       },
       {
-        file: `${outDir}/${packageJson.module}`,
+        file: `${outDir}/${module}`,
         format: 'esm',
       },
     ],
@@ -34,19 +38,21 @@ export default [
           properties: false,
         },
       }),
-      copy({
-        targets: [
-          {
-            src: 'package.json',
-            dest: outDir,
-          },
-        ],
+      generatePackageJson({
+        outputFolder: outDir,
+        baseContents: {
+          ...packageJson,
+          main,
+          module,
+          types,
+          scripts: undefined,
+        },
       }),
     ],
   },
   {
-    input: `${outDir}/${packageJson.types}`,
-    output: [{ file: `${outDir}/index.d.ts`, format: 'esm' }],
+    input: `${outDir}/${types}`,
+    output: [{ file: `${outDir}/${types}`, format: 'esm' }],
     plugins: [
       dts(),
       del({ targets: resolvedFolders.map((folder) => `${outDir}/${folder}`), hook: 'buildEnd' }),
