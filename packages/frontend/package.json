@@ -10,8 +10,8 @@
     "start": "next",
     "build": "next build",
     "serve": "next start",
-    "write": "prettier --write '*/**/*.{ts,tsx}'",
-    "prettier": "prettier --check '*/**/*.{ts,tsx}'",
+    "prettier:check": "prettier --check '*/**/*.{ts,tsx}'",
+    "prettier:fix": "prettier --write '*/**/*.{ts,tsx}'",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix"
   },
@@ -20,6 +20,7 @@
     "@reduxjs/toolkit": "^1.8.3",
     "@vse-bude/shared": "file:../shared/build",
     "cookies-next": "^2.1.1",
+    "grapefruit-ui": "^0.2.5",
     "next": "^12.2.0",
     "next-redux-wrapper": "^7.0.5",
     "react": "^18.2.0",

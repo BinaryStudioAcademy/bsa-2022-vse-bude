@@ -11,14 +11,15 @@
     "start": "nodemon -r ts-node --files ./src/server.ts",
     "build": "tsc && tsc-alias",
     "serve": "node build/server.js",
-    "migrate:create": "prisma migrate dev --create-only --name",
-    "migrate": "prisma migrate dev",
-    "seed": "ts-node --transpile-only --files ./prisma/seed",
-    "write": "prettier --write '*/**/*.{ts,tsx}'",
-    "prettier": "prettier --check '*/**/*.{ts,tsx}'",
+    "db:generate": "prisma generate",
+    "db:migrate:create": "prisma migrate dev --create-only --name",
+    "db:migrate": "prisma migrate dev",
+    "db:seed": "ts-node --transpile-only --files ./prisma/seed",
+    "prettier:check": "prettier --check '*/**/*.{ts,tsx}'",
+    "prettier:fix": "prettier --write '*/**/*.{ts,tsx}'",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
-    "postinstall": "prisma generate"
+    "postinstall": "npm run db:generate"
   },
   "dependencies": {
     "@prisma/client": "^4.1.1",
