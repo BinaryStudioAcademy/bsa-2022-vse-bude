@@ -42,8 +42,8 @@
     "lint:fix:frontend": "cd packages/frontend && npm run lint:fix",
     "lint:fix:mobile": "cd packages/mobile && npm run lint:fix",
     "lint:fix:shared": "cd packages/shared && npm run lint:fix",
-    "hooks:pre-commit": "npm run prettier:check:all && lint:all",
-    "hooks:pre-push": "cd packages/backend && npm run "
+    "hooks:pre-commit": "npm run prettier:check:all && npm run lint:all",
+    "hooks:pre-push": "cd packages/backend && npm run db:generate"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.30.5",
@@ -51,7 +51,7 @@
     "eslint": "^8.20.0",
     "eslint-import-resolver-typescript": "^3.3.0",
     "eslint-plugin-import": "^2.26.0",
-    "husky": "^8.0.1",
+    "husky": "^4.3.8",
     "prettier": "^2.7.1",
     "typescript": "4.7.4"
   },
