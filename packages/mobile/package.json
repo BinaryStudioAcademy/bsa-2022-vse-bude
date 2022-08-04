@@ -6,8 +6,8 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "prettier:check": "prettier --check '*/**/*.{ts,tsx}'",
-    "prettier:fix": "prettier --write '*/**/*.{ts,tsx}'",
+    "prettier:check": "prettier --check '*/**/*.{ts,tsx}' --loglevel=warn",
+    "prettier:fix": "prettier --write '*/**/*.{ts,tsx}' --loglevel=warn",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix"
   },

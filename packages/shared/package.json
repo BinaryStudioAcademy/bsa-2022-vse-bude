@@ -12,8 +12,8 @@
   },
   "scripts": {
     "build": "rollup -c",
-    "prettier:check": "prettier --check '*/**/*.{ts,tsx}'",
-    "prettier:fix": "prettier --write '*/**/*.{ts,tsx}'",
+    "prettier:check": "prettier --check '*/**/*.{ts,tsx}' --loglevel=warn",
+    "prettier:fix": "prettier --write '*/**/*.{ts,tsx}' --loglevel=warn",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix"
   },
