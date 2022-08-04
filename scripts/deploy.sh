@@ -1,4 +1,6 @@
 #!/bin/bash
+export DISABLE_ERD=true
+
 npm install
 npm run install:shared
 npm run build:shared
