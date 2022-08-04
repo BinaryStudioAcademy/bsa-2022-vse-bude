@@ -1,0 +1,11 @@
+ls:
+  .dir: regex:([.a-z0-9]*)([-.][a-z0-9]+)*
+  .scss: regex:([.a-z0-9]*)([-.][a-z0-9]+)*
+  .ts: regex:([.a-z0-9]*)([-.][a-z0-9]+)*
+  .tsx: regex:([.a-z0-9]*)([-.][a-z0-9]+)*
+
+ignore:
+  - .git
+  - node_modules
+  - android
+  - ios

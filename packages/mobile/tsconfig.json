@@ -1,7 +1,24 @@
 {
-  "extends": "@tsconfig/react-native/tsconfig.json",
+  "include": ["src"],
+  "exclude": ["node_modules"],
   "compilerOptions": {
-    "skipLibCheck": true,
-    "types": ["react"]
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["src/*"]
+    },
+    "target": "esnext",
+    "lib": ["es2017"],
+    "allowJs": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "jsx": "react-native",
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noEmit": true,
+    "strict": true,
+    "skipLibCheck": true
   }
 }
