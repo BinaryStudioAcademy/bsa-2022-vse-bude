@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  vsebude_db:
+    container_name: vsebude_db
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: vsebude_db
+    ports:
+      - '5432:5432'
+    volumes:
+      - vsebude_pg_data:/var/lib/postgresql/data/
+volumes:
+  vsebude_pg_data:
