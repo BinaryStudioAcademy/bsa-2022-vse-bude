@@ -38,8 +38,7 @@
     "lint:fix:frontend": "cd packages/frontend && npm run lint:fix",
     "lint:fix:mobile": "cd packages/mobile && npm run lint:fix",
     "lint:fix:shared": "cd packages/shared && npm run lint:fix",
-    "hooks:pre-commit": "npm run prettier:fix:all && npm run lint:fix:all",
-    "hooks:pre-push": "cd packages/backend && npm run db:generate"
+    "hooks:pre-commit": "npm run prettier:fix:all && npm run lint:fix:all && cd packages/backend && npm run db:generate"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.30.5",
@@ -53,8 +52,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run hooks:pre-commit",
-      "pre-push": "npm run hooks:pre-push"
+      "pre-commit": "npm run hooks:pre-commit"
     }
   }
 }
