@@ -1,0 +1,11 @@
+root: '*'
+
+CI/CD: .github/**/*
+
+frontend: packages/frontend/**/*
+
+backend: packages/backend/**/*
+
+mobile: packages/mobile/**/*
+
+shared: packages/shared/**/*
