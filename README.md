@@ -18,7 +18,7 @@ As an online auction platform, “Vse-bude” provides a simple and secure envir
 
 ### Backend 💾
 
-- Create table using PostgreSQL
+- Create DB using PostgreSQL
 - Fill `.env` in `packages/backend` folder
 - Run `cd packages/backend && npm run db:generate && npm run db:migrate && npm run db:seed`
 
@@ -53,7 +53,8 @@ There are also other npm scripts, they are used for code style checks and lintin
 
 ### Frontend
 
-- [Next](https://nextjs.org/) - react framework
+- [Next](https://nextjs.org/) - React framework
+- [NextUI](https://nextui.org/) - React UI library
 - [Redux](https://redux.js.org/) - state container for JS apps
 - [Redux/Toolkit](https://redux-toolkit.js.org/) - toolset for efficient Redux development
 
@@ -62,6 +63,9 @@ There are also other npm scripts, they are used for code style checks and lintin
 - [React-Native](https://reactnative.dev/) - UI software framework
 - [Redux](https://redux.js.org/) - state container for JS apps
 - [Redux/Toolkit](https://redux-toolkit.js.org/) - toolset for efficient Redux development
+
+### Shared
+
 - [Joi](https://github.com/sideway/joi) - schema description language and data validator for JS
 
 # Git flow

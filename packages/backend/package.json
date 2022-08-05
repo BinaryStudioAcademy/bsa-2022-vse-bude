@@ -4,8 +4,8 @@
   "private": true,
   "main": "./src/server.ts",
   "engines": {
-    "npm": ">=7.0.0",
-    "node": ">=16.0.0"
+    "npm": ">=8.0.0",
+    "node": ">=16.0.0 <17.0.0"
   },
   "scripts": {
     "start": "nodemon -r ts-node --files ./src/server.ts",
