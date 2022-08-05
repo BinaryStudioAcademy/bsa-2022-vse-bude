@@ -69,3 +69,7 @@ There are also other npm scripts, they are used for code style checks and lintin
 - [Joi](https://github.com/sideway/joi) - schema description language and data validator for JS
 
 # Git flow
+
+# Team rules 🧐
+
+- [Rules](https://docs.google.com/document/d/17qtB4Dyh03I9VmBRIzGNk4M2feKaiAyGf4cvgUGBbSI/edit)
