@@ -40,7 +40,9 @@
     "lint:fix:shared": "cd packages/shared && npm run lint:fix",
     "hooks:pre-commit": "npm run prettier:fix:all && npm run lint:fix:all && cd packages/backend && npm run db:generate",
     "production:start:backend": "cd packages/backend && pm2 start \"npm run serve\" --name server",
-    "production:start:frontend": "cd packages/frontend && pm2 start \"npm run serve -- -p 8080\" --name nextjs"
+    "production:start:frontend": "cd packages/frontend && pm2 start \"npm run serve -- -p 8080\" --name nextjs",
+    "production:stop:backend": "pm2 delete server || true",
+    "production:stop:frontend": "pm2 delete nextjs || true"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.30.5",

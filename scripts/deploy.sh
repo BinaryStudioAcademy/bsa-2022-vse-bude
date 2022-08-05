@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# stop old version
+echo "0. Stop old version of the project"
+production:stop:backend
+production:stop:frontend
+
 # configure nginx
 echo "1. Configure nginx"
 cp nginx.conf /etc/nginx/nginx.conf
