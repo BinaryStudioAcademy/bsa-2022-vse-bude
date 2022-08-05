@@ -10,6 +10,6 @@ npm run build:backend
 npm run build:frontend
 cd ./packages/backend
 npm run db:migrate
-npx pm2 start build/server.js
-cd ../frontend
-npm run serve
+cd ../..
+npm run production:start:backend
+npm run production:start:frontend

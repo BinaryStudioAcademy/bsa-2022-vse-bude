@@ -39,3 +39,5 @@ sudo service nginx restart
 ```
 ./scripts/deploy.sh
 ```
+
+[Useful link](https://gist.github.com/ZaHuPro/2ecdb934a7362e979e3aa5a92b181153)
