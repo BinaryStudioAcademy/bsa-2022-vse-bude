@@ -1,13 +1,21 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { randomDataReducer } from './random-data';
+import { rootReducer } from './root-reducer';
+import { storage, authApi } from '~/services/services';
+
+const extraArgument = {
+  storage,
+  authApi,
+};
 
 const store = configureStore({
-  reducer: {
-    randomData: randomDataReducer,
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => {
+    return getDefaultMiddleware({
+      thunk: {
+        extraArgument,
+      },
+    });
   },
 });
 
-export { store };
-
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export { extraArgument, store };

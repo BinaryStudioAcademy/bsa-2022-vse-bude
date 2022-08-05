@@ -16,7 +16,7 @@
     "build:frontend": "cd packages/frontend && npm install",
     "build:shared": "cd packages/shared && npm run build",
     "start:backend": "cd packages/backend && npm run start",
-    "start:frontend": "cd fpackages/rontend && npm run start",
+    "start:frontend": "cd packages/frontend && npm run start",
     "start:mobile": "cd packages/mobile && npm run start",
     "prettier:check:all": "npm run prettier:check:backend && npm run prettier:check:frontend && npm run prettier:check:mobile && npm run prettier:check:shared",
     "prettier:check:backend": "cd packages/backend && npm run prettier:check",
