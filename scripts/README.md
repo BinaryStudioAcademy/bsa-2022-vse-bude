@@ -26,7 +26,7 @@ Create folder `/home/ubuntu/env` with files `backend.env` and `frontend.env` (.e
 2. Run deployment command
 
 ```
-sudo ./scripts/deploy.sh
+./scripts/deploy.sh
 ```
 
 [Useful link](https://gist.github.com/ZaHuPro/2ecdb934a7362e979e3aa5a92b181153)

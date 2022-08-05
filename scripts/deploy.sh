@@ -3,10 +3,10 @@
 # configure nginx
 echo "1. Configure nginx"
 cp nginx.conf /etc/nginx/nginx.conf
-sudo systemctl start nginx
-sudo systemctl restart nginx
-sudo systemctl status nginx
-sudo nginx -t
+systemctl start nginx
+systemctl restart nginx
+systemctl status nginx
+nginx -t
 
 # copy .env paths
 echo "2. Copy .env files"
