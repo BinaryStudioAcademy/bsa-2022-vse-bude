@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# stop old version
-echo "0. Stop old version of the project"
-npm run production:stop:backend
-npm run production:stop:frontend
-
 # configure nginx
 echo "1. Configure nginx"
 cp nginx.conf /etc/nginx/nginx.conf
@@ -34,7 +29,12 @@ cd ./packages/backend
 npm run db:migrate
 cd ../..
 
+# stop old version
+echo "5. Stop old version of the project"
+npm run production:stop:backend
+npm run production:stop:frontend
+
 # start production builds
-echo "5. Run production build"
+echo "6. Run production build"
 npm run production:start:backend
 npm run production:start:frontend
