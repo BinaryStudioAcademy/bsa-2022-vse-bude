@@ -4,10 +4,10 @@ As an online auction platform, “Vse-bude” provides a simple and secure envir
 
 # Packages 📦
 
-- [Backend] (./packages/backend)
-- [Frontend] (./packages/frontend)
-- [Mobile] (./packages/mobile)
-- [Shared] (./packages/shared)
+- [Backend](./packages/backend)
+- [Frontend](./packages/frontend)
+- [Mobile](./packages/mobile)
+- [Shared](./packages/shared)
 
 # Requirements:
 
@@ -47,21 +47,21 @@ There are also other npm scripts, they are used for code style checks and lintin
 
 ### Backend
 
-- [Prisma] (https://www.prisma.io/) - an ORM
-- [Express] (https://expressjs.com/) - a node.js framework
-- [PostgreSql] (https://www.postgresql.org/) - for DB
+- [Prisma](https://www.prisma.io/) - an ORM
+- [Express](https://expressjs.com/) - a node.js framework
+- [PostgreSql](https://www.postgresql.org/) - for DB
 
 ### Frontend
 
-- [Next] (https://nextjs.org/) - react framework
-- [Redux] (https://redux.js.org/) - state container for JS apps
-- [Redux/Toolkit] (https://redux-toolkit.js.org/) - toolset for efficient Redux development
+- [Next](https://nextjs.org/) - react framework
+- [Redux](https://redux.js.org/) - state container for JS apps
+- [Redux/Toolkit](https://redux-toolkit.js.org/) - toolset for efficient Redux development
 
 ### Mobile
 
-- [React-Native] (https://reactnative.dev/) - UI software framework
-- [Redux] (https://redux.js.org/) - state container for JS apps
-- [Redux/Toolkit] (https://redux-toolkit.js.org/) - toolset for efficient Redux development
-- [Joi] (https://github.com/sideway/joi) - schema description language and data validator for JS
+- [React-Native](https://reactnative.dev/) - UI software framework
+- [Redux](https://redux.js.org/) - state container for JS apps
+- [Redux/Toolkit](https://redux-toolkit.js.org/) - toolset for efficient Redux development
+- [Joi](https://github.com/sideway/joi) - schema description language and data validator for JS
 
 # Git flow
