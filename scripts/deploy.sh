@@ -2,8 +2,8 @@
 
 # stop old version
 echo "0. Stop old version of the project"
-production:stop:backend
-production:stop:frontend
+npm run production:stop:backend
+npm run production:stop:frontend
 
 # configure nginx
 echo "1. Configure nginx"
