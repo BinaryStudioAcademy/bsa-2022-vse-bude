@@ -18,8 +18,7 @@
     "prettier:check": "prettier --check '*/**/*.{ts,tsx}' --loglevel=warn",
     "prettier:fix": "prettier --write '*/**/*.{ts,tsx}' --loglevel=warn",
     "lint": "eslint . --ext .ts",
-    "lint:fix": "eslint . --ext .ts --fix",
-    "postinstall": "npm run db:generate"
+    "lint:fix": "eslint . --ext .ts --fix"
   },
   "dependencies": {
     "@prisma/client": "^4.1.1",
