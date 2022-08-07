@@ -6,6 +6,7 @@
     "npm": ">=8.0.0 <9.0.0",
     "node": ">=16.0.0 <17.0.0"
   },
+  "prettier": "@vse-bude/prettier-config",
   "scripts": {
     "start": "next",
     "build": "next build",
@@ -30,6 +31,7 @@
     "@types/node": "^18.0.3",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
+    "@vse-bude/prettier-config": "file:../prettier-config",
     "eslint-plugin-jsx-a11y": "^6.6.0",
     "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-react-hooks": "^4.6.0",

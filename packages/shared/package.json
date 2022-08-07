@@ -7,6 +7,7 @@
     "npm": ">=8.0.0",
     "node": ">=16.0.0 <17.0.0"
   },
+  "prettier": "@vse-bude/prettier-config",
   "dependencies": {
     "query-string": "^7.1.1"
   },
@@ -22,6 +23,7 @@
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@rollup/plugin-typescript": "^8.3.2",
     "@types/node": "^18.0.3",
+    "@vse-bude/prettier-config": "file:../prettier-config",
     "prettier": "^2.7.1",
     "rollup": "^2.72.1",
     "rollup-plugin-delete": "^2.0.0",
