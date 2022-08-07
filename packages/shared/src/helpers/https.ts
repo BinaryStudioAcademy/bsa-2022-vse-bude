@@ -1,5 +1,10 @@
 import queryString from 'query-string';
-import { HttpHeader, HttpMethod, HttpStatusCode, HttpContentType } from '../common/enums';
+import {
+  HttpHeader,
+  HttpMethod,
+  HttpStatusCode,
+  HttpContentType,
+} from '../common/enums';
 import type {
   DeleteRequestParams,
   GetRequestParams,
@@ -26,34 +31,60 @@ class Http {
 
   public get<T>({ url, payload, options }: GetRequestParams) {
     const urlPath = this.getUrlWithQuery(url, payload);
-    const config = this.getRequestOptions({ method: HttpMethod.GET, url: urlPath, options });
+    const config = this.getRequestOptions({
+      method: HttpMethod.GET,
+      url: urlPath,
+      options,
+    });
 
     return this.makeRequest<T>(config);
   }
 
   public post<T>({ url, body, options }: PostRequestParams) {
-    const config = this.getRequestOptions({ method: HttpMethod.POST, url, body, options });
+    const config = this.getRequestOptions({
+      method: HttpMethod.POST,
+      url,
+      body,
+      options,
+    });
 
     return this.makeRequest<T>(config);
   }
 
   public put<T>({ url, body, options }: PutRequestParams) {
-    const config = this.getRequestOptions({ method: HttpMethod.PUT, url, body, options });
+    const config = this.getRequestOptions({
+      method: HttpMethod.PUT,
+      url,
+      body,
+      options,
+    });
 
     return this.makeRequest<T>(config);
   }
 
   public delete<K>({ url, options }: DeleteRequestParams) {
-    const config = this.getRequestOptions({ method: HttpMethod.DELETE, url, options });
+    const config = this.getRequestOptions({
+      method: HttpMethod.DELETE,
+      url,
+      options,
+    });
 
     return this.makeRequest<K>(config);
   }
 
-  private getUrlWithQuery(url: string, params?: Record<string, unknown>): string {
+  private getUrlWithQuery(
+    url: string,
+    params?: Record<string, unknown>,
+  ): string {
     return `${url}${params ? `?${queryString.stringify(params)}` : ''}`;
   }
 
-  private getRequestOptions({ url, body, method, options }: RequestArgs): MakeRequest {
+  private getRequestOptions({
+    url,
+    body,
+    method,
+    options,
+  }: RequestArgs): MakeRequest {
     const {
       external = false,
       needAuthorization = true,
@@ -84,7 +115,10 @@ class Http {
     };
   }
 
-  private async makeRequest<T = unknown>({ url, config }: MakeRequest): Promise<T> {
+  private async makeRequest<T = unknown>({
+    url,
+    config,
+  }: MakeRequest): Promise<T> {
     const result = await fetch(url, config);
 
     if (result.status === HttpStatusCode.UNAUTHORIZED) {

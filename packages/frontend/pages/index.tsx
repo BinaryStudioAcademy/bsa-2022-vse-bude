@@ -6,19 +6,24 @@ import { useAppDispatch, useTypedSelector } from '@hooks';
 import { shallowEqual } from 'react-redux';
 import { fetchRandomData, fetchRandomDataSSR, wrapper } from 'store';
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
-  const storage = new CookieStorage(ctx);
-  const httpClient = new Http(process.env.NEXT_PUBLIC_API_ROUTE, storage);
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async (ctx) => {
+    const storage = new CookieStorage(ctx);
+    const httpClient = new Http(process.env.NEXT_PUBLIC_API_ROUTE, storage);
 
-  await store.dispatch(fetchRandomDataSSR(httpClient));
+    await store.dispatch(fetchRandomDataSSR(httpClient));
 
-  return Promise.resolve({
-    props: {},
-  });
-});
+    return Promise.resolve({
+      props: {},
+    });
+  },
+);
 
 const IndexPage = () => {
-  const { data, loading } = useTypedSelector((state) => state.randomData, shallowEqual);
+  const { data, loading } = useTypedSelector(
+    (state) => state.randomData,
+    shallowEqual,
+  );
   const dispatch = useAppDispatch();
 
   return (
@@ -30,7 +35,12 @@ const IndexPage = () => {
             <div style={{ wordBreak: 'break-all' }}>{JSON.stringify(data)}</div>
           </Card.Body>
           <Card.Footer>
-            <Button animated shadow size="md" onPress={() => dispatch(fetchRandomData())}>
+            <Button
+              animated
+              shadow
+              size="md"
+              onPress={() => dispatch(fetchRandomData())}
+            >
               {loading ? <Loading /> : 'reload'}
             </Button>
           </Card.Footer>
