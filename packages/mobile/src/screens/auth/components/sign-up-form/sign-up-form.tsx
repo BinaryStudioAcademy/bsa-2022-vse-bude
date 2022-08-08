@@ -1,9 +1,8 @@
 import React from 'react';
-import { UserSignUpDto } from '@vse-bude/shared';
+import { UserSignUpDto, signUpValidationSchema } from '@vse-bude/shared';
 
 import { useAppForm } from '~/hooks/hooks';
 import { Text, View, Button, Input } from '~/components/components';
-import { signUp as signUpValidationSchema } from '~/validation-schemas/validation-schemas';
 import { DEFAULT_SIGN_UP_PAYLOAD } from './common/constants';
 
 type Props = {

@@ -15,6 +15,7 @@ type Constructor = {
 
 class AuthApi {
   #http: Http;
+
   #apiPrefix: string;
 
   constructor({ http, apiPrefix }: Constructor) {

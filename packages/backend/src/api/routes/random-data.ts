@@ -3,7 +3,10 @@ import { Router } from 'express';
 import { wrap } from '@helpers';
 import type { Services } from '@services';
 
-export const initRandomDataRoutes = ({ randomDataService }: Services, path: ApiRoutes) => {
+export const initRandomDataRoutes = (
+  { randomDataService }: Services,
+  path: ApiRoutes,
+) => {
   const router = Router();
 
   return router.get(
