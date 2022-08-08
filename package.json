@@ -2,9 +2,10 @@
   "name": "vse-bude",
   "version": "0.0.1",
   "engines": {
-    "npm": ">=8.0.0",
-    "node": ">=16.0.0"
+    "npm": ">=8.0.0 <9.0.0",
+    "node": ">=16.0.0 <17.0.0"
   },
+  "prettier": "@vse-bude/prettier-config",
   "scripts": {
     "install:all": "npm install && npm run install:shared && npm run build:shared && npm run install:backend && npm run install:frontend && npm run install:mobile",
     "install:shared": "cd packages/shared && npm install",
@@ -16,7 +17,7 @@
     "build:frontend": "cd packages/frontend && npm run build",
     "build:shared": "cd packages/shared && npm run build",
     "start:backend": "cd packages/backend && npm run start",
-    "start:frontend": "cd fpackages/rontend && npm run start",
+    "start:frontend": "cd packages/frontend && npm run start",
     "start:mobile": "cd packages/mobile && npm run start",
     "prettier:check:all": "npm run prettier:check:backend && npm run prettier:check:frontend && npm run prettier:check:mobile && npm run prettier:check:shared",
     "prettier:check:backend": "cd packages/backend && npm run prettier:check",
@@ -38,15 +39,16 @@
     "lint:fix:frontend": "cd packages/frontend && npm run lint:fix",
     "lint:fix:mobile": "cd packages/mobile && npm run lint:fix",
     "lint:fix:shared": "cd packages/shared && npm run lint:fix",
-    "hooks:pre-commit": "npm run prettier:fix:all && npm run lint:fix:all && cd packages/backend && npm run db:generate",
     "production:start:backend": "cd packages/backend && pm2 start \"npm run serve\" --name server",
     "production:start:frontend": "cd packages/frontend && pm2 start \"npm run serve -- -p 8080\" --name nextjs",
     "production:stop:backend": "pm2 delete server || true",
-    "production:stop:frontend": "pm2 delete nextjs || true"
+    "production:stop:frontend": "pm2 delete nextjs || true",
+    "hooks:pre-commit": "npm run prettier:fix:all && npm run lint:fix:all"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "@typescript-eslint/parser": "^5.30.5",
+    "@vse-bude/prettier-config": "file:packages/prettier-config",
     "eslint": "^8.20.0",
     "eslint-import-resolver-typescript": "^3.3.0",
     "eslint-plugin-import": "^2.26.0",

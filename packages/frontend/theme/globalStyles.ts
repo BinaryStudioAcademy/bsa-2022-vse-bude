@@ -1,6 +1,6 @@
 import { globalCss } from '@nextui-org/react';
 
-export const globalStyles = globalCss({
+export const setGlobalStyles = globalCss({
   [`div[data-overlay-container='true']`]: {
     display: 'flex',
     flexDirection: 'column',

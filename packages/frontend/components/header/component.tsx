@@ -6,7 +6,12 @@ import { StyledHeader } from './styles';
 export const Header = () => (
   <StyledHeader>
     <Container
-      css={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexGrow: 1 }}
+      css={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexGrow: 1,
+      }}
     >
       <Link href={Routes.DEFAULT}>
         <a>

@@ -15,7 +15,7 @@ export class CookieStorage implements Storage {
     return JSON.parse(getCookie(key, this._ctx) as string) as T;
   }
 
-  set<T>(key: StorageKey, value: T, options: CookieSerializeOptions): void {
+  set<T>(key: StorageKey, value: T, options?: CookieSerializeOptions): void {
     setCookie(key, JSON.stringify(value), { ...this._ctx, ...options });
   }
 

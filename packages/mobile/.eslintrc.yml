@@ -1,0 +1,83 @@
+env:
+  es2021: true
+
+root: true
+
+parserOptions:
+  ecmaVersion: 2021
+  sourceType: module
+
+extends:
+  - '../../.eslintrc.js'
+  - plugin:import/recommended
+  - plugin:import/typescript
+
+settings:
+  import/ignore:
+    - 'react-native'
+
+rules:
+  no-multiple-empty-lines:
+    - error
+    - max: 1
+  newline-per-chained-call:
+    - off
+  no-var:
+    - error
+  no-console:
+    - error
+  arrow-parens:
+    - error
+    - always
+  arrow-body-style:
+    - off
+  curly:
+    - error
+    - all
+  no-else-return:
+    - error
+    - allowElseIf: false
+  no-duplicate-imports:
+    - error
+    - includeExports: true
+  jsx-quotes:
+    - error
+    - prefer-double
+  '@typescript-eslint/explicit-function-return-type':
+    - off
+  '@typescript-eslint/quotes':
+    - error
+    - single
+  '@typescript-eslint/object-curly-spacing':
+    - error
+    - always
+  '@typescript-eslint/semi':
+    - error
+    - always
+  '@typescript-eslint/comma-dangle':
+    - error
+    - always-multiline
+  '@typescript-eslint/no-use-before-define':
+    - error
+  '@typescript-eslint/consistent-type-imports':
+    - off
+  '@typescript-eslint/no-unused-vars':
+    - error
+    - vars: all
+      args: after-used
+      argsIgnorePattern: ^_
+      caughtErrors: all
+      ignoreRestSiblings: true
+  import/no-unresolved:
+    - off
+  import/no-named-as-default-member:
+    - off
+  import/no-default-export:
+    - error
+  import/no-named-as-default:
+    - off
+  import/order:
+    - error
+    - pathGroups:
+        - pattern: '~/**'
+          group: external

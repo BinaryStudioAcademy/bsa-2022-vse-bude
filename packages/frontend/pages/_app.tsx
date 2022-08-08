@@ -1,9 +1,9 @@
 import { NextUIProvider } from '@nextui-org/react';
 import type { AppProps } from 'next/app';
 import { wrapper } from 'store';
-import { globalStyles } from 'theme';
+import { setGlobalStyles } from 'theme';
 
-globalStyles();
+setGlobalStyles();
 
 const App = ({ Component, pageProps }: AppProps) => (
   <NextUIProvider>
