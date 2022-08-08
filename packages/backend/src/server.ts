@@ -5,13 +5,10 @@ import { initRepositories } from '@repositories';
 import { getEnv, log } from '@helpers';
 import { initServices } from '@services';
 import { logger } from '@middlewares';
-import { PrismaClient } from '@prisma/client';
+import { prismaClient as database } from './data/db';
 
 const app = express();
-const prismaClient = new PrismaClient({
-  log: ['query', 'info', 'warn', 'error'],
-});
-const repositories = initRepositories(prismaClient);
+const repositories = initRepositories(database);
 const services = initServices(repositories);
 const routes = initRoutes(services);
 const port = getEnv('PORT');
@@ -21,5 +18,5 @@ app
   .use(logger)
   .use(json())
   .use(routes)
-  .on('close', () => prismaClient.$disconnect())
+  .on('close', () => database.$disconnect())
   .listen(port, () => log('server is running'));
