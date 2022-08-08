@@ -9,7 +9,12 @@ import generatePackageJson from 'rollup-plugin-generate-package-json';
 
 const packageJson = require('./package.json');
 const outDir = 'build';
-const resolvedFolders = ['common', 'helpers'];
+const resolvedFolders = [
+  'common',
+  'helpers',
+  'exceptions',
+  'validation-schemas',
+];
 
 const main = 'index.cjs.js';
 const module = 'index.esm.js';
