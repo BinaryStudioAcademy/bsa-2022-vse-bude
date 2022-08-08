@@ -1,7 +1,9 @@
 import { PrismaClient } from '@prisma/client';
 import { seedUsers } from './user';
 
-const prismaClient = new PrismaClient({ log: ['query', 'info', 'warn', 'error'] });
+const prismaClient = new PrismaClient({
+  log: ['query', 'info', 'warn', 'error'],
+});
 
 (async () => {
   await seedUsers(prismaClient);

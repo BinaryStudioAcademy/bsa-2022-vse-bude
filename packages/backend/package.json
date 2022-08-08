@@ -7,6 +7,7 @@
     "npm": ">=8.0.0 <9.0.0",
     "node": ">=16.0.0 <17.0.0"
   },
+  "prettier": "@vse-bude/prettier-config",
   "scripts": {
     "start": "nodemon -r ts-node --files ./src/server.ts",
     "build": "tsc && tsc-alias",
@@ -15,8 +16,8 @@
     "db:migrate:create": "prisma migrate dev --create-only --name",
     "db:migrate": "prisma migrate dev",
     "db:seed": "ts-node --transpile-only --files ./prisma/seed",
-    "prettier:check": "prettier --check '*/**/*.{ts,tsx}' --loglevel=warn",
-    "prettier:fix": "prettier --write '*/**/*.{ts,tsx}' --loglevel=warn",
+    "prettier:check": "prettier --check \"*/**/*.{ts,tsx}\" --loglevel=warn",
+    "prettier:fix": "prettier --write \"*/**/*.{ts,tsx}\" --loglevel=warn",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix"
   },
@@ -32,6 +33,7 @@
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/node": "^18.6.3",
+    "@vse-bude/prettier-config": "file:../prettier-config",
     "nodemon": "2.0.19",
     "prettier": "^2.7.1",
     "prisma": "^4.1.1",

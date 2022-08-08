@@ -3,8 +3,8 @@ import { UserSignUpDto } from '@vse-bude/shared';
 
 import { auth as authActions } from '~/store/actions';
 import { useAppDispatch, useRoute } from '~/hooks/hooks';
-import { SignInForm, SignUpForm } from './components/components';
 import { RootScreenName } from '~/common/enums/enums';
+import { SignInForm, SignUpForm } from './components/components';
 
 const Auth: FC = () => {
   const { name } = useRoute();
