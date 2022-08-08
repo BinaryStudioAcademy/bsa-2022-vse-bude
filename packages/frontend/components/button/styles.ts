@@ -8,7 +8,7 @@ export const StyledButton = styled('button', {
   fontFamily: '$sans',
   fontWeight: '$bold',
 
-  '&[data-variant="ordinary"]': {
+  '&[data-variant="filled"]': {
     background: '#DFDFDF',
     color: '$white',
     '&:hover': {
