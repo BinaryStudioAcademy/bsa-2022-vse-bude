@@ -1,1 +1,4 @@
-export { signUp as signUpValidationSchema } from './user';
+export {
+  signUp as signUpValidationSchema,
+  signIn as signInValidationSchema,
+} from './auth';
