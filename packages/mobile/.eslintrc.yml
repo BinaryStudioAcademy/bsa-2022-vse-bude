@@ -14,7 +14,7 @@ extends:
 
 settings:
   import/ignore:
-    - "node_modules/react-native/index\\.js$"
+    - 'react-native'
 
 rules:
   no-multiple-empty-lines:
