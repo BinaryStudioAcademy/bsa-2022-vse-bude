@@ -5,13 +5,13 @@ on:
     branches: ['release']
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
     environment:
       name: Release
       url: http://vse-bude.com.ua
     steps:
-      - name: Deploy front-end and backend. Migrate DB.
+      - name: Deploy frontend and backend. Migrate DB.
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.MAIN_SERVER_HOST }}
