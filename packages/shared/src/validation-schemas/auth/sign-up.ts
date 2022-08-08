@@ -1,8 +1,9 @@
 import * as Joi from 'joi';
 import type { UserSignUpDto } from '../../common/types';
 import { UserValidationMessage } from '../../common/enums';
+import { MIN_PASSWORD_LENGTH } from '../constants';
 
-const signUp = Joi.object<UserSignUpDto>({
+export const signUp = Joi.object<UserSignUpDto>({
   email: Joi.string()
     .trim()
     .email({ tlds: { allow: false } })
@@ -14,9 +15,7 @@ const signUp = Joi.object<UserSignUpDto>({
   name: Joi.string().trim().required().messages({
     'string.empty': UserValidationMessage.NAME_REQUIRED,
   }),
-  password: Joi.string().trim().required().messages({
+  password: Joi.string().trim().min(MIN_PASSWORD_LENGTH).required().messages({
     'string.empty': UserValidationMessage.PASSWORD_REQUIRED,
   }),
 });
-
-export { signUp };
