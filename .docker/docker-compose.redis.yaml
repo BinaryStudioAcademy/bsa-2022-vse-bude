@@ -1,6 +1,7 @@
 ﻿version: '3.8'
 services:
   cache:
+    container_name: redis-server
     image: redis:6.2-alpine
     restart: always
     ports:
