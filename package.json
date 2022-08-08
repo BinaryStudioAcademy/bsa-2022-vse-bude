@@ -56,5 +56,8 @@
     "hooks": {
       "pre-commit": "npm run hooks:pre-commit"
     }
+  },
+  "dependencies": {
+    "react-native-vector-icons": "^9.2.0"
   }
 }
