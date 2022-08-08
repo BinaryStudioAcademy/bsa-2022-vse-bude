@@ -4,6 +4,7 @@ import typescript from '@rollup/plugin-typescript';
 import dts from 'rollup-plugin-dts';
 import del from 'rollup-plugin-delete';
 import { terser } from 'rollup-plugin-terser';
+import json from '@rollup/plugin-json';
 import generatePackageJson from 'rollup-plugin-generate-package-json';
 
 const packageJson = require('./package.json');
@@ -48,6 +49,7 @@ export default [
           scripts: undefined,
         },
       }),
+      json(),
     ],
   },
   {
@@ -55,7 +57,10 @@ export default [
     output: [{ file: `${outDir}/${types}`, format: 'esm' }],
     plugins: [
       dts(),
-      del({ targets: resolvedFolders.map((folder) => `${outDir}/${folder}`), hook: 'buildEnd' }),
+      del({
+        targets: resolvedFolders.map((folder) => `${outDir}/${folder}`),
+        hook: 'buildEnd',
+      }),
     ],
   },
 ];

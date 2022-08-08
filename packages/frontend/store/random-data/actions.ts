@@ -5,7 +5,8 @@ import { RandomDataActions } from './action-types';
 
 export const fetchRandomData = createAsyncThunk(
   RandomDataActions.FETCH,
-  async (_, { rejectWithValue }) => getRandomData().catch(() => rejectWithValue([])),
+  async (_, { rejectWithValue }) =>
+    getRandomData().catch(() => rejectWithValue([])),
 );
 
 export const fetchRandomDataSSR = createAsyncThunk(
