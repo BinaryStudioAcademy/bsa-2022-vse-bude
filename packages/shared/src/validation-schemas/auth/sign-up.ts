@@ -15,6 +15,9 @@ export const signUp = Joi.object<UserSignUpDto>({
   name: Joi.string().trim().required().messages({
     'string.empty': UserValidationMessage.NAME_REQUIRED,
   }),
+  phoneNumber: Joi.string().trim().required().messages({
+    'string.empty': UserValidationMessage.NAME_REQUIRED,
+  }),
   password: Joi.string().trim().min(MIN_PASSWORD_LENGTH).required().messages({
     'string.empty': UserValidationMessage.PASSWORD_REQUIRED,
   }),
