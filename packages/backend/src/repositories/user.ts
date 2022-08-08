@@ -1,13 +1,13 @@
 import type { PrismaClient, User } from '@prisma/client';
 
 export class UserRepository {
-  private _bdClient: PrismaClient;
+  private _dbClient: PrismaClient;
 
   constructor(prismaClient: PrismaClient) {
-    this._bdClient = prismaClient;
+    this._dbClient = prismaClient;
   }
 
   public getAll(): Promise<User[]> {
-    return this._bdClient.user.findMany();
+    return this._dbClient.user.findMany();
   }
 }

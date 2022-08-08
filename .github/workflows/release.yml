@@ -1,0 +1,30 @@
+name: Release
+
+on:
+  push:
+    branches: ['release']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment:
+      name: Release
+      url: http://vse-bude.com.ua
+    steps:
+      - name: Deploy front-end and backend. Migrate DB.
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.MAIN_SERVER_HOST }}
+          username: ${{ secrets.MAIN_SERVER_USERNAME }}
+          password: ${{ secrets.MAIN_SERVER_PASSWORD }}
+          port: ${{ secrets.MAIN_SERVER_PORT }}
+          script_stop: true
+          script: |
+            whoami
+            cd /home/ubuntu/vse-bude/
+            pwd
+            ls -a
+            git checkout release
+            git pull
+            git status
+            ./scripts/deploy.sh
