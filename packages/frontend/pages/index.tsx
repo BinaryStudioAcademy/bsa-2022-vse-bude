@@ -16,12 +16,13 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     await store.dispatch(fetchRandomDataSSR(httpClient));
 
-  return Promise.resolve({
-    props: {
-      ...(await serverSideTranslations(locale, ['home'])),
-    },
-  });
-});
+    return Promise.resolve({
+      props: {
+        ...(await serverSideTranslations(locale, ['home'])),
+      },
+    });
+  },
+);
 
 const IndexPage = () => {
   const { data, loading } = useTypedSelector(
