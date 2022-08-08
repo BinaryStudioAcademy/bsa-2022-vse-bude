@@ -40,6 +40,13 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
           control={control}
           errors={errors}
         />
+        <Input
+          label="Phone Number"
+          placeholder="Enter your phone number"
+          name="phoneNumber"
+          control={control}
+          errors={errors}
+        />
         <Button label="Sign up" onPress={handleSubmit(onSubmit)} />
       </View>
     </>
