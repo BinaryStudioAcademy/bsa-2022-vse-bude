@@ -24,6 +24,7 @@ jobs:
             cd /home/ubuntu/vse-bude/
             pwd
             ls -a
+            git fetch
             git checkout release
             git pull
             git status
