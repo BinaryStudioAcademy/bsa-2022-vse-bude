@@ -19,6 +19,10 @@ const colors = {
   link: ColorPalette.Yellow100,
 };
 
+const darkColors = {
+  background: ColorPalette.Black100,
+}; // TODO: add dark colors
+
 const fonts = {
   sans: "'Raleway', sans-serif",
 };
@@ -102,4 +106,17 @@ const lightTheme = createTheme({
   },
 });
 
-export { lightTheme };
+const darkTheme = createTheme({
+  type: 'dark',
+  theme: {
+    colors: darkColors,
+    fonts,
+    fontSizes,
+    fontWeights,
+    lineHeights,
+    space,
+    radii,
+  },
+});
+
+export { lightTheme, darkTheme };
