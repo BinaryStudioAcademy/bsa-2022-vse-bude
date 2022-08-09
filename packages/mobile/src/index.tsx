@@ -4,8 +4,8 @@ import { Provider as StoreProvider } from 'react-redux';
 import 'fast-text-encoding';
 import { Navigation } from '~/navigation/navigation';
 import { store } from '~/store/store';
-import { NavigationDarkTheme, NavigationTheme } from './config/config';
-import { useColorScheme } from './hooks/hooks';
+import { NavigationDarkTheme, NavigationTheme } from '~/config/config';
+import { useColorScheme } from '~/hooks/hooks';
 
 const App: FC = () => {
   const colorScheme = useColorScheme();
