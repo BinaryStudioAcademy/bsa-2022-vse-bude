@@ -1,75 +1,44 @@
 import React, { FC } from 'react';
 import { Pressable, View } from 'react-native';
-import { ButtonType } from '~/common/enums/enums';
+import { ButtonType, ButtonView } from '~/common/enums/enums';
 import { Text } from '~/components/components';
 import { styles } from './styles';
 
-//mock before update global theme color
-enum AppColor {
-  YELLOW_100 = '#F1B313',
-  YELLOW_200 = '#FFB800',
-  GRAY_200 = '#DFDFDF',
-  WHITE = '#FFFFFF',
-}
-////
-
+type ReactText = string | number;
 type Props = {
-  label: string;
+  label: ReactText;
   type?: ButtonType;
+  view?: ButtonView;
   isDisabled?: boolean;
-  isOutlined?: boolean;
   onPress: () => void;
 };
 
 const Button: FC<Props> = ({
   label,
-  type = ButtonType.MAIN,
+  type = ButtonType.PRIMARY,
+  view = ButtonView.FILLED,
   isDisabled,
-  isOutlined,
   onPress,
 }) => {
+  const isOutlined = view === ButtonView.OUTLINED;
+
   return (
     <Pressable disabled={isDisabled} onPress={onPress}>
       <View
         style={[
           styles.button,
           styles[type],
-          isOutlined
-            ? {
-                backgroundColor: AppColor.WHITE,
-                borderColor: AppColor.YELLOW_100,
-                borderWidth: 2,
-              }
-            : { backgroundColor: AppColor.YELLOW_100 },
-          isDisabled
-            ? {
-                backgroundColor: AppColor.GRAY_200,
-                borderColor: AppColor.GRAY_200,
-              }
-            : {},
-          isOutlined && isDisabled
-            ? {
-                backgroundColor: AppColor.WHITE,
-                borderColor: AppColor.GRAY_200,
-                borderWidth: 2,
-              }
-            : {},
+          styles[view],
+          isDisabled ? styles.disabledFill : {},
+          isOutlined && isDisabled ? styles.disabledOutlained : {},
         ]}
       >
         <Text
           style={[
             styles.title,
-            isOutlined
-              ? { color: AppColor.YELLOW_100 }
-              : { color: AppColor.WHITE },
-            isDisabled
-              ? { color: AppColor.WHITE }
-              : { color: AppColor.YELLOW_100 },
-            isOutlined && isDisabled
-              ? {
-                  color: AppColor.GRAY_200,
-                }
-              : {},
+            isOutlined ? styles.outlainedTitle : styles.filledTitle,
+            isDisabled ? styles.filledTitle : {},
+            isOutlined && isDisabled ? styles.disabledOutlainedTitle : {},
           ]}
         >
           {label}

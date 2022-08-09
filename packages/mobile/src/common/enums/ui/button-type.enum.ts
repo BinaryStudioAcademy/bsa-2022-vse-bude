@@ -1,7 +1,11 @@
 enum ButtonType {
-  MAIN = 'main',
-  OUTLINED = 'outlined',
+  PRIMARY = 'primary',
   SECONDARY = 'secondary',
 }
 
-export { ButtonType };
+enum ButtonView {
+  FILLED = 'filled',
+  OUTLINED = 'outlined',
+}
+
+export { ButtonType, ButtonView };
