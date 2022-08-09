@@ -1,20 +1,20 @@
-import { Colors } from '@vse-bude/shared';
+import { ColorPalette } from '@vse-bude/shared';
 import { DefaultTheme, DarkTheme } from '@react-navigation/native';
 
 const COMMON_COLORS = {
-  accent: Colors.ACCENT_PRIMARY,
-  organ: Colors.ORGAN_BG,
-  card: Colors.CARD_BG,
-  inputBg: Colors.INPUT_BG,
-  dropdownBg: Colors.DROPDOWN_BG,
-  circleBg: Colors.CIRCLE_BG,
-  line: Colors.LINE,
-  placeholder: Colors.PLACEHOLDER,
-  subtitle: Colors.SUBTITLE,
-  buttonTextPrimary: Colors.BUTTON_TEXT_PRIMARY,
-  buttonTextSecondary: Colors.BUTTON_TEXT_SECONDARY,
-  buttonBgDark: Colors.BUTTON_BG_DARK,
-  error: Colors.ERROR,
+  accent: ColorPalette.YELLOW_100,
+  organ: ColorPalette.GREEN_200,
+  card: ColorPalette.GRAY_100,
+  inputBg: ColorPalette.GRAY_100,
+  dropdownBg: ColorPalette.GRAY_100,
+  circleBg: ColorPalette.GRAY_100,
+  line: ColorPalette.GRAY_200,
+  placeholder: ColorPalette.BLACK_100,
+  subtitle: ColorPalette.GRAY_300,
+  buttonTextPrimary: ColorPalette.WHITE_100,
+  buttonTextSecondary: ColorPalette.GREEN_200,
+  buttonBgDark: ColorPalette.GREEN_200,
+  error: ColorPalette.RED_100,
 };
 
 const NavigationTheme = {
@@ -22,14 +22,14 @@ const NavigationTheme = {
   colors: {
     ...DefaultTheme.colors,
     ...COMMON_COLORS,
-    background: Colors.BACKGROUND_PRIMARY,
-    text: Colors.TEXT_PRIMARY,
-    backgroundSecondary: Colors.BACKGROUND_SECONDARY,
-    borderButton: Colors.BORDER_BUTTON,
-    iconPrimary: Colors.ICON_PRIMARY,
-    iconSecondary: Colors.ICON_SECONDARY,
-    titlePrimary: Colors.TITLE_PRIMARY,
-    titleSecondary: Colors.TITLE_SECONDARY,
+    background: ColorPalette.WHITE_100,
+    text: ColorPalette.BLACK_100,
+    backgroundSecondary: ColorPalette.GRAY_100,
+    borderButton: ColorPalette.GREEN_200,
+    iconPrimary: ColorPalette.GREEN_200,
+    iconSecondary: ColorPalette.GRAY_300,
+    titlePrimary: ColorPalette.BLACK_100,
+    titleSecondary: ColorPalette.GREEN_200,
   },
 };
 
@@ -38,14 +38,14 @@ const NavigationDarkTheme = {
   colors: {
     ...DarkTheme.colors,
     ...COMMON_COLORS,
-    background: Colors.BACKGROUND_PRIMARY_DT,
-    text: Colors.TEXT_SECONDARY,
-    backgroundSecondary: Colors.BACKGROUND_SECONDARY_DT,
-    borderButton: Colors.BORDER_BUTTON_DT,
-    iconPrimary: Colors.TEXT_SECONDARY,
-    iconSecondary: Colors.ACCENT_PRIMARY,
-    titlePrimary: Colors.TEXT_SECONDARY,
-    titleSecondary: Colors.TEXT_SECONDARY,
+    background: ColorPalette.GREEN_200,
+    text: ColorPalette.WHITE_100,
+    backgroundSecondary: ColorPalette.GREEN_100,
+    borderButton: ColorPalette.WHITE_100,
+    iconPrimary: ColorPalette.WHITE_100,
+    iconSecondary: ColorPalette.YELLOW_100,
+    titlePrimary: ColorPalette.WHITE_100,
+    titleSecondary: ColorPalette.WHITE_100,
   },
 };
 
