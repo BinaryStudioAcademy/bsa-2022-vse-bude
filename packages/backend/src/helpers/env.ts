@@ -1,8 +1,5 @@
-type ProcessEnvKey =
-  | 'NODE_ENV'
-  | 'PORT'
-  | 'REDIS_PORT'
-  | 'REDIS_HOST'
-  | 'REDIS_PASSWORD';
+type ProcessEnvKey = 'NODE_ENV' | 'PORT';
 
-export const getEnv = (key: ProcessEnvKey) => process.env[key];
+type RedisEnvKey = 'REDIS_PORT' | 'REDIS_HOST' | 'REDIS_PASSWORD';
+
+export const getEnv = (key: ProcessEnvKey | RedisEnvKey) => process.env[key];
