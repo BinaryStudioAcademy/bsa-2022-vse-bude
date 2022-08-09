@@ -27,6 +27,12 @@ const redisConnectionParams = {
 
 const redisClient = createClient(redisConnectionParams);
 
+redisClient.on('error', (err) => console.log('redis client error', err));
+
+redisClient.connect().then(() => {
+  console.log('redis client connected!');
+});
+
 const repositories = initRepositories(prismaClient);
 const services = initServices(repositories, redisClient);
 const routes = initRoutes(services);
