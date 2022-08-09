@@ -1,3 +1,7 @@
 type ProcessEnvKey = 'NODE_ENV' | 'PORT';
 
-export const getEnv = (key: ProcessEnvKey) => process.env[key];
+type AuthEnvKeys = 'JWT_SECRET_KEY';
+
+type EnvKeys = ProcessEnvKey | AuthEnvKeys;
+
+export const getEnv = (key: EnvKeys) => process.env[key];
