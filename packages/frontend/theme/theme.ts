@@ -2,25 +2,25 @@ import { createTheme } from '@nextui-org/react';
 import { ColorPalette } from '@vse-bude/shared';
 
 const colors = {
-  primary: ColorPalette.Yellow100,
-  primaryLight: ColorPalette.Yellow100,
-  primaryLightHover: ColorPalette.Yellow200,
-  secondaryLight: ColorPalette.Green100,
-  secondaryDark: ColorPalette.Green200,
-  background: ColorPalette.White100,
-  backgroundLight: ColorPalette.Gray100,
-  backgroundDark: ColorPalette.Gray200,
-  text: ColorPalette.Black100,
-  textLight: ColorPalette.Gray300,
-  error: ColorPalette.Red100,
-  active: ColorPalette.Yellow100,
-  accent: ColorPalette.Yellow200,
-  disabled: ColorPalette.Gray200,
-  link: ColorPalette.Yellow100,
+  primary: ColorPalette.YELLOW_100,
+  primaryLight: ColorPalette.YELLOW_100,
+  primaryLightHover: ColorPalette.YELLOW_200,
+  secondaryLight: ColorPalette.GREEN_100,
+  secondaryDark: ColorPalette.GREEN_200,
+  background: ColorPalette.WHITE_100,
+  backgroundLight: ColorPalette.GRAY_100,
+  backgroundDark: ColorPalette.GRAY_200,
+  text: ColorPalette.BLACK_100,
+  textLight: ColorPalette.GRAY_300,
+  error: ColorPalette.RED_100,
+  active: ColorPalette.YELLOW_100,
+  accent: ColorPalette.YELLOW_200,
+  disabled: ColorPalette.GRAY_200,
+  link: ColorPalette.YELLOW_100,
 };
 
 const darkColors = {
-  background: ColorPalette.Black100,
+  background: ColorPalette.BLACK_100,
 }; // TODO: add dark colors
 
 const fonts = {

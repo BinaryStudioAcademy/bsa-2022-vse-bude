@@ -14,7 +14,7 @@ class CustomDocument extends Document {
 
   render() {
     return (
-      <Html lang="en">
+      <Html lang={this.props.locale}>
         <Head>
           {CssBaseline.flush()}
           <link rel="preconnect" href="https://fonts.googleapis.com" />
