@@ -3,13 +3,6 @@ import { getEnv } from '@helpers';
 
 type RedisClientType = ReturnType<typeof createClient>;
 
-type RedisStorageGetDataType =
-  | string
-  | Array<string | number | Record<string, unknown>>
-  | Record<string, unknown>;
-
-type RedisStorageSetDataType = RedisStorageGetDataType | number;
-
 export class RedisStorageService {
   private client: RedisClientType;
 
@@ -35,31 +28,30 @@ export class RedisStorageService {
     });
   }
 
-  async get(key: string): Promise<RedisStorageGetDataType> {
+  async get<T>(key: string): Promise<T> {
     const isExist = await this.isKeyExists(key);
     if (!isExist) {
       return null;
     }
-    const data = await this.client.get(key);
 
+    const data = await this.client.get(key);
     return JSON.parse(data);
   }
 
-  // expirationTime in milliseconds
-  async set(
+  async set<T>(
     key: string,
-    data: RedisStorageSetDataType,
-    expirationTime?: number,
-  ): Promise<RedisStorageSetDataType> {
+    data: T,
+    expirationTimeMs?: number,
+  ): Promise<T> {
     await this.client.set(key, JSON.stringify(data));
-    if (expirationTime) {
-      await this.client.pExpire(key, expirationTime);
+    if (expirationTimeMs) {
+      await this.client.pExpire(key, expirationTimeMs);
     }
 
     return data;
   }
 
-  del(key: string): Promise<RedisStorageSetDataType> {
+  del(key: string): Promise<number> {
     return this.client.del(key);
   }
 

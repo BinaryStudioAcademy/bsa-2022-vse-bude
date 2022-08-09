@@ -11,7 +11,6 @@ const app = express();
 const prismaClient = new PrismaClient({
   log: ['query', 'info', 'warn', 'error'],
 });
-
 const repositories = initRepositories(prismaClient);
 const services = initServices(repositories);
 const routes = initRoutes(services);
