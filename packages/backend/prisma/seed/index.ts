@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client';
-import { USERS_NUMBER } from './config';
 import { seedUsers } from './user';
 
 const prismaClient = new PrismaClient({
@@ -10,7 +9,7 @@ const prismaClient = new PrismaClient({
   await prismaClient.user.deleteMany({});
   const users = await prismaClient.user.findMany();
   if (users.length === 0) {
-    await seedUsers(prismaClient, USERS_NUMBER);
+    await seedUsers(prismaClient);
   }
 })()
   .then(() => prismaClient.$disconnect())

@@ -1,32 +1,12 @@
 import type { PrismaClient, User } from '@prisma/client';
-import { Role } from '@prisma/client';
-import { faker } from '@faker-js/faker';
+import { fakeUsers } from './data/users';
+import { USERS_NUMBER } from './config';
 
-export const seedUsers = async (
-  prismaClient: PrismaClient,
-  amountOfUsers: number,
-) => {
-  const users: User[] = [];
-
-  for (let i = 0; i < amountOfUsers; i++) {
-    const user: User = {
-      id: faker.datatype.uuid(),
-      firebaseUid: faker.datatype.uuid(),
-      email: faker.internet.email(),
-      phone: faker.phone.number('+380 ## ### ####'),
-      firstName: faker.name.firstName(),
-      lastName: faker.name.lastName(),
-      avatar: faker.image.avatar(),
-      role: Role.USER,
-      createdAt: faker.date.past(),
-      updatedAt: faker.date.recent(),
-    };
-
-    users.push(user);
-  }
-
-  const addUsers = async () =>
+export const seedUsers = async (prismaClient: PrismaClient) => {
+  const addUsers = async () => {
+    const users: User[] = await fakeUsers(USERS_NUMBER);
     await prismaClient.user.createMany({ data: users });
+  };
 
   addUsers();
 };
