@@ -1,3 +1,10 @@
+import { TextStyle, FlexStyle } from 'react-native';
+import {
+  IFontStyles,
+  IFlexBoxStyles,
+  ISpaceStyles,
+} from '~/common/interfaces/interfaces';
+
 const DEFAULT_SPACER = 10;
 const spacer1 = DEFAULT_SPACER * 1;
 const spacer2 = DEFAULT_SPACER * 1.5;
@@ -7,7 +14,7 @@ const spacer5 = DEFAULT_SPACER * 5;
 const spacer6 = DEFAULT_SPACER * 7.5;
 const spacer7 = DEFAULT_SPACER * 14;
 
-const SPACE_STYLES = {
+const SPACE_STYLES: ISpaceStyles<FlexStyle> = {
   px1: {
     paddingHorizontal: spacer2,
   },
@@ -46,7 +53,7 @@ const SPACE_STYLES = {
   },
 };
 
-const FLEX_BOX_STYLES = {
+const FLEX_BOX_STYLES: IFlexBoxStyles<FlexStyle> = {
   flexDirectionRow: {
     flexDirection: 'row',
   },
@@ -64,7 +71,7 @@ const FLEX_BOX_STYLES = {
   },
 };
 
-const FONT_STYLES = {
+const FONT_STYLES: IFontStyles<TextStyle> = {
   fontWeightRegular: {
     fontWeight: '400',
   },
