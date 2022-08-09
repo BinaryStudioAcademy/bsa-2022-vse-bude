@@ -1,5 +1,4 @@
 import type { Bid, PrismaClient, User } from '@prisma/client';
-// import { faker } from '@faker-js/faker';
 import { USERS_NUMBER } from './config';
 import { fakeBid } from './data/bid';
 

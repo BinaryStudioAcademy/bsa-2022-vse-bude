@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { seedChat } from './chat';
 import { seedAddress } from './address';
 import { seedBids } from './bid';
 import { seedCategory } from './category';
@@ -31,6 +32,7 @@ const prismaClient = new PrismaClient({
   await seedCategory(prismaClient);
   await seedProducts(prismaClient, existingUsers);
   await seedBids(prismaClient, existingUsers);
+  await seedChat(prismaClient);
 })()
   .then(() => prismaClient.$disconnect())
   .catch(async (e) => {
