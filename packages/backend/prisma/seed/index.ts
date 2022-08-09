@@ -6,7 +6,10 @@ const prismaClient = new PrismaClient({
 });
 
 (async () => {
-  await seedUsers(prismaClient);
+  const users = prismaClient.user.findMany;
+  if (users.length === 0) {
+    await seedUsers(prismaClient);
+  }
 })()
   .then(() => prismaClient.$disconnect())
   .catch(async (e) => {
