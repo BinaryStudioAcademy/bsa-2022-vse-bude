@@ -1,5 +1,4 @@
-import { HttpStatusCode } from '@vse-bude/shared';
-import { ExceptionName } from '~/common/enums/enums';
+import { HttpStatusCode, ExceptionName } from '../../common/enums';
 
 const DEFAULT_MESSAGE = 'Network Error';
 

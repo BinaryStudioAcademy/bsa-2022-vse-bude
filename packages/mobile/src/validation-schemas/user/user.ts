@@ -1,1 +1,1 @@
-export { signUp } from './sign-up.validation-schema';
+export { signUp } from './sign-up';

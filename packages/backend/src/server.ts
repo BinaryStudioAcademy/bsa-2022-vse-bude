@@ -8,7 +8,9 @@ import { logger } from '@middlewares';
 import { PrismaClient } from '@prisma/client';
 
 const app = express();
-const prismaClient = new PrismaClient({ log: ['query', 'info', 'warn', 'error'] });
+const prismaClient = new PrismaClient({
+  log: ['query', 'info', 'warn', 'error'],
+});
 const repositories = initRepositories(prismaClient);
 const services = initServices(repositories);
 const routes = initRoutes(services);
@@ -20,4 +22,4 @@ app
   .use(json())
   .use(routes)
   .on('close', () => prismaClient.$disconnect())
-  .listen(port, () => log('server is running'));
+  .listen(port, () => log(`Server is running on port ${port}`));

@@ -8,19 +8,20 @@ parserOptions:
   sourceType: module
 
 extends:
-  - eslint:recommended
+  - '../../.eslintrc.js'
   - plugin:import/recommended
   - plugin:import/typescript
-  - plugin:@typescript-eslint/recommended
 
 settings:
   import/ignore:
-    - "node_modules/react-native/index\\.js$"
+    - 'react-native'
 
 rules:
   no-multiple-empty-lines:
     - error
     - max: 1
+  newline-per-chained-call:
+    - off
   no-var:
     - error
   no-console:
@@ -28,6 +29,8 @@ rules:
   arrow-parens:
     - error
     - always
+  arrow-body-style:
+    - off
   curly:
     - error
     - all
@@ -56,6 +59,8 @@ rules:
     - always-multiline
   '@typescript-eslint/no-use-before-define':
     - error
+  '@typescript-eslint/consistent-type-imports':
+    - off
   '@typescript-eslint/no-unused-vars':
     - error
     - vars: all
@@ -71,3 +76,8 @@ rules:
     - error
   import/no-named-as-default:
     - off
+  import/order:
+    - error
+    - pathGroups:
+        - pattern: '~/**'
+          group: external

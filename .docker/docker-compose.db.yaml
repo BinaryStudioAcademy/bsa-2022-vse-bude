@@ -12,5 +12,15 @@ services:
       - '5432:5432'
     volumes:
       - vsebude_pg_data:/var/lib/postgresql/data/
+
+  vsebude_adminer:
+    container_name: vsebude_adminer
+    image: adminer
+    restart: always
+    ports:
+      - "3030:8080"
+    depends_on:
+      - vsebude_db
+
 volumes:
   vsebude_pg_data:

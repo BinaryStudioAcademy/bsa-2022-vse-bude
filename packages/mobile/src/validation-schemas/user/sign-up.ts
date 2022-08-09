@@ -1,5 +1,5 @@
 import * as Joi from 'joi';
-import { UserSignUpDto, UserValidationMessage } from '@vse-bude/shared';
+import { UserValidationMessage, UserSignUpDto } from '@vse-bude/shared';
 
 const signUp = Joi.object<UserSignUpDto>({
   email: Joi.string()
