@@ -2,11 +2,11 @@ import type { User } from '@prisma/client';
 import { Role } from '@prisma/client';
 import { faker } from '@faker-js/faker';
 
-export const fakeUsers = async (amountOfUsers: number) => {
-  const users: User[] = [];
+export const fakeUsers = async (amountOfRecords: number) => {
+  const records: User[] = [];
 
-  for (let i = 0; i < amountOfUsers; i++) {
-    const user: User = {
+  for (let i = 0; i < amountOfRecords; i++) {
+    const record: User = {
       id: faker.datatype.uuid(),
       firebaseUid: faker.datatype.uuid(),
       email: faker.internet.email(),
@@ -19,8 +19,8 @@ export const fakeUsers = async (amountOfUsers: number) => {
       updatedAt: faker.date.recent(),
     };
 
-    users.push(user);
+    records.push(record);
   }
 
-  return users;
+  return records;
 };
