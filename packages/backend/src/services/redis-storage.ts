@@ -35,6 +35,7 @@ export class RedisStorageService {
     }
 
     const data = await this.client.get(key);
+
     return JSON.parse(data);
   }
 
