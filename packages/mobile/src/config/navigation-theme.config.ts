@@ -3,17 +3,16 @@ import { DefaultTheme, DarkTheme } from '@react-navigation/native';
 
 const COMMON_COLORS = {
   accent: ColorPalette.YELLOW_100,
-  organ: ColorPalette.GREEN_200,
   card: ColorPalette.GRAY_100,
-  inputBg: ColorPalette.GRAY_100,
-  dropdownBg: ColorPalette.GRAY_100,
-  circleBg: ColorPalette.GRAY_100,
+  backgroundThird: ColorPalette.GREEN_200,
+  backgroundElements: ColorPalette.GRAY_100,
   line: ColorPalette.GRAY_200,
   placeholder: ColorPalette.BLACK_100,
   subtitle: ColorPalette.GRAY_300,
   buttonTextPrimary: ColorPalette.WHITE_100,
   buttonTextSecondary: ColorPalette.GREEN_200,
-  buttonBgDark: ColorPalette.GREEN_200,
+  buttonPrimaryBackground: ColorPalette.YELLOW_100,
+  buttonSecondaryBackground: ColorPalette.GREEN_200,
   error: ColorPalette.RED_100,
 };
 
