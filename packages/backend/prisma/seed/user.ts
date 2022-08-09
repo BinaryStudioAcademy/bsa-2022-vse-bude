@@ -10,6 +10,6 @@ export const seedUsers = async (prismaClient: PrismaClient) => {
     return;
   }
 
-  const users: User[] = await fakeUsers(howManyToCreate);
-  await prismaClient.user.createMany({ data: users });
+  const data: User[] = await fakeUsers(howManyToCreate);
+  await prismaClient.user.createMany({ data: data });
 };

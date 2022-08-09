@@ -1,13 +1,25 @@
-import type { PrismaClient, UserSettings } from '@prisma/client';
+import type { PrismaClient, User, UserSettings } from '@prisma/client';
 import { USERS_NUMBER } from './config';
 import { fakeUserSettings } from './data/userSettings';
 
-export const seedUserSettings = async (prismaClient: PrismaClient) => {
-  const existingUsers = await prismaClient.user.findMany();
+export const seedUserSettings = async (
+  prismaClient: PrismaClient,
+  existingUsers: User[],
+) => {
+  const existingUsersSettings = await prismaClient.userSettings.findMany();
 
-  const usersSettings: UserSettings[] = await fakeUserSettings(
+  //check if all exists
+  if (existingUsers.length === existingUsersSettings.length) {
+    return;
+  }
+
+  //clear records
+  await prismaClient.userSettings.deleteMany({});
+
+  //create new
+  const data: UserSettings[] = await fakeUserSettings(
     USERS_NUMBER,
     existingUsers,
   );
-  await prismaClient.userSettings.createMany({ data: usersSettings });
+  await prismaClient.userSettings.createMany({ data: data });
 };
