@@ -42,10 +42,10 @@ const IndexPage = () => {
           </Card.Body>
           <Card.Footer>
             <Button
-              animated
-              shadow
-              size="md"
-              onPress={() => dispatch(fetchRandomData())}
+              data_variant="filled"
+              data_size="big"
+              text="Fetch data"
+              onClick={() => dispatch(fetchRandomData())}
             >
               {loading ? <Loading /> : 'reload'}
             </Button>

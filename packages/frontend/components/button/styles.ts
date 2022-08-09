@@ -1,44 +1,46 @@
 import { styled } from '@nextui-org/react';
+import { lightTheme } from 'theme/theme'; 
 
 export const StyledButton = styled('button', {
+  
   borderStyle: 'none',
-  fontSize: '$base',
-  lineHeight: '20px',
-  fontFamily: '$sans',
-  fontWeight: '$bold',
+  fontSize: lightTheme.fontSizes.button.value,
+  lineHeight: lightTheme.lineHeights.button.value,
+  fontFamily: lightTheme.fonts.sans.value,
+  fontWeight: lightTheme.fontWeights.button.value,
 
   '&[data-variant="filled"]': {
-    background: '#DFDFDF',
+    background: lightTheme.colors.disabled.value,
     color: '$white',
     '&:hover': {
-      background: '#FFB800',
+      background: lightTheme.colors.accent.value,
     },
     '&:active': {
-      background: '#F1B313',
+      background: lightTheme.colors.active.value,
     },
   },
 
   '&[data-variant="empty"]': {
-    border: '1px solid #DFDFDF',
+    border: `1px solid ${lightTheme.colors.disabled.value}`,
     background: '$white',
-    color: '#DFDFDF',
+    color: lightTheme.colors.disabled.value,
     '&:hover': {
-      border: '1px solid #F1B313',
-      color: '#F1B313',
+      border: `1px solid ${lightTheme.colors.active.value}`,
+      color: lightTheme.colors.active.value,
     },
     '&:active': {
-      border: '1px solid #2C4340',
-      color: '#2C4340',
+      border: `1px solid ${lightTheme.colors.secondaryDark.value}`,
+      color: lightTheme.colors.secondaryDark.value,
     },
   },
 
   '&[data-size="big"]': {
-    borderRadius: '10px',
-    padding: '13px 35px',
+    borderRadius: lightTheme.radii.md.value,
+    padding: `${lightTheme.space.md.value} ${lightTheme.space.xl2.value}`,
   },
 
   '&[data-size="small"]': {
-    borderRadius: '7px',
-    padding: '8px 20px',
+    borderRadius: lightTheme.radii.sm.value,
+    padding: `${lightTheme.space.sm.value} ${lightTheme.space.lg.value}`,
   },
 });
