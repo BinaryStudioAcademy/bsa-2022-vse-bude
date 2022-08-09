@@ -17,10 +17,11 @@ export class RedisStorageService {
       return null;
     }
 
+    const data = await this.client.get(key);
     try {
-      return JSON.parse(await this.client.get(key));
+      return JSON.parse(data);
     } catch {
-      return await this.client.get(key);
+      return data;
     }
   }
 
