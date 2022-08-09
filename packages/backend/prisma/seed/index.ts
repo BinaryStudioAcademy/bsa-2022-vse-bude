@@ -6,11 +6,8 @@ const prismaClient = new PrismaClient({
 });
 
 (async () => {
-  await prismaClient.user.deleteMany({});
-  const users = await prismaClient.user.findMany();
-  if (users.length === 0) {
-    await seedUsers(prismaClient);
-  }
+  // await prismaClient.user.deleteMany({});
+  await seedUsers(prismaClient);
 })()
   .then(() => prismaClient.$disconnect())
   .catch(async (e) => {
