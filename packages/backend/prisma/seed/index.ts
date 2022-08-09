@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { seedAddress } from './address';
 import { seedCategory } from './category';
+import { seedProducts } from './product';
 // import { seedSocialMedia } from './socialMedia';
 import { seedUsers } from './user';
 import { seedUserSettings } from './userSettings';
@@ -24,6 +25,7 @@ const prismaClient = new PrismaClient({
   await seedAddress(prismaClient, existingUsers);
   // await seedSocialMedia(prismaClient, existingUsers);
   await seedCategory(prismaClient);
+  await seedProducts(prismaClient, existingUsers);
 })()
   .then(() => prismaClient.$disconnect())
   .catch(async (e) => {
