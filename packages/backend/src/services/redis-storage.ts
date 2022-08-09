@@ -2,6 +2,17 @@
 
 export type RedisClientType = ReturnType<typeof createClient>;
 
+type RedisStorageGetDataType =
+  | string
+  | Array<string | number | Record<string, unknown>>
+  | Record<string, unknown>;
+
+type RedisStorageSetDataType =
+  | number
+  | string
+  | Array<string | number | Record<string, unknown>>
+  | Record<string, unknown>;
+
 export class RedisStorageService {
   private client: RedisClientType;
 
@@ -9,38 +20,23 @@ export class RedisStorageService {
     this.client = redisClient;
   }
 
-  async get(
-    key: string,
-  ): Promise<string | Array<any> | Record<string, unknown>> {
+  async get(key: string): Promise<RedisStorageGetDataType> {
     const isExist = await this.isKeyExists(key);
     if (!isExist) {
       return null;
     }
-
     const data = await this.client.get(key);
-    try {
-      return JSON.parse(data);
-    } catch {
-      return data;
-    }
+
+    return JSON.parse(data);
   }
 
   // expirationTime in milliseconds
   async set(
     key: string,
-    data: any,
+    data: RedisStorageSetDataType,
     expirationTime?: number,
-  ): Promise<string | Array<any> | Record<string, unknown>> {
-    const dataType = typeof data;
-
-    if (dataType === 'string' || dataType === 'number') {
-      await this.client.set(key, data);
-    } else if (dataType === 'object') {
-      await this.client.set(key, JSON.stringify(data));
-    } else {
-      throw new Error('This type is not supported!');
-    }
-
+  ): Promise<RedisStorageSetDataType> {
+    await this.client.set(key, JSON.stringify(data));
     if (expirationTime) {
       await this.client.pExpire(key, expirationTime);
     }
@@ -48,7 +44,7 @@ export class RedisStorageService {
     return data;
   }
 
-  del(key: string): Promise<any> {
+  del(key: string): Promise<RedisStorageSetDataType> {
     return this.client.del(key);
   }
 
