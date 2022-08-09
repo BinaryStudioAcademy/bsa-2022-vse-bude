@@ -3,7 +3,7 @@ import { styled } from '@nextui-org/react';
 export const StyledButton = styled('button', {
   borderStyle: 'none',
   fontSize: '$base',
-  lineHeight: '19px',
+  lineHeight: '20px',
   fontFamily: '$sans',
   fontWeight: '$bold',
 
