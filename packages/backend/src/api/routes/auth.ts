@@ -3,8 +3,6 @@ import { type Request, Router } from 'express';
 import type { ApiRoutes, UserSignInDto, UserSignUpDto } from '@vse-bude/shared';
 import { AuthApiRoutes } from '@vse-bude/shared';
 import { wrap } from '@helpers';
-import { validation as signInValidation } from '../validation/auth/sign-in.validation';
-import { validation as signUpValidation } from '../validation/auth/sign-up.validation';
 import { apiPath } from '../../helpers/api';
 
 export const initAuthRoutes = (
@@ -15,7 +13,6 @@ export const initAuthRoutes = (
 
   router.post(
     apiPath(path, AuthApiRoutes.SIGN_IN),
-    signInValidation,
     wrap(async (req: Request) => {
       const signInDto: UserSignInDto = {
         email: req.body.email,
@@ -28,7 +25,6 @@ export const initAuthRoutes = (
 
   router.post(
     apiPath(path, AuthApiRoutes.SIGN_UP),
-    signUpValidation,
     wrap(async (req: Request) => {
       const signUpDto: UserSignUpDto = {
         email: req.body.email,
