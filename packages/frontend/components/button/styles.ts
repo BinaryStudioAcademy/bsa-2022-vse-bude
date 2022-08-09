@@ -1,7 +1,6 @@
 import { styled } from '@nextui-org/react';
 
 export const StyledButton = styled('button', {
-
   borderStyle: 'none',
   fontSize: '$base',
   lineHeight: '19px',
@@ -16,7 +15,7 @@ export const StyledButton = styled('button', {
     },
     '&:active': {
       background: '#F1B313',
-    }
+    },
   },
 
   '&[data-variant="empty"]': {
@@ -30,15 +29,15 @@ export const StyledButton = styled('button', {
     '&:active': {
       border: '1px solid #2C4340',
       color: '#2C4340',
-    }
+    },
   },
 
-  '&[data-size="big"]':{
+  '&[data-size="big"]': {
     borderRadius: '10px',
     padding: '13px 35px',
   },
 
-  '&[data-size="small"]':{
+  '&[data-size="small"]': {
     borderRadius: '7px',
     padding: '8px 20px',
   },

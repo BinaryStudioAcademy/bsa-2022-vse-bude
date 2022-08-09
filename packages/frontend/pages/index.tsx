@@ -7,6 +7,7 @@ import { CookieStorage } from '@helpers';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { shallowEqual } from 'react-redux';
 import { fetchRandomData, fetchRandomDataSSR, wrapper } from 'store';
+import { log } from 'util';
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
