@@ -42,6 +42,7 @@ const IndexPage = () => {
             <div style={{ wordBreak: 'break-all' }}>{JSON.stringify(data)}</div>
           </Card.Body>
           <Card.Footer>
+
             <Button
               animated
               shadow
