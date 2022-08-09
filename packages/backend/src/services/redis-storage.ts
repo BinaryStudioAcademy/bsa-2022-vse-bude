@@ -17,20 +17,10 @@ export class RedisStorageService {
       return null;
     }
 
-    const dataType = await this.client.type(key);
-    switch (dataType) {
-      case 'string': {
-        return this.client.get(key);
-      }
-      case 'list': {
-        return this.client.lRange(key, 0, -1);
-      }
-      case 'hash': {
-        return this.client.hGetAll(key);
-      }
-      default: {
-        throw new Error('redis client error!');
-      }
+    try {
+      return JSON.parse(await this.client.get(key));
+    } catch {
+      return await this.client.get(key);
     }
   }
 
@@ -45,12 +35,7 @@ export class RedisStorageService {
     if (dataType === 'string' || dataType === 'number') {
       await this.client.set(key, data);
     } else if (dataType === 'object') {
-      if (Array.isArray(data)) {
-        console.log('here');
-        await this.client.rPush(key, data);
-      } else {
-        await this.client.hSet(key, data);
-      }
+      await this.client.set(key, JSON.stringify(data));
     } else {
       throw new Error('This type is not supported!');
     }
