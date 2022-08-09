@@ -15,7 +15,6 @@ export const StyledButton = styled('button', {
     },
     '&:active': {
       background: '#F1B313',
-
     },
   },
 
@@ -37,7 +36,6 @@ export const StyledButton = styled('button', {
     borderRadius: '10px',
     padding: '13px 35px',
   },
-
 
   '&[data-size="small"]': {
     borderRadius: '7px',
