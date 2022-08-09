@@ -31,7 +31,12 @@ const IndexPage = () => {
             <div style={{ wordBreak: 'break-all' }}>{JSON.stringify(data)}</div>
           </Card.Body>
           <Card.Footer>
-            <Button data_variant='filled' data_size='big' text='Change Data' onClick={() => dispatch(fetchRandomData())}>
+          <Button
+              animated
+              shadow
+              size="md"
+              onPress={() => dispatch(fetchRandomData())}
+            >
               {loading ? <Loading /> : 'reload'}
             </Button>
           </Card.Footer>
