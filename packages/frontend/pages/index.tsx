@@ -5,7 +5,6 @@ import { CookieStorage } from '@helpers';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { shallowEqual } from 'react-redux';
 import { fetchRandomData, fetchRandomDataSSR, wrapper } from 'store';
-import { log } from 'util';
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
   const storage = new CookieStorage(ctx);
@@ -31,7 +30,12 @@ const IndexPage = () => {
             <div style={{ wordBreak: 'break-all' }}>{JSON.stringify(data)}</div>
           </Card.Body>
           <Card.Footer>
-            <Button data_variant='filled' data_size='big' text='Change Data' onClick={() => dispatch(fetchRandomData())}>
+            <Button
+              animated
+              shadow
+              size="md"
+              onPress={() => dispatch(fetchRandomData())}
+            >
               {loading ? <Loading /> : 'reload'}
             </Button>
           </Card.Footer>
