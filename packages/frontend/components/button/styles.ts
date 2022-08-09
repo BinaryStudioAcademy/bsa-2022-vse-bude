@@ -1,8 +1,7 @@
 import { styled } from '@nextui-org/react';
-import { lightTheme } from 'theme/theme'; 
+import { lightTheme } from 'theme/theme';
 
 export const StyledButton = styled('button', {
-  
   borderStyle: 'none',
   fontSize: lightTheme.fontSizes.button.value,
   lineHeight: lightTheme.lineHeights.button.value,

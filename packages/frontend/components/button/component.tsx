@@ -1,11 +1,18 @@
 import { StyledButton } from './styles';
+import * as React from 'react';
 
-export const Button = (props) => (
+interface IButton extends React.HTMLAttributes<HTMLButtonElement> {
+  variant: 'filled' | 'empty';
+  size:  'big' | 'small';
+}
+
+export const Button = ({variant, size, ...props} : IButton) => (
   <StyledButton
-    data-variant={props.data_variant}
-    data-size={props.data_size}
+    data-variant={variant}
+    data-size={size}
     onClick={props.onClick}
   >
-    {props.text}
+      {props.title}
   </StyledButton>
+  
 );
