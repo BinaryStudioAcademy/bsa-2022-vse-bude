@@ -22,4 +22,4 @@ app
   .use(json())
   .use(routes)
   .on('close', () => prismaClient.$disconnect())
-  .listen(port, () => log('server is running'));
+  .listen(port, () => log(`Server is running on port ${port}`));
