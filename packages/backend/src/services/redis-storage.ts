@@ -38,11 +38,7 @@ export class RedisStorageService {
     return JSON.parse(data);
   }
 
-  async set<T>(
-    key: string,
-    data: T,
-    expirationTimeMs?: number,
-  ): Promise<T> {
+  async set<T>(key: string, data: T, expirationTimeMs?: number): Promise<T> {
     await this.client.set(key, JSON.stringify(data));
     if (expirationTimeMs) {
       await this.client.pExpire(key, expirationTimeMs);
