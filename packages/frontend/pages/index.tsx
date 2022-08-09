@@ -42,7 +42,7 @@ const IndexPage = () => {
           </Card.Body>
           <Card.Footer>
             <Button
-              variant="emp"
+              variant="empty"
               size="big"
               title="Fetch data"
               onClick={() => dispatch(fetchRandomData())}
