@@ -1,9 +1,7 @@
 import * as Joi from 'joi';
-import type { UserSignInDto } from '../../common/types';
-import { UserValidationMessage } from '../../common/enums';
-import { MIN_PASSWORD_LENGTH } from '../constants';
+import { UserValidationMessage, UserSignUpDto } from '@vse-bude/shared';
 
-export const signIn = Joi.object<UserSignInDto>({
+const signUp = Joi.object<UserSignUpDto>({
   email: Joi.string()
     .trim()
     .email({ tlds: { allow: false } })
@@ -12,7 +10,12 @@ export const signIn = Joi.object<UserSignInDto>({
       'string.email': UserValidationMessage.EMAIL_WRONG,
       'string.empty': UserValidationMessage.EMAIL_REQUIRED,
     }),
-  password: Joi.string().trim().min(MIN_PASSWORD_LENGTH).required().messages({
+  name: Joi.string().trim().required().messages({
+    'string.empty': UserValidationMessage.NAME_REQUIRED,
+  }),
+  password: Joi.string().trim().required().messages({
     'string.empty': UserValidationMessage.PASSWORD_REQUIRED,
   }),
 });
+
+export { signUp };

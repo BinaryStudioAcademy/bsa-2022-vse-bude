@@ -19,4 +19,4 @@ app
   .use(json())
   .use(routes)
   .on('close', () => database.$disconnect())
-  .listen(port, () => log('server is running'));
+  .listen(port, () => log(`Server is running on port ${port}`));
