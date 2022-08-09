@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Button, Text, View } from '~/components/components';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from '~/hooks/hooks';
 
 type Props = {
   onSubmit: () => void;
