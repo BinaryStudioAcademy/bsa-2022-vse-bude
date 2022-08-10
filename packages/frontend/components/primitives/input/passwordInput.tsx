@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import * as styles from './styles';
-import { PasswordProps } from './types';
+import type { PasswordProps } from './types';
 
 export const PasswordInput = ({
   error,
@@ -12,15 +12,24 @@ export const PasswordInput = ({
 
   return (
     <div css={styles.InputWrapper}>
-      {label && <label css={styles.StyledLabel} htmlFor={id}>{label}</label>}
+      {label && (
+        <label css={styles.StyledLabel} htmlFor={id}>
+          {label}
+        </label>
+      )}
       <div css={styles.ButtonWrapper}>
-        <button css={styles.ShowBtn} type="button" onClick={() => setIsShown(!isShown)}>
+        <button
+          css={styles.ShowBtn}
+          type="button"
+          onClick={() => setIsShown(!isShown)}
+        >
           {/* TODO: remove placeholder */}
           {isShown ? 'H' : 'S'}
         </button>
-        <input css={styles.StyledInput}
+        <input
+          css={styles.StyledInput}
           data-padding-variant={'password'}
-          data-status={error ? "error" : 'successfully'}
+          data-status={error ? 'error' : 'successfully'}
           type={isShown ? 'text' : 'password'}
           id={id}
           {...props}
@@ -31,7 +40,7 @@ export const PasswordInput = ({
           {/* TODO: remove placeholder */}
           <span>!!!!</span>
           {error}
-        </p >
+        </p>
       )}
     </div>
   );

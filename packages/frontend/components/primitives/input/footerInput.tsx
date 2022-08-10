@@ -9,12 +9,16 @@ export const FooterInput = ({
   ...props
 }: InputProps) => (
   <div css={styles.InputWrapper}>
-    {label && <label data-color-style='footer' css={styles.StyledLabel} htmlFor={id}>{label}</label>}
+    {label && (
+      <label data-color-style="footer" css={styles.StyledLabel} htmlFor={id}>
+        {label}
+      </label>
+    )}
     <input
       css={styles.StyledInput}
-      data-padding-variant={"text"}
-      data-status={error ? "error" : 'successfully'}
-      data-color-style='footer'
+      data-padding-variant={'text'}
+      data-status={error ? 'error' : 'successfully'}
+      data-color-style="footer"
       type={type}
       id={id}
       {...props}

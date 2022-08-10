@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Theme } from 'theme';
+import type { Theme } from 'theme';
 
 export const StyledInput = ({
   colors,
