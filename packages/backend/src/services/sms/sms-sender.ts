@@ -1,6 +1,5 @@
-import { getEnv } from '@helpers';
-import type { ITwilioOptions } from './twilio-sms-provider';
-import { TwilioService } from './twilio-sms-provider';
+import { log } from '@helpers';
+import type { ISMSProvider } from '@providers';
 
 export interface ISMSSenderService {
   send(phone: string, message: string): Promise<object>;
@@ -10,12 +9,8 @@ export interface ISMSSenderService {
 class SMSSenderService implements ISMSSenderService {
   private providerService: ISMSSenderService;
 
-  constructor() {
-    this.providerService = new TwilioService({
-      accountSid: getEnv('TWILIO_ACCOUNT_SID'),
-      authToken: getEnv('TWILIO_AUTH_TOKEN'),
-      messagingServiceSid: getEnv('TWILIO_MESSAGING_SERVICE_SID'),
-    } as ITwilioOptions);
+  constructor(providerService: ISMSProvider) {
+    this.providerService = providerService;
   }
 
   /**
@@ -30,7 +25,7 @@ class SMSSenderService implements ISMSSenderService {
 
       return result;
     } catch (error) {
-      console.error(error);
+      log(error);
     }
   }
 
@@ -45,7 +40,7 @@ class SMSSenderService implements ISMSSenderService {
 
       return result;
     } catch (error) {
-      console.error(error);
+      log(error);
     }
   }
 }

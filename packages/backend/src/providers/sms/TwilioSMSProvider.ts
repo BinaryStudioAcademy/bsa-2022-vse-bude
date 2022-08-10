@@ -1,25 +1,24 @@
+import { getEnv, log } from '@helpers';
 import { Twilio } from 'twilio';
-import type { ISMSSenderService } from './sms-sender';
 
-export interface ITwilioOptions {
-  accountSid: string;
-  authToken: string;
-  messagingServiceSid: string;
+export interface ISMSProvider {
+  send(phone: string, message: string): Promise<object>;
+  getById(id: string): Promise<object>;
 }
 
-export class TwilioService implements ISMSSenderService, ITwilioOptions {
-  public authToken: ITwilioOptions['authToken'];
+export class TwilioSMSService implements ISMSProvider {
+  private authToken: string;
 
-  public accountSid: ITwilioOptions['accountSid'];
+  private accountSid: string;
 
-  public messagingServiceSid: ITwilioOptions['messagingServiceSid'];
+  private messagingServiceSid: string;
 
   private client: Twilio;
 
-  constructor(options: ITwilioOptions) {
-    this.accountSid = options.accountSid;
-    this.authToken = options.authToken;
-    this.messagingServiceSid = options.messagingServiceSid;
+  constructor() {
+    this.accountSid = getEnv('TWILIO_ACCOUNT_SID');
+    this.authToken = getEnv('TWILIO_AUTH_TOKEN');
+    this.messagingServiceSid = getEnv('TWILIO_MESSAGING_SERVICE_SID');
     this.client = new Twilio(this.accountSid, this.authToken);
   }
 
@@ -39,7 +38,7 @@ export class TwilioService implements ISMSSenderService, ITwilioOptions {
 
       return result;
     } catch (error) {
-      console.error(error);
+      log(error);
     }
   }
 
@@ -54,7 +53,7 @@ export class TwilioService implements ISMSSenderService, ITwilioOptions {
 
       return result;
     } catch (error) {
-      console.error(error);
+      log(error);
     }
   }
 }

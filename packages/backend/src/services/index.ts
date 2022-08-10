@@ -1,18 +1,21 @@
 import type { Repositories } from '@repositories';
+import { TwilioSMSService } from '@providers';
 import { RandomDataService } from './random-data';
 import { UserService } from './user';
 import { RedisStorageService } from './redis-storage';
 import { SMSSenderService } from './sms';
 
-export const initServices = (repositories: Repositories) => ({
-  randomDataService: new RandomDataService(repositories.randomDataRepository),
-  userService: new UserService(repositories.userRepository),
-  redisStorageService: new RedisStorageService(),
-  smsSenderService: new SMSSenderService(),
-});
+export function initServices(repositories: Repositories) {
+  const smsProvider = new TwilioSMSService();
+
+  return {
+    randomDataService: new RandomDataService(repositories.randomDataRepository),
+    userService: new UserService(repositories.userRepository),
+    redisStorageService: new RedisStorageService(),
+    smsSenderService: new SMSSenderService(smsProvider),
+  };
+}
 
 export type Services = ReturnType<typeof initServices>;
 
 export { type RandomDataService, type UserService };
-
-export * from './sms';
