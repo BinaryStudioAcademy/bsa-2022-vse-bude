@@ -1,14 +1,6 @@
 import { StyleSheet } from 'react-native';
-import { ButtonType, ButtonView } from '~/common/enums/enums';
-
-//mock before update global theme color
-enum AppColor {
-  YELLOW_100 = '#F1B313',
-  YELLOW_200 = '#FFB800',
-  GRAY_200 = '#DFDFDF',
-  WHITE = '#FFFFFF',
-}
-////
+import { ButtonType, ButtonAppearance } from '~/common/enums/enums';
+import { ColorPalette } from '@vse-bude/shared';
 
 const styles = StyleSheet.create({
   [ButtonType.PRIMARY]: {
@@ -20,21 +12,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     alignSelf: 'center',
   },
-  [ButtonView.OUTLINED]: {
+  [ButtonAppearance.OUTLINED]: {
     borderWidth: 2,
-    backgroundColor: AppColor.WHITE,
-    borderColor: AppColor.YELLOW_100,
+    backgroundColor: ColorPalette.WHITE_100,
+    borderColor: ColorPalette.YELLOW_100,
   },
-  [ButtonView.FILLED]: {
-    backgroundColor: AppColor.YELLOW_100,
+  [ButtonAppearance.FILLED]: {
+    backgroundColor: ColorPalette.YELLOW_100,
   },
   disabledFill: {
-    backgroundColor: AppColor.GRAY_200,
-    borderColor: AppColor.GRAY_200,
+    backgroundColor: ColorPalette.GRAY_200,
+    borderColor: ColorPalette.GRAY_200,
   },
   disabledOutlained: {
-    backgroundColor: AppColor.WHITE,
-    borderColor: AppColor.GRAY_200,
+    backgroundColor: ColorPalette.WHITE_100,
+    borderColor: ColorPalette.GRAY_200,
     borderWidth: 2,
   },
   button: {
@@ -48,13 +40,13 @@ const styles = StyleSheet.create({
     lineHeight: 19,
   },
   outlainedTitle: {
-    color: AppColor.YELLOW_100,
+    color: ColorPalette.YELLOW_100,
   },
   filledTitle: {
-    color: AppColor.WHITE,
+    color: ColorPalette.WHITE_100,
   },
   disabledOutlainedTitle: {
-    color: AppColor.GRAY_200,
+    color: ColorPalette.GRAY_200,
   },
 });
 

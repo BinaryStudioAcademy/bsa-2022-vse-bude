@@ -1,14 +1,13 @@
-import React, { FC } from 'react';
+import React, { FC , ReactText } from 'react';
 import { Pressable, View } from 'react-native';
-import { ButtonType, ButtonView } from '~/common/enums/enums';
+import { ButtonType, ButtonAppearance } from '~/common/enums/enums';
 import { Text } from '~/components/components';
 import { styles } from './styles';
 
-type ReactText = string | number;
 type Props = {
   label: ReactText;
   type?: ButtonType;
-  view?: ButtonView;
+  view?: ButtonAppearance;
   isDisabled?: boolean;
   onPress: () => void;
 };
@@ -16,11 +15,11 @@ type Props = {
 const Button: FC<Props> = ({
   label,
   type = ButtonType.PRIMARY,
-  view = ButtonView.FILLED,
+  view = ButtonAppearance.FILLED,
   isDisabled,
   onPress,
 }) => {
-  const isOutlined = view === ButtonView.OUTLINED;
+  const isOutlined = view === ButtonAppearance.OUTLINED;
 
   return (
     <Pressable disabled={isDisabled} onPress={onPress}>

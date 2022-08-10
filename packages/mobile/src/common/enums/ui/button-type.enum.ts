@@ -3,9 +3,9 @@ enum ButtonType {
   SECONDARY = 'secondary',
 }
 
-enum ButtonView {
+enum ButtonAppearance {
   FILLED = 'filled',
   OUTLINED = 'outlined',
 }
 
-export { ButtonType, ButtonView };
+export { ButtonType, ButtonAppearance };
