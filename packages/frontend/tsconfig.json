@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "jsxImportSource": "@emotion/react",
     "target": "es2015",
     "lib": ["dom", "dom.iterable", "esnext"],
     "baseUrl": "./",
@@ -12,7 +13,8 @@
       "@helpers": ["helpers"],
       "@components": ["components"],
       "@services": ["services"],
-      "@primitives": ["components/primitives"]
+      "@primitives": ["components/primitives"],
+      "@providers": ["providers"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
