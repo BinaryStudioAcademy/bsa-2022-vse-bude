@@ -1,23 +1,25 @@
 import React, { FC } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, ColorValue, View } from 'react-native';
 import { styles } from './styles';
 
 type Props = {
   size?: number;
-  color?: string;
+  color?: ColorValue;
   isOverflow?: boolean;
 };
 
 const Spinner: FC<Props> = ({ size, color, isOverflow }) => {
+  const spinnerSize = 40;
+
   if (isOverflow) {
     return (
       <View style={styles.overflowContainer}>
-        <ActivityIndicator size={size ?? 45} color={color} />
+        <ActivityIndicator size={size ?? spinnerSize} color={color} />
       </View>
     );
   }
 
-  return <ActivityIndicator size={size ?? 30} color={color} />;
+  return <ActivityIndicator size={size ?? spinnerSize} color={color} />;
 };
 
 export { Spinner };

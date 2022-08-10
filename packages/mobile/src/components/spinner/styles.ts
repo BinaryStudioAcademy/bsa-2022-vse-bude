@@ -2,9 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   overflowContainer: {
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
+    ...StyleSheet.absoluteFillObject,
     justifyContent: 'center',
     elevation: 1,
     zIndex: 1,
