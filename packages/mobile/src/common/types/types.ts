@@ -8,3 +8,9 @@ export type {
   FormControlValues,
   FormControlPath,
 } from './form/form';
+export type {
+  FontStyles,
+  FlexBoxStyles,
+  MarginStyles,
+  PaddingStyles,
+} from './styles/styles';
