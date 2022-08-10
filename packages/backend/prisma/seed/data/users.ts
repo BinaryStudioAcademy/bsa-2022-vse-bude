@@ -8,7 +8,6 @@ export const fakeUsers = async (amountOfRecords: number) => {
   for (let i = 0; i < amountOfRecords; i++) {
     const record: User = {
       id: faker.datatype.uuid(),
-      firebaseUid: faker.datatype.uuid(),
       email: faker.internet.email(),
       phone: faker.phone.number('+380 ## ### ####'),
       firstName: faker.name.firstName(),
