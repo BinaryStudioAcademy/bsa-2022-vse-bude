@@ -21,24 +21,24 @@ const Input = ({
   type,
   value,
 }: IInput) => (
-    <InputWrapper>
-      {label && <StyledLabel htmlFor={id}>{label}</StyledLabel>}
-      <StyledInput
-        status={error ? 'error' : 'succeeded'}
-        type={type}
-        id={id}
-        name={name}
-        placeholder={placeholder || ''}
-        autoComplete={autocomplete}
-        value={value}
-      />
-      {error && (
-        <ErrorMessage>
-          {/* TODO: remove placeholder */}
-          <span>!!!!</span>
-          {error}
-        </ErrorMessage>
-      )}
-    </InputWrapper>
-  );
+  <InputWrapper>
+    {label && <StyledLabel htmlFor={id}>{label}</StyledLabel>}
+    <StyledInput
+      status={error ? 'error' : 'succeeded'}
+      type={type}
+      id={id}
+      name={name}
+      placeholder={placeholder || ''}
+      autoComplete={autocomplete}
+      value={value}
+    />
+    {error && (
+      <ErrorMessage>
+        {/* TODO: remove placeholder */}
+        <span>!!!!</span>
+        {error}
+      </ErrorMessage>
+    )}
+  </InputWrapper>
+);
 export default Input;

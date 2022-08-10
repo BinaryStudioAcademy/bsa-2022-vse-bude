@@ -15,15 +15,15 @@ const SearchInput = ({
   placeholder,
   value,
 }: IInput) => (
-    <SearchWrapper>
-      <StyledInput
-        type={'text'}
-        id={id}
-        name={name}
-        placeholder={placeholder || ''}
-        autoComplete={autocomplete}
-        value={value}
-      />
-    </SearchWrapper>
-  );
+  <SearchWrapper>
+    <StyledInput
+      type={'text'}
+      id={id}
+      name={name}
+      placeholder={placeholder || ''}
+      autoComplete={autocomplete}
+      value={value}
+    />
+  </SearchWrapper>
+);
 export default SearchInput;

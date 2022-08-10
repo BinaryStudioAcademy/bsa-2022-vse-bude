@@ -7,10 +7,6 @@ import { CookieStorage } from '@helpers';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { shallowEqual } from 'react-redux';
 import { fetchRandomData, fetchRandomDataSSR, wrapper } from 'store';
-import FooterInput from 'components/inputs/FooterInput/component';
-import PasswordInput from 'components/inputs/PasswordInput/component';
-import Input from 'components/inputs/Input/component';
-import SearchInput from 'components/inputs/SearchInput/component';
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
@@ -55,15 +51,6 @@ const IndexPage = () => {
             </Button>
           </Card.Footer>
         </Card>
-        <FooterInput label="dodoodo" error="" placeholder="gogogog" />
-        <Input
-          label="dodoodo"
-          error=""
-          placeholder="gogogog"
-          value="jdkskjds"
-        />
-        <PasswordInput label="dodoodo" />
-        <SearchInput placeholder="Input here your message" />
       </Container>
     </Layout>
   );
