@@ -1,20 +1,14 @@
-export interface InnerLinkProps {
-  variant: 'innerLink';
-  href: string;
-  label: string;
+import { LinkProps } from 'next/link';
+
+interface LinkStyleProps {
+  variant?: 'primary';
+  label?: string | undefined;
   disabled?: boolean;
   title?: string;
-  as?: string;
-  passHref?: boolean;
-  prefetch?: boolean;
-  replace?: boolean;
-  scroll?: boolean;
-  shallow?: boolean;
-  locale?: string | false | undefined;
 }
 
-export interface AnchorProps extends HTMLAnchorElement {
-  label: string;
-  variant: 'anchorLink';
-  disabled: boolean;
-}
+export interface InternalLinkProps extends LinkStyleProps, LinkProps {}
+
+export interface AnchorProps
+  extends LinkStyleProps,
+    React.HTMLProps<HTMLAnchorElement> {}
