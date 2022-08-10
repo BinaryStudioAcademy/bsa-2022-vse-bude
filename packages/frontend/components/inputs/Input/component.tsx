@@ -20,6 +20,7 @@ const Input = ({
   label,
   type,
   value,
+  ...props
 }: IInput) => (
   <InputWrapper>
     {label && <StyledLabel htmlFor={id}>{label}</StyledLabel>}
@@ -31,6 +32,7 @@ const Input = ({
       placeholder={placeholder || ''}
       autoComplete={autocomplete}
       value={value}
+      {...props}
     />
     {error && (
       <ErrorMessage>

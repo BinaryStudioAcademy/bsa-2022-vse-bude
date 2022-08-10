@@ -20,6 +20,7 @@ const FooterInput = ({
   label,
   type,
   value,
+  ...props
 }: IInput) => (
   <InputWrapper>
     {label && <StyledLabel htmlFor={id}>{label}</StyledLabel>}
@@ -31,6 +32,7 @@ const FooterInput = ({
       placeholder={placeholder || ''}
       autoComplete={autocomplete}
       value={value}
+      {...props}
     />
     {error && (
       <ErrorMessage>

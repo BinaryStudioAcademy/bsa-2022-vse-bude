@@ -25,6 +25,7 @@ const PasswordInput = ({
   placeholder,
   label,
   value,
+  ...props
 }: IPasswordInput) => {
   const [isShown, setIsShown] = useState(false);
 
@@ -44,6 +45,7 @@ const PasswordInput = ({
           placeholder={placeholder || ''}
           autoComplete={autocomplete}
           value={value}
+          {...props}
         />
       </ButtonWrapper>
       {error && (

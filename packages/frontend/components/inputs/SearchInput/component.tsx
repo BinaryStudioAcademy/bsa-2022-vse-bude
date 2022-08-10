@@ -14,6 +14,7 @@ const SearchInput = ({
   autocomplete = 'off',
   placeholder,
   value,
+  ...props
 }: IInput) => (
   <SearchWrapper>
     <StyledInput
@@ -23,6 +24,7 @@ const SearchInput = ({
       placeholder={placeholder || ''}
       autoComplete={autocomplete}
       value={value}
+      {...props}
     />
   </SearchWrapper>
 );
