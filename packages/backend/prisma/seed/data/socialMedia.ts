@@ -1,10 +1,11 @@
-import type { SocialMedia, User } from '@prisma/client';
+import type { SocialMedia, User, Product } from '@prisma/client';
 import { SocialMediaType } from '@prisma/client';
 import { faker } from '@faker-js/faker';
 
 export const fakeSocialMedia = async (
   amountOfRecords: number,
   existingUsers: User[],
+  existingProducts: Product[],
 ) => {
   const records: SocialMedia[] = [];
 
@@ -14,7 +15,11 @@ export const fakeSocialMedia = async (
       continue;
     }
 
-    const productId = faker.datatype.uuid();
+    const productIndex = i % existingProducts.length;
+    const productId = existingProducts.at(productIndex)?.id;
+    if (!productId) {
+      continue;
+    }
 
     const record: SocialMedia = {
       id: faker.datatype.uuid(),
