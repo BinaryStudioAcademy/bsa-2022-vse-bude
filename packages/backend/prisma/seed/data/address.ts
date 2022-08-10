@@ -20,7 +20,7 @@ export const fakeAddress = async (
       city: faker.address.city(),
       address: faker.address.street(),
       zip: faker.address.zipCode(),
-      novaPoshtaRef: 'novaPoshtaRef',
+      novaPoshtaRef: null,
       userId: userId,
       createdAt: faker.date.past(),
       updatedAt: faker.date.recent(),
