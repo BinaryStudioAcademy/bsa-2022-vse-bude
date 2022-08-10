@@ -1,5 +1,5 @@
-import { styled } from '@nextui-org/react';
+import { css } from '@emotion/react';
 
-export const StyledMain = styled('main', {
-  flex: '1',
-});
+export const main = css`
+  flex: 1;
+`;
