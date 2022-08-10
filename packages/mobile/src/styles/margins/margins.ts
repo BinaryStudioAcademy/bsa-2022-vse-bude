@@ -23,6 +23,48 @@ const MARGINS_STYLES: MarginStyles = {
   mt7: {
     marginTop: SPACERS.spacer7,
   },
+  mr1: {
+    marginRight: SPACERS.spacer1,
+  },
+  mr2: {
+    marginRight: SPACERS.spacer2,
+  },
+  mr3: {
+    marginRight: SPACERS.spacer3,
+  },
+  mr4: {
+    marginRight: SPACERS.spacer4,
+  },
+  mr5: {
+    marginRight: SPACERS.spacer5,
+  },
+  mr6: {
+    marginRight: SPACERS.spacer6,
+  },
+  mr7: {
+    marginRight: SPACERS.spacer7,
+  },
+  mb1: {
+    marginBottom: SPACERS.spacer1,
+  },
+  mb2: {
+    marginBottom: SPACERS.spacer2,
+  },
+  mb3: {
+    marginBottom: SPACERS.spacer3,
+  },
+  mb4: {
+    marginBottom: SPACERS.spacer4,
+  },
+  mb5: {
+    marginBottom: SPACERS.spacer5,
+  },
+  mb6: {
+    marginBottom: SPACERS.spacer6,
+  },
+  mb7: {
+    marginBottom: SPACERS.spacer7,
+  },
   ml1: {
     marginLeft: SPACERS.spacer1,
   },
