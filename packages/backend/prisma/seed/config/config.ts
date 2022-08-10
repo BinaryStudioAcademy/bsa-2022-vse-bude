@@ -1,3 +1,5 @@
+// if you chaging USERS_NUMBER please use
+// npm run db:seed:reset
 export const USERS_NUMBER = 5;
 
 export const BIDS_NUMBER = USERS_NUMBER * 2;

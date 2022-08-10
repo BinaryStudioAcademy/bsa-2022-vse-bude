@@ -15,3 +15,4 @@
 6. Generate DB migration: `db:migrate:create -n`
 7. Apply DB migration(s): `db:migrate`
 8. Apply DB seeds: `db:seed`
+9. Reset DB seeds: `db:seed:reset`
