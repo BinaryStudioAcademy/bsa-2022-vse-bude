@@ -7,15 +7,15 @@ type KeyboardAvoidingProps = {
   style: Record<string, unknown>;
 };
 
-const KeyboardAvoiding: FC<KeyboardAvoidingProps> = ({ children, style }): ReactElement => {
+const KeyboardAvoiding: FC<KeyboardAvoidingProps> = ({
+  children,
+  style,
+}): ReactElement => {
   const keyboardHeight = useKeyboardHeight();
-
   //TODO: use animation for slide behavior
 
   return (
-    <View
-      style={[{ paddingBottom: keyboardHeight / 4 }, style]}
-    >
+    <View style={[{ paddingBottom: keyboardHeight / 4 }, style]}>
       {children}
     </View>
   );
