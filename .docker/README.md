@@ -17,3 +17,23 @@ docker-compose -f docker-compose.db.yaml down
 ```
 docker-compose -f docker-compose.db.yaml down -v
 ```
+
+# Run Redis in docker
+
+## Start command
+
+```
+docker-compose -f docker-compose.redis.yaml up -d
+```
+
+## Stop command
+
+```
+docker-compose -f docker-compose.redis.yaml down
+```
+
+### To stop Redis
+
+```
+docker-compose -f docker-compose.redis.yaml down -v
+```
