@@ -1,4 +1,5 @@
 import type { PrismaClient, User } from '@prisma/client';
+import type { UserSignUpDto } from '@vse-bude/shared';
 
 export class UserRepository {
   private _dbClient: PrismaClient;
@@ -11,18 +12,37 @@ export class UserRepository {
     return this._dbClient.user.findMany();
   }
 
+  public create(signUpData: UserSignUpDto) {
+    return this._dbClient.user.create({
+      data: {
+        firstName: signUpData.firstName,
+        lastName: signUpData.lastName,
+        phone: signUpData.phone,
+        email: signUpData.email,
+        passwordHash: signUpData.password,
+      },
+    });
+  }
+
   public async getByEmail(email: string) {
-    return await this._bdClient.user.findFirst({
+    return await this._dbClient.user.findFirst({
       where: {
         email: email,
       },
     });
   }
 
-  public async getByPhone(phone: string) {
-    return await this._bdClient.user.findFirst({
+  public async getByEmailOrPhone(email: string, phone: string) {
+    return await this._dbClient.user.findFirst({
       where: {
-        phone: phone,
+        OR: [
+          {
+            phone: phone,
+          },
+          {
+            email: email,
+          },
+        ],
       },
     });
   }

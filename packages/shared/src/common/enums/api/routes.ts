@@ -7,4 +7,5 @@ export enum ApiRoutes {
 export enum AuthApiRoutes {
   SIGN_IN = '/sign-in',
   SIGN_UP = '/sign-up',
+  REFRESH_TOKEN = '/refresh-token',
 }
