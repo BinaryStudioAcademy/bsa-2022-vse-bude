@@ -8,30 +8,24 @@ import {
   StyledLabel,
 } from './styles';
 
-type IPasswordInput = {
-  id: string;
+interface IPasswordInput extends React.HTMLAttributes<HTMLInputElement> {
   name: string;
   autocomplete?: string;
   placeholder?: string;
   label?: string;
   error?: string;
+  value?: string;
 };
 
-const PasswordInput: React.FC<IPasswordInput> = ({
+const PasswordInput = ({
   error,
   id,
   name,
   autocomplete = 'off',
   placeholder,
   label,
-}: {
-  id: string;
-  name: string;
-  autocomplete?: string;
-  placeholder?: string;
-  label?: string;
-  error?: string;
-}) => {
+  value
+}: IPasswordInput) => {
   const [isShown, setIsShown] = useState(false);
 
   return (
@@ -39,6 +33,7 @@ const PasswordInput: React.FC<IPasswordInput> = ({
       {label && <StyledLabel htmlFor={id}>{label}</StyledLabel>}
       <ButtonWrapper>
         <ShowBtn type="button" onClick={() => setIsShown(!isShown)}>
+          {/* TODO: remove placeholder */}
           {isShown ? 'H' : 'S'}
         </ShowBtn>
         <StyledInput
@@ -48,10 +43,12 @@ const PasswordInput: React.FC<IPasswordInput> = ({
           name={name}
           placeholder={placeholder || ''}
           autoComplete={autocomplete}
+          value={value}
         />
       </ButtonWrapper>
       {error && (
         <ErrorMessage>
+          {/* TODO: remove placeholder */}
           <span>!!!!</span>
           {error}
         </ErrorMessage>

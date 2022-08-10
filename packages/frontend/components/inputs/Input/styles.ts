@@ -6,13 +6,14 @@ export const StyledInput = styled('input', {
   border: '$backgroundLight 2px solid',
   borderRadius: '$md',
   boxSizing: 'border-box',
-  padding: '12px 50px 12px $md',
+  padding: '12px $md',
   backgroundColor: '$backgroundLight',
   fontSize: '$toggle',
   lineHeight: '$toggle',
   fontFamily: '$sans',
   '&::placeholder': {
     opacity: 0.2,
+    color: '$text',
   },
   '&:focus': {
     borderColor: '$backgroundDark',
@@ -56,18 +57,4 @@ export const ErrorMessage = styled('p', {
   '& span': {
     marginRight: '$xs',
   },
-});
-
-export const ButtonWrapper = styled('div', {
-  position: 'relative',
-});
-
-export const ShowBtn = styled('button', {
-  position: 'absolute',
-  top: '50%',
-  right: '15px',
-  transform: 'translateY(-50%)',
-  border: 'none',
-  cursor: 'pointer',
-  backgroundColor: 'transparent',
 });
