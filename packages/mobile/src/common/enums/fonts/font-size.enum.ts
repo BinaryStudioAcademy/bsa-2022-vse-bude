@@ -1,5 +1,5 @@
 enum FontSize {
-  HEADER = 36,
+  HEADER = 26,
   HEADING = 22,
   TEXT_16 = 16,
   TEXT_14 = 14,
