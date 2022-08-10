@@ -1,5 +1,5 @@
 import type { Bid, PrismaClient, Product, User } from '@prisma/client';
-import { BIDS_NUMBER } from '../config';
+import { BIDS_NUMBER } from '../config/config';
 import { fakeBid } from '../data/bid';
 
 export const seedBids = async (

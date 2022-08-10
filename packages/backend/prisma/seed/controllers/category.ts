@@ -1,5 +1,5 @@
 import type { Category, PrismaClient } from '@prisma/client';
-import { Categories } from '../Categories';
+import { Categories } from '../config/Categories';
 import { fakeCategory } from '../data/category';
 
 export const seedCategory = async (prismaClient: PrismaClient) => {
@@ -9,6 +9,6 @@ export const seedCategory = async (prismaClient: PrismaClient) => {
     return;
   }
 
-  const data: Category[] = await fakeCategory(existingCategories);
+  const data: Category[] = await fakeCategory(existingCategories, Categories);
   await prismaClient.category.createMany({ data: data });
 };

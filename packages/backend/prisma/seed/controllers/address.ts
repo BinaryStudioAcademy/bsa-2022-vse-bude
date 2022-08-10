@@ -1,5 +1,5 @@
 import type { Address, PrismaClient, User } from '@prisma/client';
-import { USERS_NUMBER } from '../config';
+import { USERS_NUMBER } from '../config/config';
 import { fakeAddress } from '../data/address';
 
 export const seedAddress = async (
