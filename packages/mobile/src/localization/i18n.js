@@ -17,5 +17,5 @@ i18n
       ua: { translation: ua },
     },
   });
-  
+
 export { i18n };

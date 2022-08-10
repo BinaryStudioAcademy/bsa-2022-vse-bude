@@ -6,7 +6,7 @@ export const ua = {
     EMAIL_HINT: 'Введіть електронну адресу',
     PASSWORD: 'Пароль',
     PASSWORD_HINT: 'Введіть своій пароль',
-    NAME: 'Ім\'я',
-    NAME_HINT: 'Введіть своє ім\'я',
+    NAME: "Ім'я",
+    NAME_HINT: "Введіть своє Ім'я",
   },
 };
