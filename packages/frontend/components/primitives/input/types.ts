@@ -1,9 +1,9 @@
-export interface SearchProps extends React.HTMLAttributes<HTMLInputElement> {
+export interface SearchProps extends React.HTMLProps<HTMLButtonElement> {
   value: string;
   setValue: (string) => void;
 }
 
-export interface PasswordProps extends React.HTMLAttributes<HTMLInputElement> {
+export interface PasswordProps extends React.HTMLProps<HTMLButtonElement> {
   label?: string;
   error?: string;
 }

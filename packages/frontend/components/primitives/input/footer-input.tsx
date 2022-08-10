@@ -1,30 +1,25 @@
+import React from 'react';
 import * as styles from './styles';
 import type { InputProps } from './types';
 
-export const FooterInput = ({
-  error,
-  id,
-  label,
-  type,
-  ...props
-}: InputProps) => (
-  <div css={styles.InputWrapper}>
+const Component = ({ error, id, label, type, ...props }: InputProps, ref) => (
+  <div css={styles.inputWrapper}>
     {label && (
-      <label data-color-style="footer" css={styles.StyledLabel} htmlFor={id}>
+      <label data-variant="footer" css={styles.label} htmlFor={id}>
         {label}
       </label>
     )}
     <input
-      css={styles.StyledInput}
-      data-padding-variant={'text'}
+      ref={ref}
+      css={styles.input}
       data-status={error ? 'error' : 'successfully'}
-      data-color-style="footer"
+      data-variant="footer"
       type={type}
       id={id}
       {...props}
     />
     {error && (
-      <p css={styles.ErrorMessage}>
+      <p css={styles.errorMessage}>
         {/* TODO: remove placeholder */}
         <span>!!!!</span>
         {error}
@@ -32,3 +27,4 @@ export const FooterInput = ({
     )}
   </div>
 );
+export const FooterInput = React.forwardRef(Component);

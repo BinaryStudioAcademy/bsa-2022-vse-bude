@@ -1,23 +1,24 @@
+import React from 'react';
 import * as styles from './styles';
 import type { InputProps } from './types';
 
-export const Input = ({ error, id, label, type, ...props }: InputProps) => (
-  <div css={styles.InputWrapper}>
+const Component = ({ error, id, label, type, ...props }: InputProps, ref) => (
+  <div css={styles.inputWrapper}>
     {label && (
-      <label data-color-style="main" css={styles.StyledLabel} htmlFor={id}>
+      <label css={styles.label} htmlFor={id}>
         {label}
       </label>
     )}
     <input
-      css={styles.StyledInput}
-      data-padding-variant={'text'}
+      ref={ref}
+      css={styles.input}
       data-status={error ? 'error' : 'successfully'}
       type={type}
       id={id}
       {...props}
     />
     {error && (
-      <p css={styles.ErrorMessage}>
+      <p css={styles.errorMessage}>
         {/* TODO: remove placeholder */}
         <span>!!!!</span>
         {error}
@@ -25,3 +26,4 @@ export const Input = ({ error, id, label, type, ...props }: InputProps) => (
     )}
   </div>
 );
+export const Input = React.forwardRef(Component);

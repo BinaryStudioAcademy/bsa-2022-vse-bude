@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import type { Theme } from 'theme';
 
-export const StyledInput = ({
+export const input = ({
   colors,
   fontSizes,
   lineHeights,
@@ -32,17 +32,7 @@ export const StyledInput = ({
     opacity: 0.2;
   }
 
-  &[data-padding-variant='text'] {
-  }
-
-  &[data-padding-variant='password'] {
-    padding: 12px 50px 12px ${spaces.md};
-  }
-
-  &[data-color-style='footer'] {
-  }
-
-  &[data-color-style='footer'] {
+  &[data-variant='footer'] {
     border: ${colors.secondaryLight} 2px solid;
     background-color: ${colors.secondaryLight};
     color: ${colors.background};
@@ -62,11 +52,15 @@ export const StyledInput = ({
   }
 `;
 
+export const passwordPadding = ({ spaces }: Theme) => css`
+  padding: 12px 50px 12px ${spaces.md};
+`;
+
 export const error = ({ colors }: Theme) => css`
   color: ${colors.error};
 `;
 
-export const StyledLabel = ({ colors, fontSizes, lineHeights }: Theme) => css`
+export const label = ({ colors, fontSizes, lineHeights }: Theme) => css`
   margin-bottom: 4px;
   cursor: pointer;
   font-size: ${fontSizes.caption};
@@ -74,17 +68,17 @@ export const StyledLabel = ({ colors, fontSizes, lineHeights }: Theme) => css`
   font-family: inherit;
   color: ${colors.text};
 
-  &[data-color-style='footer'] {
+  &[data-variant='footer'] {
     color: ${colors.background};
   }
 `;
 
-export const InputWrapper = () => css`
+export const inputWrapper = () => css`
   display: flex;
   flex-direction: column;
 `;
 
-export const ErrorMessage = ({
+export const errorMessage = ({
   colors,
   fontSizes,
   lineHeights,
@@ -102,11 +96,11 @@ export const ErrorMessage = ({
   }
 `;
 
-export const ButtonWrapper = () => css`
+export const buttonWrapper = () => css`
   position: relative;
 `;
 
-export const ShowBtn = () => css`
+export const showBtn = () => css`
   position: absolute;
   top: 50%;
   right: 15px;
@@ -116,20 +110,21 @@ export const ShowBtn = () => css`
   background-color: transparent;
 `;
 
-export const SearchWrapper = ({ radiuses }: Theme) => css`
+export const searchWrapper = ({ radiuses, shadows }: Theme) => css`
   position: relative;
-  box-shadow: -1px -2px 23px 0px #c3c3c340;
+  box-shadow: ${shadows.upper};
   border-radius: ${radiuses.lg};
 `;
 
-export const StyledSearchInput = ({
+export const searchInput = ({
   colors,
   fontSizes,
   lineHeights,
   radiuses,
+  shadows,
 }: Theme) => css`
   transition: 200ms linear;
-  box-shadow: 2px 5px 10px 0px #c3c3c340;
+  box-shadow: ${shadows.bottom};
   width: 100%;
   height: 60px;
   border: ${colors.backgroundDark} 1px solid;

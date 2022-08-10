@@ -1,25 +1,21 @@
+import React from 'react';
 import { useState } from 'react';
 import * as styles from './styles';
 import type { PasswordProps } from './types';
 
-export const PasswordInput = ({
-  error,
-  id,
-  label,
-  ...props
-}: PasswordProps) => {
+const Component = ({ error, id, label, ...props }: PasswordProps, ref) => {
   const [isShown, setIsShown] = useState(false);
 
   return (
-    <div css={styles.InputWrapper}>
+    <div css={styles.inputWrapper}>
       {label && (
-        <label css={styles.StyledLabel} htmlFor={id}>
+        <label css={styles.label} htmlFor={id}>
           {label}
         </label>
       )}
-      <div css={styles.ButtonWrapper}>
+      <div css={styles.buttonWrapper}>
         <button
-          css={styles.ShowBtn}
+          css={styles.showBtn}
           type="button"
           onClick={() => setIsShown(!isShown)}
         >
@@ -27,8 +23,8 @@ export const PasswordInput = ({
           {isShown ? 'H' : 'S'}
         </button>
         <input
-          css={styles.StyledInput}
-          data-padding-variant={'password'}
+          ref={ref}
+          css={[styles.input, styles.passwordPadding]}
           data-status={error ? 'error' : 'successfully'}
           type={isShown ? 'text' : 'password'}
           id={id}
@@ -36,7 +32,7 @@ export const PasswordInput = ({
         />
       </div>
       {error && (
-        <p css={styles.ErrorMessage}>
+        <p css={styles.errorMessage}>
           {/* TODO: remove placeholder */}
           <span>!!!!</span>
           {error}
@@ -45,3 +41,4 @@ export const PasswordInput = ({
     </div>
   );
 };
+export const PasswordInput = React.forwardRef(Component);
