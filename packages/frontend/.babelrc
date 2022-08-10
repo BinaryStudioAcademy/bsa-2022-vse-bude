@@ -1,0 +1,12 @@
+{
+  "presets": [
+    ["next/babel"],
+    [
+      "@emotion/babel-preset-css-prop",
+      {
+        "autoLabel": "dev-only",
+        "labelFormat": "[local]"
+      }
+    ]
+  ]
+}
