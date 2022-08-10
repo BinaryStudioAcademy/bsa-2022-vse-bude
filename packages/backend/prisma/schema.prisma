@@ -16,7 +16,6 @@ datasource db {
 
 model User {
   id          String        @id @default(uuid()) @db.Uuid
-  firebaseUid String
   email       String        @unique @db.VarChar(256)
   phone       String        @unique @db.VarChar(32)
   firstName   String        @db.VarChar(256)
@@ -32,7 +31,7 @@ model User {
   chats       ChatMember[]
   messages    Message[]
   createdAt   DateTime      @default(now())
-  updatedAt   DateTime?     @updatedAt
+  updatedAt   DateTime      @updatedAt
 }
 
 model UserSettings {
@@ -65,9 +64,9 @@ model SocialMedia {
   socialMedia      SocialMediaType
   link             String          @db.VarChar(2048)
   user             User?           @relation(fields: [ownedByUserId], references: [id])
-  ownedByUserId    String?         @unique @db.Uuid
+  ownedByUserId    String?         @db.Uuid
   product          Product?        @relation(fields: [ownedByProductId], references: [id])
-  ownedByProductId String?         @unique @db.Uuid
+  ownedByProductId String?         @db.Uuid
   createdAt        DateTime        @default(now())
   updatedAt        DateTime        @updatedAt
 }
@@ -78,6 +77,8 @@ model Category {
   products  Product[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+
+  @@unique([title])
 }
 
 model Product {
@@ -94,11 +95,11 @@ model Product {
   endDate         DateTime?
   cancellReason   String?
   author          User          @relation(name: "ownProducts", fields: [authorId], references: [id])
-  authorId        String        @unique @db.Uuid
+  authorId        String        @db.Uuid
   category        Category?     @relation(fields: [categoryId], references: [id])
-  categoryId      String?       @unique @db.Uuid
+  categoryId      String?       @db.Uuid
   winner          User?         @relation(name: "wonProducts", fields: [winnerId], references: [id])
-  winnerId        String?       @unique @db.Uuid
+  winnerId        String?       @db.Uuid
   socialMedia     SocialMedia[]
   bids            Bid[]
   chat            Chat?
@@ -109,9 +110,9 @@ model Product {
 model Bid {
   id        String   @id @default(uuid()) @db.Uuid
   bidder    User     @relation(fields: [bidderId], references: [id])
-  bidderId  String   @unique @db.Uuid
+  bidderId  String   @db.Uuid
   product   Product  @relation(fields: [productId], references: [id])
-  productId String   @unique @db.Uuid
+  productId String   @db.Uuid
   price     Decimal  @db.Money
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -132,9 +133,9 @@ model Chat {
 model ChatMember {
   id        String   @id @default(uuid()) @db.Uuid
   user      User     @relation(fields: [userId], references: [id])
-  userId    String   @unique @db.Uuid
+  userId    String   @db.Uuid
   chat      Chat     @relation(fields: [chatId], references: [id])
-  chatId    String   @unique @db.Uuid
+  chatId    String   @db.Uuid
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -142,9 +143,9 @@ model ChatMember {
 model Message {
   id        String   @id @default(uuid()) @db.Uuid
   sender    User     @relation(fields: [senderId], references: [id])
-  senderId  String   @unique @db.Uuid
+  senderId  String   @db.Uuid
   chat      Chat     @relation(fields: [chatId], references: [id])
-  chatId    String   @unique @db.Uuid
+  chatId    String   @db.Uuid
   text      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
