@@ -1,17 +1,12 @@
-import { ErrorMessage, InputWrapper, StyledInput, StyledLabel } from './styles';
+import {
+  ErrorMessage,
+  InputWrapper,
+  StyledFooterInput,
+  StyledFooterLabel,
+} from './styles';
+import type { IInput } from './types';
 
-interface IInput extends React.HTMLAttributes<HTMLInputElement> {
-  name: string;
-  type: 'text' | 'email';
-  autocomplete?: string;
-  placeholder?: string;
-  label?: string;
-  error?: string;
-  required: boolean;
-  value?: string;
-}
-
-const Input = ({
+const FooterInput = ({
   error,
   id,
   name,
@@ -23,8 +18,8 @@ const Input = ({
   ...props
 }: IInput) => (
   <InputWrapper>
-    {label && <StyledLabel htmlFor={id}>{label}</StyledLabel>}
-    <StyledInput
+    {label && <StyledFooterLabel htmlFor={id}>{label}</StyledFooterLabel>}
+    <StyledFooterInput
       status={error ? 'error' : 'succeeded'}
       type={type}
       id={id}
@@ -43,4 +38,4 @@ const Input = ({
     )}
   </InputWrapper>
 );
-export default Input;
+export default FooterInput;

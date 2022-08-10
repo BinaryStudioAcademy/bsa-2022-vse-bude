@@ -7,15 +7,7 @@ import {
   StyledInput,
   StyledLabel,
 } from './styles';
-
-interface IPasswordInput extends React.HTMLAttributes<HTMLInputElement> {
-  name: string;
-  autocomplete?: string;
-  placeholder?: string;
-  label?: string;
-  error?: string;
-  value?: string;
-}
+import type { IPasswordInput } from './types';
 
 const PasswordInput = ({
   error,
@@ -38,6 +30,7 @@ const PasswordInput = ({
           {isShown ? 'H' : 'S'}
         </ShowBtn>
         <StyledInput
+          stylesType={'password'}
           status={error ? 'error' : 'succeeded'}
           type={isShown ? 'text' : 'password'}
           id={id}

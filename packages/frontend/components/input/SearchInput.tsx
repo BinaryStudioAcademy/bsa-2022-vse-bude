@@ -1,12 +1,5 @@
-import { SearchWrapper, StyledInput } from './styles';
-
-interface IInput extends React.HTMLAttributes<HTMLInputElement> {
-  name: string;
-  autocomplete?: string;
-  placeholder?: string;
-  required: boolean;
-  value?: string;
-}
+import { SearchWrapper, StyledSearchInput } from './styles';
+import type { ISearchInput } from './types';
 
 const SearchInput = ({
   id,
@@ -15,9 +8,9 @@ const SearchInput = ({
   placeholder,
   value,
   ...props
-}: IInput) => (
+}: ISearchInput) => (
   <SearchWrapper>
-    <StyledInput
+    <StyledSearchInput
       type={'text'}
       id={id}
       name={name}
