@@ -1,13 +1,18 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC } from 'react';
+import { NativeSafeAreaViewProps } from 'react-native-safe-area-context';
 import { SafeAreaView } from '../components';
 import { styles } from './styles';
 
-type Props = {
-  children?: ReactNode;
-};
-
-const ScreenWrapper: FC<Props> = ({ children }) => {
-  return <SafeAreaView style={styles.container}>{children}</SafeAreaView>;
+const ScreenWrapper: FC<NativeSafeAreaViewProps> = ({
+  style,
+  children,
+  ...restProps
+}) => {
+  return (
+    <SafeAreaView style={styles.container} {...restProps}>
+      {children}
+    </SafeAreaView>
+  );
 };
 
 export { ScreenWrapper };
