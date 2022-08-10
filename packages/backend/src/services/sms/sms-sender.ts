@@ -3,7 +3,7 @@ import type { ISMSProvider } from '@types';
 import type { ISMSSenderService } from '@types';
 
 class SMSSenderService implements ISMSSenderService {
-  private providerService: ISMSSenderService;
+  private providerService: ISMSProvider;
 
   constructor(providerService: ISMSProvider) {
     this.providerService = providerService;
@@ -15,7 +15,7 @@ class SMSSenderService implements ISMSSenderService {
    * @param {string} message - The message you want to send.
    * @returns The result of the send method from the provider service.
    */
-  public async send(phone: string, message: string): Promise<object> {
+  public async send(phone: string, message: string): Promise<boolean> {
     try {
       const result = await this.providerService.send(phone, String(message));
 

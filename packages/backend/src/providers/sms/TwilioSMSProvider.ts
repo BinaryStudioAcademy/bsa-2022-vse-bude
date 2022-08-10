@@ -1,8 +1,9 @@
 import { getEnv, log } from '@helpers';
 import { Twilio } from 'twilio';
 import type { ISMSProvider } from '@types';
+import { MessageStatus } from '@enums';
 
-export class TwilioSMSService implements ISMSProvider {
+export class TwilioSMSProvider implements ISMSProvider {
   private authToken: string;
 
   private accountSid: string;
@@ -24,7 +25,7 @@ export class TwilioSMSService implements ISMSProvider {
    * @param {string} message - The message you want to send.
    * @returns The result of the send function is an object.
    */
-  public async send(phone: string, message: string): Promise<object> {
+  public async send(phone: string, message: string): Promise<boolean> {
     try {
       const result = await this.client.messages.create({
         body: message,
@@ -32,7 +33,7 @@ export class TwilioSMSService implements ISMSProvider {
         to: phone,
       });
 
-      return result;
+      return result.status === MessageStatus.ACCEPTED;
     } catch (error) {
       log(error);
     }
