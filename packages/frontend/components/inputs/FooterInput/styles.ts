@@ -13,7 +13,7 @@ export const StyledInput = styled('input', {
   fontFamily: '$sans',
   '&::placeholder': {
     opacity: 0.4,
-    color: '$background'
+    color: '$background',
   },
   '&:focus': {
     borderColor: '$secondaryDark',
@@ -58,4 +58,3 @@ export const ErrorMessage = styled('p', {
     marginRight: '$xs',
   },
 });
-

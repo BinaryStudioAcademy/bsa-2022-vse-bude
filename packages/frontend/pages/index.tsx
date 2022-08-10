@@ -55,10 +55,15 @@ const IndexPage = () => {
             </Button>
           </Card.Footer>
         </Card>
-        <FooterInput label='dodoodo' error='' placeholder='gogogog' />
-        <Input label='dodoodo' error='' placeholder='gogogog' value='jdkskjds' />
-        <PasswordInput label='dodoodo'  />
-        <SearchInput placeholder='Input here your message' />
+        <FooterInput label="dodoodo" error="" placeholder="gogogog" />
+        <Input
+          label="dodoodo"
+          error=""
+          placeholder="gogogog"
+          value="jdkskjds"
+        />
+        <PasswordInput label="dodoodo" />
+        <SearchInput placeholder="Input here your message" />
       </Container>
     </Layout>
   );

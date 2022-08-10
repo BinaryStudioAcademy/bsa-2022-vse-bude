@@ -1,7 +1,4 @@
-import {
-  SearchWrapper,
-  StyledInput,
-} from './styles';
+import { SearchWrapper, StyledInput } from './styles';
 
 interface IInput extends React.HTMLAttributes<HTMLInputElement> {
   name: string;
@@ -9,19 +6,18 @@ interface IInput extends React.HTMLAttributes<HTMLInputElement> {
   placeholder?: string;
   required: boolean;
   value?: string;
-};
+}
 
 const SearchInput = ({
   id,
   name,
   autocomplete = 'off',
   placeholder,
-  value
-}: IInput) => {
-  return (
+  value,
+}: IInput) => (
     <SearchWrapper>
       <StyledInput
-        type={"text"}
+        type={'text'}
         id={id}
         name={name}
         placeholder={placeholder || ''}
@@ -30,5 +26,4 @@ const SearchInput = ({
       />
     </SearchWrapper>
   );
-};
 export default SearchInput;

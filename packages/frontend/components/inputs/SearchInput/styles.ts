@@ -2,7 +2,7 @@ import { styled } from '@nextui-org/react';
 
 export const StyledInput = styled('input', {
   transition: '200ms linear',
-  boxShadow: "2px 5px 10px 0px #C3C3C340",
+  boxShadow: '2px 5px 10px 0px #C3C3C340',
   width: '100%',
   border: '$backgroundDark 1px solid',
   borderRadius: '$lg',
@@ -20,6 +20,6 @@ export const StyledInput = styled('input', {
 });
 
 export const SearchWrapper = styled('div', {
-  boxShadow: "-1px -2px 23px 0px #C3C3C340",
+  boxShadow: '-1px -2px 23px 0px #C3C3C340',
   borderRadius: '$lg',
-})
+});

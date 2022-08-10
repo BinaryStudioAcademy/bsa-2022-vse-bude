@@ -15,7 +15,7 @@ interface IPasswordInput extends React.HTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: string;
   value?: string;
-};
+}
 
 const PasswordInput = ({
   error,
@@ -24,7 +24,7 @@ const PasswordInput = ({
   autocomplete = 'off',
   placeholder,
   label,
-  value
+  value,
 }: IPasswordInput) => {
   const [isShown, setIsShown] = useState(false);
 
