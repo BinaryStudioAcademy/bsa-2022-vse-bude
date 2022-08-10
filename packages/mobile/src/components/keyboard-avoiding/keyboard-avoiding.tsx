@@ -3,8 +3,8 @@ import { KeyboardAvoidingView } from 'react-native';
 import { PlatformOS } from '~/common/enums/enums';
 
 type Props = {
-  children: ReactElement
-  style: Record<string, unknown>,
+  children: ReactElement;
+  style: Record<string, unknown>;
 };
 
 const KeyboardAvoiding: FC<Props> = ({ children, style }): ReactElement => {

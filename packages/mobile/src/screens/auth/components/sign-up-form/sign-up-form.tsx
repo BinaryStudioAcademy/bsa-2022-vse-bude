@@ -1,8 +1,13 @@
 import React from 'react';
 import { UserSignUpDto } from '@vse-bude/shared';
-
 import { useAppForm } from '~/hooks/hooks';
-import { Text, View, Button, Input, KeyboardAvoiding } from '~/components/components';
+import {
+  Text,
+  View,
+  Button,
+  Input,
+  KeyboardAvoiding,
+} from '~/components/components';
 import { signUp } from '~/validation-schemas/validation-schemas';
 import { DEFAULT_SIGN_UP_PAYLOAD } from './common/constants';
 
@@ -45,7 +50,7 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
           <Button label="Sign up" onPress={handleSubmit(onSubmit)} />
         </View>
       </>
-    </KeyboardAvoiding >
+    </KeyboardAvoiding>
   );
 };
 
