@@ -18,6 +18,26 @@ export class RefreshTokenRepository {
     });
   }
 
+  async deleteByUserId(userId: string) {
+    return await this._dbClient.refreshToken.deleteMany({
+      where: {
+        userId: userId,
+      },
+    });
+  }
+
+  async updateTokenById(tokenId: string, tokenValue: string, expiresAt: Date) {
+    return await this._dbClient.refreshToken.update({
+      where: {
+        id: tokenId,
+      },
+      data: {
+        token: tokenValue,
+        expiresAt: expiresAt,
+      },
+    });
+  }
+
   async getTokenByValue(tokenValue: string) {
     return await this._dbClient.refreshToken.findFirst({
       where: {

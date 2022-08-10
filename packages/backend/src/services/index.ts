@@ -2,6 +2,9 @@ import type { Repositories } from '@repositories';
 import { RandomDataService } from './random-data';
 import { UserService } from './user';
 import { AuthService } from './auth';
+import { HashService } from './hash';
+
+const hashService: HashService = new HashService();
 
 export const initServices = (repositories: Repositories) => ({
   randomDataService: new RandomDataService(repositories.randomDataRepository),
@@ -9,6 +12,7 @@ export const initServices = (repositories: Repositories) => ({
   authService: new AuthService(
     repositories.userRepository,
     repositories.refreshTokenRepository,
+    hashService,
   ),
 });
 

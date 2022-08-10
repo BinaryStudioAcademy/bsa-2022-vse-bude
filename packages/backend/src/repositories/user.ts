@@ -1,5 +1,5 @@
 import type { PrismaClient, User } from '@prisma/client';
-import type { UserSignUpDto } from '@vse-bude/shared';
+import type { CreateUserDto } from '../common/types/user/create.user.dto';
 
 export class UserRepository {
   private _dbClient: PrismaClient;
@@ -12,14 +12,14 @@ export class UserRepository {
     return this._dbClient.user.findMany();
   }
 
-  public create(signUpData: UserSignUpDto) {
+  public create(signUpData: CreateUserDto) {
     return this._dbClient.user.create({
       data: {
         firstName: signUpData.firstName,
         lastName: signUpData.lastName,
         phone: signUpData.phone,
         email: signUpData.email,
-        passwordHash: signUpData.password,
+        passwordHash: signUpData.passwordHash,
       },
     });
   }

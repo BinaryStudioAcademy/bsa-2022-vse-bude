@@ -5,6 +5,8 @@ import { AuthApiRoutes } from '@vse-bude/shared';
 import { wrap } from '@helpers';
 import { apiPath } from '../../helpers/api';
 import { authMiddleware } from '../../auth/middlewares/auth.middleware';
+import type { SignOutDto } from '../../common/types/auth/sign-out.dto';
+import type { UpdateRefreshTokenDto } from '../../common/types/refresh-token/update.refresh-token.dto';
 
 export const initAuthRoutes = (
   { authService }: Services,
@@ -24,15 +26,27 @@ export const initAuthRoutes = (
     }),
   );
 
-  router.get(
-    apiPath(path, '/test'),
+  router.post(
+    apiPath(path, AuthApiRoutes.SIGN_OUT),
     authMiddleware,
-    wrap(
-      (req: Request) =>
-        new Promise((resolve) => {
-          resolve(req.userId);
-        }),
-    ),
+    wrap(async (req: Request) => {
+      const signOutDto: SignOutDto = {
+        userId: req.userId,
+      };
+
+      return await authService.signOut(signOutDto);
+    }),
+  );
+
+  router.post(
+    apiPath(path, AuthApiRoutes.REFRESH_TOKEN),
+    wrap(async (req: Request) => {
+      const updateRefreshTokenDto: UpdateRefreshTokenDto = {
+        tokenValue: req.body.refreshToken,
+      };
+
+      return await authService.refreshToken(updateRefreshTokenDto);
+    }),
   );
 
   router.post(
