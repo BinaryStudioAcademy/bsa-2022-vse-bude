@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 export interface StringCutterProps {
-  text: string;
+  children: ReactNode;
 }
