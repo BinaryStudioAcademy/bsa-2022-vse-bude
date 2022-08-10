@@ -61,8 +61,5 @@
     "hooks": {
       "pre-commit": "npm run hooks:pre-commit"
     }
-  },
-  "dependencies": {
-    "firebase": "^9.9.2"
   }
 }
