@@ -41,4 +41,5 @@ const Component = ({ error, id, label, ...props }: PasswordProps, ref) => {
     </div>
   );
 };
+
 export const PasswordInput = React.forwardRef(Component);
