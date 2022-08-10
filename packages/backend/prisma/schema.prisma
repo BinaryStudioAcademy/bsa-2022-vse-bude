@@ -16,7 +16,6 @@ datasource db {
 
 model User {
   id                          String        @id @default(uuid()) @db.Uuid
-  firebaseUid                 String
   email                       String        @unique @db.VarChar(256)
   phone                       String        @unique @db.VarChar(32)
   firstName                   String        @db.VarChar(256)
@@ -24,6 +23,7 @@ model User {
   avatar                      String?       @db.VarChar(2048)
   role                        Role          @default(USER)
   settings                    UserSettings?
+  refreshTokens               RefreshToken[]
   address                     Address?
   socialMedia                 SocialMedia[]
   ownProducts                 Product[]     @relation("ownProducts")
@@ -33,6 +33,7 @@ model User {
   messages                    Message[]
   createdAt                   DateTime      @default(now())
   updatedAt                   DateTime?     @updatedAt
+  passwordHash                String        @db.VarChar(256)
 }
 
 model UserSettings {
@@ -148,6 +149,14 @@ model Message {
   text                        String
   createdAt	                  DateTime      @default(now())
   updatedAt                   DateTime      @updatedAt
+}
+
+model RefreshToken {
+  id                          String        @id @default(uuid()) @db.Uuid
+  user                        User          @relation(fields: [userId], references: [id])
+  userId                      String        @db.Uuid
+  token                       String
+  expiresAt                   DateTime      @db.Timestamp
 }
 
 enum Role {

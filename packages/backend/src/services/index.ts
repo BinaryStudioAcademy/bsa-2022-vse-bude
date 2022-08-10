@@ -6,7 +6,10 @@ import { AuthService } from './auth';
 export const initServices = (repositories: Repositories) => ({
   randomDataService: new RandomDataService(repositories.randomDataRepository),
   userService: new UserService(repositories.userRepository),
-  authService: new AuthService(repositories.userRepository),
+  authService: new AuthService(
+    repositories.userRepository,
+    repositories.refreshTokenRepository,
+  ),
 });
 
 export type Services = ReturnType<typeof initServices>;
