@@ -7,6 +7,7 @@ import { seedProducts } from './product';
 // import { seedSocialMedia } from './socialMedia';
 import { seedUsers } from './user';
 import { seedUserSettings } from './userSettings';
+import { seedChatMember } from './chatMember';
 
 const prismaClient = new PrismaClient({
   log: ['query', 'info', 'warn', 'error'],
@@ -14,12 +15,14 @@ const prismaClient = new PrismaClient({
 
 (async () => {
   //clear
-  await prismaClient.address.deleteMany({});
-  await prismaClient.userSettings.deleteMany({});
-  await prismaClient.category.deleteMany({});
-  await prismaClient.product.deleteMany({});
-  await prismaClient.bid.deleteMany({});
-  await prismaClient.user.deleteMany({});
+  // await prismaClient.address.deleteMany({});
+  // await prismaClient.userSettings.deleteMany({});
+  // await prismaClient.category.deleteMany({});
+  // await prismaClient.bid.deleteMany({});
+  // await prismaClient.chatMember.deleteMany({});
+  // await prismaClient.chat.deleteMany({});
+  // await prismaClient.product.deleteMany({});
+  // await prismaClient.user.deleteMany({});
 
   await seedUsers(prismaClient);
 
@@ -33,6 +36,7 @@ const prismaClient = new PrismaClient({
   await seedProducts(prismaClient, existingUsers);
   await seedBids(prismaClient, existingUsers);
   await seedChat(prismaClient);
+  await seedChatMember(prismaClient, existingUsers);
 })()
   .then(() => prismaClient.$disconnect())
   .catch(async (e) => {

@@ -9,11 +9,19 @@ export const seedProducts = async (
 ) => {
   const existingCategories = await prismaClient.category.findMany();
 
-  // const howManyToCreate =
+  // const productsNumber =
   //   faker.datatype.number({ min: 1, max: 3 }) * existingCategories.length;
+  const productsNumber = USERS_NUMBER;
+
+  const existingProducts = await prismaClient.product.findMany();
+  const howManyToCreate = productsNumber - existingProducts.length;
+
+  if (howManyToCreate <= 0) {
+    return;
+  }
 
   const data: Product[] = await fakeProducts(
-    USERS_NUMBER,
+    howManyToCreate,
     existingUsers,
     existingCategories,
   );
