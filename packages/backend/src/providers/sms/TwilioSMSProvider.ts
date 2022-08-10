@@ -1,6 +1,6 @@
 import { getEnv, log } from '@helpers';
 import { Twilio } from 'twilio';
-import { ISMSProvider } from '@types';
+import type { ISMSProvider } from '@types';
 
 export class TwilioSMSService implements ISMSProvider {
   private authToken: string;
