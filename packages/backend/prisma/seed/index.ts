@@ -1,14 +1,14 @@
 import { PrismaClient } from '@prisma/client';
-import { seedChat } from './chat';
-import { seedAddress } from './address';
-import { seedBids } from './bid';
-import { seedCategory } from './category';
-import { seedProducts } from './product';
-import { seedSocialMedia } from './socialMedia';
-import { seedUsers } from './user';
-import { seedUserSettings } from './userSettings';
-import { seedChatMember } from './chatMember';
-import { seedMessage } from './message';
+import { seedChat } from './controllers/chat';
+import { seedAddress } from './controllers/address';
+import { seedBids } from './controllers/bid';
+import { seedCategory } from './controllers/category';
+import { seedProducts } from './controllers/product';
+import { seedSocialMedia } from './controllers/socialMedia';
+import { seedUsers } from './controllers/user';
+import { seedUserSettings } from './controllers/userSettings';
+import { seedChatMember } from './controllers/chatMember';
+import { seedMessage } from './controllers/message';
 
 const prismaClient = new PrismaClient({
   log: ['query', 'info', 'warn', 'error'],

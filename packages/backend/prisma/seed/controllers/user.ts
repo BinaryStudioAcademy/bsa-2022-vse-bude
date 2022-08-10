@@ -1,6 +1,6 @@
 import type { PrismaClient, User } from '@prisma/client';
-import { fakeUsers } from './data/users';
-import { USERS_NUMBER } from './config';
+import { fakeUsers } from '../data/users';
+import { USERS_NUMBER } from '../config';
 
 export const seedUsers = async (prismaClient: PrismaClient) => {
   const existingUsers = await prismaClient.user.findMany();

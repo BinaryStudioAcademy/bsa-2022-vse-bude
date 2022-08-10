@@ -1,6 +1,6 @@
 import type { PrismaClient, User, UserSettings } from '@prisma/client';
-import { USERS_NUMBER } from './config';
-import { fakeUserSettings } from './data/userSettings';
+import { USERS_NUMBER } from '../config';
+import { fakeUserSettings } from '../data/userSettings';
 
 export const seedUserSettings = async (
   prismaClient: PrismaClient,

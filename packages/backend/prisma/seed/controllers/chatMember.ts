@@ -1,6 +1,6 @@
 import type { Chat, ChatMember, PrismaClient, User } from '@prisma/client';
-import { CHAT_MEMBERS_NUMBER } from './config';
-import { fakeChatMember } from './data/chatMember';
+import { CHAT_MEMBERS_NUMBER } from '../config';
+import { fakeChatMember } from '../data/chatMember';
 
 export const seedChatMember = async (
   prismaClient: PrismaClient,
