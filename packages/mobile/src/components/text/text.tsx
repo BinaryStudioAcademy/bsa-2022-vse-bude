@@ -1,20 +1,25 @@
 import React, { FC, ReactElement } from 'react';
-import { Text as NativeText } from 'react-native';
-import { Raleway, FontSize } from '~/common/enums/enums';
+import { Text as NativeText, TextProps as RNTextProps } from 'react-native';
+import { FontFamily, FontSize } from '~/common/enums/enums';
 
-type Props = {
-  fontVariant?: Raleway;
+type TextProps = RNTextProps & {
+  fontVariant?: FontFamily;
   size?: FontSize;
   children: string;
 };
 
-const Text: FC<Props> = ({
-  fontVariant = Raleway.REGULAR,
+const Text: FC<TextProps> = ({
+  fontVariant = FontFamily.RALEWAY_REGULAR,
   size = 16,
+  style,
   children,
+  ...restProps
 }): ReactElement => {
   return (
-    <NativeText style={{ fontFamily: fontVariant, fontSize: size }}>
+    <NativeText
+      style={[{ fontFamily: fontVariant, fontSize: size }, style]}
+      {...restProps}
+    >
       {children}
     </NativeText>
   );
