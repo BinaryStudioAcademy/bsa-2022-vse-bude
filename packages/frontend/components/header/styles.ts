@@ -1,6 +1,7 @@
-import { styled } from '@nextui-org/react';
+import { css } from '@emotion/react';
+import type { Theme } from 'theme';
 
-export const StyledHeader = styled('header', {
-  padding: '$lg 0',
-  background: '$blue100',
-});
+export const header = (theme: Theme) => css`
+  padding: ${theme.spaces.lg} 0;
+  background-color: ${theme.colors.backgroundLight};
+`;

@@ -1,4 +1,3 @@
-import { createTheme } from '@nextui-org/react';
 import { ColorPalette } from '@vse-bude/shared';
 
 const colors = {
@@ -21,10 +20,6 @@ const colors = {
 
 const darkColors = {
   background: ColorPalette.BLACK_100,
-}; // TODO: add dark colors
-
-const fonts = {
-  sans: "'Raleway', sans-serif",
 };
 
 const fontSizes = {
@@ -66,7 +61,7 @@ const lineHeights = {
   caption: '14px',
 };
 
-const space = {
+const spaces = {
   xs: '5px',
   sm: '10px',
   md: '15px',
@@ -85,7 +80,7 @@ const space = {
   xl11: '80px',
 };
 
-const radii = {
+const radiuses = {
   xs: '5px',
   sm: '7px',
   md: '10px',
@@ -93,30 +88,24 @@ const radii = {
   circle: '50%',
 };
 
-const lightTheme = createTheme({
-  type: 'light',
-  theme: {
-    colors,
-    fonts,
-    fontSizes,
-    fontWeights,
-    lineHeights,
-    space,
-    radii,
-  },
-});
+const lightTheme = {
+  colors,
+  fontSizes,
+  fontWeights,
+  lineHeights,
+  spaces,
+  radiuses,
+};
 
-const darkTheme = createTheme({
-  type: 'dark',
-  theme: {
-    colors: darkColors,
-    fonts,
-    fontSizes,
-    fontWeights,
-    lineHeights,
-    space,
-    radii,
-  },
-});
+const darkTheme = {
+  colors: darkColors,
+  fontSizes,
+  fontWeights,
+  lineHeights,
+  spaces,
+  radiuses,
+};
 
 export { lightTheme, darkTheme };
+
+export type Theme = typeof lightTheme;
