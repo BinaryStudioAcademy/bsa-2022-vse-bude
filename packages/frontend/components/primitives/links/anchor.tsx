@@ -1,9 +1,9 @@
 import { linkStyles } from './styles';
 import { AnchorProps } from './types';
 
-export function AnchorLink({
+export function anchor({
   variant,
-  disabled = undefined,
+  disabled = false,
   label,
   target = '_blank',
   ...props
