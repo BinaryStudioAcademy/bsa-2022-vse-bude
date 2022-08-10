@@ -87,6 +87,9 @@ const FONT_STYLES: IFontStyles<TextStyle> = {
   fontWeightMedium: {
     fontWeight: '500',
   },
+  fs10: {
+    fontSize: 10,
+  },
   fs12: {
     fontSize: 12,
   },
@@ -96,14 +99,17 @@ const FONT_STYLES: IFontStyles<TextStyle> = {
   fs16: {
     fontSize: 16,
   },
+  fs17: {
+    fontSize: 17,
+  },
   fs18: {
     fontSize: 18,
   },
   fs22: {
     fontSize: 22,
   },
-  fs58: {
-    fontSize: 58,
+  fs36: {
+    fontSize: 36,
   },
 };
 

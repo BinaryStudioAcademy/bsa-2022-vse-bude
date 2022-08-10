@@ -4,12 +4,14 @@ export interface IFontStyles<T> {
   fontWeightExtraBold: T;
   fontWeightSemiBold: T;
   fontWeightMedium: T;
+  fs10: T;
   fs12: T;
   fs14: T;
   fs16: T;
+  fs17: T;
   fs18: T;
   fs22: T;
-  fs58: T;
+  fs36: T;
 }
 
 export interface IFlexBoxStyles<T> {
