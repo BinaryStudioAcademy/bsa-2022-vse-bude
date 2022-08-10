@@ -8,9 +8,7 @@ const StringCutter: FC<StringCutterProps> = ({ children }) => {
   const [isCut, setIsCut] = useState(false);
   const cutterRef = useRef(null);
 
-  const handleMouseLeave = () => setIsCut(false);
-
-  const checkIsCutted = () => {
+  const checkIsCut = () => {
     const cutterElem = cutterRef.current;
     if (cutterElem) {
       setIsCut(cutterElem.offsetWidth < cutterElem.scrollWidth);
@@ -19,30 +17,14 @@ const StringCutter: FC<StringCutterProps> = ({ children }) => {
 
   return (
     <div
-      onMouseEnter={checkIsCutted}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={checkIsCut}
       data-is-cutted={isCut}
       css={styles.cutterWrapper}
     >
       <span ref={cutterRef} css={styles.cutterText}>
         {children}
       </span>
-      {isCut && (
-        // temp tooltip
-        <div
-          style={{
-            position: 'absolute',
-            whiteSpace: 'nowrap',
-            height: '30px',
-            bottom: '100%',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            color: 'black',
-          }}
-        >
-          {children}
-        </div>
-      )}
+      {/* toltip */}
     </div>
   );
 };
