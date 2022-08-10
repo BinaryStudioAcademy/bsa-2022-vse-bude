@@ -4,6 +4,7 @@ import { Provider as StoreProvider } from 'react-redux';
 import 'fast-text-encoding';
 import { Navigation } from '~/navigation/navigation';
 import { store } from '~/store/store';
+import './localization/i18n';
 
 const App: FC = () => {
   return (
