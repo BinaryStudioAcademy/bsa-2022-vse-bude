@@ -9,7 +9,6 @@
   },
   "prettier": "@vse-bude/prettier-config",
   "dependencies": {
-    "joi": "^17.6.0",
     "query-string": "^7.1.1"
   },
   "scripts": {
@@ -21,7 +20,6 @@
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^22.0.1",
-    "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@rollup/plugin-typescript": "^8.3.2",
     "@types/node": "^18.0.3",

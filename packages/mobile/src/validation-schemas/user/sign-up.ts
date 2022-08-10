@@ -1,6 +1,5 @@
 import * as Joi from 'joi';
-import type { UserSignUpDto } from '../../common/types';
-import { UserValidationMessage } from '../../common/enums';
+import { UserValidationMessage, UserSignUpDto } from '@vse-bude/shared';
 
 const signUp = Joi.object<UserSignUpDto>({
   email: Joi.string()

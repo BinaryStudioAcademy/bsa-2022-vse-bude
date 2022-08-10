@@ -1,8 +1,9 @@
 import React from 'react';
-import { UserSignUpDto, signUpValidationSchema } from '@vse-bude/shared';
+import { UserSignUpDto } from '@vse-bude/shared';
 
 import { useAppForm } from '~/hooks/hooks';
 import { Text, View, Button, Input } from '~/components/components';
+import { signUp } from '~/validation-schemas/validation-schemas';
 import { DEFAULT_SIGN_UP_PAYLOAD } from './common/constants';
 
 type Props = {
@@ -12,7 +13,7 @@ type Props = {
 const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
   const { control, errors, handleSubmit } = useAppForm<UserSignUpDto>({
     defaultValues: DEFAULT_SIGN_UP_PAYLOAD,
-    validationSchema: signUpValidationSchema,
+    validationSchema: signUp,
   });
 
   return (
