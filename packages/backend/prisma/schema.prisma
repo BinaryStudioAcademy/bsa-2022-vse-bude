@@ -47,10 +47,10 @@ model UserSettings {
 
 model Address {
   id                          String        @id @default(uuid()) @db.Uuid
-  country	                    String?       @db.VarChar(256)
+  country                     String?       @db.VarChar(256)
   region                      String?       @db.VarChar(512)
   city                        String?       @db.VarChar(512)
-  address	                    String?       @db.VarChar(1024)
+  address                     String?       @db.VarChar(1024)
   zip                         String?       @db.VarChar(32)
   novaPoshtaRef               String?
   user                        User?         @relation(fields: [userId], references: [id])
@@ -60,14 +60,14 @@ model Address {
 }
 
 model SocialMedia {
-  id	                        String        @id @default(uuid()) @db.Uuid
-  socialMedia	                SocialMediaType
+  id                          String        @id @default(uuid()) @db.Uuid
+  socialMedia                 SocialMediaType
   link	                      String        @db.VarChar(2048)
   user                        User?         @relation(fields: [ownedByUserId], references: [id])
   ownedByUserId	              String?       @db.Uuid
   product                     Product?      @relation(fields: [ownedByProductId], references: [id])
   ownedByProductId            String?       @db.Uuid
-  createdAt	                  DateTime      @default(now())
+  createdAt                   DateTime      @default(now())
   updatedAt                   DateTime      @updatedAt
 }
 
@@ -76,7 +76,7 @@ model Category {
   title                       String        @db.VarChar(512)
   products                    Product[]
   @@unique([title])
-  createdAt	                  DateTime      @default(now())
+  createdAt                   DateTime      @default(now())
   updatedAt                   DateTime      @updatedAt
 }
 
@@ -102,7 +102,7 @@ model Product {
   socialMedia                 SocialMedia[]
   bids                        Bid[]
   chat                        Chat?
-  createdAt	                  DateTime      @default(now())
+  createdAt                   DateTime      @default(now())
   updatedAt                   DateTime      @updatedAt
 }
 
@@ -113,7 +113,7 @@ model Bid {
   product                     Product       @relation(fields: [productId], references: [id])
   productId                   String        @db.Uuid
   price                       Decimal       @db.Money
-  createdAt	                  DateTime      @default(now())
+  createdAt                   DateTime      @default(now())
   updatedAt                   DateTime      @updatedAt
 }
 
@@ -130,23 +130,23 @@ model Chat {
 }
 
 model ChatMember {
-  id	                        String        @id @default(uuid()) @db.Uuid
+  id                          String        @id @default(uuid()) @db.Uuid
   user                        User          @relation(fields: [userId], references: [id])
   userId                      String        @db.Uuid
   chat                        Chat          @relation(fields: [chatId], references: [id])
   chatId                      String        @db.Uuid
-  createdAt	                  DateTime      @default(now())
+  createdAt                   DateTime      @default(now())
   updatedAt                   DateTime      @updatedAt
 }
 
 model Message {
-  id	                        String        @id @default(uuid()) @db.Uuid
+  id                          String        @id @default(uuid()) @db.Uuid
   sender                      User          @relation(fields: [senderId], references: [id])
   senderId                    String        @db.Uuid
   chat                        Chat          @relation(fields: [chatId], references: [id])
   chatId                      String        @db.Uuid
   text                        String
-  createdAt	                  DateTime      @default(now())
+  createdAt                   DateTime      @default(now())
   updatedAt                   DateTime      @updatedAt
 }
 
