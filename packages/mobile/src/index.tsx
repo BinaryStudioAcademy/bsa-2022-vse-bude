@@ -5,18 +5,26 @@ import 'fast-text-encoding';
 import { Navigation } from '~/navigation/navigation';
 import { store } from '~/store/store';
 import { NavigationDarkTheme, NavigationTheme } from '~/config/config';
-import { useColorScheme } from '~/hooks/hooks';
+import { useColorScheme, useEffect, useState } from '~/hooks/hooks';
+import { WithSplashScreen } from './screens/screens';
 
 const App: FC = () => {
   const colorScheme = useColorScheme();
   const theme = colorScheme === 'dark' ? NavigationDarkTheme : NavigationTheme;
+  const [isAppReady, setIsAppReady] = useState(false);
+
+  useEffect(() => {
+    setIsAppReady(true);
+  }, []);
 
   return (
-    <StoreProvider store={store}>
-      <NavigationContainer theme={theme}>
-        <Navigation />
-      </NavigationContainer>
-    </StoreProvider>
+    <WithSplashScreen isAppReady={isAppReady}>
+      <StoreProvider store={store}>
+        <NavigationContainer theme={theme}>
+          <Navigation />
+        </NavigationContainer>
+      </StoreProvider>
+    </WithSplashScreen>
   );
 };
 
