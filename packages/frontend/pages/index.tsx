@@ -7,7 +7,6 @@ import { CookieStorage } from '@helpers';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { shallowEqual } from 'react-redux';
 import { fetchRandomData, fetchRandomDataSSR, wrapper } from 'store';
-import { StringCutter } from 'components/primitives/string-cutter';
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
@@ -60,11 +59,6 @@ const IndexPage = () => {
           >
             click me
           </Button>
-          <div style={{ width: '100%', color: 'red' }}>
-            <StringCutter>
-              sdfsdfsdfds sfdf sdfsdfdsf sdfsd fsd fsdf sdfsdf
-            </StringCutter>
-          </div>
         </div>
       </Container>
     </Layout>
