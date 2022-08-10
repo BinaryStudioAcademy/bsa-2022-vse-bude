@@ -1,8 +1,8 @@
 import { Container } from '@primitives';
-import { StyledFooter } from './styles';
+import * as styles from './styles';
 
 export const Footer = () => (
-  <StyledFooter>
+  <footer css={styles.footer}>
     <Container>[footer]</Container>
-  </StyledFooter>
+  </footer>
 );
