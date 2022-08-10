@@ -1,2 +1,2 @@
-export { ENV, StorageKey, DataStatus, PlatformOS } from './app/app';
+export { ENV, StorageKey, DataStatus } from './app/app';
 export { RootScreenName } from './navigation/navigation';
