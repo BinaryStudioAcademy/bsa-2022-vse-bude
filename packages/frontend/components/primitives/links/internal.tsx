@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { linkStyles } from './styles';
-import { InternalLinkProps } from './types';
+import type { InternalLinkProps } from './types';
 
-export function InnerLink({
+export function InternalLink({
   variant,
   disabled = undefined,
   label,
@@ -11,7 +11,7 @@ export function InnerLink({
 }: InternalLinkProps) {
   return (
     <Link passHref={passHref} {...props}>
-      <a data-variant={variant} aria-disable={disabled} css={linkStyles}>
+      <a data-variant={variant} aria-disabled={disabled} css={linkStyles}>
         {label}
       </a>
     </Link>

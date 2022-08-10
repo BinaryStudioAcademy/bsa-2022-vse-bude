@@ -1,7 +1,7 @@
 import { linkStyles } from './styles';
-import { AnchorProps } from './types';
+import type { AnchorProps } from './types';
 
-export function anchor({
+export function Anchor({
   variant,
   disabled = false,
   label,
@@ -11,7 +11,7 @@ export function anchor({
   return (
     <a
       data-variant={variant}
-      aria-disable={disabled}
+      aria-disabled={disabled}
       target={target}
       rel={target === '_blank' ? 'noopener noreferer' : undefined}
       css={linkStyles}

@@ -14,6 +14,11 @@ export const linkStyles = ({
   line-height: ${lineHeights.body1};
   cursor: pointer;
 
+  &[aria-disabled='true'] {
+    color: ${colors.disabled};
+    pointer-events: none;
+  }
+
   &:visited {
     color: ${colors.link};
   }
