@@ -88,11 +88,17 @@ const radiuses = {
   circle: '50%',
 };
 
+const heights = {
+  controlSm: '35px',
+  controlBg: '45px',
+};
+
 const lightTheme = {
   colors,
   fontSizes,
   fontWeights,
   lineHeights,
+  heights,
   spaces,
   radiuses,
 };
@@ -102,6 +108,7 @@ const darkTheme = {
   fontSizes,
   fontWeights,
   lineHeights,
+  heights,
   spaces,
   radiuses,
 };
