@@ -1,10 +1,6 @@
 import { getEnv, log } from '@helpers';
 import { Twilio } from 'twilio';
-
-export interface ISMSProvider {
-  send(phone: string, message: string): Promise<object>;
-  getById(id: string): Promise<object>;
-}
+import { ISMSProvider } from '@types';
 
 export class TwilioSMSService implements ISMSProvider {
   private authToken: string;
