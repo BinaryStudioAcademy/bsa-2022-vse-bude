@@ -7,7 +7,7 @@ export const Tooltip = ({
   children,
   body,
   place = 'top',
-  delayHideMs = 0,
+  delayHideMs = 600,
   offset = {},
 }: TooltipProps) => {
   const [isMounted, setIsMounted] = useState(false); // Need this for the react-tooltip
