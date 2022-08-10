@@ -1,10 +1,11 @@
-import type { PrismaClient, SocialMedia, User } from '@prisma/client';
+import type { PrismaClient, Product, SocialMedia, User } from '@prisma/client';
 import { USERS_NUMBER } from './config';
 import { fakeSocialMedia } from './data/socialMedia';
 
 export const seedSocialMedia = async (
   prismaClient: PrismaClient,
   existingUsers: User[],
+  existingProducts: Product[],
 ) => {
   const existingSocialMedia = await prismaClient.socialMedia.findMany();
 
@@ -15,8 +16,6 @@ export const seedSocialMedia = async (
 
   //clear records
   await prismaClient.socialMedia.deleteMany({});
-
-  const existingProducts = await prismaClient.product.findMany();
 
   //create new
   const data: SocialMedia[] = await fakeSocialMedia(

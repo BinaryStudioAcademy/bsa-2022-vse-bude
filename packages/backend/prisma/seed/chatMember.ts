@@ -1,10 +1,11 @@
-import type { ChatMember, PrismaClient, User } from '@prisma/client';
+import type { Chat, ChatMember, PrismaClient, User } from '@prisma/client';
 import { CHAT_MEMBERS_NUMBER } from './config';
 import { fakeChatMember } from './data/chatMember';
 
 export const seedChatMember = async (
   prismaClient: PrismaClient,
   existingUsers: User[],
+  existingChats: Chat[],
 ) => {
   const existingChatMembers = await prismaClient.chatMember.findMany();
   const howManyToCreate = CHAT_MEMBERS_NUMBER - existingChatMembers.length;
@@ -12,8 +13,6 @@ export const seedChatMember = async (
   if (howManyToCreate <= 0) {
     return;
   }
-
-  const existingChats = await prismaClient.chat.findMany();
 
   const data: ChatMember[] = await fakeChatMember(
     howManyToCreate,

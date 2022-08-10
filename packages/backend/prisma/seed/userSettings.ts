@@ -9,7 +9,7 @@ export const seedUserSettings = async (
   const existingUsersSettings = await prismaClient.userSettings.findMany();
 
   //check if all exists
-  if (existingUsers.length === existingUsersSettings.length) {
+  if (existingUsersSettings.length >= existingUsers.length) {
     return;
   }
 

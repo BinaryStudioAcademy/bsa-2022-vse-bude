@@ -23,6 +23,7 @@ const prismaClient = new PrismaClient({
   await prismaClient.chatMember.deleteMany({});
   await prismaClient.message.deleteMany({});
   await prismaClient.chat.deleteMany({});
+  await prismaClient.socialMedia.deleteMany({});
   await prismaClient.product.deleteMany({});
   await prismaClient.user.deleteMany({});
 
@@ -35,11 +36,17 @@ const prismaClient = new PrismaClient({
   await seedAddress(prismaClient, existingUsers);
   await seedCategory(prismaClient);
   await seedProducts(prismaClient, existingUsers);
-  await seedSocialMedia(prismaClient, existingUsers);
-  await seedBids(prismaClient, existingUsers);
-  await seedChat(prismaClient);
-  await seedChatMember(prismaClient, existingUsers);
-  await seedMessage(prismaClient, existingUsers);
+
+  const existingProducts = await prismaClient.product.findMany();
+
+  await seedSocialMedia(prismaClient, existingUsers, existingProducts);
+  await seedBids(prismaClient, existingUsers, existingProducts);
+  await seedChat(prismaClient, existingProducts);
+
+  const existingChats = await prismaClient.chat.findMany();
+
+  await seedChatMember(prismaClient, existingUsers, existingChats);
+  await seedMessage(prismaClient, existingUsers, existingChats);
 })()
   .then(() => prismaClient.$disconnect())
   .catch(async (e) => {
