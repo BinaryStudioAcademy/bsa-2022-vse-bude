@@ -1,6 +1,6 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
-import { Container } from '@primitives';
+import { Button, Container } from '@primitives';
 import { Http } from '@vse-bude/shared';
 import { Layout } from '@components';
 import { CookieStorage } from '@helpers';
@@ -34,10 +34,31 @@ const IndexPage = () => {
       <Container>
         <h1>{t('h1')}</h1>
         <div>
-          <div>
-            <div style={{ wordBreak: 'break-all' }}>{JSON.stringify(data)}</div>
-          </div>
-          <button onClick={() => dispatch(fetchRandomData())}>click me</button>
+          <div style={{ wordBreak: 'break-all' }}>{JSON.stringify(data)}</div>
+          <Button
+            variant="outlined"
+            onClick={() => dispatch(fetchRandomData())}
+          >
+            click me
+          </Button>
+          <Button
+            variant="outlined"
+            disabled
+            onClick={() => dispatch(fetchRandomData())}
+          >
+            click me
+          </Button>
+
+          <Button variant="filled" onClick={() => dispatch(fetchRandomData())}>
+            click me
+          </Button>
+          <Button
+            disabled
+            variant="filled"
+            onClick={() => dispatch(fetchRandomData())}
+          >
+            click me
+          </Button>
         </div>
       </Container>
     </Layout>
