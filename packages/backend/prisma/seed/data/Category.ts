@@ -2,14 +2,21 @@ import type { Category } from '@prisma/client';
 import { faker } from '@faker-js/faker';
 import { Categories } from '../Categories';
 
-export const fakeCategory = async (amountOfRecords: number) => {
+export const fakeCategory = async (existingCategories: Category[]) => {
   const records: Category[] = [];
 
-  for (let i = 0; i < amountOfRecords; i++) {
+  overal: for (let i = 0; i < Categories.length; i++) {
     const title = Categories.at(i);
     if (!title) {
       continue;
     }
+
+    for (const recs of existingCategories) {
+      if (recs.title === title) {
+        continue overal;
+      }
+    }
+
     const record: Category = {
       id: faker.datatype.uuid(),
       title: title,

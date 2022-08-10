@@ -9,8 +9,6 @@ export const seedCategory = async (prismaClient: PrismaClient) => {
     return;
   }
 
-  const howManyToCreate = Categories.length - existingCategories.length;
-
-  const data: Category[] = await fakeCategory(howManyToCreate);
+  const data: Category[] = await fakeCategory(existingCategories);
   await prismaClient.category.createMany({ data: data });
 };
