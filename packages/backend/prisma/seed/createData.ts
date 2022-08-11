@@ -14,7 +14,6 @@ export const createData = async () => {
   try {
     await seedUsers(prismaClient);
 
-    //optimizing requests
     const existingUsers = await prismaClient.user.findMany();
 
     await seedUserSettings(prismaClient, existingUsers);

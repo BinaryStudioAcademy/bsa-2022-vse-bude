@@ -2,7 +2,6 @@ import { prismaClient } from './config/prismaClient';
 
 export const clearData = async () => {
   try {
-    //clear
     await prismaClient.address.deleteMany({});
     await prismaClient.userSettings.deleteMany({});
     await prismaClient.category.deleteMany({});
