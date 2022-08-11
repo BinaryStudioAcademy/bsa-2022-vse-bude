@@ -1,6 +1,7 @@
-import { styled } from '@nextui-org/react';
+import { css } from '@emotion/react';
+import type { Theme } from 'theme';
 
-export const StyledFooter = styled('footer', {
-  background: '$blue100',
-  padding: '$lg 0',
-});
+export const footer = (theme: Theme) => css`
+  padding: ${theme.spaces.lg} 0;
+  background-color: ${theme.colors.backgroundLight};
+`;

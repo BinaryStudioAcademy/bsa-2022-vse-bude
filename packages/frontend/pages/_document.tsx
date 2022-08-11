@@ -1,14 +1,31 @@
-import { CssBaseline } from '@nextui-org/react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import React from 'react';
+import createEmotionServer from '@emotion/server/create-instance';
+import { cache } from '@emotion/css';
+
+export const renderStatic = async (html) => {
+  const { extractCritical } = createEmotionServer(cache);
+  const { ids, css } = extractCritical(html);
+
+  return { ids, css };
+};
 
 class CustomDocument extends Document {
   static async getInitialProps(ctx) {
     const initialProps = await Document.getInitialProps(ctx);
+    const { css, ids } = await renderStatic(initialProps.html);
 
     return {
       ...initialProps,
-      styles: React.Children.toArray([initialProps.styles]),
+      styles: (
+        <React.Fragment>
+          {initialProps.styles}
+          <style
+            data-emotion={`css ${ids.join(' ')}`}
+            dangerouslySetInnerHTML={{ __html: css }}
+          />
+        </React.Fragment>
+      ),
     };
   }
 
@@ -16,7 +33,6 @@ class CustomDocument extends Document {
     return (
       <Html lang={this.props.locale}>
         <Head>
-          {CssBaseline.flush()}
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
             rel="preconnect"
@@ -26,7 +42,7 @@ class CustomDocument extends Document {
           <link
             href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&display=swap"
             rel="stylesheet"
-          ></link>
+          />
         </Head>
         <body>
           <Main />

@@ -1,17 +1,48 @@
-import React, { FC } from 'react';
-import { Pressable } from 'react-native';
+import React, { FC , ReactText } from 'react';
+import { Pressable, View } from 'react-native';
+import { ButtonType, ButtonAppearance } from '~/common/enums/enums';
 import { Text } from '~/components/components';
 import { styles } from './styles';
 
 type Props = {
-  label: string;
+  label: ReactText;
+  type?: ButtonType;
+  view?: ButtonAppearance;
+  isDisabled?: boolean;
   onPress: () => void;
 };
 
-const Button: FC<Props> = ({ label, onPress }) => {
+const Button: FC<Props> = ({
+  label,
+  type = ButtonType.PRIMARY,
+  view = ButtonAppearance.FILLED,
+  isDisabled,
+  onPress,
+}) => {
+  const isOutlined = view === ButtonAppearance.OUTLINED;
+
   return (
-    <Pressable style={styles.button} onPress={onPress}>
-      <Text>{label}</Text>
+    <Pressable disabled={isDisabled} onPress={onPress}>
+      <View
+        style={[
+          styles.button,
+          styles[type],
+          styles[view],
+          isDisabled ? styles.disabledFill : {},
+          isOutlined && isDisabled ? styles.disabledOutlained : {},
+        ]}
+      >
+        <Text
+          style={[
+            styles.title,
+            isOutlined ? styles.outlainedTitle : styles.filledTitle,
+            isDisabled ? styles.filledTitle : {},
+            isOutlined && isDisabled ? styles.disabledOutlainedTitle : {},
+          ]}
+        >
+          {label}
+        </Text>
+      </View>
     </Pressable>
   );
 };
