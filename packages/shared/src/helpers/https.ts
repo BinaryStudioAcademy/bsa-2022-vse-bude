@@ -11,22 +11,24 @@ import type {
   PostRequestParams,
   PutRequestParams,
   RequestArgs,
-  Storage,
+  Auth,
 } from '../common/types';
+import { HttpError } from '../exceptions';
 
 interface MakeRequest {
   url: string;
   config: RequestInit;
+  isRetryRequest: boolean;
 }
 
 class Http {
   private _baseUrl: string;
 
-  private _storage: Storage;
+  private _auth: Auth;
 
-  constructor(baseUrl: string, storage?: Storage) {
+  constructor(baseUrl: string, auth: Auth) {
     this._baseUrl = baseUrl;
-    this._storage = storage;
+    this._auth = auth;
   }
 
   public get<T>({ url, payload, options }: GetRequestParams) {
@@ -89,6 +91,7 @@ class Http {
       external = false,
       needAuthorization = true,
       contentType = HttpContentType.APPLICATION_JSON,
+      isRetryRequest = false,
     } = options ?? {};
 
     const headers: HeadersInit = {
@@ -96,8 +99,8 @@ class Http {
     };
 
     if (needAuthorization) {
-      // const token = this._storage.getItem('token');
-      // headers[HttpHeader.AUTHORIZATION] = token;
+      const token = this._auth.getAccessToken();
+      headers[HttpHeader.AUTHORIZATION] = token;
     }
 
     const config: RequestInit = {
@@ -112,31 +115,29 @@ class Http {
     return {
       url: external ? url : `${this._baseUrl}${url}`,
       config,
+      isRetryRequest,
     };
   }
 
   private async makeRequest<T = unknown>({
     url,
     config,
+    isRetryRequest,
   }: MakeRequest): Promise<T> {
-    const result = await fetch(url, config);
+    let result = await fetch(url, config);
 
-    if (result.status === HttpStatusCode.UNAUTHORIZED) {
-      // const accessTokenResponse = await this.updateAuthorizationToken();
-      // if (accessTokenResponse) {
-      //     result = await fetch(url, config);
-      // }
+    if (result.status === HttpStatusCode.UNAUTHORIZED && !isRetryRequest) {
+      const accessTokenResponse = await this._auth.updateAuthorizationToken();
+      if (accessTokenResponse) {
+        result = await fetch(url, config);
+      }
     }
 
     if (!result.ok) {
-      // throw new HttpError(result);
+      throw new HttpError(result);
     }
 
     return result.json() as Promise<T>;
-  }
-
-  private updateAuthorizationToken() {
-    throw new Error('not implemented');
   }
 }
 

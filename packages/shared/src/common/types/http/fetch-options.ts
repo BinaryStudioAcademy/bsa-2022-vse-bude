@@ -4,6 +4,7 @@ interface FetchOptions {
   external?: boolean;
   needAuthorization?: boolean;
   contentType?: HttpContentType;
+  isRetryRequest?: boolean;
 }
 
 export interface RequestArgs {
