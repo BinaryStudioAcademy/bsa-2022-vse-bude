@@ -1,6 +1,7 @@
 import type { PrismaClient, Product, SocialMedia, User } from '@prisma/client';
-import { USERS_NUMBER } from '../../config/config';
+import { SOCIAL_MEDIA_FILE_NAME, USERS_NUMBER } from '../../config/config';
 import { fakeSocialMedia } from '../../data/socialMedia';
+import { writeFile } from './../../helpers/wtireFile';
 
 export const seedSocialMedia = async (
   prismaClient: PrismaClient,
@@ -18,5 +19,8 @@ export const seedSocialMedia = async (
     existingUsers,
     existingProducts,
   );
+
+  writeFile(SOCIAL_MEDIA_FILE_NAME, data);
+
   await prismaClient.socialMedia.createMany({ data: data });
 };

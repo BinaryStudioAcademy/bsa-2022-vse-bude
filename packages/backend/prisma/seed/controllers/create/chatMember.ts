@@ -1,6 +1,8 @@
 import type { Chat, ChatMember, PrismaClient, User } from '@prisma/client';
 import { CHAT_MEMBERS_NUMBER } from '../../config/config';
 import { fakeChatMember } from '../../data/chatMember';
+import { CHAT_MEMBER_FILE_NAME } from './../../config/config';
+import { writeFile } from './../../helpers/wtireFile';
 
 export const seedChatMember = async (
   prismaClient: PrismaClient,
@@ -19,5 +21,8 @@ export const seedChatMember = async (
     existingUsers,
     existingChats,
   );
+
+  writeFile(CHAT_MEMBER_FILE_NAME, data);
+
   await prismaClient.chatMember.createMany({ data: data });
 };

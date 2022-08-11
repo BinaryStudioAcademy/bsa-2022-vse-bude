@@ -1,6 +1,7 @@
 import type { Chat, Message, PrismaClient, User } from '@prisma/client';
 import { fakeMessage } from '../../data/message';
-import { MESSAGES_NUMBER } from '../../config/config';
+import { MESSAGES_NUMBER, MESSAGE_FILE_NAME } from '../../config/config';
+import { writeFile } from './../../helpers/wtireFile';
 
 export const seedMessage = async (
   prismaClient: PrismaClient,
@@ -19,5 +20,8 @@ export const seedMessage = async (
     existingUsers,
     existingChats,
   );
+
+  writeFile(MESSAGE_FILE_NAME, data);
+
   await prismaClient.message.createMany({ data: data });
 };

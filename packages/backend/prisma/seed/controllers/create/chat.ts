@@ -1,5 +1,7 @@
 import type { Chat, PrismaClient, Product } from '@prisma/client';
 import { fakeChat } from '../../data/chat';
+import { writeFile } from './../../helpers/wtireFile';
+import { CHAT_FILE_NAME } from './../../config/config';
 
 export const seedChat = async (
   prismaClient: PrismaClient,
@@ -17,5 +19,8 @@ export const seedChat = async (
     existingProducts,
     existingChats,
   );
+
+  writeFile(CHAT_FILE_NAME, data);
+
   await prismaClient.chat.createMany({ data: data });
 };
