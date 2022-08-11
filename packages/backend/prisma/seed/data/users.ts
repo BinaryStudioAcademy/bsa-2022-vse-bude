@@ -1,6 +1,7 @@
 import type { User } from '@prisma/client';
 import { Role } from '@prisma/client';
 import { faker } from '@faker-js/faker';
+import { hashService } from './../../../src/services/index';
 
 export const fakeUsers = async (amountOfRecords: number) => {
   const records: User[] = [];
@@ -15,6 +16,9 @@ export const fakeUsers = async (amountOfRecords: number) => {
       avatar: faker.image.avatar(),
       role: Role.USER,
       createdAt: faker.date.past(),
+      passwordHash: hashService.generatePasswordHash('test'),
+      phoneVerified: true,
+      emailVerified: true,
       updatedAt: faker.date.recent(),
     };
 
