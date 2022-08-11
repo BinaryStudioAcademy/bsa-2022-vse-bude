@@ -4,6 +4,8 @@ import { UserSignUpDto } from '@vse-bude/shared';
 import { auth as authActions } from '~/store/actions';
 import { useAppDispatch, useRoute } from '~/hooks/hooks';
 import { RootScreenName } from '~/common/enums/enums';
+import { ScreenWrapper, View } from '~/components/components';
+import { Logo } from '~/components/logo/logo';
 import { SignInForm, SignUpForm } from './components/components';
 
 const Auth: FC = () => {
@@ -31,7 +33,14 @@ const Auth: FC = () => {
     return null;
   };
 
-  return <>{getScreen(name)}</>;
+  return (
+    <ScreenWrapper>
+      <View>
+        <Logo />
+      </View>
+      {getScreen(name)}
+    </ScreenWrapper>
+  );
 };
 
 export { Auth };
