@@ -2,7 +2,10 @@ import React from 'react';
 import * as styles from './styles';
 import type { InputProps } from './types';
 
-const Component = ({ error, id, label, type, ...props }: InputProps, ref) => (
+const SecondaryInputInner = (
+  { error, id, label, type, ...props }: InputProps,
+  ref,
+) => (
   <div css={styles.inputWrapper}>
     {label && (
       <label data-variant="footer" css={styles.label} htmlFor={id}>
@@ -27,4 +30,4 @@ const Component = ({ error, id, label, type, ...props }: InputProps, ref) => (
     )}
   </div>
 );
-export const FooterInput = React.forwardRef(Component);
+export const SecondaryInput = React.forwardRef(SecondaryInputInner);

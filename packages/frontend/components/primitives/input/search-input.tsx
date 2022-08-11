@@ -2,7 +2,7 @@ import React from 'react';
 import * as styles from './styles';
 import type { SearchProps } from './types';
 
-const Component = ({ value, setValue, ...props }: SearchProps, ref) => (
+const SearchInputInner = ({ value, setValue, ...props }: SearchProps, ref) => (
   <div css={styles.searchWrapper}>
     {value && (
       <button css={styles.showBtn} onClick={() => setValue('')} type="button">
@@ -19,4 +19,4 @@ const Component = ({ value, setValue, ...props }: SearchProps, ref) => (
     />
   </div>
 );
-export const SearchInput = React.forwardRef(Component);
+export const SearchInput = React.forwardRef(SearchInputInner);

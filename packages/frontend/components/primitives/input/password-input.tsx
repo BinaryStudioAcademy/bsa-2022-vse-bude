@@ -3,7 +3,10 @@ import { useState } from 'react';
 import * as styles from './styles';
 import type { PasswordProps } from './types';
 
-const Component = ({ error, id, label, ...props }: PasswordProps, ref) => {
+const PasswordInputInner = (
+  { error, id, label, ...props }: PasswordProps,
+  ref,
+) => {
   const [isShown, setIsShown] = useState(false);
 
   return (
@@ -41,4 +44,4 @@ const Component = ({ error, id, label, ...props }: PasswordProps, ref) => {
     </div>
   );
 };
-export const PasswordInput = React.forwardRef(Component);
+export const PasswordInput = React.forwardRef(PasswordInputInner);

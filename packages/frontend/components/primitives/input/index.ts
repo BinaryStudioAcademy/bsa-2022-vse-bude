@@ -1,6 +1,6 @@
 import { Input } from './input';
-import { FooterInput } from './footer-input';
+import { SecondaryInput } from './secondary-input';
 import { PasswordInput } from './password-input';
 import { SearchInput } from './search-input';
 
-export { FooterInput, Input, PasswordInput, SearchInput };
+export { SecondaryInput, Input, PasswordInput, SearchInput };
