@@ -12,7 +12,8 @@
       "@repositories": ["repositories"],
       "@services": ["services"],
       "@routes": ["api/routes"],
-      "@middlewares": ["api/middlewares"]
+      "@middlewares": ["api/middlewares"],
+      "@errors": ["error"]
     },
     "outDir": "build"
   },
