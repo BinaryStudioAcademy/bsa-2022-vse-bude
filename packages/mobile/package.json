@@ -36,6 +36,7 @@
     "react-native-mmkv": "2.4.3",
     "react-native-safe-area-context": "4.3.1",
     "react-native-screens": "3.15.0",
+    "react-native-vector-icons": "^9.2.0",
     "react-redux": "8.0.2"
   },
   "devDependencies": {
@@ -45,6 +46,7 @@
     "@ls-lint/ls-lint": "1.11.2",
     "@types/react": "18.0.15",
     "@types/react-native": "0.69.2",
+    "@types/react-native-vector-icons": "^6.4.11",
     "@typescript-eslint/eslint-plugin": "^5.32.0",
     "@vse-bude/prettier-config": "file:../prettier-config",
     "babel-plugin-module-resolver": "4.1.0",
