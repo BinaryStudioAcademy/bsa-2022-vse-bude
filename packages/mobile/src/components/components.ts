@@ -4,3 +4,4 @@ export { ScreenWrapper } from './screen-wrapper/screen-wrapper';
 export { Button } from './button/button';
 export * from './icon';
 export { Input } from './input/input';
+export { Spinner } from './spinner/spinner';
