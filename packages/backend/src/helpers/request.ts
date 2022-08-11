@@ -1,4 +1,5 @@
 import type { NextFunction, Request, Response } from 'express';
+import { HttpStatusCode } from '@vse-bude/shared';
 
 export const wrap =
   <
@@ -15,5 +16,13 @@ export const wrap =
     next: NextFunction,
   ) =>
     handler(req)
-      .then((result) => res.json(result))
+      .then((result) => {
+        if (!result) {
+          return res.status(HttpStatusCode.NO_CONTENT).json({
+            success: true,
+          });
+        }
+
+        return res.status(HttpStatusCode.OK).json(result);
+      })
       .catch(next);
