@@ -14,3 +14,4 @@ export type {
   MarginStyles,
   PaddingStyles,
 } from './styles/styles';
+export type { AppIcon, IconProps, CustomIconProps } from './ui/ui';
