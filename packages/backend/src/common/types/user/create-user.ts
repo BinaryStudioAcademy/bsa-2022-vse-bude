@@ -1,4 +1,4 @@
-type CreateUserDto = {
+type CreateUser = {
   firstName: string;
   lastName: string;
   email: string;
@@ -6,4 +6,4 @@ type CreateUserDto = {
   passwordHash: string;
 };
 
-export type { CreateUserDto };
+export type { CreateUser };

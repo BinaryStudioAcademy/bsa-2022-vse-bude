@@ -1,5 +1,5 @@
 import type { PrismaClient } from '@prisma/client';
-import { type CreateRefreshTokenDto } from '../common/types/refresh-token/create.refresh-token.dto';
+import { type CreateRefreshToken } from '@types';
 
 export class RefreshTokenRepository {
   private _dbClient: PrismaClient;
@@ -8,7 +8,7 @@ export class RefreshTokenRepository {
     this._dbClient = prismaClient;
   }
 
-  async create(tokenData: CreateRefreshTokenDto) {
+  async create(tokenData: CreateRefreshToken) {
     return await this._dbClient.refreshToken.create({
       data: {
         userId: tokenData.userId,
@@ -18,16 +18,16 @@ export class RefreshTokenRepository {
     });
   }
 
-  async deleteByUserId(userId: string) {
-    return await this._dbClient.refreshToken.deleteMany({
+  deleteByUserId(userId: string) {
+    return this._dbClient.refreshToken.deleteMany({
       where: {
         userId: userId,
       },
     });
   }
 
-  async updateTokenById(tokenId: string, tokenValue: string, expiresAt: Date) {
-    return await this._dbClient.refreshToken.update({
+  updateTokenById(tokenId: string, tokenValue: string, expiresAt: Date) {
+    return this._dbClient.refreshToken.update({
       where: {
         id: tokenId,
       },
@@ -38,8 +38,8 @@ export class RefreshTokenRepository {
     });
   }
 
-  async getTokenByValue(tokenValue: string) {
-    return await this._dbClient.refreshToken.findFirst({
+  getTokenByValue(tokenValue: string) {
+    return this._dbClient.refreshToken.findFirst({
       where: {
         token: tokenValue,
       },

@@ -3,10 +3,9 @@ import { type Request, Router } from 'express';
 import type { ApiRoutes, UserSignInDto, UserSignUpDto } from '@vse-bude/shared';
 import { AuthApiRoutes } from '@vse-bude/shared';
 import { wrap } from '@helpers';
-import { apiPath } from '../../helpers/api';
-import { authMiddleware } from '../../auth/middlewares/auth.middleware';
-import type { SignOutDto } from '../../common/types/auth/sign-out.dto';
-import type { UpdateRefreshTokenDto } from '../../common/types/refresh-token/update.refresh-token.dto';
+import type { SignOut, UpdateRefreshToken, AuthTokenData } from '@types';
+import { apiPath } from '@helpers';
+import { authMiddleware } from '../../auth/middlewares/auth';
 
 export const initAuthRoutes = (
   { authService }: Services,
@@ -16,52 +15,35 @@ export const initAuthRoutes = (
 
   router.post(
     apiPath(path, AuthApiRoutes.SIGN_IN),
-    wrap(async (req: Request) => {
-      const signInDto: UserSignInDto = {
-        email: req.body.email,
-        password: req.body.password,
-      };
-
-      return await authService.signIn(signInDto);
-    }),
+    wrap<Empty, AuthTokenData, UserSignInDto>((req: Request) =>
+      authService.signIn(req.body),
+    ),
   );
 
   router.post(
     apiPath(path, AuthApiRoutes.SIGN_OUT),
     authMiddleware,
     wrap(async (req: Request) => {
-      const signOutDto: SignOutDto = {
+      const signOutDto: SignOut = {
         userId: req.userId,
       };
 
-      return await authService.signOut(signOutDto);
+      return authService.signOut(signOutDto);
     }),
   );
 
   router.post(
     apiPath(path, AuthApiRoutes.REFRESH_TOKEN),
-    wrap(async (req: Request) => {
-      const updateRefreshTokenDto: UpdateRefreshTokenDto = {
-        tokenValue: req.body.refreshToken,
-      };
-
-      return await authService.refreshToken(updateRefreshTokenDto);
-    }),
+    wrap<Empty, AuthTokenData, UpdateRefreshToken>((req: Request) =>
+      authService.refreshToken(req.body),
+    ),
   );
 
   router.post(
     apiPath(path, AuthApiRoutes.SIGN_UP),
-    wrap(async (req: Request) => {
-      const signUpDto: UserSignUpDto = {
-        email: req.body.email,
-        password: req.body.password,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        phone: req.body.phone,
-      };
-
-      return await authService.signUp(signUpDto);
-    }),
+    wrap<Empty, AuthTokenData, UserSignUpDto>((req: Request) =>
+      authService.signUp(req.body),
+    ),
   );
 
   return router;

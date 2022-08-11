@@ -3,8 +3,8 @@ import { HttpStatusCode } from '@vse-bude/shared';
 import { verify as jwtVerify } from 'jsonwebtoken';
 import { getEnv } from '@helpers';
 import type { UserSessionJwtPayload } from 'jsonwebtoken';
+import { UNAUTHORIZED } from '@errors';
 import { AUTH_HEADER_NAME } from '../constants';
-import { UNAUTHORIZED } from '../../error/error.messages';
 import { getBearerValue } from '../functions';
 
 export const authMiddleware = (

@@ -1,5 +1,5 @@
 import { HttpError, HttpStatusCode } from '@vse-bude/shared';
-import { USER_ALREADY_EXISTS } from '../error.messages';
+import { USER_ALREADY_EXISTS } from '../error-messages';
 
 class UserExistsError extends HttpError {
   constructor() {

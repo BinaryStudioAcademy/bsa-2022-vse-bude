@@ -6,7 +6,7 @@ import { getEnv, log } from '@helpers';
 import { initServices } from '@services';
 import { logger } from '@middlewares';
 import { prismaClient as database } from './data/db';
-import { errorHandler } from './error/error.handler';
+import { errorHandler } from './error/error-handler';
 
 const app = express();
 const repositories = initRepositories(database);

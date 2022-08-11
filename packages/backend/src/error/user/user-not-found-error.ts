@@ -1,5 +1,5 @@
 import { HttpError, HttpStatusCode } from '@vse-bude/shared';
-import { USER_NOT_FOUND } from '../error.messages';
+import { USER_NOT_FOUND } from '../error-messages';
 
 class UserNotFoundError extends HttpError {
   constructor() {

@@ -1,5 +1,5 @@
 import type { PrismaClient, User } from '@prisma/client';
-import type { CreateUserDto } from '../common/types/user/create.user.dto';
+import type { CreateUser } from '@types';
 
 export class UserRepository {
   private _dbClient: PrismaClient;
@@ -12,7 +12,7 @@ export class UserRepository {
     return this._dbClient.user.findMany();
   }
 
-  public create(signUpData: CreateUserDto) {
+  public create(signUpData: CreateUser) {
     return this._dbClient.user.create({
       data: {
         firstName: signUpData.firstName,
@@ -24,16 +24,16 @@ export class UserRepository {
     });
   }
 
-  public async getByEmail(email: string) {
-    return await this._dbClient.user.findFirst({
+  public getByEmail(email: string) {
+    return this._dbClient.user.findFirst({
       where: {
         email: email,
       },
     });
   }
 
-  public async getByEmailOrPhone(email: string, phone: string) {
-    return await this._dbClient.user.findFirst({
+  public getByEmailOrPhone(email: string, phone: string) {
+    return this._dbClient.user.findFirst({
       where: {
         OR: [
           {

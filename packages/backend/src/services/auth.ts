@@ -3,22 +3,27 @@ import type { UserSignInDto, UserSignUpDto } from '@vse-bude/shared';
 import { sign as jwtSign, type UserSessionJwtPayload } from 'jsonwebtoken';
 import { getEnv } from '@helpers';
 import type { RefreshTokenRepository } from '@repositories';
-import { UserNotFoundError } from '../error/user/user.not-found.error';
-import { UserExistsError } from '../error/user/user.exists.error';
-import type { AuthTokenData } from '../common/types/auth/auth.token.data';
 import {
   fromMilliToSeconds,
   fromMinToSeconds,
   fromSecondsToDate,
-} from '../helpers/time';
-import type { CreateRefreshTokenDto } from '../common/types/refresh-token/create.refresh-token.dto';
-import type { CreateUserDto } from '../common/types/user/create.user.dto';
-import { WrongPasswordError } from '../error/user/wrong.password.error';
-import type { UpdateRefreshTokenDto } from '../common/types/refresh-token/update.refresh-token.dto';
-import type { SignOutDto } from '../common/types/auth/sign-out.dto';
-import { UnauthorizedError } from '../error/auth/unauthorized.error';
-import { WrongRefreshTokenError } from '../error/auth/wrong.refresh-token.error';
-import type { HashService } from './hash';
+} from '@helpers';
+import {
+  UserNotFoundError,
+  UserExistsError,
+  WrongPasswordError,
+  UnauthorizedError,
+  WrongRefreshTokenError,
+  ExpiredRefreshTokenError,
+} from '@errors';
+import type {
+  CreateRefreshToken,
+  AuthTokenData,
+  CreateUser,
+  UpdateRefreshToken,
+  SignOut,
+} from '@types';
+import type { HashService } from '@services';
 
 export class AuthService {
   private _userRepository: UserRepository;
@@ -37,7 +42,7 @@ export class AuthService {
     this._hashService = hashService;
   }
 
-  async signOut(signOutDto: SignOutDto) {
+  async signOut(signOutDto: SignOut) {
     await this._refreshTokenRepository.deleteByUserId(signOutDto.userId);
   }
 
@@ -49,7 +54,7 @@ export class AuthService {
     if (userByEmailOrPhone) {
       throw new UserExistsError();
     }
-    const createUserDto: CreateUserDto = {
+    const createUserDto: CreateUser = {
       firstName: signUpDto.firstName,
       lastName: signUpDto.lastName,
       email: signUpDto.email,
@@ -59,7 +64,7 @@ export class AuthService {
     const newUser = await this._userRepository.create(createUserDto);
     const tokenData = this.getTokenData(newUser.id);
 
-    const refreshToken: CreateRefreshTokenDto = {
+    const refreshToken: CreateRefreshToken = {
       userId: newUser.id,
       token: tokenData.refreshToken,
       expiresAt: this.getRefreshTokenExpiresAt(),
@@ -85,7 +90,7 @@ export class AuthService {
     }
 
     const tokenData = this.getTokenData(user.id);
-    const refreshToken: CreateRefreshTokenDto = {
+    const refreshToken: CreateRefreshToken = {
       userId: user.id,
       token: tokenData.refreshToken,
       expiresAt: this.getRefreshTokenExpiresAt(),
@@ -106,7 +111,7 @@ export class AuthService {
     );
   }
 
-  async refreshToken(updateDto: UpdateRefreshTokenDto) {
+  async refreshToken(updateDto: UpdateRefreshToken) {
     if (!updateDto.tokenValue) {
       throw new WrongRefreshTokenError();
     }
@@ -115,6 +120,10 @@ export class AuthService {
     );
     if (!token) {
       throw new UnauthorizedError();
+    }
+
+    if (new Date(token.expiresAt) < new Date()) {
+      throw new ExpiredRefreshTokenError();
     }
 
     const newTokenData = this.getTokenData(token.userId);

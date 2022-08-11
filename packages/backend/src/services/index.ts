@@ -7,8 +7,7 @@ import { HashService } from './hash';
 import { RedisStorageService } from './redis-storage';
 import { SMSSenderService } from './sms';
 
-const hashService: HashService = new HashService();
-
+export const hashService: HashService = new HashService();
 const smsProvider = new TwilioSMSProvider();
 
 export const initServices = (repositories: Repositories) => ({
@@ -25,4 +24,9 @@ export const initServices = (repositories: Repositories) => ({
 
 export type Services = ReturnType<typeof initServices>;
 
-export { type RandomDataService, type UserService, type AuthService };
+export {
+  type RandomDataService,
+  type UserService,
+  type AuthService,
+  type HashService,
+};

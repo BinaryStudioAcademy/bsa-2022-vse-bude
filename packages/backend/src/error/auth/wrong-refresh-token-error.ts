@@ -1,5 +1,5 @@
 import { HttpError, HttpStatusCode } from '@vse-bude/shared';
-import { WRONG_REFRESH_TOKEN } from '../error.messages';
+import { WRONG_REFRESH_TOKEN } from '../error-messages';
 
 class WrongRefreshTokenError extends HttpError {
   constructor() {

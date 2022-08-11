@@ -1,5 +1,5 @@
 import { HttpError, HttpStatusCode } from '@vse-bude/shared';
-import { UNAUTHORIZED } from '../error.messages';
+import { UNAUTHORIZED } from '../error-messages';
 
 class UnauthorizedError extends HttpError {
   constructor() {
