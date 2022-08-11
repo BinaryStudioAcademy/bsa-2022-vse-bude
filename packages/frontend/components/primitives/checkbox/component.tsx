@@ -1,12 +1,11 @@
-import type { FC } from 'react';
 import type { CheckboxProps } from './types';
 import * as styles from './styles';
 
-export const Checkbox: FC<CheckboxProps> = ({
+export const Checkbox = ({
   labelText,
   defaultChecked,
   onChange,
-}) => (
+}: CheckboxProps) => (
   <div>
     <label css={styles.label}>
       <input
