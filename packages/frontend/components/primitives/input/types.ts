@@ -4,6 +4,7 @@ export interface SearchProps extends React.HTMLProps<HTMLButtonElement> {
 }
 
 export interface PasswordProps extends React.HTMLProps<HTMLButtonElement> {
+  variant: "primary" | "secondary";
   label?: string;
   error?: string;
 }

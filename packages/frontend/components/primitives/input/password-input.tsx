@@ -4,7 +4,7 @@ import * as styles from './styles';
 import type { PasswordProps } from './types';
 
 const PasswordInputInner = (
-  { error, id, label, ...props }: PasswordProps,
+  { variant, error, id, label, ...props }: PasswordProps,
   ref,
 ) => {
   const [isShown, setIsShown] = useState(false);
@@ -12,7 +12,7 @@ const PasswordInputInner = (
   return (
     <div css={styles.inputWrapper}>
       {label && (
-        <label css={styles.label} htmlFor={id}>
+        <label data-variant={variant} css={styles.label} htmlFor={id}>
           {label}
         </label>
       )}
@@ -28,6 +28,7 @@ const PasswordInputInner = (
         <input
           ref={ref}
           css={[styles.input, styles.passwordPadding]}
+          data-variant={variant}
           data-status={error ? 'error' : 'successfully'}
           type={isShown ? 'text' : 'password'}
           id={id}

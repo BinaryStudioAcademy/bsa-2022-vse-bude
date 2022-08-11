@@ -32,7 +32,7 @@ export const input = ({
     opacity: 0.2;
   }
 
-  &[data-variant='footer'] {
+  &[data-variant='secondary'] {
     border: ${colors.secondaryLight} 2px solid;
     background-color: ${colors.secondaryLight};
     color: ${colors.background};
@@ -68,7 +68,7 @@ export const label = ({ colors, fontSizes, lineHeights }: Theme) => css`
   font-family: inherit;
   color: ${colors.text};
 
-  &[data-variant='footer'] {
+  &[data-variant='secondary'] {
     color: ${colors.background};
   }
 `;
