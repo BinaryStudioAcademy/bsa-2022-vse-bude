@@ -1,4 +1,6 @@
 import type { User } from '@prisma/client';
+import { Role } from '@prisma/client';
+import { hashService } from '../../../src/services';
 
 export const users: User[] = [
   {
@@ -7,6 +9,11 @@ export const users: User[] = [
     lastName: 'Koch',
     email: 'raymondkoch@manglo.com',
     phone: '+3809044273447',
+    avatar: 'images/users/user/avatar',
+    role: Role.USER,
+    createdAt: new Date('2022-08-09'),
+    updatedAt: new Date('2022-08-09'),
+    passwordHash: hashService.generatePasswordHash('test'),
   },
   {
     id: '54a03182-c145-4965-bb2c-30fcacaa9bac',
@@ -14,6 +21,11 @@ export const users: User[] = [
     lastName: 'Cruz',
     email: 'silvacruz@manglo.com',
     phone: '+3809105342033',
+    avatar: 'images/users/user/avatar',
+    role: Role.USER,
+    createdAt: new Date('2022-08-09'),
+    updatedAt: new Date('2022-08-09'),
+    passwordHash: hashService.generatePasswordHash('test'),
   },
   {
     id: '8e0c4eb5-2dfd-4dd2-ba06-06aae673b1bc',
@@ -21,6 +33,11 @@ export const users: User[] = [
     lastName: 'Rush',
     email: 'hodgesrush@manglo.com',
     phone: '+3808294262183',
+    avatar: 'images/users/user/avatar',
+    role: Role.USER,
+    createdAt: new Date('2022-08-09'),
+    updatedAt: new Date('2022-08-09'),
+    passwordHash: hashService.generatePasswordHash('test'),
   },
   {
     id: '7bfb2bfa-10d6-48c3-b05b-a608f711c8c6',
@@ -28,6 +45,11 @@ export const users: User[] = [
     lastName: 'Stafford',
     email: 'myersstafford@manglo.com',
     phone: '+3808094403450',
+    avatar: 'images/users/user/avatar',
+    role: Role.USER,
+    createdAt: new Date('2022-08-09'),
+    updatedAt: new Date('2022-08-09'),
+    passwordHash: hashService.generatePasswordHash('test'),
   },
   {
     id: '62fd8e4f-2a2f-4ec9-8466-6ac2eaa0080a',
@@ -35,6 +57,11 @@ export const users: User[] = [
     lastName: 'Downs',
     email: 'wrightdowns@manglo.com',
     phone: '+3808554942273',
+    avatar: 'images/users/user/avatar',
+    role: Role.USER,
+    createdAt: new Date('2022-08-09'),
+    updatedAt: new Date('2022-08-09'),
+    passwordHash: hashService.generatePasswordHash('test'),
   },
   {
     id: '34db4684-e83c-411c-85dd-43f94d982aa6',
@@ -42,5 +69,10 @@ export const users: User[] = [
     lastName: 'Trevino',
     email: 'sharrontrevino@manglo.com',
     phone: '+3809275822228',
+    avatar: 'images/users/user/avatar',
+    role: Role.USER,
+    createdAt: new Date('2022-08-09'),
+    updatedAt: new Date('2022-08-09'),
+    passwordHash: hashService.generatePasswordHash('test'),
   },
 ];

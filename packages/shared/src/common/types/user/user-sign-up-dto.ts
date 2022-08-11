@@ -1,7 +1,9 @@
 type UserSignUpDto = {
   email: string;
-  name: string;
   password: string;
+  phone: string;
+  firstName: string;
+  lastName: string;
 };
 
 export type { UserSignUpDto };
