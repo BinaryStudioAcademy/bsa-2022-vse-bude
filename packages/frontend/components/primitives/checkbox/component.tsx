@@ -6,6 +6,7 @@ export const Checkbox = ({
   defaultChecked,
   onChange,
 }: CheckboxProps) => (
+  <>
     <label css={styles.label}>
       <input
         css={styles.checkbox}
@@ -15,4 +16,5 @@ export const Checkbox = ({
       />
       {labelText}
     </label>
+  </>
 );
