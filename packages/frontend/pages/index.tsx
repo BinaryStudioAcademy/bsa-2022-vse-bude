@@ -38,6 +38,11 @@ const IndexPage = () => {
   const { data } = useTypedSelector((state) => state.randomData, shallowEqual);
   const dispatch = useAppDispatch();
   const { t } = useTranslation('home');
+  const popoverRef = useRef(null);
+
+  const handleClick = () => {
+    popoverRef.current.setVisible(true);
+  };
 
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -63,6 +68,25 @@ const IndexPage = () => {
         <h1>{t('h1')}</h1>
         <div>
           <div style={{ wordBreak: 'break-all' }}>{JSON.stringify(data)}</div>
+
+          <MyPopover
+            ref={popoverRef}
+            body={
+              <Target onClick={handleClick}>
+                hey from a custom target component
+              </Target>
+            }
+          >
+            <ul>
+              <li>Personal Info</li>
+              <li>My List</li>
+              <li>Settings</li>
+              <li>Messages</li>
+              <li>Support</li>
+              <li>Sign Out</li>
+            </ul>
+          </MyPopover>
+
           <Button
             variant="outlined"
             onClick={() => dispatch(fetchRandomData())}
