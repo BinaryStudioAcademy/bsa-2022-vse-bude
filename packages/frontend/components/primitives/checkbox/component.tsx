@@ -1,18 +1,14 @@
 import type { CheckboxProps } from './types';
 import * as styles from './styles';
 
-export const Checkbox = ({
-  labelText,
-  defaultChecked,
-  onChange,
-}: CheckboxProps) => (
+export const Checkbox = ({ label, value, onChange }: CheckboxProps) => (
   <label css={styles.label}>
     <input
       css={styles.checkbox}
-      checked={defaultChecked}
+      checked={value}
       type="checkbox"
-      onChange={onChange}
+      onChange={() => onChange(value)}
     />
-    {labelText}
+    {label}
   </label>
 );

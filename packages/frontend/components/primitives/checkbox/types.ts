@@ -1,5 +1,5 @@
 export interface CheckboxProps {
-  labelText: string;
-  defaultChecked: boolean;
-  onChange(): void;
+  label: string;
+  value: boolean;
+  onChange(value: boolean): boolean;
 }
