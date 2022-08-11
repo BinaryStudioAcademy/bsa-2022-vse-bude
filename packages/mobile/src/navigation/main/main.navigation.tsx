@@ -1,77 +1,72 @@
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {
+  createBottomTabNavigator,
+  BottomTabNavigationOptions,
+} from '@react-navigation/bottom-tabs';
+
 import { useCustomTheme } from '~/hooks/hooks';
 import { MainScreenName } from '~/common/enums/enums';
+import { AppIcon } from '~/common/types/types';
 import { Home, Favorite, MyList, Account } from '~/screens/screens';
-import { Text, CustomIcon } from '~/components/components';
-import { IconName } from '~/common/enums/components/components';
+import {
+  Text,
+  HomeIcon,
+  ListIcon,
+  StarIcon,
+  UserIcon,
+} from '~/components/components';
 
-type TabOptionProps = {
-  focused: boolean;
-  color: string;
-};
-
-const Tab = createBottomTabNavigator();
+const Tabs = createBottomTabNavigator();
 
 const MainNavigation = () => {
   const { dark, colors } = useCustomTheme();
 
-  const screenOptions = {
-    animationEnabled: true,
+  const screenOptions: BottomTabNavigationOptions = {
     headerShown: false,
-    tabBarInactiveTintColor: colors.icon,
+    tabBarActiveTintColor: colors.accent,
     tabBarStyle: {
       minHeight: 60,
       backgroundColor: dark ? colors.backgroundSecondary : colors.background,
+    },
+    tabBarItemStyle: {
       paddingVertical: 8,
     },
     tabBarHideOnKeyboard: true,
   };
 
-  const getTabOptions = (label: string, icon: string) => ({
-    tabBarIcon: ({ focused, color }: TabOptionProps) => (
-      <CustomIcon
-        name={icon}
-        color={focused ? colors.accent : color}
-        size={25}
-      />
-    ),
-    tabBarLabel: ({ focused, color }: TabOptionProps) => (
-      <Text
-        style={{
-          color: focused ? colors.accent : color,
-          fontSize: 10,
-          paddingBottom: 10,
-        }}
-      >
-        {label}
-      </Text>
+  const getTabOptions = (
+    label: string,
+    tabBarIcon: AppIcon,
+  ): BottomTabNavigationOptions => ({
+    tabBarIcon,
+    tabBarLabel: ({ color }) => (
+      <Text style={{ fontSize: 12, color }}>{label}</Text>
     ),
   });
 
   return (
-    <Tab.Navigator screenOptions={screenOptions}>
-      <Tab.Screen
+    <Tabs.Navigator screenOptions={screenOptions}>
+      <Tabs.Screen
         name={MainScreenName.HOME}
         component={Home}
-        options={getTabOptions(MainScreenName.HOME, IconName.HOME)}
+        options={getTabOptions(MainScreenName.HOME, HomeIcon)}
       />
-      <Tab.Screen
+      <Tabs.Screen
         name={MainScreenName.FAVORITE}
         component={Favorite}
-        options={getTabOptions(MainScreenName.FAVORITE, IconName.STAR)}
+        options={getTabOptions(MainScreenName.FAVORITE, StarIcon)}
       />
-      <Tab.Screen
+      <Tabs.Screen
         name={MainScreenName.MY_LIST}
         component={MyList}
-        options={getTabOptions(MainScreenName.MY_LIST, IconName.LIST)}
+        options={getTabOptions(MainScreenName.MY_LIST, ListIcon)}
       />
-      <Tab.Screen
+      <Tabs.Screen
         name={MainScreenName.ACCOUNT}
         component={Account}
-        options={getTabOptions(MainScreenName.ACCOUNT, IconName.USER)}
+        options={getTabOptions(MainScreenName.ACCOUNT, UserIcon)}
       />
-    </Tab.Navigator>
+    </Tabs.Navigator>
   );
 };
 
