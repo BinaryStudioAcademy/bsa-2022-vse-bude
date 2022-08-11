@@ -1,4 +1,4 @@
-import React, { FC , ReactText } from 'react';
+import React, { FC, ReactText } from 'react';
 import { Pressable, View } from 'react-native';
 import { ButtonType, ButtonAppearance } from '~/common/enums/enums';
 import { Text } from '~/components/components';
