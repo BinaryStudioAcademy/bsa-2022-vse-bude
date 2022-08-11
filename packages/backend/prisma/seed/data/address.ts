@@ -4,13 +4,20 @@ import { faker } from '@faker-js/faker';
 export const fakeAddress = async (
   amountOfRecords: number,
   existingUsers: User[],
+  existingAddress: Address[],
 ) => {
   const records: Address[] = [];
 
-  for (let i = 0; i < amountOfRecords; i++) {
+  overal: for (let i = 0; i < amountOfRecords; i++) {
     const userId = existingUsers.at(i)?.id;
     if (!userId) {
       continue;
+    }
+
+    for (const address of existingAddress) {
+      if (address.userId === userId) {
+        continue overal;
+      }
     }
 
     const record: Address = {

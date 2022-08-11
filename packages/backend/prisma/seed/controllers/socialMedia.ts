@@ -9,15 +9,10 @@ export const seedSocialMedia = async (
 ) => {
   const existingSocialMedia = await prismaClient.socialMedia.findMany();
 
-  //check if all exists
   if (existingSocialMedia.length >= existingUsers.length) {
     return;
   }
 
-  //clear records
-  await prismaClient.socialMedia.deleteMany({});
-
-  //create new
   const data: SocialMedia[] = await fakeSocialMedia(
     USERS_NUMBER,
     existingUsers,

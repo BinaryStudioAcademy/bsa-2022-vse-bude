@@ -12,8 +12,10 @@ export const seedChat = async (
     return;
   }
 
-  await prismaClient.chat.deleteMany({});
-
-  const data: Chat[] = await fakeChat(howManyToCreate, existingProducts);
+  const data: Chat[] = await fakeChat(
+    howManyToCreate,
+    existingProducts,
+    existingChats,
+  );
   await prismaClient.chat.createMany({ data: data });
 };

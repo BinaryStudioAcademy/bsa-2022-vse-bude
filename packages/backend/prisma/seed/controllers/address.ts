@@ -8,15 +8,14 @@ export const seedAddress = async (
 ) => {
   const existingAddress = await prismaClient.address.findMany();
 
-  //check if all records exists
   if (existingUsers.length === existingAddress.length) {
     return;
   }
 
-  //clear records
-  await prismaClient.address.deleteMany({});
-
-  //create new
-  const data: Address[] = await fakeAddress(USERS_NUMBER, existingUsers);
+  const data: Address[] = await fakeAddress(
+    USERS_NUMBER,
+    existingUsers,
+    existingAddress,
+  );
   await prismaClient.address.createMany({ data: data });
 };

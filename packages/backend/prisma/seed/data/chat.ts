@@ -4,14 +4,21 @@ import { faker } from '@faker-js/faker';
 export const fakeChat = async (
   amountOfRecords: number,
   existingProducts: Product[],
+  existingChats: Chat[],
 ) => {
   const records: Chat[] = [];
 
-  for (let i = 0; i < amountOfRecords; i++) {
+  overal: for (let i = 0; i < amountOfRecords; i++) {
     const productIndex = i % existingProducts.length;
     const productId = existingProducts.at(productIndex)?.id;
     if (!productId) {
       continue;
+    }
+
+    for (const chat of existingChats) {
+      if (chat.productId === productId) {
+        continue overal;
+      }
     }
 
     const record: Chat = {

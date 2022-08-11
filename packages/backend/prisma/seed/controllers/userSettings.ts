@@ -8,18 +8,14 @@ export const seedUserSettings = async (
 ) => {
   const existingUsersSettings = await prismaClient.userSettings.findMany();
 
-  //check if all exists
   if (existingUsersSettings.length >= existingUsers.length) {
     return;
   }
 
-  //clear records
-  await prismaClient.userSettings.deleteMany({});
-
-  //create new
   const data: UserSettings[] = await fakeUserSettings(
     USERS_NUMBER,
     existingUsers,
+    existingUsersSettings,
   );
   await prismaClient.userSettings.createMany({ data: data });
 };
