@@ -9,7 +9,7 @@ const ScreenWrapper: FC<NativeSafeAreaViewProps> = ({
   ...restProps
 }) => {
   return (
-    <SafeAreaView style={styles.container} {...restProps}>
+    <SafeAreaView style={[styles.container, style]} {...restProps}>
       {children}
     </SafeAreaView>
   );
