@@ -1,6 +1,6 @@
 import type { PrismaClient, Product, User } from '@prisma/client';
 import { faker } from '@faker-js/faker';
-import { fakeProducts } from '../data/Product';
+import { fakeProducts } from '../../data/Product';
 
 export const seedProducts = async (
   prismaClient: PrismaClient,

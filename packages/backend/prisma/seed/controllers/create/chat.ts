@@ -1,5 +1,5 @@
 import type { Chat, PrismaClient, Product } from '@prisma/client';
-import { fakeChat } from '../data/chat';
+import { fakeChat } from '../../data/chat';
 
 export const seedChat = async (
   prismaClient: PrismaClient,

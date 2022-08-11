@@ -1,14 +1,14 @@
 import { prismaClient } from './config/prismaClient';
-import { seedChat } from './controllers/chat';
-import { seedAddress } from './controllers/address';
-import { seedBids } from './controllers/bid';
-import { seedCategory } from './controllers/category';
-import { seedProducts } from './controllers/product';
-import { seedSocialMedia } from './controllers/socialMedia';
-import { seedUsers } from './controllers/user';
-import { seedUserSettings } from './controllers/userSettings';
-import { seedChatMember } from './controllers/chatMember';
-import { seedMessage } from './controllers/message';
+import { seedChat } from './controllers/create/chat';
+import { seedAddress } from './controllers/create/address';
+import { seedBids } from './controllers/create/bid';
+import { seedCategory } from './controllers/create/category';
+import { seedProducts } from './controllers/create/product';
+import { seedSocialMedia } from './controllers/create/socialMedia';
+import { seedUsers } from './controllers/create/user';
+import { seedUserSettings } from './controllers/create/userSettings';
+import { seedChatMember } from './controllers/create/chatMember';
+import { seedMessage } from './controllers/create/message';
 
 export const createData = async () => {
   try {

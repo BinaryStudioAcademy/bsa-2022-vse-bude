@@ -1,6 +1,6 @@
 import type { Chat, Message, PrismaClient, User } from '@prisma/client';
-import { fakeMessage } from '../data/message';
-import { MESSAGES_NUMBER } from '../config/config';
+import { fakeMessage } from '../../data/message';
+import { MESSAGES_NUMBER } from '../../config/config';
 
 export const seedMessage = async (
   prismaClient: PrismaClient,

@@ -1,6 +1,6 @@
 import type { PrismaClient, Product, SocialMedia, User } from '@prisma/client';
-import { USERS_NUMBER } from '../config/config';
-import { fakeSocialMedia } from '../data/socialMedia';
+import { USERS_NUMBER } from '../../config/config';
+import { fakeSocialMedia } from '../../data/socialMedia';
 
 export const seedSocialMedia = async (
   prismaClient: PrismaClient,
