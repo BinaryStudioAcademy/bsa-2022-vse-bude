@@ -8,6 +8,7 @@
       "@types": ["common/types"],
       "@enums": ["common/enums"],
       "@helpers": ["helpers"],
+      "@providers": ["providers"],
       "@repositories": ["repositories"],
       "@services": ["services"],
       "@routes": ["api/routes"],
