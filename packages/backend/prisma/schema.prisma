@@ -15,23 +15,27 @@ datasource db {
 }
 
 model User {
-  id          String        @id @default(uuid()) @db.Uuid
-  email       String        @unique @db.VarChar(256)
-  phone       String        @unique @db.VarChar(32)
-  firstName   String        @db.VarChar(256)
-  lastName    String        @db.VarChar(256)
-  avatar      String?       @db.VarChar(2048)
-  role        Role          @default(USER)
-  settings    UserSettings?
-  address     Address?
-  socialMedia SocialMedia[]
-  ownProducts Product[]     @relation("ownProducts")
-  wonProducts Product[]     @relation("wonProducts")
-  bids        Bid[]
-  chats       ChatMember[]
-  messages    Message[]
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+  id            String         @id @default(uuid()) @db.Uuid
+  email         String         @unique @db.VarChar(256)
+  phone         String         @unique @db.VarChar(32)
+  firstName     String         @db.VarChar(256)
+  lastName      String         @db.VarChar(256)
+  avatar        String?        @db.VarChar(2048)
+  role          Role           @default(USER)
+  settings      UserSettings?
+  refreshTokens RefreshToken[]
+  address       Address?
+  socialMedia   SocialMedia[]
+  ownProducts   Product[]      @relation("ownProducts")
+  wonProducts   Product[]      @relation("wonProducts")
+  bids          Bid[]
+  chats         ChatMember[]
+  messages      Message[]
+  createdAt     DateTime       @default(now())
+  passwordHash  String         @db.VarChar(256)
+  phoneVerified Boolean        @default(false)
+  emailVerified Boolean        @default(false)
+  updatedAt     DateTime       @updatedAt
 }
 
 model UserSettings {
@@ -149,6 +153,14 @@ model Message {
   text      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid()) @db.Uuid
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @db.Uuid
+  token     String
+  expiresAt DateTime @db.Timestamp
 }
 
 enum Role {
