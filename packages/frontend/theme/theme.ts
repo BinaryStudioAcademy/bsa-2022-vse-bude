@@ -102,6 +102,11 @@ const widths = {
   checkbox: '20px',
 };
 
+const shadows = {
+  upper: '2px 5px 10px 0px #c3c3c340',
+  bottom: '2px 5px 10px 0px #c3c3c340',
+};
+
 const lightTheme = {
   colors,
   fontSizes,
@@ -111,6 +116,7 @@ const lightTheme = {
   widths,
   spaces,
   radiuses,
+  shadows,
 };
 
 const darkTheme = {
@@ -122,6 +128,7 @@ const darkTheme = {
   widths,
   spaces,
   radiuses,
+  shadows,
 };
 
 export { lightTheme, darkTheme };
