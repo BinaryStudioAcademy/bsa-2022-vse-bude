@@ -26,6 +26,7 @@
     "cookies-next": "^2.1.1",
     "emotion-normalize": "^11.0.1",
     "grapefruit-ui": "^0.2.5",
+    "moment": "^2.29.4",
     "next": "12.2.0",
     "next-i18next": "^11.3.0",
     "next-redux-wrapper": "^7.0.5",
