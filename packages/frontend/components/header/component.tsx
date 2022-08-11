@@ -1,12 +1,12 @@
 import { Routes } from '@enums';
 import { Container } from '@primitives';
 import Link from 'next/link';
-import { StyledHeader } from './styles';
+import * as styles from './styles';
 
 export const Header = () => (
-  <StyledHeader>
+  <header css={styles.header}>
     <Container
-      css={{
+      style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -24,5 +24,5 @@ export const Header = () => (
         </Link>
       </nav>
     </Container>
-  </StyledHeader>
+  </header>
 );

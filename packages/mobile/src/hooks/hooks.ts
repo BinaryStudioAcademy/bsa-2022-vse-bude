@@ -1,3 +1,4 @@
+export { useColorScheme } from 'react-native';
 export { useState, useEffect, useMemo, useLayoutEffect } from 'react';
 export { useNavigation, useRoute } from '@react-navigation/native';
 export { useController as useFormControl } from 'react-hook-form';

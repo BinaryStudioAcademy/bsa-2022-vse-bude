@@ -24,6 +24,7 @@ const Input = <T extends FormControlValues>({
   control,
   errors,
   placeholder,
+  ...props
 }: Props<T>): ReactElement => {
   const { field } = useFormControl({ name, control });
 
@@ -39,6 +40,7 @@ const Input = <T extends FormControlValues>({
         onChangeText={field.onChange}
         onBlur={field.onBlur}
         style={styles.input}
+        {...props}
       />
       {Boolean(error) && <Text>{error}</Text>}
     </View>
