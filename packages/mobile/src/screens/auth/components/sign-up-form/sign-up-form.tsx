@@ -11,7 +11,7 @@ type Props = {
 };
 
 const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
-  const { control, errors, handleSubmit } = useAppForm<UserSignUpDto>({
+  const { control, handleSubmit } = useAppForm<UserSignUpDto>({
     defaultValues: DEFAULT_SIGN_UP_PAYLOAD,
     validationSchema: signUp,
   });
@@ -25,21 +25,18 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
           placeholder="Enter your email"
           name="email"
           control={control}
-          errors={errors}
         />
         <Input
           label="Name"
           placeholder="Enter your name"
           name="name"
           control={control}
-          errors={errors}
         />
         <Input
           label="Password"
           placeholder="Enter your password"
           name="password"
           control={control}
-          errors={errors}
         />
         <Button label="Sign up" onPress={handleSubmit(onSubmit)} />
       </View>
