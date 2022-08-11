@@ -40,8 +40,7 @@ DROP INDEX "SocialMedia_ownedByProductId_key";
 DROP INDEX "SocialMedia_ownedByUserId_key";
 
 -- AlterTable
-ALTER TABLE "User" DROP COLUMN "firebaseUid",
-ALTER COLUMN "updatedAt" SET NOT NULL;
+ALTER TABLE "User" ALTER COLUMN "updatedAt" SET NOT NULL;
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Category_title_key" ON "Category"("title");
