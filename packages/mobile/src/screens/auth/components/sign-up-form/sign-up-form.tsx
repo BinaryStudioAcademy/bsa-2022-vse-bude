@@ -49,7 +49,10 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
           control={control}
           errors={errors}
         />
-        <Button label={t('verification.SING_UP')} onPress={handleSubmit(onSubmit)} />
+        <Button
+          label={t('verification.SING_UP')}
+          onPress={handleSubmit(onSubmit)}
+        />
       </View>
     </>
   );
