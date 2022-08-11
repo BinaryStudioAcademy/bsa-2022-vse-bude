@@ -26,4 +26,11 @@ const ListIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="list" {...iconProps} />
 );
 
-export { HomeIcon, StarIcon, UserIcon, SettingsIcon, ListIcon, CustomFeatherIcon };
+export {
+  HomeIcon,
+  StarIcon,
+  UserIcon,
+  SettingsIcon,
+  ListIcon,
+  CustomFeatherIcon,
+};

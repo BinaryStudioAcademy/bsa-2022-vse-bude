@@ -19,14 +19,19 @@ const Navigation: FC = () => {
 
   return (
     <NativeStack.Navigator screenOptions={screenOptions}>
-      {isLoggedIn && (
+      {isLoggedIn ? (
         <NativeStack.Screen
           name={RootScreenName.MAIN}
           component={MainNavigation}
         />
+      ) : (
+        <NativeStack.Group
+          navigationKey={`auth-group-${isLoggedIn ? 'user' : 'guest'}`}
+        >
+          <NativeStack.Screen name={RootScreenName.SIGN_UP} component={Auth} />
+          <NativeStack.Screen name={RootScreenName.SIGN_IN} component={Auth} />
+        </NativeStack.Group>
       )}
-      <NativeStack.Screen name={RootScreenName.SIGN_UP} component={Auth} />
-      <NativeStack.Screen name={RootScreenName.SIGN_IN} component={Auth} />
     </NativeStack.Navigator>
   );
 };
