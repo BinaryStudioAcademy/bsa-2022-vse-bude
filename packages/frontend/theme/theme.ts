@@ -93,6 +93,11 @@ const heights = {
   controlBg: '45px',
 };
 
+const shadows = {
+  upper: '2px 5px 10px 0px #c3c3c340',
+  bottom: '2px 5px 10px 0px #c3c3c340',
+};
+
 const lightTheme = {
   colors,
   fontSizes,
@@ -101,6 +106,7 @@ const lightTheme = {
   heights,
   spaces,
   radiuses,
+  shadows,
 };
 
 const darkTheme = {
@@ -111,6 +117,7 @@ const darkTheme = {
   heights,
   spaces,
   radiuses,
+  shadows,
 };
 
 export { lightTheme, darkTheme };
