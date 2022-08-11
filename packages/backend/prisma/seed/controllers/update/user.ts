@@ -3,40 +3,38 @@ import { readFileSync } from 'fs';
 import { USER_FILE_NAME } from '../../config/config';
 
 export const updateUsers = async (prismaClient: PrismaClient) => {
-  // const existingUsers = await prismaClient.user.findMany();
-
   const path = `./prisma/seed/mockData/${USER_FILE_NAME}.json`;
   const file = readFileSync(path, 'utf-8');
 
-  const usersJSON: User[] = JSON.parse(file);
+  const data: User[] = JSON.parse(file);
 
-  usersJSON.map(async (_userJSON) => {
-    const user = await prismaClient.user.findUnique({
+  data.map(async (_dataJSON) => {
+    const record = await prismaClient.user.findUnique({
       where: {
-        id: _userJSON.id,
+        id: _dataJSON.id,
       },
     });
-    if (user) {
+    if (record) {
       await prismaClient.user.update({
         where: {
-          id: _userJSON.id,
+          id: _dataJSON.id,
         },
         data: {
-          email: _userJSON.email,
-          phone: _userJSON.phone,
-          firstName: _userJSON.firstName,
-          lastName: _userJSON.lastName,
-          avatar: _userJSON.avatar,
-          role: _userJSON.role,
-          createdAt: _userJSON.createdAt,
-          passwordHash: _userJSON.passwordHash,
-          phoneVerified: _userJSON.phoneVerified,
-          emailVerified: _userJSON.emailVerified,
-          updatedAt: _userJSON.updatedAt,
+          email: _dataJSON.email,
+          phone: _dataJSON.phone,
+          firstName: _dataJSON.firstName,
+          lastName: _dataJSON.lastName,
+          avatar: _dataJSON.avatar,
+          role: _dataJSON.role,
+          createdAt: _dataJSON.createdAt,
+          passwordHash: _dataJSON.passwordHash,
+          phoneVerified: _dataJSON.phoneVerified,
+          emailVerified: _dataJSON.emailVerified,
+          updatedAt: _dataJSON.updatedAt,
         },
       });
     } else {
-      await prismaClient.user.create({ data: _userJSON });
+      await prismaClient.user.create({ data: _dataJSON });
     }
   });
 };

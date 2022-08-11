@@ -1,40 +1,38 @@
-import type { PrismaClient, User } from '@prisma/client';
+import type { Address, PrismaClient } from '@prisma/client';
 import { readFileSync } from 'fs';
-import { USER_FILE_NAME } from '../../config/config';
+import { ADDRESS_FILE_NAME } from './../../config/config';
 
-export const updateUsers = async (prismaClient: PrismaClient) => {
-  const path = `./prisma/seed/mockData/${USER_FILE_NAME}.json`;
+export const updateAddress = async (prismaClient: PrismaClient) => {
+  const path = `./prisma/seed/mockData/${ADDRESS_FILE_NAME}.json`;
   const file = readFileSync(path, 'utf-8');
 
-  const usersJSON: User[] = JSON.parse(file);
+  const data: Address[] = JSON.parse(file);
 
-  usersJSON.map(async (_userJSON) => {
-    const user = await prismaClient.user.findUnique({
+  data.map(async (_dataJSON) => {
+    const record = await prismaClient.address.findUnique({
       where: {
-        id: _userJSON.id,
+        id: _dataJSON.id,
       },
     });
-    if (user) {
-      await prismaClient.user.update({
+    if (record) {
+      await prismaClient.address.update({
         where: {
-          id: _userJSON.id,
+          id: _dataJSON.id,
         },
         data: {
-          email: _userJSON.email,
-          phone: _userJSON.phone,
-          firstName: _userJSON.firstName,
-          lastName: _userJSON.lastName,
-          avatar: _userJSON.avatar,
-          role: _userJSON.role,
-          createdAt: _userJSON.createdAt,
-          passwordHash: _userJSON.passwordHash,
-          phoneVerified: _userJSON.phoneVerified,
-          emailVerified: _userJSON.emailVerified,
-          updatedAt: _userJSON.updatedAt,
+          country: _dataJSON.country,
+          region: _dataJSON.region,
+          city: _dataJSON.city,
+          address: _dataJSON.address,
+          zip: _dataJSON.zip,
+          novaPoshtaRef: _dataJSON.novaPoshtaRef,
+          userId: _dataJSON.userId,
+          createdAt: _dataJSON.createdAt,
+          updatedAt: _dataJSON.updatedAt,
         },
       });
     } else {
-      await prismaClient.user.create({ data: _userJSON });
+      await prismaClient.address.create({ data: _dataJSON });
     }
   });
 };
