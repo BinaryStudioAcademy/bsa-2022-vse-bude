@@ -1,10 +1,10 @@
 import type { User } from '@prisma/client';
 import { Role } from '@prisma/client';
+import { hashService } from '../../../src/services';
 
 export const users: User[] = [
   {
     id: 'bfefdc2e-3d22-4646-8132-bd903ba13f49',
-    firebaseUid: 'f49fdc2e-3d22-4646-8132-bd903ba13f49',
     firstName: 'Raymond',
     lastName: 'Koch',
     email: 'raymondkoch@manglo.com',
@@ -13,10 +13,10 @@ export const users: User[] = [
     role: Role.USER,
     createdAt: new Date('2022-08-09'),
     updatedAt: new Date('2022-08-09'),
+    passwordHash: hashService.generatePasswordHash('test'),
   },
   {
     id: '54a03182-c145-4965-bb2c-30fcacaa9bac',
-    firebaseUid: 'bacfdc2e-3d22-4646-8132-bd903ba13f49',
     firstName: 'Silva',
     lastName: 'Cruz',
     email: 'silvacruz@manglo.com',
@@ -25,10 +25,10 @@ export const users: User[] = [
     role: Role.USER,
     createdAt: new Date('2022-08-09'),
     updatedAt: new Date('2022-08-09'),
+    passwordHash: hashService.generatePasswordHash('test'),
   },
   {
     id: '8e0c4eb5-2dfd-4dd2-ba06-06aae673b1bc',
-    firebaseUid: '1bcfdc2e-3d22-4646-8132-bd903ba13f49',
     firstName: 'Hodges',
     lastName: 'Rush',
     email: 'hodgesrush@manglo.com',
@@ -37,10 +37,10 @@ export const users: User[] = [
     role: Role.USER,
     createdAt: new Date('2022-08-09'),
     updatedAt: new Date('2022-08-09'),
+    passwordHash: hashService.generatePasswordHash('test'),
   },
   {
     id: '7bfb2bfa-10d6-48c3-b05b-a608f711c8c6',
-    firebaseUid: '8c6fdc2e-3d22-4646-8132-bd903ba13f49',
     firstName: 'Myers',
     lastName: 'Stafford',
     email: 'myersstafford@manglo.com',
@@ -49,10 +49,10 @@ export const users: User[] = [
     role: Role.USER,
     createdAt: new Date('2022-08-09'),
     updatedAt: new Date('2022-08-09'),
+    passwordHash: hashService.generatePasswordHash('test'),
   },
   {
     id: '62fd8e4f-2a2f-4ec9-8466-6ac2eaa0080a',
-    firebaseUid: '80afdc2e-3d22-4646-8132-bd903ba13f49',
     firstName: 'Wright',
     lastName: 'Downs',
     email: 'wrightdowns@manglo.com',
@@ -61,10 +61,10 @@ export const users: User[] = [
     role: Role.USER,
     createdAt: new Date('2022-08-09'),
     updatedAt: new Date('2022-08-09'),
+    passwordHash: hashService.generatePasswordHash('test'),
   },
   {
     id: '34db4684-e83c-411c-85dd-43f94d982aa6',
-    firebaseUid: 'aa6fdc2e-3d22-4646-8132-bd903ba13f49',
     firstName: 'Sharron',
     lastName: 'Trevino',
     email: 'sharrontrevino@manglo.com',
@@ -73,5 +73,6 @@ export const users: User[] = [
     role: Role.USER,
     createdAt: new Date('2022-08-09'),
     updatedAt: new Date('2022-08-09'),
+    passwordHash: hashService.generatePasswordHash('test'),
   },
 ];
