@@ -6,15 +6,13 @@ export const Checkbox = ({
   defaultChecked,
   onChange,
 }: CheckboxProps) => (
-  <>
-    <label css={styles.label}>
-      <input
-        css={styles.checkbox}
-        checked={defaultChecked}
-        type="checkbox"
-        onChange={onChange}
-      />
-      {labelText}
-    </label>
-  </>
+  <label css={styles.label}>
+    <input
+      css={styles.checkbox}
+      checked={defaultChecked}
+      type="checkbox"
+      onChange={onChange}
+    />
+    {labelText}
+  </label>
 );
