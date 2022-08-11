@@ -1,4 +1,2 @@
-import { ua } from './ua';
-import { en } from './en';
-
-export { ua, en };
+export { ua } from './ua';
+export { en } from './en';

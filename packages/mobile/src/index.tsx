@@ -6,7 +6,9 @@ import { Navigation } from '~/navigation/navigation';
 import { store } from '~/store/store';
 import { NavigationDarkTheme, NavigationTheme } from '~/config/config';
 import { useColorScheme } from '~/hooks/hooks';
-import './localization/localization';
+import { i18 } from './localization/localization';
+
+i18();
 
 const App: FC = () => {
   const colorScheme = useColorScheme();

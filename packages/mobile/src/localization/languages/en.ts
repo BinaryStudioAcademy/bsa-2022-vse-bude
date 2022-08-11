@@ -8,5 +8,7 @@ export const en = {
     PASSWORD_HINT: 'Enter your password',
     NAME: 'Name',
     NAME_HINT: 'Enter your name',
+    LAST_NAME: 'Last name',
+    LAST_NAME_HINT: 'Enter your last name',
   },
 };

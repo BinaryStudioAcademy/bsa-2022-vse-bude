@@ -22,34 +22,34 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
       <Text>{t('verification.SING_UP')}</Text>
       <View>
         <Input
-          label="Email"
-          placeholder="Enter your email"
+          label={t('verification.EMAIL')}
+          placeholder={t('verification.EMAIL_HINT')}
           name="email"
           control={control}
           errors={errors}
         />
-       <Input
-          label="First Name"
-          placeholder="Enter your first name"
+        <Input
+          label={t('verification.NAME')}
+          placeholder={t('verification.NAME_HINT')}
           name="firstName"
           control={control}
           errors={errors}
         />
         <Input
-          label="Last Name"
-          placeholder="Enter your last name"
+          label={t('verification.LAST_NAME')}
+          placeholder={t('verification.LAST_NAME_HINT')}
           name="lastName"
           control={control}
           errors={errors}
         />
         <Input
-          label="Password"
-          placeholder="Enter your password"
+          label={t('verification.PASSWORD')}
+          placeholder={t('verification.PASSWORD_HINT')}
           name="password"
           control={control}
           errors={errors}
         />
-        <Button label="Sign up" onPress={handleSubmit(onSubmit)} />
+        <Button label={t('verification.SING_UP')} onPress={handleSubmit(onSubmit)} />
       </View>
     </>
   );

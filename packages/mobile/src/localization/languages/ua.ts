@@ -8,5 +8,7 @@ export const ua = {
     PASSWORD_HINT: 'Введіть своій пароль',
     NAME: "Ім'я",
     NAME_HINT: "Введіть своє Ім'я",
+    LAST_NAME: 'Прізвище',
+    LAST_NAME_HINT: 'Введіть своє Прізвище',
   },
 };
