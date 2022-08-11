@@ -1,9 +1,10 @@
 import type { User } from '@prisma/client';
 import { Role } from '@prisma/client';
 import { faker } from '@faker-js/faker';
-import { hashService } from '../../../src/services/index';
+import { HashService } from './../../../src/services/hash';
 
 export const fakeUsers = async (amountOfRecords: number) => {
+  const hashService = new HashService();
   const records: User[] = [];
 
   for (let i = 0; i < amountOfRecords; i++) {
