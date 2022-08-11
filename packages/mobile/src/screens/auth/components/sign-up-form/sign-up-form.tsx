@@ -28,9 +28,30 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
           errors={errors}
         />
         <Input
+          label="First Name"
+          placeholder="Enter your first name"
+          name="firstName"
+          control={control}
+          errors={errors}
+        />
+        <Input
+          label="Last Name"
+          placeholder="Enter your last name"
+          name="lastName"
+          control={control}
+          errors={errors}
+        />
+        <Input
           label="Password"
           placeholder="Enter your password"
           name="password"
+          control={control}
+          errors={errors}
+        />
+        <Input
+          label="Phone Number"
+          placeholder="Enter your phone number"
+          name="phone"
           control={control}
           errors={errors}
         />

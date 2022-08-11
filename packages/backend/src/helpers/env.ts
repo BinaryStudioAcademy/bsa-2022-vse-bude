@@ -7,6 +7,11 @@ type TwilioEnvKey =
   | 'TWILIO_AUTH_TOKEN'
   | 'TWILIO_MESSAGING_SERVICE_SID';
 
-type EnvKey = ProcessEnvKey | RedisEnvKey | TwilioEnvKey;
+type AuthEnvKeys =
+  | 'JWT_SECRET_KEY'
+  | 'JWT_ACCESS_TOKEN_EXPIRATION_MIN'
+  | 'REFRESH_TOKEN_EXPIRATION_MIN';
 
-export const getEnv = (key: EnvKey) => process.env[key];
+type EnvKeys = ProcessEnvKey | AuthEnvKeys | RedisEnvKey | TwilioEnvKey;
+
+export const getEnv = (key: EnvKeys) => process.env[key];
