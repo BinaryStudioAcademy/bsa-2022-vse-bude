@@ -13,6 +13,7 @@ export const productFooter = () => css`
 export const productHeader = () => css`
   position: relative;
   margin-bottom: 20px;
+  user-select: none;
 `;
 
 export const productName = ({ fontWeights, fontSizes }: Theme) => css`
@@ -40,12 +41,11 @@ export const divider = ({ colors }: Theme) => css`
 
 export const productTimer = () => css`
   position: absolute;
-  bottom: -10px;
-  left: 17%;
+  bottom: -15px;
+  left: 16%;
 `;
 
 export const productCard = () => css`
-  width: 300px;
   border: 1px solid lightgray;
   padding: 22px 25px;
   border-radius: 5px;
