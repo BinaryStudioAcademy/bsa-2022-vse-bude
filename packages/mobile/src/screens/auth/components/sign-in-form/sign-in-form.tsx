@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Button, View, Input } from '~/components/components';
 import { UserSignInDto } from '@vse-bude/shared';
-import { useAppForm } from '~/hooks/hooks';
+import { useAppForm, useTranslation } from '~/hooks/hooks';
 import { signIn } from '~/validation-schemas/validation-schemas';
 import { DEFAULT_SIGN_IN_PAYLOAD } from './common/constants';
 
@@ -14,6 +14,7 @@ const SignInForm: FC<Props> = ({ onSubmit }) => {
     defaultValues: DEFAULT_SIGN_IN_PAYLOAD,
     validationSchema: signIn,
   });
+  const { t } = useTranslation();
 
   return (
     <View>
@@ -33,7 +34,10 @@ const SignInForm: FC<Props> = ({ onSubmit }) => {
           errors={errors}
         />
         <View style={{ marginTop: 30 }}>
-          <Button label="Sign in" onPress={handleSubmit(onSubmit)} />
+          <Button
+            label={t('verification.SING_IN')}
+            onPress={handleSubmit(onSubmit)}
+          />
         </View>
       </View>
     </View>
