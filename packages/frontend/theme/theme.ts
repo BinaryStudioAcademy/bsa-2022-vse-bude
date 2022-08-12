@@ -94,6 +94,7 @@ const radiuses = {
 };
 
 const heights = {
+  header: '104px',
   checkbox: '20px',
   controlSm: '35px',
   controlBg: '45px',

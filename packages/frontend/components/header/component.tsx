@@ -10,14 +10,14 @@ export const Header = () => (
       style={{
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'center',
+        height: '100%',
         flexGrow: 1,
       }}
     >
       <Link href={Routes.DEFAULT}>
         <a>
-          <Container>
-            <Logo />
-          </Container>
+          <Logo />
         </a>
       </Link>
       <Container
@@ -26,13 +26,14 @@ export const Header = () => (
           alignItems: 'center',
           flexGrow: 2,
           maxWidth: '60%',
+          marginLeft: '4em',
         }}
       >
         <nav
           style={{
             display: 'flex',
             alignItems: 'center',
-            width: '540px',
+            width: '70%',
             gap: '1em',
           }}
         >
@@ -41,9 +42,9 @@ export const Header = () => (
           <InternalLink href={Routes.DEFAULT} label="Search" />
           <InternalLink href={Routes.DEFAULT} label="News" />
           <InternalLink href={Routes.DEFAULT} label="About us" />
-          <Link href={Routes.USERS}>
+          {/* <Link href={Routes.USERS}>
             <a>users</a>
-          </Link>
+          </Link> */}
         </nav>
       </Container>
       <Container

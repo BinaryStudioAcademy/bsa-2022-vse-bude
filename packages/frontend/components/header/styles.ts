@@ -4,6 +4,7 @@ import type { Theme } from 'theme';
 export const header = (theme: Theme) => css`
   padding: ${theme.spaces.lg} 0;
   background-color: ${theme.colors.backgroundLight};
+  height: ${theme.heights.header};
 `;
 
 export const buttonCreateAccountText = (theme: Theme) => css`
