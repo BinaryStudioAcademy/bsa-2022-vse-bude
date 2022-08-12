@@ -35,8 +35,6 @@ export const Tooltip = ({ trigger, children }: TooltipProps) => {
 
       bodyRef.current.style.top = `${bodyTop}px`;
       bodyRef.current.style.left = `${bodyLeft}px`;
-
-      bodyRef.current.style.visibility = 'visible';
     }
   }, [isVisible, calcBodyCoords]);
 

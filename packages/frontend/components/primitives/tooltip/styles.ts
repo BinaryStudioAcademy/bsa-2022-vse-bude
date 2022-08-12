@@ -10,7 +10,6 @@ export const trigger = () => css`
 
 export const body = ({ colors, spaces }: Theme) => css`
   position: absolute;
-  visibility: hidden;
   max-width: 50%;
   overflow: hidden;
   background-color: ${colors.background};
