@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { HydrateAction } from '@types';
-import type { User } from 'common/models';
+import type { UserDto } from '@vse-bude/shared';
 import { HYDRATE } from 'next-redux-wrapper';
 import { getCurrentUser } from './actions';
 
 interface ProfileState {
-  user: User | null;
+  user: UserDto | null;
   loading: boolean;
 }
 
