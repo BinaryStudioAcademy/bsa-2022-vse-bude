@@ -8,7 +8,6 @@ import { useRouter } from 'next/router';
 
 interface AuthProviderProps {
   children: ReactNode;
-  isPrivate: boolean;
 }
 
 const AuthProvider = ({ children }: AuthProviderProps) => {

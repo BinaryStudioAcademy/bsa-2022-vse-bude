@@ -11,7 +11,7 @@ type CustomAppProps = AppProps & {
 const App = ({ Component, pageProps }: CustomAppProps) => (
   <ThemeProvider>
     {Component.auth ? (
-      <AuthProvider isPrivate={pageProps.isPrivate}>
+      <AuthProvider>
         <Component {...pageProps} />
       </AuthProvider>
     ) : (
