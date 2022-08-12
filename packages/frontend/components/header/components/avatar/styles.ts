@@ -10,8 +10,10 @@ export const avatar = ({ spaces, radiuses }: Theme) => css`
   border-radius: ${radiuses.circle};
 `;
 
-export const name = ({
+export const initials = ({
   colors,
+  spaces,
+  radiuses,
   fontSizes,
   fontWeights,
   lineHeights,
@@ -20,10 +22,19 @@ export const name = ({
   font-size: ${fontSizes.toggle};
   font-weight: ${fontWeights.toggle};
   line-height: ${lineHeights.toggle};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: ${spaces.xl2};
+  height: ${spaces.xl2};
+  border-radius: ${radiuses.circle};
+  background-color: ${colors.primaryLight};
+  text-transform: uppercase;
 `;
 
 export const wrapper = ({ spaces }: Theme) => css`
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
   gap: ${spaces.sm};
