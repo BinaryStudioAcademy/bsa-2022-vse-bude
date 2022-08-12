@@ -10,6 +10,14 @@ export const timerBadge = () => css`
   width: 170px;
   text-align: center;
   background: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const timerIcon = () => css`
+  margin-right: 5px;
 `;
 
 export const timerValue = ({ fontWeights, fontSizes }: Theme) => css`
