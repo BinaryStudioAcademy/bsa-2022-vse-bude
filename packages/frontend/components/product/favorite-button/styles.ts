@@ -12,4 +12,7 @@ export const favoriteIcon = () => css`
   position: absolute;
   top: 15px;
   right: 15px;
+  &:hover {
+    cursor: pointer;
+  }
 `;

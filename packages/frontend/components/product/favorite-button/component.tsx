@@ -1,13 +1,23 @@
-import React from 'react';
-import notFavoriteIcon from '../../../assets/icons/favorite-icon.svg';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ColorPalette } from '@vse-bude/shared';
 import { favoriteIcon } from './styles';
+import type { FavoriteButtonProps } from './types';
 
-export const FavoriteButton = () => (
-  <React.Fragment>
+export const FavoriteButton = ({
+  isFavorite = false,
+  onUpdateFavorite,
+}: FavoriteButtonProps) => {
+  const color = isFavorite ? ColorPalette.YELLOW_100 : ColorPalette.WHITE_100;
+
+  return (
     <div css={favoriteIcon}>
-      <div>
-        <img src={notFavoriteIcon.src} alt="" />
-      </div>
+      <FontAwesomeIcon
+        onClick={onUpdateFavorite}
+        icon={faStar}
+        color={color}
+        stroke="red"
+      />
     </div>
-  </React.Fragment>
-);
+  );
+};
