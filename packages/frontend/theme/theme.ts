@@ -29,6 +29,7 @@ const fontSizes = {
   h6: '16px',
   body1: '16px',
   body2: '14px',
+  label: '14px',
   tub: '18px',
   toggle: '14px',
   button: '16px',
@@ -42,6 +43,7 @@ const fontWeights = {
   h6: '700',
   body1: '400',
   body2: '400',
+  label: '400',
   tub: '600',
   toggle: '600',
   button: '700',
@@ -55,6 +57,7 @@ const lineHeights = {
   h6: '22px',
   body1: '22px',
   body2: '16px',
+  label: '16px',
   tub: '21px',
   toggle: '16px',
   button: '19px',
@@ -81,6 +84,7 @@ const spaces = {
 };
 
 const radiuses = {
+  xxs: '2px',
   xs: '5px',
   sm: '7px',
   md: '10px',
@@ -89,8 +93,18 @@ const radiuses = {
 };
 
 const heights = {
+  checkbox: '20px',
   controlSm: '35px',
   controlBg: '45px',
+};
+
+const widths = {
+  checkbox: '20px',
+};
+
+const shadows = {
+  upper: '2px 5px 10px 0px #c3c3c340',
+  bottom: '2px 5px 10px 0px #c3c3c340',
 };
 
 const lightTheme = {
@@ -99,8 +113,10 @@ const lightTheme = {
   fontWeights,
   lineHeights,
   heights,
+  widths,
   spaces,
   radiuses,
+  shadows,
 };
 
 const darkTheme = {
@@ -109,8 +125,10 @@ const darkTheme = {
   fontWeights,
   lineHeights,
   heights,
+  widths,
   spaces,
   radiuses,
+  shadows,
 };
 
 export { lightTheme, darkTheme };
