@@ -42,9 +42,6 @@ export const Header = () => (
           <InternalLink href={Routes.DEFAULT} label="Search" />
           <InternalLink href={Routes.DEFAULT} label="News" />
           <InternalLink href={Routes.DEFAULT} label="About us" />
-          {/* <Link href={Routes.USERS}>
-            <a>users</a>
-          </Link> */}
         </nav>
       </Container>
       <Container
@@ -64,5 +61,8 @@ export const Header = () => (
         </Button>
       </Container>
     </Container>
+    <Link href={Routes.USERS}>
+      <a>users</a>
+    </Link>
   </header>
 );
