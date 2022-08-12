@@ -8,7 +8,7 @@ export const updateSocialMedia = async (prismaClient: PrismaClient) => {
 
   const data: SocialMedia[] = JSON.parse(file);
 
-  data.map(async (_dataJSON) => {
+  for (const _dataJSON of data) {
     const record = await prismaClient.socialMedia.findUnique({
       where: {
         id: _dataJSON.id,
@@ -31,5 +31,5 @@ export const updateSocialMedia = async (prismaClient: PrismaClient) => {
     } else {
       await prismaClient.socialMedia.create({ data: _dataJSON });
     }
-  });
+  }
 };

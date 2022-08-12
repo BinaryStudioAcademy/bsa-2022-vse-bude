@@ -8,7 +8,7 @@ export const updateCategory = async (prismaClient: PrismaClient) => {
 
   const data: Category[] = JSON.parse(file);
 
-  data.map(async (_dataJSON) => {
+  for (const _dataJSON of data) {
     const record = await prismaClient.category.findUnique({
       where: {
         id: _dataJSON.id,
@@ -28,5 +28,5 @@ export const updateCategory = async (prismaClient: PrismaClient) => {
     } else {
       await prismaClient.category.create({ data: _dataJSON });
     }
-  });
+  }
 };

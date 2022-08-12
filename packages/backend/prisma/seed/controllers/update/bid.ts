@@ -8,7 +8,7 @@ export const updateBid = async (prismaClient: PrismaClient) => {
 
   const data: Bid[] = JSON.parse(file);
 
-  data.map(async (_dataJSON) => {
+  for (const _dataJSON of data) {
     const record = await prismaClient.bid.findUnique({
       where: {
         id: _dataJSON.id,
@@ -30,5 +30,5 @@ export const updateBid = async (prismaClient: PrismaClient) => {
     } else {
       await prismaClient.bid.create({ data: _dataJSON });
     }
-  });
+  }
 };

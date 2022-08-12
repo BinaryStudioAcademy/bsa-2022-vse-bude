@@ -8,7 +8,7 @@ export const updateChat = async (prismaClient: PrismaClient) => {
 
   const data: Chat[] = JSON.parse(file);
 
-  data.map(async (_dataJSON) => {
+  for (const _dataJSON of data) {
     const record = await prismaClient.chat.findUnique({
       where: {
         id: _dataJSON.id,
@@ -30,5 +30,5 @@ export const updateChat = async (prismaClient: PrismaClient) => {
     } else {
       await prismaClient.chat.create({ data: _dataJSON });
     }
-  });
+  }
 };
