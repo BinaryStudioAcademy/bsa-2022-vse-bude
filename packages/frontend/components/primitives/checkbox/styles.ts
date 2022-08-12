@@ -18,10 +18,16 @@ export const label = ({
   cursor: pointer;
 `;
 
-export const checkbox = ({ colors, heights, widths, radiuses }: Theme) => css`
+export const checkbox = ({
+  colors,
+  heights,
+  widths,
+  radiuses,
+  spaces,
+}: Theme) => css`
   position: relative;
   appearance: none;
-  margin-right: 10.1px;
+  margin-right: ${spaces.sm};
   height: ${heights.checkbox};
   width: ${widths.checkbox};
   border: 1px solid ${colors.primaryLight};
@@ -38,7 +44,7 @@ export const checkbox = ({ colors, heights, widths, radiuses }: Theme) => css`
       left: calc(50% - 5px);
       display: block;
       width: 10px;
-      height: 7.76px;
+      height: 8px;
       background-image: url(${checkmark.src});
     }
   }
