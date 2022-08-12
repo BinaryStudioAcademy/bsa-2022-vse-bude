@@ -2,7 +2,7 @@ import { prismaClient } from './config/prismaClient';
 import { createData } from './createData';
 
 (async () => {
-  await createData();
+  await createData(prismaClient);
 })()
   .then(() => prismaClient.$disconnect())
   .catch(async (e) => {

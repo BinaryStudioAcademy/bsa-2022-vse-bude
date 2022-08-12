@@ -1,4 +1,4 @@
-import { prismaClient } from './config/prismaClient';
+import type { PrismaClient } from '@prisma/client';
 import { seedChat } from './controllers/create/chat';
 import { seedAddress } from './controllers/create/address';
 import { seedBids } from './controllers/create/bid';
@@ -10,32 +10,24 @@ import { seedUserSettings } from './controllers/create/userSettings';
 import { seedChatMember } from './controllers/create/chatMember';
 import { seedMessage } from './controllers/create/message';
 
-export const createData = async () => {
-  try {
-    await seedUsers(prismaClient);
+export const createData = async (prismaClient: PrismaClient) => {
+  await seedUsers(prismaClient);
 
-    const existingUsers = await prismaClient.user.findMany();
+  const existingUsers = await prismaClient.user.findMany();
 
-    await seedUserSettings(prismaClient, existingUsers);
-    await seedAddress(prismaClient, existingUsers);
-    await seedCategory(prismaClient);
-    await seedProducts(prismaClient, existingUsers);
+  await seedUserSettings(prismaClient, existingUsers);
+  await seedAddress(prismaClient, existingUsers);
+  await seedCategory(prismaClient);
+  await seedProducts(prismaClient, existingUsers);
 
-    const existingProducts = await prismaClient.product.findMany();
+  const existingProducts = await prismaClient.product.findMany();
 
-    await seedSocialMedia(prismaClient, existingUsers, existingProducts);
-    await seedBids(prismaClient, existingUsers, existingProducts);
-    await seedChat(prismaClient, existingProducts);
+  await seedSocialMedia(prismaClient, existingUsers, existingProducts);
+  await seedBids(prismaClient, existingUsers, existingProducts);
+  await seedChat(prismaClient, existingProducts);
 
-    const existingChats = await prismaClient.chat.findMany();
+  const existingChats = await prismaClient.chat.findMany();
 
-    await seedChatMember(prismaClient, existingUsers, existingChats);
-    await seedMessage(prismaClient, existingUsers, existingChats);
-  } catch (e) {
-    console.log(e);
-    await prismaClient.$disconnect();
-    process.exit(1);
-  } finally {
-    await prismaClient.$disconnect();
-  }
+  await seedChatMember(prismaClient, existingUsers, existingChats);
+  await seedMessage(prismaClient, existingUsers, existingChats);
 };

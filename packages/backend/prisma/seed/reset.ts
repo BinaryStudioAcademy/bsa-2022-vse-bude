@@ -3,8 +3,8 @@ import { clearData } from './clearData';
 import { createData } from './createData';
 
 (async () => {
-  await clearData();
-  await createData();
+  await clearData(prismaClient);
+  await createData(prismaClient);
 })()
   .then(() => prismaClient.$disconnect())
   .catch(async (e) => {
