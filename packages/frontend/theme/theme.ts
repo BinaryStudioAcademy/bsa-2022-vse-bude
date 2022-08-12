@@ -33,6 +33,7 @@ const fontSizes = {
   tub: '18px',
   toggle: '14px',
   button: '16px',
+  buttonSmall: '12px',
   caption: '12px',
 };
 
