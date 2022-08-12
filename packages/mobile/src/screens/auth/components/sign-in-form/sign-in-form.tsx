@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Button, Text, View, Input } from '~/components/components';
+import { Button, View, Input } from '~/components/components';
 import { UserSignInDto } from '@vse-bude/shared';
 import { useAppForm } from '~/hooks/hooks';
 import { signIn } from '~/validation-schemas/validation-schemas';
@@ -17,7 +17,6 @@ const SignInForm: FC<Props> = ({ onSubmit }) => {
 
   return (
     <View>
-      <Text>Sign In</Text>
       <View>
         <Input
           label="Email"
@@ -33,7 +32,9 @@ const SignInForm: FC<Props> = ({ onSubmit }) => {
           control={control}
           errors={errors}
         />
-        <Button label="Sign in" onPress={handleSubmit(onSubmit)} />
+        <View style={{ marginTop: 30 }}>
+          <Button label="Sign in" onPress={handleSubmit(onSubmit)} />
+        </View>
       </View>
     </View>
   );
