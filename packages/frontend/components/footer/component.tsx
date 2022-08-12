@@ -3,8 +3,6 @@ import * as styles from './styles';
 
 export const Footer = () => (
   <footer css={styles.footer}>
-    <Container>
-      []
-    </Container>
+    <Container>[]</Container>
   </footer>
 );

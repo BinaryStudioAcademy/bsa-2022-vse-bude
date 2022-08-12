@@ -12,17 +12,17 @@ export const FooterInput: FC<InputBlockProps> = ({
   autocomplete,
   onChange,
 }) => (
-    <label htmlFor={id}>
-      <span css={styles.footerLabel}>{label}</span>
-      <input
-        css={styles.footerInput}
-        value={value}
-        id={id}
-        type={type}
-        name={name}
-        placeholder={placeholder}
-        autoComplete={autocomplete}
-        onChange={onChange}
-      />
-    </label>
-  );
+  <label htmlFor={id}>
+    <span css={styles.footerLabel}>{label}</span>
+    <input
+      css={styles.footerInput}
+      value={value}
+      id={id}
+      type={type}
+      name={name}
+      placeholder={placeholder}
+      autoComplete={autocomplete}
+      onChange={onChange}
+    />
+  </label>
+);
