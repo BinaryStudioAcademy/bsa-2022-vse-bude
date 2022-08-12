@@ -16,7 +16,7 @@ const wrapper = css`
   }
 `;
 
-export function Test() {
+function Test() {
   return (
     <div>
       <FontAwesomeIcon icon={faUser} css={wrapper} />
@@ -25,3 +25,5 @@ export function Test() {
     </div>
   );
 }
+
+export default Test;
