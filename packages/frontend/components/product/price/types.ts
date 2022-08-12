@@ -1,6 +1,6 @@
 type PriceProps = {
   amount: number;
-  currency: 'UAH';
+  currency: string;
 };
 
 export type { PriceProps };
