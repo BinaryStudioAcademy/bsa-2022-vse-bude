@@ -16,20 +16,21 @@ export const Tooltip = ({
   const timer = useRef(null);
 
   const calcBodyCoords = useCallback(() => {
-    const {
-      left: triggerLeft,
-      top: triggerTop,
-      height: triggerHeight,
-      width: triggerWidth,
-    } = getTriggerRectParams();
-    const { height: bodyHeight, width: bodyWidth } = getBodyRectParams();
+    const triggerRectParams = getTriggerRectParams();
+    const bodyRectParams = getBodyRectParams();
 
-    const newBodyLeft = triggerLeft + triggerWidth / 2 - bodyWidth / 2;
+    let bodyTop = window.scrollY + triggerRectParams.top;
+    bodyTop +=
+      triggerRectParams.top - bodyRectParams.height <= 0
+        ? triggerRectParams.height
+        : -bodyRectParams.height;
 
-    let newBodyTop = window.scrollY + triggerTop;
-    newBodyTop += triggerTop - bodyHeight <= 0 ? triggerHeight : -bodyHeight;
+    const bodyLeft =
+      triggerRectParams.left +
+      triggerRectParams.width / 2 -
+      bodyRectParams.width / 2;
 
-    return [newBodyTop, newBodyLeft];
+    return [bodyTop, bodyLeft];
   }, []);
 
   useEffect(() => {
