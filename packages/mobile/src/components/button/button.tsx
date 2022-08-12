@@ -12,6 +12,7 @@ type Props = {
   onPress: () => void;
   textColor?: ColorValue;
   background?: ColorValue;
+  fontSize?: number;
 };
 
 const Button: FC<Props> = ({
@@ -22,6 +23,7 @@ const Button: FC<Props> = ({
   onPress,
   textColor,
   background,
+  fontSize,
 }) => {
   const isOutlined = view === ButtonAppearance.OUTLINED;
 
@@ -44,6 +46,7 @@ const Button: FC<Props> = ({
             isDisabled ? styles.filledTitle : {},
             isOutlined && isDisabled ? styles.disabledOutlinedTitle : {},
             textColor ? { color: textColor } : {},
+            fontSize ? { fontSize } : {},
           ]}
         >
           {label}

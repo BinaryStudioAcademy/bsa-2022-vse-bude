@@ -1,4 +1,10 @@
 export const en = {
+  stamp: {
+    TITLE: 'Mark "Russian Warship"',
+    DESCRIPTION:
+      'The stamp was made by Ukrposhta in 2022. The expression became famous...',
+    BET: 'Bet',
+  },
   verification: {
     SING_IN: 'Sing in',
     SING_UP: 'Sing up',

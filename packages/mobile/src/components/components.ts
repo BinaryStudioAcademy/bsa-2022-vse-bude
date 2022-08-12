@@ -5,4 +5,4 @@ export { Button } from './button/button';
 export { Input } from './input/input';
 export * from './icons/icons';
 export { Spinner } from './spinner/spinner';
-export { LinearGradient } from './linear-gradient/linear-gradient';
+export { default as LinearGradient } from 'react-native-linear-gradient';

@@ -3,7 +3,7 @@ import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
-import { Auth, Home } from '~/screens/screens';
+import { Auth, Welcome } from '~/screens/screens';
 import { RootScreenName } from '~/common/enums/enums';
 import { RootNavigationParamList } from '~/common/types/types';
 import { MainNavigation } from './main/main.navigation';
@@ -28,7 +28,10 @@ const Navigation: FC = () => {
         <NativeStack.Group
           navigationKey={`auth-group-${isLoggedIn ? 'user' : 'guest'}`}
         >
-          <NativeStack.Screen name={RootScreenName.HOME} component={Home} />
+          <NativeStack.Screen
+            name={RootScreenName.WELCOME}
+            component={Welcome}
+          />
           <NativeStack.Screen name={RootScreenName.SIGN_UP} component={Auth} />
           <NativeStack.Screen name={RootScreenName.SIGN_IN} component={Auth} />
         </NativeStack.Group>
