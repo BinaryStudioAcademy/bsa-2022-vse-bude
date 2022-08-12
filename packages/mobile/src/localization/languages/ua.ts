@@ -10,5 +10,6 @@ export const ua = {
     NAME_HINT: "Введіть своє Ім'я",
     LAST_NAME: 'Прізвище',
     LAST_NAME_HINT: 'Введіть своє Прізвище',
+    CREATE_ACCOUNT: 'Cтворити Аккаунт',
   },
 };

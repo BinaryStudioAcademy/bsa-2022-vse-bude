@@ -10,5 +10,6 @@ export const en = {
     NAME_HINT: 'Enter your name',
     LAST_NAME: 'Last name',
     LAST_NAME_HINT: 'Enter your last name',
+    CREATE_ACCOUNT: 'Create Account',
   },
 };
