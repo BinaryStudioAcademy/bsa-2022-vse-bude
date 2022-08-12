@@ -112,7 +112,7 @@ const shadows = {
 const opacities = {
   lg: 0.2,
   md: 0.4,
-  sm: 0.6
+  sm: 0.6,
 };
 
 const lightTheme = {

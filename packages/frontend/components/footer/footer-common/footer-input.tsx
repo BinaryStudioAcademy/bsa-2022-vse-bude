@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 import type { InputBlockProps } from './types';
 import * as styles from './styles';
 
@@ -11,8 +11,7 @@ export const FooterInput: FC<InputBlockProps> = ({
   placeholder,
   autocomplete,
   onChange,
-}) => {
-  return (
+}) => (
     <label htmlFor={id}>
       <span css={styles.footerLabel}>{label}</span>
       <input
@@ -27,4 +26,3 @@ export const FooterInput: FC<InputBlockProps> = ({
       />
     </label>
   );
-};

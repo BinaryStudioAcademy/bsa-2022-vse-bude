@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import type React from 'react';
+import { useState } from 'react';
 import { Button } from '@primitives';
 import { ColumnHeader, FooterInput } from '../footer-common';
 import * as styles from './styles';
