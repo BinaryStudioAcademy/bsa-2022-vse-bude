@@ -1,12 +1,8 @@
-import { PrismaClient } from '@prisma/client';
-import { seedUsers } from './user';
-
-const prismaClient = new PrismaClient({
-  log: ['query', 'info', 'warn', 'error'],
-});
+import { prismaClient } from './config/prismaClient';
+import { createData } from './createData';
 
 (async () => {
-  await seedUsers(prismaClient);
+  await createData(prismaClient);
 })()
   .then(() => prismaClient.$disconnect())
   .catch(async (e) => {
