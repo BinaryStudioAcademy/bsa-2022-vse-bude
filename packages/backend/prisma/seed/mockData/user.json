@@ -1,0 +1,72 @@
+[
+    {
+        "id": "807f73fb-31b8-4e66-9f74-babc8ee95d94",
+        "email": "Mylene27@hotmail.com",
+        "phone": "+380 12 352 5748",
+        "firstName": "Roderick",
+        "lastName": "Grimes",
+        "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/374.jpg",
+        "role": "USER",
+        "createdAt": "2022-01-31T10:18:57.980Z",
+        "passwordHash": "5c6962d8a115970e390ab613b0533a7a6a8ac2e8aa8c4891d849585e8b34dfb3",
+        "phoneVerified": true,
+        "emailVerified": true,
+        "updatedAt": "2022-08-11T19:11:08.601Z"
+    },
+    {
+        "id": "b8f594a9-e836-4e25-9979-a56500b21be2",
+        "email": "Webster.Gorczany54@hotmail.com",
+        "phone": "+380 13 825 4164",
+        "firstName": "Jordane",
+        "lastName": "Hilpert",
+        "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/398.jpg",
+        "role": "USER",
+        "createdAt": "2022-07-01T09:30:45.046Z",
+        "passwordHash": "5c6962d8a115970e390ab613b0533a7a6a8ac2e8aa8c4891d849585e8b34dfb3",
+        "phoneVerified": true,
+        "emailVerified": true,
+        "updatedAt": "2022-08-12T06:51:14.320Z"
+    },
+    {
+        "id": "f5cf90f8-6943-4e42-b006-03cf9bb707a4",
+        "email": "Leland85@gmail.com",
+        "phone": "+380 73 807 5018",
+        "firstName": "Milan",
+        "lastName": "Crona",
+        "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/382.jpg",
+        "role": "USER",
+        "createdAt": "2022-02-09T09:13:41.962Z",
+        "passwordHash": "5c6962d8a115970e390ab613b0533a7a6a8ac2e8aa8c4891d849585e8b34dfb3",
+        "phoneVerified": true,
+        "emailVerified": true,
+        "updatedAt": "2022-08-11T10:57:46.997Z"
+    },
+    {
+        "id": "47504cdd-55e6-4584-9539-6eef69c6deed",
+        "email": "Aidan_Bosco@hotmail.com",
+        "phone": "+380 43 934 3101",
+        "firstName": "Caroline",
+        "lastName": "Rutherford",
+        "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/700.jpg",
+        "role": "USER",
+        "createdAt": "2022-05-11T14:49:23.483Z",
+        "passwordHash": "5c6962d8a115970e390ab613b0533a7a6a8ac2e8aa8c4891d849585e8b34dfb3",
+        "phoneVerified": true,
+        "emailVerified": true,
+        "updatedAt": "2022-08-11T12:04:23.026Z"
+    },
+    {
+        "id": "79946740-1328-414f-bef0-926cb4eb59be",
+        "email": "Joan67@yahoo.com",
+        "phone": "+380 08 748 7735",
+        "firstName": "Pietro",
+        "lastName": "Cummerata",
+        "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/247.jpg",
+        "role": "USER",
+        "createdAt": "2021-12-26T06:41:18.845Z",
+        "passwordHash": "5c6962d8a115970e390ab613b0533a7a6a8ac2e8aa8c4891d849585e8b34dfb3",
+        "phoneVerified": true,
+        "emailVerified": true,
+        "updatedAt": "2022-08-11T18:03:27.357Z"
+    }
+]
