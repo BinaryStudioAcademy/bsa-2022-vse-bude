@@ -4,12 +4,16 @@ import * as ReactDOM from 'react-dom';
 import * as styles from './styles';
 import type { TooltipProps } from './types';
 
-export const Tooltip = ({ trigger, children, hideTimeoutMs = 500 }: TooltipProps) => {
+export const Tooltip = ({
+  trigger,
+  children,
+  hideTimeoutMs = 500,
+}: TooltipProps) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const bodyRef = useRef<HTMLDivElement>();
   const triggerWrapperRef = useRef<HTMLDivElement>();
-  let timer: NodeJS.Timeout | null = null;
+  const timer = useRef(null);
 
   const calcBodyCoords = useCallback(() => {
     const {
@@ -44,13 +48,13 @@ export const Tooltip = ({ trigger, children, hideTimeoutMs = 500 }: TooltipProps
 
   const handleMouseEnter = () => {
     setIsVisible(true);
-    if (timer) {
-      clearTimeout(timer);
+    if (timer.current) {
+      clearTimeout(timer.current);
     }
   };
 
   const handleMouseLeave = () => {
-    timer = setTimeout(() => {
+    timer.current = setTimeout(() => {
       setIsVisible(false);
     }, hideTimeoutMs);
   };
