@@ -16,7 +16,7 @@
     "db:migrate:create": "prisma migrate dev --create-only --name",
     "db:migrate": "prisma migrate dev",
     "db:seed": "ts-node --transpile-only --files ./prisma/seed/update",
-    "db:seed:reset": "ts-node --transpile-only --files ./prisma/seed/reset",
+    "db:seed:delete": "ts-node --transpile-only --files ./prisma/seed/delete",
     "prettier:check": "prettier --check \"*/**/*.{ts,tsx}\" --loglevel=warn",
     "prettier:fix": "prettier --write \"*/**/*.{ts,tsx}\" --loglevel=warn",
     "lint": "eslint . --ext .ts",
