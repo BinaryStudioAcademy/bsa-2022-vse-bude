@@ -33,9 +33,7 @@
     "react-dom": "^18.2.0",
     "react-popper": "^2.3.0",
     "react-redux": "^8.0.2",
-    "react-tiny-popover": "^7.1.0",
-    "react-tooltip": "^4.2.21",
-    "rsuite": "^5.16.5"
+    "react-tiny-popover": "^7.1.0"
   },
   "devDependencies": {
     "@emotion/babel-preset-css-prop": "^11.10.0",

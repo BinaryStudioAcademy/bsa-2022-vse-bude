@@ -1,5 +1,4 @@
-import React from 'react';
-import { PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import { Popover } from 'react-tiny-popover';
 import * as styles from './styles';
 import type { PopoverProps, PopoverState } from './types';
