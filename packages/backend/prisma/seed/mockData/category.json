@@ -1,1 +1,98 @@
-[{"id":"63f9a950-fff7-4edd-ba12-f34c7c6e2f80","title":"LAPTOPS_AND_PC_CATEGORY_NAME","createdAt":"2022-01-29T01:10:32.738Z","updatedAt":"2022-08-11T12:35:21.547Z"},{"id":"74839896-d1e9-4c58-affd-450d0ab53738","title":"SMARTPHONES_TV_AND_ELECTRONICS_CATEGORY_NAME","createdAt":"2022-01-10T13:55:19.487Z","updatedAt":"2022-08-11T03:26:45.560Z"},{"id":"f49f5ab2-9f23-40e9-a9b4-1e6520a77ce4","title":"GOODS_FOR_GAMERS_CATEGORY_NAME","createdAt":"2021-09-19T15:40:08.436Z","updatedAt":"2022-08-10T21:16:18.062Z"},{"id":"0143e286-3398-4ac4-a830-314bf346b9da","title":"HOUSEHOLD_APPLIANCES_CATEGORY_NAME","createdAt":"2022-04-29T12:38:39.135Z","updatedAt":"2022-08-11T13:23:47.764Z"},{"id":"33bf5516-9c5c-4da6-b5dc-4d41bc183462","title":"HOME_GOODS_CATEGORY_NAME","createdAt":"2022-06-26T20:52:06.065Z","updatedAt":"2022-08-10T22:06:28.712Z"},{"id":"997f21f9-5735-4e9e-bea3-578a55c3dd93","title":"TOOLS_AND_AUTO_GOODS_CATEGORY_NAME","createdAt":"2022-01-31T11:21:37.327Z","updatedAt":"2022-08-10T23:21:45.291Z"},{"id":"d0318c6c-21f3-4c6b-85f1-f9719065193c","title":"PLUMBING_AND_REPAIR_CATEGORY_NAME","createdAt":"2021-10-05T18:17:55.476Z","updatedAt":"2022-08-10T23:30:13.736Z"},{"id":"85dda517-39a5-4e48-ba15-9c64633db987","title":"COTTAGE_GARDEN_AND_VEGETABLE_GARDEN_CATEGORY_NAME","createdAt":"2021-12-08T14:23:35.571Z","updatedAt":"2022-08-11T09:50:27.896Z"},{"id":"8cc2d504-1263-4d1b-bcb7-b3667834d876","title":"SPORTS_AND_HOBBY_CATEGORY_NAME","createdAt":"2022-01-22T21:25:59.975Z","updatedAt":"2022-08-11T15:28:42.404Z"},{"id":"f6bf84d7-68f0-46ab-9ec7-14db5f086fe0","title":"CLOTHES_SHOES_AND_JEWELRY_CATEGORY_NAME","createdAt":"2022-08-02T02:47:40.083Z","updatedAt":"2022-08-11T11:35:59.280Z"},{"id":"7d26c37b-7230-4085-9ee5-7e78f276469a","title":"BEAUTY_AND_HEALTH_CATEGORY_NAME","createdAt":"2022-04-01T12:30:31.551Z","updatedAt":"2022-08-10T17:13:49.855Z"},{"id":"21857040-3a59-46bf-8ec9-9ee2a75f1cac","title":"CHILDRENS_GOODS_CATEGORY_NAME","createdAt":"2022-06-01T05:25:35.954Z","updatedAt":"2022-08-10T20:23:25.904Z"},{"id":"c997da94-d1db-4970-aa3c-e2bd6f1341fd","title":"PET_PRODUCTS_CATEGORY_NAME","createdAt":"2021-08-26T10:21:34.042Z","updatedAt":"2022-08-11T04:20:23.892Z"},{"id":"b8062e38-f330-4d60-bc88-5c28df820b21","title":"OFFICE_SCHOOL_BOOKS_CATEGORY_NAME","createdAt":"2022-05-22T23:46:38.101Z","updatedAt":"2022-08-11T08:42:52.258Z"},{"id":"6e802197-84c8-425d-9c61-3a582441f630","title":"ALCOHOLIC_BEVERAGES_AND_PRODUCTS_CATEGORY_NAME","createdAt":"2021-09-24T12:22:34.273Z","updatedAt":"2022-08-11T04:07:33.817Z"},{"id":"53858bcd-4bde-4e98-99ab-947965d7f303","title":"SERVICES_CATEGORY_NAME","createdAt":"2021-11-30T03:00:49.905Z","updatedAt":"2022-08-10T23:28:16.577Z"}]
+[
+    {
+        "id": "51dea135-fca2-4cc0-ab5b-a32c909f14e7",
+        "title": "LAPTOPS_AND_PC_CATEGORY_NAME",
+        "createdAt": "2022-01-10T12:32:04.287Z",
+        "updatedAt": "2022-08-11T08:58:38.557Z"
+    },
+    {
+        "id": "50d4f365-e241-4783-8b2c-809a7d83771b",
+        "title": "SMARTPHONES_TV_AND_ELECTRONICS_CATEGORY_NAME",
+        "createdAt": "2021-10-01T23:40:29.411Z",
+        "updatedAt": "2022-08-11T15:55:36.742Z"
+    },
+    {
+        "id": "3f9bd5c0-f9a8-4763-b020-eac58681b1cf",
+        "title": "GOODS_FOR_GAMERS_CATEGORY_NAME",
+        "createdAt": "2022-07-04T07:37:02.657Z",
+        "updatedAt": "2022-08-11T21:44:52.611Z"
+    },
+    {
+        "id": "0e86f866-2146-4a5a-970b-7a62f07144a6",
+        "title": "HOUSEHOLD_APPLIANCES_CATEGORY_NAME",
+        "createdAt": "2022-01-12T23:49:49.976Z",
+        "updatedAt": "2022-08-12T02:32:01.968Z"
+    },
+    {
+        "id": "a7694c34-2325-4d0d-b344-0fe074e99862",
+        "title": "HOME_GOODS_CATEGORY_NAME",
+        "createdAt": "2022-06-26T19:23:03.114Z",
+        "updatedAt": "2022-08-11T08:35:06.609Z"
+    },
+    {
+        "id": "6b8df3e5-b587-413f-9943-ef3d695b97c0",
+        "title": "TOOLS_AND_AUTO_GOODS_CATEGORY_NAME",
+        "createdAt": "2021-12-30T14:59:07.037Z",
+        "updatedAt": "2022-08-12T00:38:54.400Z"
+    },
+    {
+        "id": "e4bef890-791e-4c53-adfd-c455227b54ad",
+        "title": "PLUMBING_AND_REPAIR_CATEGORY_NAME",
+        "createdAt": "2021-09-13T17:41:10.534Z",
+        "updatedAt": "2022-08-11T20:11:36.956Z"
+    },
+    {
+        "id": "beff46f0-133b-4af7-8206-83419b526734",
+        "title": "COTTAGE_GARDEN_AND_VEGETABLE_GARDEN_CATEGORY_NAME",
+        "createdAt": "2022-06-06T00:47:34.992Z",
+        "updatedAt": "2022-08-12T06:10:46.774Z"
+    },
+    {
+        "id": "a351b320-76d7-4545-bb74-8bb1f2fa486d",
+        "title": "SPORTS_AND_HOBBY_CATEGORY_NAME",
+        "createdAt": "2022-04-11T22:08:14.925Z",
+        "updatedAt": "2022-08-11T12:41:20.152Z"
+    },
+    {
+        "id": "0bfc0f51-e082-4dc9-b545-ae0afedbd330",
+        "title": "CLOTHES_SHOES_AND_JEWELRY_CATEGORY_NAME",
+        "createdAt": "2021-11-10T15:41:32.419Z",
+        "updatedAt": "2022-08-11T21:57:31.280Z"
+    },
+    {
+        "id": "8556c563-4b04-43cb-8fe1-5bc53b5f0aad",
+        "title": "BEAUTY_AND_HEALTH_CATEGORY_NAME",
+        "createdAt": "2022-05-12T12:12:37.810Z",
+        "updatedAt": "2022-08-11T11:11:52.295Z"
+    },
+    {
+        "id": "948feb22-e480-4e24-a90d-e49aa3d990c2",
+        "title": "CHILDRENS_GOODS_CATEGORY_NAME",
+        "createdAt": "2021-11-23T22:47:22.010Z",
+        "updatedAt": "2022-08-12T07:43:08.195Z"
+    },
+    {
+        "id": "54fa7b5f-58d1-4e5d-b588-d9a8507fa3c7",
+        "title": "PET_PRODUCTS_CATEGORY_NAME",
+        "createdAt": "2021-11-28T22:35:10.903Z",
+        "updatedAt": "2022-08-12T04:36:49.114Z"
+    },
+    {
+        "id": "410c606f-f463-42ec-988e-d95917dd2834",
+        "title": "OFFICE_SCHOOL_BOOKS_CATEGORY_NAME",
+        "createdAt": "2021-12-29T15:12:09.180Z",
+        "updatedAt": "2022-08-11T11:24:29.698Z"
+    },
+    {
+        "id": "7062243f-f114-4b5a-abea-64fc21f4e117",
+        "title": "ALCOHOLIC_BEVERAGES_AND_PRODUCTS_CATEGORY_NAME",
+        "createdAt": "2022-07-03T06:09:46.812Z",
+        "updatedAt": "2022-08-12T07:57:50.652Z"
+    },
+    {
+        "id": "f5750398-bdfa-4262-adbb-c1e1c4cc92eb",
+        "title": "SERVICES_CATEGORY_NAME",
+        "createdAt": "2022-02-16T13:41:23.515Z",
+        "updatedAt": "2022-08-11T11:42:21.770Z"
+    }
+]

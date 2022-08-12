@@ -1,1 +1,82 @@
-[{"id":"c8e78945-8348-4a5a-9234-9ba3bff7a9a2","bidderId":"54a3b4fc-1210-441d-991b-7aed2aba5636","productId":"529b1f11-dcca-42dd-9770-6d942e4bd7d0","price":"33018","createdAt":"2022-06-11T16:31:37.031Z","updatedAt":"2022-08-10T20:46:01.864Z"},{"id":"0ff39a38-ced7-4f81-a4e8-dcbc604ff8cc","bidderId":"1168fe1d-043d-4e6d-8c39-f266aae237f1","productId":"1b8d87c5-79c4-46b9-a049-b8dfdd9f2d05","price":"10038","createdAt":"2021-11-03T03:36:37.109Z","updatedAt":"2022-08-11T10:41:33.818Z"},{"id":"8d7c0880-c323-4652-8163-30d0c5bd7aa4","bidderId":"d4d98038-2057-43fc-9e18-36444b7d5c8f","productId":"aafb0f56-4e2d-4449-bf6a-3edc2043c10c","price":"96423","createdAt":"2021-11-01T11:38:18.197Z","updatedAt":"2022-08-11T16:20:52.973Z"},{"id":"f1c2bad5-9801-46df-a48d-e92e5c8908a8","bidderId":"e9257b9a-8e19-4083-9451-d9384148fb02","productId":"81a97abb-9720-4d7c-a301-9faaa4f9664e","price":"99683","createdAt":"2022-05-03T07:21:53.446Z","updatedAt":"2022-08-11T00:13:22.521Z"},{"id":"042813e7-7379-4502-8492-c66ec7f6b1aa","bidderId":"fc2d2f2a-1af7-4aa9-b586-380a689fd8ba","productId":"031ff275-a759-4fa2-b689-d39d148f7fdc","price":"43431","createdAt":"2022-03-29T14:18:45.899Z","updatedAt":"2022-08-10T19:09:31.055Z"},{"id":"189a2a2b-0357-4dc7-a9e6-867dae7dc989","bidderId":"54a3b4fc-1210-441d-991b-7aed2aba5636","productId":"85305224-2e2c-4bfd-82b3-9d28b3da6087","price":"76630","createdAt":"2021-12-31T00:53:16.289Z","updatedAt":"2022-08-11T04:47:10.794Z"},{"id":"24a5fea0-00b2-4dfd-a094-44a675c0ffa4","bidderId":"1168fe1d-043d-4e6d-8c39-f266aae237f1","productId":"27a48c22-59f8-42f1-b235-d41f1a12f6e6","price":"75814","createdAt":"2022-01-31T18:47:37.008Z","updatedAt":"2022-08-11T05:51:51.889Z"},{"id":"f5347944-2bad-4cca-8c8e-00c68351ca92","bidderId":"d4d98038-2057-43fc-9e18-36444b7d5c8f","productId":"7d3038af-d99b-478d-9439-9d0802ee9716","price":"43925","createdAt":"2022-02-08T06:26:39.880Z","updatedAt":"2022-08-11T03:18:25.317Z"},{"id":"9255d939-e85e-4816-aaf3-83efff9dfb89","bidderId":"e9257b9a-8e19-4083-9451-d9384148fb02","productId":"d6d8ec10-bb18-4844-9fb5-72f1fa6dd0e4","price":"44171","createdAt":"2021-11-06T03:30:32.183Z","updatedAt":"2022-08-10T22:00:30.656Z"},{"id":"3f5ea16f-dcf1-4523-94ad-b24eaf77fe60","bidderId":"fc2d2f2a-1af7-4aa9-b586-380a689fd8ba","productId":"fcb661e8-08c0-4984-aba5-efb6cd9dffd5","price":"87878","createdAt":"2022-02-11T04:40:31.336Z","updatedAt":"2022-08-10T18:34:26.517Z"}]
+[
+    {
+        "id": "327c25b8-45a0-4ae3-87d1-b8857a40d4a8",
+        "bidderId": "807f73fb-31b8-4e66-9f74-babc8ee95d94",
+        "productId": "e2a5725e-1f06-4e9b-8fee-20b19e7b59e9",
+        "price": "32682",
+        "createdAt": "2021-08-27T00:41:44.842Z",
+        "updatedAt": "2022-08-11T20:52:41.850Z"
+    },
+    {
+        "id": "c54b8133-1428-424b-a0d1-2d2b72ae347a",
+        "bidderId": "b8f594a9-e836-4e25-9979-a56500b21be2",
+        "productId": "a620ba08-3d3e-4645-8821-cf791cc273d1",
+        "price": "78356",
+        "createdAt": "2022-04-22T04:57:28.582Z",
+        "updatedAt": "2022-08-11T09:49:23.610Z"
+    },
+    {
+        "id": "7a7e315a-a0fd-4496-8562-bded209bf69a",
+        "bidderId": "f5cf90f8-6943-4e42-b006-03cf9bb707a4",
+        "productId": "d2a6980a-e8bd-4512-9008-cead4dd36051",
+        "price": "33912",
+        "createdAt": "2022-03-04T00:32:35.918Z",
+        "updatedAt": "2022-08-12T01:54:40.537Z"
+    },
+    {
+        "id": "1022483d-fbec-44a4-afe9-adc321ebde44",
+        "bidderId": "47504cdd-55e6-4584-9539-6eef69c6deed",
+        "productId": "c8688a84-af18-4dfe-8f5a-b7a4396001de",
+        "price": "17745",
+        "createdAt": "2022-04-04T18:13:37.145Z",
+        "updatedAt": "2022-08-12T03:15:36.610Z"
+    },
+    {
+        "id": "340927a1-c5d6-4e2e-94af-76553dca0039",
+        "bidderId": "79946740-1328-414f-bef0-926cb4eb59be",
+        "productId": "777783f4-7547-465e-9f18-3f68e4e97ad7",
+        "price": "36625",
+        "createdAt": "2022-03-26T11:16:52.663Z",
+        "updatedAt": "2022-08-11T18:13:13.203Z"
+    },
+    {
+        "id": "c65d9194-4bb4-46da-8080-b5e1a70a18dd",
+        "bidderId": "807f73fb-31b8-4e66-9f74-babc8ee95d94",
+        "productId": "896d7916-9e8b-47ca-9819-376d97f70145",
+        "price": "96302",
+        "createdAt": "2022-07-22T16:55:59.029Z",
+        "updatedAt": "2022-08-11T08:55:25.349Z"
+    },
+    {
+        "id": "8737f27d-ec15-425e-9190-77d57129133b",
+        "bidderId": "b8f594a9-e836-4e25-9979-a56500b21be2",
+        "productId": "7f15800b-63a1-4675-87eb-f47c38c3392a",
+        "price": "22755",
+        "createdAt": "2022-03-29T16:13:03.116Z",
+        "updatedAt": "2022-08-11T14:52:37.730Z"
+    },
+    {
+        "id": "93a590bb-4ad0-4975-ab5c-fb4d42ccf410",
+        "bidderId": "f5cf90f8-6943-4e42-b006-03cf9bb707a4",
+        "productId": "8bb4b345-be26-4a11-ae1e-5578c2560bde",
+        "price": "91925",
+        "createdAt": "2021-12-05T10:51:33.899Z",
+        "updatedAt": "2022-08-11T18:41:44.739Z"
+    },
+    {
+        "id": "4223c6dc-9a53-405d-aa0f-3112aef02215",
+        "bidderId": "47504cdd-55e6-4584-9539-6eef69c6deed",
+        "productId": "ce6b2fe9-0c66-4673-a58e-c1e76644da55",
+        "price": "70406",
+        "createdAt": "2022-02-28T10:09:38.679Z",
+        "updatedAt": "2022-08-11T21:42:07.691Z"
+    },
+    {
+        "id": "be591814-d197-4a72-b95e-e6317f050eff",
+        "bidderId": "79946740-1328-414f-bef0-926cb4eb59be",
+        "productId": "0b8eb3c1-c769-40f3-82e2-b07d95df1cde",
+        "price": "52440",
+        "createdAt": "2022-02-27T19:25:33.102Z",
+        "updatedAt": "2022-08-11T16:04:25.616Z"
+    }
+]
