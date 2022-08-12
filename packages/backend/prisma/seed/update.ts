@@ -11,16 +11,16 @@ import { updateAddress } from './controllers/update/address';
 import { updateUsers } from './controllers/update/user';
 
 (async () => {
+  await updateUsers(prismaClient);
+  await updateUserSettings(prismaClient);
   await updateAddress(prismaClient);
-  await updateBid(prismaClient);
   await updateCategory(prismaClient);
+  await updateProduct(prismaClient);
+  await updateSocialMedia(prismaClient);
+  await updateBid(prismaClient);
   await updateChat(prismaClient);
   await updateChatMember(prismaClient);
   await updateMessage(prismaClient);
-  await updateProduct(prismaClient);
-  await updateSocialMedia(prismaClient);
-  await updateUsers(prismaClient);
-  await updateUserSettings(prismaClient);
 })()
   .then(() => prismaClient.$disconnect())
   .catch(async (e) => {
