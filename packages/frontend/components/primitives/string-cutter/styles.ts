@@ -1,14 +1,10 @@
 import { css } from '@emotion/react';
 
-export const cutterWrapper = () => css`
+export const cutterWrapper = css`
   position: relative;
-
-  &[data-is-cutted='true'] {
-    cursor: pointer;
-  }
 `;
 
-export const cutterText = () => css`
+export const cutterText = css`
   display: block;
   width: 100%;
   height: 100%;
