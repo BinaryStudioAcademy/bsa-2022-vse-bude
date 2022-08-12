@@ -8,12 +8,12 @@ const Target = React.forwardRef<HTMLDivElement, CustomComponentProps>(
   (props, ref) => (
     <div>
       <button
-      ref={ref}
-      onClick={props.onClick}
-      style={{ color: 'black', width: '200px' }}
-    >
-      {props.children}
-    </button>
+        ref={ref}
+        onClick={props.onClick}
+        style={{ color: 'black', width: '200px' }}
+      >
+        {props.children}
+      </button>
       
     </div>
   ));
