@@ -3,4 +3,5 @@
 export interface TooltipProps {
   trigger: ReactNode;
   children: ReactNode;
+  hideTimeoutMs?: number;
 }

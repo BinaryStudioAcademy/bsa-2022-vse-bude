@@ -4,13 +4,12 @@ import * as ReactDOM from 'react-dom';
 import * as styles from './styles';
 import type { TooltipProps } from './types';
 
-export const Tooltip = ({ trigger, children }: TooltipProps) => {
+export const Tooltip = ({ trigger, children, hideTimeoutMs = 500 }: TooltipProps) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const bodyRef = useRef<HTMLDivElement>();
   const triggerWrapperRef = useRef<HTMLDivElement>();
   let timer: NodeJS.Timeout | null = null;
-  const timeout = 500;
 
   const calcBodyCoords = useCallback(() => {
     const {
@@ -53,7 +52,7 @@ export const Tooltip = ({ trigger, children }: TooltipProps) => {
   const handleMouseLeave = () => {
     timer = setTimeout(() => {
       setIsVisible(false);
-    }, timeout);
+    }, hideTimeoutMs);
   };
 
   const renderPortalBody = () => (
