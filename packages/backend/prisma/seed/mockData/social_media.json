@@ -1,0 +1,47 @@
+[
+    {
+        "id": "edb0b888-9c70-45e1-a8f8-4c78b2246369",
+        "socialMedia": "INSTAGRAM",
+        "link": "https://watchful-cluster.info",
+        "ownedByUserId": "807f73fb-31b8-4e66-9f74-babc8ee95d94",
+        "ownedByProductId": "e2a5725e-1f06-4e9b-8fee-20b19e7b59e9",
+        "createdAt": "2022-08-03T00:50:42.253Z",
+        "updatedAt": "2022-08-12T00:54:50.695Z"
+    },
+    {
+        "id": "a3b6ed16-af97-4b81-b75f-86fe7f254d8b",
+        "socialMedia": "INSTAGRAM",
+        "link": "https://whopping-league.biz",
+        "ownedByUserId": "b8f594a9-e836-4e25-9979-a56500b21be2",
+        "ownedByProductId": "a620ba08-3d3e-4645-8821-cf791cc273d1",
+        "createdAt": "2021-10-30T11:22:47.336Z",
+        "updatedAt": "2022-08-11T19:45:20.235Z"
+    },
+    {
+        "id": "844b7bb6-b710-460c-8d8c-166a1e3839a4",
+        "socialMedia": "INSTAGRAM",
+        "link": "http://fickle-shadow.name",
+        "ownedByUserId": "f5cf90f8-6943-4e42-b006-03cf9bb707a4",
+        "ownedByProductId": "d2a6980a-e8bd-4512-9008-cead4dd36051",
+        "createdAt": "2022-04-20T11:57:32.235Z",
+        "updatedAt": "2022-08-11T21:59:23.839Z"
+    },
+    {
+        "id": "99e83863-6b2c-4897-92eb-0a58a69558dd",
+        "socialMedia": "INSTAGRAM",
+        "link": "https://clear-chemotaxis.info",
+        "ownedByUserId": "47504cdd-55e6-4584-9539-6eef69c6deed",
+        "ownedByProductId": "c8688a84-af18-4dfe-8f5a-b7a4396001de",
+        "createdAt": "2022-01-31T12:50:47.430Z",
+        "updatedAt": "2022-08-11T11:12:34.501Z"
+    },
+    {
+        "id": "59658faa-9bbc-48f8-8169-1bba3f7a6483",
+        "socialMedia": "INSTAGRAM",
+        "link": "http://lost-walk.biz",
+        "ownedByUserId": "79946740-1328-414f-bef0-926cb4eb59be",
+        "ownedByProductId": "777783f4-7547-465e-9f18-3f68e4e97ad7",
+        "createdAt": "2022-01-20T20:24:00.198Z",
+        "updatedAt": "2022-08-12T02:08:17.964Z"
+    }
+]
