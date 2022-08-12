@@ -28,7 +28,8 @@ export const globalStyles = (theme: Theme) => css`
   html,
   body {
     height: 100%;
-    color: ${theme.colors.background};
+    background: ${theme.colors.background};
+    color: ${theme.colors.text};
     font-family: 'Raleway', sans-serif;
   }
 
