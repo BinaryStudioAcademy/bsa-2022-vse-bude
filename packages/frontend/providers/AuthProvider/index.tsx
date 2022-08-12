@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { useEffect } from 'react';
 import React from 'react';
-import { auth } from '@helpers';
+import { auth as authHelper } from '@helpers';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { getCurrentUser } from 'store/profile';
 import { useRouter } from 'next/router';
@@ -11,27 +11,30 @@ interface AuthProviderProps {
   isPrivate: boolean;
 }
 
-const AuthProvider = ({ children, isPrivate }: AuthProviderProps) => {
+const AuthProvider = ({ children }: AuthProviderProps) => {
   const user = useTypedSelector((state) => state.profile.user);
 
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const hasToken = !!auth.getAccessToken();
+  const hasToken = !!authHelper.getAccessToken();
   const hasUser = !!user;
+  const needLoadUser = !hasUser && hasToken;
 
   useEffect(() => {
-    if (hasToken) {
+    if (needLoadUser) {
       dispatch(getCurrentUser());
     }
-  }, [dispatch, hasToken]);
+  }, [dispatch, needLoadUser, router]);
 
-  if (!hasUser && hasToken) {
+  useEffect(() => {
+    if (!hasToken) {
+      router.push('/');
+    }
+  }, [hasToken, router]);
+
+  if (needLoadUser || !hasToken) {
     return <div>Loading...</div>;
-  }
-
-  if (isPrivate && !hasToken) {
-    router.push('/');
   }
 
   return <React.Fragment>{children}</React.Fragment>;

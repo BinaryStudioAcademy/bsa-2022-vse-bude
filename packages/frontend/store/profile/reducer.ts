@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { HydrateAction } from '@types';
+import type { User } from 'common/models';
 import { HYDRATE } from 'next-redux-wrapper';
 import { getCurrentUser } from './actions';
 
 interface ProfileState {
-  user: any;
+  user: User | null;
   loading: boolean;
 }
 
@@ -31,7 +32,7 @@ const profileSlice = createSlice({
     },
     [HYDRATE](state, { payload }: HydrateAction) {
       if (payload.profile.user) {
-        state.user = payload.profile;
+        state.user = payload.profile.user;
       }
     },
   },

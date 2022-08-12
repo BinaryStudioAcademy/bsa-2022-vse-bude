@@ -1,9 +1,9 @@
 import { Http } from '@vse-bude/shared';
-import { AuthService } from './auth';
+import { AuthHelper } from './auth';
 import { CookieStorage } from './cookies';
 
 const cookieStorage = new CookieStorage();
-const auth = new AuthService(cookieStorage);
+const auth = new AuthHelper(cookieStorage);
 
 const http = new Http(process.env.NEXT_PUBLIC_API_ROUTE, auth);
 

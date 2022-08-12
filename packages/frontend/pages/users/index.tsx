@@ -12,7 +12,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const httpClient = new Http(process.env.NEXT_PUBLIC_API_ROUTE, auth);
   const users = await httpClient.get({ url: ApiRoutes.USERS });
 
-  return { props: { users, isPrivate: true } };
+  return { props: { users } };
 };
 
 const Users = ({ users }: UsersProps) => (
@@ -27,3 +27,5 @@ const Users = ({ users }: UsersProps) => (
 );
 
 export default Users;
+
+Users.auth = true;

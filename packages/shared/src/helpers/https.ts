@@ -32,7 +32,6 @@ class Http {
   }
 
   public get<T>({ url, payload, options }: GetRequestParams) {
-    console.log('get', url);
     const urlPath = this.getUrlWithQuery(url, payload);
     const config = this.getRequestOptions({
       method: HttpMethod.GET,

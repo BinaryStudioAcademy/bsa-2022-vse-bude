@@ -1,9 +1,7 @@
-import { http } from '@helpers';
 import type { Auth, Storage } from '@vse-bude/shared';
-import { AuthApiRoutes } from '@vse-bude/shared';
 import { StorageKey } from '@vse-bude/shared';
 
-class AuthService implements Auth {
+class AuthHelper implements Auth {
   private _storage: Storage;
 
   constructor(storage: Storage) {
@@ -27,12 +25,6 @@ class AuthService implements Auth {
     this._storage.delete(StorageKey.ACCESS_TOKEN);
     this._storage.delete(StorageKey.REFRESH_TOKEN);
   }
-
-  public getCurrentUser() {
-    return http.get({
-      url: AuthApiRoutes.GET_USER,
-    });
-  }
 }
 
-export { AuthService };
+export { AuthHelper };

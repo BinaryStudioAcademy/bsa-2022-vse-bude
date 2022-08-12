@@ -3,5 +3,4 @@ export interface Auth {
   getRefreshToken(): string;
   setTokens(accessToken: string, refreshToken: string): void;
   logout(): void;
-  getCurrentUser(): any;
 }
