@@ -12,10 +12,7 @@ const Text: FC<TextProps> = ({
   ...restProps
 }): ReactElement => {
   return (
-    <NativeText
-      style={[styles.default, style]}
-      {...restProps}
-    >
+    <NativeText style={[styles.default, style]} {...restProps}>
       {children}
     </NativeText>
   );
