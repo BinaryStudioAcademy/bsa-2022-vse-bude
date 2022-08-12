@@ -14,9 +14,9 @@ const Target = React.forwardRef<HTMLDivElement, CustomComponentProps>(
       >
         {props.children}
       </button>
-      
     </div>
-  ));
+  ),
+);
 
 Target.displayName = 'Target';
 export default Target;
