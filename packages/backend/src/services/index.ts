@@ -1,14 +1,14 @@
 import type { Repositories } from '@repositories';
-import { TwilioSMSProvider } from '@providers';
+// import { TwilioSMSProvider } from '@providers';
 import { RandomDataService } from './random-data';
 import { UserService } from './user';
 import { AuthService } from './auth';
 import { HashService } from './hash';
 import { RedisStorageService } from './redis-storage';
-import { SMSSenderService } from './sms';
+// import { SMSSenderService } from './sms';
 
 export const hashService: HashService = new HashService();
-const smsProvider = new TwilioSMSProvider();
+// const smsProvider = new TwilioSMSProvider();
 
 export const initServices = (repositories: Repositories) => ({
   randomDataService: new RandomDataService(repositories.randomDataRepository),
@@ -19,7 +19,7 @@ export const initServices = (repositories: Repositories) => ({
     hashService,
   ),
   redisStorageService: new RedisStorageService(),
-  smsSenderService: new SMSSenderService(smsProvider),
+  // smsSenderService: new SMSSenderService(smsProvider),
 });
 
 export type Services = ReturnType<typeof initServices>;

@@ -4,6 +4,7 @@ import {
   HttpMethod,
   HttpStatusCode,
   HttpContentType,
+  AuthApiRoutes,
 } from '../common/enums';
 import type {
   DeleteRequestParams,
@@ -18,7 +19,6 @@ import { HttpError } from '../exceptions';
 interface MakeRequest {
   url: string;
   config: RequestInit;
-  isRetryRequest: boolean;
 }
 
 class Http {
@@ -32,6 +32,7 @@ class Http {
   }
 
   public get<T>({ url, payload, options }: GetRequestParams) {
+    console.log('get', url);
     const urlPath = this.getUrlWithQuery(url, payload);
     const config = this.getRequestOptions({
       method: HttpMethod.GET,
@@ -91,7 +92,6 @@ class Http {
       external = false,
       needAuthorization = true,
       contentType = HttpContentType.APPLICATION_JSON,
-      isRetryRequest = false,
     } = options ?? {};
 
     const headers: HeadersInit = {
@@ -115,21 +115,21 @@ class Http {
     return {
       url: external ? url : `${this._baseUrl}${url}`,
       config,
-      isRetryRequest,
     };
   }
 
   private async makeRequest<T = unknown>({
     url,
     config,
-    isRetryRequest,
   }: MakeRequest): Promise<T> {
     let result = await fetch(url, config);
 
-    if (result.status === HttpStatusCode.UNAUTHORIZED && !isRetryRequest) {
-      const accessTokenResponse = await this._auth.updateAuthorizationToken();
-      if (accessTokenResponse) {
+    if (result.status === HttpStatusCode.UNAUTHORIZED) {
+      try {
+        await this.updateAuthorizationToken();
         result = await fetch(url, config);
+      } catch (err) {
+        throw new HttpError(err);
       }
     }
 
@@ -138,6 +138,32 @@ class Http {
     }
 
     return result.json() as Promise<T>;
+  }
+
+  private async updateAuthorizationToken() {
+    const refreshToken = this._auth.getRefreshToken();
+
+    if (refreshToken) {
+      const res = await fetch(
+        `${this._baseUrl}${AuthApiRoutes.REFRESH_TOKEN}`,
+        {
+          method: HttpMethod.POST,
+          body: JSON.stringify(refreshToken),
+          headers: {
+            [HttpHeader.CONTENT_TYPE]: HttpContentType.APPLICATION_JSON,
+          },
+        },
+      );
+
+      if (!res.ok) {
+        this._auth.logout();
+        throw new HttpError(res);
+      }
+
+      const { accessToken, refreshToken: newRefreshToken } = await res.json();
+
+      this._auth.setTokens(accessToken, newRefreshToken);
+    }
   }
 }
 

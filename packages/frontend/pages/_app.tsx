@@ -10,5 +10,4 @@ const App = ({ Component, pageProps }: AppProps) => (
     </AuthProvider>
   </ThemeProvider>
 );
-
 export default wrapper.withRedux(appWithTranslation(App));

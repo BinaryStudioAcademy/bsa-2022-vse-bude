@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
 import { randomDataReducer } from './random-data';
+import { profileReducer } from './profile';
 
 const makeStore = () =>
   configureStore({
     reducer: {
       randomData: randomDataReducer,
+      profile: profileReducer,
     },
   });
 

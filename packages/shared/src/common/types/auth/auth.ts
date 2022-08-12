@@ -1,4 +1,7 @@
 export interface Auth {
-  updateAuthorizationToken(): Promise<boolean>;
   getAccessToken(): string;
+  getRefreshToken(): string;
+  setTokens(accessToken: string, refreshToken: string): void;
+  logout(): void;
+  getCurrentUser(): any;
 }
