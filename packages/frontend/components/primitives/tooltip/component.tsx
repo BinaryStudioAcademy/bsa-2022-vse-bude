@@ -13,7 +13,7 @@ export const Tooltip = ({
 
   const bodyRef = useRef<HTMLDivElement>();
   const triggerWrapperRef = useRef<HTMLDivElement>();
-  const timer = useRef(null);
+  const timerRef = useRef(null);
 
   const calcBodyCoords = useCallback(() => {
     const triggerRectParams = getTriggerRectParams();
@@ -49,13 +49,13 @@ export const Tooltip = ({
 
   const handleMouseEnter = () => {
     setIsVisible(true);
-    if (timer.current) {
-      clearTimeout(timer.current);
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
     }
   };
 
   const handleMouseLeave = () => {
-    timer.current = setTimeout(() => {
+    timerRef.current = setTimeout(() => {
       setIsVisible(false);
     }, hideTimeoutMs);
   };
