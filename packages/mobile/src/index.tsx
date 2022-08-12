@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider as StoreProvider } from 'react-redux';
 import 'fast-text-encoding';
@@ -6,11 +6,15 @@ import { Navigation } from '~/navigation/navigation';
 import { store } from '~/store/store';
 import { NavigationDarkTheme, NavigationTheme } from '~/config/config';
 import { useColorScheme } from '~/hooks/hooks';
+import SplashScreen from 'react-native-splash-screen';
 import { i18 } from './localization/localization';
 
 i18();
 
 const App: FC = () => {
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
   const colorScheme = useColorScheme();
   const theme = colorScheme === 'dark' ? NavigationDarkTheme : NavigationTheme;
 
