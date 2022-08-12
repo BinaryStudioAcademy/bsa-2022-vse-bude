@@ -11,6 +11,7 @@ const colors = {
   backgroundDark: ColorPalette.GRAY_200,
   text: ColorPalette.BLACK_100,
   textLight: ColorPalette.GRAY_300,
+  textFooter: ColorPalette.WHITE_100,
   error: ColorPalette.RED_100,
   active: ColorPalette.YELLOW_100,
   accent: ColorPalette.YELLOW_200,
@@ -100,11 +101,18 @@ const heights = {
 
 const widths = {
   checkbox: '20px',
+  footerFormRow: '360px',
 };
 
 const shadows = {
   upper: '2px 5px 10px 0px #c3c3c340',
   bottom: '2px 5px 10px 0px #c3c3c340',
+};
+
+const opacities = {
+  lg: 0.2,
+  md: 0.4,
+  sm: 0.6
 };
 
 const lightTheme = {
@@ -117,6 +125,7 @@ const lightTheme = {
   spaces,
   radiuses,
   shadows,
+  opacities,
 };
 
 const darkTheme = {
@@ -129,6 +138,7 @@ const darkTheme = {
   spaces,
   radiuses,
   shadows,
+  opacities,
 };
 
 export { lightTheme, darkTheme };
