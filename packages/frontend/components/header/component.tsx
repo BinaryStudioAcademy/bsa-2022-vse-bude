@@ -1,6 +1,7 @@
 import { Routes } from '@enums';
 import { Container } from '@primitives';
 import Link from 'next/link';
+import { Logo } from '../primitives/logo/component';
 import * as styles from './styles';
 
 export const Header = () => (
@@ -15,7 +16,9 @@ export const Header = () => (
     >
       <Link href={Routes.DEFAULT}>
         <a>
-          <h2>Vse Bude</h2>
+          <Container>
+            <Logo />
+          </Container>
         </a>
       </Link>
       <nav>
