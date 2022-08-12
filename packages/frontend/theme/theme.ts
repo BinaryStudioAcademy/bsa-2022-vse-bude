@@ -105,6 +105,12 @@ const widths = {
 const shadows = {
   upper: '2px 5px 10px 0px #c3c3c340',
   bottom: '2px 5px 10px 0px #c3c3c340',
+  dropdown:
+    '-3px 0px 9px rgba(222, 222, 222, 0.25), 2px 2px 8px rgba(222, 222, 222, 0.25);',
+};
+
+const borders = {
+  dropdown: `2px solid ${colors.backgroundLight}`,
 };
 
 const lightTheme = {
@@ -117,6 +123,7 @@ const lightTheme = {
   spaces,
   radiuses,
   shadows,
+  borders,
 };
 
 const darkTheme = {
@@ -129,6 +136,7 @@ const darkTheme = {
   spaces,
   radiuses,
   shadows,
+  borders,
 };
 
 export { lightTheme, darkTheme };
