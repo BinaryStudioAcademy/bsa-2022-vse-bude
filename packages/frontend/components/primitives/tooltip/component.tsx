@@ -1,36 +1,91 @@
-﻿import ReactTooltip from 'react-tooltip';
-import { useState, useEffect } from 'react';
-import type { TooltipProps } from './types';
+﻿import { useRef, useEffect, useState, useCallback } from 'react';
+import React from 'react';
+import * as ReactDOM from 'react-dom';
 import * as styles from './styles';
+import type { TooltipProps } from './types';
 
-export const Tooltip = ({
-  children,
-  body,
-  place = 'top',
-  delayHideMs = 600,
-  offset = {},
-}: TooltipProps) => {
-  const [isMounted, setIsMounted] = useState(false); // Need this for the react-tooltip
+export const Tooltip = ({ trigger, children }: TooltipProps) => {
+  const [isVisible, setIsVisible] = useState(false);
 
-  useEffect(() => {
-    setIsMounted(true);
+  const bodyRef = useRef<HTMLDivElement>();
+  const triggerWrapperRef = useRef<HTMLDivElement>();
+  let timer: NodeJS.Timeout | null = null;
+  const timeout = 500;
+
+  const calcBodyCoords = useCallback(() => {
+    const {
+      left: triggerLeft,
+      top: triggerTop,
+      height: triggerHeight,
+      width: triggerWidth,
+    } = getTriggerRectParams();
+    const { height: bodyHeight, width: bodyWidth } = getBodyRectParams();
+
+    const newBodyLeft = triggerLeft + triggerWidth / 2 - bodyWidth / 2;
+
+    let newBodyTop = window.scrollY + triggerTop;
+    newBodyTop += triggerTop - bodyHeight <= 0 ? triggerHeight : -bodyHeight;
+
+    return [newBodyTop, newBodyLeft];
   }, []);
 
-  return (
-    <div>
-      <div data-tip css={styles.tooltipTrigger}>
-        {children}
-      </div>
-      {isMounted && (
-        <ReactTooltip
-          css={styles.tooltip}
-          place={place}
-          offset={offset}
-          delayHide={delayHideMs}
-        >
-          {body}
-        </ReactTooltip>
-      )}
+  useEffect(() => {
+    if (bodyRef.current) {
+      const [bodyTop, bodyLeft] = calcBodyCoords();
+
+      bodyRef.current.style.top = `${bodyTop}px`;
+      bodyRef.current.style.left = `${bodyLeft}px`;
+
+      bodyRef.current.style.visibility = 'visible';
+    }
+  }, [isVisible, calcBodyCoords]);
+
+  const getTriggerRectParams = () =>
+    triggerWrapperRef.current.getBoundingClientRect();
+
+  const getBodyRectParams = () => bodyRef.current.getBoundingClientRect();
+
+  const handleMouseEnter = () => {
+    setIsVisible(true);
+    if (timer) {
+      clearTimeout(timer);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    timer = setTimeout(() => {
+      setIsVisible(false);
+    }, timeout);
+  };
+
+  const renderPortalBody = () => (
+    <div
+      ref={bodyRef}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      css={styles.body}
+    >
+      {children}
     </div>
+  );
+
+  const renderPortal = () =>
+    ReactDOM.createPortal(
+      renderPortalBody(),
+      document.querySelector('#portal'),
+    );
+
+  return (
+    <React.Fragment>
+      <span
+        ref={triggerWrapperRef}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        css={styles.trigger}
+      >
+        {trigger}
+      </span>
+      {isVisible && renderPortal()}
+    </React.Fragment>
   );
 };
