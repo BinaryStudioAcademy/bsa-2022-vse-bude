@@ -10,15 +10,14 @@ export const dropdownTitle = ({
   fontWeights,
 }: Theme) => css`
   ${resetButton}
-  display: flex;
   position: relative;
+  display: flex;
   align-items: center;
   height: 100%;
+  cursor: pointer;
   font-size: ${fontSizes.tub};
   line-height: ${lineHeights.tub};
   font-weight: ${fontWeights.tub};
-  cursor: pointer;
-
   color: ${colors.text};
 
   :hover,
@@ -46,16 +45,16 @@ export const dropdownContent = ({
   colors,
 }: Theme) => css`
   position: absolute;
-  background-color: ${colors.background};
   top: ${spaces.xl11};
-  padding: ${spaces.sm} 0;
-  box-shadow: ${shadows.dropdown};
-  border: ${borders.dropdown};
-  border-radius: ${radiuses.xs};
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding: ${spaces.sm} 0;
+  box-shadow: ${shadows.dropdown};
+  border: ${borders.dropdown};
+  border-radius: ${radiuses.xs};
+  background-color: ${colors.background};
 `;
 
 export const dropdownItem = ({
@@ -66,17 +65,19 @@ export const dropdownItem = ({
   spaces,
 }: Theme) => css`
   ${resetButton}
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+  padding: ${spaces.xs} ${spaces.lg};
+  cursor: pointer;
   font-size: ${fontSizes.body1};
   line-height: ${lineHeights.body1};
   font-weight: ${fontWeights.body1};
   color: ${colors.text};
-  width: 100%;
-  padding: ${spaces.xs} ${spaces.lg};
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
+
   :hover {
     background-color: ${colors.backgroundLight};
   }
+
   :disabled {
     cursor: not-allowed;
     color: ${colors.disabled};
