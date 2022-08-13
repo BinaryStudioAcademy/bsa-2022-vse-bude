@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
 import { Text, View } from '~/components/components';
-import { useCustomTheme } from '~/hooks/hooks';
+import { useCustomTheme, useTranslation } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 
 const Line: FC = () => {
   const { colors } = useCustomTheme();
+  const { t } = useTranslation();
 
   return (
     <View
@@ -25,7 +26,7 @@ const Line: FC = () => {
           { color: colors.line },
         ]}
       >
-        or
+        {t('verification.LINE')}
       </Text>
       <View style={[styles.line, { backgroundColor: colors.line }]} />
     </View>

@@ -2,12 +2,22 @@ import React, { FC, ReactElement } from 'react';
 import { UserSignUpDto } from '@vse-bude/shared';
 import { RootScreenName } from '~/common/enums/enums';
 import { auth as authActions } from '~/store/actions';
-import { useAppDispatch, useCustomTheme, useRoute } from '~/hooks/hooks';
-import { StatusBar, Text, View, ScrollView } from '~/components/components';
+import {
+  useAppDispatch,
+  useCustomTheme,
+  useRoute,
+  useTranslation,
+} from '~/hooks/hooks';
+import {
+  StatusBar,
+  Text,
+  View,
+  ScrollView,
+  Header,
+} from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import {
   GoogleButton,
-  Header,
   Line,
   SignInForm,
   SignUpForm,
@@ -18,8 +28,11 @@ const Auth: FC = () => {
   const { name } = useRoute();
   const dispatch = useAppDispatch();
   const { colors } = useCustomTheme();
+  const { t } = useTranslation();
   const screenLabel =
-    name === RootScreenName.SIGN_IN ? 'Sign in' : 'Create account';
+    name === RootScreenName.SIGN_IN
+      ? t('verification.SING_IN')
+      : t('verification.CREATE_ACCOUNT');
 
   const handleSignIn = (): void => {
     // TODO: handle sign in
@@ -49,7 +62,10 @@ const Auth: FC = () => {
   return (
     <View style={{ flex: 1 }}>
       <StatusBar translucent backgroundColor="transparent" />
-      <Header onBack={handleGoBack} />
+      <Header
+        labelButton={t('components.HEADER_BUTTON_BACK')}
+        onPress={handleGoBack}
+      />
       <ScrollView
         style={[
           styles.main,

@@ -5,4 +5,7 @@ export { Button } from './button/button';
 export { Input } from './input/input';
 export * from './icons/icons';
 export { Spinner } from './spinner/spinner';
+export { default as LinearGradient } from 'react-native-linear-gradient';
 export { Logo } from './logo/logo';
+export { Header } from './header/header';
+export { HeaderButton } from './header-button/header-button';

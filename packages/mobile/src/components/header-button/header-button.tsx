@@ -4,13 +4,14 @@ import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 
 type Props = {
-  onBack: () => void;
+  label: string;
+  onPress: () => void;
 };
 
-const BackButton: FC<Props> = ({ onBack }) => {
+const HeaderButton: FC<Props> = ({ label, onPress }) => {
   return (
     <Pressable
-      onPress={onBack}
+      onPress={onPress}
       style={[
         globalStyles.flexDirectionRow,
         globalStyles.alignItemsCenter,
@@ -29,10 +30,10 @@ const BackButton: FC<Props> = ({ onBack }) => {
           { color: '#FFFFFF', textAlign: 'left' },
         ]}
       >
-        Back
+        {label}
       </Text>
     </Pressable>
   );
 };
 
-export { BackButton };
+export { HeaderButton };

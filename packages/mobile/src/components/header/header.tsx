@@ -1,15 +1,19 @@
 import React, { FC } from 'react';
-import LinearGradient from 'react-native-linear-gradient';
-import { Logo, View } from '~/components/components';
+import {
+  LinearGradient,
+  Logo,
+  View,
+  HeaderButton,
+} from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { BackButton } from '../components';
 import { styles } from './styles';
 
 type Props = {
-  onBack: () => void;
+  labelButton: string;
+  onPress: () => void;
 };
 
-const Header: FC<Props> = ({ onBack }) => {
+const Header: FC<Props> = ({ labelButton, onPress }) => {
   return (
     <LinearGradient
       start={{ x: 0, y: 0.4 }}
@@ -17,7 +21,7 @@ const Header: FC<Props> = ({ onBack }) => {
       colors={['#0C42A6', '#F4C50A']}
     >
       <View style={[styles.header, globalStyles.alignItemsCenter]}>
-        <BackButton onBack={onBack} />
+        <HeaderButton label={labelButton} onPress={onPress} />
         <Logo />
       </View>
     </LinearGradient>

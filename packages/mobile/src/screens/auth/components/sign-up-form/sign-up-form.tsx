@@ -40,8 +40,8 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
         errors={errors}
       />
       <Input
-        label="Phone Number"
-        placeholder="Enter your phone"
+        label={t('verification.PHONE_NUMBER')}
+        placeholder={t('verification.PHONE_NUMBER_HINT')}
         name="phone"
         control={control}
         errors={errors}
@@ -54,15 +54,15 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
         errors={errors}
       />
       <Input
-        label="Repeat Password"
-        placeholder="Enter password"
+        label={t('verification.PASSWORD_REPEAT')}
+        placeholder={t('verification.PASSWORD_HINT')}
         name="password"
         control={control}
         errors={errors}
       />
       <View style={{ marginVertical: 15 }}>
         <Button
-          label={t('verification.SING_UP')}
+          label={t('verification.CREATE_ACCOUNT')}
           onPress={handleSubmit(onSubmit)}
         />
       </View>

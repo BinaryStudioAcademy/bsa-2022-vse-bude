@@ -20,15 +20,15 @@ const SignInForm: FC<Props> = ({ onSubmit }) => {
     <View>
       <View>
         <Input
-          label="Email"
-          placeholder="Enter your email"
+          label={t('verification.EMAIL')}
+          placeholder={t('verification.EMAIL_HINT')}
           name="email"
           control={control}
           errors={errors}
         />
         <Input
-          label="Password"
-          placeholder="Enter your password"
+          label={t('verification.PASSWORD')}
+          placeholder={t('verification.PASSWORD_HINT')}
           name="password"
           control={control}
           errors={errors}

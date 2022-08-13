@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
 import { Pressable, Text, View } from '~/components/components';
-import { useCustomTheme } from '~/hooks/hooks';
+import { useCustomTheme, useTranslation } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 
 const GoogleButton: FC = () => {
   const { colors } = useCustomTheme();
+  const { t } = useTranslation();
 
   return (
     <Pressable>
@@ -20,7 +21,7 @@ const GoogleButton: FC = () => {
             globalStyles.fontWeightBold,
           ]}
         >
-          Sign in with Google
+          {t('verification.GOOGLE_BUTTON')}
         </Text>
       </View>
     </Pressable>
