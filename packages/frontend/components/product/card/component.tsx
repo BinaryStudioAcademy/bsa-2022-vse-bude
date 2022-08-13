@@ -36,7 +36,7 @@ export const ProductCard = (props: ProductCardProps) => {
       <div>
         <div css={productName}>{props.name}</div>
         <div css={productDescription}>
-          <StringCutter>{props.description}</StringCutter>
+          <StringCutter lines={2}>{props.description}</StringCutter>
         </div>
         <hr css={divider} />
       </div>
