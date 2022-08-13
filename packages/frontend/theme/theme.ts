@@ -116,7 +116,7 @@ const opacities = {
 };
 
 const breakpoints = [576, 768, 992, 1200, 1300];
-const mq = breakpoints.map(bp => `@media (min-width: ${bp}px)`);
+const mq = breakpoints.map((bp) => `@media (min-width: ${bp}px)`);
 
 const lightTheme = {
   colors,
@@ -129,7 +129,7 @@ const lightTheme = {
   radiuses,
   shadows,
   opacities,
-  mq
+  mq,
 };
 
 const darkTheme = {
@@ -143,7 +143,7 @@ const darkTheme = {
   radiuses,
   shadows,
   opacities,
-  mq
+  mq,
 };
 
 export { lightTheme, darkTheme };

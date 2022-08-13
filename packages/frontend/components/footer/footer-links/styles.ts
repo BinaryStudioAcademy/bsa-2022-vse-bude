@@ -4,7 +4,7 @@ import phoneIcon from '../../../public/images/footer/phone-icon.svg';
 import emailIcon from '../../../public/images/footer/email-icon.svg';
 import policy from '../../../public/images/footer/privacy-policy-icon.svg';
 
-export const footerLinksWrapper = ({ spaces, mq }: Theme) => css`
+export const footerLinksWrapper = ({ spaces }: Theme) => css`
   display: flex;
   flex-direction: column;
   margin-right: ${spaces.xl4};

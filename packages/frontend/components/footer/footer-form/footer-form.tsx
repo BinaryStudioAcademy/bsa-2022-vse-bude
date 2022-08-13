@@ -1,8 +1,8 @@
 import type React from 'react';
 import { useState } from 'react';
-import type { FooterFormProps } from './types';
 import { Button } from '@primitives';
 import { ColumnHeader, FooterInput } from '../footer-common';
+import type { FooterFormProps } from './types';
 import * as styles from './styles';
 
 export const FooterForm: React.FC<FooterFormProps> = ({
