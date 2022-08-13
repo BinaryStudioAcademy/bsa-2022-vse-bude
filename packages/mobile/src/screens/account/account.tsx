@@ -13,11 +13,12 @@ import {
   LogOutIcon,
   Logo,
 } from '~/components/components';
-import { useNavigation } from '~/hooks/hooks';
+import { useNavigation, useTranslation } from '~/hooks/hooks';
 import { styles } from './styles';
 
 const Account: FC = () => {
   const navigation = useNavigation<RootNavigationProps>();
+  const { t } = useTranslation();
 
   const handlePersonalInfo = () => {
     navigation.navigate(AccountScreenName.PERSONAL_INFO);
@@ -43,25 +44,27 @@ const Account: FC = () => {
       <View style={styles.btnWrapper}>
         <TouchableOpacity onPress={handlePersonalInfo} style={styles.row}>
           <UserIcon size={30} style={styles.icon} />
-          <Text style={styles.btnText}>Personal Info</Text>
+          <Text style={styles.btnText}>{t('account.PERSONAL_INFO')}</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleSettings} style={styles.row}>
           <SettingsIcon size={30} style={styles.icon} />
-          <Text style={styles.btnText}>Settings </Text>
+          <Text style={styles.btnText}>{t('account.SETTINGS')}</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleMessages} style={styles.row}>
           <MessageIcon size={30} style={styles.icon} />
-          <Text style={styles.btnText}>Messages</Text>
+          <Text style={styles.btnText}>{t('account.MESSAGES')}</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleSupport} style={styles.row}>
           <SupportIcon size={30} style={styles.icon} />
-          <Text style={styles.btnText}>Support</Text>
+          <Text style={styles.btnText}>{t('account.SUPPORT')}</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.logOutWrapper}>
         <TouchableOpacity onPress={handleLogOut} style={styles.row}>
           <LogOutIcon size={30} style={styles.icon} />
-          <Text style={[styles.btnText, styles.accentColor]}>Sign Out</Text>
+          <Text style={[styles.btnText, styles.accentColor]}>
+            {t('account.SIGN_OUT')}
+          </Text>
         </TouchableOpacity>
       </View>
     </ScreenWrapper>
