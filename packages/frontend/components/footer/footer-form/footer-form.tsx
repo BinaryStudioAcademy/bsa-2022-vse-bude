@@ -1,7 +1,8 @@
 import type React from 'react';
 import { useState } from 'react';
 import { Button } from '@primitives';
-import { ColumnHeader, FooterInput } from '../footer-common';
+import { Input } from 'components/primitives/input';
+import { ColumnHeader } from '../footer-common';
 import type { FooterFormProps } from './types';
 import * as styles from './styles';
 
@@ -38,45 +39,44 @@ export const FooterForm: React.FC<FooterFormProps> = ({
       </div>
 
       <div css={styles.footerFormRow}>
-        <FooterInput
+        <Input
           id="footer-fullname"
           label={nameLabel}
           name="fullName"
           value={form.fullName}
           type="text"
-          autocomplete="off"
           placeholder={namePlaceholder}
           onChange={changeHandler}
+          variant="secondary"
         />
       </div>
 
       <div css={styles.footerFormRow}>
-        <FooterInput
+        <Input
           id="footer-email"
           label={emailLabel}
           name="email"
           value={form.email}
           type="email"
-          autocomplete="on"
           placeholder={emailPlaceholder}
           onChange={changeHandler}
+          variant="secondary"
         />
       </div>
 
       <div css={styles.footerFormRow}>
-        <FooterInput
+        <Input
           id="footer-description"
           label={descLabel}
           name="description"
           value={form.description}
           type="text"
-          autocomplete="off"
           placeholder={descPlaceholder}
           onChange={changeHandler}
+          variant="secondary"
         />
       </div>
 
-      {/* button - prop disabled = type boolean, depends on sendHandler*/}
       <div css={styles.footerFormRow}>
         <Button
           type="submit"
