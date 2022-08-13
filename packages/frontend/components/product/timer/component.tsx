@@ -7,7 +7,7 @@ import type { TimerTranslations } from '../../../common/types/timer/translations
 import type { TimerProps } from './types';
 import { timerValue, timerBadge, timerIcon } from './styles';
 
-function useTimeTranslations () {
+function useTimeTranslations() {
   const { t } = useTranslation('common');
   const timeTranslations: TimerTranslations = {
     daysText: t('DAYS_SHORT'),
@@ -23,7 +23,7 @@ function useTimer(date: Date, interval = 1000) {
   const timeTranslations = useTimeTranslations();
 
   const [timeString, setTimeString] = useState(
-    timeToEventString(date, timeTranslations)
+    timeToEventString(date, timeTranslations),
   );
   const toTheEndObj = timeToEventObj(date);
 

@@ -34,6 +34,7 @@ const fontSizes = {
   toggle: '14px',
   button: '16px',
   caption: '12px',
+  smallButton: '15px',
 };
 
 const fontWeights = {

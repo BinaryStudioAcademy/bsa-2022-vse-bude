@@ -2,15 +2,18 @@ import { ColorPalette } from '@vse-bude/shared';
 import { css } from '@emotion/react';
 import type { Theme } from '../../../theme';
 
-export const productFooter = () => css`
-  margin-top: 15px;
+export const productFooter = css`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  margin-top: 15px;
+  & .productPrice {
+    margin-bottom: 10px;
+  }
 `;
 
-export const productHeader = () => css`
+export const productHeader = css`
   position: relative;
   margin-bottom: 20px;
   user-select: none;
@@ -28,24 +31,24 @@ export const productDescription = ({
   fontSizes,
   fontWeights,
 }: Theme) => css`
+  margin-bottom: 15px;
   color: ${colors.text};
   font-size: ${fontSizes.body2};
   font-weight: ${fontWeights.body2};
   word-break: break-all;
-  margin-bottom: 15px;
 `;
 
 export const divider = ({ colors }: Theme) => css`
   border: 1px solid ${colors.disabled};
 `;
 
-export const productTimer = () => css`
+export const productTimer = css`
   position: absolute;
   bottom: -15px;
   left: 16%;
 `;
 
-export const productCard = () => css`
+export const productCard = css`
   border: 1px solid lightgray;
   padding: 22px 25px;
   border-radius: 5px;
