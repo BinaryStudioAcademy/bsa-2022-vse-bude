@@ -1,54 +1,57 @@
-import { useEffect, useRef } from 'react';
-import moment from 'moment';
+import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'next-i18next';
+import { timeToEventObj, timeToEventString } from '../../../helpers/time';
+import type { TimerTranslations } from '../../../common/types/timer/translations';
 import type { TimerProps } from './types';
 import { timerValue, timerBadge, timerIcon } from './styles';
 
-export const ProductTimer = (props: TimerProps) => {
-  const timerEl = useRef(null);
-  const nowTime = moment();
-  const endDateTime = moment(props.date);
-  const toTheEndObj = moment.duration(endDateTime.diff(nowTime));
-
-  const timeString = (date: Date): string => {
-    const now = moment();
-    const endDate = moment(date);
-    const toTheEnd = moment.duration(endDate.diff(now));
-
-    let timeString = '';
-    const days = toTheEnd.days();
-    if (days) {
-      timeString += `${toTheEnd.days()} days `;
-    }
-    timeString += `${toTheEnd.hours()} h `;
-    timeString += `${toTheEnd.minutes()} min`;
-    if (!days) {
-      timeString += ` ${toTheEnd.seconds()} s`;
-    }
-
-    return timeString;
+function useTimeTranslations () {
+  const { t } = useTranslation('common');
+  const timeTranslations: TimerTranslations = {
+    daysText: t('DAYS_SHORT'),
+    hoursText: t('HOURS_SHORT'),
+    minsText: t('MINUTES_SHORT'),
+    secsText: t('SECONDS_SHORT'),
   };
 
+  return timeTranslations;
+}
+
+function useTimer(date: Date, interval = 1000) {
+  const timeTranslations = useTimeTranslations();
+
+  const [timeString, setTimeString] = useState(
+    timeToEventString(date, timeTranslations)
+  );
+  const toTheEndObj = timeToEventObj(date);
+
   useEffect(() => {
-    timerEl.current.innerText = timeString(props.date);
     if (!toTheEndObj.days()) {
       const timer = setInterval(() => {
-        timerEl.current.innerText = timeString(props.date);
-      }, 1000);
+        setTimeString(timeToEventString(date, timeTranslations));
+      }, interval);
       setTimeout(() => {
         clearInterval(timer);
-      }, toTheEndObj.seconds() * 1000);
+      }, toTheEndObj.seconds() * interval);
     }
-  }, [toTheEndObj, props]);
+  }, [toTheEndObj, date, interval, timeTranslations]);
+
+  return timeString;
+}
+
+export const ProductTimer = (props: TimerProps) => {
+  const stringVal = useTimer(props.date);
 
   return (
     <div css={timerBadge}>
       <div css={timerIcon}>
         <FontAwesomeIcon icon={faClock} />
       </div>
-      <div css={timerValue} ref={timerEl}>
-        Loading...
+      <div css={timerValue} suppressHydrationWarning={true}>
+        {!stringVal && 'Loading...'}
+        {!!stringVal && stringVal}
       </div>
     </div>
   );
