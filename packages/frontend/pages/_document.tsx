@@ -48,6 +48,7 @@ class CustomDocument extends Document {
           <Main />
           <NextScript />
           <div id="portal"></div>
+          <div id="popover"></div>
         </body>
       </Html>
     );

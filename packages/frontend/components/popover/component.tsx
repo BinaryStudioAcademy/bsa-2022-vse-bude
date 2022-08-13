@@ -5,38 +5,29 @@ import { useOutsideClick } from 'hooks/popover';
 import * as styles from './styles';
 import type { PopoverProps } from './types';
 
-export const Popover = ({ trigger, children }: PopoverProps) => {
+const Popover = ({ trigger, children }: PopoverProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const bodyRef = useRef<HTMLDivElement>();
   const triggerWrapperRef = useRef<HTMLButtonElement>();
 
   const calcBodyCoords = useCallback(() => {
     const triggerRectParams = getTriggerRectParams();
-
-    const bodyRectParams = getBodyRectParams();
     const bodyTop = triggerRectParams.bottom;
-    const bodyLeft = triggerRectParams.left;
-    const bodyRight =
-      triggerRectParams.left +
-      triggerRectParams.width -
-      bodyRectParams.width;
+    const bodyLeft = triggerRectParams.right;
 
-    return [bodyTop, bodyLeft, bodyRight];
+    return [bodyTop, bodyLeft];
   }, []);
 
   useEffect(() => {
     if (bodyRef.current) {
-      const [bodyTop, bodyLeft, bodyRight] = calcBodyCoords();
+      const [bodyTop, bodyLeft] = calcBodyCoords();
       bodyRef.current.style.top = `${bodyTop}px`;
       bodyRef.current.style.left = `${bodyLeft}px`;
-      //bodyRef.current.style.left = `${bodyRight}px`;
     }
   }, [isVisible, calcBodyCoords]);
 
   const getTriggerRectParams = () =>
     triggerWrapperRef.current.getBoundingClientRect();
-
-  const getBodyRectParams = () => bodyRef.current.getBoundingClientRect();
 
   const handleMouseClick = () => {
     setIsVisible(true);
@@ -47,7 +38,7 @@ export const Popover = ({ trigger, children }: PopoverProps) => {
   };
 
   useOutsideClick(triggerWrapperRef, onClose, isVisible);
-
+  
   const renderPortalBody = () => (
     <div ref={bodyRef} css={styles.popover}>
       {children}
@@ -73,3 +64,5 @@ export const Popover = ({ trigger, children }: PopoverProps) => {
     </React.Fragment>
   );
 };
+
+export default Popover;

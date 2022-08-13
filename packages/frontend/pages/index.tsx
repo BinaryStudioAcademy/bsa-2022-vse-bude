@@ -1,7 +1,6 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
-import { Button, Container } from '@primitives';
+import { Button, Container, Popover } from '@primitives';
 import { Http } from '@vse-bude/shared';
 import { Layout } from '@components';
 import { useAppDispatch, useTypedSelector } from '@hooks';
@@ -65,14 +64,7 @@ const IndexPage = () => {
         <div>
           <div style={{ wordBreak: 'break-all' }}>{JSON.stringify(data)}</div>
 
-          <MyPopover
-            ref={popoverRef}
-            body={
-              <Target onClick={handleClick}>
-                hey from a custom target component
-              </Target>
-            }
-          >
+          <Popover trigger="open popover faeeeeegrdrsfd">
             <ul>
               <li>Personal Info</li>
               <li>My List</li>
@@ -81,7 +73,7 @@ const IndexPage = () => {
               <li>Support</li>
               <li>Sign Out</li>
             </ul>
-          </MyPopover>
+          </Popover>
 
           <Button
             variant="outlined"
