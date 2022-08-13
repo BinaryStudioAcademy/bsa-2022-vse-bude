@@ -15,21 +15,17 @@ export const Popover = ({ trigger, children }: PopoverProps) => {
 
     const bodyRectParams = getBodyRectParams();
     const bodyTop = triggerRectParams.bottom;
-    const bodyLeft = triggerRectParams.left;
     const bodyRight =
-      triggerRectParams.left +
-      triggerRectParams.width -
-      bodyRectParams.width;
+      triggerRectParams.left + triggerRectParams.width - bodyRectParams.width;
 
-    return [bodyTop, bodyLeft, bodyRight];
+    return [bodyTop, bodyRight];
   }, []);
 
   useEffect(() => {
     if (bodyRef.current) {
-      const [bodyTop, bodyLeft, bodyRight] = calcBodyCoords();
+      const [bodyTop, bodyRight] = calcBodyCoords();
       bodyRef.current.style.top = `${bodyTop}px`;
-      bodyRef.current.style.left = `${bodyLeft}px`;
-      //bodyRef.current.style.left = `${bodyRight}px`;
+      bodyRef.current.style.left = `${bodyRight}px`;
     }
   }, [isVisible, calcBodyCoords]);
 
