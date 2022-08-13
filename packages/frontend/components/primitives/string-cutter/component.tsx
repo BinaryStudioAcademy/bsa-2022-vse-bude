@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 import { useState, useRef } from 'react';
+import { Tooltip } from '../tooltip';
 import type { StringCutterProps } from './types';
 
 import * as styles from './styles';
@@ -16,15 +17,10 @@ const StringCutter: FC<StringCutterProps> = ({ children }) => {
   };
 
   return (
-    <div
-      onMouseEnter={checkIsCut}
-      data-is-cutted={isCut}
-      css={styles.cutterWrapper}
-    >
+    <div onMouseEnter={checkIsCut} css={styles.cutterWrapper}>
       <span ref={cutterRef} css={styles.cutterText}>
-        {children}
+        {isCut ? <Tooltip trigger={children}>{children}</Tooltip> : children}
       </span>
-      {/* toltip */}
     </div>
   );
 };
