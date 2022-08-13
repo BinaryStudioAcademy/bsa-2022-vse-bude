@@ -38,6 +38,14 @@ const LogOutIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="log-out" {...iconProps} />
 );
 
+const ArrowLeftIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="chevron-left" {...iconProps} />
+);
+
+const ArrowRightIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="chevron-right" {...iconProps} />
+);
+
 export {
   HomeIcon,
   StarIcon,
@@ -47,5 +55,7 @@ export {
   MessageIcon,
   SupportIcon,
   LogOutIcon,
+  ArrowLeftIcon,
+  ArrowRightIcon,
   CustomFeatherIcon,
 };

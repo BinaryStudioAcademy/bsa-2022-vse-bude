@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { RootNavigationProps } from '~/common/types/navigation/navigation-props';
-//import { AccountScreenName } from '~/common/enums/enums';
+import { AccountScreenName } from '~/common/enums/enums';
 import {
   View,
   ScreenWrapper,
@@ -10,17 +10,11 @@ import {
   SupportIcon,
   MessageIcon,
   UserIcon,
+  LogOutIcon,
+  Logo,
 } from '~/components/components';
 import { useNavigation } from '~/hooks/hooks';
 import { styles } from './styles';
-
-enum AccountScreenName {
-  ACCOUNT_ROOT = 'Account',
-  PERSONAL_INFO = 'PersonalInfo',
-  SETTINGS = 'Settings',
-  MESSAGES = 'Messages',
-  SUPPORT = 'Support',
-}
 
 const Account: FC = () => {
   const navigation = useNavigation<RootNavigationProps>();
@@ -37,28 +31,37 @@ const Account: FC = () => {
   const handleSupport = () => {
     navigation.navigate(AccountScreenName.SUPPORT);
   };
+  const handleLogOut = () => {
+    //TODO
+  };
 
   return (
-    <ScreenWrapper>
+    <ScreenWrapper style={styles.screen}>
       <View style={styles.headerContent}>
-        <Text>header</Text>
+        <Logo width={120} height={30} />
       </View>
-      <View style={styles.screen}>
-        <TouchableOpacity onPress={handlePersonalInfo}>
-          <UserIcon />
-          <Text>Personal Info</Text>
+      <View style={styles.btnWrapper}>
+        <TouchableOpacity onPress={handlePersonalInfo} style={styles.row}>
+          <UserIcon size={30} style={styles.icon} />
+          <Text style={styles.btnText}>Personal Info</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={handleSettings}>
-          <SettingsIcon />
-          <Text>Settings </Text>
+        <TouchableOpacity onPress={handleSettings} style={styles.row}>
+          <SettingsIcon size={30} style={styles.icon} />
+          <Text style={styles.btnText}>Settings </Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={handleMessages}>
-          <MessageIcon />
-          <Text>Messages</Text>
+        <TouchableOpacity onPress={handleMessages} style={styles.row}>
+          <MessageIcon size={30} style={styles.icon} />
+          <Text style={styles.btnText}>Messages</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={handleSupport}>
-          <SupportIcon />
-          <Text>Support</Text>
+        <TouchableOpacity onPress={handleSupport} style={styles.row}>
+          <SupportIcon size={30} style={styles.icon} />
+          <Text style={styles.btnText}>Support</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.logOutWrapper}>
+        <TouchableOpacity onPress={handleLogOut} style={styles.row}>
+          <LogOutIcon size={30} style={styles.icon} />
+          <Text style={[styles.btnText, styles.accentColor]}>Sign Out</Text>
         </TouchableOpacity>
       </View>
     </ScreenWrapper>

@@ -63,9 +63,9 @@ const MainNavigation = () => {
         options={getTabOptions(MainScreenName.MY_LIST, ListIcon)}
       />
       <Tabs.Screen
-        name={MainScreenName.ACCOUNT}
+        name={MainScreenName.ACCOUNT_ROOT}
         component={AccountNavigation}
-        options={getTabOptions(MainScreenName.ACCOUNT, UserIcon)}
+        options={getTabOptions(MainScreenName.ACCOUNT_ROOT, UserIcon)}
       />
     </Tabs.Navigator>
   );
