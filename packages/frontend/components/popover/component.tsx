@@ -38,7 +38,7 @@ const Popover = ({ trigger, children }: PopoverProps) => {
   };
 
   useOutsideClick(triggerWrapperRef, onClose, isVisible);
-  
+
   const renderPortalBody = () => (
     <div ref={bodyRef} css={styles.popover}>
       {children}
