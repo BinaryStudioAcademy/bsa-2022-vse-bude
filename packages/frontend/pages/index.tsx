@@ -8,6 +8,7 @@ import { useAppDispatch, useTypedSelector } from '@hooks';
 import { shallowEqual } from 'react-redux';
 import { fetchRandomData, fetchRandomDataSSR, wrapper } from 'store';
 import { css } from '@emotion/react';
+import { useState } from 'react';
 import { ProductCard } from '../components/product/card/component';
 
 export const getServerSideProps = wrapper.getServerSideProps(
@@ -20,7 +21,11 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     return Promise.resolve({
       props: {
-        ...(await serverSideTranslations(locale, ['home'])),
+        ...(await serverSideTranslations(locale, [
+          'home',
+          'product',
+          'common',
+        ])),
       },
     });
   },
@@ -31,6 +36,12 @@ const IndexPage = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation('home');
 
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const onChangeIsFavorite = () => {
+    setIsFavorite(!isFavorite);
+  };
+
   const productData = {
     images: [
       'https://gingkodesign.com/wp-content/uploads/2020/12/Black-Smart-Moon-Lamp-scaled.jpg',
@@ -38,7 +49,7 @@ const IndexPage = () => {
     ],
     price: 200,
     name: 'Some name',
-    description: 'Some description',
+    description: 'Some description asdasd as dasd as das da das das adssa',
     auctionDate: new Date('2022-08-14 00:00:00'),
     currency: 'UAH',
   };
@@ -86,6 +97,8 @@ const IndexPage = () => {
               description={productData.description}
               price={productData.price}
               currency={productData.currency}
+              onChangeIsFavorite={onChangeIsFavorite}
+              isFavorite={isFavorite}
             />
           </div>
         </div>

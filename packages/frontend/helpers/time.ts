@@ -4,9 +4,10 @@ import type { TimerTranslations } from '../common/types/timer';
 
 dayjs.extend(Duration);
 
-export const timeToEventString = (date: Date, {
-  hoursText, daysText, minsText, secsText
-}: TimerTranslations): string => {
+export const timeToEventString = (
+  date: Date,
+  { hoursText, daysText, minsText, secsText }: TimerTranslations,
+): string => {
   const toTheEnd = timeToEventObj(date);
 
   let timeString = '';

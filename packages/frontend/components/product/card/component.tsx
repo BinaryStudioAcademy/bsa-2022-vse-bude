@@ -1,10 +1,10 @@
-import { useState } from 'react';
 import { Button } from '@primitives';
-import { textLimit } from '@helpers';
+import { useTranslation } from 'next-i18next';
 import { Price } from '../price';
 import { FavoriteButton } from '../favorite-button/component';
 import { ProductTimer } from '../timer/component';
 import { ImageSlider } from '../image-slider/component';
+import { StringCutter } from '../../primitives/string-cutter';
 import {
   productFooter,
   productCard,
@@ -17,11 +17,7 @@ import {
 import type { ProductCardProps } from './types';
 
 export const ProductCard = (props: ProductCardProps) => {
-  const [isFavorite, setIsFavorite] = useState(false);
-
-  const onChangeIsFavorite = () => {
-    setIsFavorite(!isFavorite);
-  };
+  const { t } = useTranslation('product');
 
   return (
     <div className="cardBlock" css={productCard}>
@@ -30,8 +26,8 @@ export const ProductCard = (props: ProductCardProps) => {
           <ImageSlider images={props.images} />
         </div>
         <FavoriteButton
-          onUpdateFavorite={onChangeIsFavorite}
-          isFavorite={isFavorite}
+          onChangeIsFavorite={props.onChangeIsFavorite}
+          isFavorite={props.isFavorite}
         />
         <div css={productTimer}>
           <ProductTimer date={props.auctionDate} />
@@ -39,7 +35,9 @@ export const ProductCard = (props: ProductCardProps) => {
       </div>
       <div>
         <div css={productName}>{props.name}</div>
-        <div css={productDescription}>{textLimit(props.description)}</div>
+        <div css={productDescription}>
+          <StringCutter>{props.description}</StringCutter>
+        </div>
         <hr css={divider} />
       </div>
       <div css={productFooter}>
@@ -48,7 +46,7 @@ export const ProductCard = (props: ProductCardProps) => {
         </div>
         <div className="productAction">
           <Button title="Place a Bid" variant="filled" size="small">
-            Place a Bid
+            {t('PLACE_BID_BTN')}
           </Button>
         </div>
       </div>

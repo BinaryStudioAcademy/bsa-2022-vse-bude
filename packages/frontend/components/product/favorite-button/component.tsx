@@ -6,14 +6,14 @@ import type { FavoriteButtonProps } from './types';
 
 export const FavoriteButton = ({
   isFavorite = false,
-  onUpdateFavorite,
+  onChangeIsFavorite,
 }: FavoriteButtonProps) => {
   const color = isFavorite ? ColorPalette.YELLOW_100 : ColorPalette.WHITE_100;
 
   return (
     <div css={favoriteIcon}>
       <FontAwesomeIcon
-        onClick={onUpdateFavorite}
+        onClick={onChangeIsFavorite}
         icon={faStar}
         color={color}
         stroke="red"
