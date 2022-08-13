@@ -1,4 +1,4 @@
-export { Container } from 'grapefruit-ui';
+export { Container, Row } from 'grapefruit-ui';
 export { Tooltip } from './tooltip';
 export { Button } from './button';
 export { Checkbox } from './checkbox';
