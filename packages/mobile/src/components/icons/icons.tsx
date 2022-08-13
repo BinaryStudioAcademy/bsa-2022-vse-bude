@@ -26,11 +26,26 @@ const ListIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="list" {...iconProps} />
 );
 
+const MessageIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="message-circle" {...iconProps} />
+);
+
+const SupportIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="help-circle" {...iconProps} />
+);
+
+const LogOutIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="log-out" {...iconProps} />
+);
+
 export {
   HomeIcon,
   StarIcon,
   UserIcon,
   SettingsIcon,
   ListIcon,
+  MessageIcon,
+  SupportIcon,
+  LogOutIcon,
   CustomFeatherIcon,
 };
