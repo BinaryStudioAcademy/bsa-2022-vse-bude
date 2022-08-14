@@ -1,1 +1,11 @@
-{}
+{
+  "CREATE_ACCOUNT": "Створити аккаунт",
+  "FIRST_NAME": "Ім'я",
+  "LAST_NAME": "Прізвище",
+  "EMAIL": "E-mail",
+  "PASSWORD": "Пароль",
+  "REPEAT_PASSWORD": "Повторний пароль",
+  "PHONE_NUMBER": "Номер телефону",
+  "I_HAVE_AN_ACCOUNT": "В мене вже є аккаунт",
+  "SIGN_IN": "Увійти"
+}
