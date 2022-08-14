@@ -4,49 +4,50 @@ import settings from '../../public/images/account-page/settings-icon.svg';
 import messages from '../../public/images/account-page/chat-icon.svg';
 import support from '../../public/images/account-page/support-icon.svg';
 import signout from '../../public/images/account-page/sign-out-icon.svg';
-import type { LinksData } from './types';
+import { Routes, AccountRoutes } from '../../common/enums';
+import type { LinkData } from './types';
 
-export const linksData: LinksData[] = [
+export const linksData: LinkData[] = [
   {
     iconPath: profile,
     width: 22,
     height: 22,
-    label: 'Personal Info',
-    path: '/user-account/dashboard/profile-info',
+    label: 'PERSONAL_INFO',
+    path: Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_PERSONAL,
   },
   {
     iconPath: mylist,
     width: 22,
     height: 22,
-    label: 'My List',
-    path: '/user-account/dashboard/my-list',
+    label: 'MY_LIST',
+    path: Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_LIST,
   },
   {
     iconPath: settings,
     width: 22,
     height: 22,
-    label: 'Settings',
-    path: '/user-account/dashboard/settings',
+    label: 'SETTINGS',
+    path: Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_SETTINGS,
   },
   {
     iconPath: messages,
     width: 22,
     height: 22,
-    label: 'Messages',
-    path: '/user-account/dashboard/messages',
+    label: 'MESSAGES',
+    path: Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_MESSAGES,
   },
   {
     iconPath: support,
     width: 22,
     height: 22,
-    label: 'Support',
-    path: '/user-account/dashboard/support',
+    label: 'SUPPORT',
+    path: Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_SUPPORT,
   },
   {
     iconPath: signout,
     width: 22,
     height: 22,
-    label: 'Sign Out',
-    path: '/',
+    label: 'SIGN_OUT',
+    path: Routes.DEFAULT,
   },
 ];

@@ -5,9 +5,9 @@ export enum Routes {
 }
 
 export enum AccountRoutes {
-  ACCOUNT_PERSONAL = 'dashboard/personal-info',
-  ACCOUNT_LIST = 'dashboard/my-list',
-  ACCOUNT_SETTINGS = 'dashboard/settings',
-  ACCOUNT_MESSAGES = 'dashboard/messages',
-  ACCOUNT_SUPPORT = 'dashboard/support',
+  ACCOUNT_PERSONAL = '/dashboard/personal-info',
+  ACCOUNT_LIST = '/dashboard/my-list',
+  ACCOUNT_SETTINGS = '/dashboard/settings',
+  ACCOUNT_MESSAGES = '/dashboard/messages',
+  ACCOUNT_SUPPORT = '/dashboard/support',
 }
