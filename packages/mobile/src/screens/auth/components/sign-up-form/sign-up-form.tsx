@@ -49,6 +49,13 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
           control={control}
           errors={errors}
         />
+        <Input
+          label={t('verification.PASSWORD')}
+          placeholder={t('verification.PASSWORD_HINT')}
+          name="repeatPassword"
+          control={control}
+          errors={errors}
+        />
         <Button
           label={t('verification.SING_UP')}
           onPress={handleSubmit(onSubmit)}
