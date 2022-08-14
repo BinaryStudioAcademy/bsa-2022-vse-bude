@@ -4,8 +4,8 @@ import { AccountLayout } from '../layout';
 import { NestedLayout } from './layout';
 
 const ProfileInfo: NextPageWithLayout = () => (
-    <div style={{ width: '500px', backgroundColor: 'red' }}>Profile Info</div>
-  );
+  <div style={{ width: '500px', backgroundColor: 'red' }}>Profile Info</div>
+);
 
 ProfileInfo.getLayout = function getLayout(page: ReactElement) {
   return (

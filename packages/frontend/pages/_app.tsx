@@ -5,8 +5,8 @@ import type { AppPropsWithLayout } from './types';
 
 const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? ((page) => page);
-  
-return (
+
+  return (
     <ThemeProvider>{getLayout(<Component {...pageProps} />)}</ThemeProvider>
   );
 };
