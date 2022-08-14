@@ -1,31 +1,31 @@
 import { Icon } from 'components/primitives/icon';
 import { IconName } from 'common/enums/icons';
-import { ColorPalette } from '@vse-bude/shared';
 
 function Test() {
-  const color = ColorPalette.YELLOW_100;
+  const size = 'sm';
 
   return (
     <div>
-      <Icon icon={IconName.ANGLE_DOWN} color={color} size="lg" />
-      <Icon icon={IconName.ANGLE_LEFT} color={color} size="lg" />
-      <Icon icon={IconName.ANGLE_RIGHT} color={color} size="lg" />
-      <Icon icon={IconName.ANGLE_UP} color={color} size="lg" />
-      <Icon icon={IconName.BELL} color={color} size="lg" />
-      <Icon icon={IconName.CHECK} color={color} size="lg" />
-      <Icon icon={IconName.EYE} color={color} size="lg" />
-      <Icon icon={IconName.EYE_SLASH} color={color} size="lg" />
-      <Icon icon={IconName.LIST} color={color} size="lg" />
-      <Icon icon={IconName.MESSAGE} color={color} size="lg" />
-      <Icon icon={IconName.SETTINGS} color={color} size="lg" />
-      <Icon icon={IconName.SIGN_OUT} color={color} size="lg" />
-      <Icon icon={IconName.STAR} color={color} size="lg" />
-      <Icon icon={IconName.SUPPORT} color={color} size="lg" />
-      <Icon icon={IconName.USER} color={color} size="lg" />
-      <Icon icon={IconName.CAMERA} color={color} size="lg" />
-      <Icon icon={IconName.EMAIL} color={color} size="lg" />
-      <Icon icon={IconName.PHONE} color={color} size="lg" />
-      <Icon icon={IconName.PRIVACY_POLICY} color={color} size="lg" />
+      <Icon icon={IconName.ANGLE_DOWN} color="yellow" />
+      <Icon icon={IconName.ANGLE_LEFT} color="yellow" size={size} />
+      <Icon icon={IconName.ANGLE_RIGHT} color="yellow" size={size} />
+      <Icon icon={IconName.ANGLE_UP} color="yellow" size={size} />
+      <Icon icon={IconName.BELL} color="yellow" size={size} />
+      <Icon icon={IconName.CHECK} color="yellow" size={size} />
+      <Icon icon={IconName.EYE} color="yellow" size={size} />
+      <Icon icon={IconName.EYE_SLASH} color="yellow" size={size} />
+      <Icon icon={IconName.LIST} color="yellow" size={size} />
+      <Icon icon={IconName.MESSAGE} color="yellow" size={size} />
+      <Icon icon={IconName.SETTINGS} color="yellow" size={size} />
+      <Icon icon={IconName.SIGN_OUT} color="yellow" size={size} />
+      <Icon icon={IconName.STAR} color="yellow" size={size} />
+      <Icon icon={IconName.SUPPORT} color="yellow" size={size} />
+      <Icon icon={IconName.USER} color="yellow" size={size} />
+      <Icon icon={IconName.CAMERA} color="yellow" size={size} />
+      <Icon icon={IconName.EMAIL} color="yellow" size={size} />
+      <Icon icon={IconName.PHONE} color="yellow" size={size} />
+      <Icon icon={IconName.PRIVACY_POLICY} color="yellow" size={size} />
+      <Icon icon={IconName.STOPWATCH} color="yellow" size="sm" />
     </div>
   );
 }

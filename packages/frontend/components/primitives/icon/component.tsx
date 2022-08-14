@@ -1,13 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconColor } from 'common/enums/iconColor';
 import { IconNameToSvgIcon } from 'common/enums/icons';
 import type { IconProps } from './types';
+import * as styles from './styles';
 
-export const Icon = ({ className, css, icon, color, size }: IconProps) => (
+export const Icon = ({ icon, color, size = 'md' }: IconProps) => (
   <FontAwesomeIcon
-    className={className}
-    css={css}
+    css={styles.icon}
+    data-size={size}
     icon={IconNameToSvgIcon[icon]}
-    color={color}
-    size={size}
+    color={IconColor[color.toUpperCase()]}
   />
 );

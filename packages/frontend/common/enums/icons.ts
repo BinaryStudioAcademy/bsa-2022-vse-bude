@@ -20,6 +20,7 @@ import {
   faCamera,
   faPhone,
   faUserShield,
+  faStopwatch,
 } from '@fortawesome/free-solid-svg-icons';
 
 export enum IconName {
@@ -42,6 +43,7 @@ export enum IconName {
   PHONE = 'phone',
   EMAIL = 'envelope',
   PRIVACY_POLICY = 'user-shield',
+  STOPWATCH = 'stopwatch',
 }
 
 export const IconNameToSvgIcon = {
@@ -64,4 +66,5 @@ export const IconNameToSvgIcon = {
   [IconName.PHONE]: faPhone,
   [IconName.EMAIL]: faEnvelope,
   [IconName.PRIVACY_POLICY]: faUserShield,
+  [IconName.STOPWATCH]: faStopwatch,
 };

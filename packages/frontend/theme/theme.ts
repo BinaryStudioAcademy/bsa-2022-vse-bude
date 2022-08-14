@@ -115,6 +115,13 @@ const opacities = {
   sm: 0.6,
 };
 
+const iconSizes = {
+  lg: '42px',
+  md: '18px',
+  sm: '16px',
+  xs: '14px',
+};
+
 const breakpoints = [576, 768, 992, 1200, 1300];
 const mq = breakpoints.map((bp) => `@media (min-width: ${bp}px)`);
 
@@ -130,6 +137,7 @@ const lightTheme = {
   shadows,
   opacities,
   mq,
+  iconSizes,
 };
 
 const darkTheme = {
@@ -144,6 +152,7 @@ const darkTheme = {
   shadows,
   opacities,
   mq,
+  iconSizes,
 };
 
 export { lightTheme, darkTheme };

@@ -1,9 +1,12 @@
-import type { IconName, SizeProp } from '@fortawesome/fontawesome-svg-core';
+import type { IconName } from '@fortawesome/fontawesome-svg-core';
 
 export type IconProps = {
   icon: IconName;
-  className?: string;
   css?: string;
   size?: SizeProp;
-  color?: string;
+  color?: ColorProp;
 };
+
+type SizeProp = 'lg' | 'md' | 'sm' | 'xs';
+
+type ColorProp = 'yellow' | 'black' | 'white' | 'gray' | 'green';
