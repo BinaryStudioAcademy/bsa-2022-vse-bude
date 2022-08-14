@@ -7,6 +7,7 @@ import { CookieStorage } from '@helpers';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { shallowEqual } from 'react-redux';
 import { fetchRandomData, fetchRandomDataSSR, wrapper } from 'store';
+import Test from './test';
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
@@ -41,6 +42,7 @@ const IndexPage = () => {
           >
             click me
           </Button>
+
           <Button
             variant="outlined"
             disabled
@@ -48,7 +50,6 @@ const IndexPage = () => {
           >
             click me
           </Button>
-
           <Button variant="filled" onClick={() => dispatch(fetchRandomData())}>
             click me
           </Button>
@@ -59,6 +60,7 @@ const IndexPage = () => {
           >
             click me
           </Button>
+          <Test />
         </div>
       </Container>
     </Layout>

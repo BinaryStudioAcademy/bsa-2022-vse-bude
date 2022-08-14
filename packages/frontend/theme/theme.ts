@@ -11,6 +11,7 @@ const colors = {
   backgroundDark: ColorPalette.GRAY_200,
   text: ColorPalette.BLACK_100,
   textLight: ColorPalette.GRAY_300,
+  textFooter: ColorPalette.WHITE_100,
   error: ColorPalette.RED_100,
   active: ColorPalette.YELLOW_100,
   accent: ColorPalette.YELLOW_200,
@@ -100,6 +101,7 @@ const heights = {
 
 const widths = {
   checkbox: '20px',
+  footerFormRow: '360px',
 };
 
 const shadows = {
@@ -113,6 +115,22 @@ const borders = {
   dropdown: `2px solid ${colors.backgroundLight}`,
 };
 
+const opacities = {
+  lg: 0.2,
+  md: 0.4,
+  sm: 0.6,
+};
+
+const iconSizes = {
+  lg: '42px',
+  md: '18px',
+  sm: '16px',
+  xs: '14px',
+};
+
+const breakpoints = [576, 768, 992, 1200, 1300];
+const mq = breakpoints.map((bp) => `@media (min-width: ${bp}px)`);
+
 const lightTheme = {
   colors,
   fontSizes,
@@ -123,7 +141,10 @@ const lightTheme = {
   spaces,
   radiuses,
   shadows,
+  iconSizes,
   borders,
+  opacities,
+  mq,
 };
 
 const darkTheme = {
@@ -136,7 +157,10 @@ const darkTheme = {
   spaces,
   radiuses,
   shadows,
+  iconSizes,
   borders,
+  opacities,
+  mq,
 };
 
 export { lightTheme, darkTheme };

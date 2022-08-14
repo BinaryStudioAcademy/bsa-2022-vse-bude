@@ -1,5 +1,6 @@
 import { useOutsideClick } from '@hooks';
 import { useCallback, useState } from 'react';
+import { Icon } from '@primitives';
 import * as styles from './styles';
 import type { DropdownProps } from './types';
 
@@ -23,7 +24,7 @@ export const Dropdown = ({ options, ...props }: DropdownProps) => {
       {isOpen && (
         <div css={styles.dropdownContent}>
           {options.map((item) => {
-            const { value, key, onClick: callbackFn, disabled } = item;
+            const { value, key, onClick: callbackFn, disabled, icon } = item;
 
             const onClick = () => {
               callbackFn();
@@ -36,7 +37,16 @@ export const Dropdown = ({ options, ...props }: DropdownProps) => {
                 css={styles.dropdownItem}
                 onClick={onClick}
                 disabled={disabled}
+                data-variant={icon && 'icon'}
               >
+                {icon && (
+                  <Icon
+                    icon={icon.icon}
+                    color={icon.color}
+                    css={icon.css}
+                    size={icon.size}
+                  />
+                )}
                 {value}
               </button>
             );

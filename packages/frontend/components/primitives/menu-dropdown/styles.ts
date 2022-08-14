@@ -24,17 +24,6 @@ export const dropdownTitle = ({
   :active {
     color: ${colors.primaryLight};
   }
-
-  &::after {
-    content: '';
-    display: block;
-    width: 12px;
-    height: 8px;
-    margin-left: 6px;
-    background-repeat: no-repeat;
-    background-color: ${colors.primaryLight};
-    mask-image: url(${dropdown_arrow.src});
-  }
 `;
 
 export const dropdownContent = ({
@@ -81,5 +70,12 @@ export const dropdownItem = ({
   :disabled {
     cursor: not-allowed;
     color: ${colors.disabled};
+  }
+
+  &[data-variant='icon'] {
+    padding: ${spaces.xs} ${spaces.md};
+    & > svg {
+      margin-right: ${spaces.md};
+    }
   }
 `;
