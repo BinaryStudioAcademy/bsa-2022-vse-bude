@@ -8,7 +8,7 @@ export const linkStyles = ({
   fontWeights,
 }: Theme) => css`
   color: ${colors.link};
-  text-decoration: 'none';
+  text-decoration: none;
   font-size: ${fontSizes.body1};
   font-weight: ${fontWeights.body1};
   line-height: ${lineHeights.body1};
