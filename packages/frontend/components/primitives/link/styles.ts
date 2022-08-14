@@ -30,4 +30,22 @@ export const linkStyles = ({
   &[data-variant='primary'] {
     color: ${colors.link};
   }
+
+  &[data-variant='secondary'] {
+    font-size: ${fontSizes.body2};
+    line-height: ${lineHeights.body2};
+    color: ${colors.textFooter};
+    &:hover {
+      color: ${colors.textFooter};
+    }
+  }
+
+  &[data-variant='accent'] {
+    font-size: ${fontSizes.body2};
+    line-height: ${lineHeights.body2};
+    color: ${colors.accent};
+    &:hover {
+      color: ${colors.accent};
+    }
+  }
 `;
