@@ -9,8 +9,8 @@ export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
     const { locale } = ctx;
     console.log(store);
-    
-return Promise.resolve({
+
+    return Promise.resolve({
       props: {
         ...(await serverSideTranslations(locale, ['dashboard', 'page-titles'])),
       },
