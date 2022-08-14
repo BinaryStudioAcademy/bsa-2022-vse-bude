@@ -1,0 +1,16 @@
+{
+  "FIRST_NAME_REQUIRED_ERROR": "Ім'я є обов'язковим!",
+  "LAST_NAME_REQUIRED_ERROR": "Прізвище є обов'язковим!",
+  "PHONE_REQUIRED_ERROR": "Номер телефону є обов'язковим!",
+  "EMAIL_REQUIRED_ERROR": "E-mail є обов'язковим!",
+  "PASSWORD_REQUIRED_ERROR": "Пароль є обов'язковим!",
+  "REPEAT_PASSWORD_REQUIRED_ERROR": "Повторний пароль є обов'язковим!",
+  "PASSWORD_MINLENGTH_ERROR": "Пароль занадто короткий!",
+  "PASSWORD_MAXLENGTH_ERROR": "Пароль занадто довгий!",
+  "REPEAT_PASSWORD_MINLENGTH_ERROR": "Повторний пароль занадто короткий!",
+  "FIRST_NAME_MAXLENGTH_ERROR": "Ім'я занадтно довге!",
+  "LAST_NAME_MAXLENGTH_ERROR": "Прізвище задатно довге!",
+  "PHONE_PATTERN_ERROR": "Телефон невірного формату!",
+  "REPEAT_PASSWORD_VALIDATE_ERROR": "Паролі не співпадають!!",
+  "EMAIL_PATTERN_ERROR": "Email невірного формату!"
+}

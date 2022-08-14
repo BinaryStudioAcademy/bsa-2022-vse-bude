@@ -1,0 +1,16 @@
+{
+  "FIRST_NAME_REQUIRED_ERROR": "First Name is required!",
+  "LAST_NAME_REQUIRED_ERROR": "Last Name is required!",
+  "PHONE_REQUIRED_ERROR": "Phone is required!",
+  "EMAIL_REQUIRED_ERROR": "Email is required!",
+  "PASSWORD_REQUIRED_ERROR": "Password is required!",
+  "REPEAT_PASSWORD_REQUIRED_ERROR": "Repeat Password is required!",
+  "PASSWORD_MINLENGTH_ERROR": "Password too short!",
+  "PASSWORD_MAXLENGTH_ERROR": "Password too long!",
+  "REPEAT_PASSWORD_MINLENGTH_ERROR": "Repeat Password too short!",
+  "FIRST_NAME_MAXLENGTH_ERROR": "First Name too long!",
+  "LAST_NAME_MAXLENGTH_ERROR": "Last Name too long!",
+  "PHONE_PATTERN_ERROR": "Phone is in incorrect format!",
+  "EMAIL_PATTERN_ERROR": "Email невірного формату!",
+  "REPEAT_PASSWORD_VALIDATE_ERROR": "Passwords don't match!"
+}
