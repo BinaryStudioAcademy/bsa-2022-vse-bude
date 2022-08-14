@@ -11,9 +11,10 @@ export const button = ({
   spaces,
   heights,
 }: Theme) => css`
-  ${resetButton}
+  ${resetButton};
   display: flex;
   align-items: center;
+  justify-content: center;
   font-size: ${fontSizes.button};
   line-height: ${lineHeights.button};
   font-weight: ${fontWeights.button};
