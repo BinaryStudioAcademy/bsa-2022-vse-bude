@@ -11,8 +11,8 @@ import type { AccountPageProps } from './types';
 export const AccountLayout: FC<AccountPageProps> = ({ children }) => {
   const router = useRouter();
   const { t } = useTranslation(['dashboard', 'page-titles']);
-  
-return (
+
+  return (
     <Layout>
       <Container>
         <div css={styles.wrapper}>

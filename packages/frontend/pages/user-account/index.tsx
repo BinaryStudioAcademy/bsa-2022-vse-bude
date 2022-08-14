@@ -7,8 +7,9 @@ import { AccountLayout } from './layout';
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
     const { locale } = ctx;
-    console.log(store)
-    return Promise.resolve({
+    console.log(store);
+    
+return Promise.resolve({
       props: {
         ...(await serverSideTranslations(locale, ['dashboard', 'page-titles'])),
       },
