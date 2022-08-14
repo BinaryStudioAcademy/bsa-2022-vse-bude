@@ -40,13 +40,7 @@ const PasswordInputInner = (
           {...props}
         />
       </div>
-      {error && (
-        <p css={styles.errorMessage}>
-          {/* TODO: remove placeholder */}
-          <span>!!!!</span>
-          {error}
-        </p>
-      )}
+      {error && <p css={styles.errorMessage}>{error}</p>}
     </div>
   );
 };
