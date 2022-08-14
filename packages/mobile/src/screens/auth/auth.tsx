@@ -8,19 +8,14 @@ import {
   useRoute,
   useTranslation,
 } from '~/hooks/hooks';
-import {
-  StatusBar,
-  Text,
-  View,
-  ScrollView,
-  Header,
-} from '~/components/components';
+import { StatusBar, Text, View, ScrollView } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import {
   GoogleButton,
   Line,
   SignInForm,
   SignUpForm,
+  Header,
 } from './components/components';
 import { styles } from './styles';
 
