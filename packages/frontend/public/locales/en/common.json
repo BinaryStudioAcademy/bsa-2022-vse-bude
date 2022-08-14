@@ -1,4 +1,8 @@
 {
+  "HOURS_SHORT": "h",
+  "DAYS_SHORT": "d",
+  "MINUTES_SHORT": "min",
+  "SECONDS_SHORT": "s",
   "CREATE_ACCOUNT": "Create Account",
   "FIRST_NAME": "First Name",
   "LAST_NAME": "Last Name",

@@ -60,6 +60,7 @@ export const button = ({
   &[data-size='small'] {
     height: ${heights.controlSm};
     border-radius: ${radiuses.sm};
-    padding: 0 ${spaces.lg};
+    padding: 0 ${spaces.md};
+    font-size: ${fontSizes.smallButton};
   }
 `;

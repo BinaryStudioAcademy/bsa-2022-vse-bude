@@ -1,4 +1,8 @@
 {
+  "HOURS_SHORT": "г",
+  "DAYS_SHORT": "д",
+  "MINUTES_SHORT": "хв",
+  "SECONDS_SHORT": "с",
   "CREATE_ACCOUNT": "Створити аккаунт",
   "FIRST_NAME": "Ім'я",
   "LAST_NAME": "Прізвище",
