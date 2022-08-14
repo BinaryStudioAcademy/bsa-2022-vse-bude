@@ -4,7 +4,7 @@ import postStamp from '../../public/images/postStamp.png';
 import logoImg from '../../public/images/logo.png';
 import flagBg from '../../public/images/flagBg.png';
 import * as styles from './styles';
-import { LayoutProps } from './types';
+import type { LayoutProps } from './types';
 
 export const AuthLayout = ({ children }: LayoutProps) => (
   <section css={styles.authSection}>

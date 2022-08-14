@@ -6,7 +6,7 @@ import { UserService } from './user';
 import { AuthService } from './auth';
 import { HashService } from './hash';
 import { RedisStorageService } from './redis-storage';
-// import { SMSSenderService } from './sms';
+import { SMSSenderService } from './sms';
 
 export const initServices = (repositories: Repositories) => {
   const hashService: HashService = new HashService();
