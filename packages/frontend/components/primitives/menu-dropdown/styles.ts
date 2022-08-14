@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import type { Theme } from 'theme';
 import { resetButton } from 'theme';
-import dropdown_arrow from '../../../public/images/icons/dropdown_arrow.svg';
 
 export const dropdownTitle = ({
   colors,
