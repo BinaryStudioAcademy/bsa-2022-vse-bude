@@ -89,6 +89,7 @@ export const errorMessage = ({
   margin: 2px 0 0;
   cursor: pointer;
   font-size: ${fontSizes.caption};
+  font-weight: bold;
   line-height: ${lineHeights.caption};
   font-family: inherit;
   color: ${colors.error};
