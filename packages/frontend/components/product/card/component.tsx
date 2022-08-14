@@ -1,10 +1,9 @@
-import { Button } from '@primitives';
+import { Button, StringCutter } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import { Price } from '../price';
 import { FavoriteButton } from '../favorite-button/component';
 import { ProductTimer } from '../timer/component';
 import { ImageSlider } from '../image-slider/component';
-import { StringCutter } from '../../primitives/string-cutter';
 import {
   productFooter,
   productCard,

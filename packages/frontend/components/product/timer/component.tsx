@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'next-i18next';
 import { timeToEventObj, timeToEventString } from '../../../helpers/time';
-import type { TimerTranslations } from '../../../common/types/timer/translations';
+import type { TimerTranslations } from '../../../common/types/timer';
+import { useTimer } from '../../../hooks/time';
 import type { TimerProps } from './types';
-import { timerValue, timerBadge, timerIcon } from './styles';
+import { timerBadge, timerIcon } from './styles';
 
 function useTimeTranslations() {
   const { t } = useTranslation('common');
@@ -19,30 +20,18 @@ function useTimeTranslations() {
   return timeTranslations;
 }
 
-function useTimer(date: Date, interval = 1000) {
+export const ProductTimer = ({ date }: TimerProps) => {
   const timeTranslations = useTimeTranslations();
-
-  const [timeString, setTimeString] = useState(
+  const [timerValue, setTimerValue] = useState(
     timeToEventString(date, timeTranslations),
   );
-  const toTheEndObj = timeToEventObj(date);
 
-  useEffect(() => {
+  useTimer(() => {
+    const toTheEndObj = timeToEventObj(date);
     if (!toTheEndObj.days()) {
-      const timer = setInterval(() => {
-        setTimeString(timeToEventString(date, timeTranslations));
-      }, interval);
-      setTimeout(() => {
-        clearInterval(timer);
-      }, toTheEndObj.seconds() * interval);
+      setTimerValue(timeToEventString(date, timeTranslations));
     }
-  }, [toTheEndObj, date, interval, timeTranslations]);
-
-  return timeString;
-}
-
-export const ProductTimer = (props: TimerProps) => {
-  const stringVal = useTimer(props.date);
+  });
 
   return (
     <div css={timerBadge}>
@@ -50,8 +39,7 @@ export const ProductTimer = (props: TimerProps) => {
         <FontAwesomeIcon icon={faClock} />
       </div>
       <div css={timerValue} suppressHydrationWarning={true}>
-        {!stringVal && 'Loading...'}
-        {!!stringVal && stringVal}
+        {timerValue}
       </div>
     </div>
   );
