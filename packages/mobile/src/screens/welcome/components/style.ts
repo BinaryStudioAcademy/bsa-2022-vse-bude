@@ -24,22 +24,16 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontWeight: '700',
     color: ColorPalette.BLACK_100,
-  },
-  text: {
-    fontSize: 11,
   },
   divider: {
     marginVertical: 4,
     width: '95%',
     height: 2,
     borderRadius: 5,
-    backgroundColor: '#DFDFDF',
+    backgroundColor: ColorPalette.GRAY_200,
   },
   price: {
-    fontSize: 17,
     color: ColorPalette.YELLOW_100,
-    fontWeight: 'bold',
   },
 });

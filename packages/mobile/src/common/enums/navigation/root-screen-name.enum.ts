@@ -3,7 +3,6 @@ enum RootScreenName {
   SIGN_IN = 'Sign In',
   MAIN = 'Main',
   WELCOME = 'Welcome',
-  HOME = 'Home',
 }
 
 export { RootScreenName };
