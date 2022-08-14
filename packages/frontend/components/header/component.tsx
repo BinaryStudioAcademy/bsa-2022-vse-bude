@@ -1,5 +1,5 @@
 import { Routes } from '@enums';
-import { Container, Dropdown, Icon } from '@primitives';
+import { Avatar, Container, Dropdown, Icon } from '@primitives';
 import { IconName } from 'common/enums/icons';
 import Link from 'next/link';
 import * as styles from './styles';
@@ -71,6 +71,7 @@ export const Header = () => (
         Dropdown without icons&nbsp;
         <Icon icon={IconName.ANGLE_DOWN} color="yellow" />
       </Dropdown>
+      <Avatar firstName="John" lastName="Doe" />
       <nav>
         <Link href={Routes.USERS}>
           <a>users</a>
