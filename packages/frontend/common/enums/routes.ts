@@ -12,4 +12,5 @@ export enum AccountRoutes {
   ACCOUNT_SETTINGS = '/dashboard/settings',
   ACCOUNT_MESSAGES = '/dashboard/messages',
   ACCOUNT_SUPPORT = '/dashboard/support',
+  SIGN_UP = '/sign-up',
 }
