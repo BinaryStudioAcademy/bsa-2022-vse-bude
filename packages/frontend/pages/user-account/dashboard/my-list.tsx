@@ -1,11 +1,9 @@
-import { NestedLayout } from './layout';
+import type { ReactElement } from 'react';
 import type { NextPageWithLayout } from '../../types';
-import { ReactElement } from 'react';
 import { AccountLayout } from '../layout';
+import { NestedLayout } from './layout';
 
-const MyList: NextPageWithLayout = () => {
-  return <div>My List</div>;
-};
+const MyList: NextPageWithLayout = () => <div>My List</div>;
 
 MyList.getLayout = function getLayout(page: ReactElement) {
   return (
@@ -16,4 +14,3 @@ MyList.getLayout = function getLayout(page: ReactElement) {
 };
 
 export default MyList;
-

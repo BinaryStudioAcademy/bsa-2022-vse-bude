@@ -1,11 +1,11 @@
-import { NestedLayout } from './layout';
+import type { ReactElement } from 'react';
 import type { NextPageWithLayout } from '../../types';
-import { ReactElement } from 'react';
 import { AccountLayout } from '../layout';
+import { NestedLayout } from './layout';
 
-const ProfileInfo: NextPageWithLayout = () => {
-  return <div style={{width: "500px", backgroundColor: 'red'}}>Profile Info</div>;
-};
+const ProfileInfo: NextPageWithLayout = () => (
+    <div style={{ width: '500px', backgroundColor: 'red' }}>Profile Info</div>
+  );
 
 ProfileInfo.getLayout = function getLayout(page: ReactElement) {
   return (
