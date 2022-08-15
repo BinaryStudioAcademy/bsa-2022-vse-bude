@@ -23,20 +23,33 @@ export const Header = () => (
       <Container css={styles.navigationWrapper}>
         <nav css={styles.navigation}>
           <InternalLink href={Routes.DEFAULT} label="Home" />
-          <InternalLink href={Routes.DEFAULT} label="Category" />
+          <Dropdown
+            options={[
+              {
+                value: 'Home',
+                key: 'home',
+                onClick: () => {
+                  console.log('home');
+                },
+              },
+              {
+                value: 'About',
+                key: 'about',
+                onClick: () => {
+                  console.log('about');
+                },
+                disabled: true,
+              },
+            ]}
+          >
+            Category&nbsp;
+            <Icon icon={IconName.ANGLE_DOWN} color="yellow" />
+          </Dropdown>
           <InternalLink href={Routes.DEFAULT} label="Search" />
           <InternalLink href={Routes.DEFAULT} label="News" />
           <InternalLink href={Routes.DEFAULT} label="About us" />
         </nav>
       </Container>
-      <div css={styles.buttonsWrapper}>
-        <Button size="small">
-          <span css={styles.buttonCreateAccountText}>Create Account</span>
-        </Button>
-        <Button size="small" variant="outlined">
-          <span css={styles.buttonSignIn}>Sign In</span>
-        </Button>
-      </div>
       <Dropdown
         options={[
           {
@@ -90,6 +103,38 @@ export const Header = () => (
         <Icon icon={IconName.ANGLE_DOWN} color="yellow" />
       </Dropdown>
       <Avatar firstName="John" lastName="Doe" />
+    </Container>
+    <Link href={Routes.USERS}>
+      <a>users</a>
+    </Link>
+  </header>
+);
+
+export const HeaderLoggedOut = () => (
+  <header css={styles.header}>
+    <Container css={styles.headerWrapper}>
+      <Link href={Routes.DEFAULT}>
+        <a>
+          <Logo />
+        </a>
+      </Link>
+      <Container css={styles.navigationWrapper}>
+        <nav css={styles.navigation}>
+          <InternalLink href={Routes.DEFAULT} label="Home" />
+          <InternalLink href={Routes.DEFAULT} label="Category" />
+          <InternalLink href={Routes.DEFAULT} label="Search" />
+          <InternalLink href={Routes.DEFAULT} label="News" />
+          <InternalLink href={Routes.DEFAULT} label="About us" />
+        </nav>
+      </Container>
+      <div css={styles.buttonsWrapper}>
+        <Button size="small">
+          <span css={styles.buttonCreateAccountText}>Create Account</span>
+        </Button>
+        <Button size="small" variant="outlined">
+          <span css={styles.buttonSignIn}>Sign In</span>
+        </Button>
+      </div>
     </Container>
     <Link href={Routes.USERS}>
       <a>users</a>
