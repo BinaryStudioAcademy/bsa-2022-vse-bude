@@ -1,3 +1,8 @@
 {
-  "PLACE_BID_BTN": "Place a Bid"
+  "PLACE_BID_BTN": "Place a Bid",
+  "test": {
+    "nested": {
+      "value": "yoo"
+    }
+  }
 }

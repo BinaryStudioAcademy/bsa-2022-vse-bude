@@ -1,4 +1,13 @@
 {
+  "header": {
+    "nav": {
+      "home": "Головна",
+      "category": "Категорії",
+      "search": "Пошук",
+      "news": "Новини",
+      "about_us": "Про нас"
+    }
+  },
   "HOURS_SHORT": "г",
   "DAYS_SHORT": "д",
   "MINUTES_SHORT": "хв",

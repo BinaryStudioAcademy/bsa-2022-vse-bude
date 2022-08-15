@@ -1,12 +1,15 @@
 {
+  "header": {
+    "nav": {
+      "home": "Home",
+      "category": "Category",
+      "search": "Search",
+      "news": "News",
+      "about_us": "About us"
+    }
+  },
   "HOURS_SHORT": "h",
   "DAYS_SHORT": "d",
   "MINUTES_SHORT": "min",
-  "SECONDS_SHORT": "s",
-
-  "HOME": "Home",
-  "CATEGORY": "Category",
-  "SEARCH": "Search",
-  "NEWS": "News",
-  "ABOUT_US": "About us"
+  "SECONDS_SHORT": "s"
 }
