@@ -1,8 +1,8 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { wrapper } from 'store';
 import type { FC } from 'react';
-import type { AccountPageProps } from './types';
-import { AccountLayout } from './layout';
+import type { AccountPageProps } from '../../components/user-account-layout/types';
+import { AccountLayout } from '../../components/user-account-layout/layout';
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {

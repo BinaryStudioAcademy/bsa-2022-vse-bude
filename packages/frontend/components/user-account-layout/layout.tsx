@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { Layout } from '@components';
 import { Container, Flex } from '@primitives';
-import { DashboardLink } from '../../components/primitives/dashboard-link';
+import { DashboardLink } from '../primitives/dashboard-link';
 import { linksData } from './account-links-data';
 import * as styles from './styles';
 import type { AccountPageProps } from './types';
