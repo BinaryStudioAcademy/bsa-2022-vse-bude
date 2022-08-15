@@ -9,4 +9,5 @@ export enum AuthApiRoutes {
   SIGN_UP = '/sign-up',
   SIGN_OUT = '/sign-out',
   REFRESH_TOKEN = '/refresh-token',
+  USER = '/user',
 }
