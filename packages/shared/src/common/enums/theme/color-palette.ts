@@ -9,6 +9,7 @@ enum ColorPalette {
   RED_100 = '#E81414',
   BLACK_100 = '#2F2F2F',
   WHITE_100 = '#FFFFFF',
+  BLUE_100 ='0C42A6',
 }
 
 export { ColorPalette };

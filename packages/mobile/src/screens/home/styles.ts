@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     width: '100%',
     minHeight: 300,
     marginTop: 30,
-    backgroundColor: '#2C4340',
+    backgroundColor: ColorPalette.GREEN_200,
     justifyContent: 'center',
     paddingHorizontal: 16,
   },
