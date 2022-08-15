@@ -7,6 +7,12 @@ export type IconProps = {
   color?: ColorProp;
 };
 
-type SizeProp = 'lg' | 'md' | 'sm' | 'xs';
+export type SizeProp = 'lg' | 'md' | 'sm' | 'xs';
 
-type ColorProp = 'yellow' | 'black' | 'white' | 'gray' | 'green' | 'disabled';
+export type ColorProp =
+  | 'yellow'
+  | 'black'
+  | 'white'
+  | 'gray'
+  | 'green'
+  | 'disabled';
