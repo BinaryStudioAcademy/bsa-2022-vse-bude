@@ -21,8 +21,8 @@ export const loader = ({ colors }: Theme) => css`
   height: 32px;
   margin: 8px;
   border-radius: 50%;
-  border: 4px solid transparent;
-  border-top: 4px solid ${colors.text};
+  border: 2px solid transparent;
+  border-top: 2px solid ${colors.text};
   animation: ${loaderAnim} 1.2s linear infinite;
 
   &[data-size='extraSmall'] {
