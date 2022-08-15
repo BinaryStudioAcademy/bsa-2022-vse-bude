@@ -2,6 +2,7 @@ export enum ApiRoutes {
   RANDOM_DATA = '/random-data',
   USERS = '/users',
   AUTH = '/auth',
+  UPLOAD_IMAGE = '/upload-image',
 }
 
 export enum AuthApiRoutes {
