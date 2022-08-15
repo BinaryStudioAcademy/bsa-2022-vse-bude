@@ -5,3 +5,6 @@ export const WRONG_REFRESH_TOKEN = 'Wrong Refresh Token!';
 export const EXPIRED_REFRESH_TOKEN = 'Expired Refresh Token!';
 export const WRONG_PASSWORD = 'Wrong password!';
 export const INTERNAL_ERROR = 'Internal error!';
+export const USUPPORTED_FILE_EXTENSION = 'Unsupported file extension!';
+export const FILE_SIZE_TOO_LARGE = 'File size too large!';
+export const NO_FILE_ERROR = 'No file provided!';

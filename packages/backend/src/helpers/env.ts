@@ -12,6 +12,17 @@ type AuthEnvKeys =
   | 'JWT_ACCESS_TOKEN_EXPIRATION_MIN'
   | 'REFRESH_TOKEN_EXPIRATION_MIN';
 
-type EnvKeys = ProcessEnvKey | AuthEnvKeys | RedisEnvKey | TwilioEnvKey;
+type S3StorageEnvKey =
+  | 'S3_API_KEY'
+  | 'S3_API_SECRET'
+  | 'S3_API_LINK'
+  | 'S3_BUCKET_NAME';
+
+type EnvKeys =
+  | ProcessEnvKey
+  | AuthEnvKeys
+  | RedisEnvKey
+  | TwilioEnvKey
+  | S3StorageEnvKey;
 
 export const getEnv = (key: EnvKeys) => process.env[key];

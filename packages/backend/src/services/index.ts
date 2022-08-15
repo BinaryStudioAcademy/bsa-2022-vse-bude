@@ -7,6 +7,7 @@ import { AuthService } from './auth';
 import { HashService } from './hash';
 import { RedisStorageService } from './redis-storage';
 import { SMSSenderService } from './sms';
+import { S3StorageService } from './s3-storage';
 
 export const initServices = (repositories: Repositories) => {
   const hashService: HashService = new HashService();
@@ -25,6 +26,7 @@ export const initServices = (repositories: Repositories) => {
     ),
     redisStorageService: new RedisStorageService(),
     smsSenderService: new SMSSenderService(smsProvider),
+    s3StorageService: new S3StorageService(),
   };
 };
 
