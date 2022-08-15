@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { globalStyles } from '~/styles/styles';
-import { ScrollView } from 'react-native';
-
-import { BurgerMenu, Flag } from './components/components';
+import { ScrollView, FlatList } from '~/components/components';
+import { categories } from './components/category/mock-data/categories';
+import { BurgerMenu, Category, Flag } from './components/components';
 
 const Home: FC = () => {
   return (
@@ -12,7 +12,16 @@ const Home: FC = () => {
           //TODO
         }}
       />
-      <Flag/>
+      <Flag />
+      <FlatList
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        data={categories}
+        renderItem={({ item }) => (
+          <Category title={item.title} imageSource={item.src} />
+        )}
+
+      />
     </ScrollView>
   );
 };

@@ -1,8 +1,8 @@
-import React from 'react';
-import { View } from 'react-native';
+import React, { FC } from 'react';
+import { View } from '~/components/components';
 import { styles } from './style';
 
-const Flag = () => {
+const Flag:FC = () => {
   return (
     <View style={styles.wrapper}>
       <View style={styles.flagTop} />
