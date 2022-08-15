@@ -1,5 +1,5 @@
 import 'react-i18next';
-import { resources } from '~/localization/i18n';
+import { resources } from './i18n';
 
 declare module 'react-i18next' {
   interface CustomTypeOptions {
