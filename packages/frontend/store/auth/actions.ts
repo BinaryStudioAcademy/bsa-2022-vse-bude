@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { login } from 'services/auth';
 import type { UserDto, UserSignInDto } from '@vse-bude/shared';
 import { StorageKey } from '@vse-bude/shared';
-import { cookieStorage } from '@helpers';
+import { auth, cookieStorage } from '@helpers';
 import { AuthActions } from './action-types';
 
 export interface IAuth {
@@ -17,7 +17,6 @@ const loginUser = createAsyncThunk(
   (data: UserSignInDto, { rejectWithValue }) =>
     login(data)
       .then((data: IAuth) => {
-        console.log(data);
         if (data?.error) {
           return rejectWithValue(data.error);
         }
@@ -26,7 +25,7 @@ const loginUser = createAsyncThunk(
           expires: expiresAt,
         });
         cookieStorage.set<string>(StorageKey.REFRESH_TOKEN, data.refreshToken);
-
+        auth.setTokens(data.accessToken, data.refreshToken);
         return data;
       })
       .catch((error) => {
