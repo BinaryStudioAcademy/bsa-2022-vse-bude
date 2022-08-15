@@ -4,6 +4,7 @@ export {
   Image,
   ScrollView,
   FlatList,
+  TextInput,
 } from 'react-native';
 export { SafeAreaView } from 'react-native-safe-area-context';
 export { ScreenWrapper } from './screen-wrapper/screen-wrapper';
@@ -12,3 +13,4 @@ export { Input } from './input/input';
 export { Text } from './text/text';
 export * from './icons/icons';
 export { Spinner } from './spinner/spinner';
+export { SearchInput } from './search-input/search-input';

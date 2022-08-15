@@ -1,6 +1,12 @@
 import React, { FC } from 'react';
 import { globalStyles } from '~/styles/styles';
-import { ScrollView, FlatList, View, Text } from '~/components/components';
+import {
+  ScrollView,
+  FlatList,
+  View,
+  Text,
+  SearchInput,
+} from '~/components/components';
 import { categories } from './components/category/mock-data/categories';
 import { lotUpcoming } from './components/lot/mock-data/mock-data';
 import { organizations } from './components/organization/mock-data/mock-data';
@@ -22,6 +28,12 @@ const Home: FC = () => {
         }}
       />
       <Flag />
+      <SearchInput
+        placeHolder="Search the products"
+        onValueChange={() => {
+          //TODO
+        }}
+      />
       <FlatList
         horizontal={true}
         showsHorizontalScrollIndicator={false}
@@ -40,7 +52,7 @@ const Home: FC = () => {
             price={item.price}
             imgSrc={item.imgSrc}
             description={item.description}
-            title={item.price}
+            title={item.title}
           />
         )}
       />

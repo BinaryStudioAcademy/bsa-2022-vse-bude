@@ -28,6 +28,9 @@ const ListIcon: AppIcon = (iconProps) => (
 const ClockIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="clock" {...iconProps} />
 );
+const SearchIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="search" {...iconProps} />
+);
 export {
   HomeIcon,
   StarIcon,
@@ -36,4 +39,5 @@ export {
   ListIcon,
   CustomFeatherIcon,
   ClockIcon,
+  SearchIcon,
 };
