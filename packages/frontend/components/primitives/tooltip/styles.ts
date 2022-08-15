@@ -1,7 +1,7 @@
 ﻿import { css } from '@emotion/react';
 import type { Theme } from 'theme';
 
-export const trigger = () => css`
+export const trigger = css`
   cursor: pointer;
 `;
 
