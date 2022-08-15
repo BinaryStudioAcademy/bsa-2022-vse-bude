@@ -1,6 +1,5 @@
 import { getEnv } from '@helpers';
-import type { IEmailProvider } from 'common/types/providers/IEmailProvider';
-import type { SendSmtpEmail } from 'sib-api-v3-typescript';
+import type { EmailOptions, IEmailProvider } from '@types';
 import {
   TransactionalEmailsApi,
   TransactionalEmailsApiApiKeys,
@@ -16,7 +15,16 @@ export class SendInBlueEmailProvider implements IEmailProvider {
     );
   }
 
-  public async send(options: SendSmtpEmail) {
-    return await this._apiInstance.sendTransacEmail(options);
+  public async send(options: EmailOptions) {
+    return await this._apiInstance.sendTransacEmail({
+      subject: options.subject,
+      sender: options.from,
+      to: options.to,
+      replyTo: options.replyTo,
+      textContent: options.text,
+      htmlContent: options.html,
+      bcc: options.bcc,
+      cc: options.cc,
+    });
   }
 }

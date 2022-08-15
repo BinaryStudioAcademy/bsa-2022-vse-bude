@@ -1,6 +1,5 @@
 import { log } from '@helpers';
-import type { IEmailProvider } from '@types';
-import type { SendSmtpEmail } from 'sib-api-v3-typescript';
+import type { EmailOptions, IEmailProvider } from '@types';
 
 export class EmailService {
   private _emailProvider: IEmailProvider;
@@ -9,7 +8,7 @@ export class EmailService {
     this._emailProvider = emailProvider;
   }
 
-  public async send(options: SendSmtpEmail) {
+  public async send(options: EmailOptions) {
     try {
       return await this._emailProvider.send(options);
     } catch (error) {

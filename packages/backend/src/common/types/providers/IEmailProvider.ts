@@ -1,8 +1,5 @@
-import type { SendSmtpEmail, CreateSmtpEmail } from 'sib-api-v3-typescript';
-import type { IncomingMessage } from 'http';
+import type { EmailOptions } from '@types';
 
 export interface IEmailProvider {
-  send(
-    options: SendSmtpEmail,
-  ): Promise<{ response: IncomingMessage; body: CreateSmtpEmail }>;
+  send(options: EmailOptions): Promise<object>;
 }
