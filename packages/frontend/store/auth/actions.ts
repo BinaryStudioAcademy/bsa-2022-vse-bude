@@ -26,8 +26,8 @@ const loginUser = createAsyncThunk(
         });
         cookieStorage.set<string>(StorageKey.REFRESH_TOKEN, data.refreshToken);
         auth.setTokens(data.accessToken, data.refreshToken);
-        
-return data;
+
+        return data;
       })
       .catch((error) => {
         if (error instanceof Error) {
