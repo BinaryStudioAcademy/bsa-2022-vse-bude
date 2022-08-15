@@ -98,10 +98,12 @@ const heights = {
   checkbox: '20px',
   controlSm: '35px',
   controlBg: '45px',
+  logo: '32px',
 };
 
 const widths = {
   checkbox: '20px',
+  logo: '128px',
 };
 
 const shadows = {

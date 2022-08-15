@@ -33,6 +33,7 @@ export const Header = () => (
           style={{
             display: 'flex',
             alignItems: 'center',
+            justifyContent: 'space-between',
             width: '70%',
             gap: '1em',
           }}
