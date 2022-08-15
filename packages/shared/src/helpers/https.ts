@@ -5,6 +5,7 @@ import {
   HttpStatusCode,
   HttpContentType,
   AuthApiRoutes,
+  ApiRoutes,
 } from '../common/enums';
 import type {
   DeleteRequestParams,
@@ -142,13 +143,16 @@ class Http {
   private async updateAuthorizationToken() {
     const refreshToken = this._auth.getRefreshToken();
 
-    const res = await fetch(`${this._baseUrl}${AuthApiRoutes.REFRESH_TOKEN}`, {
-      method: HttpMethod.POST,
-      body: JSON.stringify(refreshToken),
-      headers: {
-        [HttpHeader.CONTENT_TYPE]: HttpContentType.APPLICATION_JSON,
+    const res = await fetch(
+      `${this._baseUrl}${ApiRoutes.AUTH}${AuthApiRoutes.REFRESH_TOKEN}`,
+      {
+        method: HttpMethod.POST,
+        body: JSON.stringify({ tokenValue: refreshToken }),
+        headers: {
+          [HttpHeader.CONTENT_TYPE]: HttpContentType.APPLICATION_JSON,
+        },
       },
-    });
+    );
 
     if (!res.ok) {
       this._auth.logOut();
