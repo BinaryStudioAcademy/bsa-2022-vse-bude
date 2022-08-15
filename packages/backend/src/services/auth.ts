@@ -1,29 +1,30 @@
-import type { UserRepository } from '@repositories';
+import type { RefreshTokenRepository, UserRepository } from '@repositories';
+import { VerificationTypes } from '@vse-bude/shared';
 import type { UserSignInDto, UserSignUpDto } from '@vse-bude/shared';
 import { sign as jwtSign, type UserSessionJwtPayload } from 'jsonwebtoken';
-import { getEnv } from '@helpers';
-import type { RefreshTokenRepository } from '@repositories';
 import {
   fromMilliToSeconds,
   fromMinToSeconds,
   fromSecondsToDate,
+  getEnv,
 } from '@helpers';
 import {
-  UserNotFoundError,
-  UserExistsError,
-  WrongPasswordError,
-  UnauthorizedError,
-  WrongRefreshTokenError,
   ExpiredRefreshTokenError,
+  UnauthorizedError,
+  UserExistsError,
+  UserNotFoundError,
+  WrongPasswordError,
+  WrongRefreshTokenError,
 } from '@errors';
 import type {
-  CreateRefreshToken,
   AuthTokenData,
+  CreateRefreshToken,
   CreateUser,
-  UpdateRefreshToken,
   SignOut,
+  UpdateRefreshToken,
 } from '@types';
 import type { HashService } from '@services';
+import type { VerifyService } from '@services';
 
 export class AuthService {
   private _userRepository: UserRepository;
@@ -32,14 +33,18 @@ export class AuthService {
 
   private _hashService: HashService;
 
+  private _verifyService: VerifyService;
+
   constructor(
     userRepository: UserRepository,
     refreshTokenRepository: RefreshTokenRepository,
     hashService: HashService,
+    verifyService: VerifyService,
   ) {
     this._userRepository = userRepository;
     this._refreshTokenRepository = refreshTokenRepository;
     this._hashService = hashService;
+    this._verifyService = verifyService;
   }
 
   async signOut(signOutDto: SignOut) {
@@ -62,6 +67,14 @@ export class AuthService {
       passwordHash: this._hashService.generatePasswordHash(signUpDto.password),
     };
     const newUser = await this._userRepository.create(createUserDto);
+    await this._verifyService.createVerificationCode(
+      newUser.id,
+      VerificationTypes.PHONE,
+    );
+    await this._verifyService.createVerificationCode(
+      newUser.id,
+      VerificationTypes.EMAIL,
+    );
     const tokenData = this.getTokenData(newUser.id);
 
     const refreshToken: CreateRefreshToken = {

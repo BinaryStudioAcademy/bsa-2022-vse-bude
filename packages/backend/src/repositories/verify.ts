@@ -2,7 +2,11 @@ import type { SaveVerifyCode } from '../common/types/verification-code';
 import { BaseRepository } from './base';
 
 export class VerifyRepository extends BaseRepository {
-  getUserCodeByTypeAndCode(userId: string, type: 'PHONE' | 'EMAIL', code: string) {
+  getUserCodeByTypeAndCode(
+    userId: string,
+    type: 'PHONE' | 'EMAIL',
+    code: string,
+  ) {
     return this._dbClient.verificationCode.findFirst({
       where: {
         AND: [
@@ -10,13 +14,13 @@ export class VerifyRepository extends BaseRepository {
             userId: userId,
           },
           {
-            type: type
+            type: type,
           },
           {
-            code: code
-          }
-        ]
-      }
+            code: code,
+          },
+        ],
+      },
     });
   }
 
@@ -25,12 +29,12 @@ export class VerifyRepository extends BaseRepository {
       where: {
         AND: [
           {
-            userId: userId
+            userId: userId,
           },
           {
-            type: type
-          }
-        ]
+            type: type,
+          },
+        ],
       },
     });
   }
@@ -40,8 +44,8 @@ export class VerifyRepository extends BaseRepository {
       data: {
         userId: data.userId,
         type: data.type,
-        code: data.code
-      }
+        code: data.code,
+      },
     });
   }
 }
