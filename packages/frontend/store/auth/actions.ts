@@ -1,6 +1,4 @@
-// import type { Http } from '@vse-bude/shared';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
 import { login } from 'services/auth';
 import type { UserDto, UserSignInDto } from '@vse-bude/shared';
 import { StorageKey } from '@vse-bude/shared';
@@ -19,6 +17,7 @@ const loginUser = createAsyncThunk(
   (data: UserSignInDto, { rejectWithValue }) =>
     login(data)
       .then((data: IAuth) => {
+        console.log(data);
         if (data?.error) {
           return rejectWithValue(data.error);
         }
@@ -32,7 +31,7 @@ const loginUser = createAsyncThunk(
       })
       .catch((error) => {
         if (error instanceof Error) {
-          rejectWithValue(error.message);
+          return rejectWithValue(error.message);
         }
       }),
 );

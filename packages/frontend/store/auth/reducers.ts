@@ -15,13 +15,13 @@ const user = createReducer(INITIAL_STATE, {
 });
 
 const token = createReducer('', {
-  [loginUser.fulfilled.type]: (_, { payload }) => payload.accessToken,
   [loginUser.rejected.type]: () => '',
+  [loginUser.fulfilled.type]: (_, { payload }) => payload.accessToken,
 });
 
 const refreshToken = createReducer('', {
-  [loginUser.fulfilled.type]: (_, { payload }) => payload.refreshToken,
   [loginUser.rejected.type]: () => '',
+  [loginUser.fulfilled.type]: (_, { payload }) => payload.refreshToken,
 });
 
 const loading = createReducer(false, {
@@ -31,8 +31,8 @@ const loading = createReducer(false, {
 });
 
 const error = createReducer('', {
-  [loginUser.pending.type]: () => '',
   [loginUser.rejected.type]: (_, { payload }) => payload,
+  [loginUser.pending.type]: () => '',
 });
 
 export const authReducer = combineReducers({

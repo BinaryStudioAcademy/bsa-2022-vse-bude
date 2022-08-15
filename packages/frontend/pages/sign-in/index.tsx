@@ -7,9 +7,9 @@ export default function LoginPage() {
   return (
     // TODO: wrap in public route
     <Layout>
-    <AuthLayout>
-      <Login />
-    </AuthLayout>
+      <AuthLayout>
+        <Login />
+      </AuthLayout>
     </Layout>
   );
 }

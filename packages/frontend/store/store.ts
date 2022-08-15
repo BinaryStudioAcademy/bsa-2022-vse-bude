@@ -5,7 +5,6 @@ import { randomDataReducer } from './random-data';
 import { profileReducer } from './profile';
 import { authReducer } from './auth';
 
-
 const rootReducer = combineReducers({
   randomData: randomDataReducer,
   auth: authReducer,
@@ -14,7 +13,7 @@ const rootReducer = combineReducers({
 
 const makeStore = () =>
   configureStore({
-    reducer: rootReducer
+    reducer: rootReducer,
   });
 
 export type RootState = ReturnType<typeof rootReducer>;
