@@ -14,6 +14,11 @@ type AuthEnvKeys =
   | 'JWT_ACCESS_TOKEN_EXPIRATION_MIN'
   | 'REFRESH_TOKEN_EXPIRATION_MIN';
 
-type EnvKeys = ProcessEnvKey | AuthEnvKeys | RedisEnvKey | TwilioEnvKey | EmailEnvKey;
+type EnvKeys =
+  | ProcessEnvKey
+  | AuthEnvKeys
+  | RedisEnvKey
+  | TwilioEnvKey
+  | EmailEnvKey;
 
 export const getEnv = (key: EnvKeys) => process.env[key];

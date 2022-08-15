@@ -1,6 +1,7 @@
 import type { Repositories } from '@repositories';
 import { TwilioSMSProvider, BarSMSProvider } from '@providers';
 import { getEnv } from '@helpers';
+import { SendInBlueEmailProvider } from 'providers/email';
 import { RandomDataService } from './random-data';
 import { UserService } from './user';
 import { AuthService } from './auth';
@@ -8,7 +9,6 @@ import { HashService } from './hash';
 import { RedisStorageService } from './redis-storage';
 import { SMSSenderService } from './sms';
 import { EmailService } from './email';
-import { SendInBlueEmailProvider } from 'providers/email';
 
 export const initServices = (repositories: Repositories) => {
   const hashService: HashService = new HashService();
@@ -27,7 +27,7 @@ export const initServices = (repositories: Repositories) => {
     ),
     redisStorageService: new RedisStorageService(),
     smsSenderService: new SMSSenderService(smsProvider),
-    emailService: new EmailService(new SendInBlueEmailProvider())
+    emailService: new EmailService(new SendInBlueEmailProvider()),
   };
 };
 
