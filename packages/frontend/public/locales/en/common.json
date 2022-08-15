@@ -1,4 +1,9 @@
 {
+  "HOURS_SHORT": "h",
+  "DAYS_SHORT": "d",
+  "MINUTES_SHORT": "min",
+  "SECONDS_SHORT": "s",
+
   "HOME": "Home",
   "CATEGORY": "Category",
   "SEARCH": "Search",

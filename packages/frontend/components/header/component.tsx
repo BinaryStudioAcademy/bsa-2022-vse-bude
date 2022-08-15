@@ -1,5 +1,13 @@
 import { Routes } from '@enums';
-import { Button, Container, InternalLink } from '@primitives';
+import {
+  Avatar,
+  Button,
+  Container,
+  Dropdown,
+  Icon,
+  InternalLink,
+} from '@primitives';
+import { IconName } from 'common/enums/icons';
 import Link from 'next/link';
 import { Logo } from '../primitives/logo/component';
 import * as styles from './styles';
@@ -29,6 +37,59 @@ export const Header = () => (
           <span css={styles.buttonSignIn}>Sign In</span>
         </Button>
       </div>
+      <Dropdown
+        options={[
+          {
+            value: 'Home',
+            key: 'home',
+            onClick: () => {
+              console.log('home');
+            },
+            icon: {
+              icon: IconName.SETTINGS,
+              color: 'yellow',
+            },
+          },
+          {
+            value: 'About',
+            key: 'about',
+            onClick: () => {
+              console.log('about');
+            },
+            icon: {
+              icon: IconName.SIGN_OUT,
+              color: 'disabled',
+            },
+            disabled: true,
+          },
+        ]}
+      >
+        Dropdown with icons&nbsp;
+        <Icon icon={IconName.ANGLE_DOWN} color="yellow" />
+      </Dropdown>
+      <Dropdown
+        options={[
+          {
+            value: 'Home',
+            key: 'home',
+            onClick: () => {
+              console.log('home');
+            },
+          },
+          {
+            value: 'About',
+            key: 'about',
+            onClick: () => {
+              console.log('about');
+            },
+            disabled: true,
+          },
+        ]}
+      >
+        Dropdown without icons&nbsp;
+        <Icon icon={IconName.ANGLE_DOWN} color="yellow" />
+      </Dropdown>
+      <Avatar firstName="John" lastName="Doe" />
     </Container>
     <Link href={Routes.USERS}>
       <a>users</a>
