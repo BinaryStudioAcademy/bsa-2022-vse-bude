@@ -1,10 +1,10 @@
 import type { FC } from 'react';
-import type { AccountPageProps } from './types';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { Layout } from '@components';
 import { Container, Flex } from '@primitives';
 import { DashboardLink } from '../primitives/dashboard-link';
+import type { AccountPageProps } from './types';
 import { linksData } from './account-links-data';
 import * as styles from './styles';
 
