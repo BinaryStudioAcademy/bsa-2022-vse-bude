@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 
 export const contentWrapper = ({ spaces }: Theme) => css`
   height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   padding: ${spaces.xl6} 0;
@@ -15,22 +16,30 @@ export const formWrapper = () => css`
 `;
 export const form = () => css`
   width: 100%;
-  min-width: 327px;
+  max-width: 327px;
 `;
-export const linkText = ({ fontSizes, colors, lineHeights }: Theme) => css`
+export const linkText = ({
+  fontSizes,
+  colors,
+  lineHeights,
+  spaces,
+}: Theme) => css`
   margin: 0;
   text-align: center;
   font-family: inherit;
   font-size: ${fontSizes.body2};
   line-height: ${lineHeights.body2};
   color: ${colors.text};
+  & span {
+    margin-left: ${spaces.xs};
+  }
 `;
 export const inputWrapper = ({ spaces }: Theme) => css`
   margin-bottom: ${spaces.md};
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  /* align-items: stretch; */
 `;
 export const headline = ({
   colors,
