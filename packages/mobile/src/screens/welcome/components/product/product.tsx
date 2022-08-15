@@ -14,13 +14,13 @@ export const Product: FC = () => {
       <Image source={images.stamp} style={styles.image} />
       <View style={styles.wrapper}>
         <Text style={[styles.title, globalStyles.fontWeightBold]}>
-          {t('stamp.TITLE')}
+          {t('welcome.TITLE')}
         </Text>
         <Text style={globalStyles.fs12} numberOfLines={2}>
-          {t('stamp.DESCRIPTION')}
+          {t('welcome.DESCRIPTION')}
         </Text>
         <View style={styles.divider}></View>
-        <View style={styles.price_wrapper}>
+        <View style={styles.priceWrapper}>
           <Text
             style={[
               globalStyles.fs17,
@@ -28,10 +28,10 @@ export const Product: FC = () => {
               styles.price,
             ]}
           >
-            360 {t('stamp.CURRENCY_UA')}
+            360 {t('welcome.CURRENCY_UA')}
           </Text>
           <Button
-            label={t('stamp.BET')}
+            label={t('welcome.BET')}
             type={ButtonType.SECONDARY}
             view={ButtonAppearance.FILLED}
             fontSize={11}

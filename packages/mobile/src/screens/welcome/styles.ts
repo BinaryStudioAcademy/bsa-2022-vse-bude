@@ -1,11 +1,8 @@
-import { StyleSheet, Dimensions } from 'react-native';
-
-const { width, height } = Dimensions.get('window');
+import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   wrapper: {
-    width: width,
-    height: height,
+    flex: 1,
     alignItems: 'center',
     paddingHorizontal: 30,
   },
@@ -15,10 +12,10 @@ export const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginTop: 70,
   },
-  stamp_wrapper: {
+  stampWrapper: {
     marginTop: 50,
   },
-  buttons_wrapper: {
+  buttonsWrapper: {
     position: 'absolute',
     bottom: 60,
     justifyContent: 'space-between',

@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
     resizeMode: 'contain',
     alignSelf: 'center',
   },
-  price_wrapper: {
+  priceWrapper: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 5,

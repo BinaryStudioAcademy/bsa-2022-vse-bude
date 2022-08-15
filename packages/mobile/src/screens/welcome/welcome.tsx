@@ -25,10 +25,10 @@ const Welcome: FC<Props> = ({ navigation }) => {
       style={styles.wrapper}
     >
       <Image source={images.logo_small} style={styles.logo} />
-      <View style={styles.stamp_wrapper}>
+      <View style={styles.stampWrapper}>
         <Product />
       </View>
-      <View style={styles.buttons_wrapper}>
+      <View style={styles.buttonsWrapper}>
         <Button
           label={t('verification.CREATE_ACCOUNT')}
           background={ColorPalette.GREEN_200}
