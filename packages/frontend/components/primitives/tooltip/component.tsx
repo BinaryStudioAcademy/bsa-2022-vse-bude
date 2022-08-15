@@ -1,5 +1,4 @@
-﻿import { useRef, useEffect, useState, useCallback } from 'react';
-import React from 'react';
+﻿import { Fragment, useRef, useEffect, useState, useCallback } from 'react';
 import * as ReactDOM from 'react-dom';
 import * as styles from './styles';
 import type { TooltipProps } from './types';
@@ -7,7 +6,7 @@ import type { TooltipProps } from './types';
 export const Tooltip = ({
   trigger,
   children,
-  hideTimeoutMs = 500,
+  hideTimeoutMs = 300,
 }: TooltipProps) => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -78,16 +77,16 @@ export const Tooltip = ({
     );
 
   return (
-    <React.Fragment>
-      <span
+    <Fragment>
+      <div
         ref={triggerWrapperRef}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         css={styles.trigger}
       >
         {trigger}
-      </span>
+      </div>
       {isVisible && renderPortal()}
-    </React.Fragment>
+    </Fragment>
   );
 };

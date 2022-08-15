@@ -1,0 +1,73 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/Raleway-Bold.ttf",
+      "sha1": "7da5bcf0f8ce1caa4806f535ea123ff77f3b3c0a"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-BoldItalic.ttf",
+      "sha1": "a0d12d97cf92a207668741977ba757104f441392"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-ExtraBold.ttf",
+      "sha1": "a125a42542e6579be8f729415ea51989986a191c"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-ExtraBoldItalic.ttf",
+      "sha1": "918316d6218e63233b4c3a6e54dda5a36969a7aa"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-ExtraLight.ttf",
+      "sha1": "89dfefd316c3d7ef4a4a1c51b3ca166c1dfefc36"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-ExtraLightItalic.ttf",
+      "sha1": "9384ad2a8a76276bcb033338b5777ab648d90400"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-Italic.ttf",
+      "sha1": "ef0798d10e4ba26a9624bbefc07d896876dc1cc4"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-Light.ttf",
+      "sha1": "6d05656d68df61514a3e30b569caf7b4b581d069"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-LightItalic.ttf",
+      "sha1": "1e8186bcdab8a6f9b43079c5b875c6bf2cd96625"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-Medium.ttf",
+      "sha1": "22e19cd5ad425d646f6b95eaf18044b675557881"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-MediumItalic.ttf",
+      "sha1": "1819b762676b8445b2652a9f87693bf50bfbc9e2"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-Regular.ttf",
+      "sha1": "e199aa653758d7e6bf443396329fcdd80f97dc01"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-SemiBold.ttf",
+      "sha1": "eba085cb0997e4a07420fedba782f92ae95e8062"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-SemiBoldItalic.ttf",
+      "sha1": "2143cf2115acf777b387202730acc7436c353261"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-Thin.ttf",
+      "sha1": "f23e465b05b13e66ad50e276ceb8a2de8323b564"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-ThinItalic.ttf",
+      "sha1": "62c81a9a032dc42dd361594b260c206ae5de87c1"
+    },
+    {
+      "path": "src/assets/fonts/SIL Open Font License.txt",
+      "sha1": "7ccfbdcb32067a7c664895d03e73ab5d7e95d7a4"
+    }
+  ]
+}

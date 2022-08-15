@@ -1,17 +1,17 @@
 import { css } from '@emotion/react';
 
-export const cutterWrapper = () => css`
-  position: relative;
-
-  &[data-is-cutted='true'] {
-    cursor: pointer;
-  }
+export const multiline = (lines: number) => css`
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: ${lines};
+  -webkit-line-clamp: ${lines};
+  -webkit-box-orient: vertical;
+  white-space: normal;
+  word-break: break-word;
 `;
 
-export const cutterText = () => css`
-  display: block;
-  width: 100%;
-  height: 100%;
+export const singleline = css`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

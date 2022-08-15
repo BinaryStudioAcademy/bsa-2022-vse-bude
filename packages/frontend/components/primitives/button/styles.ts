@@ -11,12 +11,13 @@ export const button = ({
   spaces,
   heights,
 }: Theme) => css`
-  ${resetButton}
+  ${resetButton};
   display: flex;
   align-items: center;
-  font-size: ${fontSizes.button};
+  justify-content: center;
   line-height: ${lineHeights.button};
   font-weight: ${fontWeights.button};
+  font-size: ${fontSizes.button};
   cursor: pointer;
 
   &[data-variant='filled'] {
@@ -59,6 +60,7 @@ export const button = ({
   &[data-size='small'] {
     height: ${heights.controlSm};
     border-radius: ${radiuses.sm};
-    padding: 0 ${spaces.lg};
+    padding: 0 ${spaces.md};
+    font-size: ${fontSizes.smallButton};
   }
 `;
