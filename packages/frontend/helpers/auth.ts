@@ -1,7 +1,9 @@
-import type { Auth, Storage } from '@vse-bude/shared';
+import type { IAuthHelper, Storage } from '@vse-bude/shared';
 import { StorageKey } from '@vse-bude/shared';
+import { logOut } from 'store/profile';
+import { store } from '../store/store';
 
-class AuthHelper implements Auth {
+class AuthHelper implements IAuthHelper {
   private _storage: Storage;
 
   constructor(storage: Storage) {
@@ -21,9 +23,10 @@ class AuthHelper implements Auth {
     this._storage.set(StorageKey.REFRESH_TOKEN, refreshToken);
   }
 
-  public logout(): void {
+  public logOut(): void {
     this._storage.delete(StorageKey.ACCESS_TOKEN);
     this._storage.delete(StorageKey.REFRESH_TOKEN);
+    store.dispatch(logOut());
   }
 }
 

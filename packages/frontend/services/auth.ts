@@ -1,7 +1,7 @@
-import { AuthApiRoutes } from '@vse-bude/shared';
+import { ApiRoutes, AuthApiRoutes } from '@vse-bude/shared';
 import { http } from '@helpers';
 
 export const getUser = () =>
   http.get({
-    url: AuthApiRoutes.GET_USER,
+    url: `${ApiRoutes.AUTH}${AuthApiRoutes.GET_USER}`,
   });

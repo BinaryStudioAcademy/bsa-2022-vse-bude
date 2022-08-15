@@ -5,34 +5,35 @@ import { auth as authHelper } from '@helpers';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { getCurrentUser } from 'store/profile';
 import { useRouter } from 'next/router';
+import { Routes } from '@enums';
 
 interface AuthProviderProps {
   children: ReactNode;
 }
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
-  const user = useTypedSelector((state) => state.profile.user);
+  const { user } = useTypedSelector((state) => state.profile);
 
   const dispatch = useAppDispatch();
   const router = useRouter();
 
   const hasToken = !!authHelper.getAccessToken();
   const hasUser = !!user;
-  const needLoadUser = !hasUser && hasToken;
+  const needToLoadUser = !hasUser && hasToken;
 
   useEffect(() => {
-    if (needLoadUser) {
+    if (needToLoadUser) {
       dispatch(getCurrentUser());
     }
-  }, [dispatch, needLoadUser, router]);
+  }, [dispatch, needToLoadUser]);
 
   useEffect(() => {
-    if (!hasToken) {
-      router.push('/');
+    if (!hasUser && !hasToken) {
+      router.push(Routes.DEFAULT);
     }
-  }, [hasToken, router]);
+  }, [hasUser, router, hasToken]);
 
-  if (needLoadUser || !hasToken) {
+  if (needToLoadUser || !hasUser) {
     return <div>Loading...</div>;
   }
 

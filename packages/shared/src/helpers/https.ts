@@ -12,7 +12,7 @@ import type {
   PostRequestParams,
   PutRequestParams,
   RequestArgs,
-  Auth,
+  IAuthHelper,
 } from '../common/types';
 import { HttpError } from '../exceptions';
 
@@ -24,9 +24,9 @@ interface MakeRequest {
 class Http {
   private _baseUrl: string;
 
-  private _auth: Auth;
+  private _auth: IAuthHelper;
 
-  constructor(baseUrl: string, auth: Auth) {
+  constructor(baseUrl: string, auth: IAuthHelper) {
     this._baseUrl = baseUrl;
     this._auth = auth;
   }
@@ -142,27 +142,22 @@ class Http {
   private async updateAuthorizationToken() {
     const refreshToken = this._auth.getRefreshToken();
 
-    if (refreshToken) {
-      const res = await fetch(
-        `${this._baseUrl}${AuthApiRoutes.REFRESH_TOKEN}`,
-        {
-          method: HttpMethod.POST,
-          body: JSON.stringify(refreshToken),
-          headers: {
-            [HttpHeader.CONTENT_TYPE]: HttpContentType.APPLICATION_JSON,
-          },
-        },
-      );
+    const res = await fetch(`${this._baseUrl}${AuthApiRoutes.REFRESH_TOKEN}`, {
+      method: HttpMethod.POST,
+      body: JSON.stringify(refreshToken),
+      headers: {
+        [HttpHeader.CONTENT_TYPE]: HttpContentType.APPLICATION_JSON,
+      },
+    });
 
-      if (!res.ok) {
-        this._auth.logout();
-        throw new HttpError(res);
-      }
-
-      const { accessToken, refreshToken: newRefreshToken } = await res.json();
-
-      this._auth.setTokens(accessToken, newRefreshToken);
+    if (!res.ok) {
+      this._auth.logOut();
+      throw new HttpError(res);
     }
+
+    const { accessToken, refreshToken: newRefreshToken } = await res.json();
+
+    this._auth.setTokens(accessToken, newRefreshToken);
   }
 }
 

@@ -7,5 +7,5 @@ const auth = new AuthHelper(cookieStorage);
 
 const http = new Http(process.env.NEXT_PUBLIC_API_ROUTE, auth);
 
-export { cookieStorage, http, CookieStorage, auth };
+export { cookieStorage, http, CookieStorage, auth, AuthHelper };
 export * from './title';

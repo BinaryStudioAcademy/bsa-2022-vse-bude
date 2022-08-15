@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { HydrateAction } from '@types';
 import type { UserDto } from '@vse-bude/shared';
-import { HYDRATE } from 'next-redux-wrapper';
 import { getCurrentUser } from './actions';
 
 interface ProfileState {
@@ -17,7 +15,12 @@ const initialState: ProfileState = {
 const profileSlice = createSlice({
   name: 'profile',
   initialState,
-  reducers: {},
+  reducers: {
+    logOut(state) {
+      state.user = null;
+      state.loading = false;
+    },
+  },
   extraReducers: {
     [getCurrentUser.pending.type](state) {
       state.loading = true;
@@ -30,13 +33,9 @@ const profileSlice = createSlice({
       state.user = null;
       state.loading = false;
     },
-    [HYDRATE](state, { payload }: HydrateAction) {
-      if (payload.profile.user) {
-        state.user = payload.profile.user;
-      }
-    },
   },
 });
 
 export const profileReducer = profileSlice.reducer;
+export const { logOut } = profileSlice.actions;
 export type { ProfileState };

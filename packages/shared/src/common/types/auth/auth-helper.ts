@@ -1,6 +1,6 @@
-export interface Auth {
+export interface IAuthHelper {
   getAccessToken(): string;
   getRefreshToken(): string;
   setTokens(accessToken: string, refreshToken: string): void;
-  logout(): void;
+  logOut(): void;
 }
