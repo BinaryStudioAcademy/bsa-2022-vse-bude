@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { globalStyles } from '~/styles/styles';
-import {  ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 
-import { BurgerMenu } from './components/burger-menu/burger-menu';
+import { BurgerMenu, Flag } from './components/components';
 
 const Home: FC = () => {
   return (
@@ -12,6 +12,7 @@ const Home: FC = () => {
           //TODO
         }}
       />
+      <Flag/>
     </ScrollView>
   );
 };
