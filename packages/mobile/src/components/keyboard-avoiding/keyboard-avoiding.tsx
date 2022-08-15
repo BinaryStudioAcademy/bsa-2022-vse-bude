@@ -17,9 +17,7 @@ const KeyboardAvoiding: FC<KeyboardAvoidingProps> = ({
       style={[styles.wrapper, style]}
       behavior={isIOS ? 'padding' : undefined}
     >
-      <ScrollView>
-        {children}
-      </ScrollView>
+      <ScrollView>{children}</ScrollView>
     </KeyboardAvoidingView>
   );
 };
