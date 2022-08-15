@@ -17,23 +17,16 @@ const styles = StyleSheet.create({
   categories: {
     marginTop: 30,
   },
-  actionHeaderWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginTop: 30,
-  },
-  lotTitle: {
-    color: ColorPalette.BLACK_100,
-  },
   organizationTitle: {
     color: ColorPalette.WHITE_100,
   },
-  wrapper: {
-    flex: 1,
-    backgroundColor: '#2C4340',
+  organizationsWrapper: {
+    width: '100%',
     minHeight: 300,
+    marginTop: 30,
+    backgroundColor: '#2C4340',
     justifyContent: 'center',
+    paddingHorizontal: 16,
   },
   imgWrapper: {
     flexDirection: 'row',

@@ -14,9 +14,12 @@ const styles = StyleSheet.create({
   },
   title: {
     color: ColorPalette.BLACK_100,
+    textAlign: 'center',
   },
   image: {
-    marginTop: 15,
+    maxWidth: '60%',
+    maxHeight: '65%',
+    resizeMode: 'contain',
   },
 });
 

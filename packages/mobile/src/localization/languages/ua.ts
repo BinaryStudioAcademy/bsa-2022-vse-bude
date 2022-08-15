@@ -11,6 +11,18 @@ export const ua = {
     LAST_NAME: 'Прізвище',
     LAST_NAME_HINT: 'Введіть своє Прізвище',
   },
+  home: {
+    HELP_UKRAINE: 'Допоможи Україні',
+    SEARCH_PLACEHOLDER: 'Знайти товари',
+    ARTS: 'Мистецтво',
+    TOYS: 'Іграшки',
+    HOME_DECORS: 'Домашній Декор',
+    APPLIANCES: 'Побутова Техніка',
+    POPULAR_LOTS: 'Популярні лоти',
+    SEE_ALL_LOTS: 'Переглягути Усі Лоти',
+    CHARITY_ORGANIZATIONS: 'Благодійні Організації',
+    POPULAR_ITEMS: 'Популярні Товари',
+  },
   currency: {
     UAH: 'ГРН',
   },

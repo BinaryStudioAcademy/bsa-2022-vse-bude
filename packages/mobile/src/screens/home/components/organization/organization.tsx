@@ -10,7 +10,7 @@ type Props = {
 const Organization: FC<Props> = ({ imageSource }) => {
   return (
     <View style={styles.imgContainer}>
-      <Image source={imageSource} />
+      <Image source={imageSource} style={styles.image} />
     </View>
   );
 };

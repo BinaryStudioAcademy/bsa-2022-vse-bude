@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { useTranslation } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
 import {
   ScrollView,
@@ -6,79 +7,70 @@ import {
   View,
   Text,
   SearchInput,
-  ResponsiveText,
 } from '~/components/components';
+import { LotType } from '~/common/enums/enums';
 import { categories } from './components/category/mock-data/categories';
-import { lotUpcoming } from './components/lot/mock-data/mock-data';
+import { lotData } from './components/lot/mock-data/mock-data';
 import { organizations } from './components/organization/mock-data/mock-data';
 import {
   BurgerMenu,
   Category,
   Flag,
-  Lot,
   Organization,
+  LotSection,
+  Wrapper,
 } from './components/components';
 import { styles } from './styles';
 
 const Home: FC = () => {
+  const { t } = useTranslation();
+
   return (
-    <ScrollView style={globalStyles.px4}>
-      <BurgerMenu
-        onClick={() => {
-          //TODO
-        }}
-      />
-      <View style={[styles.header]}>
-        <Text style={[styles.title, globalStyles.fs36]}> Help Ukraine</Text>
-        <Flag />
-      </View>
-      <SearchInput
-        placeHolder="Search the products"
-        onValueChange={() => {
-          //TODO
-        }}
-      />
-      <FlatList
-        style={styles.categories}
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        data={categories}
-        renderItem={({ item }) => (
-          <Category title={item.title} imageSource={item.src} />
-        )}
-      />
-      <View style={styles.actionHeaderWrapper}>
-        <Text
-          style={[
-            globalStyles.fs22,
-            globalStyles.fontWeightBold,
-            styles.lotTitle,
-          ]}
-        >
-          Popular Lots
-        </Text>
-        <ResponsiveText
-          text="See All Lots"
-          onPress={() => {
+    <ScrollView>
+      <Wrapper>
+        <BurgerMenu
+          onClick={() => {
+            //TODO
+          }}
+        />
+        <View style={[styles.header]}>
+          <Text style={[styles.title, globalStyles.fs36]}>
+            {t('home.HELP_UKRAINE')}
+          </Text>
+          <Flag />
+        </View>
+        <SearchInput
+          placeHolder={t('home.SEARCH_PLACEHOLDER')}
+          onValueChange={() => {
+            //TODO
+          }}
+        />
+        <FlatList
+          style={styles.categories}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          data={categories}
+          renderItem={({ item }) => (
+            <Category
+              title={item.title}
+              imageSource={item.src}
+              onPress={() => {
+                // TODO
+              }}
+            />
+          )}
+        />
+        <LotSection
+          sectionTitle={t('home.POPULAR_LOTS')}
+          extendTitle={t('home.SEE_ALL_LOTS')}
+          lotType={LotType.UPCOMING}
+          data={lotData}
+          onExtendPress={() => {
             // TODO
           }}
         />
-      </View>
-      <FlatList
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        data={lotUpcoming}
-        renderItem={({ item }) => (
-          <Lot
-            type={item.type}
-            price={item.price}
-            imgSrc={item.imgSrc}
-            description={item.description}
-            title={item.title}
-          />
-        )}
-      />
-      <View style={styles.wrapper}>
+      </Wrapper>
+      <View style={styles.organizationsWrapper}>
         <Text
           style={[
             styles.organizationTitle,
@@ -86,7 +78,7 @@ const Home: FC = () => {
             globalStyles.fontWeightExtraBold,
           ]}
         >
-          Charity Organizations
+          {t('home.CHARITY_ORGANIZATIONS')}
         </Text>
         <View style={styles.imgWrapper}>
           {organizations.map((item) => {
@@ -94,6 +86,17 @@ const Home: FC = () => {
           })}
         </View>
       </View>
+      <Wrapper>
+        <LotSection
+          sectionTitle={t('home.POPULAR_ITEMS')}
+          extendTitle={t('home.SEE_ALL_LOTS')}
+          lotType={LotType.OVER}
+          data={lotData}
+          onExtendPress={() => {
+            // TODO
+          }}
+        />
+      </Wrapper>
     </ScrollView>
   );
 };

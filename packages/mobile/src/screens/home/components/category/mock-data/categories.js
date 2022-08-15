@@ -2,21 +2,21 @@ import { images } from '~/assets/images/images';
 
 const categories =[
   {
-    title:'Arts',
+    title:'Мистецтво',
     src:images.arts,
     key:1,
   },
   {
-    title: 'Toys',
+    title: 'Іграшки',
     src:images.toys,
   },
   {
-    title: 'Home Decors',
+    title: 'Домашній Декор',
     src:images.home_decor,
     key:2,
   },
   {
-    title: 'Appliances',
+    title: 'Побутова Техніка',
     src:images.appliances,
     key:3,
   },

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { View, Text, Image } from '~/components/components';
+import { View, Text, Image, TouchableOpacity } from '~/components/components';
 import { ImageSourcePropType } from 'react-native';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
@@ -7,14 +7,17 @@ import { styles } from './styles';
 type Props = {
   title: string;
   imageSource: ImageSourcePropType;
+  onPress: () => void;
 };
 
-const Category: FC<Props> = ({ title, imageSource }) => {
+const Category: FC<Props> = ({ title, imageSource, onPress }) => {
   return (
-    <View style={styles.wrapper}>
-      <Text style={[styles.title, globalStyles.fs14]}>{title}</Text>
-      <Image source={imageSource} style={styles.image} />
-    </View>
+    <TouchableOpacity onPress={onPress}>
+      <View style={styles.wrapper}>
+        <Text style={[styles.title, globalStyles.fs14]}>{title}</Text>
+        <Image source={imageSource} style={styles.image} />
+      </View>
+    </TouchableOpacity>
   );
 };
 

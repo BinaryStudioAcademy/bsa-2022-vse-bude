@@ -5,8 +5,8 @@ const organizations = [
   { src: images.come_back_alive },
   { src: images.help_children },
   { src: images.ihf },
-  { src: images.ico },
   { src: images.hospitallers },
+  { src: images.ico },
 ];
 
 export { organizations };
