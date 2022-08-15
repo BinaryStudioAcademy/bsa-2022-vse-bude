@@ -81,7 +81,7 @@ export const popup = ({ mq, colors, radiuses }: Theme) => css`
     padding: 22px 23px;
   }
 `;
-export const controlsWrapper = () => css`
+export const controlsWrapper = css`
   display: flex;
   justify-content: space-between;
   align-items: center;
