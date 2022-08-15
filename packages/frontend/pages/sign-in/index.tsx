@@ -1,9 +1,17 @@
-import { Layout } from '@components';
+import { AuthLayout } from 'components/authLayout';
+import Login from 'components/login/component';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-const SignInPage = () => (
-  <Layout>
-    <h1>Sign In</h1>
-  </Layout>
-);
+export default function LoginPage() {
+  return (
+    <AuthLayout>
+      <Login />
+    </AuthLayout>
+  );
+}
 
-export default SignInPage;
+export const getServerSideProps = async ({ locale }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ['auth'])),
+  },
+});
