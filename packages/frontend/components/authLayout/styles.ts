@@ -1,40 +1,46 @@
 import type { Theme } from 'theme';
 import { css } from '@emotion/react';
 
-export const authSection = css`
+export const authSection = ({ mq }: Theme) => css`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   min-height: 100vh;
-  @media screen and (max-width: 768px) {
-    flex-direction: column;
+  ${mq[1]} {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 `;
-export const bgWrapper = css`
+export const bgWrapper = ({ mq }: Theme) => css`
   position: relative;
-  width: 56%;
-  min-height: 100vh;
-  overflow: hidden;
-  @media screen and (max-width: 768px) {
-    width: 100%;
-    min-height: 100px;
+  flex-grow: 0;
+  height: 100px;
+  width: 100%;
+
+  ${mq[1]} {
+    max-width: 56%;
+    min-height: 100vh;
+    overflow: hidden;
+    order: 2;
   }
 `;
-export const formWrapper = ({ colors, radiuses }: Theme) => css`
+export const formWrapper = ({ mq, colors, radiuses }: Theme) => css`
+  position: relative;
+  top: -10px;
+  z-index: 2;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 44%;
-  @media screen and (max-width: 768px) {
-    position: relative;
-    top: -10px;
-    z-index: 2;
-    overflow: hidden;
-    flex-grow: 1;
-    order: 2;
-    width: 100%;
-    border-radius: ${radiuses.md} ${radiuses.md} 0 0;
-    background-color: ${colors.background};
+  flex-grow: 1;
+  order: 1;
+  width: 100%;
+  border-radius: ${radiuses.md} ${radiuses.md} 0 0;
+  background-color: ${colors.background};
+  ${mq[1]} {
+    position: static;
+    width: 44%;
+    border-radius: 0;
   }
 `;
 export const productWrapper = css`
@@ -46,44 +52,45 @@ export const productWrapper = css`
   max-width: 870px;
   width: 100%;
 `;
-export const productImgWrapper = css`
+export const productImgWrapper = ({ mq }: Theme) => css`
   position: relative;
   padding-top: 75%;
   width: 100%;
-  @media screen and (max-width: 768px) {
-    display: none;
+  display: none;
+  ${mq[1]} {
+    display: block;
   }
 `;
-export const popup = ({ colors, radiuses }: Theme) => css`
+export const popup = ({ mq, colors, radiuses }: Theme) => css`
   position: absolute;
-  bottom: -77px;
-  right: -36px;
+  transform: translateX(50%);
+  right: 50%;
+  bottom: -15px;
   width: 350px;
+  padding: 16px;
+  opacity: 0.93;
   border-radius: ${radiuses.sm};
   background-color: ${colors.background};
-  padding: 22px 23px;
-  opacity: 0.93;
-  @media screen and (max-width: 1630px) {
-    bottom: -15px;
+  ${mq[2]} {
     right: -5px;
+    transform: none;
   }
-  @media screen and (max-width: 992px) {
-    padding: 16px;
-    transform: translateX(50%);
-    right: 50%;
+  @media screen and (min-width: 1630px) {
+    bottom: -77px;
+    right: -36px;
+    padding: 22px 23px;
   }
 `;
-export const controlsWrapper = css`
+export const controlsWrapper = () => css`
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
-export const logo = ({ spaces }: Theme) => css`
-  margin-bottom: ${spaces.xl4};
-  @media screen and (max-width: 768px) {
-    display: block;
-    margin-bottom: 0;
-    text-align: center;
+export const logo = ({ mq, spaces }: Theme) => css`
+  text-align: center;
+  ${mq[1]} {
+    text-align: left;
+    margin-bottom: ${spaces.xl4};
   }
 `;
 
@@ -93,7 +100,13 @@ export const headline = ({ colors, fontSizes, fontWeights }: Theme) => css`
   font-family: inherit;
   color: ${colors.text};
 `;
-export const text = ({ colors, spaces, fontSizes, lineHeights }: Theme) => css`
+export const text = ({
+  mq,
+  colors,
+  spaces,
+  fontSizes,
+  lineHeights,
+}: Theme) => css`
   margin-bottom: ${spaces.md};
   line-height: ${lineHeights.body2};
   font-size: ${fontSizes.body2};
@@ -107,7 +120,7 @@ export const text = ({ colors, spaces, fontSizes, lineHeights }: Theme) => css`
     height: 2px;
     background-color: ${colors.backgroundDark};
   }
-  @media screen and (max-width: 992px) {
+  ${mq[2]} {
     margin-bottom: ${spaces.sm};
     ::after {
       margin-top: ${spaces.sm};

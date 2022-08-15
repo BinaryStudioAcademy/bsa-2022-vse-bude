@@ -1,15 +1,15 @@
 import type { Theme } from 'theme';
 import { css } from '@emotion/react';
 
-export const contentWrapper = ({ spaces }: Theme) => css`
-  height: 100vh;
-  width: 100%;
+export const contentWrapper = ({ mq, spaces }: Theme) => css`
   display: flex;
   flex-direction: column;
-  padding: ${spaces.xl6} 0;
-  @media screen and (max-width: 768px) {
-    padding: ${spaces.lg} 0;
-    height: 100%;
+  height: 100%;
+  width: 100%;
+  padding: ${spaces.lg} 0;
+  ${mq[1]} {
+    height: 100vh;
+    padding: ${spaces.xl6} 0;
   }
 `;
 export const formWrapper = css`
@@ -19,11 +19,11 @@ export const formWrapper = css`
   flex-grow: 1;
   padding: 0 16px;
 `;
-export const form = css`
+export const form = ({ mq }: Theme) => css`
   width: 100%;
-  max-width: 327px;
-  @media screen and (max-width: 768px) {
-    max-width: 374px;
+  max-width: 342px;
+  ${mq[1]} {
+    max-width: 327px;
   }
 `;
 export const linkText = ({
@@ -49,6 +49,7 @@ export const inputWrapper = ({ spaces }: Theme) => css`
   flex-direction: column;
 `;
 export const headline = ({
+  mq,
   colors,
   spaces,
   fontSizes,
@@ -56,10 +57,10 @@ export const headline = ({
 }: Theme) => css`
   margin-bottom: ${spaces.xl1};
   margin-top: 0;
-  font-size: ${fontSizes.h4};
   font-weight: ${fontWeights.h4};
   color: ${colors.secondaryDark};
-  @media screen and (max-width: 768px) {
-    font-size: ${fontSizes.h3};
+  font-size: ${fontSizes.h3};
+  ${mq[1]} {
+    font-size: ${fontSizes.h4};
   }
 `;
