@@ -1,11 +1,11 @@
-import React, { FC, ReactText } from 'react';
-import { Pressable, View, ColorValue } from 'react-native';
+import React, { FC } from 'react';
+import { Pressable, View , ColorValue } from 'react-native';
 import { ButtonType, ButtonAppearance } from '~/common/enums/enums';
 import { Text } from '~/components/components';
 import { styles } from './styles';
 
 type Props = {
-  label: ReactText;
+  label: string;
   type?: ButtonType;
   view?: ButtonAppearance;
   isDisabled?: boolean;

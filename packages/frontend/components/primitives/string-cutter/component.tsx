@@ -5,22 +5,30 @@ import type { StringCutterProps } from './types';
 
 import * as styles from './styles';
 
-const StringCutter: FC<StringCutterProps> = ({ children }) => {
+const StringCutter: FC<StringCutterProps> = ({ children, lines = 1 }) => {
   const [isCut, setIsCut] = useState(false);
   const cutterRef = useRef(null);
+  const isMultiLine = lines > 1;
 
   const checkIsCut = () => {
     const cutterElem = cutterRef.current;
     if (cutterElem) {
-      setIsCut(cutterElem.offsetWidth < cutterElem.scrollWidth);
+      const { offsetWidth, scrollWidth, offsetHeight, scrollHeight } =
+        cutterElem;
+
+      setIsCut(
+        isMultiLine ? scrollHeight > offsetHeight : scrollWidth > offsetWidth,
+      );
     }
   };
 
   return (
-    <div onMouseEnter={checkIsCut} css={styles.cutterWrapper}>
-      <span ref={cutterRef} css={styles.cutterText}>
-        {isCut ? <Tooltip trigger={children}>{children}</Tooltip> : children}
-      </span>
+    <div
+      ref={cutterRef}
+      css={[isMultiLine ? styles.multiline(lines) : styles.singleline]}
+      onMouseEnter={checkIsCut}
+    >
+      {isCut ? <Tooltip trigger={children}>{children}</Tooltip> : children}
     </div>
   );
 };
