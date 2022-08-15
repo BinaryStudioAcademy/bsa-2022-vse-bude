@@ -1,4 +1,10 @@
-export { View, TouchableOpacity, Image, ScrollView, FlatList } from 'react-native';
+export {
+  View,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+  FlatList,
+} from 'react-native';
 export { SafeAreaView } from 'react-native-safe-area-context';
 export { ScreenWrapper } from './screen-wrapper/screen-wrapper';
 export { Button } from './button/button';

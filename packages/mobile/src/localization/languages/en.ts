@@ -11,4 +11,19 @@ export const en = {
     LAST_NAME: 'Last name',
     LAST_NAME_HINT: 'Enter your last name',
   },
+  currency: {
+    UAH: 'UAH',
+  },
+  button: {
+    BID: 'Bid',
+    BUY: 'Buy',
+  },
+  time: {
+    DAYS: 'days',
+    HOURS: 'h',
+    MINUTES: 'min',
+  },
+  lot: {
+    PAST_TIME: 'days ago',
+  },
 };

@@ -28,7 +28,10 @@ const Navigation: FC = () => {
         <NativeStack.Group
           navigationKey={`auth-group-${isLoggedIn ? 'user' : 'guest'}`}
         >
-
+          <NativeStack.Screen
+          name={RootScreenName.MAIN}
+          component={MainNavigation}
+        />
           <NativeStack.Screen name={RootScreenName.SIGN_UP} component={Auth} />
           <NativeStack.Screen name={RootScreenName.SIGN_IN} component={Auth} />
         </NativeStack.Group>

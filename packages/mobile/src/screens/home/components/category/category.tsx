@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { View, Text, Image  } from '~/components/components';
+import { View, Text, Image } from '~/components/components';
 import { ImageSourcePropType } from 'react-native';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
