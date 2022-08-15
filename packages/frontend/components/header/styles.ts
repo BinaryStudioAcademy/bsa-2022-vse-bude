@@ -7,31 +7,40 @@ export const header = (theme: Theme) => css`
   height: ${theme.heights.header};
 `;
 
-export const headerWrapper = () => css`
+export const headerWrapper = css`
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
 `;
 
-export const navigationWrapper = () => css`
+export const logoWrapper = css`
   display: flex;
   align-items: center;
-  margin-left: 4em;
+  justify-content: center;
+  height: 100%;
 `;
 
-export const navigation = () => css`
+export const navigationWrapper = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+`;
+
+export const navigation = css`
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 2em;
 `;
 
-export const buttonsWrapper = () => css`
+export const buttonsWrapper = css`
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 2em;
+  flex-shrink: 0;
 `;
 
 export const buttonCreateAccountText = (theme: Theme) => css`
