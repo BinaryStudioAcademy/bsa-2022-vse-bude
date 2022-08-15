@@ -6,6 +6,10 @@
       "search": "Search",
       "news": "News",
       "about_us": "About us"
+    },
+    "buttons": {
+      "create_account": "Create Account",
+      "sign_in": "Sign In"
     }
   },
   "HOURS_SHORT": "h",

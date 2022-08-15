@@ -20,7 +20,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     await store.dispatch(fetchRandomDataSSR(httpClient));
 
-    return Promise.resolve({
+    return {
       props: {
         ...(await serverSideTranslations(locale, [
           'home',
@@ -28,7 +28,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
           'common',
         ])),
       },
-    });
+    };
   },
 );
 

@@ -6,6 +6,10 @@
       "search": "Пошук",
       "news": "Новини",
       "about_us": "Про нас"
+    },
+    "buttons": {
+      "create_account": "Створити Аккаунт",
+      "sign_in": "Зареєструватись"
     }
   },
   "HOURS_SHORT": "г",

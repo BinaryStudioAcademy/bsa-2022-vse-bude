@@ -14,7 +14,7 @@ import { Logo } from '../primitives/logo/component';
 import * as styles from './styles';
 
 export const Header = () => {
-  const { t } = useTranslation('product');
+  const { t } = useTranslation('common');
 
   return (
     <header css={styles.header}>
@@ -118,34 +118,49 @@ export const Header = () => {
   );
 };
 
-export const HeaderLoggedOut = () => (
-  <header css={styles.header}>
-    <Container css={styles.headerWrapper}>
-      <Link href={Routes.DEFAULT}>
-        <a>
-          <Logo />
-        </a>
-      </Link>
-      <Container css={styles.navigationWrapper}>
-        <nav css={styles.navigation}>
-          <InternalLink href={Routes.DEFAULT} label="Home" />
-          <InternalLink href={Routes.DEFAULT} label="Category" />
-          <InternalLink href={Routes.DEFAULT} label="Search" />
-          <InternalLink href={Routes.DEFAULT} label="News" />
-          <InternalLink href={Routes.DEFAULT} label="About us" />
-        </nav>
+export const HeaderLoggedOut = () => {
+  const { t } = useTranslation('common');
+
+  return (
+    <header css={styles.header}>
+      <Container css={styles.headerWrapper}>
+        <Link href={Routes.DEFAULT}>
+          <a>
+            <Logo />
+          </a>
+        </Link>
+        <Container css={styles.navigationWrapper}>
+          <nav css={styles.navigation}>
+            <InternalLink href={Routes.DEFAULT} label={t('header.nav.home')} />
+            <InternalLink
+              href={Routes.DEFAULT}
+              label={t('header.nav.category')}
+            />
+            <InternalLink
+              href={Routes.DEFAULT}
+              label={t('header.nav.search')}
+            />
+            <InternalLink href={Routes.DEFAULT} label={t('header.nav.news')} />
+            <InternalLink
+              href={Routes.DEFAULT}
+              label={t('header.nav.about_us')}
+            />
+          </nav>
+        </Container>
+        <div css={styles.buttonsWrapper}>
+          <Button size="small">
+            <span css={styles.buttonCreateAccountText}>
+              {t('header.buttons.create_account')}
+            </span>
+          </Button>
+          <Button size="small" variant="outlined">
+            <span css={styles.buttonSignIn}>{t('header.buttons.sign_in')}</span>
+          </Button>
+        </div>
       </Container>
-      <div css={styles.buttonsWrapper}>
-        <Button size="small">
-          <span css={styles.buttonCreateAccountText}>Create Account</span>
-        </Button>
-        <Button size="small" variant="outlined">
-          <span css={styles.buttonSignIn}>Sign In</span>
-        </Button>
-      </div>
-    </Container>
-    <Link href={Routes.USERS}>
-      <a>users</a>
-    </Link>
-  </header>
-);
+      <Link href={Routes.USERS}>
+        <a>users</a>
+      </Link>
+    </header>
+  );
+};
