@@ -1,5 +1,5 @@
 import { getEnv } from '@helpers';
-import { EmailOptions, IEmailProvider } from '@types';
+import type { EmailOptions, IEmailProvider } from '@types';
 import {
   TransactionalEmailsApi,
   TransactionalEmailsApiApiKeys,
