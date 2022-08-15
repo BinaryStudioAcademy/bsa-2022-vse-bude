@@ -27,8 +27,8 @@ const loginUser = createAsyncThunk(
           expires: expiresAt,
         });
         cookieStorage.set<string>(StorageKey.REFRESH_TOKEN, data.refreshToken);
-        
-return data;
+
+        return data;
       })
       .catch((error) => {
         if (error instanceof Error) {
