@@ -15,8 +15,6 @@ import {
   StarIcon,
   UserIcon,
 } from '~/components/components';
-import { ColorPalette } from '@vse-bude/shared';
-import { StyleProp, ViewStyle } from 'react-native';
 import { AccountNavigation } from '../account/account.navigation';
 
 const Tabs = createBottomTabNavigator();
@@ -40,25 +38,12 @@ const MainNavigation = () => {
   const getTabOptions = (
     label: string,
     tabBarIcon: AppIcon,
-    tabBarStyle?: StyleProp<ViewStyle>,
-    tabBarInactiveTintColor?: string,
   ): BottomTabNavigationOptions => ({
     tabBarIcon,
     tabBarLabel: ({ color }) => (
       <Text style={{ fontSize: 12, color }}>{label}</Text>
     ),
-    tabBarStyle: tabBarStyle ?? {
-      backgroundColor: ColorPalette.WHITE_100,
-      minHeight: 60,
-    },
-    tabBarInactiveTintColor: tabBarInactiveTintColor ?? ColorPalette.GRAY_300,
   });
-
-  const darkTabBarStyle: StyleProp<ViewStyle> = {
-    backgroundColor: ColorPalette.GREEN_100,
-    minHeight: 60,
-  };
-  const darkInactiveTintColorStyle = ColorPalette.WHITE_100;
 
   return (
     <Tabs.Navigator screenOptions={screenOptions}>
@@ -80,12 +65,7 @@ const MainNavigation = () => {
       <Tabs.Screen
         name={MainScreenName.ACCOUNT_ROOT}
         component={AccountNavigation}
-        options={getTabOptions(
-          MainScreenName.ACCOUNT_ROOT,
-          UserIcon,
-          darkTabBarStyle,
-          darkInactiveTintColorStyle,
-        )}
+        options={getTabOptions(MainScreenName.ACCOUNT_ROOT, UserIcon)}
       />
     </Tabs.Navigator>
   );

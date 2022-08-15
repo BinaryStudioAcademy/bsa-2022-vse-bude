@@ -13,17 +13,14 @@ import {
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
 import { AccountNavigationParamList } from '~/common/types/types';
-import { ColorPalette } from '@vse-bude/shared';
-import { useNavigation, useTranslation } from '~/hooks/hooks';
-import { RootNavigationProps } from '~/common/types/navigation/navigation-props';
-import { ArrowLeftIcon, Text } from '~/components/components';
-import { TouchableWithoutFeedback, View } from 'react-native';
+import { useCustomTheme, useTranslation } from '~/hooks/hooks';
+import { HeaderLeft } from '~/components/components';
 
 const Stack = createNativeStackNavigator<AccountNavigationParamList>();
 
 const AccountNavigation = () => {
-  const navigation = useNavigation<RootNavigationProps>();
   const { t } = useTranslation();
+  const { dark, colors } = useCustomTheme();
 
   const screenOptions: NativeStackNavigationOptions = {
     headerShown: true,
@@ -41,19 +38,12 @@ const AccountNavigation = () => {
         options={{
           headerTitle: t('account.ACCOUNT'),
           headerStyle: {
-            backgroundColor: ColorPalette.GREEN_100,
+            backgroundColor: dark
+              ? colors.backgroundSecondary
+              : colors.background,
           },
-          headerTintColor: ColorPalette.WHITE_100,
-          headerLeft: () => (
-            <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <ArrowLeftIcon style={{ color: ColorPalette.YELLOW_100 }} />
-                <Text style={{ color: ColorPalette.YELLOW_100 }}>
-                  {t('common.HOME')}
-                </Text>
-              </View>
-            </TouchableWithoutFeedback>
-          ),
+          headerTintColor: colors.titlePrimary,
+          headerLeft: () => <HeaderLeft />,
         }}
       />
       <Stack.Screen
