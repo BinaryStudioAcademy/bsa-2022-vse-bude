@@ -5,6 +5,7 @@ import {
   View,
   HeaderButton,
 } from '~/components/components';
+import { useCustomTheme } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 
@@ -14,15 +15,19 @@ type Props = {
 };
 
 const Header: FC<Props> = ({ labelButton, onPress }) => {
+  const { colors } = useCustomTheme();
+
   return (
     <LinearGradient
       start={{ x: 0, y: 0.4 }}
       end={{ x: 0, y: 0.9 }}
-      colors={['#0C42A6', '#F4C50A']}
+      colors={[colors.flagTop, colors.flagBottom]}
     >
-      <View style={[styles.header, globalStyles.alignItemsCenter]}>
+      <View style={styles.header}>
         <HeaderButton label={labelButton} onPress={onPress} />
-        <Logo />
+        <View style={globalStyles.alignItemsCenter}>
+          <Logo />
+        </View>
       </View>
     </LinearGradient>
   );

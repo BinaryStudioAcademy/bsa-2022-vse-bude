@@ -3,6 +3,7 @@ import { UserSignUpDto } from '@vse-bude/shared';
 import { View, Button, Input } from '~/components/components';
 import { useAppForm, useTranslation } from '~/hooks/hooks';
 import { signUp } from '~/validation-schemas/validation-schemas';
+import { globalStyles } from '~/styles/styles';
 import { DEFAULT_SIGN_UP_PAYLOAD } from './common/constants';
 
 type Props = {
@@ -24,6 +25,7 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
         name="email"
         control={control}
         errors={errors}
+        contentContainerStyle={globalStyles.mt5}
       />
       <Input
         label={t('verification.NAME')}
@@ -31,6 +33,7 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
         name="firstName"
         control={control}
         errors={errors}
+        contentContainerStyle={globalStyles.mt5}
       />
       <Input
         label={t('verification.LAST_NAME')}
@@ -38,6 +41,7 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
         name="lastName"
         control={control}
         errors={errors}
+        contentContainerStyle={globalStyles.mt5}
       />
       <Input
         label={t('verification.PHONE_NUMBER')}
@@ -45,6 +49,7 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
         name="phone"
         control={control}
         errors={errors}
+        contentContainerStyle={globalStyles.mt5}
       />
       <Input
         label={t('verification.PASSWORD')}
@@ -52,6 +57,7 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
         name="password"
         control={control}
         errors={errors}
+        contentContainerStyle={globalStyles.mt5}
       />
       <Input
         label={t('verification.PASSWORD_REPEAT')}
@@ -59,8 +65,9 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
         name="password"
         control={control}
         errors={errors}
+        contentContainerStyle={globalStyles.mt5}
       />
-      <View style={{ marginVertical: 15 }}>
+      <View style={[globalStyles.mt5, globalStyles.mb5]}>
         <Button
           label={t('verification.CREATE_ACCOUNT')}
           onPress={handleSubmit(onSubmit)}

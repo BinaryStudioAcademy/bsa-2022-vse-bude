@@ -7,12 +7,18 @@ import {
   useCustomTheme,
   useRoute,
   useTranslation,
+  useNavigation,
 } from '~/hooks/hooks';
-import { StatusBar, Text, View, ScrollView } from '~/components/components';
+import {
+  StatusBar,
+  Text,
+  View,
+  ScrollView,
+  Divider,
+} from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import {
   GoogleButton,
-  Line,
   SignInForm,
   SignUpForm,
   Header,
@@ -24,6 +30,7 @@ const Auth: FC = () => {
   const dispatch = useAppDispatch();
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
+  const navigation = useNavigation();
   const screenLabel =
     name === RootScreenName.SIGN_IN
       ? t('verification.SING_IN')
@@ -38,7 +45,7 @@ const Auth: FC = () => {
   };
 
   const handleGoBack = (): void => {
-    // TODO: handle go back
+    navigation.goBack();
   };
 
   const getScreen = (screen: string): ReactElement | null => {
@@ -79,7 +86,7 @@ const Auth: FC = () => {
           {screenLabel}
         </Text>
         <GoogleButton />
-        <Line />
+        <Divider text={t('verification.LINE')} />
         {getScreen(name)}
       </ScrollView>
     </View>

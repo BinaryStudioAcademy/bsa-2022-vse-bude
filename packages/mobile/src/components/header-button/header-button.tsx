@@ -15,10 +15,7 @@ const HeaderButton: FC<Props> = ({ label, onPress }) => {
       style={[
         globalStyles.flexDirectionRow,
         globalStyles.alignItemsCenter,
-        {
-          width: '100%',
-          justifyContent: 'flex-start',
-        },
+        globalStyles.justifyContentStart,
       ]}
     >
       <BackIcon size={35} style={{ color: '#FFFFFF' }} />

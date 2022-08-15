@@ -1,9 +1,6 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: 15,
-  },
   input: {
     paddingVertical: 6,
     paddingHorizontal: 15,

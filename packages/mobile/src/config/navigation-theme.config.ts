@@ -14,6 +14,8 @@ const COMMON_COLORS = {
   buttonPrimaryBackground: ColorPalette.YELLOW_100,
   buttonSecondaryBackground: ColorPalette.GREEN_200,
   error: ColorPalette.RED_100,
+  flagTop: ColorPalette.BLUE_100,
+  flagBottom: ColorPalette.YELLOW_50,
 };
 
 const NavigationTheme = {

@@ -9,3 +9,4 @@ export { Spinner } from './spinner/spinner';
 export { default as LinearGradient } from 'react-native-linear-gradient';
 export { Logo } from './logo/logo';
 export { HeaderButton } from './header-button/header-button';
+export { Divider } from '~/components/divider/divider';

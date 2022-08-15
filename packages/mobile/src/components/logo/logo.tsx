@@ -1,10 +1,7 @@
 import React from 'react';
 import Svg, { SvgProps, Path } from 'react-native-svg';
-// import { useCustomTheme } from '~/hooks/hooks';
 
 const Logo = (props: SvgProps) => {
-  // const { colors } = useCustomTheme();
-
   return (
     <Svg width={180} height={44} fill="none" {...props}>
       <Path

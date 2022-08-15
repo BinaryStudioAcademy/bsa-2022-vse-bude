@@ -3,6 +3,7 @@ import { Button, View, Input } from '~/components/components';
 import { UserSignInDto } from '@vse-bude/shared';
 import { useAppForm, useTranslation } from '~/hooks/hooks';
 import { signIn } from '~/validation-schemas/validation-schemas';
+import { globalStyles } from '~/styles/styles';
 import { DEFAULT_SIGN_IN_PAYLOAD } from './common/constants';
 
 type Props = {
@@ -18,27 +19,27 @@ const SignInForm: FC<Props> = ({ onSubmit }) => {
 
   return (
     <View>
-      <View>
-        <Input
-          label={t('verification.EMAIL')}
-          placeholder={t('verification.EMAIL_HINT')}
-          name="email"
-          control={control}
-          errors={errors}
+      <Input
+        label={t('verification.EMAIL')}
+        placeholder={t('verification.EMAIL_HINT')}
+        name="email"
+        control={control}
+        errors={errors}
+        contentContainerStyle={globalStyles.mt5}
+      />
+      <Input
+        label={t('verification.PASSWORD')}
+        placeholder={t('verification.PASSWORD_HINT')}
+        name="password"
+        control={control}
+        errors={errors}
+        contentContainerStyle={globalStyles.mt5}
+      />
+      <View style={{ marginTop: 30 }}>
+        <Button
+          label={t('verification.SING_IN')}
+          onPress={handleSubmit(onSubmit)}
         />
-        <Input
-          label={t('verification.PASSWORD')}
-          placeholder={t('verification.PASSWORD_HINT')}
-          name="password"
-          control={control}
-          errors={errors}
-        />
-        <View style={{ marginTop: 30 }}>
-          <Button
-            label={t('verification.SING_IN')}
-            onPress={handleSubmit(onSubmit)}
-          />
-        </View>
       </View>
     </View>
   );

@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { TextInput } from 'react-native';
+import { TextInput, ViewStyle } from 'react-native';
 import {
   FormControl,
   FormControlPath,
@@ -17,6 +17,7 @@ type Props<T extends FormControlValues> = {
   control: FormControl<T>;
   errors: FormControlErrors<T>;
   placeholder?: string;
+  contentContainerStyle?: ViewStyle;
 };
 
 const Input = <T extends FormControlValues>({
@@ -25,6 +26,7 @@ const Input = <T extends FormControlValues>({
   control,
   errors,
   placeholder,
+  contentContainerStyle,
   ...props
 }: Props<T>): ReactElement => {
   const { field } = useFormControl({ name, control });
@@ -33,7 +35,7 @@ const Input = <T extends FormControlValues>({
   const error = errors[name]?.message as string;
 
   return (
-    <View style={styles.container}>
+    <View style={contentContainerStyle}>
       <Text
         style={[
           styles.label,
@@ -50,11 +52,11 @@ const Input = <T extends FormControlValues>({
         autoCorrect={false}
         onChangeText={field.onChange}
         onBlur={field.onBlur}
+        placeholderTextColor={colors.placeholder}
         style={[
           styles.input,
           {
             backgroundColor: colors.backgroundElements,
-            color: colors.placeholder,
             borderColor: error ? colors.error : colors.backgroundElements,
           },
           globalStyles.fs14,
