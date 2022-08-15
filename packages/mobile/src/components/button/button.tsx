@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Pressable, View , ColorValue } from 'react-native';
+import { Pressable, View, ColorValue } from 'react-native';
 import { ButtonType, ButtonAppearance } from '~/common/enums/enums';
 import { Text } from '~/components/components';
 import { styles } from './styles';
