@@ -22,15 +22,13 @@ export const AccountLayout: FC<AccountPageProps> = ({ children }) => {
           <Flex css={styles.pageContent}>
             <Flex css={styles.linksContainer}>
               {linksData.map((link, idx) => {
-                const { height, width, iconPath, label, path } = link;
+                const { iconPath, label, path } = link;
                 const location = router.pathname === link.path;
                 const tLabel = t(label);
 
                 return (
                   <DashboardLink
                     key={path + idx}
-                    height={height}
-                    width={width}
                     iconPath={iconPath}
                     label={tLabel}
                     location={location}
