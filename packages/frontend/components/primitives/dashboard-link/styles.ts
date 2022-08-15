@@ -20,6 +20,12 @@ export const icon = ({ spaces }: Theme) => css`
   margin-right: ${spaces.md};
 `;
 
+export const img = () => css`
+  display: block;
+  width: 22px;
+  height: 22px;
+`;
+
 export const activeLink = ({ colors }: Theme) => css`
   background: ${colors.backgroundLight};
 `;

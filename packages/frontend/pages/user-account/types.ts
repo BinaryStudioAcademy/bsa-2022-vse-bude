@@ -6,8 +6,6 @@ export interface AccountPageProps {
 
 export interface LinkData {
   iconPath: string;
-  width: number;
-  height: number;
   label: string;
   path: string;
 }
