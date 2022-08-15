@@ -1,7 +1,7 @@
+import type React from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { wrapper } from 'store';
 import { AccountLayout } from '../../components/user-account-layout/layout';
-import React from 'react';
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
