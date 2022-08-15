@@ -5,7 +5,7 @@ export const authSection = () => css`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
 `;
 export const bgWrapper = () => css`
   position: relative;
