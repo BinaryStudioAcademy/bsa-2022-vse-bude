@@ -1,17 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { login } from 'services/auth';
-import type { UserDto, UserSignInDto } from '@vse-bude/shared';
-import { StorageKey } from '@vse-bude/shared';
+import { login, signUp } from 'services/auth';
+import type { UserSignInDto, UserSignUpDto } from '@vse-bude/shared';
 import { auth, cookieStorage } from '@helpers';
+import Router from 'next/router';
+import { Routes } from '@enums';
+import type { IAuth } from '../../common/types/auth';
 import { AuthActions } from './action-types';
 
-export interface IAuth {
-  user: UserDto;
-  error?: string;
-  accessToken: string;
-  accessExpiresAt: number;
-  refreshToken: string;
-}
 const loginUser = createAsyncThunk(
   AuthActions.LOGIN,
   (data: UserSignInDto, { rejectWithValue }) =>
@@ -20,11 +15,7 @@ const loginUser = createAsyncThunk(
         if (data?.error) {
           return rejectWithValue(data.error);
         }
-        const expiresAt = new Date(Date.now() + data.accessExpiresAt);
-        cookieStorage.set<string>(StorageKey.ACCESS_TOKEN, data.accessToken, {
-          expires: expiresAt,
-        });
-        cookieStorage.set<string>(StorageKey.REFRESH_TOKEN, data.refreshToken);
+        cookieStorage.saveTokens(data);
         auth.setTokens(data.accessToken, data.refreshToken);
 
         return data;
@@ -36,4 +27,20 @@ const loginUser = createAsyncThunk(
       }),
 );
 
-export { loginUser };
+const signUpUser = createAsyncThunk(
+  AuthActions.SIGN_UP,
+  async (data: UserSignUpDto, { rejectWithValue }) => {
+    try {
+      const response: IAuth = await signUp(data);
+      cookieStorage.saveTokens(response);
+      auth.setTokens(response.accessToken, response.refreshToken);
+      // TODO: upload user data
+      // TODO: check if user's phone and email are verified and redirect dependently of it values
+      await Router.push(Routes.PHONE_VERIFY);
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
+
+export { loginUser, signUpUser };

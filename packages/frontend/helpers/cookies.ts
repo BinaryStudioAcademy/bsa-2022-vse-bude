@@ -1,8 +1,9 @@
-import type { Storage, StorageKey } from '@vse-bude/shared';
+import { type Storage, StorageKey } from '@vse-bude/shared';
 import { deleteCookie, getCookie, getCookies, setCookie } from 'cookies-next';
 import type { GetServerSidePropsContext, PreviewData } from 'next';
 import type { CookieSerializeOptions } from 'next/dist/server/web/types';
 import type { ParsedUrlQuery } from 'querystring';
+import type { IAuth } from '../common/types/auth';
 
 export class CookieStorage implements Storage {
   private _ctx = undefined;
@@ -23,6 +24,22 @@ export class CookieStorage implements Storage {
 
   delete(key: StorageKey): void {
     deleteCookie(key, this._ctx);
+  }
+
+  saveTokens(data: IAuth): void {
+    this.setAccessToken(data.accessToken, data.accessExpiresAt);
+    this.setRefreshToken(data.refreshToken);
+  }
+
+  private setAccessToken(token: string, accessExpiresAt: number) {
+    const expiresAt = new Date(Date.now() + accessExpiresAt);
+    this.set<string>(StorageKey.ACCESS_TOKEN, token, {
+      expires: expiresAt,
+    });
+  }
+
+  private setRefreshToken(token: string) {
+    this.set<string>(StorageKey.ACCESS_TOKEN, token);
   }
 
   clear(): void {
