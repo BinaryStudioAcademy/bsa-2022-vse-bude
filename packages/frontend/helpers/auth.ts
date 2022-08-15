@@ -26,7 +26,7 @@ class AuthHelper implements IAuthHelper {
   public logOut(): void {
     this._storage.delete(StorageKey.ACCESS_TOKEN);
     this._storage.delete(StorageKey.REFRESH_TOKEN);
-    store.dispatch(logOut());
+    store().dispatch(logOut());
   }
 }
 

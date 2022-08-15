@@ -14,4 +14,4 @@ const makeStore = () =>
 export type AppStore = ReturnType<typeof makeStore>;
 
 export const wrapper = createWrapper<AppStore>(makeStore);
-export const store = makeStore();
+export const store = makeStore;
