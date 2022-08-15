@@ -1,8 +1,7 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { wrapper } from 'store';
-import type { FC } from 'react';
-import type { AccountPageProps } from '../../components/user-account-layout/types';
 import { AccountLayout } from '../../components/user-account-layout/layout';
+import React from 'react';
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
@@ -17,7 +16,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
   },
 );
 
-const UserAccount: FC<AccountPageProps> = ({ children }) => (
+const UserAccount = ({ children }: { children: React.ReactNode }) => (
   <AccountLayout>{children}</AccountLayout>
 );
 
