@@ -25,7 +25,9 @@ const SettingsIcon: AppIcon = (iconProps) => (
 const ListIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="list" {...iconProps} />
 );
-
+const ClockIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="clock" {...iconProps} />
+);
 export {
   HomeIcon,
   StarIcon,
@@ -33,4 +35,5 @@ export {
   SettingsIcon,
   ListIcon,
   CustomFeatherIcon,
+  ClockIcon,
 };

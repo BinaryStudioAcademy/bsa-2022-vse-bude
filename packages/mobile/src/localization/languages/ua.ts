@@ -11,4 +11,16 @@ export const ua = {
     LAST_NAME: 'Прізвище',
     LAST_NAME_HINT: 'Введіть своє Прізвище',
   },
+  currency: {
+    UAH: 'ГРН',
+  },
+  button: {
+    BID: 'Ставка',
+    BUY: 'Купити',
+  },
+  time: {
+    DAYS: 'днів',
+    HOURS: 'г',
+    MINUTES: 'хв',
+  },
 };
