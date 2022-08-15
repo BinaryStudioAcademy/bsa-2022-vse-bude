@@ -1,5 +1,5 @@
 import { Routes } from '@enums';
-import { Avatar, Container, Dropdown, Icon } from '@primitives';
+import { Avatar, Container, Dropdown, Icon, IconButton } from '@primitives';
 import { IconName } from 'common/enums/icons';
 import Link from 'next/link';
 import * as styles from './styles';
@@ -72,6 +72,17 @@ export const Header = () => (
         <Icon icon={IconName.ANGLE_DOWN} color="yellow" />
       </Dropdown>
       <Avatar firstName="John" lastName="Doe" />
+      <IconButton
+        icon={IconName.SIGN_OUT}
+        color="yellow"
+        label="Sign out"
+        onClick={() => console.log('hello')}
+      />
+      <IconButton
+        icon={IconName.SIGN_OUT}
+        color="yellow"
+        onClick={() => console.log('hello')}
+      />
       <nav>
         <Link href={Routes.USERS}>
           <a>users</a>
