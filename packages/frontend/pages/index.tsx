@@ -6,7 +6,11 @@ import { Layout } from '@components';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { shallowEqual } from 'react-redux';
 import { fetchRandomData, fetchRandomDataSSR, wrapper } from 'store';
+import { css } from '@emotion/react';
+import { useState } from 'react';
 import { CookieStorage, AuthHelper } from '@helpers';
+import { ProductCard } from '../components/product/card/component';
+import Test from './test';
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
@@ -20,7 +24,11 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     return Promise.resolve({
       props: {
-        ...(await serverSideTranslations(locale, ['home'])),
+        ...(await serverSideTranslations(locale, [
+          'home',
+          'product',
+          'common',
+        ])),
       },
     });
   },
@@ -30,6 +38,24 @@ const IndexPage = () => {
   const { data } = useTypedSelector((state) => state.randomData, shallowEqual);
   const dispatch = useAppDispatch();
   const { t } = useTranslation('home');
+
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const onChangeIsFavorite = () => {
+    setIsFavorite(!isFavorite);
+  };
+
+  const productData = {
+    images: [
+      'https://gingkodesign.com/wp-content/uploads/2020/12/Black-Smart-Moon-Lamp-scaled.jpg',
+      'https://gingkodesign.com/wp-content/uploads/2020/06/Gingko-Mini-Halo-One-Bluetooth-Speaker40-1.jpg',
+    ],
+    price: 200,
+    name: 'Some name',
+    description: 'Some description asdasd as dasd as das da das das adssa',
+    auctionDate: new Date('2022-08-15 00:00:00'),
+    currency: 'UAH',
+  };
 
   return (
     <Layout>
@@ -43,6 +69,7 @@ const IndexPage = () => {
           >
             click me
           </Button>
+
           <Button
             variant="outlined"
             disabled
@@ -50,7 +77,6 @@ const IndexPage = () => {
           >
             click me
           </Button>
-
           <Button variant="filled" onClick={() => dispatch(fetchRandomData())}>
             click me
           </Button>
@@ -61,6 +87,25 @@ const IndexPage = () => {
           >
             click me
           </Button>
+
+          <Test />
+          <div
+            css={css`
+              width: 300px;
+              margin-top: 15px;
+            `}
+          >
+            <ProductCard
+              images={productData.images}
+              auctionDate={productData.auctionDate}
+              name={productData.name}
+              description={productData.description}
+              price={productData.price}
+              currency={productData.currency}
+              onChangeIsFavorite={onChangeIsFavorite}
+              isFavorite={isFavorite}
+            />
+          </div>
         </div>
       </Container>
     </Layout>
