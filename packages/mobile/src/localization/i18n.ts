@@ -6,8 +6,8 @@ const i18 = () => {
   i18n.use(initReactI18next).init({
     compatibilityJSON: 'v3',
     debug: true,
-    lng: 'ua',
-    fallbackLng: 'ua',
+    lng: 'en',
+    fallbackLng: 'en',
     interpolation: {
       escapeValue: false,
     },
