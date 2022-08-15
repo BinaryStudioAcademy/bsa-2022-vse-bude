@@ -3,3 +3,4 @@ node_modules/
 .next/
 out/
 build/
+components/auth/sign-uup/validation.ts

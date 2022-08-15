@@ -1,16 +1,15 @@
 {
-  "FIRST_NAME_REQUIRED_ERROR": "Ім'я є обов'язковим!",
-  "LAST_NAME_REQUIRED_ERROR": "Прізвище є обов'язковим!",
-  "PHONE_REQUIRED_ERROR": "Номер телефону є обов'язковим!",
-  "EMAIL_REQUIRED_ERROR": "E-mail є обов'язковим!",
-  "PASSWORD_REQUIRED_ERROR": "Пароль є обов'язковим!",
-  "REPEAT_PASSWORD_REQUIRED_ERROR": "Повторний пароль є обов'язковим!",
-  "PASSWORD_MINLENGTH_ERROR": "Пароль занадто короткий!",
+  "FIRST_NAME_STRING.EMPTY_ERROR": "Ім'я є обов'язковим!",
+  "LAST_NAME_STRING.EMPTY_ERROR": "Прізвище є обов'язковим!",
+  "PHONE_STRING.EMPTY_ERROR": "Номер телефону є обов'язковим!",
+  "EMAIL_STRING.EMPTY_ERROR": "E-mail є обов'язковим!",
+  "PASSWORD_STRING.EMPTY_ERROR": "Пароль є обов'язковим!",
+  "PASSWORD_STRING.MIN_ERROR": "Пароль занадто короткий!",
   "PASSWORD_MAXLENGTH_ERROR": "Пароль занадто довгий!",
   "REPEAT_PASSWORD_MINLENGTH_ERROR": "Повторний пароль занадто короткий!",
   "FIRST_NAME_MAXLENGTH_ERROR": "Ім'я занадтно довге!",
   "LAST_NAME_MAXLENGTH_ERROR": "Прізвище задатно довге!",
-  "PHONE_PATTERN_ERROR": "Телефон невірного формату!",
-  "REPEAT_PASSWORD_VALIDATE_ERROR": "Паролі не співпадають!!",
-  "EMAIL_PATTERN_ERROR": "Email невірного формату!"
+  "PHONE_STRING.PATTERN.BASE_ERROR": "Телефон невірного формату!",
+  "REPEAT_PASSWORD_ANY.ONLY_ERROR": "Паролі не співпадають!",
+  "EMAIL_STRING.EMAIL_ERROR": "Email невірного формату!"
 }
