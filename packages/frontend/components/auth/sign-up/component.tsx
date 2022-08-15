@@ -3,16 +3,11 @@ import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import type { UserSignUpDto } from '@vse-bude/shared';
 import { useTranslation } from 'next-i18next';
+import { joiResolver } from '@hookform/resolvers/joi';
 import { Input, PasswordInput } from '../../primitives/input';
 import { form, inputWrapper } from '../layout/styles';
 import { getErrorKey } from '../../../helpers/validation';
-import {
-  emailValidation,
-  nameValidation,
-  passwordValidation,
-  phoneValidation,
-  repeatPasswordValidation,
-} from './validation';
+import { signUpSchema } from './validation';
 
 export const SignUpForm = () => {
   const { t: lang } = useTranslation('validation');
@@ -21,17 +16,16 @@ export const SignUpForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-    getValues,
-    clearErrors,
-    setError,
-  } = useForm<UserSignUpDto>();
+  } = useForm<UserSignUpDto>({
+    resolver: joiResolver(signUpSchema),
+  });
   const onSubmit: SubmitHandler<UserSignUpDto> = (data) => console.log(data);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} css={form}>
       <div css={inputWrapper}>
         <Input
-          {...register('firstName', nameValidation)}
+          {...register('firstName')}
           label={commonLang('FIRST_NAME')}
           variant="primary"
           type="text"
@@ -41,7 +35,7 @@ export const SignUpForm = () => {
       </div>
       <div css={inputWrapper}>
         <Input
-          {...register('lastName', nameValidation)}
+          {...register('lastName')}
           label={commonLang('LAST_NAME')}
           variant="primary"
           type="text"
@@ -51,7 +45,7 @@ export const SignUpForm = () => {
       </div>
       <div css={inputWrapper}>
         <Input
-          {...register('phone', phoneValidation)}
+          {...register('phone')}
           label={commonLang('PHONE_NUMBER')}
           variant="primary"
           type="text"
@@ -61,7 +55,7 @@ export const SignUpForm = () => {
       </div>
       <div css={inputWrapper}>
         <Input
-          {...register('email', emailValidation)}
+          {...register('email')}
           label={commonLang('EMAIL')}
           variant="primary"
           type="email"
@@ -71,16 +65,7 @@ export const SignUpForm = () => {
       </div>
       <div css={inputWrapper}>
         <PasswordInput
-          {...register('password', {
-            ...passwordValidation,
-            validate: () => {
-              getValues('password') === getValues('repeatPassword')
-                ? clearErrors('repeatPassword')
-                : setError('repeatPassword', { type: 'validate' });
-
-              return true;
-            },
-          })}
+          {...register('password')}
           label={commonLang('PASSWORD')}
           variant="primary"
           name="password"
@@ -89,18 +74,7 @@ export const SignUpForm = () => {
       </div>
       <div css={inputWrapper}>
         <PasswordInput
-          {...register('repeatPassword', {
-            ...repeatPasswordValidation,
-            validate: () => {
-              const result =
-                getValues('password') === getValues('repeatPassword');
-              if (result) {
-                clearErrors('password');
-              }
-
-              return result;
-            },
-          })}
+          {...register('repeatPassword')}
           label={commonLang('REPEAT_PASSWORD')}
           variant="primary"
           name="repeatPassword"

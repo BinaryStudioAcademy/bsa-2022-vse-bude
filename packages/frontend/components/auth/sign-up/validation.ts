@@ -1,35 +1,20 @@
-import type { RegisterOptions } from 'react-hook-form';
-
 export const phoneMask = /\+380[1-9][0-9]{8}/;
-export const emailMask = /([0-9a-z.]+)@([0-9a-z.]+)\.([0-9a-z]{2,})/;
 
-export const maxNameLength = 50;
 export const minPasswordLength = 6;
-export const maxPasswordLength = 50;
 
-export const nameValidation: RegisterOptions = {
-  required: true,
-  maxLength: maxNameLength,
-};
+import Joi from 'joi';
+import type { UserSignUpDto } from '@vse-bude/shared';
 
-export const passwordValidation: RegisterOptions = {
-  required: true,
-  minLength: minPasswordLength,
-  maxLength: maxPasswordLength,
-};
-
-export const repeatPasswordValidation: RegisterOptions = {
-  required: true,
-  minLength: minPasswordLength,
-  maxLength: maxPasswordLength,
-};
-
-export const phoneValidation: RegisterOptions = {
-  required: true,
-  pattern: phoneMask,
-};
-
-export const emailValidation: RegisterOptions = {
-  required: true,
-  pattern: emailMask,
-};
+export const signUpSchema = Joi.object<UserSignUpDto>({
+  firstName: Joi.string().required(),
+  lastName: Joi.string().required(),
+  phone: Joi.string().required()
+.pattern(phoneMask),
+  email: Joi.string()
+    .trim()
+    .email({ tlds: { allow: false } })
+    .required(),
+  password: Joi.string().min(minPasswordLength)
+.required(),
+  repeatPassword: Joi.any().valid(Joi.ref('password')),
+});
