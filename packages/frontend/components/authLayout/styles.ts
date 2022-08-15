@@ -1,7 +1,7 @@
 import type { Theme } from 'theme';
 import { css } from '@emotion/react';
 
-export const authSection = () => css`
+export const authSection = css`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -10,7 +10,7 @@ export const authSection = () => css`
     flex-direction: column;
   }
 `;
-export const bgWrapper = () => css`
+export const bgWrapper = css`
   position: relative;
   width: 56%;
   min-height: 100vh;
@@ -37,7 +37,7 @@ export const formWrapper = ({ colors, radiuses }: Theme) => css`
     background-color: ${colors.background};
   }
 `;
-export const productWrapper = () => css`
+export const productWrapper = css`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -46,7 +46,7 @@ export const productWrapper = () => css`
   max-width: 870px;
   width: 100%;
 `;
-export const productImgWrapper = () => css`
+export const productImgWrapper = css`
   position: relative;
   padding-top: 75%;
   width: 100%;
@@ -73,7 +73,7 @@ export const popup = ({ colors, radiuses }: Theme) => css`
     right: 50%;
   }
 `;
-export const controlsWrapper = () => css`
+export const controlsWrapper = css`
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -12,18 +12,18 @@ export const contentWrapper = ({ spaces }: Theme) => css`
     height: 100%;
   }
 `;
-export const formWrapper = () => css`
+export const formWrapper = css`
   display: flex;
   align-items: center;
   justify-content: center;
   flex-grow: 1;
   padding: 0 16px;
 `;
-export const form = () => css`
+export const form = css`
   width: 100%;
   max-width: 327px;
   @media screen and (max-width: 768px) {
-    max-width: 342px;
+    max-width: 374px;
   }
 `;
 export const linkText = ({
@@ -47,7 +47,6 @@ export const inputWrapper = ({ spaces }: Theme) => css`
   width: 100%;
   display: flex;
   flex-direction: column;
-  /* align-items: stretch; */
 `;
 export const headline = ({
   colors,
