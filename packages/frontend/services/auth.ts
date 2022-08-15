@@ -3,5 +3,5 @@ import { http } from '@helpers';
 
 export const getUser = () =>
   http.get({
-    url: `${ApiRoutes.AUTH}${AuthApiRoutes.GET_USER}`,
+    url: `${ApiRoutes.AUTH}${AuthApiRoutes.USER}`,
   });
