@@ -6,38 +6,14 @@ import * as styles from './styles';
 
 export const Header = () => (
   <header css={styles.header}>
-    <Container
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100%',
-        flexGrow: 1,
-      }}
-    >
+    <Container css={styles.headerWrapper}>
       <Link href={Routes.DEFAULT}>
         <a>
           <Logo />
         </a>
       </Link>
-      <Container
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          flexGrow: 2,
-          maxWidth: '60%',
-          marginLeft: '4em',
-        }}
-      >
-        <nav
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            width: '70%',
-            gap: '1em',
-          }}
-        >
+      <Container css={styles.navigationWrapper}>
+        <nav css={styles.navigation}>
           <InternalLink href={Routes.DEFAULT} label="Home" />
           <InternalLink href={Routes.DEFAULT} label="Category" />
           <InternalLink href={Routes.DEFAULT} label="Search" />
@@ -45,22 +21,14 @@ export const Header = () => (
           <InternalLink href={Routes.DEFAULT} label="About us" />
         </nav>
       </Container>
-      <Container
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexGrow: 1,
-          maxWidth: '21%',
-        }}
-      >
+      <div css={styles.buttonsWrapper}>
         <Button size="small">
           <span css={styles.buttonCreateAccountText}>Create Account</span>
         </Button>
         <Button size="small" variant="outlined">
           <span css={styles.buttonSignIn}>Sign In</span>
         </Button>
-      </Container>
+      </div>
     </Container>
     <Link href={Routes.USERS}>
       <a>users</a>
