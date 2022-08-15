@@ -9,4 +9,4 @@ export type IconProps = {
 
 type SizeProp = 'lg' | 'md' | 'sm' | 'xs';
 
-type ColorProp = 'yellow' | 'black' | 'white' | 'gray' | 'green';
+type ColorProp = 'yellow' | 'black' | 'white' | 'gray' | 'green' | 'disabled';
