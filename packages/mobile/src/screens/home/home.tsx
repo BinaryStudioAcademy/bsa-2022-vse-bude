@@ -1,11 +1,18 @@
 import React, { FC } from 'react';
-import { View, Text } from '~/components/components';
+import { globalStyles } from '~/styles/styles';
+import {  ScrollView } from 'react-native';
+
+import { BurgerMenu } from './components/burger-menu/burger-menu';
 
 const Home: FC = () => {
   return (
-    <View>
-      <Text>Home screen</Text>
-    </View>
+    <ScrollView style={globalStyles.px4}>
+      <BurgerMenu
+        onClick={() => {
+          //TODO
+        }}
+      />
+    </ScrollView>
   );
 };
 
