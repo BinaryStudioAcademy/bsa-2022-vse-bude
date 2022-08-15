@@ -24,7 +24,6 @@ export const navigation = () => css`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* width: 70%; */
   gap: 2em;
 `;
 
@@ -32,8 +31,6 @@ export const buttonsWrapper = () => css`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* flex-grow: 1; */
-  /* max-width: 21%; */
   gap: 2em;
 `;
 
