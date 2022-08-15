@@ -20,16 +20,21 @@ export const bgWrapper = () => css`
     min-height: 100px;
   }
 `;
-export const formWrapper = () => css`
+export const formWrapper = ({ colors, radiuses }: Theme) => css`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 44%;
   @media screen and (max-width: 768px) {
+    position: relative;
+    top: -10px;
+    z-index: 2;
+    overflow: hidden;
     flex-grow: 1;
     order: 2;
     width: 100%;
-    z-index: 2;
+    border-radius: ${radiuses.md} ${radiuses.md} 0 0;
+    background-color: ${colors.background};
   }
 `;
 export const productWrapper = () => css`

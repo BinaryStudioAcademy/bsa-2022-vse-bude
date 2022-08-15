@@ -22,6 +22,9 @@ export const formWrapper = () => css`
 export const form = () => css`
   width: 100%;
   max-width: 327px;
+  @media screen and (max-width: 768px) {
+    max-width: 342px;
+  }
 `;
 export const linkText = ({
   fontSizes,
@@ -53,7 +56,11 @@ export const headline = ({
   fontWeights,
 }: Theme) => css`
   margin-bottom: ${spaces.xl1};
+  margin-top: 0;
   font-size: ${fontSizes.h4};
   font-weight: ${fontWeights.h4};
   color: ${colors.secondaryDark};
+  @media screen and (max-width: 768px) {
+    font-size: ${fontSizes.h3};
+  }
 `;
