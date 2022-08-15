@@ -6,3 +6,4 @@ export {
 } from './navigation/navigation';
 export { NotificationType } from './notification/notification.enum';
 export { ButtonType, ButtonAppearance } from './ui/ui';
+export { FontFamily, FontSize } from './fonts/fonts';

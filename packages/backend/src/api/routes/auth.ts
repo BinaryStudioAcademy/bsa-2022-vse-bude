@@ -5,7 +5,7 @@ import { AuthApiRoutes } from '@vse-bude/shared';
 import { wrap } from '@helpers';
 import type { SignOut, UpdateRefreshToken, AuthTokenData } from '@types';
 import { apiPath } from '@helpers';
-import { authMiddleware } from '../../auth/middlewares/auth';
+import { authMiddleware } from '@middlewares';
 
 export const initAuthRoutes = (
   { authService }: Services,
