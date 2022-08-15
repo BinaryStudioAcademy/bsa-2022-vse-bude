@@ -1,4 +1,4 @@
-type EmailEnvKey = 'EMAIL_SERVICE_API_KEY' | 'EMAIL_SERVICE_ADDRESS';
+type EmailEnvKey = 'EMAIL_SERVICE_API_KEY';
 
 type ProcessEnvKey = 'NODE_ENV' | 'PORT';
 

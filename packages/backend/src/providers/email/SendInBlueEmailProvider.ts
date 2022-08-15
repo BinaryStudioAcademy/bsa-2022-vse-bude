@@ -1,5 +1,5 @@
 import { getEnv } from '@helpers';
-import type { EmailOptions, IEmailProvider } from '@types';
+import { EmailOptions, IEmailProvider } from '@types';
 import {
   TransactionalEmailsApi,
   TransactionalEmailsApiApiKeys,
@@ -16,7 +16,7 @@ export class SendInBlueEmailProvider implements IEmailProvider {
   }
 
   public async send(options: EmailOptions) {
-    return await this._apiInstance.sendTransacEmail({
+    await this._apiInstance.sendTransacEmail({
       subject: options.subject,
       sender: options.from,
       to: options.to,

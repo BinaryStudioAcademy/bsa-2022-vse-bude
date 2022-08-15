@@ -10,7 +10,7 @@ export class EmailService {
 
   public async send(options: EmailOptions) {
     try {
-      return await this._emailProvider.send(options);
+      await this._emailProvider.send(options);
     } catch (error) {
       log(error);
     }
