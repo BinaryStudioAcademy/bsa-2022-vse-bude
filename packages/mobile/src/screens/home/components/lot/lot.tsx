@@ -15,13 +15,7 @@ type Props = {
   type: LotType;
 };
 
-const Lot: FC<Props> = ({
-  imgSrc,
-  title,
-  description,
-  price,
-  type,
-}) => {
+const Lot: FC<Props> = ({ imgSrc, title, description, price, type }) => {
   const { t } = useTranslation();
 
   return (
@@ -33,9 +27,9 @@ const Lot: FC<Props> = ({
           <View style={styles.time}>
             <ClockIcon />
             <Text style={globalStyles.ml2}>
-              {`2 ${t('time.DAYS')} 5 ${t(
-                'time.HOURS',
-              )} 15 ${t('time.MINUTES')}`}
+              {`2 ${t('time.DAYS')} 5 ${t('time.HOURS')} 15 ${t(
+                'time.MINUTES',
+              )}`}
             </Text>
           </View>
         ) : null}
@@ -54,7 +48,7 @@ const Lot: FC<Props> = ({
           {description}
         </Text>
         {type === LotType.OVER ? (
-          <Text style={globalStyles.fs12}>2 days ago</Text>
+          <Text style={globalStyles.fs12}>{`2 ${t('lot.PAST_TIME')}`}</Text>
         ) : null}
       </View>
       <View style={styles.divider} />

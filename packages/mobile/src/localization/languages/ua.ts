@@ -23,4 +23,7 @@ export const ua = {
     HOURS: 'г',
     MINUTES: 'хв',
   },
+  lot: {
+    PAST_TIME: 'дні тому',
+  },
 };

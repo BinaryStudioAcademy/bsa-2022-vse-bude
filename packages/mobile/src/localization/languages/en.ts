@@ -23,4 +23,7 @@ export const en = {
     HOURS: 'h',
     MINUTES: 'min',
   },
+  lot: {
+    PAST_TIME: 'days ago',
+  },
 };
