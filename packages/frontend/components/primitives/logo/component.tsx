@@ -1,6 +1,3 @@
-import Image from 'next/image';
-import logo from '../../../public/images/icons/logo.svg';
+import * as styles from './styles';
 
-export const Logo = () => (
-  <Image src={logo.src} width={128} height={32} alt="logo" />
-);
+export const Logo = () => <span css={styles.logo}></span>;
