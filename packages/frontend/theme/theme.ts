@@ -35,6 +35,7 @@ const fontSizes = {
   toggle: '14px',
   button: '16px',
   caption: '12px',
+  smallButton: '15px',
 };
 
 const fontWeights = {
@@ -107,12 +108,25 @@ const widths = {
 const shadows = {
   upper: '2px 5px 10px 0px #c3c3c340',
   bottom: '2px 5px 10px 0px #c3c3c340',
+  dropdown:
+    '-3px 0px 9px rgba(222, 222, 222, 0.25), 2px 2px 8px rgba(222, 222, 222, 0.25);',
+};
+
+const borders = {
+  dropdown: `2px solid ${colors.backgroundLight}`,
 };
 
 const opacities = {
   lg: 0.2,
   md: 0.4,
   sm: 0.6,
+};
+
+const iconSizes = {
+  lg: '42px',
+  md: '18px',
+  sm: '16px',
+  xs: '14px',
 };
 
 const breakpoints = [576, 768, 992, 1200, 1300];
@@ -128,6 +142,8 @@ const lightTheme = {
   spaces,
   radiuses,
   shadows,
+  iconSizes,
+  borders,
   opacities,
   mq,
 };
@@ -142,6 +158,8 @@ const darkTheme = {
   spaces,
   radiuses,
   shadows,
+  iconSizes,
+  borders,
   opacities,
   mq,
 };
