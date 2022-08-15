@@ -9,7 +9,7 @@ const makeStore = () =>
     reducer: {
       randomData: randomDataReducer,
       profile: profileReducer,
-      auth: authReducer
+      auth: authReducer,
     },
   });
 
