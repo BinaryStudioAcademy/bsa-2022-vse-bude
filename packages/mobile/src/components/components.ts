@@ -5,3 +5,4 @@ export { Button } from './button/button';
 export * from './icon';
 export { Input } from './input/input';
 export { Spinner } from './spinner/spinner';
+export { KeyboardAvoiding } from './keyboard-avoiding/keyboard-avoiding';

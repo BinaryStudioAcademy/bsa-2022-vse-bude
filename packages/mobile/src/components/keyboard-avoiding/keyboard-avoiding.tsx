@@ -1,24 +1,26 @@
 import React, { FC, ReactElement } from 'react';
-import { View } from '~/components/components';
-import { useKeyboardHeight } from '~/hooks/hooks';
+import { KeyboardAvoidingView, ScrollView } from 'react-native';
+import { isIOS } from '~/common/constants/constants';
+import { styles } from './styles';
 
 type KeyboardAvoidingProps = {
   children: ReactElement;
-  style: Record<string, unknown>;
+  style?: Record<string, unknown>;
 };
 
 const KeyboardAvoiding: FC<KeyboardAvoidingProps> = ({
   children,
   style,
 }): ReactElement => {
-  const keyboardHeight = useKeyboardHeight();
-
-  //TODO: use animation for slide behavior
-
   return (
-    <View style={[{ paddingBottom: keyboardHeight / 4 }, style]}>
-      {children}
-    </View>
+    <KeyboardAvoidingView
+      style={[styles.wrapper, style]}
+      behavior={isIOS ? 'padding' : undefined}
+    >
+      <ScrollView>
+        {children}
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
