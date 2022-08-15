@@ -1,9 +1,9 @@
 import React from 'react';
 import { UserSignUpDto } from '@vse-bude/shared';
 
-import { useAppForm } from '~/hooks/hooks';
+import { useAppForm, useTranslation } from '~/hooks/hooks';
 import { Text, View, Button, Input } from '~/components/components';
-import { signUp as signUpValidationSchema } from '~/validation-schemas/validation-schemas';
+import { signUp } from '~/validation-schemas/validation-schemas';
 import { DEFAULT_SIGN_UP_PAYLOAD } from './common/constants';
 
 type Props = {
@@ -11,37 +11,48 @@ type Props = {
 };
 
 const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
+  const { t } = useTranslation();
   const { control, errors, handleSubmit } = useAppForm<UserSignUpDto>({
     defaultValues: DEFAULT_SIGN_UP_PAYLOAD,
-    validationSchema: signUpValidationSchema,
+    validationSchema: signUp,
   });
 
   return (
     <>
-      <Text>Sign Up</Text>
+      <Text>{t('verification.SING_UP')}</Text>
       <View>
         <Input
-          label="Email"
-          placeholder="Enter your email"
+          label={t('verification.EMAIL')}
+          placeholder={t('verification.EMAIL_HINT')}
           name="email"
           control={control}
           errors={errors}
         />
         <Input
-          label="Name"
-          placeholder="Enter your name"
-          name="name"
+          label={t('verification.NAME')}
+          placeholder={t('verification.NAME_HINT')}
+          name="firstName"
           control={control}
           errors={errors}
         />
         <Input
-          label="Password"
-          placeholder="Enter your password"
+          label={t('verification.LAST_NAME')}
+          placeholder={t('verification.LAST_NAME_HINT')}
+          name="lastName"
+          control={control}
+          errors={errors}
+        />
+        <Input
+          label={t('verification.PASSWORD')}
+          placeholder={t('verification.PASSWORD_HINT')}
           name="password"
           control={control}
           errors={errors}
         />
-        <Button label="Sign up" onPress={handleSubmit(onSubmit)} />
+        <Button
+          label={t('verification.SING_UP')}
+          onPress={handleSubmit(onSubmit)}
+        />
       </View>
     </>
   );

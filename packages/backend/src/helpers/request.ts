@@ -1,10 +1,28 @@
 import type { NextFunction, Request, Response } from 'express';
+import { HttpStatusCode } from '@vse-bude/shared';
 
 export const wrap =
-  <P extends ParamsDictionary, ResBody = unknown, ReqBody = unknown, ReqQuery = Query>(
+  <
+    P extends ParamsDictionary,
+    ResBody = unknown,
+    ReqBody = unknown,
+    ReqQuery = Query,
+  >(
     handler: (req?: Request<P, ResBody, ReqBody, ReqQuery>) => Promise<ResBody>,
   ) =>
-  (req: Request<P, ResBody, ReqBody, ReqQuery>, res: Response, next: NextFunction) =>
+  (
+    req: Request<P, ResBody, ReqBody, ReqQuery>,
+    res: Response,
+    next: NextFunction,
+  ) =>
     handler(req)
-      .then((result) => res.json(result))
+      .then((result) => {
+        if (!result) {
+          return res.status(HttpStatusCode.NO_CONTENT).json({
+            success: true,
+          });
+        }
+
+        return res.status(HttpStatusCode.OK).json(result);
+      })
       .catch(next);

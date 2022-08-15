@@ -1,7 +1,6 @@
-import { HttpHeader, HttpMethod } from '@vse-bude/shared';
+import { HttpHeader, HttpMethod, HttpError } from '@vse-bude/shared';
 import { StorageKey } from '~/common/enums/enums';
 import { GetHeadersParams, HttpOptions } from '~/common/types/types';
-import { HttpError } from '~/exceptions/exceptions';
 import { getQueryString } from '~/helpers/helpers';
 import { Storage } from '../storage/storage.service';
 

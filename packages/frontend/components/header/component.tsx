@@ -1,12 +1,17 @@
 import { Routes } from '@enums';
 import { Container } from '@primitives';
 import Link from 'next/link';
-import { StyledHeader } from './styles';
+import * as styles from './styles';
 
 export const Header = () => (
-  <StyledHeader>
+  <header css={styles.header}>
     <Container
-      css={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexGrow: 1 }}
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexGrow: 1,
+      }}
     >
       <Link href={Routes.DEFAULT}>
         <a>
@@ -19,5 +24,5 @@ export const Header = () => (
         </Link>
       </nav>
     </Container>
-  </StyledHeader>
+  </header>
 );

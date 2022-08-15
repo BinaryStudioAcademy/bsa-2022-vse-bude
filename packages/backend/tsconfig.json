@@ -8,10 +8,12 @@
       "@types": ["common/types"],
       "@enums": ["common/enums"],
       "@helpers": ["helpers"],
+      "@providers": ["providers"],
       "@repositories": ["repositories"],
       "@services": ["services"],
       "@routes": ["api/routes"],
-      "@middlewares": ["api/middlewares"]
+      "@middlewares": ["api/middlewares"],
+      "@errors": ["error"]
     },
     "outDir": "build"
   },

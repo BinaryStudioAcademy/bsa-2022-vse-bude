@@ -1,14 +1,12 @@
-import { NextUIProvider } from '@nextui-org/react';
 import type { AppProps } from 'next/app';
+import { appWithTranslation } from 'next-i18next';
 import { wrapper } from 'store';
-import { setGlobalStyles } from 'theme';
-
-setGlobalStyles();
+import { ThemeProvider } from '@providers';
 
 const App = ({ Component, pageProps }: AppProps) => (
-  <NextUIProvider>
+  <ThemeProvider>
     <Component {...pageProps} />
-  </NextUIProvider>
+  </ThemeProvider>
 );
 
-export default wrapper.withRedux(App);
+export default wrapper.withRedux(appWithTranslation(App));
