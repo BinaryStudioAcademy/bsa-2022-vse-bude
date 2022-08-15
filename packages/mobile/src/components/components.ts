@@ -14,3 +14,4 @@ export { Text } from './text/text';
 export * from './icons/icons';
 export { Spinner } from './spinner/spinner';
 export { SearchInput } from './search-input/search-input';
+export { ResponsiveText } from './responsive-text/responsive-text';

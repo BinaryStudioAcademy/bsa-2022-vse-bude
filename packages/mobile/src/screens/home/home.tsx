@@ -6,6 +6,7 @@ import {
   View,
   Text,
   SearchInput,
+  ResponsiveText,
 } from '~/components/components';
 import { categories } from './components/category/mock-data/categories';
 import { lotUpcoming } from './components/lot/mock-data/mock-data';
@@ -27,7 +28,10 @@ const Home: FC = () => {
           //TODO
         }}
       />
-      <Flag />
+      <View style={[styles.header]}>
+        <Text style={[styles.title, globalStyles.fs36]}> Help Ukraine</Text>
+        <Flag />
+      </View>
       <SearchInput
         placeHolder="Search the products"
         onValueChange={() => {
@@ -35,6 +39,7 @@ const Home: FC = () => {
         }}
       />
       <FlatList
+        style={styles.categories}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         data={categories}
@@ -42,6 +47,23 @@ const Home: FC = () => {
           <Category title={item.title} imageSource={item.src} />
         )}
       />
+      <View style={styles.actionHeaderWrapper}>
+        <Text
+          style={[
+            globalStyles.fs22,
+            globalStyles.fontWeightBold,
+            styles.lotTitle,
+          ]}
+        >
+          Popular Lots
+        </Text>
+        <ResponsiveText
+          text="See All Lots"
+          onPress={() => {
+            // TODO
+          }}
+        />
+      </View>
       <FlatList
         horizontal={true}
         showsHorizontalScrollIndicator={false}
@@ -59,7 +81,7 @@ const Home: FC = () => {
       <View style={styles.wrapper}>
         <Text
           style={[
-            styles.title,
+            styles.organizationTitle,
             globalStyles.fs22,
             globalStyles.fontWeightExtraBold,
           ]}
