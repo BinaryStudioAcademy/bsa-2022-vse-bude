@@ -13,12 +13,15 @@ import {
   LogOutIcon,
   Logo,
 } from '~/components/components';
-import { useNavigation, useTranslation } from '~/hooks/hooks';
-import { styles } from './styles';
+import { useCustomTheme, useNavigation, useTranslation } from '~/hooks/hooks';
+import { createStyles } from './styles';
 
 const Account: FC = () => {
   const navigation = useNavigation<RootNavigationProps>();
   const { t } = useTranslation();
+  const { dark, colors } = useCustomTheme();
+
+  const styles = React.useMemo(() => createStyles(colors), [dark, colors]);
 
   const handlePersonalInfo = () => {
     navigation.navigate(AccountScreenName.PERSONAL_INFO);
