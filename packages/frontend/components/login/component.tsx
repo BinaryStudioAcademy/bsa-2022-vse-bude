@@ -9,7 +9,7 @@ import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
-import { getAuthError, loginUser } from 'store/auth';
+import { getAuthErrorSelector, loginUser } from 'store/auth';
 
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { useTranslation } from 'next-i18next';
@@ -20,7 +20,7 @@ export default function Login() {
   const { t } = useTranslation('auth');
 
   const dispatch = useAppDispatch();
-  const authError = useTypedSelector(getAuthError);
+  const authError = useTypedSelector(getAuthErrorSelector);
 
   const {
     register,

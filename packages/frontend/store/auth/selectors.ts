@@ -1,4 +1,4 @@
 import type { RootState } from '@types';
 
-export const getUser = (state: RootState) => state.auth.currentUser;
-export const getAuthError = (state: RootState) => state.auth.error;
+export const getUserSelector = (state: RootState) => state.auth.currentUser;
+export const getAuthErrorSelector = (state: RootState) => state.auth.error;
