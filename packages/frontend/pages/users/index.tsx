@@ -3,6 +3,7 @@ import { Container } from '@primitives';
 import { Layout } from '@components';
 import { ApiRoutes, Http } from '@vse-bude/shared';
 import { auth } from '@helpers';
+import { withAuth } from 'hocs/withAuth';
 
 interface UsersProps {
   users: any[];
@@ -26,6 +27,4 @@ const Users = ({ users }: UsersProps) => (
   </Layout>
 );
 
-export default Users;
-
-Users.auth = true;
+export default withAuth(Users);

@@ -1,22 +1,11 @@
 import type { AppProps } from 'next/app';
 import { appWithTranslation } from 'next-i18next';
 import { wrapper } from 'store';
-import { AuthProvider, ThemeProvider } from '@providers';
-import type { NextComponentType } from 'next';
+import { ThemeProvider } from '@providers';
 
-type CustomAppProps = AppProps & {
-  Component: NextComponentType & { auth?: boolean };
-};
-
-const App = ({ Component, pageProps }: CustomAppProps) => (
+const App = ({ Component, pageProps }: AppProps) => (
   <ThemeProvider>
-    {Component.auth ? (
-      <AuthProvider>
-        <Component {...pageProps} />
-      </AuthProvider>
-    ) : (
-      <Component {...pageProps} />
-    )}
+    <Component {...pageProps} />
   </ThemeProvider>
 );
 export default wrapper.withRedux(appWithTranslation(App));
