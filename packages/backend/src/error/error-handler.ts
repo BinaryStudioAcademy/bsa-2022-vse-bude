@@ -8,7 +8,6 @@ export const errorHandler = (
   res: Response,
   next: NextFunction,
 ) => {
-  console.log(err);
   if (!err) {
     next();
   }
