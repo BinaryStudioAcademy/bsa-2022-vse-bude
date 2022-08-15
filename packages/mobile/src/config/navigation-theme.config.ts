@@ -28,6 +28,8 @@ const NavigationTheme = {
     icon: ColorPalette.GRAY_300,
     titlePrimary: ColorPalette.BLACK_100,
     titleSecondary: ColorPalette.GREEN_200,
+    logoYellow: ColorPalette.YELLOW_200,
+    logoBlue: ColorPalette.BLUE_100,
   },
 };
 
@@ -43,6 +45,8 @@ const NavigationDarkTheme = {
     icon: ColorPalette.WHITE_100,
     titlePrimary: ColorPalette.WHITE_100,
     titleSecondary: ColorPalette.WHITE_100,
+    logoYellow: ColorPalette.WHITE_100,
+    logoBlue: ColorPalette.WHITE_100,
   },
 };
 
