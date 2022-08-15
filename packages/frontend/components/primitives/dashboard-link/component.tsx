@@ -12,11 +12,7 @@ export const DashboardLink: FC<LinkProps> = ({
   <div data-location={location} css={styles.link}>
     <Flex css={styles.linkContent} align="center">
       <div css={styles.icon}>
-        <img
-          css={styles.img}
-          src={iconPath}
-          alt={label}
-        />
+        <img css={styles.img} src={iconPath} alt={label} />
       </div>
       <InternalLink href={path} label={label} variant="dashboard" />
     </Flex>
