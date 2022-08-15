@@ -1,40 +1,35 @@
-import profile from '../../public/images/account-page/personal-info-icon.svg';
-import mylist from '../../public/images/account-page/my-list-icon.svg';
-import settings from '../../public/images/account-page/settings-icon.svg';
-import messages from '../../public/images/account-page/chat-icon.svg';
-import support from '../../public/images/account-page/support-icon.svg';
-import signout from '../../public/images/account-page/sign-out-icon.svg';
+import { IconName, IconNameToSvgIcon } from '../../common/enums';
 import { Routes, AccountRoutes } from '../../common/enums';
 import type { LinkData } from './types';
 
 export const linksData: LinkData[] = [
   {
-    iconPath: profile.src,
+    iconPath: IconNameToSvgIcon[IconName.USER],
     label: 'PERSONAL_INFO',
     path: Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_PERSONAL,
   },
   {
-    iconPath: mylist.src,
+    iconPath: IconNameToSvgIcon[IconName.LIST],
     label: 'MY_LIST',
     path: Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_LIST,
   },
   {
-    iconPath: settings.src,
+    iconPath: IconNameToSvgIcon[IconName.SETTINGS],
     label: 'SETTINGS',
     path: Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_SETTINGS,
   },
   {
-    iconPath: messages.src,
+    iconPath: IconNameToSvgIcon[IconName.MESSAGE],
     label: 'MESSAGES',
     path: Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_MESSAGES,
   },
   {
-    iconPath: support.src,
+    iconPath: IconNameToSvgIcon[IconName.SUPPORT],
     label: 'SUPPORT',
     path: Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_SUPPORT,
   },
   {
-    iconPath: signout.src,
+    iconPath: IconNameToSvgIcon[IconName.SIGN_OUT],
     label: 'SIGN_OUT',
     path: Routes.DEFAULT,
   },
