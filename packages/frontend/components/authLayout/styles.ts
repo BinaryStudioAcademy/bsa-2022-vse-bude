@@ -6,18 +6,31 @@ export const authSection = () => css`
   justify-content: space-between;
   align-items: center;
   min-height: 100vh;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 export const bgWrapper = () => css`
   position: relative;
   width: 56%;
-  height: 100%;
+  min-height: 100vh;
   overflow: hidden;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    min-height: 100px;
+  }
 `;
 export const formWrapper = () => css`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 44%;
+  @media screen and (max-width: 768px) {
+    flex-grow: 1;
+    order: 2;
+    width: 100%;
+    z-index: 2;
+  }
 `;
 export const productWrapper = () => css`
   position: absolute;
@@ -32,6 +45,9 @@ export const productImgWrapper = () => css`
   position: relative;
   padding-top: 75%;
   width: 100%;
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 export const popup = ({ colors, radiuses }: Theme) => css`
   position: absolute;
@@ -42,6 +58,15 @@ export const popup = ({ colors, radiuses }: Theme) => css`
   background-color: ${colors.background};
   padding: 22px 23px;
   opacity: 0.93;
+  @media screen and (max-width: 1630px) {
+    bottom: -15px;
+    right: -5px;
+  }
+  @media screen and (max-width: 992px) {
+    padding: 16px;
+    transform: translateX(50%);
+    right: 50%;
+  }
 `;
 export const controlsWrapper = () => css`
   display: flex;
@@ -50,6 +75,11 @@ export const controlsWrapper = () => css`
 `;
 export const logo = ({ spaces }: Theme) => css`
   margin-bottom: ${spaces.xl4};
+  @media screen and (max-width: 768px) {
+    display: block;
+    margin-bottom: 0;
+    text-align: center;
+  }
 `;
 
 export const headline = ({ colors, fontSizes, fontWeights }: Theme) => css`
@@ -71,6 +101,12 @@ export const text = ({ colors, spaces, fontSizes, lineHeights }: Theme) => css`
     width: 100%;
     height: 2px;
     background-color: ${colors.backgroundDark};
+  }
+  @media screen and (max-width: 992px) {
+    margin-bottom: ${spaces.sm};
+    ::after {
+      margin-top: ${spaces.sm};
+    }
   }
 `;
 export const price = ({ colors, fontSizes, fontWeights }: Theme) => css`

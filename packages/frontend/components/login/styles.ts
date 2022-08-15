@@ -7,12 +7,17 @@ export const contentWrapper = ({ spaces }: Theme) => css`
   display: flex;
   flex-direction: column;
   padding: ${spaces.xl6} 0;
+  @media screen and (max-width: 768px) {
+    padding: ${spaces.lg} 0;
+    height: 100%;
+  }
 `;
 export const formWrapper = () => css`
   display: flex;
   align-items: center;
   justify-content: center;
   flex-grow: 1;
+  padding: 0 16px;
 `;
 export const form = () => css`
   width: 100%;
