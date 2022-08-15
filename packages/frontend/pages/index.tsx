@@ -3,20 +3,22 @@ import { useTranslation } from 'next-i18next';
 import { Button, Container } from '@primitives';
 import { Http } from '@vse-bude/shared';
 import { Layout } from '@components';
-import { CookieStorage } from '@helpers';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { shallowEqual } from 'react-redux';
 import { fetchRandomData, fetchRandomDataSSR, wrapper } from 'store';
 import { css } from '@emotion/react';
 import { useState } from 'react';
+import { CookieStorage, AuthHelper } from '@helpers';
 import { ProductCard } from '../components/product/card/component';
 import Test from './test';
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
-    const storage = new CookieStorage(ctx);
     const { locale } = ctx;
-    const httpClient = new Http(process.env.NEXT_PUBLIC_API_ROUTE, storage);
+
+    const storage = new CookieStorage(ctx);
+    const auth = new AuthHelper(storage);
+    const httpClient = new Http(process.env.NEXT_PUBLIC_API_ROUTE, auth);
 
     await store.dispatch(fetchRandomDataSSR(httpClient));
 
