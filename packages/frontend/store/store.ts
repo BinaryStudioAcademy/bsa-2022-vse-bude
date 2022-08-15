@@ -1,19 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
-import { combineReducers } from '@reduxjs/toolkit';
 import { randomDataReducer } from './random-data';
 import { profileReducer } from './profile';
 import { authReducer } from './auth';
 
-const rootReducer = combineReducers({
-  randomData: randomDataReducer,
-  auth: authReducer,
-  profile: profileReducer,
-});
-
 const makeStore = () =>
   configureStore({
-    reducer: rootReducer,
+    reducer: {
+      randomData: randomDataReducer,
+      profile: profileReducer,
+      auth: authReducer
+    },
   });
 
 export type AppStore = ReturnType<typeof makeStore>;
