@@ -1,1 +1,1 @@
-export { i18, resources } from './i18n';
+export { i18 } from './i18n';

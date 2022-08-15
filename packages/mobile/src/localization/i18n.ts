@@ -16,7 +16,7 @@ const i18 = () => {
     interpolation: {
       escapeValue: false,
     },
-    resources: resources,
+    resources,
   });
 };
 
