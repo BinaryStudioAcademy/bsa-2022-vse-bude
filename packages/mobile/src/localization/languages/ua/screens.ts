@@ -1,4 +1,4 @@
-export const ua = {
+export const screens = {
   welcome: {
     TITLE: 'Марка "Русский военный корабль"',
     DESCRIPTION: 'Марка була випущена Укрпоштою у 2022. Вислів став відомим...',
@@ -20,11 +20,5 @@ export const ua = {
     PHONE_NUMBER: 'Телефонний номер',
     PHONE_NUMBER_HINT: 'Введіть свій номер телефону',
     GOOGLE_BUTTON: 'Увійти за допомогою Google',
-  },
-  text: {
-    OR: 'або',
-  },
-  components: {
-    HEADER_BUTTON_BACK: 'Назад',
   },
 };

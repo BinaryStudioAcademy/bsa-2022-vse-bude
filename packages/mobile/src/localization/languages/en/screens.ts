@@ -1,4 +1,4 @@
-export const en = {
+export const screens = {
   welcome: {
     TITLE: 'Mark "Russian Warship"',
     DESCRIPTION:
@@ -21,11 +21,5 @@ export const en = {
     PHONE_NUMBER: 'Phone Number',
     PHONE_NUMBER_HINT: 'Enter your phone',
     GOOGLE_BUTTON: 'Sign in with Google',
-  },
-  text: {
-    OR: 'or',
-  },
-  components: {
-    HEADER_BUTTON_BACK: 'Back',
   },
 };

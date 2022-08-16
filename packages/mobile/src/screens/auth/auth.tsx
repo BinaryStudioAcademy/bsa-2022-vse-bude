@@ -65,7 +65,7 @@ const Auth: FC = () => {
     <View style={{ flex: 1 }}>
       <StatusBar translucent backgroundColor="transparent" />
       <Header
-        labelButton={t('components.HEADER_BUTTON_BACK')}
+        labelButton={t('common:components.HEADER_BUTTON_BACK')}
         onPress={handleGoBack}
       />
       <ScrollView
@@ -86,7 +86,7 @@ const Auth: FC = () => {
           {screenLabel}
         </Text>
         <GoogleButton />
-        <Divider text={t('text.OR')} />
+        <Divider text={t('common:text.OR')} />
         {getScreen(name)}
       </ScrollView>
     </View>
