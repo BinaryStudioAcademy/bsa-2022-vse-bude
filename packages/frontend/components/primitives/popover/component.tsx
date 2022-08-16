@@ -12,8 +12,10 @@ export const Popover = ({ trigger, children }: PopoverProps) => {
   const handleClickOutside = useCallback(() => setIsVisible(false), []);
   const triggerWrapperRef = useOutsideClick(handleClickOutside);
 
-  const getTriggerRectParams = useCallback(() =>
-    triggerWrapperRef.current.getBoundingClientRect(), [triggerWrapperRef]);
+  const getTriggerRectParams = useCallback(
+    () => triggerWrapperRef.current.getBoundingClientRect(),
+    [triggerWrapperRef],
+  );
 
   const getBodyRectParams = () => bodyRef.current.getBoundingClientRect();
 
