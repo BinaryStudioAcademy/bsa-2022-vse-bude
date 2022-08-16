@@ -44,8 +44,8 @@ export {
   UserIcon,
   SettingsIcon,
   ListIcon,
-  CustomFeatherIcon,
   AlertIcon,
   BackIcon,
+  CustomFeatherIcon,
   CameraIcon,
 };

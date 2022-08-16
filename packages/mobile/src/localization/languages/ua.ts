@@ -1,7 +1,12 @@
 export const ua = {
+  welcome: {
+    TITLE: 'Марка "Русский военный корабль"',
+    DESCRIPTION: 'Марка була випущена Укрпоштою у 2022. Вислів став відомим...',
+    BET: 'Ставка',
+    UAH: 'ГРН',
+  },
   verification: {
     SING_IN: 'Увійти',
-    SING_UP: 'Зареєструватись',
     EMAIL: 'Адреса електронної пошти',
     EMAIL_HINT: 'Введіть електронну адресу',
     PASSWORD: 'Пароль',
@@ -17,7 +22,6 @@ export const ua = {
     PHONE_NUMBER: 'Телефонний номер',
     PHONE_NUMBER_HINT: 'Введіть свій номер телефону',
     GOOGLE_BUTTON: 'Увійти за допомогою Google',
-    LINE: 'або',
   },
   components: {
     HEADER_BUTTON_BACK: 'Назад',
@@ -38,5 +42,8 @@ export const ua = {
     INSTAGRAM_HINT: 'Введіть свій Instagram',
     LINKEDIN_HINT: 'Введіть свій Linkedin',
     FACEBOOK_HINT: 'Введіть свій Facebook',
+  },
+  text: {
+    OR: 'або',
   },
 };

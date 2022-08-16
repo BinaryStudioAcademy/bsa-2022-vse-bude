@@ -1,7 +1,13 @@
 export const en = {
+  welcome: {
+    TITLE: 'Mark "Russian Warship"',
+    DESCRIPTION:
+      'The stamp was made by Ukrposhta in 2022. The expression became famous...',
+    BET: 'Bet',
+    UAH: 'UAH',
+  },
   verification: {
     SING_IN: 'Sing in',
-    SING_UP: 'Sing up',
     EMAIL: 'Email',
     EMAIL_HINT: 'Enter your email',
     PASSWORD: 'Password',
@@ -17,7 +23,6 @@ export const en = {
     PHONE_NUMBER: 'Phone Number',
     PHONE_NUMBER_HINT: 'Enter your phone',
     GOOGLE_BUTTON: 'Sign in with Google',
-    LINE: 'or',
   },
   components: {
     HEADER_BUTTON_BACK: 'Back',
@@ -38,5 +43,8 @@ export const en = {
     INSTAGRAM_HINT: 'Enter you Instagram',
     LINKEDIN_HINT: 'Enter you Linkedin',
     FACEBOOK_HINT: 'Enter you Facebook',
+  },
+  text: {
+    OR: 'or',
   },
 };
