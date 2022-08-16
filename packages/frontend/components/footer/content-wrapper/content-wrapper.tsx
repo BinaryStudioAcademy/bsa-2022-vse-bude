@@ -7,8 +7,8 @@ import * as styles from './styles';
 
 export const ContentWrapper = () => {
   const { t } = useTranslation('footer');
-  
-return (
+
+  return (
     <Row css={styles.wrapper}>
       <div css={styles.logoLinks}>
         <Logo />
