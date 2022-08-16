@@ -8,7 +8,9 @@ import type { UserSignUpDto } from '@vse-bude/shared';
 export const signUpSchema = Joi.object<UserSignUpDto>({
   firstName: Joi.string().required(),
   lastName: Joi.string().required(),
-  phone: Joi.string().required().pattern(phoneMask),
+  phone: Joi.string()
+    .required()
+    .pattern(phoneMask),
   email: Joi.string()
     .trim()
     .email({ tlds: { allow: false } })
