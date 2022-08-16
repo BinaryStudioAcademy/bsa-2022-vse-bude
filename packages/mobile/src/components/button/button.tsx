@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Pressable, View } from 'react-native';
+import { Pressable, View, ColorValue } from 'react-native';
 import { ButtonType, ButtonAppearance } from '~/common/enums/enums';
 import { Text } from '~/components/components';
 import { styles } from './styles';
@@ -10,6 +10,9 @@ type Props = {
   view?: ButtonAppearance;
   isDisabled?: boolean;
   onPress: () => void;
+  textColor?: ColorValue;
+  background?: ColorValue;
+  fontSize?: number;
 };
 
 const Button: FC<Props> = ({
@@ -18,6 +21,9 @@ const Button: FC<Props> = ({
   view = ButtonAppearance.FILLED,
   isDisabled,
   onPress,
+  textColor,
+  background,
+  fontSize,
 }) => {
   const isOutlined = view === ButtonAppearance.OUTLINED;
 
@@ -29,15 +35,18 @@ const Button: FC<Props> = ({
           styles[type],
           styles[view],
           isDisabled ? styles.disabledFill : {},
-          isOutlined && isDisabled ? styles.disabledOutlained : {},
+          isOutlined && isDisabled ? styles.disabledOutlined : {},
+          background ? { backgroundColor: background } : {},
         ]}
       >
         <Text
           style={[
             styles.title,
-            isOutlined ? styles.outlainedTitle : styles.filledTitle,
+            isOutlined ? styles.outlinedTitle : styles.filledTitle,
             isDisabled ? styles.filledTitle : {},
-            isOutlined && isDisabled ? styles.disabledOutlainedTitle : {},
+            isOutlined && isDisabled ? styles.disabledOutlinedTitle : {},
+            textColor ? { color: textColor } : {},
+            fontSize ? { fontSize } : {},
           ]}
         >
           {label}

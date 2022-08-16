@@ -1,4 +1,4 @@
-export { View, StatusBar, Pressable, ScrollView } from 'react-native';
+export { Image, View, StatusBar, Pressable, ScrollView } from 'react-native';
 export { SafeAreaView } from 'react-native-safe-area-context';
 export { default as LinearGradient } from 'react-native-linear-gradient';
 export { ScreenWrapper } from './screen-wrapper/screen-wrapper';
