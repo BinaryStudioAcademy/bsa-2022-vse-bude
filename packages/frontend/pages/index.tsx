@@ -1,7 +1,6 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 import { Button, Container, Popover } from '@primitives';
-import { Http } from '@vse-bude/shared';
 import { Layout } from '@components';
 import { wrapper } from 'store';
 import { css } from '@emotion/react';
@@ -57,7 +56,7 @@ const IndexPage = () => {
       <Container>
         <h1>{t('h1')}</h1>
         <div>
-          <div style={{ wordBreak: 'break-all' }}>{JSON.stringify(data)}</div>
+          {/* <div style={{ wordBreak: 'break-all' }}>{JSON.stringify(data)}</div> */}
 
           <Popover trigger="open popover faeeeeegrdrsfd">
             <ul>
