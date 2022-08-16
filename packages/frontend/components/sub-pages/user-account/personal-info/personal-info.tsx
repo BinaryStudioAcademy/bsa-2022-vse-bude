@@ -2,7 +2,7 @@
 //import { useState } from 'react';
 // import { Input } from 'components/primitives/input';
 
-export const PersonalInfo = () => 
+export const PersonalInfo = () => (
   // const [form, setForm] = useState({
   //   firsName: '',
   //   secondName: '',
@@ -14,5 +14,5 @@ export const PersonalInfo = () =>
   //   setForm({ ...form, [event.target.name]: event.target.value });
   // };
 
-   <div></div>
-;
+  <div></div>
+);
