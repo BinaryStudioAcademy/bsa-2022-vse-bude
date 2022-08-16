@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { login, signUp } from 'services/auth';
 import type { UserSignInDto, UserSignUpDto } from '@vse-bude/shared';
-import { auth, cookieStorage } from '@helpers';
+import { auth } from '@helpers';
 import Router from 'next/router';
 import { Routes } from '@enums';
 import type { IAuth } from '../../common/types/auth';

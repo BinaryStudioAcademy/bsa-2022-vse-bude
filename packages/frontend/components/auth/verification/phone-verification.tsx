@@ -2,12 +2,7 @@ import { Button } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import { Input } from '../../primitives/input';
 import { inputWrapper } from '../layout/styles';
-import {
-  verifyEntity,
-  verifyForm,
-  verifyInput,
-  verifyText,
-} from '../../../pages/auth/styles';
+import { verifyEntity, verifyForm, verifyInput, verifyText } from '../styles';
 
 export const PhoneVerification = () => {
   const { t } = useTranslation('auth');

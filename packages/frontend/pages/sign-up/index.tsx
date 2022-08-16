@@ -2,7 +2,7 @@ import { Routes } from '@enums';
 import { InternalLink } from 'components/primitives/link';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
-import { AuthLayout } from '../../components/authLayout/component';
+import { AuthLayout } from '../../components/authLayout';
 import {
   contentWrapper,
   formWrapper,
@@ -17,7 +17,7 @@ export const getServerSideProps = async ({ locale }) => ({
 });
 
 export default function SignUpPage() {
-  const { t: lang } = useTranslation('common');
+  const { t } = useTranslation('common');
 
   return (
     <AuthLayout>
@@ -26,10 +26,10 @@ export default function SignUpPage() {
           <SignUpForm />
         </div>
         <div css={linkText}>
-          {lang('I_HAVE_AN_ACCOUNT')}!{' '}
+          {t('I_HAVE_AN_ACCOUNT')}!{' '}
           <InternalLink
             variant="primary"
-            label={`${lang('SIGN_IN')}!`}
+            label={`${t('SIGN_IN')}!`}
             href={Routes.SIGN_IN}
           />
         </div>
