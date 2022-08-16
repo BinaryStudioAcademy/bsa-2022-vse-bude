@@ -26,11 +26,21 @@ const ListIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="list" {...iconProps} />
 );
 
+const AlertIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="alert-triangle" {...iconProps} />
+);
+
+const BackIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="chevron-left" {...iconProps} />
+);
+
 export {
   HomeIcon,
   StarIcon,
   UserIcon,
   SettingsIcon,
   ListIcon,
+  AlertIcon,
+  BackIcon,
   CustomFeatherIcon,
 };

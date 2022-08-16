@@ -7,12 +7,14 @@ import { ProfileActions } from './action-types';
 export const getCurrentUser = createAsyncThunk(
   ProfileActions.FETCH_USER,
   async (_request, { rejectWithValue }) => {
-    try {
-      return await getUser();
-    } catch (err) {
+    const user = await getUser();
+
+    if (!user) {
       auth.logOut();
 
-      return rejectWithValue(err?.message ?? ExceptionName.HTTP_ERROR);
+      return rejectWithValue(ExceptionName.HTTP_ERROR);
     }
+
+    return user;
   },
 );

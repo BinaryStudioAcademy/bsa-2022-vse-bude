@@ -1,3 +1,5 @@
+type EmailEnvKey = 'EMAIL_SERVICE_API_KEY';
+
 type ProcessEnvKey = 'NODE_ENV' | 'PORT';
 
 type RedisEnvKey = 'REDIS_PORT' | 'REDIS_HOST' | 'REDIS_PASSWORD';
@@ -12,6 +14,18 @@ type AuthEnvKeys =
   | 'JWT_ACCESS_TOKEN_EXPIRATION_MIN'
   | 'REFRESH_TOKEN_EXPIRATION_MIN';
 
-type EnvKeys = ProcessEnvKey | AuthEnvKeys | RedisEnvKey | TwilioEnvKey;
+type S3StorageEnvKey =
+  | 'S3_API_KEY'
+  | 'S3_API_SECRET'
+  | 'S3_API_LINK'
+  | 'S3_BUCKET_NAME';
+
+type EnvKeys =
+  | ProcessEnvKey
+  | AuthEnvKeys
+  | RedisEnvKey
+  | TwilioEnvKey
+  | EmailEnvKey
+  | S3StorageEnvKey;
 
 export const getEnv = (key: EnvKeys) => process.env[key];
