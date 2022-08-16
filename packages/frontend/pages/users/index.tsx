@@ -2,13 +2,15 @@ import type { GetServerSideProps } from 'next';
 import { Container } from '@primitives';
 import { Layout } from '@components';
 import { ApiRoutes, Http } from '@vse-bude/shared';
+import { auth } from '@helpers';
+import { withAuth } from 'hocs/withAuth';
 
 interface UsersProps {
   users: any[];
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const httpClient = new Http(process.env.NEXT_PUBLIC_API_ROUTE);
+  const httpClient = new Http(process.env.NEXT_PUBLIC_API_ROUTE, auth);
   const users = await httpClient.get({ url: ApiRoutes.USERS });
 
   return { props: { users } };
@@ -25,4 +27,4 @@ const Users = ({ users }: UsersProps) => (
   </Layout>
 );
 
-export default Users;
+export default withAuth(Users);

@@ -20,11 +20,16 @@ const styles = StyleSheet.create({
   [ButtonAppearance.FILLED]: {
     backgroundColor: ColorPalette.YELLOW_100,
   },
+  [ButtonAppearance.TRANSPARENT]: {
+    borderWidth: 1,
+    backgroundColor: '#00000000',
+    borderColor: ColorPalette.GREEN_200,
+  },
   disabledFill: {
     backgroundColor: ColorPalette.GRAY_200,
     borderColor: ColorPalette.GRAY_200,
   },
-  disabledOutlained: {
+  disabledOutlined: {
     backgroundColor: ColorPalette.WHITE_100,
     borderColor: ColorPalette.GRAY_200,
     borderWidth: 2,
@@ -39,13 +44,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 19,
   },
-  outlainedTitle: {
+  outlinedTitle: {
     color: ColorPalette.YELLOW_100,
   },
   filledTitle: {
     color: ColorPalette.WHITE_100,
   },
-  disabledOutlainedTitle: {
+  disabledOutlinedTitle: {
     color: ColorPalette.GRAY_200,
   },
 });

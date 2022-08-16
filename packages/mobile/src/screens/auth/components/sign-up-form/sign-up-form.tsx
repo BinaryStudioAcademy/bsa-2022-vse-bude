@@ -1,9 +1,9 @@
 import React from 'react';
 import { UserSignUpDto } from '@vse-bude/shared';
-
+import { View, Button, Input } from '~/components/components';
 import { useAppForm, useTranslation } from '~/hooks/hooks';
-import { Text, View, Button, Input } from '~/components/components';
 import { signUp } from '~/validation-schemas/validation-schemas';
+import { globalStyles } from '~/styles/styles';
 import { DEFAULT_SIGN_UP_PAYLOAD } from './common/constants';
 
 type Props = {
@@ -18,43 +18,62 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
   });
 
   return (
-    <>
-      <Text>{t('verification.SING_UP')}</Text>
-      <View>
-        <Input
-          label={t('verification.EMAIL')}
-          placeholder={t('verification.EMAIL_HINT')}
-          name="email"
-          control={control}
-          errors={errors}
-        />
-        <Input
-          label={t('verification.NAME')}
-          placeholder={t('verification.NAME_HINT')}
-          name="firstName"
-          control={control}
-          errors={errors}
-        />
-        <Input
-          label={t('verification.LAST_NAME')}
-          placeholder={t('verification.LAST_NAME_HINT')}
-          name="lastName"
-          control={control}
-          errors={errors}
-        />
-        <Input
-          label={t('verification.PASSWORD')}
-          placeholder={t('verification.PASSWORD_HINT')}
-          name="password"
-          control={control}
-          errors={errors}
-        />
+    <View>
+      <Input
+        label={t('verification.EMAIL')}
+        placeholder={t('verification.EMAIL_HINT')}
+        name="email"
+        control={control}
+        errors={errors}
+        contentContainerStyle={globalStyles.mt5}
+      />
+      <Input
+        label={t('verification.NAME')}
+        placeholder={t('verification.NAME_HINT')}
+        name="firstName"
+        control={control}
+        errors={errors}
+        contentContainerStyle={globalStyles.mt5}
+      />
+      <Input
+        label={t('verification.LAST_NAME')}
+        placeholder={t('verification.LAST_NAME_HINT')}
+        name="lastName"
+        control={control}
+        errors={errors}
+        contentContainerStyle={globalStyles.mt5}
+      />
+      <Input
+        label={t('verification.PHONE_NUMBER')}
+        placeholder={t('verification.PHONE_NUMBER_HINT')}
+        name="phone"
+        control={control}
+        errors={errors}
+        contentContainerStyle={globalStyles.mt5}
+      />
+      <Input
+        label={t('verification.PASSWORD')}
+        placeholder={t('verification.PASSWORD_HINT')}
+        name="password"
+        control={control}
+        errors={errors}
+        contentContainerStyle={globalStyles.mt5}
+      />
+      <Input
+        label={t('verification.PASSWORD_REPEAT')}
+        placeholder={t('verification.PASSWORD_HINT')}
+        name="password"
+        control={control}
+        errors={errors}
+        contentContainerStyle={globalStyles.mt5}
+      />
+      <View style={[globalStyles.mt5, globalStyles.mb5]}>
         <Button
-          label={t('verification.SING_UP')}
+          label={t('verification.CREATE_ACCOUNT')}
           onPress={handleSubmit(onSubmit)}
         />
       </View>
-    </>
+    </View>
   );
 };
 
