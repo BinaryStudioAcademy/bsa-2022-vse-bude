@@ -7,3 +7,4 @@ export { Text } from './text/text';
 export * from './icons/icons';
 export { Spinner } from './spinner/spinner';
 export { default as LinearGradient } from 'react-native-linear-gradient';
+export { KeyboardAvoiding } from './keyboard-avoiding/keyboard-avoiding';
