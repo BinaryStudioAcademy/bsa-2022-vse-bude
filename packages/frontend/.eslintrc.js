@@ -14,6 +14,7 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'error',
     'jsx-a11y/anchor-is-valid': 'off',
+    indent: ['error', 2],
   },
   settings: {
     react: {
