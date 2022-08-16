@@ -12,9 +12,9 @@ import { i18 } from './localization/localization';
 i18();
 
 const App: FC = () => {
-  useEffect(() =>{
+  useEffect(() => {
     RNBootSplash.hide({ fade: true });
-  },[]);
+  }, []);
   const colorScheme = useColorScheme();
   const theme = colorScheme === 'dark' ? NavigationDarkTheme : NavigationTheme;
 
