@@ -4,7 +4,7 @@ export const en = {
     DESCRIPTION:
       'The stamp was made by Ukrposhta in 2022. The expression became famous...',
     BET: 'Bet',
-    CURRENCY_UA: 'UAH',
+    UAH: 'UAH',
   },
   verification: {
     SING_IN: 'Sing in',

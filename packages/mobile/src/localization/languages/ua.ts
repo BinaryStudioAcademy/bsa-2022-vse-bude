@@ -3,7 +3,7 @@ export const ua = {
     TITLE: 'Марка "Русский военный корабль"',
     DESCRIPTION: 'Марка була випущена Укрпоштою у 2022. Вислів став відомим...',
     BET: 'Ставка',
-    CURRENCY_UA: 'ГРН',
+    UAH: 'ГРН',
   },
   verification: {
     SING_IN: 'Увійти',
