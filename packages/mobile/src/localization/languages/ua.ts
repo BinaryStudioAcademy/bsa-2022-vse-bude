@@ -1,14 +1,24 @@
 export const ua = {
   verification: {
     SING_IN: 'Увійти',
-    SING_UP: 'Зареєструватись',
     EMAIL: 'Адреса електронної пошти',
     EMAIL_HINT: 'Введіть електронну адресу',
     PASSWORD: 'Пароль',
-    PASSWORD_HINT: 'Введіть своій пароль',
+    PASSWORD_REPEAT: 'Повторіть пароль',
+    PASSWORD_HINT: 'Введіть свій пароль',
     NAME: "Ім'я",
     NAME_HINT: "Введіть своє Ім'я",
     LAST_NAME: 'Прізвище',
     LAST_NAME_HINT: 'Введіть своє Прізвище',
+    CREATE_ACCOUNT: 'Створити акаунт',
+    PHONE_NUMBER: 'Телефонний номер',
+    PHONE_NUMBER_HINT: 'Введіть свій номер телефону',
+    GOOGLE_BUTTON: 'Увійти за допомогою Google',
+  },
+  text: {
+    OR: 'або',
+  },
+  components: {
+    HEADER_BUTTON_BACK: 'Назад',
   },
 };
