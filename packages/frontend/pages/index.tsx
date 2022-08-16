@@ -1,6 +1,6 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
-import { Button, Container } from '@primitives';
+import { Button, Container, Popover } from '@primitives';
 import { Layout } from '@components';
 import { wrapper } from 'store';
 import { css } from '@emotion/react';
@@ -56,7 +56,18 @@ const IndexPage = () => {
       <Container>
         <h1>{t('h1')}</h1>
         <div>
-          <Button variant="outlined">click me</Button>
+          {/* <div style={{ wordBreak: 'break-all' }}>{JSON.stringify(data)}</div> */}
+
+          <Popover trigger="open popover faeeeeegrdrsfd">
+            <ul>
+              <li>Personal Info</li>
+              <li>My List</li>
+              <li>Settings</li>
+              <li>Messages</li>
+              <li>Support</li>
+              <li>Sign Out</li>
+            </ul>
+          </Popover>
 
           <Button variant="outlined" disabled>
             click me
