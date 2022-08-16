@@ -36,7 +36,7 @@ export const Product: FC = () => {
             view={ButtonAppearance.FILLED}
             fontSize={11}
             onPress={() => {
-              // to do
+              //TODO
             }}
           />
         </View>
