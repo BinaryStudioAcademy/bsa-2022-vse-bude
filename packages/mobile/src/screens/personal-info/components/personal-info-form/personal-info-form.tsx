@@ -1,7 +1,6 @@
 import React from 'react';
 import { useAppForm, useTranslation } from '~/hooks/hooks';
 import { View, Button, Input, DropDown } from '~/components/components';
-// import { personalInfo } from '~/validation-schemas/validation-schemas';
 import { globalStyles } from '~/styles/styles';
 import { ButtonAppearance } from '~/common/enums/enums';
 import { Title } from '../components';
@@ -45,7 +44,7 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
       facebook: TEST_USER.facebook,
       password: TEST_USER.password,
     },
-    // validationSchema: personalInfo,
+    //TODO need add validationSchema: personalInfo,
   });
 
   const onCancel = (): void => {
@@ -54,121 +53,124 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
 
   return (
     <View>
-      <Title label="Personal Info" />
+      <Title label={t('personal_info.PERSONAL_INFO')} />
       <Input
-        label="First Name"
+        label={t('verification.NAME')}
         placeholder={t('verification.NAME_HINT')}
         name="firstName"
         control={control}
         errors={errors}
       />
       <Input
-        label="Last Name"
+        label={t('verification.LAST_NAME')}
         placeholder={t('verification.LAST_NAME_HINT')}
         name="lastName"
         control={control}
         errors={errors}
       />
       <Input
-        label="Email"
+        label={t('verification.EMAIL')}
         placeholder={t('verification.EMAIL_HINT')}
         name="email"
         control={control}
         errors={errors}
       />
       <Input
-        label="Phone"
-        placeholder="Enter your phone"
+        label={t('verification.PHONE_NUMBER')}
+        placeholder={t('verification.PHONE_NUMBER_HINT')}
         name="phone"
         control={control}
         errors={errors}
       />
-      <Title label="Address" />
+      <Title label={t('personal_info.ADDRESS')} />
       <DropDown
-        label="Country"
+        label={t('personal_info.COUNTRY')}
         name="country"
         control={control}
         items={COUNTRIES}
         zIndex={15}
       />
       <DropDown
-        label="Region"
+        label={t('personal_info.REGION')}
         name="region"
         control={control}
         items={REGIONS}
         zIndex={10}
       />
       <DropDown
-        label="City"
+        label={t('personal_info.CITY')}
         name="city"
         control={control}
         items={CITIES}
         zIndex={5}
       />
       <Input
-        label="ZIP Code"
-        placeholder="Enter ZIP Code"
+        label={t('personal_info.ZIP_CODE')}
+        placeholder={t('personal_info.ZIP_CODE_HINT')}
         name="zipCode"
         control={control}
         errors={errors}
       />
       <Input
-        label="# Nova Poshta"
-        placeholder="Enter Nova Poshta office"
+        label={t('personal_info.NOVA_POSHTA')}
+        placeholder={t('personal_info.NOVA_POSHTA_HINT')}
         name="novaPoshta"
         control={control}
         errors={errors}
       />
-      <Title label="Social networks" />
+      <Title label={t('personal_info.SOCIAL_NETWORKS')} />
       <Input
         label="Instagram"
-        placeholder="Enter you Instagram"
+        placeholder={t('personal_info.INSTAGRAM_HINT')}
         name="instagram"
         control={control}
         errors={errors}
       />
       <Input
         label="Linkedin"
-        placeholder="Enter you Linkedin"
+        placeholder={t('personal_info.LINKEDIN_HINT')}
         name="linkedin"
         control={control}
         errors={errors}
       />
       <Input
         label="Facebook"
-        placeholder="Enter you Facebook"
+        placeholder={t('personal_info.FACEBOOK_HINT')}
         name="facebook"
         control={control}
         errors={errors}
       />
-      <Title label="Password" />
+      <Title label={t('verification.PASSWORD')} />
       <Input
-        label="Current Password"
+        label={t('verification.PASSWORD_CURRENT')}
         placeholder={t('verification.PASSWORD_HINT')}
         name="password"
         control={control}
         errors={errors}
       />
       <Input
-        label="New Password"
+        label={t('verification.PASSWORD_NEW')}
         placeholder={t('verification.PASSWORD_HINT')}
         name="password"
         control={control}
         errors={errors}
       />
       <Input
-        label="Repeat Password"
+        label={t('verification.PASSWORD_REPEAT')}
         placeholder={t('verification.PASSWORD_HINT')}
         name="password"
         control={control}
         errors={errors}
       />
       <View style={[globalStyles.mt5, globalStyles.mb3]}>
-        <Button label="Save" onPress={handleSubmit(onSubmit)} />
+        <Button
+          label={t('components.BUTTON_SAVE')}
+          onPress={handleSubmit(onSubmit)}
+        />
       </View>
       <View style={[globalStyles.mt3, globalStyles.mb5]}>
         <Button
-          label="Cancel"
+          label={t('components.BUTTON_CANCEL')}
           view={ButtonAppearance.OUTLINED}
           onPress={() => onCancel()}
         />

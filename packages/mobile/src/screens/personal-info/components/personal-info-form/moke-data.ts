@@ -11,7 +11,7 @@ export const TEST_USER = {
   instagram: '',
   linkedin: '',
   facebook: '',
-  password: 'qwerty',
+  password: '',
 };
 
 export const COUNTRIES = [
