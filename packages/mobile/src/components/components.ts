@@ -6,3 +6,4 @@ export { Input } from './input/input';
 export { Text } from './text/text';
 export * from './icons/icons';
 export { Spinner } from './spinner/spinner';
+export { KeyboardAvoiding } from './keyboard-avoiding/keyboard-avoiding';
