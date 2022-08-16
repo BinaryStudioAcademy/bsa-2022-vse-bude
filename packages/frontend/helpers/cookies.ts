@@ -12,7 +12,9 @@ export class CookieStorage implements Storage {
   }
 
   get<T>(key: StorageKey): T {
-    return JSON.parse(getCookie(key, this._ctx) as string) as T;
+    const res = getCookie(key, this._ctx) as string;
+
+    return res ? (JSON.parse(res) as T) : null;
   }
 
   set<T>(key: StorageKey, value: T, options?: CookieSerializeOptions): void {
