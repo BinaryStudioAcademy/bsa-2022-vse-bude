@@ -39,7 +39,7 @@ export const header = (theme: Theme) => css`
     flex-shrink: 0;
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: ${theme.breakpoints.lg}px) {
     .header-content {
       display: none;
     }
