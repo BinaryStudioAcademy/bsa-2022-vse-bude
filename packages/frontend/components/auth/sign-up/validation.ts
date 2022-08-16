@@ -7,15 +7,13 @@ export const minPasswordLength = 6;
 export const signUpSchema = Joi.object<UserSignUpDto>({
   firstName: Joi.string().required(),
   lastName: Joi.string().required(),
-  phone: Joi.string().trim()
-    .required()
-    .pattern(phoneMask),
+  /* eslint-disable */
+  phone: Joi.string().trim().required().pattern(phoneMask),
   email: Joi.string()
     .trim()
     .email({ tlds: { allow: false } })
     .required(),
-  password: Joi.string().trim()
-    .min(minPasswordLength)
-    .required(),
+  /* eslint-disable */
+  password: Joi.string().trim().min(minPasswordLength).required(),
   repeatPassword: Joi.any().valid(Joi.ref('password')),
 });
