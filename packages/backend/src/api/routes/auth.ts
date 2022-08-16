@@ -5,7 +5,7 @@ import { AuthApiRoutes } from '@vse-bude/shared';
 import { wrap } from '@helpers';
 import type { SignOut, UpdateRefreshToken, AuthTokenData } from '@types';
 import { apiPath } from '@helpers';
-import { authMiddleware } from '../../auth/middlewares/auth';
+import { authMiddleware } from '@middlewares';
 
 export const initAuthRoutes = (
   { authService }: Services,
@@ -44,6 +44,12 @@ export const initAuthRoutes = (
     wrap<Empty, AuthTokenData, UserSignUpDto>((req: Request) =>
       authService.signUp(req.body),
     ),
+  );
+
+  router.get(
+    apiPath(path, AuthApiRoutes.USER),
+    authMiddleware,
+    wrap((req: Request) => authService.getCurrentUser(req.userId)),
   );
 
   return router;

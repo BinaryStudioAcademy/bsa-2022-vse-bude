@@ -15,6 +15,5 @@ export const IconButton = ({
     data-variant={label && 'label'}
   >
     <Icon icon={icon} color={color} size={size} />
-    {label}
   </button>
 );

@@ -75,7 +75,6 @@ export const Header = () => (
       <IconButton
         icon={IconName.SIGN_OUT}
         color="yellow"
-        label="Sign out"
         onClick={() => console.log('hello')}
       />
       <IconButton

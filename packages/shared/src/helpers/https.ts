@@ -4,6 +4,8 @@ import {
   HttpMethod,
   HttpStatusCode,
   HttpContentType,
+  AuthApiRoutes,
+  ApiRoutes,
 } from '../common/enums';
 import type {
   DeleteRequestParams,
@@ -11,8 +13,9 @@ import type {
   PostRequestParams,
   PutRequestParams,
   RequestArgs,
-  Storage,
+  IAuthHelper,
 } from '../common/types';
+import { HttpError } from '../exceptions';
 
 interface MakeRequest {
   url: string;
@@ -22,11 +25,11 @@ interface MakeRequest {
 class Http {
   private _baseUrl: string;
 
-  private _storage: Storage;
+  private _auth: IAuthHelper;
 
-  constructor(baseUrl: string, storage?: Storage) {
+  constructor(baseUrl: string, auth: IAuthHelper) {
     this._baseUrl = baseUrl;
-    this._storage = storage;
+    this._auth = auth;
   }
 
   public get<T>({ url, payload, options }: GetRequestParams) {
@@ -96,8 +99,8 @@ class Http {
     };
 
     if (needAuthorization) {
-      // const token = this._storage.getItem('token');
-      // headers[HttpHeader.AUTHORIZATION] = token;
+      const token = this._auth.getAccessToken();
+      headers[HttpHeader.AUTHORIZATION] = token;
     }
 
     const config: RequestInit = {
@@ -119,24 +122,46 @@ class Http {
     url,
     config,
   }: MakeRequest): Promise<T> {
-    const result = await fetch(url, config);
+    let result = await fetch(url, config);
 
     if (result.status === HttpStatusCode.UNAUTHORIZED) {
-      // const accessTokenResponse = await this.updateAuthorizationToken();
-      // if (accessTokenResponse) {
-      //     result = await fetch(url, config);
-      // }
+      try {
+        await this.updateAuthorizationToken();
+        result = await fetch(url, config);
+      } catch (err) {
+        throw new HttpError(err);
+      }
     }
 
     if (!result.ok) {
-      // throw new HttpError(result);
+      throw new HttpError(result);
     }
 
     return result.json() as Promise<T>;
   }
 
-  private updateAuthorizationToken() {
-    throw new Error('not implemented');
+  private async updateAuthorizationToken() {
+    const refreshToken = this._auth.getRefreshToken();
+
+    const res = await fetch(
+      `${this._baseUrl}${ApiRoutes.AUTH}${AuthApiRoutes.REFRESH_TOKEN}`,
+      {
+        method: HttpMethod.POST,
+        body: JSON.stringify({ tokenValue: refreshToken }),
+        headers: {
+          [HttpHeader.CONTENT_TYPE]: HttpContentType.APPLICATION_JSON,
+        },
+      },
+    );
+
+    if (!res.ok) {
+      this._auth.logOut();
+      throw new HttpError(res);
+    }
+
+    const { accessToken, refreshToken: newRefreshToken } = await res.json();
+
+    this._auth.setTokens(accessToken, newRefreshToken);
   }
 }
 
