@@ -4,7 +4,7 @@ import type { Theme } from 'theme';
 export const header = (theme: Theme) => css`
   padding: ${theme.spaces.lg} 0;
   background-color: ${theme.colors.backgroundLight};
-  height: auto;
+  height: ${theme.heights.header};
 
   .navigation {
     display: flex;
@@ -26,7 +26,7 @@ export const header = (theme: Theme) => css`
 
   .burger-menu-button {
     display: none;
-    margin: 1em;
+    margin: ${theme.spaces.sm};
     font-size: ${theme.fontSizes.toggle};
     cursor: pointer;
   }
@@ -35,7 +35,7 @@ export const header = (theme: Theme) => css`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 2em;
+    gap: ${theme.spaces.sm};
     flex-shrink: 0;
   }
 
@@ -47,37 +47,6 @@ export const header = (theme: Theme) => css`
     .burger-menu-button {
       display: block;
     }
-  }
-
-  .burger-overlay {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    padding: 2em;
-    background-color: ${theme.colors.backgroundDark};
-  }
-
-  .burger-overlay,
-  .burger-navigation,
-  .burger-buttons-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1em;
-  }
-
-  .burger-navigation {
-    a {
-      font-size: ${theme.fontSizes.tub};
-      font-weight: ${theme.fontWeights.tub};
-    }
-  }
-
-  .burger-close-button {
-    position: fixed;
-    top: 2em;
-    right: 2em;
   }
 `;
 
@@ -91,8 +60,45 @@ export const buttonSignIn = (theme: Theme) => css`
   font-size: ${theme.fontSizes.buttonSmall};
 `;
 
-export const headerWrapper = css`
+export const headerInner = css`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 100%;
+`;
+
+export const burgerOverlay = (theme: Theme) => css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: ${theme.spaces.md};
+
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: ${theme.spaces.xl1};
+  background-color: ${theme.colors.backgroundDark};
+
+  .burger-navigation,
+  .burger-buttons-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: ${theme.spaces.md};
+  }
+
+  .burger-navigation {
+    a {
+      font-size: ${theme.fontSizes.tub};
+      font-weight: ${theme.fontWeights.tub};
+    }
+  }
+
+  .burger-close-button {
+    position: fixed;
+    top: ${theme.spaces.xl1};
+    right: ${theme.spaces.xl1};
+  }
 `;
