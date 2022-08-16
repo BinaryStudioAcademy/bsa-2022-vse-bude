@@ -56,7 +56,7 @@ export const Header = () => {
     </div>
   );
 
-  const LogoSVG = () => (
+  const logoSVG = () => (
     <Link href={Routes.DEFAULT}>
       <a>
         <Logo />
@@ -124,7 +124,7 @@ export const Header = () => {
     <React.Fragment>
       <header css={styles.header}>
         <Container css={styles.headerInner}>
-          <LogoSVG />
+          {logoSVG()}
 
           <div className="header-content">{renderNavigation()}</div>
           <div className="header-content">{renderAuthButtons()}</div>
