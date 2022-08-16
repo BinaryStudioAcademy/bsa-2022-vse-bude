@@ -1,12 +1,12 @@
 import type React from 'react';
-import type { IconNameToSvgIcon, IconName } from '../../common/enums';
+import type { IconNameToClassName, IconName } from '../../common/enums';
 
 export interface AccountPageProps {
   children: React.ReactNode;
 }
 
 export interface LinkData {
-  iconPath: typeof IconNameToSvgIcon[IconName];
+  iconPath: typeof IconNameToClassName[IconName];
   label: string;
   path: string;
 }

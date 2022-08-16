@@ -5,15 +5,18 @@ import * as styles from './styles';
 export const IconButton = ({
   icon,
   color,
+  backgroundColor,
   size = 'md',
-  label,
+  className,
   onClick,
 }: IconButtonProps) => (
   <button
     css={styles.iconButton}
+    className={className}
     onClick={onClick}
-    data-variant={label && 'label'}
+    data-size={size}
+    data-bg-color={backgroundColor}
   >
-    <Icon icon={icon} color={color} size={size} />
+    <Icon icon={icon} color={color} />
   </button>
 );

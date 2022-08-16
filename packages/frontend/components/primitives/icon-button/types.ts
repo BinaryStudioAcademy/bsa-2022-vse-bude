@@ -1,11 +1,15 @@
-import type { IconName } from '@fortawesome/fontawesome-svg-core';
-import type { ColorProp, SizeProp } from '../icon/types';
+import type { IconName } from '@enums';
+import type { ColorProp } from '../icon/types';
 
 export type IconButtonProps = {
-  icon: IconName;
-  css?: string;
+  icon: typeof IconName[keyof typeof IconName];
   size?: SizeProp;
-  color?: ColorProp;
-  label?: string;
+  color: ColorProp;
+  backgroundColor: BackgroundColorProp;
+  className?: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
+
+export type BackgroundColorProp = 'lightgray' | 'darkgray';
+
+export type SizeProp = 'lg' | 'md' | 'sm' | 'xs';
