@@ -24,6 +24,14 @@ export class UserRepository {
     });
   }
 
+  public getById(id: string) {
+    return this._dbClient.user.findFirst({
+      where: {
+        id,
+      },
+    });
+  }
+
   public getByEmail(email: string) {
     return this._dbClient.user.findFirst({
       where: {
