@@ -48,4 +48,11 @@ export const linkStyles = ({
       color: ${colors.accent};
     }
   }
+
+  &[data-variant='dashboard'] {
+    font-size: ${fontSizes.tub};
+    font-weight: ${fontWeights.tub};
+    line-height: ${lineHeights.tub};
+    color: ${colors.text};
+  }
 `;
