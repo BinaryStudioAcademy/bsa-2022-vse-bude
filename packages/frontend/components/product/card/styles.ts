@@ -48,8 +48,12 @@ export const productTimer = css`
   left: 16%;
 `;
 
-export const productCard = css`
-  border: 1px solid lightgray;
-  padding: 22px 25px;
-  border-radius: 5px;
+export const productCard = ({ spaces, colors, radiuses }: Theme) => css`
+  border: 1px solid transparent;
+  padding: ${spaces.lg} ${spaces.xl};
+  border-radius: ${radiuses.xs};
+
+  &:hover {
+    border: 1px solid ${colors.accent};
+  }
 `;
