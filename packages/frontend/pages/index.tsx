@@ -47,7 +47,7 @@ const IndexPage = () => {
     price: 200,
     name: 'Some name',
     description: 'Some description asdasd as dasd as das da das das adssa',
-    auctionDate: new Date('2022-08-15 00:00:00'),
+    auctionDate: new Date('2022-08-17 00:00:00'),
     currency: 'UAH',
   };
 
