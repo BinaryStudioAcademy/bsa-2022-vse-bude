@@ -64,7 +64,7 @@ export const Header = () => {
     </Link>
   );
 
-  const BurgerButton = () => (
+  const renderBurgerButton = () => (
     <button onClick={() => setShow(!show)}>
       <Icon icon={IconName.LIST} color="yellow" />
     </button>
@@ -110,11 +110,11 @@ export const Header = () => {
           <span css={styles.buttonSignIn}>{t('header.buttons.sign_in')}</span>
         </Button>
       </div>
-      <div className="burger-close-button">{CloseBurgerButton()}</div>
+      <div className="burger-close-button">{renderCloseBurgerButton()}</div>
     </div>
   );
 
-  const CloseBurgerButton = () => (
+  const renderCloseBurgerButton = () => (
     <button onClick={() => setShow(!show)}>
       <Icon icon={IconName.ANGLE_UP} color="yellow" />
     </button>
@@ -129,7 +129,7 @@ export const Header = () => {
           <div className="header-content">{renderNavigation()}</div>
           <div className="header-content">{renderAuthButtons()}</div>
 
-          <div className="burger-menu-button">{BurgerButton()}</div>
+          <div className="burger-menu-button">{renderBurgerButton()}</div>
         </Container>
       </header>
       {show && renderHamburderMenuContent()}
