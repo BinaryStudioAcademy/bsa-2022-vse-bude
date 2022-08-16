@@ -2,11 +2,11 @@ import type React from 'react';
 import { useState } from 'react';
 import { Button } from '@primitives';
 import { Input } from 'components/primitives/input';
-import { ColumnHeader } from '../footer-common';
-import type { FooterFormProps } from './types';
+import { ColumnHeader } from '../common';
+import type { FormProps } from './types';
 import * as styles from './styles';
 
-export const FooterForm: React.FC<FooterFormProps> = ({
+export const Form: React.FC<FormProps> = ({
   header,
   description,
   button,

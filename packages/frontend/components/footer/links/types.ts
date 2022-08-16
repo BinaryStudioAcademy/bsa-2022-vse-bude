@@ -1,10 +1,10 @@
-export interface FooterContactsProps {
+export interface ContactsProps {
   header: string;
   phone: string;
   email: string;
 }
 
-export interface FooterPolicyProps {
+export interface PolicyProps {
   header: string;
   path: string;
   label: string;

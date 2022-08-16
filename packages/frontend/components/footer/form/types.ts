@@ -1,4 +1,4 @@
-export interface FooterFormProps {
+export interface FormProps {
   header: string;
   description: string;
   button: string;
