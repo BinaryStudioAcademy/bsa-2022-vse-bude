@@ -2,7 +2,6 @@ import type { Repositories } from '@repositories';
 import { TwilioSMSProvider, BarSMSProvider } from '@providers';
 import { getEnv } from '@helpers';
 import { SendInBlueEmailProvider } from 'providers/email';
-import { RandomDataService } from './random-data';
 import { UserService } from './user';
 import { AuthService } from './auth';
 import { HashService } from './hash';
