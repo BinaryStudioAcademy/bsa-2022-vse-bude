@@ -26,9 +26,7 @@ const Lot: FC<Props> = ({ imgSrc, title, description, price, type }) => {
         {type === LotType.UPCOMING ? (
           <View style={styles.time}>
             <ClockIcon />
-            <Text style={globalStyles.ml2}>
-              2 дня 5 г 15 хв
-            </Text>
+            <Text style={globalStyles.ml2}>2 дня 5 г 15 хв</Text>
           </View>
         ) : null}
       </View>
