@@ -27,12 +27,11 @@ export const pageHeader = ({
   color: ${colors.text};
 `;
 
-export const linksContainer = () => css`
-  flex-direction: column;
-  min-width: 190px;
-  @media (max-width: 1200px) {
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 100%;
+export const linksContainer = ({ mq }: Theme) => css`
+  visibility: hidden;
+  ${mq[2]} {
+    visibility: visible;
+    flex-direction: column;
+    min-width: 190px;
   }
 `;
