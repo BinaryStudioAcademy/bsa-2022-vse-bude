@@ -10,7 +10,8 @@ import type { PolicyProps } from './types';
 
 export const Policy: FC<PolicyProps> = ({ path }) => {
   const { t } = useTranslation('footer');
-  return (
+  
+return (
     <div css={styles.footerLinksWrapper}>
       <ColumnHeader>{t('SECURITY')}</ColumnHeader>
 
@@ -21,7 +22,11 @@ export const Policy: FC<PolicyProps> = ({ path }) => {
           icon={IconNameToSvgIcon[IconName.PRIVACY_POLICY]}
         />
         <span css={styles.primaryUnderline}>
-          <InternalLink variant="accent" label={t('SECURITY_LINK')} href={path} />
+          <InternalLink
+            variant="accent"
+            label={t('SECURITY_LINK')}
+            href={path}
+          />
         </span>
       </div>
     </div>

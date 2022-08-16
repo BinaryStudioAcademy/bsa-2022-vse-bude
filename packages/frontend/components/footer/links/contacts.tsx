@@ -10,7 +10,8 @@ import type { ContactsProps } from './types';
 
 export const Contacts: FC<ContactsProps> = ({ email, phone }) => {
   const { t } = useTranslation('footer');
-  return (
+  
+return (
     <div css={styles.footerLinksWrapper}>
       <ColumnHeader>{t('CONTACT')}</ColumnHeader>
 
