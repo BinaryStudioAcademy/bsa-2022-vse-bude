@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppForm, useTranslation } from '~/hooks/hooks';
+import { useAppForm, useCustomTheme, useTranslation } from '~/hooks/hooks';
 import { View, Button, Input, DropDown } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { ButtonAppearance } from '~/common/enums/enums';
@@ -28,6 +28,7 @@ type Props = {
 
 const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
   const { t } = useTranslation();
+  const { dark, colors } = useCustomTheme();
   const { control, errors, handleSubmit } = useAppForm<UserPersonalInfo>({
     defaultValues: {
       firstName: TEST_USER.firstName,
@@ -60,6 +61,7 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
         name="firstName"
         control={control}
         errors={errors}
+        contentContainerStyle={globalStyles.mt5}
       />
       <Input
         label={t('verification.LAST_NAME')}
@@ -67,6 +69,7 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
         name="lastName"
         control={control}
         errors={errors}
+        contentContainerStyle={globalStyles.mt5}
       />
       <Input
         label={t('verification.EMAIL')}
@@ -74,6 +77,7 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
         name="email"
         control={control}
         errors={errors}
+        contentContainerStyle={globalStyles.mt5}
       />
       <Input
         label={t('verification.PHONE_NUMBER')}
@@ -81,6 +85,7 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
         name="phone"
         control={control}
         errors={errors}
+        contentContainerStyle={globalStyles.mt5}
       />
       <Title label={t('personal_info.ADDRESS')} />
       <DropDown
@@ -110,6 +115,7 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
         name="zipCode"
         control={control}
         errors={errors}
+        contentContainerStyle={globalStyles.mt5}
       />
       <Input
         label={t('personal_info.NOVA_POSHTA')}
@@ -117,6 +123,7 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
         name="novaPoshta"
         control={control}
         errors={errors}
+        contentContainerStyle={globalStyles.mt5}
       />
       <Title label={t('personal_info.SOCIAL_NETWORKS')} />
       <Input
@@ -125,6 +132,7 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
         name="instagram"
         control={control}
         errors={errors}
+        contentContainerStyle={globalStyles.mt5}
       />
       <Input
         label="Linkedin"
@@ -132,6 +140,7 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
         name="linkedin"
         control={control}
         errors={errors}
+        contentContainerStyle={globalStyles.mt5}
       />
       <Input
         label="Facebook"
@@ -139,6 +148,7 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
         name="facebook"
         control={control}
         errors={errors}
+        contentContainerStyle={globalStyles.mt5}
       />
       <Title label={t('verification.PASSWORD')} />
       <Input
@@ -147,6 +157,7 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
         name="password"
         control={control}
         errors={errors}
+        contentContainerStyle={globalStyles.mt5}
       />
       <Input
         label={t('verification.PASSWORD_NEW')}
@@ -154,6 +165,7 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
         name="password"
         control={control}
         errors={errors}
+        contentContainerStyle={globalStyles.mt5}
       />
       <Input
         label={t('verification.PASSWORD_REPEAT')}
@@ -161,6 +173,7 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
         name="password"
         control={control}
         errors={errors}
+        contentContainerStyle={globalStyles.mt5}
       />
       <View style={[globalStyles.mt5, globalStyles.mb3]}>
         <Button
@@ -171,7 +184,8 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
       <View style={[globalStyles.mt3, globalStyles.mb5]}>
         <Button
           label={t('components.BUTTON_CANCEL')}
-          view={ButtonAppearance.OUTLINED}
+          view={ButtonAppearance.TRANSPARENT}
+          textColor={dark ? colors.whiteColor : colors.buttonTextSecondary}
           onPress={() => onCancel()}
         />
       </View>
