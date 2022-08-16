@@ -10,8 +10,8 @@ import type { PolicyProps } from './types';
 
 export const Policy: FC<PolicyProps> = ({ path }) => {
   const { t } = useTranslation('footer');
-  
-return (
+
+  return (
     <div css={styles.footerLinksWrapper}>
       <ColumnHeader>{t('SECURITY')}</ColumnHeader>
 
