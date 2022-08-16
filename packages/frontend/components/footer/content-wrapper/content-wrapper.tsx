@@ -1,13 +1,14 @@
 import { Row } from '@primitives';
-import * as styles from './styles';
+import { useTranslation } from 'next-i18next';
 import { Logo } from '../logo';
 import { Contacts, Policy } from '../links';
 import { Form } from '../form';
-import { useTranslation } from 'next-i18next';
+import * as styles from './styles';
 
 export const ContentWrapper = () => {
   const { t } = useTranslation('footer');
-  return (
+  
+return (
     <Row css={styles.wrapper}>
       <div css={styles.logoLinks}>
         <Logo />

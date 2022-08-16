@@ -7,11 +7,7 @@ import { ColumnHeader } from '../common/column-header';
 import * as styles from './styles';
 import type { ContactsProps } from './types';
 
-export const Contacts: FC<ContactsProps> = ({
-  header,
-  email,
-  phone,
-}) => (
+export const Contacts: FC<ContactsProps> = ({ header, email, phone }) => (
   <div css={styles.footerLinksWrapper}>
     <ColumnHeader>{header}</ColumnHeader>
 
