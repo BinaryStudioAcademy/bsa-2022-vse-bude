@@ -1,12 +1,13 @@
 import type { Repositories } from '@repositories';
 import { TwilioSMSProvider, BarSMSProvider } from '@providers';
 import { getEnv } from '@helpers';
-import { RandomDataService } from './random-data';
+import { SendInBlueEmailProvider } from 'providers/email';
 import { UserService } from './user';
 import { AuthService } from './auth';
 import { HashService } from './hash';
 import { RedisStorageService } from './redis-storage';
 import { SMSSenderService } from './sms';
+import { EmailService } from './email';
 import { S3StorageService } from './s3-storage';
 import { VerifyService } from './verify';
 
@@ -24,7 +25,6 @@ export const initServices = (repositories: Repositories) => {
   );
 
   return {
-    randomDataService: new RandomDataService(repositories.randomDataRepository),
     userService: new UserService(repositories.userRepository),
     authService: new AuthService(
       repositories.userRepository,
@@ -34,6 +34,7 @@ export const initServices = (repositories: Repositories) => {
     ),
     redisStorageService: redisService,
     smsSenderService: new SMSSenderService(smsProvider),
+    emailService: new EmailService(new SendInBlueEmailProvider()),
     s3StorageService: new S3StorageService(),
     verifyService: verifyService,
   };
@@ -42,7 +43,6 @@ export const initServices = (repositories: Repositories) => {
 export type Services = ReturnType<typeof initServices>;
 
 export {
-  type RandomDataService,
   type UserService,
   type AuthService,
   type HashService,

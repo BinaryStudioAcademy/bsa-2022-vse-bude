@@ -113,6 +113,10 @@ export class AuthService {
     return this.getTokenData(user.id);
   }
 
+  async getCurrentUser(userId: string) {
+    return this._userRepository.getById(userId);
+  }
+
   private getAccessToken(userPayload: UserSessionJwtPayload): string {
     return jwtSign(userPayload, getEnv('JWT_SECRET_KEY'));
   }
@@ -151,6 +155,7 @@ export class AuthService {
 
   private getTokenData(userId: string): AuthTokenData {
     const accessExpiresIn: number = this.getAccessTokenExpiration();
+
     const userPayload: UserSessionJwtPayload = {
       userId: userId,
       exp: accessExpiresIn,
