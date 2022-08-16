@@ -15,7 +15,6 @@ const loginUser = createAsyncThunk(
         if (data?.error) {
           return rejectWithValue(data.error);
         }
-        cookieStorage.saveTokens(data);
         auth.setTokens(data.accessToken, data.refreshToken);
 
         return data;
@@ -32,7 +31,6 @@ const signUpUser = createAsyncThunk(
   async (data: UserSignUpDto, { rejectWithValue }) => {
     try {
       const response: IAuth = await signUp(data);
-      cookieStorage.saveTokens(response);
       auth.setTokens(response.accessToken, response.refreshToken);
       // TODO: upload user data
       // TODO: check if user's phone and email are verified and redirect dependently of it values
