@@ -21,6 +21,7 @@ export type FlexBoxStyles = {
   flexDirectionColumn: FlexStyle;
   alignItemsCenter: FlexStyle;
   justifyContentCenter: FlexStyle;
+  justifyContentStart: FlexStyle;
   justifyContentSpaceBetween: FlexStyle;
 };
 

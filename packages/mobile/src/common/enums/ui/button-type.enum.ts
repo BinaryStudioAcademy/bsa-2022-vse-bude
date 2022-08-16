@@ -6,6 +6,7 @@ enum ButtonType {
 enum ButtonAppearance {
   FILLED = 'filled',
   OUTLINED = 'outlined',
+  TRANSPARENT = 'transparent',
 }
 
 export { ButtonType, ButtonAppearance };
