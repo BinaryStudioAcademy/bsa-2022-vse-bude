@@ -14,10 +14,10 @@ type Props<T extends FormControlValues> = {
   label: string;
   name: FormControlPath<T>;
   control: FormControl<T>;
-  items: {
+  items: Array<{
     label: string;
     value: string;
-  }[];
+  }>;
   zIndex: number;
 };
 const DropDown = <T extends FormControlValues>({

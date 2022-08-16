@@ -6,23 +6,19 @@ import {
   Pressable,
   CameraIcon,
 } from '~/components/components';
+import { useCustomTheme } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 
-const Hero: FC = () => {
+const ProfileImage: FC = () => {
+  const { colors } = useCustomTheme();
+
   return (
-    <View
-      style={[
-        styles.container,
-        globalStyles.px5,
-        globalStyles.mt5,
-        globalStyles.mb3,
-      ]}
-    >
+    <View style={[styles.container, globalStyles.px5, globalStyles.mt5]}>
       <LinearGradient
         start={{ x: 0, y: 0.4 }}
         end={{ x: 0, y: 0.9 }}
-        colors={['#0C42A6', '#F4C50A']}
+        colors={[colors.flagTop, colors.flagBottom]}
         style={styles.flag}
       />
       <View style={styles.photoWrapper}>
@@ -43,4 +39,4 @@ const Hero: FC = () => {
   );
 };
 
-export { Hero };
+export { ProfileImage };

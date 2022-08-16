@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   title: {
     lineHeight: 16,
-    paddingVertical: 10,
+    paddingVertical: 5,
   },
 });
 

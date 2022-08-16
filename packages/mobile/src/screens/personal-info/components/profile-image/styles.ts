@@ -1,11 +1,13 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
-    height: 194,
+    height: width / 2,
   },
   flag: {
-    height: 139,
+    height: width / 3,
     borderRadius: 10,
   },
   photoWrapper: {

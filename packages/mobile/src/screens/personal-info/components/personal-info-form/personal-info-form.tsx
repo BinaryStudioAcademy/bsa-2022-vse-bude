@@ -3,8 +3,13 @@ import { useAppForm, useCustomTheme, useTranslation } from '~/hooks/hooks';
 import { View, Button, Input, DropDown } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { ButtonAppearance } from '~/common/enums/enums';
+import {
+  CITIES,
+  COUNTRIES,
+  REGIONS,
+  TEST_USER,
+} from '~/mock/mock-personal-info';
 import { Title } from '../components';
-import { CITIES, COUNTRIES, REGIONS, TEST_USER } from './moke-data';
 
 type UserPersonalInfo = {
   firstName: string;
@@ -48,7 +53,7 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
     //TODO need add validationSchema: personalInfo,
   });
 
-  const onCancel = (): void => {
+  const handleCancelPress = (): void => {
     //TODO add Cancel handler
   };
 
@@ -186,7 +191,7 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
           label={t('components.BUTTON_CANCEL')}
           view={ButtonAppearance.TRANSPARENT}
           textColor={dark ? colors.whiteColor : colors.buttonTextSecondary}
-          onPress={() => onCancel()}
+          onPress={handleCancelPress}
         />
       </View>
     </View>
