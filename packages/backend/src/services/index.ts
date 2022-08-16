@@ -1,7 +1,6 @@
 import type { Repositories } from '@repositories';
 import { TwilioSMSProvider, BarSMSProvider } from '@providers';
 import { getEnv } from '@helpers';
-import { RandomDataService } from './random-data';
 import { UserService } from './user';
 import { AuthService } from './auth';
 import { HashService } from './hash';
@@ -17,7 +16,6 @@ export const initServices = (repositories: Repositories) => {
       : new TwilioSMSProvider();
 
   return {
-    randomDataService: new RandomDataService(repositories.randomDataRepository),
     userService: new UserService(repositories.userRepository),
     authService: new AuthService(
       repositories.userRepository,
@@ -32,9 +30,4 @@ export const initServices = (repositories: Repositories) => {
 
 export type Services = ReturnType<typeof initServices>;
 
-export {
-  type RandomDataService,
-  type UserService,
-  type AuthService,
-  type HashService,
-};
+export { type UserService, type AuthService, type HashService };
