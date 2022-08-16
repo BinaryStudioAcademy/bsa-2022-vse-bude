@@ -18,12 +18,4 @@ export const ua = {
     BID: 'Ставка',
     BUY: 'Купити',
   },
-  time: {
-    DAYS: 'днів',
-    HOURS: 'г',
-    MINUTES: 'хв',
-  },
-  lot: {
-    PAST_TIME: 'дні тому',
-  },
 };

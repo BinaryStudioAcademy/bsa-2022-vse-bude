@@ -27,9 +27,7 @@ const Lot: FC<Props> = ({ imgSrc, title, description, price, type }) => {
           <View style={styles.time}>
             <ClockIcon />
             <Text style={globalStyles.ml2}>
-              {`2 ${t('time.DAYS')} 5 ${t('time.HOURS')} 15 ${t(
-                'time.MINUTES',
-              )}`}
+              2 дня 5 г 15 хв
             </Text>
           </View>
         ) : null}
@@ -48,7 +46,7 @@ const Lot: FC<Props> = ({ imgSrc, title, description, price, type }) => {
           {description}
         </Text>
         {type === LotType.OVER ? (
-          <Text style={globalStyles.fs12}>{`2 ${t('lot.PAST_TIME')}`}</Text>
+          <Text style={globalStyles.fs12}>2 дні тому</Text>
         ) : null}
       </View>
       <View style={styles.divider} />

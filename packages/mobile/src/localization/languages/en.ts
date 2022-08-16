@@ -18,12 +18,4 @@ export const en = {
     BID: 'Bid',
     BUY: 'Buy',
   },
-  time: {
-    DAYS: 'days',
-    HOURS: 'h',
-    MINUTES: 'min',
-  },
-  lot: {
-    PAST_TIME: 'days ago',
-  },
 };
