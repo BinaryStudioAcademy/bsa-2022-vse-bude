@@ -38,11 +38,6 @@ const IndexPage = () => {
   const { data } = useTypedSelector((state) => state.randomData, shallowEqual);
   const dispatch = useAppDispatch();
   const { t } = useTranslation('home');
-  const popoverRef = useRef(null);
-
-  const handleClick = () => {
-    popoverRef.current.setVisible(true);
-  };
 
   const [isFavorite, setIsFavorite] = useState(false);
 
