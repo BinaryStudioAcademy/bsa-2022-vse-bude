@@ -12,7 +12,7 @@ export const initHealthRoutes = (path: ApiRoutes) => {
   });
 
   try {
-    prisma.$connect();
+    prisma.user.findMany();
     new RedisStorageService();
   } catch (e) {
     status = 503;
