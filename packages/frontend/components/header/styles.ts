@@ -9,7 +9,6 @@ export const css_responsive = css`
   @media (max-width: 1024px) {
     .burger_menu_wrapper {
       position: sticky;
-      /* display: none; */
       flex-direction: column;
       gap: 1em;
     }
