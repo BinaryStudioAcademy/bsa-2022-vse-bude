@@ -28,7 +28,7 @@ export const Product: FC = () => {
               styles.price,
             ]}
           >
-            {`360 ${t('welcome.CURRENCY_UA')}`}
+            {`360 ${t('welcome.UAH')}`}
           </Text>
           <Button
             label={t('welcome.BET')}
