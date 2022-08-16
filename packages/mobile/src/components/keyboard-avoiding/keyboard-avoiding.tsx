@@ -1,6 +1,6 @@
 import React, { FC, ReactElement } from 'react';
 import { KeyboardAvoidingView, ScrollView } from 'react-native';
-import { isIOS } from '~/common/constants/constants';
+import { IS_IOS } from '~/common/constants/constants';
 import { styles } from './styles';
 
 type KeyboardAvoidingProps = {
@@ -15,7 +15,7 @@ const KeyboardAvoiding: FC<KeyboardAvoidingProps> = ({
   return (
     <KeyboardAvoidingView
       style={[styles.wrapper, style]}
-      behavior={isIOS ? 'padding' : undefined}
+      behavior={IS_IOS ? 'padding' : undefined}
     >
       <ScrollView>{children}</ScrollView>
     </KeyboardAvoidingView>
