@@ -163,18 +163,6 @@ model RefreshToken {
   expiresAt DateTime @db.Timestamp
 }
 
-model VerificationCode {
-  id        String    @id @default(uuid()) @db.Uuid
-  userId    String    @db.Uuid
-  code      String
-  type      VerificationCodeType
-}
-
-enum VerificationCodeType {
-  PHONE
-  EMAIL
-}
-
 enum Role {
   USER
   ADMIN

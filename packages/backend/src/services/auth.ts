@@ -67,14 +67,7 @@ export class AuthService {
       passwordHash: this._hashService.generatePasswordHash(signUpDto.password),
     };
     const newUser = await this._userRepository.create(createUserDto);
-    await this._verifyService.createVerificationCode(
-      newUser.id,
-      VerificationTypes.PHONE,
-    );
-    await this._verifyService.createVerificationCode(
-      newUser.id,
-      VerificationTypes.EMAIL,
-    );
+    await this.initPhoneVerification(newUser.id);
     const tokenData = this.getTokenData(newUser.id);
 
     const refreshToken: CreateRefreshToken = {
@@ -85,6 +78,13 @@ export class AuthService {
     await this._refreshTokenRepository.create(refreshToken);
 
     return tokenData;
+  }
+
+  private async initPhoneVerification(userId: string) {
+    await this._verifyService.createVerificationCode(
+      userId,
+      VerificationTypes.PHONE,
+    );
   }
 
   async signIn(signInDto: UserSignInDto) {

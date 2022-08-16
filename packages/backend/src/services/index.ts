@@ -8,17 +8,19 @@ import { HashService } from './hash';
 import { RedisStorageService } from './redis-storage';
 import { SMSSenderService } from './sms';
 import { S3StorageService } from './s3-storage';
-import { VerifyService } from './verify-service';
+import { VerifyService } from './verify';
 
 export const initServices = (repositories: Repositories) => {
   const hashService: HashService = new HashService();
+  const redisService: RedisStorageService = new RedisStorageService();
+
   const smsProvider =
     getEnv('NODE_ENV') === 'development'
       ? new BarSMSProvider()
       : new TwilioSMSProvider();
   const verifyService: VerifyService = new VerifyService(
-    repositories.verifyRepository,
     repositories.userRepository,
+    redisService,
   );
 
   return {
@@ -30,7 +32,7 @@ export const initServices = (repositories: Repositories) => {
       hashService,
       verifyService,
     ),
-    redisStorageService: new RedisStorageService(),
+    redisStorageService: redisService,
     smsSenderService: new SMSSenderService(smsProvider),
     s3StorageService: new S3StorageService(),
     verifyService: verifyService,
