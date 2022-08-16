@@ -43,7 +43,6 @@ const LotSection: FC<Props> = ({
         style={styles.lotsWrapper}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
-        // keyExtractor={(item) => item.id}
         data={dataLengthCheck(data)}
         renderItem={({ item }) => (
           <Lot

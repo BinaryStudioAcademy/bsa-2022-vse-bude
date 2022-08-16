@@ -25,6 +25,13 @@ const SettingsIcon: AppIcon = (iconProps) => (
 const ListIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="list" {...iconProps} />
 );
+const AlertIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="alert-triangle" {...iconProps} />
+);
+
+const BackIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="chevron-left" {...iconProps} />
+);
 const ClockIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="clock" {...iconProps} />
 );
@@ -37,6 +44,8 @@ export {
   UserIcon,
   SettingsIcon,
   ListIcon,
+  AlertIcon,
+  BackIcon,
   CustomFeatherIcon,
   ClockIcon,
   SearchIcon,

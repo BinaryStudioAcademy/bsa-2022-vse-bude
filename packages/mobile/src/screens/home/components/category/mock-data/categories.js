@@ -4,7 +4,7 @@ const categories =[
   {
     title:'Мистецтво',
     src:images.arts,
-    key:1,
+    id:1,
   },
   {
     title: 'Іграшки',
@@ -13,12 +13,12 @@ const categories =[
   {
     title: 'Домашній Декор',
     src:images.home_decor,
-    key:2,
+    id:2,
   },
   {
     title: 'Побутова Техніка',
     src:images.appliances,
-    key:3,
+    id:3,
   },
 ];
 

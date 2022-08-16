@@ -13,6 +13,9 @@ const FLEX_BOX_STYLES: FlexBoxStyles = {
   justifyContentCenter: {
     justifyContent: 'center',
   },
+  justifyContentStart: {
+    justifyContent: 'flex-start',
+  },
   justifyContentSpaceBetween: {
     justifyContent: 'space-between',
   },

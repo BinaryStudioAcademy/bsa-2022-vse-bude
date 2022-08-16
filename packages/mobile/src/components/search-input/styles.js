@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native';
 import { ColorPalette } from '@vse-bude/shared';
-// import { AppColor } from 'config/config';
 
 const styles = StyleSheet.create({
   inputContainer: {
