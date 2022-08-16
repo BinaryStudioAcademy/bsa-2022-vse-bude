@@ -80,6 +80,7 @@ model Category {
   title     String    @db.VarChar(512)
   products  Product[]
   createdAt DateTime  @default(now())
+  image     String?   @db.VarChar(2048) @default("")
   updatedAt DateTime  @updatedAt
 
   @@unique([title])
