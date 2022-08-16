@@ -86,7 +86,7 @@ const Auth: FC = () => {
           {screenLabel}
         </Text>
         <GoogleButton />
-        <Divider text={t('verification.LINE')} />
+        <Divider text={t('text.OR')} />
         {getScreen(name)}
       </ScrollView>
     </View>

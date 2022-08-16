@@ -14,7 +14,9 @@ export const en = {
     PHONE_NUMBER: 'Phone Number',
     PHONE_NUMBER_HINT: 'Enter your phone',
     GOOGLE_BUTTON: 'Sign in with Google',
-    LINE: 'or',
+  },
+  text: {
+    OR: 'or',
   },
   components: {
     HEADER_BUTTON_BACK: 'Back',

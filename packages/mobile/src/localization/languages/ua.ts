@@ -14,7 +14,9 @@ export const ua = {
     PHONE_NUMBER: 'Телефонний номер',
     PHONE_NUMBER_HINT: 'Введіть свій номер телефону',
     GOOGLE_BUTTON: 'Увійти за допомогою Google',
-    LINE: 'або',
+  },
+  text: {
+    OR: 'або',
   },
   components: {
     HEADER_BUTTON_BACK: 'Назад',

@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { BackIcon, Pressable, Text } from '~/components/components';
+import { useCustomTheme } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 
@@ -9,6 +10,8 @@ type Props = {
 };
 
 const HeaderButton: FC<Props> = ({ label, onPress }) => {
+  const { colors } = useCustomTheme();
+
   return (
     <Pressable
       onPress={onPress}
@@ -18,13 +21,13 @@ const HeaderButton: FC<Props> = ({ label, onPress }) => {
         globalStyles.justifyContentStart,
       ]}
     >
-      <BackIcon size={35} style={{ color: '#FFFFFF' }} />
+      <BackIcon size={35} style={{ color: colors.whiteColor }} />
       <Text
         style={[
           styles.buttonText,
           globalStyles.fs17,
           globalStyles.fontWeightMedium,
-          { color: '#FFFFFF', textAlign: 'left' },
+          { color: colors.whiteColor, textAlign: 'left' },
         ]}
       >
         {label}

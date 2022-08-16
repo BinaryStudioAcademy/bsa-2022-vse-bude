@@ -25,7 +25,7 @@ const Divider: FC<Props> = ({ text }) => {
           { backgroundColor: colors.line },
         ]}
       />
-      {text && (
+      {!!text && (
         <>
           <Text
             style={[
