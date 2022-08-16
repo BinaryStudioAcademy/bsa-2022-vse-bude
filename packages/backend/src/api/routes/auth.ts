@@ -46,5 +46,11 @@ export const initAuthRoutes = (
     ),
   );
 
+  router.get(
+    apiPath(path, AuthApiRoutes.USER),
+    authMiddleware,
+    wrap((req: Request) => authService.getCurrentUser(req.userId)),
+  );
+
   return router;
 };
