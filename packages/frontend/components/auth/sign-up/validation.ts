@@ -15,6 +15,7 @@ export const signUpSchema = Joi.object<UserSignUpDto>({
     .trim()
     .email({ tlds: { allow: false } })
     .required(),
-  password: Joi.string().min(minPasswordLength).required(),
+  password: Joi.string().min(minPasswordLength)
+    .required(),
   repeatPassword: Joi.any().valid(Joi.ref('password')),
 });
