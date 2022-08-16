@@ -1,3 +1,5 @@
+type EmailEnvKey = 'EMAIL_SERVICE_API_KEY';
+
 type ProcessEnvKey = 'NODE_ENV' | 'PORT';
 
 type RedisEnvKey = 'REDIS_PORT' | 'REDIS_HOST' | 'REDIS_PASSWORD';
@@ -23,6 +25,7 @@ type EnvKeys =
   | AuthEnvKeys
   | RedisEnvKey
   | TwilioEnvKey
+  | EmailEnvKey
   | S3StorageEnvKey;
 
 export const getEnv = (key: EnvKeys) => process.env[key];

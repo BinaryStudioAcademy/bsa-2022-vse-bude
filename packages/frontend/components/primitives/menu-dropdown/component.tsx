@@ -16,7 +16,7 @@ export const Dropdown = ({ options, ...props }: DropdownProps) => {
   };
 
   return (
-    <div {...props}>
+    <div {...props} css={styles.dropdownWrapper}>
       <button css={styles.dropdownTitle} ref={ref} onClick={handleClick}>
         {props.children}
       </button>

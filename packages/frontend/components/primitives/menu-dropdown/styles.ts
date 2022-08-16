@@ -2,6 +2,10 @@ import { css } from '@emotion/react';
 import type { Theme } from 'theme';
 import { resetButton } from 'theme';
 
+export const dropdownWrapper = () => css`
+  position: relative;
+`;
+
 export const dropdownTitle = ({
   colors,
   fontSizes,
@@ -33,7 +37,7 @@ export const dropdownContent = ({
   colors,
 }: Theme) => css`
   position: absolute;
-  top: ${spaces.xl11};
+  top: calc(100% + ${spaces.lg});
   display: flex;
   align-items: center;
   justify-content: center;
