@@ -1,2 +1,1 @@
-export { NestedLayout } from './common/layout';
-export { PersonalInfo } from './personal-info';
+export { PersonalInfo } from './component';

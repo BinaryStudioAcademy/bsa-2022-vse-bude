@@ -7,3 +7,4 @@ export { StringCutter } from './string-cutter';
 export { Avatar } from './avatar';
 export { Dropdown } from './menu-dropdown';
 export { Icon } from './icon';
+export { Input, PasswordInput, SearchInput } from './input';
