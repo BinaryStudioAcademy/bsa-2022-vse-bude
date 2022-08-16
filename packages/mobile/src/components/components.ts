@@ -1,4 +1,5 @@
 export { Image, View } from 'react-native';
+export { default as LinearGradient } from 'react-native-linear-gradient';
 export { SafeAreaView } from 'react-native-safe-area-context';
 export { ScreenWrapper } from './screen-wrapper/screen-wrapper';
 export { Button } from './button/button';
@@ -6,5 +7,4 @@ export { Input } from './input/input';
 export { Text } from './text/text';
 export * from './icons/icons';
 export { Spinner } from './spinner/spinner';
-export { default as LinearGradient } from 'react-native-linear-gradient';
 export { KeyboardAvoiding } from './keyboard-avoiding/keyboard-avoiding';

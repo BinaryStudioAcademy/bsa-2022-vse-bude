@@ -8,7 +8,8 @@ export const styles = StyleSheet.create({
     right: -15,
     bottom: -50,
     width: '55%',
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    backgroundColor: ColorPalette.WHITE_100,
+    opacity: 0.9,
     padding: 8,
   },
   image: {
