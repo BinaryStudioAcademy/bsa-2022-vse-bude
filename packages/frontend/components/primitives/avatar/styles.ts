@@ -19,7 +19,7 @@ export const initials = ({
   fontWeights,
   lineHeights,
 }: Theme) => css`
-  color: ${colors.text};
+  color: ${colors.background};
   font-size: ${fontSizes.toggle};
   font-weight: ${fontWeights.toggle};
   line-height: ${lineHeights.toggle};
@@ -29,7 +29,7 @@ export const initials = ({
   width: ${spaces.xl2};
   height: ${spaces.xl2};
   border-radius: ${radiuses.circle};
-  background-color: ${colors.primaryLight};
+  background-color: ${colors.primary};
   text-transform: uppercase;
 `;
 

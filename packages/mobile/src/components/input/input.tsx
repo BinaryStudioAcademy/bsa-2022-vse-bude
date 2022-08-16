@@ -1,13 +1,14 @@
 import React, { ReactElement } from 'react';
-import { TextInput } from 'react-native';
+import { TextInput, ViewStyle } from 'react-native';
 import {
   FormControl,
   FormControlPath,
   FormControlErrors,
   FormControlValues,
 } from '~/common/types/types';
-import { Text, View } from '~/components/components';
-import { useFormControl } from '~/hooks/hooks';
+import { Text, View, AlertIcon } from '~/components/components';
+import { useCustomTheme, useFormControl } from '~/hooks/hooks';
+import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 
 type Props<T extends FormControlValues> = {
@@ -16,6 +17,7 @@ type Props<T extends FormControlValues> = {
   control: FormControl<T>;
   errors: FormControlErrors<T>;
   placeholder?: string;
+  contentContainerStyle?: ViewStyle;
 };
 
 const Input = <T extends FormControlValues>({
@@ -24,25 +26,60 @@ const Input = <T extends FormControlValues>({
   control,
   errors,
   placeholder,
+  contentContainerStyle,
   ...props
 }: Props<T>): ReactElement => {
   const { field } = useFormControl({ name, control });
+  const { colors } = useCustomTheme();
 
   const error = errors[name]?.message as string;
 
   return (
-    <View>
-      <Text>{label}</Text>
+    <View style={contentContainerStyle}>
+      <Text
+        style={[
+          styles.label,
+          globalStyles.mb2,
+          globalStyles.fs12,
+          { color: colors.titlePrimary },
+        ]}
+      >
+        {label}
+      </Text>
       <TextInput
         value={field.value}
         placeholder={placeholder}
         autoCorrect={false}
         onChangeText={field.onChange}
         onBlur={field.onBlur}
-        style={styles.input}
+        placeholderTextColor={colors.placeholder}
+        style={[
+          styles.input,
+          {
+            backgroundColor: colors.backgroundElements,
+            borderColor: error ? colors.error : colors.backgroundElements,
+          },
+          globalStyles.fs14,
+        ]}
         {...props}
       />
-      {Boolean(error) && <Text>{error}</Text>}
+      {Boolean(error) && (
+        <View
+          style={[
+            globalStyles.mt2,
+            globalStyles.fs12,
+            globalStyles.flexDirectionRow,
+            globalStyles.alignItemsCenter,
+          ]}
+        >
+          <AlertIcon style={[globalStyles.mr2, { color: colors.error }]} />
+          <Text
+            style={[styles.label, globalStyles.fs12, { color: colors.error }]}
+          >
+            {error}
+          </Text>
+        </View>
+      )}
     </View>
   );
 };

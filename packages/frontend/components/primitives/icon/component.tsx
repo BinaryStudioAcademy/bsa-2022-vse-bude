@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconColor } from 'common/enums/iconColor';
-import { IconNameToSvgIcon } from 'common/enums/icons';
+import { IconColor, IconNameToSvgIcon } from '@enums';
 import type { IconProps } from './types';
 import * as styles from './styles';
 
