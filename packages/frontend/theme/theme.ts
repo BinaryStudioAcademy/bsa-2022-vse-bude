@@ -101,12 +101,14 @@ const heights = {
   controlSm: '35px',
   controlBg: '45px',
   logo: '32px',
+  navigation: '21px',
 };
 
 const widths = {
   checkbox: '20px',
   footerFormRow: '360px',
   logo: '128px',
+  navigation: '540px',
 };
 
 const shadows = {

@@ -3,7 +3,7 @@ import Head from 'next/head';
 import type { FC } from 'react';
 import React from 'react';
 import { Footer } from '../footer';
-import { HeaderLoggedOut } from '../header';
+import { Header } from '../header';
 import type { LayoutProps } from './types';
 
 import * as styles from './styles';
@@ -13,7 +13,7 @@ export const Layout: FC<LayoutProps> = ({ title, children }) => (
     <Head>
       <title>{getTitle(title)}</title>
     </Head>
-    <HeaderLoggedOut />
+    <Header />
     <main css={styles.main}>{children}</main>
     <Footer />
   </React.Fragment>
