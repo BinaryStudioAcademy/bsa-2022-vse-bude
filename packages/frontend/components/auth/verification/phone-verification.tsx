@@ -11,10 +11,12 @@ import { verifyEntity, verifyForm, verifyInput, verifyText } from '../styles';
 import { hideMainTextPart } from '../../../helpers/text';
 import { phoneVerification } from '../../../store/auth';
 import { getErrorKey } from '../../../helpers/validation';
+import { Error } from '../../primitives/error/component';
 import { verifyCodeSchema } from './validation';
 
 export const PhoneVerification = () => {
   const { user } = useTypedSelector((state) => state.profile);
+  const { error } = useTypedSelector((state) => state.auth);
 
   const dispatch = useAppDispatch();
 
@@ -54,6 +56,7 @@ export const PhoneVerification = () => {
           name="code"
           error={t(getErrorKey('code', errors.code?.type))}
         />
+        <Error text={error} />
       </div>
       <Button type="submit" width={'100%'}>
         {t('VERIFY_TEXT')}
