@@ -20,8 +20,8 @@ export type ThemeColors = {
   icon: string;
   titlePrimary: string;
   titleSecondary: string;
-  logoYellow: ColorValue;
-  logoBlue: ColorValue;
+  yellow: ColorValue;
+  blue: ColorValue;
 };
 
 export type Theme = {
