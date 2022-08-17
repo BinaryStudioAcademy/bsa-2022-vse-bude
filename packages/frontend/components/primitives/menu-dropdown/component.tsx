@@ -43,7 +43,7 @@ export const Dropdown = ({ options, ...props }: DropdownProps) => {
                   <Icon
                     icon={icon.icon}
                     color={icon.color}
-                    css={icon.css}
+                    cssExtend={icon.cssExtend}
                     size={icon.size}
                   />
                 )}

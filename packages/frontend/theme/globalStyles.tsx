@@ -8,7 +8,6 @@ export const globalStyles = (theme: Theme) => css`
   }
 
   :root {
-    --space-lg: 1rem;
     --grid-columns: 12;
   }
 
@@ -52,5 +51,4 @@ export const resetButton = css`
   margin: 0;
   background: transparent;
   font: inherit;
-  text-align: start;
 `;

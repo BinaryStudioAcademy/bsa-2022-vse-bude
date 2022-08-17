@@ -1,5 +1,5 @@
 ﻿import { createClient } from 'redis';
-import { getEnv } from '@helpers';
+import { getEnv, logger } from '@helpers';
 
 type RedisClientType = ReturnType<typeof createClient>;
 
@@ -21,7 +21,9 @@ export class RedisStorageService {
 
     this.client = createClient(redisConnectionParams);
 
-    this.client.on('error', (err) => console.log('redis client error', err));
+    this.client.on('error', (err) =>
+      logger.error({ message: `Redis client error: ${err.message}`, ...err }),
+    );
 
     this.client.connect().then(() => {
       console.log('redis client connected!');

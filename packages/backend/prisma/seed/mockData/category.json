@@ -1,98 +1,114 @@
 [
-    {
-        "id": "51dea135-fca2-4cc0-ab5b-a32c909f14e7",
-        "title": "LAPTOPS_AND_PC_CATEGORY_NAME",
-        "createdAt": "2022-01-10T12:32:04.287Z",
-        "updatedAt": "2022-08-11T08:58:38.557Z"
-    },
-    {
-        "id": "50d4f365-e241-4783-8b2c-809a7d83771b",
-        "title": "SMARTPHONES_TV_AND_ELECTRONICS_CATEGORY_NAME",
-        "createdAt": "2021-10-01T23:40:29.411Z",
-        "updatedAt": "2022-08-11T15:55:36.742Z"
-    },
-    {
-        "id": "3f9bd5c0-f9a8-4763-b020-eac58681b1cf",
-        "title": "GOODS_FOR_GAMERS_CATEGORY_NAME",
-        "createdAt": "2022-07-04T07:37:02.657Z",
-        "updatedAt": "2022-08-11T21:44:52.611Z"
-    },
-    {
-        "id": "0e86f866-2146-4a5a-970b-7a62f07144a6",
-        "title": "HOUSEHOLD_APPLIANCES_CATEGORY_NAME",
-        "createdAt": "2022-01-12T23:49:49.976Z",
-        "updatedAt": "2022-08-12T02:32:01.968Z"
-    },
-    {
-        "id": "a7694c34-2325-4d0d-b344-0fe074e99862",
-        "title": "HOME_GOODS_CATEGORY_NAME",
-        "createdAt": "2022-06-26T19:23:03.114Z",
-        "updatedAt": "2022-08-11T08:35:06.609Z"
-    },
-    {
-        "id": "6b8df3e5-b587-413f-9943-ef3d695b97c0",
-        "title": "TOOLS_AND_AUTO_GOODS_CATEGORY_NAME",
-        "createdAt": "2021-12-30T14:59:07.037Z",
-        "updatedAt": "2022-08-12T00:38:54.400Z"
-    },
-    {
-        "id": "e4bef890-791e-4c53-adfd-c455227b54ad",
-        "title": "PLUMBING_AND_REPAIR_CATEGORY_NAME",
-        "createdAt": "2021-09-13T17:41:10.534Z",
-        "updatedAt": "2022-08-11T20:11:36.956Z"
-    },
-    {
-        "id": "beff46f0-133b-4af7-8206-83419b526734",
-        "title": "COTTAGE_GARDEN_AND_VEGETABLE_GARDEN_CATEGORY_NAME",
-        "createdAt": "2022-06-06T00:47:34.992Z",
-        "updatedAt": "2022-08-12T06:10:46.774Z"
-    },
-    {
-        "id": "a351b320-76d7-4545-bb74-8bb1f2fa486d",
-        "title": "SPORTS_AND_HOBBY_CATEGORY_NAME",
-        "createdAt": "2022-04-11T22:08:14.925Z",
-        "updatedAt": "2022-08-11T12:41:20.152Z"
-    },
-    {
-        "id": "0bfc0f51-e082-4dc9-b545-ae0afedbd330",
-        "title": "CLOTHES_SHOES_AND_JEWELRY_CATEGORY_NAME",
-        "createdAt": "2021-11-10T15:41:32.419Z",
-        "updatedAt": "2022-08-11T21:57:31.280Z"
-    },
-    {
-        "id": "8556c563-4b04-43cb-8fe1-5bc53b5f0aad",
-        "title": "BEAUTY_AND_HEALTH_CATEGORY_NAME",
-        "createdAt": "2022-05-12T12:12:37.810Z",
-        "updatedAt": "2022-08-11T11:11:52.295Z"
-    },
-    {
-        "id": "948feb22-e480-4e24-a90d-e49aa3d990c2",
-        "title": "CHILDRENS_GOODS_CATEGORY_NAME",
-        "createdAt": "2021-11-23T22:47:22.010Z",
-        "updatedAt": "2022-08-12T07:43:08.195Z"
-    },
-    {
-        "id": "54fa7b5f-58d1-4e5d-b588-d9a8507fa3c7",
-        "title": "PET_PRODUCTS_CATEGORY_NAME",
-        "createdAt": "2021-11-28T22:35:10.903Z",
-        "updatedAt": "2022-08-12T04:36:49.114Z"
-    },
-    {
-        "id": "410c606f-f463-42ec-988e-d95917dd2834",
-        "title": "OFFICE_SCHOOL_BOOKS_CATEGORY_NAME",
-        "createdAt": "2021-12-29T15:12:09.180Z",
-        "updatedAt": "2022-08-11T11:24:29.698Z"
-    },
-    {
-        "id": "7062243f-f114-4b5a-abea-64fc21f4e117",
-        "title": "ALCOHOLIC_BEVERAGES_AND_PRODUCTS_CATEGORY_NAME",
-        "createdAt": "2022-07-03T06:09:46.812Z",
-        "updatedAt": "2022-08-12T07:57:50.652Z"
-    },
-    {
-        "id": "f5750398-bdfa-4262-adbb-c1e1c4cc92eb",
-        "title": "SERVICES_CATEGORY_NAME",
-        "createdAt": "2022-02-16T13:41:23.515Z",
-        "updatedAt": "2022-08-11T11:42:21.770Z"
-    }
+  {
+    "id": "51dea135-fca2-4cc0-ab5b-a32c909f14e7",
+    "title": "LAPTOPS_AND_PC_CATEGORY_NAME",
+    "image": "https://loremflickr.com/640/480/fashion",
+    "createdAt": "2022-01-10T12:32:04.287Z",
+    "updatedAt": "2022-08-11T08:58:38.557Z"
+  },
+  {
+    "id": "50d4f365-e241-4783-8b2c-809a7d83771b",
+    "title": "SMARTPHONES_TV_AND_ELECTRONICS_CATEGORY_NAME",
+    "image": "https://loremflickr.com/640/480/fashion",
+    "createdAt": "2021-10-01T23:40:29.411Z",
+    "updatedAt": "2022-08-11T15:55:36.742Z"
+  },
+  {
+    "id": "3f9bd5c0-f9a8-4763-b020-eac58681b1cf",
+    "title": "GOODS_FOR_GAMERS_CATEGORY_NAME",
+    "image": "https://loremflickr.com/640/480/fashion",
+    "createdAt": "2022-07-04T07:37:02.657Z",
+    "updatedAt": "2022-08-11T21:44:52.611Z"
+  },
+  {
+    "id": "0e86f866-2146-4a5a-970b-7a62f07144a6",
+    "title": "HOUSEHOLD_APPLIANCES_CATEGORY_NAME",
+    "image": "https://loremflickr.com/640/480/fashion",
+    "createdAt": "2022-01-12T23:49:49.976Z",
+    "updatedAt": "2022-08-12T02:32:01.968Z"
+  },
+  {
+    "id": "a7694c34-2325-4d0d-b344-0fe074e99862",
+    "title": "HOME_GOODS_CATEGORY_NAME",
+    "image": "https://loremflickr.com/640/480/fashion",
+    "createdAt": "2022-06-26T19:23:03.114Z",
+    "updatedAt": "2022-08-11T08:35:06.609Z"
+  },
+  {
+    "id": "6b8df3e5-b587-413f-9943-ef3d695b97c0",
+    "title": "TOOLS_AND_AUTO_GOODS_CATEGORY_NAME",
+    "image": "https://loremflickr.com/640/480/fashion",
+    "createdAt": "2021-12-30T14:59:07.037Z",
+    "updatedAt": "2022-08-12T00:38:54.400Z"
+  },
+  {
+    "id": "e4bef890-791e-4c53-adfd-c455227b54ad",
+    "title": "PLUMBING_AND_REPAIR_CATEGORY_NAME",
+    "image": "https://loremflickr.com/640/480/fashion",
+    "createdAt": "2021-09-13T17:41:10.534Z",
+    "updatedAt": "2022-08-11T20:11:36.956Z"
+  },
+  {
+    "id": "beff46f0-133b-4af7-8206-83419b526734",
+    "title": "COTTAGE_GARDEN_AND_VEGETABLE_GARDEN_CATEGORY_NAME",
+    "image": "https://loremflickr.com/640/480/fashion",
+    "createdAt": "2022-06-06T00:47:34.992Z",
+    "updatedAt": "2022-08-12T06:10:46.774Z"
+  },
+  {
+    "id": "a351b320-76d7-4545-bb74-8bb1f2fa486d",
+    "title": "SPORTS_AND_HOBBY_CATEGORY_NAME",
+    "image": "https://loremflickr.com/640/480/fashion",
+    "createdAt": "2022-04-11T22:08:14.925Z",
+    "updatedAt": "2022-08-11T12:41:20.152Z"
+  },
+  {
+    "id": "0bfc0f51-e082-4dc9-b545-ae0afedbd330",
+    "title": "CLOTHES_SHOES_AND_JEWELRY_CATEGORY_NAME",
+    "image": "https://loremflickr.com/640/480/fashion",
+    "createdAt": "2021-11-10T15:41:32.419Z",
+    "updatedAt": "2022-08-11T21:57:31.280Z"
+  },
+  {
+    "id": "8556c563-4b04-43cb-8fe1-5bc53b5f0aad",
+    "title": "BEAUTY_AND_HEALTH_CATEGORY_NAME",
+    "image": "https://loremflickr.com/640/480/fashion",
+    "createdAt": "2022-05-12T12:12:37.810Z",
+    "updatedAt": "2022-08-11T11:11:52.295Z"
+  },
+  {
+    "id": "948feb22-e480-4e24-a90d-e49aa3d990c2",
+    "title": "CHILDRENS_GOODS_CATEGORY_NAME",
+    "image": "https://loremflickr.com/640/480/fashion",
+    "createdAt": "2021-11-23T22:47:22.010Z",
+    "updatedAt": "2022-08-12T07:43:08.195Z"
+  },
+  {
+    "id": "54fa7b5f-58d1-4e5d-b588-d9a8507fa3c7",
+    "title": "PET_PRODUCTS_CATEGORY_NAME",
+    "image": "https://loremflickr.com/640/480/fashion",
+    "createdAt": "2021-11-28T22:35:10.903Z",
+    "updatedAt": "2022-08-12T04:36:49.114Z"
+  },
+  {
+    "id": "410c606f-f463-42ec-988e-d95917dd2834",
+    "title": "OFFICE_SCHOOL_BOOKS_CATEGORY_NAME",
+    "image": "https://loremflickr.com/640/480/fashion",
+    "createdAt": "2021-12-29T15:12:09.180Z",
+    "updatedAt": "2022-08-11T11:24:29.698Z"
+  },
+  {
+    "id": "7062243f-f114-4b5a-abea-64fc21f4e117",
+    "title": "ALCOHOLIC_BEVERAGES_AND_PRODUCTS_CATEGORY_NAME",
+    "image": "https://loremflickr.com/640/480/fashion",
+    "createdAt": "2022-07-03T06:09:46.812Z",
+    "updatedAt": "2022-08-12T07:57:50.652Z"
+  },
+  {
+    "id": "f5750398-bdfa-4262-adbb-c1e1c4cc92eb",
+    "title": "SERVICES_CATEGORY_NAME",
+    "image": "https://loremflickr.com/640/480/fashion",
+    "createdAt": "2022-02-16T13:41:23.515Z",
+    "updatedAt": "2022-08-11T11:42:21.770Z"
+  }
 ]
