@@ -3,7 +3,6 @@ import { HttpHeader, HttpStatusCode } from '@vse-bude/shared';
 import { verify as jwtVerify } from 'jsonwebtoken';
 import { getEnv, getBearerValue } from '@helpers';
 import type { UserSessionJwtPayload } from 'jsonwebtoken';
-import { UNAUTHORIZED } from '@errors';
 
 export const authMiddleware = (
   req: Request,
@@ -13,7 +12,7 @@ export const authMiddleware = (
   const authHeader = req.header(HttpHeader.AUTHORIZATION);
   if (!authHeader) {
     return res.status(HttpStatusCode.UNAUTHORIZED).json({
-      error: UNAUTHORIZED,
+      error: req.t('UNAUTHORIZED'),
     });
   }
   const tokenValue = getBearerValue(authHeader);
@@ -24,7 +23,7 @@ export const authMiddleware = (
     req.userId = tokenPayload.userId;
   } catch (e) {
     return res.status(HttpStatusCode.UNAUTHORIZED).json({
-      error: UNAUTHORIZED,
+      error: req.t('UNAUTHORIZED'),
     });
   }
 

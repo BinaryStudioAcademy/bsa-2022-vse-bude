@@ -1,6 +1,5 @@
 import type { Request, Errback, Response, NextFunction } from 'express';
 import { HttpError, HttpStatusCode } from '@vse-bude/shared';
-import { INTERNAL_ERROR } from './error-messages';
 
 export const errorHandler = (
   err: Errback,
@@ -19,6 +18,6 @@ export const errorHandler = (
   }
 
   return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
-    error: INTERNAL_ERROR,
+    error: req.t('INTERNAL_ERROR'),
   });
 };

@@ -1,11 +1,11 @@
 import { HttpError, HttpStatusCode } from '@vse-bude/shared';
-import { UNAUTHORIZED } from '../error-messages';
+import type { Request } from 'express';
 
 class UnauthorizedError extends HttpError {
-  constructor() {
+  constructor(req: Request) {
     super({
       status: HttpStatusCode.UNAUTHORIZED,
-      message: UNAUTHORIZED,
+      message: req.t('UNAUTHORIZED'),
     });
   }
 }
