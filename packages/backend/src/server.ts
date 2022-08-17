@@ -5,6 +5,8 @@ import { initRepositories } from '@repositories';
 import { getEnv, logger } from '@helpers';
 import { initServices } from '@services';
 import { loggerMiddleware, localizationMiddleware } from '@middlewares';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from '../swagger.json';
 import { prismaClient as database } from './data/db';
 import { errorHandler } from './error/error-handler';
 
@@ -21,6 +23,7 @@ app
   .use(localizationMiddleware)
   .use(routes)
   .use(errorHandler)
+  .use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
   .on('close', () => database.$disconnect())
   .listen(port, () => {
     logger.log(`Server is running on port ${port}`);
