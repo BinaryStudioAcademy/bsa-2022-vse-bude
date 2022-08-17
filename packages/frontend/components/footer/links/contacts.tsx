@@ -1,9 +1,7 @@
 import type { FC } from 'react';
 import { useTranslation } from 'next-i18next';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconNameToSvgIcon, IconName } from '@enums';
-import { ColorPalette } from '@vse-bude/shared';
-import { Anchor } from '@primitives';
+import { IconName } from '@enums';
+import { Anchor, Icon } from '@primitives';
 import { ColumnHeader } from '../common/column-header';
 import * as styles from './styles';
 import type { ContactsProps } from './types';
@@ -16,11 +14,7 @@ export const Contacts: FC<ContactsProps> = ({ email, phone }) => {
       <ColumnHeader>{t('CONTACT')}</ColumnHeader>
 
       <div css={styles.footerLinksRow}>
-        <FontAwesomeIcon
-          css={styles.phone}
-          color={ColorPalette.YELLOW_100}
-          icon={IconNameToSvgIcon[IconName.PHONE]}
-        />
+        <Icon cssExtend={styles.phone} color="yellow" icon={IconName.PHONE} />
         <Anchor
           variant="secondary"
           href={`tel:${phone}`}
@@ -30,11 +24,7 @@ export const Contacts: FC<ContactsProps> = ({ email, phone }) => {
       </div>
 
       <div css={styles.footerLinksRow}>
-        <FontAwesomeIcon
-          css={styles.email}
-          color={ColorPalette.YELLOW_100}
-          icon={IconNameToSvgIcon[IconName.EMAIL]}
-        />
+        <Icon cssExtend={styles.email} color="yellow" icon={IconName.EMAIL} />
         <Anchor
           variant="secondary"
           href={`mailto:${email}`}
