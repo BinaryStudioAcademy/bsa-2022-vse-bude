@@ -2,19 +2,14 @@ import { css } from '@emotion/react';
 import { resetButton } from 'theme';
 import type { Theme } from 'theme';
 
-export const userInHeader = ({ spaces }: Theme) => css`
+export const profileInfo = ({ spaces }: Theme) => css`
   display: flex;
   align-items: center;
   width: max-content;
   padding: ${spaces.xs} 0;
 `;
 
-export const textInHeader = ({ fontWeights, spaces }: Theme) => css`
-  margin: 0 ${spaces.xs} 0 ${spaces.xs};
-  font-weight: ${fontWeights.tub};
-`;
-
-export const arrowInHeader = ({
+export const dropdownArrow = ({
   colors,
   widths,
   heights,
@@ -24,6 +19,7 @@ export const arrowInHeader = ({
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: ${spaces.sm};
   border-radius: ${radiuses.circle};
   background-color: ${colors.backgroundLight};
   cursor: pointer;
@@ -59,9 +55,8 @@ export const popoverContentItem = ({
     background-color: ${colors.backgroundLight};
   }
 
-  :disabled {
-    cursor: not-allowed;
-    color: ${colors.disabled};
+  :last-child {
+    color: ${colors.primaryLight};
   }
 
   &[data-variant='icon'] {
