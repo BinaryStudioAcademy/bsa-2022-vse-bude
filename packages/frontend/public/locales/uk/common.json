@@ -1,4 +1,17 @@
 {
+  "header": {
+    "nav": {
+      "home": "Головна",
+      "category": "Категорії",
+      "search": "Пошук",
+      "news": "Новини",
+      "about_us": "Про нас"
+    },
+    "buttons": {
+      "create_account": "Створити Аккаунт",
+      "sign_in": "Зареєструватись"
+    }
+  },
   "HOURS_SHORT": "г",
   "DAYS_SHORT": "д",
   "MINUTES_SHORT": "хв",
