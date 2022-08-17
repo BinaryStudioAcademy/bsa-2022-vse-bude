@@ -1,8 +1,5 @@
 import { css } from '@emotion/react';
 import type { Theme } from 'theme';
-import phoneIcon from '../../../public/images/footer/phone-icon.svg';
-import emailIcon from '../../../public/images/footer/email-icon.svg';
-import policy from '../../../public/images/footer/privacy-policy-icon.svg';
 
 export const footerLinksWrapper = ({ spaces }: Theme) => css`
   display: flex;
@@ -22,23 +19,20 @@ export const phone = () => css`
   margin-right: 12px;
   width: 18px;
   height: 18px;
-  background: url(${phoneIcon.src}) no-repeat;
 `;
 
 export const email = () => css`
   display: block;
   margin-right: 12px;
   width: 18px;
-  height: 13px;
-  background: url(${emailIcon.src}) no-repeat;
+  height: 18px;
 `;
 
 export const shield = () => css`
   display: block;
   margin-right: 12px;
-  width: 16px;
-  height: 17px;
-  background: url(${policy.src}) no-repeat;
+  width: 18px;
+  height: 18px;
 `;
 
 export const primaryUnderline = ({ colors }: Theme) => css`

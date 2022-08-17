@@ -8,7 +8,6 @@ const COMMON_COLORS = {
   backgroundElements: ColorPalette.GRAY_100,
   line: ColorPalette.GRAY_200,
   placeholder: ColorPalette.BLACK_100,
-  subtitle: ColorPalette.GRAY_300,
   buttonTextPrimary: ColorPalette.WHITE_100,
   buttonTextSecondary: ColorPalette.GREEN_200,
   buttonPrimaryBackground: ColorPalette.YELLOW_100,
@@ -31,6 +30,7 @@ const NavigationTheme = {
     icon: ColorPalette.GRAY_300,
     titlePrimary: ColorPalette.BLACK_100,
     titleSecondary: ColorPalette.GREEN_200,
+    subtitle: ColorPalette.GRAY_300,
   },
 };
 
@@ -46,6 +46,7 @@ const NavigationDarkTheme = {
     icon: ColorPalette.WHITE_100,
     titlePrimary: ColorPalette.WHITE_100,
     titleSecondary: ColorPalette.WHITE_100,
+    subtitle: ColorPalette.YELLOW_100,
   },
 };
 
