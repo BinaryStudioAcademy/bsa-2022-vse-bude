@@ -7,17 +7,16 @@ import type { PopoverProps } from './types';
 
 export const Popover = ({ trigger, children }: PopoverProps) => {
   const [isVisible, setIsVisible] = useState(false);
-  const bodyRef = useRef<HTMLDivElement>();
-
+  const triggerWrapperRef = useRef<HTMLButtonElement>();
   const handleClickOutside = useCallback(() => setIsVisible(false), []);
-  const triggerWrapperRef = useOutsideClick(handleClickOutside);
+  const bodyRef = useOutsideClick(handleClickOutside);
 
-  const getTriggerRectParams = useCallback(
-    () => triggerWrapperRef.current.getBoundingClientRect(),
-    [triggerWrapperRef],
+  const getBodyRectParams = useCallback(
+    () => bodyRef.current.getBoundingClientRect(),
+    [bodyRef],
   );
 
-  const getBodyRectParams = () => bodyRef.current.getBoundingClientRect();
+  const getTriggerRectParams = () => triggerWrapperRef.current.parentElement.getBoundingClientRect();
 
   const calcBodyCoords = useCallback(() => {
     const triggerRectParams = getTriggerRectParams();
@@ -28,7 +27,7 @@ export const Popover = ({ trigger, children }: PopoverProps) => {
       triggerRectParams.left + triggerRectParams.width - bodyRectParams.width;
 
     return [bodyTop, bodyRight];
-  }, [getTriggerRectParams]);
+  }, [getBodyRectParams]);
 
   useEffect(() => {
     if (bodyRef.current) {
@@ -36,7 +35,7 @@ export const Popover = ({ trigger, children }: PopoverProps) => {
       bodyRef.current.style.top = `${bodyTop}px`;
       bodyRef.current.style.left = `${bodyRight}px`;
     }
-  }, [isVisible, calcBodyCoords]);
+  }, [isVisible, calcBodyCoords, bodyRef]);
 
   const handleMouseClick = () => {
     setIsVisible(true);
