@@ -11,7 +11,8 @@ export interface DropdownInHeaderProps {
   style?: Interpolation<Theme>;
 }
 
-export interface AvatarInHeaderProps {
-  url?: string;
-  style?: Interpolation<Theme>;
+export interface PopoverContentInHeaderProps {
+  wrapperStyles?: Interpolation<Theme>;
+  innerStyles?: Interpolation<Theme>;
+  handleClick: React.MouseEventHandler<HTMLButtonElement>;
 }
