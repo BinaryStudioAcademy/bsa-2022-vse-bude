@@ -1,5 +1,7 @@
+import { ColorValue } from 'react-native';
+
 export type ThemeColors = {
-  accent: string;
+  accent: ColorValue;
   card: string;
   backgroundThird: string;
   backgroundElements: string;
@@ -8,18 +10,18 @@ export type ThemeColors = {
   subtitle: string;
   buttonTextPrimary: string;
   buttonTextSecondary: string;
-  buttonPrimaryBackground: string;
-  buttonSecondaryBackground: string;
+  buttonPrimaryBackground: ColorValue;
+  buttonSecondaryBackground: ColorValue;
   error: string;
-  background: string;
+  background: ColorValue;
   text: string;
-  backgroundSecondary: string;
+  backgroundSecondary: ColorValue;
   borderButton: string;
   icon: string;
   titlePrimary: string;
   titleSecondary: string;
-  logoYellow: string;
-  logoBlue: string;
+  logoYellow: ColorValue;
+  logoBlue: ColorValue;
 };
 
 export type Theme = {

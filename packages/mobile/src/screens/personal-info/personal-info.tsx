@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
-import { View, Text } from '~/components/components';
+import { ScreenWrapper, Text } from '~/components/components';
 
 const PersonalInfoScreen: FC = () => {
   return (
-    <View>
+    <ScreenWrapper>
       <Text>Personal Info screen</Text>
-    </View>
+    </ScreenWrapper>
   );
 };
 

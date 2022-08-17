@@ -4,7 +4,6 @@ import { ThemeColors } from '~/common/types/types';
 const createStyles = (colors: ThemeColors) => {
   const styles = StyleSheet.create({
     screen: {
-      height: '100%',
       backgroundColor: colors.background,
       padding: 20,
     },

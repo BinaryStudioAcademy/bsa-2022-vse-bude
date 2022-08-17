@@ -12,7 +12,7 @@ export const ua = {
     LAST_NAME_HINT: 'Введіть своє Прізвище',
   },
   account: {
-    ACCOUNT: 'Аккаунт',
+    ACCOUNT: 'Акаунт',
     PERSONAL_INFO: 'Персональна інформація',
     SETTINGS: 'Налаштування',
     MESSAGES: 'Повідомлення',
