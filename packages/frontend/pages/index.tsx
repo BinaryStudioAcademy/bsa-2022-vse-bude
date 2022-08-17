@@ -14,7 +14,12 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     return {
       props: {
-        ...(await serverSideTranslations(locale, ['home'])),
+        ...(await serverSideTranslations(locale, [
+          'home',
+          'product',
+          'common',
+          'footer',
+        ])),
       },
     };
   },
