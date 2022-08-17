@@ -59,6 +59,8 @@
     "lint-staged": "13.0.3",
     "metro-react-native-babel-preset": "0.70.3",
     "prettier": "2.7.1",
+    "react-native-flipper": "0.158.0",
+    "redux-flipper": "2.0.2",
     "typescript": "4.7.4"
   },
   "overrides": {
