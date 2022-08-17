@@ -1,6 +1,6 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
-import { Button, Container } from '@primitives';
+import { Button, Container, Popover } from '@primitives';
 import { Layout } from '@components';
 import { wrapper } from 'store';
 import { css } from '@emotion/react';
@@ -18,15 +18,16 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     // await store.dispatch(fetchRandomDataSSR(httpClient));
 
-    return Promise.resolve({
+    return {
       props: {
         ...(await serverSideTranslations(locale, [
           'home',
           'product',
           'common',
+          'footer',
         ])),
       },
-    });
+    };
   },
 );
 
@@ -47,7 +48,7 @@ const IndexPage = () => {
     price: 200,
     name: 'Some name',
     description: 'Some description asdasd as dasd as das da das das adssa',
-    auctionDate: new Date('2022-08-15 00:00:00'),
+    auctionDate: new Date('2022-08-17 00:00:00'),
     currency: 'UAH',
   };
 
@@ -56,7 +57,18 @@ const IndexPage = () => {
       <Container>
         <h1>{t('h1')}</h1>
         <div>
-          <Button variant="outlined">click me</Button>
+          {/* <div style={{ wordBreak: 'break-all' }}>{JSON.stringify(data)}</div> */}
+
+          <Popover trigger="open popover faeeeeegrdrsfd">
+            <ul>
+              <li>Personal Info</li>
+              <li>My List</li>
+              <li>Settings</li>
+              <li>Messages</li>
+              <li>Support</li>
+              <li>Sign Out</li>
+            </ul>
+          </Popover>
 
           <Button variant="outlined" disabled>
             click me

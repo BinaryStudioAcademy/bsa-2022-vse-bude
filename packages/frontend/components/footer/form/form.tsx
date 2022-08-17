@@ -1,27 +1,19 @@
 import type React from 'react';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 import { Button } from '@primitives';
 import { Input } from 'components/primitives/input';
-import { ColumnHeader } from '../footer-common';
-import type { FooterFormProps } from './types';
+import { ColumnHeader } from '../common';
 import * as styles from './styles';
 
-export const FooterForm: React.FC<FooterFormProps> = ({
-  header,
-  description,
-  button,
-  nameLabel,
-  emailLabel,
-  descLabel,
-  namePlaceholder,
-  emailPlaceholder,
-  descPlaceholder,
-}) => {
+export const Form = () => {
   const [form, setForm] = useState({
     fullName: '',
     email: '',
     description: '',
   });
+
+  const { t } = useTranslation('footer');
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [event.target.name]: event.target.value });
@@ -34,18 +26,18 @@ export const FooterForm: React.FC<FooterFormProps> = ({
   return (
     <form css={styles.footerForm}>
       <div css={styles.footerFormRow}>
-        <ColumnHeader>{header}</ColumnHeader>
-        <span css={styles.footerFormDescription}>{description}</span>
+        <ColumnHeader>{t('CONTACT_US')}</ColumnHeader>
+        <span css={styles.footerFormDescription}>{t('FORM_DESCRIPTION')}</span>
       </div>
 
       <div css={styles.footerFormRow}>
         <Input
           id="footer-fullname"
-          label={nameLabel}
+          label={t('FULL_NAME')}
           name="fullName"
           value={form.fullName}
           type="text"
-          placeholder={namePlaceholder}
+          placeholder={t('FULL_NAME_PLACEHOLDER')}
           onChange={changeHandler}
           variant="secondary"
         />
@@ -54,11 +46,11 @@ export const FooterForm: React.FC<FooterFormProps> = ({
       <div css={styles.footerFormRow}>
         <Input
           id="footer-email"
-          label={emailLabel}
+          label={t('EMAIL')}
           name="email"
           value={form.email}
           type="email"
-          placeholder={emailPlaceholder}
+          placeholder={t('EMAIL_PLACEHOLDER')}
           onChange={changeHandler}
           variant="secondary"
         />
@@ -67,11 +59,11 @@ export const FooterForm: React.FC<FooterFormProps> = ({
       <div css={styles.footerFormRow}>
         <Input
           id="footer-description"
-          label={descLabel}
+          label={t('DESCRIPTION')}
           name="description"
           value={form.description}
           type="text"
-          placeholder={descPlaceholder}
+          placeholder={t('DESCRIPTION_PLACEHOLDER')}
           onChange={changeHandler}
           variant="secondary"
         />
@@ -84,7 +76,7 @@ export const FooterForm: React.FC<FooterFormProps> = ({
           onClick={sendHandler}
           disabled={false}
         >
-          {button}
+          {t('SEND')}
         </Button>
       </div>
     </form>

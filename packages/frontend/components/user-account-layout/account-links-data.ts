@@ -1,5 +1,4 @@
-import { IconName, IconNameToSvgIcon } from '../../common/enums';
-import { Routes, AccountRoutes } from '../../common/enums';
+import { IconName, IconNameToSvgIcon, Routes, AccountRoutes } from '@enums';
 import type { LinkData } from './types';
 
 export const linksData: LinkData[] = [

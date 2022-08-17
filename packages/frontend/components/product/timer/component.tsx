@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'next-i18next';
+import { useTimer } from '@hooks';
 import { timeToEventObj, timeToEventString } from '../../../helpers/time';
 import type { TimerTranslations } from '../../../common/types/timer';
-import { useTimer } from '../../../hooks/time';
 import type { TimerProps } from './types';
 import { timerBadge, timerIcon } from './styles';
 
