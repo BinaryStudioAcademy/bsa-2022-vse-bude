@@ -1,5 +1,12 @@
 import { Routes } from '@enums';
-import { Button, Container, Dropdown, Icon, InternalLink } from '@primitives';
+import {
+  Button,
+  Container,
+  Dropdown,
+  Icon,
+  InternalLink,
+  ProfileInfo,
+} from '@primitives';
 import { IconName } from 'common/enums/icons';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
@@ -11,6 +18,13 @@ import * as styles from './styles';
 export const Header = () => {
   const { t } = useTranslation('common');
   const [show, setShow] = useState(false);
+
+  const user = {
+    image:
+      'https://gingkodesign.com/wp-content/uploads/2020/12/Black-Smart-Moon-Lamp-scaled.jpg',
+    firstName: 'Roderick',
+    lastName: 'Grimes',
+  };
 
   const renderNavigation = () => (
     <nav className="navigation">
@@ -40,6 +54,11 @@ export const Header = () => {
       <InternalLink href={Routes.DEFAULT} label={t('header.nav.search')} />
       <InternalLink href={Routes.DEFAULT} label={t('header.nav.news')} />
       <InternalLink href={Routes.DEFAULT} label={t('header.nav.about_us')} />
+      <ProfileInfo
+        image={user.image}
+        firstName={user.firstName}
+        lastName={user.lastName}
+      />
     </nav>
   );
 

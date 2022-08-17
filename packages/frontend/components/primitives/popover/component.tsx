@@ -17,7 +17,7 @@ export const Popover = ({ trigger, children }: PopoverProps) => {
   );
 
   const getTriggerRectParams = () =>
-    triggerWrapperRef.current.parentElement.getBoundingClientRect();
+    triggerWrapperRef.current.getBoundingClientRect();
 
   const calcBodyCoords = useCallback(() => {
     const triggerRectParams = getTriggerRectParams();
