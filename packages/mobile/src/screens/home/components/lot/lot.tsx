@@ -19,12 +19,20 @@ const Lot: FC<Props> = ({ imgSrc, title, description, price, type }) => {
   const { t } = useTranslation();
 
   return (
-    <View style={styles.container}>
-      <View style={styles.imgWrapper}>
+    <View style={[styles.container, globalStyles.boxShadow]}>
+      <View style={[styles.imgWrapper]}>
         <Image source={imgSrc} style={styles.img} />
 
         {type === LotType.UPCOMING ? (
-          <View style={styles.time}>
+          <View
+            style={[
+              styles.time,
+              globalStyles.boxShadow,
+              globalStyles.flexDirectionRow,
+              globalStyles.alignItemsCenter,
+              globalStyles.justifyContentCenter,
+            ]}
+          >
             <ClockIcon />
             <Text style={globalStyles.ml2}>2 дня 5 г 15 хв</Text>
           </View>
@@ -43,12 +51,18 @@ const Lot: FC<Props> = ({ imgSrc, title, description, price, type }) => {
         >
           {description}
         </Text>
-        {type === LotType.OVER ? (
+        {type === LotType.OVER && (
           <Text style={globalStyles.fs12}>2 дні тому</Text>
-        ) : null}
+        )}
       </View>
       <View style={styles.divider} />
-      <View style={styles.priceWrapper}>
+      <View
+        style={[
+          globalStyles.flexDirectionRow,
+          globalStyles.alignItemsCenter,
+          globalStyles.justifyContentSpaceBetween,
+        ]}
+      >
         <Text
           style={[globalStyles.fs16, globalStyles.fontWeightBold, styles.price]}
         >{`${price} ${t('currency.UAH')}`}</Text>

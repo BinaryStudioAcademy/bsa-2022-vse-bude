@@ -6,14 +6,6 @@ const styles = StyleSheet.create({
     width: 250,
     padding: 18,
     borderRadius: 1,
-    shadowColor: 'lightgray',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.15,
-    shadowRadius: 1,
-    elevation: 3,
   },
   imgWrapper: {
     alignSelf: 'center',
@@ -24,11 +16,8 @@ const styles = StyleSheet.create({
   },
   time: {
     position: 'absolute',
-    flexDirection: 'row',
     bottom: -10,
     alignSelf: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
     width: '70%',
     height: 26,
     textAlign: 'center',
@@ -36,14 +25,6 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     borderWidth: 1,
     borderColor: ColorPalette.GRAY_200,
-    shadowColor: 'lightgray',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.15,
-    shadowRadius: 1,
-    elevation: 3,
   },
   img: {
     width: '100%',
@@ -59,11 +40,6 @@ const styles = StyleSheet.create({
     height: 2,
     backgroundColor: ColorPalette.GRAY_200,
     marginVertical: 13,
-  },
-  priceWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
   },
   price: {
     color: ColorPalette.BLACK_100,
