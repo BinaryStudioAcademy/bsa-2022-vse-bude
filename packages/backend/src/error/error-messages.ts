@@ -1,0 +1,12 @@
+export const USER_NOT_FOUND = 'User not found!';
+export const CODE_NOT_FOUND = 'Code not found!';
+export const WRONG_CODE = 'Wrong code!';
+export const USER_ALREADY_EXISTS = 'User already exists!';
+export const UNAUTHORIZED = 'Unauthorized!';
+export const WRONG_REFRESH_TOKEN = 'Wrong Refresh Token!';
+export const EXPIRED_REFRESH_TOKEN = 'Expired Refresh Token!';
+export const WRONG_PASSWORD = 'Wrong password!';
+export const INTERNAL_ERROR = 'Internal error!';
+export const USUPPORTED_FILE_EXTENSION = 'Unsupported file extension!';
+export const FILE_SIZE_TOO_LARGE = 'File size too large!';
+export const NO_FILE_ERROR = 'No file provided!';

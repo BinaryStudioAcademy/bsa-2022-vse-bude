@@ -1,8 +1,8 @@
-import type { UserRepository } from '@repositories';
+import type { RefreshTokenRepository, UserRepository } from '@repositories';
+import { VerificationTypes } from '@vse-bude/shared';
 import type { UserSignInDto, UserSignUpDto } from '@vse-bude/shared';
 import { sign as jwtSign, type UserSessionJwtPayload } from 'jsonwebtoken';
 import { getEnv } from '@helpers';
-import type { RefreshTokenRepository } from '@repositories';
 import {
   fromMilliToSeconds,
   fromMinToSeconds,
@@ -25,6 +25,7 @@ import type {
 } from '@types';
 import type { HashService } from '@services';
 import type { Request } from 'express';
+import type { VerifyService } from '@services';
 
 export class AuthService {
   private _userRepository: UserRepository;
@@ -33,14 +34,18 @@ export class AuthService {
 
   private _hashService: HashService;
 
+  private _verifyService: VerifyService;
+
   constructor(
     userRepository: UserRepository,
     refreshTokenRepository: RefreshTokenRepository,
     hashService: HashService,
+    verifyService: VerifyService,
   ) {
     this._userRepository = userRepository;
     this._refreshTokenRepository = refreshTokenRepository;
     this._hashService = hashService;
+    this._verifyService = verifyService;
   }
 
   async signOut(signOutDto: SignOut) {
@@ -63,6 +68,7 @@ export class AuthService {
       passwordHash: this._hashService.generatePasswordHash(signUpDto.password),
     };
     const newUser = await this._userRepository.create(createUserDto);
+    await this.initPhoneVerification(newUser.id);
     const tokenData = this.getTokenData(newUser.id);
 
     const refreshToken: CreateRefreshToken = {
@@ -73,6 +79,13 @@ export class AuthService {
     await this._refreshTokenRepository.create(refreshToken);
 
     return tokenData;
+  }
+
+  private async initPhoneVerification(userId: string) {
+    await this._verifyService.createVerificationCode(
+      userId,
+      VerificationTypes.PHONE,
+    );
   }
 
   async signIn(signInDto: UserSignInDto, req: Request) {
