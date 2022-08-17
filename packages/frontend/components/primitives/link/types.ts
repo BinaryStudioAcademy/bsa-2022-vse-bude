@@ -2,7 +2,7 @@ import type { LinkProps } from 'next/link';
 
 interface LinkStyleProps {
   variant?: 'primary' | 'secondary' | 'accent' | 'dashboard';
-  label?: string | undefined;
+  label?: string;
   disabled?: boolean;
   title?: string;
 }

@@ -18,14 +18,15 @@ export const dropdownTitle = ({
   align-items: center;
   height: 100%;
   cursor: pointer;
-  font-size: ${fontSizes.tub};
+  /* font-size: ${fontSizes.tub};
   line-height: ${lineHeights.tub};
-  font-weight: ${fontWeights.tub};
-  color: ${colors.text};
+  font-weight: ${fontWeights.tub}; */
+  /* color: ${colors.text}; */
+  color: ${colors.primaryLight};
 
   :hover,
   :active {
-    color: ${colors.primaryLight};
+    color: ${colors.primaryLightHover};
   }
 `;
 
@@ -37,7 +38,8 @@ export const dropdownContent = ({
   colors,
 }: Theme) => css`
   position: absolute;
-  top: calc(100% + ${spaces.lg});
+  top: calc(100% + ${spaces.sm});
+  right: 0;
   display: flex;
   align-items: center;
   justify-content: center;
