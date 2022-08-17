@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PromoSection } from './components/promo-section';
+import { PromoSection } from './promo-section';
 
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState('');

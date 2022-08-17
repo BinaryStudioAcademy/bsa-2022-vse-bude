@@ -48,27 +48,6 @@ export const input = ({
     }
   }
 
-  &[data-variant='search'] {
-    padding: 22px 34px;
-    height: 60px;
-    width: 100%;
-    border: ${colors.backgroundDark} 1px solid;
-    border-radius: ${radiuses.lg};
-    background-color: ${colors.background};
-    color: ${colors.text};
-    filter: drop-shadow(-1px -2px 23px rgba(195, 195, 195, 0.25))
-      drop-shadow(2px 5px 10px rgba(195, 195, 195, 0.25));
-
-    ::placeholder {
-      opacity: 0.3;
-      color: ${colors.text};
-    }
-    &:focus {
-      border-color: ${colors.backgroundDark};
-      caret-color: ${colors.text};
-    }
-  }
-
   &[data-status='error'] {
     color: ${colors.error};
   }

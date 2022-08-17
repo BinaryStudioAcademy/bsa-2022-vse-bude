@@ -34,9 +34,10 @@ export const subTitle = ({
   fontSizes,
   fontWeights,
   lineHeights,
+  spaces,
 }: Theme) => css`
   margin: 0 auto;
-  margin-top: 17px;
+  margin-top: ${spaces.md};
   max-width: 517px;
   color: ${colors.text};
   font-size: ${fontSizes.body1};
