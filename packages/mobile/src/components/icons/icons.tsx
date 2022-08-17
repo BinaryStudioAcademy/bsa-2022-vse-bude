@@ -34,6 +34,10 @@ const BackIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="chevron-left" {...iconProps} />
 );
 
+const CameraIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="camera" {...iconProps} />
+);
+
 export {
   HomeIcon,
   StarIcon,
@@ -43,4 +47,5 @@ export {
   AlertIcon,
   BackIcon,
   CustomFeatherIcon,
+  CameraIcon,
 };

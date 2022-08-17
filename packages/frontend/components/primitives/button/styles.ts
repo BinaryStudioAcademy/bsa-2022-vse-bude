@@ -15,9 +15,9 @@ export const button = ({
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: ${fontSizes.button};
   line-height: ${lineHeights.button};
   font-weight: ${fontWeights.button};
-  font-size: ${fontSizes.button};
   cursor: pointer;
 
   &[data-variant='filled'] {

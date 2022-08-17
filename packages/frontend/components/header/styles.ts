@@ -1,22 +1,19 @@
 import { css } from '@emotion/react';
 import type { Theme } from 'theme';
+import { resetButton } from 'theme';
 
 export const header = (theme: Theme) => css`
   padding: ${theme.spaces.lg} 0;
   background-color: ${theme.colors.backgroundLight};
   height: ${theme.heights.header};
+  box-shadow: 0px 6px 10px 0px #dedede80;
 
   .navigation {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: ${theme.heights.navigation};
-    width: ${theme.widths.navigation};
-
-    a {
-      font-size: ${theme.fontSizes.tub};
-      font-weight: ${theme.fontWeights.tub};
-    }
+    gap: ${theme.spaces.lg};
+    margin: 0 ${theme.spaces.xl};
   }
 
   .burger-menu-wrapper {
@@ -25,6 +22,7 @@ export const header = (theme: Theme) => css`
   }
 
   .burger-menu-button {
+    ${resetButton}
     display: none;
     margin: ${theme.spaces.sm};
     font-size: ${theme.fontSizes.toggle};

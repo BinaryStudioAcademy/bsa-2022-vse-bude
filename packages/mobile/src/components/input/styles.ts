@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   input: {
-    paddingVertical: 6,
+    paddingVertical: 9,
     paddingHorizontal: 15,
     borderRadius: 10,
     lineHeight: 16,

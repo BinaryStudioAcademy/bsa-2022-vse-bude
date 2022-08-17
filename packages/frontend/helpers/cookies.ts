@@ -1,4 +1,5 @@
-import type { Storage, StorageKey } from '@vse-bude/shared';
+import type { StorageKey } from '@vse-bude/shared';
+import { type Storage } from '@vse-bude/shared';
 import { deleteCookie, getCookie, getCookies, setCookie } from 'cookies-next';
 import type { GetServerSidePropsContext, PreviewData } from 'next';
 import type { CookieSerializeOptions } from 'next/dist/server/web/types';

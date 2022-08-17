@@ -1,4 +1,3 @@
-import { Routes } from '@enums';
 import {
   Button,
   Container,
@@ -7,12 +6,11 @@ import {
   InternalLink,
   ProfileInfo,
 } from '@primitives';
-import { IconName } from 'common/enums/icons';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
-import React from 'react';
-import { useState } from 'react';
-import { Logo } from '../primitives/logo/component';
+import { Fragment, useState } from 'react';
+import { Routes, IconName } from '@enums';
+import { Logo } from 'components/primitives/logo';
 import * as styles from './styles';
 
 export const Header = () => {
@@ -75,14 +73,6 @@ export const Header = () => {
     </div>
   );
 
-  const logoSVG = () => (
-    <Link href={Routes.DEFAULT}>
-      <a>
-        <Logo />
-      </a>
-    </Link>
-  );
-
   const renderBurgerButton = () => (
     <button onClick={() => setShow(!show)}>
       <Icon icon={IconName.LIST} color="yellow" />
@@ -140,10 +130,14 @@ export const Header = () => {
   );
 
   return (
-    <React.Fragment>
+    <Fragment>
       <header css={styles.header}>
-        <Container css={styles.headerInner}>
-          {logoSVG()}
+        <Container cssExtend={styles.headerInner}>
+          <Link href={Routes.DEFAULT}>
+            <a>
+              <Logo />
+            </a>
+          </Link>
 
           <div className="header-content">{renderNavigation()}</div>
           <div className="header-content">{renderAuthButtons()}</div>
@@ -152,6 +146,6 @@ export const Header = () => {
         </Container>
       </header>
       {show && renderHamburderMenuContent()}
-    </React.Fragment>
+    </Fragment>
   );
 };
