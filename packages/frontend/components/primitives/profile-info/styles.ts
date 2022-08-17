@@ -21,11 +21,11 @@ export const dropdownArrow = ({
   align-items: center;
   margin-left: ${spaces.sm};
   border-radius: ${radiuses.circle};
-  background-color: ${colors.backgroundLight};
-  cursor: pointer;
   width: ${widths.checkbox};
   height: ${heights.checkbox};
   padding: ${spaces.xs};
+  background-color: ${colors.backgroundLight};
+  cursor: pointer;
 `;
 
 export const popoverContentWrapper = ({ spaces }: Theme) => css`
@@ -66,8 +66,8 @@ export const popoverContentItem = ({
   &[data-variant='icon'] {
     padding: ${spaces.xs} ${spaces.md};
     & > i {
-      margin-right: ${spaces.md};
       float: left;
+      margin-right: ${spaces.md};
     }
   }
 `;
