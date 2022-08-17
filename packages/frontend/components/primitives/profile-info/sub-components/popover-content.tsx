@@ -15,7 +15,7 @@ export const PopoverContent = ({
       data-variant="icon"
     >
       <Icon icon={IconName.USER} color="yellow" />
-      Personal Info
+      <span>Personal Info</span>
     </button>
     <button
       css={innerStyles}
@@ -24,7 +24,7 @@ export const PopoverContent = ({
       data-variant="icon"
     >
       <Icon icon={IconName.LIST} color="yellow" />
-      My List
+      <span>My List</span>
     </button>
     <button
       css={innerStyles}
@@ -33,7 +33,7 @@ export const PopoverContent = ({
       data-variant="icon"
     >
       <Icon icon={IconName.SETTINGS} color="yellow" />
-      Settings
+      <span>Settings</span>
     </button>
     <button
       css={innerStyles}
@@ -42,7 +42,7 @@ export const PopoverContent = ({
       data-variant="icon"
     >
       <Icon icon={IconName.MESSAGE} color="yellow" />
-      Messages
+      <span>Messages</span>
     </button>
     <button
       css={innerStyles}
@@ -51,7 +51,7 @@ export const PopoverContent = ({
       data-variant="icon"
     >
       <Icon icon={IconName.SUPPORT} color="yellow" />
-      Support
+      <span>Support</span>
     </button>
     <button
       css={innerStyles}
@@ -60,7 +60,7 @@ export const PopoverContent = ({
       data-variant="icon"
     >
       <Icon icon={IconName.SIGN_OUT} color="yellow" />
-      Sign Out
+      <span>Sign Out</span>
     </button>
   </div>
 );

@@ -59,10 +59,15 @@ export const popoverContentItem = ({
     color: ${colors.primaryLight};
   }
 
+  & span {
+    float: left;
+  }
+
   &[data-variant='icon'] {
     padding: ${spaces.xs} ${spaces.md};
-    & > svg {
+    & > i {
       margin-right: ${spaces.md};
+      float: left;
     }
   }
 `;
