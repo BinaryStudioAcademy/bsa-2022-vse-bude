@@ -1,9 +1,6 @@
 export type { RootState, AppDispatch, AsyncThunkConfig } from './app/app';
 export type { HttpOptions, GetHeadersParams } from './http/http';
-export type {
-  RootNavigationParamList,
-  AccountNavigationParamList,
-} from './navigation/navigation';
+export type { RootNavigationParamList } from './navigation/navigation';
 export type { ValidationSchema } from './validation/validation';
 export type {
   FormControl,

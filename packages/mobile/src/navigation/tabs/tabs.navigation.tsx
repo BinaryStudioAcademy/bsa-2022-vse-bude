@@ -7,7 +7,7 @@ import {
 import { useCustomTheme } from '~/hooks/hooks';
 import { MainScreenName } from '~/common/enums/enums';
 import { AppIcon } from '~/common/types/types';
-import { Home, Favorite, MyList } from '~/screens/screens';
+import { Home, Favorite, MyList, Account } from '~/screens/screens';
 import {
   Text,
   HomeIcon,
@@ -15,7 +15,6 @@ import {
   StarIcon,
   UserIcon,
 } from '~/components/components';
-import { AccountNavigation } from '../account/account.navigation';
 
 const Tabs = createBottomTabNavigator();
 
@@ -64,7 +63,7 @@ const MainNavigation = () => {
       />
       <Tabs.Screen
         name={MainScreenName.ACCOUNT_ROOT}
-        component={AccountNavigation}
+        component={Account}
         options={getTabOptions(MainScreenName.ACCOUNT_ROOT, UserIcon)}
       />
     </Tabs.Navigator>

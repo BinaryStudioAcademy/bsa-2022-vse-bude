@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { RootNavigationProps } from '~/common/types/navigation/navigation-props';
-import { AccountScreenName } from '~/common/enums/enums';
+import { RootScreenName } from '~/common/enums/enums';
 import {
   View,
   ScreenWrapper,
@@ -23,17 +23,17 @@ const Account: FC = () => {
 
   const styles = React.useMemo(() => createStyles(colors), [dark, colors]);
 
-  const handlePersonalInfo = () => {
-    navigation.navigate(AccountScreenName.PERSONAL_INFO);
+  const handlePersonalInfoPress = () => {
+    navigation.navigate(RootScreenName.PERSONAL_INFO);
   };
-  const handleSettings = () => {
-    navigation.navigate(AccountScreenName.SETTINGS);
+  const handleSettingsPress = () => {
+    navigation.navigate(RootScreenName.SETTINGS);
   };
-  const handleMessages = () => {
-    navigation.navigate(AccountScreenName.MESSAGES);
+  const handleMessagesPress = () => {
+    navigation.navigate(RootScreenName.MESSAGES);
   };
-  const handleSupport = () => {
-    navigation.navigate(AccountScreenName.SUPPORT);
+  const handleSupportPress = () => {
+    navigation.navigate(RootScreenName.SUPPORT);
   };
   const handleLogOut = () => {
     //TODO
@@ -45,19 +45,19 @@ const Account: FC = () => {
         <Logo width={120} height={30} />
       </View>
       <View style={styles.btnWrapper}>
-        <TouchableOpacity onPress={handlePersonalInfo} style={styles.row}>
+        <TouchableOpacity onPress={handlePersonalInfoPress} style={styles.row}>
           <UserIcon size={30} style={styles.icon} />
           <Text style={styles.btnText}>{t('account.PERSONAL_INFO')}</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={handleSettings} style={styles.row}>
+        <TouchableOpacity onPress={handleSettingsPress} style={styles.row}>
           <SettingsIcon size={30} style={styles.icon} />
           <Text style={styles.btnText}>{t('account.SETTINGS')}</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={handleMessages} style={styles.row}>
+        <TouchableOpacity onPress={handleMessagesPress} style={styles.row}>
           <MessageIcon size={30} style={styles.icon} />
           <Text style={styles.btnText}>{t('account.MESSAGES')}</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={handleSupport} style={styles.row}>
+        <TouchableOpacity onPress={handleSupportPress} style={styles.row}>
           <SupportIcon size={30} style={styles.icon} />
           <Text style={styles.btnText}>{t('account.SUPPORT')}</Text>
         </TouchableOpacity>
