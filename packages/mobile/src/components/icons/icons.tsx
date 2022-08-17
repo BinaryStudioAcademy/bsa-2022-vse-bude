@@ -44,6 +44,7 @@ const ArrowLeftIcon: AppIcon = (iconProps) => (
 
 const ArrowRightIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="chevron-right" {...iconProps} />
+);
 
 const AlertIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="alert-triangle" {...iconProps} />

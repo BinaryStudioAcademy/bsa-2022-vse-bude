@@ -3,7 +3,6 @@ import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
-import { Auth, Welcome } from '~/screens/screens';
 import { RootScreenName } from '~/common/enums/enums';
 import { RootNavigationParamList } from '~/common/types/types';
 import {
@@ -11,6 +10,8 @@ import {
   PersonalInfoScreen,
   SettingsScreen,
   SupportScreen,
+  Auth,
+  Welcome,
 } from '~/screens/screens';
 import { MainNavigation } from './tabs/tabs.navigation';
 
