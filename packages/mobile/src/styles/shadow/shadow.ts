@@ -1,7 +1,7 @@
 import { ColorPalette } from '@vse-bude/shared';
 
-const SHADOW = {
-  shLot: {
+const SHADOW_STYLE = {
+  boxShadow: {
     shadowColor: ColorPalette.GRAY_SHADOW,
     shadowOffset: {
       width: 0,
@@ -12,4 +12,5 @@ const SHADOW = {
     elevation: 3,
   },
 };
-export { SHADOW };
+
+export { SHADOW_STYLE };

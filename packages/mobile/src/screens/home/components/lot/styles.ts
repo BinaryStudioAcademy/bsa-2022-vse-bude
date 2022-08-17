@@ -16,11 +16,8 @@ const styles = StyleSheet.create({
   },
   time: {
     position: 'absolute',
-    flexDirection: 'row',
     bottom: -10,
     alignSelf: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
     width: '70%',
     height: 26,
     textAlign: 'center',
@@ -43,11 +40,6 @@ const styles = StyleSheet.create({
     height: 2,
     backgroundColor: ColorPalette.GRAY_200,
     marginVertical: 13,
-  },
-  priceWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
   },
   price: {
     color: ColorPalette.BLACK_100,

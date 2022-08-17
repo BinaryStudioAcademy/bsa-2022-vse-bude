@@ -53,4 +53,5 @@ export {
   ClockIcon,
   SearchIcon,
   CameraIcon,
+  ClockIcon,
 };
