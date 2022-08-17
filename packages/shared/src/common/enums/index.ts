@@ -4,3 +4,4 @@ export * from './storage';
 export * from './validation';
 export * from './exception';
 export * from './theme';
+export * from './verify';

@@ -4,7 +4,7 @@ import express, { json } from 'express';
 import { initRepositories } from '@repositories';
 import { getEnv, log } from '@helpers';
 import { initServices } from '@services';
-import { logger } from '@middlewares';
+import { localizationMiddleware, logger } from '@middlewares';
 import { prismaClient as database } from './data/db';
 import { errorHandler } from './error/error-handler';
 
@@ -18,6 +18,7 @@ app
   .use(cors())
   .use(logger)
   .use(json())
+  .use(localizationMiddleware)
   .use(routes)
   .use(errorHandler)
   .on('close', () => database.$disconnect())
