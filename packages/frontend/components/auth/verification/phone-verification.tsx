@@ -1,10 +1,14 @@
 import { Button } from '@primitives';
 import { useTranslation } from 'next-i18next';
+import { useTypedSelector } from '@hooks';
 import { Input } from '../../primitives/input';
 import { inputWrapper } from '../layout/styles';
 import { verifyEntity, verifyForm, verifyInput, verifyText } from '../styles';
+import { hideMainTextPart } from '../../../helpers/text';
 
 export const PhoneVerification = () => {
+  const { user } = useTypedSelector((state) => state.profile);
+
   const { t } = useTranslation('auth');
 
   return (
@@ -13,7 +17,10 @@ export const PhoneVerification = () => {
         <div css={verifyText}>
           <span>
             {t('PHONE_VERIFICATION_TEXT_FIRST_PART')}
-            <span css={verifyEntity}> +3809XXXXXXX9</span>!
+            {user && (
+              <span css={verifyEntity}> {hideMainTextPart(user.email)}</span>
+            )}
+            !
           </span>
           <span>{t('ENTER_VERIFICATION_CODE_BELOW')}!</span>
         </div>

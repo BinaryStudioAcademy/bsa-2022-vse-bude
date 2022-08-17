@@ -45,11 +45,15 @@ export const Header = () => {
     <div className="buttons-wrapper">
       <Button size="small">
         <span css={styles.buttonCreateAccountText}>
-          {t('header.buttons.create_account')}
+          <Link href={Routes.SIGN_UP}>
+            {t('header.buttons.create_account')}
+          </Link>
         </span>
       </Button>
       <Button size="small" variant="outlined">
-        <span css={styles.buttonSignIn}>{t('header.buttons.sign_in')}</span>
+        <span css={styles.buttonSignIn}>
+          <Link href={Routes.SIGN_IN}>{t('header.buttons.sign_in')}</Link>
+        </span>
       </Button>
     </div>
   );
