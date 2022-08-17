@@ -2,9 +2,9 @@ import { initRoutes } from '@routes';
 import cors from 'cors';
 import express, { json } from 'express';
 import { initRepositories } from '@repositories';
-import { getEnv, log } from '@helpers';
+import { getEnv, logger } from '@helpers';
 import { initServices } from '@services';
-import { logger } from '@middlewares';
+import { loggerMiddleware } from '@middlewares';
 import { prismaClient as database } from './data/db';
 import { errorHandler } from './error/error-handler';
 
@@ -16,9 +16,11 @@ const port = getEnv('PORT');
 
 app
   .use(cors())
-  .use(logger)
+  .use(loggerMiddleware)
   .use(json())
   .use(routes)
   .use(errorHandler)
   .on('close', () => database.$disconnect())
-  .listen(port, () => log(`Server is running on port ${port}`));
+  .listen(port, () => {
+    logger.log(`Server is running on port ${port}`);
+  });
