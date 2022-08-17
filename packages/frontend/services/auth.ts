@@ -3,7 +3,7 @@ import type {
   UserSignInDto,
   UserSignUpDto,
 } from '@vse-bude/shared';
-import { ApiRoutes } from '@vse-bude/shared';
+import { ApiRoutes, VerifyApiRoutes } from '@vse-bude/shared';
 import { AuthApiRoutes } from '@vse-bude/shared';
 import { http } from '@helpers';
 import type { IAuth } from '../common/types/auth';
@@ -27,6 +27,6 @@ export const getUser = () =>
 
 export const verifyPhone = async (data: PhoneVerifyDto) =>
   await http.post({
-    url: '',
+    url: `${ApiRoutes.VERIFY}${VerifyApiRoutes.VERIFY_PHONE}`,
     body: data,
   });

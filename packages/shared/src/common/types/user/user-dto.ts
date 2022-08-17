@@ -3,6 +3,7 @@ type UserDto = {
   name: string;
   email: string;
   phone: string;
+  phoneVerified: boolean;
 };
 
 export type { UserDto };

@@ -49,7 +49,8 @@ const phoneVerification = createAsyncThunk(
   AuthActions.PHONE_VERIFY,
   async (data: PhoneVerifyDto, { rejectWithValue }) => {
     try {
-      return await verifyPhone(data);
+      await verifyPhone(data);
+      await Router.push(Routes.EMAIL_VERIFY);
     } catch (e) {
       return rejectWithValue(e.message);
     }
