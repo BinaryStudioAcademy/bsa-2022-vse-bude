@@ -12,7 +12,7 @@ export const FavoriteButton = ({
 
   return (
     <IconButton
-      css={favoriteIcon}
+      cssExtend={favoriteIcon}
       onClick={onChangeIsFavorite}
       icon={icon}
       color={color}

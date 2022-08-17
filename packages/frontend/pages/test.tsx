@@ -14,12 +14,7 @@ function Test() {
           gap: '10px',
         }}
       >
-        <IconButton
-          size="sm"
-          icon={IconName.STAR_FULFILLED}
-          color="yellow"
-          backgroundColor="darkgray"
-        />
+        <IconButton icon={IconName.STAR_FULFILLED} color="yellow" />
         <IconButton
           size="sm"
           icon={IconName.STAR_OUTLINED}

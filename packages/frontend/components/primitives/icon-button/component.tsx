@@ -4,20 +4,17 @@ import * as styles from './styles';
 
 export const IconButton = ({
   icon,
-  color,
-  backgroundColor,
+  color = 'yellow',
+  backgroundColor = 'transparent',
   size = 'md',
-  className,
-  isBackgroundTransparent = true,
+  cssExtend,
   onClick,
 }: IconButtonProps) => (
   <button
-    css={styles.iconButton}
-    className={className}
+    css={[styles.iconButton, cssExtend]}
     onClick={onClick}
     data-size={size}
     data-bg-color={backgroundColor}
-    data-bg-transparent={isBackgroundTransparent}
   >
     <Icon icon={icon} color={color} />
   </button>

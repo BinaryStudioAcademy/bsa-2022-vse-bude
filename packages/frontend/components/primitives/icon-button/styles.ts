@@ -2,6 +2,22 @@ import { css } from '@emotion/react';
 import type { Theme } from 'theme';
 import { resetButton } from 'theme';
 
+const hoverColor = `rgb(232,232,232)`;
+
+const hover = css`
+  &:hover {
+    background: ${hoverColor};
+    filter: contrast(1.05);
+  }
+`;
+
+const active = css`
+  &:active {
+    background-color: ${hoverColor};
+    filter: contrast(1.1);
+  }
+`;
+
 export const iconButton = ({ colors, radiuses }: Theme) => css`
   ${resetButton}
   display: flex;
@@ -9,6 +25,7 @@ export const iconButton = ({ colors, radiuses }: Theme) => css`
   justify-content: center;
   border-radius: ${radiuses.circle};
   cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
 
   &[data-size='xs'] {
     height: 18px;
@@ -40,33 +57,17 @@ export const iconButton = ({ colors, radiuses }: Theme) => css`
   }
   &[data-bg-color='lightgray'] {
     background-color: ${colors.backgroundLight};
-    &:hover {
-      background-color: ${colors.backgroundLight};
-      filter: contrast(0.95);
-    }
-    &:active {
-      background-color: ${colors.backgroundLight};
-      filter: contrast(0.9);
-    }
+    ${hover}
+    ${active}
   }
   &[data-bg-color='darkgray'] {
     background-color: ${colors.backgroundDark};
-    &:hover {
-      background-color: ${colors.backgroundDark};
-      filter: contrast(0.95);
-    }
-    &:active {
-      background-color: ${colors.backgroundDark};
-      filter: contrast(0.9);
-    }
+    ${hover}
+    ${active}
   }
-  &[data-bg-transparent='true'] {
+  &[data-bg-color='transparent'] {
     background-color: transparent;
-    &:hover {
-      filter: contrast(0.95);
-    }
-    &:active {
-      filter: contrast(0.9);
-    }
+    ${hover}
+    ${active}
   }
 `;
