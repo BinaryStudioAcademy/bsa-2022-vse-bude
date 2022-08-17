@@ -24,6 +24,7 @@ import type {
   SignOut,
 } from '@types';
 import type { HashService } from '@services';
+import type { Request } from 'express';
 
 export class AuthService {
   private _userRepository: UserRepository;
@@ -46,13 +47,13 @@ export class AuthService {
     await this._refreshTokenRepository.deleteByUserId(signOutDto.userId);
   }
 
-  async signUp(signUpDto: UserSignUpDto) {
+  async signUp(signUpDto: UserSignUpDto, req: Request) {
     const userByEmailOrPhone = await this._userRepository.getByEmailOrPhone(
       signUpDto.email,
       signUpDto.phone,
     );
     if (userByEmailOrPhone) {
-      throw new UserExistsError();
+      throw new UserExistsError(req);
     }
     const createUserDto: CreateUser = {
       firstName: signUpDto.firstName,
@@ -74,10 +75,10 @@ export class AuthService {
     return tokenData;
   }
 
-  async signIn(signInDto: UserSignInDto) {
+  async signIn(signInDto: UserSignInDto, req: Request) {
     const user = await this._userRepository.getByEmail(signInDto.email);
     if (!user) {
-      throw new UserNotFoundError();
+      throw new UserNotFoundError(req);
     }
 
     if (
@@ -86,7 +87,7 @@ export class AuthService {
         signInDto.password,
       )
     ) {
-      throw new WrongPasswordError();
+      throw new WrongPasswordError(req);
     }
 
     const tokenData = this.getTokenData(user.id);
@@ -115,19 +116,19 @@ export class AuthService {
     );
   }
 
-  async refreshToken(updateDto: UpdateRefreshToken) {
+  async refreshToken(updateDto: UpdateRefreshToken, req) {
     if (!updateDto.tokenValue) {
-      throw new WrongRefreshTokenError();
+      throw new WrongRefreshTokenError(req);
     }
     const token = await this._refreshTokenRepository.getTokenByValue(
       updateDto.tokenValue,
     );
     if (!token) {
-      throw new UnauthorizedError();
+      throw new UnauthorizedError(req);
     }
 
     if (new Date(token.expiresAt) < new Date()) {
-      throw new ExpiredRefreshTokenError();
+      throw new ExpiredRefreshTokenError(req);
     }
 
     const newTokenData = this.getTokenData(token.userId);

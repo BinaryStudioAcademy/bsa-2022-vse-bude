@@ -16,7 +16,7 @@ export const initAuthRoutes = (
   router.post(
     apiPath(path, AuthApiRoutes.SIGN_IN),
     wrap<Empty, AuthTokenData, UserSignInDto>((req: Request) =>
-      authService.signIn(req.body),
+      authService.signIn(req.body, req),
     ),
   );
 
@@ -35,14 +35,14 @@ export const initAuthRoutes = (
   router.post(
     apiPath(path, AuthApiRoutes.REFRESH_TOKEN),
     wrap<Empty, AuthTokenData, UpdateRefreshToken>((req: Request) =>
-      authService.refreshToken(req.body),
+      authService.refreshToken(req.body, req),
     ),
   );
 
   router.post(
     apiPath(path, AuthApiRoutes.SIGN_UP),
     wrap<Empty, AuthTokenData, UserSignUpDto>((req: Request) =>
-      authService.signUp(req.body),
+      authService.signUp(req.body, req),
     ),
   );
 
