@@ -6,6 +6,7 @@ import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import { wrapper } from 'store';
 import { AuthProvider, ThemeProvider } from '@providers';
+import '../public/css/fontawesome.css';
 
 const cache = createCache({ key: 'next', stylisPlugins: [] });
 

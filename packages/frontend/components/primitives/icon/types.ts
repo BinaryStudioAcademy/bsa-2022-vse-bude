@@ -2,7 +2,7 @@ import type { IconName } from '@fortawesome/fontawesome-svg-core';
 
 export type IconProps = {
   icon: IconName;
-  css?: string;
+  cssExtend?: any;
   size?: SizeProp;
   color?: ColorProp;
 };
