@@ -18,6 +18,13 @@ export const iconButton = ({ colors, radiuses }: Theme) => css`
     }
   }
   &[data-size='sm'] {
+    height: 25px;
+    width: 25px;
+    & > i {
+      font-size: 12px;
+    }
+  }
+  &[data-size='md'] {
     height: 36px;
     width: 36px;
     & > i {

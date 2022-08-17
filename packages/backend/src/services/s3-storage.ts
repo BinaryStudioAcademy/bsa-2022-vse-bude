@@ -32,16 +32,16 @@ export class S3StorageService {
     const { file } = req;
 
     if (!file) {
-      throw new NoFileProvidedError();
+      throw new NoFileProvidedError(req);
     }
 
     const extension = file.mimetype.split('/')[1];
     if (!this.isFileExtensionValid(extension)) {
-      throw new UnsupportedFileExtensionError();
+      throw new UnsupportedFileExtensionError(req);
     }
 
     if (!this.isFileSizeValid(req.file.size)) {
-      throw new FileSizeTooLargeError();
+      throw new FileSizeTooLargeError(req);
     }
 
     const filename = this.generateFilename(extension);

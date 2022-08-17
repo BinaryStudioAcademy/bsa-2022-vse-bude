@@ -51,5 +51,4 @@ export const resetButton = css`
   margin: 0;
   background: transparent;
   font: inherit;
-  text-align: start;
 `;

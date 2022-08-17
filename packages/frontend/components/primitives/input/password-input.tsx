@@ -1,5 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
+import { IconName } from '@enums';
+import { Icon } from '../icon';
 import * as styles from './styles';
 import type { PasswordProps } from './types';
 
@@ -7,7 +9,8 @@ const PasswordInputInner = (
   { variant, error, id, label, ...props }: PasswordProps,
   ref,
 ) => {
-  const [isShown, setIsShown] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const passwordIcon = passwordVisible ? IconName.EYE : IconName.EYE_SLASH;
 
   return (
     <div css={styles.inputWrapper}>
@@ -20,28 +23,25 @@ const PasswordInputInner = (
         <button
           css={styles.showBtn}
           type="button"
-          onClick={() => setIsShown(!isShown)}
+          onClick={() => setPasswordVisible(!passwordVisible)}
         >
-          {/* TODO: remove placeholder */}
-          {isShown ? 'H' : 'S'}
+          <Icon
+            icon={passwordIcon}
+            cssExtend={styles.passwordVisibilityIcon}
+            color="gray"
+          />
         </button>
         <input
           ref={ref}
           css={[styles.input, styles.passwordPadding]}
           data-variant={variant}
           data-status={error ? 'error' : 'successfully'}
-          type={isShown ? 'text' : 'password'}
+          type={passwordVisible ? 'text' : 'password'}
           id={id}
           {...props}
         />
       </div>
-      {error && (
-        <p css={styles.errorMessage}>
-          {/* TODO: remove placeholder */}
-          <span>!!!!</span>
-          {error}
-        </p>
-      )}
+      {error && <p css={styles.errorMessage}>{error}</p>}
     </div>
   );
 };

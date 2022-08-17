@@ -3,7 +3,7 @@ import type { IconName } from '@enums';
 export type IconProps = {
   icon: typeof IconName[keyof typeof IconName];
   color: ColorProp;
-  css?: string;
+  cssExtend?: any;
   size?: SizeProp;
 };
 
