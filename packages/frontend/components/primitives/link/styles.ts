@@ -7,7 +7,6 @@ export const linkStyles = ({
   lineHeights,
   fontWeights,
 }: Theme) => css`
-  color: ${colors.link};
   text-decoration: none;
   font-size: ${fontSizes.body1};
   font-weight: ${fontWeights.body1};
@@ -19,22 +18,23 @@ export const linkStyles = ({
     pointer-events: none;
   }
 
-  &:visited {
-    color: ${colors.link};
-  }
-
-  &:hover {
-    color: ${colors.link};
-  }
-
   &[data-variant='primary'] {
-    color: ${colors.link};
+    color: ${colors.primaryLight};
+
+    &:visited {
+      color: ${colors.primaryLight};
+    }
+
+    &:hover {
+      color: ${colors.primaryLightHover};
+    }
   }
 
   &[data-variant='secondary'] {
     font-size: ${fontSizes.body2};
     line-height: ${lineHeights.body2};
     color: ${colors.textFooter};
+
     &:hover {
       color: ${colors.textFooter};
     }
@@ -44,8 +44,16 @@ export const linkStyles = ({
     font-size: ${fontSizes.body2};
     line-height: ${lineHeights.body2};
     color: ${colors.accent};
+
     &:hover {
       color: ${colors.accent};
     }
+  }
+
+  &[data-variant='dashboard'] {
+    font-size: ${fontSizes.tub};
+    font-weight: ${fontWeights.tub};
+    line-height: ${lineHeights.tub};
+    color: ${colors.text};
   }
 `;

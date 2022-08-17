@@ -1,11 +1,11 @@
 import { HttpError, HttpStatusCode } from '@vse-bude/shared';
-import { USER_ALREADY_EXISTS } from '../error-messages';
+import type { Request } from 'express';
 
 class UserExistsError extends HttpError {
-  constructor() {
+  constructor(req: Request) {
     super({
       status: HttpStatusCode.BAD_REQUEST,
-      message: USER_ALREADY_EXISTS,
+      message: req.t('USER_ALREADY_EXISTS'),
     });
   }
 }

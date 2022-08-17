@@ -2,7 +2,7 @@ import { linkStyles } from './styles';
 import type { AnchorProps } from './types';
 
 export function Anchor({
-  variant,
+  variant = 'primary',
   disabled = false,
   label,
   target = '_blank',

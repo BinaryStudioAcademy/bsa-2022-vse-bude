@@ -32,6 +32,9 @@ const AlertIcon: AppIcon = (iconProps) => (
 const BackIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="chevron-left" {...iconProps} />
 );
+const CameraIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="camera" {...iconProps} />
+);
 const ClockIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="clock" {...iconProps} />
 );
@@ -49,4 +52,5 @@ export {
   CustomFeatherIcon,
   ClockIcon,
   SearchIcon,
+  CameraIcon,
 };

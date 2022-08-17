@@ -37,6 +37,7 @@ const Button: FC<Props> = ({
           isDisabled ? styles.disabledFill : {},
           isOutlined && isDisabled ? styles.disabledOutlined : {},
           background ? { backgroundColor: background } : {},
+          textColor ? { borderColor: textColor } : {},
         ]}
       >
         <Text

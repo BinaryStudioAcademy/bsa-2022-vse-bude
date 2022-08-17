@@ -1,6 +1,28 @@
 {
+  "header": {
+    "nav": {
+      "home": "Home",
+      "category": "Category",
+      "search": "Search",
+      "news": "News",
+      "about_us": "About us"
+    },
+    "buttons": {
+      "create_account": "Create Account",
+      "sign_in": "Sign In"
+    }
+  },
   "HOURS_SHORT": "h",
   "DAYS_SHORT": "d",
   "MINUTES_SHORT": "min",
-  "SECONDS_SHORT": "s"
+  "SECONDS_SHORT": "s",
+  "CREATE_ACCOUNT": "Create Account",
+  "FIRST_NAME": "First Name",
+  "LAST_NAME": "Last Name",
+  "EMAIL": "E-mail",
+  "PASSWORD": "Password",
+  "REPEAT_PASSWORD": "Repeat password",
+  "PHONE_NUMBER": "Phone Number",
+  "I_HAVE_AN_ACCOUNT": "I have an account",
+  "SIGN_IN": "Sign In"
 }
