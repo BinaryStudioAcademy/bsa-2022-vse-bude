@@ -1,6 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { login, signUp } from 'services/auth';
-import type { UserSignInDto, UserSignUpDto } from '@vse-bude/shared';
+import { login, signUp, verifyPhone } from 'services/auth';
+import type {
+  PhoneVerifyDto,
+  UserSignInDto,
+  UserSignUpDto,
+} from '@vse-bude/shared';
 import { auth } from '@helpers';
 import Router from 'next/router';
 import { Routes } from '@enums';
@@ -41,4 +45,15 @@ const signUpUser = createAsyncThunk(
   },
 );
 
-export { loginUser, signUpUser };
+const phoneVerification = createAsyncThunk(
+  AuthActions.PHONE_VERIFY,
+  async (data: PhoneVerifyDto, { rejectWithValue }) => {
+    try {
+      return await verifyPhone(data);
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  },
+);
+
+export { loginUser, signUpUser, phoneVerification };

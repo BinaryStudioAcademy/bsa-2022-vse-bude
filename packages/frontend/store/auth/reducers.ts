@@ -13,6 +13,7 @@ const INITIAL_STATE: UserDto = {
   id: null,
   name: null,
   email: null,
+  phone: null,
 };
 
 const currentUser = createReducer(INITIAL_STATE, {

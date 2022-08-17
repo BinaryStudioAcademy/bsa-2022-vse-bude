@@ -1,4 +1,8 @@
-import type { UserSignInDto, UserSignUpDto } from '@vse-bude/shared';
+import type {
+  PhoneVerifyDto,
+  UserSignInDto,
+  UserSignUpDto,
+} from '@vse-bude/shared';
 import { ApiRoutes } from '@vse-bude/shared';
 import { AuthApiRoutes } from '@vse-bude/shared';
 import { http } from '@helpers';
@@ -19,4 +23,10 @@ export const signUp = async (signUpData: UserSignUpDto): Promise<IAuth> =>
 export const getUser = () =>
   http.get({
     url: `${ApiRoutes.AUTH}${AuthApiRoutes.USER}`,
+  });
+
+export const verifyPhone = async (data: PhoneVerifyDto) =>
+  await http.post({
+    url: '',
+    body: data,
   });
