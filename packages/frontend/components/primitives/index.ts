@@ -8,4 +8,5 @@ export { Avatar } from './avatar';
 export { Dropdown } from './menu-dropdown';
 export { Icon } from './icon';
 export { Popover } from './popover';
+export { IconButton } from './icon-button';
 export { Container } from './container';

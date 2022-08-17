@@ -1,12 +1,18 @@
-import type { IconName } from '@fortawesome/fontawesome-svg-core';
+import type { IconName } from '@enums';
 
 export type IconProps = {
-  icon: IconName;
+  icon: typeof IconName[keyof typeof IconName];
+  color: ColorProp;
   cssExtend?: any;
   size?: SizeProp;
-  color?: ColorProp;
 };
 
-type SizeProp = 'lg' | 'md' | 'sm' | 'xs';
+export type SizeProp = 'lg' | 'md' | 'sm' | 'xs';
 
-type ColorProp = 'yellow' | 'black' | 'white' | 'gray' | 'green' | 'disabled';
+export type ColorProp =
+  | 'yellow'
+  | 'black'
+  | 'white'
+  | 'gray'
+  | 'green'
+  | 'disabled';
