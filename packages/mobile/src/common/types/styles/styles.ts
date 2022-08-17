@@ -17,6 +17,7 @@ export type FontStyles = {
 };
 
 export type FlexBoxStyles = {
+  flex1: FlexStyle;
   flexDirectionRow: FlexStyle;
   flexDirectionColumn: FlexStyle;
   alignItemsCenter: FlexStyle;

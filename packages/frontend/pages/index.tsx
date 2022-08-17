@@ -24,6 +24,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
           'home',
           'product',
           'common',
+          'footer',
         ])),
       },
     };
