@@ -1,4 +1,4 @@
-import { log } from '@helpers';
+import { logger } from '@helpers';
 import type { EmailOptions, IEmailProvider } from '@types';
 
 export class EmailService {
@@ -12,7 +12,7 @@ export class EmailService {
     try {
       await this._emailProvider.send(options);
     } catch (error) {
-      log(error);
+      logger.error(error);
     }
   }
 }
