@@ -2,8 +2,14 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   input: {
-    borderWidth: 1,
-    borderColor: 'gray',
+    paddingVertical: 9,
+    paddingHorizontal: 15,
+    borderRadius: 10,
+    lineHeight: 16,
+    borderWidth: 2,
+  },
+  label: {
+    lineHeight: 14,
   },
 });
 

@@ -44,6 +44,17 @@ const ArrowLeftIcon: AppIcon = (iconProps) => (
 
 const ArrowRightIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="chevron-right" {...iconProps} />
+
+const AlertIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="alert-triangle" {...iconProps} />
+);
+
+const BackIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="chevron-left" {...iconProps} />
+);
+
+const CameraIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="camera" {...iconProps} />
 );
 
 export {
@@ -57,5 +68,8 @@ export {
   LogOutIcon,
   ArrowLeftIcon,
   ArrowRightIcon,
+  AlertIcon,
+  BackIcon,
   CustomFeatherIcon,
+  CameraIcon,
 };

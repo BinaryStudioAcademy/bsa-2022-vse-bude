@@ -14,6 +14,7 @@ export const button = ({
   ${resetButton};
   display: flex;
   align-items: center;
+  justify-content: center;
   line-height: ${lineHeights.button};
   font-weight: ${fontWeights.button};
   font-size: ${fontSizes.button};

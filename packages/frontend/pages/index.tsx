@@ -1,28 +1,24 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
-import { Button, Container } from '@primitives';
-import { Http } from '@vse-bude/shared';
+import { Button, Container, Popover } from '@primitives';
 import { Layout } from '@components';
-import { useAppDispatch, useTypedSelector } from '@hooks';
-import { shallowEqual } from 'react-redux';
-import { fetchRandomData, fetchRandomDataSSR, wrapper } from 'store';
+import { wrapper } from 'store';
 import { css } from '@emotion/react';
 import { useState } from 'react';
-import { CookieStorage, AuthHelper } from '@helpers';
 import { ProductCard } from '../components/product/card/component';
 import Test from './test';
 
 export const getServerSideProps = wrapper.getServerSideProps(
-  (store) => async (ctx) => {
+  (_store) => async (ctx) => {
     const { locale } = ctx;
 
-    const storage = new CookieStorage(ctx);
-    const auth = new AuthHelper(storage);
-    const httpClient = new Http(process.env.NEXT_PUBLIC_API_ROUTE, auth);
+    // const storage = new CookieStorage(ctx);
+    // const auth = new AuthHelper(storage);
+    // const httpClient = new Http(process.env.NEXT_PUBLIC_API_ROUTE, auth);
 
-    await store.dispatch(fetchRandomDataSSR(httpClient));
+    // await store.dispatch(fetchRandomDataSSR(httpClient));
 
-    return Promise.resolve({
+    return {
       props: {
         ...(await serverSideTranslations(locale, [
           'home',
@@ -30,13 +26,11 @@ export const getServerSideProps = wrapper.getServerSideProps(
           'common',
         ])),
       },
-    });
+    };
   },
 );
 
 const IndexPage = () => {
-  const { data } = useTypedSelector((state) => state.randomData, shallowEqual);
-  const dispatch = useAppDispatch();
   const { t } = useTranslation('home');
 
   const [isFavorite, setIsFavorite] = useState(false);
@@ -53,7 +47,7 @@ const IndexPage = () => {
     price: 200,
     name: 'Some name',
     description: 'Some description asdasd as dasd as das da das das adssa',
-    auctionDate: new Date('2022-08-15 00:00:00'),
+    auctionDate: new Date('2022-08-17 00:00:00'),
     currency: 'UAH',
   };
 
@@ -62,29 +56,24 @@ const IndexPage = () => {
       <Container>
         <h1>{t('h1')}</h1>
         <div>
-          <div style={{ wordBreak: 'break-all' }}>{JSON.stringify(data)}</div>
-          <Button
-            variant="outlined"
-            onClick={() => dispatch(fetchRandomData())}
-          >
-            click me
-          </Button>
+          {/* <div style={{ wordBreak: 'break-all' }}>{JSON.stringify(data)}</div> */}
 
-          <Button
-            variant="outlined"
-            disabled
-            onClick={() => dispatch(fetchRandomData())}
-          >
+          <Popover trigger="open popover faeeeeegrdrsfd">
+            <ul>
+              <li>Personal Info</li>
+              <li>My List</li>
+              <li>Settings</li>
+              <li>Messages</li>
+              <li>Support</li>
+              <li>Sign Out</li>
+            </ul>
+          </Popover>
+
+          <Button variant="outlined" disabled>
             click me
           </Button>
-          <Button variant="filled" onClick={() => dispatch(fetchRandomData())}>
-            click me
-          </Button>
-          <Button
-            disabled
-            variant="filled"
-            onClick={() => dispatch(fetchRandomData())}
-          >
+          <Button variant="filled">click me</Button>
+          <Button disabled variant="filled">
             click me
           </Button>
 

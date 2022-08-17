@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-export const imageSliderBlock = () => css`
+export const imageSliderBlock = css`
   position: relative;
   height: 300px;
   &:hover .sliderControls {
@@ -8,19 +8,19 @@ export const imageSliderBlock = () => css`
   }
 `;
 
-export const sliderControls = () => css`
+export const sliderControls = css`
   visibility: hidden;
   > span {
     cursor: pointer;
   }
-  ,
-  > span:first-child {
+
+  > span:first-of-type {
     position: absolute;
     left: 10px;
     top: 50%;
   }
-  ,
-  > span:last-child {
+
+  > span:last-of-type {
     position: absolute;
     right: 10px;
     top: 50%;

@@ -6,6 +6,7 @@ enum RootScreenName {
   SETTINGS = 'Settings',
   MESSAGES = 'Messages',
   SUPPORT = 'Support',
+  WELCOME = 'Welcome',
 }
 
 export { RootScreenName };

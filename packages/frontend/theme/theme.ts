@@ -34,6 +34,7 @@ const fontSizes = {
   tub: '18px',
   toggle: '14px',
   button: '16px',
+  buttonSmall: '12px',
   caption: '12px',
   smallButton: '15px',
 };
@@ -95,14 +96,19 @@ const radiuses = {
 };
 
 const heights = {
+  header: '104px',
   checkbox: '20px',
   controlSm: '35px',
   controlBg: '45px',
+  logo: '32px',
+  navigation: '21px',
 };
 
 const widths = {
   checkbox: '20px',
   footerFormRow: '360px',
+  logo: '128px',
+  navigation: '540px',
 };
 
 const shadows = {
@@ -129,8 +135,17 @@ const iconSizes = {
   xs: '14px',
 };
 
-const breakpoints = [576, 768, 992, 1200, 1300];
-const mq = breakpoints.map((bp) => `@media (min-width: ${bp}px)`);
+const breakpoints = {
+  sm: 576,
+  md: 768,
+  lg: 992,
+  xl: 1200,
+  xxl: 1300,
+};
+
+const mq = Object.keys(breakpoints).map(
+  (bp) => `@media (min-width: ${breakpoints[bp]}px)`,
+);
 
 const lightTheme = {
   colors,
@@ -145,6 +160,7 @@ const lightTheme = {
   iconSizes,
   borders,
   opacities,
+  breakpoints,
   mq,
 };
 
@@ -161,6 +177,7 @@ const darkTheme = {
   iconSizes,
   borders,
   opacities,
+  breakpoints,
   mq,
 };
 

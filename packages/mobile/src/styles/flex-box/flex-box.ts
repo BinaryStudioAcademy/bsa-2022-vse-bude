@@ -1,6 +1,9 @@
 import { FlexBoxStyles } from '~/common/types/types';
 
 const FLEX_BOX_STYLES: FlexBoxStyles = {
+  flex1: {
+    flex: 1,
+  },
   flexDirectionRow: {
     flexDirection: 'row',
   },
@@ -12,6 +15,9 @@ const FLEX_BOX_STYLES: FlexBoxStyles = {
   },
   justifyContentCenter: {
     justifyContent: 'center',
+  },
+  justifyContentStart: {
+    justifyContent: 'flex-start',
   },
   justifyContentSpaceBetween: {
     justifyContent: 'space-between',
