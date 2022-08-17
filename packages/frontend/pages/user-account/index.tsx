@@ -7,11 +7,16 @@ export const getServerSideProps = wrapper.getServerSideProps(
   () => async (ctx) => {
     const { locale } = ctx;
 
-    return Promise.resolve({
+    return {
       props: {
-        ...(await serverSideTranslations(locale, ['dashboard', 'page-titles'])),
+        ...(await serverSideTranslations(locale, [
+          'dashboard',
+          'page-titles',
+          'common',
+          'footer',
+        ])),
       },
-    });
+    };
   },
 );
 

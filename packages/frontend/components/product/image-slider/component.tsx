@@ -27,7 +27,7 @@ export const ImageSlider = ({ images }: ImageSliderProps) => {
 
   return (
     <div css={imageSliderBlock}>
-      <Image src={image} layout="fill" />
+      <Image src={image} objectFit="cover" layout="fill" />
       <SliderControls
         onPrev={onPrevImage}
         onNext={onNextImage}

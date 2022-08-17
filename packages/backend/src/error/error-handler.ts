@@ -1,7 +1,6 @@
 import type { Request, Response, NextFunction } from 'express';
 import { HttpError, HttpStatusCode } from '@vse-bude/shared';
 import { logger } from '@helpers';
-import { INTERNAL_ERROR } from './error-messages';
 
 export const errorHandler = (
   err: Error,
@@ -32,6 +31,6 @@ export const errorHandler = (
   logger.error(err.message);
 
   return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
-    error: INTERNAL_ERROR,
+    error: req.t('INTERNAL_ERROR'),
   });
 };

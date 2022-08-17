@@ -1,8 +1,8 @@
 export enum ApiRoutes {
-  RANDOM_DATA = '/random-data',
   USERS = '/users',
   AUTH = '/auth',
   UPLOAD_IMAGE = '/upload-image',
+  VERIFY = '/verify',
 }
 
 export enum AuthApiRoutes {
@@ -11,4 +11,9 @@ export enum AuthApiRoutes {
   SIGN_OUT = '/sign-out',
   REFRESH_TOKEN = '/refresh-token',
   USER = '/user',
+}
+
+export enum VerifyApiRoutes {
+  VERIFY_PHONE = '/phone',
+  VERIFY_EMAIL = '/email',
 }

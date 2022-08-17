@@ -1,6 +1,6 @@
 export enum AuthActions {
   LOGIN = 'user/login',
-  REGISTER = 'user/register',
+  SIGN_UP = 'user/sign-up',
   LOGOUT = 'user/logout',
   REFRESH = 'user/refresh',
 }

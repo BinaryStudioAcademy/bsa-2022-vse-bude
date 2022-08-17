@@ -40,6 +40,17 @@ export class UserRepository {
     });
   }
 
+  public verifyPhone(userId: string) {
+    return this._dbClient.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        phoneVerified: true,
+      },
+    });
+  }
+
   public getByEmailOrPhone(email: string, phone: string) {
     return this._dbClient.user.findFirst({
       where: {
