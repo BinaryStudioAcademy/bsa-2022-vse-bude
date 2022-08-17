@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
   title: {
     lineHeight: 39,
     marginRight: 20,
-    marginLeft: -5,
     color: ColorPalette.BLACK_100,
     fontWeight: '800',
   },

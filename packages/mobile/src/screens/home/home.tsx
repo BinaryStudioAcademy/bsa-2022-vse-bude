@@ -7,8 +7,10 @@ import {
   View,
   Text,
   SearchInput,
+  StatusBar,
 } from '~/components/components';
 import { LotType } from '~/common/enums/enums';
+import { ColorPalette } from '@vse-bude/shared';
 import { categories } from './components/category/mock-data/categories';
 import { lotData } from './components/lot/mock-data/mock-data';
 import { organizations } from './components/organization/mock-data/mock-data';
@@ -27,6 +29,10 @@ const Home: FC = () => {
 
   return (
     <ScrollView>
+      <StatusBar
+        backgroundColor={ColorPalette.WHITE_100}
+        barStyle="dark-content"
+      />
       <Wrapper>
         <BurgerMenu
           onClick={() => {

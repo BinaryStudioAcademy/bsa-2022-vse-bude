@@ -6,14 +6,6 @@ const styles = StyleSheet.create({
     width: 250,
     padding: 18,
     borderRadius: 1,
-    shadowColor: 'lightgray',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.15,
-    shadowRadius: 1,
-    elevation: 3,
   },
   imgWrapper: {
     alignSelf: 'center',
@@ -36,14 +28,6 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     borderWidth: 1,
     borderColor: ColorPalette.GRAY_200,
-    shadowColor: 'lightgray',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.15,
-    shadowRadius: 1,
-    elevation: 3,
   },
   img: {
     width: '100%',

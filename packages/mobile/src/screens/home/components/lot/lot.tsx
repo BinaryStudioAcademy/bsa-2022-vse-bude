@@ -19,12 +19,12 @@ const Lot: FC<Props> = ({ imgSrc, title, description, price, type }) => {
   const { t } = useTranslation();
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, globalStyles.shLot]}>
       <View style={styles.imgWrapper}>
         <Image source={imgSrc} style={styles.img} />
 
         {type === LotType.UPCOMING ? (
-          <View style={styles.time}>
+          <View style={[styles.time, globalStyles.shLot]}>
             <ClockIcon />
             <Text style={globalStyles.ml2}>
               {`2 ${t('time.DAYS')} 5 ${t('time.HOURS')} 15 ${t(
