@@ -6,6 +6,7 @@ export type IconButtonProps = {
   size?: SizeProp;
   color: ColorProp;
   backgroundColor: BackgroundColorProp;
+  isBackgroundTransparent: boolean;
   className?: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };

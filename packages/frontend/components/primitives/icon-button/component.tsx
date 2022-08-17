@@ -8,6 +8,7 @@ export const IconButton = ({
   backgroundColor,
   size = 'md',
   className,
+  isBackgroundTransparent = false,
   onClick,
 }: IconButtonProps) => (
   <button
@@ -16,6 +17,7 @@ export const IconButton = ({
     onClick={onClick}
     data-size={size}
     data-bg-color={backgroundColor}
+    data-bg-transparent={isBackgroundTransparent}
   >
     <Icon icon={icon} color={color} />
   </button>

@@ -41,14 +41,27 @@ export const iconButton = ({ colors, radiuses }: Theme) => css`
   &[data-bg-color='lightgray'] {
     background-color: ${colors.backgroundLight};
     &:hover {
+      background-color: ${colors.backgroundLight};
       filter: contrast(0.95);
     }
     &:active {
+      background-color: ${colors.backgroundLight};
       filter: contrast(0.9);
     }
   }
   &[data-bg-color='darkgray'] {
     background-color: ${colors.backgroundDark};
+    &:hover {
+      background-color: ${colors.backgroundDark};
+      filter: contrast(0.95);
+    }
+    &:active {
+      background-color: ${colors.backgroundDark};
+      filter: contrast(0.9);
+    }
+  }
+  &[data-bg-transparent='true'] {
+    background-color: transparent;
     &:hover {
       filter: contrast(0.95);
     }
