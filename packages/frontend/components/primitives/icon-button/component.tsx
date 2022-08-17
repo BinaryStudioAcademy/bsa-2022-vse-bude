@@ -8,7 +8,7 @@ export const IconButton = ({
   backgroundColor,
   size = 'md',
   className,
-  isBackgroundTransparent = false,
+  isBackgroundTransparent = true,
   onClick,
 }: IconButtonProps) => (
   <button
