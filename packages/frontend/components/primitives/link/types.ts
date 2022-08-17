@@ -7,8 +7,8 @@ interface LinkStyleProps {
   title?: string;
 }
 
-export interface InternalLinkProps extends LinkStyleProps, LinkProps { }
+export interface InternalLinkProps extends LinkStyleProps, LinkProps {}
 
 export interface AnchorProps
   extends LinkStyleProps,
-  React.HTMLProps<HTMLAnchorElement> { }
+    React.HTMLProps<HTMLAnchorElement> {}
