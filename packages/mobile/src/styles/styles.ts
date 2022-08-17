@@ -10,4 +10,5 @@ export const globalStyles = StyleSheet.create({
   ...FONT_STYLES,
   ...MARGINS_STYLES,
   ...PADDING_STYLES,
+  ...SHADOW_STYLE,
 });

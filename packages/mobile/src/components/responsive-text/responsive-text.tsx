@@ -17,8 +17,14 @@ const ResponsiveText: FC<Props> = ({
   fontSize,
 }) => {
   return (
-    <TouchableOpacity onPress={onPress}>
-      <Text style={[{ color }, fontSize ? { fontSize } : globalStyles.fs14]}>
+    <TouchableOpacity onPress={() => onPress()}>
+      <Text
+        style={[
+          { color },
+          fontSize ? { fontSize } : globalStyles.fs14,
+          globalStyles.fontWeightRegular,
+        ]}
+      >
         {text}
       </Text>
     </TouchableOpacity>

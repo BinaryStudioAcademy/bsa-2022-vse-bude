@@ -12,8 +12,14 @@ type Props = {
 
 const Category: FC<Props> = ({ title, imageSource, onPress }) => {
   return (
-    <TouchableOpacity onPress={onPress}>
-      <View style={styles.wrapper}>
+    <TouchableOpacity onPress={() => onPress()}>
+      <View
+        style={[
+          styles.wrapper,
+          globalStyles.alignItemsCenter,
+          globalStyles.justifyContentSpaceBetween,
+        ]}
+      >
         <Text style={[styles.title, globalStyles.fs14]}>{title}</Text>
         <Image source={imageSource} style={styles.image} />
       </View>

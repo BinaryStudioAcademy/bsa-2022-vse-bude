@@ -7,8 +7,6 @@ const styles = StyleSheet.create({
     height: 110,
     backgroundColor: ColorPalette.GRAY_100,
     borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'space-between',
     paddingVertical: 10,
     marginRight: 10,
   },

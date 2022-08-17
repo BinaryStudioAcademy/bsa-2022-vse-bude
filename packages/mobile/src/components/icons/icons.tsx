@@ -50,7 +50,6 @@ export {
   AlertIcon,
   BackIcon,
   CustomFeatherIcon,
-  ClockIcon,
   SearchIcon,
   CameraIcon,
   ClockIcon,

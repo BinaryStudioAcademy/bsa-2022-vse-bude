@@ -39,8 +39,20 @@ const Home: FC = () => {
             //TODO
           }}
         />
-        <View style={[styles.header]}>
-          <Text style={[styles.title, globalStyles.fs36]}>
+        <View
+          style={[
+            styles.header,
+            globalStyles.flexDirectionRow,
+            globalStyles.alignItemsCenter,
+          ]}
+        >
+          <Text
+            style={[
+              styles.title,
+              globalStyles.fs36,
+              globalStyles.fontWeightExtraBold,
+            ]}
+          >
             {t('home.HELP_UKRAINE')}
           </Text>
           <Flag />
@@ -74,9 +86,12 @@ const Home: FC = () => {
           onExtendPress={() => {
             // TODO
           }}
+          wrapperStyles={[globalStyles.mt6]}
         />
       </Wrapper>
-      <View style={styles.organizationsWrapper}>
+      <View
+        style={[styles.organizationsWrapper, globalStyles.justifyContentCenter]}
+      >
         <Text
           style={[
             styles.organizationTitle,
@@ -86,9 +101,22 @@ const Home: FC = () => {
         >
           {t('home.CHARITY_ORGANIZATIONS')}
         </Text>
-        <View style={styles.imgWrapper}>
+        <View
+          style={[
+            styles.imgWrapper,
+            globalStyles.justifyContentSpaceBetween,
+            globalStyles.alignItemsCenter,
+            globalStyles.flexDirectionRow,
+          ]}
+        >
           {organizations.map((item) => {
-            return <Organization imageSource={item.src} />;
+            return (
+              <Organization
+                imageSource={item.src}
+                maxHeight={50}
+                width={'30%'}
+              />
+            );
           })}
         </View>
       </View>
@@ -101,6 +129,7 @@ const Home: FC = () => {
           onExtendPress={() => {
             // TODO
           }}
+          wrapperStyles={[globalStyles.mt6]}
         />
       </Wrapper>
     </ScrollView>

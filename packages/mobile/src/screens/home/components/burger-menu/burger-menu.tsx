@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { TouchableOpacity, View } from '~/components/components';
+import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 
 type Props = {
@@ -8,7 +9,10 @@ type Props = {
 
 const BurgerMenu: FC<Props> = ({ onClick }) => {
   return (
-    <TouchableOpacity style={styles.wrapper} onPress={onClick}>
+    <TouchableOpacity
+      style={[styles.wrapper, globalStyles.justifyContentSpaceBetween]}
+      onPress={() => onClick()}
+    >
       <View style={styles.bar} />
       <View style={[styles.bar, styles.barMiddle]} />
       <View style={styles.bar} />

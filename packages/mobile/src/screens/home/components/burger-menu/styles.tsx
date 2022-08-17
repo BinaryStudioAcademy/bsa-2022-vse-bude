@@ -3,7 +3,6 @@ import { ColorPalette } from '@vse-bude/shared';
 
 const styles = StyleSheet.create({
   wrapper: {
-    justifyContent: 'space-between',
     backgroundColor: ColorPalette.GRAY_100,
     width: 36,
     height: 36,

@@ -3,6 +3,7 @@ import { View, Text, FlatList, ResponsiveText } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { LotType } from '~/common/enums/enums';
 import { LotData } from '~/common/types/types';
+import { FlexStyle } from 'react-native';
 import { Lot } from '../components';
 import { styles } from './styles';
 
@@ -12,6 +13,7 @@ type Props = {
   lotType: LotType;
   data: LotData;
   onExtendPress: () => void;
+  wrapperStyles?: FlexStyle[];
 };
 
 const LotSection: FC<Props> = ({
@@ -20,14 +22,21 @@ const LotSection: FC<Props> = ({
   lotType,
   data,
   onExtendPress,
+  wrapperStyles,
 }) => {
   const dataLengthCheck = (data: LotData) => {
     return data.length > 10 ? data.slice(0, 11) : data;
   };
 
   return (
-    <>
-      <View style={styles.auctionHeaderWrapper}>
+    <View style={wrapperStyles}>
+      <View
+        style={[
+          globalStyles.flexDirectionRow,
+          globalStyles.alignItemsCenter,
+          globalStyles.justifyContentSpaceBetween,
+        ]}
+      >
         <Text
           style={[
             globalStyles.fs22,
@@ -40,7 +49,7 @@ const LotSection: FC<Props> = ({
         <ResponsiveText text={extendTitle} onPress={onExtendPress} />
       </View>
       <FlatList
-        style={styles.lotsWrapper}
+        style={globalStyles.mt6}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         data={dataLengthCheck(data)}
@@ -54,7 +63,7 @@ const LotSection: FC<Props> = ({
           />
         )}
       />
-    </>
+    </View>
   );
 };
 
