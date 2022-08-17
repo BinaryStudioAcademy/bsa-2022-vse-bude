@@ -3,14 +3,20 @@ import { Home, Layout } from '@components';
 import { wrapper } from 'store';
 
 export const getServerSideProps = wrapper.getServerSideProps(
-  () => async (ctx) => {
+  (_store) => async (ctx) => {
     const { locale } = ctx;
 
-    return Promise.resolve({
+    // const storage = new CookieStorage(ctx);
+    // const auth = new AuthHelper(storage);
+    // const httpClient = new Http(process.env.NEXT_PUBLIC_API_ROUTE, auth);
+
+    // await store.dispatch(fetchRandomDataSSR(httpClient));
+
+    return {
       props: {
         ...(await serverSideTranslations(locale, ['home'])),
       },
-    });
+    };
   },
 );
 

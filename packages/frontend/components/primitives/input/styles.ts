@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import type { Theme } from 'theme';
+import { ColorPalette } from '@vse-bude/shared';
 
 export const input = ({
   colors,
@@ -109,6 +110,7 @@ export const errorMessage = ({
   margin: 2px 0 0;
   cursor: pointer;
   font-size: ${fontSizes.caption};
+  font-weight: bold;
   line-height: ${lineHeights.caption};
   font-family: inherit;
   color: ${colors.error};
@@ -164,4 +166,8 @@ export const searchInput = ({
   :focus {
     outline: none;
   }
+`;
+
+export const passwordVisibilityIcon = css`
+  color: ${ColorPalette.GRAY_300};
 `;
