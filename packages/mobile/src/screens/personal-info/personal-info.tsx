@@ -3,7 +3,6 @@ import { useCustomTheme } from '~/hooks/hooks';
 import { ScrollView, View } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { ProfileImage, PersonalInfoForm } from './components/components';
-import { styles } from './styles';
 
 const PersonalInfoScreen: FC = () => {
   const { colors } = useCustomTheme();
@@ -17,7 +16,7 @@ const PersonalInfoScreen: FC = () => {
       <ProfileImage />
       <ScrollView
         style={[
-          styles.main,
+          globalStyles.flex1,
           globalStyles.px5,
           { backgroundColor: colors.background },
         ]}

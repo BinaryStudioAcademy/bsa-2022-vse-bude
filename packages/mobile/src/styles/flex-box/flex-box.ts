@@ -1,6 +1,9 @@
 import { FlexBoxStyles } from '~/common/types/types';
 
 const FLEX_BOX_STYLES: FlexBoxStyles = {
+  flex1: {
+    flex: 1,
+  },
   flexDirectionRow: {
     flexDirection: 'row',
   },
