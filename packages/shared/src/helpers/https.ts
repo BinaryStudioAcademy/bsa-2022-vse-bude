@@ -100,7 +100,7 @@ class Http {
 
     if (needAuthorization) {
       const token = this._auth.getAccessToken();
-      headers[HttpHeader.AUTHORIZATION] = token;
+      headers[HttpHeader.AUTHORIZATION] = `Bearer ${token}`;
     }
 
     const config: RequestInit = {

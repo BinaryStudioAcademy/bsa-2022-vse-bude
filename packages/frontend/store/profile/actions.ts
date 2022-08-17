@@ -8,6 +8,7 @@ export const getCurrentUser = createAsyncThunk(
   ProfileActions.FETCH_USER,
   async (_request, { rejectWithValue }) => {
     const user = await getUser();
+    console.log(user);
 
     if (!user) {
       auth.logOut();
