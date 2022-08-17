@@ -10,6 +10,7 @@ export const pageContent = ({ mq }: Theme) => css`
   flex-direction: column;
   ${mq[3]} {
     flex-direction: row;
+    justify-content: space-between;
   }
 `;
 
