@@ -10,7 +10,6 @@ import '../public/css/fontawesome.css';
 
 const cache = createCache({ key: 'next', stylisPlugins: [] });
 
-
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
