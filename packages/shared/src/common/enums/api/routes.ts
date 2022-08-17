@@ -2,6 +2,8 @@ export enum ApiRoutes {
   RANDOM_DATA = '/random-data',
   USERS = '/users',
   CATEGORIES = '/categories',
+  PRODUCTS = '/products',
+  NEWS = '/news',
   AUTH = '/auth',
   UPLOAD_IMAGE = '/upload-image',
 }
@@ -14,6 +16,6 @@ export enum AuthApiRoutes {
   USER = '/user',
 }
 
-export enum CategoryApiRoutes {
-  POPULAR = '/popular',
+export enum ProductApiRoutes {
+  $TYPE = '/:type',
 }

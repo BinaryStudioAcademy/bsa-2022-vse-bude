@@ -5,12 +5,14 @@ import { SendInBlueEmailProvider } from 'providers/email';
 import { RandomDataService } from './random-data';
 import { UserService } from './user';
 import { CategoryService } from './category';
+import { ProductService } from './product';
 import { AuthService } from './auth';
 import { HashService } from './hash';
 import { RedisStorageService } from './redis-storage';
 import { SMSSenderService } from './sms';
 import { EmailService } from './email';
 import { S3StorageService } from './s3-storage';
+import { NewsService } from './news';
 
 export const initServices = (repositories: Repositories) => {
   const hashService: HashService = new HashService();
@@ -23,6 +25,8 @@ export const initServices = (repositories: Repositories) => {
     randomDataService: new RandomDataService(repositories.randomDataRepository),
     userService: new UserService(repositories.userRepository),
     categoryService: new CategoryService(repositories.categoryRepository),
+    productService: new ProductService(repositories.productRepository),
+    newsService: new NewsService(repositories.newsRepository),
     authService: new AuthService(
       repositories.userRepository,
       repositories.refreshTokenRepository,
@@ -41,6 +45,8 @@ export {
   type RandomDataService,
   type UserService,
   type CategoryService,
+  type ProductService,
   type AuthService,
   type HashService,
+  type NewsService,
 };

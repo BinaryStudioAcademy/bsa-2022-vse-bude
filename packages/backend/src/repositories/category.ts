@@ -7,7 +7,7 @@ export class CategoryRepository {
     this._dbClient = prismaClient;
   }
 
-  public getPopular(take: number): Promise<Category[]> {
+  public getAll(take: number): Promise<Category[]> {
     return this._dbClient.category.findMany({
       take,
     });

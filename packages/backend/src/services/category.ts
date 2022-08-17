@@ -7,7 +7,9 @@ export class CategoryService {
     this._categoryRepository = categoryRepository;
   }
 
-  public getPopular() {
-    return this._categoryRepository.getPopular(4);
+  public getAll(query: Query) {
+    const take = query.limit ? +query.limit : 10;
+
+    return this._categoryRepository.getAll(take);
   }
 }
