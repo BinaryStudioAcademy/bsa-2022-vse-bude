@@ -16,10 +16,7 @@ const ScreenWrapper: FC<NativeSafeAreaViewProps> = ({
       style={[styles.container, { backgroundColor: colors.background }]}
       {...restProps}
     >
-      <StatusBar
-        backgroundColor="transparent"
-        translucent={true}
-      />
+      <StatusBar backgroundColor="transparent" translucent={true} />
       {children}
     </View>
   );

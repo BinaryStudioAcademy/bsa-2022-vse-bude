@@ -10,11 +10,10 @@ import {
   useNavigation,
 } from '~/hooks/hooks';
 import {
-  StatusBar,
   Text,
-  View,
   ScrollView,
   Divider,
+  ScreenWrapper,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import {
@@ -62,8 +61,8 @@ const Auth: FC = () => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      <StatusBar translucent backgroundColor="transparent" />
+    <ScreenWrapper>
+      {/* <StatusBar translucent backgroundColor="transparent"  /> */}
       <Header
         labelButton={t('components.HEADER_BUTTON_BACK')}
         onPress={handleGoBack}
@@ -89,7 +88,7 @@ const Auth: FC = () => {
         <Divider text={t('text.OR')} />
         {getScreen(name)}
       </ScrollView>
-    </View>
+    </ScreenWrapper>
   );
 };
 
