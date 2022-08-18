@@ -47,7 +47,19 @@ export const en = {
   text: {
     OR: 'or',
   },
+  account: {
+    ACCOUNT: 'Account',
+    PERSONAL_INFO: 'Personal Info',
+    SETTINGS: 'Settings',
+    MESSAGES: 'Messages',
+    SUPPORT: 'Support',
+    SIGN_OUT: 'Sign Out',
+  },
+  common: {
+    HOME: 'Home',
+  },
   home: {
+
     HELP_UKRAINE: 'Help Ukraine',
     SEARCH_PLACEHOLDER: 'Search the products',
     ARTS: 'Arts',

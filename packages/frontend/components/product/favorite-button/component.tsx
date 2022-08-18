@@ -1,6 +1,5 @@
-import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ColorPalette } from '@vse-bude/shared';
+import { IconName } from '@enums';
+import { IconButton } from '@primitives';
 import { favoriteIcon } from './styles';
 import type { FavoriteButtonProps } from './types';
 
@@ -8,16 +7,17 @@ export const FavoriteButton = ({
   isFavorite = false,
   onChangeIsFavorite,
 }: FavoriteButtonProps) => {
-  const color = isFavorite ? ColorPalette.YELLOW_100 : ColorPalette.WHITE_100;
+  const color = isFavorite ? 'yellow' : 'white';
+  const icon = isFavorite ? IconName.STAR_FULFILLED : IconName.STAR_OUTLINED;
 
   return (
-    <div css={favoriteIcon}>
-      <FontAwesomeIcon
-        onClick={onChangeIsFavorite}
-        icon={faStar}
-        color={color}
-        stroke="red"
-      />
-    </div>
+    <IconButton
+      cssExtend={favoriteIcon}
+      onClick={onChangeIsFavorite}
+      icon={icon}
+      color={color}
+      backgroundColor="darkgray"
+      size="sm"
+    />
   );
 };

@@ -17,13 +17,8 @@
     "lint:fix": "eslint . --ext .ts,.tsx --fix"
   },
   "dependencies": {
-    "@emotion/cache": "11.10.1",
     "@emotion/react": "11.10.0",
     "@emotion/styled": "11.10.0",
-    "@fortawesome/fontawesome-svg-core": "6.1.2",
-    "@fortawesome/free-regular-svg-icons": "6.1.2",
-    "@fortawesome/free-solid-svg-icons": "6.1.2",
-    "@fortawesome/react-fontawesome": "0.2.0",
     "@hookform/resolvers": "2.9.7",
     "@reduxjs/toolkit": "1.8.4",
     "@vse-bude/shared": "file:../shared/build",
@@ -33,18 +28,14 @@
     "grapefruit-ui": "0.2.5",
     "joi": "17.6.0",
     "next": "12.2.5",
-    "next-google-fonts": "2.2.0",
     "next-i18next": "11.3.0",
     "next-redux-wrapper": "7.0.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "7.34.2",
-    "react-redux": "8.0.2",
-    "react-tooltip": "4.2.21"
+    "react-redux": "8.0.2"
   },
   "devDependencies": {
-    "@babel/plugin-transform-react-jsx": "7.18.10",
-    "@emotion/babel-preset-css-prop": "11.10.0",
     "@types/node": "18.7.3",
     "@types/react": "18.0.15",
     "@types/react-dom": "18.0.6",

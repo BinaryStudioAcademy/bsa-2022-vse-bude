@@ -46,6 +46,17 @@ export const ua = {
   text: {
     OR: 'або',
   },
+  account: {
+    ACCOUNT: 'Account',
+    PERSONAL_INFO: 'Personal Info',
+    SETTINGS: 'Settings',
+    MESSAGES: 'Messages',
+    SUPPORT: 'Support',
+    SIGN_OUT: 'Sign Out',
+  },
+  common: {
+    HOME: 'Home',
+  },
   home: {
     HELP_UKRAINE: 'Допоможи Україні',
     SEARCH_PLACEHOLDER: 'Знайти товари',
