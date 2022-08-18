@@ -14,8 +14,8 @@ export const login = (loginData: UserSignInDto) =>
     body: loginData,
   });
 
-export const signUp = async (signUpData: UserSignUpDto): Promise<IAuth> =>
-  await http.post({
+export const signUp = (signUpData: UserSignUpDto): Promise<IAuth> =>
+  http.post({
     url: ApiRoutes.AUTH + AuthApiRoutes.SIGN_UP,
     body: signUpData,
   });
@@ -25,8 +25,8 @@ export const getUser = () =>
     url: `${ApiRoutes.AUTH}${AuthApiRoutes.USER}`,
   });
 
-export const verifyPhone = async (data: PhoneVerifyDto) =>
-  await http.post({
+export const verifyPhone = (data: PhoneVerifyDto) =>
+  http.post({
     url: `${ApiRoutes.VERIFY}${VerifyApiRoutes.VERIFY_PHONE}`,
     body: data,
   });

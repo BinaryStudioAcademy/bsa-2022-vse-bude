@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ExceptionName } from '@vse-bude/shared';
+import { HttpError, HttpStatusCode } from '@vse-bude/shared';
 import { getUser } from '@services';
 import { auth } from '@helpers';
 import { ProfileActions } from './action-types';
@@ -7,15 +7,16 @@ import { ProfileActions } from './action-types';
 export const getCurrentUser = createAsyncThunk(
   ProfileActions.FETCH_USER,
   async (_request, { rejectWithValue }) => {
-    const user = await getUser();
-    console.log(user);
+    try {
+      return await getUser();
+    } catch (e) {
+      if (e instanceof HttpError) {
+        if (e.status === HttpStatusCode.UNAUTHORIZED) {
+          auth.logOut();
+        }
+      }
 
-    if (!user) {
-      auth.logOut();
-
-      return rejectWithValue(ExceptionName.HTTP_ERROR);
+      return rejectWithValue(e.message);
     }
-
-    return user;
   },
 );
