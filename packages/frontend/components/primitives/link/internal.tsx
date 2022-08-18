@@ -3,7 +3,7 @@ import { linkStyles } from './styles';
 import type { InternalLinkProps } from './types';
 
 export function InternalLink({
-  variant,
+  variant = 'primary',
   disabled = undefined,
   label,
   passHref = true,

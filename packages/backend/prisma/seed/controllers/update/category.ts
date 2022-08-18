@@ -21,6 +21,7 @@ export const updateCategory = async (prismaClient: PrismaClient) => {
         },
         data: {
           title: _dataJSON.title,
+          image: _dataJSON.image,
           createdAt: _dataJSON.createdAt,
           updatedAt: _dataJSON.updatedAt,
         },

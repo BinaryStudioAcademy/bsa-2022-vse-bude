@@ -1,11 +1,11 @@
 ﻿import { HttpError, HttpStatusCode } from '@vse-bude/shared';
-import { NO_FILE_ERROR } from '../error-messages';
+import type { Request } from 'express';
 
 class NoFileProvidedError extends HttpError {
-  constructor() {
+  constructor(req: Request) {
     super({
       status: HttpStatusCode.BAD_REQUEST,
-      message: NO_FILE_ERROR,
+      message: req.t('NO_FILE_ERROR'),
     });
   }
 }
