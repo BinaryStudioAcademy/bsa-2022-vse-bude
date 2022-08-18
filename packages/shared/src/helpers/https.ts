@@ -15,7 +15,7 @@ import type {
   RequestArgs,
   IAuthHelper,
 } from '../common/types';
-import { HttpError } from '../exceptions';
+import { HttpError, type ErrorResponse } from '../exceptions';
 
 interface MakeRequest {
   url: string;
@@ -100,7 +100,7 @@ class Http {
 
     if (needAuthorization) {
       const token = this._auth.getAccessToken();
-      headers[HttpHeader.AUTHORIZATION] = token;
+      headers[HttpHeader.AUTHORIZATION] = `Bearer ${token}`;
     }
 
     const config: RequestInit = {
@@ -123,18 +123,28 @@ class Http {
     config,
   }: MakeRequest): Promise<T> {
     let result = await fetch(url, config);
+    let statusCode = result.status;
 
     if (result.status === HttpStatusCode.UNAUTHORIZED) {
       try {
         await this.updateAuthorizationToken();
         result = await fetch(url, config);
+        statusCode = result.status;
       } catch (err) {
-        throw new HttpError(err);
+        const errorRes: ErrorResponse = await result.json();
+        throw new HttpError({
+          status: statusCode,
+          message: errorRes.error,
+        });
       }
     }
 
     if (!result.ok) {
-      throw new HttpError(result);
+      const errorRes: ErrorResponse = await result.json();
+      throw new HttpError({
+        status: statusCode,
+        message: errorRes.error,
+      });
     }
 
     return result.json() as Promise<T>;

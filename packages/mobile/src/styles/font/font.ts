@@ -2,19 +2,19 @@ import { FontStyles } from '~/common/types/types';
 
 const FONT_STYLES: FontStyles = {
   fontWeightRegular: {
-    fontWeight: '400',
+    fontFamily: 'Raleway-Regular',
   },
   fontWeightBold: {
-    fontWeight: '700',
+    fontFamily: 'Raleway-Bold',
   },
   fontWeightExtraBold: {
-    fontWeight: '800',
+    fontFamily: 'Raleway-ExtraBold',
   },
   fontWeightSemiBold: {
-    fontWeight: '600',
+    fontFamily: 'Raleway-SemiBold',
   },
   fontWeightMedium: {
-    fontWeight: '500',
+    fontFamily: 'Raleway-Medium',
   },
   fs10: {
     fontSize: 10,
