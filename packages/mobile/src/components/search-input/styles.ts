@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     height: 40,
   },
   inputWrapper: {
-    flex:1,
+    flex: 1,
     alignItems: 'center',
     borderRadius: 50,
     flexDirection: 'row',

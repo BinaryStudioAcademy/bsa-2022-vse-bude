@@ -1,2 +1,2 @@
 export * from './button-type.enum';
-export { LotType } from './lot-type';
+export { LotType } from '../server-data/lot-type/lot-type';

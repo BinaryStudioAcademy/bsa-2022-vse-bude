@@ -11,9 +11,7 @@ import {
 } from '~/components/components';
 import { LotType } from '~/common/enums/enums';
 import { ColorPalette } from '@vse-bude/shared';
-import { categories } from './components/category/mock-data/categories';
-import { lotData } from './components/lot/mock-data/mock-data';
-import { organizations } from './components/organization/mock-data/mock-data';
+import { lotData, organizations, categories } from '~/mock/mock';
 import {
   BurgerMenu,
   Category,
@@ -35,7 +33,7 @@ const Home: FC = () => {
       />
       <Wrapper>
         <BurgerMenu
-          onClick={() => {
+          onPress={() => {
             //TODO
           }}
         />
@@ -81,7 +79,7 @@ const Home: FC = () => {
         <LotSection
           sectionTitle={t('home.POPULAR_LOTS')}
           extendTitle={t('home.SEE_ALL_LOTS')}
-          lotType={LotType.UPCOMING}
+          lotType={LotType.AUCTION}
           data={lotData}
           onExtendPress={() => {
             // TODO
@@ -114,7 +112,8 @@ const Home: FC = () => {
               <Organization
                 imageSource={item.src}
                 maxHeight={50}
-                width={'30%'}
+                width="30%"
+                props={[globalStyles.mt6]}
               />
             );
           })}
@@ -124,7 +123,7 @@ const Home: FC = () => {
         <LotSection
           sectionTitle={t('home.POPULAR_ITEMS')}
           extendTitle={t('home.SEE_ALL_LOTS')}
-          lotType={LotType.OVER}
+          lotType={LotType.FIXED_PRICE}
           data={lotData}
           onExtendPress={() => {
             // TODO

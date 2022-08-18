@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
   },
   title: {
     lineHeight: 39,
-    marginRight: 20,
+    marginRight: 10,
     color: ColorPalette.BLACK_100,
   },
   categories: {

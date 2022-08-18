@@ -4,14 +4,14 @@ import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 
 type Props = {
-  onClick: () => void;
+  onPress: () => void;
 };
 
-const BurgerMenu: FC<Props> = ({ onClick }) => {
+const BurgerMenu: FC<Props> = ({ onPress }) => {
   return (
     <TouchableOpacity
       style={[styles.wrapper, globalStyles.justifyContentSpaceBetween]}
-      onPress={() => onClick()}
+      onPress={() => onPress()}
     >
       <View style={styles.bar} />
       <View style={[styles.bar, styles.barMiddle]} />

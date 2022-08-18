@@ -23,7 +23,7 @@ const Lot: FC<Props> = ({ imgSrc, title, description, price, type }) => {
       <View style={[styles.imgWrapper]}>
         <Image source={imgSrc} style={styles.img} />
 
-        {type === LotType.UPCOMING ? (
+        {type === LotType.AUCTION ? (
           <View
             style={[
               styles.time,
@@ -51,7 +51,7 @@ const Lot: FC<Props> = ({ imgSrc, title, description, price, type }) => {
         >
           {description}
         </Text>
-        {type === LotType.OVER && (
+        {type === LotType.FIXED_PRICE && (
           <Text style={globalStyles.fs12}>2 дні тому</Text>
         )}
       </View>
@@ -67,7 +67,7 @@ const Lot: FC<Props> = ({ imgSrc, title, description, price, type }) => {
           style={[globalStyles.fs16, globalStyles.fontWeightBold, styles.price]}
         >{`${price} ${t('currency.UAH')}`}</Text>
         <Button
-          label={type === LotType.UPCOMING ? t('button.BID') : t('button.BUY')}
+          label={type === LotType.AUCTION ? t('button.BID') : t('button.BUY')}
           onPress={() => {
             //TODO
           }}

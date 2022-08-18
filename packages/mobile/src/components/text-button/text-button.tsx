@@ -7,23 +7,17 @@ type Props = {
   text: string;
   onPress: () => void;
   color?: ColorValue;
-  fontSize?: number;
 };
 
-const ResponsiveText: FC<Props> = ({
+const TextButton: FC<Props> = ({
   text,
   onPress,
   color = ColorPalette.YELLOW_100,
-  fontSize,
 }) => {
   return (
     <TouchableOpacity onPress={() => onPress()}>
       <Text
-        style={[
-          { color },
-          fontSize ? { fontSize } : globalStyles.fs14,
-          globalStyles.fontWeightRegular,
-        ]}
+        style={[{ color }, globalStyles.fs14, globalStyles.fontWeightRegular]}
       >
         {text}
       </Text>
@@ -31,4 +25,4 @@ const ResponsiveText: FC<Props> = ({
   );
 };
 
-export { ResponsiveText };
+export { TextButton };

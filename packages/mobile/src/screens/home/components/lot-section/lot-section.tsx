@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import { View, Text, FlatList, ResponsiveText } from '~/components/components';
+import { View, Text, FlatList, TextButton } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { LotType } from '~/common/enums/enums';
-import { LotData } from '~/common/types/types';
+import { LotParams } from '~/common/types/types';
 import { FlexStyle } from 'react-native';
 import { Lot } from '../components';
 import { styles } from './styles';
@@ -11,7 +11,7 @@ type Props = {
   sectionTitle: string;
   extendTitle: string;
   lotType: LotType;
-  data: LotData;
+  data: LotParams;
   onExtendPress: () => void;
   wrapperStyles?: FlexStyle[];
 };
@@ -24,7 +24,7 @@ const LotSection: FC<Props> = ({
   onExtendPress,
   wrapperStyles,
 }) => {
-  const dataLengthCheck = (data: LotData) => {
+  const dataLengthCheck = (data: LotParams) => {
     return data.length > 10 ? data.slice(0, 11) : data;
   };
 
@@ -46,7 +46,7 @@ const LotSection: FC<Props> = ({
         >
           {sectionTitle}
         </Text>
-        <ResponsiveText text={extendTitle} onPress={onExtendPress} />
+        <TextButton text={extendTitle} onPress={onExtendPress} />
       </View>
       <FlatList
         style={globalStyles.mt6}
@@ -57,7 +57,7 @@ const LotSection: FC<Props> = ({
           <Lot
             type={lotType}
             price={item.price}
-            imgSrc={item.imgSrc}
+            imgSrc={item.imageLinks}
             description={item.description}
             title={item.title}
           />

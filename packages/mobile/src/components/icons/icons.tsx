@@ -60,6 +60,7 @@ const ClockIcon: AppIcon = (iconProps) => (
 const SearchIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="search" {...iconProps} />
 );
+
 export {
   HomeIcon,
   StarIcon,
