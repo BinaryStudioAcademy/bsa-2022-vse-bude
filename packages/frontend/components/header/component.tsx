@@ -19,7 +19,7 @@ export const Header = () => {
   const [show, setShow] = useState(false);
 
   const { isAuth, user } = useCheckAuth();
-
+  
   const renderNavigation = () => (
     <nav className="navigation">
       <InternalLink href={Routes.DEFAULT} label={t('header.nav.home')} />

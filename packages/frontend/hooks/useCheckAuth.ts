@@ -3,9 +3,8 @@ import { useEffect, useState } from 'react';
 import { shallowEqual } from 'react-redux';
 
 export const useCheckAuth = () => {
-  const user = useTypedSelector((state) => {
-    state.profile;
-  }, shallowEqual);
+  const { user } = useTypedSelector((state) => state.profile, shallowEqual );
+
   const [isAuth, setIsAuth] = useState(false);
 
   const hasUser = !!user;
