@@ -16,5 +16,6 @@ export type {
 } from './styles/styles';
 export type { ShowNotificationParams } from './notification/notification';
 export type { AppIcon, IconProps, CustomIconProps } from './ui/ui';
+export type { AuthResponseDto } from './auth/auth';
 export type { Theme, ThemeColors } from './theme/theme.type';
 export type { LotData } from './server-data/lot-data';

@@ -12,3 +12,4 @@ export { IconButton } from './icon-button';
 export { Container } from './container';
 export { Loader } from './loader';
 export * from './input';
+export { ProfileInfo } from './profile-info';
