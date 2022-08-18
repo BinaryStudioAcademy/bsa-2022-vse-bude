@@ -1,11 +1,11 @@
 ﻿import { HttpError, HttpStatusCode } from '@vse-bude/shared';
-import { USUPPORTED_FILE_EXTENSION } from '../error-messages';
+import type { Request } from 'express';
 
 class UnsupportedFileExtensionError extends HttpError {
-  constructor() {
+  constructor(req: Request) {
     super({
       status: HttpStatusCode.BAD_REQUEST,
-      message: USUPPORTED_FILE_EXTENSION,
+      message: req.t('UNSUPPORTED_FILE_EXTENSION'),
     });
   }
 }

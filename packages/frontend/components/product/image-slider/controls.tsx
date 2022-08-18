@@ -1,9 +1,5 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faCircleChevronLeft,
-  faCircleChevronRight,
-} from '@fortawesome/free-solid-svg-icons';
-import { ColorPalette } from '@vse-bude/shared';
+import { IconButton } from '@primitives';
+import { IconName } from '@enums';
 import { sliderControls } from './styles';
 import type { SliderControlsProps } from './types';
 
@@ -16,20 +12,22 @@ export const SliderControls = ({
   <div css={sliderControls} className="sliderControls">
     <span>
       {!!currSlide && (
-        <FontAwesomeIcon
-          size="lg"
-          icon={faCircleChevronLeft}
-          color={ColorPalette.GRAY_200}
+        <IconButton
+          size="sm"
+          icon={IconName.ANGLE_LEFT}
+          color="green"
+          backgroundColor="darkgray"
           onClick={onPrev}
         />
       )}
     </span>
     <span>
       {currSlide !== maxSlide && (
-        <FontAwesomeIcon
-          size="lg"
-          icon={faCircleChevronRight}
-          color={ColorPalette.GRAY_200}
+        <IconButton
+          size="sm"
+          icon={IconName.ANGLE_RIGHT}
+          color="green"
+          backgroundColor="darkgray"
           onClick={onNext}
         />
       )}

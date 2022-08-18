@@ -7,6 +7,5 @@ export const popover = ({ colors, radiuses }: Theme) => css`
     2px 2px 8px rgba(222, 222, 222, 0.25);
   border: 2px solid ${colors.backgroundLight};
   border-radius: ${radiuses.xs};
-  box-sizing: border-box;
-  background-color: white;
+  background-color: ${colors.background};
 `;
