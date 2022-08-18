@@ -11,21 +11,14 @@ import Link from 'next/link';
 import { Fragment, useState } from 'react';
 import { Routes, IconName } from '@enums';
 import { Logo } from 'components/primitives/logo';
-import { useCheckAuth } from 'helpers/useCheckAuth';
+import { useCheckAuth } from '@hooks';
 import * as styles from './styles';
 
 export const Header = () => {
   const { t } = useTranslation('common');
   const [show, setShow] = useState(false);
 
-  const userInfo = {
-    image:
-      'https://gingkodesign.com/wp-content/uploads/2020/12/Black-Smart-Moon-Lamp-scaled.jpg',
-    firstName: 'Roderick',
-    lastName: 'Grimes',
-  };
-
-  const isAuth = useCheckAuth();
+  const { isAuth, user } = useCheckAuth();
 
   const renderNavigation = () => (
     <nav className="navigation">
@@ -129,9 +122,9 @@ export const Header = () => {
 
   const renderProfileInfo = () => (
     <ProfileInfo
-      image={userInfo.image}
-      firstName={userInfo.firstName}
-      lastName={userInfo.lastName}
+      image={user.avatar}
+      firstName={user.firstName}
+      lastName={user.lastName}
     />
   );
 
