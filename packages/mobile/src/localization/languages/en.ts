@@ -59,7 +59,6 @@ export const en = {
     HOME: 'Home',
   },
   home: {
-
     HELP_UKRAINE: 'Help Ukraine',
     SEARCH_PLACEHOLDER: 'Search the products',
     ARTS: 'Arts',
