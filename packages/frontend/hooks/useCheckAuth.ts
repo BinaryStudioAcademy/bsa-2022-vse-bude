@@ -3,10 +3,9 @@ import { useEffect, useState } from 'react';
 import { getCurrentUser } from 'store/profile';
 
 export const useCheckAuth = () => {
-  const { user } = useTypedSelector((state) => state.profile);
-
   const [isAuth, setIsAuth] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
+  const { user } = useTypedSelector((state) => state.profile);
 
   const dispatch = useAppDispatch();
   const hasUser = !!user;
