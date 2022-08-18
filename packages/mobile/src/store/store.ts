@@ -10,11 +10,19 @@ const extraArgument = {
 const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware({
+    const defaultMiddleware = getDefaultMiddleware({
       thunk: {
         extraArgument,
       },
     });
+
+    if (__DEV__) {
+      // eslint-disable-next-line
+      const createDebugger = require('redux-flipper').default;
+      defaultMiddleware.concat(createDebugger());
+    }
+
+    return defaultMiddleware;
   },
 });
 
