@@ -12,3 +12,4 @@ export { Logo } from './logo/logo';
 export { HeaderButton } from './header-button/header-button';
 export { Divider } from '~/components/divider/divider';
 export { KeyboardAvoiding } from './keyboard-avoiding/keyboard-avoiding';
+export { PhotoPickerModal } from './photo-picker-modal/photo-picker-modal';

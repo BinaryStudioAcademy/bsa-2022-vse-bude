@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider as StoreProvider } from 'react-redux';
 import 'fast-text-encoding';
+import Toast from 'react-native-toast-message';
 import { Navigation } from '~/navigation/navigation';
 import { store } from '~/store/store';
 import { NavigationDarkTheme, NavigationTheme } from '~/config/config';
@@ -18,6 +19,7 @@ const App: FC = () => {
     <StoreProvider store={store}>
       <NavigationContainer theme={theme}>
         <Navigation />
+        <Toast />
       </NavigationContainer>
     </StoreProvider>
   );
