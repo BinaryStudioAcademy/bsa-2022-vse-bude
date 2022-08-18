@@ -6,6 +6,8 @@ import {
 import { Auth, Welcome } from '~/screens/screens';
 import { RootScreenName } from '~/common/enums/enums';
 import { RootNavigationParamList } from '~/common/types/types';
+import { useAppSelector } from '~/hooks/hooks';
+import { getIsLoggedIn } from '~/store/auth/selectors';
 import { MainNavigation } from './main/main.navigation';
 
 const NativeStack = createNativeStackNavigator<RootNavigationParamList>();
@@ -15,7 +17,7 @@ const screenOptions: NativeStackNavigationOptions = {
 };
 
 const Navigation: FC = () => {
-  const isLoggedIn = false;
+  const isLoggedIn = useAppSelector(getIsLoggedIn);
 
   return (
     <NativeStack.Navigator screenOptions={screenOptions}>
