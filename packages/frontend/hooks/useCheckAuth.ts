@@ -1,19 +1,23 @@
-import { useTypedSelector } from '@hooks';
+import { useAppDispatch, useTypedSelector } from '@hooks';
 import { useEffect, useState } from 'react';
-import { shallowEqual } from 'react-redux';
+import { getCurrentUser } from 'store/profile';
 
 export const useCheckAuth = () => {
-  const { user } = useTypedSelector((state) => state.profile, shallowEqual );
+  const { user } = useTypedSelector((state) => state.profile);
 
   const [isAuth, setIsAuth] = useState(false);
+  const [userInfo, setUserInfo] = useState(null);
 
+  const dispatch = useAppDispatch();
+ 
   const hasUser = !!user;
 
   useEffect(() => {
     if (hasUser) {
       setIsAuth(true);
+      setUserInfo(dispatch(getCurrentUser()));
     }
-  }, [hasUser]);
+  }, [dispatch, hasUser]);
 
-  return { isAuth, user };
+  return { isAuth, userInfo };
 };

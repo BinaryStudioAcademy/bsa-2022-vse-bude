@@ -18,8 +18,8 @@ export const Header = () => {
   const { t } = useTranslation('common');
   const [show, setShow] = useState(false);
 
-  const { isAuth, user } = useCheckAuth();
-  
+  const { isAuth, userInfo } = useCheckAuth();
+
   const renderNavigation = () => (
     <nav className="navigation">
       <InternalLink href={Routes.DEFAULT} label={t('header.nav.home')} />
@@ -122,9 +122,9 @@ export const Header = () => {
 
   const renderProfileInfo = () => (
     <ProfileInfo
-      image={user.avatar}
-      firstName={user.firstName}
-      lastName={user.lastName}
+      image={userInfo.avatar}
+      firstName={userInfo.firstName}
+      lastName={userInfo.lastName}
     />
   );
 
