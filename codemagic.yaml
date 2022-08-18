@@ -18,16 +18,11 @@ workflows:
         - $CM_BUILD_DIR/packages/mobile/node_modules
 
     scripts:
-      - &install_shared
-        name: Install shared package
-        working_directory: packages/shared
+      - &npm_install
+        name: Install npm dependencies
+        working_directory: $CM_BUILD_DIR
         script: |
-          npm ci && npm run build
-
-      - &install_mobile
-        name: Install mobile package
-        script: |
-          npm ci
+          npm install && npm run install:shared && npm run build:shared && npm run install:mobile
 
       - &environment_set
         name: Setting environment file
