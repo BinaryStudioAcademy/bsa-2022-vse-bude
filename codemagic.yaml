@@ -1,0 +1,61 @@
+workflows:
+  # MAIN
+  android-main:
+    name: Android Main
+    working_directory: packages/mobile
+    max_build_duration: 60
+    instance_type: mac_mini
+
+    environment:
+      groups:
+        - env_main
+        - android_keystore
+      node: 16
+
+    cache:
+      cache_paths:
+        - $CM_BUILD_DIR/packages/shared/node_modules
+        - $CM_BUILD_DIR/packages/mobile/node_modules
+
+    scripts:
+      - &install_shared
+        name: Install shared package
+        working_directory: packages/shared
+        script: |
+          npm ci && npm run build
+
+      - &install_mobile
+        name: Install mobile package
+        script: |
+          npm ci
+
+      - &environment_set
+        name: Setting environment file
+        script: |
+          cat >> ".env" <<EOF
+          API_ORIGIN_URL=$API_ORIGIN_URL
+          EOF
+
+      - &android_sdk_set
+        name: Set Android SDK location
+        script: |
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > "./android/local.properties"
+
+      - &android_keystore_set
+        name: Set up keystore
+        script: |
+          echo $KEYSTORE | base64 --decode > $KEYSTORE_STORE_PATH
+          cat >> "./android/keystore.properties" <<EOF
+          storePassword=$KEYSTORE_STORE_PASSWORD
+          keyPassword=$KEYSTORE_KEY_PASSWORD
+          keyAlias=$KEYSTORE_KEY_ALIAS
+          storeFile=$KEYSTORE_STORE_PATH
+          EOF
+
+      - &android_build
+        name: Build Android release
+        script: |
+          cd ./android && ./gradlew clean assembleRelease
+
+    artifacts:
+      - $CM_BUILD_DIR/packages/mobile/android/app/build/outputs/**/*.apk
