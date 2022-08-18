@@ -11,18 +11,21 @@ import Link from 'next/link';
 import { Fragment, useState } from 'react';
 import { Routes, IconName } from '@enums';
 import { Logo } from 'components/primitives/logo';
+import { useCheckAuth } from 'helpers/useCheckAuth';
 import * as styles from './styles';
 
 export const Header = () => {
   const { t } = useTranslation('common');
   const [show, setShow] = useState(false);
 
-  const user = {
+  const userInfo = {
     image:
       'https://gingkodesign.com/wp-content/uploads/2020/12/Black-Smart-Moon-Lamp-scaled.jpg',
     firstName: 'Roderick',
     lastName: 'Grimes',
   };
+
+  const isAuth = useCheckAuth();
 
   const renderNavigation = () => (
     <nav className="navigation">
@@ -52,11 +55,6 @@ export const Header = () => {
       <InternalLink href={Routes.DEFAULT} label={t('header.nav.search')} />
       <InternalLink href={Routes.DEFAULT} label={t('header.nav.news')} />
       <InternalLink href={Routes.DEFAULT} label={t('header.nav.about_us')} />
-      <ProfileInfo
-        image={user.image}
-        firstName={user.firstName}
-        lastName={user.lastName}
-      />
     </nav>
   );
 
@@ -129,6 +127,14 @@ export const Header = () => {
     </button>
   );
 
+  const renderProfileInfo = () => (
+    <ProfileInfo
+      image={userInfo.image}
+      firstName={userInfo.firstName}
+      lastName={userInfo.lastName}
+    />
+  );
+
   return (
     <Fragment>
       <header css={styles.header}>
@@ -138,10 +144,13 @@ export const Header = () => {
               <Logo />
             </a>
           </Link>
-
           <div className="header-content">{renderNavigation()}</div>
-          <div className="header-content">{renderAuthButtons()}</div>
 
+          {isAuth ? (
+            <div className="header-content">{renderProfileInfo()}</div>
+          ) : (
+            <div className="header-content">{renderAuthButtons()}</div>
+          )}
           <div className="burger-menu-button">{renderBurgerButton()}</div>
         </Container>
       </header>
