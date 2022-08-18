@@ -13,11 +13,13 @@ export const initUserRoutes = (
   /**
    * @openapi
    * /users:
-   *   get:
-   *     description: Welcome to swagger-jsdoc!
-   *     responses:
-   *       200:
-   *         description: Returns a mysterious string.
+   *  get:
+   *    tag:
+   *      - Users
+   *    description: Get users.
+   *    responses:
+   *      200:
+   *        description: Returns users list.
    */
 
   router.get(

@@ -13,6 +13,18 @@ export const initAuthRoutes = (
 ): Router => {
   const router = Router();
 
+  /**
+   * @openapi
+   * /auth:
+   *  get:
+   *    tag:
+   *      - Users
+   *    description: Get current user
+   *    responses:
+   *      200:
+   *        description: Returns current user
+   */
+
   router.post(
     apiPath(path, AuthApiRoutes.SIGN_IN),
     wrap<Empty, AuthTokenData, UserSignInDto>((req: Request) =>

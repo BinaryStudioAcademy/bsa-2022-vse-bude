@@ -11,6 +11,18 @@ export const initCategoryRoutes = (
 ): Router => {
   const router = Router();
 
+  /**
+   * @openapi
+   * /categories:
+   *   get:
+   *    tag:
+   *     - Categories
+   *    description: Get categories.
+   *    responses:
+   *      200:
+   *        description: Returns categories list
+   */
+
   router.get(
     apiPath(path),
     wrap((req: Request) => categoryService.getAll(req.query)),

@@ -16,6 +16,18 @@ export const initProductRoutes = (
 ): Router => {
   const router = Router();
 
+  /**
+   * @openapi
+   * /products:
+   *  get:
+   *    tag:
+   *      - Products
+   *    description: Get products.
+   *    responses:
+   *      200:
+   *        description: Returns products list.
+   */
+
   router.get(
     apiPath(path),
     wrap(() => productService.getAll()),
