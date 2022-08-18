@@ -1,15 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { HydrateAction } from '@types';
 import { HYDRATE } from 'next-redux-wrapper';
-import { fetchProducts } from './actions';
+import {
+  fetchAuctionProducts,
+  fetchProducts,
+  fetchSellingProducts,
+} from './actions';
 
 interface ProductState {
-  list: any[];
+  allProducts: any[];
+  auctionProducts: any[];
+  sellingProducts: any[];
   loading: boolean;
 }
 
 const initialState: ProductState = {
-  list: [],
+  allProducts: [],
+  auctionProducts: [],
+  sellingProducts: [],
   loading: false,
 };
 
@@ -22,15 +30,41 @@ const productSlice = createSlice({
       state.loading = true;
     },
     [fetchProducts.fulfilled.type](state, { payload }) {
-      state.list = payload;
+      state.allProducts = payload;
       state.loading = false;
     },
     [fetchProducts.rejected.type](state) {
       state.loading = false;
     },
+    [fetchAuctionProducts.pending.type](state) {
+      state.loading = true;
+    },
+    [fetchAuctionProducts.fulfilled.type](state, { payload }) {
+      state.auctionProducts = payload;
+      state.loading = false;
+    },
+    [fetchAuctionProducts.rejected.type](state) {
+      state.loading = false;
+    },
+    [fetchSellingProducts.pending.type](state) {
+      state.loading = true;
+    },
+    [fetchSellingProducts.fulfilled.type](state, { payload }) {
+      state.sellingProducts = payload;
+      state.loading = false;
+    },
+    [fetchSellingProducts.rejected.type](state) {
+      state.loading = false;
+    },
     [HYDRATE](state, { payload }: HydrateAction) {
-      if (payload.product.list) {
-        state.list = payload.product.list;
+      if (payload.product.allProducts) {
+        state.allProducts = payload.product.allProducts;
+      }
+      if (payload.product.auctionProducts) {
+        state.auctionProducts = payload.product.auctionProducts;
+      }
+      if (payload.product.allProducts) {
+        state.sellingProducts = payload.product.sellingProducts;
       }
     },
   },

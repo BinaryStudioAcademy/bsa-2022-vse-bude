@@ -4,7 +4,10 @@ import { wrapper } from 'store';
 import { AuthHelper, CookieStorage } from '@helpers';
 import { fetchCategoriesSSR } from 'store/category';
 import { Http } from '@vse-bude/shared';
-import { fetchProductsSSR } from 'store/product';
+import {
+  fetchAuctionProductsSSR,
+  fetchSellingProductsSSR,
+} from 'store/product';
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (_store) => async (ctx) => {
@@ -16,7 +19,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     await _store.dispatch(fetchCategoriesSSR(httpClient));
     await _store.dispatch(
-      fetchProductsSSR({ httpSSR: httpClient, limit: 4, type: 'AUCTION' }),
+      fetchAuctionProductsSSR({ httpSSR: httpClient, limit: 4 }),
+    );
+    await _store.dispatch(
+      fetchSellingProductsSSR({ httpSSR: httpClient, limit: 4 }),
     );
 
     return {

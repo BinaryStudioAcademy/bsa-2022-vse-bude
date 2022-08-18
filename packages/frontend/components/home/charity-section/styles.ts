@@ -2,12 +2,12 @@ import { css } from '@emotion/react';
 import type { Theme } from 'theme';
 
 export const wrapper = ({ spaces, colors, breakpoints }: Theme) => css`
-  margin-top: ${spaces.xl1};
+  margin-bottom: ${spaces.xl1};
   padding: ${spaces.xl11} 0;
   background: ${colors.secondaryDark};
 
   @media (min-width: ${breakpoints.md}px) {
-    margin-top: ${spaces.xl11};
+    margin-bottom: ${spaces.xl11};
   }
 `;
 

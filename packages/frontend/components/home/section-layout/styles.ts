@@ -2,10 +2,10 @@ import { css } from '@emotion/react';
 import type { Theme } from 'theme';
 
 export const wrapper = ({ spaces, breakpoints }: Theme) => css`
-  margin-top: ${spaces.xl1};
+  margin-bottom: ${spaces.xl1};
 
   @media (min-width: ${breakpoints.md}px) {
-    margin-top: ${spaces.xl11};
+    margin-bottom: ${spaces.xl11};
   }
 `;
 
@@ -16,7 +16,10 @@ export const title = ({
   lineHeights,
   breakpoints,
 }: Theme) => css`
-  &[with-out-title] {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &[data-with-out-title='true'] {
     display: none;
   }
   color: ${colors.text};
@@ -25,6 +28,28 @@ export const title = ({
   line-height: ${lineHeights.h4};
 
   @media (min-width: ${breakpoints.md}px) {
-    display: block;
+    &[data-with-out-title='true'] {
+      display: flex;
+    }
+  }
+`;
+
+export const loadMore = ({
+  colors,
+  fontSizes,
+  fontWeights,
+  lineHeights,
+  breakpoints,
+}: Theme) => css`
+  color: ${colors.primaryLight};
+  font-size: ${fontSizes.label};
+  font-weight: ${fontWeights.h6};
+  line-height: ${lineHeights.button};
+
+  @media (min-width: ${breakpoints.md}px) {
+    font-size: ${fontSizes.body1};
+    font-weight: ${fontWeights.toggle};
+    line-height: ${lineHeights.label};
+    cursor: pointer;
   }
 `;

@@ -4,6 +4,7 @@ import { StringCutter } from '@primitives';
 import Image from 'next/image';
 import Link from 'next/link';
 import { lightTheme } from 'theme';
+import { fetchCategories } from 'store/category';
 import { SectionLayout } from '../section-layout';
 import {
   categoryContainer,
@@ -29,7 +30,12 @@ const CategorySection = () => {
   }));
 
   return (
-    <SectionLayout title="Popular Categories">
+    <SectionLayout
+      withOutTitle
+      title="Popular Categories"
+      loadMoreAction={fetchCategories}
+      loadMoreTitle="See All Categories"
+    >
       <div css={categoryContainer}>
         <Splide
           options={{
@@ -48,7 +54,7 @@ const CategorySection = () => {
           {categoriesMapped.map((item, i) => (
             <SplideSlideStyled
               key={item.id}
-              data-is-left={i + 1 === 1 || i + (1 % 4) === 1}
+              data-is-left={i + 1 === 1 || (i + 1) % 4 === 1}
               data-is-right={!((i + 1) % 4)}
             >
               <Link href="#" passHref>

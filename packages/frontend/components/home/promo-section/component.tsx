@@ -2,6 +2,7 @@ import { SearchInput } from 'components/primitives/input';
 import { Container } from '@primitives';
 import Image from 'next/image';
 import {
+  wrapper,
   promoMain,
   title,
   subTitle,
@@ -12,7 +13,7 @@ import {
 import type { PromoProps } from './types';
 
 const PromoSection = ({ searchQuery, setSearchQuery }: PromoProps) => (
-  <section>
+  <section css={wrapper}>
     <div css={promoMain}>
       <Container>
         <h1 css={title}>Charity auction to help Ukraine</h1>

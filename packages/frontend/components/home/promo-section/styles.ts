@@ -1,6 +1,14 @@
 import { css } from '@emotion/react';
 import type { Theme } from 'theme';
 
+export const wrapper = ({ breakpoints, spaces }: Theme) => css`
+  margin-bottom: ${spaces.xl1};
+
+  @media (min-width: ${breakpoints.md}px) {
+    margin-bottom: ${spaces.xl11};
+  }
+`;
+
 export const promoMain = ({ breakpoints, spaces }: Theme) => css`
   position: relative;
   padding-top: ${spaces.md};
