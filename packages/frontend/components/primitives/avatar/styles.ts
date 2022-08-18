@@ -9,6 +9,7 @@ export const avatar = ({ spaces, radiuses }: Theme) => css`
   width: ${spaces.xl2};
   height: ${spaces.xl2};
   border-radius: ${radiuses.circle};
+  object-fit: cover;
 `;
 
 export const initials = ({

@@ -1,11 +1,10 @@
 import { css } from '@emotion/react';
 import type { Theme } from 'theme';
 
-export const popover = ({ colors, radiuses }: Theme) => css`
+export const popover = ({ colors, radiuses, shadows, borders }: Theme) => css`
   position: absolute;
-  box-shadow: -3px 0px 9px rgba(222, 222, 222, 0.25),
-    2px 2px 8px rgba(222, 222, 222, 0.25);
-  border: 2px solid ${colors.backgroundLight};
+  box-shadow: ${shadows.dropdown};
+  border: ${borders.dropdown};
   border-radius: ${radiuses.xs};
   background-color: ${colors.background};
 `;

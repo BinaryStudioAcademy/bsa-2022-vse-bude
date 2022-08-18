@@ -1,14 +1,24 @@
+import {
+  Button,
+  Container,
+  Dropdown,
+  Icon,
+  InternalLink,
+  ProfileInfo,
+} from '@primitives';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { Fragment, useState } from 'react';
 import { Routes, IconName } from '@enums';
-import { Button, Container, Dropdown, Icon, InternalLink } from '@primitives';
 import { Logo } from 'components/primitives/logo';
+import { useCheckAuth } from '@hooks';
 import * as styles from './styles';
 
 export const Header = () => {
   const { t } = useTranslation('common');
   const [show, setShow] = useState(false);
+
+  const { isAuth, userInfo } = useCheckAuth();
 
   const renderNavigation = () => (
     <nav className="navigation">
@@ -114,6 +124,14 @@ export const Header = () => {
     </button>
   );
 
+  const renderProfileInfo = () => (
+    <ProfileInfo
+      image={userInfo.avatar}
+      firstName={userInfo.firstName}
+      lastName={userInfo.lastName}
+    />
+  );
+
   return (
     <Fragment>
       <header css={styles.header}>
@@ -123,10 +141,13 @@ export const Header = () => {
               <Logo />
             </a>
           </Link>
-
           <div className="header-content">{renderNavigation()}</div>
-          <div className="header-content">{renderAuthButtons()}</div>
 
+          {isAuth ? (
+            <div className="header-content">{renderProfileInfo()}</div>
+          ) : (
+            <div className="header-content">{renderAuthButtons()}</div>
+          )}
           <div className="burger-menu-button">{renderBurgerButton()}</div>
         </Container>
       </header>
