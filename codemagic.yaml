@@ -14,6 +14,7 @@ workflows:
 
     cache:
       cache_paths:
+        - $CM_BUILD_DIR/node_modules
         - $CM_BUILD_DIR/packages/shared/node_modules
         - $CM_BUILD_DIR/packages/mobile/node_modules
 
