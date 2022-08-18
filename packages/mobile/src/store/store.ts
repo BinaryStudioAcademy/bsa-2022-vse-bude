@@ -16,8 +16,8 @@ const store = configureStore({
       },
     });
 
-    /* eslint-disable */
     if (__DEV__) {
+      // eslint-disable-next-line
       const createDebugger = require('redux-flipper').default;
       defaultMiddleware.concat(createDebugger());
     }

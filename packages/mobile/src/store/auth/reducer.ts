@@ -3,6 +3,11 @@ import { createReducer } from '@reduxjs/toolkit';
 import { DataStatus } from '~/common/enums/enums';
 import { signUp, signIn } from './actions';
 
+type State = {
+  dataStatus: DataStatus;
+  user: UserDto | null;
+};
+
 const initialState: State = {
   dataStatus: DataStatus.IDLE,
   user: null,
@@ -30,10 +35,5 @@ const reducer = createReducer(initialState, (builder) => {
     state.user = null;
   });
 });
-
-export type State = {
-  dataStatus: DataStatus;
-  user: UserDto | null;
-};
 
 export { reducer };
