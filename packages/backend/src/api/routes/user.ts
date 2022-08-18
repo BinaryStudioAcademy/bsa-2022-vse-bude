@@ -14,7 +14,7 @@ export const initUserRoutes = (
    * @openapi
    * /users:
    *  get:
-   *    tag:
+   *    tags:
    *      - Users
    *    description: Get users.
    *    responses:

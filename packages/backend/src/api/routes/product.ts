@@ -20,7 +20,7 @@ export const initProductRoutes = (
    * @openapi
    * /products:
    *  get:
-   *    tag:
+   *    tags:
    *      - Products
    *    description: Get products.
    *    responses:

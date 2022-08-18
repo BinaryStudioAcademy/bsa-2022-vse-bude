@@ -15,7 +15,7 @@ export const initCategoryRoutes = (
    * @openapi
    * /categories:
    *   get:
-   *    tag:
+   *    tags:
    *     - Categories
    *    description: Get categories.
    *    responses:

@@ -17,8 +17,8 @@ export const initAuthRoutes = (
    * @openapi
    * /auth:
    *  get:
-   *    tag:
-   *      - Users
+   *    tags:
+   *      - Auth
    *    description: Get current user
    *    responses:
    *      200:
