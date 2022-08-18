@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import { Text, ScreenWrapper } from '~/components/components';
 
-const MyList: FC = () => {
+const SupportScreen: FC = () => {
   return (
     <ScreenWrapper>
-      <Text>My list screen</Text>
+      <Text>Support screen</Text>
     </ScreenWrapper>
   );
 };
 
-export { MyList };
+export { SupportScreen };
