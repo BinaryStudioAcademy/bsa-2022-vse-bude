@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { NativeSafeAreaViewProps } from 'react-native-safe-area-context';
-import { SafeAreaView } from '../components';
+import { useCustomTheme } from '~/hooks/hooks';
+import { StatusBar, View } from '../components';
 import { styles } from './styles';
 
 const ScreenWrapper: FC<NativeSafeAreaViewProps> = ({
@@ -8,10 +9,19 @@ const ScreenWrapper: FC<NativeSafeAreaViewProps> = ({
   children,
   ...restProps
 }) => {
+  const { colors } = useCustomTheme();
+
   return (
-    <SafeAreaView style={[styles.container, style]} {...restProps}>
+    <View
+      style={[styles.container, { backgroundColor: colors.background }]}
+      {...restProps}
+    >
+      <StatusBar
+        backgroundColor="transparent"
+        translucent={true}
+      />
       {children}
-    </SafeAreaView>
+    </View>
   );
 };
 
