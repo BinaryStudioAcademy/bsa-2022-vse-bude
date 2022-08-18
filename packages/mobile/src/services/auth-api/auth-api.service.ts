@@ -6,7 +6,7 @@ import {
   UserSignInDto,
   UserSignUpDto,
 } from '@vse-bude/shared';
-import { Auth } from '~/common/types/types';
+import { AuthResponseDto } from '~/common/types/types';
 
 import { Http } from '~/services/http/http.service';
 
@@ -25,7 +25,7 @@ class AuthApi {
     this.#apiPrefix = apiPrefix;
   }
 
-  signIn(_payload: UserSignInDto): Promise<Auth> {
+  signIn(_payload: UserSignInDto): Promise<AuthResponseDto> {
     return this.#http.load(
       `${this.#apiPrefix}${ApiRoutes.AUTH}${AuthApiRoutes.SIGN_IN}`,
       {
