@@ -10,7 +10,8 @@ type ProductDto = {
   city: string;
   type: ProductType;
   status: string;
-  endDate: string;
+  endDate: Date;
+  imageLinks: string[];
 };
 
 export type { ProductDto };

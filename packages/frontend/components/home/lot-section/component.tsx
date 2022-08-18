@@ -42,9 +42,8 @@ const LotSection = ({
               images={item.imageLinks}
               currency="EURO"
               auctionDate={item.endDate}
-              onChangeIsFavorite={() => {
-                console.log('dsf');
-              }}
+              // eslint-disable-next-line @typescript-eslint/no-empty-function
+              onChangeIsFavorite={() => {}}
             />
           </SplideSlide>
         ))}
