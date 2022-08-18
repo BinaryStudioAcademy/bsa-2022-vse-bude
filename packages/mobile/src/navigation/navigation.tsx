@@ -5,6 +5,8 @@ import {
 } from '@react-navigation/native-stack';
 import { RootScreenName } from '~/common/enums/enums';
 import { RootNavigationParamList } from '~/common/types/types';
+import { useAppSelector } from '~/hooks/hooks';
+import { selectCurrentUser } from '~/store/auth/selectors';
 import {
   MessagesScreen,
   PersonalInfoScreen,
@@ -28,11 +30,11 @@ const accountScreenOptions: NativeStackNavigationOptions = {
 };
 
 const Navigation: FC = () => {
-  const isLoggedIn = false;
+  const user = useAppSelector(selectCurrentUser);
 
   return (
     <NativeStack.Navigator screenOptions={mainScreenOptions}>
-      {isLoggedIn ? (
+      {user ? (
         <NativeStack.Group>
           <NativeStack.Screen
             name={RootScreenName.MAIN}
@@ -59,7 +61,7 @@ const Navigation: FC = () => {
         </NativeStack.Group>
       ) : (
         <NativeStack.Group
-          navigationKey={`auth-group-${isLoggedIn ? 'user' : 'guest'}`}
+          navigationKey={`auth-group-${user ? 'user' : 'guest'}`}
         >
           <NativeStack.Screen
             name={RootScreenName.WELCOME}
