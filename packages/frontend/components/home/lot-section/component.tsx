@@ -18,7 +18,9 @@ const LotSection = () => {
             images={item.imageLinks}
             currency="EURO"
             auctionDate={item.endDate}
-            onChangeIsFavorite={() => {}}
+            onChangeIsFavorite={() => {
+              console.log('dsf');
+            }}
           />
         ))}
       </div>
