@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { Container } from '@primitives';
+import { lightTheme } from 'theme';
 import { wrapper, title, sliderWrapper } from './styles';
 
 import '@splidejs/react-splide/css';
@@ -14,6 +15,15 @@ const CharitySection = () => (
           options={{
             autoWidth: true,
             gap: 80,
+            mediaQuery: 'min',
+            pagination: false,
+            arrows: false,
+            breakpoints: {
+              [lightTheme.breakpoints.md]: {
+                pagination: true,
+                arrows: true,
+              },
+            },
           }}
         >
           <SplideSlide>
