@@ -57,9 +57,9 @@ workflows:
       - $CM_BUILD_DIR/packages/mobile/android/app/build/outputs/**/*.apk
 
     publishing:
-      slack:
-        channel: '#vsebude_mobile_builds'
-        notify_on_build_start: false
+      email:
+        recipients:
+          - aleksandr.termenzhy@binary-studio.com
         notify:
           success: true
           failure: false
