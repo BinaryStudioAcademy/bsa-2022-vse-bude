@@ -3,8 +3,8 @@ import {
   Container,
   Dropdown,
   Icon,
+  IconButton,
   InternalLink,
-  ProfileInfo,
 } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
@@ -12,13 +12,15 @@ import { Fragment, useState } from 'react';
 import { Routes, IconName } from '@enums';
 import { Logo } from 'components/primitives/logo';
 import { useCheckAuth } from '@hooks';
+import { useRouter } from 'next/router';
+import { ProfileInfo } from './profile-info';
 import * as styles from './styles';
 
 export const Header = () => {
-  const { t } = useTranslation('common');
   const [show, setShow] = useState(false);
-
   const { isAuth, userInfo } = useCheckAuth();
+  const { push } = useRouter();
+  const { t } = useTranslation('common');
 
   const renderNavigation = () => (
     <nav className="navigation">
@@ -53,25 +55,29 @@ export const Header = () => {
 
   const renderAuthButtons = () => (
     <div className="buttons-wrapper">
-      <Button size="small">
+      <Button size="small" onClick={() => push(Routes.SIGN_UP)}>
         <span css={styles.buttonCreateAccountText}>
-          <Link href={Routes.SIGN_UP}>
-            {t('header.buttons.create_account')}
-          </Link>
+          {t('header.buttons.create_account')}
         </span>
       </Button>
-      <Button size="small" variant="outlined">
-        <span css={styles.buttonSignIn}>
-          <Link href={Routes.SIGN_IN}>{t('header.buttons.sign_in')}</Link>
-        </span>
+
+      <Button
+        size="small"
+        variant="outlined"
+        onClick={() => push(Routes.SIGN_IN)}
+      >
+        <span css={styles.buttonSignIn}>{t('header.buttons.sign_in')}</span>
       </Button>
     </div>
   );
 
   const renderBurgerButton = () => (
-    <button onClick={() => setShow(!show)}>
-      <Icon icon={IconName.LIST} color="yellow" />
-    </button>
+    <IconButton
+      icon={IconName.LIST}
+      size="md"
+      onClick={() => setShow(!show)}
+      color="yellow"
+    />
   );
 
   const renderHamburderMenuContent = () => (
@@ -119,9 +125,12 @@ export const Header = () => {
   );
 
   const renderCloseBurgerButton = () => (
-    <button onClick={() => setShow(!show)}>
-      <Icon icon={IconName.ANGLE_UP} color="yellow" />
-    </button>
+    <IconButton
+      icon={IconName.ANGLE_UP}
+      size="md"
+      onClick={() => setShow(!show)}
+      color="yellow"
+    />
   );
 
   const renderProfileInfo = () => (
