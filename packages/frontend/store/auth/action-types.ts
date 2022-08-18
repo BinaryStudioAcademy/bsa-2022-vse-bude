@@ -4,4 +4,5 @@ export enum AuthActions {
   LOGOUT = 'user/logout',
   REFRESH = 'user/refresh',
   PHONE_VERIFY = 'user/phone-verify',
+  PHONE_RESEND_CODE = 'user/phone-resend-code',
 }
