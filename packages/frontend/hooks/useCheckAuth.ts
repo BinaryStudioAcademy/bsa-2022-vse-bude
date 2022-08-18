@@ -9,7 +9,6 @@ export const useCheckAuth = () => {
   const [userInfo, setUserInfo] = useState(null);
 
   const dispatch = useAppDispatch();
- 
   const hasUser = !!user;
 
   useEffect(() => {
