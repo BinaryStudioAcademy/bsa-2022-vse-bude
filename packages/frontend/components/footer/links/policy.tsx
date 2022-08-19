@@ -1,9 +1,7 @@
 import type { FC } from 'react';
 import { useTranslation } from 'next-i18next';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconNameToSvgIcon, IconName } from '@enums';
-import { ColorPalette } from '@vse-bude/shared';
-import { InternalLink } from '@primitives';
+import { IconName } from '@enums';
+import { Icon, InternalLink } from '@primitives';
 import { ColumnHeader } from '../common/column-header';
 import * as styles from './styles';
 import type { PolicyProps } from './types';
@@ -16,10 +14,10 @@ export const Policy: FC<PolicyProps> = ({ path }) => {
       <ColumnHeader>{t('footer.security')}</ColumnHeader>
 
       <div css={styles.footerLinksRow}>
-        <FontAwesomeIcon
-          css={styles.shield}
-          color={ColorPalette.YELLOW_100}
-          icon={IconNameToSvgIcon[IconName.PRIVACY_POLICY]}
+        <Icon
+          cssExtend={styles.shield}
+          color="yellow"
+          icon={IconName.PRIVACY_POLICY}
         />
         <span css={styles.primaryUnderline}>
           <InternalLink

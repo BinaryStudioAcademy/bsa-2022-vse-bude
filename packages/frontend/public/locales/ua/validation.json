@@ -19,5 +19,11 @@
   "email": {
     "email": "E-mail є обов'язковим!",
     "pattern": "Email невірного формату!"
+  },
+  "verification": {
+    "CODE_STRING.EMPTY_ERROR": "Код верифікації є обов'язковим!",
+    "CODE_STRING.MIN_ERROR": "Код верифікації занадто короткий!",
+    "CODE_STRING.MAX_ERROR": "Код верифікації занадто довгий!",
+    "CODE_STRING.PATTERN.BASE_ERROR": "Код верифікації може містити лише цифри!"
   }
 }

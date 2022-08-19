@@ -1,10 +1,10 @@
-import { log } from '@helpers';
+import { logger } from '@helpers';
 import type { ISMSProvider } from '@types';
 
 export class BarSMSProvider implements ISMSProvider {
   send(phone: string, message: string): Promise<boolean> {
     const result = Promise.resolve(true);
-    log(`Sending message to ${phone}: ${message}`);
+    logger.log(`Sending message to ${phone}: ${message}`);
 
     return result;
   }

@@ -17,12 +17,12 @@ export const Dropdown = ({ options, ...props }: DropdownProps) => {
 
   return (
     <div {...props} css={styles.dropdownWrapper}>
-      <button css={styles.dropdownTitle} ref={ref} onClick={handleClick}>
+      <button css={styles.dropdownTitle} onClick={handleClick}>
         {props.children}
       </button>
 
       {isOpen && (
-        <div css={styles.dropdownContent}>
+        <div ref={ref} css={styles.dropdownContent}>
           {options.map((item) => {
             const { value, key, onClick: callbackFn, disabled, icon } = item;
 
@@ -43,7 +43,7 @@ export const Dropdown = ({ options, ...props }: DropdownProps) => {
                   <Icon
                     icon={icon.icon}
                     color={icon.color}
-                    css={icon.css}
+                    cssExtend={icon.cssExtend}
                     size={icon.size}
                   />
                 )}
