@@ -15,7 +15,7 @@ function initHealthRoutes(path: ApiRoutes) {
   const check = new Promise((resolve, reject) => {
     try {
       prisma.$queryRaw`SELECT 1`;
-      initServices(initRepositories(prisma)).redisStorageService.client.ping;
+      initServices(initRepositories(prisma)).redisStorageService.checkPing();
       resolve(200);
     } catch (err) {
       reject(503);

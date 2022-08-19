@@ -4,7 +4,7 @@ import { getEnv, logger } from '@helpers';
 type RedisClientType = ReturnType<typeof createClient>;
 
 export class RedisStorageService {
-  public client: RedisClientType;
+  private client: RedisClientType;
 
   constructor() {
     const redisPort = Number(getEnv('REDIS_PORT')) || 6379;
@@ -56,5 +56,9 @@ export class RedisStorageService {
 
   async isKeyExists(key: string) {
     return this.client.exists(key);
+  }
+  
+  checkPing(){
+    return this.client.ping;
   }
 }
