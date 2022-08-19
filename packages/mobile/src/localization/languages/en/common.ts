@@ -4,5 +4,10 @@ export const common = {
   },
   components: {
     HEADER_BUTTON_BACK: 'Back',
+    BUTTON_SAVE: 'Save',
+    BUTTON_CANCEL: 'Cancel',
+  },
+  common: {
+    HOME: 'Home',
   },
 };

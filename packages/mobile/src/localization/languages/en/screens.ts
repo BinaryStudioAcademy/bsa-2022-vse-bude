@@ -24,11 +24,6 @@ export const screens = {
     PHONE_NUMBER_HINT: 'Enter your phone',
     GOOGLE_BUTTON: 'Sign in with Google',
   },
-  components: {
-    HEADER_BUTTON_BACK: 'Back',
-    BUTTON_SAVE: 'Save',
-    BUTTON_CANCEL: 'Cancel',
-  },
   personal_info: {
     PERSONAL_INFO: 'Personal Info',
     ADDRESS: 'Address',
@@ -44,9 +39,6 @@ export const screens = {
     LINKEDIN_HINT: 'Enter you Linkedin',
     FACEBOOK_HINT: 'Enter you Facebook',
   },
-  text: {
-    OR: 'or',
-  },
   account: {
     ACCOUNT: 'Account',
     PERSONAL_INFO: 'Personal Info',
@@ -54,8 +46,5 @@ export const screens = {
     MESSAGES: 'Messages',
     SUPPORT: 'Support',
     SIGN_OUT: 'Sign Out',
-  },
-  common: {
-    HOME: 'Home',
   },
 };

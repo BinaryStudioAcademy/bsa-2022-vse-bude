@@ -4,5 +4,10 @@ export const common = {
   },
   components: {
     HEADER_BUTTON_BACK: 'Назад',
+    BUTTON_SAVE: 'Зберегти',
+    BUTTON_CANCEL: 'Відмінити зміни',
+  },
+  common: {
+    HOME: 'Головна',
   },
 };

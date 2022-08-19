@@ -23,11 +23,6 @@ export const screens = {
     PHONE_NUMBER_HINT: 'Введіть свій номер телефону',
     GOOGLE_BUTTON: 'Увійти за допомогою Google',
   },
-  components: {
-    HEADER_BUTTON_BACK: 'Назад',
-    BUTTON_SAVE: 'Зберегти',
-    BUTTON_CANCEL: 'Відмінити зміни',
-  },
   personal_info: {
     PERSONAL_INFO: 'Особиста інформація',
     ADDRESS: 'Адреса',
@@ -43,9 +38,6 @@ export const screens = {
     LINKEDIN_HINT: 'Введіть свій Linkedin',
     FACEBOOK_HINT: 'Введіть свій Facebook',
   },
-  text: {
-    OR: 'або',
-  },
   account: {
     ACCOUNT: 'Акаунт',
     PERSONAL_INFO: 'Персональна інформація',
@@ -53,8 +45,5 @@ export const screens = {
     MESSAGES: 'Повідомлення',
     SUPPORT: 'Підтримка',
     SIGN_OUT: 'Вийти',
-  },
-  common: {
-    HOME: 'Головна',
   },
 };
