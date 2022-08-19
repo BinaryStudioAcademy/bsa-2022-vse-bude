@@ -10,18 +10,6 @@ export const initUserRoutes = (
 ): Router => {
   const router = Router();
 
-  /**
-   * @openapi
-   * /users:
-   *  get:
-   *    tags:
-   *      - Users
-   *    description: Get users.
-   *    responses:
-   *      200:
-   *        description: Returns users list.
-   */
-
   router.get(
     apiPath(path),
     wrap(() => userService.getAll()),
