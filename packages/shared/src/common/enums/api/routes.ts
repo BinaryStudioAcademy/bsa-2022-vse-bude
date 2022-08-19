@@ -19,6 +19,8 @@ export enum AuthApiRoutes {
 export enum VerifyApiRoutes {
   VERIFY_PHONE = '/phone-verify',
   VERIFY_EMAIL = '/email-verify',
+  PHONE_RESEND_CODE = '/phone/resend-code',
+  EMAIL_RESEND_CODE = '/email/resend-code',
 }
 
 export enum ProductApiRoutes {
