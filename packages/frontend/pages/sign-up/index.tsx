@@ -21,7 +21,7 @@ export const getServerSideProps = async ({ locale }) => ({
 });
 
 export default function SignUpPage() {
-  const { t } = useTranslation('sign-up');
+  const { t } = useTranslation();
 
   return (
     <AuthLayout>
@@ -30,10 +30,10 @@ export default function SignUpPage() {
           <SignUpForm />
         </div>
         <div css={linkText}>
-          {t('accountExist')}!{' '}
+          {t('sign-up:accountExist')}!{' '}
           <InternalLink
             variant="primary"
-            label={`${t('signIn')}!`}
+            label={`${t('sign-up:signIn')}!`}
             href={Routes.SIGN_IN}
           />
         </div>

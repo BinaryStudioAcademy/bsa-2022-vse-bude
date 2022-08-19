@@ -8,7 +8,7 @@ import * as styles from './styles';
 import type { LayoutProps } from './types';
 
 export const AuthLayout = ({ children }: LayoutProps) => {
-  const { t } = useTranslation('public-common');
+  const { t } = useTranslation();
 
   return (
     <section css={styles.authSection}>
@@ -29,8 +29,8 @@ export const AuthLayout = ({ children }: LayoutProps) => {
                 famous during ...
               </p>
               <div css={styles.controlsWrapper}>
-                <span css={styles.price}>360 {t('uah')}</span>
-                <Button>{t('bet')}</Button>
+                <span css={styles.price}>360 {t('public-common:uah')}</span>
+                <Button>{t('public-common:bet')}</Button>
               </div>
             </div>
           </div>

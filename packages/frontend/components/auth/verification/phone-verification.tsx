@@ -31,25 +31,25 @@ export const PhoneVerification = () => {
     dispatch(phoneVerification(data));
   };
 
-  const { t } = useTranslation('auth');
+  const { t } = useTranslation();
 
   return (
     <form css={verifyForm} onSubmit={handleSubmit(onSubmit)}>
       <div css={inputWrapper}>
         <div css={verifyText}>
           <span>
-            {t('phoneText')}
+            {t('auth:phoneText')}
             {user && (
               <span css={verifyEntity}> {hideMainTextPart(user.phone)}</span>
             )}
             !
           </span>
-          <span>{t('enterCode')}!</span>
+          <span>{t('auth:enterCode')}!</span>
         </div>
         <Input
           {...register('code')}
           css={verifyInput}
-          label={t('code')}
+          label={t('auth:code')}
           variant="primary"
           type="text"
           name="code"
@@ -58,7 +58,7 @@ export const PhoneVerification = () => {
         <Error text={error} />
       </div>
       <Button type="submit" width={'100%'}>
-        {t('text')}
+        {t('auth:text')}
       </Button>
     </form>
   );
