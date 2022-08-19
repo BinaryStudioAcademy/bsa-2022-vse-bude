@@ -22,5 +22,22 @@ services:
     depends_on:
       - vsebude_db
 
+  # for testing availability of redis
+  # docker exec -it vsebude_cache sh
+  # redis-cli
+  # auth redis_admin redis_password_777
+  # if there is no error - everything is OK
+  vsebude_cache:
+    container_name: vsebude_cache
+    build:
+      dockerfile: ./config/redis.Dockerfile
+      context: .
+    restart: always
+    ports:
+      - '6379:6379'
+    volumes:
+      - cache:/data
+
 volumes:
   vsebude_pg_data:
+  cache:
