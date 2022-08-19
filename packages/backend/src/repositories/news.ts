@@ -1,5 +1,7 @@
 import type { PrismaClient, News } from '@prisma/client';
+import { Get, Query, Route } from 'tsoa';
 
+@Route('news')
 export class NewsRepository {
   private _dbClient: PrismaClient;
 
@@ -7,7 +9,8 @@ export class NewsRepository {
     this._dbClient = prismaClient;
   }
 
-  public getAll(take: number): Promise<News[]> {
+  @Get('getAll')
+  public getAll(@Query() take: number): Promise<News[]> {
     return this._dbClient.news.findMany({
       take,
     });

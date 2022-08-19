@@ -36,6 +36,162 @@
 				],
 				"type": "object",
 				"description": "Model Category"
+			},
+			"Prisma.Decimal": {
+				"type": "string"
+			},
+			"ProductType": {
+				"type": "string",
+				"enum": [
+					"AUCTION",
+					"SELLING"
+				]
+			},
+			"ProductStatus": {
+				"type": "string",
+				"enum": [
+					"CREATED",
+					"ACTIVE",
+					"CANCELLED",
+					"FINISHED",
+					"CLOSED",
+					"DRAFT"
+				]
+			},
+			"Product": {
+				"properties": {
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"winnerId": {
+						"type": "string",
+						"nullable": true
+					},
+					"categoryId": {
+						"type": "string",
+						"nullable": true
+					},
+					"authorId": {
+						"type": "string"
+					},
+					"cancellReason": {
+						"type": "string",
+						"nullable": true
+					},
+					"endDate": {
+						"type": "string",
+						"format": "date-time",
+						"nullable": true
+					},
+					"status": {
+						"$ref": "#/components/schemas/ProductStatus"
+					},
+					"type": {
+						"$ref": "#/components/schemas/ProductType"
+					},
+					"city": {
+						"type": "string",
+						"nullable": true
+					},
+					"imageLinks": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"minimalBid": {
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/Prisma.Decimal"
+							}
+						],
+						"nullable": true
+					},
+					"recomendedPrice": {
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/Prisma.Decimal"
+							}
+						],
+						"nullable": true
+					},
+					"price": {
+						"$ref": "#/components/schemas/Prisma.Decimal"
+					},
+					"description": {
+						"type": "string"
+					},
+					"title": {
+						"type": "string"
+					},
+					"id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"updatedAt",
+					"createdAt",
+					"winnerId",
+					"categoryId",
+					"authorId",
+					"cancellReason",
+					"endDate",
+					"status",
+					"type",
+					"city",
+					"imageLinks",
+					"minimalBid",
+					"recomendedPrice",
+					"price",
+					"description",
+					"title",
+					"id"
+				],
+				"type": "object",
+				"description": "Model Product"
+			},
+			"News": {
+				"properties": {
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"image": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"content": {
+						"type": "string"
+					},
+					"title": {
+						"type": "string"
+					},
+					"id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"updatedAt",
+					"createdAt",
+					"image",
+					"description",
+					"content",
+					"title",
+					"id"
+				],
+				"type": "object",
+				"description": "Model News"
 			}
 		},
 		"securitySchemes": {}
@@ -47,7 +203,7 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/category/{take}": {
+		"/category/getAll": {
 			"get": {
 				"operationId": "GetAll",
 				"responses": {
@@ -68,7 +224,101 @@
 				"security": [],
 				"parameters": [
 					{
-						"in": "path",
+						"in": "query",
+						"name": "take",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/product/getAll": {
+			"get": {
+				"operationId": "GetAll",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Product"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/product/getByType": {
+			"get": {
+				"operationId": "GetByType",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Product"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "type",
+						"required": true,
+						"schema": {
+							"$ref": "#/components/schemas/ProductType"
+						}
+					},
+					{
+						"in": "query",
+						"name": "take",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/news/getAll": {
+			"get": {
+				"operationId": "GetAll",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/News"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
 						"name": "take",
 						"required": true,
 						"schema": {
