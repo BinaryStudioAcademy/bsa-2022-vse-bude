@@ -38,7 +38,7 @@ export class RefreshTokenRepository {
 
   @Patch('updateTokenById')
   async updateTokenById(
-    @Body()
+    @Query()
     tokenId: string,
     @Query()
     tokenValue: string,

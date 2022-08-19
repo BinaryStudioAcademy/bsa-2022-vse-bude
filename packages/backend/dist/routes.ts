@@ -696,7 +696,7 @@ export function RegisterRoutes(app: express.Router) {
     ) {
       const args = {
         tokenId: {
-          'in': 'body',
+          'in': 'query',
           'name': 'tokenId',
           'required': true,
           'dataType': 'string',

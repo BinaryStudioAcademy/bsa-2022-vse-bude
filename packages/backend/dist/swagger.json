@@ -695,6 +695,14 @@
 				"parameters": [
 					{
 						"in": "query",
+						"name": "tokenId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
 						"name": "tokenValue",
 						"required": true,
 						"schema": {
@@ -710,17 +718,7 @@
 							"type": "string"
 						}
 					}
-				],
-				"requestBody": {
-					"required": true,
-					"content": {
-						"application/json": {
-							"schema": {
-								"type": "string"
-							}
-						}
-					}
-				}
+				]
 			}
 		},
 		"/refreshToken/getTokenByValue": {
