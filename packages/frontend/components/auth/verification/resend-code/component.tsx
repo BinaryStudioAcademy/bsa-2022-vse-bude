@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'next-i18next';
-import { resendCodeBlock, resendCodeBtn, resendCodeTxt } from './styles';
+import { DEFAULT_INTERVAL } from '../../../../common/constants/app';
+import { LinkButton } from '../../../primitives/link-button';
+import { resendCodeBlock, resendCodeTxt } from './styles';
 import type { ResendCodeButtonProps } from './types';
 
 export const ResendCodeButton = ({
   onClickResend,
   timeLimit,
 }: ResendCodeButtonProps) => {
-  const { t } = useTranslation('auth');
-  const { t: commonLang } = useTranslation('common');
+  const { t } = useTranslation(['auth', 'common']);
 
   const [resendDisabled, setResendDisabled] = useState(false);
   const [timeToResend, setTimeToResend] = useState(timeLimit);
@@ -17,7 +18,7 @@ export const ResendCodeButton = ({
     if (resendDisabled) {
       const interval = setInterval(() => {
         setTimeToResend((prev) => prev - 1);
-      }, 1000);
+      }, DEFAULT_INTERVAL);
 
       if (timeToResend === 0) {
         setResendDisabled(false);
@@ -37,14 +38,14 @@ export const ResendCodeButton = ({
   return (
     <div css={resendCodeBlock}>
       {!resendDisabled && (
-        <button css={resendCodeBtn} onClick={onResendCode}>
+        <LinkButton size={'small'} onClickHook={onResendCode}>
           {t('RESEND_CODE')}
-        </button>
+        </LinkButton>
       )}
       {resendDisabled && (
         <span css={resendCodeTxt}>
           {t('RESEND_CODE_TIME_LEFT')}: {timeToResend}{' '}
-          {commonLang('SECONDS_SHORT')}
+          {t('common:SECONDS_SHORT')}
         </span>
       )}
     </div>

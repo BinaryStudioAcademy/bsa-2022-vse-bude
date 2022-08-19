@@ -58,7 +58,7 @@ export class VerifyService {
   ): Promise<string> {
     const code = `${this.generateCode()}`;
     await this.saveCode({
-      code: code,
+      code,
       type,
       userId,
     });
