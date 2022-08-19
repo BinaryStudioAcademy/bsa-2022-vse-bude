@@ -1,6 +1,6 @@
 import { Popover } from '@primitives';
 import { useRouter } from 'next/router';
-import { Avatar } from '../avatar';
+import { Avatar } from '../../primitives/avatar';
 import type { ProfileInfoProps } from './types';
 import * as styles from './styles';
 import { DownArrow } from './sub-components/dropdown';

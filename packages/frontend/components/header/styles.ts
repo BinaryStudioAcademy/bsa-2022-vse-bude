@@ -66,17 +66,17 @@ export const headerInner = css`
 `;
 
 export const burgerOverlay = (theme: Theme) => css`
+  position: fixed;
+  z-index: 999;
+  top: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: ${theme.spaces.md};
-
-  position: fixed;
-  top: 0;
   width: 100%;
   padding: ${theme.spaces.xl1};
-  background-color: ${theme.colors.backgroundDark};
+  background-color: ${theme.colors.backgroundLight};
 
   .burger-navigation,
   .burger-buttons-wrapper {
@@ -88,7 +88,8 @@ export const burgerOverlay = (theme: Theme) => css`
   }
 
   .burger-navigation {
-    a {
+    a,
+    button {
       font-size: ${theme.fontSizes.tub};
       font-weight: ${theme.fontWeights.tub};
     }

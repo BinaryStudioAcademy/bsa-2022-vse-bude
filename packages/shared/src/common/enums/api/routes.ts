@@ -18,8 +18,8 @@ export enum AuthApiRoutes {
 }
 
 export enum VerifyApiRoutes {
-  VERIFY_PHONE = '/phone',
-  VERIFY_EMAIL = '/email',
+  VERIFY_PHONE = '/phone-verify',
+  VERIFY_EMAIL = '/email-verify',
 }
 
 export enum ProductApiRoutes {
