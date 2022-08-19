@@ -16,7 +16,7 @@ export const signInSchema = Joi.object<UserSignInDto>({
       'string.empty': UserValidationMessage.EMAIL_REQUIRED,
     }),
   password: Joi.string().required()
-    .messages({
-      'string.empty': UserValidationMessage.PASSWORD_REQUIRED,
-    }),
+.messages({
+    'string.empty': UserValidationMessage.PASSWORD_REQUIRED,
+  }),
 });
