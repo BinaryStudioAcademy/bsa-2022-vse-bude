@@ -1,7 +1,7 @@
 import type { FC } from 'react';
-import { Row } from '@primitives';
 import type { NestedLayoutProps } from '../user-account/personal-info/types';
+import * as styles from './styles';
 
 export const NestedLayout: FC<NestedLayoutProps> = ({ children }) => (
-  <Row>{children}</Row>
+  <div css={styles.nestedLayout}>{children}</div>
 );

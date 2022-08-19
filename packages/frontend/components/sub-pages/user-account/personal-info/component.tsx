@@ -1,13 +1,24 @@
 import { useTranslation } from 'next-i18next';
 import type React from 'react';
 import { useState } from 'react';
-import { Input, PasswordInput, Column, Flex } from '@primitives';
+import { useForm } from 'react-hook-form';
+import {
+  Input,
+  PasswordInput,
+  Column,
+  Flex,
+  Button,
+  DownloadButton,
+} from '@primitives';
 import { SectionHeader, NestedLayout } from '../../common';
+import noavatar from '../../../../public/images/noavatar.svg';
+import flag from '../../../../public/images/flagBg.png';
 import * as styles from './styles';
 
 export const PersonalInfo = () => {
   const [form, setForm] = useState({
-    firsName: '',
+    avatar: '',
+    firstName: '',
     lastName: '',
     email: '',
     phone: '',
@@ -24,32 +35,68 @@ export const PersonalInfo = () => {
     zipCode: '',
   });
 
+  const { handleSubmit } = useForm();
+
   const { t } = useTranslation('personal-info');
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [event.target.name]: event.target.value });
   };
 
-  // const onSaveHandler = (event: React.FormEvent<HTMLButtonElement>) => {
-  //   event.preventDefault();
-  // };
+  const onSaveHandler = (event: React.FormEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+  };
 
   // const onCanselHandler = (event: React.FormEvent<HTMLButtonElement>) => {
   //   event.preventDefault();
   // };
 
+  const onDownloadAvatar = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    //const file = event.target.files;
+  };
+
   return (
     <NestedLayout>
-      <form style={{ width: '800px' }}>
-        <div>
+      <form css={styles.form} onSubmit={handleSubmit(onSaveHandler)}>
+        <div css={styles.personalHeader}>
+          <div css={styles.headerWrapper}>
+            <div css={styles.flagWrapper}>
+              <img css={styles.flag} src={flag.src} alt="flag" />
+            </div>
+
+            <div css={styles.avatarWrapper}>
+              <img
+                css={styles.avatar}
+                src={!form.avatar ? noavatar.src : form.avatar}
+                alt="avatar"
+              />
+              <DownloadButton
+                id="profile-avatar"
+                name="avatar"
+                onChange={onDownloadAvatar}
+              />
+            </div>
+          </div>
+          <Flex justify={'flex-end'} css={styles.buttons}>
+            <Button type="reset" variant="outlined">
+              {t('ACTION_CANCEL')}
+            </Button>
+            <Button type="submit" onClick={onSaveHandler}>
+              {t('ACTION_SAVE')}
+            </Button>
+          </Flex>
+        </div>
+
+        <div css={styles.sections}>
           <Column css={styles.sectionRow}>
             <SectionHeader>{t('PERSONAL_INFO')}</SectionHeader>
-            <Flex>
+            <Flex css={styles.groupInputs}>
               <div css={styles.inputRow}>
                 <Input
                   id="firstName-profile"
                   type="text"
                   name="firstName"
-                  value={form.firsName}
+                  value={form.firstName}
                   variant="primary"
                   label={t('LABEL_FIRST_NAME')}
                   placeholder={t('PLACEHOLDER_FIRST_NAME')}
@@ -98,7 +145,7 @@ export const PersonalInfo = () => {
           <Column css={styles.sectionRow}>
             <SectionHeader>{t('ADDRESS')}</SectionHeader>
 
-            <Flex>
+            <Flex css={styles.groupInputs}>
               <div css={styles.inputRow}>
                 <Input
                   id="country-profile"
@@ -126,7 +173,7 @@ export const PersonalInfo = () => {
               </div>
             </Flex>
 
-            <Flex>
+            <Flex css={styles.groupInputs}>
               <div css={styles.inputRow}>
                 <Input
                   id="city-profile"

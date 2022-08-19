@@ -16,3 +16,10 @@ export const sectionHeader = ({
   font-weight: ${fontWeights.h4};
   color: ${colors.text};
 `;
+
+export const nestedLayout = () => css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+`;

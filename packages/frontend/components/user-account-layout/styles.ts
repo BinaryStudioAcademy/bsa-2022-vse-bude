@@ -3,12 +3,12 @@ import type { Theme } from 'theme';
 
 export const wrapper = ({ spaces }: Theme) => css`
   margin-top: ${spaces.xl5};
-  margin-bottom: ${spaces.xl11};
+  margin-bottom: ${spaces.xl5};
 `;
 
 export const pageContent = ({ mq }: Theme) => css`
   flex-direction: column;
-  ${mq[3]} {
+  ${mq[2]} {
     flex-direction: row;
     justify-content: space-between;
   }
@@ -28,11 +28,12 @@ export const pageHeader = ({
   color: ${colors.text};
 `;
 
-export const linksContainer = ({ mq }: Theme) => css`
-  visibility: hidden;
+export const linksContainer = ({ mq, spaces }: Theme) => css`
+  display: none;
   ${mq[2]} {
-    visibility: visible;
+    display: flex;
     flex-direction: column;
+    margin-right: ${spaces.xl3};
     min-width: 190px;
   }
 `;

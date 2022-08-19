@@ -15,6 +15,8 @@ export const getServerSideProps = wrapper.getServerSideProps(
           'dashboard',
           'personal-info',
           'page-titles',
+          'common',
+          'footer',
         ])),
       },
     });

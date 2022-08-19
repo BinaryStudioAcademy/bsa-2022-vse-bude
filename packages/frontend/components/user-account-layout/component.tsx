@@ -20,7 +20,7 @@ export const AccountLayout: FC<AccountPageProps> = ({ children }) => {
             {t('ACCOUNT_PAGE', { ns: 'page-titles' })}
           </h3>
           <Flex css={styles.pageContent}>
-            <Flex css={styles.linksContainer}>
+            <div css={styles.linksContainer}>
               {linksData.map((link, idx) => {
                 const { iconPath, label, path } = link;
                 const location = router.pathname === link.path;
@@ -36,7 +36,7 @@ export const AccountLayout: FC<AccountPageProps> = ({ children }) => {
                   />
                 );
               })}
-            </Flex>
+            </div>
 
             {children}
           </Flex>
