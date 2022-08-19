@@ -15,12 +15,8 @@ export const signInSchema = Joi.object<UserSignInDto>({
       'string.email': UserValidationMessage.EMAIL_WRONG,
       'string.empty': UserValidationMessage.EMAIL_REQUIRED,
     }),
-  password: Joi.string()
-    .pattern(/([0-9a-zA-Z.]{8,16})/)
-    .required()
-    .messages({
-      'string.pattern.base': UserValidationMessage.PASSWORD_REQUIRED,
-      'string.password': UserValidationMessage.PASSWORD_REQUIRED,
-      'string.empty': UserValidationMessage.PASSWORD_REQUIRED,
-    }),
+  password: Joi.string().required()
+.messages({
+    'string.empty': UserValidationMessage.PASSWORD_REQUIRED,
+  }),
 });
