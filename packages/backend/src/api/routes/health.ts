@@ -1,24 +1,38 @@
 import type { ApiRoutes } from '@vse-bude/shared';
 import { Router } from 'express';
 import { PrismaClient } from '@prisma/client';
-import { RedisStorageService } from 'services/redis-storage';
+import { initServices } from '@services';
+import { initRepositories } from '@repositories';
 
-export const initHealthRoutes = (path: ApiRoutes) => {
+function initHealthRoutes(path: ApiRoutes) {
   const router = Router();
-  let status = 200;
+  let status: number; 
 
   const prisma = new PrismaClient({
     log: ['query', 'info', 'warn', 'error'],
   });
 
-  try {
-    prisma.user.findMany();
-    new RedisStorageService();
-  } catch (e) {
-    status = 503;
-  }
+  const check = new Promise ((resolve, reject) => {
+    try {
+      prisma.$queryRaw`SELECT 1`;
+      initServices(initRepositories(prisma)).redisStorageService.client.ping;
+      resolve(200);
+    }
+    catch (err) {
+      reject(503);
+    }
+});
 
-  return router.get(path, (req, res) => {
+const result = (result) => {
+  status = result;
+  console.log(status);
+};
+
+Promise.resolve(check).then(result);
+
+  return router.get(path, (_req, res) => {
     res.send(`status: ${status}`);
   });
-};
+}
+
+export { initHealthRoutes };

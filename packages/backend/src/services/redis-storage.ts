@@ -4,7 +4,7 @@ import { getEnv, logger } from '@helpers';
 type RedisClientType = ReturnType<typeof createClient>;
 
 export class RedisStorageService {
-  private client: RedisClientType;
+  public client: RedisClientType;
 
   constructor() {
     const redisPort = Number(getEnv('REDIS_PORT')) || 6379;
