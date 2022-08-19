@@ -19,8 +19,8 @@ const i18 = () => {
     defaultNS: 'screens',
     compatibilityJSON: 'v3',
     debug: true,
-    lng: 'ua',
-    fallbackLng: 'ua',
+    lng: 'en',
+    fallbackLng: 'en',
     interpolation: {
       escapeValue: false,
     },

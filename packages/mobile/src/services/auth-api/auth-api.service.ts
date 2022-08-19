@@ -2,9 +2,11 @@ import {
   HttpContentType,
   HttpMethod,
   ApiRoutes,
-  UserDto,
+  AuthApiRoutes,
+  UserSignInDto,
   UserSignUpDto,
 } from '@vse-bude/shared';
+import { AuthResponseDto } from '~/common/types/types';
 
 import { Http } from '~/services/http/http.service';
 
@@ -23,13 +25,20 @@ class AuthApi {
     this.#apiPrefix = apiPrefix;
   }
 
-  signUp(payload: UserSignUpDto): Promise<UserDto> {
-    return this.#http.load(`${this.#apiPrefix}${ApiRoutes.RANDOM_DATA}`, {
-      method: HttpMethod.POST,
-      contentType: HttpContentType.APPLICATION_JSON,
-      payload: JSON.stringify(payload),
-      hasAuth: false,
-    });
+  signIn(_payload: UserSignInDto): Promise<AuthResponseDto> {
+    return this.#http.load(
+      `${this.#apiPrefix}${ApiRoutes.AUTH}${AuthApiRoutes.SIGN_IN}`,
+      {
+        method: HttpMethod.POST,
+        contentType: HttpContentType.APPLICATION_JSON,
+        payload: JSON.stringify(_payload),
+        hasAuth: false,
+      },
+    );
+  }
+
+  signUp(_payload: UserSignUpDto): Promise<any> {
+    return Promise.resolve([]);
   }
 }
 

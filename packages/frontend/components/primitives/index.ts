@@ -1,4 +1,4 @@
-export { Container, Row } from 'grapefruit-ui';
+export { Column, Row, Flex } from 'grapefruit-ui';
 export { Tooltip } from './tooltip';
 export { Button } from './button';
 export { Checkbox } from './checkbox';
@@ -7,3 +7,9 @@ export { StringCutter } from './string-cutter';
 export { Avatar } from './avatar';
 export { Dropdown } from './menu-dropdown';
 export { Icon } from './icon';
+export { Popover } from './popover';
+export { IconButton } from './icon-button';
+export { Container } from './container';
+export { Loader } from './loader';
+export * from './input';
+export { ProfileInfo } from './profile-info';

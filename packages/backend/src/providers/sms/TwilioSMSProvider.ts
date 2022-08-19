@@ -1,4 +1,4 @@
-import { getEnv, log } from '@helpers';
+import { getEnv, logger } from '@helpers';
 import { Twilio } from 'twilio';
 import type { ISMSProvider } from '@types';
 import { MessageStatus } from '@enums';
@@ -35,7 +35,7 @@ export class TwilioSMSProvider implements ISMSProvider {
 
       return result.status === MessageStatus.ACCEPTED;
     } catch (error) {
-      log(error);
+      logger.error(error);
     }
   }
 
@@ -50,7 +50,7 @@ export class TwilioSMSProvider implements ISMSProvider {
 
       return result;
     } catch (error) {
-      log(error);
+      logger.error(error);
     }
   }
 }

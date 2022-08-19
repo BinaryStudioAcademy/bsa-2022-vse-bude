@@ -21,13 +21,7 @@ const InputInner = (
       id={id}
       {...props}
     />
-    {error && (
-      <p css={styles.errorMessage}>
-        {/* TODO: remove placeholder */}
-        <span>!!!!</span>
-        {error}
-      </p>
-    )}
+    {error && <p css={styles.errorMessage}>{error}</p>}
   </div>
 );
 export const Input = React.forwardRef(InputInner);

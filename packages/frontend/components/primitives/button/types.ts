@@ -6,4 +6,5 @@ export interface ButtonProps
   type?: 'button' | 'submit' | 'reset';
   variant?: 'filled' | 'outlined';
   size?: 'big' | 'small';
+  width?: string;
 }

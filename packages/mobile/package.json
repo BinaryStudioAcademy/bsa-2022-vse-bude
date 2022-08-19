@@ -33,7 +33,9 @@
     "react-hook-form": "7.33.1",
     "react-i18next": "11.18.3",
     "react-native": "0.69.3",
+    "react-native-bootsplash": "4.3.2",
     "react-native-config": "1.4.6",
+    "react-native-dropdown-picker": "5.4.2",
     "react-native-linear-gradient": "2.6.2",
     "react-native-mmkv": "2.4.3",
     "react-native-safe-area-context": "4.3.1",
@@ -59,6 +61,8 @@
     "lint-staged": "13.0.3",
     "metro-react-native-babel-preset": "0.70.3",
     "prettier": "2.7.1",
+    "react-native-flipper": "0.158.0",
+    "redux-flipper": "2.0.2",
     "typescript": "4.7.4"
   },
   "overrides": {

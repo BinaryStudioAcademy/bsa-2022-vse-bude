@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider as StoreProvider } from 'react-redux';
 import 'fast-text-encoding';
+import RNBootSplash from 'react-native-bootsplash';
 import { Navigation } from '~/navigation/navigation';
 import { store } from '~/store/store';
 import { NavigationDarkTheme, NavigationTheme } from '~/config/config';
@@ -16,7 +17,12 @@ const App: FC = () => {
 
   return (
     <StoreProvider store={store}>
-      <NavigationContainer theme={theme}>
+      <NavigationContainer
+        theme={theme}
+        onReady={() => {
+          RNBootSplash.hide({ fade: true });
+        }}
+      >
         <Navigation />
       </NavigationContainer>
     </StoreProvider>
