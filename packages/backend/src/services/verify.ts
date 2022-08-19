@@ -31,6 +31,8 @@ export class VerifyService {
 
     await this._userRepository.verifyPhone(dto.userId);
     await this.deleteByType(dto.userId, dto.type);
+
+    return {};
   }
 
   async createVerificationCode(userId: string, type: VerificationTypes) {

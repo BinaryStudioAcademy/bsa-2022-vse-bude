@@ -46,4 +46,15 @@ export const ua = {
   text: {
     OR: 'або',
   },
+  account: {
+    ACCOUNT: 'Акаунт',
+    PERSONAL_INFO: 'Персональна інформація',
+    SETTINGS: 'Налаштування',
+    MESSAGES: 'Повідомлення',
+    SUPPORT: 'Підтримка',
+    SIGN_OUT: 'Вийти',
+  },
+  common: {
+    HOME: 'Головна',
+  },
 };

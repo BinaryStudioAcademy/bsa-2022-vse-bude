@@ -12,3 +12,5 @@ export { Popover } from './popover';
 export { IconButton } from './icon-button';
 export { Container } from './container';
 export { DownloadButton } from './download-button';
+export { Loader } from './loader';
+export * from './input';
