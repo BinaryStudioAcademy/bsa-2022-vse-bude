@@ -372,6 +372,9 @@
 						}
 					}
 				},
+				"tags": [
+					"Category"
+				],
 				"security": [],
 				"parameters": [
 					{
@@ -404,6 +407,9 @@
 						}
 					}
 				},
+				"tags": [
+					"User"
+				],
 				"security": [],
 				"parameters": []
 			}
@@ -423,6 +429,9 @@
 						}
 					}
 				},
+				"tags": [
+					"User"
+				],
 				"security": [],
 				"parameters": [],
 				"requestBody": {
@@ -452,6 +461,9 @@
 						}
 					}
 				},
+				"tags": [
+					"User"
+				],
 				"security": [],
 				"parameters": [
 					{
@@ -480,6 +492,9 @@
 						}
 					}
 				},
+				"tags": [
+					"User"
+				],
 				"security": [],
 				"parameters": [
 					{
@@ -508,6 +523,9 @@
 						}
 					}
 				},
+				"tags": [
+					"User"
+				],
 				"security": [],
 				"parameters": [
 					{
@@ -536,6 +554,9 @@
 						}
 					}
 				},
+				"tags": [
+					"User"
+				],
 				"security": [],
 				"parameters": [
 					{
@@ -575,6 +596,9 @@
 						}
 					}
 				},
+				"tags": [
+					"Product"
+				],
 				"security": [],
 				"parameters": []
 			}
@@ -597,6 +621,9 @@
 						}
 					}
 				},
+				"tags": [
+					"Product"
+				],
 				"security": [],
 				"parameters": [
 					{
@@ -634,6 +661,9 @@
 						}
 					}
 				},
+				"tags": [
+					"Refresh Token"
+				],
 				"security": [],
 				"parameters": [],
 				"requestBody": {
@@ -663,6 +693,9 @@
 						}
 					}
 				},
+				"tags": [
+					"Refresh Token"
+				],
 				"security": [],
 				"parameters": [
 					{
@@ -691,6 +724,9 @@
 						}
 					}
 				},
+				"tags": [
+					"Refresh Token"
+				],
 				"security": [],
 				"parameters": [
 					{
@@ -736,6 +772,9 @@
 						}
 					}
 				},
+				"tags": [
+					"Refresh Token"
+				],
 				"security": [],
 				"parameters": [
 					{
@@ -767,6 +806,9 @@
 						}
 					}
 				},
+				"tags": [
+					"News"
+				],
 				"security": [],
 				"parameters": [
 					{

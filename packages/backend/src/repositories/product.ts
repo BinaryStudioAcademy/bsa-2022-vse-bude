@@ -1,7 +1,8 @@
 import type { PrismaClient, Product, ProductType } from '@prisma/client';
-import { Get, Query, Route } from 'tsoa';
+import { Get, Query, Route, Tags } from 'tsoa';
 
 @Route('product')
+@Tags('Product')
 export class ProductRepository {
   private _dbClient: PrismaClient;
 

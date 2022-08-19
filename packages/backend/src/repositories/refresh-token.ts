@@ -1,8 +1,9 @@
 import type { PrismaClient } from '@prisma/client';
-import { Body, Delete, Get, Patch, Post, Query, Route } from 'tsoa';
+import { Body, Delete, Get, Patch, Post, Query, Route, Tags } from 'tsoa';
 import type { CreateRefreshToken } from './types/CreateRefreshToken';
 
 @Route('refreshToken')
+@Tags('Refresh Token')
 export class RefreshTokenRepository {
   private _dbClient: PrismaClient;
 

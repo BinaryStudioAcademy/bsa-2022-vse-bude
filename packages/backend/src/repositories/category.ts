@@ -1,7 +1,8 @@
 import type { PrismaClient, Category } from '@prisma/client';
-import { Get, Query, Route } from 'tsoa';
+import { Get, Query, Route, Tags } from 'tsoa';
 
 @Route('category')
+@Tags('Category')
 export class CategoryRepository {
   private _dbClient: PrismaClient;
 

@@ -1,7 +1,8 @@
 import type { PrismaClient, News } from '@prisma/client';
-import { Get, Query, Route } from 'tsoa';
+import { Get, Query, Route, Tags } from 'tsoa';
 
 @Route('news')
+@Tags('News')
 export class NewsRepository {
   private _dbClient: PrismaClient;
 

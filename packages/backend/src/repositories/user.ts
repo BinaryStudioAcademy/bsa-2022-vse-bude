@@ -1,8 +1,9 @@
 import type { PrismaClient, User } from '@prisma/client';
-import { Body, Get, Patch, Post, Query, Route } from 'tsoa';
+import { Body, Get, Patch, Post, Query, Route, Tags } from 'tsoa';
 import type { CreateUser } from './types/CreateUser';
 
 @Route('user')
+@Tags('User')
 export class UserRepository {
   private _dbClient: PrismaClient;
 
