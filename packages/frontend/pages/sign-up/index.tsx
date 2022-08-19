@@ -12,12 +12,16 @@ import { SignUpForm } from '../../components/auth/sign-up/component';
 
 export const getServerSideProps = async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale, ['validation', 'common'])),
+    ...(await serverSideTranslations(locale, [
+      'validation',
+      'sign-up',
+      'public-common',
+    ])),
   },
 });
 
 export default function SignUpPage() {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('sign-up');
 
   return (
     <AuthLayout>
@@ -26,10 +30,10 @@ export default function SignUpPage() {
           <SignUpForm />
         </div>
         <div css={linkText}>
-          {t('I_HAVE_AN_ACCOUNT')}!{' '}
+          {t('accountExist')}!{' '}
           <InternalLink
             variant="primary"
-            label={`${t('SIGN_IN')}!`}
+            label={`${t('signIn')}!`}
             href={Routes.SIGN_IN}
           />
         </div>

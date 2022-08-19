@@ -9,12 +9,12 @@ import type { TimerProps } from './types';
 import { timerBadge, timerIcon } from './styles';
 
 function useTimeTranslations() {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('components');
   const timeTranslations: TimerTranslations = {
-    daysText: t('DAYS_SHORT'),
-    hoursText: t('HOURS_SHORT'),
-    minsText: t('MINUTES_SHORT'),
-    secsText: t('SECONDS_SHORT'),
+    daysText: t('product.time.days'),
+    hoursText: t('product.time.hours'),
+    minsText: t('product.time.minutes'),
+    secsText: t('product.time.seconds'),
   };
 
   return timeTranslations;

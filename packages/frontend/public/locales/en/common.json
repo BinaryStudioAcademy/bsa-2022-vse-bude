@@ -12,17 +12,20 @@
       "sign_in": "Sign In"
     }
   },
-  "HOURS_SHORT": "h",
-  "DAYS_SHORT": "d",
-  "MINUTES_SHORT": "min",
-  "SECONDS_SHORT": "s",
-  "CREATE_ACCOUNT": "Create Account",
-  "FIRST_NAME": "First Name",
-  "LAST_NAME": "Last Name",
-  "EMAIL": "E-mail",
-  "PASSWORD": "Password",
-  "REPEAT_PASSWORD": "Repeat password",
-  "PHONE_NUMBER": "Phone Number",
-  "I_HAVE_AN_ACCOUNT": "I have an account",
-  "SIGN_IN": "Sign In"
+  "footer": {
+    "contacts": "Contact",
+    "security": "Security",
+    "securityLink": "Privacy Policy",
+    "contactUs": "Contact us",
+    "form": {
+      "formDescription": "Looking to sell or partner with us? Send us an email",
+      "fullName": "Full name",
+      "fullNamePlaceholder": "Enter a full name",
+      "email": "Email",
+      "emailPlaceholder": "Enter your email",
+      "description": "Description",
+      "descriptionPlaceholder": "Enter description",
+      "send": "Send"
+    }
+  }
 }

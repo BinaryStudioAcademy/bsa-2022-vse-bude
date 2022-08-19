@@ -4,32 +4,32 @@ import type { LinkData } from './types';
 export const linksData: LinkData[] = [
   {
     iconPath: IconNameToSvgIcon[IconName.USER],
-    label: 'PERSONAL_INFO',
+    label: 'personalInfo',
     path: Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_PERSONAL,
   },
   {
     iconPath: IconNameToSvgIcon[IconName.LIST],
-    label: 'MY_LIST',
+    label: 'myList',
     path: Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_LIST,
   },
   {
     iconPath: IconNameToSvgIcon[IconName.SETTINGS],
-    label: 'SETTINGS',
+    label: 'settings',
     path: Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_SETTINGS,
   },
   {
     iconPath: IconNameToSvgIcon[IconName.MESSAGE],
-    label: 'MESSAGES',
+    label: 'messages',
     path: Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_MESSAGES,
   },
   {
     iconPath: IconNameToSvgIcon[IconName.SUPPORT],
-    label: 'SUPPORT',
+    label: 'support',
     path: Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_SUPPORT,
   },
   {
     iconPath: IconNameToSvgIcon[IconName.SIGN_OUT],
-    label: 'SIGN_OUT',
+    label: 'signOut',
     path: Routes.DEFAULT,
   },
 ];

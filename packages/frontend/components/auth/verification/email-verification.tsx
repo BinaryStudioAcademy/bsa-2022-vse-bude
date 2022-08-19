@@ -12,21 +12,21 @@ export const EmailVerification = () => {
       <div css={inputWrapper}>
         <div css={verifyText}>
           <span>
-            {t('EMAIL_VERIFICATION_TEXT_FIRST_PART')}
+            {t('emailText')}
             <span css={verifyEntity}> tesXXXXXXXXn.com</span>!
           </span>
-          <span>{t('ENTER_VERIFICATION_CODE_BELOW')}!</span>
+          <span>{t('enterCode')}!</span>
         </div>
         <Input
           css={verifyInput}
-          label={t('VERIFICATION_CODE')}
+          label={t('code')}
           variant="primary"
           type="text"
           name="emailCode"
         />
       </div>
       <Button type="submit" width={'100%'}>
-        {t('VERIFY_TEXT')}
+        {t('text')}
       </Button>
     </form>
   );

@@ -1,0 +1,12 @@
+{
+  "createAccount": "Створити аккаунт",
+  "firstName": "Ім'я",
+  "lastName": "Прізвище",
+  "email": "E-mail",
+  "password": "Пароль",
+  "passwordRepeat": "Повторний пароль",
+  "phone": "Номер телефону",
+  "accountExist": "В мене вже є аккаунт",
+  "signUpBtn": "Зареєструватись",
+  "signIn": "Увійти"
+}

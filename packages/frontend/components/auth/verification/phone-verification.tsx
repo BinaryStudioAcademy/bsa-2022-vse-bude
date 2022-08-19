@@ -12,21 +12,21 @@ export const PhoneVerification = () => {
       <div css={inputWrapper}>
         <div css={verifyText}>
           <span>
-            {t('PHONE_VERIFICATION_TEXT_FIRST_PART')}
+            {t('phoneText')}
             <span css={verifyEntity}> +3809XXXXXXX9</span>!
           </span>
-          <span>{t('ENTER_VERIFICATION_CODE_BELOW')}!</span>
+          <span>{t('enterCode')}!</span>
         </div>
         <Input
           css={verifyInput}
-          label={t('VERIFICATION_CODE')}
+          label={t('code')}
           variant="primary"
           type="text"
           name="phoneCode"
         />
       </div>
       <Button type="submit" width={'100%'}>
-        {t('VERIFY_TEXT')}
+        {t('text')}
       </Button>
     </form>
   );

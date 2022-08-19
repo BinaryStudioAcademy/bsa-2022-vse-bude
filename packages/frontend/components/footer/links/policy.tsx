@@ -9,11 +9,11 @@ import * as styles from './styles';
 import type { PolicyProps } from './types';
 
 export const Policy: FC<PolicyProps> = ({ path }) => {
-  const { t } = useTranslation('footer');
+  const { t } = useTranslation('common');
 
   return (
     <div css={styles.footerLinksWrapper}>
-      <ColumnHeader>{t('SECURITY')}</ColumnHeader>
+      <ColumnHeader>{t('footer.security')}</ColumnHeader>
 
       <div css={styles.footerLinksRow}>
         <FontAwesomeIcon
@@ -24,7 +24,7 @@ export const Policy: FC<PolicyProps> = ({ path }) => {
         <span css={styles.primaryUnderline}>
           <InternalLink
             variant="accent"
-            label={t('SECURITY_LINK')}
+            label={t('footer.securityLink')}
             href={path}
           />
         </span>

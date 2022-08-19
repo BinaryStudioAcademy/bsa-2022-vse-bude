@@ -13,7 +13,7 @@ export const Form = () => {
     description: '',
   });
 
-  const { t } = useTranslation('footer');
+  const { t } = useTranslation('common');
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [event.target.name]: event.target.value });
@@ -26,18 +26,20 @@ export const Form = () => {
   return (
     <form css={styles.footerForm}>
       <div css={styles.footerFormRow}>
-        <ColumnHeader>{t('CONTACT_US')}</ColumnHeader>
-        <span css={styles.footerFormDescription}>{t('FORM_DESCRIPTION')}</span>
+        <ColumnHeader>{t('footer.contactUs')}</ColumnHeader>
+        <span css={styles.footerFormDescription}>
+          {t('footer.form.formDescription')}
+        </span>
       </div>
 
       <div css={styles.footerFormRow}>
         <Input
           id="footer-fullname"
-          label={t('FULL_NAME')}
+          label={t('footer.form.fullName')}
           name="fullName"
           value={form.fullName}
           type="text"
-          placeholder={t('FULL_NAME_PLACEHOLDER')}
+          placeholder={t('footer.form.fullNamePlaceholder')}
           onChange={changeHandler}
           variant="secondary"
         />
@@ -46,11 +48,11 @@ export const Form = () => {
       <div css={styles.footerFormRow}>
         <Input
           id="footer-email"
-          label={t('EMAIL')}
+          label={t('footer.form.email')}
           name="email"
           value={form.email}
           type="email"
-          placeholder={t('EMAIL_PLACEHOLDER')}
+          placeholder={t('footer.form.emailPlaceholder')}
           onChange={changeHandler}
           variant="secondary"
         />
@@ -59,11 +61,11 @@ export const Form = () => {
       <div css={styles.footerFormRow}>
         <Input
           id="footer-description"
-          label={t('DESCRIPTION')}
+          label={t('footer.form.description')}
           name="description"
           value={form.description}
           type="text"
-          placeholder={t('DESCRIPTION_PLACEHOLDER')}
+          placeholder={t('footer.form.descriptionPlaceholder')}
           onChange={changeHandler}
           variant="secondary"
         />
@@ -76,7 +78,7 @@ export const Form = () => {
           onClick={sendHandler}
           disabled={false}
         >
-          {t('SEND')}
+          {t('footer.form.send')}
         </Button>
       </div>
     </form>

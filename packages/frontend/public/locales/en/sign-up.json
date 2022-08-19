@@ -1,0 +1,12 @@
+{
+  "createAccount": "Create Account",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "email": "E-mail",
+  "password": "Password",
+  "passwordRepeat": "Repeat password",
+  "phone": "Phone number",
+  "accountExist": "I have an account",
+  "signUpBtn": "Create Account",
+  "signIn": "Sign In"
+}

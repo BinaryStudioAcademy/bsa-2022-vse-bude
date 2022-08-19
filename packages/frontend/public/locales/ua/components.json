@@ -1,0 +1,11 @@
+{
+  "product": {
+    "placeBidBtn": "Зробити ставку",
+    "time": {
+      "hours": "г",
+      "days": "д",
+      "minutes": "хв",
+      "seconds": "с"
+    }
+  }
+}

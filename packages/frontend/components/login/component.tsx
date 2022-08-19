@@ -17,7 +17,7 @@ import { signInSchema } from 'validation-schemas/user';
 import * as styles from './styles';
 
 export default function Login() {
-  const { t } = useTranslation('auth');
+  const { t } = useTranslation('sign-in');
 
   const dispatch = useAppDispatch();
   const authError = useTypedSelector(getAuthErrorSelector);
@@ -70,7 +70,7 @@ export default function Login() {
         <span>
           <InternalLink
             variant="primary"
-            label="Sign Up"
+            label={t('signUp')}
             href={Routes.SIGN_UP}
           />
         </span>

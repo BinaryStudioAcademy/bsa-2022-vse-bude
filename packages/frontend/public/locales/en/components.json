@@ -1,0 +1,11 @@
+{
+  "product": {
+    "placeBidBtn": "Place a Bid",
+    "time": {
+      "hours": "h",
+      "days": "d",
+      "minutes": "min",
+      "seconds": "s"
+    }
+  }
+}

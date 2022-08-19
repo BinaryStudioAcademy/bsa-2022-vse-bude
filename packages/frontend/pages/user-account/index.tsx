@@ -9,12 +9,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     return {
       props: {
-        ...(await serverSideTranslations(locale, [
-          'dashboard',
-          'page-titles',
-          'common',
-          'footer',
-        ])),
+        ...(await serverSideTranslations(locale, ['common', 'user-account'])),
       },
     };
   },

@@ -1,0 +1,31 @@
+{
+ "header": {
+  "nav": {
+    "home": "Головна",
+    "category": "Категорії",
+    "search": "Пошук",
+    "news": "Новини",
+    "about_us": "Про нас"
+  },
+  "buttons": {
+    "create_account": "Створити Аккаунт",
+    "sign_in": "Увійти в Аккаунт"
+  }
+},
+  "footer": {
+    "contacts": "Контакти",
+    "security": "Безпека",
+    "securityLink": "Політики Конфіденційності",
+    "contactUs": "Зв'яжіться з нами",
+    "form": {
+      "formDescription": "Бажаєте продавати або бути партнерами з нами? Надішліть нам листа",
+      "fullName": "Ім'я та прізвище",
+      "fullNamePlaceholder": "Введіть ваше ім'я та прізвище",
+      "email": "Електронна пошта",
+      "emailPlaceholder": "Введіть вашу електронну пошту",
+      "description": "Опис",
+      "descriptionPlaceholder": "Опишіть ваше питання",
+      "send": "Відправити"
+    }
+  }
+}

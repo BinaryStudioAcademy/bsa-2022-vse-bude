@@ -22,9 +22,8 @@ export const getServerSideProps = wrapper.getServerSideProps(
       props: {
         ...(await serverSideTranslations(locale, [
           'home',
-          'product',
           'common',
-          'footer',
+          'components',
         ])),
       },
     };

@@ -16,7 +16,7 @@ import {
 import type { ProductCardProps } from './types';
 
 export const ProductCard = (props: ProductCardProps) => {
-  const { t } = useTranslation('product');
+  const { t } = useTranslation('components');
 
   return (
     <div className="cardBlock" css={productCard}>
@@ -45,7 +45,7 @@ export const ProductCard = (props: ProductCardProps) => {
         </div>
         <div className="productAction">
           <Button title="Place a Bid" variant="filled" size="small">
-            {t('PLACE_BID_BTN')}
+            {t('product.placeBidBtn')}
           </Button>
         </div>
       </div>
