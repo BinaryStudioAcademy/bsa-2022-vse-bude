@@ -1,4 +1,4 @@
-export const en = {
+export const screens = {
   welcome: {
     TITLE: 'Mark "Russian Warship"',
     DESCRIPTION:
@@ -24,11 +24,6 @@ export const en = {
     PHONE_NUMBER_HINT: 'Enter your phone',
     GOOGLE_BUTTON: 'Sign in with Google',
   },
-  components: {
-    HEADER_BUTTON_BACK: 'Back',
-    BUTTON_SAVE: 'Save',
-    BUTTON_CANCEL: 'Cancel',
-  },
   personal_info: {
     PERSONAL_INFO: 'Personal Info',
     ADDRESS: 'Address',
@@ -44,8 +39,13 @@ export const en = {
     LINKEDIN_HINT: 'Enter you Linkedin',
     FACEBOOK_HINT: 'Enter you Facebook',
   },
-  text: {
-    OR: 'or',
+  account: {
+    ACCOUNT: 'Account',
+    PERSONAL_INFO: 'Personal Info',
+    SETTINGS: 'Settings',
+    MESSAGES: 'Messages',
+    SUPPORT: 'Support',
+    SIGN_OUT: 'Sign Out',
   },
   currency: {
     UAH: 'UAH',

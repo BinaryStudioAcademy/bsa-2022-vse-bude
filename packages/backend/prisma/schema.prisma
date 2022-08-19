@@ -80,6 +80,7 @@ model Category {
   title     String    @db.VarChar(512)
   products  Product[]
   createdAt DateTime  @default(now())
+  image     String?   @db.VarChar(2048) @default("")
   updatedAt DateTime  @updatedAt
 
   @@unique([title])
@@ -161,6 +162,16 @@ model RefreshToken {
   userId    String   @db.Uuid
   token     String
   expiresAt DateTime @db.Timestamp
+}
+
+model News {
+  id          String     @id @default(uuid()) @db.Uuid
+  title       String
+  content     String
+  description String
+  image       String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
 }
 
 enum Role {

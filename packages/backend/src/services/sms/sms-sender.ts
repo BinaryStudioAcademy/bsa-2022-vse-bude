@@ -1,4 +1,4 @@
-import { log } from '@helpers';
+import { logger } from '@helpers';
 import type { ISMSProvider } from '@types';
 import type { ISMSSenderService } from '@types';
 
@@ -21,7 +21,7 @@ class SMSSenderService implements ISMSSenderService {
 
       return result;
     } catch (error) {
-      log(error);
+      logger.error(error);
     }
   }
 
@@ -36,7 +36,7 @@ class SMSSenderService implements ISMSSenderService {
 
       return result;
     } catch (error) {
-      log(error);
+      logger.error(error);
     }
   }
 }

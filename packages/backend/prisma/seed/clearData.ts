@@ -11,4 +11,5 @@ export const clearData = async (prismaClient: PrismaClient) => {
   await prismaClient.socialMedia.deleteMany({});
   await prismaClient.product.deleteMany({});
   await prismaClient.user.deleteMany({});
+  await prismaClient.news.deleteMany({});
 };

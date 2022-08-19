@@ -38,7 +38,8 @@
     "node-fetch": "^2.6.7",
     "redis": "^4.2.0",
     "sib-api-v3-typescript": "^2.2.2",
-    "twilio": "^3.80.0"
+    "twilio": "^3.80.0",
+    "winston": "^3.8.1"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.4.0",
