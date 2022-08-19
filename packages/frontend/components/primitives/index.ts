@@ -10,3 +10,6 @@ export { Icon } from './icon';
 export { Popover } from './popover';
 export { IconButton } from './icon-button';
 export { Container } from './container';
+export { Loader } from './loader';
+export { Error } from './error';
+export * from './input';

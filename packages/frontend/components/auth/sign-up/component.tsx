@@ -1,15 +1,13 @@
-import { Button } from '@primitives';
+import { Button, Loader, Input, PasswordInput } from '@primitives';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import type { UserSignUpDto } from '@vse-bude/shared';
 import { useTranslation } from 'next-i18next';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useAppDispatch, useTypedSelector } from '@hooks';
-import { Input, PasswordInput } from '../../primitives/input';
 import { form, inputWrapper } from '../layout/styles';
 import { getErrorKey } from '../../../helpers/validation';
 import { signUpUser } from '../../../store/auth';
-import { Loader } from '../../primitives/loader';
 import { signUpSchema } from './validation';
 
 export const SignUpForm = () => {
