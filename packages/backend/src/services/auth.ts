@@ -68,6 +68,7 @@ export class AuthService {
     };
     const newUser = await this._userRepository.create(createUserDto);
     await this._verifyService.initPhoneVerification(newUser.id);
+    await this._verifyService.initEmailVerification(newUser.id);
     const tokenData = this.getTokenData(newUser.id);
 
     const refreshToken: CreateRefreshToken = {
