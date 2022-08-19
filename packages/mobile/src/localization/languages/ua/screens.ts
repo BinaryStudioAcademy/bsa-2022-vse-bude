@@ -58,19 +58,4 @@ export const screens = {
     CHARITY_ORGANIZATIONS: 'Благодійні Організації',
     POPULAR_ITEMS: 'Популярні Товари',
   },
-  currency: {
-    UAH: 'ГРН',
-  },
-  button: {
-    BID: 'Ставка',
-    BUY: 'Купити',
-  },
-  time: {
-    DAYS: 'днів',
-    HOURS: 'г',
-    MINUTES: 'хв',
-  },
-  lot: {
-    PAST_TIME: 'дні тому',
-  },
 };

@@ -64,6 +64,10 @@ const Navigation: FC = () => {
           navigationKey={`auth-group-${user ? 'user' : 'guest'}`}
         >
           <NativeStack.Screen
+            name={RootScreenName.MAIN}
+            component={MainNavigation}
+          />
+          <NativeStack.Screen
             name={RootScreenName.WELCOME}
             component={Welcome}
           />

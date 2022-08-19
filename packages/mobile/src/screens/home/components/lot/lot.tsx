@@ -65,9 +65,13 @@ const Lot: FC<Props> = ({ imgSrc, title, description, price, type }) => {
       >
         <Text
           style={[globalStyles.fs16, globalStyles.fontWeightBold, styles.price]}
-        >{`${price} ${t('currency.UAH')}`}</Text>
+        >{`${price} ${t('common:currency.UAH')}`}</Text>
         <Button
-          label={type === LotType.AUCTION ? t('button.BID') : t('button.BUY')}
+          label={
+            type === LotType.AUCTION
+              ? t('common:components.BID')
+              : t('common:components.BUY')
+          }
           onPress={() => {
             //TODO
           }}

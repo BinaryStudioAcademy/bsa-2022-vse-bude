@@ -59,19 +59,4 @@ export const screens = {
     CHARITY_ORGANIZATIONS: 'Charity Organizations',
     POPULAR_ITEMS: 'Popular Lots',
   },
-  currency: {
-    UAH: 'UAH',
-  },
-  button: {
-    BID: 'Bid',
-    BUY: 'Buy',
-  },
-  time: {
-    DAYS: 'days',
-    HOURS: 'h',
-    MINUTES: 'min',
-  },
-  lot: {
-    PAST_TIME: 'days ago',
-  },
 };
