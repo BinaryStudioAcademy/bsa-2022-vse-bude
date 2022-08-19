@@ -29,7 +29,7 @@ module.exports = {
     'padded-blocks': ['error', 'never'],
     'lines-between-class-members': ['error', 'always'],
     'newline-before-return': 'error',
-    'newline-per-chained-call': ['error', { ignoreChainWithDepth: 2 }],
+    'newline-per-chained-call': ['error', { ignoreChainWithDepth: 4 }],
     'arrow-body-style': ['error', 'as-needed'],
     'prefer-arrow-callback': 'error',
     'no-unused-vars': 'off',
