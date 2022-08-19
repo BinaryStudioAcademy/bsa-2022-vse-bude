@@ -1,2 +1,2 @@
-export { ua } from './ua';
-export { en } from './en';
+export * as ua from './ua/ua';
+export * as en from './en/en';
