@@ -1,4 +1,4 @@
-import type { VerifyPhoneDto } from '@vse-bude/shared';
+import type { VerifyEmailDto, VerifyPhoneDto } from '@vse-bude/shared';
 import { VerificationTypes } from '@vse-bude/shared';
 import type { UserRepository } from '@repositories';
 import { CodeNotFoundError } from '../error/verify/code-not-found-error';
@@ -52,6 +52,25 @@ export class VerifyService {
     await this.resendPhoneCode(userId, type);
   }
 
+  async verifyEmail(dto: VerifyEmailDto) {
+    const code = await this.getUserCodeByTypeAndCode(dto.userId, dto.type);
+    if (!code) {
+      throw new CodeNotFoundError();
+    }
+    if (dto.code !== code) {
+      throw new WrongCodeError();
+    }
+
+    await this._userRepository.verifyPhone(dto.userId);
+    await this.deleteCodeByType(dto.userId, dto.type);
+
+    return {};
+  }
+
+  async initEmailVerification(userId: string, type = VerificationTypes.EMAIL) {
+    await this.resendEmailCode(userId, type);
+  }
+
   async createVerificationCode(
     userId: string,
     type: VerificationTypes,
@@ -72,6 +91,18 @@ export class VerifyService {
     const code = await this.createVerificationCode(userId, type);
 
     return await this._smsService.send(user.phone, code);
+  }
+
+  async resendEmailCode(userId: string, type: VerificationTypes) {
+    const user = await this._userRepository.getById(userId);
+    await this.deleteCodeByType(userId, type);
+    const code = await this.createVerificationCode(userId, type);
+
+    return await this._emailService.send({
+      to: [{ email: user.email }],
+      subject: 'Verify your email',
+      text: `Your code: ${code}`,
+    });
   }
 
   private generateCode(): number {
