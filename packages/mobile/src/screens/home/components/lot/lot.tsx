@@ -3,25 +3,22 @@ import { useTranslation } from '~/hooks/hooks';
 import { Button, ClockIcon, Image, Text, View } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { LotType } from '~/common/enums/enums';
-import { ImageURISource } from 'react-native';
+import { ProductProps } from '~/common/types/server-data/product';
 import { styles } from './styles';
 
-type Props = {
-  imgSrc: ImageURISource;
-  actionEnd?: Date;
-  title: string;
-  description: string;
-  price: string;
-  type: LotType;
-};
-
-const Lot: FC<Props> = ({ imgSrc, title, description, price, type }) => {
+const Lot: FC<ProductProps> = ({
+  imageLinks,
+  title,
+  description,
+  price,
+  type,
+}) => {
   const { t } = useTranslation();
 
   return (
     <View style={[styles.container, globalStyles.boxShadow]}>
       <View style={[styles.imgWrapper]}>
-        <Image source={imgSrc} style={styles.img} />
+        <Image source={{ uri: imageLinks[0] }} style={styles.img} />
 
         {type === LotType.UPCOMING ? (
           <View
