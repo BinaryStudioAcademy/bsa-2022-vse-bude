@@ -14,7 +14,11 @@ import {
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { CategoryRepository } from './../src/repositories/category';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { UserRepository } from './../src/repositories/user';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { ProductRepository } from './../src/repositories/product';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { RefreshTokenRepository } from './../src/repositories/refresh-token';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { NewsRepository } from './../src/repositories/news';
 import type { RequestHandler } from 'express';
@@ -41,6 +45,62 @@ const models: TsoaRoute.Models = {
         'createdAt': { 'dataType': 'datetime', 'required': true },
         'title': { 'dataType': 'string', 'required': true },
         'id': { 'dataType': 'string', 'required': true },
+      },
+      'validators': {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  'Role': {
+    'dataType': 'refAlias',
+    'type': {
+      'dataType': 'union',
+      'subSchemas': [
+        { 'dataType': 'enum', 'enums': ['USER'] },
+        { 'dataType': 'enum', 'enums': ['ADMIN'] },
+      ],
+      'validators': {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  'User': {
+    'dataType': 'refAlias',
+    'type': {
+      'dataType': 'nestedObjectLiteral',
+      'nestedProperties': {
+        'updatedAt': { 'dataType': 'datetime', 'required': true },
+        'emailVerified': { 'dataType': 'boolean', 'required': true },
+        'phoneVerified': { 'dataType': 'boolean', 'required': true },
+        'passwordHash': { 'dataType': 'string', 'required': true },
+        'createdAt': { 'dataType': 'datetime', 'required': true },
+        'role': { 'ref': 'Role', 'required': true },
+        'avatar': {
+          'dataType': 'union',
+          'subSchemas': [
+            { 'dataType': 'string' },
+            { 'dataType': 'enum', 'enums': [null] },
+          ],
+          'required': true,
+        },
+        'lastName': { 'dataType': 'string', 'required': true },
+        'firstName': { 'dataType': 'string', 'required': true },
+        'phone': { 'dataType': 'string', 'required': true },
+        'email': { 'dataType': 'string', 'required': true },
+        'id': { 'dataType': 'string', 'required': true },
+      },
+      'validators': {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  'CreateUser': {
+    'dataType': 'refAlias',
+    'type': {
+      'dataType': 'nestedObjectLiteral',
+      'nestedProperties': {
+        'passwordHash': { 'dataType': 'string', 'required': true },
+        'phone': { 'dataType': 'string', 'required': true },
+        'email': { 'dataType': 'string', 'required': true },
+        'lastName': { 'dataType': 'string', 'required': true },
+        'firstName': { 'dataType': 'string', 'required': true },
       },
       'validators': {},
     },
@@ -159,6 +219,44 @@ const models: TsoaRoute.Models = {
     },
   },
   // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  'RefreshToken': {
+    'dataType': 'refAlias',
+    'type': {
+      'dataType': 'nestedObjectLiteral',
+      'nestedProperties': {
+        'expiresAt': { 'dataType': 'datetime', 'required': true },
+        'token': { 'dataType': 'string', 'required': true },
+        'userId': { 'dataType': 'string', 'required': true },
+        'id': { 'dataType': 'string', 'required': true },
+      },
+      'validators': {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  'CreateRefreshToken': {
+    'dataType': 'refAlias',
+    'type': {
+      'dataType': 'nestedObjectLiteral',
+      'nestedProperties': {
+        'expiresAt': { 'dataType': 'datetime', 'required': true },
+        'token': { 'dataType': 'string', 'required': true },
+        'userId': { 'dataType': 'string', 'required': true },
+      },
+      'validators': {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  'BatchPayload': {
+    'dataType': 'refAlias',
+    'type': {
+      'dataType': 'nestedObjectLiteral',
+      'nestedProperties': {
+        'count': { 'dataType': 'double', 'required': true },
+      },
+      'validators': {},
+    },
+  },
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
   'News': {
     'dataType': 'refAlias',
     'type': {
@@ -210,6 +308,219 @@ export function RegisterRoutes(app: express.Router) {
         const controller = new CategoryRepository(prismaClient);
 
         const promise = controller.getAll.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, undefined, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/user/getAll',
+    ...fetchMiddlewares<RequestHandler>(UserRepository),
+    ...fetchMiddlewares<RequestHandler>(UserRepository.prototype.getAll),
+
+    function UserRepository_getAll(request: any, response: any, next: any) {
+      const args = {};
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new UserRepository(prismaClient);
+
+        const promise = controller.getAll.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, undefined, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.post(
+    '/user/create',
+    ...fetchMiddlewares<RequestHandler>(UserRepository),
+    ...fetchMiddlewares<RequestHandler>(UserRepository.prototype.create),
+
+    function UserRepository_create(request: any, response: any, next: any) {
+      const args = {
+        signUpData: {
+          'in': 'body',
+          'name': 'signUpData',
+          'required': true,
+          'ref': 'CreateUser',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new UserRepository(prismaClient);
+
+        const promise = controller.create.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, undefined, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/user/getById',
+    ...fetchMiddlewares<RequestHandler>(UserRepository),
+    ...fetchMiddlewares<RequestHandler>(UserRepository.prototype.getById),
+
+    function UserRepository_getById(request: any, response: any, next: any) {
+      const args = {
+        id: {
+          'in': 'query',
+          'name': 'id',
+          'required': true,
+          'dataType': 'string',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new UserRepository(prismaClient);
+
+        const promise = controller.getById.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, undefined, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/user/getByEmail',
+    ...fetchMiddlewares<RequestHandler>(UserRepository),
+    ...fetchMiddlewares<RequestHandler>(UserRepository.prototype.getByEmail),
+
+    function UserRepository_getByEmail(request: any, response: any, next: any) {
+      const args = {
+        email: {
+          'in': 'query',
+          'name': 'email',
+          'required': true,
+          'dataType': 'string',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new UserRepository(prismaClient);
+
+        const promise = controller.getByEmail.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, undefined, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.patch(
+    '/user/verifyPhone',
+    ...fetchMiddlewares<RequestHandler>(UserRepository),
+    ...fetchMiddlewares<RequestHandler>(UserRepository.prototype.verifyPhone),
+
+    function UserRepository_verifyPhone(
+      request: any,
+      response: any,
+      next: any,
+    ) {
+      const args = {
+        userId: {
+          'in': 'query',
+          'name': 'userId',
+          'required': true,
+          'dataType': 'string',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new UserRepository(prismaClient);
+
+        const promise = controller.verifyPhone.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, undefined, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/user/getByEmailOrPhone',
+    ...fetchMiddlewares<RequestHandler>(UserRepository),
+    ...fetchMiddlewares<RequestHandler>(
+      UserRepository.prototype.getByEmailOrPhone,
+    ),
+
+    function UserRepository_getByEmailOrPhone(
+      request: any,
+      response: any,
+      next: any,
+    ) {
+      const args = {
+        email: {
+          'in': 'query',
+          'name': 'email',
+          'required': true,
+          'dataType': 'string',
+        },
+        phone: {
+          'in': 'query',
+          'name': 'phone',
+          'required': true,
+          'dataType': 'string',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new UserRepository(prismaClient);
+
+        const promise = controller.getByEmailOrPhone.apply(
           controller,
           validatedArgs as any,
         );
@@ -281,6 +592,178 @@ export function RegisterRoutes(app: express.Router) {
         const controller = new ProductRepository(prismaClient);
 
         const promise = controller.getByType.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, undefined, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.post(
+    '/refreshToken/create',
+    ...fetchMiddlewares<RequestHandler>(RefreshTokenRepository),
+    ...fetchMiddlewares<RequestHandler>(
+      RefreshTokenRepository.prototype.create,
+    ),
+
+    function RefreshTokenRepository_create(
+      request: any,
+      response: any,
+      next: any,
+    ) {
+      const args = {
+        tokenData: {
+          'in': 'body',
+          'name': 'tokenData',
+          'required': true,
+          'ref': 'CreateRefreshToken',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new RefreshTokenRepository(prismaClient);
+
+        const promise = controller.create.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, undefined, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.delete(
+    '/refreshToken/deleteByUserId',
+    ...fetchMiddlewares<RequestHandler>(RefreshTokenRepository),
+    ...fetchMiddlewares<RequestHandler>(
+      RefreshTokenRepository.prototype.deleteByUserId,
+    ),
+
+    function RefreshTokenRepository_deleteByUserId(
+      request: any,
+      response: any,
+      next: any,
+    ) {
+      const args = {
+        userId: {
+          'in': 'query',
+          'name': 'userId',
+          'required': true,
+          'dataType': 'string',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new RefreshTokenRepository(prismaClient);
+
+        const promise = controller.deleteByUserId.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, undefined, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.patch(
+    '/refreshToken/updateTokenById',
+    ...fetchMiddlewares<RequestHandler>(RefreshTokenRepository),
+    ...fetchMiddlewares<RequestHandler>(
+      RefreshTokenRepository.prototype.updateTokenById,
+    ),
+
+    function RefreshTokenRepository_updateTokenById(
+      request: any,
+      response: any,
+      next: any,
+    ) {
+      const args = {
+        tokenId: {
+          'in': 'body',
+          'name': 'tokenId',
+          'required': true,
+          'dataType': 'string',
+        },
+        tokenValue: {
+          'in': 'query',
+          'name': 'tokenValue',
+          'required': true,
+          'dataType': 'string',
+        },
+        expiresAt: {
+          'in': 'query',
+          'name': 'expiresAt',
+          'required': true,
+          'dataType': 'datetime',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new RefreshTokenRepository(prismaClient);
+
+        const promise = controller.updateTokenById.apply(
+          controller,
+          validatedArgs as any,
+        );
+        promiseHandler(controller, promise, response, undefined, next);
+      } catch (err) {
+        return next(err);
+      }
+    },
+  );
+  // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+  app.get(
+    '/refreshToken/getTokenByValue',
+    ...fetchMiddlewares<RequestHandler>(RefreshTokenRepository),
+    ...fetchMiddlewares<RequestHandler>(
+      RefreshTokenRepository.prototype.getTokenByValue,
+    ),
+
+    function RefreshTokenRepository_getTokenByValue(
+      request: any,
+      response: any,
+      next: any,
+    ) {
+      const args = {
+        tokenValue: {
+          'in': 'query',
+          'name': 'tokenValue',
+          'required': true,
+          'dataType': 'string',
+        },
+      };
+
+      // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request, response);
+
+        const controller = new RefreshTokenRepository(prismaClient);
+
+        const promise = controller.getTokenByValue.apply(
           controller,
           validatedArgs as any,
         );

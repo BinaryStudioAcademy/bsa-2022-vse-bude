@@ -1,6 +1,6 @@
 import type { PrismaClient } from '@prisma/client';
-import { type CreateRefreshToken } from '@types';
 import { Body, Delete, Get, Patch, Post, Query, Route } from 'tsoa';
+import type { CreateRefreshToken } from './types/CreateRefreshToken';
 
 @Route('refreshToken')
 export class RefreshTokenRepository {
@@ -11,7 +11,10 @@ export class RefreshTokenRepository {
   }
 
   @Post('create')
-  async create(@Body() tokenData: CreateRefreshToken) {
+  async create(
+    @Body()
+    tokenData: CreateRefreshToken,
+  ) {
     return await this._dbClient.refreshToken.create({
       data: {
         userId: tokenData.userId,
@@ -22,8 +25,11 @@ export class RefreshTokenRepository {
   }
 
   @Delete('deleteByUserId')
-  deleteByUserId(@Query() userId: string) {
-    return this._dbClient.refreshToken.deleteMany({
+  async deleteByUserId(
+    @Query()
+    userId: string,
+  ) {
+    return await this._dbClient.refreshToken.deleteMany({
       where: {
         userId: userId,
       },
@@ -31,12 +37,15 @@ export class RefreshTokenRepository {
   }
 
   @Patch('updateTokenById')
-  updateTokenById(
-    @Body() tokenId: string,
-    @Body() tokenValue: string,
-    @Body() expiresAt: Date,
+  async updateTokenById(
+    @Body()
+    tokenId: string,
+    @Query()
+    tokenValue: string,
+    @Query()
+    expiresAt: Date,
   ) {
-    return this._dbClient.refreshToken.update({
+    return await this._dbClient.refreshToken.update({
       where: {
         id: tokenId,
       },
@@ -48,8 +57,11 @@ export class RefreshTokenRepository {
   }
 
   @Get('getTokenByValue')
-  getTokenByValue(@Query() tokenValue: string) {
-    return this._dbClient.refreshToken.findFirst({
+  async getTokenByValue(
+    @Query()
+    tokenValue: string,
+  ) {
+    return await this._dbClient.refreshToken.findFirst({
       where: {
         token: tokenValue,
       },

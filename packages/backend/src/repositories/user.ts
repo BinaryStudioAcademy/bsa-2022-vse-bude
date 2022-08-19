@@ -1,6 +1,8 @@
 import type { PrismaClient, User } from '@prisma/client';
-import type { CreateUser } from '@types';
+import { Body, Get, Patch, Post, Query, Route } from 'tsoa';
+import type { CreateUser } from './types/CreateUser';
 
+@Route('user')
 export class UserRepository {
   private _dbClient: PrismaClient;
 
@@ -8,12 +10,14 @@ export class UserRepository {
     this._dbClient = prismaClient;
   }
 
-  public getAll(): Promise<User[]> {
-    return this._dbClient.user.findMany();
+  @Get('getAll')
+  public async getAll(): Promise<User[]> {
+    return await this._dbClient.user.findMany();
   }
 
-  public create(signUpData: CreateUser) {
-    return this._dbClient.user.create({
+  @Post('create')
+  public async create(@Body() signUpData: CreateUser) {
+    return await this._dbClient.user.create({
       data: {
         firstName: signUpData.firstName,
         lastName: signUpData.lastName,
@@ -24,24 +28,27 @@ export class UserRepository {
     });
   }
 
-  public getById(id: string) {
-    return this._dbClient.user.findFirst({
+  @Get('getById')
+  public async getById(@Query() id: string) {
+    return await this._dbClient.user.findFirst({
       where: {
         id,
       },
     });
   }
 
-  public getByEmail(email: string) {
-    return this._dbClient.user.findFirst({
+  @Get('getByEmail')
+  public async getByEmail(@Query() email: string) {
+    return await this._dbClient.user.findFirst({
       where: {
         email: email,
       },
     });
   }
 
-  public verifyPhone(userId: string) {
-    return this._dbClient.user.update({
+  @Patch('verifyPhone')
+  public async verifyPhone(@Query() userId: string) {
+    return await this._dbClient.user.update({
       where: {
         id: userId,
       },
@@ -51,8 +58,12 @@ export class UserRepository {
     });
   }
 
-  public getByEmailOrPhone(email: string, phone: string) {
-    return this._dbClient.user.findFirst({
+  @Get('getByEmailOrPhone')
+  public async getByEmailOrPhone(
+    @Query() email: string,
+    @Query() phone: string,
+  ) {
+    return await this._dbClient.user.findFirst({
       where: {
         OR: [
           {
