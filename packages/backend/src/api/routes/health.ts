@@ -6,29 +6,28 @@ import { initRepositories } from '@repositories';
 
 function initHealthRoutes(path: ApiRoutes) {
   const router = Router();
-  let status: number; 
+  let status: number;
 
   const prisma = new PrismaClient({
     log: ['query', 'info', 'warn', 'error'],
   });
 
-  const check = new Promise ((resolve, reject) => {
+  const check = new Promise((resolve, reject) => {
     try {
       prisma.$queryRaw`SELECT 1`;
       initServices(initRepositories(prisma)).redisStorageService.client.ping;
       resolve(200);
-    }
-    catch (err) {
+    } catch (err) {
       reject(503);
     }
-});
+  });
 
-const result = (result) => {
-  status = result;
-  console.log(status);
-};
+  const result = (result) => {
+    status = result;
+    console.log(status);
+  };
 
-Promise.resolve(check).then(result);
+  Promise.resolve(check).then(result);
 
   return router.get(path, (_req, res) => {
     res.send(`status: ${status}`);
