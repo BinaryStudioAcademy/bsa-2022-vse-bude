@@ -22,7 +22,7 @@ const signIn = createAsyncThunk<UserDto, UserSignInDto, AsyncThunkConfig>(
     storage.setItem(StorageKey.ACCESS_TOKEN, response.accessToken);
     storage.setItem(StorageKey.REFRESH_TOKEN, response.refreshToken);
 
-    return { id: '', name: '', email: '', phone: '', phoneVerified: false };
+    return { id: '', name: '', email: '', phone: '', phoneVerified: false, avatar: '', firstName: '', lastName: '' };
   },
 );
 

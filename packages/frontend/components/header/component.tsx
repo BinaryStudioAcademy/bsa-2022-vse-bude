@@ -18,7 +18,7 @@ import * as styles from './styles';
 
 export const Header = () => {
   const [show, setShow] = useState(false);
-  const { isAuth, userInfo } = useCheckAuth();
+  const { isAuth, user, loading } = useCheckAuth();
   const { push } = useRouter();
   const { t } = useTranslation('common');
 
@@ -117,7 +117,7 @@ export const Header = () => {
           </span>
         </Button>
         <Button size="small" variant="outlined">
-          <span css={styles.buttonSignIn}>{t('header.buttons.sign_in')}</span>
+          <span>{t('header.buttons.sign_in')}</span>
         </Button>
       </div>
       <div className="burger-close-button">{renderCloseBurgerButton()}</div>
@@ -135,9 +135,9 @@ export const Header = () => {
 
   const renderProfileInfo = () => (
     <ProfileInfo
-      image={userInfo.avatar}
-      firstName={userInfo.firstName}
-      lastName={userInfo.lastName}
+      image={user.avatar}
+      firstName={user.firstName}
+      lastName={user.lastName}
     />
   );
 
@@ -152,10 +152,16 @@ export const Header = () => {
           </Link>
           <div className="header-content">{renderNavigation()}</div>
 
-          {isAuth ? (
-            <div className="header-content">{renderProfileInfo()}</div>
+          {!loading ? (
+            <>
+              {isAuth ? (
+                <div className="header-content">{renderProfileInfo()}</div>
+              ) : (
+                <div className="header-content">{renderAuthButtons()}</div>
+              )}
+            </>
           ) : (
-            <div className="header-content">{renderAuthButtons()}</div>
+            <div />
           )}
           <div className="burger-menu-button">{renderBurgerButton()}</div>
         </Container>
