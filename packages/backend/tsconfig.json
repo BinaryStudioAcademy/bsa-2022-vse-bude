@@ -3,6 +3,7 @@
   "compilerOptions": {
     "baseUrl": "src",
     "module": "commonjs",
+    "experimentalDecorators": true,
     "noEmit": false,
     "paths": {
       "@types": ["common/types"],

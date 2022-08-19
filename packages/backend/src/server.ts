@@ -6,8 +6,9 @@ import { getEnv, logger } from '@helpers';
 import { initServices } from '@services';
 import { loggerMiddleware, localizationMiddleware } from '@middlewares';
 import swaggerUi from 'swagger-ui-express';
-import swaggerJsdoc from 'swagger-jsdoc';
-// import swaggerDocument from '../swagger.json';
+// import swaggerJsdoc from 'swagger-jsdoc';
+import swaggerDocument from '../dist/swagger.json';
+import { RegisterRoutes } from '../dist/routes';
 import { prismaClient as database } from './data/db';
 import { errorHandler } from './error/error-handler';
 
@@ -17,17 +18,17 @@ const services = initServices(repositories);
 const routes = initRoutes(services);
 const port = getEnv('PORT');
 
-const options = {
-  definition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'Hello World',
-      version: '1.0.0',
-    },
-  },
-  apis: ['**/*.ts'], // files containing annotations as above
-};
-const swaggerSpecification = swaggerJsdoc(options);
+// const options = {
+//   definition: {
+//     openapi: '3.0.0',
+//     info: {
+//       title: 'Hello World',
+//       version: '1.0.0',
+//     },
+//   },
+//   apis: ['**/*.ts'], // files containing annotations as above
+// };
+// const swaggerSpecification = swaggerJsdoc(options);
 
 app
   .use(cors())
@@ -36,8 +37,10 @@ app
   .use(localizationMiddleware)
   .use(routes)
   .use(errorHandler)
-  .use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecification))
+  .use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
   .on('close', () => database.$disconnect())
   .listen(port, () => {
     logger.log(`Server is running on port ${port}`);
   });
+
+RegisterRoutes(app);
