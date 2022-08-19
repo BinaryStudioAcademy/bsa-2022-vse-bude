@@ -1,3 +1,4 @@
+import { phoneVerification } from 'store/auth';
 import { Button } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import { useAppDispatch, useTypedSelector } from '@hooks';
