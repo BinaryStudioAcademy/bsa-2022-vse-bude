@@ -8,8 +8,8 @@ export function PagesLoader() {
   Router.events.on('routeChangeStart', () => setIsLoading(true));
   Router.events.on('routeChangeComplete', () => setIsLoading(false));
   Router.events.on('routeChangeError', () => setIsLoading(false));
-  
-return (
+
+  return (
     <>
       {isLoading && (
         <div css={loaderWrapper}>
