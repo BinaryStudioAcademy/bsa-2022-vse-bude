@@ -23,7 +23,7 @@ const Lot: FC<Props> = ({ imgSrc, title, description, price, type }) => {
       <View style={[styles.imgWrapper]}>
         <Image source={imgSrc} style={styles.img} />
 
-        {type === LotType.AUCTION ? (
+        {type === LotType.AUCTION && (
           <View
             style={[
               styles.time,
@@ -36,7 +36,7 @@ const Lot: FC<Props> = ({ imgSrc, title, description, price, type }) => {
             <ClockIcon />
             <Text style={globalStyles.ml2}>2 дня 5 г 15 хв</Text>
           </View>
-        ) : null}
+        )}
       </View>
       <View>
         <Text
