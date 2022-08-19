@@ -14,24 +14,14 @@ export const title = ({
   fontSizes,
   fontWeights,
   lineHeights,
-  breakpoints,
 }: Theme) => css`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  &[data-with-out-title='true'] {
-    display: none;
-  }
   color: ${colors.text};
   font-size: ${fontSizes.h4};
   font-weight: ${fontWeights.h4};
   line-height: ${lineHeights.h4};
-
-  @media (min-width: ${breakpoints.md}px) {
-    &[data-with-out-title='true'] {
-      display: flex;
-    }
-  }
 `;
 
 export const loadMore = ({
@@ -45,11 +35,11 @@ export const loadMore = ({
   font-size: ${fontSizes.label};
   font-weight: ${fontWeights.h6};
   line-height: ${lineHeights.button};
+  text-decoration: none;
 
   @media (min-width: ${breakpoints.md}px) {
     font-size: ${fontSizes.body1};
     font-weight: ${fontWeights.toggle};
     line-height: ${lineHeights.label};
-    cursor: pointer;
   }
 `;

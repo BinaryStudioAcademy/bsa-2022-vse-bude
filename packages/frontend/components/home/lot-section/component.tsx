@@ -5,17 +5,8 @@ import { SectionLayout } from '../section-layout';
 import { lotContainer } from './styles';
 import type { LotProps } from './types';
 
-const LotSection = ({
-  title,
-  lots,
-  loadMoreTitle,
-  loadMoreAction,
-}: LotProps) => (
-  <SectionLayout
-    title={title}
-    loadMoreAction={loadMoreAction}
-    loadMoreTitle={loadMoreTitle}
-  >
+const LotSection = ({ title, lots, loadMoreTitle }: LotProps) => (
+  <SectionLayout title={title} loadMoreTitle={loadMoreTitle}>
     <div css={lotContainer}>
       <Splide
         options={{

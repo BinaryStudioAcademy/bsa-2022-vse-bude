@@ -14,7 +14,7 @@ export const categoryContainer = ({ spaces, breakpoints }: Theme) => css`
       display: grid !important;
       grid-template-columns: repeat(4, 1fr);
       grid-auto-rows: 266px;
-      gap: 25px;
+      gap: ${spaces.xl};
     }
   }
 `;
@@ -85,5 +85,9 @@ export const imageWrapper = () => css`
 
 export const SplideSlideStyled = styled(SplideSlide)`
   grid-column: ${(p) =>
-    p['data-is-left'] ? '1 / 4' : p['data-is-right'] ? '2 / 5' : 'unset'};
+    p['data-is-left-big']
+      ? '1 / 4'
+      : p['data-is-right-big']
+      ? '2 / 5'
+      : 'unset'};
 `;

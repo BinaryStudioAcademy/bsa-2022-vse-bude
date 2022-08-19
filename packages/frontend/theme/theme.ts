@@ -24,6 +24,7 @@ const darkColors = {
 };
 
 const fontSizes = {
+  h1: '64px',
   h3: '36px',
   h4: '22px',
   h5: '18px',
@@ -40,6 +41,7 @@ const fontSizes = {
 };
 
 const fontWeights = {
+  h1: '800',
   h3: '800',
   h4: '800',
   h5: '600',
@@ -54,6 +56,7 @@ const fontWeights = {
 };
 
 const lineHeights = {
+  h1: '74px',
   h3: '41px',
   h4: '25px',
   h5: '21px',

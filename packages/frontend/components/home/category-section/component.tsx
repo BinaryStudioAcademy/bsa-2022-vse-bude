@@ -3,8 +3,6 @@ import { useTypedSelector } from '@hooks';
 import { StringCutter } from '@primitives';
 import Image from 'next/image';
 import Link from 'next/link';
-import { lightTheme } from 'theme';
-import { fetchCategories } from 'store/category';
 import { SectionLayout } from '../section-layout';
 import {
   categoryContainer,
@@ -31,9 +29,7 @@ const CategorySection = () => {
 
   return (
     <SectionLayout
-      withOutTitle
       title="Popular Categories"
-      loadMoreAction={fetchCategories}
       loadMoreTitle="See All Categories"
     >
       <div css={categoryContainer}>
@@ -45,7 +41,7 @@ const CategorySection = () => {
             autoWidth: true,
             gap: 20,
             breakpoints: {
-              [lightTheme.breakpoints.xl]: {
+              1200: {
                 destroy: true,
               },
             },
@@ -54,8 +50,8 @@ const CategorySection = () => {
           {categoriesMapped.map((item, i) => (
             <SplideSlideStyled
               key={item.id}
-              data-is-left={i + 1 === 1 || (i + 1) % 4 === 1}
-              data-is-right={!((i + 1) % 4)}
+              data-is-left-big={i === 0}
+              data-is-right-big={i === 3}
             >
               <Link href="#" passHref>
                 <a css={categoryItem}>

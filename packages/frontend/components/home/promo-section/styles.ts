@@ -86,7 +86,7 @@ export const subTitle = ({
     display: block;
     margin: 0 auto;
     margin-top: ${spaces.md};
-    max-width: 517px;
+    max-width: 500px;
     color: ${colors.text};
     font-size: ${fontSizes.body1};
     font-weight: ${fontWeights.body1};
@@ -95,7 +95,12 @@ export const subTitle = ({
   }
 `;
 
-export const greeting = ({ breakpoints }: Theme) => css`
+export const greeting = ({
+  breakpoints,
+  fontSizes,
+  lineHeights,
+  fontWeights,
+}: Theme) => css`
   display: none;
 
   @media (min-width: ${breakpoints.md}px) {
@@ -103,9 +108,9 @@ export const greeting = ({ breakpoints }: Theme) => css`
     background: linear-gradient(to top, #f4c50a 50%, #0c42a6 50%);
     display: grid;
     place-items: center;
-    font-weight: 800;
-    font-size: 64px;
-    line-height: 114.88%;
+    font-weight: ${fontWeights.h1};
+    font-size: ${fontSizes.h1};
+    line-height: ${lineHeights.h1};
     color: #ffffff;
   }
 `;

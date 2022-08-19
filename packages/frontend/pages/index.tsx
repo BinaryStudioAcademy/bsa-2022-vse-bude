@@ -10,18 +10,18 @@ import {
 } from 'store/product';
 
 export const getServerSideProps = wrapper.getServerSideProps(
-  (_store) => async (ctx) => {
+  (store) => async (ctx) => {
     const { locale } = ctx;
 
     const storage = new CookieStorage(ctx);
     const auth = new AuthHelper(storage);
     const httpClient = new Http(process.env.NEXT_PUBLIC_API_ROUTE, auth);
 
-    await _store.dispatch(fetchCategoriesSSR(httpClient));
-    await _store.dispatch(
+    await store.dispatch(fetchCategoriesSSR(httpClient));
+    await store.dispatch(
       fetchAuctionProductsSSR({ httpSSR: httpClient, limit: 4 }),
     );
-    await _store.dispatch(
+    await store.dispatch(
       fetchSellingProductsSSR({ httpSSR: httpClient, limit: 4 }),
     );
 
