@@ -1,11 +1,12 @@
 import type { Interpolation } from '@emotion/react';
 import type { IconName } from '@enums';
 import type { Theme } from 'theme';
+import type { IconColor } from '@enums';
 
 export type IconButtonProps = {
   icon: typeof IconName[keyof typeof IconName];
   size?: SizeProp;
-  color?: string;
+  color?: IconColor;
   backgroundColor?: BackgroundColorProp;
   isBackgroundDisplayed?: boolean;
   cssExtend?: Interpolation<Theme>;
