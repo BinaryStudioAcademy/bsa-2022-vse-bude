@@ -1,4 +1,3 @@
-
 declare global {
   import type { lightTheme } from 'theme';
 
@@ -6,8 +5,7 @@ declare global {
     type GlobalTheme = typeof lightTheme;
 
     // eslint-disable-next-line @typescript-eslint/no-empty-interface
-    interface Theme extends GlobalTheme {
-    }
+    interface Theme extends GlobalTheme {}
     export const useTheme: () => Theme;
   }
 }
