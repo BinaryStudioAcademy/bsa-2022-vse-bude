@@ -5,6 +5,7 @@ export {
   Pressable,
   ScrollView,
   TouchableWithoutFeedback,
+  Modal,
 } from 'react-native';
 export { SafeAreaView } from 'react-native-safe-area-context';
 export { default as LinearGradient } from 'react-native-linear-gradient';

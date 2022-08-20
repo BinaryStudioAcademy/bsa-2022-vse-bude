@@ -1,8 +1,7 @@
 import React, { FC, ReactElement } from 'react';
-import { Modal, Pressable, View } from 'react-native';
 import { ColorPalette } from '@vse-bude/shared';
 import { globalStyles } from '~/styles/styles';
-import { CrossIcon } from '../components';
+import { CrossIcon, Modal, Pressable, View } from '../components';
 import { Text } from '../text/text';
 import { styles } from './styles';
 
