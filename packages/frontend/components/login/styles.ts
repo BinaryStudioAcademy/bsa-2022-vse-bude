@@ -1,4 +1,4 @@
-import type { Theme } from 'theme';
+import type { Theme } from '@emotion/react';
 import { css } from '@emotion/react';
 
 export const contentWrapper = ({ mq, spaces }: Theme) => css`

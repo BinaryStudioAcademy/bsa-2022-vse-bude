@@ -4,7 +4,7 @@ import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { InternalLink } from 'components/primitives/link';
 import type { UserSignInDto } from '@vse-bude/shared';
-import type { Theme } from 'theme';
+import type { Theme } from '@emotion/react';
 import { css } from '@emotion/react';
 import { AuthLayout } from '../../components/authLayout/component';
 
