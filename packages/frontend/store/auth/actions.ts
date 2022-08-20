@@ -1,15 +1,36 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { login, signUp, verifyPhone, resendPhoneCode } from 'services/auth';
+import { getUser, login, signUp, verifyPhone, resendPhoneCode } from 'services/auth';
 import type {
   PhoneVerifyDto,
   UserSignInDto,
-  UserSignUpDto,
+  UserSignUpDto
+} from '@vse-bude/shared';
+import {
+  HttpError,
+  HttpStatusCode
 } from '@vse-bude/shared';
 import { auth } from '@helpers';
 import Router from 'next/router';
 import { Routes } from '@enums';
-import type { IAuth } from '../../common/types/auth';
+import type { IAuth } from '@types';
 import { AuthActions } from './action-types';
+
+const getCurrentUser = createAsyncThunk(
+  AuthActions.FETCH_USER,
+  async (_request, { rejectWithValue }) => {
+    try {
+      return await getUser();
+    } catch (e) {
+      if (e instanceof HttpError) {
+        if (e.status === HttpStatusCode.UNAUTHORIZED) {
+          auth.logOut();
+        }
+      }
+
+      return rejectWithValue(e.message);
+    }
+  },
+);
 
 const loginUser = createAsyncThunk(
   AuthActions.LOGIN,
@@ -69,4 +90,4 @@ const phoneCodeResend = createAsyncThunk(
   },
 );
 
-export { loginUser, signUpUser, phoneVerification, phoneCodeResend };
+export { getCurrentUser, loginUser, signUpUser, phoneVerification, phoneCodeResend };

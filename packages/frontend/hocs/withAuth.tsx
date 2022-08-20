@@ -7,7 +7,7 @@ import { Layout } from '@components';
 
 export const withAuth = (Component) => {
   const Wrapper = (props) => {
-    const { user } = useTypedSelector((state) => state.profile);
+    const { user } = useTypedSelector((state) => state.auth);
 
     const router = useRouter();
 

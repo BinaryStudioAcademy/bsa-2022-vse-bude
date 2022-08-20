@@ -1,18 +1,12 @@
-import { Button } from '@primitives';
-import { Input, PasswordInput } from 'components/primitives/input';
-import { InternalLink } from 'components/primitives/link';
-
-import type { UserSignInDto } from '@vse-bude/shared';
-import { Routes } from '@enums';
-
+import { useTranslation } from 'next-i18next';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
-
+import { Input, PasswordInput, InternalLink, Button } from '@primitives';
+import type { UserSignInDto } from '@vse-bude/shared';
+import { Routes } from '@enums';
 import { getAuthErrorSelector, loginUser } from 'store/auth';
-
 import { useAppDispatch, useTypedSelector } from '@hooks';
-import { useTranslation } from 'next-i18next';
 import { signInSchema } from 'validation-schemas/user';
 import * as styles from './styles';
 

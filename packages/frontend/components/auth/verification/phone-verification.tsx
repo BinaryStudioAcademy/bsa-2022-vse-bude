@@ -1,6 +1,6 @@
 import { Button } from '@primitives';
 import { useTranslation } from 'next-i18next';
-import { useAppDispatch, useTypedSelector } from '@hooks';
+import { useAppDispatch, useAuth, useTypedSelector } from '@hooks';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import type { PhoneVerifyDto } from '@vse-bude/shared';
@@ -17,7 +17,7 @@ import { divider } from './styles';
 import { ResendCodeButton } from './resend-code';
 
 export const PhoneVerification = () => {
-  const { user } = useTypedSelector((state) => state.profile);
+  const { user } = useAuth();
   const { error } = useTypedSelector((state) => state.auth);
 
   const dispatch = useAppDispatch();

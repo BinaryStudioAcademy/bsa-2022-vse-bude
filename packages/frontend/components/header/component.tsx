@@ -11,14 +11,15 @@ import Link from 'next/link';
 import { Fragment, useState } from 'react';
 import { Routes, IconName } from '@enums';
 import { Logo } from 'components/primitives/logo';
-import { useCheckAuth } from '@hooks';
+import { useAuth, useMounted } from '@hooks';
 import { useRouter } from 'next/router';
 import { ProfileInfo } from './profile-info';
 import * as styles from './styles';
 
 export const Header = () => {
   const [show, setShow] = useState(false);
-  const { isAuth, user, loading } = useCheckAuth();
+  const { hasToken } = useAuth();
+  const isMounted = useMounted();
   const { push } = useRouter();
   const { t } = useTranslation('common');
 
@@ -133,13 +134,7 @@ export const Header = () => {
     />
   );
 
-  const renderProfileInfo = () => (
-    <ProfileInfo
-      image={user.avatar}
-      firstName={user.firstName}
-      lastName={user.lastName}
-    />
-  );
+  const renderProfileInfo = () => <ProfileInfo />;
 
   return (
     <Fragment>
@@ -152,9 +147,9 @@ export const Header = () => {
           </Link>
           <div className="header-content">{renderNavigation()}</div>
 
-          {!loading ? (
+          {isMounted ? (
             <>
-              {isAuth ? (
+              {hasToken ? (
                 <div className="header-content">{renderProfileInfo()}</div>
               ) : (
                 <div className="header-content">{renderAuthButtons()}</div>

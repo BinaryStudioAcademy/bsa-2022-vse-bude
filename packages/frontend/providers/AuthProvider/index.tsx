@@ -1,16 +1,15 @@
 import type { ReactNode } from 'react';
-import { useEffect } from 'react';
-import React from 'react';
+import { Fragment, useEffect } from 'react';
 import { auth as authHelper } from '@helpers';
-import { useAppDispatch, useTypedSelector } from '@hooks';
-import { getCurrentUser } from 'store/profile';
+import { useAppDispatch, useAuth } from '@hooks';
+import { getCurrentUser } from 'store/auth';
 
 interface AuthProviderProps {
   children: ReactNode;
 }
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
-  const { user } = useTypedSelector((state) => state.profile);
+  const { user } = useAuth();
 
   const dispatch = useAppDispatch();
 
@@ -23,7 +22,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   }, [dispatch, hasUser, hasToken]);
 
-  return <React.Fragment>{children}</React.Fragment>;
+  return <Fragment>{children}</Fragment>;
 };
 
 export { AuthProvider };
