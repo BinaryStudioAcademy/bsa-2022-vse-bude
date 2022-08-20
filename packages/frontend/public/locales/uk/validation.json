@@ -11,5 +11,9 @@
   "LAST_NAME_MAXLENGTH_ERROR": "Прізвище задатно довге!",
   "PHONE_STRING.PATTERN.BASE_ERROR": "Телефон невірного формату!",
   "REPEAT_PASSWORD_ANY.ONLY_ERROR": "Паролі не співпадають!",
-  "EMAIL_STRING.EMAIL_ERROR": "Email невірного формату!"
+  "EMAIL_STRING.EMAIL_ERROR": "Email невірного формату!",
+  "CODE_STRING.EMPTY_ERROR": "Код верифікації є обов'язковим!",
+  "CODE_STRING.MIN_ERROR": "Код верифікації занадто короткий!",
+  "CODE_STRING.MAX_ERROR": "Код верифікації занадто довгий!",
+  "CODE_STRING.PATTERN.BASE_ERROR": "Код верифікації може містити лише цифри!"
 }

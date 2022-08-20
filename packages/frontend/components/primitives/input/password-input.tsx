@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
-import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconName } from '@enums';
+import { Icon } from '../icon';
 import * as styles from './styles';
 import type { PasswordProps } from './types';
 
@@ -10,7 +10,7 @@ const PasswordInputInner = (
   ref,
 ) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const passwordIcon = passwordVisible ? faEye : faEyeSlash;
+  const passwordIcon = passwordVisible ? IconName.EYE : IconName.EYE_SLASH;
 
   return (
     <div css={styles.inputWrapper}>
@@ -25,9 +25,10 @@ const PasswordInputInner = (
           type="button"
           onClick={() => setPasswordVisible(!passwordVisible)}
         >
-          <FontAwesomeIcon
+          <Icon
             icon={passwordIcon}
-            css={styles.passwordVisibilityIcon}
+            cssExtend={styles.passwordVisibilityIcon}
+            color="gray"
           />
         </button>
         <input

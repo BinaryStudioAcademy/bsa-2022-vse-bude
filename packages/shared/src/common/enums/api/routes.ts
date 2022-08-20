@@ -1,5 +1,8 @@
 export enum ApiRoutes {
   USERS = '/users',
+  CATEGORIES = '/categories',
+  PRODUCTS = '/products',
+  NEWS = '/news',
   AUTH = '/auth',
   UPLOAD_IMAGE = '/upload-image',
   VERIFY = '/verify',
@@ -14,6 +17,12 @@ export enum AuthApiRoutes {
 }
 
 export enum VerifyApiRoutes {
-  VERIFY_PHONE = '/phone',
-  VERIFY_EMAIL = '/email',
+  VERIFY_PHONE = '/phone-verify',
+  VERIFY_EMAIL = '/email-verify',
+  PHONE_RESEND_CODE = '/phone/resend-code',
+  EMAIL_RESEND_CODE = '/email/resend-code',
+}
+
+export enum ProductApiRoutes {
+  $TYPE = '/:type',
 }
