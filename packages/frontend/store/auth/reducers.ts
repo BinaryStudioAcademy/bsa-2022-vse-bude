@@ -1,7 +1,12 @@
 import { createReducer } from '@reduxjs/toolkit';
 import type { UserDto } from '@vse-bude/shared';
 import { combineReducers } from 'redux';
-import { getCurrentUser, loginUser, phoneVerification, signUpUser } from './actions';
+import {
+  getCurrentUser,
+  loginUser,
+  phoneVerification,
+  signUpUser,
+} from './actions';
 
 export interface AuthState {
   user: UserDto | null;
@@ -12,7 +17,9 @@ export interface AuthState {
 const user = createReducer<UserDto>(null, {
   [getCurrentUser.fulfilled.type]: (_, { payload }) => payload,
   [getCurrentUser.rejected.type]: () => null,
-  [phoneVerification.fulfilled.type]: (state) => { state.phoneVerified = true; }
+  [phoneVerification.fulfilled.type]: (state) => {
+    state.phoneVerified = true;
+  },
 });
 
 const loading = createReducer(false, {

@@ -1,14 +1,17 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getUser, login, signUp, verifyPhone, resendPhoneCode } from 'services/auth';
+import {
+  getUser,
+  login,
+  signUp,
+  verifyPhone,
+  resendPhoneCode,
+} from 'services/auth';
 import type {
   PhoneVerifyDto,
   UserSignInDto,
-  UserSignUpDto
+  UserSignUpDto,
 } from '@vse-bude/shared';
-import {
-  HttpError,
-  HttpStatusCode
-} from '@vse-bude/shared';
+import { HttpError, HttpStatusCode } from '@vse-bude/shared';
 import { auth } from '@helpers';
 import Router from 'next/router';
 import { Routes } from '@enums';
@@ -90,4 +93,10 @@ const phoneCodeResend = createAsyncThunk(
   },
 );
 
-export { getCurrentUser, loginUser, signUpUser, phoneVerification, phoneCodeResend };
+export {
+  getCurrentUser,
+  loginUser,
+  signUpUser,
+  phoneVerification,
+  phoneCodeResend,
+};

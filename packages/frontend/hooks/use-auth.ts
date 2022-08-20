@@ -8,15 +8,21 @@ type UseAuth = () => {
   user: UserDto;
   loading: boolean;
   hasToken: boolean;
-}
+};
 
 export const useAuth: UseAuth = () => {
-  const { user, loading } = useTypedSelector((state) => state.auth, shallowEqual);
+  const { user, loading } = useTypedSelector(
+    (state) => state.auth,
+    shallowEqual,
+  );
   const hasToken = !!authHelper.getAccessToken();
 
-  return useMemo(() => ({
-    user,
-    loading,
-    hasToken
-  }), [user, loading, hasToken]);
+  return useMemo(
+    () => ({
+      user,
+      loading,
+      hasToken,
+    }),
+    [user, loading, hasToken],
+  );
 };
