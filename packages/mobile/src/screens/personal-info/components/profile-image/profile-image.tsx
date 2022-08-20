@@ -12,9 +12,7 @@ import {
 } from '~/components/components';
 import { useCustomTheme } from '~/hooks/hooks';
 import { notification } from '~/services/services';
-import {
-  requestCameraStoragePermission,
-} from '~/permissions/android-permissions';
+import { requestCameraStoragePermission } from '~/permissions/android-permissions';
 import { globalStyles } from '~/styles/styles';
 import { CAMERA_OPTIONS, IMAGE_OPTIONS } from '../../common/constants';
 import { styles } from './styles';
@@ -23,6 +21,7 @@ const ProfileImage: FC = () => {
   const { colors } = useCustomTheme();
   const [showModal, setShowModal] = useState(false);
   const [photoUri, setPhotoUri] = useState('');
+  const [isPhoto, setIsPhoto] = useState(false);
 
   const toggleModal = () => {
     return setShowModal(!showModal);
@@ -39,10 +38,10 @@ const ProfileImage: FC = () => {
           return notification.info('Cancelled by user');
         }
         if (response?.assets) {
+          setIsPhoto(true);
           setPhotoUri(response?.assets[0]?.uri as string);
         }
-      })
-        .finally(() => setShowModal(false));
+      }).finally(() => setShowModal(false));
     } else {
       notification.error('Storage permission denied');
     }
@@ -57,11 +56,17 @@ const ProfileImage: FC = () => {
         return notification.info('Cancelled by user');
       }
       if (response?.assets) {
+        setIsPhoto(true);
+
         return setPhotoUri(response.assets[0].uri as string);
       }
-    })
-      .finally(() => setShowModal(false));
+    }).finally(() => setShowModal(false));
   }, []);
+
+  const handleRemovePhoto = () => {
+    setPhotoUri('');
+    setIsPhoto(false);
+  };
 
   return (
     <View style={[styles.container, globalStyles.px5, globalStyles.mt5]}>
@@ -73,11 +78,11 @@ const ProfileImage: FC = () => {
       />
       <View style={styles.photoWrapper}>
         <View style={styles.photoContainer}>
-          {photoUri ?
-            (<Image source={{ uri: photoUri }} style={styles.photo} />)
-            :
-            (<UserIcon size={130} />)
-          }
+          {photoUri ? (
+            <Image source={{ uri: photoUri }} style={styles.photo} />
+          ) : (
+            <UserIcon size={130} />
+          )}
         </View>
         <Pressable
           style={[
@@ -91,9 +96,11 @@ const ProfileImage: FC = () => {
         </Pressable>
         <PhotoPickerModal
           isVisible={showModal}
+          isPhoto={isPhoto}
           onClose={toggleModal}
           handleOpenCamera={onCameraOpen}
           handlePickFromGallery={onGalleryOpen}
+          handleRemovePicture={handleRemovePhoto}
         />
       </View>
     </View>

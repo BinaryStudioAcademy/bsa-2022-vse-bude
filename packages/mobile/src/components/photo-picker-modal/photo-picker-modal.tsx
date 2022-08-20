@@ -8,15 +8,19 @@ import { styles } from './styles';
 
 type PhotoPickerModalProps = {
   isVisible: boolean;
+  isPhoto: boolean;
   handlePickFromGallery: () => void;
   handleOpenCamera: () => void;
+  handleRemovePicture: () => void;
   onClose?: () => void;
 };
 
 const PhotoPickerModal: FC<PhotoPickerModalProps> = ({
   isVisible,
+  isPhoto,
   handlePickFromGallery,
   handleOpenCamera,
+  handleRemovePicture,
   onClose,
 }): ReactElement => {
   return (
@@ -30,12 +34,17 @@ const PhotoPickerModal: FC<PhotoPickerModalProps> = ({
             </Pressable>
           </View>
           <View style={styles.buttonsBlock}>
-            <Pressable onPress={handlePickFromGallery} style={styles.firstBtn}>
+            <Pressable onPress={handlePickFromGallery} style={styles.btn}>
               <Text style={styles.btnText}>Choose from device</Text>
             </Pressable>
-            <Pressable onPress={handleOpenCamera}>
+            <Pressable onPress={handleOpenCamera} style={styles.btn}>
               <Text style={styles.btnText}>Open camera</Text>
             </Pressable>
+            {isPhoto && (
+              <Pressable style={styles.btn} onPress={handleRemovePicture}>
+                <Text style={styles.btnText}>Remove existing photo</Text>
+              </Pressable>
+            )}
           </View>
         </View>
       </View>

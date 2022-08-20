@@ -37,11 +37,11 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     justifyContent: 'space-around',
   },
-  firstBtn: {
+  btn: {
     paddingTop: 15,
     paddingBottom: 25,
-    borderBottomColor: ColorPalette.GRAY_100,
-    borderBottomWidth: 1,
+    borderTopColor: ColorPalette.GRAY_100,
+    borderTopWidth: 1,
   },
   btnText: {
     fontSize: FontSize.TEXT_20,
