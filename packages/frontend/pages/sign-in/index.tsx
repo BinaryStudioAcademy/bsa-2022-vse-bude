@@ -12,6 +12,6 @@ export default function LoginPage() {
 
 export const getServerSideProps = async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale, ['sign-in', 'public-common'])),
+    ...(await serverSideTranslations(locale, ['auth', 'public'])),
   },
 });

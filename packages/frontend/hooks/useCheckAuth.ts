@@ -4,8 +4,8 @@ import { getCurrentUser } from 'store/profile';
 
 export const useCheckAuth = () => {
   const [isAuth, setIsAuth] = useState(false);
-  const [userInfo, setUserInfo] = useState(null);
-  const { user } = useTypedSelector((state) => state.profile);
+  const [, setUserInfo] = useState(null);
+  const { user, loading } = useTypedSelector((state) => state.profile);
 
   const dispatch = useAppDispatch();
   const hasUser = !!user;
@@ -17,5 +17,5 @@ export const useCheckAuth = () => {
     }
   }, [dispatch, hasUser]);
 
-  return { isAuth, userInfo };
+  return { isAuth, user, loading };
 };

@@ -29,8 +29,8 @@ export const AuthLayout = ({ children }: LayoutProps) => {
                 famous during ...
               </p>
               <div css={styles.controlsWrapper}>
-                <span css={styles.price}>360 {t('public-common:uah')}</span>
-                <Button>{t('public-common:bet')}</Button>
+                <span css={styles.price}>360 {t('public:uah')}</span>
+                <Button>{t('public:bet')}</Button>
               </div>
             </div>
           </div>

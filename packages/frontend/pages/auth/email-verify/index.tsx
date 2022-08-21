@@ -1,6 +1,6 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { EmailVerification } from '../../../components/auth/verification/email-verification';
-import { AuthLayout } from '../../../components/authLayout/component';
+import { AuthLayout } from '../../../components/authLayout';
 import {
   contentWrapper,
   formWrapper,

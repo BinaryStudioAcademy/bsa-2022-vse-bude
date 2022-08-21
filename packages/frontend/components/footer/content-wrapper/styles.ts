@@ -10,7 +10,7 @@ export const logoLinks = ({ mq }: Theme) => css`
   flex-direction: column;
   flex-wrap: nowrap;
 
-  ${mq[4]} {
+  ${mq[3]} {
     flex-direction: row;
   }
 `;
