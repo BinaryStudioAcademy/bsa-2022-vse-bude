@@ -8,11 +8,13 @@ function initHealthRoutes({ healthService }: Services, path: ApiRoutes) {
   const router = Router();
 
   return router.get(path, async (req, res) => {
-    try{
+    try {
       await healthService.select();
-      await initServices(initRepositories(healthService.getClient())).redisStorageService.checkPing();
+      await initServices(
+        initRepositories(await healthService.getClient()),
+      ).redisStorageService.checkPing();
       res.status(200).send('healthy');
-    }catch(error){
+    } catch (error) {
       console.log(error);
       res.status(503).send('not healthy');
     }

@@ -7,11 +7,11 @@ export class HealthService {
     this._healthRepository = healthRepository;
   }
 
-  public getClient(){
-    return this._healthRepository.getClient();
+  async getClient() {
+    return await this._healthRepository.getClient();
   }
 
-  public select(){
-    return this._healthRepository.select();
+  async select() {
+    return await this._healthRepository.select();
   }
 }

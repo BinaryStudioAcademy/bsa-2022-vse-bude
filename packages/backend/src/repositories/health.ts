@@ -7,11 +7,11 @@ export class HealthRepository {
     this._dbClient = prismaClient;
   }
 
-  public getClient(){
-    return this._dbClient;
+  async getClient() {
+    return await this._dbClient;
   }
 
-  public select(){
-    return this._dbClient.$queryRaw`SELECT 1`;
+  async select() {
+    return await this._dbClient.$queryRaw`SELECT 1`;
   }
 }
