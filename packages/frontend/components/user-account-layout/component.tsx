@@ -19,8 +19,8 @@ export const AccountLayout: FC<AccountPageProps> = ({ children }) => {
           <h3 css={styles.pageHeader}>
             {t('ACCOUNT_PAGE', { ns: 'page-titles' })}
           </h3>
-          <Flex css={styles.pageContent} justify="space-between">
-            <Flex css={styles.linksContainer}>
+          <Flex css={styles.pageContent}>
+            <div css={styles.linksContainer}>
               {linksData.map((link, idx) => {
                 const { iconPath, label, path } = link;
                 const location = router.pathname === link.path;
@@ -36,7 +36,7 @@ export const AccountLayout: FC<AccountPageProps> = ({ children }) => {
                   />
                 );
               })}
-            </Flex>
+            </div>
 
             {children}
           </Flex>
