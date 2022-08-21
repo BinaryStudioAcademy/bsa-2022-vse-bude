@@ -2,8 +2,6 @@
   return async (context) => {
     const accessToken = context.req.cookies['access-token'];
 
-    console.log(context.req.cookies['access-token']);
-
     if (!accessToken) {
       return {
         redirect: {
