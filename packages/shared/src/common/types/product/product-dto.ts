@@ -1,23 +1,23 @@
-import { LotType } from '~/common/enums/enums';
+import type { ProductType } from '../../enums/index';
 
-type ProductProps = {
+type ProductDto = {
   id: string;
   title: string;
   description: string;
-  price: number;
-  recomendedPrice: number;
-  minimalBid: number;
+  price: string;
+  recomendedPrice: string;
+  minimalBid: string;
   imageLinks: string[];
   city: string;
-  type: LotType;
+  type: ProductType;
   status: string;
   endDate: string;
   cancellReason: string;
   authorId: string;
   categoryId: string;
-  winnerId: number | boolean;
+  winnerId: string | boolean;
   createdAt: string;
   updatedAt: string;
 };
 
-export type { ProductProps };
+export type { ProductDto };

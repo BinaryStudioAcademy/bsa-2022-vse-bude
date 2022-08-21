@@ -2,11 +2,19 @@ import React, { FC } from 'react';
 import { useTranslation } from '~/hooks/hooks';
 import { Button, ClockIcon, Image, Text, View } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { LotType } from '~/common/enums/enums';
-import { ProductProps } from '~/common/types/server-data/product';
+import { ProductType } from '@vse-bude/shared';
 import { styles } from './styles';
 
-const Lot: FC<ProductProps> = ({
+type Props = {
+  imageLinks: string[];
+  title: string;
+  description: string;
+  price: string;
+  type: ProductType;
+  endDate?: string;
+};
+
+const Product: FC<Props> = ({
   imageLinks,
   title,
   description,
@@ -14,13 +22,16 @@ const Lot: FC<ProductProps> = ({
   type,
 }) => {
   const { t } = useTranslation();
+  const transformPrice = (price: string) => {
+    return price.length > 2 ? `${price.slice(0, 2)} ${price.slice(2)}` : price;
+  };
 
   return (
     <View style={[styles.container, globalStyles.boxShadow]}>
       <View style={[styles.imgWrapper]}>
         <Image source={{ uri: imageLinks[0] }} style={styles.img} />
 
-        {type === LotType.UPCOMING ? (
+        {type === ProductType.AUCTION ? (
           <View
             style={[
               styles.time,
@@ -48,7 +59,7 @@ const Lot: FC<ProductProps> = ({
         >
           {description}
         </Text>
-        {type === LotType.OVER && (
+        {type === ProductType.FIXED_PRICE && (
           <Text style={globalStyles.fs12}>2 дні тому</Text>
         )}
       </View>
@@ -62,9 +73,11 @@ const Lot: FC<ProductProps> = ({
       >
         <Text
           style={[globalStyles.fs16, globalStyles.fontWeightBold, styles.price]}
-        >{`${price} ${t('currency.UAH')}`}</Text>
+        >{`${transformPrice(price)} ${t('currency.UAH')}`}</Text>
         <Button
-          label={type === LotType.UPCOMING ? t('button.BID') : t('button.BUY')}
+          label={
+            type === ProductType.AUCTION ? t('button.BID') : t('button.BUY')
+          }
           onPress={() => {
             //TODO
           }}
@@ -74,4 +87,4 @@ const Lot: FC<ProductProps> = ({
   );
 };
 
-export { Lot };
+export { Product };
