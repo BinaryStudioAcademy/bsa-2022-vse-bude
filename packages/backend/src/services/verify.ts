@@ -1,6 +1,7 @@
 import type { VerifyEmailDto, VerifyPhoneDto } from '@vse-bude/shared';
 import { VerificationTypes } from '@vse-bude/shared';
 import type { UserRepository } from '@repositories';
+import { logger } from '@helpers';
 import { CodeNotFoundError } from '../error/verify/code-not-found-error';
 import { WrongCodeError } from '../error/verify/wrong-code-error';
 import type { SaveVerifyCode } from '../common/types/verification-code';
@@ -61,7 +62,7 @@ export class VerifyService {
       throw new WrongCodeError();
     }
 
-    await this._userRepository.verifyPhone(dto.userId);
+    await this._userRepository.verifyEmail(dto.userId);
     await this.deleteCodeByType(dto.userId, dto.type);
 
     return {};
@@ -97,6 +98,7 @@ export class VerifyService {
     const user = await this._userRepository.getById(userId);
     await this.deleteCodeByType(userId, type);
     const code = await this.createVerificationCode(userId, type);
+    logger.warn(`Sending email to ${user.email} with code ${code}`);
 
     return await this._emailService.send({
       to: [{ email: user.email }],
