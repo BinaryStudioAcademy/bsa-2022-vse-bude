@@ -15,7 +15,6 @@ function initHealthRoutes({ healthService }: Services, path: ApiRoutes) {
       ).redisStorageService.checkPing();
       res.status(200).send('healthy');
     } catch (error) {
-      console.log(error);
       res.status(503).send('not healthy');
     }
   });
