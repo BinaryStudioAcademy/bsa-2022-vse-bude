@@ -3,7 +3,7 @@ import type { ReactElement, ReactNode } from 'react';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import { wrapper } from 'store';
-import { AuthProvider, ThemeProvider } from '@providers';
+import { UserProvider, ThemeProvider } from '@providers';
 import '../public/css/fontawesome.css';
 
 export type NextPageWithLayout = NextPage & {
@@ -19,7 +19,7 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
 
   return (
     <ThemeProvider>
-      <AuthProvider>{getLayout(<Component {...pageProps} />)}</AuthProvider>
+      <UserProvider>{getLayout(<Component {...pageProps} />)}</UserProvider>
     </ThemeProvider>
   );
 };
