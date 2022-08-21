@@ -3,8 +3,7 @@ import {
   createBottomTabNavigator,
   BottomTabNavigationOptions,
 } from '@react-navigation/bottom-tabs';
-
-import { useCustomTheme } from '~/hooks/hooks';
+import { useAppSelector, useCustomTheme } from '~/hooks/hooks';
 import { MainScreenName } from '~/common/enums/enums';
 import { AppIcon } from '~/common/types/types';
 import { Home, Favorite, MyList, Account } from '~/screens/screens';
@@ -15,10 +14,13 @@ import {
   StarIcon,
   UserIcon,
 } from '~/components/components';
+import { selectCurrentUser } from '~/store/auth/selectors';
+import { WelcomeNavigation } from '../welcome/welcome.navigation';
 
 const Tabs = createBottomTabNavigator();
 
 const MainNavigation = () => {
+  const user = useAppSelector(selectCurrentUser);
   const { dark, colors } = useCustomTheme();
 
   const screenOptions: BottomTabNavigationOptions = {
@@ -63,7 +65,7 @@ const MainNavigation = () => {
       />
       <Tabs.Screen
         name={MainScreenName.ACCOUNT_ROOT}
-        component={Account}
+        component={user ? Account : WelcomeNavigation}
         options={getTabOptions(MainScreenName.ACCOUNT_ROOT, UserIcon)}
       />
     </Tabs.Navigator>

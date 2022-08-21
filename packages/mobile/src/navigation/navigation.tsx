@@ -5,15 +5,11 @@ import {
 } from '@react-navigation/native-stack';
 import { RootScreenName } from '~/common/enums/enums';
 import { RootNavigationParamList } from '~/common/types/types';
-import { useAppSelector } from '~/hooks/hooks';
-import { selectCurrentUser } from '~/store/auth/selectors';
 import {
   MessagesScreen,
   PersonalInfoScreen,
   SettingsScreen,
   SupportScreen,
-  Auth,
-  Welcome,
 } from '~/screens/screens';
 import { MainNavigation } from './tabs/tabs.navigation';
 
@@ -30,47 +26,32 @@ const accountScreenOptions: NativeStackNavigationOptions = {
 };
 
 const Navigation: FC = () => {
-  const user = useAppSelector(selectCurrentUser);
-
   return (
     <NativeStack.Navigator screenOptions={mainScreenOptions}>
-      {user ? (
-        <NativeStack.Group>
-          <NativeStack.Screen
-            name={RootScreenName.MAIN}
-            component={MainNavigation}
+      <NativeStack.Group>
+        <NativeStack.Screen
+          name={RootScreenName.MAIN}
+          component={MainNavigation}
+        />
+        <NativeStack.Group screenOptions={accountScreenOptions}>
+          <Stack.Screen
+            name={RootScreenName.PERSONAL_INFO}
+            component={PersonalInfoScreen}
           />
-          <NativeStack.Group screenOptions={accountScreenOptions}>
-            <Stack.Screen
-              name={RootScreenName.PERSONAL_INFO}
-              component={PersonalInfoScreen}
-            />
-            <Stack.Screen
-              name={RootScreenName.SETTINGS}
-              component={SettingsScreen}
-            />
-            <Stack.Screen
-              name={RootScreenName.MESSAGES}
-              component={MessagesScreen}
-            />
-            <Stack.Screen
-              name={RootScreenName.SUPPORT}
-              component={SupportScreen}
-            />
-          </NativeStack.Group>
-        </NativeStack.Group>
-      ) : (
-        <NativeStack.Group
-          navigationKey={`auth-group-${user ? 'user' : 'guest'}`}
-        >
-          <NativeStack.Screen
-            name={RootScreenName.WELCOME}
-            component={Welcome}
+          <Stack.Screen
+            name={RootScreenName.SETTINGS}
+            component={SettingsScreen}
           />
-          <NativeStack.Screen name={RootScreenName.SIGN_UP} component={Auth} />
-          <NativeStack.Screen name={RootScreenName.SIGN_IN} component={Auth} />
+          <Stack.Screen
+            name={RootScreenName.MESSAGES}
+            component={MessagesScreen}
+          />
+          <Stack.Screen
+            name={RootScreenName.SUPPORT}
+            component={SupportScreen}
+          />
         </NativeStack.Group>
-      )}
+      </NativeStack.Group>
     </NativeStack.Navigator>
   );
 };
