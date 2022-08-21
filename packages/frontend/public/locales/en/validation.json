@@ -11,5 +11,9 @@
   "LAST_NAME_MAXLENGTH_ERROR": "Last Name too long!",
   "PHONE_STRING.PATTERN.BASE_ERROR": "Phone is in incorrect format!",
   "REPEAT_PASSWORD_ANY.ONLY_ERROR": "Email невірного формату!",
-  "EMAIL_STRING.EMAIL_ERROR": "Passwords don't match!"
+  "EMAIL_STRING.EMAIL_ERROR": "Passwords don't match!",
+  "CODE_STRING.EMPTY_ERROR": "Verification code is required!",
+  "CODE_STRING.MIN_ERROR": "Verification code too short!",
+  "CODE_STRING.MAX_ERROR": "Verification code too long!",
+  "CODE_STRING.PATTERN.BASE_ERROR": "Verification code must contains only digits!"
 }

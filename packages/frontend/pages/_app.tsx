@@ -5,6 +5,7 @@ import type { AppProps } from 'next/app';
 import { wrapper } from 'store';
 import { UserProvider, ThemeProvider } from '@providers';
 import '../public/css/fontawesome.css';
+import { PagesLoader } from 'components/primitives/pages-loader';
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -20,6 +21,7 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   return (
     <ThemeProvider>
       <UserProvider>{getLayout(<Component {...pageProps} />)}</UserProvider>
+      <PagesLoader />
     </ThemeProvider>
   );
 };

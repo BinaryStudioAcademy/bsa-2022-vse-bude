@@ -182,13 +182,13 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
       />
       <View style={[globalStyles.mt5, globalStyles.mb3]}>
         <Button
-          label={t('components.BUTTON_SAVE')}
+          label={t('common:components.BUTTON_SAVE')}
           onPress={handleSubmit(onSubmit)}
         />
       </View>
       <View style={[globalStyles.mt3, globalStyles.mb5]}>
         <Button
-          label={t('components.BUTTON_CANCEL')}
+          label={t('common:components.BUTTON_CANCEL')}
           view={ButtonAppearance.TRANSPARENT}
           textColor={dark ? colors.whiteColor : colors.buttonTextSecondary}
           onPress={handleCancelPress}

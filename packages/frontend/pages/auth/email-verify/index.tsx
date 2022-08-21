@@ -1,7 +1,7 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { withProtected } from '@helpers';
 import { EmailVerification } from '../../../components/auth/verification/email-verification';
-import { AuthLayout } from '../../../components/authLayout/component';
+import { AuthLayout } from '../../../components/authLayout';
 import {
   contentWrapper,
   formWrapper,
@@ -9,7 +9,7 @@ import {
 
 export const getServerSideProps = withProtected(async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale, ['auth'])),
+    ...(await serverSideTranslations(locale, ['auth', 'common'])),
   },
 }));
 

@@ -1,5 +1,4 @@
 import type { RefreshTokenRepository, UserRepository } from '@repositories';
-import { VerificationTypes } from '@vse-bude/shared';
 import type { UserSignInDto, UserSignUpDto } from '@vse-bude/shared';
 import { sign as jwtSign, type UserSessionJwtPayload } from 'jsonwebtoken';
 import { getEnv } from '@helpers';
@@ -68,7 +67,7 @@ export class AuthService {
       passwordHash: this._hashService.generatePasswordHash(signUpDto.password),
     };
     const newUser = await this._userRepository.create(createUserDto);
-    await this.initPhoneVerification(newUser.id);
+    await this._verifyService.initPhoneVerification(newUser.id);
     const tokenData = this.getTokenData(newUser.id);
 
     const refreshToken: CreateRefreshToken = {
@@ -79,13 +78,6 @@ export class AuthService {
     await this._refreshTokenRepository.create(refreshToken);
 
     return tokenData;
-  }
-
-  private async initPhoneVerification(userId: string) {
-    await this._verifyService.createVerificationCode(
-      userId,
-      VerificationTypes.PHONE,
-    );
   }
 
   async signIn(signInDto: UserSignInDto, req: Request) {
