@@ -58,7 +58,7 @@ export class RedisStorageService {
     return this.client.exists(key);
   }
 
-  checkPing() {
-    return this.client.ping;
+  async checkPing() {
+    return await this.client.ping() === 'PONG';
   }
 }

@@ -17,5 +17,5 @@ export const initRoutes = (services: Services) => [
   initUploadImageRoutes(services, ApiRoutes.UPLOAD_IMAGE),
   initNewsRoutes(services, ApiRoutes.NEWS),
   initVerifyRoutes(services, ApiRoutes.VERIFY),
-  initHealthRoutes(ApiRoutes.HEALTH),
+  initHealthRoutes(services, ApiRoutes.HEALTH),
 ];
