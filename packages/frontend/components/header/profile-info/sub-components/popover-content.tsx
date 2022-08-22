@@ -11,11 +11,11 @@ export const PopoverContent = ({ onClose }: PopoverContentProps) => {
   const handleClick = (e) => {
     e.preventDefault();
     let path = '/';
-    
-   (e.target.hasAttribute('path-label'))
-    ? path = e.target.getAttribute('path-label')
-    : path = e.target.parentElement.getAttribute('path-label');
-    
+
+    e.target.hasAttribute('path-label')
+      ? (path = e.target.getAttribute('path-label'))
+      : (path = e.target.parentElement.getAttribute('path-label'));
+
     router.push(path);
     onClose();
   };
@@ -71,7 +71,7 @@ export const PopoverContent = ({ onClose }: PopoverContentProps) => {
         css={styles.popoverContentItem}
         onClick={(e) => {
           auth.logOut();
-          handleClick(e); 
+          handleClick(e);
         }}
         path-label={Routes.DEFAULT}
         data-variant="icon"
