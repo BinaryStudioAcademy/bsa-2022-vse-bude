@@ -2,6 +2,8 @@ import type { VerifyEmailDto, VerifyPhoneDto } from '@vse-bude/shared';
 import { VerificationTypes } from '@vse-bude/shared';
 import type { UserRepository } from '@repositories';
 import { logger } from '@helpers';
+import { t } from 'i18next';
+import { EmailFrom } from '@enums';
 import { CodeNotFoundError } from '../error/verify/code-not-found-error';
 import { WrongCodeError } from '../error/verify/wrong-code-error';
 import type { SaveVerifyCode } from '../common/types/verification-code';
@@ -101,9 +103,10 @@ export class VerifyService {
     logger.warn(`Sending email to ${user.email} with code ${code}`);
 
     return await this._emailService.send({
+      from: { email: EmailFrom.NO_REPLY_EMAIL, name: EmailFrom.NO_REPLY_NAME },
       to: [{ email: user.email }],
-      subject: 'Verify your email',
-      text: `Your code: ${code}`,
+      subject: t('mailing.verification.subject'),
+      text: `${t('mailing.verification.body')}${code}`,
     });
   }
 
