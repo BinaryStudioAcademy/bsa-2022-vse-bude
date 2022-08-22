@@ -5,11 +5,11 @@ import { auth as authHelper } from '@helpers';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { getCurrentUser } from 'store/profile';
 
-interface AuthProviderProps {
+interface UserProviderProps {
   children: ReactNode;
 }
 
-const AuthProvider = ({ children }: AuthProviderProps) => {
+const UserProvider = ({ children }: UserProviderProps) => {
   const { user } = useTypedSelector((state) => state.profile);
 
   const dispatch = useAppDispatch();
@@ -21,9 +21,9 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     if (!hasUser && hasToken) {
       dispatch(getCurrentUser());
     }
-  }, [dispatch, hasUser, hasToken]);
+  }, [dispatch, hasToken, hasUser]);
 
   return <React.Fragment>{children}</React.Fragment>;
 };
 
-export { AuthProvider };
+export { UserProvider };

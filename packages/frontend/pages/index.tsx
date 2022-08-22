@@ -1,9 +1,10 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Home, Layout } from '@components';
 import { wrapper } from 'store';
+import { withPublic } from '@helpers';
 
-export const getServerSideProps = wrapper.getServerSideProps(
-  (_store) => async (ctx) => {
+export const getServerSideProps = withPublic(
+  wrapper.getServerSideProps((_store) => async (ctx) => {
     const { locale } = ctx;
 
     // const storage = new CookieStorage(ctx);
@@ -17,7 +18,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
         ...(await serverSideTranslations(locale, ['home', 'common'])),
       },
     };
-  },
+  }),
 );
 
 const IndexPage = () => (
