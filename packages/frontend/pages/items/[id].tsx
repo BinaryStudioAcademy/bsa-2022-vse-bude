@@ -2,6 +2,7 @@
 import { useRouter } from 'next/router';
 import { wrapper } from 'store';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { Item } from '@components';
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (_store) =>
@@ -12,15 +13,15 @@ export const getServerSideProps = wrapper.getServerSideProps(
     }),
 );
 
-const Item = () => {
+const ItemPage = () => {
   const router = useRouter();
-  const { id } = router.query;
+  const id = router.query.id as string;
 
   return (
     <Layout title="Item name">
-      <div>Item id: {id}</div>
+      <Item id={id}></Item>
     </Layout>
   );
 };
 
-export default Item;
+export default ItemPage;
