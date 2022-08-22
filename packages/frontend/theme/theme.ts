@@ -100,11 +100,14 @@ const heights = {
   checkbox: '20px',
   controlSm: '35px',
   controlBg: '45px',
+  download: '40px',
   logo: '32px',
+  flag: '140px',
 };
 
 const widths = {
   checkbox: '20px',
+  download: '40px',
   footerFormRow: '360px',
   logo: '128px',
 };
@@ -180,5 +183,3 @@ const darkTheme = {
 };
 
 export { lightTheme, darkTheme };
-
-export type Theme = typeof lightTheme;

@@ -20,6 +20,7 @@ const loginUser = createAsyncThunk(
           return rejectWithValue(data.error);
         }
         auth.setTokens(data.accessToken, data.refreshToken);
+        Router.push(Routes.DEFAULT);
 
         return data;
       })

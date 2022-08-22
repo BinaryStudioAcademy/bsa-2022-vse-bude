@@ -4,21 +4,19 @@ import { Image } from 'react-native';
 import { image as imageService, notification } from '~/services/services';
 import {
   View,
-  LinearGradient,
   UserIcon,
   Pressable,
   CameraIcon,
+  FlagBackgroundView,
   PhotoPickerModal,
   Spinner,
 } from '~/components/components';
-import { useCustomTheme } from '~/hooks/hooks';
 import { requestCameraStoragePermission } from '~/permissions/android-permissions';
 import { globalStyles } from '~/styles/styles';
 import { pickImageCamera, pickImageLibrary } from '~/helpers/helpers';
 import { styles } from './styles';
 
 const ProfileImage: FC = () => {
-  const { colors } = useCustomTheme();
   const [showModal, setShowModal] = useState(false);
   const [photoUri, setPhotoUri] = useState('');
   const [isPhoto, setIsPhoto] = useState(false);
@@ -72,12 +70,7 @@ const ProfileImage: FC = () => {
 
   return (
     <View style={[styles.container, globalStyles.px5, globalStyles.mt5]}>
-      <LinearGradient
-        start={{ x: 0, y: 0.4 }}
-        end={{ x: 0, y: 0.9 }}
-        colors={[colors.flagTop, colors.flagBottom]}
-        style={styles.flag}
-      />
+      <FlagBackgroundView style={styles.flag} />
       <View style={styles.photoWrapper}>
         <View style={styles.photoContainer}>
           {photoUri ? (

@@ -4,6 +4,9 @@ type UserDto = {
   email: string;
   phone: string;
   phoneVerified: boolean;
+  firstName: string;
+  lastName: string;
+  avatar: string;
 };
 
 export type { UserDto };
