@@ -1,7 +1,7 @@
 /* eslint-disable no-extra-boolean-cast */
 import React, { FC, useState, useCallback } from 'react';
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { Image } from 'react-native';
+import { image as imageService, notification } from '~/services/services';
 import {
   View,
   LinearGradient,
@@ -9,12 +9,12 @@ import {
   Pressable,
   CameraIcon,
   PhotoPickerModal,
+  Spinner,
 } from '~/components/components';
 import { useCustomTheme } from '~/hooks/hooks';
-import { notification } from '~/services/services';
 import { requestCameraStoragePermission } from '~/permissions/android-permissions';
 import { globalStyles } from '~/styles/styles';
-import { CAMERA_OPTIONS, IMAGE_OPTIONS } from '../../common/constants';
+import { pickImageCamera, pickImageLibrary } from '~/helpers/helpers';
 import { styles } from './styles';
 
 const ProfileImage: FC = () => {
@@ -22,6 +22,7 @@ const ProfileImage: FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [photoUri, setPhotoUri] = useState('');
   const [isPhoto, setIsPhoto] = useState(false);
+  const [IsUploading, setIsUploading] = useState(false);
 
   const toggleModal = () => {
     return setShowModal(!showModal);
@@ -30,37 +31,38 @@ const ProfileImage: FC = () => {
   const onCameraOpen = useCallback(async () => {
     const permission = await requestCameraStoragePermission();
     if (permission) {
-      launchCamera(CAMERA_OPTIONS, (response) => {
-        if (response.errorCode && response.errorMessage) {
-          return notification.error(response.errorMessage, response.errorCode);
-        }
-        if (response.didCancel) {
-          return notification.info('Cancelled by user');
-        }
-        if (response?.assets) {
-          setIsPhoto(true);
-          setPhotoUri(response?.assets[0]?.uri as string);
-        }
-      }).finally(() => setShowModal(false));
+      setIsUploading(true);
+      const file = await pickImageCamera();
+      if (!file) {
+        setIsUploading(false);
+
+        return;
+      }
+      const link = await imageService.uploadImage(file);
+
+      setIsPhoto(true);
+      setPhotoUri(link);
+      setIsUploading(false);
+      setShowModal(false);
     } else {
       notification.error('Storage permission denied');
     }
   }, []);
 
-  const onGalleryOpen = useCallback(() => {
-    launchImageLibrary(IMAGE_OPTIONS, (response) => {
-      if (response.errorCode && response.errorMessage) {
-        return notification.error(response.errorMessage, response.errorCode);
-      }
-      if (response.didCancel) {
-        return notification.info('Cancelled by user');
-      }
-      if (response?.assets) {
-        setIsPhoto(true);
+  const onGalleryOpen = useCallback(async () => {
+    const file = await pickImageLibrary();
 
-        return setPhotoUri(response.assets[0].uri as string);
-      }
-    }).finally(() => setShowModal(false));
+    if (!file) {
+      setIsUploading(false);
+
+      return;
+    }
+    const link = await imageService.uploadImage(file);
+
+    setIsPhoto(true);
+    setPhotoUri(link);
+    setIsUploading(false);
+    setShowModal(false);
   }, []);
 
   const handleRemovePhoto = () => {
@@ -80,6 +82,8 @@ const ProfileImage: FC = () => {
         <View style={styles.photoContainer}>
           {photoUri ? (
             <Image source={{ uri: photoUri }} style={styles.photo} />
+          ) : IsUploading ? (
+            <Spinner size={130} />
           ) : (
             <UserIcon size={130} />
           )}
