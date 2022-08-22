@@ -1,5 +1,5 @@
 import React, { FC, ReactElement } from 'react';
-import { UserSignUpDto } from '@vse-bude/shared';
+import { ColorPalette, UserSignUpDto } from '@vse-bude/shared';
 import { RootScreenName } from '~/common/enums/enums';
 import { auth as authActions } from '~/store/actions';
 import {
@@ -14,6 +14,7 @@ import {
   ScrollView,
   Divider,
   ScreenWrapper,
+  StatusBar,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import {
@@ -62,7 +63,11 @@ const Auth: FC = () => {
 
   return (
     <ScreenWrapper>
-      {/* <StatusBar translucent backgroundColor="transparent"  /> */}
+      <StatusBar
+        backgroundColor={ColorPalette.BLUE_100}
+        translucent={true}
+        barStyle="light-content"
+      />
       <Header
         labelButton={t('components.HEADER_BUTTON_BACK')}
         onPress={handleGoBack}

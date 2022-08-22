@@ -10,8 +10,8 @@ const resources = {
 const i18 = () => {
   i18n.use(initReactI18next).init({
     compatibilityJSON: 'v3',
-    debug: true,
-    lng: 'en',
+    // debug: true,
+    lng: 'ua',
     fallbackLng: 'en',
     interpolation: {
       escapeValue: false,
