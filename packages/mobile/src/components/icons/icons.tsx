@@ -37,6 +37,9 @@ const BackIcon: AppIcon = (iconProps) => (
 const CameraIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="camera" {...iconProps} />
 );
+const EyeIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="eye" {...iconProps} />
+);
 
 export {
   HomeIcon,
@@ -48,4 +51,5 @@ export {
   BackIcon,
   CustomFeatherIcon,
   CameraIcon,
+  EyeIcon,
 };

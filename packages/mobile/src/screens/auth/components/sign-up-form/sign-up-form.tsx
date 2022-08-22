@@ -53,19 +53,22 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
       />
       <Input
         label={t('verification.PASSWORD')}
-        placeholder={t('verification.PASSWORD_HINT')}
+        placeholder={t('verification.PASSWORD_PLACEHOLDER')}
         name="password"
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
+        secureField={true}
+        hint={t('verification.PASSWORD_HINT')}
       />
       <Input
         label={t('verification.PASSWORD_REPEAT')}
-        placeholder={t('verification.PASSWORD_HINT')}
-        name="password"
+        placeholder={t('verification.PASSWORD_PLACEHOLDER')}
+        name="repeatPassword"
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
+        secureField={true}
       />
       <View style={[globalStyles.mt5, globalStyles.mb5]}>
         <Button

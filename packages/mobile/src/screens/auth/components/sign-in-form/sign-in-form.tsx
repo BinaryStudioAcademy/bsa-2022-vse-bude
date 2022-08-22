@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
 import { Button, View, Input } from '~/components/components';
 import { UserSignInDto } from '@vse-bude/shared';
-import { useAppForm, useTranslation } from '~/hooks/hooks';
+import { useAppForm, useTranslation, useAppSelector } from '~/hooks/hooks';
 import { signIn } from '~/validation-schemas/validation-schemas';
 import { globalStyles } from '~/styles/styles';
+import { DataStatus } from '~/common/enums/enums';
 import { DEFAULT_SIGN_IN_PAYLOAD } from './common/constants';
 
 type Props = {
@@ -16,6 +17,7 @@ const SignInForm: FC<Props> = ({ onSubmit }) => {
     validationSchema: signIn,
   });
   const { t } = useTranslation();
+  const signInStatus = useAppSelector((state) => state.auth.dataStatus);
 
   return (
     <View>
@@ -29,11 +31,15 @@ const SignInForm: FC<Props> = ({ onSubmit }) => {
       />
       <Input
         label={t('verification.PASSWORD')}
-        placeholder={t('verification.PASSWORD_HINT')}
+        placeholder={t('verification.PASSWORD_PLACEHOLDER')}
         name="password"
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
+        hint={
+          signInStatus === DataStatus.REJECTED &&
+          t('verification.PASSWORD_WRONG')
+        }
       />
       <View style={{ marginTop: 30 }}>
         <Button

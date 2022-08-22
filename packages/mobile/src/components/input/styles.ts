@@ -11,6 +11,11 @@ const styles = StyleSheet.create({
   label: {
     lineHeight: 14,
   },
+  icon: {
+    position: 'absolute',
+    right: 5,
+    top: '27%',
+  },
 });
 
 export { styles };

@@ -6,8 +6,8 @@ import {
   FormControlErrors,
   FormControlValues,
 } from '~/common/types/types';
-import { Text, View, AlertIcon } from '~/components/components';
-import { useCustomTheme, useFormControl } from '~/hooks/hooks';
+import { Text, View, AlertIcon, EyeIcon } from '~/components/components';
+import { useCustomTheme, useFormControl, useState } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 
@@ -18,6 +18,8 @@ type Props<T extends FormControlValues> = {
   errors: FormControlErrors<T>;
   placeholder?: string;
   contentContainerStyle?: ViewStyle;
+  secureField?: boolean;
+  hint?: string | boolean;
 };
 
 const Input = <T extends FormControlValues>({
@@ -27,12 +29,18 @@ const Input = <T extends FormControlValues>({
   errors,
   placeholder,
   contentContainerStyle,
+  secureField = false,
+  hint,
   ...props
 }: Props<T>): ReactElement => {
+  const [secured, setSecured] = useState(secureField ? true : false);
   const { field } = useFormControl({ name, control });
   const { colors } = useCustomTheme();
 
   const error = errors[name]?.message as string;
+  const onSecureChange = () => {
+    setSecured((prevState) => !prevState);
+  };
 
   return (
     <View style={contentContainerStyle}>
@@ -46,24 +54,31 @@ const Input = <T extends FormControlValues>({
       >
         {label}
       </Text>
-      <TextInput
-        value={field.value}
-        placeholder={placeholder}
-        autoCorrect={false}
-        onChangeText={field.onChange}
-        onBlur={field.onBlur}
-        placeholderTextColor={colors.placeholder}
-        style={[
-          styles.input,
-          {
-            color: colors.placeholder,
-            backgroundColor: colors.backgroundElements,
-            borderColor: error ? colors.error : colors.backgroundElements,
-          },
-          globalStyles.fs14,
-        ]}
-        {...props}
-      />
+      <View>
+        <TextInput
+          value={field.value}
+          placeholder={placeholder}
+          autoCorrect={false}
+          onChangeText={field.onChange}
+          onBlur={field.onBlur}
+          placeholderTextColor={colors.placeholder}
+          secureTextEntry={secured}
+          selectTextOnFocus={field.name === 'password' ? false : true}
+          style={[
+            styles.input,
+            {
+              color: colors.placeholder,
+              backgroundColor: colors.backgroundElements,
+              borderColor: error ? colors.error : colors.backgroundElements,
+            },
+            globalStyles.fs14,
+          ]}
+          {...props}
+        />
+        {secureField && (
+          <EyeIcon size={20} style={styles.icon} onPress={onSecureChange} />
+        )}
+      </View>
       {Boolean(error) && (
         <View
           style={[
@@ -77,9 +92,12 @@ const Input = <T extends FormControlValues>({
           <Text
             style={[styles.label, globalStyles.fs12, { color: colors.error }]}
           >
-            {error}
+            {error || (hint as string)}
           </Text>
         </View>
+      )}
+      {Boolean(error) || (
+        <Text style={[styles.label, globalStyles.fs12]}>{hint as string}</Text>
       )}
     </View>
   );
