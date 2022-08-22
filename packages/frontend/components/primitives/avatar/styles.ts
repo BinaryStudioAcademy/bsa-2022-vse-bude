@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { Theme } from 'theme';
+import type { Theme } from '@emotion/react';
 import { resetButton } from 'theme';
 
 export const avatar = ({ spaces, radiuses }: Theme) => css`
