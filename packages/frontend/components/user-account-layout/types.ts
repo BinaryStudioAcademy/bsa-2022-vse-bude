@@ -1,5 +1,4 @@
 import type React from 'react';
-import type userAccount from 'public/locales/ua/user-account.json';
 import type { IconName } from '../../common/enums';
 
 export interface AccountPageProps {
@@ -8,11 +7,10 @@ export interface AccountPageProps {
 
 export interface LinkData {
   iconPath: typeof IconName[keyof typeof IconName];
-  label: keyof typeof userAccount.dashboard;
+  label: string;
   path: string;
 }
 
-export interface LinkProps extends Omit<LinkData, 'label'> {
+export interface LinkProps extends LinkData {
   location: boolean;
-  label: string;
 }
