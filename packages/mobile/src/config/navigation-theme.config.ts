@@ -33,6 +33,7 @@ const NavigationTheme = {
     yellow: ColorPalette.YELLOW_200,
     blue: ColorPalette.BLUE_100,
     subtitle: ColorPalette.GRAY_300,
+    logoWhite: ColorPalette.WHITE_100,
   },
 };
 
@@ -51,6 +52,7 @@ const NavigationDarkTheme = {
     yellow: ColorPalette.YELLOW_200,
     blue: ColorPalette.BLUE_100,
     subtitle: ColorPalette.YELLOW_100,
+    logoWhite: ColorPalette.WHITE_100,
   },
 };
 

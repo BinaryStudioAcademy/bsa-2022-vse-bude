@@ -8,11 +8,6 @@ const styles = StyleSheet.create({
   headerText: {
     lineHeight: 22,
   },
-  logo: {
-    width: 180,
-    height: 45,
-    resizeMode: 'contain',
-  },
 });
 
 export { styles };
