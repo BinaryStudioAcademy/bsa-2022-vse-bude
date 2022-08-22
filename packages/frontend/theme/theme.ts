@@ -4,6 +4,8 @@ const colors = {
   primary: ColorPalette.YELLOW_100,
   primaryLight: ColorPalette.YELLOW_100,
   primaryLightHover: ColorPalette.YELLOW_200,
+  extraDark: ColorPalette.BLACK,
+  lightDark: ColorPalette.GRAY_700,
   secondaryLight: ColorPalette.GREEN_100,
   secondaryDark: ColorPalette.GREEN_200,
   background: ColorPalette.WHITE_100,
@@ -183,3 +185,5 @@ const darkTheme = {
 };
 
 export { lightTheme, darkTheme };
+
+export type Theme = typeof lightTheme;
