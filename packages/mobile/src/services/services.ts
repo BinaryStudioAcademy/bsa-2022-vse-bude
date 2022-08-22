@@ -4,7 +4,7 @@ import { Http } from './http/http.service';
 import { Storage } from './storage/storage.service';
 import { AuthApi } from './auth-api/auth-api.service';
 import { NotificationService } from './notification/notification.service';
-import { Product } from './products/products';
+import { Product } from './product/product';
 
 const storage = new Storage({
   storage: new MMKV(),

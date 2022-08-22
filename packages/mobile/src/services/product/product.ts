@@ -18,7 +18,9 @@ class Product {
   }
 
   getAllProducts(): Promise<ProductDto[]> {
-    return this.#http.load(`${this.#apiPrefix}${ApiRoutes.PRODUCTS}`);
+    return this.#http.load(`${this.#apiPrefix}${ApiRoutes.PRODUCTS}`, {
+      hasAuth: false,
+    });
   }
 }
 

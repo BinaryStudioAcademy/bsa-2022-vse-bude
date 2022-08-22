@@ -2,7 +2,7 @@ import { ColorPalette } from '@vse-bude/shared';
 
 const SHADOW_STYLE = {
   boxShadow: {
-    shadowColor: ColorPalette.GRAY_SHADOW,
+    shadowColor: ColorPalette.GRAY_200,
     shadowOffset: {
       width: 0,
       height: 1,
