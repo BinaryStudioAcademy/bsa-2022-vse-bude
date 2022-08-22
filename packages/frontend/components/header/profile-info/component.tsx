@@ -27,10 +27,7 @@ export const ProfileInfo = ({
         handleClick={handleClick}
       />
       <Popover trigger={<DownArrow style={styles.dropdownArrow} />}>
-        <PopoverContent
-          wrapperStyles={styles.popoverContentWrapper}
-          innerStyles={styles.popoverContentItem}
-        />
+        {(onClose) => <PopoverContent onClose={onClose} />}
       </Popover>
     </div>
   );

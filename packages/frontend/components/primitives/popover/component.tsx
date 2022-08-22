@@ -17,7 +17,7 @@ export const Popover = ({ trigger, children }: PopoverProps) => {
   );
 
   const getTriggerRectParams = () =>
-    triggerWrapperRef.current.getBoundingClientRect();
+    triggerWrapperRef.current.parentElement.getBoundingClientRect();
 
   const calcBodyCoords = useCallback(() => {
     const triggerRectParams = getTriggerRectParams();
@@ -42,9 +42,13 @@ export const Popover = ({ trigger, children }: PopoverProps) => {
     setIsVisible(true);
   };
 
+  const onClose = () => {
+    setIsVisible(false);
+  };
+
   const renderPortalBody = () => (
     <div ref={bodyRef} css={styles.popover}>
-      {children}
+      {children(onClose)}
     </div>
   );
 

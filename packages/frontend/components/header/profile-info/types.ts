@@ -12,6 +12,5 @@ export interface DropdownProfileProps {
 }
 
 export interface PopoverContentProps {
-  wrapperStyles?: Interpolation<Theme>;
-  innerStyles?: Interpolation<Theme>;
+  onClose?: () => void;
 }
