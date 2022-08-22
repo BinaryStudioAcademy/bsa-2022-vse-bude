@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { UserDto } from '@vse-bude/shared';
+import { phoneVerification } from '../auth';
 import { getCurrentUser } from './actions';
 
 interface ProfileState {
@@ -32,6 +33,12 @@ const profileSlice = createSlice({
     [getCurrentUser.rejected.type](state) {
       state.user = null;
       state.loading = false;
+    },
+    [phoneVerification.fulfilled.type](state) {
+      state.user = {
+        ...state.user,
+        phoneVerified: true,
+      };
     },
   },
 });

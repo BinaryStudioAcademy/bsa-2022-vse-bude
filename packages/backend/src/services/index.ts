@@ -22,9 +22,15 @@ export const initServices = (repositories: Repositories) => {
     getEnv('NODE_ENV') === 'development'
       ? new BarSMSProvider()
       : new TwilioSMSProvider();
+
+  const smsService = new SMSSenderService(smsProvider);
+  const emailService = new EmailService(new SendInBlueEmailProvider());
+
   const verifyService: VerifyService = new VerifyService(
     repositories.userRepository,
     redisService,
+    smsService,
+    emailService,
   );
 
   return {
@@ -39,7 +45,7 @@ export const initServices = (repositories: Repositories) => {
       verifyService,
     ),
     redisStorageService: redisService,
-    smsSenderService: new SMSSenderService(smsProvider),
+    smsSenderService: smsService,
     emailService: new EmailService(new SendInBlueEmailProvider()),
     s3StorageService: new S3StorageService(),
     verifyService: verifyService,

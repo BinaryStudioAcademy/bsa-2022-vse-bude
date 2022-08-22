@@ -1,14 +1,26 @@
+import {
+  Button,
+  Container,
+  Dropdown,
+  Icon,
+  IconButton,
+  InternalLink,
+} from '@primitives';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { Fragment, useState } from 'react';
 import { Routes, IconName } from '@enums';
-import { Button, Container, Dropdown, Icon, InternalLink } from '@primitives';
 import { Logo } from 'components/primitives/logo';
+import { useCheckAuth } from '@hooks';
+import { useRouter } from 'next/router';
+import { ProfileInfo } from './profile-info';
 import * as styles from './styles';
 
 export const Header = () => {
-  const { t } = useTranslation('common');
   const [show, setShow] = useState(false);
+  const { isAuth, user, loading } = useCheckAuth();
+  const { push } = useRouter();
+  const { t } = useTranslation('common');
 
   const renderNavigation = () => (
     <nav className="navigation">
@@ -43,21 +55,29 @@ export const Header = () => {
 
   const renderAuthButtons = () => (
     <div className="buttons-wrapper">
-      <Button size="small">
+      <Button size="small" onClick={() => push(Routes.SIGN_UP)}>
         <span css={styles.buttonCreateAccountText}>
           {t('header.buttons.create_account')}
         </span>
       </Button>
-      <Button size="small" variant="outlined">
+
+      <Button
+        size="small"
+        variant="outlined"
+        onClick={() => push(Routes.SIGN_IN)}
+      >
         <span css={styles.buttonSignIn}>{t('header.buttons.sign_in')}</span>
       </Button>
     </div>
   );
 
   const renderBurgerButton = () => (
-    <button onClick={() => setShow(!show)}>
-      <Icon icon={IconName.LIST} color="yellow" />
-    </button>
+    <IconButton
+      icon={IconName.LIST}
+      size="md"
+      onClick={() => setShow(!show)}
+      color="yellow"
+    />
   );
 
   const renderHamburderMenuContent = () => (
@@ -97,7 +117,7 @@ export const Header = () => {
           </span>
         </Button>
         <Button size="small" variant="outlined">
-          <span css={styles.buttonSignIn}>{t('header.buttons.sign_in')}</span>
+          <span>{t('header.buttons.sign_in')}</span>
         </Button>
       </div>
       <div className="burger-close-button">{renderCloseBurgerButton()}</div>
@@ -105,9 +125,20 @@ export const Header = () => {
   );
 
   const renderCloseBurgerButton = () => (
-    <button onClick={() => setShow(!show)}>
-      <Icon icon={IconName.ANGLE_UP} color="yellow" />
-    </button>
+    <IconButton
+      icon={IconName.ANGLE_UP}
+      size="md"
+      onClick={() => setShow(!show)}
+      color="yellow"
+    />
+  );
+
+  const renderProfileInfo = () => (
+    <ProfileInfo
+      image={user.avatar}
+      firstName={user.firstName}
+      lastName={user.lastName}
+    />
   );
 
   return (
@@ -119,10 +150,19 @@ export const Header = () => {
               <Logo />
             </a>
           </Link>
-
           <div className="header-content">{renderNavigation()}</div>
-          <div className="header-content">{renderAuthButtons()}</div>
 
+          {!loading ? (
+            <>
+              {isAuth ? (
+                <div className="header-content">{renderProfileInfo()}</div>
+              ) : (
+                <div className="header-content">{renderAuthButtons()}</div>
+              )}
+            </>
+          ) : (
+            <div />
+          )}
           <div className="burger-menu-button">{renderBurgerButton()}</div>
         </Container>
       </header>

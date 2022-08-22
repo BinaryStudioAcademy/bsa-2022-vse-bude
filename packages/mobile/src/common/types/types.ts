@@ -1,6 +1,6 @@
 export type { RootState, AppDispatch, AsyncThunkConfig } from './app/app';
 export type { HttpOptions, GetHeadersParams } from './http/http';
-export type { RootNavigationParamList } from './navigation/navigation';
+export type { RootNavigationParamList, RootNavigationProps } from './navigation/navigation';
 export type { ValidationSchema } from './validation/validation';
 export type {
   FormControl,
@@ -16,3 +16,5 @@ export type {
 } from './styles/styles';
 export type { ShowNotificationParams } from './notification/notification';
 export type { AppIcon, IconProps, CustomIconProps } from './ui/ui';
+export type { AuthResponseDto } from './auth/auth';
+export type { Theme, ThemeColors } from './theme/theme.type';
