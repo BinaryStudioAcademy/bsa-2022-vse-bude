@@ -13,15 +13,16 @@ import { Routes, IconName } from '@enums';
 import { Logo } from 'components/primitives/logo';
 import { useCheckAuth } from '@hooks';
 import { useRouter } from 'next/router';
-import type { Theme } from '../../theme';
+import { useTheme } from '@emotion/react';
 import { ProfileInfo } from './profile-info';
 import * as styles from './styles';
 
-export const Header = ({ colors }: Theme) => {
+export const Header = () => {
   const [show, setShow] = useState(false);
   const { isAuth, user, loading } = useCheckAuth();
   const { push } = useRouter();
   const { t } = useTranslation('common');
+  const { colors } = useTheme();
 
   const renderNavigation = () => (
     <nav className="navigation">
