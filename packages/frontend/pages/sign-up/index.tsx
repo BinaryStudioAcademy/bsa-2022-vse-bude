@@ -2,6 +2,7 @@ import { Routes } from '@enums';
 import { InternalLink } from 'components/primitives/link';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
+import { withPublic } from '@helpers';
 import { AuthLayout } from '../../components/authLayout';
 import {
   contentWrapper,
@@ -10,13 +11,13 @@ import {
 } from '../../components/auth/layout/styles';
 import { SignUpForm } from '../../components/auth/sign-up/component';
 
-export const getServerSideProps = async ({ locale }) => ({
+export const getServerSideProps = withPublic(async ({ locale }) => ({
   props: {
     ...(await serverSideTranslations(locale, ['validation', 'common'])),
   },
-});
+}));
 
-export default function SignUpPage() {
+const SignUpPage = () => {
   const { t } = useTranslation('common');
 
   return (
@@ -36,4 +37,6 @@ export default function SignUpPage() {
       </div>
     </AuthLayout>
   );
-}
+};
+
+export default SignUpPage;

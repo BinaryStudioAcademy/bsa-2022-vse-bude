@@ -1,5 +1,5 @@
 import React, { FC, ReactElement } from 'react';
-import { UserSignInDto, UserSignUpDto } from '@vse-bude/shared';
+import { ColorPalette, UserSignInDto, UserSignUpDto } from '@vse-bude/shared';
 import { RootScreenName } from '~/common/enums/enums';
 import { auth as authActions } from '~/store/actions';
 import {
@@ -10,11 +10,11 @@ import {
   useNavigation,
 } from '~/hooks/hooks';
 import {
-  StatusBar,
   Text,
-  View,
   ScrollView,
   Divider,
+  ScreenWrapper,
+  StatusBar,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import {
@@ -62,8 +62,12 @@ const Auth: FC = () => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      <StatusBar translucent backgroundColor="transparent" />
+    <ScreenWrapper>
+      <StatusBar
+        backgroundColor={ColorPalette.BLUE_100}
+        translucent={true}
+        barStyle="light-content"
+      />
       <Header
         labelButton={t('common:components.HEADER_BUTTON_BACK')}
         onPress={handleGoBack}
@@ -89,7 +93,7 @@ const Auth: FC = () => {
         <Divider text={t('common:text.OR')} />
         {getScreen(name)}
       </ScrollView>
-    </View>
+    </ScreenWrapper>
   );
 };
 

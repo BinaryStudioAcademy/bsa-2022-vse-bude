@@ -1,15 +1,32 @@
 import React, { FC } from 'react';
-import { NativeSafeAreaViewProps } from 'react-native-safe-area-context';
-import { SafeAreaView } from '../components';
-import { styles } from './styles';
+import { StatusBar } from 'react-native';
+import {
+  NativeSafeAreaViewProps,
+  SafeAreaView,
+} from 'react-native-safe-area-context';
+import { useCustomTheme } from '~/hooks/hooks';
+import { globalStyles } from '~/styles/styles';
 
 const ScreenWrapper: FC<NativeSafeAreaViewProps> = ({
   style,
   children,
   ...restProps
 }) => {
+  const { colors, dark } = useCustomTheme();
+
   return (
-    <SafeAreaView style={[styles.container, style]} {...restProps}>
+    <SafeAreaView
+      style={[
+        globalStyles.flex1,
+        { backgroundColor: colors.background },
+        style,
+      ]}
+      {...restProps}
+    >
+      <StatusBar
+        barStyle={dark ? 'light-content' : 'dark-content'}
+        backgroundColor={colors.background}
+      />
       {children}
     </SafeAreaView>
   );
