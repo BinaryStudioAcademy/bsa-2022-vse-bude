@@ -3,11 +3,9 @@ import { Home, Layout } from '@components';
 import { wrapper } from 'store';
 import { AuthHelper, CookieStorage } from '@helpers';
 import { fetchCategoriesSSR } from 'store/category';
-import { Http } from '@vse-bude/shared';
-import {
-  fetchAuctionProductsSSR,
-  fetchSellingProductsSSR,
-} from 'store/product';
+import { Http, ProductType } from '@vse-bude/shared';
+import { getProductsSSR } from 'services/product';
+import type { HomeProps } from 'components/home/types';
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
@@ -17,13 +15,17 @@ export const getServerSideProps = wrapper.getServerSideProps(
     const auth = new AuthHelper(storage);
     const httpClient = new Http(process.env.NEXT_PUBLIC_API_ROUTE, auth);
 
-    await store.dispatch(fetchCategoriesSSR(httpClient));
-    await store.dispatch(
-      fetchAuctionProductsSSR({ httpSSR: httpClient, limit: 4 }),
-    );
-    await store.dispatch(
-      fetchSellingProductsSSR({ httpSSR: httpClient, limit: 4 }),
-    );
+    await store.dispatch(fetchCategoriesSSR({ httpSSR: httpClient, limit: 4 }));
+    const auctionProducts = await getProductsSSR({
+      httpSSR: httpClient,
+      limit: 4,
+      type: ProductType.AUCTION,
+    });
+    const sellingProducts = await getProductsSSR({
+      httpSSR: httpClient,
+      limit: 4,
+      type: ProductType.SELLING,
+    });
 
     return {
       props: {
@@ -33,14 +35,16 @@ export const getServerSideProps = wrapper.getServerSideProps(
           'common',
           'footer',
         ])),
+        auctionProducts,
+        sellingProducts,
       },
     };
   },
 );
 
-const IndexPage = () => (
+const IndexPage = ({ auctionProducts, sellingProducts }: HomeProps) => (
   <Layout>
-    <Home />
+    <Home auctionProducts={auctionProducts} sellingProducts={sellingProducts} />
   </Layout>
 );
 

@@ -1,19 +1,30 @@
 import { http } from '@helpers';
-import type { Http } from '@vse-bude/shared';
+import type { Http, ProductType } from '@vse-bude/shared';
 import { ApiRoutes } from '@vse-bude/shared';
 
-export const getProducts = (limit: number, type?: string) =>
+interface ProductOptions {
+  limit: number;
+  type?: ProductType;
+}
+
+interface ProductOptionsSSR extends ProductOptions {
+  httpSSR: Http;
+}
+
+export const getProducts = ({ limit, type }: ProductOptions) =>
   http.get({
-    url: type ? `${ApiRoutes.PRODUCTS}/${type}` : `${ApiRoutes.PRODUCTS}`,
+    url: `${ApiRoutes.PRODUCTS}`,
     payload: {
       limit,
+      type,
     },
   });
 
-export const getProductsSSR = (httpSSR: Http, limit: number, type?: string) =>
+export const getProductsSSR = ({ httpSSR, limit, type }: ProductOptionsSSR) =>
   httpSSR.get({
-    url: type ? `${ApiRoutes.PRODUCTS}/${type}` : `${ApiRoutes.PRODUCTS}`,
+    url: `${ApiRoutes.PRODUCTS}`,
     payload: {
       limit,
+      type,
     },
   });

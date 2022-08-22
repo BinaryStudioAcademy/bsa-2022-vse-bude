@@ -84,10 +84,10 @@ export const imageWrapper = () => css`
 `;
 
 export const SplideSlideStyled = styled(SplideSlide)`
-  grid-column: ${(p) =>
-    p['data-is-left-big']
-      ? '1 / 4'
-      : p['data-is-right-big']
-      ? '2 / 5'
-      : 'unset'};
+  &:nth-child(1) {
+    grid-column: 1 / 4;
+  }
+  &:nth-child(4) {
+    grid-column: 2 / 5;
+  }
 `;

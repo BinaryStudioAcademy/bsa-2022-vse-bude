@@ -47,12 +47,8 @@ const CategorySection = () => {
             },
           }}
         >
-          {categoriesMapped.map((item, i) => (
-            <SplideSlideStyled
-              key={item.id}
-              data-is-left-big={i === 0}
-              data-is-right-big={i === 3}
-            >
+          {categoriesMapped.map((item) => (
+            <SplideSlideStyled key={item.id}>
               <Link href="#" passHref>
                 <a css={categoryItem}>
                   <div css={categoryItemTitle}>

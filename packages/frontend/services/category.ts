@@ -2,7 +2,15 @@ import { http } from '@helpers';
 import type { Http } from '@vse-bude/shared';
 import { ApiRoutes } from '@vse-bude/shared';
 
-export const getAllCategories = (limit: number) =>
+interface CategoryOptions {
+  limit: number;
+}
+
+interface CategoryOptionsSSR extends CategoryOptions {
+  httpSSR: Http;
+}
+
+export const getAllCategories = ({ limit }: CategoryOptions) =>
   http.get({
     url: `${ApiRoutes.CATEGORIES}`,
     payload: {
@@ -10,7 +18,7 @@ export const getAllCategories = (limit: number) =>
     },
   });
 
-export const getAllCategoriesSSR = (httpSSR: Http, limit: number) =>
+export const getAllCategoriesSSR = ({ httpSSR, limit }: CategoryOptionsSSR) =>
   httpSSR.get({
     url: `${ApiRoutes.CATEGORIES}`,
     payload: {
