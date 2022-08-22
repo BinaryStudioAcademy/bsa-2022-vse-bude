@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
+import { images } from '~/assets/images/images';
 import {
   LinearGradient,
-  Logo,
   View,
   HeaderButton,
+  Image,
 } from '~/components/components';
 import { useCustomTheme } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
@@ -26,7 +27,7 @@ const Header: FC<Props> = ({ labelButton, onPress }) => {
       <View style={styles.header}>
         <HeaderButton label={labelButton} onPress={onPress} />
         <View style={globalStyles.alignItemsCenter}>
-          <Logo />
+        <Image source={images.logo_small} style={styles.logo} />
         </View>
       </View>
     </LinearGradient>
