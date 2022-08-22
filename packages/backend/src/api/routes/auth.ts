@@ -52,5 +52,10 @@ export const initAuthRoutes = (
     wrap((req: Request) => authService.getCurrentUser(req.userId)),
   );
 
+  router.post(
+    apiPath(path, AuthApiRoutes.RESET_PASSWORD_LINK),
+    wrap((req: Request) => authService.resetPasswordLink(req.body.email)),
+  );
+
   return router;
 };

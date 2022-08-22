@@ -25,6 +25,7 @@ import type {
 import type { HashService } from '@services';
 import type { Request } from 'express';
 import type { VerifyService } from '@services';
+import type { RedisStorageService } from './redis-storage';
 
 export class AuthService {
   private _userRepository: UserRepository;
@@ -35,16 +36,22 @@ export class AuthService {
 
   private _verifyService: VerifyService;
 
+  private _cache: RedisStorageService;
+
+  private resetLinkLifeTime = 3600000;
+
   constructor(
     userRepository: UserRepository,
     refreshTokenRepository: RefreshTokenRepository,
     hashService: HashService,
     verifyService: VerifyService,
+    cache: RedisStorageService,
   ) {
     this._userRepository = userRepository;
     this._refreshTokenRepository = refreshTokenRepository;
     this._hashService = hashService;
     this._verifyService = verifyService;
+    this._cache = cache;
   }
 
   async signOut(signOutDto: SignOut) {
@@ -64,7 +71,7 @@ export class AuthService {
       lastName: signUpDto.lastName,
       email: signUpDto.email,
       phone: signUpDto.phone,
-      passwordHash: this._hashService.generatePasswordHash(signUpDto.password),
+      passwordHash: this._hashService.generateHash(signUpDto.password),
     };
     const newUser = await this._userRepository.create(createUserDto);
     await this._verifyService.initPhoneVerification(newUser.id);
@@ -144,6 +151,21 @@ export class AuthService {
     );
 
     return newTokenData;
+  }
+
+  async resetPasswordLink(email: string) {
+    const hashValue = this._hashService.generateHash(email);
+    await this._cache.set(
+      this.getResetPasswordCacheKey(email),
+      hashValue,
+      this.resetLinkLifeTime,
+    );
+
+    return {};
+  }
+
+  private getResetPasswordCacheKey(email: string): string {
+    return `reset_password:email:${email}`;
   }
 
   private getTokenData(userId: string): AuthTokenData {

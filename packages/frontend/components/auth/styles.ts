@@ -21,6 +21,7 @@ export const verifyInput = css`
 `;
 
 export const verifyForm = css`
+  max-width: 60%;
   width: 60%;
 `;
 
