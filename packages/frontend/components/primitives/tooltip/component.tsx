@@ -3,6 +3,8 @@ import * as ReactDOM from 'react-dom';
 import * as styles from './styles';
 import type { TooltipProps } from './types';
 
+const marginScreenLeftRightPx = 10;
+
 export const Tooltip = ({
   trigger,
   children,
@@ -13,7 +15,6 @@ export const Tooltip = ({
   const bodyRef = useRef<HTMLDivElement>();
   const triggerWrapperRef = useRef<HTMLDivElement>();
   const timerRef = useRef(null);
-  const marginScreenLeftRightPx = 10;
 
   const calcBodyCoords = useCallback(() => {
     const triggerRectParams = getTriggerRectParams();
