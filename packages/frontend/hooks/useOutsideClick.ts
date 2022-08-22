@@ -15,12 +15,12 @@ export const useOutsideClick = (callback: () => void) => {
   useEffect(() => {
     const handleClick = (event) => {
       let path = '/';
-      
+
       if (ref.current) {
-        if(ref.current.contains(event.target)){
-          (event.target.hasAttribute('path-label')) 
-            ? path = event.target.getAttribute('path-label') 
-            : path = event.target.parentElement.getAttribute('path-label');
+        if (ref.current.contains(event.target)) {
+          event.target.hasAttribute('path-label')
+            ? (path = event.target.getAttribute('path-label'))
+            : (path = event.target.parentElement.getAttribute('path-label'));
 
           router.push(path);
         }
