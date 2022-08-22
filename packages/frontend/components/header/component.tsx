@@ -13,6 +13,7 @@ import { Routes, IconName } from '@enums';
 import { Logo } from 'components/primitives/logo';
 import { useCheckAuth } from '@hooks';
 import { useRouter } from 'next/router';
+import { useTheme } from '@emotion/react';
 import { ProfileInfo } from './profile-info';
 import * as styles from './styles';
 
@@ -21,10 +22,15 @@ export const Header = () => {
   const { isAuth, user, loading } = useCheckAuth();
   const { push } = useRouter();
   const { t } = useTranslation();
+  const { colors } = useTheme();
 
   const renderNavigation = () => (
     <nav className="navigation">
-      <InternalLink href={Routes.DEFAULT} label={t('common:header.nav.home')} />
+      <InternalLink
+        variant="default"
+        href={Routes.DEFAULT}
+        label={t('common:header.nav.home')}
+      />
       <Dropdown
         options={[
           {
@@ -45,16 +51,22 @@ export const Header = () => {
         ]}
       >
         {t('common:header.nav.category')}&nbsp;
-        <Icon icon={IconName.ANGLE_DOWN} color="yellow" />
+        <Icon icon={IconName.ANGLE_DOWN} color={colors.extraDark} />
       </Dropdown>
       <InternalLink
         href={Routes.DEFAULT}
         label={t('common:header.nav.search')}
+        variant="default"
       />
-      <InternalLink href={Routes.DEFAULT} label={t('common:header.nav.news')} />
+      <InternalLink
+        href={Routes.DEFAULT}
+        label={t('common:header.nav.news')}
+        variant="default"
+      />
       <InternalLink
         href={Routes.DEFAULT}
         label={t('common:header.nav.about_us')}
+        variant="default"
       />
     </nav>
   );

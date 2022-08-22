@@ -9,6 +9,8 @@ enum ColorPalette {
   GRAY_300 = '#6A6C6D',
   RED_100 = '#E81414',
   BLACK_100 = '#2F2F2F',
+  BLACK = '#000000',
+  GRAY_700 = '#595959',
   WHITE_100 = '#FFFFFF',
   BLUE_100 = '#0C42A6',
 }
