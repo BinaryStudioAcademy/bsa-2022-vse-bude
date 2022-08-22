@@ -7,6 +7,7 @@ import { initUploadImageRoutes } from './upload-image';
 import { initVerifyRoutes } from './verify';
 import { initProductRoutes } from './product';
 import { initNewsRoutes } from './news';
+import { initHealthRoutes } from './health';
 
 export const initRoutes = (services: Services) => [
   initUserRoutes(services, ApiRoutes.USERS),
@@ -16,4 +17,5 @@ export const initRoutes = (services: Services) => [
   initUploadImageRoutes(services, ApiRoutes.UPLOAD_IMAGE),
   initNewsRoutes(services, ApiRoutes.NEWS),
   initVerifyRoutes(services, ApiRoutes.VERIFY),
+  initHealthRoutes(services, ApiRoutes.HEALTH),
 ];
