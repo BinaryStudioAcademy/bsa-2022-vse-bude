@@ -23,6 +23,7 @@ const PasswordInputInner = (
         <button
           css={styles.showBtn}
           type="button"
+          tabIndex={-1}
           onClick={() => setPasswordVisible(!passwordVisible)}
         >
           <Icon
