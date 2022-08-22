@@ -1,6 +1,6 @@
+import type { Theme } from '@emotion/react';
 import { css } from '@emotion/react';
 import emotionNormalize from 'emotion-normalize';
-import type { Theme } from './theme';
 
 export const globalStyles = (theme: Theme) => css`
   * {

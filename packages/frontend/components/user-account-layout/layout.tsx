@@ -19,7 +19,7 @@ export const AccountLayout: FC<AccountPageProps> = ({ children }) => {
           <h3 css={styles.pageHeader}>
             {t('ACCOUNT_PAGE', { ns: 'page-titles' })}
           </h3>
-          <Flex css={styles.pageContent}>
+          <Flex css={styles.pageContent} justify="space-between">
             <Flex css={styles.linksContainer}>
               {linksData.map((link, idx) => {
                 const { iconPath, label, path } = link;

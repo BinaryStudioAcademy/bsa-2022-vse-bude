@@ -21,7 +21,7 @@ const HeaderLeft: FC = () => {
       >
         <ArrowLeftIcon style={{ color: ColorPalette.YELLOW_100 }} />
         <Text style={{ color: ColorPalette.YELLOW_100 }}>
-          {t('common.HOME')}
+          {t('common:common.HOME')}
         </Text>
       </View>
     </TouchableWithoutFeedback>
