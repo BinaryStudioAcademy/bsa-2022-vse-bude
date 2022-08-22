@@ -73,10 +73,12 @@ const Product: FC<Props> = ({
       >
         <Text
           style={[globalStyles.fs16, globalStyles.fontWeightBold, styles.price]}
-        >{`${transformPrice(price)} ${t('currency.UAH')}`}</Text>
+        >{`${transformPrice(price)} ${t('common:currency.UAH')}`}</Text>
         <Button
           label={
-            type === ProductType.AUCTION ? t('button.BID') : t('button.BUY')
+            type === ProductType.AUCTION
+              ? t('common:components.BUTTON_BID')
+              : t('common:components.BUTTON_BUY')
           }
           onPress={() => {
             //TODO

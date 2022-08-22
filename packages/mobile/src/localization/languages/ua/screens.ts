@@ -46,11 +46,4 @@ export const screens = {
     SUPPORT: 'Підтримка',
     SIGN_OUT: 'Вийти',
   },
-  currency: {
-    UAH: 'ГРН',
-  },
-  button: {
-    BID: 'Ставка',
-    BUY: 'Купити',
-  },
 };

@@ -47,11 +47,4 @@ export const screens = {
     SUPPORT: 'Support',
     SIGN_OUT: 'Sign Out',
   },
-  currency: {
-    UAH: 'UAH',
-  },
-  button: {
-    BID: 'Bid',
-    BUY: 'Buy',
-  },
 };
