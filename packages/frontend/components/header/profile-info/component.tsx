@@ -19,19 +19,19 @@ export const ProfileInfo = ({
   };
 
   return (
-    <Popover
-      trigger={
-        <div css={styles.profileInfo}>
-          <Avatar firstName={firstName} lastName={lastName} image={image} />
-          <DownArrow style={styles.dropdownArrow} />
-        </div>
-      }
-    >
-      <PopoverContent
-        wrapperStyles={styles.popoverContentWrapper}
-        innerStyles={styles.popoverContentItem}
+    <div css={styles.profileInfo}>
+      <Avatar
+        firstName={firstName}
+        lastName={lastName}
+        image={image}
         handleClick={handleClick}
       />
-    </Popover>
+      <Popover trigger={<DownArrow style={styles.dropdownArrow} />}>
+        <PopoverContent
+          wrapperStyles={styles.popoverContentWrapper}
+          innerStyles={styles.popoverContentItem}
+        />
+      </Popover>
+    </div>
   );
 };
