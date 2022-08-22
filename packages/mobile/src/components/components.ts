@@ -21,4 +21,4 @@ export { DropDown } from './dropdown/dropdown';
 export { HeaderButton } from './header-button/header-button';
 export { Divider } from '~/components/divider/divider';
 export { KeyboardAvoiding } from './keyboard-avoiding/keyboard-avoiding';
-export { FlagBackgroundView } from './flag-view/flag-view';
+export { FlagBackgroundView } from './flag-background-view/flag-background-view';
