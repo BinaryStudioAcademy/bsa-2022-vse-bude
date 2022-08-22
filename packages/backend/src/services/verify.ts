@@ -1,7 +1,6 @@
 import type { VerifyEmailDto, VerifyPhoneDto } from '@vse-bude/shared';
 import { VerificationTypes } from '@vse-bude/shared';
 import type { UserRepository } from '@repositories';
-import { logger } from '@helpers';
 import { t } from 'i18next';
 import { EmailFrom } from '@enums';
 import { CodeNotFoundError } from '../error/verify/code-not-found-error';
@@ -100,7 +99,6 @@ export class VerifyService {
     const user = await this._userRepository.getById(userId);
     await this.deleteCodeByType(userId, type);
     const code = await this.createVerificationCode(userId, type);
-    logger.warn(`Sending email to ${user.email} with code ${code}`);
 
     return await this._emailService.send({
       from: { email: EmailFrom.NO_REPLY_EMAIL, name: EmailFrom.NO_REPLY_NAME },
