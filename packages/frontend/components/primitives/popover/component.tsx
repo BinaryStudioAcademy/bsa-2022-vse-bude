@@ -42,11 +42,11 @@ export const Popover = ({ trigger, children }: PopoverProps) => {
     setIsVisible(true);
   };
 
-  const onClose = useCallback(() => setIsVisible(false), []);
+  const handleClose = useCallback(() => setIsVisible(false), []);
 
   const renderPortalBody = () => (
     <div ref={bodyRef} css={styles.popover}>
-      {children(onClose)}
+      {children(handleClose)}
     </div>
   );
 

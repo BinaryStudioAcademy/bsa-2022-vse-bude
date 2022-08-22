@@ -12,5 +12,5 @@ export interface DropdownProfileProps {
 }
 
 export interface PopoverContentProps {
-  onClose?: () => void;
+  handleClose?: () => void;
 }

@@ -5,7 +5,7 @@ import { auth } from '@helpers';
 import * as styles from '../styles';
 import type { PopoverContentProps } from '../types';
 
-export const PopoverContent = ({ onClose }: PopoverContentProps) => {
+export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
   const router = useRouter();
 
   const handleClick = (e) => {
@@ -17,7 +17,7 @@ export const PopoverContent = ({ onClose }: PopoverContentProps) => {
       : (path = e.target.parentElement.getAttribute('path-label'));
 
     router.push(path);
-    onClose();
+    handleClose();
   };
 
   return (
