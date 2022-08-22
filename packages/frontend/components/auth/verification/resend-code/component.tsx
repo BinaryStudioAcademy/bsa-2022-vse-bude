@@ -39,13 +39,13 @@ export const ResendCodeButton = ({
     <div css={resendCodeBlock}>
       {!resendDisabled && (
         <LinkButton size={'small'} onClickHook={onResendCode}>
-          {t('auth:RESEND_CODE')}
+          {t('auth:resendBtn.resendCode')}
         </LinkButton>
       )}
       {resendDisabled && (
         <span css={resendCodeTxt}>
-          {t('auth:RESEND_CODE_TIME_LEFT')}: {timeToResend}{' '}
-          {t('auth:SECONDS_SHORT')}
+          {t('auth:resendBtn.codeTimeLeft')}: {timeToResend}{' '}
+          {t('auth:resendBtn.seconds')}
         </span>
       )}
     </div>
