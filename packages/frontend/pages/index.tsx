@@ -1,14 +1,15 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Home, Layout } from '@components';
 import { wrapper } from 'store';
+import { withPublic } from '@helpers';
 import { AuthHelper, CookieStorage } from '@helpers';
 import { fetchCategoriesSSR } from 'store/category';
 import { Http, ProductType } from '@vse-bude/shared';
 import { getProductsSSR } from 'services/product';
 import type { HomeProps } from 'components/home/types';
 
-export const getServerSideProps = wrapper.getServerSideProps(
-  (store) => async (ctx) => {
+export const getServerSideProps = withPublic(
+  wrapper.getServerSideProps((store) => async (ctx) => {
     const { locale } = ctx;
 
     const storage = new CookieStorage(ctx);
@@ -39,7 +40,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
         sellingProducts,
       },
     };
-  },
+  }),
 );
 
 const IndexPage = ({ auctionProducts, sellingProducts }: HomeProps) => (
