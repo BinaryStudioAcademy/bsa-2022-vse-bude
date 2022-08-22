@@ -6,12 +6,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 30,
   },
-  logo: {
-    width: 180,
-    height: 45,
-    resizeMode: 'contain',
-    marginTop: 70,
-  },
   stampWrapper: {
     marginTop: 50,
   },
