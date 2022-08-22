@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
 
 /**
@@ -9,10 +10,21 @@ import { useEffect, useRef } from 'react';
  */
 export const useOutsideClick = (callback: () => void) => {
   const ref = useRef<HTMLDivElement>();
+  const router = useRouter();
 
   useEffect(() => {
     const handleClick = (event) => {
-      if (ref.current && !ref.current.contains(event.target)) {
+      let path = '/';
+      
+      if (ref.current) {
+        if(ref.current.contains(event.target)){
+          (event.target.hasAttribute('path-label')) 
+            ? path = event.target.getAttribute('path-label') 
+            : path = event.target.parentElement.getAttribute('path-label');
+
+          router.push(path);
+        }
+
         callback();
       }
     };
@@ -22,7 +34,7 @@ export const useOutsideClick = (callback: () => void) => {
     return () => {
       document.removeEventListener('click', handleClick, true);
     };
-  }, [callback, ref]);
+  }, [callback, ref, router]);
 
   return ref;
 };
