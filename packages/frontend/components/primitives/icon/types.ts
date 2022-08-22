@@ -1,9 +1,8 @@
 import type { IconName } from '@enums';
-import type { IconColor } from '@enums';
 
 export type IconProps = {
   icon: typeof IconName[keyof typeof IconName];
-  color: IconColor;
+  color: string;
   cssExtend?: any;
   size?: SizeProp;
 };

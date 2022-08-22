@@ -13,11 +13,11 @@ import { Routes, IconName } from '@enums';
 import { Logo } from 'components/primitives/logo';
 import { useCheckAuth } from '@hooks';
 import { useRouter } from 'next/router';
-import { AppTheme } from '../../theme';
+import type { Theme } from '../../theme';
 import { ProfileInfo } from './profile-info';
 import * as styles from './styles';
 
-export const Header = () => {
+export const Header = ({ colors }: Theme) => {
   const [show, setShow] = useState(false);
   const { isAuth, userInfo } = useCheckAuth();
   const { push } = useRouter();
@@ -50,7 +50,7 @@ export const Header = () => {
         ]}
       >
         {t('header.nav.category')}&nbsp;
-        <Icon icon={IconName.ANGLE_DOWN} color={AppTheme.colors.extraDark} />
+        <Icon icon={IconName.ANGLE_DOWN} color={colors.extraDark} />
       </Dropdown>
       <InternalLink
         href={Routes.DEFAULT}
