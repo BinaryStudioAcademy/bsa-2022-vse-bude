@@ -1,6 +1,6 @@
 import { SplideSlide } from '@splidejs/react-splide';
 import { css } from '@emotion/react';
-import type { Theme } from 'theme';
+import type { Theme } from '@emotion/react';
 import styled from '@emotion/styled';
 
 export const categoryContainer = ({ spaces, breakpoints }: Theme) => css`
