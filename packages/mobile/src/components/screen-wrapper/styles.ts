@@ -1,5 +1,5 @@
-import { ColorPalette } from '@vse-bude/shared';
 import { StyleSheet } from 'react-native';
+import { ColorPalette } from '@vse-bude/shared';
 
 const styles = StyleSheet.create({
   container: {
