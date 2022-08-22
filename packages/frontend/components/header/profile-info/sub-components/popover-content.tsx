@@ -1,6 +1,7 @@
 import { AccountRoutes, Routes, IconName } from '@enums';
 import { Icon } from '@primitives';
 import { useRouter } from 'next/router';
+import { auth } from '@helpers';
 import * as styles from '../styles';
 import type { PopoverContentProps } from '../types';
 
@@ -9,7 +10,13 @@ export const PopoverContent = ({ onClose }: PopoverContentProps) => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    router.push(e.target.getAttribute('path-label'));
+    let path = '/';
+    
+   (e.target.hasAttribute('path-label'))
+    ? path = e.target.getAttribute('path-label')
+    : path = e.target.parentElement.getAttribute('path-label');
+    
+    router.push(path);
     onClose();
   };
 
@@ -62,7 +69,10 @@ export const PopoverContent = ({ onClose }: PopoverContentProps) => {
       </button>
       <button
         css={styles.popoverContentItem}
-        onClick={handleClick}
+        onClick={(e) => {
+          auth.logOut();
+          handleClick(e); 
+        }}
         path-label={Routes.DEFAULT}
         data-variant="icon"
       >
