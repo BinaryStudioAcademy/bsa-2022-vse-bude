@@ -9,7 +9,7 @@ export const ResendCodeButton = ({
   onClickResend,
   timeLimit,
 }: ResendCodeButtonProps) => {
-  const { t } = useTranslation(['auth', 'common']);
+  const { t } = useTranslation();
 
   const [resendDisabled, setResendDisabled] = useState(false);
   const [timeToResend, setTimeToResend] = useState(timeLimit);
@@ -39,13 +39,13 @@ export const ResendCodeButton = ({
     <div css={resendCodeBlock}>
       {!resendDisabled && (
         <LinkButton size={'small'} onClickHook={onResendCode}>
-          {t('RESEND_CODE')}
+          {t('auth:RESEND_CODE')}
         </LinkButton>
       )}
       {resendDisabled && (
         <span css={resendCodeTxt}>
-          {t('RESEND_CODE_TIME_LEFT')}: {timeToResend}{' '}
-          {t('common:SECONDS_SHORT')}
+          {t('auth:RESEND_CODE_TIME_LEFT')}: {timeToResend}{' '}
+          {t('auth:SECONDS_SHORT')}
         </span>
       )}
     </div>

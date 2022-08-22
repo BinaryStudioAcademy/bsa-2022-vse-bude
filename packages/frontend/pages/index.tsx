@@ -14,11 +14,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     return {
       props: {
-        ...(await serverSideTranslations(locale, [
-          'home',
-          'common',
-          'components',
-        ])),
+        ...(await serverSideTranslations(locale, ['home', 'common'])),
       },
     };
   },

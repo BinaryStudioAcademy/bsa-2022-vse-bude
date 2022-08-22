@@ -45,7 +45,7 @@ export const ProductCard = (props: ProductCardProps) => {
         </div>
         <div className="productAction">
           <Button title="Place a Bid" variant="filled" size="small">
-            {t('components:product.placeBidBtn')}
+            {t('common:components.product.placeBidBtn')}
           </Button>
         </div>
       </div>

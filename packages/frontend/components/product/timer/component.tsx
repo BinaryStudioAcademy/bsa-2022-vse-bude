@@ -11,10 +11,10 @@ import { timerBadge, timerIcon } from './styles';
 function useTimeTranslations() {
   const { t } = useTranslation();
   const timeTranslations: TimerTranslations = {
-    daysText: t('components:product.time.days'),
-    hoursText: t('components:product.time.hours'),
-    minsText: t('components:product.time.minutes'),
-    secsText: t('components:product.time.seconds'),
+    daysText: t('common:components.product.time.days'),
+    hoursText: t('common:components.product.time.hours'),
+    minsText: t('common:components.product.time.minutes'),
+    secsText: t('common:components.product.time.seconds'),
   };
 
   return timeTranslations;

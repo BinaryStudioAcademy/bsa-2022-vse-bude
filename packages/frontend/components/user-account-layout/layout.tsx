@@ -22,7 +22,7 @@ export const AccountLayout: FC<AccountPageProps> = ({ children }) => {
               {linksData.map((link, idx) => {
                 const { iconPath, label, path } = link;
                 const location = router.pathname === link.path;
-                const tLabel = t(`dashboard.${label}`);
+                const tLabel = t(`user-account:dashboard.${label}`);
 
                 return (
                   <DashboardLink

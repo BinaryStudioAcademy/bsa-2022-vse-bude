@@ -12,7 +12,7 @@ import { signUpSchema } from './validation';
 
 export const SignUpForm = () => {
   // const { t: lang } = useTranslation('validation');
-  const { t: commonLang } = useTranslation();
+  const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
   const isLoading = useTypedSelector((state) => state.auth.loading);
@@ -31,11 +31,11 @@ export const SignUpForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} css={form}>
       <div css={inputWrapper}>
-        <p css={headline}>{commonLang('sign-up:createAccount')}</p>
+        <p css={headline}>{t('auth:sign-up.createAccount')}</p>
 
         <Input
           {...register('firstName')}
-          label={commonLang('sign-up:firstName')}
+          label={t('auth:sign-up.firstName')}
           variant="primary"
           type="text"
           name="firstName"
@@ -46,7 +46,7 @@ export const SignUpForm = () => {
       <div css={inputWrapper}>
         <Input
           {...register('lastName')}
-          label={commonLang('sign-up:lastName')}
+          label={t('auth:sign-up.lastName')}
           variant="primary"
           type="text"
           name="lastName"
@@ -57,7 +57,7 @@ export const SignUpForm = () => {
       <div css={inputWrapper}>
         <Input
           {...register('phone')}
-          label={commonLang('sign-up:phone')}
+          label={t('auth:sign-up.phone')}
           variant="primary"
           type="text"
           name="phone"
@@ -68,7 +68,7 @@ export const SignUpForm = () => {
       <div css={inputWrapper}>
         <Input
           {...register('email')}
-          label={commonLang('sign-up:email')}
+          label={t('auth:sign-up.email')}
           variant="primary"
           type="email"
           name="email"
@@ -79,7 +79,7 @@ export const SignUpForm = () => {
       <div css={inputWrapper}>
         <PasswordInput
           {...register('password')}
-          label={commonLang('sign-up:password')}
+          label={t('auth:sign-up.password')}
           variant="primary"
           name="password"
           disabled={isLoading}
@@ -89,7 +89,7 @@ export const SignUpForm = () => {
       <div css={inputWrapper}>
         <PasswordInput
           {...register('repeatPassword')}
-          label={commonLang('sign-up:passwordRepeat')}
+          label={t('auth:sign-up.passwordRepeat')}
           variant="primary"
           name="repeatPassword"
           disabled={isLoading}
@@ -100,7 +100,7 @@ export const SignUpForm = () => {
       </div>
       <Button type="submit" width={'100%'} disabled={isLoading}>
         {isLoading && <Loader size={'extraSmall'} />}
-        {commonLang('sign-up:signUpBtn')}
+        {t('auth:sign-up.signUpBtn')}
       </Button>
     </form>
   );

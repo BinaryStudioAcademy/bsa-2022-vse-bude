@@ -140,7 +140,6 @@ export const Header = () => {
           <span css={styles.buttonSignIn}>
             {t('common:header.buttons.sign_in')}
           </span>
-          {/* <span>{t('header.buttons.sign_in')}</span> */}
         </Button>
       </div>
       <div className="burger-close-button">{renderCloseBurgerButton()}</div>
