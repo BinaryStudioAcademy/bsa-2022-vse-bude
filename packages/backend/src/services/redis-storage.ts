@@ -1,5 +1,6 @@
-﻿import { createClient } from 'redis';
-import { getEnv } from '@helpers';
+﻿import type { RedisClientOptions } from 'redis';
+import { createClient } from 'redis';
+import { getEnv, logger } from '@helpers';
 
 type RedisClientType = ReturnType<typeof createClient>;
 
@@ -10,18 +11,22 @@ export class RedisStorageService {
     const redisPort = Number(getEnv('REDIS_PORT')) || 6379;
     const redisHost = getEnv('REDIS_HOST');
     const redisPassword = getEnv('REDIS_PASSWORD');
+    const redisUsername = getEnv('REDIS_USERNAME');
 
-    const redisConnectionParams = {
+    const redisConnectionParams: RedisClientOptions = {
       socket: {
         port: redisPort,
         host: redisHost,
       },
       password: redisPassword,
+      username: redisUsername,
     };
 
     this.client = createClient(redisConnectionParams);
 
-    this.client.on('error', (err) => console.log('redis client error', err));
+    this.client.on('error', (err) =>
+      logger.error({ message: `Redis client error: ${err.message}`, ...err }),
+    );
 
     this.client.connect().then(() => {
       console.log('redis client connected!');

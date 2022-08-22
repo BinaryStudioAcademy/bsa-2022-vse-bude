@@ -1,5 +1,9 @@
-import type { UserSignInDto, UserSignUpDto } from '@vse-bude/shared';
-import { ApiRoutes } from '@vse-bude/shared';
+import type {
+  PhoneVerifyDto,
+  UserSignInDto,
+  UserSignUpDto,
+} from '@vse-bude/shared';
+import { ApiRoutes, VerifyApiRoutes } from '@vse-bude/shared';
 import { AuthApiRoutes } from '@vse-bude/shared';
 import { http } from '@helpers';
 import type { IAuth } from '../common/types/auth';
@@ -10,8 +14,8 @@ export const login = (loginData: UserSignInDto) =>
     body: loginData,
   });
 
-export const signUp = async (signUpData: UserSignUpDto): Promise<IAuth> =>
-  await http.post({
+export const signUp = (signUpData: UserSignUpDto): Promise<IAuth> =>
+  http.post({
     url: ApiRoutes.AUTH + AuthApiRoutes.SIGN_UP,
     body: signUpData,
   });
@@ -19,4 +23,16 @@ export const signUp = async (signUpData: UserSignUpDto): Promise<IAuth> =>
 export const getUser = () =>
   http.get({
     url: `${ApiRoutes.AUTH}${AuthApiRoutes.USER}`,
+  });
+
+export const verifyPhone = (data: PhoneVerifyDto) =>
+  http.post({
+    url: `${ApiRoutes.VERIFY}${VerifyApiRoutes.VERIFY_PHONE}`,
+    body: data,
+  });
+
+export const resendPhoneCode = () =>
+  http.post({
+    url: `${ApiRoutes.VERIFY}${VerifyApiRoutes.PHONE_RESEND_CODE}`,
+    body: {},
   });

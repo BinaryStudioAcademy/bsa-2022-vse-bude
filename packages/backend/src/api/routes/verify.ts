@@ -25,5 +25,13 @@ export const initVerifyRoutes = (
     }),
   );
 
+  router.post(
+    apiPath(path, VerifyApiRoutes.PHONE_RESEND_CODE),
+    authMiddleware,
+    wrap((req: Request) =>
+      verifyService.resendPhoneCode(req.userId, VerificationTypes.PHONE),
+    ),
+  );
+
   return router;
 };

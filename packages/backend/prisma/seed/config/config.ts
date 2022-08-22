@@ -1,6 +1,7 @@
 // if you chaging USERS_NUMBER please use
 // npm run db:seed:reset
 export const USERS_NUMBER = 5;
+export const NEWS_NUMBER = 5;
 
 export const BIDS_NUMBER = USERS_NUMBER * 2;
 export const CHAT_MEMBERS_NUMBER = USERS_NUMBER * 2;
@@ -16,3 +17,4 @@ export const PRODUCTS_FILE_NAME = 'product';
 export const SOCIAL_MEDIA_FILE_NAME = 'social_media';
 export const USER_FILE_NAME = 'user';
 export const USER_SETTINGS_FILE_NAME = 'user_settings';
+export const NEWS_FILE_NAME = 'news';

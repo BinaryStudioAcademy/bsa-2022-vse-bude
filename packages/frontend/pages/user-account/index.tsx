@@ -11,8 +11,9 @@ export const getServerSideProps = wrapper.getServerSideProps(
       props: {
         ...(await serverSideTranslations(locale, [
           'dashboard',
-          'page-titles',
+          'personal-info',
           'common',
+          'page-titles',
           'footer',
         ])),
       },

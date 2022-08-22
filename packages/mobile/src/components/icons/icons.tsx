@@ -26,6 +26,26 @@ const ListIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="list" {...iconProps} />
 );
 
+const MessageIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="message-circle" {...iconProps} />
+);
+
+const SupportIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="help-circle" {...iconProps} />
+);
+
+const LogOutIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="log-out" {...iconProps} />
+);
+
+const ArrowLeftIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="chevron-left" {...iconProps} />
+);
+
+const ArrowRightIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="chevron-right" {...iconProps} />
+);
+
 const AlertIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="alert-triangle" {...iconProps} />
 );
@@ -47,6 +67,11 @@ export {
   UserIcon,
   SettingsIcon,
   ListIcon,
+  MessageIcon,
+  SupportIcon,
+  LogOutIcon,
+  ArrowLeftIcon,
+  ArrowRightIcon,
   AlertIcon,
   BackIcon,
   CustomFeatherIcon,

@@ -1,4 +1,4 @@
-import { log } from '@helpers';
+import { logger } from '@helpers';
 import type { ISMSProvider } from '@types';
 import type { ISMSSenderService } from '@types';
 
@@ -17,11 +17,9 @@ class SMSSenderService implements ISMSSenderService {
    */
   public async send(phone: string, message: string): Promise<boolean> {
     try {
-      const result = await this.providerService.send(phone, String(message));
-
-      return result;
+      return await this.providerService.send(phone, String(message));
     } catch (error) {
-      log(error);
+      logger.error(error);
     }
   }
 
@@ -32,11 +30,9 @@ class SMSSenderService implements ISMSSenderService {
    */
   public async getById(id: string): Promise<object> {
     try {
-      const result = await this.providerService.getById(id);
-
-      return result;
+      return await this.providerService.getById(id);
     } catch (error) {
-      log(error);
+      logger.error(error);
     }
   }
 }

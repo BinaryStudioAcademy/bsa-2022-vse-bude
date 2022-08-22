@@ -1,6 +1,6 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { PhoneVerification } from '../../../components/auth/verification/phone-verification';
-import { AuthLayout } from '../../../components/authLayout/component';
+import { AuthLayout } from '../../../components/authLayout';
 import {
   contentWrapper,
   formWrapper,
@@ -8,7 +8,7 @@ import {
 
 export const getServerSideProps = async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale, ['auth'])),
+    ...(await serverSideTranslations(locale, ['auth', 'common'])),
   },
 });
 
