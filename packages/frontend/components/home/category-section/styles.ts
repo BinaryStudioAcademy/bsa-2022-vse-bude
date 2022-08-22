@@ -84,10 +84,10 @@ export const imageWrapper = () => css`
 `;
 
 export const SplideSlideStyled = styled(SplideSlide)`
-  &:nth-child(1) {
+  &:nth-of-type(1) {
     grid-column: 1 / 4;
   }
-  &:nth-child(4) {
+  &:nth-of-type(4) {
     grid-column: 2 / 5;
   }
 `;
