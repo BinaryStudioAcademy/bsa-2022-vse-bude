@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { Theme } from 'theme';
+import type { Theme } from '@emotion/react';
 
 export const avatar = ({ spaces, radiuses }: Theme) => css`
   display: flex;
@@ -14,8 +14,6 @@ export const avatar = ({ spaces, radiuses }: Theme) => css`
 
 export const initials = ({
   colors,
-  spaces,
-  radiuses,
   fontSizes,
   fontWeights,
   lineHeights,
@@ -27,16 +25,17 @@ export const initials = ({
   display: flex;
   align-items: center;
   justify-content: center;
+
+  text-transform: uppercase;
+`;
+
+export const wrapper = ({ spaces, radiuses, colors }: Theme) => css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
   width: ${spaces.xl2};
   height: ${spaces.xl2};
   border-radius: ${radiuses.circle};
   background-color: ${colors.primary};
-  text-transform: uppercase;
-`;
-
-export const wrapper = ({ spaces }: Theme) => css`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: ${spaces.sm};
 `;

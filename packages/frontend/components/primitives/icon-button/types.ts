@@ -1,6 +1,6 @@
 import type { Interpolation } from '@emotion/react';
 import type { IconName } from '@enums';
-import type { Theme } from 'theme';
+import type { Theme } from '@emotion/react';
 
 export type IconButtonProps = {
   icon: typeof IconName[keyof typeof IconName];

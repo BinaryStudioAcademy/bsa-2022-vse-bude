@@ -30,3 +30,9 @@ export const verifyPhone = (data: PhoneVerifyDto) =>
     url: `${ApiRoutes.VERIFY}${VerifyApiRoutes.VERIFY_PHONE}`,
     body: data,
   });
+
+export const resendPhoneCode = () =>
+  http.post({
+    url: `${ApiRoutes.VERIFY}${VerifyApiRoutes.PHONE_RESEND_CODE}`,
+    body: {},
+  });

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { login, signUp, verifyPhone } from 'services/auth';
+import { login, signUp, verifyPhone, resendPhoneCode } from 'services/auth';
 import type {
   PhoneVerifyDto,
   UserSignInDto,
@@ -20,6 +20,7 @@ const loginUser = createAsyncThunk(
           return rejectWithValue(data.error);
         }
         auth.setTokens(data.accessToken, data.refreshToken);
+        Router.push(Routes.DEFAULT);
 
         return data;
       })
@@ -57,4 +58,15 @@ const phoneVerification = createAsyncThunk(
   },
 );
 
-export { loginUser, signUpUser, phoneVerification };
+const phoneCodeResend = createAsyncThunk(
+  AuthActions.PHONE_RESEND_CODE,
+  async (_, { rejectWithValue }) => {
+    try {
+      return await resendPhoneCode();
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  },
+);
+
+export { loginUser, signUpUser, phoneVerification, phoneCodeResend };
