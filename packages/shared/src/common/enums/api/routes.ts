@@ -16,6 +16,7 @@ export enum AuthApiRoutes {
   REFRESH_TOKEN = '/refresh-token',
   USER = '/user',
   RESET_PASSWORD_LINK = '/reset-password-link',
+  RESET_PASSWORD = '/reset-password',
 }
 
 export enum VerifyApiRoutes {

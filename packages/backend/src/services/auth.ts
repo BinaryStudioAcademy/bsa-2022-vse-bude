@@ -25,7 +25,11 @@ import type {
 import type { HashService } from '@services';
 import type { Request } from 'express';
 import type { VerifyService } from '@services';
+import { AuthApiRoutes } from '@vse-bude/shared';
+import { ResetPasswordMail } from '../email/reset-password-mail';
+import { ResetPassLinkInvalid } from '../error/reset-password/reset-pass-link-invalid';
 import type { RedisStorageService } from './redis-storage';
+import type { EmailService } from './email/email';
 
 export class AuthService {
   private _userRepository: UserRepository;
@@ -38,6 +42,8 @@ export class AuthService {
 
   private _cache: RedisStorageService;
 
+  private _emailService: EmailService;
+
   private resetLinkLifeTime = 3600000;
 
   constructor(
@@ -46,12 +52,14 @@ export class AuthService {
     hashService: HashService,
     verifyService: VerifyService,
     cache: RedisStorageService,
+    emailService: EmailService,
   ) {
     this._userRepository = userRepository;
     this._refreshTokenRepository = refreshTokenRepository;
     this._hashService = hashService;
     this._verifyService = verifyService;
     this._cache = cache;
+    this._emailService = emailService;
   }
 
   async signOut(signOutDto: SignOut) {
@@ -153,15 +161,47 @@ export class AuthService {
     return newTokenData;
   }
 
-  async resetPasswordLink(email: string) {
-    const hashValue = this._hashService.generateHash(email);
+  private async saveLink(email: string, hashValue: string) {
     await this._cache.set(
       this.getResetPasswordCacheKey(email),
       hashValue,
       this.resetLinkLifeTime,
     );
+  }
+
+  private async deleteLinksByEmail(email: string) {
+    await this._cache.del(this.getResetPasswordCacheKey(email));
+  }
+
+  async resetPasswordLink(email: string) {
+    const hashValue = this._hashService.generateHash(email);
+    await this.deleteLinksByEmail(email);
+    await this.saveLink(email, hashValue);
+    const link = this.getResetPasswordEmailLink(hashValue, email);
+
+    const resetMail = new ResetPasswordMail().setText(link).setTo(email);
+
+    await resetMail.send();
 
     return {};
+  }
+
+  async resetPassword(email: string, hash: string) {
+    const resetHash = await this._cache.get<string>(
+      this.getResetPasswordCacheKey(email),
+    );
+
+    if (!resetHash || resetHash !== hash) {
+      throw new ResetPassLinkInvalid();
+    }
+
+    return {};
+  }
+
+  private getResetPasswordEmailLink(hash: string, email: string): string {
+    return `${getEnv('APP_URL')}${
+      AuthApiRoutes.RESET_PASSWORD
+    }?email=${email}&value=${hash}`;
   }
 
   private getResetPasswordCacheKey(email: string): string {

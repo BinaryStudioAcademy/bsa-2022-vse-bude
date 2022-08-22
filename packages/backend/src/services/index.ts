@@ -9,11 +9,12 @@ import { AuthService } from './auth';
 import { HashService } from './hash';
 import { RedisStorageService } from './redis-storage';
 import { SMSSenderService } from './sms';
-import { EmailService } from './email';
+import { EmailService } from './email/email';
 import { S3StorageService } from './s3-storage';
 import { VerifyService } from './verify';
 import { NewsService } from './news';
 import { HealthService } from './health';
+import { emailService } from './email';
 
 export const initServices = (repositories: Repositories) => {
   const hashService: HashService = new HashService();
@@ -25,7 +26,6 @@ export const initServices = (repositories: Repositories) => {
       : new TwilioSMSProvider();
 
   const smsService = new SMSSenderService(smsProvider);
-  const emailService = new EmailService(new SendInBlueEmailProvider());
 
   const verifyService: VerifyService = new VerifyService(
     repositories.userRepository,
@@ -45,6 +45,8 @@ export const initServices = (repositories: Repositories) => {
       repositories.refreshTokenRepository,
       hashService,
       verifyService,
+      redisService,
+      emailService,
     ),
     redisStorageService: redisService,
     smsSenderService: smsService,

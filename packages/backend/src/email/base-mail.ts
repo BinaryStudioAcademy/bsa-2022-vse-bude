@@ -21,7 +21,7 @@ export class BaseMail implements MailInterface {
   setTo(emailTo: string, name?: string) {
     this._options.to.push({
       email: emailTo,
-      name
+      name,
     });
 
     return this;
@@ -44,8 +44,8 @@ export class BaseMail implements MailInterface {
       subject: '',
       from: {
         email: getEnv('APP_EMAIL_FROM'),
-        name: getEnv('APP_NAME')
-      }
+        name: getEnv('APP_NAME'),
+      },
     };
   }
 }
