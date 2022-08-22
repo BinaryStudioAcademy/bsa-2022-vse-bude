@@ -5,12 +5,10 @@ import type { PopoverContentProps } from '../types';
 export const PopoverContent = ({
   wrapperStyles,
   innerStyles,
-  handleClick,
 }: PopoverContentProps) => (
   <div css={wrapperStyles}>
     <button
       css={innerStyles}
-      onClick={handleClick}
       path-label={Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_PERSONAL}
       data-variant="icon"
     >
@@ -19,7 +17,6 @@ export const PopoverContent = ({
     </button>
     <button
       css={innerStyles}
-      onClick={handleClick}
       path-label={Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_LIST}
       data-variant="icon"
     >
@@ -28,7 +25,6 @@ export const PopoverContent = ({
     </button>
     <button
       css={innerStyles}
-      onClick={handleClick}
       path-label={Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_SETTINGS}
       data-variant="icon"
     >
@@ -37,7 +33,6 @@ export const PopoverContent = ({
     </button>
     <button
       css={innerStyles}
-      onClick={handleClick}
       path-label={Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_MESSAGES}
       data-variant="icon"
     >
@@ -46,19 +41,13 @@ export const PopoverContent = ({
     </button>
     <button
       css={innerStyles}
-      onClick={handleClick}
       path-label={Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_LIST}
       data-variant="icon"
     >
       <Icon icon={IconName.SUPPORT} color="yellow" />
       <span>Support</span>
     </button>
-    <button
-      css={innerStyles}
-      onClick={handleClick}
-      path-label={Routes.DEFAULT}
-      data-variant="icon"
-    >
+    <button css={innerStyles} path-label={Routes.DEFAULT} data-variant="icon">
       <Icon icon={IconName.SIGN_OUT} color="yellow" />
       <span>Sign Out</span>
     </button>
