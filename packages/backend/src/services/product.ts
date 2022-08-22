@@ -8,13 +8,16 @@ export class ProductService {
     this._productRepository = categoryRepository;
   }
 
-  public getAll() {
-    return this._productRepository.getAll();
-  }
+  public getByType(query: Query) {
+    console.log(query);
 
-  public getByType(type: ProductType, query: Query) {
     const take = query.limit ? +query.limit : 10;
+    const type = query.type as ProductType;
 
     return this._productRepository.getByType(type, take);
+  }
+
+  public getById(id: string) {
+    return this._productRepository.getById(id);
   }
 }

@@ -18,14 +18,12 @@ export const initProductRoutes = (
 
   router.get(
     apiPath(path),
-    wrap(() => productService.getAll()),
+    wrap<RequestParams>((req) => productService.getByType(req.query)),
   );
 
   router.get(
-    apiPath(path, ProductApiRoutes.$TYPE),
-    wrap<RequestParams>((req) =>
-      productService.getByType(req.params.type, req.query),
-    ),
+    apiPath(path, ProductApiRoutes.ID),
+    wrap((req) => productService.getById(req.params.id)),
   );
 
   return router;
