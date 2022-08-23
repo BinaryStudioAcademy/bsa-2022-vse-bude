@@ -12,7 +12,5 @@ export interface DropdownProfileProps {
 }
 
 export interface PopoverContentProps {
-  wrapperStyles?: Interpolation<Theme>;
-  innerStyles?: Interpolation<Theme>;
-  handleClick: React.MouseEventHandler<HTMLButtonElement>;
+  handleClose?: () => void;
 }

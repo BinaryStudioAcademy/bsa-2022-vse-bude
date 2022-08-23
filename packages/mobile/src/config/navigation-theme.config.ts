@@ -7,7 +7,7 @@ const COMMON_COLORS = {
   backgroundThird: ColorPalette.GREEN_200,
   backgroundElements: ColorPalette.GRAY_100,
   line: ColorPalette.GRAY_200,
-  placeholder: ColorPalette.BLACK_100,
+  placeholder: ColorPalette.GRAY_200,
   buttonTextPrimary: ColorPalette.WHITE_100,
   buttonTextSecondary: ColorPalette.GREEN_200,
   buttonPrimaryBackground: ColorPalette.YELLOW_100,

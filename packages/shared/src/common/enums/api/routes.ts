@@ -27,5 +27,5 @@ export enum VerifyApiRoutes {
 }
 
 export enum ProductApiRoutes {
-  $TYPE = '/:type',
+  ID = '/:id',
 }

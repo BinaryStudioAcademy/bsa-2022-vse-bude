@@ -1,6 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { login, signUp, verifyPhone, resendPhoneCode } from 'services/auth';
+import {
+  login,
+  signUp,
+  verifyPhone,
+  resendPhoneCode,
+  verifyEmail,
+  resendEmailCode,
+} from 'services/auth';
 import type {
+  EmailVerifyDto,
   PhoneVerifyDto,
   UserSignInDto,
   UserSignUpDto,
@@ -69,4 +77,34 @@ const phoneCodeResend = createAsyncThunk(
   },
 );
 
-export { loginUser, signUpUser, phoneVerification, phoneCodeResend };
+const emailVerification = createAsyncThunk(
+  AuthActions.EMAIL_VERIFY,
+  async (data: EmailVerifyDto, { rejectWithValue }) => {
+    try {
+      await verifyEmail(data);
+      await Router.push(Routes.DEFAULT);
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  },
+);
+
+const emailCodeResend = createAsyncThunk(
+  AuthActions.EMAIL_RESEND_CODE,
+  async (_, { rejectWithValue }) => {
+    try {
+      return await resendEmailCode();
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  },
+);
+
+export {
+  loginUser,
+  signUpUser,
+  phoneVerification,
+  phoneCodeResend,
+  emailVerification,
+  emailCodeResend,
+};

@@ -18,6 +18,18 @@ export const linkStyles = ({
     pointer-events: none;
   }
 
+  &[data-variant='default'] {
+    color: ${colors.extraDark};
+
+    &:visited {
+      color: ${colors.lightDark};
+    }
+
+    &:hover {
+      color: ${colors.lightDark};
+    }
+  }
+
   &[data-variant='primary'] {
     color: ${colors.primaryLight};
 
