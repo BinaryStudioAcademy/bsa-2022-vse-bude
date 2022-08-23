@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { Theme } from 'theme';
+import type { Theme } from '@emotion/react';
 
 export const linkStyles = ({
   colors,
@@ -16,6 +16,18 @@ export const linkStyles = ({
   &[aria-disabled='true'] {
     color: ${colors.disabled};
     pointer-events: none;
+  }
+
+  &[data-variant='default'] {
+    color: ${colors.extraDark};
+
+    &:visited {
+      color: ${colors.lightDark};
+    }
+
+    &:hover {
+      color: ${colors.lightDark};
+    }
   }
 
   &[data-variant='primary'] {

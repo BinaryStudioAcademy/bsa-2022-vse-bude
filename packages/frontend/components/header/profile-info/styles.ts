@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { resetButton } from 'theme';
-import type { Theme } from 'theme';
+import type { Theme } from '@emotion/react';
 
 export const profileInfo = ({ spaces }: Theme) => css`
   display: flex;

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { Theme } from 'theme';
+import type { Theme } from '@emotion/react';
 
 export const footer = ({ colors, spaces }: Theme) => css`
   padding: ${spaces.xl8} 0;

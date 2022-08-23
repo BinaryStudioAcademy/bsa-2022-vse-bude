@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { Theme } from 'theme';
+import type { Theme } from '@emotion/react';
 import { ColorPalette } from '@vse-bude/shared';
 
 export const input = ({
