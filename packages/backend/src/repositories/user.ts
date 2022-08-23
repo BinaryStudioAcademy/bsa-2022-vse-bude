@@ -8,12 +8,12 @@ export class UserRepository {
     this._dbClient = prismaClient;
   }
 
-  public async getAll(): Promise<User[]> {
-    return await this._dbClient.user.findMany();
+  public getAll(): Promise<User[]> {
+    return this._dbClient.user.findMany();
   }
 
-  public async create(signUpData: CreateUser) {
-    return await this._dbClient.user.create({
+  public create(signUpData: CreateUser) {
+    return this._dbClient.user.create({
       data: {
         firstName: signUpData.firstName,
         lastName: signUpData.lastName,
@@ -24,24 +24,24 @@ export class UserRepository {
     });
   }
 
-  public async getById(id: string) {
-    return await this._dbClient.user.findFirst({
+  public getById(id: string) {
+    return this._dbClient.user.findFirst({
       where: {
         id,
       },
     });
   }
 
-  public async getByEmail(email: string) {
-    return await this._dbClient.user.findFirst({
+  public getByEmail(email: string) {
+    return this._dbClient.user.findFirst({
       where: {
         email: email,
       },
     });
   }
 
-  public async verifyPhone(userId: string) {
-    return await this._dbClient.user.update({
+  public verifyPhone(userId: string) {
+    return this._dbClient.user.update({
       where: {
         id: userId,
       },
@@ -51,8 +51,8 @@ export class UserRepository {
     });
   }
 
-  public async getByEmailOrPhone(email: string, phone: string) {
-    return await this._dbClient.user.findFirst({
+  public getByEmailOrPhone(email: string, phone: string) {
+    return this._dbClient.user.findFirst({
       where: {
         OR: [
           {
