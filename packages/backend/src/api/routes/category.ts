@@ -41,7 +41,6 @@ export const initCategoryRoutes = (
    * @openapi
    * /category/getAll:
    *   get:
-   *     description: Welcome to swagger-jsdoc!
    *     tags: [Category]
    *     produces:
    *       - application/json
