@@ -30,12 +30,7 @@ export const getServerSideProps = withPublic(
 
     return {
       props: {
-        ...(await serverSideTranslations(locale, [
-          'home',
-          'product',
-          'common',
-          'footer',
-        ])),
+        ...(await serverSideTranslations(locale, ['home', 'common'])),
         auctionProducts,
         sellingProducts,
       },
