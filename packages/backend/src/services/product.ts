@@ -11,4 +11,8 @@ export class ProductService {
   public getAll(query: ProductQuery) {
     return this._productRepository.getAll(query);
   }
+
+  public getById(id: string) {
+    return this._productRepository.getById(id);
+  }
 }
