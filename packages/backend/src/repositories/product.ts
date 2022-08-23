@@ -1,4 +1,5 @@
-import type { PrismaClient, Product, ProductType } from '@prisma/client';
+import type { PrismaClient, Product } from '@prisma/client';
+import type { ProductQuery } from '@types';
 
 export class ProductRepository {
   private _dbClient: PrismaClient;
@@ -7,9 +8,11 @@ export class ProductRepository {
     this._dbClient = prismaClient;
   }
 
-  public getAll(type: ProductType, take: number): Promise<Product[]> {
+  public getAll(query: ProductQuery): Promise<Product[]> {
+    const { limit = 10, type } = query;
+
     return this._dbClient.product.findMany({
-      take,
+      take: +limit,
       where: {
         type,
       },

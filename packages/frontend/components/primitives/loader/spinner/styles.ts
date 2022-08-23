@@ -1,5 +1,5 @@
+import type { Theme } from '@emotion/react';
 import { css, keyframes } from '@emotion/react';
-import type { Theme } from '../../../../theme';
 
 const extraSmall = 24;
 const smallSize = 32;

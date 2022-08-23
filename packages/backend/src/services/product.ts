@@ -1,5 +1,5 @@
 import type { ProductRepository } from '@repositories';
-import type { GetProductsRequest } from '@types';
+import type { ProductQuery } from '@types';
 
 export class ProductService {
   private _productRepository: ProductRepository;
@@ -8,10 +8,8 @@ export class ProductService {
     this._productRepository = categoryRepository;
   }
 
-  public getAll({ type, limit }: GetProductsRequest) {
-    const take = limit ? +limit : 10;
-
-    return this._productRepository.getAll(type, take);
+  public getAll(query: ProductQuery) {
+    return this._productRepository.getAll(query);
   }
 
   public getById(id: string) {

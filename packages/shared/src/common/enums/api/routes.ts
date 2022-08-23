@@ -6,6 +6,7 @@ export enum ApiRoutes {
   AUTH = '/auth',
   UPLOAD_IMAGE = '/upload-image',
   VERIFY = '/verify',
+  HEALTH = '/health',
 }
 
 export enum AuthApiRoutes {

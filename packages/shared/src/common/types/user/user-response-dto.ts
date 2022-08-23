@@ -8,6 +8,6 @@ export type UserResponseDto = {
   phoneVerified: boolean;
   id: string;
   role: string;
-  updatedAt: string;
-  createdAt: string;
+  updatedAt: number;
+  createdAt: number;
 };
