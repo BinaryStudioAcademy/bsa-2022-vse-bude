@@ -29,7 +29,7 @@ export class RedisStorageService {
     );
 
     this.client.connect().then(() => {
-      console.log('redis client connected!');
+      logger.log('Redis client connected');
     });
   }
 
