@@ -12,7 +12,7 @@ export class EmailService {
     try {
       await this._emailProvider.send(options);
     } catch (error) {
-      logger.error(error);
+      logger.error(error.response.body);
     }
   }
 }

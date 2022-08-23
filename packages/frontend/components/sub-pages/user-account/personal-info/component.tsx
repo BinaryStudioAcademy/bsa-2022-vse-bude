@@ -37,7 +37,7 @@ export const PersonalInfo = () => {
 
   const { handleSubmit } = useForm();
 
-  const { t } = useTranslation('personal-info');
+  const { t } = useTranslation();
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [event.target.name]: event.target.value });
   };
@@ -79,17 +79,19 @@ export const PersonalInfo = () => {
           </div>
           <Flex justify={'flex-end'} css={styles.buttons}>
             <Button type="reset" variant="outlined">
-              {t('ACTION_CANCEL')}
+              {t('personal-info:action.cancel')}
             </Button>
             <Button type="submit" onClick={onSaveHandler}>
-              {t('ACTION_SAVE')}
+              {t('personal-info:action.save')}
             </Button>
           </Flex>
         </div>
 
         <div css={styles.sections}>
           <Column css={styles.sectionRow}>
-            <SectionHeader>{t('PERSONAL_INFO')}</SectionHeader>
+            <SectionHeader>
+              {t('personal-info:headline.personalInfo')}
+            </SectionHeader>
             <Flex css={styles.groupInputs}>
               <div css={styles.inputRow}>
                 <Input
@@ -98,8 +100,8 @@ export const PersonalInfo = () => {
                   name="firstName"
                   value={form.firstName}
                   variant="primary"
-                  label={t('LABEL_FIRST_NAME')}
-                  placeholder={t('PLACEHOLDER_FIRST_NAME')}
+                  label={t('personal-info:label.firstName')}
+                  placeholder={t('personal-info:placeholder.firstName')}
                   onChange={changeHandler}
                 />
               </div>
@@ -110,8 +112,8 @@ export const PersonalInfo = () => {
                   name="lastName"
                   value={form.lastName}
                   variant="primary"
-                  label={t('LABEL_LAST_NAME')}
-                  placeholder={t('PLACEHOLDER_LAST_NAME')}
+                  label={t('personal-info:label.lastName')}
+                  placeholder={t('personal-info:placeholder.lastName')}
                   onChange={changeHandler}
                 />
               </div>
@@ -123,8 +125,8 @@ export const PersonalInfo = () => {
                 name="email"
                 value={form.email}
                 variant="primary"
-                label={t('LABEL_EMAIL')}
-                placeholder={t('PLACEHOLDER_EMAIL')}
+                label={t('personal-info:label.email')}
+                placeholder={t('personal-info:placeholder.email')}
                 onChange={changeHandler}
               />
             </div>
@@ -135,15 +137,15 @@ export const PersonalInfo = () => {
                 variant="primary"
                 name="phone"
                 value={form.phone}
-                label={t('LABEL_PHONE')}
-                placeholder={t('PLACEHOLDER_PHONE')}
+                label={t('personal-info:label.phone')}
+                placeholder={t('personal-info:placeholder.phone')}
                 onChange={changeHandler}
               />
             </div>
           </Column>
 
           <Column css={styles.sectionRow}>
-            <SectionHeader>{t('ADDRESS')}</SectionHeader>
+            <SectionHeader>{t('personal-info:headline.address')}</SectionHeader>
 
             <Flex css={styles.groupInputs}>
               <div css={styles.inputRow}>
@@ -153,8 +155,8 @@ export const PersonalInfo = () => {
                   name="country"
                   value={form.country}
                   variant="primary"
-                  label={t('LABEL_COUNTRY')}
-                  placeholder={t('PLACEHOLDER_COUNTRY')}
+                  label={t('personal-info:label.country')}
+                  placeholder={t('personal-info:placeholder.country')}
                   onChange={changeHandler}
                 />
               </div>
@@ -166,8 +168,8 @@ export const PersonalInfo = () => {
                   name="region"
                   value={form.region}
                   variant="primary"
-                  label={t('LABEL_REGION')}
-                  placeholder={t('PLACEHOLDER_REGION')}
+                  label={t('personal-info:label.region')}
+                  placeholder={t('personal-info:placeholder.region')}
                   onChange={changeHandler}
                 />
               </div>
@@ -181,8 +183,8 @@ export const PersonalInfo = () => {
                   name="city"
                   value={form.city}
                   variant="primary"
-                  label={t('LABEL_CITY')}
-                  placeholder={t('PLACEHOLDER_CITY')}
+                  label={t('personal-info:label.city')}
+                  placeholder={t('personal-info:placeholder.city')}
                   onChange={changeHandler}
                 />
               </div>
@@ -193,8 +195,8 @@ export const PersonalInfo = () => {
                   name="zipCode"
                   value={form.zipCode}
                   variant="primary"
-                  label={t('LABEL_ZIP_CODE')}
-                  placeholder={t('PLACEHOLDER_ZIP_CODE')}
+                  label={t('personal-info:label.zipCode')}
+                  placeholder={t('personal-info:placeholder.zipCode')}
                   onChange={changeHandler}
                 />
               </div>
@@ -207,15 +209,17 @@ export const PersonalInfo = () => {
                 variant="primary"
                 name="novaposhta"
                 value={form.novaposhta}
-                label={t('NOVA_POSHTA')}
-                placeholder={t('NOVA_POSHTA_PLACEHOLDER')}
+                label={t('personal-info:label.novaPoshta')}
+                placeholder={t('personal-info:placeholder.novaPoshta')}
                 onChange={changeHandler}
               />
             </div>
           </Column>
 
           <Column css={styles.sectionRow}>
-            <SectionHeader>{t('SOCIAL_NETWORKS')}</SectionHeader>
+            <SectionHeader>
+              {t('personal-info:headline.socialNetworks')}
+            </SectionHeader>
 
             <div css={styles.inputRow}>
               <Input
@@ -224,8 +228,8 @@ export const PersonalInfo = () => {
                 variant="primary"
                 name="instagram"
                 value={form.instagram}
-                label={t('LABEL_INSTAGRAM')}
-                placeholder={t('PLACEHOLDER_INSTAGRAM')}
+                label={t('personal-info:label.instagram')}
+                placeholder={t('personal-info:placeholder.instagram')}
                 onChange={changeHandler}
               />
             </div>
@@ -237,8 +241,8 @@ export const PersonalInfo = () => {
                 variant="primary"
                 name="linkedin"
                 value={form.linkedin}
-                label={t('LABEL_LINKEDIN')}
-                placeholder={t('PLACEHOLDER_LINKEDIN')}
+                label={t('personal-info:label.linkedin')}
+                placeholder={t('personal-info:placeholder.linkedin')}
                 onChange={changeHandler}
               />
             </div>
@@ -250,22 +254,24 @@ export const PersonalInfo = () => {
                 variant="primary"
                 name="facebook"
                 value={form.facebook}
-                label={t('LABEL_FACEBOOK')}
-                placeholder={t('PLACEHOLDER_FACEBOOK')}
+                label={t('personal-info:label.facebook')}
+                placeholder={t('personal-info:placeholder.facebook')}
                 onChange={changeHandler}
               />
             </div>
           </Column>
 
           <Column css={styles.sectionRow}>
-            <SectionHeader>{t('PASSWORD')}</SectionHeader>
+            <SectionHeader>
+              {t('personal-info:headline.password')}
+            </SectionHeader>
             <div css={styles.inputRow}>
               <PasswordInput
                 id="current-password-profile"
                 value={form.currentPassword}
                 variant="primary"
-                label={t('LABEL_CURRENT_PASSWORD')}
-                placeholder={t('PLACEHOLDER__CURRENT_PASSWORD')}
+                label={t('personal-info:label.currentPassword')}
+                placeholder={t('personal-info:placeholder.currentPassword')}
                 onChange={changeHandler}
               />
             </div>
@@ -274,8 +280,8 @@ export const PersonalInfo = () => {
                 id="new-password-profile"
                 value={form.newPassword}
                 variant="primary"
-                label={t('LABEL_NEW_PASSWORD')}
-                placeholder={t('PLACEHOLDER__NEW_PASSWORD')}
+                label={t('personal-info:label.newPassword')}
+                placeholder={t('personal-info:placeholder.newPassword')}
                 onChange={changeHandler}
               />
             </div>
@@ -284,8 +290,8 @@ export const PersonalInfo = () => {
                 id="repeat-password-profile"
                 value={form.repeatPassword}
                 variant="primary"
-                label={t('LABEL_REPEAT_PASSWORD')}
-                placeholder={t('PLACEHOLDER__REPEAT_PASSWORD')}
+                label={t('personal-info:label.repeatPassword')}
+                placeholder={t('personal-info:placeholder.repeatPassword')}
                 onChange={changeHandler}
               />
             </div>

@@ -1,6 +1,6 @@
 import { ColorPalette } from '@vse-bude/shared';
+import type { Theme } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { Theme } from '../../../theme';
 
 export const productFooter = css`
   display: flex;
