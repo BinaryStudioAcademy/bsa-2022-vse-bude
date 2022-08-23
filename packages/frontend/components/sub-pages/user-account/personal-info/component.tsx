@@ -49,7 +49,7 @@ export const PersonalInfo = () => {
     setValue,
     watch,
     handleSubmit,
-    formState: { errors },
+    //formState: { errors },
   } = useForm<UserPersonalInfoDto>({
     defaultValues: {
       avatar,
@@ -90,18 +90,15 @@ export const PersonalInfo = () => {
 
   const onCutHandler = (event: React.ClipboardEvent<HTMLInputElement>) => {
     event.preventDefault();
-
-return false;
+    return false;
   };
   const onCopyHandler = (event: React.ClipboardEvent<HTMLInputElement>) => {
     event.preventDefault();
-
-return false;
+    return false;
   };
   const onPastHandler = (event: React.ClipboardEvent<HTMLInputElement>) => {
     event.preventDefault();
-
-return false;
+    return false;
   };
 
   return (
@@ -166,7 +163,7 @@ return false;
                   label={t('personal-info:label.firstName')}
                   placeholder={t('personal-info:placeholder.firstName')}
                   {...register('firstName')}
-                  error={t(errors.firstName?.message)}
+                  //error={t(errors.firstName?.message)}
                 />
               </div>
               <div css={styles.inputRow}>
@@ -177,7 +174,7 @@ return false;
                   label={t('personal-info:label.lastName')}
                   placeholder={t('personal-info:placeholder.lastName')}
                   {...register('lastName')}
-                  error={t(errors.lastName?.message)}
+                  //error={t(errors.lastName?.message)}
                 />
               </div>
             </Flex>
@@ -189,7 +186,7 @@ return false;
                 label={t('personal-info:label.email')}
                 placeholder={t('personal-info:placeholder.email')}
                 {...register('email')}
-                error={t(errors.email?.message)}
+                //error={t(errors.email?.message)}
               />
             </div>
             <div css={styles.inputRow}>
@@ -200,7 +197,7 @@ return false;
                 label={t('personal-info:label.phone')}
                 placeholder={t('personal-info:placeholder.phone')}
                 {...register('phone')}
-                error={t(errors.phone?.message)}
+                //error={t(errors.phone?.message)}
               />
             </div>
           </Column>
@@ -320,7 +317,7 @@ return false;
                 onCopy={onCopyHandler}
                 onPaste={onPastHandler}
                 {...register('password')}
-                error={t(errors.password?.message)}
+                //error={t(errors.password?.message)}
               />
             </div>
             <div css={styles.inputRow}>
@@ -333,7 +330,7 @@ return false;
                 onCopy={onCopyHandler}
                 onPaste={onPastHandler}
                 {...register('newPassword')}
-                error={t(errors.newPassword?.message)}
+                //error={t(errors.newPassword?.message)}
               />
             </div>
             <div css={styles.inputRow}>
@@ -346,7 +343,7 @@ return false;
                 onCopy={onCopyHandler}
                 onPaste={onPastHandler}
                 {...register('repeatPassword')}
-                error={t(errors.repeatPassword?.message)}
+                //error={t(errors.repeatPassword?.message)}
               />
             </div>
           </Column>
