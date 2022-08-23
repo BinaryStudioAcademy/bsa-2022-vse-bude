@@ -47,7 +47,6 @@ export const initCategoryRoutes = (
    *     parameters:
    *       - name: limit
    *         in: query
-   *         description: Amount of records.
    *         required: true
    *         schema:
    *           format: double

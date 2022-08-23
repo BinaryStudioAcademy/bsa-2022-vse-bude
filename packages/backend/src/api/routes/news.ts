@@ -52,7 +52,6 @@ export const initNewsRoutes = (
    *     parameters:
    *       - name: limit
    *         in: query
-   *         description: Amount of records.
    *         required: true
    *         schema:
    *           format: double
