@@ -90,18 +90,18 @@ export const PersonalInfo = () => {
 
   const onCutHandler = (event: React.ClipboardEvent<HTMLInputElement>) => {
     event.preventDefault();
-    
-return false;
+
+    return false;
   };
   const onCopyHandler = (event: React.ClipboardEvent<HTMLInputElement>) => {
     event.preventDefault();
-    
-return false;
+
+    return false;
   };
   const onPastHandler = (event: React.ClipboardEvent<HTMLInputElement>) => {
     event.preventDefault();
-    
-return false;
+
+    return false;
   };
 
   return (
