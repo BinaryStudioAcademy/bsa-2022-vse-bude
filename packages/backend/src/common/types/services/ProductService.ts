@@ -1,6 +1,6 @@
 ﻿import type { ProductType } from '@prisma/client';
 
-export interface GetProductsRequest {
-  type?: ProductType;
+export interface ProductQuery {
   limit?: string;
+  type?: ProductType;
 }

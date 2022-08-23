@@ -5,6 +5,7 @@ import type { Services } from '@services';
 import { apiPath } from '@helpers';
 import type { Product } from '@prisma/client';
 import type { ProductQuery } from '@types';
+import { ProductApiRoutes } from '@vse-bude/shared';
 
 export const initProductRoutes = (
   { productService }: Services,
