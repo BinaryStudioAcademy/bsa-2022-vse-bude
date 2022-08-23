@@ -19,7 +19,7 @@ const CreatePage = () => {
 
   return (
     <Layout title="Create post">
-      <Post create={ create }/>
+      <Post create={create} />
     </Layout>
   );
 };
