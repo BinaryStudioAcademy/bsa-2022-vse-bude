@@ -7,7 +7,7 @@ export class ProductRepository {
     this._dbClient = prismaClient;
   }
 
-  public getByType(type: ProductType, take: number): Promise<Product[]> {
+  public getAll(type: ProductType, take: number): Promise<Product[]> {
     return this._dbClient.product.findMany({
       take,
       where: {

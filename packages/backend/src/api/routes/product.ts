@@ -18,7 +18,7 @@ export const initProductRoutes = (
 
   router.get(
     apiPath(path),
-    wrap<RequestParams>((req) => productService.getByType(req.query)),
+    wrap<RequestParams>((req) => productService.getAll(req.query)),
   );
 
   router.get(

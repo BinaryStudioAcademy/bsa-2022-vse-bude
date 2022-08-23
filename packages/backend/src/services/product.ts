@@ -8,10 +8,10 @@ export class ProductService {
     this._productRepository = categoryRepository;
   }
 
-  public getByType({ type, limit }: GetProductsRequest) {
+  public getAll({ type, limit }: GetProductsRequest) {
     const take = limit ? +limit : 10;
 
-    return this._productRepository.getByType(type, take);
+    return this._productRepository.getAll(type, take);
   }
 
   public getById(id: string) {
