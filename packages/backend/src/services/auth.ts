@@ -178,7 +178,7 @@ export class AuthService {
 
     await resetMail.send();
 
-    return {};
+    return undefined;
   }
 
   async resetPassword(email: string, hash: string) {
