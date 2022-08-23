@@ -1,5 +1,6 @@
 import type { EmailOptions } from '@types';
 import { getEnv } from '@helpers';
+import { defaultEmailOptions } from '@types';
 import type { EmailService } from '../services/email/email';
 import { emailService } from '../services/email';
 import type { Mailable } from './mailable';
@@ -41,6 +42,7 @@ export class BaseMail implements Mailable {
 
   protected setOptions(): void {
     this._options = {
+      ...defaultEmailOptions,
       subject: '',
       from: {
         email: getEnv('APP_EMAIL_FROM'),
