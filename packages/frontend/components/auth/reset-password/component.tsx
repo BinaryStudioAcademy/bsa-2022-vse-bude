@@ -8,16 +8,11 @@ import { Input } from '@primitives';
 import { Routes } from '@enums';
 import { inputWrapper, linkText } from '../layout/styles';
 import { verifyForm, verifyText } from '../styles';
-import { getErrorKey } from '../../../helpers/validation';
 import { Divider } from '../../primitives/divider';
 import { verifyCodeSchema } from './validation';
 
 export const ForgotPassword = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<ResetPasswordLink>({
+  const { register, handleSubmit } = useForm<ResetPasswordLink>({
     resolver: joiResolver(verifyCodeSchema),
   });
 
@@ -26,32 +21,31 @@ export const ForgotPassword = () => {
   };
 
   const { t } = useTranslation('auth');
-  const { t: commonLang } = useTranslation('common');
 
   return (
     <form css={verifyForm} onSubmit={handleSubmit(onSubmit)}>
       <div css={inputWrapper}>
         <div css={verifyText}>
-          <span>{t('ENTER_EMAIL_ADDRESS_PASSWORD_RESET_TEXT')}</span>
+          <span>{t('forgot-password.emailAddressPasswordResetText')}</span>
         </div>
         <Input
           {...register('email')}
-          label={t('EMAIL')}
+          label={t('sign-in.email')}
           variant="primary"
           type="text"
           name="email"
-          error={t(getErrorKey('email', errors.email?.type))}
+          // error={t(errors.email?.type)}
         />
       </div>
       <Button type="submit" width={'100%'}>
-        {commonLang('SEND_RESET_LINK_BTN')}
+        {t('resendBtn.text')}
       </Button>
       <Divider />
       <div css={linkText}>
-        {commonLang('I_HAVE_AN_ACCOUNT')}!{' '}
+        {t('sign-up.accountExist')}!{' '}
         <InternalLink
           variant="primary"
-          label={`${commonLang('SIGN_IN')}!`}
+          label={`${t('sign-up.signIn')}!`}
           href={Routes.SIGN_IN}
         />
       </div>
