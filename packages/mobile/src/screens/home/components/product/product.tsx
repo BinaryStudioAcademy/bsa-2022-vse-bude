@@ -1,37 +1,37 @@
 import React, { FC } from 'react';
-import { useTranslation } from '~/hooks/hooks';
+import { useTranslation, useAppSelector } from '~/hooks/hooks';
+import { createSelector } from '@reduxjs/toolkit';
 import { Button, ClockIcon, Image, Text, View } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { ProductType } from '@vse-bude/shared';
+import { ProductType, ProductDto } from '@vse-bude/shared';
+import { addSpacePrice, getTimeToEvent } from '~/helpers/helpers';
+import { RootState } from '~/common/types/types';
 import { styles } from './styles';
 
 type Props = {
-  imageLinks: string[];
-  title: string;
-  description: string;
-  price: string;
-  type: ProductType;
-  endDate?: string;
+  id: string;
 };
 
-const Product: FC<Props> = ({
-  imageLinks,
-  title,
-  description,
-  price,
-  type,
-}) => {
+const Product: FC<Props> = ({ id }) => {
+  const selector = createSelector(
+    (state: RootState) => state.products.products,
+    (products) => {
+      return products.find((item) => item.id === id);
+    },
+  );
+
+  const { imageLinks, title, description, price, type, endDate } =
+    useAppSelector(selector) as ProductDto;
+  const duration = getTimeToEvent(endDate);
+  const auction = ProductType.AUCTION;
   const { t } = useTranslation();
-  const transformPrice = (price: string) => {
-    return price.length > 2 ? `${price.slice(0, 2)} ${price.slice(2)}` : price;
-  };
 
   return (
     <View style={[styles.container, globalStyles.boxShadow]}>
       <View style={[styles.imgWrapper]}>
         <Image source={{ uri: imageLinks[0] }} style={styles.img} />
 
-        {type === ProductType.AUCTION ? (
+        {type === auction && (
           <View
             style={[
               styles.time,
@@ -42,9 +42,9 @@ const Product: FC<Props> = ({
             ]}
           >
             <ClockIcon />
-            <Text style={globalStyles.ml2}>2 дня 5 г 15 хв</Text>
+            <Text style={globalStyles.fs12}>{duration}</Text>
           </View>
-        ) : null}
+        )}
       </View>
       <View>
         <Text
@@ -60,7 +60,7 @@ const Product: FC<Props> = ({
           {description}
         </Text>
         {type === ProductType.FIXED_PRICE && (
-          <Text style={globalStyles.fs12}>2 дні тому</Text>
+          <Text style={globalStyles.fs12}>{duration}</Text>
         )}
       </View>
       <View style={styles.divider} />
@@ -73,10 +73,10 @@ const Product: FC<Props> = ({
       >
         <Text
           style={[globalStyles.fs16, globalStyles.fontWeightBold, styles.price]}
-        >{`${transformPrice(price)} ${t('common:currency.UAH')}`}</Text>
+        >{`${addSpacePrice(price)} ${t('common:currency.UAH')}`}</Text>
         <Button
           label={
-            type === ProductType.AUCTION
+            type === auction
               ? t('common:components.BUTTON_BID')
               : t('common:components.BUTTON_BUY')
           }

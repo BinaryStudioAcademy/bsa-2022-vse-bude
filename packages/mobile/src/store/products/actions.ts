@@ -10,7 +10,7 @@ const loadAllProducts = createAsyncThunk<
 >(ActionType.PRODUCTS_FETCH, async (_, { extra }) => {
   const { productApi } = extra;
 
-  return await productApi.getAllProducts();
+  return productApi.getAllProducts();
 });
 
 export { loadAllProducts };

@@ -7,7 +7,7 @@ type Constructor = {
   apiPrefix: string;
 };
 
-class Product {
+class ProductService {
   #http: Http;
 
   #apiPrefix: string;
@@ -18,10 +18,8 @@ class Product {
   }
 
   getAllProducts(): Promise<ProductDto[]> {
-    return this.#http.load(`${this.#apiPrefix}${ApiRoutes.PRODUCTS}`, {
-      hasAuth: false,
-    });
+    return this.#http.load(`${this.#apiPrefix}${ApiRoutes.PRODUCTS}`);
   }
 }
 
-export { Product };
+export { ProductService };

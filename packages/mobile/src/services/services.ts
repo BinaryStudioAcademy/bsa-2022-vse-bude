@@ -4,7 +4,7 @@ import { Http } from './http/http.service';
 import { Storage } from './storage/storage.service';
 import { AuthApi } from './auth-api/auth-api.service';
 import { NotificationService } from './notification/notification.service';
-import { Product } from './product/product';
+import { ProductService } from './product/product.service';
 
 const storage = new Storage({
   storage: new MMKV(),
@@ -19,7 +19,7 @@ const authApi = new AuthApi({
   apiPrefix: ENV.APP.API_ORIGIN_URL,
 });
 
-const productApi = new Product({
+const productApi = new ProductService({
   http,
   apiPrefix: ENV.APP.API_ORIGIN_URL,
 });
