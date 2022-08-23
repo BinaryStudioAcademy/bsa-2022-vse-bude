@@ -1,14 +1,11 @@
 import type { ApiRoutes } from '@vse-bude/shared';
-import { ProductApiRoutes } from '@vse-bude/shared';
 import { Router } from 'express';
 import { wrap } from '@helpers';
 import type { Services } from '@services';
 import { apiPath } from '@helpers';
-import type { ProductType } from '@prisma/client';
-
-type RequestParams = {
-  type: ProductType;
-};
+import type { Product } from '@prisma/client';
+import type { ProductQuery } from '@types';
+import { ProductApiRoutes } from '@vse-bude/shared';
 
 export const initProductRoutes = (
   { productService }: Services,
@@ -144,7 +141,9 @@ export const initProductRoutes = (
 
   router.get(
     apiPath(path),
-    wrap(() => productService.getAll()),
+    wrap<Empty, Product[], Empty, ProductQuery>((req) =>
+      productService.getAll(req.query),
+    ),
   );
 
   /**
@@ -179,10 +178,8 @@ export const initProductRoutes = (
    */
 
   router.get(
-    apiPath(path, ProductApiRoutes.$TYPE),
-    wrap<RequestParams>((req) =>
-      productService.getByType(req.params.type, req.query),
-    ),
+    apiPath(path, ProductApiRoutes.ID),
+    wrap((req) => productService.getById(req.params.id)),
   );
 
   return router;

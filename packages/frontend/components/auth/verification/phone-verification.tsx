@@ -10,7 +10,6 @@ import { inputWrapper } from '../layout/styles';
 import { verifyEntity, verifyForm, verifyInput, verifyText } from '../styles';
 import { hideMainTextPart } from '../../../helpers/text';
 import { phoneCodeResend, phoneVerification } from '../../../store/auth';
-import { getErrorKey } from '../../../helpers/validation';
 import { RESEND_VERIFICATION_CODE_LIMIT_SEC } from '../../../common/constants/app';
 import { verifyCodeSchema } from './validation';
 import { divider } from './styles';
@@ -25,7 +24,7 @@ export const PhoneVerification = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    // formState: { errors },
   } = useForm<PhoneVerifyDto>({
     resolver: joiResolver(verifyCodeSchema),
   });
@@ -34,38 +33,37 @@ export const PhoneVerification = () => {
     dispatch(phoneVerification(data));
   };
 
+  const { t } = useTranslation();
   const onResendCode = () => {
     dispatch(phoneCodeResend());
   };
-
-  const { t } = useTranslation('auth');
 
   return (
     <form css={verifyForm} onSubmit={handleSubmit(onSubmit)}>
       <div css={inputWrapper}>
         <div css={verifyText}>
           <span>
-            {t('PHONE_VERIFICATION_TEXT_FIRST_PART')}
+            {t('auth:phoneText')}
             {user && (
               <span css={verifyEntity}> {hideMainTextPart(user.phone)}</span>
             )}
             !
           </span>
-          <span>{t('ENTER_VERIFICATION_CODE_BELOW')}!</span>
+          <span>{t('auth:enterCode')}!</span>
         </div>
         <Input
           {...register('code')}
           css={verifyInput}
-          label={t('VERIFICATION_CODE')}
+          label={t('auth:code')}
           variant="primary"
           type="text"
           name="code"
-          error={t(getErrorKey('code', errors.code?.type))}
+          // error={t(getErrorKey('code', errors.code?.type))}
         />
         <Error text={error} />
       </div>
       <Button type="submit" width={'100%'}>
-        {t('VERIFY_TEXT')}
+        {t('auth:text')}
       </Button>
       <hr css={divider} />
       <div>

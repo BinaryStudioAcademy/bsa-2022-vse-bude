@@ -1,6 +1,6 @@
+import type { Theme } from '@emotion/react';
 import { css } from '@emotion/react';
 import { ColorPalette } from '@vse-bude/shared';
-import type { Theme } from '../../../theme';
 
 export const timerBadge = ({ spaces, radiuses }: Theme) => css`
   display: flex;

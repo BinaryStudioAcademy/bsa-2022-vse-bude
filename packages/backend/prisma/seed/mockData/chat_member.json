@@ -1,72 +1,72 @@
 [
-    {
-        "id": "d64ecf0f-913b-4705-a070-a72fc629a299",
-        "userId": "807f73fb-31b8-4e66-9f74-babc8ee95d94",
-        "chatId": "73c1f55f-f3f6-4493-a40f-7beabe539207",
-        "createdAt": "2022-04-15T19:37:17.586Z",
-        "updatedAt": "2022-08-11T20:15:06.236Z"
-    },
-    {
-        "id": "84805403-1655-4303-af30-d0874404fde9",
-        "userId": "b8f594a9-e836-4e25-9979-a56500b21be2",
-        "chatId": "450bfda5-db0a-4496-b049-2f91c4e850ad",
-        "createdAt": "2021-12-30T07:45:27.433Z",
-        "updatedAt": "2022-08-11T12:40:15.300Z"
-    },
-    {
-        "id": "9302ff91-82a8-45f1-8127-233087acf3b9",
-        "userId": "f5cf90f8-6943-4e42-b006-03cf9bb707a4",
-        "chatId": "70ef5aa4-a0ce-41f3-9aca-b572f5f1bb7a",
-        "createdAt": "2021-10-10T02:38:32.067Z",
-        "updatedAt": "2022-08-11T14:40:36.958Z"
-    },
-    {
-        "id": "5a8395b6-14d1-4f30-896b-c7d2aec1dad5",
-        "userId": "47504cdd-55e6-4584-9539-6eef69c6deed",
-        "chatId": "6d3c395f-52be-4d5c-9508-46fa41a21b06",
-        "createdAt": "2021-12-06T14:18:19.897Z",
-        "updatedAt": "2022-08-11T20:08:25.472Z"
-    },
-    {
-        "id": "7d8af51c-9e5f-4c36-838a-f68a2600998d",
-        "userId": "79946740-1328-414f-bef0-926cb4eb59be",
-        "chatId": "11369bb1-63d4-422a-af94-026ee96bc4e5",
-        "createdAt": "2021-10-06T01:33:44.800Z",
-        "updatedAt": "2022-08-12T00:39:42.925Z"
-    },
-    {
-        "id": "c3c15201-a89a-438e-8e14-35fc20da4f7a",
-        "userId": "807f73fb-31b8-4e66-9f74-babc8ee95d94",
-        "chatId": "018939ca-9eb0-4087-97f2-d54d9a82ebf3",
-        "createdAt": "2022-01-14T23:53:26.752Z",
-        "updatedAt": "2022-08-12T02:10:49.561Z"
-    },
-    {
-        "id": "48c31dc1-184c-4db3-9993-0acc2f774e0d",
-        "userId": "b8f594a9-e836-4e25-9979-a56500b21be2",
-        "chatId": "50a63420-a5c4-4a58-8d01-e84f1b4fd292",
-        "createdAt": "2022-01-31T12:33:34.146Z",
-        "updatedAt": "2022-08-12T07:13:37.587Z"
-    },
-    {
-        "id": "ff875128-5b88-4af9-a5ce-e1b6ead8c9c6",
-        "userId": "f5cf90f8-6943-4e42-b006-03cf9bb707a4",
-        "chatId": "2f48f448-d2b9-42a8-af13-e3487c0d8a59",
-        "createdAt": "2021-08-21T15:17:32.020Z",
-        "updatedAt": "2022-08-11T18:39:06.200Z"
-    },
-    {
-        "id": "e19dc53e-6136-4f35-9733-ef99871d63a8",
-        "userId": "47504cdd-55e6-4584-9539-6eef69c6deed",
-        "chatId": "1f9b8ddc-8a9e-4aec-b33a-cdb031a41faa",
-        "createdAt": "2022-04-01T11:37:54.076Z",
-        "updatedAt": "2022-08-11T18:38:29.324Z"
-    },
-    {
-        "id": "ac8325a6-7e05-4396-a872-e43b1670345b",
-        "userId": "79946740-1328-414f-bef0-926cb4eb59be",
-        "chatId": "1340cfc2-716d-4352-86f8-4897a690e477",
-        "createdAt": "2022-04-03T04:58:47.291Z",
-        "updatedAt": "2022-08-11T13:25:39.178Z"
-    }
+  {
+    "id": "d64ecf0f-913b-4705-a070-a72fc629a299",
+    "userId": "807f73fb-31b8-4e66-9f74-babc8ee95d94",
+    "chatId": "73c1f55f-f3f6-4493-a40f-7beabe539207",
+    "createdAt": "2022-04-15T19:37:17.586Z",
+    "updatedAt": "2022-08-11T20:15:06.236Z"
+  },
+  {
+    "id": "84805403-1655-4303-af30-d0874404fde9",
+    "userId": "b8f594a9-e836-4e25-9979-a56500b21be2",
+    "chatId": "450bfda5-db0a-4496-b049-2f91c4e850ad",
+    "createdAt": "2021-12-30T07:45:27.433Z",
+    "updatedAt": "2022-08-11T12:40:15.300Z"
+  },
+  {
+    "id": "9302ff91-82a8-45f1-8127-233087acf3b9",
+    "userId": "f5cf90f8-6943-4e42-b006-03cf9bb707a4",
+    "chatId": "70ef5aa4-a0ce-41f3-9aca-b572f5f1bb7a",
+    "createdAt": "2021-10-10T02:38:32.067Z",
+    "updatedAt": "2022-08-11T14:40:36.958Z"
+  },
+  {
+    "id": "5a8395b6-14d1-4f30-896b-c7d2aec1dad5",
+    "userId": "47504cdd-55e6-4584-9539-6eef69c6deed",
+    "chatId": "6d3c395f-52be-4d5c-9508-46fa41a21b06",
+    "createdAt": "2021-12-06T14:18:19.897Z",
+    "updatedAt": "2022-08-11T20:08:25.472Z"
+  },
+  {
+    "id": "7d8af51c-9e5f-4c36-838a-f68a2600998d",
+    "userId": "79946740-1328-414f-bef0-926cb4eb59be",
+    "chatId": "11369bb1-63d4-422a-af94-026ee96bc4e5",
+    "createdAt": "2021-10-06T01:33:44.800Z",
+    "updatedAt": "2022-08-12T00:39:42.925Z"
+  },
+  {
+    "id": "c3c15201-a89a-438e-8e14-35fc20da4f7a",
+    "userId": "807f73fb-31b8-4e66-9f74-babc8ee95d94",
+    "chatId": "018939ca-9eb0-4087-97f2-d54d9a82ebf3",
+    "createdAt": "2022-01-14T23:53:26.752Z",
+    "updatedAt": "2022-08-12T02:10:49.561Z"
+  },
+  {
+    "id": "48c31dc1-184c-4db3-9993-0acc2f774e0d",
+    "userId": "b8f594a9-e836-4e25-9979-a56500b21be2",
+    "chatId": "50a63420-a5c4-4a58-8d01-e84f1b4fd292",
+    "createdAt": "2022-01-31T12:33:34.146Z",
+    "updatedAt": "2022-08-12T07:13:37.587Z"
+  },
+  {
+    "id": "ff875128-5b88-4af9-a5ce-e1b6ead8c9c6",
+    "userId": "f5cf90f8-6943-4e42-b006-03cf9bb707a4",
+    "chatId": "2f48f448-d2b9-42a8-af13-e3487c0d8a59",
+    "createdAt": "2021-08-21T15:17:32.020Z",
+    "updatedAt": "2022-08-11T18:39:06.200Z"
+  },
+  {
+    "id": "e19dc53e-6136-4f35-9733-ef99871d63a8",
+    "userId": "47504cdd-55e6-4584-9539-6eef69c6deed",
+    "chatId": "1f9b8ddc-8a9e-4aec-b33a-cdb031a41faa",
+    "createdAt": "2022-04-01T11:37:54.076Z",
+    "updatedAt": "2022-08-11T18:38:29.324Z"
+  },
+  {
+    "id": "ac8325a6-7e05-4396-a872-e43b1670345b",
+    "userId": "79946740-1328-414f-bef0-926cb4eb59be",
+    "chatId": "1340cfc2-716d-4352-86f8-4897a690e477",
+    "createdAt": "2022-04-03T04:58:47.291Z",
+    "updatedAt": "2022-08-11T13:25:39.178Z"
+  }
 ]

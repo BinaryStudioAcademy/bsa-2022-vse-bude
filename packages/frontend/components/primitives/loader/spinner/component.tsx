@@ -1,7 +1,7 @@
 import { loader } from './styles';
 
 export interface SpinnerProps {
-  size: string;
+  size: 'extraSmall' | 'small' | 'big' | 'large';
 }
 
 export const Spinner = ({ size }: SpinnerProps) => (

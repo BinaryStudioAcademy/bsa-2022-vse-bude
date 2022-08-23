@@ -33,7 +33,9 @@ docker-compose -f docker-compose.db.yaml down -v vsebude_cache
 ```
 
 # Testing Redis connection
+
 For testing availability of redis use next commands:
+
 ```
 docker exec -it vsebude_cache sh
 redis-cli

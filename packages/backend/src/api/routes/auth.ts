@@ -1,6 +1,11 @@
 import type { Services } from '@services';
 import { type Request, Router } from 'express';
-import type { ApiRoutes, UserSignInDto, UserSignUpDto } from '@vse-bude/shared';
+import type {
+  ApiRoutes,
+  AuthResponse,
+  UserSignInDto,
+  UserSignUpDto,
+} from '@vse-bude/shared';
 import { AuthApiRoutes } from '@vse-bude/shared';
 import { wrap } from '@helpers';
 import type { SignOut, UpdateRefreshToken, AuthTokenData } from '@types';
@@ -47,7 +52,7 @@ export const initAuthRoutes = (
 
   router.post(
     apiPath(path, AuthApiRoutes.SIGN_IN),
-    wrap<Empty, AuthTokenData, UserSignInDto>((req: Request) =>
+    wrap<Empty, AuthResponse, UserSignInDto>((req: Request) =>
       authService.signIn(req.body, req),
     ),
   );
@@ -190,7 +195,7 @@ export const initAuthRoutes = (
 
   router.post(
     apiPath(path, AuthApiRoutes.SIGN_UP),
-    wrap<Empty, AuthTokenData, UserSignUpDto>((req: Request) =>
+    wrap<Empty, AuthResponse, UserSignUpDto>((req: Request) =>
       authService.signUp(req.body, req),
     ),
   );

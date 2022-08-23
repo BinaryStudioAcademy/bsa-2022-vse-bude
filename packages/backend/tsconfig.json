@@ -14,7 +14,8 @@
       "@services": ["services"],
       "@routes": ["api/routes"],
       "@middlewares": ["api/middlewares"],
-      "@errors": ["error"]
+      "@errors": ["error"],
+      "@mappers": ["mapper"]
     },
     "outDir": "build"
   },
