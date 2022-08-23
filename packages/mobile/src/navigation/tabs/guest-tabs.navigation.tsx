@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MainScreenName } from '~/common/enums/enums';
 import { Home, Favorite, MyList } from '~/screens/screens';
+import { useCustomTheme } from '~/hooks/hooks';
 import {
   HomeIcon,
   ListIcon,
@@ -9,14 +10,15 @@ import {
   UserIcon,
 } from '~/components/components';
 import { WelcomeNavigation } from '../welcome/welcome.navigation';
-import { screenOptions } from './common/constants';
-import { getTabOptions } from './common/tab-options.helper';
+import { getScreenOptions, getTabOptions } from './helpers/helper';
 
 const Tabs = createBottomTabNavigator();
 
 const GuestNavigation: FC = () => {
+  const theme = useCustomTheme();
+
   return (
-    <Tabs.Navigator screenOptions={screenOptions}>
+    <Tabs.Navigator screenOptions={getScreenOptions(theme)}>
       <Tabs.Screen
         name={MainScreenName.HOME}
         component={Home}
