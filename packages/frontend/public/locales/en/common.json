@@ -24,5 +24,6 @@
   "REPEAT_PASSWORD": "Repeat password",
   "PHONE_NUMBER": "Phone Number",
   "I_HAVE_AN_ACCOUNT": "I have an account",
-  "SIGN_IN": "Sign In"
+  "SIGN_IN": "Sign In",
+  "SEND_RESET_LINK_BTN": "Send reset link"
 }

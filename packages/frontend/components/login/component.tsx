@@ -14,6 +14,7 @@ import { getAuthErrorSelector, loginUser } from 'store/auth';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { useTranslation } from 'next-i18next';
 import { signInSchema } from 'validation-schemas/user';
+import { Divider } from '../primitives/divider';
 import * as styles from './styles';
 
 export default function Login() {
@@ -62,6 +63,19 @@ export default function Login() {
           {authError && <p>{authError}</p>}
           <div css={styles.inputWrapper}>
             <Button type="submit">{t('loginBtn')}</Button>
+          </div>
+          <Divider />
+          <div>
+            <p css={styles.linkText}>
+              {t('FORGOT_PASSWORD_LINK')}?
+              <span>
+                <InternalLink
+                  variant="primary"
+                  label={t('RESTORE_PASSWORD')}
+                  href={Routes.FORGOT_PASSWORD}
+                />
+              </span>
+            </p>
           </div>
         </form>
       </div>

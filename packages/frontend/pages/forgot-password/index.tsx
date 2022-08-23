@@ -1,11 +1,11 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { withProtected } from '@helpers';
-import { AuthLayout } from '../../../components/authLayout';
+import { AuthLayout } from '../../components/authLayout';
 import {
   contentWrapper,
   formWrapper,
-} from '../../../components/auth/layout/styles';
-import { ResetPassword } from '../../../components/auth/reset-password/component';
+} from '../../components/auth/layout/styles';
+import { ForgotPassword } from '../../components/auth/reset-password';
 
 export const getServerSideProps = withProtected(async ({ locale }) => ({
   props: {
@@ -18,7 +18,7 @@ function ResetPasswordPage() {
     <AuthLayout>
       <div css={contentWrapper}>
         <div css={formWrapper}>
-          <ResetPassword />
+          <ForgotPassword />
         </div>
       </div>
     </AuthLayout>
