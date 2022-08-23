@@ -67,11 +67,11 @@ export default function Login() {
           <Divider />
           <div>
             <p css={styles.linkText}>
-              {t('FORGOT_PASSWORD_LINK')}?
+              {t('auth:sign-in.forgotPassword')}?
               <span>
                 <InternalLink
                   variant="primary"
-                  label={t('RESTORE_PASSWORD')}
+                  label={t('auth:sign-in.restorePassword')}
                   href={Routes.FORGOT_PASSWORD}
                 />
               </span>
