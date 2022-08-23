@@ -35,22 +35,22 @@ export const EmailVerification = () => {
     dispatch(emailCodeResend());
   };
 
-  const { t } = useTranslation('auth');
+  const { t } = useTranslation();
 
   return (
     <form css={verifyForm} onSubmit={handleSubmit(onSubmit)}>
       <div css={inputWrapper}>
         <div css={verifyText}>
           <span>
-            {t('EMAIL_VERIFICATION_TEXT_FIRST_PART')}
+            {t('auth:emailText')}
             {user && <span css={verifyEntity}> {user.email}</span>}!
           </span>
-          <span>{t('ENTER_VERIFICATION_CODE_BELOW')}!</span>
+          <span>{t('auth:enterCode')}!</span>
         </div>
         <Input
           {...register('code')}
           css={verifyInput}
-          label={t('VERIFICATION_CODE')}
+          label={t('auth:code')}
           variant="primary"
           type="text"
           name="code"
@@ -59,7 +59,7 @@ export const EmailVerification = () => {
         <Error text={error} />
       </div>
       <Button type="submit" width={'100%'}>
-        {t('VERIFY_TEXT')}
+        {t('auth:text')}
       </Button>
       <hr css={divider} />
       <div>

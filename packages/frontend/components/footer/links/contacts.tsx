@@ -7,11 +7,11 @@ import * as styles from './styles';
 import type { ContactsProps } from './types';
 
 export const Contacts: FC<ContactsProps> = ({ email, phone }) => {
-  const { t } = useTranslation('footer');
+  const { t } = useTranslation();
 
   return (
     <div css={styles.footerLinksWrapper}>
-      <ColumnHeader>{t('CONTACT')}</ColumnHeader>
+      <ColumnHeader>{t('common:footer.contacts')}</ColumnHeader>
 
       <div css={styles.footerLinksRow}>
         <Icon cssExtend={styles.phone} color="yellow" icon={IconName.PHONE} />
