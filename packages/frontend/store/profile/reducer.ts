@@ -4,6 +4,7 @@ import type {
   UserAddressDto,
   UserSocialMediaDto,
 } from '@vse-bude/shared';
+import { phoneVerification } from '../auth';
 import { getCurrentUser } from './actions';
 
 interface ProfileState {
@@ -21,6 +22,7 @@ const initialState: ProfileState = {
     lastName: 'Doe',
     email: 'example@yahoo.com',
     phone: '+380660153647',
+    phoneVerified: true,
   },
   address: null,
   socialMedia: null,
@@ -47,6 +49,12 @@ const profileSlice = createSlice({
     [getCurrentUser.rejected.type](state) {
       state.user = null;
       state.loading = false;
+    },
+    [phoneVerification.fulfilled.type](state) {
+      state.user = {
+        ...state.user,
+        phoneVerified: true,
+      };
     },
   },
 });

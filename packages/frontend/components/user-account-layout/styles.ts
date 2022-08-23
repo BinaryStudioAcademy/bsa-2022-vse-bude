@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { Theme } from 'theme';
+import type { Theme } from '@emotion/react';
 
 export const wrapper = ({ spaces }: Theme) => css`
   margin-top: ${spaces.xl5};

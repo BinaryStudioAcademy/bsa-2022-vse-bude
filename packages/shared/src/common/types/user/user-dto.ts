@@ -5,6 +5,7 @@ type UserDto = {
   lastName: string;
   email: string;
   phone: string;
+  phoneVerified: boolean;
 };
 
 type UserAddressDto = {

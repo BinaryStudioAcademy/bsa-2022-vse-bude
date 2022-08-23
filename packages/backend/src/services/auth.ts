@@ -1,6 +1,9 @@
 import type { RefreshTokenRepository, UserRepository } from '@repositories';
-import { VerificationTypes } from '@vse-bude/shared';
-import type { UserSignInDto, UserSignUpDto } from '@vse-bude/shared';
+import type {
+  UserSignInDto,
+  UserSignUpDto,
+  AuthResponse,
+} from '@vse-bude/shared';
 import { sign as jwtSign, type UserSessionJwtPayload } from 'jsonwebtoken';
 import { getEnv } from '@helpers';
 import {
@@ -26,6 +29,7 @@ import type {
 import type { HashService } from '@services';
 import type { Request } from 'express';
 import type { VerifyService } from '@services';
+import { authResponseMap } from '@mappers';
 
 export class AuthService {
   private _userRepository: UserRepository;
@@ -52,7 +56,7 @@ export class AuthService {
     await this._refreshTokenRepository.deleteByUserId(signOutDto.userId);
   }
 
-  async signUp(signUpDto: UserSignUpDto, req: Request) {
+  async signUp(signUpDto: UserSignUpDto, req: Request): Promise<AuthResponse> {
     const userByEmailOrPhone = await this._userRepository.getByEmailOrPhone(
       signUpDto.email,
       signUpDto.phone,
@@ -68,7 +72,8 @@ export class AuthService {
       passwordHash: this._hashService.generatePasswordHash(signUpDto.password),
     };
     const newUser = await this._userRepository.create(createUserDto);
-    await this.initPhoneVerification(newUser.id);
+    await this._verifyService.initPhoneVerification(newUser.id);
+    await this._verifyService.initEmailVerification(newUser.id);
     const tokenData = this.getTokenData(newUser.id);
 
     const refreshToken: CreateRefreshToken = {
@@ -78,17 +83,10 @@ export class AuthService {
     };
     await this._refreshTokenRepository.create(refreshToken);
 
-    return tokenData;
+    return authResponseMap(tokenData, newUser);
   }
 
-  private async initPhoneVerification(userId: string) {
-    await this._verifyService.createVerificationCode(
-      userId,
-      VerificationTypes.PHONE,
-    );
-  }
-
-  async signIn(signInDto: UserSignInDto, req: Request) {
+  async signIn(signInDto: UserSignInDto, req: Request): Promise<AuthResponse> {
     const user = await this._userRepository.getByEmail(signInDto.email);
     if (!user) {
       throw new UserNotFoundError(req);
@@ -111,7 +109,7 @@ export class AuthService {
     };
     await this._refreshTokenRepository.create(refreshToken);
 
-    return this.getTokenData(user.id);
+    return authResponseMap(this.getTokenData(user.id), user);
   }
 
   async getCurrentUser(userId: string) {

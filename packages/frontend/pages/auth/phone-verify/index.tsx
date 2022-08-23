@@ -1,18 +1,19 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { withProtected } from '@helpers';
 import { PhoneVerification } from '../../../components/auth/verification/phone-verification';
-import { AuthLayout } from '../../../components/authLayout/component';
+import { AuthLayout } from '../../../components/authLayout';
 import {
   contentWrapper,
   formWrapper,
 } from '../../../components/auth/layout/styles';
 
-export const getServerSideProps = async ({ locale }) => ({
+export const getServerSideProps = withProtected(async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale, ['auth'])),
+    ...(await serverSideTranslations(locale, ['auth', 'public'])),
   },
-});
+}));
 
-export default function PhoneVerificationPage() {
+function PhoneVerificationPage() {
   return (
     <AuthLayout>
       <div css={contentWrapper}>
@@ -23,3 +24,5 @@ export default function PhoneVerificationPage() {
     </AuthLayout>
   );
 }
+
+export default PhoneVerificationPage;

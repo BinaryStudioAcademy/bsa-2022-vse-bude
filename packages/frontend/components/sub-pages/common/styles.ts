@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { Theme } from 'theme';
+import type { Theme } from '@emotion/react';
 
 export const sectionHeaderWrapper = ({ spaces }: Theme) => css`
   margin-bottom: ${spaces.lg};

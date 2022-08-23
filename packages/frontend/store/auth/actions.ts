@@ -1,6 +1,18 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { login, signUp } from 'services/auth';
-import type { UserSignInDto, UserSignUpDto } from '@vse-bude/shared';
+import {
+  login,
+  signUp,
+  verifyPhone,
+  resendPhoneCode,
+  verifyEmail,
+  resendEmailCode,
+} from 'services/auth';
+import type {
+  EmailVerifyDto,
+  PhoneVerifyDto,
+  UserSignInDto,
+  UserSignUpDto,
+} from '@vse-bude/shared';
 import { auth } from '@helpers';
 import Router from 'next/router';
 import { Routes } from '@enums';
@@ -16,6 +28,7 @@ const loginUser = createAsyncThunk(
           return rejectWithValue(data.error);
         }
         auth.setTokens(data.accessToken, data.refreshToken);
+        Router.push(Routes.DEFAULT);
 
         return data;
       })
@@ -41,4 +54,57 @@ const signUpUser = createAsyncThunk(
   },
 );
 
-export { loginUser, signUpUser };
+const phoneVerification = createAsyncThunk(
+  AuthActions.PHONE_VERIFY,
+  async (data: PhoneVerifyDto, { rejectWithValue }) => {
+    try {
+      await verifyPhone(data);
+      await Router.push(Routes.EMAIL_VERIFY);
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  },
+);
+
+const phoneCodeResend = createAsyncThunk(
+  AuthActions.PHONE_RESEND_CODE,
+  async (_, { rejectWithValue }) => {
+    try {
+      return await resendPhoneCode();
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  },
+);
+
+const emailVerification = createAsyncThunk(
+  AuthActions.EMAIL_VERIFY,
+  async (data: EmailVerifyDto, { rejectWithValue }) => {
+    try {
+      await verifyEmail(data);
+      await Router.push(Routes.DEFAULT);
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  },
+);
+
+const emailCodeResend = createAsyncThunk(
+  AuthActions.EMAIL_RESEND_CODE,
+  async (_, { rejectWithValue }) => {
+    try {
+      return await resendEmailCode();
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  },
+);
+
+export {
+  loginUser,
+  signUpUser,
+  phoneVerification,
+  phoneCodeResend,
+  emailVerification,
+  emailCodeResend,
+};

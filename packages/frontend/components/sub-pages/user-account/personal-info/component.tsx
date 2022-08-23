@@ -66,7 +66,7 @@ export const PersonalInfo = () => {
     resolver: joiResolver(userUpdateSchema),
   });
 
-  const { t } = useTranslation('personal-info');
+  const { t } = useTranslation();
 
   const [photo] = watch(['avatar']);
 
@@ -91,17 +91,17 @@ export const PersonalInfo = () => {
   const onCutHandler = (event: React.ClipboardEvent<HTMLInputElement>) => {
     event.preventDefault();
 
-    return false;
+return false;
   };
   const onCopyHandler = (event: React.ClipboardEvent<HTMLInputElement>) => {
     event.preventDefault();
 
-    return false;
+return false;
   };
   const onPastHandler = (event: React.ClipboardEvent<HTMLInputElement>) => {
     event.preventDefault();
 
-    return false;
+return false;
   };
 
   return (
@@ -146,23 +146,25 @@ export const PersonalInfo = () => {
                 );
               }}
             >
-              {t('ACTION_CANCEL')}
+              {t('personal-info:action.cancel')}
             </Button>
-            <Button type="submit">{t('ACTION_SAVE')}</Button>
+            <Button type="submit">{t('personal-info:action.save')}</Button>
           </Flex>
         </div>
 
         <div css={styles.sections}>
           <Column css={styles.sectionRow}>
-            <SectionHeader>{t('PERSONAL_INFO')}</SectionHeader>
+            <SectionHeader>
+              {t('personal-info:headline.personalInfo')}
+            </SectionHeader>
             <Flex css={styles.groupInputs}>
               <div css={styles.inputRow}>
                 <Input
                   id="firstName-profile"
                   type="text"
                   variant="primary"
-                  label={t('LABEL_FIRSTNAME')}
-                  placeholder={t('PLACEHOLDER_FIRSTNAME')}
+                  label={t('personal-info:label.firstName')}
+                  placeholder={t('personal-info:placeholder.firstName')}
                   {...register('firstName')}
                   error={t(errors.firstName?.message)}
                 />
@@ -172,8 +174,8 @@ export const PersonalInfo = () => {
                   id="lastName-profile"
                   type="text"
                   variant="primary"
-                  label={t('LABEL_LASTNAME')}
-                  placeholder={t('PLACEHOLDER_LASTNAME')}
+                  label={t('personal-info:label.lastName')}
+                  placeholder={t('personal-info:placeholder.lastName')}
                   {...register('lastName')}
                   error={t(errors.lastName?.message)}
                 />
@@ -184,8 +186,8 @@ export const PersonalInfo = () => {
                 id="email-profile"
                 type="email"
                 variant="primary"
-                label={t('LABEL_EMAIL')}
-                placeholder={t('PLACEHOLDER_EMAIL')}
+                label={t('personal-info:label.email')}
+                placeholder={t('personal-info:placeholder.email')}
                 {...register('email')}
                 error={t(errors.email?.message)}
               />
@@ -195,8 +197,8 @@ export const PersonalInfo = () => {
                 id="phone-profile"
                 type="text"
                 variant="primary"
-                label={t('LABEL_PHONE')}
-                placeholder={t('PLACEHOLDER_PHONE')}
+                label={t('personal-info:label.phone')}
+                placeholder={t('personal-info:placeholder.phone')}
                 {...register('phone')}
                 error={t(errors.phone?.message)}
               />
@@ -204,7 +206,7 @@ export const PersonalInfo = () => {
           </Column>
 
           <Column css={styles.sectionRow}>
-            <SectionHeader>{t('ADDRESS')}</SectionHeader>
+            <SectionHeader>{t('personal-info:headline.address')}</SectionHeader>
 
             <Flex css={styles.groupInputs}>
               <div css={styles.inputRow}>
@@ -212,8 +214,8 @@ export const PersonalInfo = () => {
                   id="country-profile"
                   type="text"
                   variant="primary"
-                  label={t('LABEL_COUNTRY')}
-                  placeholder={t('PLACEHOLDER_COUNTRY')}
+                  label={t('personal-info:label.country')}
+                  placeholder={t('personal-info:placeholder.country')}
                   {...register('country')}
                 />
               </div>
@@ -223,8 +225,8 @@ export const PersonalInfo = () => {
                   id="region-profile"
                   type="text"
                   variant="primary"
-                  label={t('LABEL_REGION')}
-                  placeholder={t('PLACEHOLDER_REGION')}
+                  label={t('personal-info:label.region')}
+                  placeholder={t('personal-info:placeholder.region')}
                   {...register('region')}
                 />
               </div>
@@ -236,8 +238,8 @@ export const PersonalInfo = () => {
                   id="city-profile"
                   type="text"
                   variant="primary"
-                  label={t('LABEL_CITY')}
-                  placeholder={t('PLACEHOLDER_CITY')}
+                  label={t('personal-info:label.city')}
+                  placeholder={t('personal-info:placeholder.city')}
                   {...register('city')}
                 />
               </div>
@@ -246,8 +248,8 @@ export const PersonalInfo = () => {
                   id="zip-code-profile"
                   type="text"
                   variant="primary"
-                  label={t('LABEL_ZIP_CODE')}
-                  placeholder={t('PLACEHOLDER_ZIP_CODE')}
+                  label={t('personal-info:label.zipCode')}
+                  placeholder={t('personal-info:placeholder.zip')}
                   {...register('zip')}
                 />
               </div>
@@ -258,23 +260,25 @@ export const PersonalInfo = () => {
                 id="novaposhta-profile"
                 type="text"
                 variant="primary"
-                label={t('NOVA_POSHTA')}
-                placeholder={t('NOVA_POSHTA_PLACEHOLDER')}
+                label={t('personal-info:label.novaPoshta')}
+                placeholder={t('personal-info:placeholder.novaPoshtaRef')}
                 {...register('novaPoshtaRef')}
               />
             </div>
           </Column>
 
           <Column css={styles.sectionRow}>
-            <SectionHeader>{t('SOCIAL_NETWORKS')}</SectionHeader>
+            <SectionHeader>
+              {t('personal-info:headline.socialNetworks')}
+            </SectionHeader>
 
             <div css={styles.inputRow}>
               <Input
                 id="instagram-profile"
                 type="text"
                 variant="primary"
-                label={t('LABEL_INSTAGRAM')}
-                placeholder={t('PLACEHOLDER_INSTAGRAM')}
+                label={t('personal-info:label.instagram')}
+                placeholder={t('personal-info:placeholder.instagram')}
                 {...register('instagram')}
               />
             </div>
@@ -284,8 +288,8 @@ export const PersonalInfo = () => {
                 id="linkedin-profile"
                 type="text"
                 variant="primary"
-                label={t('LABEL_LINKEDIN')}
-                placeholder={t('PLACEHOLDER_LINKEDIN')}
+                label={t('personal-info:label.linkedin')}
+                placeholder={t('personal-info:placeholder.linkedin')}
                 {...register('linkedin')}
               />
             </div>
@@ -295,21 +299,23 @@ export const PersonalInfo = () => {
                 id="facebook-profile"
                 type="text"
                 variant="primary"
-                label={t('LABEL_FACEBOOK')}
-                placeholder={t('PLACEHOLDER_FACEBOOK')}
+                label={t('personal-info:label.facebook')}
+                placeholder={t('personal-info:placeholder.facebook')}
                 {...register('facebook')}
               />
             </div>
           </Column>
 
           <Column css={styles.sectionRow}>
-            <SectionHeader>{t('PASSWORD')}</SectionHeader>
+            <SectionHeader>
+              {t('personal-info:headline.password')}
+            </SectionHeader>
             <div css={styles.inputRow}>
               <PasswordInput
                 id="current-password-profile"
                 variant="primary"
-                label={t('LABEL_CURRENT_PASSWORD')}
-                placeholder={t('PLACEHOLDER_CURRENT_PASSWORD')}
+                label={t('personal-info:label.currentPassword')}
+                placeholder={t('personal-info:placeholder.password')}
                 onCut={onCutHandler}
                 onCopy={onCopyHandler}
                 onPaste={onPastHandler}
@@ -321,8 +327,8 @@ export const PersonalInfo = () => {
               <PasswordInput
                 id="new-password-profile"
                 variant="primary"
-                label={t('LABEL_NEW_PASSWORD')}
-                placeholder={t('PLACEHOLDER_NEW_PASSWORD')}
+                label={t('personal-info:label.newPassword')}
+                placeholder={t('personal-info:placeholder.newPassword')}
                 onCut={onCutHandler}
                 onCopy={onCopyHandler}
                 onPaste={onPastHandler}
@@ -334,8 +340,8 @@ export const PersonalInfo = () => {
               <PasswordInput
                 id="repeat-password-profile"
                 variant="primary"
-                label={t('LABEL_REPEAT_PASSWORD')}
-                placeholder={t('PLACEHOLDER_REPEAT_PASSWORD')}
+                label={t('personal-info:label.repeatPassword')}
+                placeholder={t('personal-info:placeholder.repeatPassword')}
                 onCut={onCutHandler}
                 onCopy={onCopyHandler}
                 onPaste={onPastHandler}

@@ -4,18 +4,14 @@ import { UserPersonalInfoValidationMessage } from '@vse-bude/shared';
 export const userUpdateSchema = Joi.object().keys({
   avatar: Joi.string(),
 
-  firstName: Joi.string().trim()
-.required()
-.min(2)
+  firstName: Joi.string().trim().required().min(2)
 .max(256)
 .messages({
     'string.min': UserPersonalInfoValidationMessage.FIRSTNAME_MIN,
     'string.max': UserPersonalInfoValidationMessage.FIRSTNAME_MAX,
     'string.empty': UserPersonalInfoValidationMessage.FIRSTNAME_REQUIRED,
   }),
-  lastName: Joi.string().trim()
-.required()
-.min(2)
+  lastName: Joi.string().trim().required().min(2)
 .max(256)
 .messages({
     'string.min': UserPersonalInfoValidationMessage.LASTNAME_MIN,
@@ -52,8 +48,7 @@ export const userUpdateSchema = Joi.object().keys({
   linkedin: Joi.string().allow(''),
   facebook: Joi.string().allow(''),
 
-  password: Joi.string().trim()
-.messages({
+  password: Joi.string().trim().messages({
     'string.empty': UserPersonalInfoValidationMessage.EMPTY_PASSWORD,
   }),
   newPassword: Joi.string()
@@ -66,8 +61,7 @@ export const userUpdateSchema = Joi.object().keys({
       'string.pattern.base': UserPersonalInfoValidationMessage.NEW_PASSWORD,
       'any.invalid': UserPersonalInfoValidationMessage.SAME_PASSWORD,
     }),
-  repeatPassword: Joi.any().valid(Joi.ref('newPassword'))
-.messages({
+  repeatPassword: Joi.any().valid(Joi.ref('newPassword')).messages({
     'any.only': UserPersonalInfoValidationMessage.DIFFERENT_PASSWORDS,
   }),
 });
