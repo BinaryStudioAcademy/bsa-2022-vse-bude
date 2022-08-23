@@ -5,24 +5,24 @@ import { loadAllProducts } from './actions';
 
 type InitialState = {
   products: ProductDto[] | [];
-  productsLoadStatus: DataStatus;
+  dataStatus: DataStatus;
 };
 
 const initialState: InitialState = {
   products: [],
-  productsLoadStatus: DataStatus.IDLE,
+  dataStatus: DataStatus.IDLE,
 };
 
 const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(loadAllProducts.pending, (state) => {
-      state.productsLoadStatus = DataStatus.PENDING;
+      state.dataStatus = DataStatus.PENDING;
     })
     .addCase(loadAllProducts.rejected, (state) => {
-      state.productsLoadStatus = DataStatus.REJECTED;
+      state.dataStatus = DataStatus.REJECTED;
     })
     .addCase(loadAllProducts.fulfilled, (state, action) => {
-      state.productsLoadStatus = DataStatus.FULFILLED;
+      state.dataStatus = DataStatus.FULFILLED;
       state.products = action.payload;
     });
 });

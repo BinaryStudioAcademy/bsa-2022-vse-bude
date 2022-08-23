@@ -16,7 +16,7 @@ const getTimeToEvent = (date: string) => {
       .duration(dayjs.duration(ms).hours(), 'minutes')
       .humanize();
 
-    return `${days}  ${hours.slice(0, 3)} ${minutes.slice(0, 5)}`;
+    return `${days}  ${hours.split('o')[0]} ${minutes.split('u')[0]}`;
   }
 
   return dayjs().to(date);
