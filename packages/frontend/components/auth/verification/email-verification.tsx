@@ -54,7 +54,7 @@ export const EmailVerification = () => {
           variant="primary"
           type="text"
           name="code"
-          error={t(getErrorKey('code', errors.code?.type))}
+          error={t(getErrorKey('code', errors.code?.type) as any)}
         />
         <Error text={error} />
       </div>
