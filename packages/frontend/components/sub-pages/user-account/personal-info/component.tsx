@@ -1,6 +1,6 @@
 import { useTranslation } from 'next-i18next';
 import type React from 'react';
-import { useState } from 'react';
+import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import {
   Input,
@@ -10,54 +10,103 @@ import {
   Button,
   DownloadButton,
 } from '@primitives';
-import { SectionHeader, NestedLayout } from '../../common';
-import noavatar from '../../../../public/images/noavatar.svg';
+import { userUpdateSchema } from 'validation-schemas/user/user-update';
+import type { UserPersonalInfoDto } from '@vse-bude/shared';
+import { joiResolver } from '@hookform/resolvers/joi';
+import { useTypedSelector } from '@hooks';
+import type { RootState } from '@types';
+import { useEffect } from 'react';
 import flag from '../../../../public/images/flagBg.png';
+import noavatar from '../../../../public/images/noavatar.svg';
+import { SectionHeader, NestedLayout } from '../../common';
 import * as styles from './styles';
 
 export const PersonalInfo = () => {
-  const [form, setForm] = useState({
-    avatar: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    novaposhta: '',
-    instagram: '',
-    linkedin: '',
-    facebook: '',
-    currentPassword: '',
-    newPassword: '',
-    repeatPassword: '',
-    country: '',
-    region: '',
-    city: '',
-    zipCode: '',
+  const { user, address, socialMedia } = useTypedSelector(
+    (state: RootState) => state.profile,
+  );
+  const { avatar, firstName, lastName, email, phone } = user;
+  const addressFields = address
+    ? address
+    : {
+        country: address?.country ? address.country : '',
+        region: address?.region ? address.region : '',
+        city: address?.city ? address.city : '',
+        zip: address?.zip ? address.zip : '',
+        novaPoshtaRef: address?.novaPoshtaRef ? address.novaPoshtaRef : '',
+      };
+  const socialMediaFields = socialMedia
+    ? socialMedia
+    : {
+        instagram: socialMedia?.instagram ? socialMedia.instagram : '',
+        linkedin: socialMedia?.linkedin ? socialMedia.linkedin : '',
+        facebook: socialMedia?.facebook ? socialMedia.facebook : '',
+      };
+
+  const {
+    register,
+    reset,
+    setValue,
+    watch,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<UserPersonalInfoDto>({
+    defaultValues: {
+      avatar,
+      firstName,
+      lastName,
+      email,
+      phone,
+      ...addressFields,
+      ...socialMediaFields,
+      password: '',
+      newPassword: '',
+      repeatPassword: '',
+    },
+    resolver: joiResolver(userUpdateSchema),
   });
 
-  const { handleSubmit } = useForm();
-
   const { t } = useTranslation('personal-info');
-  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [event.target.name]: event.target.value });
-  };
 
-  const onSaveHandler = (event: React.FormEvent<HTMLButtonElement>) => {
+  const [photo] = watch(['avatar']);
+
+  useEffect(() => {
+    if (!photo) {
+      setValue('avatar', noavatar.src);
+    }
+  }, [watch, photo, setValue]);
+
+  const onSave: SubmitHandler<UserPersonalInfoDto> = (data, event) => {
     event.preventDefault();
+    console.log('data', data);
   };
-
-  // const onCanselHandler = (event: React.FormEvent<HTMLButtonElement>) => {
-  //   event.preventDefault();
-  // };
 
   const onDownloadAvatar = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files[0];
+    const url = URL.createObjectURL(file);
+    console.log(url);
+    setValue('avatar', url);
+  };
+
+  const onCutHandler = (event: React.ClipboardEvent<HTMLInputElement>) => {
     event.preventDefault();
-    //const file = event.target.files;
+    
+return false;
+  };
+  const onCopyHandler = (event: React.ClipboardEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    
+return false;
+  };
+  const onPastHandler = (event: React.ClipboardEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    
+return false;
   };
 
   return (
     <NestedLayout>
-      <form css={styles.form} onSubmit={handleSubmit(onSaveHandler)}>
+      <form css={styles.form} onSubmit={handleSubmit(onSave)}>
         <div css={styles.personalHeader}>
           <div css={styles.headerWrapper}>
             <div css={styles.flagWrapper}>
@@ -65,25 +114,41 @@ export const PersonalInfo = () => {
             </div>
 
             <div css={styles.avatarWrapper}>
-              <img
-                css={styles.avatar}
-                src={!form.avatar ? noavatar.src : form.avatar}
-                alt="avatar"
-              />
+              <img css={styles.avatar} src={avatar} alt="avatar" />
               <DownloadButton
+                {...register('avatar')}
                 id="profile-avatar"
-                name="avatar"
                 onChange={onDownloadAvatar}
               />
             </div>
           </div>
           <Flex justify={'flex-end'} css={styles.buttons}>
-            <Button type="reset" variant="outlined">
+            <Button
+              type="button"
+              variant="outlined"
+              onClick={() => {
+                reset(
+                  {
+                    avatar,
+                    firstName,
+                    lastName,
+                    email,
+                    phone,
+                    ...addressFields,
+                    ...socialMediaFields,
+                    password: '',
+                    newPassword: '',
+                    repeatPassword: '',
+                  },
+                  {
+                    keepDefaultValues: true,
+                  },
+                );
+              }}
+            >
               {t('ACTION_CANCEL')}
             </Button>
-            <Button type="submit" onClick={onSaveHandler}>
-              {t('ACTION_SAVE')}
-            </Button>
+            <Button type="submit">{t('ACTION_SAVE')}</Button>
           </Flex>
         </div>
 
@@ -95,24 +160,22 @@ export const PersonalInfo = () => {
                 <Input
                   id="firstName-profile"
                   type="text"
-                  name="firstName"
-                  value={form.firstName}
                   variant="primary"
-                  label={t('LABEL_FIRST_NAME')}
-                  placeholder={t('PLACEHOLDER_FIRST_NAME')}
-                  onChange={changeHandler}
+                  label={t('LABEL_FIRSTNAME')}
+                  placeholder={t('PLACEHOLDER_FIRSTNAME')}
+                  {...register('firstName')}
+                  error={t(errors.firstName?.message)}
                 />
               </div>
               <div css={styles.inputRow}>
                 <Input
                   id="lastName-profile"
                   type="text"
-                  name="lastName"
-                  value={form.lastName}
                   variant="primary"
-                  label={t('LABEL_LAST_NAME')}
-                  placeholder={t('PLACEHOLDER_LAST_NAME')}
-                  onChange={changeHandler}
+                  label={t('LABEL_LASTNAME')}
+                  placeholder={t('PLACEHOLDER_LASTNAME')}
+                  {...register('lastName')}
+                  error={t(errors.lastName?.message)}
                 />
               </div>
             </Flex>
@@ -120,12 +183,11 @@ export const PersonalInfo = () => {
               <Input
                 id="email-profile"
                 type="email"
-                name="email"
-                value={form.email}
                 variant="primary"
                 label={t('LABEL_EMAIL')}
                 placeholder={t('PLACEHOLDER_EMAIL')}
-                onChange={changeHandler}
+                {...register('email')}
+                error={t(errors.email?.message)}
               />
             </div>
             <div css={styles.inputRow}>
@@ -133,11 +195,10 @@ export const PersonalInfo = () => {
                 id="phone-profile"
                 type="text"
                 variant="primary"
-                name="phone"
-                value={form.phone}
                 label={t('LABEL_PHONE')}
                 placeholder={t('PLACEHOLDER_PHONE')}
-                onChange={changeHandler}
+                {...register('phone')}
+                error={t(errors.phone?.message)}
               />
             </div>
           </Column>
@@ -150,12 +211,10 @@ export const PersonalInfo = () => {
                 <Input
                   id="country-profile"
                   type="text"
-                  name="country"
-                  value={form.country}
                   variant="primary"
                   label={t('LABEL_COUNTRY')}
                   placeholder={t('PLACEHOLDER_COUNTRY')}
-                  onChange={changeHandler}
+                  {...register('country')}
                 />
               </div>
 
@@ -163,12 +222,10 @@ export const PersonalInfo = () => {
                 <Input
                   id="region-profile"
                   type="text"
-                  name="region"
-                  value={form.region}
                   variant="primary"
                   label={t('LABEL_REGION')}
                   placeholder={t('PLACEHOLDER_REGION')}
-                  onChange={changeHandler}
+                  {...register('region')}
                 />
               </div>
             </Flex>
@@ -178,24 +235,20 @@ export const PersonalInfo = () => {
                 <Input
                   id="city-profile"
                   type="text"
-                  name="city"
-                  value={form.city}
                   variant="primary"
                   label={t('LABEL_CITY')}
                   placeholder={t('PLACEHOLDER_CITY')}
-                  onChange={changeHandler}
+                  {...register('city')}
                 />
               </div>
               <div css={styles.inputRow}>
                 <Input
                   id="zip-code-profile"
                   type="text"
-                  name="zipCode"
-                  value={form.zipCode}
                   variant="primary"
                   label={t('LABEL_ZIP_CODE')}
                   placeholder={t('PLACEHOLDER_ZIP_CODE')}
-                  onChange={changeHandler}
+                  {...register('zip')}
                 />
               </div>
             </Flex>
@@ -205,11 +258,9 @@ export const PersonalInfo = () => {
                 id="novaposhta-profile"
                 type="text"
                 variant="primary"
-                name="novaposhta"
-                value={form.novaposhta}
                 label={t('NOVA_POSHTA')}
                 placeholder={t('NOVA_POSHTA_PLACEHOLDER')}
-                onChange={changeHandler}
+                {...register('novaPoshtaRef')}
               />
             </div>
           </Column>
@@ -222,11 +273,9 @@ export const PersonalInfo = () => {
                 id="instagram-profile"
                 type="text"
                 variant="primary"
-                name="instagram"
-                value={form.instagram}
                 label={t('LABEL_INSTAGRAM')}
                 placeholder={t('PLACEHOLDER_INSTAGRAM')}
-                onChange={changeHandler}
+                {...register('instagram')}
               />
             </div>
 
@@ -235,11 +284,9 @@ export const PersonalInfo = () => {
                 id="linkedin-profile"
                 type="text"
                 variant="primary"
-                name="linkedin"
-                value={form.linkedin}
                 label={t('LABEL_LINKEDIN')}
                 placeholder={t('PLACEHOLDER_LINKEDIN')}
-                onChange={changeHandler}
+                {...register('linkedin')}
               />
             </div>
 
@@ -248,11 +295,9 @@ export const PersonalInfo = () => {
                 id="facebook-profile"
                 type="text"
                 variant="primary"
-                name="facebook"
-                value={form.facebook}
                 label={t('LABEL_FACEBOOK')}
                 placeholder={t('PLACEHOLDER_FACEBOOK')}
-                onChange={changeHandler}
+                {...register('facebook')}
               />
             </div>
           </Column>
@@ -262,31 +307,40 @@ export const PersonalInfo = () => {
             <div css={styles.inputRow}>
               <PasswordInput
                 id="current-password-profile"
-                value={form.currentPassword}
                 variant="primary"
                 label={t('LABEL_CURRENT_PASSWORD')}
-                placeholder={t('PLACEHOLDER__CURRENT_PASSWORD')}
-                onChange={changeHandler}
+                placeholder={t('PLACEHOLDER_CURRENT_PASSWORD')}
+                onCut={onCutHandler}
+                onCopy={onCopyHandler}
+                onPaste={onPastHandler}
+                {...register('password')}
+                error={t(errors.password?.message)}
               />
             </div>
             <div css={styles.inputRow}>
               <PasswordInput
                 id="new-password-profile"
-                value={form.newPassword}
                 variant="primary"
                 label={t('LABEL_NEW_PASSWORD')}
-                placeholder={t('PLACEHOLDER__NEW_PASSWORD')}
-                onChange={changeHandler}
+                placeholder={t('PLACEHOLDER_NEW_PASSWORD')}
+                onCut={onCutHandler}
+                onCopy={onCopyHandler}
+                onPaste={onPastHandler}
+                {...register('newPassword')}
+                error={t(errors.newPassword?.message)}
               />
             </div>
             <div css={styles.inputRow}>
               <PasswordInput
                 id="repeat-password-profile"
-                value={form.repeatPassword}
                 variant="primary"
                 label={t('LABEL_REPEAT_PASSWORD')}
-                placeholder={t('PLACEHOLDER__REPEAT_PASSWORD')}
-                onChange={changeHandler}
+                placeholder={t('PLACEHOLDER_REPEAT_PASSWORD')}
+                onCut={onCutHandler}
+                onCopy={onCopyHandler}
+                onPaste={onPastHandler}
+                {...register('repeatPassword')}
+                error={t(errors.repeatPassword?.message)}
               />
             </div>
           </Column>

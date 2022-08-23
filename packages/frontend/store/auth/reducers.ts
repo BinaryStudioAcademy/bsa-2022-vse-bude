@@ -11,8 +11,10 @@ export interface AuthState {
 
 const INITIAL_STATE: UserDto = {
   id: null,
-  name: null,
+  firstName: null,
+  lastName: null,
   email: null,
+  phone: null,
 };
 
 const currentUser = createReducer(INITIAL_STATE, {

@@ -1,22 +1,21 @@
-import type { FC } from 'react';
+import React from 'react';
 import { Icon } from '@primitives';
 import { IconName } from '@enums';
 import type { DownloadButtonProps } from './types';
 import * as styles from './styles';
 
-export const DownloadButton: FC<DownloadButtonProps> = ({
-  id,
-  name,
-  multiple = false,
-  onChange,
-}) => (
+const InputFile = (
+  { id, multiple = false, onChange }: DownloadButtonProps,
+  ref,
+) => (
   <div css={styles.container}>
     <label css={styles.downloadWrapper} htmlFor={id}>
       <input
+        ref={ref}
         css={styles.download}
         id={id}
         type="file"
-        name={name}
+        accept=".jpg, .png"
         multiple={multiple}
         onChange={onChange}
       />
@@ -28,3 +27,5 @@ export const DownloadButton: FC<DownloadButtonProps> = ({
     </label>
   </div>
 );
+
+export const DownloadButton = React.forwardRef(InputFile);

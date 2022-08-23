@@ -8,9 +8,12 @@ export const form = () => css`
   width: 100%;
 `;
 
-export const personalHeader = () => css`
+export const personalHeader = ({ mq }: Theme) => css`
   width: 100%;
   margin-bottom: 7px;
+  ${mq[0]} {
+    margin-bottom: 15px;
+  }
 `;
 
 export const headerWrapper = ({ spaces }: Theme) => css`
@@ -33,8 +36,6 @@ export const avatarWrapper = ({ colors, radiuses }: Theme) => css`
   position: absolute;
   top: 66px;
   left: 3%;
-  width: 130px;
-  height: 130px;
   border-radius: ${radiuses.circle};
   border: 2px solid ${colors.backgroundLight};
 `;
@@ -42,6 +43,8 @@ export const avatarWrapper = ({ colors, radiuses }: Theme) => css`
 export const avatar = ({ radiuses }: Theme) => css`
   display: block;
   border-radius: ${radiuses.circle};
+  width: 130px;
+  height: 130px;
 `;
 
 export const buttons = ({ spaces }: Theme) => css`

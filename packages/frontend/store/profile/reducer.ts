@@ -1,14 +1,29 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { UserDto } from '@vse-bude/shared';
+import type {
+  UserDto,
+  UserAddressDto,
+  UserSocialMediaDto,
+} from '@vse-bude/shared';
 import { getCurrentUser } from './actions';
 
 interface ProfileState {
   user: UserDto | null;
+  address: UserAddressDto | null;
+  socialMedia: UserSocialMediaDto | null;
   loading: boolean;
 }
 
 const initialState: ProfileState = {
-  user: null,
+  user: {
+    id: '1234567890',
+    avatar: null,
+    firstName: 'John',
+    lastName: 'Doe',
+    email: 'example@yahoo.com',
+    phone: '+380660153647',
+  },
+  address: null,
+  socialMedia: null,
   loading: false,
 };
 
