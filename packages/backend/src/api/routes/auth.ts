@@ -13,12 +13,69 @@ export const initAuthRoutes = (
 ): Router => {
   const router = Router();
 
+  /**
+   * @openapi
+   * /auth/sign-in:
+   *   post:
+   *     tags: [Auth]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - name: body
+   *         in: body
+   *         required: true
+   *         schema:
+   *           type: object
+   *           required:
+   *             - email
+   *           properties:
+   *             email:
+   *               type: string
+   *             password:
+   *               type: string
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 contribution:
+   *                   $ref: "#/definitions/User"
+   */
+
   router.post(
     apiPath(path, AuthApiRoutes.SIGN_IN),
     wrap<Empty, AuthTokenData, UserSignInDto>((req: Request) =>
       authService.signIn(req.body, req),
     ),
   );
+
+  /**
+   * @openapi
+   * /auth/sign-out:
+   *   post:
+   *     tags: [Auth]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - name: userId
+   *         in: query
+   *         required: true
+   *         schema:
+   *           type: string
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 contribution:
+   *                   $ref: "#/definitions/User"
+   */
 
   router.post(
     apiPath(path, AuthApiRoutes.SIGN_OUT),
@@ -32,6 +89,59 @@ export const initAuthRoutes = (
     }),
   );
 
+  /**
+   * @openapi
+   * definitions:
+   *   RefreshToken:
+   *     properties:
+   *       expiresAt:
+   *         type: string
+   *         format: date-time
+   *       token:
+   *         type: string
+   *       userId:
+   *         type: string
+   *       id:
+   *         type: string
+   *     required:
+   *     - expiresAt
+   *     - token
+   *     - userId
+   *     - id
+   *     type: object
+   *     description: Model RefreshToken
+   */
+
+  /**
+   * @openapi
+   * /auth/refresh-token:
+   *   post:
+   *     tags: [Auth]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - name: body
+   *         in: body
+   *         required: true
+   *         schema:
+   *           type: object
+   *           required:
+   *             - tokenValue
+   *           properties:
+   *             tokenValue:
+   *               type: string
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 contribution:
+   *                   $ref: "#/definitions/RefreshToken"
+   */
+
   router.post(
     apiPath(path, AuthApiRoutes.REFRESH_TOKEN),
     wrap<Empty, AuthTokenData, UpdateRefreshToken>((req: Request) =>
@@ -39,12 +149,76 @@ export const initAuthRoutes = (
     ),
   );
 
+  /**
+   * @openapi
+   * /auth/sign-up:
+   *   post:
+   *     tags: [Auth]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - name: body
+   *         in: body
+   *         required: true
+   *         schema:
+   *           type: object
+   *           required:
+   *             - firstName
+   *             - lastName
+   *           properties:
+   *             firstName:
+   *               type: string
+   *             lastName:
+   *               type: string
+   *             email:
+   *               type: string
+   *             phone:
+   *               type: string
+   *             password:
+   *               type: string
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 contribution:
+   *                   $ref: "#/definitions/User"
+   */
+
   router.post(
     apiPath(path, AuthApiRoutes.SIGN_UP),
     wrap<Empty, AuthTokenData, UserSignUpDto>((req: Request) =>
       authService.signUp(req.body, req),
     ),
   );
+
+  /**
+   * @openapi
+   * /auth/user:
+   *   get:
+   *     tags: [Auth]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - name: userId
+   *         in: query
+   *         required: true
+   *         schema:
+   *           type: string
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 contribution:
+   *                   $ref: "#/definitions/User"
+   */
 
   router.get(
     apiPath(path, AuthApiRoutes.USER),

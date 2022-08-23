@@ -57,8 +57,6 @@ export const initNewsRoutes = (
    *           format: double
    *           type: number
    *     responses:
-   *       403:
-   *         description: User is not authorized to perform the action.
    *       200:
    *         description: Ok
    *         content:

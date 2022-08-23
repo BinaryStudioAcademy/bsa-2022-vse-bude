@@ -77,8 +77,6 @@ export const initUserRoutes = (
    *     produces:
    *       - application/json
    *     responses:
-   *       403:
-   *         description: User is not authorized to perform the action.
    *       200:
    *         description: Ok
    *         content:
