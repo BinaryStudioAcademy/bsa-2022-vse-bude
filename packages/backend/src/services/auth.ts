@@ -29,7 +29,6 @@ import { AuthApiRoutes } from '@vse-bude/shared';
 import { ResetPasswordMail } from '../email/reset-password-mail';
 import { ResetPassLinkInvalid } from '../error/reset-password/reset-pass-link-invalid';
 import type { RedisStorageService } from './redis-storage';
-import type { EmailService } from './email/email';
 
 export class AuthService {
   private _userRepository: UserRepository;
@@ -42,8 +41,6 @@ export class AuthService {
 
   private _cache: RedisStorageService;
 
-  private _emailService: EmailService;
-
   private resetLinkLifeTime = 3600000;
 
   constructor(
@@ -52,14 +49,12 @@ export class AuthService {
     hashService: HashService,
     verifyService: VerifyService,
     cache: RedisStorageService,
-    emailService: EmailService,
   ) {
     this._userRepository = userRepository;
     this._refreshTokenRepository = refreshTokenRepository;
     this._hashService = hashService;
     this._verifyService = verifyService;
     this._cache = cache;
-    this._emailService = emailService;
   }
 
   async signOut(signOutDto: SignOut) {

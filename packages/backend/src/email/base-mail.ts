@@ -2,9 +2,9 @@ import type { EmailOptions } from '@types';
 import { getEnv } from '@helpers';
 import type { EmailService } from '../services/email/email';
 import { emailService } from '../services/email';
-import type { MailInterface } from './mail-interface';
+import type { Mailable } from './mailable';
 
-export class BaseMail implements MailInterface {
+export class BaseMail implements Mailable {
   protected _mailService: EmailService;
 
   protected _options: EmailOptions;
