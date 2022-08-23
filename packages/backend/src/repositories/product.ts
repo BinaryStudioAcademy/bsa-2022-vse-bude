@@ -26,6 +26,16 @@ export class ProductRepository {
       },
       include: {
         bids: true,
+        author: {
+          select: {
+            id: true,
+            phone: true,
+            firstName: true,
+            lastName: true,
+            avatar: true,
+            socialMedia: true,
+          },
+        },
       },
     });
   }
