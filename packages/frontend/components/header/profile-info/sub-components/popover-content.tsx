@@ -1,7 +1,8 @@
 import { AccountRoutes, Routes, IconName } from '@enums';
 import { Icon } from '@primitives';
 import { useRouter } from 'next/router';
-import { auth } from '@helpers';
+import { logOut } from 'store/profile';
+import { store } from 'store/store';
 import * as styles from '../styles';
 import type { PopoverContentProps } from '../types';
 
@@ -69,11 +70,9 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
       </button>
       <button
         css={styles.popoverContentItem}
-        onClick={(e) => {
-          auth.logOut();
-          handleClick(e);
+        onClick={() => {
+          store().dispatch(logOut());
         }}
-        path-label={Routes.DEFAULT}
         data-variant="icon"
       >
         <Icon icon={IconName.SIGN_OUT} color="yellow" />
