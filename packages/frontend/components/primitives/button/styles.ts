@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { Theme } from 'theme';
+import type { Theme } from '@emotion/react';
 import { resetButton } from 'theme';
 
 export const button = ({
@@ -15,9 +15,9 @@ export const button = ({
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: ${fontSizes.button};
   line-height: ${lineHeights.button};
   font-weight: ${fontWeights.button};
-  font-size: ${fontSizes.button};
   cursor: pointer;
 
   &[data-variant='filled'] {

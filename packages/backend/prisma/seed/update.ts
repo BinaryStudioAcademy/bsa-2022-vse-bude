@@ -9,6 +9,7 @@ import { updateBid } from './controllers/update/bid';
 import { prismaClient } from './config/prismaClient';
 import { updateAddress } from './controllers/update/address';
 import { updateUsers } from './controllers/update/user';
+import { updateNews } from './controllers/update/news';
 
 (async () => {
   await updateUsers(prismaClient);
@@ -21,6 +22,7 @@ import { updateUsers } from './controllers/update/user';
   await updateChat(prismaClient);
   await updateChatMember(prismaClient);
   await updateMessage(prismaClient);
+  await updateNews(prismaClient);
 })()
   .then(() => prismaClient.$disconnect())
   .catch(async (e) => {

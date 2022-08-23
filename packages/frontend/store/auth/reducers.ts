@@ -1,7 +1,12 @@
 import { createReducer } from '@reduxjs/toolkit';
 import type { UserDto } from '@vse-bude/shared';
 import { combineReducers } from 'redux';
-import { loginUser } from './actions';
+import {
+  emailVerification,
+  loginUser,
+  phoneVerification,
+  signUpUser,
+} from './actions';
 
 export interface AuthState {
   currentUser: UserDto | null;
@@ -13,6 +18,11 @@ const INITIAL_STATE: UserDto = {
   id: null,
   name: null,
   email: null,
+  phone: null,
+  phoneVerified: false,
+  firstName: '',
+  lastName: '',
+  avatar: '',
 };
 
 const currentUser = createReducer(INITIAL_STATE, {
@@ -24,10 +34,16 @@ const loading = createReducer(false, {
   [loginUser.pending.type]: () => true,
   [loginUser.fulfilled.type]: () => false,
   [loginUser.rejected.type]: () => false,
+  [signUpUser.pending.type]: () => true,
+  [signUpUser.fulfilled.type]: () => false,
+  [signUpUser.rejected.type]: () => false,
 });
 
 const error = createReducer('', {
   [loginUser.rejected.type]: (_, { payload }) => payload,
+  [signUpUser.rejected.type]: (_, { payload }) => payload,
+  [phoneVerification.rejected.type]: (_, { payload }) => payload,
+  [emailVerification.rejected.type]: (_, { payload }) => payload,
   [loginUser.pending.type]: () => '',
 });
 

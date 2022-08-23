@@ -1,11 +1,11 @@
 import { HttpError, HttpStatusCode } from '@vse-bude/shared';
-import { WRONG_PASSWORD } from '../error-messages';
+import type { Request } from 'express';
 
 class WrongPasswordError extends HttpError {
-  constructor() {
+  constructor(req: Request) {
     super({
       status: HttpStatusCode.BAD_REQUEST,
-      message: WRONG_PASSWORD,
+      message: req.t('WRONG_PASSWORD'),
     });
   }
 }

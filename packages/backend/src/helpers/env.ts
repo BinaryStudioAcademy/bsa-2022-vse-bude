@@ -2,7 +2,11 @@ type EmailEnvKey = 'EMAIL_SERVICE_API_KEY';
 
 type ProcessEnvKey = 'NODE_ENV' | 'PORT';
 
-type RedisEnvKey = 'REDIS_PORT' | 'REDIS_HOST' | 'REDIS_PASSWORD';
+type RedisEnvKey =
+  | 'REDIS_PORT'
+  | 'REDIS_HOST'
+  | 'REDIS_PASSWORD'
+  | 'REDIS_USERNAME';
 
 type TwilioEnvKey =
   | 'TWILIO_ACCOUNT_SID'

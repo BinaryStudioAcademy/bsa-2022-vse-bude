@@ -1,36 +1,35 @@
-import { IconName, IconNameToSvgIcon } from '../../common/enums';
-import { Routes, AccountRoutes } from '../../common/enums';
+import { IconName, Routes, AccountRoutes } from '@enums';
 import type { LinkData } from './types';
 
 export const linksData: LinkData[] = [
   {
-    iconPath: IconNameToSvgIcon[IconName.USER],
-    label: 'PERSONAL_INFO',
+    iconPath: IconName.USER,
+    label: 'user-account:dashboard.personalInfo',
     path: Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_PERSONAL,
   },
   {
-    iconPath: IconNameToSvgIcon[IconName.LIST],
-    label: 'MY_LIST',
+    iconPath: IconName.LIST,
+    label: 'user-account:dashboard.myList',
     path: Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_LIST,
   },
   {
-    iconPath: IconNameToSvgIcon[IconName.SETTINGS],
-    label: 'SETTINGS',
+    iconPath: IconName.SETTINGS,
+    label: 'user-account:dashboard.settings',
     path: Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_SETTINGS,
   },
   {
-    iconPath: IconNameToSvgIcon[IconName.MESSAGE],
-    label: 'MESSAGES',
+    iconPath: IconName.MESSAGE,
+    label: 'user-account:dashboard.messages',
     path: Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_MESSAGES,
   },
   {
-    iconPath: IconNameToSvgIcon[IconName.SUPPORT],
-    label: 'SUPPORT',
+    iconPath: IconName.SUPPORT,
+    label: 'user-account:dashboard.support',
     path: Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_SUPPORT,
   },
   {
-    iconPath: IconNameToSvgIcon[IconName.SIGN_OUT],
-    label: 'SIGN_OUT',
+    iconPath: IconName.SIGN_OUT,
+    label: 'user-account:dashboard.signOut',
     path: Routes.DEFAULT,
   },
 ];

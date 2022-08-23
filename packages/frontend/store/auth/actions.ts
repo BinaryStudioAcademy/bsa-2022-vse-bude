@@ -1,17 +1,24 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { login } from 'services/auth';
-import type { UserDto, UserSignInDto } from '@vse-bude/shared';
-import { StorageKey } from '@vse-bude/shared';
-import { auth, cookieStorage } from '@helpers';
+import {
+  login,
+  signUp,
+  verifyPhone,
+  resendPhoneCode,
+  verifyEmail,
+  resendEmailCode,
+} from 'services/auth';
+import type {
+  EmailVerifyDto,
+  PhoneVerifyDto,
+  UserSignInDto,
+  UserSignUpDto,
+} from '@vse-bude/shared';
+import { auth } from '@helpers';
+import Router from 'next/router';
+import { Routes } from '@enums';
+import type { IAuth } from '../../common/types/auth';
 import { AuthActions } from './action-types';
 
-export interface IAuth {
-  user: UserDto;
-  error?: string;
-  accessToken: string;
-  accessExpiresAt: number;
-  refreshToken: string;
-}
 const loginUser = createAsyncThunk(
   AuthActions.LOGIN,
   (data: UserSignInDto, { rejectWithValue }) =>
@@ -20,12 +27,8 @@ const loginUser = createAsyncThunk(
         if (data?.error) {
           return rejectWithValue(data.error);
         }
-        const expiresAt = new Date(Date.now() + data.accessExpiresAt);
-        cookieStorage.set<string>(StorageKey.ACCESS_TOKEN, data.accessToken, {
-          expires: expiresAt,
-        });
-        cookieStorage.set<string>(StorageKey.REFRESH_TOKEN, data.refreshToken);
         auth.setTokens(data.accessToken, data.refreshToken);
+        Router.push(Routes.DEFAULT);
 
         return data;
       })
@@ -36,4 +39,72 @@ const loginUser = createAsyncThunk(
       }),
 );
 
-export { loginUser };
+const signUpUser = createAsyncThunk(
+  AuthActions.SIGN_UP,
+  async (data: UserSignUpDto, { rejectWithValue }) => {
+    try {
+      const response: IAuth = await signUp(data);
+      auth.setTokens(response.accessToken, response.refreshToken);
+      // TODO: upload user data
+      // TODO: check if user's phone and email are verified and redirect dependently of it values
+      await Router.push(Routes.PHONE_VERIFY);
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
+
+const phoneVerification = createAsyncThunk(
+  AuthActions.PHONE_VERIFY,
+  async (data: PhoneVerifyDto, { rejectWithValue }) => {
+    try {
+      await verifyPhone(data);
+      await Router.push(Routes.EMAIL_VERIFY);
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  },
+);
+
+const phoneCodeResend = createAsyncThunk(
+  AuthActions.PHONE_RESEND_CODE,
+  async (_, { rejectWithValue }) => {
+    try {
+      return await resendPhoneCode();
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  },
+);
+
+const emailVerification = createAsyncThunk(
+  AuthActions.EMAIL_VERIFY,
+  async (data: EmailVerifyDto, { rejectWithValue }) => {
+    try {
+      await verifyEmail(data);
+      await Router.push(Routes.DEFAULT);
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  },
+);
+
+const emailCodeResend = createAsyncThunk(
+  AuthActions.EMAIL_RESEND_CODE,
+  async (_, { rejectWithValue }) => {
+    try {
+      return await resendEmailCode();
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  },
+);
+
+export {
+  loginUser,
+  signUpUser,
+  phoneVerification,
+  phoneCodeResend,
+  emailVerification,
+  emailCodeResend,
+};

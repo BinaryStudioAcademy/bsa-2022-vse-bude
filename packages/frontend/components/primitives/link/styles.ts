@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { Theme } from 'theme';
+import type { Theme } from '@emotion/react';
 
 export const linkStyles = ({
   colors,
@@ -7,7 +7,6 @@ export const linkStyles = ({
   lineHeights,
   fontWeights,
 }: Theme) => css`
-  color: ${colors.link};
   text-decoration: none;
   font-size: ${fontSizes.body1};
   font-weight: ${fontWeights.body1};
@@ -19,22 +18,35 @@ export const linkStyles = ({
     pointer-events: none;
   }
 
-  &:visited {
-    color: ${colors.link};
-  }
+  &[data-variant='default'] {
+    color: ${colors.extraDark};
 
-  &:hover {
-    color: ${colors.link};
+    &:visited {
+      color: ${colors.lightDark};
+    }
+
+    &:hover {
+      color: ${colors.lightDark};
+    }
   }
 
   &[data-variant='primary'] {
-    color: ${colors.link};
+    color: ${colors.primaryLight};
+
+    &:visited {
+      color: ${colors.primaryLight};
+    }
+
+    &:hover {
+      color: ${colors.primaryLightHover};
+    }
   }
 
   &[data-variant='secondary'] {
     font-size: ${fontSizes.body2};
     line-height: ${lineHeights.body2};
     color: ${colors.textFooter};
+
     &:hover {
       color: ${colors.textFooter};
     }
@@ -44,6 +56,7 @@ export const linkStyles = ({
     font-size: ${fontSizes.body2};
     line-height: ${lineHeights.body2};
     color: ${colors.accent};
+
     &:hover {
       color: ${colors.accent};
     }

@@ -1,0 +1,18 @@
+{
+  "USER_NOT_FOUND": "User not found!",
+  "USER_ALREADY_EXISTS": "User already exists!",
+  "UNAUTHORIZED": "Unauthorized!",
+  "WRONG_REFRESH_TOKEN": "Wrong Refresh Token!",
+  "EXPIRED_REFRESH_TOKEN": "Expired Refresh Token!",
+  "WRONG_PASSWORD": "Wrong password!",
+  "INTERNAL_ERROR": "Internal error!",
+  "UNSUPPORTED_FILE_EXTENSION": "Unsupported file extension!",
+  "FILE_SIZE_TOO_LARGE": "File size too large!",
+  "NO_FILE_ERROR": "No file provided!",
+  "mailing": {
+    "verification": {
+      "subject": "Email confirmation",
+      "body": "Please complete the e-mail confirmation process with this code: "
+    }
+  }
+}

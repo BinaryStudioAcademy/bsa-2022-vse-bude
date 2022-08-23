@@ -1,9 +1,11 @@
 import { appWithTranslation } from 'next-i18next';
-import { wrapper } from 'store';
-import { AuthProvider, ThemeProvider } from '@providers';
 import type { ReactElement, ReactNode } from 'react';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
+import { wrapper } from 'store';
+import { UserProvider, ThemeProvider } from '@providers';
+import '../public/css/fontawesome.css';
+import { PagesLoader } from 'components/primitives/pages-loader';
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -18,7 +20,8 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
 
   return (
     <ThemeProvider>
-      <AuthProvider>{getLayout(<Component {...pageProps} />)}</AuthProvider>
+      <UserProvider>{getLayout(<Component {...pageProps} />)}</UserProvider>
+      <PagesLoader />
     </ThemeProvider>
   );
 };

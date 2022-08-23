@@ -18,9 +18,21 @@ services:
     image: adminer
     restart: always
     ports:
-      - "3030:8080"
+      - '3030:8080'
     depends_on:
       - vsebude_db
 
+  vsebude_cache:
+    container_name: vsebude_cache
+    image: redis:6.2-alpine
+    restart: always
+    command: redis-server ./config/redis.conf
+    ports:
+      - '6379:6379'
+    volumes:
+      - cache:/data
+      - ./config/redis.conf:/data/config/redis.conf
+
 volumes:
   vsebude_pg_data:
+  cache:

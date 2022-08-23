@@ -1,7 +1,12 @@
-import type { UserSignInDto } from '@vse-bude/shared';
-import { ApiRoutes } from '@vse-bude/shared';
+import type {
+  PhoneVerifyDto,
+  UserSignInDto,
+  UserSignUpDto,
+} from '@vse-bude/shared';
+import { ApiRoutes, VerifyApiRoutes } from '@vse-bude/shared';
 import { AuthApiRoutes } from '@vse-bude/shared';
 import { http } from '@helpers';
+import type { IAuth } from '../common/types/auth';
 
 export const login = (loginData: UserSignInDto) =>
   http.post({
@@ -9,7 +14,37 @@ export const login = (loginData: UserSignInDto) =>
     body: loginData,
   });
 
+export const signUp = (signUpData: UserSignUpDto): Promise<IAuth> =>
+  http.post({
+    url: ApiRoutes.AUTH + AuthApiRoutes.SIGN_UP,
+    body: signUpData,
+  });
+
 export const getUser = () =>
   http.get({
     url: `${ApiRoutes.AUTH}${AuthApiRoutes.USER}`,
+  });
+
+export const verifyPhone = (data: PhoneVerifyDto) =>
+  http.post({
+    url: `${ApiRoutes.VERIFY}${VerifyApiRoutes.VERIFY_PHONE}`,
+    body: data,
+  });
+
+export const resendPhoneCode = () =>
+  http.post({
+    url: `${ApiRoutes.VERIFY}${VerifyApiRoutes.PHONE_RESEND_CODE}`,
+    body: {},
+  });
+
+export const verifyEmail = (data: PhoneVerifyDto) =>
+  http.post({
+    url: `${ApiRoutes.VERIFY}${VerifyApiRoutes.VERIFY_EMAIL}`,
+    body: data,
+  });
+
+export const resendEmailCode = () =>
+  http.post({
+    url: `${ApiRoutes.VERIFY}${VerifyApiRoutes.EMAIL_RESEND_CODE}`,
+    body: {},
   });

@@ -1,44 +1,28 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
-import React from 'react';
-import createEmotionServer from '@emotion/server/create-instance';
-import { cache } from '@emotion/css';
-
-export const renderStatic = async (html) => {
-  const { extractCritical } = createEmotionServer(cache);
-  const { ids, css } = extractCritical(html);
-
-  return { ids, css };
-};
 
 class CustomDocument extends Document {
-  static async getInitialProps(ctx) {
-    const initialProps = await Document.getInitialProps(ctx);
-    const { css, ids } = await renderStatic(initialProps.html);
-
-    return {
-      ...initialProps,
-      styles: (
-        <React.Fragment>
-          {initialProps.styles}
-          <style
-            data-emotion={`css ${ids.join(' ')}`}
-            dangerouslySetInnerHTML={{ __html: css }}
-          />
-        </React.Fragment>
-      ),
-    };
-  }
-
   render() {
     return (
       <Html lang={this.props.locale}>
         <Head>
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
-            rel="preconnect"
-            href="https://fonts.gstatic.com"
-            crossOrigin="true"
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/images/favicon/apple-touch-icon.png"
           />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/images/favicon/favicon-32x32.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/images/favicon/favicon-16x16.png"
+          />
+          <link rel="manifest" href="/images/favicon/site.webmanifest" />
           <link
             href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&display=swap"
             rel="stylesheet"
@@ -48,6 +32,7 @@ class CustomDocument extends Document {
           <Main />
           <NextScript />
           <div id="portal"></div>
+          <div id="popover"></div>
         </body>
       </Html>
     );

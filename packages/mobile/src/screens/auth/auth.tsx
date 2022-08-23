@@ -1,5 +1,5 @@
 import React, { FC, ReactElement } from 'react';
-import { UserSignUpDto } from '@vse-bude/shared';
+import { ColorPalette, UserSignInDto, UserSignUpDto } from '@vse-bude/shared';
 import { RootScreenName } from '~/common/enums/enums';
 import { auth as authActions } from '~/store/actions';
 import {
@@ -10,11 +10,11 @@ import {
   useNavigation,
 } from '~/hooks/hooks';
 import {
-  StatusBar,
   Text,
-  View,
   ScrollView,
   Divider,
+  ScreenWrapper,
+  StatusBar,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import {
@@ -36,8 +36,8 @@ const Auth: FC = () => {
       ? t('verification.SING_IN')
       : t('verification.CREATE_ACCOUNT');
 
-  const handleSignIn = (): void => {
-    // TODO: handle sign in
+  const handleSignIn = (payload: UserSignInDto): void => {
+    dispatch(authActions.signIn(payload));
   };
 
   const handleSignUp = (payload: UserSignUpDto): void => {
@@ -62,10 +62,14 @@ const Auth: FC = () => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      <StatusBar translucent backgroundColor="transparent" />
+    <ScreenWrapper>
+      <StatusBar
+        backgroundColor={ColorPalette.BLUE_100}
+        translucent={true}
+        barStyle="light-content"
+      />
       <Header
-        labelButton={t('components.HEADER_BUTTON_BACK')}
+        labelButton={t('common:components.HEADER_BUTTON_BACK')}
         onPress={handleGoBack}
       />
       <ScrollView
@@ -86,10 +90,10 @@ const Auth: FC = () => {
           {screenLabel}
         </Text>
         <GoogleButton />
-        <Divider text={t('text.OR')} />
+        <Divider text={t('common:text.OR')} />
         {getScreen(name)}
       </ScrollView>
-    </View>
+    </ScreenWrapper>
   );
 };
 

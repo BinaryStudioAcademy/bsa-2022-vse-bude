@@ -8,7 +8,7 @@ import { useEffect, useRef } from 'react';
  * @returns A ref object
  */
 export const useOutsideClick = (callback: () => void) => {
-  const ref = useRef<HTMLInputElement>();
+  const ref = useRef<HTMLDivElement>();
 
   useEffect(() => {
     const handleClick = (event) => {

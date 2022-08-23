@@ -1,8 +1,11 @@
-import type { UserRepository } from '@repositories';
-import type { UserSignInDto, UserSignUpDto } from '@vse-bude/shared';
+import type { RefreshTokenRepository, UserRepository } from '@repositories';
+import type {
+  UserSignInDto,
+  UserSignUpDto,
+  AuthResponse,
+} from '@vse-bude/shared';
 import { sign as jwtSign, type UserSessionJwtPayload } from 'jsonwebtoken';
 import { getEnv } from '@helpers';
-import type { RefreshTokenRepository } from '@repositories';
 import {
   fromMilliToSeconds,
   fromMinToSeconds,
@@ -24,6 +27,9 @@ import type {
   SignOut,
 } from '@types';
 import type { HashService } from '@services';
+import type { Request } from 'express';
+import type { VerifyService } from '@services';
+import { authResponseMap } from '@mappers';
 
 export class AuthService {
   private _userRepository: UserRepository;
@@ -32,27 +38,31 @@ export class AuthService {
 
   private _hashService: HashService;
 
+  private _verifyService: VerifyService;
+
   constructor(
     userRepository: UserRepository,
     refreshTokenRepository: RefreshTokenRepository,
     hashService: HashService,
+    verifyService: VerifyService,
   ) {
     this._userRepository = userRepository;
     this._refreshTokenRepository = refreshTokenRepository;
     this._hashService = hashService;
+    this._verifyService = verifyService;
   }
 
   async signOut(signOutDto: SignOut) {
     await this._refreshTokenRepository.deleteByUserId(signOutDto.userId);
   }
 
-  async signUp(signUpDto: UserSignUpDto) {
+  async signUp(signUpDto: UserSignUpDto, req: Request): Promise<AuthResponse> {
     const userByEmailOrPhone = await this._userRepository.getByEmailOrPhone(
       signUpDto.email,
       signUpDto.phone,
     );
     if (userByEmailOrPhone) {
-      throw new UserExistsError();
+      throw new UserExistsError(req);
     }
     const createUserDto: CreateUser = {
       firstName: signUpDto.firstName,
@@ -62,6 +72,8 @@ export class AuthService {
       passwordHash: this._hashService.generatePasswordHash(signUpDto.password),
     };
     const newUser = await this._userRepository.create(createUserDto);
+    await this._verifyService.initPhoneVerification(newUser.id);
+    await this._verifyService.initEmailVerification(newUser.id);
     const tokenData = this.getTokenData(newUser.id);
 
     const refreshToken: CreateRefreshToken = {
@@ -71,13 +83,13 @@ export class AuthService {
     };
     await this._refreshTokenRepository.create(refreshToken);
 
-    return tokenData;
+    return authResponseMap(tokenData, newUser);
   }
 
-  async signIn(signInDto: UserSignInDto) {
+  async signIn(signInDto: UserSignInDto, req: Request): Promise<AuthResponse> {
     const user = await this._userRepository.getByEmail(signInDto.email);
     if (!user) {
-      throw new UserNotFoundError();
+      throw new UserNotFoundError(req);
     }
 
     if (
@@ -86,7 +98,7 @@ export class AuthService {
         signInDto.password,
       )
     ) {
-      throw new WrongPasswordError();
+      throw new WrongPasswordError(req);
     }
 
     const tokenData = this.getTokenData(user.id);
@@ -97,7 +109,7 @@ export class AuthService {
     };
     await this._refreshTokenRepository.create(refreshToken);
 
-    return this.getTokenData(user.id);
+    return authResponseMap(this.getTokenData(user.id), user);
   }
 
   async getCurrentUser(userId: string) {
@@ -115,19 +127,19 @@ export class AuthService {
     );
   }
 
-  async refreshToken(updateDto: UpdateRefreshToken) {
+  async refreshToken(updateDto: UpdateRefreshToken, req) {
     if (!updateDto.tokenValue) {
-      throw new WrongRefreshTokenError();
+      throw new WrongRefreshTokenError(req);
     }
     const token = await this._refreshTokenRepository.getTokenByValue(
       updateDto.tokenValue,
     );
     if (!token) {
-      throw new UnauthorizedError();
+      throw new UnauthorizedError(req);
     }
 
     if (new Date(token.expiresAt) < new Date()) {
-      throw new ExpiredRefreshTokenError();
+      throw new ExpiredRefreshTokenError(req);
     }
 
     const newTokenData = this.getTokenData(token.userId);

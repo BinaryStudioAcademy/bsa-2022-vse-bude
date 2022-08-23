@@ -22,6 +22,7 @@ export const fakeCategory = async (
     const record: Category = {
       id: faker.datatype.uuid(),
       title: title,
+      image: faker.image.fashion(),
       createdAt: faker.date.past(),
       updatedAt: faker.date.recent(),
     };

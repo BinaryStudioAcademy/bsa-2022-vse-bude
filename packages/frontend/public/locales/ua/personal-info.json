@@ -1,0 +1,46 @@
+{
+  "headline": {
+    "personalInfo": "Особисті дані",
+    "address": "Адреса",
+    "socialNetworks": "Соціальні мережі",
+    "password": "Пароль"
+  },
+  "action": {
+    "save": "Зберегти",
+    "cancel": "Скасувати"
+  },
+  "label": {
+    "novaPoshta": "# Нова Пошта",
+    "firstName": "Ім'я",
+    "lastName": "Прізвище",
+    "email": "Електронна пошта",
+    "phone": "Номер телефону",
+    "country": "Країна",
+    "region": "Регіон",
+    "city": "Населений пункт",
+    "instagram": "Instagram",
+    "linkedin": "Linkedin",
+    "zipCode": "Поштовий індекс",
+    "facebook": "Facebook",
+    "newPassword": "Новий пароль",
+    "currentPassword": "Поточний пароль",
+    "repeatPassword": "Повторити пароль"
+  },
+  "placeholder": {
+    "firstName": "Введіть своє ім'я",
+    "lastName": "Введіть своє прізвище",
+    "email": "Введіть свою електронну пошту",
+    "phone": "+380999999999",
+    "country": "Оберіть країну",
+    "region": "Оберіть регіон",
+    "city": "Оберіть населений пункт",
+    "zipCode": "Введіть поштовий індекс",
+    "instagram": "Введіть свій Instagram",
+    "linkedin": "Введіть свій Linkedin",
+    "facebook": "Введіть свій Facebook",
+    "currentPassword": "Введіть свій поточний пароль",
+    "newPassword": "Введіть новий пароль",
+    "repeatPassword": "Повторіть новий пароль",
+    "novaPoshta": "Введіть відділення Нової Пошти"
+  }
+}

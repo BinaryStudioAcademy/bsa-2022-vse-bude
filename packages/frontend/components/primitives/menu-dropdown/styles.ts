@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { Theme } from 'theme';
+import type { Theme } from '@emotion/react';
 import { resetButton } from 'theme';
 
 export const dropdownWrapper = () => css`
@@ -12,20 +12,21 @@ export const dropdownTitle = ({
   lineHeights,
   fontWeights,
 }: Theme) => css`
-  ${resetButton}
+  ${resetButton};
   position: relative;
   display: flex;
   align-items: center;
   height: 100%;
   cursor: pointer;
-  font-size: ${fontSizes.tub};
+  /* font-size: ${fontSizes.tub};
   line-height: ${lineHeights.tub};
-  font-weight: ${fontWeights.tub};
-  color: ${colors.text};
+  font-weight: ${fontWeights.tub}; */
+  /* color: ${colors.text}; */
+  color: ${colors.extraDark};
 
   :hover,
   :active {
-    color: ${colors.primaryLight};
+    color: ${colors.lightDark};
   }
 `;
 
@@ -37,7 +38,8 @@ export const dropdownContent = ({
   colors,
 }: Theme) => css`
   position: absolute;
-  top: calc(100% + ${spaces.lg});
+  top: calc(100% + ${spaces.sm});
+  right: 0;
   display: flex;
   align-items: center;
   justify-content: center;
