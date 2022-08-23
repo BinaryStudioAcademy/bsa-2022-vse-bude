@@ -149,6 +149,39 @@ export const initProductRoutes = (
     wrap(() => productService.getAll()),
   );
 
+  /**
+   * @openapi
+   * /product/getByType:
+   *   get:
+   *     tags: [Product]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - in: query
+   *         name: type
+   *         required: true
+   *         schema:
+   *           "$ref": "#/definitions/ProductType"
+   *       - in: query
+   *         name: take
+   *         required: true
+   *         schema:
+   *           format: double
+   *           type: number
+   *     responses:
+   *       403:
+   *         description: User is not authorized to perform the action.
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 contribution:
+   *                   $ref: "#/definitions/Product"
+   */
+
   router.get(
     apiPath(path, ProductApiRoutes.$TYPE),
     wrap<RequestParams>((req) =>
