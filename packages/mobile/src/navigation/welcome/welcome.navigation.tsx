@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
@@ -7,7 +7,7 @@ import { RootScreenName } from '~/common/enums/enums';
 import { RootNavigationParamList } from '~/common/types/types';
 import { Auth, Welcome } from '~/screens/screens';
 
-const WelcomeNavigation = () => {
+const WelcomeNavigation: FC = () => {
   const NativeStack = createNativeStackNavigator<RootNavigationParamList>();
   const welcomeScreenOptions: NativeStackNavigationOptions = {
     headerShown: false,
@@ -15,11 +15,9 @@ const WelcomeNavigation = () => {
 
   return (
     <NativeStack.Navigator screenOptions={welcomeScreenOptions}>
-      <NativeStack.Group>
-        <NativeStack.Screen name={RootScreenName.WELCOME} component={Welcome} />
-        <NativeStack.Screen name={RootScreenName.SIGN_UP} component={Auth} />
-        <NativeStack.Screen name={RootScreenName.SIGN_IN} component={Auth} />
-      </NativeStack.Group>
+      <NativeStack.Screen name={RootScreenName.WELCOME} component={Welcome} />
+      <NativeStack.Screen name={RootScreenName.SIGN_UP} component={Auth} />
+      <NativeStack.Screen name={RootScreenName.SIGN_IN} component={Auth} />
     </NativeStack.Navigator>
   );
 };

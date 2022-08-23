@@ -28,29 +28,24 @@ const accountScreenOptions: NativeStackNavigationOptions = {
 const Navigation: FC = () => {
   return (
     <NativeStack.Navigator screenOptions={mainScreenOptions}>
-      <NativeStack.Group>
-        <NativeStack.Screen
-          name={RootScreenName.MAIN}
-          component={MainNavigation}
+      <NativeStack.Screen
+        name={RootScreenName.MAIN}
+        component={MainNavigation}
+      />
+      <NativeStack.Group screenOptions={accountScreenOptions}>
+        <Stack.Screen
+          name={RootScreenName.PERSONAL_INFO}
+          component={PersonalInfoScreen}
         />
-        <NativeStack.Group screenOptions={accountScreenOptions}>
-          <Stack.Screen
-            name={RootScreenName.PERSONAL_INFO}
-            component={PersonalInfoScreen}
-          />
-          <Stack.Screen
-            name={RootScreenName.SETTINGS}
-            component={SettingsScreen}
-          />
-          <Stack.Screen
-            name={RootScreenName.MESSAGES}
-            component={MessagesScreen}
-          />
-          <Stack.Screen
-            name={RootScreenName.SUPPORT}
-            component={SupportScreen}
-          />
-        </NativeStack.Group>
+        <Stack.Screen
+          name={RootScreenName.SETTINGS}
+          component={SettingsScreen}
+        />
+        <Stack.Screen
+          name={RootScreenName.MESSAGES}
+          component={MessagesScreen}
+        />
+        <Stack.Screen name={RootScreenName.SUPPORT} component={SupportScreen} />
       </NativeStack.Group>
     </NativeStack.Navigator>
   );
