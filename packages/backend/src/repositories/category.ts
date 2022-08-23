@@ -1,8 +1,5 @@
 import type { PrismaClient, Category } from '@prisma/client';
-import { Get, Query, Route, Tags } from 'tsoa';
 
-@Route('category')
-@Tags('Category')
 export class CategoryRepository {
   private _dbClient: PrismaClient;
 
@@ -10,8 +7,7 @@ export class CategoryRepository {
     this._dbClient = prismaClient;
   }
 
-  @Get('getAll')
-  public getAll(@Query() take: number): Promise<Category[]> {
+  public getAll(take: number): Promise<Category[]> {
     return this._dbClient.category.findMany({
       take,
     });

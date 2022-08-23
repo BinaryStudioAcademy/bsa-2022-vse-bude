@@ -1,9 +1,6 @@
 import type { PrismaClient, User } from '@prisma/client';
-import { Body, Get, Patch, Post, Query, Route, Tags } from 'tsoa';
-import type { CreateUser } from './types/CreateUser';
+import type { CreateUser } from '@types';
 
-@Route('user')
-@Tags('User')
 export class UserRepository {
   private _dbClient: PrismaClient;
 
@@ -11,13 +8,11 @@ export class UserRepository {
     this._dbClient = prismaClient;
   }
 
-  @Get('getAll')
   public async getAll(): Promise<User[]> {
     return await this._dbClient.user.findMany();
   }
 
-  @Post('create')
-  public async create(@Body() signUpData: CreateUser) {
+  public async create(signUpData: CreateUser) {
     return await this._dbClient.user.create({
       data: {
         firstName: signUpData.firstName,
@@ -29,8 +24,7 @@ export class UserRepository {
     });
   }
 
-  @Get('getById')
-  public async getById(@Query() id: string) {
+  public async getById(id: string) {
     return await this._dbClient.user.findFirst({
       where: {
         id,
@@ -38,8 +32,7 @@ export class UserRepository {
     });
   }
 
-  @Get('getByEmail')
-  public async getByEmail(@Query() email: string) {
+  public async getByEmail(email: string) {
     return await this._dbClient.user.findFirst({
       where: {
         email: email,
@@ -47,8 +40,7 @@ export class UserRepository {
     });
   }
 
-  @Patch('verifyPhone')
-  public async verifyPhone(@Query() userId: string) {
+  public async verifyPhone(userId: string) {
     return await this._dbClient.user.update({
       where: {
         id: userId,
@@ -59,11 +51,7 @@ export class UserRepository {
     });
   }
 
-  @Get('getByEmailOrPhone')
-  public async getByEmailOrPhone(
-    @Query() email: string,
-    @Query() phone: string,
-  ) {
+  public async getByEmailOrPhone(email: string, phone: string) {
     return await this._dbClient.user.findFirst({
       where: {
         OR: [
