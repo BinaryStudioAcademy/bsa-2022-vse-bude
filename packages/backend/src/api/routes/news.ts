@@ -44,13 +44,13 @@ export const initNewsRoutes = (
 
   /**
    * @openapi
-   * /news/getAll:
+   * /news:
    *   get:
    *     tags: [News]
    *     produces:
    *       - application/json
    *     parameters:
-   *       - name: take
+   *       - name: limit
    *         in: query
    *         description: Amount of records.
    *         required: true

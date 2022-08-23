@@ -125,7 +125,7 @@ export const initProductRoutes = (
 
   /**
    * @openapi
-   * /product/getAll:
+   * /products:
    *   get:
    *     tags: [Product]
    *     produces:
@@ -151,19 +151,19 @@ export const initProductRoutes = (
 
   /**
    * @openapi
-   * /product/getByType:
+   * /products/{type}:
    *   get:
    *     tags: [Product]
    *     produces:
    *       - application/json
    *     parameters:
-   *       - in: query
+   *       - in: path
    *         name: type
    *         required: true
    *         schema:
    *           "$ref": "#/definitions/ProductType"
    *       - in: query
-   *         name: take
+   *         name: limit
    *         required: true
    *         schema:
    *           format: double

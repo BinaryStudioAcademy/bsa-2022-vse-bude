@@ -39,13 +39,13 @@ export const initCategoryRoutes = (
 
   /**
    * @openapi
-   * /category/getAll:
+   * /categories:
    *   get:
    *     tags: [Category]
    *     produces:
    *       - application/json
    *     parameters:
-   *       - name: take
+   *       - name: limit
    *         in: query
    *         description: Amount of records.
    *         required: true

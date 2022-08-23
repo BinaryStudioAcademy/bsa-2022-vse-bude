@@ -8,7 +8,7 @@ import { loggerMiddleware, localizationMiddleware } from '@middlewares';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 // import swaggerDocument from '../dist/swagger.json';
-import { RegisterRoutes } from '../dist/routes';
+// import { RegisterRoutes } from '../dist/routes';
 import { prismaClient as database } from './data/db';
 import { errorHandler } from './error/error-handler';
 
@@ -38,10 +38,10 @@ app
   .use(routes)
   .use(errorHandler)
   .use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecification))
-  // .use('/api-docs2', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+  // .use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
   .on('close', () => database.$disconnect())
   .listen(port, () => {
     logger.log(`Server is running on port ${port}`);
   });
 
-RegisterRoutes(app);
+// RegisterRoutes(app);
