@@ -17,7 +17,7 @@ type Props<T extends FormControlValues> = {
   control: FormControl<T>;
   errors: FormControlErrors<T>;
   placeholder?: string;
-  contentContainerStyle?: ViewStyle;
+  contentContainerStyle?: ViewStyle | ViewStyle[];
 };
 
 const Input = <T extends FormControlValues>({
