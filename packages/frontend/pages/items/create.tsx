@@ -16,7 +16,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 const CreatePage = () => {
   const router = useRouter();
   const create = router.query.create as string;
-  
+
   return (
     <Layout title="Create post">
       <Post create={create} />
