@@ -1,0 +1,44 @@
+{
+  "headline": {
+    "makePost": "Make a Post",
+    "downloadPhotos": "Download photos",
+    "description": "Description",
+    "contact": "Contact"
+  },
+  "button": {
+    "makePost": "Make a post"
+  },
+  "caption": {
+    "downloadPhotos": "You can add to 30 pics"
+  },
+  "label": {
+    "category": "Category",
+    "name": "Title name",
+    "description": "Description",
+    "price": "Price",
+    "currency": "Currency",
+    "country": "Country",
+    "city": "City",
+    "callingCode": "Calling Code",
+    "phone": "Mobile phone",
+    "instagram": "Instagram",
+    "linkedin": "Linkedin",
+    "facebook": "Facebook",
+    "site": "Site"
+  },
+  "placeholder": {
+    "category": "Select the category",
+    "name": "Enter name",
+    "description": "Enter your product description",
+    "price": "Enter your price",
+    "currency": "UAH",
+    "country": "Ukraine",
+    "city": "Lviv",
+    "callingCode": "",
+    "phone": "+380()",
+    "instagram": "Enter your nickname",
+    "linkedin": "Enter your nickname",
+    "facebook": "Enter your nickname",
+    "site": "Enter site address"
+  }
+}
