@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 
 export type ModalProps = {
-  children: (callback: () => void) => ReactNode;
+  visible: boolean;
+  children: string | ReactNode;
 };

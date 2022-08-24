@@ -5,12 +5,13 @@ import * as styles from '../styles';
 import type { ConsentContentProps } from '../types';
 
 export const ConsentContent = ({
-  handleClose,
+  setVisible,
   children,
 }: ConsentContentProps) => {
   const [value, setValue] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const router = useRouter();
+  
   const setAgree = () => {
     setValue(!value);
     setDisabled(!disabled);
@@ -26,7 +27,7 @@ export const ConsentContent = ({
         <Button
           variant="outlined"
           disabled={disabled}
-          onClick={() => handleClose()}
+          onClick={() => setVisible(false)}
         >
           Accept
         </Button>

@@ -3,6 +3,6 @@ export type ConsentProps = {
 };
 
 export type ConsentContentProps = {
-  handleClose?: () => void;
+  setVisible?: (visible: boolean) => void;
   children: string | React.ReactNode;
 };
