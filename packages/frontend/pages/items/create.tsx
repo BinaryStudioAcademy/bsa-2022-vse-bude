@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { wrapper } from 'store';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Post } from '@components';
+import { ConsentPage } from 'components/consent';
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (_store) =>
@@ -19,6 +20,7 @@ const CreatePage = () => {
 
   return (
     <Layout title="Create post">
+      <ConsentPage><b>Our terms of service</b></ConsentPage>
       <Post create={create} />
     </Layout>
   );

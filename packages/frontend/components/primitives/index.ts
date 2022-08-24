@@ -15,3 +15,4 @@ export { DownloadButton } from './download-button';
 export { Loader } from './loader';
 export { Error } from './error';
 export * from './input';
+export { Modal } from './modal';

@@ -33,7 +33,7 @@ class CustomDocument extends Document {
           <NextScript />
           <div id="portal"></div>
           <div id="popover"></div>
-          <div id="consent"></div>
+          <div id="modal"></div>
         </body>
       </Html>
     );
