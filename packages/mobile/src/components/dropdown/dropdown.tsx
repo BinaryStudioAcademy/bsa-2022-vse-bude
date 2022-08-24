@@ -11,7 +11,7 @@ import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 
 type Props<T extends FormControlValues> = {
-  label: string;
+  label?: string;
   name: FormControlPath<T>;
   control: FormControl<T>;
   items: Array<{
@@ -34,16 +34,18 @@ const DropDown = <T extends FormControlValues>({
 
   return (
     <View style={styles.container}>
-      <Text
-        style={[
-          styles.label,
-          globalStyles.mb2,
-          globalStyles.fs12,
-          { color: colors.titlePrimary },
-        ]}
-      >
-        {label}
-      </Text>
+      {label && (
+        <Text
+          style={[
+            styles.label,
+            globalStyles.mb2,
+            globalStyles.fs12,
+            { color: colors.titlePrimary },
+          ]}
+        >
+          {label}
+        </Text>
+      )}
       <DropDownPicker
         listMode="SCROLLVIEW"
         open={open}
