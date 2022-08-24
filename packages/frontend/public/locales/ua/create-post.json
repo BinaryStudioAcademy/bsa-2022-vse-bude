@@ -1,44 +1,44 @@
 {
   "headline": {
-    "makePost": "Make a Post",
-    "downloadPhotos": "Download photos",
-    "description": "Description",
-    "contact": "Contact"
+    "makePost": "Створити пост",
+    "downloadPhotos": "Завантажити фотографії",
+    "description": "Опис",
+    "contact": "Контакти"
   },
   "button": {
-    "makePost": "Make a post"
+    "makePost": "Створити пост"
   },
   "caption": {
-    "downloadPhotos": "You can add to 30 pics"
+    "downloadPhotos": "Ви можете додати до 30 фотографій"
   },
   "label": {
-    "category": "Category",
-    "name": "Title name",
-    "description": "Description",
-    "price": "Price",
-    "currency": "Currency",
-    "country": "Country",
-    "city": "City",
-    "callingCode": "Calling Code",
-    "phone": "Mobile phone",
+    "category": "Категорія",
+    "name": "Назва продукту",
+    "description": "Опис",
+    "price": "Ціна",
+    "currency": "Валюта",
+    "country": "Країна",
+    "city": "Місто",
+    "callingCode": "Телефонний код",
+    "phone": "Номер телефону",
     "instagram": "Instagram",
     "linkedin": "Linkedin",
     "facebook": "Facebook",
-    "site": "Site"
+    "site": "Сайт"
   },
   "placeholder": {
-    "category": "Select the category",
-    "name": "Enter name",
-    "description": "Enter your product description",
-    "price": "Enter your price",
+    "category": "Виберіть категорію",
+    "name": "Введіть назву продукту",
+    "description": "Введіть опис продукту",
+    "price": "Введіть ціну продукту",
     "currency": "UAH",
-    "country": "Ukraine",
-    "city": "Lviv",
-    "callingCode": "",
+    "country": "Україна",
+    "city": "Львів",
+    "callingCode": "UA",
     "phone": "+380()",
-    "instagram": "Enter your nickname",
-    "linkedin": "Enter your nickname",
-    "facebook": "Enter your nickname",
-    "site": "Enter site address"
+    "instagram": "Введіть свій нікнейм",
+    "linkedin": "Введіть свій нікнейм",
+    "facebook": "Введіть свій нікнейм",
+    "site": "Введіть адресу сайту"
   }
 }
