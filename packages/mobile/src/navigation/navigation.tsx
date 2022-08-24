@@ -14,7 +14,9 @@ import {
   SupportScreen,
   Auth,
   Welcome,
+  NewItemScreen,
 } from '~/screens/screens';
+import { HeaderLeft, HeaderSave } from '~/components/components';
 import { MainNavigation } from './tabs/tabs.navigation';
 
 const NativeStack = createNativeStackNavigator<RootNavigationParamList>();
@@ -56,6 +58,18 @@ const Navigation: FC = () => {
             <Stack.Screen
               name={RootScreenName.SUPPORT}
               component={SupportScreen}
+            />
+            <Stack.Screen
+              name={RootScreenName.NEW_ITEM}
+              component={NewItemScreen}
+              options={{
+                headerLeft: () => {
+                  return <HeaderLeft />;
+                },
+                headerRight: () => {
+                  return <HeaderSave />;
+                },
+              }}
             />
           </NativeStack.Group>
         </NativeStack.Group>
