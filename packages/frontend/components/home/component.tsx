@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 import { CategorySection } from './category-section';
 import { CharitySection } from './charity-section';
@@ -7,21 +8,22 @@ import type { HomeProps } from './types';
 
 const Home = ({ auctionProducts, sellingProducts }: HomeProps) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const { t } = useTranslation();
 
   return (
     <React.Fragment>
       <PromoSection searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <CategorySection />
       <LotSection
-        title="Popular Lots"
+        title={t('home:popularLots.title')}
         lots={auctionProducts}
-        loadMoreTitle="See All Lots"
+        loadMoreTitle={t('home:popularLots.link')}
       />
       <CharitySection />
       <LotSection
-        title="Popular Items"
+        title={t('home:popularItems.title')}
         lots={sellingProducts}
-        loadMoreTitle="See All Items"
+        loadMoreTitle={t('home:popularItems.link')}
       />
     </React.Fragment>
   );

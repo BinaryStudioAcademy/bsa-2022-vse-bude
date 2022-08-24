@@ -1,11 +1,10 @@
 type UserDto = {
   id: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   phone: string;
   phoneVerified: boolean;
-  firstName: string;
-  lastName: string;
   avatar: string;
 };
 

@@ -1,14 +1,14 @@
 import { AccountRoutes, Routes, IconName } from '@enums';
+import { useAppDispatch } from '@hooks';
 import { Icon } from '@primitives';
 import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
-import { logOut } from 'store/profile';
+import { logoutUser } from 'store/auth';
 import * as styles from '../styles';
 import type { PopoverContentProps } from '../types';
 
 export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
   const router = useRouter();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -72,7 +72,7 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
       <button
         css={styles.popoverContentItem}
         onClick={() => {
-          dispatch(logOut());
+          dispatch(logoutUser());
         }}
         data-variant="icon"
       >
