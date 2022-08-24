@@ -7,7 +7,7 @@ export const ConsentPage = ({ children }: ConsentProps) => {
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => setIsVisible(true), []);
 
-  return(
+  return (
     <React.Fragment>
       {
         <Modal visible={isVisible}>

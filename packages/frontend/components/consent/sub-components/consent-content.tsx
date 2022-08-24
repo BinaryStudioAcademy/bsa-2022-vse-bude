@@ -11,7 +11,7 @@ export const ConsentContent = ({
   const [value, setValue] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const router = useRouter();
-  
+
   const setAgree = () => {
     setValue(!value);
     setDisabled(!disabled);
