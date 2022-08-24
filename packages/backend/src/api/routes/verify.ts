@@ -15,6 +15,41 @@ export const initVerifyRoutes = (
 ): Router => {
   const router = Router();
 
+  /**
+   * @openapi
+   * /verify/phone-verify:
+   *   post:
+   *     tags: [Verify]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - name: userId
+   *         in: query
+   *         required: true
+   *         schema:
+   *           type: string
+   *       - name: code
+   *         in: body
+   *         required: true
+   *         schema:
+   *           type: object
+   *           required:
+   *             - code
+   *           properties:
+   *             code:
+   *               type: string
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 contribution:
+   *                   $ref: "#/definitions/User"
+   */
+
   router.post(
     apiPath(path, VerifyApiRoutes.VERIFY_PHONE),
     authMiddleware,
@@ -28,6 +63,31 @@ export const initVerifyRoutes = (
       return verifyService.verifyPhone(dto);
     }),
   );
+
+  /**
+   * @openapi
+   * /verify/phone/resend-code:
+   *   post:
+   *     tags: [Verify]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - name: userId
+   *         in: query
+   *         required: true
+   *         schema:
+   *           type: string
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 contribution:
+   *                   $ref: "#/definitions/User"
+   */
 
   router.post(
     apiPath(path, VerifyApiRoutes.PHONE_RESEND_CODE),
