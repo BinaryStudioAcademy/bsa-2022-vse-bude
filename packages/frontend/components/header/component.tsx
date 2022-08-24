@@ -13,6 +13,7 @@ import { Routes, IconName } from '@enums';
 import { Logo } from 'components/primitives/logo';
 import { useAuth, useMounted } from '@hooks';
 import { useRouter } from 'next/router';
+import { useTheme } from '@emotion/react';
 import { ProfileInfo } from './profile-info';
 import * as styles from './styles';
 
@@ -21,11 +22,16 @@ export const Header = () => {
   const { hasToken } = useAuth();
   const isMounted = useMounted();
   const { push } = useRouter();
-  const { t } = useTranslation('common');
+  const { t } = useTranslation();
+  const { colors } = useTheme();
 
   const renderNavigation = () => (
     <nav className="navigation">
-      <InternalLink href={Routes.DEFAULT} label={t('header.nav.home')} />
+      <InternalLink
+        variant="default"
+        href={Routes.DEFAULT}
+        label={t('common:header.nav.home')}
+      />
       <Dropdown
         options={[
           {
@@ -45,12 +51,24 @@ export const Header = () => {
           },
         ]}
       >
-        {t('header.nav.category')}&nbsp;
-        <Icon icon={IconName.ANGLE_DOWN} color="yellow" />
+        {t('common:header.nav.category')}&nbsp;
+        <Icon icon={IconName.ANGLE_DOWN} color={colors.extraDark} />
       </Dropdown>
-      <InternalLink href={Routes.DEFAULT} label={t('header.nav.search')} />
-      <InternalLink href={Routes.DEFAULT} label={t('header.nav.news')} />
-      <InternalLink href={Routes.DEFAULT} label={t('header.nav.about_us')} />
+      <InternalLink
+        href={Routes.DEFAULT}
+        label={t('common:header.nav.search')}
+        variant="default"
+      />
+      <InternalLink
+        href={Routes.DEFAULT}
+        label={t('common:header.nav.news')}
+        variant="default"
+      />
+      <InternalLink
+        href={Routes.DEFAULT}
+        label={t('common:header.nav.about_us')}
+        variant="default"
+      />
     </nav>
   );
 
@@ -58,7 +76,7 @@ export const Header = () => {
     <div className="buttons-wrapper">
       <Button size="small" onClick={() => push(Routes.SIGN_UP)}>
         <span css={styles.buttonCreateAccountText}>
-          {t('header.buttons.create_account')}
+          {t('common:header.buttons.create_account')}
         </span>
       </Button>
 
@@ -67,7 +85,9 @@ export const Header = () => {
         variant="outlined"
         onClick={() => push(Routes.SIGN_IN)}
       >
-        <span css={styles.buttonSignIn}>{t('header.buttons.sign_in')}</span>
+        <span css={styles.buttonSignIn}>
+          {t('common:header.buttons.sign_in')}
+        </span>
       </Button>
     </div>
   );
@@ -84,7 +104,10 @@ export const Header = () => {
   const renderHamburderMenuContent = () => (
     <div css={styles.burgerOverlay}>
       <nav className="burger-navigation">
-        <InternalLink href={Routes.DEFAULT} label={t('header.nav.home')} />
+        <InternalLink
+          href={Routes.DEFAULT}
+          label={t('common:header.nav.home')}
+        />
         <Dropdown
           options={[
             {
@@ -104,21 +127,32 @@ export const Header = () => {
             },
           ]}
         >
-          {t('header.nav.category')}&nbsp;
+          {t('common:header.nav.category')}&nbsp;
           <Icon icon={IconName.ANGLE_DOWN} color="yellow" />
         </Dropdown>
-        <InternalLink href={Routes.DEFAULT} label={t('header.nav.search')} />
-        <InternalLink href={Routes.DEFAULT} label={t('header.nav.news')} />
-        <InternalLink href={Routes.DEFAULT} label={t('header.nav.about_us')} />
+        <InternalLink
+          href={Routes.DEFAULT}
+          label={t('common:header.nav.search')}
+        />
+        <InternalLink
+          href={Routes.DEFAULT}
+          label={t('common:header.nav.news')}
+        />
+        <InternalLink
+          href={Routes.DEFAULT}
+          label={t('common:header.nav.about_us')}
+        />
       </nav>
       <div className="burger-buttons-wrapper">
         <Button size="small">
           <span css={styles.buttonCreateAccountText}>
-            {t('header.buttons.create_account')}
+            {t('common:header.buttons.create_account')}
           </span>
         </Button>
         <Button size="small" variant="outlined">
-          <span>{t('header.buttons.sign_in')}</span>
+          <span css={styles.buttonSignIn}>
+            {t('common:header.buttons.sign_in')}
+          </span>
         </Button>
       </div>
       <div className="burger-close-button">{renderCloseBurgerButton()}</div>

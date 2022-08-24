@@ -7,10 +7,11 @@ export interface AccountPageProps {
 
 export interface LinkData {
   iconPath: typeof IconName[keyof typeof IconName];
-  label: string;
+  label: any;
   path: string;
 }
 
-export interface LinkProps extends LinkData {
+export interface LinkProps extends Omit<LinkData, 'label'> {
   location: boolean;
+  label: string;
 }

@@ -1,17 +1,18 @@
 import { AuthLayout } from 'components/authLayout';
 import Login from 'components/login/component';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { withPublic } from '@helpers';
 
-export default function LoginPage() {
-  return (
-    <AuthLayout>
-      <Login />
-    </AuthLayout>
-  );
-}
+const LoginPage = () => (
+  <AuthLayout>
+    <Login />
+  </AuthLayout>
+);
 
-export const getServerSideProps = async ({ locale }) => ({
+export const getServerSideProps = withPublic(async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale, ['auth'])),
+    ...(await serverSideTranslations(locale, ['auth', 'public'])),
   },
-});
+}));
+
+export default LoginPage;

@@ -12,17 +12,49 @@
       "sign_in": "Sign In"
     }
   },
-  "HOURS_SHORT": "h",
-  "DAYS_SHORT": "d",
-  "MINUTES_SHORT": "min",
-  "SECONDS_SHORT": "s",
-  "CREATE_ACCOUNT": "Create Account",
-  "FIRST_NAME": "First Name",
-  "LAST_NAME": "Last Name",
-  "EMAIL": "E-mail",
-  "PASSWORD": "Password",
-  "REPEAT_PASSWORD": "Repeat password",
-  "PHONE_NUMBER": "Phone Number",
-  "I_HAVE_AN_ACCOUNT": "I have an account",
-  "SIGN_IN": "Sign In"
+  "footer": {
+    "contacts": "Contact",
+    "security": "Security",
+    "securityLink": "Privacy Policy",
+    "contactUs": "Contact us",
+    "form": {
+      "formDescription": "Looking to sell or partner with us? Send us an email",
+      "fullName": "Full name",
+      "fullNamePlaceholder": "Enter a full name",
+      "email": "Email",
+      "emailPlaceholder": "Enter your email",
+      "description": "Description",
+      "descriptionPlaceholder": "Enter description",
+      "send": "Send"
+    }
+  },
+  "categories": {
+    "LAPTOPS_AND_PC_CATEGORY_NAME": "Laptops and computers",
+    "SMARTPHONES_TV_AND_ELECTRONICS_CATEGORY_NAME": "Smartphones, TV and electronics",
+    "GOODS_FOR_GAMERS_CATEGORY_NAME": "Goods for gamers",
+    "HOUSEHOLD_APPLIANCES_CATEGORY_NAME": "Household appliances",
+    "HOME_GOODS_CATEGORY_NAME": "Home Goods",
+    "TOOLS_AND_AUTO_GOODS_CATEGORY_NAME": "Tools and auto goods",
+    "PLUMBING_AND_REPAIR_CATEGORY_NAME": "Plumbing and repair",
+    "COTTAGE_GARDEN_AND_VEGETABLE_GARDEN_CATEGORY_NAME": "Cottage, garden and vegetable garden",
+    "SPORTS_AND_HOBBY_CATEGORY_NAME": "Sports and hobby",
+    "CLOTHES_SHOES_AND_JEWELRY_CATEGORY_NAME": "Clothes, shoes and jewelry",
+    "BEAUTY_AND_HEALTH_CATEGORY_NAME": "Beauty and health",
+    "CHILDRENS_GOODS_CATEGORY_NAME": "Children's goods",
+    "PET_PRODUCTS_CATEGORY_NAME": "Pet products",
+    "OFFICE_SCHOOL_BOOKS_CATEGORY_NAME": "Office, school, books",
+    "ALCOHOLIC_BEVERAGES_AND_PRODUCTS_CATEGORY_NAME": "Alcoholic beverages and products",
+    "SERVICES_CATEGORY_NAME": "Services"
+  },
+  "components": {
+    "product": {
+      "placeBidBtn": "Place a Bid",
+      "time": {
+        "hours": "h",
+        "days": "d",
+        "minutes": "min",
+        "seconds": "s"
+      }
+    }
+  }
 }

@@ -1,0 +1,46 @@
+{
+  "headline": {
+    "personalInfo": "Personal info",
+    "address": "Address",
+    "socialNetworks": "Social networks",
+    "password": "Password"
+  },
+  "action": {
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "label": {
+    "novaPoshta": "# Nova Poshta",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "phone": "Phone",
+    "country": "Country",
+    "region": "Region",
+    "city": "City",
+    "instagram": "Instagram",
+    "linkedin": "Linkedin",
+    "zipCode": "ZIP Code",
+    "facebook": "Facebook",
+    "newPassword": "New password",
+    "currentPassword": "Current password",
+    "repeatPassword": "Repeat password"
+  },
+  "placeholder": {
+    "firstName": "Enter your first name",
+    "lastName": "Enter your last name",
+    "email": "Enter your email",
+    "phone": "+380999999999",
+    "country": "Choose your country",
+    "region": "Choose your region",
+    "city": "Choose your settlement",
+    "zipCode": "Enter ZIP Code",
+    "instagram": "Enter your Instagram",
+    "linkedin": "Enter your Linkedin",
+    "facebook": "Enter your Facebook",
+    "currentPassword": "Enter your current password",
+    "newPassword": "Enter new password",
+    "repeatPassword": "Repeat new password",
+    "novaPoshta": "Enter office of Nova Poshta"
+  }
+}

@@ -3,6 +3,7 @@ import type { UserDto } from '@vse-bude/shared';
 import { combineReducers } from 'redux';
 import {
   getCurrentUser,
+  emailVerification,
   loginUser,
   phoneVerification,
   signUpUser,
@@ -41,6 +42,8 @@ const error = createReducer('', {
   [loginUser.rejected.type]: (_, { payload }) => payload,
   [signUpUser.rejected.type]: (_, { payload }) => payload,
   [phoneVerification.rejected.type]: (_, { payload }) => payload,
+  [emailVerification.rejected.type]: (_, { payload }) => payload,
+  [loginUser.pending.type]: () => '',
 });
 
 export const authReducer = combineReducers({

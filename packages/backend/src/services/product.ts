@@ -1,5 +1,5 @@
-import type { ProductType } from '@prisma/client';
 import type { ProductRepository } from '@repositories';
+import type { ProductQuery } from '@types';
 
 export class ProductService {
   private _productRepository: ProductRepository;
@@ -8,13 +8,11 @@ export class ProductService {
     this._productRepository = categoryRepository;
   }
 
-  public getAll() {
-    return this._productRepository.getAll();
+  public getAll(query: ProductQuery) {
+    return this._productRepository.getAll(query);
   }
 
-  public getByType(type: ProductType, query: Query) {
-    const take = query.limit ? +query.limit : 10;
-
-    return this._productRepository.getByType(type, take);
+  public getById(id: string) {
+    return this._productRepository.getById(id);
   }
 }

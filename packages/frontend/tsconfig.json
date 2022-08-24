@@ -14,9 +14,10 @@
       "@components": ["components"],
       "@services": ["services"],
       "@primitives": ["components/primitives"],
+      "@sub-pages": ["components/sub-pages"],
       "@providers": ["providers"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "emotion.d.ts"],
   "exclude": ["node_modules"]
 }

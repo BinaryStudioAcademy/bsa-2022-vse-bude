@@ -15,24 +15,17 @@ export const ProfileInfo = () => {
   };
 
   return (
-    <Popover
-      trigger={
-        <div css={styles.profileInfo}>
-          <Avatar
-            firstName={user?.firstName}
-            lastName={user?.lastName}
-            image={user?.avatar}
-            loading={loading}
-          />
-          <DownArrow style={styles.dropdownArrow} />
-        </div>
-      }
-    >
-      <PopoverContent
-        wrapperStyles={styles.popoverContentWrapper}
-        innerStyles={styles.popoverContentItem}
+    <div css={styles.profileInfo}>
+      <Avatar
+        firstName={user.firstName}
+        lastName={user.lastName}
+        image={user.avatar}
+        loading={loading}
         handleClick={handleClick}
       />
-    </Popover>
+      <Popover trigger={<DownArrow style={styles.dropdownArrow} />}>
+        {(handleClose) => <PopoverContent handleClose={handleClose} />}
+      </Popover>
+    </div>
   );
 };

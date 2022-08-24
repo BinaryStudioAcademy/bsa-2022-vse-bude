@@ -3,4 +3,5 @@ export type AvatarProps = {
   lastName?: string;
   image?: string;
   loading?: boolean;
+  handleClick: React.MouseEventHandler<HTMLButtonElement>;
 };

@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
-import { View, Text } from '~/components/components';
+import { Text, ScreenWrapper } from '~/components/components';
 
 const Favorite: FC = () => {
   return (
-    <View>
+    <ScreenWrapper>
       <Text>Favorite screen</Text>
-    </View>
+    </ScreenWrapper>
   );
 };
 

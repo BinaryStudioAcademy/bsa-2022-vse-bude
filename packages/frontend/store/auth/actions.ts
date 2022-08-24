@@ -5,15 +5,18 @@ import {
   signUp,
   verifyPhone,
   resendPhoneCode,
+  verifyEmail,
+  resendEmailCode,
 } from 'services/auth';
 import type {
+  EmailVerifyDto,
   PhoneVerifyDto,
   UserSignInDto,
   UserSignUpDto,
 } from '@vse-bude/shared';
 import { HttpError, HttpStatusCode } from '@vse-bude/shared';
-import { auth } from '@helpers';
 import Router from 'next/router';
+import { auth } from '@helpers';
 import { Routes } from '@enums';
 import type { IAuth } from '@types';
 import { AuthActions } from './action-types';
@@ -61,8 +64,7 @@ const signUpUser = createAsyncThunk(
     try {
       const response: IAuth = await signUp(data);
       auth.setTokens(response.accessToken, response.refreshToken);
-      // TODO: upload user data
-      // TODO: check if user's phone and email are verified and redirect dependently of it values
+
       await Router.push(Routes.PHONE_VERIFY);
     } catch (error) {
       return rejectWithValue(error.message);
@@ -93,10 +95,46 @@ const phoneCodeResend = createAsyncThunk(
   },
 );
 
+const emailVerification = createAsyncThunk(
+  AuthActions.EMAIL_VERIFY,
+  async (data: EmailVerifyDto, { rejectWithValue }) => {
+    try {
+      await verifyEmail(data);
+      await Router.push(Routes.DEFAULT);
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  },
+);
+
+const emailCodeResend = createAsyncThunk(
+  AuthActions.EMAIL_RESEND_CODE,
+  async (_, { rejectWithValue }) => {
+    try {
+      return await resendEmailCode();
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  },
+);
+
+const logoutUser = createAsyncThunk(AuthActions.LOGOUT, async (_, { rejectWithValue }) => {
+  try {
+    // await logout(); delete refresh token on server
+    auth.logOut();
+    await Router.push(Routes.DEFAULT);
+  } catch (e) {
+    return rejectWithValue(e.message);
+  }
+});
+
 export {
-  getCurrentUser,
   loginUser,
+  logoutUser,
   signUpUser,
   phoneVerification,
   phoneCodeResend,
+  getCurrentUser,
+  emailVerification,
+  emailCodeResend,
 };
