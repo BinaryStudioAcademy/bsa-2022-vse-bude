@@ -1,5 +1,5 @@
-import type { ReactNode } from "react";
+import type { ReactNode } from 'react';
 
 export type ModalProps = {
-    children: (callback: () => void) => ReactNode;
+  children: (callback: () => void) => ReactNode;
 };

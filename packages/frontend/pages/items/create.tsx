@@ -20,7 +20,9 @@ const CreatePage = () => {
 
   return (
     <Layout title="Create post">
-      <ConsentPage><b>Our terms of service</b></ConsentPage>
+      <ConsentPage>
+        <b>Our terms of service</b>
+      </ConsentPage>
       <Post create={create} />
     </Layout>
   );

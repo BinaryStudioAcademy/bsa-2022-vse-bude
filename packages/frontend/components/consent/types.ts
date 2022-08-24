@@ -1,8 +1,8 @@
 export type ConsentProps = {
-    children: string | React.ReactNode;
-}
+  children: string | React.ReactNode;
+};
 
 export type ConsentContentProps = {
-    handleClose?: () => void;
-    children: string | React.ReactNode;
-}
+  handleClose?: () => void;
+  children: string | React.ReactNode;
+};
