@@ -3,9 +3,9 @@ import { getEnv } from '@helpers';
 import { defaultEmailOptions } from '@types';
 import type { EmailService } from '../services/email/email';
 import { emailService } from '../services/email';
-import type { Mailable } from './mailable';
+import type { IMailBuilder } from './mail-builder-interface';
 
-export class BaseMail implements Mailable {
+export class MailBuilder implements IMailBuilder {
   protected _mailService: EmailService;
 
   protected _options: EmailOptions;

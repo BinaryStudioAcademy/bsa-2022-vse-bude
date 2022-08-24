@@ -31,7 +31,7 @@ import type { Request } from 'express';
 import type { VerifyService } from '@services';
 import { authResponseMap } from '@mappers';
 import { AuthApiRoutes } from '@vse-bude/shared';
-import { ResetPasswordMail } from '../email/reset-password-mail';
+import { ResetPasswordMailBuilder } from '../email/reset-password-mail-builder';
 import { ResetPassLinkInvalid } from '../error/reset-password/reset-pass-link-invalid';
 import type { RedisStorageService } from './redis-storage';
 
@@ -180,7 +180,7 @@ export class AuthService {
     await this.saveLink(email, hashValue);
     const link = this.getResetPasswordEmailLink(hashValue, email);
 
-    const resetMail = new ResetPasswordMail().setText(link).setTo(email);
+    const resetMail = new ResetPasswordMailBuilder().setText(link).setTo(email);
 
     await resetMail.send();
 

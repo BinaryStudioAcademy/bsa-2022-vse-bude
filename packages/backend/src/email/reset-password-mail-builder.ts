@@ -1,8 +1,8 @@
 import { getEnv } from '@helpers';
 import { defaultEmailOptions } from '@types';
-import { BaseMail } from './base-mail';
+import { MailBuilder } from './mail-builder';
 
-export class ResetPasswordMail extends BaseMail {
+export class ResetPasswordMailBuilder extends MailBuilder {
   protected setOptions() {
     this._options = {
       ...this._options,
