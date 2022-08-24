@@ -8,6 +8,7 @@ import { Routes } from '@enums';
 import { getAuthErrorSelector, loginUser } from 'store/auth';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { signInSchema } from 'validation-schemas/user';
+import { Divider } from '../primitives/divider';
 import * as styles from './styles';
 
 export default function Login() {
@@ -56,6 +57,19 @@ export default function Login() {
           {authError && <p>{authError}</p>}
           <div css={styles.inputWrapper}>
             <Button type="submit">{t('auth:sign-in.loginBtn')}</Button>
+          </div>
+          <Divider />
+          <div>
+            <p css={styles.linkText}>
+              {t('auth:sign-in.forgotPassword')}?
+              <span>
+                <InternalLink
+                  variant="primary"
+                  label={t('auth:sign-in.restorePassword')}
+                  href={Routes.FORGOT_PASSWORD}
+                />
+              </span>
+            </p>
           </div>
         </form>
       </div>

@@ -9,9 +9,9 @@ export class HashService {
 
   private _keylen = 32;
 
-  generatePasswordHash(password: string): string {
+  generateHash(valueToHash: string): string {
     return pbkdf2Sync(
-      password,
+      valueToHash,
       this._salt,
       this._iterations,
       this._keylen,
@@ -20,7 +20,7 @@ export class HashService {
   }
 
   verifyPasswordHash(passwordHash: string, password: string): boolean {
-    const hash = this.generatePasswordHash(password);
+    const hash = this.generateHash(password);
 
     return passwordHash === hash;
   }
