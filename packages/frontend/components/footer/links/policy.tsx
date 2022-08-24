@@ -16,7 +16,7 @@ export const Policy: FC<PolicyProps> = ({ path }) => {
       <div css={styles.footerLinksRow}>
         <Icon
           cssExtend={styles.shield}
-          color="yellow"
+          color="YELLOW"
           icon={IconName.PRIVACY_POLICY}
         />
         <span css={styles.primaryUnderline}>

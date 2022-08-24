@@ -14,7 +14,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
         ...(await serverSideTranslations(locale, [
           'personal-info',
           'common',
-          'user-account',
+          'account',
         ])),
       },
     });

@@ -22,8 +22,8 @@ export const icon = ({ spaces }: Theme) => css`
 
 export const img = () => css`
   display: block;
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
 `;
 
 export const activeLink = ({ colors }: Theme) => css`

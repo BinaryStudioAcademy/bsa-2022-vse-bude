@@ -10,7 +10,7 @@ export const getServerSideProps = withProtected(
 
     return {
       props: {
-        ...(await serverSideTranslations(locale, ['common', 'user-account'])),
+        ...(await serverSideTranslations(locale, ['common', 'account'])),
       },
     };
   }),

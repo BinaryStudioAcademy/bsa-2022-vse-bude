@@ -15,15 +15,7 @@ interface ProfileState {
 }
 
 const initialState: ProfileState = {
-  user: {
-    id: '1234567890',
-    avatar: null,
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'example@yahoo.com',
-    phone: '+380660153647',
-    phoneVerified: true,
-  },
+  user: null,
   address: null,
   socialMedia: null,
   loading: false,

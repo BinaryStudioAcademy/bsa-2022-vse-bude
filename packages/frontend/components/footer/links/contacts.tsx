@@ -14,7 +14,7 @@ export const Contacts: FC<ContactsProps> = ({ email, phone }) => {
       <ColumnHeader>{t('common:footer.contacts')}</ColumnHeader>
 
       <div css={styles.footerLinksRow}>
-        <Icon cssExtend={styles.phone} color="yellow" icon={IconName.PHONE} />
+        <Icon cssExtend={styles.phone} color="YELLOW" icon={IconName.PHONE} />
         <Anchor
           variant="secondary"
           href={`tel:${phone}`}
@@ -24,7 +24,7 @@ export const Contacts: FC<ContactsProps> = ({ email, phone }) => {
       </div>
 
       <div css={styles.footerLinksRow}>
-        <Icon cssExtend={styles.email} color="yellow" icon={IconName.EMAIL} />
+        <Icon cssExtend={styles.email} color="YELLOW" icon={IconName.EMAIL} />
         <Anchor
           variant="secondary"
           href={`mailto:${email}`}

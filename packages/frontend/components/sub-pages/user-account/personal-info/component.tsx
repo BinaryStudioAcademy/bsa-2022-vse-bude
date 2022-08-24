@@ -13,60 +13,45 @@ import {
 import { userUpdateSchema } from 'validation-schemas/user/user-update';
 import type { UserPersonalInfoDto } from '@vse-bude/shared';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { useTypedSelector } from '@hooks';
-import type { RootState } from '@types';
 import { useEffect } from 'react';
+import { UserPersonalInfoValidationMessage } from '@vse-bude/shared';
 import flag from '../../../../public/images/flagBg.png';
 import noavatar from '../../../../public/images/noavatar.svg';
 import { SectionHeader, NestedLayout } from '../../common';
 import * as styles from './styles';
 
 export const PersonalInfo = () => {
-  const { user, address, socialMedia } = useTypedSelector(
-    (state: RootState) => state.profile,
-  );
-  const { avatar, firstName, lastName, email, phone } = user;
-  const addressFields = address
-    ? address
-    : {
-        country: address?.country ? address.country : '',
-        region: address?.region ? address.region : '',
-        city: address?.city ? address.city : '',
-        zip: address?.zip ? address.zip : '',
-        novaPoshtaRef: address?.novaPoshtaRef ? address.novaPoshtaRef : '',
-      };
-  const socialMediaFields = socialMedia
-    ? socialMedia
-    : {
-        instagram: socialMedia?.instagram ? socialMedia.instagram : '',
-        linkedin: socialMedia?.linkedin ? socialMedia.linkedin : '',
-        facebook: socialMedia?.facebook ? socialMedia.facebook : '',
-      };
+  const { t } = useTranslation();
 
   const {
     register,
     reset,
     setValue,
+    setError,
     watch,
     handleSubmit,
-    //formState: { errors },
+    formState: { errors },
   } = useForm<UserPersonalInfoDto>({
     defaultValues: {
-      avatar,
-      firstName,
-      lastName,
-      email,
-      phone,
-      ...addressFields,
-      ...socialMediaFields,
+      avatar: '',
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'example@yahoo.com',
+      phone: '+380660153647',
+      city: '',
+      region: '',
+      country: '',
+      zip: '',
+      novaPoshtaRef: '',
+      linkedin: '',
+      facebook: '',
+      instagram: '',
       password: '',
       newPassword: '',
       repeatPassword: '',
     },
-    resolver: joiResolver(userUpdateSchema),
+    resolver: joiResolver(userUpdateSchema(t)),
   });
-
-  const { t } = useTranslation();
 
   const [photo] = watch(['avatar']);
 
@@ -86,6 +71,16 @@ export const PersonalInfo = () => {
     const url = URL.createObjectURL(file);
     console.log(url);
     setValue('avatar', url);
+  };
+
+  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    value.includes(' ')
+      ? setError('newPassword', {
+          type: 'custom',
+          message: t(UserPersonalInfoValidationMessage.SPACES_IN_PASSWORD),
+        })
+      : setValue('newPassword', event.target.value);
   };
 
   const onCutHandler = (event: React.ClipboardEvent<HTMLInputElement>) => {
@@ -114,7 +109,7 @@ export const PersonalInfo = () => {
             </div>
 
             <div css={styles.avatarWrapper}>
-              <img css={styles.avatar} src={avatar} alt="avatar" />
+              <img css={styles.avatar} src={noavatar.src} alt="avatar" />
               <DownloadButton
                 {...register('avatar')}
                 id="profile-avatar"
@@ -129,13 +124,19 @@ export const PersonalInfo = () => {
               onClick={() => {
                 reset(
                   {
-                    avatar,
-                    firstName,
-                    lastName,
-                    email,
-                    phone,
-                    ...addressFields,
-                    ...socialMediaFields,
+                    avatar: '',
+                    firstName: 'John',
+                    lastName: 'Doe',
+                    email: 'example@yahoo.com',
+                    phone: '+380660153647',
+                    city: '',
+                    region: '',
+                    country: '',
+                    zip: '',
+                    novaPoshtaRef: '',
+                    linkedin: '',
+                    facebook: '',
+                    instagram: '',
                     password: '',
                     newPassword: '',
                     repeatPassword: '',
@@ -166,7 +167,7 @@ export const PersonalInfo = () => {
                   label={t('personal-info:label.firstName')}
                   placeholder={t('personal-info:placeholder.firstName')}
                   {...register('firstName')}
-                  //error={t(errors.firstName?.message)}
+                  error={errors.firstName?.message}
                 />
               </div>
               <div css={styles.inputRow}>
@@ -177,7 +178,7 @@ export const PersonalInfo = () => {
                   label={t('personal-info:label.lastName')}
                   placeholder={t('personal-info:placeholder.lastName')}
                   {...register('lastName')}
-                  //error={t(errors.lastName?.message)}
+                  error={errors.lastName?.message}
                 />
               </div>
             </Flex>
@@ -189,7 +190,7 @@ export const PersonalInfo = () => {
                 label={t('personal-info:label.email')}
                 placeholder={t('personal-info:placeholder.email')}
                 {...register('email')}
-                //error={t(errors.email?.message)}
+                error={errors.email?.message}
               />
             </div>
             <div css={styles.inputRow}>
@@ -200,7 +201,7 @@ export const PersonalInfo = () => {
                 label={t('personal-info:label.phone')}
                 placeholder={t('personal-info:placeholder.phone')}
                 {...register('phone')}
-                //error={t(errors.phone?.message)}
+                error={errors.phone?.message}
               />
             </div>
           </Column>
@@ -320,7 +321,7 @@ export const PersonalInfo = () => {
                 onCopy={onCopyHandler}
                 onPaste={onPastHandler}
                 {...register('password')}
-                //error={t(errors.password?.message)}
+                error={errors.password?.message}
               />
             </div>
             <div css={styles.inputRow}>
@@ -332,8 +333,8 @@ export const PersonalInfo = () => {
                 onCut={onCutHandler}
                 onCopy={onCopyHandler}
                 onPaste={onPastHandler}
-                {...register('newPassword')}
-                //error={t(errors.newPassword?.message)}
+                {...(register('newPassword'), { onChange: onChangeHandler })}
+                error={errors.newPassword?.message}
               />
             </div>
             <div css={styles.inputRow}>
@@ -346,7 +347,7 @@ export const PersonalInfo = () => {
                 onCopy={onCopyHandler}
                 onPaste={onPastHandler}
                 {...register('repeatPassword')}
-                //error={t(errors.repeatPassword?.message)}
+                error={errors.repeatPassword?.message}
               />
             </div>
           </Column>
