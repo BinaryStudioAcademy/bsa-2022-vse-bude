@@ -5,7 +5,7 @@ import type { DownloadButtonProps } from './types';
 import * as styles from './styles';
 
 const InputFile = (
-  { id, multiple = false, onChange }: DownloadButtonProps,
+  { id, multiple = false }: DownloadButtonProps,
   ref,
 ) => (
   <div css={styles.container}>
@@ -15,9 +15,8 @@ const InputFile = (
         css={styles.download}
         id={id}
         type="file"
-        accept=".jpg, .png"
+        accept=".jpg, .png, .jpeg"
         multiple={multiple}
-        onChange={onChange}
       />
       <Icon
         color="gray"

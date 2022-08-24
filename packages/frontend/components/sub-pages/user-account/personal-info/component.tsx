@@ -13,10 +13,8 @@ import {
 import { userUpdateSchema } from 'validation-schemas/user/user-update';
 import type { UserPersonalInfoDto } from '@vse-bude/shared';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { useEffect } from 'react';
 import { UserPersonalInfoValidationMessage } from '@vse-bude/shared';
 import flag from '../../../../public/images/flagBg.png';
-import noavatar from '../../../../public/images/noavatar.svg';
 import { SectionHeader, NestedLayout } from '../../common';
 import * as styles from './styles';
 
@@ -34,10 +32,10 @@ export const PersonalInfo = () => {
   } = useForm<UserPersonalInfoDto>({
     defaultValues: {
       avatar: '',
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'example@yahoo.com',
-      phone: '+380660153647',
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
       city: '',
       region: '',
       country: '',
@@ -53,24 +51,11 @@ export const PersonalInfo = () => {
     resolver: joiResolver(userUpdateSchema(t)),
   });
 
-  const [photo] = watch(['avatar']);
-
-  useEffect(() => {
-    if (!photo) {
-      setValue('avatar', noavatar.src);
-    }
-  }, [watch, photo, setValue]);
+  const avatar = watch('avatar');
 
   const onSave: SubmitHandler<UserPersonalInfoDto> = (data, event) => {
     event.preventDefault();
     console.log('data', data);
-  };
-
-  const onDownloadAvatar = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files[0];
-    const url = URL.createObjectURL(file);
-    console.log(url);
-    setValue('avatar', url);
   };
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -81,6 +66,32 @@ export const PersonalInfo = () => {
           message: t(UserPersonalInfoValidationMessage.SPACES_IN_PASSWORD),
         })
       : setValue('newPassword', event.target.value);
+  };
+
+  const onResetHandler = () => {
+    reset(
+      {
+        avatar: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        city: '',
+        region: '',
+        country: '',
+        zip: '',
+        novaPoshtaRef: '',
+        linkedin: '',
+        facebook: '',
+        instagram: '',
+        password: '',
+        newPassword: '',
+        repeatPassword: '',
+      },
+      {
+        keepDefaultValues: true,
+      },
+    );
   };
 
   const onCutHandler = (event: React.ClipboardEvent<HTMLInputElement>) => {
@@ -109,44 +120,15 @@ export const PersonalInfo = () => {
             </div>
 
             <div css={styles.avatarWrapper}>
-              <img css={styles.avatar} src={noavatar.src} alt="avatar" />
+              <img css={styles.avatar} src={avatar} alt="avatar" />
               <DownloadButton
-                {...register('avatar')}
                 id="profile-avatar"
-                onChange={onDownloadAvatar}
               />
+              {errors.avatar && <div>{errors.avatar.message}</div>}
             </div>
           </div>
           <Flex justify={'flex-end'} css={styles.buttons}>
-            <Button
-              type="button"
-              variant="outlined"
-              onClick={() => {
-                reset(
-                  {
-                    avatar: '',
-                    firstName: 'John',
-                    lastName: 'Doe',
-                    email: 'example@yahoo.com',
-                    phone: '+380660153647',
-                    city: '',
-                    region: '',
-                    country: '',
-                    zip: '',
-                    novaPoshtaRef: '',
-                    linkedin: '',
-                    facebook: '',
-                    instagram: '',
-                    password: '',
-                    newPassword: '',
-                    repeatPassword: '',
-                  },
-                  {
-                    keepDefaultValues: true,
-                  },
-                );
-              }}
-            >
+            <Button type="button" variant="outlined" onClick={onResetHandler}>
               {t('personal-info:action.cancel')}
             </Button>
             <Button type="submit">{t('personal-info:action.save')}</Button>

@@ -4,7 +4,7 @@ import type { TFunction } from 'next-i18next';
 
 export const userUpdateSchema = (t: TFunction) =>
   Joi.object({
-    avatar: Joi.string(),
+    avatar: Joi.any().allow(''),
 
     firstName: Joi.string()
       .trim()
