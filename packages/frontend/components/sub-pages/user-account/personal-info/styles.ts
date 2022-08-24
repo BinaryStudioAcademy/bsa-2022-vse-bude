@@ -10,7 +10,7 @@ export const form = () => css`
 
 export const personalHeader = ({ mq }: Theme) => css`
   width: 100%;
-  margin-bottom: 7px;
+  margin-bottom: 20px;
   ${mq[0]} {
     margin-bottom: 15px;
   }

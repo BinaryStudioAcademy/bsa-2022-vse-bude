@@ -133,10 +133,17 @@ export const PersonalInfo = () => {
             </div>
           </div>
           <Flex justify={'flex-end'} css={styles.buttons}>
-            <Button type="button" variant="outlined" onClick={onResetHandler}>
+            <Button
+              size="flexible"
+              type="button"
+              variant="outlined"
+              onClick={onResetHandler}
+            >
               {t('personal-info:action.cancel')}
             </Button>
-            <Button type="submit">{t('personal-info:action.save')}</Button>
+            <Button size="flexible" type="submit">
+              {t('personal-info:action.save')}
+            </Button>
           </Flex>
         </div>
 
