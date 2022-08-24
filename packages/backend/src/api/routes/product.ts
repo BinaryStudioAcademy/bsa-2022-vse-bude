@@ -85,7 +85,7 @@ export const initProductRoutes = (
    *         allOf:
    *         - "$ref": "#/definitions/Prisma.Decimal"
    *         nullable: true
-   *       recomendedPrice:
+   *       recommendedPrice:
    *         allOf:
    *         - "$ref": "#/definitions/Prisma.Decimal"
    *         nullable: true
@@ -110,7 +110,7 @@ export const initProductRoutes = (
    *     - city
    *     - imageLinks
    *     - minimalBid
-   *     - recomendedPrice
+   *     - recommendedPrice
    *     - price
    *     - description
    *     - title

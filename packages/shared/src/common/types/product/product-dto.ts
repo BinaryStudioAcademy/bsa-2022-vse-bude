@@ -5,7 +5,7 @@ type ProductDto = {
   title: string;
   description: string;
   price: number;
-  recomendedPrice: number;
+  recommendedPrice: number;
   minimalBid: number;
   city: string;
   type: ProductType;
