@@ -118,15 +118,18 @@ const emailCodeResend = createAsyncThunk(
   },
 );
 
-const logoutUser = createAsyncThunk(AuthActions.LOGOUT, async (_, { rejectWithValue }) => {
-  try {
-    // await logout(); delete refresh token on server
-    auth.logOut();
-    await Router.push(Routes.DEFAULT);
-  } catch (e) {
-    return rejectWithValue(e.message);
-  }
-});
+const logoutUser = createAsyncThunk(
+  AuthActions.LOGOUT,
+  async (_, { rejectWithValue }) => {
+    try {
+      // await logout(); delete refresh token on server
+      auth.logOut();
+      await Router.push(Routes.DEFAULT);
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  },
+);
 
 export {
   loginUser,
