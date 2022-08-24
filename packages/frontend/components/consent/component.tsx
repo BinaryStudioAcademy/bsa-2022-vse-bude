@@ -1,19 +1,16 @@
 import { Modal } from '@primitives';
 import React, { useEffect, useState } from 'react';
-import type { ConsentProps } from './types';
 import { ConsentContent } from './sub-components/consent-content';
 
-export const ConsentPage = ({ children }: ConsentProps) => {
+export const ConsentModal = () => {
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => setIsVisible(true), []);
 
   return (
     <React.Fragment>
-      {
         <Modal visible={isVisible}>
-          <ConsentContent setVisible={setIsVisible}> {children}</ConsentContent>
+          <ConsentContent setVisible={setIsVisible}> Our terms of service</ConsentContent>
         </Modal>
-      }
     </React.Fragment>
   );
 };
