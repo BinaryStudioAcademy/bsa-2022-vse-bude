@@ -11,6 +11,9 @@ export enum UserPersonalInfoValidationMessage {
   PHONE_REQUIRED = 'personal-info:validation.personal.phoneRequired',
   PHONE_PATTERN = 'personal-info:validation.personal.phonePattern',
 
+  MIN_SYMBOLS = 'personal-info:validation.password.minSymbols',
+  MAX_SYMBOLS = 'personal-info:validation.password.maxSymbols',
+  CYRILLIC = 'personal-info:validation.password.cyrillic',
   WRONG_PASSWORD = 'personal-info:validation.password.wrongPassword',
   EMPTY_PASSWORD = 'personal-info:validation.password.emptyPassword',
   NEW_PASSWORD = 'personal-info:validation.password.newPasswordPattern',

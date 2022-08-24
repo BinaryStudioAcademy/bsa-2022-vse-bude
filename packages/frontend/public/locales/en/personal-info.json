@@ -38,9 +38,9 @@
     "instagram": "Enter your Instagram",
     "linkedin": "Enter your Linkedin",
     "facebook": "Enter your Facebook",
-    "password": "Enter your current password",
-    "newPassword": "Enter new password",
-    "repeatPassword": "Repeat new password",
+    "password": "Enter password",
+    "newPassword": "Enter password",
+    "repeatPassword": "Enter password",
     "novaPoshtaRef": "Enter office of Nova Poshta"
   },
   "validation": {
@@ -59,6 +59,9 @@
     "address": {},
     "socialNetworks": {},
     "password": {
+      "minSymbols": "Password length must be at least 8 characters",
+      "maxSymbols": "Password length must not exceed 16 characters",
+      "cyrillic": "You can use only Latin letters",
       "wrongPassword": "Please enter correct password",
       "samePassword": "The new password should not match the current one!",
       "emptyPassword": "Fill the password please!",

@@ -4,10 +4,7 @@ import { IconName } from '@enums';
 import type { DownloadButtonProps } from './types';
 import * as styles from './styles';
 
-const InputFile = (
-  { id, multiple = false }: DownloadButtonProps,
-  ref,
-) => (
+const InputFile = ({ id, multiple = false }: DownloadButtonProps, ref) => (
   <div css={styles.container}>
     <label css={styles.downloadWrapper} htmlFor={id}>
       <input

@@ -26,6 +26,7 @@ export const PersonalInfo = () => {
     reset,
     setValue,
     setError,
+    clearErrors,
     watch,
     handleSubmit,
     formState: { errors },
@@ -60,12 +61,18 @@ export const PersonalInfo = () => {
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    value.includes(' ')
-      ? setError('newPassword', {
-          type: 'custom',
-          message: t(UserPersonalInfoValidationMessage.SPACES_IN_PASSWORD),
-        })
-      : setValue('newPassword', event.target.value);
+    clearErrors('newPassword');
+    if (value.includes(' ')) {
+      setError('newPassword', {
+        message: t(UserPersonalInfoValidationMessage.SPACES_IN_PASSWORD),
+      });
+    } else if (/^[А-ЯЁIЇҐЄЂЃЀЅЍЈЉЊЋЌЎа-яёіїґєђѓѐѕѝјљњћќў]+$/.test(value)) {
+      setError('newPassword', {
+        message: t(UserPersonalInfoValidationMessage.CYRILLIC),
+      });
+    } else {
+      setValue('newPassword', event.target.value);
+    }
   };
 
   const onResetHandler = () => {
@@ -121,9 +128,7 @@ export const PersonalInfo = () => {
 
             <div css={styles.avatarWrapper}>
               <img css={styles.avatar} src={avatar} alt="avatar" />
-              <DownloadButton
-                id="profile-avatar"
-              />
+              <DownloadButton id="profile-avatar" />
               {errors.avatar && <div>{errors.avatar.message}</div>}
             </div>
           </div>

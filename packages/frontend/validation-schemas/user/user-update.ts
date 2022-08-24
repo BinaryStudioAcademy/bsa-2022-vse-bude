@@ -70,13 +70,17 @@ export const userUpdateSchema = (t: TFunction) =>
       then: Joi.string()
         .required()
         .disallow(Joi.ref('password'))
+        .min(8)
+        .max(16)
         .pattern(
-          /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z~!@#$%^*\-_=+[{\]}/;:,.?]{8,16}$/,
+          /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z~!@#$%^*\-_=+[{\]}/;:,.?]+$/,
         )
         .messages({
           'string.pattern.base': t(
             UserPersonalInfoValidationMessage.NEW_PASSWORD,
           ),
+          'string.min': t(UserPersonalInfoValidationMessage.MIN_SYMBOLS),
+          'string.max': t(UserPersonalInfoValidationMessage.MAX_SYMBOLS),
           'string.empty': t(UserPersonalInfoValidationMessage.EMPTY_PASSWORD),
           'any.invalid': t(UserPersonalInfoValidationMessage.SAME_PASSWORD),
         }),
