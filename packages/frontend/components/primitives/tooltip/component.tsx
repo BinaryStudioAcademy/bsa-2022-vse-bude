@@ -3,6 +3,8 @@ import * as ReactDOM from 'react-dom';
 import * as styles from './styles';
 import type { TooltipProps } from './types';
 
+const marginScreenLeftRightPx = 10;
+
 export const Tooltip = ({
   trigger,
   children,
@@ -11,26 +13,50 @@ export const Tooltip = ({
   const [isVisible, setIsVisible] = useState(false);
 
   const bodyRef = useRef<HTMLDivElement>();
-  const triggerWrapperRef = useRef<HTMLDivElement>();
+  const triggerWrapperRef = useRef<HTMLSpanElement>();
   const timerRef = useRef(null);
 
   const calcBodyCoords = useCallback(() => {
     const triggerRectParams = getTriggerRectParams();
     const bodyRectParams = getBodyRectParams();
 
-    let bodyTop = window.scrollY + triggerRectParams.top;
-    bodyTop +=
-      triggerRectParams.top - bodyRectParams.height <= 0
-        ? triggerRectParams.height
-        : -bodyRectParams.height;
+    const bodyTop = getBodyTopCoords(triggerRectParams, bodyRectParams);
 
-    const bodyLeft =
+    const bodyLeft = getBodyLeftCoords(triggerRectParams, bodyRectParams);
+
+    return [bodyTop, bodyLeft];
+  }, []);
+
+  const getBodyTopCoords = (triggerRectParams, bodyRectParams) => {
+    let bodyTop = window.scrollY + triggerRectParams.top;
+
+    // check overflow screen top and bottom sides
+    if (triggerRectParams.top - bodyRectParams.height <= 0) {
+      bodyTop += triggerRectParams.height;
+    } else {
+      bodyTop -= bodyRectParams.height;
+    }
+
+    return bodyTop;
+  };
+
+  const getBodyLeftCoords = (triggerRectParams, bodyRectParams) => {
+    let bodyLeft =
       triggerRectParams.left +
       triggerRectParams.width / 2 -
       bodyRectParams.width / 2;
 
-    return [bodyTop, bodyLeft];
-  }, []);
+    const screenWidth = document.documentElement.clientWidth;
+
+    // check overflow screen left and right sides
+    if (bodyLeft <= 0) {
+      bodyLeft = marginScreenLeftRightPx;
+    } else if (bodyLeft + bodyRectParams.width >= screenWidth) {
+      bodyLeft = screenWidth - bodyRectParams.width - marginScreenLeftRightPx;
+    }
+
+    return bodyLeft;
+  };
 
   useEffect(() => {
     if (bodyRef.current) {
@@ -78,14 +104,14 @@ export const Tooltip = ({
 
   return (
     <Fragment>
-      <div
+      <span
         ref={triggerWrapperRef}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         css={styles.trigger}
       >
         {trigger}
-      </div>
+      </span>
       {isVisible && renderPortal()}
     </Fragment>
   );

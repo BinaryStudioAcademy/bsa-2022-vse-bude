@@ -1,17 +1,13 @@
-import { Popover } from '@primitives';
+import { useAuth } from '@hooks';
+import { Popover, Avatar } from '@primitives';
 import { useRouter } from 'next/router';
-import { Avatar } from '../../primitives/avatar';
-import type { ProfileInfoProps } from './types';
 import * as styles from './styles';
 import { DownArrow } from './sub-components/dropdown';
 import { PopoverContent } from './sub-components/popover-content';
 
-export const ProfileInfo = ({
-  image,
-  firstName,
-  lastName,
-}: ProfileInfoProps) => {
+export const ProfileInfo = () => {
   const router = useRouter();
+  const { user, loading } = useAuth();
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -19,19 +15,17 @@ export const ProfileInfo = ({
   };
 
   return (
-    <Popover
-      trigger={
-        <div css={styles.profileInfo}>
-          <Avatar firstName={firstName} lastName={lastName} image={image} />
-          <DownArrow style={styles.dropdownArrow} />
-        </div>
-      }
-    >
-      <PopoverContent
-        wrapperStyles={styles.popoverContentWrapper}
-        innerStyles={styles.popoverContentItem}
+    <div css={styles.profileInfo}>
+      <Avatar
+        firstName={user.firstName}
+        lastName={user.lastName}
+        image={user.avatar}
+        loading={loading}
         handleClick={handleClick}
       />
-    </Popover>
+      <Popover trigger={<DownArrow style={styles.dropdownArrow} />}>
+        {(handleClose) => <PopoverContent handleClose={handleClose} />}
+      </Popover>
+    </div>
   );
 };

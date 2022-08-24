@@ -29,7 +29,7 @@ export class RedisStorageService {
     );
 
     this.client.connect().then(() => {
-      console.log('redis client connected!');
+      logger.log('Redis client connected');
     });
   }
 
@@ -59,5 +59,9 @@ export class RedisStorageService {
 
   async isKeyExists(key: string) {
     return this.client.exists(key);
+  }
+
+  async checkPing() {
+    return (await this.client.ping()) === 'PONG';
   }
 }

@@ -10,15 +10,13 @@ import * as styles from './styles';
 
 export const AccountLayout: FC<AccountPageProps> = ({ children }) => {
   const router = useRouter();
-  const { t } = useTranslation(['dashboard', 'page-titles']);
+  const { t } = useTranslation();
 
   return (
     <Layout>
       <Container>
         <div css={styles.wrapper}>
-          <h3 css={styles.pageHeader}>
-            {t('ACCOUNT_PAGE', { ns: 'page-titles' })}
-          </h3>
+          <h3 css={styles.pageHeader}>{t('user-account:accountPage')}</h3>
           <Flex css={styles.pageContent}>
             <div css={styles.linksContainer}>
               {linksData.map((link, idx) => {

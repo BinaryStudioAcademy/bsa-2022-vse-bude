@@ -4,6 +4,7 @@ import { CategoryRepository } from './category';
 import { ProductRepository } from './product';
 import { RefreshTokenRepository } from './refresh-token';
 import { NewsRepository } from './news';
+import { HealthRepository } from './health';
 
 export const initRepositories = (prismaClient: PrismaClient) => ({
   userRepository: new UserRepository(prismaClient),
@@ -11,6 +12,7 @@ export const initRepositories = (prismaClient: PrismaClient) => ({
   productRepository: new ProductRepository(prismaClient),
   newsRepository: new NewsRepository(prismaClient),
   refreshTokenRepository: new RefreshTokenRepository(prismaClient),
+  healthRepository: new HealthRepository(prismaClient),
 });
 
 export type Repositories = ReturnType<typeof initRepositories>;
@@ -21,4 +23,5 @@ export {
   type CategoryRepository,
   type ProductRepository,
   type NewsRepository,
+  type HealthRepository,
 };

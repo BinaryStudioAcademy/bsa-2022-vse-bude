@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
-import type { Theme } from 'theme';
+import type { Theme } from '@emotion/react';
+import { resetButton } from 'theme';
 
 export const avatar = ({ spaces, radiuses }: Theme) => css`
   display: flex;
@@ -30,6 +31,7 @@ export const initials = ({
 `;
 
 export const wrapper = ({ spaces, radiuses, colors }: Theme) => css`
+  ${resetButton};
   display: flex;
   align-items: center;
   justify-content: center;
