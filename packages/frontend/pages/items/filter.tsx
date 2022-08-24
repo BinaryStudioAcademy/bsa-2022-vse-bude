@@ -2,7 +2,7 @@ import { Layout } from '@components';
 import { useRouter } from 'next/router';
 import { wrapper } from 'store';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { Post } from '@components';
+import { Filter } from '@components';
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (_store) =>
@@ -13,15 +13,15 @@ export const getServerSideProps = wrapper.getServerSideProps(
     }),
 );
 
-const CreatePage = () => {
+const FilteredPage = () => {
   const router = useRouter();
-  const create = router.query.create as string;
-  
+  const filter = router.query.filter as string;
+
   return (
-    <Layout title="Create post">
-      <Post create={create} />
+    <Layout title="Filtered posts">
+      <Filter filter={filter} />
     </Layout>
   );
 };
 
-export default CreatePage;
+export default FilteredPage;
