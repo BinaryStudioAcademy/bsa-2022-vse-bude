@@ -31,7 +31,7 @@ export const Avatar = ({
           width={35}
         />
       )}
-      {loading ? <Loader /> : `${firstName[0]}${lastName[0]}`}
+      {loading ? <Loader size="extraSmall" /> : `${firstName[0]}${lastName[0]}`}
     </button>
   );
 };
