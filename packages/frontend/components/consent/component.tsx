@@ -7,7 +7,7 @@ export const ConsentModal = () => {
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => setIsVisible(true), []);
   // const { t } = useTranslation();
-  
+
   return (
     <React.Fragment>
       <Modal visible={isVisible}>
