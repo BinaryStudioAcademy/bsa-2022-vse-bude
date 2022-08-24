@@ -28,7 +28,7 @@ export const ConsentContent = ({
           disabled={disabled}
           onClick={() => handleClose()}
         >
-          Agree
+          Accept
         </Button>
         <Button onClick={() => router.push('/')}>Decline</Button>
       </div>
