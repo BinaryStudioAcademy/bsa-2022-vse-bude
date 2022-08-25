@@ -51,6 +51,17 @@ export class UserRepository {
     });
   }
 
+  public updatePassword(email: string, passwordValue: string) {
+    return this._dbClient.user.update({
+      where: {
+        email: email,
+      },
+      data: {
+        passwordHash: passwordValue,
+      },
+    });
+  }
+
   public verifyEmail(userId: string) {
     return this._dbClient.user.update({
       where: {

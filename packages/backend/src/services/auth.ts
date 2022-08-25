@@ -3,6 +3,7 @@ import type {
   UserSignInDto,
   UserSignUpDto,
   AuthResponse,
+  UpdatePassword,
 } from '@vse-bude/shared';
 import { sign as jwtSign, type UserSessionJwtPayload } from 'jsonwebtoken';
 import { getEnv } from '@helpers';
@@ -99,7 +100,7 @@ export class AuthService {
   async signIn(signInDto: UserSignInDto, req: Request): Promise<AuthResponse> {
     const user = await this._userRepository.getByEmail(signInDto.email);
     if (!user) {
-      throw new UserNotFoundError(req);
+      throw new UserNotFoundError();
     }
 
     if (
@@ -187,14 +188,23 @@ export class AuthService {
     return undefined;
   }
 
-  async resetPassword(email: string, hash: string) {
+  async updatePassword(updateDto: UpdatePassword) {
     const resetHash = await this._cache.get<string>(
-      this.getResetPasswordCacheKey(email),
+      this.getResetPasswordCacheKey(updateDto.email),
     );
 
-    if (!resetHash || resetHash !== hash) {
+    if (!resetHash || resetHash !== updateDto.updateHash) {
       throw new ResetPassLinkInvalid();
     }
+
+    const user = this._userRepository.getByEmail(updateDto.email);
+
+    if (!user) {
+      throw new UserNotFoundError();
+    }
+
+    const newPassHash = this._hashService.generateHash(updateDto.password);
+    this._userRepository.updatePassword(updateDto.email, newPassHash);
 
     return {};
   }

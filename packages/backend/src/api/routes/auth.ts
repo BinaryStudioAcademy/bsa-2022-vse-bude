@@ -3,6 +3,7 @@ import { type Request, Router } from 'express';
 import type {
   ApiRoutes,
   AuthResponse,
+  UpdatePassword,
   UserSignInDto,
   UserSignUpDto,
 } from '@vse-bude/shared';
@@ -237,10 +238,17 @@ export const initAuthRoutes = (
   );
 
   router.get(
-    apiPath(path, AuthApiRoutes.RESET_PASSWORD),
-    wrap((req: Request) =>
-      authService.resetPassword(req.params.email, req.params.value),
-    ),
+    apiPath(path, AuthApiRoutes.UPDATE_PASSWORD),
+    wrap((req: Request) => {
+      const updateDto: UpdatePassword = {
+        email: req.body.email,
+        updateHash: req.body.value,
+        password: req.body.password,
+        repeatPassword: req.body.password,
+      };
+
+      return authService.updatePassword(updateDto);
+    }),
   );
 
   return router;
