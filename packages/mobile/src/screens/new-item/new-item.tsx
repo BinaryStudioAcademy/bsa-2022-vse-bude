@@ -26,6 +26,7 @@ type NewItem = {
   country: string;
   city: string;
   phone: string;
+  callingCode: string;
   instagram?: string;
   facebook?: string;
   site?: string;
@@ -37,7 +38,11 @@ const NewItemScreen: FC = () => {
   const styles = React.useMemo(() => createStyles(), [dark, colors]);
 
   const { control, errors } = useAppForm<NewItem>({
-    defaultValues: {},
+    defaultValues: {
+      currency: 'UAH',
+      country: 'Ukraine',
+      callingCode: 'UA',
+    },
   });
 
   return (
@@ -87,6 +92,7 @@ const NewItemScreen: FC = () => {
             errors={errors}
             contentContainerStyle={globalStyles.mt5}
           />
+
           <View style={[styles.row, globalStyles.mt5]}>
             <View style={styles.phoneWrap}>
               <Popover
@@ -126,15 +132,14 @@ const NewItemScreen: FC = () => {
 
             <View style={styles.currency}>
               <DropDown
-                //label=" "
                 name="currency"
                 control={control}
                 items={CURRENCY}
-                zIndex={10}
-                //contentContainerStyle={styles.currency}
+                zIndex={25}
               />
             </View>
           </View>
+
           <Text
             style={[
               globalStyles.fs14,
@@ -149,30 +154,61 @@ const NewItemScreen: FC = () => {
             name="country"
             control={control}
             items={COUNTRIES}
-            zIndex={2}
+            zIndex={20}
           />
           <DropDown
             label={t('make_a_post.CITY')}
             name="city"
             control={control}
             items={CITIES}
-            zIndex={1}
+            zIndex={15}
           />
-          <Input
-            label={t('make_a_post.MOBILE_PHONE')}
-            placeholder={t('make_a_post.MOBILE_PHONE_PLACEHOLDER')}
-            name="phone"
-            control={control}
-            errors={errors}
-            contentContainerStyle={globalStyles.mt5}
-          />
-          <DropDown
-            label={t('make_a_post.CALLING_CODE')}
-            name="city"
-            control={control}
-            items={CALLING_CODE}
-            zIndex={1}
-          />
+          <View style={[styles.row, globalStyles.mt5]}>
+            <View style={styles.phoneWrap}>
+              <Popover
+                popoverStyle={styles.popover}
+                from={
+                  <TouchableOpacity style={styles.tooltipWrap}>
+                    <Text style={[globalStyles.fs12]}>
+                      {t('make_a_post.MOBILE_PHONE')}
+                    </Text>
+                    <InfoIcon
+                      size={13}
+                      color={ColorPalette.YELLOW_200}
+                      style={styles.tooltipIcon}
+                    />
+                  </TouchableOpacity>
+                }
+              >
+                <Text>{t('make_a_post.PHONE_TOOLTIP')}</Text>
+              </Popover>
+            </View>
+            <View style={styles.currencyWrap}>
+              <Text style={[globalStyles.fs12]}>
+                {t('make_a_post.CALLING_CODE')}
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.row}>
+            <Input
+              label=""
+              placeholder={t('make_a_post.MOBILE_PHONE_PLACEHOLDER')}
+              name="phone"
+              control={control}
+              errors={errors}
+              contentContainerStyle={styles.phone}
+            />
+
+            <View style={styles.currency}>
+              <DropDown
+                name="callingCode"
+                control={control}
+                items={CALLING_CODE}
+                zIndex={10}
+              />
+            </View>
+          </View>
           <Input
             label={t('make_a_post.INSTAGRAM')}
             placeholder={t('make_a_post.INSTAGRAM_PLACEHOLDER')}
