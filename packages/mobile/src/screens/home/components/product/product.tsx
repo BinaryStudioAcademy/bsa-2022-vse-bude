@@ -1,11 +1,10 @@
 import React, { FC } from 'react';
 import { useTranslation, useAppSelector } from '~/hooks/hooks';
-import { createSelector } from '@reduxjs/toolkit';
+import { selectProductById } from '~/store/products/selectors';
 import { Button, ClockIcon, Image, Text, View } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { ProductType, ProductDto } from '@vse-bude/shared';
 import { addSpacePrice, getTimeToEvent } from '~/helpers/helpers';
-import { RootState } from '~/common/types/types';
 import { styles } from './styles';
 
 type Props = {
@@ -13,15 +12,8 @@ type Props = {
 };
 
 const Product: FC<Props> = ({ id }) => {
-  const selector = createSelector(
-    (state: RootState) => state.products.products,
-    (products) => {
-      return products.find((item) => item.id === id);
-    },
-  );
-
   const { imageLinks, title, description, price, type, endDate } =
-    useAppSelector(selector) as ProductDto;
+    useAppSelector(selectProductById(id)) as ProductDto;
   const duration = getTimeToEvent(endDate);
   const auction = ProductType.AUCTION;
   const { t } = useTranslation();

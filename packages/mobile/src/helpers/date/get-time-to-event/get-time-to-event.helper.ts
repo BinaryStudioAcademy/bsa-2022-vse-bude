@@ -9,14 +9,10 @@ const getTimeToEvent = (date: string) => {
   const ms = +dayjs(date) - +dayjs();
   if (ms > 0) {
     const days = dayjs.duration(dayjs.duration(ms).days(), 'days').humanize();
-    const hours = dayjs
-      .duration(dayjs.duration(ms).hours(), 'hours')
-      .humanize();
-    const minutes = dayjs
-      .duration(dayjs.duration(ms).hours(), 'minutes')
-      .humanize();
+    const hours = dayjs.duration(ms).hours();
+    const minutes = dayjs.duration(ms).minutes();
 
-    return `${days}  ${hours.split('o')[0]} ${minutes.split('u')[0]}`;
+    return `${days}  ${hours}h ${minutes}min`;
   }
 
   return dayjs().to(date);
