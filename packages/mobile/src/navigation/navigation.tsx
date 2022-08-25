@@ -5,7 +5,7 @@ import {
 } from '@react-navigation/native-stack';
 import { RootScreenName } from '~/common/enums/enums';
 import { RootNavigationParamList } from '~/common/types/types';
-import { useAppSelector } from '~/hooks/hooks';
+import { useAppSelector, useTranslation } from '~/hooks/hooks';
 import { selectCurrentUser } from '~/store/auth/selectors';
 import {
   MessagesScreen,
@@ -29,10 +29,12 @@ const mainScreenOptions: NativeStackNavigationOptions = {
 const accountScreenOptions: NativeStackNavigationOptions = {
   headerShown: true,
   headerTitleAlign: 'center',
+  headerTitleStyle: { fontSize: 16 },
 };
 
 const Navigation: FC = () => {
   const user = useAppSelector(selectCurrentUser);
+  const { t } = useTranslation();
 
   return (
     <NativeStack.Navigator screenOptions={mainScreenOptions}>
@@ -63,6 +65,7 @@ const Navigation: FC = () => {
               name={RootScreenName.NEW_ITEM}
               component={NewItemScreen}
               options={{
+                title: t('make_a_post.TITLE'),
                 headerLeft: () => {
                   return <HeaderLeft />;
                 },
