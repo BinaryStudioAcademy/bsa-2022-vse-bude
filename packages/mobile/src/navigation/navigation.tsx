@@ -11,9 +11,7 @@ import {
   SettingsScreen,
   SupportScreen,
 } from '~/screens/screens';
-import { useAppSelector } from '~/hooks/hooks';
-import { selectCurrentUser } from '~/store/auth/selectors';
-import { GuestNavigation, PrivateNavigation } from './tabs/navigation';
+import { MainNavigation } from './tabs/tabs.navigation';
 
 const NativeStack = createNativeStackNavigator<RootNavigationParamList>();
 const Stack = createNativeStackNavigator<RootNavigationParamList>();
@@ -28,13 +26,11 @@ const accountScreenOptions: NativeStackNavigationOptions = {
 };
 
 const Navigation: FC = () => {
-  const user = useAppSelector(selectCurrentUser);
-
   return (
     <NativeStack.Navigator screenOptions={mainScreenOptions}>
       <NativeStack.Screen
         name={RootScreenName.MAIN}
-        component={user ? PrivateNavigation : GuestNavigation}
+        component={MainNavigation}
       />
       <NativeStack.Group screenOptions={accountScreenOptions}>
         <Stack.Screen
