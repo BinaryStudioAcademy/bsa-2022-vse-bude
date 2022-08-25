@@ -3,6 +3,10 @@ import { ThemeColors } from '~/common/types/types';
 
 const createStyles = (colors: ThemeColors) => {
   const styles = StyleSheet.create({
+    screen: {
+      backgroundColor: colors.background,
+      padding: 20,
+    },
     row: {
       flexDirection: 'row',
       paddingVertical: 15,

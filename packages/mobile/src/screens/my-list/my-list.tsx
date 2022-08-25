@@ -21,12 +21,10 @@ const MyList: FC = () => {
   };
 
   return (
-    <ScreenWrapper>
-      <Text>My list screen</Text>
-
+    <ScreenWrapper style={styles.screen}>
       <TouchableOpacity onPress={handleNewItem} style={styles.row}>
         <PlusIcon size={30} style={styles.icon} />
-        <Text style={styles.btnText}>{t('make_a_post.MAKE_A_POST')}</Text>
+        <Text style={styles.btnText}>{t('make_a_post.TITLE')}</Text>
       </TouchableOpacity>
     </ScreenWrapper>
   );
