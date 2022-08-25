@@ -94,7 +94,7 @@ const NewItemScreen: FC = () => {
           />
 
           <View style={[styles.row, globalStyles.mt5]}>
-            <View style={styles.phoneWrap}>
+            <View style={styles.leftWrap}>
               <Popover
                 popoverStyle={styles.popover}
                 from={
@@ -113,7 +113,7 @@ const NewItemScreen: FC = () => {
                 <Text>{t('make_a_post.PRICE_TOOLTIP')}</Text>
               </Popover>
             </View>
-            <View style={styles.currencyWrap}>
+            <View style={styles.rightWrap}>
               <Text style={[globalStyles.fs12]}>
                 {t('make_a_post.CURRENCY')}
               </Text>
@@ -127,10 +127,10 @@ const NewItemScreen: FC = () => {
               name="price"
               control={control}
               errors={errors}
-              contentContainerStyle={styles.phone}
+              contentContainerStyle={styles.leftInput}
             />
 
-            <View style={styles.currency}>
+            <View style={styles.rightInput}>
               <DropDown
                 name="currency"
                 control={control}
@@ -164,7 +164,7 @@ const NewItemScreen: FC = () => {
             zIndex={15}
           />
           <View style={[styles.row, globalStyles.mt5]}>
-            <View style={styles.phoneWrap}>
+            <View style={styles.leftWrap}>
               <Popover
                 popoverStyle={styles.popover}
                 from={
@@ -183,7 +183,7 @@ const NewItemScreen: FC = () => {
                 <Text>{t('make_a_post.PHONE_TOOLTIP')}</Text>
               </Popover>
             </View>
-            <View style={styles.currencyWrap}>
+            <View style={styles.rightWrap}>
               <Text style={[globalStyles.fs12]}>
                 {t('make_a_post.CALLING_CODE')}
               </Text>
@@ -197,10 +197,10 @@ const NewItemScreen: FC = () => {
               name="phone"
               control={control}
               errors={errors}
-              contentContainerStyle={styles.phone}
+              contentContainerStyle={styles.leftInput}
             />
 
-            <View style={styles.currency}>
+            <View style={styles.rightInput}>
               <DropDown
                 name="callingCode"
                 control={control}

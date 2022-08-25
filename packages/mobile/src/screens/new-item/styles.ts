@@ -13,22 +13,22 @@ const createStyles = () => {
     popover: {
       padding: 10,
     },
-    phoneWrap: {
+    leftWrap: {
       width: '60%',
       flexDirection: 'row',
       paddingRight: 10,
       marginBottom: 0,
-      zIndex: 10,
+      zIndex: 5,
     },
-    phone: {
+    leftInput: {
       marginTop: -15,
       width: '60%',
       paddingRight: 10,
     },
-    currencyWrap: {
+    rightWrap: {
       width: '40%',
     },
-    currency: {
+    rightInput: {
       top: 0,
       width: '40%',
       marginTop: -10,
