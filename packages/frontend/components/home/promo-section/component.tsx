@@ -35,7 +35,9 @@ const PromoSection = ({ searchQuery, setSearchQuery }: PromoProps) => {
             <SearchInput
               value={searchQuery}
               setValue={setSearchQuery}
-              placeholder="Search the products"
+              placeholder={t(
+                'common:components.input.searchProductsPlaceholder',
+              )}
             />
           </div>
         </Container>

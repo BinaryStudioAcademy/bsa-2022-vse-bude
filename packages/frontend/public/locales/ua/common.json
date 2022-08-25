@@ -55,6 +55,9 @@
         "minutes": "хв",
         "seconds": "с"
       }
+    },
+    "input": {
+      "searchProductsPlaceholder": "Пошук продуктів"
     }
   }
 }
