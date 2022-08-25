@@ -15,4 +15,8 @@ export class ProductService {
   public getById(id: string) {
     return this._productRepository.getById(id);
   }
+
+  public incrementViews(id: string) {
+    return this._productRepository.incrementViews(id);
+  }
 }

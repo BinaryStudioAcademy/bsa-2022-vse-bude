@@ -91,14 +91,14 @@ model Product {
   title           String        @db.VarChar(512)
   description     String
   price           Decimal       @db.Money
-  recomendedPrice Decimal?      @db.Money
+  recommendedPrice Decimal?      @db.Money
   minimalBid      Decimal?      @db.Money
   imageLinks      String[]      @db.VarChar(2048)
   city            String?       @db.VarChar(512)
   type            ProductType
   status          ProductStatus
   endDate         DateTime?
-  cancellReason   String?
+  cancelReason   String?
   author          User          @relation(name: "ownProducts", fields: [authorId], references: [id])
   authorId        String        @db.Uuid
   category        Category?     @relation(fields: [categoryId], references: [id])

@@ -1,11 +1,47 @@
 [
     {
-        "id": "d74d1dc0-1a1b-407b-9ccb-0447972a7986",
+        "id": "f02abedb-bdd6-4b90-b1d5-9a063b66f3d3",
         "language": "UA",
         "theme": "LIGHT",
         "enableEmailNotifications": true,
-        "userId": "5914c07c-b9fa-449d-b322-bbfccca202fc",
-        "createdAt": "2021-10-31T02:30:13.807Z",
-        "updatedAt": "2022-08-24T00:44:19.508Z"
+        "userId": "c3e590c5-385b-41bb-88d7-e893eeb80724",
+        "createdAt": "2022-02-17T21:52:40.001Z",
+        "updatedAt": "2022-08-25T00:16:14.462Z"
+    },
+    {
+        "id": "f85a51c2-fc6c-4fa1-9a53-39ba8700fca3",
+        "language": "UA",
+        "theme": "LIGHT",
+        "enableEmailNotifications": true,
+        "userId": "2dc38d3c-6eb8-4114-b112-ef6286980769",
+        "createdAt": "2021-11-17T11:13:26.960Z",
+        "updatedAt": "2022-08-25T00:28:02.721Z"
+    },
+    {
+        "id": "807e6e43-8a17-44dc-a0c4-b9790fa91815",
+        "language": "UA",
+        "theme": "LIGHT",
+        "enableEmailNotifications": true,
+        "userId": "3014b5eb-5d39-4273-80ce-30bcdd82a19d",
+        "createdAt": "2021-09-28T16:09:41.467Z",
+        "updatedAt": "2022-08-25T00:34:56.776Z"
+    },
+    {
+        "id": "77ac377d-7624-4ada-92ad-7c0a47ac611f",
+        "language": "UA",
+        "theme": "LIGHT",
+        "enableEmailNotifications": true,
+        "userId": "a142365a-6a80-4c4e-a9fa-32cb9ee4dbba",
+        "createdAt": "2022-08-11T09:37:53.120Z",
+        "updatedAt": "2022-08-25T06:42:03.798Z"
+    },
+    {
+        "id": "e2cd3b5c-6bcb-4163-a90d-ed8fd0ae9027",
+        "language": "UA",
+        "theme": "LIGHT",
+        "enableEmailNotifications": true,
+        "userId": "5b4dcf32-963c-464c-b4cd-b4f736759240",
+        "createdAt": "2021-09-26T10:47:22.080Z",
+        "updatedAt": "2022-08-25T14:15:28.337Z"
     }
 ]

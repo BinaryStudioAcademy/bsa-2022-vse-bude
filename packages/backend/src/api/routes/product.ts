@@ -85,7 +85,7 @@ export const initProductRoutes = (
    *         allOf:
    *         - "$ref": "#/definitions/Prisma.Decimal"
    *         nullable: true
-   *       recomendedPrice:
+   *       recommendedPrice:
    *         allOf:
    *         - "$ref": "#/definitions/Prisma.Decimal"
    *         nullable: true
@@ -110,7 +110,7 @@ export const initProductRoutes = (
    *     - city
    *     - imageLinks
    *     - minimalBid
-   *     - recomendedPrice
+   *     - recommendedPrice
    *     - price
    *     - description
    *     - title
@@ -180,6 +180,11 @@ export const initProductRoutes = (
   router.get(
     apiPath(path, ProductApiRoutes.ID),
     wrap((req) => productService.getById(req.params.id)),
+  );
+
+  router.get(
+    apiPath(path, ProductApiRoutes.ID + ProductApiRoutes.VIEWS),
+    wrap((req) => productService.incrementViews(req.params.id)),
   );
 
   return router;
