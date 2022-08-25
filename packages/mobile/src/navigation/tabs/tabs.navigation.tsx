@@ -9,6 +9,7 @@ import { useAppSelector, useCustomTheme } from '~/hooks/hooks';
 import {
   HomeIcon,
   ListIcon,
+  LogInIcon,
   StarIcon,
   Text,
   UserIcon,
@@ -73,7 +74,7 @@ const MainNavigation: FC = () => {
         <Tabs.Screen
           name={MainScreenName.ACCOUNT_ROOT}
           component={WelcomeNavigation}
-          options={getTabOptions(MainScreenName.ACCOUNT_ROOT, UserIcon)}
+          options={getTabOptions(MainScreenName.LOG_IN, LogInIcon)}
         />
       )}
     </Tabs.Navigator>
