@@ -48,7 +48,7 @@ export const screens = {
     SIGN_OUT: 'Sign Out',
   },
   make_a_post: {
-    MAKE_A_POST: 'Make a Post',
+    TITLE: 'Make a Post',
     DOWNLOAD_PHOTOS: 'Download Photos',
     ADD_PHOTOS: 'Add Photos',
     DESCRIPTION: 'Description',
@@ -66,6 +66,7 @@ export const screens = {
     CITY: 'City',
     MOBILE_PHONE: 'Mobile Phone',
     MOBILE_PHONE_PLACEHOLDER: '+380 ()',
+    PHONE_TOOLTIP: 'Info about phone',
     CALLING_CODE: 'Calling Code',
     INSTAGRAM: 'Instagram',
     INSTAGRAM_PLACEHOLDER: 'Enter your nickname',
