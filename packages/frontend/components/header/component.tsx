@@ -25,6 +25,18 @@ export const Header = () => {
   const { t } = useTranslation();
   const { colors } = useTheme();
 
+  const filters: {
+    category: string;
+  } = { category: '' };
+
+  const redirectToCategory = (category: string) => {
+    filters.category = category;
+    push({
+      pathname: '/filters',
+      query: { filters: JSON.stringify(filters) },
+    });
+  };
+
   const renderNavigation = () => (
     <nav className="navigation">
       <InternalLink
@@ -40,21 +52,23 @@ export const Header = () => {
             ),
             key: 'home',
             onClick: () => {
-              console.log('home');
+              redirectToCategory(
+                'ALCOHOLIC_BEVERAGES_AND_PRODUCTS_CATEGORY_NAME',
+              );
             },
           },
           {
             value: t('common:categories.BEAUTY_AND_HEALTH_CATEGORY_NAME'),
             key: 'home',
             onClick: () => {
-              console.log('home');
+              redirectToCategory('BEAUTY_AND_HEALTH_CATEGORY_NAME');
             },
           },
           {
             value: t('common:categories.CHILDRENS_GOODS_CATEGORY_NAME'),
             key: 'home',
             onClick: () => {
-              console.log('home');
+              redirectToCategory('CHILDRENS_GOODS_CATEGORY_NAME');
             },
           },
           {
@@ -63,9 +77,8 @@ export const Header = () => {
             ),
             key: 'about',
             onClick: () => {
-              console.log('about');
+              redirectToCategory('CLOTHES_SHOES_AND_JEWELRY_CATEGORY_NAME');
             },
-            disabled: true,
           },
         ]}
       >
