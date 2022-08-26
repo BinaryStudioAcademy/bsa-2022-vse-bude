@@ -20,15 +20,6 @@ export const downloadWrapper = ({ colors }: Theme) => css`
   }
 `;
 
-export const download = ({ radiuses, heights, widths }: Theme) => css`
-  visibility: hidden;
-  width: ${widths.download};
-  height: ${heights.download};
-  border-radius: ${radiuses.circle};
-  cursor: pointer;
-  color: transparent;
-`;
-
 export const downloadIcon = () => css`
   position: absolute;
   top: calc(50% - 9.25px);

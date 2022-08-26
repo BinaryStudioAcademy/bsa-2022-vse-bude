@@ -5,6 +5,7 @@ import { Anchor, Icon } from '@primitives';
 import { ColumnHeader } from '../common/column-header';
 import * as styles from './styles';
 import type { ContactsProps } from './types';
+import { IconColorProps } from '@enums';
 
 export const Contacts: FC<ContactsProps> = ({ email, phone }) => {
   const { t } = useTranslation();
@@ -14,7 +15,7 @@ export const Contacts: FC<ContactsProps> = ({ email, phone }) => {
       <ColumnHeader>{t('common:footer.contacts')}</ColumnHeader>
 
       <div css={styles.footerLinksRow}>
-        <Icon cssExtend={styles.phone} color="YELLOW" icon={IconName.PHONE} />
+        <Icon cssExtend={styles.phone} color={IconColorProps.YELLOW} icon={IconName.PHONE} />
         <Anchor
           variant="secondary"
           href={`tel:${phone}`}
@@ -24,7 +25,7 @@ export const Contacts: FC<ContactsProps> = ({ email, phone }) => {
       </div>
 
       <div css={styles.footerLinksRow}>
-        <Icon cssExtend={styles.email} color="YELLOW" icon={IconName.EMAIL} />
+        <Icon cssExtend={styles.email} color={IconColorProps.YELLOW} icon={IconName.EMAIL} />
         <Anchor
           variant="secondary"
           href={`mailto:${email}`}

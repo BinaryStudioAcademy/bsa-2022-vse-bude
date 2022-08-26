@@ -8,11 +8,11 @@ export const form = () => css`
   width: 100%;
 `;
 
-export const personalHeader = ({ mq }: Theme) => css`
+export const personalHeader = ({ mq, spaces }: Theme) => css`
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: ${spaces.lg};
   ${mq[0]} {
-    margin-bottom: 15px;
+    margin-bottom: ${spaces.md};
   }
 `;
 
@@ -34,17 +34,16 @@ export const flag = ({ heights, radiuses }: Theme) => css`
 
 export const avatarWrapper = ({ colors, radiuses }: Theme) => css`
   position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   top: 66px;
   left: 3%;
   border-radius: ${radiuses.circle};
   border: 2px solid ${colors.backgroundLight};
-`;
-
-export const avatar = ({ radiuses }: Theme) => css`
-  display: block;
-  border-radius: ${radiuses.circle};
   width: 130px;
   height: 130px;
+  background: ${colors.backgroundDark};
 `;
 
 export const buttons = ({ spaces }: Theme) => css`

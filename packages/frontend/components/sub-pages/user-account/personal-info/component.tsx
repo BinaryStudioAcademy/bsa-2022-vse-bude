@@ -2,14 +2,8 @@ import { useTranslation } from 'next-i18next';
 import type React from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-import {
-  Input,
-  PasswordInput,
-  Column,
-  Flex,
-  Button,
-  DownloadButton,
-} from '@primitives';
+import { Input, PasswordInput, Column, Flex, Button } from '@primitives';
+import { Noavatar, Avatar, DownloadButton } from './primitives';
 import { userUpdateSchema } from 'validation-schemas/user/user-update';
 import type { UserPersonalInfoDto } from '@vse-bude/shared';
 import { joiResolver } from '@hookform/resolvers/joi';
@@ -52,7 +46,11 @@ export const PersonalInfo = () => {
     resolver: joiResolver(userUpdateSchema(t)),
   });
 
-  const avatar = watch('avatar');
+  const [avatar, firstName, lastName] = watch([
+    'avatar',
+    'firstName',
+    'lastName',
+  ]);
 
   const onSave: SubmitHandler<UserPersonalInfoDto> = (data, event) => {
     event.preventDefault();
@@ -127,8 +125,13 @@ export const PersonalInfo = () => {
             </div>
 
             <div css={styles.avatarWrapper}>
-              <img css={styles.avatar} src={avatar} alt="avatar" />
-              <DownloadButton id="profile-avatar" />
+              {avatar ? (
+                <Avatar src={avatar} alt="avatar" />
+              ) : (
+                <Noavatar firstName={firstName} lastName={lastName} />
+              )}
+
+              <DownloadButton id="profile-avatar" {...register('avatar')} />
               {errors.avatar && <div>{errors.avatar.message}</div>}
             </div>
           </div>

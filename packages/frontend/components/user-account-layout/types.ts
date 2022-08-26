@@ -1,5 +1,5 @@
 import type React from 'react';
-import type { IconName } from '../../common/enums';
+import type { IconName } from '@enums';
 
 export interface AccountPageProps {
   children: React.ReactNode;
