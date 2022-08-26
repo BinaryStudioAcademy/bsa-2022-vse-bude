@@ -11,6 +11,63 @@ export const initNewsRoutes = (
 ): Router => {
   const router = Router();
 
+  /**
+   * @openapi
+   * definitions:
+   *   News:
+   *     required:
+   *       - id
+   *       - title
+   *       - content
+   *       - description
+   *       - image
+   *       - createdAt
+   *       - updatedAt
+   *     properties:
+   *       id:
+   *         type: string
+   *       title:
+   *         type: string
+   *       content:
+   *         type: string
+   *       description:
+   *         type: string
+   *       image:
+   *         type: string
+   *       createdAt:
+   *         type: string
+   *         format: date-time
+   *       updatedAt:
+   *         type: string
+   *         format: date-time
+   */
+
+  /**
+   * @openapi
+   * /news:
+   *   get:
+   *     tags: [News]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - name: limit
+   *         in: query
+   *         required: true
+   *         schema:
+   *           format: double
+   *           type: number
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 contribution:
+   *                   $ref: "#/definitions/News"
+   */
+
   router.get(
     apiPath(path),
     wrap((req: Request) => newsService.getAll(req.query)),

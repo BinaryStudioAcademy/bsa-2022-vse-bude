@@ -4,8 +4,8 @@ interface IEmail {
 }
 
 export interface EmailOptions {
-  to?: Array<IEmail>;
-  from?: IEmail;
+  to: Array<IEmail>;
+  from: IEmail;
   subject: string;
   text?: string;
   html?: string;
@@ -13,3 +13,17 @@ export interface EmailOptions {
   cc?: Array<IEmail>;
   replyTo?: IEmail;
 }
+
+export const defaultEmailOptions: EmailOptions = {
+  to: [
+    {
+      email: '',
+      name: '',
+    },
+  ],
+  from: {
+    email: '',
+    name: '',
+  },
+  subject: '',
+};

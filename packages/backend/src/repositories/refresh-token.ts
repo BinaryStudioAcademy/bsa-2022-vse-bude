@@ -1,5 +1,5 @@
 import type { PrismaClient } from '@prisma/client';
-import { type CreateRefreshToken } from '@types';
+import type { CreateRefreshToken } from '@types';
 
 export class RefreshTokenRepository {
   private _dbClient: PrismaClient;
@@ -8,8 +8,8 @@ export class RefreshTokenRepository {
     this._dbClient = prismaClient;
   }
 
-  async create(tokenData: CreateRefreshToken) {
-    return await this._dbClient.refreshToken.create({
+  create(tokenData: CreateRefreshToken) {
+    return this._dbClient.refreshToken.create({
       data: {
         userId: tokenData.userId,
         token: tokenData.token,

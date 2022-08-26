@@ -1,5 +1,9 @@
 import type { RefreshTokenRepository, UserRepository } from '@repositories';
-import type { UserSignInDto, UserSignUpDto } from '@vse-bude/shared';
+import type {
+  UserSignInDto,
+  UserSignUpDto,
+  AuthResponse,
+} from '@vse-bude/shared';
 import { sign as jwtSign, type UserSessionJwtPayload } from 'jsonwebtoken';
 import { getEnv } from '@helpers';
 import {
@@ -25,6 +29,11 @@ import type {
 import type { HashService } from '@services';
 import type { Request } from 'express';
 import type { VerifyService } from '@services';
+import { authResponseMap } from '@mappers';
+import { AuthApiRoutes } from '@vse-bude/shared';
+import { ResetPasswordMailBuilder } from '../email/reset-password-mail-builder';
+import { ResetPassLinkInvalid } from '../error/reset-password/reset-pass-link-invalid';
+import type { RedisStorageService } from './redis-storage';
 
 export class AuthService {
   private _userRepository: UserRepository;
@@ -35,23 +44,29 @@ export class AuthService {
 
   private _verifyService: VerifyService;
 
+  private _cache: RedisStorageService;
+
+  private resetLinkLifeTime = 3600000;
+
   constructor(
     userRepository: UserRepository,
     refreshTokenRepository: RefreshTokenRepository,
     hashService: HashService,
     verifyService: VerifyService,
+    cache: RedisStorageService,
   ) {
     this._userRepository = userRepository;
     this._refreshTokenRepository = refreshTokenRepository;
     this._hashService = hashService;
     this._verifyService = verifyService;
+    this._cache = cache;
   }
 
   async signOut(signOutDto: SignOut) {
     await this._refreshTokenRepository.deleteByUserId(signOutDto.userId);
   }
 
-  async signUp(signUpDto: UserSignUpDto, req: Request) {
+  async signUp(signUpDto: UserSignUpDto, req: Request): Promise<AuthResponse> {
     const userByEmailOrPhone = await this._userRepository.getByEmailOrPhone(
       signUpDto.email,
       signUpDto.phone,
@@ -64,10 +79,11 @@ export class AuthService {
       lastName: signUpDto.lastName,
       email: signUpDto.email,
       phone: signUpDto.phone,
-      passwordHash: this._hashService.generatePasswordHash(signUpDto.password),
+      passwordHash: this._hashService.generateHash(signUpDto.password),
     };
     const newUser = await this._userRepository.create(createUserDto);
     await this._verifyService.initPhoneVerification(newUser.id);
+    await this._verifyService.initEmailVerification(newUser.id);
     const tokenData = this.getTokenData(newUser.id);
 
     const refreshToken: CreateRefreshToken = {
@@ -77,10 +93,10 @@ export class AuthService {
     };
     await this._refreshTokenRepository.create(refreshToken);
 
-    return tokenData;
+    return authResponseMap(tokenData, newUser);
   }
 
-  async signIn(signInDto: UserSignInDto, req: Request) {
+  async signIn(signInDto: UserSignInDto, req: Request): Promise<AuthResponse> {
     const user = await this._userRepository.getByEmail(signInDto.email);
     if (!user) {
       throw new UserNotFoundError(req);
@@ -103,7 +119,7 @@ export class AuthService {
     };
     await this._refreshTokenRepository.create(refreshToken);
 
-    return this.getTokenData(user.id);
+    return authResponseMap(this.getTokenData(user.id), user);
   }
 
   async getCurrentUser(userId: string) {
@@ -144,6 +160,53 @@ export class AuthService {
     );
 
     return newTokenData;
+  }
+
+  private async saveLink(email: string, hashValue: string) {
+    await this._cache.set(
+      this.getResetPasswordCacheKey(email),
+      hashValue,
+      this.resetLinkLifeTime,
+    );
+  }
+
+  private async deleteLinksByEmail(email: string) {
+    await this._cache.del(this.getResetPasswordCacheKey(email));
+  }
+
+  async resetPasswordLink(email: string) {
+    const hashValue = this._hashService.generateHash(email);
+    await this.deleteLinksByEmail(email);
+    await this.saveLink(email, hashValue);
+    const link = this.getResetPasswordEmailLink(hashValue, email);
+
+    const resetMail = new ResetPasswordMailBuilder().setText(link).setTo(email);
+
+    await resetMail.send();
+
+    return undefined;
+  }
+
+  async resetPassword(email: string, hash: string) {
+    const resetHash = await this._cache.get<string>(
+      this.getResetPasswordCacheKey(email),
+    );
+
+    if (!resetHash || resetHash !== hash) {
+      throw new ResetPassLinkInvalid();
+    }
+
+    return {};
+  }
+
+  private getResetPasswordEmailLink(hash: string, email: string): string {
+    return `${getEnv('APP_URL')}${
+      AuthApiRoutes.RESET_PASSWORD
+    }?email=${email}&value=${hash}`;
+  }
+
+  private getResetPasswordCacheKey(email: string): string {
+    return `reset_password:email:${email}`;
   }
 
   private getTokenData(userId: string): AuthTokenData {

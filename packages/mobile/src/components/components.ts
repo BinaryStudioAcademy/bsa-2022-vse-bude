@@ -17,6 +17,7 @@ export { Input } from './input/input';
 export { Text } from './text/text';
 export { Spinner } from './spinner/spinner';
 export { Logo } from './logo/logo';
+export { LogoWhite } from './logo/logo-white';
 export { HeaderLeft } from './header-left/header-left';
 export { DropDown } from './dropdown/dropdown';
 export { HeaderButton } from './header-button/header-button';

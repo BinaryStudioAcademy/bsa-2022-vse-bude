@@ -62,6 +62,10 @@ const CrossIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="x" {...iconProps} />
 );
 
+const LogInIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="log-in" {...iconProps} />
+);
+
 export {
   HomeIcon,
   StarIcon,
@@ -71,6 +75,7 @@ export {
   MessageIcon,
   SupportIcon,
   LogOutIcon,
+  LogInIcon,
   ArrowLeftIcon,
   ArrowRightIcon,
   AlertIcon,

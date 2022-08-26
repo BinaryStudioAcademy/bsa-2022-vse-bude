@@ -1,7 +1,7 @@
 import { Routes } from '@enums';
 import { InternalLink } from 'components/primitives/link';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { withPublic } from '@helpers';
 import { AuthLayout } from '../../components/authLayout';
 import {
@@ -13,12 +13,12 @@ import { SignUpForm } from '../../components/auth/sign-up/component';
 
 export const getServerSideProps = withPublic(async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale, ['validation', 'common'])),
+    ...(await serverSideTranslations(locale, ['public', 'auth'])),
   },
 }));
 
 const SignUpPage = () => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation();
 
   return (
     <AuthLayout>
@@ -27,10 +27,10 @@ const SignUpPage = () => {
           <SignUpForm />
         </div>
         <div css={linkText}>
-          {t('I_HAVE_AN_ACCOUNT')}!{' '}
+          {t('auth:sign-up.accountExist')}!{' '}
           <InternalLink
             variant="primary"
-            label={`${t('SIGN_IN')}!`}
+            label={`${t('auth:sign-up.signIn')}!`}
             href={Routes.SIGN_IN}
           />
         </div>

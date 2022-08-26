@@ -1,15 +1,42 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { login, signUp, verifyPhone, resendPhoneCode } from 'services/auth';
+import {
+  getUser,
+  login,
+  signUp,
+  verifyPhone,
+  resendPhoneCode,
+  verifyEmail,
+  resendEmailCode,
+} from 'services/auth';
 import type {
+  EmailVerifyDto,
   PhoneVerifyDto,
   UserSignInDto,
   UserSignUpDto,
 } from '@vse-bude/shared';
-import { auth } from '@helpers';
+import { HttpError, HttpStatusCode } from '@vse-bude/shared';
 import Router from 'next/router';
+import { auth } from '@helpers';
 import { Routes } from '@enums';
-import type { IAuth } from '../../common/types/auth';
+import type { IAuth } from '@types';
 import { AuthActions } from './action-types';
+
+const getCurrentUser = createAsyncThunk(
+  AuthActions.FETCH_USER,
+  async (_request, { rejectWithValue }) => {
+    try {
+      return await getUser();
+    } catch (e) {
+      if (e instanceof HttpError) {
+        if (e.status === HttpStatusCode.UNAUTHORIZED) {
+          auth.logOut();
+        }
+      }
+
+      return rejectWithValue(e.message);
+    }
+  },
+);
 
 const loginUser = createAsyncThunk(
   AuthActions.LOGIN,
@@ -37,8 +64,7 @@ const signUpUser = createAsyncThunk(
     try {
       const response: IAuth = await signUp(data);
       auth.setTokens(response.accessToken, response.refreshToken);
-      // TODO: upload user data
-      // TODO: check if user's phone and email are verified and redirect dependently of it values
+
       await Router.push(Routes.PHONE_VERIFY);
     } catch (error) {
       return rejectWithValue(error.message);
@@ -69,4 +95,49 @@ const phoneCodeResend = createAsyncThunk(
   },
 );
 
-export { loginUser, signUpUser, phoneVerification, phoneCodeResend };
+const emailVerification = createAsyncThunk(
+  AuthActions.EMAIL_VERIFY,
+  async (data: EmailVerifyDto, { rejectWithValue }) => {
+    try {
+      await verifyEmail(data);
+      await Router.push(Routes.DEFAULT);
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  },
+);
+
+const emailCodeResend = createAsyncThunk(
+  AuthActions.EMAIL_RESEND_CODE,
+  async (_, { rejectWithValue }) => {
+    try {
+      return await resendEmailCode();
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  },
+);
+
+const logoutUser = createAsyncThunk(
+  AuthActions.LOGOUT,
+  async (_, { rejectWithValue }) => {
+    try {
+      // await logout(); delete refresh token on server
+      auth.logOut();
+      await Router.push(Routes.DEFAULT);
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  },
+);
+
+export {
+  loginUser,
+  logoutUser,
+  signUpUser,
+  phoneVerification,
+  phoneCodeResend,
+  getCurrentUser,
+  emailVerification,
+  emailCodeResend,
+};
