@@ -28,3 +28,8 @@ export const getProductsSSR = ({ httpSSR, limit, type }: ProductOptionsSSR) =>
       type,
     },
   });
+
+export const getProductById = (id: string) =>
+  http.get({
+    url: `${ApiRoutes.PRODUCTS}/${id}`,
+  });

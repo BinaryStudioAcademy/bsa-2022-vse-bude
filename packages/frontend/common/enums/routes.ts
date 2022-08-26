@@ -6,6 +6,7 @@ export enum Routes {
   USER_ACCOUNT = '/user-account',
   PHONE_VERIFY = '/auth/phone-verify',
   EMAIL_VERIFY = '/auth/email-verify',
+  ITEMS = '/items',
 }
 
 export enum AccountRoutes {

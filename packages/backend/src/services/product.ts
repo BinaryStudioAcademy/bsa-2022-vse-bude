@@ -12,7 +12,7 @@ export class ProductService {
     return this._productRepository.getAll(query);
   }
 
-  public getById(id: string) {
-    return this._productRepository.getById(id);
+  public async getById(id: string) {
+    return (await this._productRepository.getById(id)) || {};
   }
 }
