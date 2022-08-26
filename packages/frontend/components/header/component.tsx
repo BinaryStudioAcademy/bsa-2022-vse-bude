@@ -11,11 +11,18 @@ import Link from 'next/link';
 import { Fragment, useState } from 'react';
 import { Routes, IconName } from '@enums';
 import { Logo } from 'components/primitives/logo';
-import { useAuth, useMounted } from '@hooks';
+import { useAuth, useMounted, useTypedSelector } from '@hooks';
 import { useRouter } from 'next/router';
 import { useTheme } from '@emotion/react';
 import { ProfileInfo } from './profile-info';
 import * as styles from './styles';
+
+const mockImage = [
+  '/images/categories/arts.png',
+  '/images/categories/toys.png',
+  '/images/categories/appliances.png',
+  '/images/categories/decor.png',
+];
 
 export const Header = () => {
   const [show, setShow] = useState(false);
@@ -24,6 +31,11 @@ export const Header = () => {
   const { push, pathname } = useRouter();
   const { t } = useTranslation();
   const { colors } = useTheme();
+  const categories = useTypedSelector((state) => state.category.list);
+  const categoriesMapped = categories.map((item, i) => ({
+    ...item,
+    image: mockImage[i] || '/images/categories/decor.png',
+  }));
 
   const filters: {
     category: string;
@@ -45,42 +57,13 @@ export const Header = () => {
         label={t('common:header.nav.home')}
       />
       <Dropdown
-        options={[
-          {
-            value: t(
-              'common:categories.ALCOHOLIC_BEVERAGES_AND_PRODUCTS_CATEGORY_NAME',
-            ),
-            key: 'home',
-            onClick: () => {
-              redirectToCategory(
-                'ALCOHOLIC_BEVERAGES_AND_PRODUCTS_CATEGORY_NAME',
-              );
-            },
+        options={categoriesMapped.map((item) => ({
+          value: t(item.title),
+          key: 'home',
+          onClick: () => {
+            redirectToCategory(item.id);
           },
-          {
-            value: t('common:categories.BEAUTY_AND_HEALTH_CATEGORY_NAME'),
-            key: 'home',
-            onClick: () => {
-              redirectToCategory('BEAUTY_AND_HEALTH_CATEGORY_NAME');
-            },
-          },
-          {
-            value: t('common:categories.CHILDRENS_GOODS_CATEGORY_NAME'),
-            key: 'home',
-            onClick: () => {
-              redirectToCategory('CHILDRENS_GOODS_CATEGORY_NAME');
-            },
-          },
-          {
-            value: t(
-              'common:categories.CLOTHES_SHOES_AND_JEWELRY_CATEGORY_NAME',
-            ),
-            key: 'about',
-            onClick: () => {
-              redirectToCategory('CLOTHES_SHOES_AND_JEWELRY_CATEGORY_NAME');
-            },
-          },
-        ]}
+        }))}
       >
         {t('common:header.nav.category')}&nbsp;
         <Icon icon={IconName.ANGLE_DOWN} color={colors.extraDark} />
