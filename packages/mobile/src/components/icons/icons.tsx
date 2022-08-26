@@ -26,22 +26,6 @@ const ListIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="list" {...iconProps} />
 );
 
-const AlertIcon: AppIcon = (iconProps) => (
-  <FeatherIcon name="alert-triangle" {...iconProps} />
-);
-
-const BackIcon: AppIcon = (iconProps) => (
-  <FeatherIcon name="chevron-left" {...iconProps} />
-);
-
-const CameraIcon: AppIcon = (iconProps) => (
-  <FeatherIcon name="camera" {...iconProps} />
-);
-
-const ClockIcon: AppIcon = (iconProps) => (
-  <FeatherIcon name="clock" {...iconProps} />
-);
-
 const MessageIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="message-circle" {...iconProps} />
 );
@@ -62,6 +46,22 @@ const ArrowRightIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="chevron-right" {...iconProps} />
 );
 
+const AlertIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="alert-triangle" {...iconProps} />
+);
+
+const BackIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="chevron-left" {...iconProps} />
+);
+
+const CameraIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="camera" {...iconProps} />
+);
+
+const LogInIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="log-in" {...iconProps} />
+);
+
 export {
   HomeIcon,
   StarIcon,
@@ -71,11 +71,11 @@ export {
   MessageIcon,
   SupportIcon,
   LogOutIcon,
+  LogInIcon,
   ArrowLeftIcon,
   ArrowRightIcon,
   AlertIcon,
   BackIcon,
   CustomFeatherIcon,
   CameraIcon,
-  ClockIcon,
 };

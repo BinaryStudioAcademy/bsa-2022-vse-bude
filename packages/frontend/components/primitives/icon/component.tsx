@@ -7,7 +7,7 @@ export const Icon = ({ icon, cssExtend, color, size = 'md' }: IconProps) => (
   <i
     className={IconNameToClassName[icon]}
     style={{
-      color: IconColor[color.toUpperCase()],
+      color: IconColor[color],
     }}
     data-size={size}
     css={[styles.icon, cssExtend]}

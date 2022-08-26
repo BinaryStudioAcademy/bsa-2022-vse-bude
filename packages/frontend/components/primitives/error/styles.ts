@@ -1,5 +1,5 @@
+import type { Theme } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { Theme } from '../../../theme';
 
 export const error = (theme: Theme) => css`
   color: ${theme.colors.error};

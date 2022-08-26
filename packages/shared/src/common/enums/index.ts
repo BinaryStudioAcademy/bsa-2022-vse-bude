@@ -5,4 +5,4 @@ export * from './validation';
 export * from './exception';
 export * from './theme';
 export * from './verify';
-export * from './product/product';
+export * from './product';

@@ -1,23 +1,17 @@
-import type { ProductType } from '../../enums/index';
+import type { ProductType } from '../../enums';
 
 type ProductDto = {
   id: string;
   title: string;
   description: string;
-  price: string;
-  recommendedPrice: string;
-  minimalBid: string;
-  imageLinks: string[];
+  price: number;
+  recommendedPrice: number;
+  minimalBid: number;
   city: string;
   type: ProductType;
   status: string;
-  endDate: string;
-  cancelReason: string;
-  authorId: string;
-  categoryId: string;
-  winnerId: string | null;
-  createdAt: string;
-  updatedAt: string;
+  endDate: Date;
+  imageLinks: string[];
 };
 
 export type { ProductDto };

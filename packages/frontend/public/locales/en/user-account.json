@@ -1,0 +1,12 @@
+{
+  "accountPage": "Account page",
+  "pageName": "",
+  "dashboard": {
+    "personalInfo": "Personal info",
+    "myList": "My list",
+    "settings": "Settings",
+    "messages": "Messages",
+    "support": "Support",
+    "signOut": "Sign Out"
+  }
+}

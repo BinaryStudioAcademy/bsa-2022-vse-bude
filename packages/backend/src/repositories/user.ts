@@ -51,6 +51,17 @@ export class UserRepository {
     });
   }
 
+  public verifyEmail(userId: string) {
+    return this._dbClient.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        emailVerified: true,
+      },
+    });
+  }
+
   public getByEmailOrPhone(email: string, phone: string) {
     return this._dbClient.user.findFirst({
       where: {

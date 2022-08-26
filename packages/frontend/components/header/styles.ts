@@ -1,8 +1,11 @@
+import type { Theme } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { Theme } from 'theme';
 import { resetButton } from 'theme';
 
 export const header = (theme: Theme) => css`
+  position: sticky;
+  z-index: 1;
+  top: 0;
   padding: ${theme.spaces.lg} 0;
   background-color: ${theme.colors.backgroundLight};
   height: ${theme.heights.header};

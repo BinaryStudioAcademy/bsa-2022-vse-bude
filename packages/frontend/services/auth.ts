@@ -30,3 +30,21 @@ export const verifyPhone = (data: PhoneVerifyDto) =>
     url: `${ApiRoutes.VERIFY}${VerifyApiRoutes.VERIFY_PHONE}`,
     body: data,
   });
+
+export const resendPhoneCode = () =>
+  http.post({
+    url: `${ApiRoutes.VERIFY}${VerifyApiRoutes.PHONE_RESEND_CODE}`,
+    body: {},
+  });
+
+export const verifyEmail = (data: PhoneVerifyDto) =>
+  http.post({
+    url: `${ApiRoutes.VERIFY}${VerifyApiRoutes.VERIFY_EMAIL}`,
+    body: data,
+  });
+
+export const resendEmailCode = () =>
+  http.post({
+    url: `${ApiRoutes.VERIFY}${VerifyApiRoutes.EMAIL_RESEND_CODE}`,
+    body: {},
+  });

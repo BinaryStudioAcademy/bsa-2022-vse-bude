@@ -17,9 +17,7 @@ class SMSSenderService implements ISMSSenderService {
    */
   public async send(phone: string, message: string): Promise<boolean> {
     try {
-      const result = await this.providerService.send(phone, String(message));
-
-      return result;
+      return await this.providerService.send(phone, String(message));
     } catch (error) {
       logger.error(error);
     }
@@ -32,9 +30,7 @@ class SMSSenderService implements ISMSSenderService {
    */
   public async getById(id: string): Promise<object> {
     try {
-      const result = await this.providerService.getById(id);
-
-      return result;
+      return await this.providerService.getById(id);
     } catch (error) {
       logger.error(error);
     }
