@@ -237,12 +237,12 @@ export const initAuthRoutes = (
     wrap((req: Request) => authService.resetPasswordLink(req.body.email)),
   );
 
-  router.get(
+  router.post(
     apiPath(path, AuthApiRoutes.UPDATE_PASSWORD),
     wrap((req: Request) => {
       const updateDto: UpdatePassword = {
         email: req.body.email,
-        updateHash: req.body.value,
+        updateHash: req.body.updateHash,
         password: req.body.password,
         repeatPassword: req.body.password,
       };
