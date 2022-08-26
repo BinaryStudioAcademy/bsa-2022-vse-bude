@@ -14,7 +14,7 @@ import * as styles from './styles';
 
 export const PersonalInfo = () => {
   const { t } = useTranslation();
-
+  
   const {
     register,
     reset,

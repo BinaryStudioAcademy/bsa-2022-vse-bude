@@ -1,5 +1,6 @@
 export enum ApiRoutes {
   USERS = '/users',
+  ACCOUNT = '/account',
   CATEGORIES = '/categories',
   PRODUCTS = '/products',
   NEWS = '/news',
@@ -26,4 +27,9 @@ export enum VerifyApiRoutes {
 
 export enum ProductApiRoutes {
   ID = '/:id',
+}
+
+export enum AccountApiRoutes {
+  PERSONAL_INFO = '/personal-info',
+  MY_LIST = '/my-list',
 }

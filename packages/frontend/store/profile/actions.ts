@@ -5,7 +5,7 @@ import { auth } from '@helpers';
 import { ProfileActions } from './action-types';
 
 export const getCurrentUser = createAsyncThunk(
-  ProfileActions.FETCH_USER,
+  ProfileActions.FETCH_PERSONAL_INFO,
   async (_request, { rejectWithValue }) => {
     try {
       return await getUser();
