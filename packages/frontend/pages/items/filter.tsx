@@ -7,7 +7,11 @@ import { AuthHelper, CookieStorage, withPublic } from '@helpers';
 import { Http, ProductType } from '@vse-bude/shared';
 import { getProductsSSR } from 'services/product';
 import { fetchCategoriesSSR } from 'store/category';
-import type { FilteredPageProps } from './types';
+import type { ProductDto } from '@vse-bude/shared';
+
+export interface FilteredPageProps {
+  auctionProducts: ProductDto[];
+}
 
 export const getServerSideProps = withPublic(
   wrapper.getServerSideProps((store) => async (ctx) => {
