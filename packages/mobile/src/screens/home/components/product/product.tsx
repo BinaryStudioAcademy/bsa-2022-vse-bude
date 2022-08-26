@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useTranslation, useAppSelector } from '~/hooks/hooks';
+import { useTranslation, useAppSelector, useCustomTheme } from '~/hooks/hooks';
 import { selectProductById } from '~/store/products/selectors';
 import { Button, ClockIcon, Image, Text, View } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
@@ -16,11 +16,12 @@ const Product: FC<Props> = ({ id }) => {
     useAppSelector(selectProductById(id)) as ProductDto;
   const duration = getTimeToEvent(endDate);
   const auction = ProductType.AUCTION;
+  const { colors } = useCustomTheme();
   const { t } = useTranslation();
 
   return (
     <View style={[styles.container, globalStyles.boxShadow]}>
-      <View style={[styles.imgWrapper]}>
+      <View style={[styles.imgWrapper, { backgroundColor: colors.card }]}>
         <Image source={{ uri: imageLinks[0] }} style={styles.img} />
 
         {type === auction && (
@@ -31,6 +32,7 @@ const Product: FC<Props> = ({ id }) => {
               globalStyles.flexDirectionRow,
               globalStyles.alignItemsCenter,
               globalStyles.justifyContentCenter,
+              { backgroundColor: colors.whiteColor, borderColor: colors.line },
             ]}
           >
             <ClockIcon />
@@ -40,7 +42,12 @@ const Product: FC<Props> = ({ id }) => {
       </View>
       <View>
         <Text
-          style={[globalStyles.fs16, globalStyles.fontWeightBold, styles.title]}
+          style={[
+            globalStyles.fs16,
+            globalStyles.fontWeightBold,
+            styles.title,
+            { color: colors.titleSecondary },
+          ]}
           numberOfLines={1}
         >
           {title}
@@ -55,7 +62,7 @@ const Product: FC<Props> = ({ id }) => {
           <Text style={globalStyles.fs12}>{duration}</Text>
         )}
       </View>
-      <View style={styles.divider} />
+      <View style={[styles.divider, { backgroundColor: colors.line }]} />
       <View
         style={[
           globalStyles.flexDirectionRow,
@@ -64,7 +71,11 @@ const Product: FC<Props> = ({ id }) => {
         ]}
       >
         <Text
-          style={[globalStyles.fs16, globalStyles.fontWeightBold, styles.price]}
+          style={[
+            globalStyles.fs16,
+            globalStyles.fontWeightBold,
+            { color: colors.titleSecondary },
+          ]}
         >{`${addSpacePrice(price)} ${t('common:currency.UAH')}`}</Text>
         <Button
           label={
