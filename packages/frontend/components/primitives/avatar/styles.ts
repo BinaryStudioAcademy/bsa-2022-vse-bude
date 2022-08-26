@@ -40,4 +40,5 @@ export const wrapper = ({ spaces, radiuses, colors }: Theme) => css`
   height: ${spaces.xl2};
   border-radius: ${radiuses.circle};
   background-color: ${colors.primary};
+  cursor: pointer;
 `;
