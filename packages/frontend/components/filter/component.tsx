@@ -1,7 +1,14 @@
-interface FilterProps {
-  filter: string;
-}
+import type { ProductDto } from "@vse-bude/shared";
+import { ProductGrid } from "./product-grid/component";
 
-export const Filter = ({ filter }: FilterProps) => (
-  <div>{filter} Filtered posts</div>
-);
+  interface FilterProps {
+    filter: string;
+    lots: ProductDto[];
+  }
+  
+  export const Filter = ({ filter, lots }: FilterProps) => (
+    <div>
+      {filter}
+      <ProductGrid lots={lots}></ProductGrid>
+    </div>    
+  );
