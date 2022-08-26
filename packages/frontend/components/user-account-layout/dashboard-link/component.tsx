@@ -16,8 +16,8 @@ export const DashboardLink: FC<LinkProps> = ({
   const handleClick = () => {
     router.push(path);
   };
-  
-return (
+
+  return (
     <div data-location={location} css={styles.link}>
       <Flex css={styles.linkContent} align="center">
         <div css={styles.icon}>
