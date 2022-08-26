@@ -1,16 +1,11 @@
 import dayjs from 'dayjs';
-import Duration from 'dayjs/plugin/duration';
-import relativeTime from 'dayjs/plugin/relativeTime';
 
-dayjs.extend(Duration);
-dayjs.extend(relativeTime);
-
-const getTimeToEvent = (date: string) => {
-  const ms = +dayjs(date) - +dayjs();
-  if (ms > 0) {
-    const days = dayjs.duration(dayjs.duration(ms).days(), 'days').humanize();
-    const hours = dayjs.duration(ms).hours();
-    const minutes = dayjs.duration(ms).minutes();
+const getTimeToEvent = (date: Date) => {
+  const duration = dayjs.duration(dayjs(date).diff(dayjs()));
+  if (duration.asMilliseconds() > 0) {
+    const days = dayjs.duration(duration.days(), 'days').humanize();
+    const hours = duration.hours();
+    const minutes = duration.minutes();
 
     return `${days}  ${hours}h ${minutes}min`;
   }

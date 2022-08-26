@@ -1,1 +1,1 @@
-export { addSpacePrice } from './add-space-price/add-space-price.helper';
+export { formatPrice } from './format-price/format-price';

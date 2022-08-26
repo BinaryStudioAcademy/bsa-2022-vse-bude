@@ -62,6 +62,10 @@ const LogInIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="log-in" {...iconProps} />
 );
 
+const ClockIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="clock" {...iconProps} />
+);
+
 export {
   HomeIcon,
   StarIcon,
@@ -78,4 +82,5 @@ export {
   BackIcon,
   CustomFeatherIcon,
   CameraIcon,
+  ClockIcon,
 };

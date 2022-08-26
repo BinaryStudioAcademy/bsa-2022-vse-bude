@@ -4,16 +4,18 @@ import { selectProductById } from '~/store/products/selectors';
 import { Button, ClockIcon, Image, Text, View } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { ProductType, ProductDto } from '@vse-bude/shared';
-import { addSpacePrice, getTimeToEvent } from '~/helpers/helpers';
+import { formatPrice, getTimeToEvent } from '~/helpers/helpers';
 import { styles } from './styles';
 
 type Props = {
-  id: string;
+  productId: string;
 };
 
-const Product: FC<Props> = ({ id }) => {
+const Product: FC<Props> = ({ productId }) => {
   const { imageLinks, title, description, price, type, endDate } =
-    useAppSelector(selectProductById(id)) as ProductDto;
+    useAppSelector((state) =>
+      selectProductById(state, productId),
+    ) as ProductDto;
   const duration = getTimeToEvent(endDate);
   const auction = ProductType.AUCTION;
   const { colors } = useCustomTheme();
@@ -58,7 +60,7 @@ const Product: FC<Props> = ({ id }) => {
         >
           {description}
         </Text>
-        {type === ProductType.FIXED_PRICE && (
+        {type === ProductType.SELLING && (
           <Text style={globalStyles.fs12}>{duration}</Text>
         )}
       </View>
@@ -76,7 +78,7 @@ const Product: FC<Props> = ({ id }) => {
             globalStyles.fontWeightBold,
             { color: colors.titleSecondary },
           ]}
-        >{`${addSpacePrice(price)} ${t('common:currency.UAH')}`}</Text>
+        >{`${formatPrice(price)} ${t('common:currency.UAH')}`}</Text>
         <Button
           label={
             type === auction
