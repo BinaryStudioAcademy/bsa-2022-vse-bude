@@ -1,5 +1,6 @@
 import type { PrismaClient, Product } from '@prisma/client';
 import type { ProductQuery } from '@types';
+import { Order } from '@vse-bude/shared';
 
 export class ProductRepository {
   private _dbClient: PrismaClient;
@@ -9,10 +10,20 @@ export class ProductRepository {
   }
 
   public getAll(query: ProductQuery): Promise<Product[]> {
-    const { limit = 10, type } = query;
+    const {
+      limit = 10,
+      from = 0,
+      type,
+      sortBy = 'createdAt',
+      order = Order.ASC,
+    } = query;
 
     return this._dbClient.product.findMany({
       take: +limit,
+      skip: +from,
+      orderBy: {
+        [sortBy]: order,
+      },
       where: {
         type,
       },

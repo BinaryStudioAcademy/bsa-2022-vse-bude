@@ -1,12 +1,14 @@
-import type { VerifyPhoneDto } from '@vse-bude/shared';
+import type { VerifyEmailDto, VerifyPhoneDto } from '@vse-bude/shared';
 import { VerificationTypes } from '@vse-bude/shared';
 import type { UserRepository } from '@repositories';
+import { t } from 'i18next';
+import { EmailFrom } from '@enums';
 import { CodeNotFoundError } from '../error/verify/code-not-found-error';
 import { WrongCodeError } from '../error/verify/wrong-code-error';
 import type { SaveVerifyCode } from '../common/types/verification-code';
 import type { RedisStorageService } from './redis-storage';
 import type { SMSSenderService } from './sms';
-import type { EmailService } from './email';
+import type { EmailService } from './email/email';
 
 export class VerifyService {
   private phoneCodeLifeTime = 900000;
@@ -52,6 +54,25 @@ export class VerifyService {
     await this.resendPhoneCode(userId, type);
   }
 
+  async verifyEmail(dto: VerifyEmailDto) {
+    const code = await this.getUserCodeByTypeAndCode(dto.userId, dto.type);
+    if (!code) {
+      throw new CodeNotFoundError();
+    }
+    if (dto.code !== code) {
+      throw new WrongCodeError();
+    }
+
+    await this._userRepository.verifyEmail(dto.userId);
+    await this.deleteCodeByType(dto.userId, dto.type);
+
+    return {};
+  }
+
+  async initEmailVerification(userId: string, type = VerificationTypes.EMAIL) {
+    await this.resendEmailCode(userId, type);
+  }
+
   async createVerificationCode(
     userId: string,
     type: VerificationTypes,
@@ -72,6 +93,19 @@ export class VerifyService {
     const code = await this.createVerificationCode(userId, type);
 
     return await this._smsService.send(user.phone, code);
+  }
+
+  async resendEmailCode(userId: string, type: VerificationTypes) {
+    const user = await this._userRepository.getById(userId);
+    await this.deleteCodeByType(userId, type);
+    const code = await this.createVerificationCode(userId, type);
+
+    return await this._emailService.send({
+      from: { email: EmailFrom.NO_REPLY_EMAIL, name: EmailFrom.NO_REPLY_NAME },
+      to: [{ email: user.email }],
+      subject: t('mailing.verification.subject'),
+      text: `${t('mailing.verification.body')}${code}`,
+    });
   }
 
   private generateCode(): number {

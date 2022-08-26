@@ -13,7 +13,7 @@ export const Tooltip = ({
   const [isVisible, setIsVisible] = useState(false);
 
   const bodyRef = useRef<HTMLDivElement>();
-  const triggerWrapperRef = useRef<HTMLDivElement>();
+  const triggerWrapperRef = useRef<HTMLSpanElement>();
   const timerRef = useRef(null);
 
   const calcBodyCoords = useCallback(() => {
@@ -104,14 +104,14 @@ export const Tooltip = ({
 
   return (
     <Fragment>
-      <div
+      <span
         ref={triggerWrapperRef}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         css={styles.trigger}
       >
         {trigger}
-      </div>
+      </span>
       {isVisible && renderPortal()}
     </Fragment>
   );

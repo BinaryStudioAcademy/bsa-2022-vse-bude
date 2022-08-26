@@ -3,10 +3,15 @@ export enum Routes {
   USERS = '/users',
   SIGN_UP = '/sign-up',
   SIGN_IN = '/sign-in',
+  FORGOT_PASSWORD = '/forgot-password',
   USER_ACCOUNT = '/user-account',
   PHONE_VERIFY = '/auth/phone-verify',
   EMAIL_VERIFY = '/auth/email-verify',
   ITEMS = '/items',
+  SEARCH = '/search',
+  NEWS = '/news',
+  ABOUT = '/about',
+  CATEGORIES = '/categories',
 }
 
 export enum AccountRoutes {
