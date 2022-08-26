@@ -15,6 +15,7 @@ export class CategoryService {
       return result.map((item) => ({
         ...item,
         title: req.t(`categories.${item.title}`),
+        titleId: item.title,
       }));
     } catch (err) {
       throw new Error(err);

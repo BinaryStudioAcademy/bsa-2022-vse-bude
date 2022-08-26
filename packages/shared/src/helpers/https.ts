@@ -6,7 +6,6 @@ import {
   HttpContentType,
   AuthApiRoutes,
   ApiRoutes,
-  HttpAcceptLanguage,
 } from '../common/enums';
 import type {
   DeleteRequestParams,
@@ -93,13 +92,16 @@ class Http {
       external = false,
       needAuthorization = true,
       contentType = HttpContentType.APPLICATION_JSON,
-      acceptLanguage = HttpAcceptLanguage.EN,
+      acceptLanguage,
     } = options ?? {};
 
     const headers: HeadersInit = {
       [HttpHeader.CONTENT_TYPE]: contentType,
-      [HttpHeader.ACCEPT_LANGUAGE]: acceptLanguage,
     };
+
+    if (acceptLanguage) {
+      headers[HttpHeader.ACCEPT_LANGUAGE] = acceptLanguage;
+    }
 
     if (needAuthorization) {
       const token = this._auth.getAccessToken();
