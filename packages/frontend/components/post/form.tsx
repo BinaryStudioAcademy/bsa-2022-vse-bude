@@ -2,34 +2,15 @@ import type { ICreatePost } from 'common/types/post/create-post';
 import { Textarea } from 'components/primitives/textarea';
 import { useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
-import { Input, Column, Flex, Button, Container } from '@primitives';
-import { NestedLayout, SectionHeader } from 'components/sub-pages/common';
+import { Input, Column, Flex, Button } from '@primitives';
+import { SectionHeader } from 'components/sub-pages/common';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { fetchCreatePost, getPostImagesDataSelector } from 'store/post';
 import { createPostSchema } from 'validation-schemas/post';
 import { joiResolver } from '@hookform/resolvers/joi';
-import ImageInput from './image-input';
+
 import { initialFormState } from './initial-form-state';
 import * as styles from './styles';
-
-export const Post = ({ create }: { create: string }) => {
-  const { t } = useTranslation();
-  console.log(create);
-
-  return (
-    <NestedLayout>
-      <Container>
-        <h3 css={styles.pageHeader}>{t('create-post:headline.makePost')}</h3>
-        <div css={styles.form}>
-          <div css={styles.sections}>
-            <ImageInput />
-            <PostForm />
-          </div>
-        </div>
-      </Container>
-    </NestedLayout>
-  );
-};
 
 export default function PostForm() {
   const { t } = useTranslation();
@@ -92,20 +73,6 @@ export default function PostForm() {
           />
         </div>
         <Flex css={styles.groupInputs}>
-          <div css={styles.inputRow}>
-            <Input
-              labelRequiredMark
-              error={errors.price?.message}
-              required
-              id="post-price"
-              type="text"
-              name="price"
-              variant="primary"
-              label={t('create-post:label.price')}
-              placeholder={t('create-post:placeholder.price')}
-              {...register('price')}
-            />
-          </div>
           <div css={styles.smallInputRow}>
             <Input
               disabled
@@ -116,6 +83,20 @@ export default function PostForm() {
               label={t('create-post:label.currency')}
               value={t('create-post:placeholder.currency')}
               {...register('currency')}
+            />
+          </div>
+          <div css={styles.inputRow}>
+            <Input
+              error={errors.price?.message}
+              required
+              tooltip={t('create-post:tooltip.price')}
+              id="post-price"
+              type="text"
+              name="price"
+              variant="primary"
+              label={t('create-post:label.price')}
+              placeholder={t('create-post:placeholder.price')}
+              {...register('price')}
             />
           </div>
         </Flex>
@@ -151,18 +132,6 @@ export default function PostForm() {
           </div>
         </Flex>
         <Flex css={styles.groupInputs}>
-          <div css={styles.inputRow}>
-            <Input
-              error={errors.phone?.message}
-              id="post-phone"
-              type="text"
-              name="phone"
-              variant="primary"
-              label={t('create-post:label.phone')}
-              placeholder={t('create-post:placeholder.phone')}
-              {...register('phone')}
-            />
-          </div>
           <div css={styles.smallInputRow}>
             <Input
               disabled
@@ -173,6 +142,19 @@ export default function PostForm() {
               label={t('create-post:label.callingCode')}
               value={t('create-post:placeholder.callingCode')}
               {...register('callingCode')}
+            />
+          </div>
+          <div css={styles.inputRow}>
+            <Input
+              tooltip={t('create-post:tooltip.phone')}
+              error={errors.phone?.message}
+              id="post-phone"
+              type="text"
+              name="phone"
+              variant="primary"
+              label={t('create-post:label.phone')}
+              placeholder={t('create-post:placeholder.phone')}
+              {...register('phone')}
             />
           </div>
         </Flex>

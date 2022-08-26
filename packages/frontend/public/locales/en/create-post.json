@@ -12,6 +12,10 @@
   "caption": {
     "downloadPhotos": "You can add to 30 pics"
   },
+  "tooltip": {
+    "price": "Make sure that you enter the correct price in digits!",
+    "phone": "Your phone number must be filled according to Ukrainian format. Sample: +XXX XX XXX XX XX. Make sure that the phone number is correct!"
+  },
   "label": {
     "photosMain": "Drag and drop an image here or ",
     "photosCaption": "choose image",
