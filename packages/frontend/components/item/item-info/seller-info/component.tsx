@@ -2,9 +2,9 @@
 import { IconName } from '@enums';
 import { ColorPalette } from '@vse-bude/shared';
 import type { AuthorDto } from '@vse-bude/shared';
-import * as styles from './styles';
 import { Routes } from '@enums';
 import Router from 'next/router';
+import * as styles from './styles';
 
 interface SellerInfoProps {
   seller: AuthorDto;
@@ -14,7 +14,7 @@ interface SellerInfoProps {
 export const SellerInfo = ({ seller, onContactSeller }: SellerInfoProps) => {
   const handleAvatarClick = () => {
     Router.push(Routes.USER_ACCOUNT);
-  }
+  };
 
   return (
     <div css={styles.sellerInfoWrapper}>
@@ -30,7 +30,11 @@ export const SellerInfo = ({ seller, onContactSeller }: SellerInfoProps) => {
         </Button>
       </div>
       <div css={styles.seller}>
-        <Avatar firstName={seller.firstName} lastName={seller.lastName} handleClick={handleAvatarClick} />
+        <Avatar
+          firstName={seller.firstName}
+          lastName={seller.lastName}
+          handleClick={handleAvatarClick}
+        />
         <span>{seller.firstName + ' ' + seller.lastName}</span>
       </div>
       <div css={styles.contacts}>
