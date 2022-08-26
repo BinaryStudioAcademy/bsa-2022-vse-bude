@@ -15,5 +15,5 @@ export const CAMERA_OPTIONS: CameraOptions = {
   maxHeight: 1200,
   maxWidth: 1200,
   quality: 0.4,
-  includeBase64: true,
+  includeBase64: false,
 };

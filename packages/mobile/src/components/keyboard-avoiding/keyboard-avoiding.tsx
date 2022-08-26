@@ -1,6 +1,6 @@
 import React, { FC, ReactElement } from 'react';
 import { KeyboardAvoidingView, ScrollView } from 'react-native';
-import { IS_IOS } from '~/common/constants/constants';
+import { IS_IOS } from '~/common/constants';
 import { styles } from './styles';
 
 type KeyboardAvoidingProps = {
