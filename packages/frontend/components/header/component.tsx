@@ -32,8 +32,8 @@ export const Header = () => {
   const redirectToCategory = (category: string) => {
     filters.category = category;
     push({
-      pathname: '/filters',
-      query: { filters: JSON.stringify(filters) },
+      pathname: Routes.ITEMS,
+      query: { filter: JSON.stringify(filters) },
     });
   };
 
