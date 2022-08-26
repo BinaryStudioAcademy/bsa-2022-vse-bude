@@ -35,14 +35,32 @@ export const Header = () => {
       <Dropdown
         options={[
           {
-            value: 'Home',
+            value: t(
+              'common:categories.ALCOHOLIC_BEVERAGES_AND_PRODUCTS_CATEGORY_NAME',
+            ),
             key: 'home',
             onClick: () => {
               console.log('home');
             },
           },
           {
-            value: 'About',
+            value: t('common:categories.BEAUTY_AND_HEALTH_CATEGORY_NAME'),
+            key: 'home',
+            onClick: () => {
+              console.log('home');
+            },
+          },
+          {
+            value: t('common:categories.CHILDRENS_GOODS_CATEGORY_NAME'),
+            key: 'home',
+            onClick: () => {
+              console.log('home');
+            },
+          },
+          {
+            value: t(
+              'common:categories.CLOTHES_SHOES_AND_JEWELRY_CATEGORY_NAME',
+            ),
             key: 'about',
             onClick: () => {
               console.log('about');
