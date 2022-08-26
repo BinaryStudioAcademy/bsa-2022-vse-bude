@@ -91,13 +91,13 @@ class Http {
     const {
       external = false,
       needAuthorization = true,
-      contentType = HttpContentType.APPLICATION_JSON,
+      contentType = false,
     } = options ?? {};
 
-    const headers: HeadersInit = {
-      [HttpHeader.CONTENT_TYPE]: contentType,
-    };
-
+    const headers: HeadersInit = {};
+    if (contentType) {
+      headers[HttpHeader.CONTENT_TYPE] = contentType;
+    }
     if (needAuthorization) {
       const token = this._auth.getAccessToken();
       headers[HttpHeader.AUTHORIZATION] = `Bearer ${token}`;

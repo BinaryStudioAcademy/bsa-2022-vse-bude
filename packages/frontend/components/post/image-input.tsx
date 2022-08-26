@@ -26,6 +26,7 @@ function ImageInput() {
 
   const getVariant = () => (images.length !== 0 ? 'filled' : 'empty');
   const { t } = useTranslation();
+  console.log(images);
 
   return (
     <Column css={styles.sectionRow}>
@@ -42,11 +43,12 @@ function ImageInput() {
           onChange={imagesInputHandler}
           accept="image/png, image/jpeg"
         />
-        {images.map((item) => (
-          <div key={item} css={styles.imgWrapper}>
-            <Image objectFit="cover" layout="fill" src={item} />
-          </div>
-        ))}
+        {images.length > 0 &&
+          images.map((item) => (
+            <div key={item} css={styles.imgWrapper}>
+              <Image objectFit="cover" layout="fill" src={item} />
+            </div>
+          ))}
         {images.length < 30 && (
           <div data-variant={getVariant()} css={styles.photosLabelWrapper}>
             <div data-variant={getVariant()} css={styles.labelWrapperInner}>

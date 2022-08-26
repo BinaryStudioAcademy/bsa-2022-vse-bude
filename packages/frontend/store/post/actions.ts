@@ -14,7 +14,7 @@ export const fetchCreatePost = createAsyncThunk(
 );
 
 export const fetchUploadImage = createAsyncThunk(
-  PostActions.CREATE_POST,
+  PostActions.UPLOAD_IMAGE,
   async (data: FormData, { rejectWithValue }) => {
     try {
       const url = (await uploadImage(data)) as string;
