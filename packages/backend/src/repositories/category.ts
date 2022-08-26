@@ -8,10 +8,8 @@ export class CategoryRepository {
   }
 
   public getAll(query: Query): Promise<Category[]> {
-    const { limit = 10 } = query;
-
     return this._dbClient.category.findMany({
-      take: +limit,
+      take: query.limit ? +query.limit : undefined,
     });
   }
 }
