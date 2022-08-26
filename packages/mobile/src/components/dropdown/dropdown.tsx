@@ -51,7 +51,7 @@ const DropDown = <T extends FormControlValues>({
         items={items}
         setOpen={setOpen}
         setValue={field.onChange}
-        textStyle={[{ color: colors.placeholder }, globalStyles.fs14]}
+        textStyle={[{ color: colors.text }, globalStyles.fs14]}
         style={[
           styles.dropDown,
           { backgroundColor: colors.backgroundElements },
