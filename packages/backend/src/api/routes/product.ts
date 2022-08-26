@@ -184,7 +184,7 @@ export const initProductRoutes = (
 
   router.get(
     apiPath(path, ProductApiRoutes.ID + ProductApiRoutes.VIEWS),
-    wrap((req) => productService.incrementViews(req.params.id)),
+    wrap((req) => productService.incrementViews(req.params.id, req)),
   );
 
   return router;
