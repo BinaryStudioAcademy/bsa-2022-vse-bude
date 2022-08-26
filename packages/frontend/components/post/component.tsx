@@ -1,61 +1,55 @@
+import type { ICreatePost } from 'common/types/post/create-post';
 import { Textarea } from 'components/primitives/textarea';
 import { useTranslation } from 'next-i18next';
-import type React from 'react';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Input, Column, Flex, Button, Container } from '@primitives';
 import { NestedLayout, SectionHeader } from 'components/sub-pages/common';
+import { useAppDispatch, useTypedSelector } from '@hooks';
+import { fetchCreatePost, getPostImagesDataSelector } from 'store/post';
+import { createPostSchema } from 'validation-schemas/post';
+import { joiResolver } from '@hookform/resolvers/joi';
+import ImageInput from './image-input';
 import * as styles from './styles';
 
-export const Post = () => {
-  const [form, setForm] = useState({
-    photos: '',
-    category: '',
-    title: '',
-    description: '',
-    price: '',
-    currency: '',
-    country: '',
-    city: '',
-    phone: '',
-    callingCode: '',
-    instagram: '',
-    facebook: '',
-    site: '',
-  });
-
-  const { handleSubmit } = useForm();
-
+export const Post = ({ create }: { create: string }) => {
   const { t } = useTranslation();
-  const changeHandler = (event) => {
-    setForm({ ...form, [event.target.name]: event.target.value });
+  const dispatch = useAppDispatch();
+  const images = useTypedSelector(getPostImagesDataSelector);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      category: '',
+      title: '',
+      description: '',
+      price: '',
+      currency: 'UAH',
+      country: '',
+      city: '',
+      phone: '',
+      callingCode: 'UA',
+      instagram: '',
+      facebook: '',
+      site: '',
+    },
+    resolver: joiResolver(createPostSchema(t)),
+  });
+  const onSubmit = (data) => {
+    const createPostData: ICreatePost = { imageLinks: images, ...data };
+    dispatch(fetchCreatePost(createPostData));
   };
-
-  const onSaveHandler = (event: React.FormEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-  };
-
-  // const onCanselHandler = (event: React.FormEvent<HTMLButtonElement>) => {
-  //   event.preventDefault();
-  // };
-
-  // const onDownloadAvatar = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   event.preventDefault();
-  //   //const file = event.target.files;
-  // };
+  console.log(create);
 
   return (
     <NestedLayout>
       <Container>
         <h3 css={styles.pageHeader}>{t('create-post:headline.makePost')}</h3>
-        <form css={styles.form} onSubmit={handleSubmit(onSaveHandler)}>
+        <form onSubmit={handleSubmit(onSubmit)} css={styles.form}>
           <div css={styles.sections}>
-            <Column css={styles.sectionRow}>
-              <SectionHeader>
-                {t('create-post:headline.downloadPhotos')}
-              </SectionHeader>
-              <div>drag & drop</div>
-            </Column>
+            <ImageInput />
 
             <Column css={styles.sectionRow}>
               <SectionHeader>
@@ -66,58 +60,63 @@ export const Post = () => {
                   id="post-category"
                   type="text"
                   name="category"
-                  value={form.category}
                   variant="primary"
                   label={t('create-post:label.category')}
                   placeholder={t('create-post:placeholder.category')}
-                  onChange={changeHandler}
+                  {...register('category')}
                 />
               </div>
               <div css={styles.inputRow}>
                 <Input
+                  labelRequiredMark
+                  error={errors.title?.message}
+                  required
                   id="post-title"
                   type="text"
                   name="title"
-                  value={form.title}
                   variant="primary"
                   label={t('create-post:label.name')}
                   placeholder={t('create-post:placeholder.name')}
-                  onChange={changeHandler}
+                  {...register('title')}
                 />
               </div>
               <div css={styles.inputRow}>
                 <Textarea
+                  labelRequiredMark
+                  error={errors.description?.message}
+                  required
                   id="post-description"
                   name="description"
-                  value={form.description}
                   label={t('create-post:label.description')}
                   placeholder={t('create-post:placeholder.description')}
-                  onChange={changeHandler}
+                  {...register('description')}
                 />
               </div>
               <Flex css={styles.groupInputs}>
                 <div css={styles.inputRow}>
                   <Input
+                    labelRequiredMark
+                    error={errors.price?.message}
+                    required
                     id="post-price"
                     type="text"
                     name="price"
-                    value={form.price}
                     variant="primary"
                     label={t('create-post:label.price')}
                     placeholder={t('create-post:placeholder.price')}
-                    onChange={changeHandler}
+                    {...register('price')}
                   />
                 </div>
                 <div css={styles.smallInputRow}>
                   <Input
+                    disabled
                     id="post-currency"
                     type="text"
                     name="currency"
-                    value={form.currency}
                     variant="primary"
                     label={t('create-post:label.currency')}
-                    placeholder={t('create-post:placeholder.currency')}
-                    onChange={changeHandler}
+                    value={t('create-post:placeholder.currency')}
+                    {...register('currency')}
                   />
                 </div>
               </Flex>
@@ -128,14 +127,16 @@ export const Post = () => {
               <Flex css={styles.groupInputs}>
                 <div css={styles.inputRow}>
                   <Input
+                    labelRequiredMark
+                    error={errors.country?.message}
+                    required
                     id="post-country"
                     type="text"
                     name="country"
-                    value={form.country}
                     variant="primary"
                     label={t('create-post:label.country')}
                     placeholder={t('create-post:placeholder.country')}
-                    onChange={changeHandler}
+                    {...register('country')}
                   />
                 </div>
                 <div css={styles.inputRow}>
@@ -143,37 +144,36 @@ export const Post = () => {
                     id="post-city"
                     type="text"
                     name="city"
-                    value={form.city}
                     variant="primary"
                     label={t('create-post:label.city')}
                     placeholder={t('create-post:placeholder.city')}
-                    onChange={changeHandler}
+                    {...register('city')}
                   />
                 </div>
               </Flex>
               <Flex css={styles.groupInputs}>
                 <div css={styles.inputRow}>
                   <Input
+                    error={errors.phone?.message}
                     id="post-phone"
                     type="text"
                     name="phone"
-                    value={form.phone}
                     variant="primary"
                     label={t('create-post:label.phone')}
                     placeholder={t('create-post:placeholder.phone')}
-                    onChange={changeHandler}
+                    {...register('phone')}
                   />
                 </div>
                 <div css={styles.smallInputRow}>
                   <Input
+                    disabled
                     id="post-callingCode"
                     type="text"
                     name="callingCode"
-                    value={form.callingCode}
                     variant="primary"
                     label={t('create-post:label.callingCode')}
-                    placeholder={t('create-post:placeholder.callingCode')}
-                    onChange={changeHandler}
+                    value={t('create-post:placeholder.callingCode')}
+                    {...register('callingCode')}
                   />
                 </div>
               </Flex>
@@ -182,11 +182,10 @@ export const Post = () => {
                   id="post-instagram"
                   type="text"
                   name="instagram"
-                  value={form.instagram}
                   variant="primary"
                   label={t('create-post:label.instagram')}
                   placeholder={t('create-post:placeholder.instagram')}
-                  onChange={changeHandler}
+                  {...register('instagram')}
                 />
               </div>
               <div css={styles.inputRow}>
@@ -194,11 +193,10 @@ export const Post = () => {
                   id="post-facebook"
                   type="text"
                   name="facebook"
-                  value={form.facebook}
                   variant="primary"
                   label={t('create-post:label.facebook')}
                   placeholder={t('create-post:placeholder.facebook')}
-                  onChange={changeHandler}
+                  {...register('facebook')}
                 />
               </div>
               <div css={styles.inputRow}>
@@ -206,16 +204,20 @@ export const Post = () => {
                   id="post-site"
                   type="text"
                   name="site"
-                  value={form.site}
                   variant="primary"
                   label={t('create-post:label.site')}
                   placeholder={t('create-post:placeholder.site')}
-                  onChange={changeHandler}
+                  {...register('site')}
                 />
               </div>
             </Column>
             <div css={styles.btnWrapper}>
-              <Button>{t('create-post:button.makePost')}</Button>
+              <div css={styles.saveDraftBtn}>
+                <Button variant="outlined">
+                  {t('create-post:button.saveDraft')}
+                </Button>
+              </div>
+              <Button type="submit">{t('create-post:button.makePost')}</Button>
             </div>
           </div>
         </form>

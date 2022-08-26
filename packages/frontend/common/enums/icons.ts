@@ -20,6 +20,7 @@ export enum IconName {
   EMAIL = 'envelope',
   PRIVACY_POLICY = 'user-shield',
   STOPWATCH = 'stopwatch',
+  IMAGE = 'image',
 }
 
 export const IconNameToClassName = {
@@ -44,4 +45,5 @@ export const IconNameToClassName = {
   [IconName.EMAIL]: 'fa-regular fa-envelope',
   [IconName.PRIVACY_POLICY]: 'fa-solid fa-user-shield',
   [IconName.STOPWATCH]: 'fa-solid fa-stopwatch',
+  [IconName.IMAGE]: 'fa-regular fa-image',
 };

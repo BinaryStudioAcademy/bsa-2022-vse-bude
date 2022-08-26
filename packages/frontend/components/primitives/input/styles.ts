@@ -62,6 +62,9 @@ export const error = ({ colors }: Theme) => css`
 `;
 
 export const label = ({ colors, fontSizes, lineHeights }: Theme) => css`
+  display: flex;
+  justify-content: start;
+  align-items: center;
   margin-bottom: 4px;
   cursor: pointer;
   font-size: ${fontSizes.caption};
@@ -71,6 +74,12 @@ export const label = ({ colors, fontSizes, lineHeights }: Theme) => css`
 
   &[data-variant='secondary'] {
     color: ${colors.background};
+  }
+
+  span {
+    font-size: ${fontSizes.h4};
+    line-height: ${lineHeights.caption};
+    color: ${colors.primary};
   }
 `;
 

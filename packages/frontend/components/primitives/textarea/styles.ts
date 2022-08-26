@@ -41,6 +41,12 @@ export const label = ({ colors, fontSizes, lineHeights }: Theme) => css`
   line-height: ${lineHeights.caption};
   font-family: inherit;
   color: ${colors.text};
+
+  span {
+    font-size: ${fontSizes.h4};
+    line-height: ${lineHeights.caption};
+    color: ${colors.primary};
+  }
 `;
 
 export const textareaWrapper = css`
@@ -50,4 +56,22 @@ export const textareaWrapper = css`
 
 export const bar = css`
   display: none;
+`;
+export const errorMessage = ({
+  colors,
+  fontSizes,
+  lineHeights,
+  spaces,
+}: Theme) => css`
+  transition: 200ms linear;
+  margin: 2px 0 0;
+  cursor: pointer;
+  font-size: ${fontSizes.caption};
+  font-weight: bold;
+  line-height: ${lineHeights.caption};
+  font-family: inherit;
+  color: ${colors.error};
+  & span {
+    margin-right: ${spaces.xs};
+  }
 `;

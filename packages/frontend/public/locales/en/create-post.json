@@ -6,12 +6,15 @@
     "contact": "Contact"
   },
   "button": {
-    "makePost": "Make a post"
+    "makePost": "Make a post",
+    "saveDraft": "Save as draft"
   },
   "caption": {
     "downloadPhotos": "You can add to 30 pics"
   },
   "label": {
+    "photosMain": "Drag and drop an image here or ",
+    "photosCaption": "choose image",
     "category": "Category",
     "name": "Title name",
     "description": "Description",
@@ -28,7 +31,7 @@
   },
   "placeholder": {
     "category": "Select the category",
-    "name": "Enter name",
+    "name": "Enter title",
     "description": "Enter your product description",
     "price": "Enter your price",
     "currency": "UAH",
@@ -40,5 +43,26 @@
     "linkedin": "Enter your nickname",
     "facebook": "Enter your nickname",
     "site": "Enter site address"
+  },
+  "validation": {
+    "title": {
+      "long": "Title too long",
+      "empty": "Title cannot be empty"
+    },
+    "description": {
+      "long": "Description too long",
+      "empty": "Description cannot be empty"
+    },
+    "phone": {
+      "pattern": "Wrong phone format",
+      "empty": "Description cannot be empty"
+    },
+    "price": {
+      "base": "Wrong price format",
+      "empty": "Price cannot be empty"
+    },
+    "country": {
+      "empty": "Country cannot be empty"
+    }
   }
 }
