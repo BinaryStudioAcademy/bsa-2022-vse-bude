@@ -1,6 +1,6 @@
 import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
 import { notification } from '~/services/services';
-import { CAMERA_OPTIONS, IMAGE_OPTIONS } from '~/common/constants/constants';
+import { CAMERA_OPTIONS, IMAGE_OPTIONS } from '~/common/constants';
 
 export const pickImageLibrary = async () => {
   const response = await launchImageLibrary(IMAGE_OPTIONS);
@@ -11,7 +11,7 @@ export const pickImageLibrary = async () => {
     return notification.info('Cancelled by user');
   }
 
-  return response.assets ? response.assets[0] : null;
+  return response?.assets?.[0] || null;
 };
 
 export const pickImageCamera = async () => {
@@ -24,5 +24,5 @@ export const pickImageCamera = async () => {
     return notification.info('Cancelled by user');
   }
 
-  return response.assets ? response.assets[0] : null;
+  return response?.assets?.[0] || null;
 };

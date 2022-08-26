@@ -1,36 +1,51 @@
-/* eslint-disable no-extra-boolean-cast */
 import React, { FC, useState, useCallback } from 'react';
-import { Image } from 'react-native';
 import { image as imageService, notification } from '~/services/services';
 import {
   View,
-  UserIcon,
   Pressable,
   CameraIcon,
   FlagBackgroundView,
   PhotoPickerModal,
-  Spinner,
 } from '~/components/components';
-import { requestCameraStoragePermission } from '~/permissions/android-permissions';
 import { globalStyles } from '~/styles/styles';
-import { pickImageCamera, pickImageLibrary } from '~/helpers/helpers';
+import {
+  requestExternalStoragePermission,
+  pickImageCamera,
+  pickImageLibrary,
+} from '~/helpers/helpers';
+import { UserAvatar } from '../avatar/avatar';
 import { styles } from './styles';
 
 const ProfileImage: FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [photoUri, setPhotoUri] = useState('');
-  const [isPhoto, setIsPhoto] = useState(false);
   const [IsUploading, setIsUploading] = useState(false);
 
   const toggleModal = () => {
-    return setShowModal(!showModal);
+    return setShowModal((showModal) => !showModal);
   };
 
   const onCameraOpen = useCallback(async () => {
-    const permission = await requestCameraStoragePermission();
-    if (permission) {
+    setIsUploading(true);
+    const file = await pickImageCamera();
+    if (!file) {
+      setIsUploading(false);
+
+      return;
+    }
+    const link = await imageService.uploadImage(file);
+
+    setPhotoUri(link);
+    setIsUploading(false);
+    setShowModal(false);
+  }, []);
+
+  const onGalleryOpen = useCallback(async () => {
+    const isPermissionGranted = await requestExternalStoragePermission();
+
+    if (isPermissionGranted) {
       setIsUploading(true);
-      const file = await pickImageCamera();
+      const file = await pickImageLibrary();
       if (!file) {
         setIsUploading(false);
 
@@ -38,7 +53,6 @@ const ProfileImage: FC = () => {
       }
       const link = await imageService.uploadImage(file);
 
-      setIsPhoto(true);
       setPhotoUri(link);
       setIsUploading(false);
       setShowModal(false);
@@ -47,25 +61,8 @@ const ProfileImage: FC = () => {
     }
   }, []);
 
-  const onGalleryOpen = useCallback(async () => {
-    const file = await pickImageLibrary();
-
-    if (!file) {
-      setIsUploading(false);
-
-      return;
-    }
-    const link = await imageService.uploadImage(file);
-
-    setIsPhoto(true);
-    setPhotoUri(link);
-    setIsUploading(false);
-    setShowModal(false);
-  }, []);
-
   const handleRemovePhoto = () => {
     setPhotoUri('');
-    setIsPhoto(false);
   };
 
   return (
@@ -73,13 +70,7 @@ const ProfileImage: FC = () => {
       <FlagBackgroundView style={styles.flag} />
       <View style={styles.photoWrapper}>
         <View style={styles.photoContainer}>
-          {photoUri ? (
-            <Image source={{ uri: photoUri }} style={styles.photo} />
-          ) : IsUploading ? (
-            <Spinner size={130} />
-          ) : (
-            <UserIcon size={130} />
-          )}
+          <UserAvatar link={photoUri} isLoading={IsUploading} />
         </View>
         <Pressable
           style={[
@@ -93,7 +84,7 @@ const ProfileImage: FC = () => {
         </Pressable>
         <PhotoPickerModal
           isVisible={showModal}
-          isPhoto={isPhoto}
+          isPhoto={Boolean(photoUri)}
           onClose={toggleModal}
           handleOpenCamera={onCameraOpen}
           handlePickFromGallery={onGalleryOpen}

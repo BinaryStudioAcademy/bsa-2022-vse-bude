@@ -28,7 +28,7 @@ class Image {
       method: HttpMethod.POST,
       contentType: HttpContentType.FORM_DATA,
       payload: formData,
-      hasAuth: false,
+      hasAuth: true,
     });
   }
 }

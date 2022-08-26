@@ -25,10 +25,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     backgroundColor: '#DFDFDF',
   },
-  photo: {
-    width: 130,
-    height: 130,
-  },
+
   photoButton: {
     position: 'absolute',
     bottom: 0,
