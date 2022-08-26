@@ -1,6 +1,5 @@
-import type { ProductDto } from "@vse-bude/shared";
+import type { ProductDto } from '@vse-bude/shared';
 
 export interface ProductGridProps {
-    lots: ProductDto[];
-  }
-  
+  lots: ProductDto[];
+}

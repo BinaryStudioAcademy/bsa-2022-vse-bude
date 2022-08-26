@@ -23,12 +23,12 @@ export const getServerSideProps = withPublic(
       limit: 5,
       type: ProductType.AUCTION,
     });
-    
+
     return {
       props: {
-          ...(await serverSideTranslations(locale, ['common'])),
-          auctionProducts,
-        },
+        ...(await serverSideTranslations(locale, ['common'])),
+        auctionProducts,
+      },
     };
   }),
 );
@@ -36,10 +36,10 @@ export const getServerSideProps = withPublic(
 const FilteredPage = ({ auctionProducts }: FilteredPageProps) => {
   const router = useRouter();
   const filter = router.query.filter as string;
-  
+
   return (
     <Layout title="Filtered posts">
-      <Filter filter={filter} lots={auctionProducts}/>
+      <Filter filter={filter} lots={auctionProducts} />
     </Layout>
   );
 };
