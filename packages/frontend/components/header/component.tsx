@@ -21,14 +21,14 @@ export const Header = () => {
   const [show, setShow] = useState(false);
   const { hasToken } = useAuth();
   const isMounted = useMounted();
-  const { push } = useRouter();
+  const { push, pathname } = useRouter();
   const { t } = useTranslation();
   const { colors } = useTheme();
 
   const renderNavigation = () => (
     <nav className="navigation">
       <InternalLink
-        variant="default"
+        variant={pathname === Routes.DEFAULT ? 'primary' : 'default'}
         href={Routes.DEFAULT}
         label={t('common:header.nav.home')}
       />
@@ -55,19 +55,19 @@ export const Header = () => {
         <Icon icon={IconName.ANGLE_DOWN} color={colors.extraDark} />
       </Dropdown>
       <InternalLink
-        href={Routes.DEFAULT}
+        href={Routes.SEARCH}
         label={t('common:header.nav.search')}
-        variant="default"
+        variant={pathname === Routes.SEARCH ? 'primary' : 'default'}
       />
       <InternalLink
-        href={Routes.DEFAULT}
+        href={Routes.NEWS}
         label={t('common:header.nav.news')}
-        variant="default"
+        variant={pathname === Routes.NEWS ? 'primary' : 'default'}
       />
       <InternalLink
-        href={Routes.DEFAULT}
+        href={Routes.ABOUT}
         label={t('common:header.nav.about_us')}
-        variant="default"
+        variant={pathname === Routes.ABOUT ? 'primary' : 'default'}
       />
     </nav>
   );
