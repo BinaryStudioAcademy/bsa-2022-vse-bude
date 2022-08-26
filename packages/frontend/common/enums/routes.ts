@@ -3,6 +3,7 @@ export enum Routes {
   USERS = '/users',
   SIGN_UP = '/sign-up',
   SIGN_IN = '/sign-in',
+  FORGOT_PASSWORD = '/forgot-password',
   USER_ACCOUNT = '/user-account',
   PHONE_VERIFY = '/auth/phone-verify',
   EMAIL_VERIFY = '/auth/email-verify',

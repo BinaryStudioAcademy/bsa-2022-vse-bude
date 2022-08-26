@@ -11,6 +11,18 @@ export const initUploadImageRoutes = (
 ): Router => {
   const router = Router();
 
+  /**
+   * @openapi
+   * /upload-image:
+   *   post:
+   *     tags: [UploadImage]
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: Ok
+   */
+
   router.post(
     path,
     uploadImage,

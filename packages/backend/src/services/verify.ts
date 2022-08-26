@@ -8,7 +8,7 @@ import { WrongCodeError } from '../error/verify/wrong-code-error';
 import type { SaveVerifyCode } from '../common/types/verification-code';
 import type { RedisStorageService } from './redis-storage';
 import type { SMSSenderService } from './sms';
-import type { EmailService } from './email';
+import type { EmailService } from './email/email';
 
 export class VerifyService {
   private phoneCodeLifeTime = 900000;
