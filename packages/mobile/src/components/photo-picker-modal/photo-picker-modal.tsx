@@ -24,7 +24,13 @@ const PhotoPickerModal: FC<PhotoPickerModalProps> = ({
 }): ReactElement => {
   return (
     <Modal animationType="fade" transparent={true} visible={isVisible}>
-      <View style={[globalStyles.flex1, styles.wrapper]}>
+      <View
+        style={[
+          globalStyles.flex1,
+          globalStyles.justifyContentCenter,
+          globalStyles.alignItemsCenter,
+        ]}
+      >
         <View style={styles.content}>
           <View style={styles.header}>
             <Text style={styles.title}>Upload Photo</Text>

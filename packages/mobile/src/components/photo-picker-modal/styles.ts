@@ -3,10 +3,6 @@ import { ColorPalette } from '@vse-bude/shared';
 import { FontFamily, FontSize } from '~/common/enums/enums';
 
 const styles = StyleSheet.create({
-  wrapper: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
