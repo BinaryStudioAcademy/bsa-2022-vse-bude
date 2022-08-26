@@ -65,7 +65,7 @@ export const initCategoryRoutes = (
 
   router.get(
     apiPath(path),
-    wrap((req: Request) => categoryService.getAll(req.query)),
+    wrap((req: Request) => categoryService.getAll(req)),
   );
 
   return router;

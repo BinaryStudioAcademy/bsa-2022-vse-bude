@@ -7,9 +7,11 @@ export class CategoryRepository {
     this._dbClient = prismaClient;
   }
 
-  public getAll(take: number): Promise<Category[]> {
+  public getAll(query: Query): Promise<Category[]> {
+    const { limit = 10 } = query;
+
     return this._dbClient.category.findMany({
-      take,
+      take: +limit,
     });
   }
 }
