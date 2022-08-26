@@ -1,9 +1,9 @@
 import type { FC } from 'react';
 import { InternalLink, Flex, IconButton } from '@primitives';
-import type { LinkProps } from '../../user-account-layout/types';
-import * as styles from './styles';
 import { IconColorProps } from '@enums';
 import { useRouter } from 'next/router';
+import type { LinkProps } from '../../user-account-layout/types';
+import * as styles from './styles';
 
 export const DashboardLink: FC<LinkProps> = ({
   iconPath,
@@ -16,7 +16,8 @@ export const DashboardLink: FC<LinkProps> = ({
   const handleClick = () => {
     router.push(path);
   };
-  return (
+  
+return (
     <div data-location={location} css={styles.link}>
       <Flex css={styles.linkContent} align="center">
         <div css={styles.icon}>

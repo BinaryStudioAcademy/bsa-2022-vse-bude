@@ -1,8 +1,8 @@
 import React from 'react';
 import { Icon } from '@primitives';
 import { IconName } from '@enums';
-import type { DownloadButtonProps } from './types';
 import { InputFile } from '../input-file';
+import type { DownloadButtonProps } from './types';
 import * as styles from './styles';
 
 const AvatarButton = ({ id }: DownloadButtonProps, ref) => (

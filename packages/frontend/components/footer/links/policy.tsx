@@ -2,10 +2,10 @@ import type { FC } from 'react';
 import { useTranslation } from 'next-i18next';
 import { IconName } from '@enums';
 import { Icon, InternalLink } from '@primitives';
+import { IconColorProps } from '@enums';
 import { ColumnHeader } from '../common/column-header';
 import * as styles from './styles';
 import type { PolicyProps } from './types';
-import { IconColorProps } from '@enums';
 
 export const Policy: FC<PolicyProps> = ({ path }) => {
   const { t } = useTranslation();
