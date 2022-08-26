@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { TouchableOpacity } from 'react-native';
-import { RootNavigationProps } from '~/common/types/navigation/navigation-props';
+
+import { RootNavigationProps } from '~/common/types/types';
 import { RootScreenName } from '~/common/enums/enums';
 import {
   View,
@@ -12,6 +12,7 @@ import {
   UserIcon,
   LogOutIcon,
   Logo,
+  TouchableOpacity,
 } from '~/components/components';
 import { useCustomTheme, useNavigation, useTranslation } from '~/hooks/hooks';
 import { createStyles } from './styles';

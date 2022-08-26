@@ -1,5 +1,5 @@
+import type { Theme } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { Theme } from '../../../theme';
 
 export const contentWrapper = ({ spaces }: Theme) => css`
   height: 100vh;
@@ -26,4 +26,20 @@ export const linkText = ({ fontSizes, colors, lineHeights }: Theme) => css`
 `;
 export const inputWrapper = ({ spaces }: Theme) => css`
   margin-bottom: ${spaces.md};
+`;
+export const headline = ({
+  mq,
+  colors,
+  spaces,
+  fontSizes,
+  fontWeights,
+}: Theme) => css`
+  margin-bottom: ${spaces.xl1};
+  margin-top: 0;
+  font-weight: ${fontWeights.h4};
+  color: ${colors.secondaryDark};
+  font-size: ${fontSizes.h3};
+  ${mq[1]} {
+    font-size: ${fontSizes.h4};
+  }
 `;

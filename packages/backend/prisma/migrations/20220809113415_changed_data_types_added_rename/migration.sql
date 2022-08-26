@@ -9,7 +9,7 @@
   - The primary key for the `ChatMember` table will be changed. If it partially fails, the table could be left without primary key constraint.
   - The primary key for the `Message` table will be changed. If it partially fails, the table could be left without primary key constraint.
   - The primary key for the `Product` table will be changed. If it partially fails, the table could be left without primary key constraint.
-  - The `recomendedPrice` column on the `Product` table would be dropped and recreated. This will lead to data loss if there is data in the column.
+  - The `recommendedPrice` column on the `Product` table would be dropped and recreated. This will lead to data loss if there is data in the column.
   - The `minimalBid` column on the `Product` table would be dropped and recreated. This will lead to data loss if there is data in the column.
   - The `imageLinks` column on the `Product` table would be dropped and recreated. This will lead to data loss if there is data in the column.
   - The `categoryId` column on the `Product` table would be dropped and recreated. This will lead to data loss if there is data in the column.
@@ -146,13 +146,13 @@ ADD CONSTRAINT "Message_pkey" PRIMARY KEY ("id");
 
 -- AlterTable
 ALTER TABLE "Product" DROP CONSTRAINT "Product_pkey",
-ADD COLUMN     "cancellReason" TEXT,
+ADD COLUMN     "cancelReason" TEXT,
 DROP COLUMN "id",
 ADD COLUMN     "id" UUID NOT NULL,
 DROP COLUMN "price",
 ADD COLUMN     "price" MONEY NOT NULL,
-DROP COLUMN "recomendedPrice",
-ADD COLUMN     "recomendedPrice" MONEY,
+DROP COLUMN "recommendedPrice",
+ADD COLUMN     "recommendedPrice" MONEY,
 DROP COLUMN "minimalBid",
 ADD COLUMN     "minimalBid" MONEY,
 DROP COLUMN "imageLinks",
