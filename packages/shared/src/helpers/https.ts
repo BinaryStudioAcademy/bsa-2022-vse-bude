@@ -111,6 +111,11 @@ class Http {
     if (body && contentType === HttpContentType.APPLICATION_JSON) {
       config.body = JSON.stringify(body);
     }
+    
+    if (body && contentType === HttpContentType.FORM_DATA) {
+      config.body = body as BodyInit;
+      delete config.headers;
+    }
 
     return {
       url: external ? url : `${this._baseUrl}${url}`,
