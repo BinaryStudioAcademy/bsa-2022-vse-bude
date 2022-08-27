@@ -18,8 +18,8 @@ export const initProfileRoutes = (
       const { userId } = req.params;
       const user = profileService.getUser({ userId });
       const socialMedia = profileService.getSocialMedia({ userId });
-      
-return {
+
+      return {
         ...user,
         socialMedia,
       };
