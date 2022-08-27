@@ -1,56 +1,37 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type {
-  UserDto,
-  UserAddressDto,
-  UserSocialMediaDto,
-} from '@vse-bude/shared';
-import { phoneVerification } from '../auth';
-import { getCurrentUser } from './actions';
+import type { HydrateAction } from '@types';
+import type { UserAddressDto, UserProfileDto } from '@vse-bude/shared';
+import { HYDRATE } from 'next-redux-wrapper';
+import { fetchUserProfileSSR } from './actions';
 
 interface ProfileState {
-  user: UserDto | null;
+  user: UserProfileDto | null;
   address: UserAddressDto | null;
-  socialMedia: UserSocialMediaDto | null;
   loading: boolean;
 }
 
 const initialState: ProfileState = {
   user: null,
   address: null,
-  socialMedia: null,
   loading: false,
 };
 
 const profileSlice = createSlice({
   name: 'profile',
   initialState,
-  reducers: {
-    logOut(state) {
-      state.user = null;
-      state.loading = false;
-    },
-  },
+  reducers: {},
   extraReducers: {
-    [getCurrentUser.pending.type](state) {
-      state.loading = true;
-    },
-    [getCurrentUser.fulfilled.type](state, { payload }) {
+    [fetchUserProfileSSR.fulfilled.type]: (state, { payload }) => {
       state.user = payload;
-      state.loading = false;
     },
-    [getCurrentUser.rejected.type](state) {
-      state.user = null;
-      state.loading = false;
-    },
-    [phoneVerification.fulfilled.type](state) {
-      state.user = {
-        ...state.user,
-        phoneVerified: true,
-      };
+    [HYDRATE](state, { payload }: HydrateAction) {
+      if (payload.profile.user) {
+        state.user = payload.profile.user;
+      }
     },
   },
 });
 
 export const profileReducer = profileSlice.reducer;
-export const { logOut } = profileSlice.actions;
+
 export type { ProfileState };

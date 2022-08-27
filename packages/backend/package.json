@@ -38,6 +38,8 @@
     "node-fetch": "^2.6.7",
     "redis": "^4.2.0",
     "sib-api-v3-typescript": "^2.2.2",
+    "swagger-jsdoc": "^6.2.5",
+    "swagger-ui-express": "^4.5.0",
     "twilio": "^3.80.0",
     "winston": "^3.8.1"
   },

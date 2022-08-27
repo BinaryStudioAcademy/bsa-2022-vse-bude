@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import {
-  Logo,
   View,
   HeaderButton,
   FlagBackgroundView,
+  LogoWhite,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
@@ -18,7 +18,7 @@ const Header: FC<Props> = ({ labelButton, onPress }) => {
     <FlagBackgroundView style={styles.header}>
       <HeaderButton label={labelButton} onPress={onPress} />
       <View style={globalStyles.alignItemsCenter}>
-        <Logo />
+        <LogoWhite />
       </View>
     </FlagBackgroundView>
   );

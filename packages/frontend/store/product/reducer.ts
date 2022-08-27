@@ -30,9 +30,7 @@ const productSlice = createSlice({
       state.loading = false;
     },
     [HYDRATE](state, { payload }: HydrateAction) {
-      if (payload.product.list) {
-        state.list = payload.product.list;
-      }
+      state.list = payload.product.list;
     },
   },
 });

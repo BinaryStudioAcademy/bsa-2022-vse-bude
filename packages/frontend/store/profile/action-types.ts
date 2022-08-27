@@ -1,4 +1,4 @@
 export enum ProfileActions {
-  FETCH_USER = 'profile/fetch-user',
-  LOG_OUT = 'profile/log-out',
+  FETCH_USER_PROFILE = 'profile/fetch-user',
+  SAVE_USER_PROFILE = 'profile/save-user',
 }

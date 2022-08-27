@@ -13,3 +13,17 @@ export interface EmailOptions {
   cc?: Array<IEmail>;
   replyTo?: IEmail;
 }
+
+export const defaultEmailOptions: EmailOptions = {
+  to: [
+    {
+      email: '',
+      name: '',
+    },
+  ],
+  from: {
+    email: '',
+    name: '',
+  },
+  subject: '',
+};

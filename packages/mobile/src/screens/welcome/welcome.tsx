@@ -5,14 +5,13 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ColorPalette } from '@vse-bude/shared';
 import { ButtonAppearance, RootScreenName } from '~/common/enums/enums';
 import { RootNavigationParamList } from '~/common/types/types';
-import { images } from '~/assets/images/images';
 import {
   View,
   Button,
-  Image,
   FlagBackgroundView,
   ScreenWrapper,
   StatusBar,
+  LogoWhite,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { Product } from './components/components';
@@ -40,7 +39,7 @@ const Welcome: FC<Props> = ({ navigation }) => {
           globalStyles.px5,
         ]}
       >
-        <Image source={images.logo_small} style={styles.logo} />
+        <LogoWhite style={styles.logo} />
         <View style={globalStyles.py7}>
           <Product />
         </View>

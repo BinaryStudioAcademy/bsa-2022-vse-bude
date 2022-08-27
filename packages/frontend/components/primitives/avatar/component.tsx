@@ -1,6 +1,5 @@
-import { ColorsAvatar } from '@enums';
 import Image from 'next/image';
-import { AccountRoutes, Routes } from '@enums';
+import { ProfileRoutes, Routes, ColorsAvatar } from '@enums';
 import { Loader } from '../loader';
 import * as styles from './styles';
 import type { AvatarProps } from './types';
@@ -18,11 +17,11 @@ export const Avatar = ({
   return (
     <button
       css={styles.wrapper}
-      style={{ backgroundColor: colorByName }}
+      style={{ backgroundColor: image ? 'transparent' : colorByName }}
       onClick={handleClick}
-      path-label={Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_PERSONAL}
+      path-label={Routes.PROFILE + ProfileRoutes.PERSONAL_INFO}
     >
-      {!!image && (
+      {image ? (
         <Image
           css={styles.avatar}
           src={image}
@@ -30,8 +29,15 @@ export const Avatar = ({
           height={35}
           width={35}
         />
+      ) : (
+        <div css={styles.initials}>
+          {loading ? (
+            <Loader size="extraSmall" />
+          ) : (
+            !image && `${firstName[0]}${lastName[0]}`
+          )}
+        </div>
       )}
-      {loading ? <Loader /> : `${firstName[0]}${lastName[0]}`}
     </button>
   );
 };

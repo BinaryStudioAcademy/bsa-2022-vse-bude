@@ -1,11 +1,11 @@
-import type { ProfileState } from 'store/profile';
 import type { AuthState } from 'store/auth';
 import type { CategoryState } from 'store/category';
 import type { ProductState } from 'store/product';
+import type { ProfileState } from 'store/profile/reducer';
 
 export interface RootState {
-  profile: ProfileState;
   auth: AuthState;
+  profile: ProfileState;
   category: CategoryState;
   product: ProductState;
 }
