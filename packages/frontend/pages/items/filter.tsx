@@ -1,13 +1,11 @@
-import { Layout } from '@components';
+import { Filter, Layout } from '@components';
 import { useRouter } from 'next/router';
 import { wrapper } from 'store';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { Filter } from '@components';
-import { AuthHelper, CookieStorage, withPublic } from '@helpers';
-import { Http, ProductType } from '@vse-bude/shared';
-import { getProductsSSR } from 'services/product';
-import { fetchCategoriesSSR } from 'store/category';
+import { ProductType } from '@vse-bude/shared';
 import type { ProductDto } from '@vse-bude/shared';
+import { fetchProducts } from 'store/product';
+import { withPublic } from '@helpers';
 
 export interface FilteredPageProps {
   auctionProducts: ProductDto[];
@@ -16,17 +14,9 @@ export interface FilteredPageProps {
 export const getServerSideProps = withPublic(
   wrapper.getServerSideProps((store) => async (ctx) => {
     const { locale } = ctx;
-
-    const storage = new CookieStorage(ctx);
-    const auth = new AuthHelper(storage);
-    const httpClient = new Http(process.env.NEXT_PUBLIC_API_ROUTE, auth);
-
-    await store.dispatch(fetchCategoriesSSR({ httpSSR: httpClient, limit: 5 }));
-    const auctionProducts = await getProductsSSR({
-      httpSSR: httpClient,
-      limit: 5,
-      type: ProductType.AUCTION,
-    });
+    
+    const auctionProducts = await store.dispatch(fetchProducts({limit: 5, type: ProductType.AUCTION}))
+      .then(res => res.payload);
 
     return {
       props: {
@@ -40,7 +30,7 @@ export const getServerSideProps = withPublic(
 const FilteredPage = ({ auctionProducts }: FilteredPageProps) => {
   const router = useRouter();
   const filter = router.query.filter as string;
-
+  
   return (
     <Layout title="Filtered posts">
       <Filter filter={filter} lots={auctionProducts} />
