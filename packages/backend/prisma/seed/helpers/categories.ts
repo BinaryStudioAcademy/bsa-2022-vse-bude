@@ -1,3 +1,5 @@
-import categories from '../../../../frontend/public/locales/en/common.json';
+import translations from '../../../locales/en/translation.json';
 
-export const categoriesFromJSON: string[] = Object.keys(categories.categories);
+export const categoriesFromJSON: string[] = Object.keys(
+  translations.categories,
+);

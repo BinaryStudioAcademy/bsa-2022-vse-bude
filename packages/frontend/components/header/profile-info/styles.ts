@@ -68,6 +68,7 @@ export const popoverContentItem = ({
     & > i {
       float: left;
       margin-right: ${spaces.md};
+      color: ${colors.primaryLight};
     }
   }
 `;
