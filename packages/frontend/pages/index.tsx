@@ -4,7 +4,7 @@ import { wrapper } from 'store';
 import { withPublic } from '@helpers';
 import { AuthHelper, CookieStorage } from '@helpers';
 import { fetchCategoriesSSR } from 'store/category';
-import type { HttpAcceptLanguage } from '@vse-bude/shared';
+import type { HttpAcceptLanguage, ProductDto } from '@vse-bude/shared';
 import { Http, ProductType } from '@vse-bude/shared';
 import { getProductsSSR } from 'services/product';
 import type { HomeProps } from 'components/home/types';
@@ -12,6 +12,8 @@ import type { HomeProps } from 'components/home/types';
 export const getServerSideProps = withPublic(
   wrapper.getServerSideProps((store) => async (ctx) => {
     const { locale } = ctx;
+    let auctionProducts: ProductDto[] = [];
+    let sellingProducts: ProductDto[] = [];
 
     const storage = new CookieStorage(ctx);
     const auth = new AuthHelper(storage);
@@ -24,16 +26,26 @@ export const getServerSideProps = withPublic(
         locale: locale as HttpAcceptLanguage,
       }),
     );
-    const auctionProducts = await getProductsSSR({
-      httpSSR: httpClient,
-      limit: 4,
-      type: ProductType.AUCTION,
-    });
-    const sellingProducts = await getProductsSSR({
-      httpSSR: httpClient,
-      limit: 4,
-      type: ProductType.SELLING,
-    });
+
+    try {
+      const products = await Promise.all([
+        getProductsSSR({
+          httpSSR: httpClient,
+          limit: 4,
+          type: ProductType.AUCTION,
+        }),
+        getProductsSSR({
+          httpSSR: httpClient,
+          limit: 4,
+          type: ProductType.SELLING,
+        }),
+      ]);
+
+      auctionProducts = products[0];
+      sellingProducts = products[1];
+    } catch (err) {
+      throw new Error(err);
+    }
 
     return {
       props: {

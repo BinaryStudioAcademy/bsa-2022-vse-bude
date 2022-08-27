@@ -1,5 +1,5 @@
 import { http } from '@helpers';
-import type { Http, ProductType } from '@vse-bude/shared';
+import type { Http, ProductDto, ProductType } from '@vse-bude/shared';
 import { ProductApiRoutes } from '@vse-bude/shared';
 import { ApiRoutes } from '@vse-bude/shared';
 
@@ -12,7 +12,10 @@ interface ProductOptionsSSR extends ProductOptions {
   httpSSR: Http;
 }
 
-export const getProducts = ({ limit, type }: ProductOptions) =>
+export const getProducts = ({
+  limit,
+  type,
+}: ProductOptions): Promise<ProductDto[]> =>
   http.get({
     url: `${ApiRoutes.PRODUCTS}`,
     payload: {
@@ -21,7 +24,11 @@ export const getProducts = ({ limit, type }: ProductOptions) =>
     },
   });
 
-export const getProductsSSR = ({ httpSSR, limit, type }: ProductOptionsSSR) =>
+export const getProductsSSR = ({
+  httpSSR,
+  limit,
+  type,
+}: ProductOptionsSSR): Promise<ProductDto[]> =>
   httpSSR.get({
     url: `${ApiRoutes.PRODUCTS}`,
     payload: {
