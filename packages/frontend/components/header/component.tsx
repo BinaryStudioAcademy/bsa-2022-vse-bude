@@ -17,13 +17,6 @@ import { useTheme } from '@emotion/react';
 import { ProfileInfo } from './profile-info';
 import * as styles from './styles';
 
-const mockImage = [
-  '/images/categories/arts.png',
-  '/images/categories/toys.png',
-  '/images/categories/appliances.png',
-  '/images/categories/decor.png',
-];
-
 export const Header = () => {
   const [show, setShow] = useState(false);
   const { hasToken } = useAuth();
@@ -32,17 +25,14 @@ export const Header = () => {
   const { t } = useTranslation();
   const { colors } = useTheme();
   const categories = useTypedSelector((state) => state.category.list);
-  const categoriesMapped = categories.map((item, i) => ({
+  const categoriesMapped = categories.map((item) => ({
     ...item,
-    image: mockImage[i] || '/images/categories/decor.png',
   }));
 
-  const filters: {
-    category: string;
-  } = { category: '' };
-
   const redirectToCategory = (category: string) => {
-    filters.category = category;
+    const filters = {
+      category: category,
+    };
     push({
       pathname: Routes.ITEMS,
       query: { filter: JSON.stringify(filters) },
@@ -58,7 +48,7 @@ export const Header = () => {
       />
       <Dropdown
         options={categoriesMapped.map((item) => ({
-          value: t(item.title),
+          value: item.title,
           key: 'home',
           onClick: () => {
             redirectToCategory(item.id);
