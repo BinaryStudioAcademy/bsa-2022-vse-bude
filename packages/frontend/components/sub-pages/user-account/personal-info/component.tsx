@@ -14,7 +14,7 @@ import * as styles from './styles';
 
 export const PersonalInfo = () => {
   const { t } = useTranslation();
-  
+
   const {
     register,
     reset,
@@ -27,10 +27,10 @@ export const PersonalInfo = () => {
   } = useForm<UserPersonalInfoDto>({
     defaultValues: {
       avatar: '',
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'example@yahoo.com',
+      phone: '+380999999999',
       city: '',
       region: '',
       country: '',
@@ -77,10 +77,10 @@ export const PersonalInfo = () => {
     reset(
       {
         avatar: '',
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'example@yahoo.com',
+        phone: '+380999999999',
         city: '',
         region: '',
         country: '',
@@ -155,7 +155,7 @@ export const PersonalInfo = () => {
             <SectionHeader>
               {t('personal-info:headline.personalInfo')}
             </SectionHeader>
-            <Flex css={styles.groupInputs}>
+            <Flex css={styles.groupeInputs}>
               <div css={styles.inputRow}>
                 <Input
                   id="firstName-profile"
@@ -190,7 +190,7 @@ export const PersonalInfo = () => {
                 error={errors.email?.message}
               />
             </div>
-            <div css={styles.inputRow}>
+            <Flex css={styles.groupePhone}>
               <Input
                 id="phone-profile"
                 type="text"
@@ -200,13 +200,18 @@ export const PersonalInfo = () => {
                 {...register('phone')}
                 error={errors.phone?.message}
               />
-            </div>
+              <div>
+                <Button type="button" size="big" variant="outlined">
+                  {t('personal-info:action.verify')}
+                </Button>
+              </div>
+            </Flex>
           </Column>
 
           <Column css={styles.sectionRow}>
             <SectionHeader>{t('personal-info:headline.address')}</SectionHeader>
 
-            <Flex css={styles.groupInputs}>
+            <Flex css={styles.groupeInputs}>
               <div css={styles.inputRow}>
                 <Input
                   id="country-profile"
@@ -230,7 +235,7 @@ export const PersonalInfo = () => {
               </div>
             </Flex>
 
-            <Flex css={styles.groupInputs}>
+            <Flex css={styles.groupeInputs}>
               <div css={styles.inputRow}>
                 <Input
                   id="city-profile"

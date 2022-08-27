@@ -64,11 +64,23 @@ export const sectionRow = ({ spaces }: Theme) => css`
   margin-bottom: ${spaces.xl1};
 `;
 
-export const groupInputs = ({ spaces }: Theme) => css`
+export const groupeInputs = ({ spaces }: Theme) => css`
   gap: ${spaces.md};
 `;
 
 export const inputRow = ({ spaces }: Theme) => css`
   margin-bottom: ${spaces.md};
   flex-grow: 1;
+`;
+
+export const groupePhone = ({ spaces }: Theme) => css`
+  gap: ${spaces.md};
+  align-items: 'flex-end';
+`;
+
+export const phoneRow = () => css`
+  display: 'flex';
+  flex-direction: row;
+  align-items: 'flex-end';
+  //flex-grow: 1;
 `;

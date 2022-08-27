@@ -7,7 +7,8 @@
   },
   "action": {
     "save": "Save",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "verify": "Verify"
   },
   "label": {
     "novaPoshta": "# Nova Poshta",
