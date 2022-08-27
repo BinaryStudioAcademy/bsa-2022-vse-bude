@@ -13,6 +13,7 @@ import { VerifyService } from './verify';
 import { NewsService } from './news';
 import { HealthService } from './health';
 import { emailService } from './email';
+import { UserProfileService } from './profile';
 
 export const initServices = (repositories: Repositories) => {
   const hashService: HashService = new HashService();
@@ -38,6 +39,7 @@ export const initServices = (repositories: Repositories) => {
     productService: new ProductService(repositories.productRepository),
     newsService: new NewsService(repositories.newsRepository),
     healthService: new HealthService(repositories.healthRepository),
+    profileService: new UserProfileService(repositories.profileRepository),
     authService: new AuthService(
       repositories.userRepository,
       repositories.refreshTokenRepository,
@@ -64,4 +66,5 @@ export {
   type VerifyService,
   type NewsService,
   type HealthService,
+  type UserProfileService,
 };

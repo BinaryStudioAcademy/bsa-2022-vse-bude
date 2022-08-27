@@ -7,6 +7,7 @@ export enum ApiRoutes {
   UPLOAD_IMAGE = '/upload-image',
   VERIFY = '/verify',
   HEALTH = '/health',
+  PROFILE = '/profile',
 }
 
 export enum AuthApiRoutes {
@@ -29,4 +30,9 @@ export enum VerifyApiRoutes {
 export enum ProductApiRoutes {
   ID = '/:id',
   VIEWS = '/views',
+}
+
+export enum ProfileApiRoutes {
+  GET_USER_BY_ID = '/:userId',
+  UPDATE_DATA = '/save',
 }
