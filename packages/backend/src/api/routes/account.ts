@@ -21,8 +21,8 @@ export const initUserAccountRoutes = (
       const address = await userAccountService.getAddress({ userId });
       const socialMedia = await userAccountService.getSocialMedia({ userId });
       const personalData = mapPersonalInfo({ address, socialMedia });
-      
-return { ...personalData };
+
+      return { ...personalData };
     }),
   );
 

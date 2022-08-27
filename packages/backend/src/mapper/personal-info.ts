@@ -27,8 +27,8 @@ const mapPersonalInfo = ({
   addressKeys.forEach((key) => {
     addressDto[key] = address[key] ? address[key] : '';
   });
-  
-return { ...addressDto, ...socialMediaDto };
+
+  return { ...addressDto, ...socialMediaDto };
 };
 
 export { mapPersonalInfo };
