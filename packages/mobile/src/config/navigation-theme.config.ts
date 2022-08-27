@@ -48,8 +48,8 @@ const NavigationDarkTheme = {
     icon: ColorPalette.WHITE_100,
     titlePrimary: ColorPalette.WHITE_100,
     titleSecondary: ColorPalette.WHITE_100,
-    yellow: ColorPalette.WHITE_100,
-    blue: ColorPalette.WHITE_100,
+    yellow: ColorPalette.YELLOW_200,
+    blue: ColorPalette.BLUE_100,
     subtitle: ColorPalette.YELLOW_100,
   },
 };

@@ -1,3 +1,23 @@
 {
-  "h1": "Random data (Server side by default"
+  "hero": {
+    "title": "Charity auction to help Ukraine",
+    "mobileTitle": "Help Ukraine",
+    "subtitle": "Buy and sell goods at auctions and help the Armed Forces of Ukraine. Funds for all goods will be redirected to the \"Povernysia Zhyvym\" fund",
+    "slogan": "Glory to Ukraine!"
+  },
+  "popularCategories": {
+    "title": "Popular Categories",
+    "link": "See All Categories"
+  },
+  "popularLots": {
+    "title": "Popular Lots",
+    "link": "See All Lots"
+  },
+  "charityOrganizations": {
+    "title": "Charity Organizations"
+  },
+  "popularItems": {
+    "title": "Popular products",
+    "link": "See All products"
+  }
 }

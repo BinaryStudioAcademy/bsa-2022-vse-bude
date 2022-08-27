@@ -24,12 +24,15 @@ type S3StorageEnvKey =
   | 'S3_API_LINK'
   | 'S3_BUCKET_NAME';
 
+type AppEnvKeys = 'APP_URL' | 'APP_EMAIL_FROM' | 'APP_NAME';
+
 type EnvKeys =
   | ProcessEnvKey
   | AuthEnvKeys
   | RedisEnvKey
   | TwilioEnvKey
   | EmailEnvKey
-  | S3StorageEnvKey;
+  | S3StorageEnvKey
+  | AppEnvKeys;
 
 export const getEnv = (key: EnvKeys) => process.env[key];

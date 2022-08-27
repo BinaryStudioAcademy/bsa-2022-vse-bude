@@ -1,47 +1,47 @@
 [
-  {
-    "id": "b60f5e59-da16-495d-a536-e5ceeb52b452",
-    "language": "UA",
-    "theme": "LIGHT",
-    "enableEmailNotifications": true,
-    "userId": "807f73fb-31b8-4e66-9f74-babc8ee95d94",
-    "createdAt": "2022-06-08T19:00:34.277Z",
-    "updatedAt": "2022-08-12T06:07:14.088Z"
-  },
-  {
-    "id": "b3e9543e-59b6-4692-87e3-06fec86dc1dc",
-    "language": "UA",
-    "theme": "LIGHT",
-    "enableEmailNotifications": true,
-    "userId": "b8f594a9-e836-4e25-9979-a56500b21be2",
-    "createdAt": "2022-04-15T22:27:20.188Z",
-    "updatedAt": "2022-08-12T05:40:35.560Z"
-  },
-  {
-    "id": "19ea573f-97b1-40f7-808a-70c2e80bb3b4",
-    "language": "UA",
-    "theme": "LIGHT",
-    "enableEmailNotifications": true,
-    "userId": "f5cf90f8-6943-4e42-b006-03cf9bb707a4",
-    "createdAt": "2022-02-18T08:00:58.461Z",
-    "updatedAt": "2022-08-12T03:37:17.603Z"
-  },
-  {
-    "id": "df9b2aa5-167f-42ad-88e8-04c6cb02708a",
-    "language": "UA",
-    "theme": "LIGHT",
-    "enableEmailNotifications": true,
-    "userId": "47504cdd-55e6-4584-9539-6eef69c6deed",
-    "createdAt": "2022-05-25T14:42:25.974Z",
-    "updatedAt": "2022-08-12T08:19:11.039Z"
-  },
-  {
-    "id": "e3e0a9df-a733-4b06-88bc-363a2f80406d",
-    "language": "UA",
-    "theme": "LIGHT",
-    "enableEmailNotifications": true,
-    "userId": "79946740-1328-414f-bef0-926cb4eb59be",
-    "createdAt": "2022-06-15T06:50:36.643Z",
-    "updatedAt": "2022-08-11T22:42:02.098Z"
-  }
+    {
+        "id": "f02abedb-bdd6-4b90-b1d5-9a063b66f3d3",
+        "language": "UA",
+        "theme": "LIGHT",
+        "enableEmailNotifications": true,
+        "userId": "c3e590c5-385b-41bb-88d7-e893eeb80724",
+        "createdAt": "2022-02-17T21:52:40.001Z",
+        "updatedAt": "2022-08-25T00:16:14.462Z"
+    },
+    {
+        "id": "f85a51c2-fc6c-4fa1-9a53-39ba8700fca3",
+        "language": "UA",
+        "theme": "LIGHT",
+        "enableEmailNotifications": true,
+        "userId": "2dc38d3c-6eb8-4114-b112-ef6286980769",
+        "createdAt": "2021-11-17T11:13:26.960Z",
+        "updatedAt": "2022-08-25T00:28:02.721Z"
+    },
+    {
+        "id": "807e6e43-8a17-44dc-a0c4-b9790fa91815",
+        "language": "UA",
+        "theme": "LIGHT",
+        "enableEmailNotifications": true,
+        "userId": "3014b5eb-5d39-4273-80ce-30bcdd82a19d",
+        "createdAt": "2021-09-28T16:09:41.467Z",
+        "updatedAt": "2022-08-25T00:34:56.776Z"
+    },
+    {
+        "id": "77ac377d-7624-4ada-92ad-7c0a47ac611f",
+        "language": "UA",
+        "theme": "LIGHT",
+        "enableEmailNotifications": true,
+        "userId": "a142365a-6a80-4c4e-a9fa-32cb9ee4dbba",
+        "createdAt": "2022-08-11T09:37:53.120Z",
+        "updatedAt": "2022-08-25T06:42:03.798Z"
+    },
+    {
+        "id": "e2cd3b5c-6bcb-4163-a90d-ed8fd0ae9027",
+        "language": "UA",
+        "theme": "LIGHT",
+        "enableEmailNotifications": true,
+        "userId": "5b4dcf32-963c-464c-b4cd-b4f736759240",
+        "createdAt": "2021-09-26T10:47:22.080Z",
+        "updatedAt": "2022-08-25T14:15:28.337Z"
+    }
 ]

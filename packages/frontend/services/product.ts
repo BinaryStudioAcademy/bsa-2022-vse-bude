@@ -1,5 +1,6 @@
 import { http } from '@helpers';
 import type { Http, ProductType } from '@vse-bude/shared';
+import { ProductApiRoutes } from '@vse-bude/shared';
 import { ApiRoutes } from '@vse-bude/shared';
 
 interface ProductOptions {
@@ -27,4 +28,9 @@ export const getProductsSSR = ({ httpSSR, limit, type }: ProductOptionsSSR) =>
       limit,
       type,
     },
+  });
+
+export const incrementProductViews = (id: string) =>
+  http.get({
+    url: `${ApiRoutes.PRODUCTS}/${id}${ProductApiRoutes.VIEWS}`,
   });

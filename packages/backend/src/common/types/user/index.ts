@@ -1,2 +1,7 @@
 export type { CreateUser } from './create-user';
-export * from './personal-info';
+export type {
+  GetUserAddressDto,
+  GetUserProfileDto,
+  UserSocialMediaDto,
+  UpdateUserProfileDto,
+} from './profile';

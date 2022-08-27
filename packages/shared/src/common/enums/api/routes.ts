@@ -8,6 +8,7 @@ export enum ApiRoutes {
   UPLOAD_IMAGE = '/upload-image',
   VERIFY = '/verify',
   HEALTH = '/health',
+  PROFILE = '/profile',
 }
 
 export enum AuthApiRoutes {
@@ -16,6 +17,8 @@ export enum AuthApiRoutes {
   SIGN_OUT = '/sign-out',
   REFRESH_TOKEN = '/refresh-token',
   USER = '/user',
+  RESET_PASSWORD_LINK = '/reset-password-link',
+  RESET_PASSWORD = '/reset-password',
 }
 
 export enum VerifyApiRoutes {
@@ -27,6 +30,12 @@ export enum VerifyApiRoutes {
 
 export enum ProductApiRoutes {
   ID = '/:id',
+  VIEWS = '/views',
+}
+
+export enum ProfileApiRoutes {
+  GET_USER_BY_ID = '/:userId',
+  UPDATE_DATA = '/save',
 }
 
 export enum AccountApiRoutes {
