@@ -72,7 +72,8 @@ export class UserProfileRepository {
     data: UpdateUserProfileDto;
   }): Promise<GetUserProfileDto> {
     const { avatar, firstName, lastName } = data;
-    return this._dbClient.user.update({
+    
+return this._dbClient.user.update({
       where: {
         id: userId,
       },
@@ -100,7 +101,8 @@ export class UserProfileRepository {
     return await this._dbClient.$transaction(
       socialMedia.map((userLink) => {
         const { id, link, socialMedia } = userLink;
-        return this._dbClient.socialMedia.upsert({
+        
+return this._dbClient.socialMedia.upsert({
           where: { id },
           update: {
             link,
