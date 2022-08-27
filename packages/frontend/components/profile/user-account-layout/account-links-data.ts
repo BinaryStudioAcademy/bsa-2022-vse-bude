@@ -1,31 +1,31 @@
-import { IconName, Routes, AccountRoutes } from '@enums';
+import { IconName, Routes, ProfileRoutes } from '@enums';
 import type { LinkData } from './types';
 
-export const linksData: LinkData[] = [
+export const getLinksData = (userId: string): LinkData[] => [
   {
     iconPath: IconName.USER,
     label: 'account:personalInfo',
-    path: Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_PERSONAL,
+    path: `${Routes.PROFILE}/${userId}${ProfileRoutes.PERSONAL_INFO}`,
   },
   {
     iconPath: IconName.LIST,
     label: 'account:myList',
-    path: Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_LIST,
+    path: `${Routes.PROFILE}/${userId}${ProfileRoutes.LIST}`,
   },
   {
     iconPath: IconName.SETTINGS,
     label: 'account:settings',
-    path: Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_SETTINGS,
+    path: `${Routes.PROFILE}/${userId}${ProfileRoutes.ACCOUNT_SETTINGS}`,
   },
   {
     iconPath: IconName.MESSAGE,
     label: 'account:messages',
-    path: Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_MESSAGES,
+    path: `${Routes.PROFILE}/${userId}${ProfileRoutes.MESSAGES}`,
   },
   {
     iconPath: IconName.SUPPORT,
     label: 'account:support',
-    path: Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_SUPPORT,
+    path: `${Routes.PROFILE}/${userId}${ProfileRoutes.SUPPORT}`,
   },
   {
     iconPath: IconName.SIGN_OUT,

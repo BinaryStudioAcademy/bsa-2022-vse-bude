@@ -1,7 +1,7 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Home, Layout } from '@components';
 import { wrapper } from 'store';
-import { withPublic } from '@helpers';
+import { withPublic } from '@hocs';
 import { AuthHelper, CookieStorage } from '@helpers';
 import { fetchCategoriesSSR } from 'store/category';
 import type { HttpAcceptLanguage } from '@vse-bude/shared';

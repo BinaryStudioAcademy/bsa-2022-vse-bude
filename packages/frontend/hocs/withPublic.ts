@@ -5,7 +5,7 @@ export function withPublic(gssp) {
   return async (context) => {
     const restrictedRoutes: string[] = [Routes.SIGN_IN, Routes.SIGN_UP];
 
-    const accessToken = context.req.cookies[StorageKey.ACCESS_TOKEN];
+    const accessToken = context.req?.cookies[StorageKey.ACCESS_TOKEN];
     if (accessToken && restrictedRoutes.includes(context.req.url)) {
       return {
         redirect: {

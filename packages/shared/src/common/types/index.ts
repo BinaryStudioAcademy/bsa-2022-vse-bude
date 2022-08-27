@@ -5,3 +5,5 @@ export * from './auth';
 export * from './verify';
 export * from './product';
 export * from './category';
+export * from './social-media';
+export * from './profile';

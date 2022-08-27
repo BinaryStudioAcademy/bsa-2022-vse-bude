@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { InternalLink, Flex, IconButton } from '@primitives';
 import { IconColorProps } from '@enums';
 import { useRouter } from 'next/router';
-import type { LinkProps } from '../../user-account-layout/types';
+import type { LinkProps } from '../types';
 import * as styles from './styles';
 
 export const DashboardLink: FC<LinkProps> = ({

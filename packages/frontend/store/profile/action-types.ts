@@ -1,5 +1,4 @@
 export enum ProfileActions {
-  FETCH_PERSONAL_INFO = 'profile/fetch-personal-info',
-  FETCH_MY_LIST = 'profile/fetch-my-list',
-  FETCH_SETTINGS = 'profile/fetch-my-list',
+  FETCH_USER_PROFILE = 'profile/fetch-user',
+  SAVE_USER_PROFILE = 'profile/save-user',
 }

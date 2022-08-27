@@ -5,10 +5,10 @@ export enum ApiRoutes {
   PRODUCTS = '/products',
   NEWS = '/news',
   AUTH = '/auth',
+  PROFILE = '/profile',
   UPLOAD_IMAGE = '/upload-image',
   VERIFY = '/verify',
   HEALTH = '/health',
-  PROFILE = '/profile',
 }
 
 export enum AuthApiRoutes {

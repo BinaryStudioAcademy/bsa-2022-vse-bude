@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import type { Http } from '@vse-bude/shared';
-import type { ProductType } from '@vse-bude/shared';
+import type { Http, ProductType } from '@vse-bude/shared';
 import {
   getProducts,
   getProductsSSR,
   incrementProductViews,
 } from 'services/product';
+
 import { ProductActions } from './action-types';
 
 interface RequestOptions {

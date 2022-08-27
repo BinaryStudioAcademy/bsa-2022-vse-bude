@@ -1,4 +1,4 @@
-type UserPersonalInfoDto = {
+type SaveUserProfileDto = {
   avatar?: string;
   firstName: string;
   lastName: string;
@@ -17,4 +17,4 @@ type UserPersonalInfoDto = {
   repeatPassword?: string;
 };
 
-export type { UserPersonalInfoDto };
+export type { SaveUserProfileDto };

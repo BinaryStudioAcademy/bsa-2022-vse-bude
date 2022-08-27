@@ -1,7 +1,6 @@
 import type { Repositories } from '@repositories';
 import { TwilioSMSProvider, BarSMSProvider } from '@providers';
 import { getEnv } from '@helpers';
-import { UserService } from './user';
 import { CategoryService } from './category';
 import { ProductService } from './product';
 import { AuthService } from './auth';
@@ -34,7 +33,6 @@ export const initServices = (repositories: Repositories) => {
   );
 
   return {
-    userService: new UserService(repositories.userRepository),
     categoryService: new CategoryService(repositories.categoryRepository),
     productService: new ProductService(repositories.productRepository),
     newsService: new NewsService(repositories.newsRepository),
@@ -58,7 +56,6 @@ export const initServices = (repositories: Repositories) => {
 export type Services = ReturnType<typeof initServices>;
 
 export {
-  type UserService,
   type CategoryService,
   type ProductService,
   type AuthService,

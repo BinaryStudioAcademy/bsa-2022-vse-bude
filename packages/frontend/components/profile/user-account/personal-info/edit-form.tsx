@@ -4,15 +4,15 @@ import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { Input, PasswordInput, Column, Flex, Button } from '@primitives';
 import { userUpdateSchema } from 'validation-schemas/user/user-update';
-import type { UserPersonalInfoDto } from '@vse-bude/shared';
+import type { SaveUserProfileDto } from '@vse-bude/shared';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { UserPersonalInfoValidationMessage } from '@vse-bude/shared';
 import flag from '../../../../public/images/flagBg.png';
-import { SectionHeader, NestedLayout } from '../../common';
+import { SectionHeader, NestedLayout } from '../../../sub-pages/common';
 import { Noavatar, Avatar, DownloadButton } from './primitives';
 import * as styles from './styles';
 
-export const PersonalInfo = () => {
+const EditPersonalInfo = () => {
   const { t } = useTranslation();
 
   const {
@@ -24,7 +24,7 @@ export const PersonalInfo = () => {
     watch,
     handleSubmit,
     formState: { errors },
-  } = useForm<UserPersonalInfoDto>({
+  } = useForm<SaveUserProfileDto>({
     defaultValues: {
       avatar: '',
       firstName: 'John',
@@ -52,7 +52,7 @@ export const PersonalInfo = () => {
     'lastName',
   ]);
 
-  const onSave: SubmitHandler<UserPersonalInfoDto> = (data, event) => {
+  const onSave: SubmitHandler<SaveUserProfileDto> = (data, event) => {
     event.preventDefault();
     console.log('data', data);
   };
@@ -358,3 +358,5 @@ export const PersonalInfo = () => {
     </NestedLayout>
   );
 };
+
+export default EditPersonalInfo;

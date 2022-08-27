@@ -5,11 +5,11 @@ import { Layout } from '@components';
 import { Container, Flex } from '@primitives';
 import { DashboardLink } from './dashboard-link';
 import type { AccountPageProps } from './types';
-import { linksData } from './account-links-data';
+import { getLinksData } from './account-links-data';
 import * as styles from './styles';
 
 export const AccountLayout: FC<AccountPageProps> = ({ children }) => {
-  const router = useRouter();
+  const { query, pathname } = useRouter();
   const { t } = useTranslation();
 
   return (
@@ -19,9 +19,9 @@ export const AccountLayout: FC<AccountPageProps> = ({ children }) => {
           <h3 css={styles.pageHeader}>{t('account:accountPage')}</h3>
           <Flex css={styles.pageContent}>
             <div css={styles.linksContainer}>
-              {linksData.map((link, idx) => {
+              {getLinksData(query.id as string).map((link, idx) => {
                 const { iconPath, label, path } = link;
-                const location = router.pathname === link.path;
+                const location = pathname === link.path;
                 const tLabel = t(label);
 
                 return (
@@ -35,7 +35,6 @@ export const AccountLayout: FC<AccountPageProps> = ({ children }) => {
                 );
               })}
             </div>
-
             {children}
           </Flex>
         </div>
