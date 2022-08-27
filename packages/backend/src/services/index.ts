@@ -3,7 +3,6 @@ import { TwilioSMSProvider, BarSMSProvider } from '@providers';
 import { getEnv } from '@helpers';
 import { SendInBlueEmailProvider } from 'providers/email';
 import { UserService } from './user';
-import { UserAccountService } from './account';
 import { CategoryService } from './category';
 import { ProductService } from './product';
 import { AuthService } from './auth';
@@ -37,7 +36,6 @@ export const initServices = (repositories: Repositories) => {
 
   return {
     userService: new UserService(repositories.userRepository),
-    userAccountService: new UserAccountService(repositories.accountRepository),
     categoryService: new CategoryService(repositories.categoryRepository),
     productService: new ProductService(repositories.productRepository),
     newsService: new NewsService(repositories.newsRepository),
@@ -60,7 +58,6 @@ export type Services = ReturnType<typeof initServices>;
 
 export {
   type UserService,
-  type UserAccountService,
   type CategoryService,
   type ProductService,
   type AuthService,
