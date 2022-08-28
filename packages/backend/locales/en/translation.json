@@ -15,6 +15,7 @@
       "body": "Please complete the e-mail confirmation process with this code: "
     }
   },
+  "PRODUCT_NOT_FOUND": "Product not found!"
   "categories": {
     "LAPTOPS_AND_PC_CATEGORY_NAME": "Laptops and computers",
     "SMARTPHONES_TV_AND_ELECTRONICS_CATEGORY_NAME": "Smartphones, TV and electronics",

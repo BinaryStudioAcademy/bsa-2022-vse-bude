@@ -44,7 +44,12 @@ export const ProductCard = (props: ProductCardProps) => {
           <Price amount={props.price} currency={props.currency} />
         </div>
         <div className="productAction">
-          <Button title="Place a Bid" variant="filled" size="small">
+          <Button
+            title="Place a Bid"
+            variant="filled"
+            size="small"
+            onClick={() => props.onButtonClick(props.id)}
+          >
             {t('common:components.product.placeBidBtn')}
           </Button>
         </div>

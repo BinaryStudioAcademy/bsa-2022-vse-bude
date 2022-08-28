@@ -6,6 +6,7 @@ export function Anchor({
   disabled = false,
   label,
   target = '_blank',
+  children,
   ...props
 }: AnchorProps) {
   return (
@@ -17,7 +18,7 @@ export function Anchor({
       css={linkStyles}
       {...props}
     >
-      {label}
+      {label || children}
     </a>
   );
 }

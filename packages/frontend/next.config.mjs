@@ -6,7 +6,7 @@ const { i18n } = i18nConfig;
 const nextConfig = {
   i18n,
   images: {
-    domains: ['gingkodesign.com', 'cloudflare-ipfs.com', 'loremflickr.com'],
+    domains: ['gingkodesign.com', 'cloudflare-ipfs.com', 'loremflickr.com', 'picsum.photos'],
   },
   compiler: {
     emotion: true,

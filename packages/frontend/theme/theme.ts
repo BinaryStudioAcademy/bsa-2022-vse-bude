@@ -33,6 +33,7 @@ const fontSizes = {
   h6: '16px',
   body1: '16px',
   body2: '14px',
+  body3: '12px',
   label: '14px',
   tub: '18px',
   toggle: '14px',
