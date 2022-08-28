@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { Fragment, useEffect } from 'react';
 import { useAppDispatch, useAuth } from '@hooks';
 import { getCurrentUser } from 'store/auth';
+import { getFavoriteIds } from '../../store/product';
 
 interface UserProviderProps {
   children: ReactNode;
@@ -16,6 +17,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
   useEffect(() => {
     if (!hasUser && hasToken) {
       dispatch(getCurrentUser());
+      dispatch(getFavoriteIds());
     }
   }, [dispatch, hasToken, hasUser]);
 

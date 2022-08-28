@@ -27,14 +27,14 @@ const LotSection = ({ title, lots, loadMoreTitle }: LotProps) => (
         {lots.map((item) => (
           <SplideSlide key={item.id}>
             <ProductCard
+              data={item}
               name={item.title}
               description={item.description}
               price={item.price}
               images={item.imageLinks}
-              currency="EURO"
+              currency="UAH"
               auctionDate={item.endDate}
-              // eslint-disable-next-line @typescript-eslint/no-empty-function
-              onChangeIsFavorite={() => {}}
+              isFavorite={false}
             />
           </SplideSlide>
         ))}

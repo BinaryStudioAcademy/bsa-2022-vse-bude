@@ -35,6 +35,11 @@ export const incrementProductViews = (id: string) =>
     url: `${ApiRoutes.PRODUCTS}/${id}${ProductApiRoutes.VIEWS}`,
   });
 
+export const fetchFavoriteProductsIds = () =>
+  http.get({
+    url: `${ApiRoutes.PRODUCTS}${ProductApiRoutes.FAVORITE_IDS}`,
+  });
+
 export const addToFavorites = (productId: string) =>
   http.post({
     url: `${ApiRoutes.PRODUCTS}${ProductApiRoutes.FAVORITE}`,
@@ -45,5 +50,5 @@ export const addToFavorites = (productId: string) =>
 
 export const deleteFromFavorites = (productId: string) =>
   http.delete({
-    url: `${ApiRoutes.PRODUCTS}${ProductApiRoutes.FAVORITE}?productId${productId}`,
+    url: `${ApiRoutes.PRODUCTS}${ProductApiRoutes.FAVORITE}?productId=${productId}`,
   });
