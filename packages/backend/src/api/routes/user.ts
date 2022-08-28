@@ -12,65 +12,6 @@ export const initUserRoutes = (
 
   /**
    * @openapi
-   * definitions:
-   *   Role:
-   *     type: string
-   *     enum:
-   *     - USER
-   *     - ADMIN
-   */
-
-  /**
-   * @openapi
-   * definitions:
-   *   User:
-   *     properties:
-   *       updatedAt:
-   *         type: string
-   *         format: date-time
-   *       emailVerified:
-   *         type: boolean
-   *       phoneVerified:
-   *         type: boolean
-   *       passwordHash:
-   *         type: string
-   *       createdAt:
-   *         type: string
-   *         format: date-time
-   *       role:
-   *         "$ref": "#/definitions/Role"
-   *       avatar:
-   *         type: string
-   *         nullable: true
-   *       lastName:
-   *         type: string
-   *       firstName:
-   *         type: string
-   *       phone:
-   *         type: string
-   *       email:
-   *         type: string
-   *       id:
-   *         type: string
-   *     required:
-   *     - updatedAt
-   *     - emailVerified
-   *     - phoneVerified
-   *     - passwordHash
-   *     - createdAt
-   *     - role
-   *     - avatar
-   *     - lastName
-   *     - firstName
-   *     - phone
-   *     - email
-   *     - id
-   *     type: object
-   *     description: Model User
-   */
-
-  /**
-   * @openapi
    * /users:
    *   get:
    *     tags: [User]

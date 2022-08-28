@@ -10,6 +10,7 @@ const nextConfig = {
       'gingkodesign.com',
       'cloudflare-ipfs.com',
       'loremflickr.com',
+      'picsum.photos',
       'vse-bude.fra1.digitaloceanspaces.com',
     ],
   },
