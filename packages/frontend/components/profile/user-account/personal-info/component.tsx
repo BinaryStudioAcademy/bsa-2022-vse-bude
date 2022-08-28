@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { Button } from '@primitives';
 import dynamic from 'next/dynamic';
 import flag from '../../../../public/images/flagBg.png';
-import { NestedLayout } from '../../../sub-pages/common';
+import { NestedLayout } from '../common';
 import * as styles from './styles';
 import { Noavatar, Avatar, ProfileData } from './primitives';
 
@@ -38,7 +38,7 @@ export const PersonalInfo = () => {
             )}
           </div>
         </div>
-        {/* 21sdasds | authUser?.id*/}
+
         <Flex justify={'flex-end'} css={styles.buttons}>
           {!isEditing && authUser?.id === user.id && (
             <Button

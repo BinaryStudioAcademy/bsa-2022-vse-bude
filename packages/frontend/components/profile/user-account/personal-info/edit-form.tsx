@@ -7,7 +7,7 @@ import { userUpdateSchema } from 'validation-schemas/user/user-update';
 import type { SaveUserProfileDto } from '@vse-bude/shared';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { UserPersonalInfoValidationMessage } from '@vse-bude/shared';
-import { SectionHeader, NestedLayout } from '../../../sub-pages/common';
+import { SectionHeader, NestedLayout } from '../common';
 import * as styles from './styles';
 
 const EditPersonalInfo = () => {
