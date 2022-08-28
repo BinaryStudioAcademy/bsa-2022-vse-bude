@@ -25,9 +25,6 @@ export const Header = () => {
   const { t } = useTranslation();
   const { colors } = useTheme();
   const categories = useTypedSelector((state) => state.category.list);
-  const categoriesMapped = categories.map((item) => ({
-    ...item,
-  }));
 
   const redirectToCategory = (category: string) => {
     const filters = {
@@ -47,7 +44,7 @@ export const Header = () => {
         label={t('common:header.nav.home')}
       />
       <Dropdown
-        options={categoriesMapped.map((item) => ({
+        options={categories.map((item) => ({
           value: item.title,
           key: 'home',
           onClick: () => {
