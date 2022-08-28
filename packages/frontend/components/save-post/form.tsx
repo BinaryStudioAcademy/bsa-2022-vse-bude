@@ -33,7 +33,7 @@ export default function PostForm() {
       images.forEach((file) => formData.append('images', file));
       Object.keys(data).forEach((key) => formData.append(key, data[key]));
 
-      createPost(formData);
+      console.log(await createPost(formData));
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
