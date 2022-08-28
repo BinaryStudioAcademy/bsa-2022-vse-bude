@@ -9,4 +9,5 @@ export interface ProductCardProps {
   data: {
     id: string;
   };
+  onButtonClick: (productId: string) => void;
 }

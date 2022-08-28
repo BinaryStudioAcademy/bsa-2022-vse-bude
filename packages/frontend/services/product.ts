@@ -30,6 +30,16 @@ export const getProductsSSR = ({ httpSSR, limit, type }: ProductOptionsSSR) =>
     },
   });
 
+export const getProductById = (id: string) =>
+  http.get({
+    url: `${ApiRoutes.PRODUCTS}/${id}`,
+  });
+
+export const getProductByIdSSR = (httpSSR: Http, id: string) =>
+  httpSSR.get({
+    url: `${ApiRoutes.PRODUCTS}/${id}`,
+  });
+
 export const incrementProductViews = (id: string) =>
   http.get({
     url: `${ApiRoutes.PRODUCTS}/${id}${ProductApiRoutes.VIEWS}`,

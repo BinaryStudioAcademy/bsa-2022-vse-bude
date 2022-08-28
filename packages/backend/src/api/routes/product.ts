@@ -93,7 +93,7 @@ export const initProductRoutes = (
 
   router.get(
     apiPath(path, ProductApiRoutes.ID),
-    wrap((req) => productService.getById(req.params.id)),
+    wrap((req) => productService.getById(req)),
   );
 
   router.get(

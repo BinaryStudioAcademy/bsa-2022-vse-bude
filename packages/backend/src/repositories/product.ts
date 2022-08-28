@@ -36,6 +36,12 @@ export class ProductRepository {
         id,
       },
       include: {
+        category: {
+          select: {
+            id: true,
+            title: true,
+          },
+        },
         bids: true,
         author: {
           select: {

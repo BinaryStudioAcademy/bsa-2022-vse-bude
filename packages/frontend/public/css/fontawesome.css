@@ -5396,6 +5396,10 @@ readers do not read off random characters that represent icons */
   content: '\f3ce';
 }
 
+.fa-mobile-notch::before {
+  content: '\e1ee';
+}
+
 .fa-mobile-button::before {
   content: '\f10b';
 }
