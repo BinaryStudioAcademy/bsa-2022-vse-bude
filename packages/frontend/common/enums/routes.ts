@@ -11,6 +11,7 @@ export enum Routes {
   NEWS = '/news',
   ABOUT = '/about',
   CATEGORIES = '/categories',
+  ITEMS = '/items',
 }
 
 export enum AccountRoutes {
