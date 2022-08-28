@@ -36,10 +36,8 @@ export class ProductService {
     return this._productRepository.incrementViews(id);
   }
 
-  public async favorite() {
-    return await this._productRepository.favorite(
-      'c3e590c5-385b-41bb-88d7-e893eeb80724',
-    );
+  public async favorite(userId: string) {
+    return await this._productRepository.favorite(userId);
   }
 
   public async addToFavorites({ userId, productId }: AddProductToFavorites) {

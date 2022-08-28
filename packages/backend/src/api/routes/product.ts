@@ -7,6 +7,7 @@ import { apiPath } from '@helpers';
 import type { Product } from '@prisma/client';
 import type { ProductQuery } from '@types';
 import { ProductApiRoutes } from '@vse-bude/shared';
+import { authMiddleware } from '@middlewares';
 
 export const initProductRoutes = (
   { productService }: Services,
@@ -49,7 +50,8 @@ export const initProductRoutes = (
 
   router.get(
     apiPath(path, ProductApiRoutes.FAVORITE),
-    wrap(() => productService.favorite()),
+    authMiddleware,
+    wrap((req: Request) => productService.favorite(req.userId)),
   );
 
   /**
@@ -95,6 +97,7 @@ export const initProductRoutes = (
 
   router.post(
     apiPath(path, ProductApiRoutes.FAVORITE),
+    authMiddleware,
     wrap((req: Request) =>
       productService.addToFavorites({
         userId: req.userId,
@@ -105,6 +108,7 @@ export const initProductRoutes = (
 
   router.delete(
     apiPath(path, ProductApiRoutes.FAVORITE),
+    authMiddleware,
     wrap((req: Request) =>
       productService.deleteFromFavorites({
         userId: req.userId,
