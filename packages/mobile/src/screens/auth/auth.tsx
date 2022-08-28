@@ -1,6 +1,6 @@
 import React, { FC, ReactElement } from 'react';
 import { ColorPalette, UserSignInDto, UserSignUpDto } from '@vse-bude/shared';
-import { RootScreenName } from '~/common/enums/enums';
+import { MainScreenName, RootScreenName } from '~/common/enums/enums';
 import { auth as authActions } from '~/store/actions';
 import {
   useAppDispatch,
@@ -17,6 +17,8 @@ import {
   StatusBar,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
+import { NavigationProp } from '@react-navigation/native';
+import { MainNavigationParamList } from '~/common/types/navigation/navigation';
 import {
   GoogleButton,
   SignInForm,
@@ -30,7 +32,7 @@ const Auth: FC = () => {
   const dispatch = useAppDispatch();
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
-  const navigation = useNavigation();
+  const navigation: NavigationProp<MainNavigationParamList> = useNavigation();
   const screenLabel =
     name === RootScreenName.SIGN_IN
       ? t('verification.SING_IN')
@@ -38,6 +40,7 @@ const Auth: FC = () => {
 
   const handleSignIn = (payload: UserSignInDto): void => {
     dispatch(authActions.signIn(payload));
+    navigation.navigate(MainScreenName.HOME);
   };
 
   const handleSignUp = (payload: UserSignUpDto): void => {
