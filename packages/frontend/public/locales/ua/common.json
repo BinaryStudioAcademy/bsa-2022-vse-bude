@@ -56,6 +56,16 @@
         "seconds": "с"
       }
     },
+    "item": {
+      "placeBidBtn": "Зробити ставку",
+      "buyBtn": "Купити",
+      "time": {
+        "hours": "год",
+        "days": "днів",
+        "minutes": "хв",
+        "seconds": "сек"
+      }
+    },
     "input": {
       "searchProductsPlaceholder": "Пошук продуктів"
     }

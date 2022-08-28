@@ -56,6 +56,16 @@
         "seconds": "s"
       }
     },
+    "item": {
+      "placeBidBtn": "Place a Bid",
+      "buyBtn": "Buy",
+      "time": {
+        "hours": "hours",
+        "days": "day",
+        "minutes": "min",
+        "seconds": "sec"
+      }
+    },
     "input": {
       "searchProductsPlaceholder": "Search the products"
     }
