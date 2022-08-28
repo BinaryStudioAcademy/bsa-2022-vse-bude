@@ -35,6 +35,11 @@ export const getProductById = (id: string) =>
     url: `${ApiRoutes.PRODUCTS}/${id}`,
   });
 
+export const getProductByIdSSR = (httpSSR: Http, id: string) =>
+  httpSSR.get({
+    url: `${ApiRoutes.PRODUCTS}/${id}`,
+  });
+
 export const incrementProductViews = (id: string) =>
   http.get({
     url: `${ApiRoutes.PRODUCTS}/${id}${ProductApiRoutes.VIEWS}`,

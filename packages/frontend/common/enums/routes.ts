@@ -12,7 +12,7 @@ export enum Routes {
   NEWS = '/news',
   ABOUT = '/about',
   CATEGORIES = '/categories',
-  ITEMS = '/items',
+  NOT_FOUND = '/404'
 }
 
 export enum AccountRoutes {

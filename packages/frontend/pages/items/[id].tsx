@@ -1,22 +1,28 @@
-﻿import { Layout } from '@components';
+﻿import { Layout, Item } from '@components';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { Item } from '@components';
-import { withPublic } from '@helpers';
-import { getProductById, getProducts } from 'services/product';
+import { AuthHelper, CookieStorage, withPublic } from '@helpers';
+import { getProductByIdSSR, getProductsSSR } from 'services/product';
 import { LotSection } from 'components/home/lot-section';
 import { Routes } from '@enums';
 import { PagePath } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import type { ItemDto } from '@vse-bude/shared';
+import { Http } from '@vse-bude/shared';
 
 export const getServerSideProps = withPublic(async (ctx) => {
   const { locale } = ctx;
 
   const id = ctx.query.id as string;
+  const storage = new CookieStorage(ctx);
+  const auth = new AuthHelper(storage);
+  const httpSSR = new Http(process.env.NEXT_PUBLIC_API_ROUTE, auth);
 
   try {
-    const item = await getProductById(id);
-    const similarItems = await getProducts({ limit: 10 });
+    const item = await getProductByIdSSR(httpSSR, id);
+    const similarItems = await getProductsSSR({
+      httpSSR,
+      limit: 10,
+    });
 
     return {
       props: {
@@ -25,12 +31,10 @@ export const getServerSideProps = withPublic(async (ctx) => {
         similarItems,
       },
     };
-  } catch (e) {
-    console.log('Error');
-
+  } catch {
     return {
       redirect: {
-        destination: Routes.DEFAULT,
+        destination: Routes.NOT_FOUND,
       },
     };
   }
