@@ -22,6 +22,7 @@ export const wrapper = ({
 
   @media (max-width: ${breakpoints.md}px) {
     flex-direction: column;
+    align-items: flex-start;
     h3 {
       margin-bottom: ${spaces.sm};
     }

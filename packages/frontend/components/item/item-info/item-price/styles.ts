@@ -8,6 +8,7 @@ export const priceWrapper = ({
   lineHeights,
   spaces,
 }: Theme) => css`
+  display: flex;
   span {
     color: ${colors.text};
     font-weight: ${fontWeights.h5};

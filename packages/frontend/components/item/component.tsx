@@ -3,7 +3,7 @@ import type { ItemDto } from '@vse-bude/shared';
 import { ProductType } from '@vse-bude/shared';
 import { Container } from '@primitives';
 import { lightTheme } from 'theme';
-import { useWindowSize } from 'hooks/use-window-size';
+import { useWindowSize } from '@hooks';
 import { ItemImageSlider } from './image-slider/component';
 import { ItemInfoSelling } from './item-info-selling/component';
 import { ItemInfoAuction } from './item-info-auction/component';
@@ -29,6 +29,10 @@ export const Item = ({ item }: ItemProps) => {
   const handleAddFavourite = () => console.log('favourite');
   const handleBuy = () => console.log('buy');
   const handleBid = () => console.log('bid');
+
+  // mockedUp date
+  const targetDate = new Date();
+  targetDate.setDate(targetDate.getDate() + 1);
 
   return (
     <React.Fragment>
