@@ -51,6 +51,45 @@ export class ProductRepository {
     });
   }
 
+  public async favorite(userId: string) {
+    const query = this._dbClient.favoriteProducts.findMany({
+      where: {
+        userId: userId,
+      },
+      include: {
+        product: {
+          select: {
+            title: true,
+            description: true,
+            price: true,
+            imageLinks: true,
+            status: true,
+          },
+        },
+      },
+    });
+
+    return await query;
+  }
+
+  public async addToFavorites(userId: string, productId: string) {
+    return await this._dbClient.favoriteProducts.create({
+      data: {
+        userId,
+        productId,
+      },
+    });
+  }
+
+  public async deleteFromFavorites(userId: string, productId: string) {
+    return await this._dbClient.favoriteProducts.delete({
+      where: {
+        userId,
+        productId,
+      },
+    });
+  }
+
   public incrementViews(id: string) {
     return this._dbClient.product.update({
       where: {

@@ -1,4 +1,5 @@
 import type { ApiRoutes } from '@vse-bude/shared';
+import type { Request } from 'express';
 import { Router } from 'express';
 import { wrap } from '@helpers';
 import type { Services } from '@services';
@@ -46,6 +47,11 @@ export const initProductRoutes = (
     ),
   );
 
+  router.get(
+    apiPath(path, ProductApiRoutes.FAVORITE),
+    wrap(() => productService.favorite()),
+  );
+
   /**
    * @openapi
    * /products/{type}:
@@ -85,6 +91,26 @@ export const initProductRoutes = (
   router.get(
     apiPath(path, ProductApiRoutes.ID + ProductApiRoutes.VIEWS),
     wrap((req) => productService.incrementViews(req.params.id, req)),
+  );
+
+  router.post(
+    apiPath(path, ProductApiRoutes.FAVORITE),
+    wrap((req: Request) =>
+      productService.addToFavorites({
+        userId: req.userId,
+        productId: req.body.productId,
+      }),
+    ),
+  );
+
+  router.delete(
+    apiPath(path, ProductApiRoutes.FAVORITE),
+    wrap((req: Request) =>
+      productService.deleteFromFavorites({
+        userId: req.userId,
+        productId: req.params.productId,
+      }),
+    ),
   );
 
   return router;

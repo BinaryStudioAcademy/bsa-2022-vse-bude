@@ -2,6 +2,10 @@ import type { ProductRepository } from '@repositories';
 import type { ProductQuery } from '@types';
 import type { Request } from 'express';
 import { getUserIdFromRequest } from '@helpers';
+import type {
+  AddProductToFavorites,
+  DeleteProductFromFavorites,
+} from '@vse-bude/shared';
 
 export class ProductService {
   private _productRepository: ProductRepository;
@@ -30,5 +34,22 @@ export class ProductService {
     }
 
     return this._productRepository.incrementViews(id);
+  }
+
+  public async favorite() {
+    return await this._productRepository.favorite(
+      'c3e590c5-385b-41bb-88d7-e893eeb80724',
+    );
+  }
+
+  public async addToFavorites({ userId, productId }: AddProductToFavorites) {
+    return await this._productRepository.addToFavorites(userId, productId);
+  }
+
+  public async deleteFromFavorites({
+    userId,
+    productId,
+  }: DeleteProductFromFavorites) {
+    return await this._productRepository.deleteFromFavorites(userId, productId);
   }
 }
