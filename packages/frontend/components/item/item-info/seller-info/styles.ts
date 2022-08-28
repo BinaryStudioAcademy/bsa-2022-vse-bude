@@ -18,14 +18,25 @@ export const sellerInfoWrapper = ({
   }
 `;
 
-export const title = ({ spaces }: Theme) => css`
+export const title = ({ spaces, breakpoints, fontSizes }: Theme) => css`
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: ${spaces.sm};
+
+  @media (max-width: ${breakpoints.md}px) {
+    h6 {
+      font-size: ${fontSizes.body2};
+    }
+  }
 `;
 
-export const seller = ({ spaces, fontSizes, fontWeights }: Theme) => css`
+export const seller = ({
+  spaces,
+  fontSizes,
+  fontWeights,
+  breakpoints,
+}: Theme) => css`
   display: flex;
   align-items: center;
   span {
@@ -34,6 +45,12 @@ export const seller = ({ spaces, fontSizes, fontWeights }: Theme) => css`
     font-weight: ${fontWeights.h5};
   }
   margin-bottom: ${spaces.sm};
+
+  @media (max-width: ${breakpoints.md}px) {
+    span {
+      font-size: ${fontSizes.body2};
+    }
+  }
 `;
 
 export const contacts = ({
@@ -72,5 +89,15 @@ export const phone = ({
   @media (max-width: ${breakpoints.sm}px) {
     width: 100%;
     margin-bottom: ${spaces.sm};
+  }
+`;
+
+export const contactSeller = ({ fontSizes, breakpoints }: Theme) => css`
+  @media (max-width: ${breakpoints.md}px) {
+    font-size: ${fontSizes.body2};
+  }
+
+  @media (max-width: ${breakpoints.sm}px) {
+    font-size: ${fontSizes.body3};
   }
 `;

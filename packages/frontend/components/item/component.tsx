@@ -8,7 +8,6 @@ import { ItemImageSlider } from './image-slider/component';
 import { ItemInfoSelling } from './item-info-selling/component';
 import { ItemInfoAuction } from './item-info-auction/component';
 import { ImageSliderSplide } from './image-slider-splide/component';
-
 import * as styles from './styles';
 
 interface ItemProps {

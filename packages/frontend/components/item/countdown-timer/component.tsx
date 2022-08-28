@@ -12,10 +12,10 @@ interface CountDownTimerProps {
 function useTimeTranslations() {
   const { t } = useTranslation();
   const timeTranslations: TimerTranslations = {
-    daysText: t('common:components.item.time.days'),
-    hoursText: t('common:components.item.time.hours'),
-    minsText: t('common:components.item.time.minutes'),
-    secsText: t('common:components.item.time.seconds'),
+    daysText: t('item:time.days'),
+    hoursText: t('item:time.hours'),
+    minsText: t('item:time.minutes'),
+    secsText: t('item:time.seconds'),
   };
 
   return timeTranslations;
@@ -37,34 +37,24 @@ export const CountDownTimer = ({ targetDate }: CountDownTimerProps) => {
   const getShownValue = (value: number) =>
     value >= 10 ? `${value}` : `0${value}`;
 
-  if (
-    timerValue.days +
-      timerValue.hours +
-      timerValue.minutes +
-      timerValue.seconds <=
-    0
-  ) {
-    return <div>Expired!</div>;
-  } else {
-    return (
-      <div css={styles.wrapper}>
-        <div>
-          <span>{getShownValue(timerValue.days)}</span>
-          <span>{timeTranslations.daysText}</span>
-        </div>
-        <div>
-          <span>{getShownValue(timerValue.hours)}</span>
-          <span>{timeTranslations.hoursText}</span>
-        </div>
-        <div>
-          <span>{getShownValue(timerValue.minutes)}</span>
-          <span>{timeTranslations.minsText}</span>
-        </div>
-        <div>
-          <span>{getShownValue(timerValue.seconds)}</span>
-          <span>{timeTranslations.secsText}</span>
-        </div>
+  return (
+    <div css={styles.wrapper}>
+      <div>
+        <span>{getShownValue(timerValue.days)}</span>
+        <span>{timeTranslations.daysText}</span>
       </div>
-    );
-  }
+      <div>
+        <span>{getShownValue(timerValue.hours)}</span>
+        <span>{timeTranslations.hoursText}</span>
+      </div>
+      <div>
+        <span>{getShownValue(timerValue.minutes)}</span>
+        <span>{timeTranslations.minsText}</span>
+      </div>
+      <div>
+        <span>{getShownValue(timerValue.seconds)}</span>
+        <span>{timeTranslations.secsText}</span>
+      </div>
+    </div>
+  );
 };

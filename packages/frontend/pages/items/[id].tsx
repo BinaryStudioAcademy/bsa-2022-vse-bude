@@ -6,6 +6,7 @@ import { getProductById, getProducts } from 'services/product';
 import { LotSection } from 'components/home/lot-section';
 import { Routes } from '@enums';
 import { PagePath } from '@primitives';
+import { useTranslation } from 'next-i18next';
 import type { ItemDto } from '@vse-bude/shared';
 
 export const getServerSideProps = withPublic(async (ctx) => {
@@ -15,13 +16,13 @@ export const getServerSideProps = withPublic(async (ctx) => {
 
   try {
     const item = await getProductById(id);
-    const similarItems = await getProducts({ limit: 10 });
+    console.log();
 
-    console.log('Item: ', item);
+    const similarItems = await getProducts({ limit: 10 });
 
     return {
       props: {
-        ...(await serverSideTranslations(locale, ['common'])),
+        ...(await serverSideTranslations(locale, ['common', 'item'])),
         item,
         similarItems,
       },
@@ -42,31 +43,35 @@ interface ItemPageProps {
   similarItems: ItemDto[];
 }
 
-const ItemPage = ({ item, similarItems }: ItemPageProps) => (
-  <Layout title={item.title}>
-    <PagePath
-      paths={[
-        {
-          name: 'Home',
-          route: Routes.DEFAULT,
-        },
-        {
-          name: 'Categories',
-          route: Routes.DEFAULT, // change
-        },
-        {
-          name: 'Computer and laptops',
-          route: Routes.DEFAULT, // change
-        },
-      ]}
-    />
-    <Item item={item} />
-    <LotSection
-      title="Similar lots"
-      lots={similarItems}
-      loadMoreTitle="See more"
-    />
-  </Layout>
-);
+const ItemPage = ({ item, similarItems }: ItemPageProps) => {
+  const { t } = useTranslation();
+
+  return (
+    <Layout title={item.title}>
+      <PagePath
+        paths={[
+          {
+            name: t('common:header.nav.home'),
+            route: Routes.DEFAULT,
+          },
+          {
+            name: t('common:header.nav.category'),
+            route: Routes.DEFAULT, // change
+          },
+          {
+            name: t(`common:categories.${item.category.title}`),
+            route: Routes.DEFAULT, // change
+          },
+        ]}
+      />
+      <Item item={item} />
+      <LotSection
+        title={t('item:similarItems')}
+        lots={similarItems}
+        loadMoreTitle={t('item:seeMoreItems')}
+      />
+    </Layout>
+  );
+};
 
 export default ItemPage;

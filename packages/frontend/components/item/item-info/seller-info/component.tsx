@@ -4,6 +4,7 @@ import { ColorPalette } from '@vse-bude/shared';
 import type { AuthorDto } from '@vse-bude/shared';
 import { Routes } from '@enums';
 import Router from 'next/router';
+import { useTranslation } from 'next-i18next';
 import * as styles from './styles';
 
 interface SellerInfoProps {
@@ -12,6 +13,7 @@ interface SellerInfoProps {
 }
 
 export const SellerInfo = ({ seller, onContactSeller }: SellerInfoProps) => {
+  const { t } = useTranslation('item');
   const handleAvatarClick = () => {
     Router.push(Routes.USER_ACCOUNT);
   };
@@ -19,20 +21,21 @@ export const SellerInfo = ({ seller, onContactSeller }: SellerInfoProps) => {
   return (
     <div css={styles.sellerInfoWrapper}>
       <div css={styles.title}>
-        <h6>Seller</h6>
+        <h6>{t('sellerCaption')}</h6>
         <Button
           variant="outlined"
           size="small"
           width="180"
           onClick={onContactSeller}
         >
-          Contact seller
+          <span css={styles.contactSeller}>{t('contactSellerBtn')}</span>
         </Button>
       </div>
       <div css={styles.seller}>
         <Avatar
           firstName={seller.firstName}
           lastName={seller.lastName}
+          image={seller.avatar}
           handleClick={handleAvatarClick}
         />
         <span>{seller.firstName + ' ' + seller.lastName}</span>

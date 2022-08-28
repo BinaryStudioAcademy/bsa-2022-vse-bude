@@ -2,6 +2,7 @@
 import { Button, Input } from '@primitives';
 import { FavoriteButton } from 'components/product/favorite-button/component';
 import { useRef } from 'react';
+import { useTranslation } from 'next-i18next';
 import { CountDownTimer } from '../countdown-timer/component';
 import { ItemTitle, ItemInfo, ItemPrice } from '../item-info';
 import * as styles from './styles';
@@ -17,6 +18,8 @@ export const ItemInfoAuction = ({
   onBid,
   onChangeIsFavorite,
 }: ItemInfoAuctionProps) => {
+  const { t } = useTranslation('item');
+
   const targetDate = new Date();
   targetDate.setDate(targetDate.getDate() + 1);
 
@@ -32,7 +35,7 @@ export const ItemInfoAuction = ({
             amount={item.minimalBid}
             cssExtended={styles.price}
           />
-          <span>Current bid</span>
+          <span>{t('currentBid')}</span>
         </div>
       </div>
       <ItemTitle title={item.title} />
@@ -43,14 +46,14 @@ export const ItemInfoAuction = ({
             variant="primary"
             type="text"
             ref={inputBidRef}
-            placeholder="Enter the bid amount"
+            placeholder={t('bidInput')}
           />
-          <span>Enter more than or equal to: </span>
+          <span>{t('bidInputCaption')} </span>
           <span>UAH {+item.minimalBid + 1}</span>
         </div>
 
         <div css={styles.buttons}>
-          <Button onClick={onBid}>Place bid</Button>
+          <Button onClick={onBid}>{t('placeBidBtn')}</Button>
           <FavoriteButton
             cssExtended={styles.favouriteButton}
             onChangeIsFavorite={onChangeIsFavorite}
