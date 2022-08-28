@@ -12,24 +12,25 @@ export const getServerSideProps = withPublic(async (ctx) => {
   const { locale } = ctx;
 
   const id = ctx.query.id as string;
-  const item = await getProductById(id);
-  const similarItems = await getProducts({ limit: 10 });
 
-  if (Object.keys(item).length === 0) {
+  try {
+    const item = await getProductById(id);
+    const similarItems = await getProducts({ limit: 10 });
+
+    return {
+      props: {
+        ...(await serverSideTranslations(locale, ['common'])),
+        item,
+        similarItems,
+      },
+    };
+  } catch (e) {
     return {
       redirect: {
         destination: Routes.DEFAULT,
       },
     };
   }
-
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ['common'])),
-      item,
-      similarItems,
-    },
-  };
 });
 
 interface ItemPageProps {

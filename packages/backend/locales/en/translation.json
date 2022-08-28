@@ -14,5 +14,6 @@
       "subject": "Email confirmation",
       "body": "Please complete the e-mail confirmation process with this code: "
     }
-  }
+  },
+  "PRODUCT_NOT_FOUND": "Product not found!"
 }
