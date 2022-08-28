@@ -68,7 +68,7 @@ export const ProductCard = (props: ProductCardProps) => {
             title="Place a Bid"
             variant="filled"
             size="small"
-            onClick={() => props.onButtonClick(props.id)}
+            onClick={() => props.onButtonClick(props.data.id)}
           >
             {t('common:components.product.placeBidBtn')}
           </Button>

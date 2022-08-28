@@ -115,14 +115,12 @@ export const initProductRoutes = (
   router.delete(
     apiPath(path, ProductApiRoutes.FAVORITE),
     authMiddleware,
-    wrap((req: Request) => {
-      console.log(req.query.productId);
-
-      return productService.deleteFromFavorites({
+    wrap((req: Request) =>
+      productService.deleteFromFavorites({
         userId: req.userId,
         productId: <string>req.query.productId,
-      });
-    }),
+      }),
+    ),
   );
 
   return router;
