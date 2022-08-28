@@ -29,10 +29,6 @@ export const Item = ({ item }: ItemProps) => {
   const handleBuy = () => console.log('buy');
   const handleBid = () => console.log('bid');
 
-  // mockedUp date
-  const targetDate = new Date();
-  targetDate.setDate(targetDate.getDate() + 1);
-
   return (
     <React.Fragment>
       <Container cssExtend={styles.itemWrapper}>

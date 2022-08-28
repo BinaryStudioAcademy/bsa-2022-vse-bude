@@ -5,8 +5,15 @@ import type { TimerTranslations } from '@types';
 import { timeToEventObj } from 'helpers/time';
 import * as styles from './styles';
 
-interface CountDownTimerProps {
-  targetDate: Date;
+function convertDateToObj(targetDate) {
+  const timer = timeToEventObj(targetDate);
+
+  return {
+    days: timer.get('days'),
+    hours: timer.get('hours'),
+    minutes: timer.get('minutes'),
+    seconds: timer.get('seconds'),
+  };
 }
 
 function useTimeTranslations() {
@@ -21,6 +28,10 @@ function useTimeTranslations() {
   return timeTranslations;
 }
 
+interface CountDownTimerProps {
+  targetDate: Date;
+}
+
 export const CountDownTimer = ({ targetDate }: CountDownTimerProps) => {
   const timeTranslations = useTimeTranslations();
   const [timerValue, setTimerValue] = useState({
@@ -31,7 +42,7 @@ export const CountDownTimer = ({ targetDate }: CountDownTimerProps) => {
   });
 
   useTimer(() => {
-    setTimerValue(timeToEventObj(targetDate).$d);
+    setTimerValue(convertDateToObj(targetDate));
   });
 
   const getShownValue = (value: number) =>

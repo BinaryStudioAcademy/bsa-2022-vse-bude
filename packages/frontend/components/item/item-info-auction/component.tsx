@@ -20,8 +20,7 @@ export const ItemInfoAuction = ({
 }: ItemInfoAuctionProps) => {
   const { t } = useTranslation('item');
 
-  const targetDate = new Date();
-  targetDate.setDate(targetDate.getDate() + 1);
+  const targetDate = new Date('2022-11-17T03:24:00');
 
   const inputBidRef = useRef<HTMLInputElement>(null);
 
