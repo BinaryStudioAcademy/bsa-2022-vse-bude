@@ -34,3 +34,16 @@ export const incrementProductViews = (id: string) =>
   http.get({
     url: `${ApiRoutes.PRODUCTS}/${id}${ProductApiRoutes.VIEWS}`,
   });
+
+export const addToFavorites = (productId: string) =>
+  http.post({
+    url: `${ApiRoutes.PRODUCTS}${ProductApiRoutes.FAVORITE}`,
+    body: {
+      productId,
+    },
+  });
+
+export const deleteFromFavorites = (productId: string) =>
+  http.delete({
+    url: `${ApiRoutes.PRODUCTS}${ProductApiRoutes.FAVORITE}?productId${productId}`,
+  });
