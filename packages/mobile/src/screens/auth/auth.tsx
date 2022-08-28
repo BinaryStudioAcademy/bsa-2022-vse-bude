@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, useState } from 'react';
 import { ColorPalette, UserSignInDto, UserSignUpDto } from '@vse-bude/shared';
 import { MainScreenName, RootScreenName } from '~/common/enums/enums';
 import { auth as authActions } from '~/store/actions';
@@ -15,6 +15,7 @@ import {
   Divider,
   ScreenWrapper,
   StatusBar,
+  Spinner,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { NavigationProp } from '@react-navigation/native';
@@ -28,6 +29,7 @@ import {
 import { styles } from './styles';
 
 const Auth: FC = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const { name } = useRoute();
   const dispatch = useAppDispatch();
   const { colors } = useCustomTheme();
@@ -39,12 +41,16 @@ const Auth: FC = () => {
       : t('verification.CREATE_ACCOUNT');
 
   const handleSignIn = (payload: UserSignInDto): void => {
+    setIsLoading(true);
     dispatch(authActions.signIn(payload));
+    setIsLoading(false);
     navigation.navigate(MainScreenName.HOME);
   };
 
   const handleSignUp = (payload: UserSignUpDto): void => {
+    setIsLoading(true);
     dispatch(authActions.signUp(payload));
+    setIsLoading(false);
   };
 
   const handleGoBack = (): void => {
@@ -63,6 +69,9 @@ const Auth: FC = () => {
 
     return null;
   };
+  if (isLoading) {
+    return <Spinner isOverflow={true} />;
+  }
 
   return (
     <ScreenWrapper>
