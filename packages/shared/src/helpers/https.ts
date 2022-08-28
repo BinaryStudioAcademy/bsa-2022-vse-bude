@@ -92,11 +92,16 @@ class Http {
       external = false,
       needAuthorization = true,
       contentType = HttpContentType.APPLICATION_JSON,
+      acceptLanguage,
     } = options ?? {};
 
     const headers: HeadersInit = {
       [HttpHeader.CONTENT_TYPE]: contentType,
     };
+
+    if (acceptLanguage) {
+      headers[HttpHeader.ACCEPT_LANGUAGE] = acceptLanguage;
+    }
 
     if (needAuthorization) {
       const token = this._auth.getAccessToken();

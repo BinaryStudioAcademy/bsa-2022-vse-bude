@@ -28,4 +28,5 @@ export enum VerifyApiRoutes {
 
 export enum ProductApiRoutes {
   ID = '/:id',
+  VIEWS = '/views',
 }

@@ -56,4 +56,17 @@ export class ProductRepository {
       },
     });
   }
+
+  public incrementViews(id: string) {
+    return this._dbClient.product.update({
+      where: {
+        id,
+      },
+      data: {
+        views: {
+          increment: 1,
+        },
+      },
+    });
+  }
 }
