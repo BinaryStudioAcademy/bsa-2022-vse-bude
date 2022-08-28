@@ -55,6 +55,9 @@
         "minutes": "min",
         "seconds": "s"
       }
+    },
+    "input": {
+      "searchProductsPlaceholder": "Search the products"
     }
   },
   "HOURS_SHORT": "h",
