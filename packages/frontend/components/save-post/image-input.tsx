@@ -5,7 +5,7 @@ import { IconName } from '@enums';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 import { allowedImgExtension } from 'common/enums/allowedImgExtension';
-import { MAX_IMAGE_SIZE } from 'common/constants/post';
+import { MAX_IMAGE_SIZE } from '@vse-bude/shared';
 import type { ImageInputProps } from './types';
 import * as styles from './styles';
 

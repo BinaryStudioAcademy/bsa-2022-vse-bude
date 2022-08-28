@@ -1,4 +1,3 @@
-import type { ICreatePost } from 'common/types/post/create-post';
 import { Textarea } from 'components/primitives/textarea';
 import { useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
@@ -7,7 +6,7 @@ import { SectionHeader } from 'components/sub-pages/common';
 import { useState } from 'react';
 import { createPostSchema } from 'validation-schemas/post';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { uploadImage } from 'services/post';
+import { createPost } from 'services/post';
 import { initialFormState } from './form-utils';
 import ImageInput from './image-input';
 import * as styles from './styles';
@@ -30,17 +29,11 @@ export default function PostForm() {
     setIsLoading(true);
     setError('');
     try {
-      const imagePromises = images.map((file) => {
-        const formData = new FormData();
-        formData.append('file', file);
+      const formData = new FormData();
+      images.forEach((file) => formData.append('images', file));
+      Object.keys(data).forEach((key) => formData.append(key, data[key]));
 
-        return uploadImage(formData);
-      });
-      const imageLinks = await Promise.all(imagePromises);
-      const createPostData: ICreatePost = { imageLinks, ...data };
-
-      // TODO: add backend query
-      console.log(createPostData);
+      createPost(formData);
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);

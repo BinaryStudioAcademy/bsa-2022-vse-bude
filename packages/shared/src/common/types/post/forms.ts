@@ -12,3 +12,7 @@ export interface IPostForms {
   facebook: string;
   site: string;
 }
+
+export interface ICreatePost extends IPostForms {
+  imageLinks: string[];
+}

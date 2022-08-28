@@ -1,6 +1,5 @@
 import { http } from '@helpers';
-import { ApiRoutes, HttpContentType } from '@vse-bude/shared';
-import type { ICreatePost } from 'common/types/post/create-post';
+import { ApiRoutes, HttpContentType, type ICreatePost } from '@vse-bude/shared';
 
 export const getPostById = () => Promise.resolve();
 
