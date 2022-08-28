@@ -21,6 +21,8 @@ export class ProductService {
       throw new ProductNotFoundError(req);
     }
 
+    console.log('return product');
+
     return product;
   }
 }

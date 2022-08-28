@@ -4,3 +4,4 @@ export * from './time';
 export * from './countDownTimer';
 export * from './use-auth';
 export * from './use-mounted';
+export * from './use-window-size';

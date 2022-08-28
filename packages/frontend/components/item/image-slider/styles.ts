@@ -14,15 +14,11 @@ export const sliderWrapper = ({ spaces, breakpoints }: Theme) => css`
   }
 
   @media (max-width: ${breakpoints.xl}px) {
-    height: 350px;
+    height: 400px;
   }
 
   @media (max-width: ${breakpoints.md}px) {
     width: 100%;
-  }
-
-  @media (max-width: ${breakpoints.sm}px) {
-    height: 300px;
   }
 `;
 

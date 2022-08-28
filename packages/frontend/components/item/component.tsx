@@ -2,9 +2,12 @@
 import type { ItemDto } from '@vse-bude/shared';
 import { ProductType } from '@vse-bude/shared';
 import { Container } from '@primitives';
+import { lightTheme } from 'theme';
+import { useWindowSize } from 'hooks/use-window-size';
 import { ItemImageSlider } from './image-slider/component';
 import { ItemInfoSelling } from './item-info-selling/component';
 import { ItemInfoAuction } from './item-info-auction/component';
+import { ImageSliderSplide } from './image-slider-splide/component';
 
 import * as styles from './styles';
 
@@ -13,8 +16,10 @@ interface ItemProps {
 }
 
 export const Item = ({ item }: ItemProps) => {
+  const windowSize = useWindowSize();
+
   // delete after adding different photos to post
-  const image = [
+  const images = [
     'https://picsum.photos/id/1/640/480/',
     'https://picsum.photos/id/2/640/480/',
     'https://picsum.photos/id/3/640/480/',
@@ -28,7 +33,11 @@ export const Item = ({ item }: ItemProps) => {
   return (
     <React.Fragment>
       <Container cssExtend={styles.itemWrapper}>
-        <ItemImageSlider imageLinks={image} />
+        {windowSize.width > lightTheme.breakpoints.sm ? (
+          <ItemImageSlider imageLinks={images} />
+        ) : (
+          <ImageSliderSplide imageLinks={images} />
+        )}
         {item.type === ProductType.SELLING ? (
           <ItemInfoSelling
             item={item}

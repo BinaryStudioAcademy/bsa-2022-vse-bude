@@ -17,6 +17,8 @@ export const getServerSideProps = withPublic(async (ctx) => {
     const item = await getProductById(id);
     const similarItems = await getProducts({ limit: 10 });
 
+    console.log('Item: ', item);
+
     return {
       props: {
         ...(await serverSideTranslations(locale, ['common'])),
@@ -25,6 +27,8 @@ export const getServerSideProps = withPublic(async (ctx) => {
       },
     };
   } catch (e) {
+    console.log('Error');
+
     return {
       redirect: {
         destination: Routes.DEFAULT,

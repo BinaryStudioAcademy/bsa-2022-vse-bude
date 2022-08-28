@@ -19,11 +19,7 @@ export const ItemImageSlider = ({ imageLinks }: ItemImageSliderProps) => {
         {imageLinks.map((link, index) => (
           <div
             key={link + index}
-            css={
-              link === focusedImage
-                ? [styles.image, styles.pickedImage]
-                : styles.image
-            }
+            css={[styles.image, link === focusedImage && styles.pickedImage]}
           >
             <Image
               key={index}
