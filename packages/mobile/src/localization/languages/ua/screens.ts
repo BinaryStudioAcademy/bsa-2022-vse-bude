@@ -1,4 +1,15 @@
+import {
+  MAX_NAME_LENGTH,
+  MAX_PASSWORD_LENGTH,
+  MIN_NAME_LENGTH,
+  MIN_PASSWORD_LENGTH,
+} from '~/common/constants/constants';
+
 export const screens = {
+  words: {
+    FIRST_NAME: 'Ім`я',
+    LAST_NAME: 'Прізвище',
+  },
   welcome: {
     TITLE: 'Марка "Русский военный корабль"',
     DESCRIPTION: 'Марка була випущена Укрпоштою у 2022. Вислів став відомим...',
@@ -55,18 +66,15 @@ export const screens = {
     LATIN: 'Дозволено введення лише латинських літер',
     INVALID_EMAIL: 'Неправильний формат електронної пошти',
     SPACES: 'Введення пробілів заборонено',
-    LENGTH_8: 'Пароль має містити не менше 8 символів',
-    LENGTH_16: 'Пароль має містити не більше 16 символів',
+    MIN_PASSWORD_LENGTH: `Пароль має містити не менше ${MIN_PASSWORD_LENGTH} символів`,
+    MAX_PASSWORD_LENGTH: `Пароль має містити не більше ${MAX_PASSWORD_LENGTH} символів`,
     UP_LOW_NUM:
       'Пароль має складатися щонайменше з однієї великої літери, однієї маленької літери, однієї цифри',
     INVALID_PASSWORD: 'Неправильний формат паролю',
     REPEAT_PASSWORD_INVALID: 'Паролі не співпадають',
-    FIRST_NAME_LENGTH_1: 'Ім`я має містити не менше 1 символу',
-    FIRST_NAME_LENGTH_40:
-      'Ім`я має містити не більше 40 символів” for Ukrainian localization',
+    MIN_NAME_LENGTH: `{{name}} має містити не менше ${MIN_NAME_LENGTH} символу`,
+    MAX_NAME_LENGTH: `{{name}} має містити не більше ${MAX_NAME_LENGTH} символів” for Ukrainian localization`,
     FIRST_NAME_INVALID: 'Неправильний формат імені',
-    LAST_NAME_LENGTH_1: 'Прізвище має містити не менше 1 символа',
-    LAST_NAME_LENGTH_40: 'Прізвище має містити не більше 40 символів',
     LAST_NAME_INVALID: 'Неправильний формат прізвища',
   },
 };
