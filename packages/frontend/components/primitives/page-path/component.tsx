@@ -1,4 +1,4 @@
-﻿import { InternalLink, Container } from '@primitives';
+﻿import { Container, InternalLink } from '@primitives';
 import { wrapper } from './styles';
 
 interface PagePathProps {

@@ -61,6 +61,6 @@ export const button = ({
     height: ${heights.controlSm};
     border-radius: ${radiuses.sm};
     padding: 0 ${spaces.md};
-    font-size: 1rem;
+    font-size: ${fontSizes.smallButton};
   }
 `;
