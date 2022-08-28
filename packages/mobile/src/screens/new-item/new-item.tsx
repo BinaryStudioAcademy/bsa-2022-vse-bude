@@ -10,12 +10,12 @@ import {
   View,
 } from '~/components/components';
 import Popover from 'react-native-popover-view';
-import { useAppForm, useCustomTheme, useTranslation } from '~/hooks/hooks';
+import { useAppForm, useTranslation } from '~/hooks/hooks';
 import { CALLING_CODE, CITIES, COUNTRIES, CURRENCY } from '~/mock/new-item';
 import { globalStyles } from '~/styles/styles';
 import { ColorPalette } from '@vse-bude/shared';
 import { AddPhotos } from './components/add-photos';
-import { createStyles } from './styles';
+import { useStyles } from './styles';
 
 type NewItem = {
   category: string;
@@ -34,8 +34,7 @@ type NewItem = {
 
 const NewItemScreen: FC = () => {
   const { t } = useTranslation();
-  const { dark, colors } = useCustomTheme();
-  const styles = React.useMemo(() => createStyles(), [dark, colors]);
+  const styles = useStyles();
 
   const { control, errors } = useAppForm<NewItem>({
     defaultValues: {
@@ -49,23 +48,11 @@ const NewItemScreen: FC = () => {
     <ScreenWrapper>
       <ScrollView style={[globalStyles.flex1, globalStyles.px5]}>
         <View>
-          <Text
-            style={[
-              globalStyles.fs14,
-              globalStyles.mt5,
-              { color: colors.subtitle },
-            ]}
-          >
+          <Text style={[globalStyles.fs14, globalStyles.mt5, styles.title]}>
             {t('make_a_post.DOWNLOAD_PHOTOS')}
           </Text>
           <AddPhotos />
-          <Text
-            style={[
-              globalStyles.fs14,
-              globalStyles.mt5,
-              { color: colors.subtitle },
-            ]}
-          >
+          <Text style={[globalStyles.fs14, globalStyles.mt5, styles.title]}>
             {t('make_a_post.DESCRIPTION')}
           </Text>
           <Input
@@ -140,13 +127,7 @@ const NewItemScreen: FC = () => {
             </View>
           </View>
 
-          <Text
-            style={[
-              globalStyles.fs14,
-              globalStyles.mt6,
-              { color: colors.subtitle },
-            ]}
-          >
+          <Text style={[globalStyles.fs14, globalStyles.mt6, styles.title]}>
             {t('make_a_post.CONTACT')}
           </Text>
           <DropDown
