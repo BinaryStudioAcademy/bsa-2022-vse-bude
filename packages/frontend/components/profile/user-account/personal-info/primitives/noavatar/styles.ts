@@ -16,7 +16,7 @@ export const letter = ({
   font-size: ${fontSizes.h3};
   font-size: ${lineHeights.h3};
   font-weight: ${fontWeights.h6};
-  &:first-child {
+  &:first-of-type {
     margin-right: ${spaces.sm};
   }
 `;

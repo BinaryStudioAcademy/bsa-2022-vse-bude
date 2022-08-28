@@ -1,15 +1,19 @@
+import { useTranslation } from 'next-i18next';
 import { useAuth, useTypedSelector } from '@hooks';
 import { shallowEqual } from 'react-redux';
 import { Flex } from 'grapefruit-ui';
 import { useState } from 'react';
 import { Button } from '@primitives';
+import dynamic from 'next/dynamic';
 import flag from '../../../../public/images/flagBg.png';
 import { NestedLayout } from '../../../sub-pages/common';
 import * as styles from './styles';
 import { Noavatar, Avatar, ProfileData } from './primitives';
-import EditForm from './edit-form';
+
+const EditForm = dynamic(() => import('./edit-form'));
 
 export const PersonalInfo = () => {
+  const { t } = useTranslation();
   const [isEditing, setIsEditing] = useState(false);
   const { user: authUser } = useAuth();
   const user = useTypedSelector((state) => state.profile.user, shallowEqual);
@@ -42,7 +46,7 @@ export const PersonalInfo = () => {
               variant="outlined"
               onClick={() => setIsEditing(true)}
             >
-              Edit profile
+              {t('personal-info:action.edit')}
             </Button>
           )}
         </Flex>

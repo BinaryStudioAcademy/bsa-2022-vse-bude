@@ -6,8 +6,8 @@ import * as styles from './styles';
 export const ProfileData = ({ user }: { user: UserProfileDto }) => {
   const { firstName, lastName, socialMedia } = user;
   const { t } = useTranslation();
-  
-return (
+
+  return (
     <div css={styles.profileWrapper}>
       <div css={styles.fullName}>
         <span css={styles.name}>{firstName}</span>
@@ -23,8 +23,8 @@ return (
         <Flex>
           {socialMedia.map((it) => {
             const { id, link, socialMedia } = it;
-            
-return (
+
+            return (
               <div key={id} css={styles.linkContainer}>
                 <Anchor href={link} label={socialMedia} variant="primary" />
               </div>

@@ -4,14 +4,16 @@ import type { TFunction } from 'next-i18next';
 
 export const userUpdateSchema = (t: TFunction) =>
   Joi.object({
-    avatar: Joi.any().allow(''),
-
     firstName: Joi.string()
       .trim()
       .required()
-      .min(2)
-      .max(256)
+      .pattern(/^[^-](([a-zA-Z]+)|([а-яёіїґєА-ЯЁIЇҐЄ]+))$/)
+      .min(1)
+      .max(40)
       .messages({
+        'string.pattern.base': t(
+          UserPersonalInfoValidationMessage.FIRSTNAME_PATTERN,
+        ),
         'string.min': t(UserPersonalInfoValidationMessage.FIRSTNAME_MIN),
         'string.max': t(UserPersonalInfoValidationMessage.FIRSTNAME_MAX),
         'string.empty': t(UserPersonalInfoValidationMessage.FIRSTNAME_REQUIRED),
@@ -20,9 +22,13 @@ export const userUpdateSchema = (t: TFunction) =>
     lastName: Joi.string()
       .trim()
       .required()
-      .min(2)
-      .max(256)
+      .pattern(/^[^-](([a-zA-Z]+)|([а-яёіїґєА-ЯЁIЇҐЄ]+))$/)
+      .min(1)
+      .max(40)
       .messages({
+        'string.pattern.base': t(
+          UserPersonalInfoValidationMessage.LASTNAME_PATTERN,
+        ),
         'string.min': t(UserPersonalInfoValidationMessage.LASTNAME_MIN),
         'string.max': t(UserPersonalInfoValidationMessage.LASTNAME_MAX),
         'string.empty': t(UserPersonalInfoValidationMessage.LASTNAME_REQUIRED),
@@ -31,7 +37,7 @@ export const userUpdateSchema = (t: TFunction) =>
     email: Joi.string()
       .trim()
       .pattern(
-        /([0-9a-z!#$%&'*+-/=?^_`{|}~.]{1,64})@([0-9a-z]+)\.([0-9a-z]{2,64})/,
+        /^(([^.]([a-zA-Z\d!#$%&'*+\-/=?^_`{|}~]{1,32})(.[^.]([a-zA-Z\d!#$%&'*+\-/=?^_`{|}~]{1,31}))*)|([a-zA-Z\d!#$%&'*+\-/=?^_`{|}~]{1,64}))@[^-]([\da-zA-Z-]{1,63}\.)([a-zA-Z]{2,6})$/,
       )
       .email({ tlds: { allow: false } })
       .required()
@@ -45,7 +51,7 @@ export const userUpdateSchema = (t: TFunction) =>
 
     phone: Joi.string()
       .trim()
-      .pattern(/^\+\d{12,15}$/)
+      .pattern(/^((\+\d{12,15})|(\+380\d{9}))$/)
       .required()
       .messages({
         'string.pattern.base': t(
@@ -59,9 +65,31 @@ export const userUpdateSchema = (t: TFunction) =>
     city: Joi.string().allow(''),
     zip: Joi.string().allow(''),
     novaPoshtaRef: Joi.string().allow(''),
-    instagram: Joi.string().allow(''),
-    linkedin: Joi.string().allow(''),
-    facebook: Joi.string().allow(''),
+
+    instagram: Joi.string()
+      .allow('')
+      .uri()
+      .max(150)
+      .messages({
+        'string.uri': t(UserPersonalInfoValidationMessage.IS_URI),
+        'string.max': t(UserPersonalInfoValidationMessage.URI_MAX_SYMBOLS),
+      }),
+    linkedin: Joi.string()
+      .allow('')
+      .uri()
+      .max(150)
+      .messages({
+        'string.uri': t(UserPersonalInfoValidationMessage.IS_URI),
+        'string.max': t(UserPersonalInfoValidationMessage.URI_MAX_SYMBOLS),
+      }),
+    facebook: Joi.string()
+      .allow('')
+      .uri()
+      .max(150)
+      .messages({
+        'string.uri': t(UserPersonalInfoValidationMessage.IS_URI),
+        'string.max': t(UserPersonalInfoValidationMessage.URI_MAX_SYMBOLS),
+      }),
 
     password: Joi.string().allow(''),
 

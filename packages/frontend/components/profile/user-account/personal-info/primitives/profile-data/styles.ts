@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import type { Theme } from '@emotion/react';
 
 export const profileWrapper = ({ spaces }: Theme) => css`
-  margin-top: ${spaces.xl7};
+  margin-top: ${spaces.xl3};
 `;
 
 export const fullName = ({ spaces }: Theme) => css`
@@ -20,7 +20,7 @@ export const name = ({
   line-height: ${lineHeights.h4};
   font-weight: ${fontWeights.h4};
   color: ${colors.text};
-  &:first-child {
+  &:first-of-type {
     margin-right: ${spaces.sm};
   }
 `;

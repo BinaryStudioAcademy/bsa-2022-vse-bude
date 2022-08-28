@@ -23,7 +23,6 @@ const EditPersonalInfo = () => {
     formState: { errors },
   } = useForm<SaveUserProfileDto>({
     defaultValues: {
-      avatar: '',
       firstName: 'John',
       lastName: 'Doe',
       email: 'example@yahoo.com',
@@ -47,7 +46,7 @@ const EditPersonalInfo = () => {
     event.preventDefault();
     console.log('data', data);
   };
-
+  console.log(errors);
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     clearErrors('newPassword');
@@ -67,7 +66,6 @@ const EditPersonalInfo = () => {
   const onResetHandler = () => {
     reset(
       {
-        avatar: '',
         firstName: 'John',
         lastName: 'Doe',
         email: 'example@yahoo.com',
@@ -258,6 +256,7 @@ const EditPersonalInfo = () => {
                 label={t('personal-info:label.instagram')}
                 placeholder={t('personal-info:placeholder.instagram')}
                 {...register('instagram')}
+                error={errors.instagram?.message}
               />
             </div>
 
@@ -269,6 +268,7 @@ const EditPersonalInfo = () => {
                 label={t('personal-info:label.linkedin')}
                 placeholder={t('personal-info:placeholder.linkedin')}
                 {...register('linkedin')}
+                error={errors.linkedin?.message}
               />
             </div>
 
@@ -280,6 +280,7 @@ const EditPersonalInfo = () => {
                 label={t('personal-info:label.facebook')}
                 placeholder={t('personal-info:placeholder.facebook')}
                 {...register('facebook')}
+                error={errors.facebook?.message}
               />
             </div>
           </Column>
