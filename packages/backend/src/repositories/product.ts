@@ -51,10 +51,18 @@ export class ProductRepository {
     });
   }
 
+  public async favoriteIds(userId: string) {
+    return await this._dbClient.favoriteProducts.findMany({
+      where: {
+        userId,
+      },
+    });
+  }
+
   public async favorite(userId: string) {
     const query = this._dbClient.favoriteProducts.findMany({
       where: {
-        userId: userId,
+        userId,
       },
       include: {
         product: {
@@ -72,11 +80,20 @@ export class ProductRepository {
     return await query;
   }
 
+  public async isInFavorite(userId: string, productId: string) {
+    return await this._dbClient.favoriteProducts.findFirst({
+      where: {
+        userId: userId,
+        productId: productId,
+      },
+    });
+  }
+
   public async addToFavorites(userId: string, productId: string) {
     return await this._dbClient.favoriteProducts.create({
       data: {
-        userId,
-        productId,
+        userId: userId,
+        productId: productId,
       },
     });
   }
@@ -84,8 +101,10 @@ export class ProductRepository {
   public async deleteFromFavorites(userId: string, productId: string) {
     return await this._dbClient.favoriteProducts.delete({
       where: {
-        userId,
-        productId,
+        userId_productId: {
+          userId: userId,
+          productId: productId,
+        },
       },
     });
   }

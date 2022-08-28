@@ -54,6 +54,12 @@ export const initProductRoutes = (
     wrap((req: Request) => productService.favorite(req.userId)),
   );
 
+  router.get(
+    apiPath(path, ProductApiRoutes.FAVORITE_IDS),
+    authMiddleware,
+    wrap((req: Request) => productService.favoriteIds(req.userId)),
+  );
+
   /**
    * @openapi
    * /products/{type}:
@@ -109,12 +115,14 @@ export const initProductRoutes = (
   router.delete(
     apiPath(path, ProductApiRoutes.FAVORITE),
     authMiddleware,
-    wrap((req: Request) =>
-      productService.deleteFromFavorites({
+    wrap((req: Request) => {
+      console.log(req.query.productId);
+
+      return productService.deleteFromFavorites({
         userId: req.userId,
-        productId: req.params.productId,
-      }),
-    ),
+        productId: <string>req.query.productId,
+      });
+    }),
   );
 
   return router;

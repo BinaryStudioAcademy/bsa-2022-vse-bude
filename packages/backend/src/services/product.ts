@@ -36,18 +36,42 @@ export class ProductService {
     return this._productRepository.incrementViews(id);
   }
 
+  public async favoriteIds(userId: string) {
+    const favProducts = await this._productRepository.favoriteIds(userId);
+
+    return favProducts.map((favProd) => favProd.productId);
+  }
+
   public async favorite(userId: string) {
     return await this._productRepository.favorite(userId);
   }
 
   public async addToFavorites({ userId, productId }: AddProductToFavorites) {
-    return await this._productRepository.addToFavorites(userId, productId);
+    const isInFavorite = await this._productRepository.isInFavorite(
+      userId,
+      productId,
+    );
+    if (isInFavorite) {
+      return undefined;
+    }
+    await this._productRepository.addToFavorites(userId, productId);
+
+    return productId;
   }
 
   public async deleteFromFavorites({
     userId,
     productId,
   }: DeleteProductFromFavorites) {
-    return await this._productRepository.deleteFromFavorites(userId, productId);
+    const isInFavorite = await this._productRepository.isInFavorite(
+      userId,
+      productId,
+    );
+    if (!isInFavorite) {
+      return undefined;
+    }
+    await this._productRepository.deleteFromFavorites(userId, productId);
+
+    return productId;
   }
 }
