@@ -38,14 +38,17 @@ export default function PostForm() {
       });
       const imageLinks = await Promise.all(imagePromises);
       const createPostData: ICreatePost = { imageLinks, ...data };
-      createPostData && setIsLoading(false);
 
       // TODO: add backend query
       console.log(createPostData);
     } catch (error) {
-      setError(error);
+      if (error instanceof Error) {
+        setError(error.message);
+      }
 
       return;
+    } finally {
+      setIsLoading(false);
     }
   };
 

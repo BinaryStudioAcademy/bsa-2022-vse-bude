@@ -17,9 +17,9 @@ export const ProfileInfo = () => {
   return (
     <div css={styles.profileInfo}>
       <Avatar
-        firstName={user.firstName}
-        lastName={user.lastName}
-        image={user.avatar}
+        firstName={user?.firstName}
+        lastName={user?.lastName}
+        image={user?.avatar}
         loading={loading}
         handleClick={handleClick}
       />

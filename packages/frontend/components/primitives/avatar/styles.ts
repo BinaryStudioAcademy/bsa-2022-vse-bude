@@ -13,13 +13,7 @@ export const avatar = ({ spaces, radiuses }: Theme) => css`
   object-fit: cover;
 `;
 
-export const initials = ({
-  colors,
-  fontSizes,
-  fontWeights,
-  lineHeights,
-}: Theme) => css`
-  color: ${colors.background};
+export const initials = ({ fontSizes, fontWeights, lineHeights }: Theme) => css`
   font-size: ${fontSizes.toggle};
   font-weight: ${fontWeights.toggle};
   line-height: ${lineHeights.toggle};
@@ -40,4 +34,5 @@ export const wrapper = ({ spaces, radiuses, colors }: Theme) => css`
   height: ${spaces.xl2};
   border-radius: ${radiuses.circle};
   background-color: ${colors.primary};
+  cursor: pointer;
 `;

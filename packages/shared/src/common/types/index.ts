@@ -5,3 +5,4 @@ export * from './auth';
 export * from './verify';
 export * from './product';
 export * from './post';
+export * from './category';

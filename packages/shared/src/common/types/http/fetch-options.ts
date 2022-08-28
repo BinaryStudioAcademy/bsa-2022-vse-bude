@@ -1,9 +1,14 @@
-import type { HttpContentType, HttpMethod } from '../../enums';
+import type {
+  HttpAcceptLanguage,
+  HttpContentType,
+  HttpMethod,
+} from '../../enums';
 
 interface FetchOptions {
   external?: boolean;
   needAuthorization?: boolean;
   contentType?: HttpContentType;
+  acceptLanguage?: HttpAcceptLanguage;
 }
 
 export interface RequestArgs {

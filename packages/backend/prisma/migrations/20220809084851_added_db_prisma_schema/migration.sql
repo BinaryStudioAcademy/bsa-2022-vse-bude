@@ -94,7 +94,7 @@ CREATE TABLE "Product" (
     "title" VARCHAR(512) NOT NULL,
     "description" TEXT NOT NULL,
     "price" DECIMAL(65,30) NOT NULL,
-    "recomendedPrice" DECIMAL(65,30),
+    "recommendedPrice" DECIMAL(65,30),
     "minimalBid" DECIMAL(65,30),
     "imageLinks" VARCHAR(2048) NOT NULL,
     "city" VARCHAR(512),
