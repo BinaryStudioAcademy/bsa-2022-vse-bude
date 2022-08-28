@@ -57,13 +57,25 @@ export const inputWrapper = ({
   }
 `;
 
-export const price = ({ lineHeights, fontWeights, colors }: Theme) => css`
+export const price = ({
+  lineHeights,
+  fontWeights,
+  colors,
+  fontSizes,
+  breakpoints,
+}: Theme) => css`
   span {
-    font-size: 2.25rem;
+    font-size: ${fontSizes.h3};
     line-height: ${lineHeights.h3};
     font-weight: ${fontWeights.h3};
     font-family: Roboto, sans-serif;
     color: ${colors.secondaryDark};
+  }
+
+  @media (max-width: ${breakpoints.sm}px) {
+    span {
+      font-size: ${fontSizes.h4};
+    }
   }
 `;
 

@@ -22,7 +22,7 @@ export const wrapper = ({
     span {
       display: block;
       &:first-child {
-        font-size: 2.25rem;
+        font-size: ${fontSizes.h3};
         margin-bottom: ${spaces.xs};
         font-family: Roboto, sans-serif;
         font-weight: ${fontWeights.h3};
@@ -39,6 +39,22 @@ export const wrapper = ({
 
   @media (max-width: ${breakpoints.md}px) {
     flex: 1;
+    div {
+      span {
+        &:first-child {
+          font-size: ${fontSizes.h3};
+      }
+    }
+  }
+
+  @media (max-width: ${breakpoints.sm}px) {
+    flex: 1;
+    div {
+      span {
+        &:first-child {
+          font-size: ${fontSizes.h4};
+      }
+    }
   }
 `;
 

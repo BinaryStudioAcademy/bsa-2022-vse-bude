@@ -7,6 +7,7 @@ export const wrapper = ({
   spaces,
   fontWeights,
   breakpoints,
+  fontSizes,
 }: Theme) => css`
   display: flex;
   justify-content: space-between;
@@ -15,7 +16,7 @@ export const wrapper = ({
   h3 {
     color: ${colors.text};
     font-weight: ${fontWeights.h3};
-    font-size: 2.25rem;
+    font-size: ${fontSizes.h3};
     line-height: ${lineHeights.h3};
     text-align: center;
   }
@@ -25,6 +26,12 @@ export const wrapper = ({
     align-items: flex-start;
     h3 {
       margin-bottom: ${spaces.sm};
+    }
+  }
+
+  @media (max-width: ${breakpoints.sm}px) {
+    h3 {
+      font-size: ${fontSizes.h4};
     }
   }
 `;
