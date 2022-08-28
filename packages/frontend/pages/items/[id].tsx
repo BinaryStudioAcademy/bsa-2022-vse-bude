@@ -16,8 +16,6 @@ export const getServerSideProps = withPublic(async (ctx) => {
 
   try {
     const item = await getProductById(id);
-    console.log();
-
     const similarItems = await getProducts({ limit: 10 });
 
     return {
