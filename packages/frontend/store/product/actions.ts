@@ -5,7 +5,6 @@ import {
   getProductsSSR,
   incrementProductViews,
 } from 'services/product';
-
 import { ProductActions } from './action-types';
 
 interface RequestOptions {
