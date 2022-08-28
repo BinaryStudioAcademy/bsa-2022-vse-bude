@@ -5,12 +5,11 @@ import { useState } from 'react';
 import { Button } from '@primitives';
 import flag from '../../../../public/images/flagBg.png';
 import { NestedLayout } from '../../../sub-pages/common';
-import { Noavatar, Avatar } from './primitives';
 import * as styles from './styles';
+import { Noavatar, Avatar, ProfileData } from './primitives';
 import EditForm from './edit-form';
 
 export const PersonalInfo = () => {
-  // const { t } = useTranslation();
   const [isEditing, setIsEditing] = useState(false);
   const { user: authUser } = useAuth();
   const user = useTypedSelector((state) => state.profile.user, shallowEqual);
@@ -35,6 +34,7 @@ export const PersonalInfo = () => {
             )}
           </div>
         </div>
+        {/* 21sdasds | authUser?.id*/}
         <Flex justify={'flex-end'} css={styles.buttons}>
           {!isEditing && authUser?.id === user.id && (
             <Button
@@ -47,7 +47,7 @@ export const PersonalInfo = () => {
           )}
         </Flex>
         {isEditing && <EditForm />}
-        {!isEditing && <pre>{JSON.stringify(user)}</pre>}
+        {!isEditing && <ProfileData user={user} />}
       </div>
     </NestedLayout>
   );

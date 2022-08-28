@@ -2,7 +2,11 @@ import { css } from '@emotion/react';
 import type { Theme } from '@emotion/react';
 
 export const link = ({ radiuses, colors }: Theme) => css`
+  border: none;
+  outline: none;
   border-radius: ${radiuses.md};
+  background: none;
+  cursor: pointer;
   &:hover {
     background: ${colors.backgroundLight};
   }
@@ -13,7 +17,7 @@ export const link = ({ radiuses, colors }: Theme) => css`
 `;
 
 export const linkContent = () => css`
-  padding: 5px 18px;
+  padding: 13px 18px;
 `;
 
 export const icon = ({ spaces }: Theme) => css`
@@ -22,4 +26,16 @@ export const icon = ({ spaces }: Theme) => css`
 
 export const activeLink = ({ colors }: Theme) => css`
   background: ${colors.backgroundLight};
+`;
+
+export const label = ({
+  fontSizes,
+  fontWeights,
+  lineHeights,
+  colors,
+}: Theme) => css`
+  font-size: ${fontSizes.tub};
+  line-height: ${lineHeights.tub};
+  font-weight: ${fontWeights.tub};
+  color: ${colors.text};
 `;

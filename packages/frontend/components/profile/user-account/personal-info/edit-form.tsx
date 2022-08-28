@@ -7,9 +7,7 @@ import { userUpdateSchema } from 'validation-schemas/user/user-update';
 import type { SaveUserProfileDto } from '@vse-bude/shared';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { UserPersonalInfoValidationMessage } from '@vse-bude/shared';
-import flag from '../../../../public/images/flagBg.png';
 import { SectionHeader, NestedLayout } from '../../../sub-pages/common';
-import { Noavatar, Avatar, DownloadButton } from './primitives';
 import * as styles from './styles';
 
 const EditPersonalInfo = () => {
@@ -21,7 +19,6 @@ const EditPersonalInfo = () => {
     setValue,
     setError,
     clearErrors,
-    watch,
     handleSubmit,
     formState: { errors },
   } = useForm<SaveUserProfileDto>({
@@ -45,12 +42,6 @@ const EditPersonalInfo = () => {
     },
     resolver: joiResolver(userUpdateSchema(t)),
   });
-
-  const [avatar, firstName, lastName] = watch([
-    'avatar',
-    'firstName',
-    'lastName',
-  ]);
 
   const onSave: SubmitHandler<SaveUserProfileDto> = (data, event) => {
     event.preventDefault();
@@ -118,23 +109,7 @@ const EditPersonalInfo = () => {
   return (
     <NestedLayout>
       <form css={styles.form} onSubmit={handleSubmit(onSave)}>
-        <div css={styles.personalHeader}>
-          <div css={styles.headerWrapper}>
-            <div css={styles.flagWrapper}>
-              <img css={styles.flag} src={flag.src} alt="flag" />
-            </div>
-
-            <div css={styles.avatarWrapper}>
-              {avatar ? (
-                <Avatar src={avatar} alt="avatar" />
-              ) : (
-                <Noavatar firstName={firstName} lastName={lastName} />
-              )}
-
-              <DownloadButton id="profile-avatar" {...register('avatar')} />
-              {errors.avatar && <div>{errors.avatar.message}</div>}
-            </div>
-          </div>
+        <div css={styles.actionWrapper}>
           <Flex justify={'flex-end'} css={styles.buttons}>
             <Button
               size="flexible"
@@ -191,20 +166,20 @@ const EditPersonalInfo = () => {
               />
             </div>
             <Flex css={styles.groupePhone}>
-              <Input
-                id="phone-profile"
-                type="text"
-                variant="primary"
-                label={t('personal-info:label.phone')}
-                placeholder={t('personal-info:placeholder.phone')}
-                {...register('phone')}
-                error={errors.phone?.message}
-              />
-              <div>
-                <Button type="button" size="big" variant="outlined">
-                  {t('personal-info:action.verify')}
-                </Button>
+              <div css={styles.phoneRow}>
+                <Input
+                  id="phone-profile"
+                  type="text"
+                  variant="primary"
+                  label={t('personal-info:label.phone')}
+                  placeholder={t('personal-info:placeholder.phone')}
+                  {...register('phone')}
+                  error={errors.phone?.message}
+                />
               </div>
+              <Button type="button" size="big" variant="outlined">
+                {t('personal-info:action.verify')}
+              </Button>
             </Flex>
           </Column>
 

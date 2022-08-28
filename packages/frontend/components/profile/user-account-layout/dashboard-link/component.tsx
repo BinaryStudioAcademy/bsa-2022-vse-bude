@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { InternalLink, Flex, IconButton } from '@primitives';
+import { Flex, Icon } from '@primitives';
 import { IconColorProps } from '@enums';
 import { useRouter } from 'next/router';
 import type { LinkProps } from '../types';
@@ -18,18 +18,17 @@ export const DashboardLink: FC<LinkProps> = ({
   };
 
   return (
-    <div data-location={location} css={styles.link}>
-      <Flex css={styles.linkContent} align="center">
-        <div css={styles.icon}>
-          <IconButton
-            size="md"
-            color={IconColorProps.YELLOW}
-            icon={iconPath}
-            onClick={handleClick}
-          />
+    <button data-location={location} css={styles.link} onClick={handleClick}>
+      <Flex css={styles.linkContent}>
+        <Icon
+          cssExtend={styles.icon}
+          color={IconColorProps.YELLOW}
+          icon={iconPath}
+        />
+        <div>
+          <span css={styles.label}>{label}</span>
         </div>
-        <InternalLink href={path} label={label} variant="dashboard" />
       </Flex>
-    </div>
+    </button>
   );
 };

@@ -8,12 +8,8 @@ export const form = () => css`
   width: 100%;
 `;
 
-export const personalHeader = ({ mq, spaces }: Theme) => css`
+export const personalHeader = () => css`
   width: 100%;
-  margin-bottom: ${spaces.lg};
-  ${mq[0]} {
-    margin-bottom: ${spaces.md};
-  }
 `;
 
 export const headerWrapper = ({ spaces }: Theme) => css`
@@ -46,6 +42,14 @@ export const avatarWrapper = ({ colors, radiuses }: Theme) => css`
   background: ${colors.backgroundDark};
 `;
 
+export const actionWrapper = ({ mq, spaces }: Theme) => css`
+  width: 100%;
+  margin-bottom: ${spaces.lg};
+  ${mq[0]} {
+    margin-bottom: ${spaces.md};
+  }
+`;
+
 export const buttons = ({ spaces }: Theme) => css`
   gap: ${spaces.sm};
 `;
@@ -75,12 +79,9 @@ export const inputRow = ({ spaces }: Theme) => css`
 
 export const groupePhone = ({ spaces }: Theme) => css`
   gap: ${spaces.md};
-  align-items: 'flex-end';
+  align-items: flex-end;
 `;
 
 export const phoneRow = () => css`
-  display: 'flex';
-  flex-direction: row;
-  align-items: 'flex-end';
-  //flex-grow: 1;
+  flex-grow: 2;
 `;
