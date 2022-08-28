@@ -2,7 +2,6 @@ import { configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
 import { authReducer } from './auth';
 import { categoryReducer } from './category';
-import { postReducer } from './post';
 import { productReducer } from './product';
 
 const makeStore = () =>
@@ -11,7 +10,6 @@ const makeStore = () =>
       auth: authReducer,
       category: categoryReducer,
       product: productReducer,
-      post: postReducer,
     },
   });
 

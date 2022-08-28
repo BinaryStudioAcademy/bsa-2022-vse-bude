@@ -1,8 +1,7 @@
-import { Layout } from '@components';
+import { Layout, SavePost } from '@components';
 import { useRouter } from 'next/router';
 import { wrapper } from 'store';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { Post } from '@components';
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (_store) =>
@@ -19,7 +18,7 @@ const CreatePage = () => {
 
   return (
     <Layout title="Create post">
-      <Post create={create} />
+      <SavePost create={create} />
     </Layout>
   );
 };

@@ -2,20 +2,21 @@ import type { ICreatePost } from 'common/types/post/create-post';
 import { Textarea } from 'components/primitives/textarea';
 import { useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
-import { Input, Column, Flex, Button } from '@primitives';
+import { Input, Column, Flex, Button, Loader } from '@primitives';
 import { SectionHeader } from 'components/sub-pages/common';
-import { useAppDispatch, useTypedSelector } from '@hooks';
-import { fetchCreatePost, getPostImagesDataSelector } from 'store/post';
+import { useState } from 'react';
 import { createPostSchema } from 'validation-schemas/post';
 import { joiResolver } from '@hookform/resolvers/joi';
-
-import { initialFormState } from './initial-form-state';
+import { uploadImage } from 'services/post';
+import { initialFormState } from './form-utils';
+import ImageInput from './image-input';
 import * as styles from './styles';
 
 export default function PostForm() {
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
-  const images = useTypedSelector(getPostImagesDataSelector);
+  const [images, setImages] = useState<File[]>([]);
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -25,14 +26,33 @@ export default function PostForm() {
     defaultValues: initialFormState,
     resolver: joiResolver(createPostSchema(t)),
   });
-  const onSubmit = (data) => {
-    const createPostData: ICreatePost = { imageLinks: images, ...data };
-    console.log(createPostData);
-    dispatch(fetchCreatePost(createPostData));
+  const onSubmit = async (data) => {
+    setIsLoading(true);
+    setError('');
+    try {
+      const imagePromises = images.map((file) => {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        return uploadImage(formData);
+      });
+      const imageLinks = await Promise.all(imagePromises);
+      const createPostData: ICreatePost = { imageLinks, ...data };
+      createPostData && setIsLoading(false);
+
+      // TODO: add backend query
+      console.log(createPostData);
+    } catch (error) {
+      setError(error);
+
+      return;
+    }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <ImageInput images={images} setImages={setImages} />
+
       <Column css={styles.sectionRow}>
         <SectionHeader>{t('create-post:headline.description')}</SectionHeader>
         <div css={styles.inputRow}>
@@ -192,13 +212,22 @@ export default function PostForm() {
           />
         </div>
       </Column>
+      {error && <p css={styles.photosError}>{error}</p>}
+
       <div css={styles.btnWrapper}>
+        {isLoading && (
+          <div css={styles.formLoader}>
+            <Loader size="big" />
+          </div>
+        )}
         <div css={styles.saveDraftBtn}>
-          <Button variant="outlined">
+          <Button disabled={isLoading} variant="outlined">
             {t('create-post:button.saveDraft')}
           </Button>
         </div>
-        <Button type="submit">{t('create-post:button.makePost')}</Button>
+        <Button disabled={isLoading} type="submit">
+          {t('create-post:button.makePost')}
+        </Button>
       </div>
     </form>
   );

@@ -91,13 +91,18 @@ class Http {
     const {
       external = false,
       needAuthorization = true,
-      contentType = false,
+      contentType = HttpContentType.APPLICATION_JSON,
+      acceptLanguage,
     } = options ?? {};
 
-    const headers: HeadersInit = {};
-    if (contentType) {
-      headers[HttpHeader.CONTENT_TYPE] = contentType;
+    const headers: HeadersInit = {
+      [HttpHeader.CONTENT_TYPE]: contentType,
+    };
+
+    if (acceptLanguage) {
+      headers[HttpHeader.ACCEPT_LANGUAGE] = acceptLanguage;
     }
+
     if (needAuthorization) {
       const token = this._auth.getAccessToken();
       headers[HttpHeader.AUTHORIZATION] = `Bearer ${token}`;
@@ -114,7 +119,7 @@ class Http {
 
     if (body && contentType === HttpContentType.FORM_DATA) {
       config.body = body as BodyInit;
-      delete config.headers;
+      delete headers[HttpHeader.CONTENT_TYPE];
     }
 
     return {

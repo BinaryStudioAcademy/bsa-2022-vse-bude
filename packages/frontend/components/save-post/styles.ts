@@ -62,9 +62,15 @@ export const photosCaption = ({
 `;
 
 export const btnWrapper = css`
+  position: relative;
   display: flex;
   justify-content: flex-end;
   align-items: center;
+`;
+
+export const formLoader = css`
+  position: absolute;
+  left: 0;
 `;
 
 export const saveDraftBtn = ({ spaces }: Theme) => css`
@@ -145,6 +151,24 @@ export const photoIco = ({ colors, spaces }: Theme) => css`
   color: ${colors.primary};
   &[data-variant='filled'] {
     align-self: flex-start;
+  }
+`;
+export const photosError = ({
+  colors,
+  fontSizes,
+  lineHeights,
+  spaces,
+}: Theme) => css`
+  transition: 200ms linear;
+  margin: 2px 0 0;
+  cursor: pointer;
+  font-size: ${fontSizes.caption};
+  font-weight: bold;
+  line-height: ${lineHeights.caption};
+  font-family: inherit;
+  color: ${colors.error};
+  & span {
+    margin-right: ${spaces.xs};
   }
 `;
 

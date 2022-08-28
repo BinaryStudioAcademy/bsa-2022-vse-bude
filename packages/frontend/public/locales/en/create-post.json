@@ -49,6 +49,10 @@
     "site": "Enter site address"
   },
   "validation": {
+    "images": {
+      "unsupportedType": "Unsupported file extension!",
+      "large": "File size too large!"
+    },
     "title": {
       "long": "Title too long",
       "empty": "Title cannot be empty"
