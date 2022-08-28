@@ -22,32 +22,24 @@ export const initAuthRoutes = (
    * @openapi
    * /auth/sign-in:
    *   post:
+   *     description: Authenticates user via email & password
+   *     operationId: auth.sign-in
    *     tags: [Auth]
    *     produces:
    *       - application/json
-   *     parameters:
-   *       - name: body
-   *         in: body
-   *         required: true
-   *         schema:
-   *           type: object
-   *           required:
-   *             - email
-   *           properties:
-   *             email:
-   *               type: string
-   *             password:
-   *               type: string
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             $ref: "#/definitions/SignInBody"
    *     responses:
    *       200:
    *         description: Ok
    *         content:
    *           application/json:
    *             schema:
-   *               type: object
-   *               properties:
-   *                 contribution:
-   *                   $ref: "#/definitions/User"
+   *               $ref: "#/definitions/SignInResponse"
    */
 
   router.post(
@@ -78,8 +70,7 @@ export const initAuthRoutes = (
    *             schema:
    *               type: object
    *               properties:
-   *                 contribution:
-   *                   $ref: "#/definitions/User"
+   *                 $ref: "#/definitions/User"
    */
 
   router.post(
@@ -115,36 +106,6 @@ export const initAuthRoutes = (
    *     - id
    *     type: object
    *     description: Model RefreshToken
-   */
-
-  /**
-   * @openapi
-   * /auth/refresh-token:
-   *   post:
-   *     tags: [Auth]
-   *     produces:
-   *       - application/json
-   *     parameters:
-   *       - name: body
-   *         in: body
-   *         required: true
-   *         schema:
-   *           type: object
-   *           required:
-   *             - tokenValue
-   *           properties:
-   *             tokenValue:
-   *               type: string
-   *     responses:
-   *       200:
-   *         description: Ok
-   *         content:
-   *           application/json:
-   *             schema:
-   *               type: object
-   *               properties:
-   *                 contribution:
-   *                   $ref: "#/definitions/RefreshToken"
    */
 
   router.post(
@@ -238,6 +199,13 @@ export const initAuthRoutes = (
 
   router.get(
     apiPath(path, AuthApiRoutes.RESET_PASSWORD),
+    wrap((req: Request) =>
+      authService.resetPassword(req.params.email, req.params.value),
+    ),
+  );
+
+  router.get(
+    apiPath(path, AuthApiRoutes.UPDATE_PASSWORD),
     wrap((req: Request) =>
       authService.resetPassword(req.params.email, req.params.value),
     ),

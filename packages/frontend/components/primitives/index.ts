@@ -14,3 +14,4 @@ export { Container } from './container';
 export { Loader } from './loader';
 export { Error } from './error';
 export * from './input';
+export { PagePath } from './page-path';

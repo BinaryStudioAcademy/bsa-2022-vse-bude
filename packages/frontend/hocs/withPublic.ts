@@ -16,6 +16,10 @@ export function withPublic(gssp) {
 
     const gsspData = await gssp(context);
 
+    if (gsspData.redirect) {
+      return gsspData;
+    }
+
     return {
       props: {
         ...gsspData.props,

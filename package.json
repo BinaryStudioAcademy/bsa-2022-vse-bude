@@ -39,6 +39,7 @@
     "lint:fix:frontend": "cd packages/frontend && npm run lint:fix",
     "lint:fix:mobile": "cd packages/mobile && npm run lint:fix",
     "lint:fix:shared": "cd packages/shared && npm run lint:fix",
+    "fix:all": "npm run lint:fix:all && npm run prettier:fix:all",
     "production:start:backend": "cd packages/backend && pm2 start \"npm run serve\" --name server",
     "production:start:frontend": "cd packages/frontend && pm2 start \"npm run serve -- -p 8080\" --name nextjs",
     "production:stop:backend": "pm2 delete server || true",

@@ -36,6 +36,12 @@ export class ProductRepository {
         id,
       },
       include: {
+        category: {
+          select: {
+            id: true,
+            title: true,
+          },
+        },
         bids: true,
         author: {
           select: {
@@ -46,6 +52,19 @@ export class ProductRepository {
             avatar: true,
             socialMedia: true,
           },
+        },
+      },
+    });
+  }
+
+  public incrementViews(id: string) {
+    return this._dbClient.product.update({
+      where: {
+        id,
+      },
+      data: {
+        views: {
+          increment: 1,
         },
       },
     });

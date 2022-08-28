@@ -7,9 +7,12 @@ export enum Routes {
   FORGOT_PASSWORD = '/forgot-password',
   PHONE_VERIFY = '/auth/phone-verify',
   EMAIL_VERIFY = '/auth/email-verify',
+  ITEMS = '/items',
   SEARCH = '/search',
   NEWS = '/news',
   ABOUT = '/about',
+  CATEGORIES = '/categories',
+  NOT_FOUND = '/404',
 }
 
 export enum ProfileRoutes {

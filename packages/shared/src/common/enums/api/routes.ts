@@ -17,6 +17,7 @@ export enum AuthApiRoutes {
   USER = '/user',
   RESET_PASSWORD_LINK = '/reset-password-link',
   RESET_PASSWORD = '/reset-password',
+  UPDATE_PASSWORD = '/update-password',
 }
 
 export enum VerifyApiRoutes {
@@ -28,4 +29,5 @@ export enum VerifyApiRoutes {
 
 export enum ProductApiRoutes {
   ID = '/:id',
+  VIEWS = '/views',
 }
