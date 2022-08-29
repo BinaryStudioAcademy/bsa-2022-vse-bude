@@ -1,3 +1,4 @@
+import { Environment } from '@vse-bude/shared';
 import type { Repositories } from '@repositories';
 import { TwilioSMSProvider, BarSMSProvider } from '@providers';
 import { getEnv } from '@helpers';
@@ -15,13 +16,16 @@ import { emailService } from './email';
 import { UserProfileService } from './profile';
 
 export const initServices = (repositories: Repositories) => {
-  const hashService: HashService = new HashService();
-  const redisService: RedisStorageService = new RedisStorageService();
+  const isProduction = getEnv('NODE_ENV') === Environment.PRODUCTION;
 
-  const smsProvider =
-    getEnv('NODE_ENV') === 'development'
-      ? new BarSMSProvider()
-      : new TwilioSMSProvider();
+  const hashService: HashService = new HashService();
+  const redisService: RedisStorageService = new RedisStorageService(
+    isProduction,
+  );
+
+  const smsProvider = isProduction
+    ? new TwilioSMSProvider()
+    : new BarSMSProvider();
 
   const smsService = new SMSSenderService(smsProvider);
 

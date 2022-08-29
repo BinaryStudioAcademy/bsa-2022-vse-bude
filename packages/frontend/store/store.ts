@@ -3,6 +3,7 @@ import { createWrapper } from 'next-redux-wrapper';
 import { authReducer } from './auth';
 import { categoryReducer } from './category';
 import { productReducer } from './product';
+import { favoriteProductReducer } from './favorite-product';
 import { profileReducer } from './profile/reducer';
 
 const makeStore = () =>
@@ -12,6 +13,7 @@ const makeStore = () =>
       profile: profileReducer,
       category: categoryReducer,
       product: productReducer,
+      favoriteProduct: favoriteProductReducer,
     },
   });
 

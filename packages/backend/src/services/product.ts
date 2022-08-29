@@ -3,6 +3,10 @@ import type { ProductQuery } from '@types';
 import { ProductNotFoundError } from '@errors';
 import type { Request } from 'express';
 import { getUserIdFromRequest } from '@helpers';
+import type {
+  AddProductToFavorites,
+  DeleteProductFromFavorites,
+} from '@vse-bude/shared';
 
 export class ProductService {
   private _productRepository: ProductRepository;
@@ -39,5 +43,44 @@ export class ProductService {
     }
 
     return this._productRepository.incrementViews(id);
+  }
+
+  public async getFavoriteIds(userId: string) {
+    const favProducts = await this._productRepository.favoriteIds(userId);
+
+    return favProducts.map((favProd) => favProd.productId);
+  }
+
+  public async getFavoriteProducts(userId: string) {
+    return this._productRepository.getFavorite(userId);
+  }
+
+  public async addToFavorites({ userId, productId }: AddProductToFavorites) {
+    const isInFavorite = await this._productRepository.isInFavorite(
+      userId,
+      productId,
+    );
+    if (isInFavorite) {
+      return undefined;
+    }
+    await this._productRepository.addToFavorites(userId, productId);
+
+    return productId;
+  }
+
+  public async deleteFromFavorites({
+    userId,
+    productId,
+  }: DeleteProductFromFavorites) {
+    const isInFavorite = await this._productRepository.isInFavorite(
+      userId,
+      productId,
+    );
+    if (!isInFavorite) {
+      return undefined;
+    }
+    await this._productRepository.deleteFromFavorites(userId, productId);
+
+    return productId;
   }
 }
