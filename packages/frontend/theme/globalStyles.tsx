@@ -30,6 +30,13 @@ export const globalStyles = (theme: Theme) => css`
     background: ${theme.colors.background};
     color: ${theme.colors.text};
     font-family: 'Raleway', sans-serif;
+    @media (max-width: ${theme.breakpoints.xl}px) {
+      font-size: 14px;
+    }
+
+    @media (max-width: ${theme.breakpoints.sm}px) {
+      font-size: 12px;
+    }
   }
 
   h1,

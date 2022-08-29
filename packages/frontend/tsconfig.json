@@ -18,6 +18,6 @@
       "@providers": ["providers"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "emotion.d.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "emotion.d.ts", "../shared/src/common/constants/post.ts"],
   "exclude": ["node_modules"]
 }
