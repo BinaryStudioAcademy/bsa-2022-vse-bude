@@ -52,3 +52,21 @@ export const incrementProductViews = (id: string): Promise<ProductDto> =>
     url: `${ApiRoutes.PRODUCTS}/${id}${ProductApiRoutes.VIEWS}`,
     body: { id },
   });
+
+export const fetchFavoriteProductsIds = () =>
+  http.get({
+    url: `${ApiRoutes.PRODUCTS}${ProductApiRoutes.FAVORITE_IDS}`,
+  });
+
+export const addToFavorites = (productId: string) =>
+  http.post({
+    url: `${ApiRoutes.PRODUCTS}${ProductApiRoutes.FAVORITE}`,
+    body: {
+      productId,
+    },
+  });
+
+export const deleteFromFavorites = (productId: string) =>
+  http.delete({
+    url: `${ApiRoutes.PRODUCTS}${ProductApiRoutes.FAVORITE}?productId=${productId}`,
+  });
