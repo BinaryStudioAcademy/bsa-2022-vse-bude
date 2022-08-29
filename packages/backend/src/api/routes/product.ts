@@ -82,7 +82,7 @@ export const initProductRoutes = (
     wrap((req) => productService.getById(req)),
   );
 
-  router.get(
+  router.put(
     apiPath(path, ProductApiRoutes.ID + ProductApiRoutes.VIEWS),
     wrap((req) => productService.incrementViews(req.params.id, req)),
   );

@@ -20,7 +20,7 @@ export const ItemInfoSelling = ({
 
   return (
     <div css={styles.wrapper}>
-      <ItemTitle title={item.title} />
+      <ItemTitle title={item.title} views={item.views} />
       <ItemPrice
         amount={item.price}
         currency="UAH"
