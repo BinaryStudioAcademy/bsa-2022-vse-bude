@@ -1,12 +1,12 @@
 import * as Joi from 'joi';
 import { UserSignUpDto } from '@vse-bude/shared';
 import i18next from 'i18next';
+import { PHONE_NUMBER_REGEX } from '~/common/regexp/regexp';
 import {
   emailValidator,
   nameValidator,
   passwordValidator,
 } from '../helpers/helpers';
-import { PHONE_REGEX_PATTERN } from '../constants/constants';
 
 const signUp = Joi.object<UserSignUpDto>({
   email: Joi.string()
@@ -32,11 +32,11 @@ const signUp = Joi.object<UserSignUpDto>({
       'string.empty': i18next.t('errors.EMPTY_LAST_NAME'),
     }),
   phone: Joi.string()
-    .pattern(PHONE_REGEX_PATTERN)
+    .pattern(PHONE_NUMBER_REGEX)
     .trim()
     .required()
     .messages({
-      'string.pattern.base': 'Wrong format',
+      'string.pattern.base': i18next.t('errors.WRONG_FORMAT'),
       'string.empty': i18next.t('errors.EMPTY_PHONE'),
     }),
   password: Joi.string()

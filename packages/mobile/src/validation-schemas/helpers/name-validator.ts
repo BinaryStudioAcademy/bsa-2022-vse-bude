@@ -1,5 +1,6 @@
 import * as Joi from 'joi';
 import i18next from 'i18next';
+import { SPECIAL_SYMBOLS_REGEX } from '~/common/regexp/regexp';
 
 const nameValidator =
   (prefix: string) => (value: string, helpers: Joi.CustomHelpers) => {
@@ -19,7 +20,7 @@ const nameValidator =
       });
     }
 
-    if (value.match(/[~!@#$%^*_=+[{]}\/;:,.?]/)) {
+    if (value.match(SPECIAL_SYMBOLS_REGEX)) {
       return helpers.message({
         custom: i18next.t(`errors.${prefix}_INVALID`),
       });
