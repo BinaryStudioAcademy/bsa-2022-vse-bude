@@ -37,8 +37,16 @@ class AuthApi {
     );
   }
 
-  signUp(_payload: UserSignUpDto): Promise<any> {
-    return Promise.resolve([]);
+  signUp(_payload: UserSignUpDto): Promise<AuthResponseDto> {
+    return this.#http.load(
+      `${this.#apiPrefix}${ApiRoutes.AUTH}${AuthApiRoutes.SIGN_UP}`,
+      {
+        method: HttpMethod.POST,
+        contentType: HttpContentType.APPLICATION_JSON,
+        payload: JSON.stringify(_payload),
+        hasAuth: false,
+      },
+    );
   }
 }
 
