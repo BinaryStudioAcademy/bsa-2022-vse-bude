@@ -10,4 +10,10 @@ export const common = {
   common: {
     HOME: 'Головна',
   },
+  time: {
+    DAYS: 'днів',
+    HOURS: 'годин',
+    MINUTES: 'хвилин',
+    SECONDS: 'секунд',
+  },
 };

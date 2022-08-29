@@ -7,11 +7,13 @@ import { Navigation } from '~/navigation/navigation';
 import { store } from '~/store/store';
 import { NavigationDarkTheme, NavigationTheme } from '~/config/config';
 import { useColorScheme } from '~/hooks/hooks';
+import { dayjsInit } from '~/day-js/day-js';
 import { i18 } from './localization/localization';
 
 i18();
 
 const App: FC = () => {
+  dayjsInit();
   const colorScheme = useColorScheme();
   const theme = colorScheme === 'dark' ? NavigationDarkTheme : NavigationTheme;
 
