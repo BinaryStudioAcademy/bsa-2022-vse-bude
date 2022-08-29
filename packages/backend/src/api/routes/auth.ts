@@ -212,12 +212,5 @@ export const initAuthRoutes = (
     }),
   );
 
-  router.get(
-    apiPath(path, AuthApiRoutes.UPDATE_PASSWORD),
-    wrap((req: Request) =>
-      authService.resetPassword(req.params.email, req.params.value),
-    ),
-  );
-
   return router;
 };
