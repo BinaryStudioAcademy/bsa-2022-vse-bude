@@ -3,8 +3,8 @@ import { getEnv } from '@helpers';
 import fs from 'fs';
 import path from 'path';
 
-function checkFileSize(fileSizeBytes: number, filepath: string) {
-  const filepathAbsolute = path.resolve(filepath);
+function checkFileSize(fileSizeBytes: number, filename: string) {
+  const filepathAbsolute = path.resolve(filename);
 
   const size = fs.statSync(filepathAbsolute).size;
 
@@ -36,9 +36,9 @@ const colors = {
 class Logger {
   private _logger: winston.Logger;
 
-  private _errorFilePath = 'logs/error.log';
+  private _errorFilename = 'logs/error.log';
 
-  private _logFilePath = 'logs/all.log';
+  private _logFilename = 'logs/all.log';
 
   private _errorFileSize = 5242880; // 5mb
 
@@ -72,11 +72,11 @@ class Logger {
   }
 
   private checkLogFileSize() {
-    checkFileSize(this._logFileSize, this._logFilePath);
+    checkFileSize(this._logFileSize, this._logFilename);
   }
 
   private checkErrorFileSize() {
-    checkFileSize(this._errorFileSize, this._errorFilePath);
+    checkFileSize(this._errorFileSize, this._errorFilename);
   }
 
   private createTransports(env: string) {
@@ -86,11 +86,11 @@ class Logger {
       | winston.transports.FileTransportInstance
     )[] = [
       new winston.transports.File({
-        filename: this._logFilePath,
+        filename: this._logFilename,
         format: formats.fileFormat,
       }),
       new winston.transports.File({
-        filename: this._errorFilePath,
+        filename: this._errorFilename,
         level: 'error',
         format: formats.fileFormat,
       }),
