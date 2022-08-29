@@ -10,6 +10,7 @@
       "@enums": ["common/enums"],
       "@constants": ["common/constants"],
       "@hooks": ["hooks"],
+      "@hocs": ["hocs"],
       "@helpers": ["helpers"],
       "@components": ["components"],
       "@services": ["services"],
