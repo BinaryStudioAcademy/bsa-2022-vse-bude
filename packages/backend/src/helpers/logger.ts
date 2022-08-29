@@ -28,15 +28,15 @@ class Logger {
   }
 
   log(message: string | Record<string, unknown>) {
-    this._logger.info(message);
+    this._logger.info(JSON.stringify(message, null, 4));
   }
 
   warn(message: string | Record<string, unknown>) {
-    this._logger.warn(message);
+    this._logger.warn(JSON.stringify(message, null, 4));
   }
 
   error(message: string | Record<string, unknown> | Error) {
-    this._logger.error(message);
+    this._logger.error(JSON.stringify(message, null, 4));
   }
 
   private createTransports(env: string) {
