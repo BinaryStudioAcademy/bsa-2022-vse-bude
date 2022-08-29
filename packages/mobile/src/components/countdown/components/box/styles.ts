@@ -15,9 +15,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 4,
     borderBottomLeftRadius: 4,
   },
-  middle: {
-    borderRadius: 0,
-  },
   right: {
     borderTopRightRadius: 4,
     borderBottomRightRadius: 4,

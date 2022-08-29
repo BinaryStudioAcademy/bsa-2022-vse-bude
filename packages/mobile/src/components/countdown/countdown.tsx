@@ -28,10 +28,10 @@ const Countdown: FC<Props> = ({ endDate }) => {
         timeValue={days}
       />
       <Box timeName={t('common:time.HOURS')} timeValue={hours} />
-      <Box timeName={t('common:time.MINUTES')} timeValue={minutes} />
+      <Box timeName={t('common:time.MINUTES_SHORT')} timeValue={minutes} />
       <Box
         boxPosition={BoxType.RIGHT}
-        timeName={t('common:time.SECONDS')}
+        timeName={t('common:time.SECONDS_SHORT')}
         timeValue={seconds}
       />
     </View>

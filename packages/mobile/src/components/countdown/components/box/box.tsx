@@ -11,11 +11,7 @@ type Props = {
   boxPosition?: BoxType;
 };
 
-const Box: FC<Props> = ({
-  timeName,
-  timeValue,
-  boxPosition = BoxType.MIDDLE,
-}) => {
+const Box: FC<Props> = ({ timeName, timeValue, boxPosition }) => {
   const { colors } = useCustomTheme();
 
   return (
@@ -24,7 +20,7 @@ const Box: FC<Props> = ({
         globalStyles.alignItemsCenter,
         globalStyles.justifyContentCenter,
         styles.box,
-        styles[boxPosition],
+        boxPosition ? styles[boxPosition] : {},
         { backgroundColor: colors.backgroundElements },
       ]}
     >

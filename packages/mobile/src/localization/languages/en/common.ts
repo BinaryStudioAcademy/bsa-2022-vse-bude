@@ -13,7 +13,7 @@ export const common = {
   time: {
     DAYS: 'days',
     HOURS: 'hours',
-    MINUTES: 'minutes',
-    SECONDS: 'seconds',
+    MINUTES_SHORT: 'min',
+    SECONDS_SHORT: 'sek',
   },
 };
