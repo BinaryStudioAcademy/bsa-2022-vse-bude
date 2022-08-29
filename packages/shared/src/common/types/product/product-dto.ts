@@ -12,6 +12,7 @@ type ProductDto = {
   status: string;
   endDate: Date;
   imageLinks: string[];
+  views: number;
 };
 
 export type { ProductDto };

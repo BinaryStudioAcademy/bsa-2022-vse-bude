@@ -62,6 +62,10 @@ export const error = ({ colors }: Theme) => css`
 `;
 
 export const label = ({ colors, fontSizes, lineHeights }: Theme) => css`
+  position: relative;
+  display: flex;
+  justify-content: start;
+  align-items: center;
   margin-bottom: 4px;
   cursor: pointer;
   font-size: ${fontSizes.caption};
@@ -71,6 +75,12 @@ export const label = ({ colors, fontSizes, lineHeights }: Theme) => css`
 
   &[data-variant='secondary'] {
     color: ${colors.background};
+  }
+
+  span {
+    font-size: ${fontSizes.h4};
+    line-height: ${lineHeights.caption};
+    color: ${colors.primary};
   }
 `;
 
@@ -149,4 +159,18 @@ export const searchInput = ({
 
 export const passwordVisibilityIcon = css`
   color: ${ColorPalette.GRAY_300};
+`;
+export const infoIco = ({ fontSizes, spaces }: Theme) => css`
+  position: absolute;
+  top: 2px;
+  margin-left: ${spaces.xs};
+  font-size: ${fontSizes.caption} !important;
+`;
+export const tooltipText = ({ fontSizes, colors, lineHeights }: Theme) => css`
+  max-width: 300px;
+  text-align: center;
+  font-family: inherit;
+  font-size: ${fontSizes.caption};
+  line-height: ${lineHeights.caption};
+  color: ${colors.secondaryLight};
 `;

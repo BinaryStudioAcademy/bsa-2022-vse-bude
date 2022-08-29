@@ -1,5 +1,6 @@
 import type { ProductRepository } from '@repositories';
 import type { ProductQuery } from '@types';
+import { ProductNotFoundError } from '@errors';
 import type { Request } from 'express';
 import { getUserIdFromRequest } from '@helpers';
 
@@ -14,8 +15,14 @@ export class ProductService {
     return this._productRepository.getAll(query);
   }
 
-  public getById(id: string) {
-    return this._productRepository.getById(id);
+  public async getById(req: Request) {
+    const { id } = req.params;
+    const product = await this._productRepository.getById(id);
+    if (!product) {
+      throw new ProductNotFoundError(req);
+    }
+
+    return product;
   }
 
   public async incrementViews(id: string, req: Request) {

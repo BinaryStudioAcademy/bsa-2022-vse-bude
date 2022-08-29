@@ -8,6 +8,7 @@ export enum ApiRoutes {
   VERIFY = '/verify',
   HEALTH = '/health',
   PROFILE = '/profile',
+  CREATE_POST = '/post',
 }
 
 export enum AuthApiRoutes {
@@ -18,6 +19,7 @@ export enum AuthApiRoutes {
   USER = '/user',
   RESET_PASSWORD_LINK = '/reset-password-link',
   RESET_PASSWORD = '/reset-password',
+  UPDATE_PASSWORD = '/update-password',
 }
 
 export enum VerifyApiRoutes {
