@@ -8,17 +8,13 @@ type Props = {
 };
 
 const UserAvatar: FC<Props> = ({ link, isLoading = false }) => {
-  return (
-    <>
-      {link ? (
-        <Image source={{ uri: link }} style={styles.photo} />
-      ) : isLoading ? (
-        <Spinner size={130} />
-      ) : (
-        <UserIcon size={130} />
-      )}
-    </>
-  );
+  if (!link) {
+    const Icon = isLoading ? Spinner : UserIcon;
+
+    return <Icon size={130} />;
+  }
+
+  return <Image source={{ uri: link }} style={styles.photo} />;
 };
 
 export { UserAvatar };
