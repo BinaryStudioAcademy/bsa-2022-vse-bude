@@ -6,6 +6,7 @@ import { useCallback, useState } from 'react';
 import { allowedImgExtension } from 'common/enums/allowedImgExtension';
 import { MAX_IMAGE_SIZE } from '@vse-bude/shared';
 import { useDropzone } from 'react-dropzone';
+import { ImageCropModal } from '@components';
 import { SectionHeader } from '../profile/user-account/common';
 import type { ImageInputProps } from './types';
 import * as styles from './styles';
@@ -14,6 +15,7 @@ function ImageInput({ images, setImages }: ImageInputProps) {
   const { t } = useTranslation();
   const [error, setError] = useState('');
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+  const [currentImage, setCurrentImage] = useState<File>();
 
   const validateFile = useCallback(
     (file) => {
@@ -31,17 +33,10 @@ function ImageInput({ images, setImages }: ImageInputProps) {
 
         return;
       }
+      setCurrentImage(file);
       setError('');
-      setImages([...images, file]);
-
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const preview = reader.result as string;
-        setImagePreviews((prev) => [...prev, preview]);
-      };
-      reader.readAsDataURL(file);
     },
-    [t, setImages, images],
+    [t, setCurrentImage],
   );
 
   const onDrop = useCallback(
@@ -59,8 +54,33 @@ function ImageInput({ images, setImages }: ImageInputProps) {
   };
   const getVariant = () => (images.length !== 0 ? 'filled' : 'empty');
 
+  const onImageCropModalSave = (croppedImage) => {
+    setImages([...images, croppedImage]);
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const preview = reader.result as string;
+      setImagePreviews((prev) => [...prev, preview]);
+    };
+    reader.readAsDataURL(croppedImage);
+
+    setCurrentImage(undefined);
+  };
+
+  const onImageCropModalClose = () => {
+    setCurrentImage(undefined);
+  };
+
   return (
     <Column css={styles.sectionRow}>
+      {currentImage && (
+        <ImageCropModal
+          file={currentImage}
+          onSave={onImageCropModalSave}
+          onClose={onImageCropModalClose}
+        />
+      )}
+
       <SectionHeader>{t('create-post:headline.downloadPhotos')}</SectionHeader>
       <p css={styles.photosCaption}>
         {t('create-post:caption.downloadPhotos')}
