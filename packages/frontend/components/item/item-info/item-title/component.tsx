@@ -3,11 +3,12 @@ import * as styles from './styles';
 
 interface InfoTitleProps {
   title: string;
+  views: number;
 }
 
-export const ItemTitle = ({ title }: InfoTitleProps) => (
+export const ItemTitle = ({ title, views }: InfoTitleProps) => (
   <div css={styles.wrapper}>
     <h3>{title}</h3>
-    <ViewCounter viewsCount="500" />
+    <ViewCounter viewsCount={views} />
   </div>
 );

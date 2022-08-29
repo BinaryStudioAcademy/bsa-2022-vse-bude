@@ -1,5 +1,5 @@
 import { http } from '@helpers';
-import type { Http, ProductType } from '@vse-bude/shared';
+import type { Http, ProductDto, ProductType } from '@vse-bude/shared';
 import { ProductApiRoutes } from '@vse-bude/shared';
 import { ApiRoutes } from '@vse-bude/shared';
 
@@ -40,7 +40,8 @@ export const getProductByIdSSR = (httpSSR: Http, id: string) =>
     url: `${ApiRoutes.PRODUCTS}/${id}`,
   });
 
-export const incrementProductViews = (id: string) =>
-  http.get({
+export const incrementProductViews = (id: string): Promise<ProductDto> =>
+  http.put({
     url: `${ApiRoutes.PRODUCTS}/${id}${ProductApiRoutes.VIEWS}`,
+    body: { id },
   });
