@@ -3,7 +3,7 @@ import type { Theme } from '@emotion/react';
 
 export const modalWrapper = ({ opacities }: Theme) => css`
   position: absolute;
-  z-index: 1;
+  z-index: 100;
   top: 0;
   bottom: 0;
   left: 0;
