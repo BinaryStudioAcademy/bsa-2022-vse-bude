@@ -115,12 +115,16 @@ export const photosLabelWrapper = ({ radiuses, colors, spaces }: Theme) => css`
 `;
 
 export const labelWrapperInner = ({ radiuses, colors, spaces }: Theme) => css`
+  transition: 200ms linear;
   width: 100%;
   border-radius: ${radiuses.md};
   border: 1px dashed ${colors.backgroundDark};
   padding: ${spaces.md};
   &[data-variant='filled'] {
     padding: ${spaces.xs};
+  }
+  &[data-drag='active'] {
+    border-color: ${colors.primary};
   }
 `;
 
