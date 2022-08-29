@@ -18,5 +18,5 @@ export const en = {
   common,
   auth,
   item,
-  rules
+  rules,
 };

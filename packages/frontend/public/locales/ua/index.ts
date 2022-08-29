@@ -18,5 +18,5 @@ export const ua = {
   common,
   auth,
   item,
-  rules
+  rules,
 };

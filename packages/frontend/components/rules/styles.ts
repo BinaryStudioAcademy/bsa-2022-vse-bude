@@ -1,5 +1,5 @@
-import type { Theme } from "@emotion/react";
-import { css } from "@emotion/react";
+import type { Theme } from '@emotion/react';
+import { css } from '@emotion/react';
 
 export const heading = ({ fontSizes, fontWeights, lineHeights }: Theme) => css`
   margin: 0;
