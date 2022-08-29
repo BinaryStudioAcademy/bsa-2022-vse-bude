@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { HydrateAction } from '@types';
+import type { CategoryDto } from '@vse-bude/shared';
 import { HYDRATE } from 'next-redux-wrapper';
 import { fetchCategories } from './actions';
 
 interface CategoryState {
-  list: any[];
+  list: CategoryDto[];
   loading: boolean;
 }
 

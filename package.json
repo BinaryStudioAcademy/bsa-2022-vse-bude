@@ -39,10 +39,10 @@
     "lint:fix:frontend": "cd packages/frontend && npm run lint:fix",
     "lint:fix:mobile": "cd packages/mobile && npm run lint:fix",
     "lint:fix:shared": "cd packages/shared && npm run lint:fix",
-    "production:start:backend": "cd packages/backend && pm2 start \"npm run serve\" --name server",
-    "production:start:frontend": "cd packages/frontend && pm2 start \"npm run serve -- -p 8080\" --name nextjs",
-    "production:stop:backend": "pm2 delete server || true",
-    "production:stop:frontend": "pm2 delete nextjs || true",
+    "fix:all": "npm run lint:fix:all && npm run prettier:fix:all",
+    "start:prod": "pm2 startOrRestart ecosystem.config.js --env production",
+    "delete:prod": "pm2 delete ecosystem.config.js",
+    "install:pm2": "pm2 install pm2-logrotate && pm2 set pm2-logrotate:max_size 5M",
     "hooks:pre-commit": "npm run prettier:fix:all && npm run lint:fix:all"
   },
   "devDependencies": {

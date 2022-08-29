@@ -26,9 +26,12 @@ import type {
   UpdateRefreshToken,
   SignOut,
 } from '@types';
-import type { HashService } from '@services';
+import {
+  type HashService,
+  type VerifyService,
+  type EmailService,
+} from '@services';
 import type { Request } from 'express';
-import type { VerifyService } from '@services';
 import { authResponseMap } from '@mappers';
 import { AuthApiRoutes } from '@vse-bude/shared';
 import { ResetPasswordMailBuilder } from '../email/reset-password-mail-builder';
@@ -46,6 +49,8 @@ export class AuthService {
 
   private _cache: RedisStorageService;
 
+  private _emailService: EmailService;
+
   private resetLinkLifeTime = 3600000;
 
   constructor(
@@ -54,12 +59,14 @@ export class AuthService {
     hashService: HashService,
     verifyService: VerifyService,
     cache: RedisStorageService,
+    emailService: EmailService,
   ) {
     this._userRepository = userRepository;
     this._refreshTokenRepository = refreshTokenRepository;
     this._hashService = hashService;
     this._verifyService = verifyService;
     this._cache = cache;
+    this._emailService = emailService;
   }
 
   async signOut(signOutDto: SignOut) {
@@ -180,7 +187,9 @@ export class AuthService {
     await this.saveLink(email, hashValue);
     const link = this.getResetPasswordEmailLink(hashValue, email);
 
-    const resetMail = new ResetPasswordMailBuilder().setText(link).setTo(email);
+    const resetMail = new ResetPasswordMailBuilder(this._emailService)
+      .setText(link)
+      .setTo(email);
 
     await resetMail.send();
 

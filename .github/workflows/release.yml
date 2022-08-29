@@ -24,9 +24,10 @@ jobs:
             cd /home/ubuntu/vse-bude/
             pwd
             ls -a
+            git reset --hard
             git fetch
             git checkout main
-            git pull
+            git pull -f
             git status
             ./scripts/deploy.sh
   # TODO add health check

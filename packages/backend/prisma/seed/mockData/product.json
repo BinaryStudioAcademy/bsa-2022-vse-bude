@@ -20,6 +20,7 @@
     "authorId": "807f73fb-31b8-4e66-9f74-babc8ee95d94",
     "categoryId": "51dea135-fca2-4cc0-ab5b-a32c909f14e7",
     "winnerId": null,
+    "views": 74,
     "createdAt": "2022-02-03T00:15:33.418Z",
     "updatedAt": "2022-08-11T20:30:49.227Z"
   },
@@ -44,6 +45,7 @@
     "authorId": "b8f594a9-e836-4e25-9979-a56500b21be2",
     "categoryId": "50d4f365-e241-4783-8b2c-809a7d83771b",
     "winnerId": null,
+    "views": 5,
     "createdAt": "2022-01-25T06:25:26.873Z",
     "updatedAt": "2022-08-11T10:54:58.904Z"
   },
@@ -68,6 +70,7 @@
     "authorId": "f5cf90f8-6943-4e42-b006-03cf9bb707a4",
     "categoryId": "3f9bd5c0-f9a8-4763-b020-eac58681b1cf",
     "winnerId": null,
+    "views": 7,
     "createdAt": "2022-06-29T16:03:54.686Z",
     "updatedAt": "2022-08-11T15:00:55.325Z"
   },
@@ -92,6 +95,7 @@
     "authorId": "47504cdd-55e6-4584-9539-6eef69c6deed",
     "categoryId": "0e86f866-2146-4a5a-970b-7a62f07144a6",
     "winnerId": null,
+    "views": 14,
     "createdAt": "2022-07-13T11:48:59.391Z",
     "updatedAt": "2022-08-11T11:27:53.306Z"
   },
@@ -116,6 +120,7 @@
     "authorId": "79946740-1328-414f-bef0-926cb4eb59be",
     "categoryId": "a7694c34-2325-4d0d-b344-0fe074e99862",
     "winnerId": null,
+    "views": 46,
     "createdAt": "2022-06-05T10:30:08.186Z",
     "updatedAt": "2022-08-11T21:00:18.968Z"
   },
@@ -140,6 +145,7 @@
     "authorId": "807f73fb-31b8-4e66-9f74-babc8ee95d94",
     "categoryId": "6b8df3e5-b587-413f-9943-ef3d695b97c0",
     "winnerId": null,
+    "views": 16,
     "createdAt": "2022-07-15T23:27:04.899Z",
     "updatedAt": "2022-08-11T20:50:55.461Z"
   },
@@ -164,6 +170,7 @@
     "authorId": "b8f594a9-e836-4e25-9979-a56500b21be2",
     "categoryId": "e4bef890-791e-4c53-adfd-c455227b54ad",
     "winnerId": null,
+    "views": 68,
     "createdAt": "2022-03-20T22:58:23.101Z",
     "updatedAt": "2022-08-11T16:56:12.846Z"
   },
@@ -188,6 +195,7 @@
     "authorId": "f5cf90f8-6943-4e42-b006-03cf9bb707a4",
     "categoryId": "beff46f0-133b-4af7-8206-83419b526734",
     "winnerId": null,
+    "views": 36,
     "createdAt": "2022-04-03T07:22:08.976Z",
     "updatedAt": "2022-08-11T19:46:17.647Z"
   },
@@ -212,6 +220,7 @@
     "authorId": "47504cdd-55e6-4584-9539-6eef69c6deed",
     "categoryId": "a351b320-76d7-4545-bb74-8bb1f2fa486d",
     "winnerId": null,
+    "views": 34,
     "createdAt": "2021-10-08T05:49:10.335Z",
     "updatedAt": "2022-08-12T05:57:28.916Z"
   },
@@ -236,6 +245,7 @@
     "authorId": "79946740-1328-414f-bef0-926cb4eb59be",
     "categoryId": "0bfc0f51-e082-4dc9-b545-ae0afedbd330",
     "winnerId": null,
+    "views": 46,
     "createdAt": "2021-08-23T10:12:50.754Z",
     "updatedAt": "2022-08-11T20:36:46.717Z"
   },
@@ -260,6 +270,7 @@
     "authorId": "807f73fb-31b8-4e66-9f74-babc8ee95d94",
     "categoryId": "8556c563-4b04-43cb-8fe1-5bc53b5f0aad",
     "winnerId": null,
+    "views": 68,
     "createdAt": "2021-09-22T17:50:30.141Z",
     "updatedAt": "2022-08-11T23:50:55.208Z"
   },
@@ -284,6 +295,7 @@
     "authorId": "b8f594a9-e836-4e25-9979-a56500b21be2",
     "categoryId": "948feb22-e480-4e24-a90d-e49aa3d990c2",
     "winnerId": null,
+    "views": 45,
     "createdAt": "2021-10-13T11:54:57.191Z",
     "updatedAt": "2022-08-12T04:05:01.157Z"
   },
@@ -308,6 +320,7 @@
     "authorId": "f5cf90f8-6943-4e42-b006-03cf9bb707a4",
     "categoryId": "54fa7b5f-58d1-4e5d-b588-d9a8507fa3c7",
     "winnerId": null,
+    "views": 24,
     "createdAt": "2021-09-23T11:03:48.883Z",
     "updatedAt": "2022-08-12T08:23:55.336Z"
   },
@@ -332,6 +345,7 @@
     "authorId": "47504cdd-55e6-4584-9539-6eef69c6deed",
     "categoryId": "410c606f-f463-42ec-988e-d95917dd2834",
     "winnerId": null,
+    "views": 46,
     "createdAt": "2022-02-10T11:33:14.109Z",
     "updatedAt": "2022-08-11T15:26:01.033Z"
   },
@@ -356,6 +370,7 @@
     "authorId": "79946740-1328-414f-bef0-926cb4eb59be",
     "categoryId": "7062243f-f114-4b5a-abea-64fc21f4e117",
     "winnerId": null,
+    "views": 34,
     "createdAt": "2021-11-03T22:12:51.798Z",
     "updatedAt": "2022-08-11T19:11:39.126Z"
   },
@@ -380,6 +395,7 @@
     "authorId": "807f73fb-31b8-4e66-9f74-babc8ee95d94",
     "categoryId": "f5750398-bdfa-4262-adbb-c1e1c4cc92eb",
     "winnerId": null,
+    "views": 64,
     "createdAt": "2022-04-30T05:28:55.395Z",
     "updatedAt": "2022-08-11T19:33:53.558Z"
   },
@@ -404,6 +420,7 @@
     "authorId": "b8f594a9-e836-4e25-9979-a56500b21be2",
     "categoryId": "51dea135-fca2-4cc0-ab5b-a32c909f14e7",
     "winnerId": null,
+    "views": 66,
     "createdAt": "2021-09-06T06:38:29.620Z",
     "updatedAt": "2022-08-12T05:26:25.359Z"
   },
@@ -428,6 +445,7 @@
     "authorId": "f5cf90f8-6943-4e42-b006-03cf9bb707a4",
     "categoryId": "50d4f365-e241-4783-8b2c-809a7d83771b",
     "winnerId": null,
+    "views": 35,
     "createdAt": "2022-02-04T21:31:32.121Z",
     "updatedAt": "2022-08-12T05:59:53.185Z"
   },
@@ -452,6 +470,7 @@
     "authorId": "47504cdd-55e6-4584-9539-6eef69c6deed",
     "categoryId": "3f9bd5c0-f9a8-4763-b020-eac58681b1cf",
     "winnerId": null,
+    "views": 51,
     "createdAt": "2022-03-14T03:22:09.420Z",
     "updatedAt": "2022-08-11T09:26:10.085Z"
   },
@@ -476,6 +495,7 @@
     "authorId": "79946740-1328-414f-bef0-926cb4eb59be",
     "categoryId": "0e86f866-2146-4a5a-970b-7a62f07144a6",
     "winnerId": null,
+    "views": 29,
     "createdAt": "2022-07-14T11:27:13.474Z",
     "updatedAt": "2022-08-12T03:07:18.515Z"
   },
@@ -500,6 +520,7 @@
     "authorId": "807f73fb-31b8-4e66-9f74-babc8ee95d94",
     "categoryId": "a7694c34-2325-4d0d-b344-0fe074e99862",
     "winnerId": null,
+    "views": 96,
     "createdAt": "2022-06-30T15:19:51.001Z",
     "updatedAt": "2022-08-11T22:09:28.489Z"
   },
@@ -524,6 +545,7 @@
     "authorId": "b8f594a9-e836-4e25-9979-a56500b21be2",
     "categoryId": "6b8df3e5-b587-413f-9943-ef3d695b97c0",
     "winnerId": null,
+    "views": 21,
     "createdAt": "2022-03-19T03:17:45.335Z",
     "updatedAt": "2022-08-11T10:38:12.111Z"
   },
@@ -548,6 +570,7 @@
     "authorId": "f5cf90f8-6943-4e42-b006-03cf9bb707a4",
     "categoryId": "e4bef890-791e-4c53-adfd-c455227b54ad",
     "winnerId": null,
+    "views": 5,
     "createdAt": "2022-06-03T17:29:04.766Z",
     "updatedAt": "2022-08-12T05:29:51.793Z"
   },
@@ -572,6 +595,7 @@
     "authorId": "47504cdd-55e6-4584-9539-6eef69c6deed",
     "categoryId": "beff46f0-133b-4af7-8206-83419b526734",
     "winnerId": null,
+    "views": 0,
     "createdAt": "2022-01-26T00:43:27.729Z",
     "updatedAt": "2022-08-11T18:53:43.236Z"
   },
@@ -596,6 +620,7 @@
     "authorId": "79946740-1328-414f-bef0-926cb4eb59be",
     "categoryId": "a351b320-76d7-4545-bb74-8bb1f2fa486d",
     "winnerId": null,
+    "views": 12,
     "createdAt": "2022-05-30T04:26:44.364Z",
     "updatedAt": "2022-08-11T12:32:54.978Z"
   },
@@ -620,6 +645,7 @@
     "authorId": "807f73fb-31b8-4e66-9f74-babc8ee95d94",
     "categoryId": "0bfc0f51-e082-4dc9-b545-ae0afedbd330",
     "winnerId": null,
+    "views": 53,
     "createdAt": "2021-12-03T15:38:16.633Z",
     "updatedAt": "2022-08-11T21:34:25.259Z"
   },
@@ -644,6 +670,7 @@
     "authorId": "b8f594a9-e836-4e25-9979-a56500b21be2",
     "categoryId": "8556c563-4b04-43cb-8fe1-5bc53b5f0aad",
     "winnerId": null,
+    "views": 85,
     "createdAt": "2022-05-26T09:20:56.715Z",
     "updatedAt": "2022-08-11T18:17:57.767Z"
   },
@@ -668,6 +695,7 @@
     "authorId": "f5cf90f8-6943-4e42-b006-03cf9bb707a4",
     "categoryId": "948feb22-e480-4e24-a90d-e49aa3d990c2",
     "winnerId": null,
+    "views": 67,
     "createdAt": "2022-04-05T08:31:28.500Z",
     "updatedAt": "2022-08-11T08:39:16.146Z"
   },
@@ -692,6 +720,7 @@
     "authorId": "47504cdd-55e6-4584-9539-6eef69c6deed",
     "categoryId": "54fa7b5f-58d1-4e5d-b588-d9a8507fa3c7",
     "winnerId": null,
+    "views": 51,
     "createdAt": "2021-08-15T01:59:08.588Z",
     "updatedAt": "2022-08-12T05:02:25.841Z"
   },
@@ -716,6 +745,7 @@
     "authorId": "79946740-1328-414f-bef0-926cb4eb59be",
     "categoryId": "410c606f-f463-42ec-988e-d95917dd2834",
     "winnerId": null,
+    "views": 12,
     "createdAt": "2021-09-22T18:26:51.017Z",
     "updatedAt": "2022-08-12T05:08:21.846Z"
   },
@@ -740,6 +770,7 @@
     "authorId": "807f73fb-31b8-4e66-9f74-babc8ee95d94",
     "categoryId": "7062243f-f114-4b5a-abea-64fc21f4e117",
     "winnerId": null,
+    "views": 41,
     "createdAt": "2022-04-30T03:11:20.886Z",
     "updatedAt": "2022-08-11T09:46:52.386Z"
   },
@@ -764,6 +795,7 @@
     "authorId": "b8f594a9-e836-4e25-9979-a56500b21be2",
     "categoryId": "f5750398-bdfa-4262-adbb-c1e1c4cc92eb",
     "winnerId": null,
+    "views": 53,
     "createdAt": "2022-04-18T16:53:09.134Z",
     "updatedAt": "2022-08-11T15:12:34.266Z"
   },
@@ -788,6 +820,7 @@
     "authorId": "f5cf90f8-6943-4e42-b006-03cf9bb707a4",
     "categoryId": "51dea135-fca2-4cc0-ab5b-a32c909f14e7",
     "winnerId": null,
+    "views": 33,
     "createdAt": "2021-09-11T19:38:10.560Z",
     "updatedAt": "2022-08-11T12:10:04.460Z"
   },
@@ -812,6 +845,7 @@
     "authorId": "47504cdd-55e6-4584-9539-6eef69c6deed",
     "categoryId": "50d4f365-e241-4783-8b2c-809a7d83771b",
     "winnerId": null,
+    "views": 13,
     "createdAt": "2022-03-02T04:29:36.581Z",
     "updatedAt": "2022-08-12T01:18:07.153Z"
   },
@@ -836,6 +870,7 @@
     "authorId": "79946740-1328-414f-bef0-926cb4eb59be",
     "categoryId": "3f9bd5c0-f9a8-4763-b020-eac58681b1cf",
     "winnerId": null,
+    "views": 53,
     "createdAt": "2021-11-15T01:57:56.276Z",
     "updatedAt": "2022-08-11T22:29:16.763Z"
   },
@@ -860,6 +895,7 @@
     "authorId": "807f73fb-31b8-4e66-9f74-babc8ee95d94",
     "categoryId": "0e86f866-2146-4a5a-970b-7a62f07144a6",
     "winnerId": null,
+    "views": 75,
     "createdAt": "2022-05-04T04:31:39.651Z",
     "updatedAt": "2022-08-11T11:01:29.425Z"
   },
@@ -884,6 +920,7 @@
     "authorId": "b8f594a9-e836-4e25-9979-a56500b21be2",
     "categoryId": "a7694c34-2325-4d0d-b344-0fe074e99862",
     "winnerId": null,
+    "views": 89,
     "createdAt": "2021-10-24T07:26:41.319Z",
     "updatedAt": "2022-08-11T22:10:43.675Z"
   },
@@ -908,6 +945,7 @@
     "authorId": "f5cf90f8-6943-4e42-b006-03cf9bb707a4",
     "categoryId": "6b8df3e5-b587-413f-9943-ef3d695b97c0",
     "winnerId": null,
+    "views": 12,
     "createdAt": "2021-12-10T09:20:30.976Z",
     "updatedAt": "2022-08-11T14:54:36.856Z"
   },
@@ -932,6 +970,7 @@
     "authorId": "47504cdd-55e6-4584-9539-6eef69c6deed",
     "categoryId": "e4bef890-791e-4c53-adfd-c455227b54ad",
     "winnerId": null,
+    "views": 1,
     "createdAt": "2022-04-06T21:31:56.813Z",
     "updatedAt": "2022-08-12T03:08:36.039Z"
   },
@@ -956,6 +995,7 @@
     "authorId": "79946740-1328-414f-bef0-926cb4eb59be",
     "categoryId": "beff46f0-133b-4af7-8206-83419b526734",
     "winnerId": null,
+    "views": 5,
     "createdAt": "2022-03-17T10:38:45.757Z",
     "updatedAt": "2022-08-11T09:06:23.631Z"
   },
@@ -980,6 +1020,7 @@
     "authorId": "807f73fb-31b8-4e66-9f74-babc8ee95d94",
     "categoryId": "a351b320-76d7-4545-bb74-8bb1f2fa486d",
     "winnerId": null,
+    "views": 3,
     "createdAt": "2022-08-06T14:30:58.779Z",
     "updatedAt": "2022-08-11T18:27:47.395Z"
   },
@@ -1004,6 +1045,7 @@
     "authorId": "b8f594a9-e836-4e25-9979-a56500b21be2",
     "categoryId": "0bfc0f51-e082-4dc9-b545-ae0afedbd330",
     "winnerId": null,
+    "views": 8,
     "createdAt": "2022-02-04T13:04:42.344Z",
     "updatedAt": "2022-08-12T03:14:30.099Z"
   },
@@ -1028,6 +1070,7 @@
     "authorId": "f5cf90f8-6943-4e42-b006-03cf9bb707a4",
     "categoryId": "8556c563-4b04-43cb-8fe1-5bc53b5f0aad",
     "winnerId": null,
+    "views": 7,
     "createdAt": "2022-06-27T05:06:00.263Z",
     "updatedAt": "2022-08-11T11:50:49.073Z"
   },
@@ -1052,6 +1095,7 @@
     "authorId": "47504cdd-55e6-4584-9539-6eef69c6deed",
     "categoryId": "948feb22-e480-4e24-a90d-e49aa3d990c2",
     "winnerId": null,
+    "views": 2,
     "createdAt": "2022-01-30T18:36:48.051Z",
     "updatedAt": "2022-08-11T16:42:00.707Z"
   },
@@ -1076,6 +1120,7 @@
     "authorId": "79946740-1328-414f-bef0-926cb4eb59be",
     "categoryId": "54fa7b5f-58d1-4e5d-b588-d9a8507fa3c7",
     "winnerId": null,
+    "views": 8,
     "createdAt": "2022-02-18T15:00:03.584Z",
     "updatedAt": "2022-08-12T06:15:12.819Z"
   },
@@ -1100,6 +1145,7 @@
     "authorId": "807f73fb-31b8-4e66-9f74-babc8ee95d94",
     "categoryId": "410c606f-f463-42ec-988e-d95917dd2834",
     "winnerId": null,
+    "views": 39,
     "createdAt": "2022-01-20T05:29:34.053Z",
     "updatedAt": "2022-08-11T23:00:12.901Z"
   },
@@ -1124,6 +1170,7 @@
     "authorId": "b8f594a9-e836-4e25-9979-a56500b21be2",
     "categoryId": "7062243f-f114-4b5a-abea-64fc21f4e117",
     "winnerId": null,
+    "views": 58,
     "createdAt": "2022-03-18T20:12:17.097Z",
     "updatedAt": "2022-08-11T20:21:14.250Z"
   },
@@ -1148,6 +1195,7 @@
     "authorId": "f5cf90f8-6943-4e42-b006-03cf9bb707a4",
     "categoryId": "f5750398-bdfa-4262-adbb-c1e1c4cc92eb",
     "winnerId": null,
+    "views": 71,
     "createdAt": "2021-09-06T05:58:55.327Z",
     "updatedAt": "2022-08-12T06:41:40.350Z"
   }

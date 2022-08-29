@@ -73,7 +73,6 @@ export const categoryItemTitle = ({
     position: absolute;
     left: ${spaces.lg};
     top: ${spaces.xl1};
-    max-width: 200px;
     z-index: 1;
   }
 `;

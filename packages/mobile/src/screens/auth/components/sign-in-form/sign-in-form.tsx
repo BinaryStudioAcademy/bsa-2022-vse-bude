@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Button, View, Input } from '~/components/components';
+import { View, Input, PrimaryButton } from '~/components/components';
 import { UserSignInDto } from '@vse-bude/shared';
 import { useAppForm, useTranslation } from '~/hooks/hooks';
 import { signIn } from '~/validation-schemas/validation-schemas';
@@ -36,7 +36,7 @@ const SignInForm: FC<Props> = ({ onSubmit }) => {
         contentContainerStyle={globalStyles.mt5}
       />
       <View style={{ marginTop: 30 }}>
-        <Button
+        <PrimaryButton
           label={t('verification.SING_IN')}
           onPress={handleSubmit(onSubmit)}
         />
