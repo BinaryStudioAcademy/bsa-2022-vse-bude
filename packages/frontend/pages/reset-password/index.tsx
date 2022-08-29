@@ -5,7 +5,7 @@ import {
   contentWrapper,
   formWrapper,
 } from '../../components/auth/layout/styles';
-import { ForgotPassword } from '../../components/auth/forgot-password';
+import { ResetPassword } from '../../components/auth/reset-password';
 
 export const getServerSideProps = withPublic(async ({ locale }) => ({
   props: {
@@ -13,16 +13,16 @@ export const getServerSideProps = withPublic(async ({ locale }) => ({
   },
 }));
 
-function ResetPasswordPage() {
+function UpdatePasswordPage() {
   return (
     <AuthLayout>
       <div css={contentWrapper}>
         <div css={formWrapper}>
-          <ForgotPassword />
+          <ResetPassword />
         </div>
       </div>
     </AuthLayout>
   );
 }
 
-export default ResetPasswordPage;
+export default UpdatePasswordPage;

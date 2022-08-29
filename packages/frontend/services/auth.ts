@@ -1,12 +1,14 @@
 import type {
   PhoneVerifyDto,
+  ResetPasswordLink,
+  UpdatePassword,
   UserSignInDto,
   UserSignUpDto,
 } from '@vse-bude/shared';
 import { ApiRoutes, VerifyApiRoutes } from '@vse-bude/shared';
 import { AuthApiRoutes } from '@vse-bude/shared';
 import { http } from '@helpers';
-import type { IAuth } from '../common/types/auth';
+import type { IAuth } from '@types';
 
 export const login = (loginData: UserSignInDto) =>
   http.post({
@@ -47,4 +49,16 @@ export const resendEmailCode = () =>
   http.post({
     url: `${ApiRoutes.VERIFY}${VerifyApiRoutes.EMAIL_RESEND_CODE}`,
     body: {},
+  });
+
+export const resetPasswordLink = (data: ResetPasswordLink) =>
+  http.post({
+    url: `${ApiRoutes.AUTH}${AuthApiRoutes.RESET_PASSWORD_LINK}`,
+    body: { ...data },
+  });
+
+export const updatePassword = (data: UpdatePassword) =>
+  http.post({
+    url: `${ApiRoutes.AUTH}${AuthApiRoutes.UPDATE_PASSWORD}`,
+    body: { ...data },
   });
