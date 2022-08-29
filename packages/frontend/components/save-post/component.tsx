@@ -1,6 +1,6 @@
 import { useTranslation } from 'next-i18next';
 import { Container } from '@primitives';
-import { NestedLayout } from 'components/sub-pages/common';
+import { NestedLayout } from '../profile/user-account/common';
 import PostForm from './form';
 import * as styles from './styles';
 

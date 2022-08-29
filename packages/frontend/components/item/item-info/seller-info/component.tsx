@@ -1,8 +1,7 @@
 ﻿import { Button, Avatar, Icon, Anchor } from '@primitives';
-import { IconName } from '@enums';
+import { IconName, Routes } from '@enums';
 import { ColorPalette } from '@vse-bude/shared';
 import type { AuthorDto } from '@vse-bude/shared';
-import { Routes } from '@enums';
 import Router from 'next/router';
 import { useTranslation } from 'next-i18next';
 import * as styles from './styles';
@@ -15,7 +14,7 @@ interface SellerInfoProps {
 export const SellerInfo = ({ seller, onContactSeller }: SellerInfoProps) => {
   const { t } = useTranslation('item');
   const handleAvatarClick = () => {
-    Router.push(Routes.USER_ACCOUNT);
+    Router.push(`${Routes.PROFILE}/${seller.id}`);
   };
 
   return (
@@ -46,7 +45,7 @@ export const SellerInfo = ({ seller, onContactSeller }: SellerInfoProps) => {
             size="sm"
             icon={IconName.PHONE}
             color={ColorPalette.YELLOW_200}
-          ></Icon>
+          />
           <span>{seller.phone}</span>
         </div>
 
@@ -68,7 +67,7 @@ export const SellerInfo = ({ seller, onContactSeller }: SellerInfoProps) => {
               size="sm"
               icon={IconName.FACEBOOK}
               color={ColorPalette.YELLOW_200}
-            ></Icon>
+            />
           </Anchor>
         </div>
         <div>
@@ -77,7 +76,7 @@ export const SellerInfo = ({ seller, onContactSeller }: SellerInfoProps) => {
               size="sm"
               icon={IconName.WEBSITE}
               color={ColorPalette.YELLOW_200}
-            ></Icon>
+            />
           </Anchor>
         </div>
         <div>
@@ -86,7 +85,7 @@ export const SellerInfo = ({ seller, onContactSeller }: SellerInfoProps) => {
               size="sm"
               icon={IconName.LINKEDIN}
               color={ColorPalette.YELLOW_200}
-            ></Icon>
+            />
           </Anchor>
         </div>
       </div>
