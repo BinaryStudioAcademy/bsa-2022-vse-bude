@@ -4,6 +4,7 @@ import {
   MAX_PASSWORD_LENGTH,
   MIN_PASSWORD_LENGTH,
 } from '~/common/constants/constants';
+import { PASSWORD_REGEX } from '~/common/regexp/regexp';
 
 const passwordValidator = (value: string, helpers: Joi.CustomHelpers) => {
   const hasUppercase = value.match(/[A-Z]/);
@@ -36,7 +37,7 @@ const passwordValidator = (value: string, helpers: Joi.CustomHelpers) => {
     });
   }
 
-  if (!value.match(/([0-9a-zA-Z!#$%&'*+-/=?^_`{|}~.]{8,16})/)) {
+  if (!value.match(PASSWORD_REGEX)) {
     return helpers.message({ custom: i18next.t('errors.INVALID_PASSWORD') });
   }
 

@@ -7,7 +7,7 @@ import {
 
 export const screens = {
   words: {
-    FIRST_NAME: 'Ім`я',
+    FIRST_NAME: "Ім'я",
     LAST_NAME: 'Прізвище',
   },
   welcome: {
@@ -73,8 +73,9 @@ export const screens = {
     INVALID_PASSWORD: 'Неправильний формат паролю',
     REPEAT_PASSWORD_INVALID: 'Паролі не співпадають',
     MIN_NAME_LENGTH: `{{name}} має містити не менше ${MIN_NAME_LENGTH} символу`,
-    MAX_NAME_LENGTH: `{{name}} має містити не більше ${MAX_NAME_LENGTH} символів” for Ukrainian localization`,
+    MAX_NAME_LENGTH: `{{name}} має містити не більше ${MAX_NAME_LENGTH} символів for Ukrainian localization`,
     FIRST_NAME_INVALID: 'Неправильний формат імені',
     LAST_NAME_INVALID: 'Неправильний формат прізвища',
+    WRONG_FORMAT: 'Невірний формат',
   },
 };

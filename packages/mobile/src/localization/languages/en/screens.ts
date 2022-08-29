@@ -77,5 +77,6 @@ export const screens = {
     MAX_NAME_LENGTH: `{{name}} must be not more than ${MAX_NAME_LENGTH} characters`,
     FIRST_NAME_INVALID: 'The invalid first name format',
     LAST_NAME_INVALID: 'The invalid last name format',
+    WRONG_FORMAT: 'Wrong format',
   },
 };
