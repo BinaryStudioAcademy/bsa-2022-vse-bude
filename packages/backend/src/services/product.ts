@@ -43,14 +43,14 @@ export class ProductService {
     return this._productRepository.incrementViews(id);
   }
 
-  public async favoriteIds(userId: string) {
+  public async getFavoriteIds(userId: string) {
     const favProducts = await this._productRepository.favoriteIds(userId);
 
     return favProducts.map((favProd) => favProd.productId);
   }
 
-  public async favorite(userId: string) {
-    return await this._productRepository.favorite(userId);
+  public async getFavoriteProducts(userId: string) {
+    return await this._productRepository.getFavorite(userId);
   }
 
   public async addToFavorites({ userId, productId }: AddProductToFavorites) {

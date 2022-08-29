@@ -51,13 +51,13 @@ export const initProductRoutes = (
   router.get(
     apiPath(path, ProductApiRoutes.FAVORITE),
     authMiddleware,
-    wrap((req: Request) => productService.favorite(req.userId)),
+    wrap((req: Request) => productService.getFavoriteProducts(req.userId)),
   );
 
   router.get(
     apiPath(path, ProductApiRoutes.FAVORITE_IDS),
     authMiddleware,
-    wrap((req: Request) => productService.favoriteIds(req.userId)),
+    wrap((req: Request) => productService.getFavoriteIds(req.userId)),
   );
 
   /**

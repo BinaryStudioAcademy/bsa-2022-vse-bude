@@ -2,9 +2,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import type { Http } from '@vse-bude/shared';
 import type { ProductType } from '@vse-bude/shared';
 import {
-  addToFavorites,
-  deleteFromFavorites,
-  fetchFavoriteProductsIds,
   getProducts,
   getProductsSSR,
   incrementProductViews,
@@ -38,37 +35,4 @@ export const fetchProductsSSR = createAsyncThunk(
 export const fetchIncrementProductViews = createAsyncThunk(
   ProductActions.FETCH_INCREMENT_PRODUCT_VIEWS,
   async (id: string) => incrementProductViews(id),
-);
-
-export const getFavoriteIds = createAsyncThunk(
-  ProductActions.GET_FAVORITE_PRODUCT_IDS,
-  async (_, { rejectWithValue }) => {
-    try {
-      return await fetchFavoriteProductsIds();
-    } catch (e) {
-      return rejectWithValue(e.message);
-    }
-  },
-);
-
-export const addProductToFavorites = createAsyncThunk(
-  ProductActions.ADD_PRODUCT_TO_FAVORITES,
-  async (productId: string, { rejectWithValue }) => {
-    try {
-      return await addToFavorites(productId);
-    } catch (e) {
-      return rejectWithValue(e.message);
-    }
-  },
-);
-
-export const deleteProductFromFavorites = createAsyncThunk(
-  ProductActions.DELETE_PRODUCT_FROM_FAVORITES,
-  async (productId: string, { rejectWithValue }) => {
-    try {
-      return await deleteFromFavorites(productId);
-    } catch (e) {
-      return rejectWithValue(e.message);
-    }
-  },
 );

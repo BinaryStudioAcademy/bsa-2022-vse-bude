@@ -8,7 +8,7 @@ import { ImageSlider } from '../image-slider/component';
 import {
   addProductToFavorites,
   deleteProductFromFavorites,
-} from '../../../store/product';
+} from '../../../store/favorite-product';
 import { useInFavorite } from '../../../hooks/favorite-product';
 import {
   productFooter,

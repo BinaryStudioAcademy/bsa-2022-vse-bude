@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { Fragment, useEffect } from 'react';
 import { useAppDispatch, useAuth } from '@hooks';
 import { getCurrentUser } from 'store/auth';
-import { getFavoriteIds } from '../../store/product';
+import { getFavoriteIds } from '../../store/favorite-product';
 
 interface UserProviderProps {
   children: ReactNode;

@@ -2,10 +2,10 @@ import { useMemo } from 'react';
 import { useTypedSelector } from './store';
 
 export const useInFavorite = (productId: string) => {
-  const { favoriteProducts } = useTypedSelector((state) => state.product);
+  const { productsIds } = useTypedSelector((state) => state.favoriteProduct);
 
   return useMemo(
-    () => favoriteProducts.includes(productId),
-    [favoriteProducts, productId],
+    () => productsIds.includes(productId),
+    [productsIds, productId],
   );
 };

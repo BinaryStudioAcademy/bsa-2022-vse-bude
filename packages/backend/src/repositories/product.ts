@@ -65,8 +65,8 @@ export class ProductRepository {
     });
   }
 
-  public async favorite(userId: string) {
-    const query = this._dbClient.favoriteProducts.findMany({
+  public async getFavorite(userId: string) {
+    return await this._dbClient.favoriteProducts.findMany({
       where: {
         userId,
       },
@@ -82,8 +82,6 @@ export class ProductRepository {
         },
       },
     });
-
-    return await query;
   }
 
   public async isInFavorite(userId: string, productId: string) {
