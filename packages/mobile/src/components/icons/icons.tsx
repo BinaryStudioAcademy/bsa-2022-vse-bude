@@ -62,6 +62,22 @@ const LogInIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="log-in" {...iconProps} />
 );
 
+const FacebookIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="facebook" {...iconProps} />
+);
+
+const InstagramIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="instagram" {...iconProps} />
+);
+
+const PhoneIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="smartphone" {...iconProps} />
+);
+
+const GlobeIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="globe" {...iconProps} />
+);
+
 export {
   HomeIcon,
   StarIcon,
@@ -78,4 +94,8 @@ export {
   BackIcon,
   CustomFeatherIcon,
   CameraIcon,
+  FacebookIcon,
+  InstagramIcon,
+  PhoneIcon,
+  GlobeIcon,
 };
