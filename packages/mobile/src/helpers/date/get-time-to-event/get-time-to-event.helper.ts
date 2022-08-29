@@ -1,13 +1,24 @@
 import dayjs from 'dayjs';
+import { t } from 'i18next';
 
 const getTimeToEvent = (date: Date) => {
   const duration = dayjs.duration(dayjs(date).diff(dayjs()));
-  if (duration.asMilliseconds() > 0) {
-    const days = dayjs.duration(duration.days(), 'days').humanize();
-    const hours = duration.hours();
-    const minutes = duration.minutes();
+  if (duration.asMilliseconds() > 60000) {
+    const days =
+      duration.days() > 0
+        ? `${dayjs.duration(duration.days(), 'days').humanize()} `
+        : '';
+    const hours =
+      duration.hours() > 0
+        ? `${duration.hours()} ${t('common:time.HOURS')} `
+        : '';
 
-    return `${days}  ${hours}h ${minutes}min`;
+    const minutes =
+      duration.minutes() > 0
+        ? `${duration.minutes()} ${t('common:time.MINUTES')}`
+        : '';
+
+    return `${days}${hours}${minutes}`;
   }
 
   return dayjs().to(date);

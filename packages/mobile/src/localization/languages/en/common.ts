@@ -15,4 +15,8 @@ export const common = {
   currency: {
     UAH: 'UAH',
   },
+  time: {
+    HOURS: 'h',
+    MINUTES: 'min',
+  },
 };

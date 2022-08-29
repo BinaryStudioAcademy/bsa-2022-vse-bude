@@ -15,4 +15,8 @@ export const common = {
   currency: {
     UAH: 'ГРН',
   },
+  time: {
+    HOURS: 'г',
+    MINUTES: 'хв',
+  },
 };
