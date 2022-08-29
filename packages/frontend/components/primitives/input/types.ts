@@ -11,4 +11,6 @@ export interface PasswordProps extends React.HTMLProps<HTMLButtonElement> {
 
 export interface InputProps extends PasswordProps {
   type: 'text' | 'email';
+  labelRequiredMark?: boolean;
+  tooltip?: string;
 }
