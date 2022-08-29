@@ -43,5 +43,5 @@ export const getProductByIdSSR = (httpSSR: Http, id: string) =>
 export const incrementProductViews = (id: string): Promise<ProductDto> =>
   http.put({
     url: `${ApiRoutes.PRODUCTS}/${id}${ProductApiRoutes.VIEWS}`,
-    body: { id: id },
+    body: { id },
   });

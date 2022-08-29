@@ -55,7 +55,7 @@ const ItemPage = ({ item, similarItems }: ItemPageProps) => {
 
   useEffect(() => {
     incrementProductViews(item.id);
-  });
+  }, [item.id]);
 
   return (
     <Layout title={item.title}>
