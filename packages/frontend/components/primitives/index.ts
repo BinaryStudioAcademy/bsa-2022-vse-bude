@@ -15,3 +15,4 @@ export { Loader } from './loader';
 export { Error } from './error';
 export * from './input';
 export { Breadcrumbs } from './breadcrumbs';
+export { Modal } from './modal';
