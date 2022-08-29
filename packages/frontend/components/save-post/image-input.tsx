@@ -1,11 +1,11 @@
 import { Column, Icon } from '@primitives';
-import { SectionHeader } from '../profile/user-account/common';
 import Image from 'next/image';
 import { IconName } from '@enums';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 import { allowedImgExtension } from 'common/enums/allowedImgExtension';
 import { MAX_IMAGE_SIZE } from '@vse-bude/shared';
+import { SectionHeader } from '../profile/user-account/common';
 import type { ImageInputProps } from './types';
 import * as styles from './styles';
 
