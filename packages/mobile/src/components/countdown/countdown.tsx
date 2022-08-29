@@ -1,12 +1,11 @@
 import React, { FC } from 'react';
 import { View } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { getStrictTimeToEvent } from '~/helpers/date/date';
 import { useTranslation, useEffect, useState } from '~/hooks/hooks';
 import { Box } from './components/components';
 import { BoxType } from './common/enums/enums';
 import { styles } from './styles';
-import { timeIntervalSetter } from './helpers/time-interval-setter';
+import { intervalSetter } from './helpers/interval-setter';
 
 type Props = {
   endDate: Date;
@@ -14,10 +13,17 @@ type Props = {
 
 const Countdown: FC<Props> = ({ endDate }) => {
   const { t } = useTranslation();
-  const [duration, setDuration] = useState(getStrictTimeToEvent(endDate));
+  const [duration, setDuration] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
   const { days, hours, minutes, seconds } = duration;
   useEffect(() => {
-    timeIntervalSetter(setDuration, endDate);
+    const timerId = intervalSetter(setDuration, endDate);
+
+    return () => clearInterval(timerId);
   }, []);
 
   return (

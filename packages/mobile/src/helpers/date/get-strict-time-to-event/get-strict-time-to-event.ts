@@ -1,13 +1,15 @@
 import dayjs from 'dayjs';
 
 const getStrictTimeToEvent = (date: Date) => {
-  const timeDuration = dayjs.duration(dayjs(date).diff(dayjs()));
-  if (timeDuration.asMilliseconds() > 0) {
+  const duration = dayjs.duration(dayjs(date).diff(dayjs()));
+  const totalMs = duration.asMilliseconds();
+  if (totalMs > 0) {
     return {
-      days: timeDuration.days(),
-      hours: timeDuration.hours(),
-      minutes: timeDuration.minutes(),
-      seconds: timeDuration.seconds(),
+      days: duration.days(),
+      hours: duration.hours(),
+      minutes: duration.minutes(),
+      seconds: duration.seconds(),
+      totalMs,
     };
   }
 
@@ -16,6 +18,7 @@ const getStrictTimeToEvent = (date: Date) => {
     hours: 0,
     minutes: 0,
     seconds: 0,
+    totalMs: 0,
   };
 };
 
