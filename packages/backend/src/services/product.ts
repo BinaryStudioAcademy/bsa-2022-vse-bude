@@ -50,7 +50,7 @@ export class ProductService {
   }
 
   public async getFavoriteProducts(userId: string) {
-    return await this._productRepository.getFavorite(userId);
+    return this._productRepository.getFavorite(userId);
   }
 
   public async addToFavorites({ userId, productId }: AddProductToFavorites) {
