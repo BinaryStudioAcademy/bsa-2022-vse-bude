@@ -2,7 +2,7 @@ import { Textarea } from 'components/primitives/textarea';
 import { useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
 import { Input, Column, Flex, Button, Loader } from '@primitives';
-import { SectionHeader } from 'components/sub-pages/common';
+import { SectionHeader } from '../profile/user-account/common';
 import { useState } from 'react';
 import { createPostSchema } from 'validation-schemas/post';
 import { joiResolver } from '@hookform/resolvers/joi';
