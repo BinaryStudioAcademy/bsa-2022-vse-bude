@@ -4,7 +4,13 @@ import type { ApiRoutes, UserProfileDto } from '@vse-bude/shared';
 import { ProfileApiRoutes } from '@vse-bude/shared';
 import { wrap } from '@helpers';
 import { apiPath } from '@helpers';
-import { authMiddleware } from '@middlewares';
+import {
+  authMiddleware,
+  userNameValidation,
+  emailValidation,
+  phoneValidation,
+  passwordValidation,
+} from '@middlewares';
 
 export const initProfileRoutes = (
   { profileService }: Services,
@@ -29,6 +35,10 @@ export const initProfileRoutes = (
   router.put(
     apiPath(path, ProfileApiRoutes.UPDATE_DATA),
     authMiddleware,
+    userNameValidation,
+    emailValidation,
+    phoneValidation,
+    passwordValidation,
     wrap(async (req: Request) => {
       const { userId } = req;
       const { avatar, firstName, lastName, socialMedia } = <UserProfileDto>(
