@@ -1,4 +1,4 @@
-﻿import { Layout, Item } from '@components';
+import { Layout, Item } from '@components';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { AuthHelper, CookieStorage } from '@helpers';
 import { getProductByIdSSR, getProductsSSR } from 'services/product';
