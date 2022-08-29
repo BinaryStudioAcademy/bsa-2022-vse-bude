@@ -11,7 +11,6 @@ import { initHealthRoutes } from './health';
 import { initProfileRoutes } from './profile';
 import { initPostRoutes } from './post';
 
-
 export const initRoutes = (services: Services) => [
   initUserRoutes(services, ApiRoutes.USERS),
   initCategoryRoutes(services, ApiRoutes.CATEGORIES),
