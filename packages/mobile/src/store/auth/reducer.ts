@@ -17,11 +17,13 @@ const reducer = createReducer(initialState, (builder) => {
   builder.addCase(signUp.pending, (state) => {
     state.dataStatus = DataStatus.PENDING;
   });
-  builder.addCase(signUp.fulfilled, (state) => {
+  builder.addCase(signUp.fulfilled, (state, { payload }) => {
     state.dataStatus = DataStatus.FULFILLED;
+    state.user = payload;
   });
   builder.addCase(signUp.rejected, (state) => {
     state.dataStatus = DataStatus.REJECTED;
+    state.user = null;
   });
   builder.addCase(signIn.pending, (state) => {
     state.dataStatus = DataStatus.PENDING;

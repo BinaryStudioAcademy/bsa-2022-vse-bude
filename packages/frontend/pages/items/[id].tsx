@@ -1,6 +1,6 @@
-﻿import { Layout, Item } from '@components';
+import { Layout, Item } from '@components';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { AuthHelper, CookieStorage, withPublic } from '@helpers';
+import { AuthHelper, CookieStorage } from '@helpers';
 import { getProductByIdSSR, getProductsSSR } from 'services/product';
 import { LotSection } from 'components/home/lot-section';
 import { Routes } from '@enums';
@@ -8,6 +8,7 @@ import { PagePath } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import type { ItemDto } from '@vse-bude/shared';
 import { Http } from '@vse-bude/shared';
+import { withPublic } from '@hocs';
 
 export const getServerSideProps = withPublic(async (ctx) => {
   const { locale } = ctx;

@@ -1,5 +1,5 @@
-import { AccountRoutes, Routes, IconName } from '@enums';
-import { useAppDispatch } from '@hooks';
+import { ProfileRoutes, Routes, IconName } from '@enums';
+import { useAppDispatch, useTypedSelector } from '@hooks';
 import { Icon } from '@primitives';
 import { useRouter } from 'next/router';
 import { logoutUser } from 'store/auth';
@@ -8,6 +8,7 @@ import type { PopoverContentProps } from '../types';
 
 export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
   const router = useRouter();
+  const userId = useTypedSelector((state) => state.auth.user.id);
   const dispatch = useAppDispatch();
 
   const handleClick = (e) => {
@@ -27,7 +28,7 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
       <button
         css={styles.popoverContentItem}
         onClick={handleClick}
-        path-label={Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_PERSONAL}
+        path-label={`${Routes.PROFILE}/${userId}${ProfileRoutes.PERSONAL_INFO}`}
         data-variant="icon"
       >
         <Icon icon={IconName.USER} color="yellow" />
@@ -36,7 +37,7 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
       <button
         css={styles.popoverContentItem}
         onClick={handleClick}
-        path-label={Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_LIST}
+        path-label={`${Routes.PROFILE}/${userId}${ProfileRoutes.LIST}`}
         data-variant="icon"
       >
         <Icon icon={IconName.LIST} color="yellow" />
@@ -45,7 +46,7 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
       <button
         css={styles.popoverContentItem}
         onClick={handleClick}
-        path-label={Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_SETTINGS}
+        path-label={`${Routes.PROFILE}/${userId}${ProfileRoutes.ACCOUNT_SETTINGS}`}
         data-variant="icon"
       >
         <Icon icon={IconName.SETTINGS} color="yellow" />
@@ -54,7 +55,7 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
       <button
         css={styles.popoverContentItem}
         onClick={handleClick}
-        path-label={Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_MESSAGES}
+        path-label={`${Routes.PROFILE}/${userId}${ProfileRoutes.MESSAGES}`}
         data-variant="icon"
       >
         <Icon icon={IconName.MESSAGE} color="yellow" />
@@ -63,7 +64,7 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
       <button
         css={styles.popoverContentItem}
         onClick={handleClick}
-        path-label={Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_LIST}
+        path-label={`${Routes.PROFILE}/${userId}${ProfileRoutes.SUPPORT}`}
         data-variant="icon"
       >
         <Icon icon={IconName.SUPPORT} color="yellow" />

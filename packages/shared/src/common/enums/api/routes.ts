@@ -1,12 +1,15 @@
 export enum ApiRoutes {
   USERS = '/users',
+  ACCOUNT = '/account',
   CATEGORIES = '/categories',
   PRODUCTS = '/products',
   NEWS = '/news',
   AUTH = '/auth',
+  PROFILE = '/profile',
   UPLOAD_IMAGE = '/upload-image',
   VERIFY = '/verify',
   HEALTH = '/health',
+  CREATE_POST = '/post',
 }
 
 export enum AuthApiRoutes {
@@ -32,4 +35,14 @@ export enum ProductApiRoutes {
   VIEWS = '/views',
   FAVORITE = '/favorite',
   FAVORITE_IDS = '/favorite-ids',
+}
+
+export enum ProfileApiRoutes {
+  GET_USER_BY_ID = '/:userId',
+  UPDATE_DATA = '/save',
+}
+
+export enum AccountApiRoutes {
+  PERSONAL_INFO = '/personal-info',
+  MY_LIST = '/my-list',
 }
