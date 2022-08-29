@@ -1,7 +1,11 @@
 ﻿import { Layout, Item } from '@components';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { AuthHelper, CookieStorage } from '@helpers';
-import { getProductByIdSSR, getProductsSSR } from 'services/product';
+import {
+  getProductByIdSSR,
+  getProductsSSR,
+  incrementProductViews,
+} from 'services/product';
 import { LotSection } from 'components/home/lot-section';
 import { Routes } from '@enums';
 import { Breadcrumbs } from '@primitives';
@@ -9,6 +13,7 @@ import { useTranslation } from 'next-i18next';
 import type { ItemDto } from '@vse-bude/shared';
 import { Http } from '@vse-bude/shared';
 import { withPublic } from '@hocs';
+import { useEffect } from 'react';
 
 export const getServerSideProps = withPublic(async (ctx) => {
   const { locale } = ctx;
@@ -48,6 +53,10 @@ interface ItemPageProps {
 
 const ItemPage = ({ item, similarItems }: ItemPageProps) => {
   const { t } = useTranslation();
+
+  useEffect(() => {
+    incrementProductViews(item.id);
+  }, [item.id]);
 
   return (
     <Layout title={item.title}>
