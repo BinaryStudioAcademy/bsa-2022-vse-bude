@@ -7,11 +7,11 @@ import { ButtonAppearance, RootScreenName } from '~/common/enums/enums';
 import { RootNavigationParamList } from '~/common/types/types';
 import {
   View,
-  Button,
   FlagBackgroundView,
   ScreenWrapper,
   StatusBar,
   LogoWhite,
+  SecondaryButton,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { Product } from './components/components';
@@ -44,17 +44,15 @@ const Welcome: FC<Props> = ({ navigation }) => {
           <Product />
         </View>
         <View style={styles.buttonsWrapper}>
-          <Button
+          <SecondaryButton
             label={t('verification.CREATE_ACCOUNT')}
-            background={ColorPalette.GREEN_200}
             onPress={() => {
               navigation.navigate(RootScreenName.SIGN_UP);
             }}
           />
-          <Button
+          <SecondaryButton
+            appearance={ButtonAppearance.OUTLINED}
             label={t('verification.SING_IN')}
-            view={ButtonAppearance.TRANSPARENT}
-            textColor={ColorPalette.GREEN_200}
             onPress={() => {
               navigation.navigate(RootScreenName.SIGN_IN);
             }}

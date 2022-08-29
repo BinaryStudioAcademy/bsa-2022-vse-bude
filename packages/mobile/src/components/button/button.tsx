@@ -1,59 +1,53 @@
 import React, { FC } from 'react';
-import { Pressable, View, ColorValue } from 'react-native';
-import { ButtonType, ButtonAppearance } from '~/common/enums/enums';
+import { Pressable, View } from 'react-native';
+
+import { ButtonAppearance } from '~/common/enums/enums';
 import { Text } from '~/components/components';
+import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
+import { ButtonProps } from './common/types/types';
+import { useButtonStyle } from './common/hooks/use-button-style';
 
-type Props = {
-  label: string;
-  type?: ButtonType;
-  view?: ButtonAppearance;
-  isDisabled?: boolean;
-  onPress: () => void;
-  textColor?: ColorValue;
-  background?: ColorValue;
-  fontSize?: number;
-};
-
-const Button: FC<Props> = ({
+const Button: FC<ButtonProps> = ({
   label,
-  type = ButtonType.PRIMARY,
-  view = ButtonAppearance.FILLED,
-  isDisabled,
+  appearance = ButtonAppearance.FILLED,
+  disabled,
   onPress,
   textColor,
-  background,
-  fontSize,
+  buttonColor,
+  compact,
 }) => {
-  const isOutlined = view === ButtonAppearance.OUTLINED;
+  const { containerStyle, buttonStyle, textStyle, rippleConfig } =
+    useButtonStyle({
+      appearance,
+      disabled,
+      textColor,
+      buttonColor,
+      compact,
+    });
 
   return (
-    <Pressable disabled={isDisabled} onPress={onPress}>
-      <View
+    <View pointerEvents="box-none" style={[styles.wrapper, containerStyle]}>
+      <Pressable
+        disabled={disabled}
+        onPress={onPress}
         style={[
+          globalStyles.justifyContentCenter,
+          globalStyles.alignItemsCenter,
+          globalStyles.flexDirectionRow,
+          globalStyles.px4,
           styles.button,
-          styles[type],
-          styles[view],
-          isDisabled ? styles.disabledFill : {},
-          isOutlined && isDisabled ? styles.disabledOutlined : {},
-          background ? { backgroundColor: background } : {},
-          textColor ? { borderColor: textColor } : {},
+          buttonStyle,
         ]}
+        android_ripple={rippleConfig}
       >
         <Text
-          style={[
-            styles.title,
-            isOutlined ? styles.outlinedTitle : styles.filledTitle,
-            isDisabled ? styles.filledTitle : {},
-            isOutlined && isDisabled ? styles.disabledOutlinedTitle : {},
-            textColor ? { color: textColor } : {},
-            fontSize ? { fontSize } : {},
-          ]}
+          style={[globalStyles.fontWeightSemiBold, styles.label, textStyle]}
         >
           {label}
         </Text>
-      </View>
-    </Pressable>
+      </Pressable>
+    </View>
   );
 };
 
