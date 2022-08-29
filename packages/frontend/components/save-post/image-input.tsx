@@ -1,5 +1,5 @@
 import { Column, Icon } from '@primitives';
-import { SectionHeader } from 'components/sub-pages/common';
+import { SectionHeader } from '../profile/user-account/common';
 import Image from 'next/image';
 import { IconName } from '@enums';
 import { useTranslation } from 'next-i18next';
