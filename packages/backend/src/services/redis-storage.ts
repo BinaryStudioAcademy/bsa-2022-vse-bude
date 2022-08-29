@@ -1,36 +1,20 @@
-﻿import type { RedisClientOptions } from 'redis';
-import { createClient } from 'redis';
-import { getEnv, logger } from '@helpers';
-
-type RedisClientType = ReturnType<typeof createClient>;
+﻿import Redis from 'ioredis';
+import { getEnv } from '@helpers';
+import { type ConnectionOptions } from 'tls';
 
 export class RedisStorageService {
-  private client: RedisClientType;
+  private client: Redis;
 
-  constructor() {
-    const redisPort = Number(getEnv('REDIS_PORT')) || 6379;
-    const redisHost = getEnv('REDIS_HOST');
-    const redisPassword = getEnv('REDIS_PASSWORD');
-    const redisUsername = getEnv('REDIS_USERNAME');
+  constructor(useSsl: boolean) {
+    const redisConnectionString = getEnv('REDIS_CONNECTION_STRING');
 
-    const redisConnectionParams: RedisClientOptions = {
-      socket: {
-        port: redisPort,
-        host: redisHost,
-      },
-      password: redisPassword,
-      username: redisUsername,
-    };
+    const tls: ConnectionOptions = useSsl
+      ? {
+          rejectUnauthorized: false,
+        }
+      : null;
 
-    this.client = createClient(redisConnectionParams);
-
-    this.client.on('error', (err) =>
-      logger.error({ message: `Redis client error: ${err.message}`, ...err }),
-    );
-
-    this.client.connect().then(() => {
-      logger.log('Redis client connected');
-    });
+    this.client = new Redis(redisConnectionString, { tls });
   }
 
   async get<T>(key: string): Promise<T> {
@@ -47,7 +31,7 @@ export class RedisStorageService {
   async set<T>(key: string, data: T, expirationTimeMs?: number): Promise<T> {
     await this.client.set(key, JSON.stringify(data));
     if (expirationTimeMs) {
-      await this.client.pExpire(key, expirationTimeMs);
+      await this.client.pexpire(key, expirationTimeMs);
     }
 
     return data;
