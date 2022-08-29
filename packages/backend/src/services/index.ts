@@ -2,6 +2,7 @@ import { Environment } from '@vse-bude/shared';
 import type { Repositories } from '@repositories';
 import { TwilioSMSProvider, BarSMSProvider } from '@providers';
 import { getEnv } from '@helpers';
+import { SendInBlueEmailProvider } from '../providers/email';
 import { CategoryService } from './category';
 import { ProductService } from './product';
 import { AuthService } from './auth';
@@ -12,8 +13,10 @@ import { S3StorageService } from './s3-storage';
 import { VerifyService } from './verify';
 import { NewsService } from './news';
 import { HealthService } from './health';
-import { emailService } from './email';
 import { UserProfileService } from './profile';
+import { EmailService } from './email/email';
+
+export const emailService = new EmailService(new SendInBlueEmailProvider());
 
 export const initServices = (repositories: Repositories) => {
   const isProduction = getEnv('NODE_ENV') === Environment.PRODUCTION;
@@ -68,4 +71,5 @@ export {
   type NewsService,
   type HealthService,
   type UserProfileService,
+  type EmailService,
 };

@@ -1,8 +1,8 @@
 import type { EmailOptions } from '@types';
 import { getEnv } from '@helpers';
 import { defaultEmailOptions } from '@types';
-import type { EmailService } from '../services/email/email';
-import { emailService } from '../services/email';
+import { emailService } from '@services';
+import type { EmailService } from '@services';
 import type { IMailBuilder } from './mail-builder-interface';
 
 export class MailBuilder implements IMailBuilder {
