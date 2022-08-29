@@ -44,7 +44,7 @@ export const getServerSideProps = withPublic(
       auctionProducts = products[0];
       sellingProducts = products[1];
     } catch (err) {
-      throw new Error(err);
+      console.log(err);
     }
 
     return {
