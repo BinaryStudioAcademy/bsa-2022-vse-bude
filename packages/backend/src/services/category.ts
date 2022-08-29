@@ -1,4 +1,5 @@
 import type { CategoryRepository } from '@repositories';
+import type { Request } from 'express';
 
 export class CategoryService {
   private _categoryRepository: CategoryRepository;
@@ -7,9 +8,16 @@ export class CategoryService {
     this._categoryRepository = categoryRepository;
   }
 
-  public getAll(query: Query) {
-    const take = query.limit ? +query.limit : 10;
+  public async getAll(req: Request) {
+    try {
+      const result = await this._categoryRepository.getAll(req.query);
 
-    return this._categoryRepository.getAll(take);
+      return result.map((item) => ({
+        ...item,
+        title: req.t(`categories.${item.title}`),
+      }));
+    } catch (err) {
+      throw new Error(err);
+    }
   }
 }

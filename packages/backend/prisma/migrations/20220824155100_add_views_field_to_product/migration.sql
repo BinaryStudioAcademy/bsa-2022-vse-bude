@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Product" ADD COLUMN     "views" INTEGER NOT NULL DEFAULT 0;

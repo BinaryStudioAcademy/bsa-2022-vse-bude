@@ -25,3 +25,5 @@ export { Divider } from '~/components/divider/divider';
 export { KeyboardAvoiding } from './keyboard-avoiding/keyboard-avoiding';
 export { PhotoPickerModal } from './photo-picker-modal/photo-picker-modal';
 export { FlagBackgroundView } from './flag-background-view/flag-background-view';
+export { PrimaryButton } from './primary-button/primary-button';
+export { SecondaryButton } from './secondary-button/secondary-button';

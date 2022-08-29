@@ -5,19 +5,22 @@ import type { FavoriteButtonProps } from './types';
 
 export const FavoriteButton = ({
   isFavorite = false,
+  size = 'sm',
+  backgroundColor = 'darkgray',
   onChangeIsFavorite,
+  cssExtended,
 }: FavoriteButtonProps) => {
   const color = isFavorite ? 'yellow' : 'white';
   const icon = isFavorite ? IconName.STAR_FULFILLED : IconName.STAR_OUTLINED;
 
   return (
     <IconButton
-      cssExtend={favoriteIcon}
+      cssExtend={cssExtended || favoriteIcon}
       onClick={onChangeIsFavorite}
       icon={icon}
       color={color}
-      backgroundColor="darkgray"
-      size="sm"
+      backgroundColor={backgroundColor}
+      size={size}
     />
   );
 };
