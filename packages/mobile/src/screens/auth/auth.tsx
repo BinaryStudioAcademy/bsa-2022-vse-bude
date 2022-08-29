@@ -1,6 +1,10 @@
 import React, { FC, ReactElement, useState } from 'react';
 import { ColorPalette, UserSignInDto, UserSignUpDto } from '@vse-bude/shared';
-import { MainScreenName, RootScreenName } from '~/common/enums/enums';
+import {
+  DataStatus,
+  MainScreenName,
+  RootScreenName,
+} from '~/common/enums/enums';
 import { auth as authActions } from '~/store/actions';
 import {
   useAppDispatch,
@@ -8,6 +12,7 @@ import {
   useRoute,
   useTranslation,
   useNavigation,
+  useAppSelector,
 } from '~/hooks/hooks';
 import {
   Text,
@@ -20,6 +25,7 @@ import {
 import { globalStyles } from '~/styles/styles';
 import { NavigationProp } from '@react-navigation/native';
 import { MainNavigationParamList } from '~/common/types/navigation/navigation';
+import { selectUserActionDataStatus } from '~/store/auth/selectors';
 import {
   GoogleButton,
   SignInForm,
@@ -31,6 +37,7 @@ import { styles } from './styles';
 const Auth: FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { name } = useRoute();
+  const dataStatus = useAppSelector(selectUserActionDataStatus);
   const dispatch = useAppDispatch();
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
@@ -44,7 +51,9 @@ const Auth: FC = () => {
     setIsLoading(true);
     dispatch(authActions.signIn(payload));
     setIsLoading(false);
-    navigation.navigate(MainScreenName.HOME);
+    if (dataStatus == DataStatus.FULFILLED) {
+      navigation.navigate(MainScreenName.HOME);
+    }
   };
 
   const handleSignUp = (payload: UserSignUpDto): void => {
