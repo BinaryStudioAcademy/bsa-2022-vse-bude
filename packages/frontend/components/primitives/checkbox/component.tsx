@@ -7,7 +7,7 @@ export const Checkbox = ({ label, value, onChange }: CheckboxProps) => (
       css={styles.checkbox}
       checked={value}
       type="checkbox"
-      onChange={() => onChange(value)}
+      onChange={() => onChange(!value)}
     />
     {label}
   </label>

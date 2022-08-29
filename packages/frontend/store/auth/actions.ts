@@ -128,6 +128,7 @@ const logoutUser = createAsyncThunk(
     try {
       // await logout(); delete refresh token on server
       auth.logOut();
+      // TODO: clear all store
       await Router.push(Routes.DEFAULT);
     } catch (e) {
       return rejectWithValue(e.message);

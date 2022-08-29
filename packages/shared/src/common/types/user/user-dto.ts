@@ -1,11 +1,11 @@
 type UserDto = {
   id: string;
+  avatar?: string;
   firstName: string;
   lastName: string;
   email: string;
   phone: string;
   phoneVerified: boolean;
-  avatar: string;
 };
 
 export type { UserDto };

@@ -34,6 +34,7 @@ export const updateProduct = async (prismaClient: PrismaClient) => {
           authorId: _dataJSON.authorId,
           categoryId: _dataJSON.categoryId,
           winnerId: _dataJSON.winnerId,
+          views: _dataJSON.views,
           createdAt: _dataJSON.createdAt,
           updatedAt: _dataJSON.updatedAt,
         },
