@@ -10,4 +10,10 @@ export const common = {
   common: {
     HOME: 'Home',
   },
+  permission: {
+    STORAGE_DENIED: 'Storage permission denied',
+  },
+  user_actions: {
+    didCancel: 'Cancelled by user',
+  },
 };

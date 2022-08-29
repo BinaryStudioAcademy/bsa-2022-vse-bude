@@ -13,16 +13,19 @@ import {
   pickImageCamera,
   pickImageLibrary,
 } from '~/helpers/helpers';
+import { useTranslation } from '~/hooks/hooks';
 import { UserAvatar } from '../avatar/avatar';
 import { styles } from './styles';
 
 const ProfileImage: FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [photoUri, setPhotoUri] = useState('');
-  const [IsUploading, setIsUploading] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
+
+  const { t } = useTranslation();
 
   const toggleModal = () => {
-    return setShowModal((showModal) => !showModal);
+    return setShowModal((currentModal) => !currentModal);
   };
 
   const onCameraOpen = useCallback(async () => {
@@ -57,7 +60,7 @@ const ProfileImage: FC = () => {
       setIsUploading(false);
       setShowModal(false);
     } else {
-      notification.error('Storage permission denied');
+      notification.error(t('permission.STORAGE_DENIED'));
     }
   }, []);
 
@@ -70,7 +73,7 @@ const ProfileImage: FC = () => {
       <FlagBackgroundView style={styles.flag} />
       <View style={styles.photoWrapper}>
         <View style={styles.photoContainer}>
-          <UserAvatar link={photoUri} isLoading={IsUploading} />
+          <UserAvatar link={photoUri} isLoading={isUploading} />
         </View>
         <Pressable
           style={[
