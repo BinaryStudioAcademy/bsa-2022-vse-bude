@@ -1,7 +1,7 @@
 import { Textarea } from 'components/primitives/textarea';
 import { useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
-import { Input, Column, Flex, Button, Loader } from '@primitives';
+import { Input, Column, Flex, Button, Loader, Checkbox } from '@primitives';
 import { SectionHeader } from 'components/sub-pages/common';
 import { useState } from 'react';
 import { createPostSchema } from 'validation-schemas/post';
@@ -16,15 +16,20 @@ export default function PostForm() {
   const [images, setImages] = useState<File[]>([]);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
+  const [showPhone, setShowPhone] = useState(true);
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm({
     defaultValues: initialFormState,
     resolver: joiResolver(createPostSchema(t)),
   });
+  const setShowPhoneWrapper = (value) => {
+    setValue('phone', '');
+    setShowPhone(value);
+  };
   const onSubmit = async (data) => {
     setIsLoading(true);
     setError('');
@@ -148,18 +153,6 @@ export default function PostForm() {
           </div>
         </Flex>
         <Flex css={styles.groupInputs}>
-          <div css={styles.smallInputRow}>
-            <Input
-              disabled
-              id="post-callingCode"
-              type="text"
-              name="callingCode"
-              variant="primary"
-              label={t('create-post:label.callingCode')}
-              value={t('create-post:placeholder.callingCode')}
-              {...register('callingCode')}
-            />
-          </div>
           <div css={styles.inputRow}>
             <Input
               tooltip={t('create-post:tooltip.phone')}
@@ -170,9 +163,16 @@ export default function PostForm() {
               variant="primary"
               label={t('create-post:label.phone')}
               placeholder={t('create-post:placeholder.phone')}
+              inerasableValue="+380"
+              disabled={showPhone}
               {...register('phone')}
             />
           </div>
+          <Checkbox
+            onChange={setShowPhoneWrapper}
+            value={showPhone}
+            label={t('create-post:label.checkbox')}
+          />
         </Flex>
         <div css={styles.inputRow}>
           <Input

@@ -14,6 +14,7 @@ const InputInner = (
     type,
     labelRequiredMark,
     tooltip,
+    inerasableValue,
     ...props
   }: InputProps,
   ref,
@@ -38,15 +39,21 @@ const InputInner = (
         )}
       </label>
     )}
-    <input
-      ref={ref}
-      css={styles.input}
-      data-variant={variant}
-      data-status={error ? 'error' : 'successfully'}
-      type={type}
-      id={id}
-      {...props}
-    />
+    <div css={styles.inputValueWrapper}>
+      <input
+        ref={ref}
+        css={styles.input}
+        data-variant={variant}
+        data-status={error ? 'error' : 'successfully'}
+        data-erasable-part={inerasableValue ? 'inerasable' : 'erasable'}
+        type={type}
+        id={id}
+        {...props}
+      />
+      {inerasableValue && (
+        <span css={styles.inerasableValue}>{inerasableValue}</span>
+      )}
+    </div>
     {error && <p css={styles.errorMessage}>{error}</p>}
   </div>
 );
