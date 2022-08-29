@@ -3,7 +3,7 @@ import { globalStyles } from '~/styles/styles';
 import { ButtonAppearance } from '~/common/enums/enums';
 import { ColorPalette } from '@vse-bude/shared';
 import { MOCK_IMAGES } from '~/mock/mock-images';
-import {} from 'react-native';
+import { useTranslation } from 'react-i18next';
 import {
   Text,
   View,
@@ -18,6 +18,8 @@ import {
 import { styles } from './styles';
 
 const SellerInfo: FC = () => {
+  const { t } = useTranslation();
+
   return (
     <View
       style={[
@@ -41,7 +43,7 @@ const SellerInfo: FC = () => {
         <SecondaryButton
           appearance={ButtonAppearance.OUTLINED}
           compact={true}
-          label="Contact the seller"
+          label={t('common:components.BUTTON_CONTACT_SELLER')}
         />
       </View>
       <View style={[globalStyles.flexDirectionColumn, globalStyles.mt4]}>
