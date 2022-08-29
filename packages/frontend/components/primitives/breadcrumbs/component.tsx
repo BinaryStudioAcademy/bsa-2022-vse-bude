@@ -8,7 +8,7 @@ interface PagePathProps {
   }[];
 }
 
-export const PagePath = ({ paths }: PagePathProps) => (
+export const Breadcrumbs = ({ paths }: PagePathProps) => (
   <Container>
     <div css={wrapper}>
       {paths.map((path, index) => (

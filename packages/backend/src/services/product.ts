@@ -26,6 +26,8 @@ export class ProductService {
       throw new ProductNotFoundError(req);
     }
 
+    product.category.title = req.t(`categories.${product.category.title}`);
+
     return product;
   }
 
