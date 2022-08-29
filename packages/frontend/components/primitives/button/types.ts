@@ -5,6 +5,6 @@ export interface ButtonProps
   > {
   type?: 'button' | 'submit' | 'reset';
   variant?: 'filled' | 'outlined';
-  size?: 'big' | 'small';
+  size?: 'big' | 'small' | 'flexible';
   width?: string;
 }

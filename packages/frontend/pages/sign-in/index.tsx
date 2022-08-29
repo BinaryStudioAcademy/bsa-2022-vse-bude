@@ -1,7 +1,7 @@
 import { AuthLayout } from 'components/authLayout';
 import Login from 'components/login/component';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { withPublic } from '@helpers';
+import { withPublic } from '@hocs';
 
 const LoginPage = () => (
   <AuthLayout>

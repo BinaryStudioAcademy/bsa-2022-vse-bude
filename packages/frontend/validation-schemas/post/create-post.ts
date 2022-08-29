@@ -37,7 +37,7 @@ export const createPostSchema = (t: TFunction) =>
     phone: Joi.string()
       .trim()
       .allow('')
-      .pattern(/^\+380(\d{9})$/)
+      .pattern(/^\d{9}$/)
       .messages({
         'string.pattern.base': t('create-post:validation.phone.pattern'),
       }),

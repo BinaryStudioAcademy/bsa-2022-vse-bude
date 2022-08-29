@@ -14,25 +14,25 @@ export const footerLinksRow = ({ spaces }: Theme) => css`
   margin-bottom: ${spaces.md};
 `;
 
-export const phone = () => css`
+export const phone = ({ iconSizes }: Theme) => css`
   display: block;
   margin-right: 12px;
-  width: 18px;
-  height: 18px;
+  width: ${iconSizes.md};
+  height: ${iconSizes.md};
 `;
 
-export const email = () => css`
+export const email = ({ iconSizes }: Theme) => css`
   display: block;
   margin-right: 12px;
-  width: 18px;
-  height: 18px;
+  width: ${iconSizes.md};
+  height: ${iconSizes.md};
 `;
 
-export const shield = () => css`
+export const shield = ({ iconSizes }: Theme) => css`
   display: block;
   margin-right: 12px;
-  width: 18px;
-  height: 18px;
+  width: ${iconSizes.md};
+  height: ${iconSizes.md};
 `;
 
 export const primaryUnderline = ({ colors }: Theme) => css`
