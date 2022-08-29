@@ -37,7 +37,7 @@ export const ItemInfoAuction = ({
           <span>{t('currentBid')}</span>
         </div>
       </div>
-      <ItemTitle title={item.title} />
+      <ItemTitle title={item.title} views={item.views} />
       <ItemInfo item={item} />
       <div css={styles.controlls}>
         <div css={styles.inputWrapper}>

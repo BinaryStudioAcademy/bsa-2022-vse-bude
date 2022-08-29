@@ -1,4 +1,15 @@
+import {
+  MAX_NAME_LENGTH,
+  MAX_PASSWORD_LENGTH,
+  MIN_NAME_LENGTH,
+  MIN_PASSWORD_LENGTH,
+} from '~/common/constants/constants';
+
 export const screens = {
+  words: {
+    FIRST_NAME: 'First name',
+    LAST_NAME: 'Last name',
+  },
   welcome: {
     TITLE: 'Mark "Russian Warship"',
     DESCRIPTION:
@@ -46,5 +57,26 @@ export const screens = {
     MESSAGES: 'Messages',
     SUPPORT: 'Support',
     SIGN_OUT: 'Sign Out',
+  },
+  errors: {
+    EMPTY_EMAIL: 'Fill the email please',
+    EMPTY_FIRST_NAME: 'Fill the first name please!',
+    EMPTY_LAST_NAME: 'Fill the last name please!”',
+    EMPTY_PHONE: 'Fill the phone number please!',
+    EMPTY_PASSWORD: 'Fill the password please!',
+    LATIN: 'You can use only Latin letters',
+    INVALID_EMAIL: 'The invalid email format',
+    SPACES: 'Spaces are not allowed',
+    MIN_PASSWORD_LENGTH: `Password length must be at least ${MIN_PASSWORD_LENGTH} characters`,
+    MAX_PASSWORD_LENGTH: `Password length must not exceed ${MAX_PASSWORD_LENGTH} characters`,
+    UP_LOW_NUM:
+      'Password should include at least one uppercase, one lowercase and one number',
+    INVALID_PASSWORD: 'The invalid password format',
+    REPEAT_PASSWORD_INVALID: 'Passwords are not the same',
+    MIN_NAME_LENGTH: `{{name}} must be at least ${MIN_NAME_LENGTH} character`,
+    MAX_NAME_LENGTH: `{{name}} must be not more than ${MAX_NAME_LENGTH} characters`,
+    FIRST_NAME_INVALID: 'The invalid first name format',
+    LAST_NAME_INVALID: 'The invalid last name format',
+    WRONG_FORMAT: 'Wrong format',
   },
 };

@@ -3,7 +3,7 @@ import { IconName } from '@enums';
 import * as styles from './styles';
 
 interface ViewCounterProps {
-  viewsCount: string;
+  viewsCount: number;
 }
 
 export const ViewCounter = ({ viewsCount }: ViewCounterProps) => (

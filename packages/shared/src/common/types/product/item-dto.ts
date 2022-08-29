@@ -4,7 +4,7 @@ import type { AuthorDto } from './author-dto';
 import type { ProductDto } from './product-dto';
 
 export type ItemDto = ProductDto & {
-  cancellReason: string;
+  cancelReason: string;
   category: CategoryDto;
   winnerId: string | null;
   createdAt: Date;

@@ -1,6 +1,5 @@
-import { ColorsAvatar } from '@enums';
 import Image from 'next/image';
-import { AccountRoutes, Routes } from '@enums';
+import { ProfileRoutes, Routes, ColorsAvatar } from '@enums';
 import { Loader } from '../loader';
 import * as styles from './styles';
 import type { AvatarProps } from './types';
@@ -20,7 +19,7 @@ export const Avatar = ({
       css={styles.wrapper}
       style={{ backgroundColor: image ? 'transparent' : colorByName }}
       onClick={handleClick}
-      path-label={Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_PERSONAL}
+      path-label={Routes.PROFILE + ProfileRoutes.PERSONAL_INFO}
     >
       {image ? (
         <Image

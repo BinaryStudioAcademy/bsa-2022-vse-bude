@@ -62,7 +62,7 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
       <Input
         label={t('verification.PASSWORD_REPEAT')}
         placeholder={t('verification.PASSWORD_HINT')}
-        name="password"
+        name="repeatPassword"
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
