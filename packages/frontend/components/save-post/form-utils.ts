@@ -8,7 +8,7 @@ export const initialFormState: IPostForms = {
   currency: 'UAH',
   country: '',
   city: '',
-  phone: '+380',
+  phone: '',
   callingCode: 'UA',
   instagram: '',
   facebook: '',

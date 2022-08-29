@@ -31,7 +31,8 @@
     "instagram": "Instagram",
     "linkedin": "Linkedin",
     "facebook": "Facebook",
-    "site": "Сайт"
+    "site": "Сайт",
+    "checkbox": "Приховати номер"
   },
   "placeholder": {
     "category": "Виберіть категорію",
@@ -42,7 +43,7 @@
     "country": "Україна",
     "city": "Львів",
     "callingCode": "UA",
-    "phone": "+380()",
+    "phone": "()",
     "instagram": "Введіть свій нікнейм",
     "linkedin": "Введіть свій нікнейм",
     "facebook": "Введіть свій нікнейм",
