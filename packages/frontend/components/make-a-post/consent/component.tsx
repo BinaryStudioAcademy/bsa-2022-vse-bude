@@ -23,7 +23,11 @@ export const ConsentModal = () => {
       <Modal visible={isVisible}>
         {t('rules:createPostRules.policy')}
         <div css={styles.consentCheckbox}>
-          <Checkbox label={t('rules:createPostRules.checkbox')} value={value} onChange={setAgree}></Checkbox>
+          <Checkbox
+            label={t('rules:createPostRules.checkbox')}
+            value={value}
+            onChange={setAgree}
+          ></Checkbox>
         </div>
         <div css={styles.consentButtons}>
           <Button
@@ -33,7 +37,9 @@ export const ConsentModal = () => {
           >
             {t('rules:createPostRules.button.accept')}
           </Button>
-          <Button onClick={() => router.push('/')}>{t('rules:createPostRules.button.decline')}</Button>
+          <Button onClick={() => router.push('/')}>
+            {t('rules:createPostRules.button.decline')}
+          </Button>
         </div>
       </Modal>
     </React.Fragment>
