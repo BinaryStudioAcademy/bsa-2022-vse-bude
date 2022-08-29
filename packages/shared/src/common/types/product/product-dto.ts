@@ -5,13 +5,14 @@ type ProductDto = {
   title: string;
   description: string;
   price: number;
-  recomendedPrice: number;
+  recommendedPrice: number;
   minimalBid: number;
   city: string;
   type: ProductType;
   status: string;
   endDate: Date;
   imageLinks: string[];
+  views: number;
 };
 
 export type { ProductDto };

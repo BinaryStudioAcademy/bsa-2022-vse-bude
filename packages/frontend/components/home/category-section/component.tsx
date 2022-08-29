@@ -3,6 +3,7 @@ import { useTypedSelector } from '@hooks';
 import { StringCutter } from '@primitives';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
 import { SectionLayout } from '../section-layout';
 import {
   categoryContainer,
@@ -21,7 +22,7 @@ const mockImage = [
 
 const CategorySection = () => {
   const categories = useTypedSelector((state) => state.category.list);
-
+  const { t } = useTranslation();
   const categoriesMapped = categories.map((item, i) => ({
     ...item,
     image: mockImage[i] || '/images/categories/decor.png',
@@ -29,8 +30,8 @@ const CategorySection = () => {
 
   return (
     <SectionLayout
-      title="Popular Categories"
-      loadMoreTitle="See All Categories"
+      title={t('home:popularCategories.title')}
+      loadMoreTitle={t('home:popularCategories.link')}
     >
       <div css={categoryContainer}>
         <Splide

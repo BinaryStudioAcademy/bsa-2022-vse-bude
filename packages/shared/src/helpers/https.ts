@@ -25,9 +25,9 @@ interface MakeRequest {
 class Http {
   private _baseUrl: string;
 
-  private _auth: IAuthHelper;
+  private _auth: IAuthHelper | null;
 
-  constructor(baseUrl: string, auth: IAuthHelper) {
+  constructor(baseUrl: string, auth?: IAuthHelper) {
     this._baseUrl = baseUrl;
     this._auth = auth;
   }
@@ -92,13 +92,18 @@ class Http {
       external = false,
       needAuthorization = true,
       contentType = HttpContentType.APPLICATION_JSON,
+      acceptLanguage,
     } = options ?? {};
 
     const headers: HeadersInit = {
       [HttpHeader.CONTENT_TYPE]: contentType,
     };
 
-    if (needAuthorization) {
+    if (acceptLanguage) {
+      headers[HttpHeader.ACCEPT_LANGUAGE] = acceptLanguage;
+    }
+
+    if (needAuthorization && this._auth) {
       const token = this._auth.getAccessToken();
       headers[HttpHeader.AUTHORIZATION] = `Bearer ${token}`;
     }
@@ -110,6 +115,11 @@ class Http {
 
     if (body && contentType === HttpContentType.APPLICATION_JSON) {
       config.body = JSON.stringify(body);
+    }
+
+    if (body && contentType === HttpContentType.FORM_DATA) {
+      config.body = body as BodyInit;
+      delete headers[HttpHeader.CONTENT_TYPE];
     }
 
     return {

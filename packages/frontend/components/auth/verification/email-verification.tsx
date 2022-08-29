@@ -15,8 +15,7 @@ import { ResendCodeButton } from './resend-code';
 import { divider } from './styles';
 
 export const EmailVerification = () => {
-  const { user } = useTypedSelector((state) => state.profile);
-  const { error } = useTypedSelector((state) => state.auth);
+  const { error, user } = useTypedSelector((state) => state.auth);
 
   const dispatch = useAppDispatch();
 

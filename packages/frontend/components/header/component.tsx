@@ -11,7 +11,7 @@ import Link from 'next/link';
 import { Fragment, useState } from 'react';
 import { Routes, IconName } from '@enums';
 import { Logo } from 'components/primitives/logo';
-import { useCheckAuth } from '@hooks';
+import { useAuth, useMounted, useTypedSelector } from '@hooks';
 import { useRouter } from 'next/router';
 import { useTheme } from '@emotion/react';
 import { ProfileInfo } from './profile-info';
@@ -19,54 +19,56 @@ import * as styles from './styles';
 
 export const Header = () => {
   const [show, setShow] = useState(false);
-  const { isAuth, user, loading } = useCheckAuth();
-  const { push } = useRouter();
+  const { hasToken } = useAuth();
+  const isMounted = useMounted();
+  const { push, pathname } = useRouter();
   const { t } = useTranslation();
   const { colors } = useTheme();
+  const categories = useTypedSelector((state) => state.category.list);
+
+  const redirectToCategory = (category: string) => {
+    const filters = {
+      category: category,
+    };
+    push({
+      pathname: Routes.ITEMS,
+      query: { filter: JSON.stringify(filters) },
+    });
+  };
 
   const renderNavigation = () => (
     <nav className="navigation">
       <InternalLink
-        variant="default"
+        variant={pathname === Routes.DEFAULT ? 'primary' : 'default'}
         href={Routes.DEFAULT}
         label={t('common:header.nav.home')}
       />
       <Dropdown
-        options={[
-          {
-            value: 'Home',
-            key: 'home',
-            onClick: () => {
-              console.log('home');
-            },
+        options={categories.map((item) => ({
+          value: item.title,
+          key: 'home',
+          onClick: () => {
+            redirectToCategory(item.id);
           },
-          {
-            value: 'About',
-            key: 'about',
-            onClick: () => {
-              console.log('about');
-            },
-            disabled: true,
-          },
-        ]}
+        }))}
       >
         {t('common:header.nav.category')}&nbsp;
         <Icon icon={IconName.ANGLE_DOWN} color={colors.extraDark} />
       </Dropdown>
       <InternalLink
-        href={Routes.DEFAULT}
+        href={Routes.SEARCH}
         label={t('common:header.nav.search')}
-        variant="default"
+        variant={pathname === Routes.SEARCH ? 'primary' : 'default'}
       />
       <InternalLink
-        href={Routes.DEFAULT}
+        href={Routes.NEWS}
         label={t('common:header.nav.news')}
-        variant="default"
+        variant={pathname === Routes.NEWS ? 'primary' : 'default'}
       />
       <InternalLink
-        href={Routes.DEFAULT}
+        href={Routes.ABOUT}
         label={t('common:header.nav.about_us')}
-        variant="default"
+        variant={pathname === Routes.ABOUT ? 'primary' : 'default'}
       />
     </nav>
   );
@@ -167,13 +169,7 @@ export const Header = () => {
     />
   );
 
-  const renderProfileInfo = () => (
-    <ProfileInfo
-      image={user.avatar}
-      firstName={user.firstName}
-      lastName={user.lastName}
-    />
-  );
+  const renderProfileInfo = () => <ProfileInfo />;
 
   return (
     <Fragment>
@@ -186,9 +182,9 @@ export const Header = () => {
           </Link>
           <div className="header-content">{renderNavigation()}</div>
 
-          {!loading ? (
+          {isMounted ? (
             <>
-              {isAuth ? (
+              {hasToken ? (
                 <div className="header-content">{renderProfileInfo()}</div>
               ) : (
                 <div className="header-content">{renderAuthButtons()}</div>

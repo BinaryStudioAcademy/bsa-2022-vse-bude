@@ -17,7 +17,7 @@ export const fakeUsers = async (amountOfRecords: number) => {
       avatar: faker.image.avatar(),
       role: Role.USER,
       createdAt: faker.date.past(),
-      passwordHash: hashService.generatePasswordHash('test'),
+      passwordHash: hashService.generateHash('test'),
       phoneVerified: true,
       emailVerified: true,
       updatedAt: faker.date.recent(),

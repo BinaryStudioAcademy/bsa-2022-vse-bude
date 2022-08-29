@@ -1,15 +1,14 @@
-import { Layout } from '@components';
+import { Layout, SavePost } from '@components';
 import { useRouter } from 'next/router';
 import { wrapper } from 'store';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { Post } from '@components';
 import { ConsentModal } from 'components/consent';
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (_store) =>
     async ({ locale }) => ({
       props: {
-        ...(await serverSideTranslations(locale, ['common'])),
+        ...(await serverSideTranslations(locale, ['common', 'create-post'])),
       },
     }),
 );
@@ -21,7 +20,7 @@ const CreatePage = () => {
   return (
     <Layout title="Create post">
       <ConsentModal></ConsentModal>
-      <Post create={create} />
+      <SavePost create={create} />
     </Layout>
   );
 };

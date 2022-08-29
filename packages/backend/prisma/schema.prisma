@@ -36,6 +36,7 @@ model User {
   phoneVerified Boolean        @default(false)
   emailVerified Boolean        @default(false)
   updatedAt     DateTime       @updatedAt
+  favoriteProducts  FavoriteProducts[]
 }
 
 model UserSettings {
@@ -91,14 +92,14 @@ model Product {
   title           String        @db.VarChar(512)
   description     String
   price           Decimal       @db.Money
-  recomendedPrice Decimal?      @db.Money
+  recommendedPrice Decimal?      @db.Money
   minimalBid      Decimal?      @db.Money
   imageLinks      String[]      @db.VarChar(2048)
   city            String?       @db.VarChar(512)
   type            ProductType
   status          ProductStatus
   endDate         DateTime?
-  cancellReason   String?
+  cancelReason   String?
   author          User          @relation(name: "ownProducts", fields: [authorId], references: [id])
   authorId        String        @db.Uuid
   category        Category?     @relation(fields: [categoryId], references: [id])
@@ -108,8 +109,10 @@ model Product {
   socialMedia     SocialMedia[]
   bids            Bid[]
   chat            Chat?
+  views           Int           @default(0)
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
+  inFavorites  FavoriteProducts[]
 }
 
 model Bid {
@@ -172,6 +175,15 @@ model News {
   image       String
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
+}
+
+model FavoriteProducts {
+  userId      String  @db.Uuid
+  user        User    @relation(fields: [userId], references: [id])
+  productId   String  @db.Uuid
+  product     Product @relation(fields: [productId], references: [id])
+
+  @@id([userId, productId])
 }
 
 enum Role {

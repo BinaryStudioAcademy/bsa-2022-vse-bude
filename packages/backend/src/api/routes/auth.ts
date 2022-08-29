@@ -18,12 +18,60 @@ export const initAuthRoutes = (
 ): Router => {
   const router = Router();
 
+  /**
+   * @openapi
+   * /auth/sign-in:
+   *   post:
+   *     description: Authenticates user via email & password
+   *     operationId: auth.sign-in
+   *     tags: [Auth]
+   *     produces:
+   *       - application/json
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             $ref: "#/definitions/SignInBody"
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/SignInResponse"
+   */
+
   router.post(
     apiPath(path, AuthApiRoutes.SIGN_IN),
     wrap<Empty, AuthResponse, UserSignInDto>((req: Request) =>
       authService.signIn(req.body, req),
     ),
   );
+
+  /**
+   * @openapi
+   * /auth/sign-out:
+   *   post:
+   *     tags: [Auth]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - name: userId
+   *         in: query
+   *         required: true
+   *         schema:
+   *           type: string
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 $ref: "#/definitions/User"
+   */
 
   router.post(
     apiPath(path, AuthApiRoutes.SIGN_OUT),
@@ -37,12 +85,74 @@ export const initAuthRoutes = (
     }),
   );
 
+  /**
+   * @openapi
+   * definitions:
+   *   RefreshToken:
+   *     properties:
+   *       expiresAt:
+   *         type: string
+   *         format: date-time
+   *       token:
+   *         type: string
+   *       userId:
+   *         type: string
+   *       id:
+   *         type: string
+   *     required:
+   *     - expiresAt
+   *     - token
+   *     - userId
+   *     - id
+   *     type: object
+   *     description: Model RefreshToken
+   */
+
   router.post(
     apiPath(path, AuthApiRoutes.REFRESH_TOKEN),
     wrap<Empty, AuthTokenData, UpdateRefreshToken>((req: Request) =>
       authService.refreshToken(req.body, req),
     ),
   );
+
+  /**
+   * @openapi
+   * /auth/sign-up:
+   *   post:
+   *     tags: [Auth]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - name: body
+   *         in: body
+   *         required: true
+   *         schema:
+   *           type: object
+   *           required:
+   *             - firstName
+   *             - lastName
+   *           properties:
+   *             firstName:
+   *               type: string
+   *             lastName:
+   *               type: string
+   *             email:
+   *               type: string
+   *             phone:
+   *               type: string
+   *             password:
+   *               type: string
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 contribution:
+   *                   $ref: "#/definitions/User"
+   */
 
   router.post(
     apiPath(path, AuthApiRoutes.SIGN_UP),
@@ -51,10 +161,54 @@ export const initAuthRoutes = (
     ),
   );
 
+  /**
+   * @openapi
+   * /auth/user:
+   *   get:
+   *     tags: [Auth]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - name: userId
+   *         in: query
+   *         required: true
+   *         schema:
+   *           type: string
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 contribution:
+   *                   $ref: "#/definitions/User"
+   */
+
   router.get(
     apiPath(path, AuthApiRoutes.USER),
     authMiddleware,
     wrap((req: Request) => authService.getCurrentUser(req.userId)),
+  );
+
+  router.post(
+    apiPath(path, AuthApiRoutes.RESET_PASSWORD_LINK),
+    wrap((req: Request) => authService.resetPasswordLink(req.body.email)),
+  );
+
+  router.get(
+    apiPath(path, AuthApiRoutes.RESET_PASSWORD),
+    wrap((req: Request) =>
+      authService.resetPassword(req.params.email, req.params.value),
+    ),
+  );
+
+  router.get(
+    apiPath(path, AuthApiRoutes.UPDATE_PASSWORD),
+    wrap((req: Request) =>
+      authService.resetPassword(req.params.email, req.params.value),
+    ),
   );
 
   return router;

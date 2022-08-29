@@ -1,5 +1,5 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { withProtected } from '@helpers';
+import { withProtected } from 'hocs';
 import { EmailVerification } from '../../../components/auth/verification/email-verification';
 import { AuthLayout } from '../../../components/authLayout';
 import {

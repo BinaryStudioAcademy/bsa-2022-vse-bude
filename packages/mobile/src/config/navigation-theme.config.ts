@@ -2,16 +2,16 @@ import { ColorPalette } from '@vse-bude/shared';
 import { DefaultTheme, DarkTheme } from '@react-navigation/native';
 
 const COMMON_COLORS = {
+  primary: ColorPalette.YELLOW_100,
+  secondary: ColorPalette.GREEN_200,
+  onPrimary: ColorPalette.WHITE_100,
+  onSecondary: ColorPalette.WHITE_100,
   accent: ColorPalette.YELLOW_100,
   card: ColorPalette.GRAY_100,
   backgroundThird: ColorPalette.GREEN_200,
   backgroundElements: ColorPalette.GRAY_100,
   line: ColorPalette.GRAY_200,
   placeholder: ColorPalette.GRAY_200,
-  buttonTextPrimary: ColorPalette.WHITE_100,
-  buttonTextSecondary: ColorPalette.GREEN_200,
-  buttonPrimaryBackground: ColorPalette.YELLOW_100,
-  buttonSecondaryBackground: ColorPalette.GREEN_200,
   error: ColorPalette.RED_100,
   flagTop: ColorPalette.BLUE_100,
   flagBottom: ColorPalette.YELLOW_50,
@@ -33,6 +33,10 @@ const NavigationTheme = {
     yellow: ColorPalette.YELLOW_200,
     blue: ColorPalette.BLUE_100,
     subtitle: ColorPalette.GRAY_300,
+    buttonPrimaryBackground: ColorPalette.YELLOW_100,
+    buttonPrimaryText: ColorPalette.WHITE_100,
+    buttonSecondaryBackground: ColorPalette.GREEN_200,
+    buttonSecondaryText: ColorPalette.WHITE_100,
   },
 };
 
@@ -48,9 +52,13 @@ const NavigationDarkTheme = {
     icon: ColorPalette.WHITE_100,
     titlePrimary: ColorPalette.WHITE_100,
     titleSecondary: ColorPalette.WHITE_100,
-    yellow: ColorPalette.WHITE_100,
-    blue: ColorPalette.WHITE_100,
+    yellow: ColorPalette.YELLOW_200,
+    blue: ColorPalette.BLUE_100,
     subtitle: ColorPalette.YELLOW_100,
+    buttonPrimaryBackground: ColorPalette.YELLOW_100,
+    buttonPrimaryText: ColorPalette.GREEN_200,
+    buttonSecondaryBackground: ColorPalette.GREEN_100,
+    buttonSecondaryText: ColorPalette.GREEN_200,
   },
 };
 

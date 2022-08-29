@@ -21,7 +21,7 @@ export const verifyInput = css`
 `;
 
 export const verifyForm = css`
-  width: 60%;
+  width: 70%;
 `;
 
 export const verifyEntity = css`
