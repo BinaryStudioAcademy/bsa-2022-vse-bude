@@ -2,9 +2,10 @@ import { Column, Icon } from '@primitives';
 import Image from 'next/image';
 import { IconName } from '@enums';
 import { useTranslation } from 'next-i18next';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { allowedImgExtension } from 'common/enums/allowedImgExtension';
 import { MAX_IMAGE_SIZE } from '@vse-bude/shared';
+import { useDropzone } from 'react-dropzone';
 import { SectionHeader } from '../profile/user-account/common';
 import type { ImageInputProps } from './types';
 import * as styles from './styles';
@@ -14,33 +15,48 @@ function ImageInput({ images, setImages }: ImageInputProps) {
   const [error, setError] = useState('');
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
 
+  const validateFile = useCallback(
+    (file) => {
+      if (!file) {
+        return;
+      }
+
+      if (!Object.values(allowedImgExtension).includes(file.type)) {
+        setError(t('create-post:validation.images.unsupportedType'));
+
+        return;
+      }
+      if (file.size > MAX_IMAGE_SIZE) {
+        setError(t('create-post:validation.images.large'));
+
+        return;
+      }
+      setError('');
+      setImages([...images, file]);
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const preview = reader.result as string;
+        setImagePreviews((prev) => [...prev, preview]);
+      };
+      reader.readAsDataURL(file);
+    },
+    [t, setImages, images],
+  );
+
+  const onDrop = useCallback(
+    (acceptFile) => {
+      const file = acceptFile[0];
+      validateFile(file);
+    },
+    [validateFile],
+  );
+  const { getRootProps, isDragActive } = useDropzone({ onDrop });
+
   const imagesInputHandler = (e) => {
     const file = e.target?.files[0];
-    if (!file) {
-      return;
-    }
-
-    if (!Object.values(allowedImgExtension).includes(file.type)) {
-      setError(t('create-post:validation.images.unsupportedType'));
-
-      return;
-    }
-    if (file.size > MAX_IMAGE_SIZE) {
-      setError(t('create-post:validation.images.large'));
-
-      return;
-    }
-    setError('');
-    setImages([...images, file]);
-
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const preview = reader.result as string;
-      setImagePreviews((prev) => [...prev, preview]);
-    };
-    reader.readAsDataURL(file);
+    validateFile(file);
   };
-
   const getVariant = () => (images.length !== 0 ? 'filled' : 'empty');
 
   return (
@@ -66,7 +82,12 @@ function ImageInput({ images, setImages }: ImageInputProps) {
           ))}
         {imagePreviews.length < 30 && (
           <div data-variant={getVariant()} css={styles.photosLabelWrapper}>
-            <div data-variant={getVariant()} css={styles.labelWrapperInner}>
+            <div
+              {...getRootProps()}
+              data-drag={isDragActive ? 'active' : 'default'}
+              data-variant={getVariant()}
+              css={styles.labelWrapperInner}
+            >
               <div css={styles.icoWrapper}>
                 <Icon
                   data-variant={getVariant()}
