@@ -1,6 +1,6 @@
 import React from 'react';
-import { useAppForm, useCustomTheme, useTranslation } from '~/hooks/hooks';
-import { View, Button, Input, DropDown } from '~/components/components';
+import { useAppForm, useTranslation } from '~/hooks/hooks';
+import { View, Input, DropDown, PrimaryButton } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { ButtonAppearance } from '~/common/enums/enums';
 import {
@@ -33,7 +33,6 @@ type Props = {
 
 const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
   const { t } = useTranslation();
-  const { dark, colors } = useCustomTheme();
   const { control, errors, handleSubmit } = useAppForm<UserPersonalInfo>({
     defaultValues: {
       firstName: TEST_USER.firstName,
@@ -181,16 +180,15 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
         contentContainerStyle={globalStyles.mt5}
       />
       <View style={[globalStyles.mt5, globalStyles.mb3]}>
-        <Button
+        <PrimaryButton
           label={t('common:components.BUTTON_SAVE')}
           onPress={handleSubmit(onSubmit)}
         />
       </View>
       <View style={[globalStyles.mt3, globalStyles.mb5]}>
-        <Button
+        <PrimaryButton
           label={t('common:components.BUTTON_CANCEL')}
-          view={ButtonAppearance.TRANSPARENT}
-          textColor={dark ? colors.whiteColor : colors.buttonTextSecondary}
+          appearance={ButtonAppearance.TRANSPARENT}
           onPress={handleCancelPress}
         />
       </View>
