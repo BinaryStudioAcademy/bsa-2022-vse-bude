@@ -8,6 +8,7 @@ import { initVerifyRoutes } from './verify';
 import { initProductRoutes } from './product';
 import { initNewsRoutes } from './news';
 import { initHealthRoutes } from './health';
+import { initPostRoutes } from './post';
 
 export const initRoutes = (services: Services) => [
   initUserRoutes(services, ApiRoutes.USERS),
@@ -18,4 +19,5 @@ export const initRoutes = (services: Services) => [
   initNewsRoutes(services, ApiRoutes.NEWS),
   initVerifyRoutes(services, ApiRoutes.VERIFY),
   initHealthRoutes(services, ApiRoutes.HEALTH),
+  initPostRoutes(ApiRoutes.CREATE_POST),
 ];

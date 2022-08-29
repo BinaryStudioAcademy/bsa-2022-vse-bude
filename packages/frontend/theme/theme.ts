@@ -103,6 +103,7 @@ const radiuses = {
 
 const heights = {
   header: '80px',
+  textarea: '96px',
   checkbox: '20px',
   controlSm: '35px',
   controlBg: '45px',
