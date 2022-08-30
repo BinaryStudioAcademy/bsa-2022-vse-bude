@@ -7,13 +7,20 @@ import {
   TouchableOpacity,
   PlusIcon,
 } from '~/components/components';
-import { useCustomTheme, useNavigation, useTranslation } from '~/hooks/hooks';
+import {
+  useAppSelector,
+  useCustomTheme,
+  useNavigation,
+  useTranslation,
+} from '~/hooks/hooks';
+import { selectCurrentUser } from '~/store/selectors';
 import { createStyles } from './styles';
 
 const MyList: FC = () => {
   const navigation = useNavigation<RootNavigationProps>();
   const { t } = useTranslation();
   const { dark, colors } = useCustomTheme();
+  const user = useAppSelector(selectCurrentUser);
 
   const styles = React.useMemo(() => createStyles(colors), [dark, colors]);
   const handleNewItem = () => {
@@ -22,10 +29,13 @@ const MyList: FC = () => {
 
   return (
     <ScreenWrapper style={styles.screen}>
-      <TouchableOpacity onPress={handleNewItem} style={styles.row}>
-        <PlusIcon size={30} style={styles.icon} />
-        <Text style={styles.btnText}>{t('make_a_post.TITLE')}</Text>
-      </TouchableOpacity>
+      <Text>My list screen</Text>
+      {user && (
+        <TouchableOpacity onPress={handleNewItem} style={styles.row}>
+          <PlusIcon size={30} style={styles.icon} />
+          <Text style={styles.btnText}>{t('make_a_post.TITLE')}</Text>
+        </TouchableOpacity>
+      )}
     </ScreenWrapper>
   );
 };
