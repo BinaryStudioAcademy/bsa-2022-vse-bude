@@ -19,6 +19,12 @@
       "@providers": ["providers"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "emotion.d.ts", "../shared/src/common/constants/post.ts", "components/imageCrop/component.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "emotion.d.ts",
+    "../shared/src/common/constants/post.ts"
+  , "components/imageCrop/component.tsx"],
   "exclude": ["node_modules"]
 }
