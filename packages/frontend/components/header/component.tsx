@@ -30,16 +30,18 @@ export const Header = () => {
   const { push, pathname, locale } = useRouter();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  
+
   const categories = useTypedSelector((state) => state.category.list);
-  
+
   useEffect(() => {
-    const category : RequestOptions = {
+    const category: RequestOptions = {
       limit: 5,
       locale: locale as HttpAcceptLanguage,
-  };
+    };
 
-    dispatch(fetchCategories({ limit: category.limit, locale: category.locale }));
+    dispatch(
+      fetchCategories({ limit: category.limit, locale: category.locale }),
+    );
   }, [dispatch, locale]);
 
   const redirectToCategory = (category: string) => {
