@@ -1,14 +1,10 @@
 import React from 'react';
-import { useAppForm, useTranslation } from '~/hooks/hooks';
+import { useAppForm, useTranslation, useAppSelector } from '~/hooks/hooks';
 import { View, Input, DropDown, PrimaryButton } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { ButtonAppearance } from '~/common/enums/enums';
-import {
-  CITIES,
-  COUNTRIES,
-  REGIONS,
-  TEST_USER,
-} from '~/mock/mock-personal-info';
+import { selectCurrentUser } from '~/store/selectors';
+import { CITIES, COUNTRIES, REGIONS } from '~/mock/mock-personal-info';
 import { Title } from '../components';
 
 type UserPersonalInfo = {
@@ -33,21 +29,22 @@ type Props = {
 
 const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
   const { t } = useTranslation();
+  const user = useAppSelector(selectCurrentUser);
   const { control, errors, handleSubmit } = useAppForm<UserPersonalInfo>({
     defaultValues: {
-      firstName: TEST_USER.firstName,
-      lastName: TEST_USER.lastName,
-      email: TEST_USER.email,
-      phone: TEST_USER.phone,
-      country: TEST_USER.country,
-      region: TEST_USER.region,
-      city: TEST_USER.city,
-      zipCode: TEST_USER.zipCode,
-      novaPoshta: TEST_USER.novaPoshta,
-      instagram: TEST_USER.instagram,
-      linkedin: TEST_USER.linkedin,
-      facebook: TEST_USER.facebook,
-      password: TEST_USER.password,
+      firstName: user?.firstName || '',
+      lastName: user?.lastName || '',
+      email: user?.email || '',
+      phone: user?.phone || '',
+      country: '',
+      region: '',
+      city: '',
+      zipCode: '',
+      novaPoshta: '',
+      instagram: '',
+      linkedin: '',
+      facebook: '',
+      password: '',
     },
     //TODO need add validationSchema: personalInfo,
   });

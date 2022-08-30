@@ -36,6 +36,7 @@
     "react-native": "0.69.3",
     "react-native-bootsplash": "4.3.2",
     "react-native-config": "1.4.6",
+    "react-native-device-info": "10.0.2",
     "react-native-dropdown-picker": "5.4.2",
     "react-native-linear-gradient": "2.6.2",
     "react-native-mmkv": "2.4.3",

@@ -1,22 +1,22 @@
 {
-    "placeBidBtn": "Зробити ставку",
-    "buyBtn": "Купити",
-    "bidInput": "Введіть розмір ставки",
-    "bidInputCaption": "Введіть суму рівну або більшу за:",
-    "currentBid": "Поточна ставка",
-    "endingCaption": "Дата закінчення",
-    "timezoneCaption": "Часовий пояс",
-    "statusCaption": "Статус",
-    "locationCaption": "Адреса",
-    "descriptionCaption": "Опис",
-    "sellerCaption": "Продавець",
-    "contactSellerBtn": "Написати продавцю",
-    "time": {
-      "hours": "год",
-      "days": "днів",
-      "minutes": "мін",
-      "seconds": "сек"
-      },
-    "similarItems": "Схожі товари",
-    "seeMoreItems": "Більше товарів"
+  "placeBidBtn": "Зробити ставку",
+  "buyBtn": "Купити",
+  "bidInput": "Введіть розмір ставки",
+  "bidInputCaption": "Введіть суму рівну або більшу за:",
+  "currentBid": "Поточна ставка",
+  "endingCaption": "Дата закінчення",
+  "timezoneCaption": "Часовий пояс",
+  "statusCaption": "Статус",
+  "locationCaption": "Адреса",
+  "descriptionCaption": "Опис",
+  "sellerCaption": "Продавець",
+  "contactSellerBtn": "Написати продавцю",
+  "time": {
+    "hours": "год",
+    "days": "днів",
+    "minutes": "мін",
+    "seconds": "сек"
+  },
+  "similarItems": "Схожі товари",
+  "seeMoreItems": "Більше товарів"
 }

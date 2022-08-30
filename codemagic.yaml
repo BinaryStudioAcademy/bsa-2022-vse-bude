@@ -1,3 +1,43 @@
+scripts:
+  - &npm_install
+    name: Install npm dependencies
+    working_directory: $CM_BUILD_DIR
+    script: |
+      npm install && npm run install:shared && npm run build:shared && npm run install:mobile
+
+  - &environment_set
+    name: Setting environment file
+    script: |
+      cat >> ".env" <<EOF
+      API_ORIGIN_URL=$API_ORIGIN_URL
+      EOF
+
+  - &android_sdk_set
+    name: Set Android SDK location
+    script: |
+      echo "sdk.dir=$ANDROID_SDK_ROOT" > "./android/local.properties"
+
+  - &android_keystore_set
+    name: Set up keystore
+    script: |
+      echo $KEYSTORE | base64 --decode > $KEYSTORE_STORE_PATH
+      cat >> "./android/keystore.properties" <<EOF
+      storePassword=$KEYSTORE_STORE_PASSWORD
+      keyPassword=$KEYSTORE_KEY_PASSWORD
+      keyAlias=$KEYSTORE_KEY_ALIAS
+      storeFile=$KEYSTORE_STORE_PATH
+      EOF
+
+  - &android_build_apk
+    name: Build Android release
+    script: |
+      cd ./android && ./gradlew clean assembleRelease
+
+  - &android_build_aab
+    name: Build Android release
+    script: |
+      cd ./android && ./gradlew clean bundleRelease
+
 workflows:
   # MAIN
   android-main:
@@ -19,39 +59,11 @@ workflows:
         - $CM_BUILD_DIR/packages/mobile/node_modules
 
     scripts:
-      - &npm_install
-        name: Install npm dependencies
-        working_directory: $CM_BUILD_DIR
-        script: |
-          npm install && npm run install:shared && npm run build:shared && npm run install:mobile
-
-      - &environment_set
-        name: Setting environment file
-        script: |
-          cat >> ".env" <<EOF
-          API_ORIGIN_URL=$API_ORIGIN_URL
-          EOF
-
-      - &android_sdk_set
-        name: Set Android SDK location
-        script: |
-          echo "sdk.dir=$ANDROID_SDK_ROOT" > "./android/local.properties"
-
-      - &android_keystore_set
-        name: Set up keystore
-        script: |
-          echo $KEYSTORE | base64 --decode > $KEYSTORE_STORE_PATH
-          cat >> "./android/keystore.properties" <<EOF
-          storePassword=$KEYSTORE_STORE_PASSWORD
-          keyPassword=$KEYSTORE_KEY_PASSWORD
-          keyAlias=$KEYSTORE_KEY_ALIAS
-          storeFile=$KEYSTORE_STORE_PATH
-          EOF
-
-      - &android_build
-        name: Build Android release
-        script: |
-          cd ./android && ./gradlew clean assembleRelease
+      - *npm_install
+      - *environment_set
+      - *android_sdk_set
+      - *android_keystore_set
+      - *android_build_apk
 
     artifacts:
       - $CM_BUILD_DIR/packages/mobile/android/app/build/outputs/**/*.apk
@@ -63,3 +75,39 @@ workflows:
         notify:
           success: true
           failure: false
+
+  # Play Console
+  android-play-console:
+    name: Android Play Console
+    working_directory: packages/mobile
+    max_build_duration: 60
+    instance_type: mac_mini
+
+    environment:
+      groups:
+        - env_main
+        - android_keystore
+        - play_console
+      node: 16
+
+    scripts:
+      - *npm_install
+      - *environment_set
+      - *android_sdk_set
+      - *android_keystore_set
+      - *android_build_aab
+
+    artifacts:
+      - $CM_BUILD_DIR/packages/mobile/android/app/build/outputs/**/*.aab
+
+    publishing:
+      email:
+        recipients:
+          - aleksandr.termenzhy@binary-studio.com
+          - elizaveta.brus@binary-studio.com
+        notify:
+          success: true
+          failure: false
+      google_play:
+        credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
+        track: internal
