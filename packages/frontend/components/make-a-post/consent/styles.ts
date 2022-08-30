@@ -2,6 +2,8 @@ import { css } from '@emotion/react';
 import type { Theme } from '@emotion/react';
 
 export const innerWrapper = css`
+  max-width: 914px;
+  max-height: 744px;
   width: 80vw;
   height: 80vh;
 `;

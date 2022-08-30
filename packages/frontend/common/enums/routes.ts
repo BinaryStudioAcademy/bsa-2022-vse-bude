@@ -25,6 +25,6 @@ export enum ProfileRoutes {
 }
 
 export enum ItemRoutes {
-  CREATE_AUCTION = '/create/auction',
-  CREATE_DIRECT_SALE = '/create/direct',
+  CREATE_AUCTION = '/create-auction',
+  CREATE_DIRECT_SALE = '/create-product',
 }
