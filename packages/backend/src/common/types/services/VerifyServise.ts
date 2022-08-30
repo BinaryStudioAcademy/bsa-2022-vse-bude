@@ -1,5 +1,5 @@
 export interface GetUserVerifiedDto {
-    id: string;
-    emailVerified: boolean;
-    phoneVerified: boolean;
+  id: string;
+  emailVerified: boolean;
+  phoneVerified: boolean;
 }

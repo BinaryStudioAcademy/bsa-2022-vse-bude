@@ -89,9 +89,13 @@ export class UserRepository {
     });
   }
 
-  public getVerified({ userId }: { userId: string }): Promise<GetUserVerifiedDto> {
+  public getVerified({
+    userId,
+  }: {
+    userId: string;
+  }): Promise<GetUserVerifiedDto> {
     return this._dbClient.user.findUnique({
-      where: { 
+      where: {
         id: userId,
       },
       select: {
