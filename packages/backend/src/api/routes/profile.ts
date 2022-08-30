@@ -1,16 +1,11 @@
 import type { Services } from '@services';
 import { type Request, Router } from 'express';
-import type { ApiRoutes, UserProfileDto } from '@vse-bude/shared';
+import type { ApiRoutes } from '@vse-bude/shared';
 import { ProfileApiRoutes } from '@vse-bude/shared';
 import { wrap } from '@helpers';
 import { apiPath } from '@helpers';
-import {
-  authMiddleware,
-  userNameValidation,
-  emailValidation,
-  phoneValidation,
-  passwordValidation,
-} from '@middlewares';
+import { authMiddleware } from '@middlewares';
+import { profileValidation } from '@validation';
 
 export const initProfileRoutes = (
   { profileService }: Services,
@@ -20,9 +15,9 @@ export const initProfileRoutes = (
 
   router.get(
     apiPath(path, ProfileApiRoutes.GET_USER_BY_ID),
-    wrap((req: Request) => {
+    wrap(async (req: Request) => {
       const { userId } = req.params;
-      const user = profileService.getUser({ userId });
+      const user = profileService.getUser({ userId, req });
       const socialMedia = profileService.getSocialMedia({ userId });
 
       return {
@@ -32,34 +27,38 @@ export const initProfileRoutes = (
     }),
   );
 
+  router.get(
+    apiPath(path, ProfileApiRoutes.GET_FULL_USER_DATA),
+    wrap(async (req: Request) => {
+      const { userId } = req.params;
+      const fullUserProfile = profileService.getFullUserData({ userId, req });
+
+      return {
+        ...fullUserProfile,
+      };
+    }),
+  );
+
   router.put(
     apiPath(path, ProfileApiRoutes.UPDATE_DATA),
     authMiddleware,
-    userNameValidation,
-    emailValidation,
-    phoneValidation,
-    passwordValidation,
     wrap(async (req: Request) => {
       const { userId } = req;
-      const { avatar, firstName, lastName, socialMedia } = <UserProfileDto>(
-        req.body
-      );
+      profileValidation({ req });
+
+      const { firstName, lastName, email, phone, socialMedia } = req.body;
 
       const user = await profileService.updateUserProfile({
         userId,
-        data: { avatar, firstName, lastName },
+        data: { firstName, lastName, email, phone },
       });
 
-      if (socialMedia.length) {
-        const links = await profileService.updateUserSocialMedia({
-          userId,
-          socialMedia,
-        });
+      const links = await profileService.updateUserSocialMedia({
+        userId,
+        socialMedia,
+      });
 
-        return { ...user, socialMedia: links };
-      }
-
-      return { ...user, socialMedia };
+      return { ...user, socialMedia: links };
     }),
   );
 

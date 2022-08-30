@@ -3,11 +3,9 @@
     "personal": {
       "firstNamePattern": "First name should consist of letters: А-Я or A-Z",
       "firstnameRequired": "Enter your name please!",
-      "firstnameMin": "First name should have a minimum of 1 symbol",
       "firstnameMax": "First name should have a maximum of 40 symbols",
       "lastNamePattern": "Last name should consist of letters: А-Я or A-Z",
       "lastnameRequired": "Enter your last name please!",
-      "lastnameMin": "Last name name should have a minimum of 1 symbol",
       "lastnameMax": "Last name should have a maximum of 40 symbols",
       "emailRequired": "Fill the email please!",
       "emailPattern": "Check your email please. Example: my-email@example.com",
@@ -26,6 +24,9 @@
       "emptyPassword": "Fill the password please!",
       "newPasswordPattern": "Password should include at least one uppercase, one lowercase and one number",
       "differentPasswords": "Passwords are not same"
+    },
+    "notExists": {
+      "user": "User not found!"
     }
   }
 }

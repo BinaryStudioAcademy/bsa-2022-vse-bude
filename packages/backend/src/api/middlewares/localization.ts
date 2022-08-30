@@ -7,7 +7,7 @@ i18next
   .use(middleware.LanguageDetector)
   .init({
     fallbackLng: 'ua',
-    ns: ['translation', 'profile'],
+    ns: ['translation', 'personal-info'],
     backend: {
       loadPath: './locales/{{lng}}/{{ns}}.json',
     },
