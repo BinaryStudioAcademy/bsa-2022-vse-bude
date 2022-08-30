@@ -1,6 +1,10 @@
 import { ColorValue } from 'react-native';
 
 export type ThemeColors = {
+  primary: ColorValue;
+  secondary: ColorValue;
+  onPrimary: ColorValue;
+  onSecondary: ColorValue;
   accent: ColorValue;
   card: string;
   backgroundThird: string;
@@ -8,10 +12,10 @@ export type ThemeColors = {
   line: string;
   placeholder: string;
   subtitle: string;
-  buttonTextPrimary: string;
-  buttonTextSecondary: string;
   buttonPrimaryBackground: ColorValue;
+  buttonPrimaryText: string;
   buttonSecondaryBackground: ColorValue;
+  buttonSecondaryText: string;
   error: string;
   background: ColorValue;
   text: string;

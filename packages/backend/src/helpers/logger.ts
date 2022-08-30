@@ -1,5 +1,29 @@
 import winston from 'winston';
 import { getEnv } from '@helpers';
+import fs from 'fs';
+import path from 'path';
+
+function checkFileSize(fileSizeBytes: number, filename: string) {
+  const filepathAbsolute = path.resolve(filename);
+
+  try {
+    const size = fs.statSync(filepathAbsolute).size;
+
+    if (size <= fileSizeBytes) {
+      return;
+    }
+
+    let data = fs.readFileSync(filepathAbsolute, 'utf8');
+
+    while (Buffer.byteLength(data) > fileSizeBytes) {
+      data = data.split('\n').slice(1).join('\n');
+    }
+
+    fs.writeFileSync(filepathAbsolute, data);
+  } catch (e) {
+    console.log(e);
+  }
+}
 
 const levels = {
   error: 0,
@@ -16,6 +40,14 @@ const colors = {
 class Logger {
   private _logger: winston.Logger;
 
+  private _errorFilename = 'logs/error.log';
+
+  private _logFilename = 'logs/all.log';
+
+  private _errorFileSize = 5242880; // 5mb
+
+  private _logFileSize = 5242880; // 5mb
+
   constructor() {
     const env = getEnv('NODE_ENV') || 'development';
     const transports = this.createTransports(env);
@@ -25,18 +57,32 @@ class Logger {
       levels,
       transports,
     });
+
+    this.createLogFiles();
   }
 
   log(message: string | Record<string, unknown>) {
     this._logger.info(message);
+    this.checkLogFileSize();
   }
 
   warn(message: string | Record<string, unknown>) {
     this._logger.warn(message);
+    this.checkLogFileSize();
   }
 
   error(message: string | Record<string, unknown> | Error) {
     this._logger.error(message);
+    this.checkLogFileSize();
+    this.checkErrorFileSize();
+  }
+
+  private checkLogFileSize() {
+    checkFileSize(this._logFileSize, this._logFilename);
+  }
+
+  private checkErrorFileSize() {
+    checkFileSize(this._errorFileSize, this._errorFilename);
   }
 
   private createTransports(env: string) {
@@ -46,11 +92,11 @@ class Logger {
       | winston.transports.FileTransportInstance
     )[] = [
       new winston.transports.File({
-        filename: 'logs/all.log',
+        filename: this._logFilename,
         format: formats.fileFormat,
       }),
       new winston.transports.File({
-        filename: 'logs/error.log',
+        filename: this._errorFilename,
         level: 'error',
         format: formats.fileFormat,
       }),
@@ -101,6 +147,18 @@ class Logger {
 
     return info;
   };
+
+  private createLogFiles() {
+    const errorFilePath = path.resolve(this._errorFilename);
+    const logFilePath = path.resolve(this._logFilename);
+
+    try {
+      fs.writeFileSync(errorFilePath, '', { flag: 'a+' });
+      fs.writeFileSync(logFilePath, '', { flag: 'a+' });
+    } catch (e) {
+      console.log(e);
+    }
+  }
 }
 
 const logger = new Logger();

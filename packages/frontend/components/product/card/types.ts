@@ -6,5 +6,8 @@ export interface ProductCardProps {
   price: number;
   currency: string;
   isFavorite?: boolean;
-  onChangeIsFavorite: () => void;
+  data: {
+    id: string;
+  };
+  onButtonClick: (productId: string) => void;
 }

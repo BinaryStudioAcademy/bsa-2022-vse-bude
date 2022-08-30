@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { UserDto, UserSignUpDto, UserSignInDto } from '@vse-bude/shared';
+import { UserSignUpDto, UserSignInDto, UserDto } from '@vse-bude/shared';
 import { StorageKey } from '~/common/enums/enums';
 import { AsyncThunkConfig } from '~/common/types/types';
 import { ActionType } from './common';
@@ -7,9 +7,13 @@ import { ActionType } from './common';
 const signUp = createAsyncThunk<UserDto, UserSignUpDto, AsyncThunkConfig>(
   ActionType.SIGN_UP,
   async (payload, { extra }) => {
-    const { authApi } = extra;
+    const { authApi, storage } = extra;
+    const response = await authApi.signUp(payload);
 
-    return authApi.signUp(payload);
+    storage.setItem(StorageKey.ACCESS_TOKEN, response.accessToken);
+    storage.setItem(StorageKey.REFRESH_TOKEN, response.refreshToken);
+
+    return response.user;
   },
 );
 
@@ -22,16 +26,7 @@ const signIn = createAsyncThunk<UserDto, UserSignInDto, AsyncThunkConfig>(
     storage.setItem(StorageKey.ACCESS_TOKEN, response.accessToken);
     storage.setItem(StorageKey.REFRESH_TOKEN, response.refreshToken);
 
-    return {
-      id: '',
-      name: '',
-      email: '',
-      phone: '',
-      phoneVerified: false,
-      avatar: '',
-      firstName: '',
-      lastName: '',
-    };
+    return response.user;
   },
 );
 

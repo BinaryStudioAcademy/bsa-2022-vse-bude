@@ -10,6 +10,14 @@
     "buttons": {
       "create_account": "Створити Аккаунт",
       "sign_in": "Увійти в Аккаунт"
+    },
+    "popover": {
+      "personalInfo": "Мій аккаунт",
+      "myList": "Мій спсиок",
+      "settings": "Налаштування",
+      "messages": "Повідомлення",
+      "support": "Підтримка",
+      "signOut": "Вийти"
     }
   },
   "footer": {
@@ -28,7 +36,7 @@
       "send": "Відправити"
     }
   },
-  "catergories": {
+  "categories": {
     "LAPTOPS_AND_PC_CATEGORY_NAME": "Ноутбуки та комп'ютери",
     "SMARTPHONES_TV_AND_ELECTRONICS_CATEGORY_NAME": "Смартфони, ТВ і електроніка",
     "GOODS_FOR_GAMERS_CATEGORY_NAME": "Товари для геймерів",
@@ -54,6 +62,17 @@
         "days": "д",
         "minutes": "хв",
         "seconds": "с"
+      }
+    },
+    "input": {
+      "searchProductsPlaceholder": "Пошук продуктів"
+    },
+    "typeOfPost": {
+      "headline": "Який тип продажу ви оберете?",
+      "btn": {
+        "auction": "Аукціон",
+        "or": "або",
+        "directSale": "Продаж"
       }
     }
   }

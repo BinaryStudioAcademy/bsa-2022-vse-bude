@@ -59,6 +59,14 @@ const CameraIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="camera" {...iconProps} />
 );
 
+const CrossIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="x" {...iconProps} />
+);
+
+const LogInIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="log-in" {...iconProps} />
+);
+
 const PlusIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="plus-circle" {...iconProps} />
 );
@@ -80,12 +88,14 @@ export {
   MessageIcon,
   SupportIcon,
   LogOutIcon,
+  LogInIcon,
   ArrowLeftIcon,
   ArrowRightIcon,
   AlertIcon,
   BackIcon,
   CustomFeatherIcon,
   CameraIcon,
+  CrossIcon,
   PlusIcon,
   ImageIcon,
   InfoIcon,

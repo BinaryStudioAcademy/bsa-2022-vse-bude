@@ -20,11 +20,11 @@ const options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Hello World',
+      title: 'Vse Bude API',
       version: '1.0.0',
     },
   },
-  apis: ['**/routes/*.ts'],
+  apis: ['**/routes/*.ts', '**/docs/**/*.ts'],
 };
 const swaggerSpecification = swaggerJsdoc(options);
 

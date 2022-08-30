@@ -6,14 +6,12 @@ import {
 import { RootScreenName } from '~/common/enums/enums';
 import { RootNavigationParamList } from '~/common/types/types';
 import { useAppSelector, useTranslation } from '~/hooks/hooks';
-import { selectCurrentUser } from '~/store/auth/selectors';
+import { selectCurrentUser } from '~/store/selectors';
 import {
   MessagesScreen,
   PersonalInfoScreen,
   SettingsScreen,
   SupportScreen,
-  Auth,
-  Welcome,
   NewItemScreen,
 } from '~/screens/screens';
 import { HeaderLeft, HeaderSave } from '~/components/components';
@@ -38,30 +36,29 @@ const Navigation: FC = () => {
 
   return (
     <NativeStack.Navigator screenOptions={mainScreenOptions}>
-      {user ? (
-        <NativeStack.Group>
-          <NativeStack.Screen
-            name={RootScreenName.MAIN}
-            component={MainNavigation}
+      <NativeStack.Screen
+        name={RootScreenName.MAIN}
+        component={MainNavigation}
+      />
+      {user && (
+        <NativeStack.Group screenOptions={accountScreenOptions}>
+          <Stack.Screen
+            name={RootScreenName.PERSONAL_INFO}
+            component={PersonalInfoScreen}
           />
-          <NativeStack.Group screenOptions={accountScreenOptions}>
-            <Stack.Screen
-              name={RootScreenName.PERSONAL_INFO}
-              component={PersonalInfoScreen}
-            />
-            <Stack.Screen
-              name={RootScreenName.SETTINGS}
-              component={SettingsScreen}
-            />
-            <Stack.Screen
-              name={RootScreenName.MESSAGES}
-              component={MessagesScreen}
-            />
-            <Stack.Screen
-              name={RootScreenName.SUPPORT}
-              component={SupportScreen}
-            />
-            <Stack.Screen
+          <Stack.Screen
+            name={RootScreenName.SETTINGS}
+            component={SettingsScreen}
+          />
+          <Stack.Screen
+            name={RootScreenName.MESSAGES}
+            component={MessagesScreen}
+          />
+          <Stack.Screen
+            name={RootScreenName.SUPPORT}
+            component={SupportScreen}
+          />
+          <Stack.Screen
               name={RootScreenName.NEW_ITEM}
               component={NewItemScreen}
               options={{
@@ -74,18 +71,6 @@ const Navigation: FC = () => {
                 },
               }}
             />
-          </NativeStack.Group>
-        </NativeStack.Group>
-      ) : (
-        <NativeStack.Group
-          navigationKey={`auth-group-${user ? 'user' : 'guest'}`}
-        >
-          <NativeStack.Screen
-            name={RootScreenName.WELCOME}
-            component={Welcome}
-          />
-          <NativeStack.Screen name={RootScreenName.SIGN_UP} component={Auth} />
-          <NativeStack.Screen name={RootScreenName.SIGN_IN} component={Auth} />
         </NativeStack.Group>
       )}
     </NativeStack.Navigator>

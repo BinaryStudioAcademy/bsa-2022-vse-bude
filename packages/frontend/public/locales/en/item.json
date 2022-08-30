@@ -1,0 +1,22 @@
+{
+  "placeBidBtn": "Place Bid",
+  "buyBtn": "Buy",
+  "bidInput": "Enter the bid amount",
+  "bidInputCaption": "Enter more than or equal to:",
+  "currentBid": "Current bid",
+  "endingCaption": "Ending on",
+  "timezoneCaption": "Timezone",
+  "statusCaption": "The status",
+  "locationCaption": "Location",
+  "descriptionCaption": "Description",
+  "sellerCaption": "Seller",
+  "contactSellerBtn": "Contact Seller",
+  "time": {
+    "hours": "hours",
+    "days": "day",
+    "minutes": "min",
+    "seconds": "sec"
+  },
+  "similarItems": "Similar items",
+  "seeMoreItems": "See more"
+}

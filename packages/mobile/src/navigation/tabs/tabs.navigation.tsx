@@ -1,25 +1,28 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {
-  createBottomTabNavigator,
   BottomTabNavigationOptions,
+  createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-
-import { useCustomTheme } from '~/hooks/hooks';
 import { MainScreenName } from '~/common/enums/enums';
-import { AppIcon } from '~/common/types/types';
 import { Home, Favorite, MyList, Account } from '~/screens/screens';
+import { useAppSelector, useCustomTheme } from '~/hooks/hooks';
 import {
-  Text,
   HomeIcon,
   ListIcon,
+  LogInIcon,
   StarIcon,
+  Text,
   UserIcon,
 } from '~/components/components';
+import { AppIcon } from '~/common/types/types';
+import { selectCurrentUser } from '~/store/selectors';
+import { WelcomeNavigation } from '../welcome/welcome.navigation';
 
 const Tabs = createBottomTabNavigator();
 
-const MainNavigation = () => {
+const MainNavigation: FC = () => {
   const { dark, colors } = useCustomTheme();
+  const user = useAppSelector(selectCurrentUser);
 
   const screenOptions: BottomTabNavigationOptions = {
     headerShown: false,
@@ -61,11 +64,19 @@ const MainNavigation = () => {
         component={MyList}
         options={getTabOptions(MainScreenName.MY_LIST, ListIcon)}
       />
-      <Tabs.Screen
-        name={MainScreenName.ACCOUNT_ROOT}
-        component={Account}
-        options={getTabOptions(MainScreenName.ACCOUNT_ROOT, UserIcon)}
-      />
+      {user ? (
+        <Tabs.Screen
+          name={MainScreenName.ACCOUNT_ROOT}
+          component={Account}
+          options={getTabOptions(MainScreenName.ACCOUNT_ROOT, UserIcon)}
+        />
+      ) : (
+        <Tabs.Screen
+          name={MainScreenName.ACCOUNT_ROOT}
+          component={WelcomeNavigation}
+          options={getTabOptions(MainScreenName.LOG_IN, LogInIcon)}
+        />
+      )}
     </Tabs.Navigator>
   );
 };

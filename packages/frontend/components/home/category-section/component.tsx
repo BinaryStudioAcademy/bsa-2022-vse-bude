@@ -53,14 +53,12 @@ const CategorySection = () => {
               <Link href="#" passHref>
                 <a css={categoryItem}>
                   <div css={categoryItemTitle}>
-                    <StringCutter>
-                      {t(`common:categories.${item.title}` as any)}
-                    </StringCutter>
+                    <StringCutter>{item.title}</StringCutter>
                   </div>
                   <div css={imageWrapper}>
                     <Image
                       src={item.image}
-                      alt={t(`common:categories.${item.title}` as any)}
+                      alt={item.title}
                       layout="fill"
                       objectFit="contain"
                     />

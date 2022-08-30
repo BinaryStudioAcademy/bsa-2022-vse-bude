@@ -1,6 +1,8 @@
-import { Platform } from 'react-native';
-
-const IS_ANDROID = Platform.OS === 'android';
-const IS_IOS = Platform.OS === 'ios';
-
-export { IS_ANDROID, IS_IOS };
+export { IS_ANDROID, IS_IOS } from './platform';
+export {
+  MIN_PASSWORD_LENGTH,
+  MAX_PASSWORD_LENGTH,
+  MIN_NAME_LENGTH,
+  MAX_NAME_LENGTH,
+} from './validation';
+export * from './images';
