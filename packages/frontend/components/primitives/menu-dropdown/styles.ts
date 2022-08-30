@@ -68,6 +68,7 @@ export const dropdownItem = ({
   font-weight: ${fontWeights.body1};
   color: ${colors.text};
   white-space: nowrap;
+  text-align: left;
 
   :hover {
     background-color: ${colors.backgroundLight};
