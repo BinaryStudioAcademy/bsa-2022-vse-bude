@@ -14,4 +14,5 @@ export { Container } from './container';
 export { Loader } from './loader';
 export { Error } from './error';
 export * from './input';
-export { PagePath } from './page-path';
+export { Breadcrumbs } from './breadcrumbs';
+export { Modal } from './modal';
