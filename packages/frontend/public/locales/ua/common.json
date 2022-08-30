@@ -10,6 +10,14 @@
     "buttons": {
       "create_account": "Створити Аккаунт",
       "sign_in": "Увійти в Аккаунт"
+    },
+    "popover": {
+      "personalInfo": "Мій аккаунт",
+      "myList": "Мій спсиок",
+      "settings": "Налаштування",
+      "messages": "Повідомлення",
+      "support": "Підтримка",
+      "signOut": "Вийти"
     }
   },
   "footer": {
@@ -58,6 +66,14 @@
     },
     "input": {
       "searchProductsPlaceholder": "Пошук продуктів"
+    },
+    "typeOfPost": {
+      "headline": "Який тип продажу ви оберете?",
+      "btn": {
+        "auction": "Аукціон",
+        "or": "або",
+        "directSale": "Продаж"
+      }
     }
   }
 }

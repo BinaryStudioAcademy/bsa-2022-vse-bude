@@ -8,8 +8,8 @@ export const RulesPageInner = () => {
   return (
     <Container>
       <header>
-        <h3 css={styles.heading}>{t('title')}</h3>
-        <p>{t('policy')}</p>
+        <h3 css={styles.heading}>{t('generalRules.title')}</h3>
+        <p>{t('generalRules.policy')}</p>
       </header>
     </Container>
   );

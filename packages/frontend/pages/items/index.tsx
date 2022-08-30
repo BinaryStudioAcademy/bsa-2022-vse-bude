@@ -1,8 +1,6 @@
-import { Layout } from '@components';
-import { useRouter } from 'next/router';
+import { Filter, Layout } from '@components';
 import { wrapper } from 'store';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { Filter } from '@components';
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (_store) =>
@@ -13,15 +11,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
     }),
 );
 
-const FilteredPage = () => {
-  const router = useRouter();
-  const filter = router.query.filter as string;
-
-  return (
-    <Layout title="Filtered posts">
-      <Filter filter={filter} />
-    </Layout>
-  );
-};
+const FilteredPage = () => (
+  <Layout title="Filtered posts">
+    <Filter />
+  </Layout>
+);
 
 export default FilteredPage;
