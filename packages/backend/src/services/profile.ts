@@ -1,4 +1,4 @@
-import type { Request } from 'express';
+import type { TFunction } from 'i18next';
 import type { UserProfileRepository } from '@repositories';
 import type {
   UpdateUserProfileDto,
@@ -28,12 +28,12 @@ export class UserProfileService {
     this._hashService = hashService;
   }
 
-  public async getUser({ userId, req }: { userId: string; req: Request }) {
+  public async getUser({ userId, t }: { userId: string; t: TFunction }) {
     const user = await this._userProfileRepository.getUser({ userId });
     if (!user) {
       throw new ProfileError({
         status: HttpStatusCode.BAD_REQUEST,
-        message: req.t(UserPersonalInfoValidationMessage.USER_NOT_EXISTS),
+        message: t(UserPersonalInfoValidationMessage.USER_NOT_EXISTS),
       });
     }
 
@@ -42,16 +42,16 @@ export class UserProfileService {
 
   public async getFullUserData({
     userId,
-    req,
+    t,
   }: {
     userId: string;
-    req: Request;
+    t: TFunction;
   }) {
     const user = await this._userProfileRepository.getFullUserData({ userId });
     if (!user) {
       throw new ProfileError({
         status: HttpStatusCode.BAD_REQUEST,
-        message: req.t(UserPersonalInfoValidationMessage.USER_NOT_EXISTS),
+        message: t(UserPersonalInfoValidationMessage.USER_NOT_EXISTS),
       });
     }
 
@@ -102,11 +102,11 @@ export class UserProfileService {
   }
 
   public async changePassword({
-    req,
+    t,
     userId,
     data,
   }: {
-    req: Request;
+    t: TFunction;
     userId: string;
     data: UpdatePasswordDto;
   }) {
@@ -117,7 +117,7 @@ export class UserProfileService {
     if (!passwordHash) {
       throw new ProfileError({
         status: HttpStatusCode.BAD_REQUEST,
-        message: req.t(UserPersonalInfoValidationMessage.USER_NOT_EXISTS),
+        message: t(UserPersonalInfoValidationMessage.USER_NOT_EXISTS),
       });
     }
 
@@ -129,7 +129,7 @@ export class UserProfileService {
     if (!isCurrentPassword) {
       throw new ProfileError({
         status: HttpStatusCode.BAD_REQUEST,
-        message: req.t(UserPersonalInfoValidationMessage.WRONG_PASSWORD),
+        message: t(UserPersonalInfoValidationMessage.WRONG_PASSWORD),
       });
     }
 

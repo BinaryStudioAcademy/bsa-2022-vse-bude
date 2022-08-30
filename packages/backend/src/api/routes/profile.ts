@@ -17,7 +17,8 @@ export const initProfileRoutes = (
     apiPath(path, ProfileApiRoutes.GET_USER_BY_ID),
     wrap(async (req: Request) => {
       const { userId } = req.params;
-      const user = profileService.getUser({ userId, req });
+      const { t } = req;
+      const user = profileService.getUser({ userId, t });
       const socialMedia = profileService.getSocialMedia({ userId });
 
       return {
@@ -31,8 +32,8 @@ export const initProfileRoutes = (
     apiPath(path, ProfileApiRoutes.GET_FULL_USER_DATA),
     authMiddleware,
     wrap(async (req: Request) => {
-      const { userId } = req;
-      const fullUserProfile = profileService.getFullUserData({ userId, req });
+      const { userId, t } = req;
+      const fullUserProfile = profileService.getFullUserData({ userId, t });
 
       return {
         ...fullUserProfile,
@@ -44,10 +45,18 @@ export const initProfileRoutes = (
     apiPath(path, ProfileApiRoutes.UPDATE_DATA),
     authMiddleware,
     wrap(async (req: Request) => {
-      const { userId } = req;
+      const { userId, t } = req;
       profileValidation({ req });
 
-      const { firstName, lastName, email, phone, socialMedia } = req.body;
+      const {
+        firstName,
+        lastName,
+        email,
+        phone,
+        socialMedia,
+        password,
+        newPassword,
+      } = req.body;
 
       const user = await profileService.updateUserProfile({
         userId,
@@ -58,6 +67,14 @@ export const initProfileRoutes = (
         userId,
         socialMedia,
       });
+
+      if (password || newPassword) {
+        await profileService.changePassword({
+          userId,
+          t,
+          data: { newPassword, password },
+        });
+      }
 
       return { ...user, socialMedia: links };
     }),
