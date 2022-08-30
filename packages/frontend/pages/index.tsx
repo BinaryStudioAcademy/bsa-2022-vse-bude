@@ -8,6 +8,8 @@ import type { HttpAcceptLanguage, ProductDto } from '@vse-bude/shared';
 import { Http, ProductType } from '@vse-bude/shared';
 import { getProductsSSR } from 'services/product';
 import type { HomeProps } from 'components/home/types';
+import { PostTypeModal } from 'components/make-a-post/type-of-post';
+import { useState } from 'react';
 
 export const getServerSideProps = withPublic(
   wrapper.getServerSideProps((store) => async (ctx) => {
@@ -57,10 +59,18 @@ export const getServerSideProps = withPublic(
   }),
 );
 
-const IndexPage = ({ auctionProducts, sellingProducts }: HomeProps) => (
-  <Layout>
-    <Home auctionProducts={auctionProducts} sellingProducts={sellingProducts} />
-  </Layout>
-);
+const IndexPage = ({ auctionProducts, sellingProducts }: HomeProps) => {
+  const [isOpen, setIsOpen] = useState(false);
 
+  return (
+    <Layout>
+      <PostTypeModal setIsOpen={setIsOpen} isOpen={isOpen} />
+      <button onClick={() => setIsOpen(true)}>msdskjdskjsdkj</button>
+      <Home
+        auctionProducts={auctionProducts}
+        sellingProducts={sellingProducts}
+      />
+    </Layout>
+  );
+};
 export default IndexPage;
