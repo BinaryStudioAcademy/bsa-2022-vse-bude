@@ -20,10 +20,10 @@ export const Filter = () => {
   useEffect(() => {
     dispatch(fetchProducts({ limit: filter.limit, type: filter.type }));
   }, [dispatch, filter]);
-  
-  return(
-  <div>
-    <ProductGrid lots={list}></ProductGrid>
-  </div>
-);
+
+  return (
+    <div>
+      <ProductGrid lots={list}></ProductGrid>
+    </div>
+  );
 };

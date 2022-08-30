@@ -12,9 +12,9 @@ export const getServerSideProps = wrapper.getServerSideProps(
 );
 
 const FilteredPage = () => (
-    <Layout title="Filtered posts">
-      <Filter />
-    </Layout>
-  );
+  <Layout title="Filtered posts">
+    <Filter />
+  </Layout>
+);
 
 export default FilteredPage;
