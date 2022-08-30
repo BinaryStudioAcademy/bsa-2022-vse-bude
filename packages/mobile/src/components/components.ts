@@ -6,6 +6,7 @@ export {
   ScrollView,
   TouchableOpacity,
   TouchableWithoutFeedback,
+  FlatList,
 } from 'react-native';
 export { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -25,3 +26,4 @@ export { KeyboardAvoiding } from './keyboard-avoiding/keyboard-avoiding';
 export { FlagBackgroundView } from './flag-background-view/flag-background-view';
 export { PrimaryButton } from './primary-button/primary-button';
 export { SecondaryButton } from './secondary-button/secondary-button';
+export { BurgerMenu } from './burger-menu/burger-menu';
