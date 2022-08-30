@@ -1,6 +1,4 @@
-import type {
-  VerifyPhoneDto,
-  VerifyEmailDto} from '@vse-bude/shared';
+import type { VerifyPhoneDto, VerifyEmailDto } from '@vse-bude/shared';
 import type { ApiRoutes } from '@vse-bude/shared';
 import { VerificationTypes, VerifyApiRoutes } from '@vse-bude/shared';
 import { type Request, Router } from 'express';

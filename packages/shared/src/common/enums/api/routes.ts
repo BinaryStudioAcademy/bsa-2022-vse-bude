@@ -8,7 +8,6 @@ export enum ApiRoutes {
   PROFILE = '/profile',
   UPLOAD_IMAGE = '/upload-image',
   VERIFY = '/verify',
-  CHECK_VERIFY = '/verify/:id',
   HEALTH = '/health',
   CREATE_POST = '/post',
 }
@@ -29,7 +28,7 @@ export enum VerifyApiRoutes {
   VERIFY_EMAIL = '/email-verify',
   PHONE_RESEND_CODE = '/phone/resend-code',
   EMAIL_RESEND_CODE = '/email/resend-code',
-  CHECK_VERIFY = '/verify/check-verify/:id',
+  CHECK_VERIFY = '/check-verify/:id',
 }
 
 export enum ProductApiRoutes {
