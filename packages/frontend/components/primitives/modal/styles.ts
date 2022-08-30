@@ -14,6 +14,7 @@ export const modalWrapper = ({ opacities }: Theme) => css`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, ${opacities.md});
+  backdrop-filter: blur(1px);
 `;
 
 export const modalContent = ({
