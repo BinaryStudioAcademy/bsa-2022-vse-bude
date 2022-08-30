@@ -7,6 +7,7 @@ import type {
   AddProductToFavorites,
   DeleteProductFromFavorites,
 } from '@vse-bude/shared';
+import { ProductStatus } from '@prisma/client';
 
 export class ProductService {
   private _productRepository: ProductRepository;
@@ -80,6 +81,23 @@ export class ProductService {
       return undefined;
     }
     await this._productRepository.deleteFromFavorites(userId, productId);
+
+    return productId;
+  }
+
+  public async buy({ userId, productId }: AddProductToFavorites) {
+    const isActive = await this._productRepository.isActive(
+      productId,
+      ProductStatus.ACTIVE,
+    );
+    if (!isActive) {
+      return undefined;
+    }
+    await this._productRepository.buy(
+      productId,
+      userId,
+      ProductStatus.FINISHED,
+    );
 
     return productId;
   }
