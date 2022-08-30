@@ -1,4 +1,4 @@
-import type { ApiRoutes } from '@vse-bude/shared';
+import type { ApiRoutes, CurrentPriceResponse } from '@vse-bude/shared';
 import type { Request } from 'express';
 import { Router } from 'express';
 import { wrap } from '@helpers';
@@ -58,6 +58,13 @@ export const initProductRoutes = (
     apiPath(path, ProductApiRoutes.FAVORITE_IDS),
     authMiddleware,
     wrap((req: Request) => productService.getFavoriteIds(req.userId)),
+  );
+
+  router.get(
+    apiPath(path, ProductApiRoutes.CURRENT_PRICE),
+    wrap<Empty, CurrentPriceResponse>((req: Request) =>
+      productService.getCurrentPrice(<string>req.query.productId),
+    ),
   );
 
   /**
