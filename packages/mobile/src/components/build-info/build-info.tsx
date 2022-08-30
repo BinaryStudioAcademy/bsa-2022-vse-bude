@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { Text, View } from '~/components/components';
 import DeviceInfo from 'react-native-device-info';
+import { Text, View } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 
 const BuildInfo: FC = () => {
