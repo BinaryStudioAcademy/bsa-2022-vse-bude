@@ -119,5 +119,13 @@ export const initVerifyRoutes = (
     ),
   );
 
+  router.post(
+    apiPath(path, VerifyApiRoutes.CHECK_VERIFY),
+    authMiddleware,
+    wrap((req: Request) =>
+      verifyService.isUserVerified(req.userId),
+    ),
+  );
+
   return router;
 };
