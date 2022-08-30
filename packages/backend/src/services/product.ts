@@ -38,7 +38,14 @@ export class ProductService {
 
     product.category.title = req.t(`categories.${product.category.title}`);
 
-    return product;
+    const currentPrice = await this._productRepository.getCurrentPrice(
+      product.id,
+    );
+
+    return {
+      ...product,
+      currentPrice: currentPrice,
+    };
   }
 
   public async incrementViews(id: string, req: Request) {
