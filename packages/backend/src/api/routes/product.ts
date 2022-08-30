@@ -122,6 +122,16 @@ export const initProductRoutes = (
       }),
     ),
   );
+  router.post(
+    apiPath(path),
+    authMiddleware,
+    wrap((req: Request) =>
+      productService.createProduct({
+        userId: req.userId,
+        productData: req.body,
+      }),
+    ),
+  );
 
   return router;
 };

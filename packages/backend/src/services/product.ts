@@ -83,4 +83,10 @@ export class ProductService {
 
     return productId;
   }
+
+  public async createProduct({ userId, productData }) {
+    await this._productRepository.createPost(userId, productData);
+
+    // return productId;
+  }
 }

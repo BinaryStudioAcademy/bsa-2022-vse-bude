@@ -7,6 +7,7 @@ import { initServices } from '@services';
 import { loggerMiddleware, localizationMiddleware } from '@middlewares';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
+// import bodyParser from 'body-parser';
 import { prismaClient as database } from './data/db';
 import { errorHandler } from './error/error-handler';
 

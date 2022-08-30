@@ -125,4 +125,14 @@ export class ProductRepository {
       },
     });
   }
+
+  public createPost(userId: string, productData) {
+    console.log(userId);
+    console.log(productData);
+    // return this._dbClient.product.create({
+    //   data: {
+    //     ,
+    //   },
+    // });
+  }
 }
