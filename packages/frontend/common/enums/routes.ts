@@ -23,3 +23,8 @@ export enum ProfileRoutes {
   MESSAGES = '/messages',
   SUPPORT = '/support',
 }
+
+export enum ItemRoutes {
+  CREATE_AUCTION = '/create/auction',
+  CREATE_DIRECT_SALE = '/create/direct',
+}

@@ -27,8 +27,8 @@ export const modalContent = ({
   box-shadow: ${shadows.dropdown};
   border: ${borders.dropdown};
   border-radius: ${radiuses.md};
-  width: 80%;
-  height: 80%;
+  width: fit-content;
+  height: fit-content;
   padding: ${spaces.md};
   background-color: ${colors.background};
 `;

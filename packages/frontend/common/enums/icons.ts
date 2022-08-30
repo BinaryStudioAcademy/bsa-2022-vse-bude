@@ -27,6 +27,7 @@ export enum IconName {
   FACEBOOK = 'facebook',
   WEBSITE = 'website',
   LINKEDIN = 'linkedin',
+  XMARK = 'xmark',
 }
 
 export const IconNameToClassName = {
@@ -58,4 +59,5 @@ export const IconNameToClassName = {
   [IconName.FACEBOOK]: 'fa-brands fa-square-facebook',
   [IconName.WEBSITE]: 'fa-solid fa-globe',
   [IconName.LINKEDIN]: 'fa-brands fa-linkedin',
+  [IconName.XMARK]: 'fa-solid fa-xmark',
 };

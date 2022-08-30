@@ -58,6 +58,14 @@
     },
     "input": {
       "searchProductsPlaceholder": "Search the products"
+    },
+    "typeOfPost": {
+      "headline": "What type a post do you create?",
+      "btn": {
+        "auction": "Auction",
+        "or": "or",
+        "directSale": "Direct Sale"
+      }
     }
   },
   "HOURS_SHORT": "h",

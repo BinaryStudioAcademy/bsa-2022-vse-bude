@@ -58,6 +58,13 @@
     },
     "input": {
       "searchProductsPlaceholder": "Пошук продуктів"
-    }
+    },
+    "typeOfPost": {
+      "headline": "What type a post do you create?",
+      "btn": {
+        "auction": "Auction",
+        "or": "or",
+        "directSale": "Direct Sale"
+      }
   }
 }
