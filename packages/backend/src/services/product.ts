@@ -5,6 +5,7 @@ import type { Request } from 'express';
 import { getUserIdFromRequest } from '@helpers';
 import type {
   AddProductToFavorites,
+  BuyProduct,
   DeleteProductFromFavorites,
 } from '@vse-bude/shared';
 import { ProductStatus } from '@prisma/client';
@@ -85,8 +86,8 @@ export class ProductService {
     return productId;
   }
 
-  public async buy({ userId, productId }: AddProductToFavorites) {
-    const isActive = await this._productRepository.isActive(
+  public async buy({ userId, productId }: BuyProduct) {
+    const isActive = await this._productRepository.checkStatus(
       productId,
       ProductStatus.ACTIVE,
     );

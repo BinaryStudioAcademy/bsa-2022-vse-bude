@@ -126,7 +126,7 @@ export class ProductRepository {
     });
   }
 
-  public async isActive(id: string, status: ProductStatus) {
+  public async checkStatus(id: string, status: ProductStatus) {
     return await this._dbClient.product.findFirst({
       where: {
         id,
