@@ -29,26 +29,11 @@ const ProfileImage: FC = () => {
   };
 
   const onCameraOpen = useCallback(async () => {
-    setIsUploading(true);
-    const file = await pickImageCamera();
-    if (!file) {
-      setIsUploading(false);
-
-      return;
-    }
-    const link = await imageService.uploadImage(file);
-
-    setPhotoUri(link);
-    setIsUploading(false);
-    setShowModal(false);
-  }, []);
-
-  const onGalleryOpen = useCallback(async () => {
     const isPermissionGranted = await requestExternalStoragePermission();
 
     if (isPermissionGranted) {
       setIsUploading(true);
-      const file = await pickImageLibrary();
+      const file = await pickImageCamera();
       if (!file) {
         setIsUploading(false);
 
@@ -62,6 +47,21 @@ const ProfileImage: FC = () => {
     } else {
       notification.error(t('permission.STORAGE_DENIED'));
     }
+  }, []);
+
+  const onGalleryOpen = useCallback(async () => {
+    setIsUploading(true);
+    const file = await pickImageLibrary();
+    if (!file) {
+      setIsUploading(false);
+
+      return;
+    }
+    const link = await imageService.uploadImage(file);
+
+    setPhotoUri(link);
+    setIsUploading(false);
+    setShowModal(false);
   }, []);
 
   const handleRemovePhoto = () => {
