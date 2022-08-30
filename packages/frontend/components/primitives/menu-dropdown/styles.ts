@@ -67,6 +67,7 @@ export const dropdownItem = ({
   line-height: ${lineHeights.body1};
   font-weight: ${fontWeights.body1};
   color: ${colors.text};
+  white-space: nowrap;
 
   :hover {
     background-color: ${colors.backgroundLight};
