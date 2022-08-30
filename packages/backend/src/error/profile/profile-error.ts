@@ -1,7 +1,9 @@
-import { HttpError, HttpStatusCode } from '@vse-bude/shared';
+import type { HttpStatusCode } from '@vse-bude/shared';
+import { HttpError } from '@vse-bude/shared';
 
 export class ProfileError extends HttpError {
   key: string;
+
   constructor({
     status,
     message,

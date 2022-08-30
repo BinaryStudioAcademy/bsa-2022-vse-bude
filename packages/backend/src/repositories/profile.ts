@@ -28,7 +28,11 @@ export class UserProfileRepository {
     });
   }
 
-  public getFullUserData({ userId }: { userId: string }): Promise<GetUserPersonalDataDto> {
+  public getFullUserData({
+    userId,
+  }: {
+    userId: string;
+  }): Promise<GetUserPersonalDataDto> {
     return this._dbClient.user.findUnique({
       where: {
         id: userId,

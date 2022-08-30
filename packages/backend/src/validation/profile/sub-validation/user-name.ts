@@ -2,7 +2,7 @@ import type { Request } from 'express';
 import {
   HttpStatusCode,
   UserPersonalInfoValidationMessage,
-  ValidationRanges
+  ValidationRanges,
 } from '@vse-bude/shared';
 import { ProfileError } from '@errors';
 

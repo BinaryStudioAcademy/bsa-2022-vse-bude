@@ -27,5 +27,5 @@ export enum UserPersonalInfoValidationMessage {
   DIFFERENT_PASSWORDS = 'personal-info:validation.password.differentPasswords',
   SAME_PASSWORD = 'personal-info:validation.password.samePassword',
 
-  USER_NOT_EXISTS = 'personal-info:validation.notExists.user'
+  USER_NOT_EXISTS = 'personal-info:validation.notExists.user',
 }

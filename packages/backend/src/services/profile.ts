@@ -1,4 +1,4 @@
-import { Request } from 'express';
+import type { Request } from 'express';
 import type { UserProfileRepository } from '@repositories';
 import type {
   UpdateUserProfileDto,
@@ -59,13 +59,15 @@ export class UserProfileService {
       userId,
     });
 
-    const socialMedia = await this._userProfileRepository.getSocialMedia({ userId });
+    const socialMedia = await this._userProfileRepository.getSocialMedia({
+      userId,
+    });
 
     return {
       ...user,
       userAddress,
-      socialMedia
-    }
+      socialMedia,
+    };
   }
 
   public async getAddress({ userId }: { userId: string }) {
