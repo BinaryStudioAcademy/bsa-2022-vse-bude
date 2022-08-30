@@ -1,23 +1,32 @@
-import { Button, InternalLink } from '@primitives';
+import { Button, InternalLink, PasswordInput } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-import type { ResetPasswordLink } from '@vse-bude/shared';
+import type { UpdatePassword } from '@vse-bude/shared';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { Input } from '@primitives';
 import { Routes } from '@enums';
+import { useAppDispatch } from '@hooks';
+import { useRouter } from 'next/router';
 import { inputWrapper, linkText } from '../layout/styles';
-import { verifyForm, verifyText } from '../styles';
+import { verifyForm } from '../styles';
 import { Divider } from '../../primitives/divider';
+import { updatePassword } from '../../../store/auth';
 import { verifyCodeSchema } from './validation';
 
-export const ForgotPassword = () => {
-  const { register, handleSubmit } = useForm<ResetPasswordLink>({
+export const ResetPassword = () => {
+  const { register, handleSubmit } = useForm<UpdatePassword>({
     resolver: joiResolver(verifyCodeSchema),
   });
+  const router = useRouter();
+  const dispatch = useAppDispatch();
 
-  const onSubmit: SubmitHandler<ResetPasswordLink> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<UpdatePassword> = (data) => {
+    const updateData: UpdatePassword = {
+      ...data,
+      email: `${router.query.email}`,
+      updateHash: `${router.query.value}`,
+    };
+    dispatch(updatePassword(updateData));
   };
 
   const { t } = useTranslation('auth');
@@ -25,16 +34,21 @@ export const ForgotPassword = () => {
   return (
     <form css={verifyForm} onSubmit={handleSubmit(onSubmit)}>
       <div css={inputWrapper}>
-        <div css={verifyText}>
-          <span>{t('forgot-password.emailAddressPasswordResetText')}</span>
-        </div>
-        <Input
-          {...register('email')}
-          label={t('sign-in.email')}
+        <PasswordInput
+          {...register('password')}
+          label={t('sign-in.password')}
           variant="primary"
-          type="text"
-          name="email"
-          // error={t(errors.email?.type)}
+          name="password"
+          // error={lang(getErrorKey('password', errors.password?.type))}
+        />
+      </div>
+      <div css={inputWrapper}>
+        <PasswordInput
+          {...register('repeatPassword')}
+          label={t('sign-up.passwordRepeat')}
+          variant="primary"
+          name="repeatPassword"
+          // error={lang(getErrorKey('password', errors.password?.type))}
         />
       </div>
       <Button type="submit" width={'100%'}>

@@ -1,4 +1,5 @@
 import type { ApiRoutes } from '@vse-bude/shared';
+import type { Request } from 'express';
 import { Router } from 'express';
 import { wrap } from '@helpers';
 import type { Services } from '@services';
@@ -6,6 +7,7 @@ import { apiPath } from '@helpers';
 import type { Product } from '@prisma/client';
 import type { ProductQuery } from '@types';
 import { ProductApiRoutes } from '@vse-bude/shared';
+import { authMiddleware } from '@middlewares';
 
 export const initProductRoutes = (
   { productService }: Services,
@@ -16,108 +18,8 @@ export const initProductRoutes = (
   /**
    * @openapi
    * definitions:
-   *   ProductStatus:
-   *     type: string
-   *     enum:
-   *     - CREATED
-   *     - ACTIVE
-   *     - CANCELLED
-   *     - FINISHED
-   *     - CLOSED
-   *     - DRAFT
-   */
-
-  /**
-   * @openapi
-   * definitions:
-   *   ProductType:
-   *     type: string
-   *     enum:
-   *     - AUCTION
-   *     - SELLING
-   */
-
-  /**
-   * @openapi
-   * definitions:
    *   Prisma.Decimal:
    *     type: string
-   */
-
-  /**
-   * @openapi
-   * definitions:
-   *   Product:
-   *     properties:
-   *       updatedAt:
-   *         type: string
-   *         format: date-time
-   *       createdAt:
-   *         type: string
-   *         format: date-time
-   *       winnerId:
-   *         type: string
-   *         nullable: true
-   *       categoryId:
-   *         type: string
-   *         nullable: true
-   *       authorId:
-   *         type: string
-   *       cancellReason:
-   *         type: string
-   *         nullable: true
-   *       endDate:
-   *         type: string
-   *         format: date-time
-   *         nullable: true
-   *       status:
-   *         "$ref": "#/definitions/ProductStatus"
-   *       type:
-   *         "$ref": "#/definitions/ProductType"
-   *       city:
-   *         type: string
-   *         nullable: true
-   *       imageLinks:
-   *         items:
-   *           type: string
-   *         type: array
-   *       minimalBid:
-   *         allOf:
-   *         - "$ref": "#/definitions/Prisma.Decimal"
-   *         nullable: true
-   *       recommendedPrice:
-   *         allOf:
-   *         - "$ref": "#/definitions/Prisma.Decimal"
-   *         nullable: true
-   *       price:
-   *         "$ref": "#/definitions/Prisma.Decimal"
-   *       description:
-   *         type: string
-   *       title:
-   *         type: string
-   *       id:
-   *         type: string
-   *     required:
-   *     - updatedAt
-   *     - createdAt
-   *     - winnerId
-   *     - categoryId
-   *     - authorId
-   *     - cancellReason
-   *     - endDate
-   *     - status
-   *     - type
-   *     - city
-   *     - imageLinks
-   *     - minimalBid
-   *     - recommendedPrice
-   *     - price
-   *     - description
-   *     - title
-   *     - id
-   *     type: object
-   *     description: Model Product
-   *
    */
 
   /**
@@ -144,6 +46,18 @@ export const initProductRoutes = (
     wrap<Empty, Product[], Empty, ProductQuery>((req) =>
       productService.getAll(req.query),
     ),
+  );
+
+  router.get(
+    apiPath(path, ProductApiRoutes.FAVORITE),
+    authMiddleware,
+    wrap((req: Request) => productService.getFavoriteProducts(req.userId)),
+  );
+
+  router.get(
+    apiPath(path, ProductApiRoutes.FAVORITE_IDS),
+    authMiddleware,
+    wrap((req: Request) => productService.getFavoriteIds(req.userId)),
   );
 
   /**
@@ -179,12 +93,34 @@ export const initProductRoutes = (
 
   router.get(
     apiPath(path, ProductApiRoutes.ID),
-    wrap((req) => productService.getById(req.params.id)),
+    wrap((req) => productService.getById(req)),
   );
 
-  router.get(
+  router.put(
     apiPath(path, ProductApiRoutes.ID + ProductApiRoutes.VIEWS),
     wrap((req) => productService.incrementViews(req.params.id, req)),
+  );
+
+  router.post(
+    apiPath(path, ProductApiRoutes.FAVORITE),
+    authMiddleware,
+    wrap((req: Request) =>
+      productService.addToFavorites({
+        userId: req.userId,
+        productId: req.body.productId,
+      }),
+    ),
+  );
+
+  router.delete(
+    apiPath(path, ProductApiRoutes.FAVORITE),
+    authMiddleware,
+    wrap((req: Request) =>
+      productService.deleteFromFavorites({
+        userId: req.userId,
+        productId: <string>req.query.productId,
+      }),
+    ),
   );
 
   return router;
