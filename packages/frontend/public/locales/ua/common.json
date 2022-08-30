@@ -10,6 +10,14 @@
     "buttons": {
       "create_account": "Створити Аккаунт",
       "sign_in": "Увійти в Аккаунт"
+    },
+    "popover": {
+      "personalInfo": "Мій аккаунт",
+      "myList": "Мій спсиок",
+      "settings": "Налаштування",
+      "messages": "Повідомлення",
+      "support": "Підтримка",
+      "signOut": "Вийти"
     }
   },
   "footer": {

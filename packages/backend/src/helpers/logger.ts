@@ -6,19 +6,23 @@ import path from 'path';
 function checkFileSize(fileSizeBytes: number, filename: string) {
   const filepathAbsolute = path.resolve(filename);
 
-  const size = fs.statSync(filepathAbsolute).size;
+  try {
+    const size = fs.statSync(filepathAbsolute).size;
 
-  if (size <= fileSizeBytes) {
-    return;
+    if (size <= fileSizeBytes) {
+      return;
+    }
+
+    let data = fs.readFileSync(filepathAbsolute, 'utf8');
+
+    while (Buffer.byteLength(data) > fileSizeBytes) {
+      data = data.split('\n').slice(1).join('\n');
+    }
+
+    fs.writeFileSync(filepathAbsolute, data);
+  } catch (e) {
+    console.log(e);
   }
-
-  let data = fs.readFileSync(filepathAbsolute, 'utf8');
-
-  while (Buffer.byteLength(data) > fileSizeBytes) {
-    data = data.split('\n').slice(1).join('\n');
-  }
-
-  fs.writeFileSync(filepathAbsolute, data);
 }
 
 const levels = {
@@ -53,6 +57,8 @@ class Logger {
       levels,
       transports,
     });
+
+    this.createLogFiles();
   }
 
   log(message: string | Record<string, unknown>) {
@@ -141,6 +147,18 @@ class Logger {
 
     return info;
   };
+
+  private createLogFiles() {
+    const errorFilePath = path.resolve(this._errorFilename);
+    const logFilePath = path.resolve(this._logFilename);
+
+    try {
+      fs.writeFileSync(errorFilePath, '', { flag: 'a+' });
+      fs.writeFileSync(logFilePath, '', { flag: 'a+' });
+    } catch (e) {
+      console.log(e);
+    }
+  }
 }
 
 const logger = new Logger();
