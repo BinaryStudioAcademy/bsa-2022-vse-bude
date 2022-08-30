@@ -70,15 +70,15 @@ export class UserProfileService {
     };
   }
 
-  public async getAddress({ userId }: { userId: string }) {
+  public getAddress({ userId }: { userId: string }) {
     return this._userProfileRepository.getAddress({ userId });
   }
 
-  public async getSocialMedia({ userId }: { userId: string }) {
+  public getSocialMedia({ userId }: { userId: string }) {
     return this._userProfileRepository.getSocialMedia({ userId });
   }
 
-  public async updateUserProfile({
+  public updateUserProfile({
     userId,
     data,
   }: {
@@ -88,7 +88,7 @@ export class UserProfileService {
     return this._userProfileRepository.updateUserProfile({ userId, data });
   }
 
-  public async updateUserSocialMedia({
+  public updateUserSocialMedia({
     userId,
     socialMedia,
   }: {

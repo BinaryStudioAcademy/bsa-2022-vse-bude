@@ -29,8 +29,9 @@ export const initProfileRoutes = (
 
   router.get(
     apiPath(path, ProfileApiRoutes.GET_FULL_USER_DATA),
+    authMiddleware,
     wrap(async (req: Request) => {
-      const { userId } = req.params;
+      const { userId } = req;
       const fullUserProfile = profileService.getFullUserData({ userId, req });
 
       return {
