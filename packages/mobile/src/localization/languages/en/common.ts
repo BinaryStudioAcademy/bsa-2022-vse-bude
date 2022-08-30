@@ -9,5 +9,6 @@ export const common = {
   },
   common: {
     HOME: 'Home',
+    ERROR: 'Error',
   },
 };
