@@ -25,7 +25,7 @@ import {
 import { globalStyles } from '~/styles/styles';
 import { NavigationProp } from '@react-navigation/native';
 import { MainNavigationParamList } from '~/common/types/navigation/navigation';
-import { selectUserActionDataStatus } from '~/store/auth/selectors';
+import { selectUserActionDataStatus } from '~/store/selectors';
 import {
   GoogleButton,
   SignInForm,
