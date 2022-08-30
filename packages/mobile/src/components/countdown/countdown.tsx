@@ -14,17 +14,18 @@ type Props = {
 const Countdown: FC<Props> = ({ endDate }) => {
   const { t } = useTranslation();
   const [duration, setDuration] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
+    days: '0',
+    hours: '00',
+    minutes: '00',
+    seconds: '00',
   });
-  const { days, hours, minutes, seconds } = duration;
+
   useEffect(() => {
     const timerId = intervalSetter(setDuration, endDate);
 
     return () => clearInterval(timerId);
   }, []);
+  const { days, hours, minutes, seconds } = duration;
 
   return (
     <View style={[globalStyles.flexDirectionRow, styles.wrapper]}>

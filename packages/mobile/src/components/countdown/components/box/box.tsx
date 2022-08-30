@@ -7,7 +7,7 @@ import { styles } from './styles';
 
 type Props = {
   timeName: string;
-  timeValue: number;
+  timeValue: string;
   boxPosition?: BoxType;
 };
 
