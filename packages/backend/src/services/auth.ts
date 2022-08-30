@@ -127,7 +127,7 @@ export class AuthService {
     };
     await this._refreshTokenRepository.create(refreshToken);
 
-    return authResponseMap(this.getTokenData(user.id), user);
+    return authResponseMap(tokenData, user);
   }
 
   async getCurrentUser(userId: string) {
