@@ -2,21 +2,46 @@ import { useTranslation } from 'next-i18next';
 import { useAuth, useTypedSelector } from '@hooks';
 import { shallowEqual } from 'react-redux';
 import { Flex } from 'grapefruit-ui';
-import { useState } from 'react';
-import { Button } from '@primitives';
+import { useRef, useState } from 'react';
+import { Button, IconButton } from '@primitives';
 import dynamic from 'next/dynamic';
+import { Avatar } from '@primitives';
+import { IconName } from '@enums';
+import { ColorPalette } from '@vse-bude/shared';
 import flag from '../../../../public/images/flagBg.png';
 import { NestedLayout } from '../common';
 import * as styles from './styles';
-import { Noavatar, Avatar, ProfileData } from './primitives';
+import { ProfileData } from './primitives';
 
 const EditForm = dynamic(() => import('./edit-form'));
+const ImageCropModal = dynamic(() => import('../../../imageCrop/component'));
 
 export const PersonalInfo = () => {
   const { t } = useTranslation();
   const [isEditing, setIsEditing] = useState(false);
+  const [avatar, setAvatar] = useState(null);
+  const [croppedAvatar, setCroppedAvatar] = useState(null);
   const { user: authUser } = useAuth();
   const user = useTypedSelector((state) => state.profile.user, shallowEqual);
+  const inputFile = useRef(null);
+
+  const handleUpdateAvatar = () => {
+    inputFile.current.click();
+  };
+
+  const onSelectFile = (e) => {
+    const file = e.target.files[0];
+    setAvatar(file);
+  };
+
+  const handleCloseCropModal = () => {
+    setAvatar(null);
+  };
+
+  const onCrop = (croppedImage) => {
+    setCroppedAvatar(croppedImage);
+    setAvatar(null);
+  };
 
   if (!user) {
     return null;
@@ -24,6 +49,14 @@ export const PersonalInfo = () => {
 
   return (
     <NestedLayout>
+      {avatar && (
+        <ImageCropModal
+          file={avatar}
+          onSave={onCrop}
+          onClose={handleCloseCropModal}
+          circle
+        />
+      )}
       <div css={styles.personalHeader}>
         <div css={styles.headerWrapper}>
           <div css={styles.flagWrapper}>
@@ -31,11 +64,29 @@ export const PersonalInfo = () => {
           </div>
 
           <div css={styles.avatarWrapper}>
-            {user.avatar ? (
-              <Avatar src={user.avatar} alt="avatar" />
-            ) : (
-              <Noavatar firstName={user.firstName} lastName={user.lastName} />
-            )}
+            <input
+              type="file"
+              id="file"
+              ref={inputFile}
+              style={{ display: 'none' }}
+              onChange={onSelectFile}
+              accept="image/*"
+            />
+            <div>
+              <Avatar
+                image={croppedAvatar && URL.createObjectURL(croppedAvatar)}
+                firstName={user.firstName}
+                lastName={user.lastName}
+                isLarge={true}
+              />
+              <IconButton
+                icon={IconName.CAMERA}
+                onClick={handleUpdateAvatar}
+                backgroundColor="lightgray"
+                color={ColorPalette.GRAY_300}
+                cssExtend={styles.avatarUpdateButton}
+              />
+            </div>
           </div>
         </div>
 
