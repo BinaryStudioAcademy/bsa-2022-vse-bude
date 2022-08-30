@@ -1,6 +1,6 @@
 import React from 'react';
 import { UserSignUpDto } from '@vse-bude/shared';
-import { View, Button, Input } from '~/components/components';
+import { View, Input, PrimaryButton } from '~/components/components';
 import { useAppForm, useTranslation } from '~/hooks/hooks';
 import { signUp } from '~/validation-schemas/validation-schemas';
 import { globalStyles } from '~/styles/styles';
@@ -58,6 +58,7 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
+        isSecure={true}
       />
       <Input
         label={t('verification.PASSWORD_REPEAT')}
@@ -66,9 +67,10 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
+        isSecure={true}
       />
       <View style={[globalStyles.mt5, globalStyles.mb5]}>
-        <Button
+        <PrimaryButton
           label={t('verification.CREATE_ACCOUNT')}
           onPress={handleSubmit(onSubmit)}
         />

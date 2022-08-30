@@ -50,6 +50,13 @@ export const input = ({
 
   &[data-status='error'] {
     color: ${colors.error};
+    & + span {
+      color: ${colors.error};
+    }
+  }
+
+  &[data-erasable-part='inerasable'] {
+    padding: 14px ${spaces.md} 14px ${spaces.xl3};
   }
 `;
 
@@ -85,6 +92,7 @@ export const label = ({ colors, fontSizes, lineHeights }: Theme) => css`
 `;
 
 export const inputWrapper = () => css`
+  position: relative;
   display: flex;
   flex-direction: column;
 `;
@@ -173,4 +181,27 @@ export const tooltipText = ({ fontSizes, colors, lineHeights }: Theme) => css`
   font-size: ${fontSizes.caption};
   line-height: ${lineHeights.caption};
   color: ${colors.secondaryLight};
+`;
+export const inerasableValue = ({
+  fontSizes,
+  colors,
+  lineHeights,
+}: Theme) => css`
+  position: absolute;
+  transform: translateY(-50%);
+  top: 50%;
+  left: 11px;
+  transition: 200ms linear;
+  font-size: ${fontSizes.toggle};
+  line-height: ${lineHeights.toggle};
+  font-family: inherit;
+  color: ${colors.text};
+
+  &[data-status='error'] {
+    color: ${colors.error};
+  }
+`;
+
+export const inputValueWrapper = css`
+  position: relative;
 `;

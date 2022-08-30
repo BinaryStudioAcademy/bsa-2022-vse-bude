@@ -31,7 +31,8 @@
     "instagram": "Instagram",
     "linkedin": "Linkedin",
     "facebook": "Facebook",
-    "site": "Site"
+    "site": "Site",
+    "checkbox": "Hide phone number"
   },
   "placeholder": {
     "category": "Select the category",
@@ -42,7 +43,7 @@
     "country": "Ukraine",
     "city": "Lviv",
     "callingCode": "UA",
-    "phone": "+380()",
+    "phone": "()",
     "instagram": "Enter your nickname",
     "linkedin": "Enter your nickname",
     "facebook": "Enter your nickname",

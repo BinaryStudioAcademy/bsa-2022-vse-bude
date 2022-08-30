@@ -23,3 +23,6 @@ export { HeaderButton } from './header-button/header-button';
 export { Divider } from '~/components/divider/divider';
 export { KeyboardAvoiding } from './keyboard-avoiding/keyboard-avoiding';
 export { FlagBackgroundView } from './flag-background-view/flag-background-view';
+export { PrimaryButton } from './primary-button/primary-button';
+export { SecondaryButton } from './secondary-button/secondary-button';
+export { BuildInfo } from './build-info/build-info';
