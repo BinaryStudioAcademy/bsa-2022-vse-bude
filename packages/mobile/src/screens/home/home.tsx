@@ -8,7 +8,7 @@ const Home: FC = () => {
     <ScreenWrapper style={[globalStyles.justifyContentSpaceBetween]}>
       <Text>Home screen</Text>
 
-      <View style={[globalStyles.flexDirectionRow]}>
+      <View style={[globalStyles.flexDirectionRow, globalStyles.justifyContentCenter, globalStyles.py3]}>
         <Text style={[globalStyles.fs12, globalStyles.mr1]}>BuildNumber:</Text>
         <Text style={[globalStyles.fs12, globalStyles.mr5]}>
           {DeviceInfo.getBuildNumber()}
