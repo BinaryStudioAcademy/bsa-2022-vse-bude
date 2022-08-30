@@ -1,12 +1,13 @@
 import React, { FC } from 'react';
 import { DotSvg } from '~/assets/svg/dot';
 import { Text, View } from '~/components/components';
-import { useCustomTheme } from '~/hooks/hooks';
+import { useCustomTheme, useTranslation } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 
 const Description: FC = () => {
   const { colors } = useCustomTheme();
+  const { t } = useTranslation();
 
   return (
     <View>
@@ -26,7 +27,7 @@ const Description: FC = () => {
               { color: colors.subtitle },
             ]}
           >
-            Ending on
+            {t('product_info.ENDING_ON')}
           </Text>
         </View>
         <Text
@@ -55,7 +56,7 @@ const Description: FC = () => {
               { color: colors.subtitle },
             ]}
           >
-            Time zone
+            {t('product_info.TIME_ZONE')}
           </Text>
         </View>
         <Text
@@ -84,7 +85,7 @@ const Description: FC = () => {
               { color: colors.subtitle },
             ]}
           >
-            The status
+            {t('product_info.STATUS')}
           </Text>
         </View>
         <Text
@@ -113,7 +114,7 @@ const Description: FC = () => {
               { color: colors.subtitle },
             ]}
           >
-            Location
+            {t('product_info.LOCATION')}
           </Text>
         </View>
         <Text
@@ -142,7 +143,7 @@ const Description: FC = () => {
               { color: colors.subtitle },
             ]}
           >
-            Description
+            {t('product_info.DESCRIPTION')}
           </Text>
         </View>
         <Text

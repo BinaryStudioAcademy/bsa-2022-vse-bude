@@ -1,12 +1,13 @@
 import { ColorPalette } from '@vse-bude/shared';
 import React, { FC } from 'react';
 import { PrimaryButton, StarIcon, Text, View } from '~/components/components';
-import { useCustomTheme } from '~/hooks/hooks';
+import { useCustomTheme, useTranslation } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 
 const ProductPriceBlock: FC = () => {
   const { colors } = useCustomTheme();
+  const { t } = useTranslation();
 
   return (
     <View
@@ -19,20 +20,31 @@ const ProductPriceBlock: FC = () => {
         styles.footer,
       ]}
     >
-      <Text
-        style={[
-          globalStyles.fs18,
-          globalStyles.fontWeightBold,
-          { color: colors.text },
-        ]}
-      >
-        UAH 6500
-      </Text>
+      <View style={globalStyles.flexDirectionRow}>
+        <Text
+          style={[
+            globalStyles.fs18,
+            globalStyles.fontWeightBold,
+            { color: colors.text },
+          ]}
+        >
+          {t('welcome.UAH')}
+        </Text>
+        <Text
+          style={[
+            globalStyles.fs18,
+            globalStyles.fontWeightBold,
+            { color: colors.text },
+          ]}
+        >
+          6500
+        </Text>
+      </View>
       <View
         style={[globalStyles.flexDirectionRow, globalStyles.alignItemsCenter]}
       >
         <View style={styles.btnWidth}>
-          <PrimaryButton label="Buy" />
+          <PrimaryButton label={t('common:components.BUTTON_BUY')} />
         </View>
         <View style={[globalStyles.ml5, styles.iconBorder]}>
           <StarIcon

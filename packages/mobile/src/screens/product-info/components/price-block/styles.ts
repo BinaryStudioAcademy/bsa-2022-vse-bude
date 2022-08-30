@@ -1,6 +1,5 @@
 import { ColorPalette } from '@vse-bude/shared';
 import { StyleSheet } from 'react-native';
-import { FontSize } from '~/common/enums/enums';
 
 const styles = StyleSheet.create({
   currentBid: {
@@ -19,14 +18,12 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     paddingHorizontal: 18,
     backgroundColor: ColorPalette.GRAY_100,
-    color: ColorPalette.BLACK_100,
-    fontSize: FontSize.TEXT_14,
     borderRadius: 7,
   },
   btnIcon: {
     position: 'absolute',
     top: 17.5,
-    left: 22,
+    left: 7,
     zIndex: 10,
   },
   iconBorder: {

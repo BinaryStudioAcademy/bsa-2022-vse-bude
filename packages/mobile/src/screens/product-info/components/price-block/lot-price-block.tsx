@@ -7,12 +7,13 @@ import {
   Text,
   View,
 } from '~/components/components';
-import { useCustomTheme } from '~/hooks/hooks';
+import { useCustomTheme, useTranslation } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 
 const LotPriceBlock: FC = () => {
   const { colors } = useCustomTheme();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -32,7 +33,7 @@ const LotPriceBlock: FC = () => {
             { color: colors.subtitle },
           ]}
         >
-          Current bid
+          {t('product_info.CURRENT_BID')}
         </Text>
         <Text
           style={[
@@ -55,17 +56,22 @@ const LotPriceBlock: FC = () => {
           styles.footer,
         ]}
       >
-        <Text style={styles.minBid}>Min UAH 200</Text>
+        <View style={[globalStyles.flexDirectionRow, styles.minBid]}>
+          <Text style={[globalStyles.fs14]}>{t('product_info.MIN_UAH')}</Text>
+          <Text style={[globalStyles.fs14]}> 200</Text>
+        </View>
+
         <View
           style={[globalStyles.flexDirectionRow, globalStyles.alignItemsCenter]}
         >
           <View style={styles.btnWidth}>
+            {/** TODO: place plusIcon depending on language */}
             <PlusIcon
               size={12}
               color={ColorPalette.WHITE_100}
               style={styles.btnIcon}
             />
-            <PrimaryButton label="Bid" />
+            <PrimaryButton label={t('common:components.BUTTON_BID')} />
           </View>
           <View style={[globalStyles.ml5, styles.iconBorder]}>
             <StarIcon

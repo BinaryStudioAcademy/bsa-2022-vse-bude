@@ -78,4 +78,13 @@ export const screens = {
     LAST_NAME_INVALID: 'Неправильний формат прізвища',
     WRONG_FORMAT: 'Невірний формат',
   },
+  product_info: {
+    ENDING_ON: 'Закінчується',
+    TIME_ZONE: 'Часовий пояс',
+    STATUS: 'Стан',
+    LOCATION: 'Місцезнаходження',
+    DESCRIPTION: 'Опис',
+    CURRENT_BID: 'Поточна ставка',
+    MIN_UAH: 'Мін ГРН',
+  },
 };

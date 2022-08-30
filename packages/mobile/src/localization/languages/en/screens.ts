@@ -79,4 +79,13 @@ export const screens = {
     LAST_NAME_INVALID: 'The invalid last name format',
     WRONG_FORMAT: 'Wrong format',
   },
+  product_info: {
+    ENDING_ON: 'Ending on',
+    TIME_ZONE: 'Time zone',
+    STATUS: 'Status',
+    LOCATION: 'Location',
+    DESCRIPTION: 'Description',
+    CURRENT_BID: 'Current bid',
+    MIN_UAH: 'Min UAH',
+  },
 };
