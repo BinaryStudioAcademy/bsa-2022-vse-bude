@@ -147,4 +147,8 @@ export class VerifyService {
   ): string {
     return `verification_code:user_id:${userId}:type:${type}`;
   }
+
+  public isUserVerified(userId: string) {
+    return this._userRepository.getVerified({ userId });
+  }
 }
