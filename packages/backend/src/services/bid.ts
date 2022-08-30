@@ -29,7 +29,11 @@ export class BidService {
       throw new AuctionEndedError();
     }
 
-    if (+product.minimalBid > dto.price) {
+    const currentPrice = await this._productRepository.getCurrentPrice(
+      dto.productId,
+    );
+
+    if (+product.minimalBid + +currentPrice > dto.price) {
       throw new LowBidPriceError();
     }
 

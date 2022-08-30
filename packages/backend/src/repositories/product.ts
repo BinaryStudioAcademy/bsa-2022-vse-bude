@@ -125,4 +125,32 @@ export class ProductRepository {
       },
     });
   }
+
+  public async getCurrentPrice(productId: string) {
+    const lastBid = await this._dbClient.bid.findFirst({
+      where: {
+        productId: productId,
+      },
+      orderBy: [
+        {
+          createdAt: 'desc',
+        },
+      ],
+    });
+
+    if (lastBid) {
+      return lastBid.price;
+    }
+
+    const product = await this._dbClient.product.findUnique({
+      where: {
+        id: productId,
+      },
+      select: {
+        price: true,
+      },
+    });
+
+    return product.price;
+  }
 }
