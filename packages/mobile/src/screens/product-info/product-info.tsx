@@ -1,4 +1,7 @@
-import React, { FC } from 'react';
+import { NavigationProp } from '@react-navigation/native';
+import React, { FC, useEffect } from 'react';
+import { RootScreenName } from '~/common/enums/enums';
+import { RootNavigationParamList } from '~/common/types/types';
 import {
   ScreenWrapper,
   View,
@@ -6,7 +9,7 @@ import {
   EyeIcon,
   ScrollView,
 } from '~/components/components';
-import { useCustomTheme } from '~/hooks/hooks';
+import { useCustomTheme, useNavigation } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
 import { Description } from './components/description/description';
 import { Header } from './components/header/header';
@@ -14,17 +17,25 @@ import { ImageCarousel } from './components/image-carousel/image-carousel';
 import { LotPriceBlock } from './components/price-block/lot-price-block';
 import { ProductPriceBlock } from './components/price-block/product-price-block';
 
-const ItemInfo: FC = () => {
+const ProductInfo: FC = () => {
   const { colors } = useCustomTheme();
-  const lot = true;
+  const navigation = useNavigation<NavigationProp<RootNavigationParamList>>();
+  const itemTypeLot = true;
 
   const handleBackPress = () => {
-    return;
+    navigation.navigate(RootScreenName.MAIN);
   };
+
+  useEffect(() => {
+    navigation.setOptions({
+      tabBarStyle: { display: 'none' },
+    });
+  }, []);
 
   return (
     <ScreenWrapper>
       <Header onBackPress={handleBackPress} />
+      {/** TODO: add countdown for auction item component */}
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={[globalStyles.px5]}
@@ -55,10 +66,11 @@ const ItemInfo: FC = () => {
         </View>
         <ImageCarousel />
         <Description />
+        {/** TODO: add seller info component */}
       </ScrollView>
-      {lot ? <LotPriceBlock /> : <ProductPriceBlock />}
+      {itemTypeLot ? <LotPriceBlock /> : <ProductPriceBlock />}
     </ScreenWrapper>
   );
 };
 
-export { ItemInfo };
+export { ProductInfo };

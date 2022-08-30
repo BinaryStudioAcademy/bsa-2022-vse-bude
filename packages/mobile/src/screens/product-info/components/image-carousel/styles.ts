@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   imgContainer: {
     backgroundColor: ColorPalette.GRAY_100,
     borderRadius: 6,
-    marginHorizontal: 7,
+    marginHorizontal: 18,
   },
   itemsCount: {
     flexDirection: 'row',

@@ -30,6 +30,8 @@ const ImageCarousel: FC = () => {
   return (
     <FlatList
       horizontal
+      snapToInterval={0}
+      snapToAlignment="center"
       showsHorizontalScrollIndicator={false}
       data={mockData}
       keyExtractor={(item: ItemImageType) => item.id.toString()}

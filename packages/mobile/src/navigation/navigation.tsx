@@ -8,6 +8,7 @@ import { RootNavigationParamList } from '~/common/types/types';
 import {
   MessagesScreen,
   PersonalInfoScreen,
+  ProductInfo,
   SettingsScreen,
   SupportScreen,
 } from '~/screens/screens';
@@ -31,6 +32,10 @@ const Navigation: FC = () => {
       <NativeStack.Screen
         name={RootScreenName.MAIN}
         component={MainNavigation}
+      />
+      <Stack.Screen
+        name={RootScreenName.PRODUCT_INFO}
+        component={ProductInfo}
       />
       <NativeStack.Group screenOptions={accountScreenOptions}>
         <Stack.Screen

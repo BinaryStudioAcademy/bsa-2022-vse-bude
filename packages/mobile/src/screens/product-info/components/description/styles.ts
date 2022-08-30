@@ -6,10 +6,11 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
   },
   titleText: {
-    paddingLeft: 4,
+    marginHorizontal: 4,
+    marginRight: 10,
   },
   description: {
-    flex: 2.5,
+    flex: 2.4,
   },
 });
 

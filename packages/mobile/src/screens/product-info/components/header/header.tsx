@@ -29,7 +29,6 @@ const Header: FC<ItemHeaderProps> = ({ onBackPress }) => {
           buttonColor={colors.yellow}
         />
       </View>
-
       <Text
         style={[
           globalStyles.fs17,
