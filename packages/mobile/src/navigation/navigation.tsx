@@ -12,7 +12,7 @@ import {
   SettingsScreen,
   SupportScreen,
 } from '~/screens/screens';
-import { selectCurrentUser } from '~/store/auth/selectors';
+import { selectCurrentUser } from '~/store/selectors';
 import { MainNavigation } from './tabs/tabs.navigation';
 
 const NativeStack = createNativeStackNavigator<RootNavigationParamList>();

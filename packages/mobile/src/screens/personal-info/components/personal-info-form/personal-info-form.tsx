@@ -3,7 +3,7 @@ import { useAppForm, useTranslation, useAppSelector } from '~/hooks/hooks';
 import { View, Input, DropDown, PrimaryButton } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { ButtonAppearance } from '~/common/enums/enums';
-import { selectCurrentUser } from '~/store/auth/selectors';
+import { selectCurrentUser } from '~/store/selectors';
 import { CITIES, COUNTRIES, REGIONS } from '~/mock/mock-personal-info';
 import { Title } from '../components';
 
