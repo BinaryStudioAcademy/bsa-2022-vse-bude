@@ -128,6 +128,13 @@ class Http {
     };
   }
 
+  private getRefreshedAuthReqConfig(config: RequestInit) {
+    const accessToken = this._auth.getAccessToken();
+    config.headers[HttpHeader.AUTHORIZATION] = `Bearer ${accessToken}`;
+
+    return config;
+  }
+
   private async makeRequest<T = unknown>({
     url,
     config,
@@ -138,7 +145,8 @@ class Http {
     if (result.status === HttpStatusCode.UNAUTHORIZED) {
       try {
         await this.updateAuthorizationToken();
-        result = await fetch(url, config);
+        const updatedConfig = this.getRefreshedAuthReqConfig(config);
+        result = await fetch(url, updatedConfig);
         statusCode = result.status;
       } catch (err) {
         const errorRes: ErrorResponse = await result.json();
