@@ -5,7 +5,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { fetchProducts } from 'store/product';
 import { useEffect } from 'react';
-import type{ ProductType } from '@vse-bude/shared';
+import type { ProductType } from '@vse-bude/shared';
 
 interface RequestOptions {
   limit?: number;
@@ -25,7 +25,7 @@ const FilteredPage = () => {
   const router = useRouter();
   const query = router.query as unknown as string;
   const { list } = useTypedSelector((store) => store.product);
-  const filter : RequestOptions = Object.fromEntries(new URLSearchParams(query));
+  const filter: RequestOptions = Object.fromEntries(new URLSearchParams(query));
   const dispatch = useAppDispatch();
 
   useEffect(() => {
