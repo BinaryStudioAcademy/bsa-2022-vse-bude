@@ -60,11 +60,12 @@
       "searchProductsPlaceholder": "Пошук продуктів"
     },
     "typeOfPost": {
-      "headline": "What type a post do you create?",
+      "headline": "Який тип продажу ви оберете?",
       "btn": {
-        "auction": "Auction",
-        "or": "or",
-        "directSale": "Direct Sale"
+        "auction": "Аукціон",
+        "or": "або",
+        "directSale": "Продаж"
       }
+    }
   }
 }
