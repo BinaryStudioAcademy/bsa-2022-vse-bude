@@ -20,29 +20,26 @@ export const ConsentModal = () => {
 
   return (
     <Modal visible={isVisible}>
-      <>
-        {t('rules:createPostRules.policy')}
-        <div css={styles.consentCheckbox}>
-          <Checkbox
-            label={t('rules:createPostRules.checkbox')}
-            value={value}
-            onChange={setAgree}
-          ></Checkbox>
-        </div>
-        <div css={styles.consentButtons}>
-          <Button
-            variant="outlined"
-            disabled={disabled}
-            onClick={() => setIsVisible(false)}
-          >
-            {t('rules:createPostRules.button.accept')}
-          </Button>
-          <Button onClick={() => router.push('/')}>
-            {t('rules:createPostRules.button.decline')}
-          </Button>
-        </div>
-      </>
-      
+      {t('rules:createPostRules.policy')}
+      <div css={styles.consentCheckbox}>
+        <Checkbox
+          label={t('rules:createPostRules.checkbox')}
+          value={value}
+          onChange={setAgree}
+        ></Checkbox>
+      </div>
+      <div css={styles.consentButtons}>
+        <Button
+          variant="outlined"
+          disabled={disabled}
+          onClick={() => setIsVisible(false)}
+        >
+          {t('rules:createPostRules.button.accept')}
+        </Button>
+        <Button onClick={() => router.push('/')}>
+          {t('rules:createPostRules.button.decline')}
+        </Button>
+      </div>
     </Modal>
   );
 };
