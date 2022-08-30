@@ -8,7 +8,6 @@ export enum ApiRoutes {
   PROFILE = '/profile',
   UPLOAD_IMAGE = '/upload-image',
   VERIFY = '/verify',
-  CHECK_VERIFY = '/verify/:id',
   HEALTH = '/health',
   CREATE_POST = '/post',
 }

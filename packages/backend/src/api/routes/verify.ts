@@ -3,7 +3,7 @@ import type {
   VerifyPhoneDto,
   VerifyEmailDto,
 } from '@vse-bude/shared';
-import { VerificationTypes, VerifyApiRoutes } from '@vse-bude/shared';
+import { VerificationTypes } from '@vse-bude/shared';
 import { type Request, Router } from 'express';
 import { apiPath, wrap } from '@helpers';
 import type { Services } from '@services';
@@ -117,12 +117,6 @@ export const initVerifyRoutes = (
     wrap((req: Request) =>
       verifyService.resendEmailCode(req.userId, VerificationTypes.EMAIL),
     ),
-  );
-
-  router.post(
-    apiPath(path, VerifyApiRoutes.CHECK_VERIFY),
-    authMiddleware,
-    wrap((req: Request) => verifyService.isUserVerified(req.userId)),
   );
 
   return router;
