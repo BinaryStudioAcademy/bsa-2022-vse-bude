@@ -4,6 +4,7 @@ import { Http } from './http/http.service';
 import { Storage } from './storage/storage.service';
 import { AuthApi } from './auth-api/auth-api.service';
 import { NotificationService } from './notification/notification.service';
+import { PersonalInfoApi } from './personal-info-api/personal-info-api.service';
 
 const storage = new Storage({
   storage: new MMKV(),
@@ -20,4 +21,9 @@ const authApi = new AuthApi({
 
 const notification = new NotificationService();
 
-export { storage, authApi, notification };
+const personalInfoApi = new PersonalInfoApi({
+  http,
+  apiPrefix: ENV.APP.API_ORIGIN_URL,
+});
+
+export { storage, authApi, notification, personalInfoApi };
