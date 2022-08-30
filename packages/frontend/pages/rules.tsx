@@ -20,7 +20,7 @@ const RulesPage = () => {
   const { t } = useTranslation('rules');
 
   return (
-    <Layout title={t('title')}>
+    <Layout title={t('generalRules.title')}>
       <RulesPageInner />
     </Layout>
   );
