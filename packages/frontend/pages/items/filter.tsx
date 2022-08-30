@@ -7,26 +7,28 @@ import { fetchProducts } from 'store/product';
 import { ProductType } from '@vse-bude/shared';
 import { useEffect } from 'react';
 
-export const getServerSideProps =
-  wrapper.getServerSideProps((_store) => async ( { locale }  ) => ({
+export const getServerSideProps = wrapper.getServerSideProps(
+  (_store) =>
+    async ({ locale }) => ({
       props: {
         ...(await serverSideTranslations(locale, ['common'])),
       },
-  }));
+    }),
+);
 
 const FilteredPage = () => {
   const router = useRouter();
   const filter = router.query.filter as string;
-  const { list } = useTypedSelector(store => store.product);
+  const { list } = useTypedSelector((store) => store.product);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchProducts({limit: 5, type: ProductType.AUCTION}));
+    dispatch(fetchProducts({ limit: 5, type: ProductType.AUCTION }));
   }, [dispatch]);
 
   return (
     <Layout title="Filtered posts">
-      <Filter filter={filter} lots={ list } />
+      <Filter filter={filter} lots={list} />
     </Layout>
   );
 };
