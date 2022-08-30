@@ -2,14 +2,18 @@ import { Column, Icon } from '@primitives';
 import Image from 'next/image';
 import { IconName } from '@enums';
 import { useTranslation } from 'next-i18next';
+import dynamic from 'next/dynamic';
 import { useCallback, useState } from 'react';
 import { allowedImgExtension } from 'common/enums/allowedImgExtension';
 import { MAX_IMAGE_SIZE } from '@vse-bude/shared';
 import { useDropzone } from 'react-dropzone';
-import { ImageCropModal } from '@components';
 import { SectionHeader } from '../profile/user-account/common';
 import type { ImageInputProps } from './types';
 import * as styles from './styles';
+
+const ImageCropModal = dynamic(
+  () => import('../../components/imageCrop/component'),
+);
 
 function ImageInput({ images, setImages }: ImageInputProps) {
   const { t } = useTranslation();

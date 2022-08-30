@@ -1,6 +1,6 @@
 import { Button, Modal } from '@primitives';
 import { useTranslation } from 'next-i18next';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { Crop, PixelCrop } from 'react-image-crop';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
@@ -8,7 +8,7 @@ import { getCroppedImg } from '@helpers';
 import type { ImageCropModalProps } from './types';
 import * as styles from './styles';
 
-export const ImageCropModal = ({
+const ImageCropModal = ({
   file,
   onSave,
   onClose,
@@ -18,7 +18,11 @@ export const ImageCropModal = ({
   const [crop, setCrop] = useState<Crop>();
   const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
 
-  const imageSrc = URL.createObjectURL(file);
+  const [imageSrc, setImageSrc] = useState<string>('');
+  
+  useEffect(() => {
+    setImageSrc(URL.createObjectURL(file));
+  }, [file]);
 
   const handleSaveCroppedImage = async () => {
     if (completedCrop) {
@@ -63,3 +67,5 @@ export const ImageCropModal = ({
     </Modal>
   );
 };
+
+export default ImageCropModal;
