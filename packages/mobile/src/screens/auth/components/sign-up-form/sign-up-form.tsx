@@ -58,6 +58,7 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
+        isSecure={true}
       />
       <Input
         label={t('verification.PASSWORD_REPEAT')}
@@ -66,6 +67,7 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
+        isSecure={true}
       />
       <View style={[globalStyles.mt5, globalStyles.mb5]}>
         <PrimaryButton
