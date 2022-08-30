@@ -11,8 +11,8 @@ import { SectionHeader } from '../profile/user-account/common';
 import type { ImageInputProps } from './types';
 import * as styles from './styles';
 
-const ImageCropModal = dynamic(
-  () => import('../../components/imageCrop/component'),
+const ImageCropModal = dynamic(() =>
+  import('@components').then((mod) => mod.ImageCropModal),
 );
 
 function ImageInput({ images, setImages }: ImageInputProps) {

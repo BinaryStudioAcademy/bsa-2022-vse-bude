@@ -8,7 +8,7 @@ import { getCroppedImg } from '@helpers';
 import type { ImageCropModalProps } from './types';
 import * as styles from './styles';
 
-const ImageCropModal = ({
+export const ImageCropModal = ({
   file,
   onSave,
   onClose,
@@ -19,7 +19,7 @@ const ImageCropModal = ({
   const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
 
   const [imageSrc, setImageSrc] = useState<string>('');
-  
+
   useEffect(() => {
     setImageSrc(URL.createObjectURL(file));
   }, [file]);
@@ -68,4 +68,4 @@ const ImageCropModal = ({
   );
 };
 
-export default ImageCropModal;
+// export default ImageCropModal;
