@@ -1,9 +1,15 @@
 import { Button, StringCutter } from '@primitives';
 import { useTranslation } from 'next-i18next';
+import { useAppDispatch, useTypedSelector } from '@hooks';
 import { Price } from '../price';
 import { FavoriteButton } from '../favorite-button/component';
 import { ProductTimer } from '../timer/component';
 import { ImageSlider } from '../image-slider/component';
+import {
+  addProductToFavorites,
+  deleteProductFromFavorites,
+} from '../../../store/favorite-product';
+import { useInFavorite } from '../../../hooks/favorite-product';
 import {
   productFooter,
   productCard,
@@ -16,7 +22,19 @@ import {
 import type { ProductCardProps } from './types';
 
 export const ProductCard = (props: ProductCardProps) => {
+  const { user } = useTypedSelector((state) => state.auth);
+
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+
+  const isInFavorite = useInFavorite(props.data.id);
+
+  const onChangeIsFavorite = () => {
+    const favAction = isInFavorite
+      ? deleteProductFromFavorites
+      : addProductToFavorites;
+    dispatch(favAction(props.data.id));
+  };
 
   return (
     <div className="cardBlock" css={productCard}>
@@ -24,10 +42,12 @@ export const ProductCard = (props: ProductCardProps) => {
         <div className="imageSlider">
           <ImageSlider images={props.images} />
         </div>
-        <FavoriteButton
-          onChangeIsFavorite={props.onChangeIsFavorite}
-          isFavorite={props.isFavorite}
-        />
+        {!!user && (
+          <FavoriteButton
+            onChangeIsFavorite={onChangeIsFavorite}
+            isFavorite={isInFavorite}
+          />
+        )}
         <div css={productTimer}>
           <ProductTimer date={props.auctionDate} />
         </div>
@@ -48,7 +68,7 @@ export const ProductCard = (props: ProductCardProps) => {
             title="Place a Bid"
             variant="filled"
             size="small"
-            onClick={() => props.onButtonClick(props.id)}
+            onClick={() => props.onButtonClick(props.data.id)}
           >
             {t('common:components.product.placeBidBtn')}
           </Button>

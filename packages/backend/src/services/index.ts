@@ -1,6 +1,10 @@
 import { Environment } from '@vse-bude/shared';
 import type { Repositories } from '@repositories';
-import { TwilioSMSProvider, BarSMSProvider } from '@providers';
+import {
+  TwilioSMSProvider,
+  BarSMSProvider,
+  SendInBlueEmailProvider,
+} from '@providers';
 import { getEnv } from '@helpers';
 import { CategoryService } from './category';
 import { ProductService } from './product';
@@ -12,7 +16,7 @@ import { S3StorageService } from './s3-storage';
 import { VerifyService } from './verify';
 import { NewsService } from './news';
 import { HealthService } from './health';
-import { emailService } from './email';
+import { EmailService } from './email';
 import { UserProfileService } from './profile';
 
 export const initServices = (repositories: Repositories) => {
@@ -26,8 +30,10 @@ export const initServices = (repositories: Repositories) => {
   const smsProvider = isProduction
     ? new TwilioSMSProvider()
     : new BarSMSProvider();
-
   const smsService = new SMSSenderService(smsProvider);
+
+  const emailProvider = new SendInBlueEmailProvider();
+  const emailService = new EmailService(emailProvider);
 
   const verifyService: VerifyService = new VerifyService(
     repositories.userRepository,
@@ -48,6 +54,7 @@ export const initServices = (repositories: Repositories) => {
       hashService,
       verifyService,
       redisService,
+      emailService,
     ),
     redisStorageService: redisService,
     smsSenderService: smsService,
@@ -68,4 +75,5 @@ export {
   type NewsService,
   type HealthService,
   type UserProfileService,
+  type EmailService,
 };
