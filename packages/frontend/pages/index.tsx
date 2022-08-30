@@ -62,5 +62,4 @@ const IndexPage = ({ auctionProducts, sellingProducts }: HomeProps) => (
     <Home auctionProducts={auctionProducts} sellingProducts={sellingProducts} />
   </Layout>
 );
-
 export default IndexPage;

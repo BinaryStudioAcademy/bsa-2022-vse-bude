@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import type { Theme } from '@emotion/react';
 
 export const modalWrapper = ({ opacities }: Theme) => css`
-  position: absolute;
+  position: fixed;
   z-index: 100;
   top: 0;
   bottom: 0;
@@ -28,9 +28,8 @@ export const modalContent = ({
   box-shadow: ${shadows.dropdown};
   border: ${borders.dropdown};
   border-radius: ${radiuses.md};
-  width: 80%;
-  min-height: 50%;
-  height: auto;
+  width: fit-content;
+  height: fit-content;
   padding: ${spaces.md};
   background-color: ${colors.background};
 `;

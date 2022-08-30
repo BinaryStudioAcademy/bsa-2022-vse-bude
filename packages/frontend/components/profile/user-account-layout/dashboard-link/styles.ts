@@ -18,6 +18,7 @@ export const link = ({ radiuses, colors }: Theme) => css`
 
 export const linkContent = () => css`
   padding: 13px 18px;
+  align-items: center;
 `;
 
 export const icon = ({ spaces }: Theme) => css`

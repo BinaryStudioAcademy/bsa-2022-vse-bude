@@ -8,7 +8,7 @@ import { getCroppedImg } from '@helpers';
 import type { ImageCropModalProps } from './types';
 import * as styles from './styles';
 
-export const ImageCropModal = ({
+const ImageCropModal = ({
   file,
   onSave,
   onClose,
@@ -46,26 +46,28 @@ export const ImageCropModal = ({
 
   return (
     <Modal visible={true}>
-      <ReactCrop
-        css={styles.imageCrop}
-        crop={crop}
-        onChange={(_, percentCrop) => setCrop(percentCrop)}
-        onComplete={(c) => setCompletedCrop(c)}
-        circularCrop={circle}
-        aspect={circle ? 1 : undefined}
-      >
-        <img src={imageSrc} alt="crop" id="image-crop-preview" />
-      </ReactCrop>
+      <div css={styles.imageCropWrapper}>
+        <ReactCrop
+          css={styles.imageCrop}
+          crop={crop}
+          onChange={(_, percentCrop) => setCrop(percentCrop)}
+          onComplete={(c) => setCompletedCrop(c)}
+          circularCrop={circle}
+          aspect={circle ? 1 : undefined}
+        >
+          <img src={imageSrc} alt="crop" id="image-crop-preview" />
+        </ReactCrop>
+      </div>
       <div css={styles.buttonRow}>
         <Button onClick={handleSaveCroppedImage}>
-          {t('personal-info:action.save')}
+          {t('common:components.button.crop' as any)}
         </Button>
         <Button variant="outlined" onClick={onClose}>
-          {t('personal-info:action.cancel')}
+          {t('common:components.button.cancel' as any)}
         </Button>
       </div>
     </Modal>
   );
 };
 
-// export default ImageCropModal;
+export default ImageCropModal;

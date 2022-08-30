@@ -10,6 +10,14 @@
     "buttons": {
       "create_account": "Create Account",
       "sign_in": "Sign In"
+    },
+    "popover": {
+      "personalInfo": "Personal Info",
+      "myList": "My List",
+      "settings": "Settings",
+      "messages": "Messages",
+      "support": "Support",
+      "signOut": "Sign Out"
     }
   },
   "footer": {
@@ -58,6 +66,18 @@
     },
     "input": {
       "searchProductsPlaceholder": "Search the products"
+    },
+    "typeOfPost": {
+      "headline": "What type a post do you create?",
+      "btn": {
+        "auction": "Auction",
+        "or": "or",
+        "directSale": "Direct Sale"
+      }
+    },
+    "button": {
+      "crop": "Crop",
+      "cancel": "Cancel"
     }
   },
   "HOURS_SHORT": "h",
