@@ -34,6 +34,7 @@ const SignInForm: FC<Props> = ({ onSubmit }) => {
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
+        isSecure={true}
       />
       <View style={{ marginTop: 30 }}>
         <PrimaryButton

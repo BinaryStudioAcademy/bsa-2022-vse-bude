@@ -1,12 +1,14 @@
 import { ProfileRoutes, Routes, IconName } from '@enums';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { Icon } from '@primitives';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { logoutUser } from 'store/auth';
 import * as styles from '../styles';
 import type { PopoverContentProps } from '../types';
 
 export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
+  const { t } = useTranslation();
   const router = useRouter();
   const userId = useTypedSelector((state) => state.auth.user.id);
   const dispatch = useAppDispatch();
@@ -32,7 +34,7 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
         data-variant="icon"
       >
         <Icon icon={IconName.USER} color="yellow" />
-        <span>Personal Info</span>
+        <span>{t('common:header.popover.personalInfo')}</span>
       </button>
       <button
         css={styles.popoverContentItem}
@@ -41,7 +43,7 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
         data-variant="icon"
       >
         <Icon icon={IconName.LIST} color="yellow" />
-        <span>My List</span>
+        <span>{t('common:header.popover.myList')}</span>
       </button>
       <button
         css={styles.popoverContentItem}
@@ -50,7 +52,7 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
         data-variant="icon"
       >
         <Icon icon={IconName.SETTINGS} color="yellow" />
-        <span>Settings</span>
+        <span>{t('common:header.popover.settings')}</span>
       </button>
       <button
         css={styles.popoverContentItem}
@@ -59,7 +61,7 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
         data-variant="icon"
       >
         <Icon icon={IconName.MESSAGE} color="yellow" />
-        <span>Messages</span>
+        <span>{t('common:header.popover.messages')}</span>
       </button>
       <button
         css={styles.popoverContentItem}
@@ -68,7 +70,7 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
         data-variant="icon"
       >
         <Icon icon={IconName.SUPPORT} color="yellow" />
-        <span>Support</span>
+        <span>{t('common:header.popover.support')}</span>
       </button>
       <button
         css={styles.popoverContentItem}
@@ -78,7 +80,7 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
         data-variant="icon"
       >
         <Icon icon={IconName.SIGN_OUT} color="yellow" />
-        <span>Sign Out</span>
+        <span>{t('common:header.popover.signOut')}</span>
       </button>
     </div>
   );

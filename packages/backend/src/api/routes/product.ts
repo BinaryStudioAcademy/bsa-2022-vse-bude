@@ -1,4 +1,5 @@
 import type { ApiRoutes } from '@vse-bude/shared';
+import type { Request } from 'express';
 import { Router } from 'express';
 import { wrap } from '@helpers';
 import type { Services } from '@services';
@@ -6,6 +7,7 @@ import { apiPath } from '@helpers';
 import type { Product } from '@prisma/client';
 import type { ProductQuery } from '@types';
 import { ProductApiRoutes } from '@vse-bude/shared';
+import { authMiddleware } from '@middlewares';
 
 export const initProductRoutes = (
   { productService }: Services,
@@ -44,6 +46,18 @@ export const initProductRoutes = (
     wrap<Empty, Product[], Empty, ProductQuery>((req) =>
       productService.getAll(req.query),
     ),
+  );
+
+  router.get(
+    apiPath(path, ProductApiRoutes.FAVORITE),
+    authMiddleware,
+    wrap((req: Request) => productService.getFavoriteProducts(req.userId)),
+  );
+
+  router.get(
+    apiPath(path, ProductApiRoutes.FAVORITE_IDS),
+    authMiddleware,
+    wrap((req: Request) => productService.getFavoriteIds(req.userId)),
   );
 
   /**
@@ -85,6 +99,39 @@ export const initProductRoutes = (
   router.put(
     apiPath(path, ProductApiRoutes.ID + ProductApiRoutes.VIEWS),
     wrap((req) => productService.incrementViews(req.params.id, req)),
+  );
+
+  router.post(
+    apiPath(path, ProductApiRoutes.FAVORITE),
+    authMiddleware,
+    wrap((req: Request) =>
+      productService.addToFavorites({
+        userId: req.userId,
+        productId: req.body.productId,
+      }),
+    ),
+  );
+
+  router.delete(
+    apiPath(path, ProductApiRoutes.FAVORITE),
+    authMiddleware,
+    wrap((req: Request) =>
+      productService.deleteFromFavorites({
+        userId: req.userId,
+        productId: <string>req.query.productId,
+      }),
+    ),
+  );
+
+  router.post(
+    apiPath(path, ProductApiRoutes.BUY),
+    authMiddleware,
+    wrap((req: Request) =>
+      productService.buy({
+        userId: req.userId,
+        productId: req.body.productId,
+      }),
+    ),
   );
 
   return router;
