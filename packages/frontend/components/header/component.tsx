@@ -8,21 +8,39 @@ import {
 } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Routes, IconName, IconColorProps } from '@enums';
 import { Logo } from 'components/primitives/logo';
-import { useAuth, useMounted, useTypedSelector } from '@hooks';
+import { useAppDispatch, useAuth, useMounted, useTypedSelector } from '@hooks';
 import { useRouter } from 'next/router';
+import { fetchCategories } from 'store/category';
+import type { HttpAcceptLanguage } from '@vse-bude/shared';
 import { ProfileInfo } from './profile-info';
 import * as styles from './styles';
+
+interface RequestOptions {
+  limit?: number;
+  locale?: HttpAcceptLanguage;
+}
 
 export const Header = () => {
   const [show, setShow] = useState(false);
   const { hasToken } = useAuth();
   const isMounted = useMounted();
-  const { push, pathname } = useRouter();
+  const { push, pathname, locale } = useRouter();
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  
   const categories = useTypedSelector((state) => state.category.list);
+  
+  useEffect(() => {
+    const category : RequestOptions = {
+      limit: 5,
+      locale: locale as HttpAcceptLanguage,
+  };
+
+    dispatch(fetchCategories({ limit: category.limit, locale: category.locale }));
+  }, [dispatch, locale]);
 
   const redirectToCategory = (category: string) => {
     const filters = {
