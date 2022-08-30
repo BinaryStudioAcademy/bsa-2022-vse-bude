@@ -68,7 +68,7 @@ export const initProfileRoutes = (
         socialMedia,
       });
 
-      if (password || newPassword) {
+      if (newPassword) {
         await profileService.changePassword({
           userId,
           t,
