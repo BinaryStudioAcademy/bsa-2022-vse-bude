@@ -26,7 +26,7 @@ const renderItem: ListRenderItem<ItemImageType> = ({ item, index }) => (
   </View>
 );
 
-const Images: FC = () => {
+const ImageCarousel: FC = () => {
   return (
     <FlatList
       horizontal
@@ -39,4 +39,4 @@ const Images: FC = () => {
   );
 };
 
-export { Images };
+export { ImageCarousel };

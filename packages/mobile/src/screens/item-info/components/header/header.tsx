@@ -1,41 +1,44 @@
 import React, { FC } from 'react';
-import { HeaderButton, View, Text, BurgerMenu } from '~/components/components';
+import { HeaderButton, View, Text } from '~/components/components';
 import { useCustomTheme } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
+import { styles } from './styles';
 
 type ItemHeaderProps = {
   onBackPress: () => void;
-  onBurgerPress: () => void;
 };
 
-const Header: FC<ItemHeaderProps> = ({ onBackPress, onBurgerPress }) => {
+const Header: FC<ItemHeaderProps> = ({ onBackPress }) => {
   const { colors } = useCustomTheme();
 
   return (
     <View
       style={[
         globalStyles.flexDirectionRow,
-        globalStyles.justifyContentSpaceBetween,
         globalStyles.alignItemsCenter,
+        globalStyles.justifyContentCenter,
         globalStyles.px3,
+        globalStyles.py5,
         { backgroundColor: colors.backgroundSecondary },
       ]}
     >
-      <HeaderButton
-        label="List"
-        onPress={onBackPress}
-        buttonColor={colors.yellow}
-      />
+      <View style={styles.button}>
+        <HeaderButton
+          label="List"
+          onPress={onBackPress}
+          buttonColor={colors.yellow}
+        />
+      </View>
+
       <Text
         style={[
           globalStyles.fs17,
           globalStyles.fontWeightBold,
-          { color: colors.text },
+          { color: colors.text, justifyContent: 'flex-end' },
         ]}
       >
         Items
       </Text>
-      <BurgerMenu onPress={onBurgerPress} />
     </View>
   );
 };
