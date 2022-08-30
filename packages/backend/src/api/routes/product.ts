@@ -123,5 +123,16 @@ export const initProductRoutes = (
     ),
   );
 
+  router.post(
+    apiPath(path, ProductApiRoutes.BUY),
+    authMiddleware,
+    wrap((req: Request) =>
+      productService.buy({
+        userId: req.userId,
+        productId: req.body.productId,
+      }),
+    ),
+  );
+
   return router;
 };
