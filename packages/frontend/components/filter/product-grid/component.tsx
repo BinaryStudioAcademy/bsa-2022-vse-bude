@@ -1,9 +1,17 @@
+import { Routes } from '@enums';
 import { SplideSlide } from '@splidejs/react-splide';
 import { ProductCard } from 'components/product/card/component';
+import Router from 'next/router';
 import * as styles from './styles';
 import type { ProductGridProps } from './types';
 
-export const ProductGrid = ({ lots }: ProductGridProps) => (
+export const ProductGrid = ({ lots }: ProductGridProps) => {
+  const router = Router;
+  const handleBidBuyProduct = (productId: string) => {
+    router.push(`${Routes.ITEMS}/${productId}`);
+  };
+  
+  return(
   <div css={styles.productGridWrapper}>
     <div css={styles.productGrid}>
       {lots.map((item) => (
@@ -16,11 +24,11 @@ export const ProductGrid = ({ lots }: ProductGridProps) => (
             images={item.imageLinks}
             currency="UAH"
             auctionDate={item.endDate}
-            // eslint-disable-next-line @typescript-eslint/no-empty-function
-            onButtonClick={() => {}}
+            onButtonClick={handleBidBuyProduct}
           />
         </SplideSlide>
       ))}
     </div>
   </div>
-);
+  );
+};
