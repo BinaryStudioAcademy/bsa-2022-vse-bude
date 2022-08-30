@@ -11,15 +11,17 @@ interface RequestOptions {
 }
 
 export const Filter = () => {
-  const router = useRouter();
-  const query = router.query as unknown as string;
+  const { query } = useRouter();
   const { list } = useTypedSelector((store) => store.product);
-  const filter: RequestOptions = Object.fromEntries(new URLSearchParams(query));
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    const filter: RequestOptions = Object.fromEntries(
+      new URLSearchParams(query as unknown as string),
+    );
+
     dispatch(fetchProducts({ limit: filter.limit, type: filter.type }));
-  }, [dispatch, filter]);
+  }, [dispatch, query]);
 
   return (
     <div>
