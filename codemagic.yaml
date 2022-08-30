@@ -76,9 +76,9 @@ workflows:
           success: true
           failure: false
 
-  #TESTING
-  android-test:
-    name: Android Test
+  # Play Console
+  android-play-console:
+    name: Android Play Console
     working_directory: packages/mobile
     max_build_duration: 60
     instance_type: mac_mini
@@ -111,4 +111,3 @@ workflows:
       google_play:
         credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
         track: internal
-        submit_as_draft: true
