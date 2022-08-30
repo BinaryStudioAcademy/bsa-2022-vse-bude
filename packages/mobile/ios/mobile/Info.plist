@@ -55,7 +55,7 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
-    <string>Raleway-Bold.ttf</string>
+		<string>Raleway-Bold.ttf</string>
 		<string>Raleway-BoldItalic.ttf</string>
 		<string>Raleway-ExtraBold.ttf</string>
 		<string>Raleway-ExtraBoldItalic.ttf</string>
@@ -81,8 +81,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
