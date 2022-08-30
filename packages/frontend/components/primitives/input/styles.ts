@@ -50,6 +50,13 @@ export const input = ({
 
   &[data-status='error'] {
     color: ${colors.error};
+    & + span {
+      color: ${colors.error};
+    }
+  }
+
+  &[data-erasable-part='inerasable'] {
+    padding: 14px ${spaces.md} 14px ${spaces.xl3};
   }
 `;
 
@@ -62,6 +69,10 @@ export const error = ({ colors }: Theme) => css`
 `;
 
 export const label = ({ colors, fontSizes, lineHeights }: Theme) => css`
+  position: relative;
+  display: flex;
+  justify-content: start;
+  align-items: center;
   margin-bottom: 4px;
   cursor: pointer;
   font-size: ${fontSizes.caption};
@@ -72,9 +83,16 @@ export const label = ({ colors, fontSizes, lineHeights }: Theme) => css`
   &[data-variant='secondary'] {
     color: ${colors.background};
   }
+
+  span {
+    font-size: ${fontSizes.h4};
+    line-height: ${lineHeights.caption};
+    color: ${colors.primary};
+  }
 `;
 
 export const inputWrapper = () => css`
+  position: relative;
   display: flex;
   flex-direction: column;
 `;
@@ -149,4 +167,41 @@ export const searchInput = ({
 
 export const passwordVisibilityIcon = css`
   color: ${ColorPalette.GRAY_300};
+`;
+export const infoIco = ({ fontSizes, spaces }: Theme) => css`
+  position: absolute;
+  top: 2px;
+  margin-left: ${spaces.xs};
+  font-size: ${fontSizes.caption} !important;
+`;
+export const tooltipText = ({ fontSizes, colors, lineHeights }: Theme) => css`
+  max-width: 300px;
+  text-align: center;
+  font-family: inherit;
+  font-size: ${fontSizes.caption};
+  line-height: ${lineHeights.caption};
+  color: ${colors.secondaryLight};
+`;
+export const inerasableValue = ({
+  fontSizes,
+  colors,
+  lineHeights,
+}: Theme) => css`
+  position: absolute;
+  transform: translateY(-50%);
+  top: 50%;
+  left: 11px;
+  transition: 200ms linear;
+  font-size: ${fontSizes.toggle};
+  line-height: ${lineHeights.toggle};
+  font-family: inherit;
+  color: ${colors.text};
+
+  &[data-status='error'] {
+    color: ${colors.error};
+  }
+`;
+
+export const inputValueWrapper = css`
+  position: relative;
 `;

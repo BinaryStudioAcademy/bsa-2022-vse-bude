@@ -28,7 +28,7 @@ export interface GetRequestParams extends BaseRequestParams {
 }
 
 export interface PostRequestParams extends BaseRequestParams {
-  body: Record<string, unknown>;
+  body: Record<string, unknown> | FormData;
 }
 
 export interface PutRequestParams extends BaseRequestParams {

@@ -1,16 +1,15 @@
 import type { EmailOptions } from '@types';
 import { getEnv } from '@helpers';
 import { defaultEmailOptions } from '@types';
-import type { EmailService } from '../services/email/email';
-import { emailService } from '../services/email';
-import type { IMailBuilder } from './mail-builder-interface';
+import { type EmailService } from '@services';
+import type { IMailBuilder } from '../common/types/email/mail-builder-interface';
 
 export class MailBuilder implements IMailBuilder {
   protected _mailService: EmailService;
 
   protected _options: EmailOptions;
 
-  constructor() {
+  constructor(emailService: EmailService) {
     this._mailService = emailService;
     this.setOptions();
   }

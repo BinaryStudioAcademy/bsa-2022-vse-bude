@@ -29,12 +29,10 @@ cd ./packages/backend
 npm run db:migrate
 cd ../..
 
-# stop old version
-echo "5. Stop old version of the project"
-npm run production:stop:backend
-npm run production:stop:frontend
+# install all pm2 dependencies and set configurations to them
+echo "5. Intall and configure pm2 dependencies"
+npm run install:pm2
 
 # start production builds
 echo "6. Run production build"
-npm run production:start:backend
-npm run production:start:frontend
+npm run start:prod

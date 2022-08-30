@@ -9,11 +9,10 @@ import {
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { Fragment, useState } from 'react';
-import { Routes, IconName } from '@enums';
+import { Routes, IconName, IconColorProps } from '@enums';
 import { Logo } from 'components/primitives/logo';
-import { useAuth, useMounted } from '@hooks';
+import { useAuth, useMounted, useTypedSelector } from '@hooks';
 import { useRouter } from 'next/router';
-import { useTheme } from '@emotion/react';
 import { ProfileInfo } from './profile-info';
 import * as styles from './styles';
 
@@ -23,7 +22,17 @@ export const Header = () => {
   const isMounted = useMounted();
   const { push, pathname } = useRouter();
   const { t } = useTranslation();
-  const { colors } = useTheme();
+  const categories = useTypedSelector((state) => state.category.list);
+
+  const redirectToCategory = (category: string) => {
+    const filters = {
+      category: category,
+    };
+    push({
+      pathname: Routes.ITEMS,
+      query: { filter: JSON.stringify(filters) },
+    });
+  };
 
   const renderNavigation = () => (
     <nav className="navigation">
@@ -33,44 +42,16 @@ export const Header = () => {
         label={t('common:header.nav.home')}
       />
       <Dropdown
-        options={[
-          {
-            value: t(
-              'common:categories.ALCOHOLIC_BEVERAGES_AND_PRODUCTS_CATEGORY_NAME',
-            ),
-            key: 'home',
-            onClick: () => {
-              console.log('home');
-            },
+        options={categories.map((item) => ({
+          value: item.title,
+          key: 'home',
+          onClick: () => {
+            redirectToCategory(item.id);
           },
-          {
-            value: t('common:categories.BEAUTY_AND_HEALTH_CATEGORY_NAME'),
-            key: 'home',
-            onClick: () => {
-              console.log('home');
-            },
-          },
-          {
-            value: t('common:categories.CHILDRENS_GOODS_CATEGORY_NAME'),
-            key: 'home',
-            onClick: () => {
-              console.log('home');
-            },
-          },
-          {
-            value: t(
-              'common:categories.CLOTHES_SHOES_AND_JEWELRY_CATEGORY_NAME',
-            ),
-            key: 'about',
-            onClick: () => {
-              console.log('about');
-            },
-            disabled: true,
-          },
-        ]}
+        }))}
       >
         {t('common:header.nav.category')}&nbsp;
-        <Icon icon={IconName.ANGLE_DOWN} color={colors.extraDark} />
+        <Icon icon={IconName.ANGLE_DOWN} color={IconColorProps.YELLOW} />
       </Dropdown>
       <InternalLink
         href={Routes.SEARCH}

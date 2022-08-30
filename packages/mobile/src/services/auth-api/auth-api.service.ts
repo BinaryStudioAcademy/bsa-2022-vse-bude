@@ -5,9 +5,8 @@ import {
   AuthApiRoutes,
   UserSignInDto,
   UserSignUpDto,
+  AuthResponse,
 } from '@vse-bude/shared';
-import { AuthResponseDto } from '~/common/types/types';
-
 import { Http } from '~/services/http/http.service';
 
 type Constructor = {
@@ -25,7 +24,7 @@ class AuthApi {
     this.#apiPrefix = apiPrefix;
   }
 
-  signIn(_payload: UserSignInDto): Promise<AuthResponseDto> {
+  signIn(_payload: UserSignInDto): Promise<AuthResponse> {
     return this.#http.load(
       `${this.#apiPrefix}${ApiRoutes.AUTH}${AuthApiRoutes.SIGN_IN}`,
       {
@@ -37,8 +36,16 @@ class AuthApi {
     );
   }
 
-  signUp(_payload: UserSignUpDto): Promise<any> {
-    return Promise.resolve([]);
+  signUp(_payload: UserSignUpDto): Promise<AuthResponse> {
+    return this.#http.load(
+      `${this.#apiPrefix}${ApiRoutes.AUTH}${AuthApiRoutes.SIGN_UP}`,
+      {
+        method: HttpMethod.POST,
+        contentType: HttpContentType.APPLICATION_JSON,
+        payload: JSON.stringify(_payload),
+        hasAuth: false,
+      },
+    );
   }
 }
 

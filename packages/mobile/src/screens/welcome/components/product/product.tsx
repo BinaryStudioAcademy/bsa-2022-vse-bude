@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
-import { Text, View, Button, Image } from '~/components/components';
-import { ButtonType, ButtonAppearance } from '~/common/enums/enums';
+import { Text, View, Image, PrimaryButton } from '~/components/components';
 import { useTranslation } from '~/hooks/hooks';
 import { images } from '~/assets/images/images';
 import { globalStyles } from '~/styles/styles';
@@ -30,11 +29,9 @@ export const Product: FC = () => {
           >
             {`360 ${t('welcome.UAH')}`}
           </Text>
-          <Button
+          <PrimaryButton
             label={t('welcome.BET')}
-            type={ButtonType.SECONDARY}
-            view={ButtonAppearance.FILLED}
-            fontSize={11}
+            compact={true}
             onPress={() => {
               //TODO
             }}

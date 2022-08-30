@@ -25,9 +25,9 @@ interface MakeRequest {
 class Http {
   private _baseUrl: string;
 
-  private _auth: IAuthHelper;
+  private _auth: IAuthHelper | null;
 
-  constructor(baseUrl: string, auth: IAuthHelper) {
+  constructor(baseUrl: string, auth?: IAuthHelper) {
     this._baseUrl = baseUrl;
     this._auth = auth;
   }
@@ -103,7 +103,7 @@ class Http {
       headers[HttpHeader.ACCEPT_LANGUAGE] = acceptLanguage;
     }
 
-    if (needAuthorization) {
+    if (needAuthorization && this._auth) {
       const token = this._auth.getAccessToken();
       headers[HttpHeader.AUTHORIZATION] = `Bearer ${token}`;
     }
@@ -117,10 +117,22 @@ class Http {
       config.body = JSON.stringify(body);
     }
 
+    if (body && contentType === HttpContentType.FORM_DATA) {
+      config.body = body as BodyInit;
+      delete headers[HttpHeader.CONTENT_TYPE];
+    }
+
     return {
       url: external ? url : `${this._baseUrl}${url}`,
       config,
     };
+  }
+
+  private getRefreshedAuthReqConfig(config: RequestInit) {
+    const accessToken = this._auth.getAccessToken();
+    config.headers[HttpHeader.AUTHORIZATION] = `Bearer ${accessToken}`;
+
+    return config;
   }
 
   private async makeRequest<T = unknown>({
@@ -133,7 +145,8 @@ class Http {
     if (result.status === HttpStatusCode.UNAUTHORIZED) {
       try {
         await this.updateAuthorizationToken();
-        result = await fetch(url, config);
+        const updatedConfig = this.getRefreshedAuthReqConfig(config);
+        result = await fetch(url, updatedConfig);
         statusCode = result.status;
       } catch (err) {
         const errorRes: ErrorResponse = await result.json();

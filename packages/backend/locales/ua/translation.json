@@ -15,6 +15,7 @@
       "body": "Будь ласка, завершіть процес підтвердження електронної пошти за допомогою цього коду: "
     }
   },
+  "PRODUCT_NOT_FOUND": "Продукт не знайдений!",
   "categories": {
     "LAPTOPS_AND_PC_CATEGORY_NAME": "Ноутбуки та комп'ютери",
     "SMARTPHONES_TV_AND_ELECTRONICS_CATEGORY_NAME": "Смартфони, ТВ і електроніка",

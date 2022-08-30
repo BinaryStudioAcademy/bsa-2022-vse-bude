@@ -3,20 +3,28 @@ export enum Routes {
   USERS = '/users',
   SIGN_UP = '/sign-up',
   SIGN_IN = '/sign-in',
+  USER_ACCOUNT = '/account',
+  PROFILE = '/profile',
   FORGOT_PASSWORD = '/forgot-password',
-  USER_ACCOUNT = '/user-account',
   PHONE_VERIFY = '/auth/phone-verify',
   EMAIL_VERIFY = '/auth/email-verify',
+  ITEMS = '/items',
   SEARCH = '/search',
   NEWS = '/news',
   ABOUT = '/about',
   CATEGORIES = '/categories',
+  NOT_FOUND = '/404',
 }
 
-export enum AccountRoutes {
-  ACCOUNT_PERSONAL = '/dashboard/personal-info',
-  ACCOUNT_LIST = '/dashboard/my-list',
-  ACCOUNT_SETTINGS = '/dashboard/settings',
-  ACCOUNT_MESSAGES = '/dashboard/messages',
-  ACCOUNT_SUPPORT = '/dashboard/support',
+export enum ProfileRoutes {
+  PERSONAL_INFO = '/',
+  LIST = '/my-list',
+  ACCOUNT_SETTINGS = '/settings',
+  MESSAGES = '/messages',
+  SUPPORT = '/support',
+}
+
+export enum ItemRoutes {
+  CREATE_AUCTION = '/create-auction',
+  CREATE_DIRECT_SALE = '/create-product',
 }
