@@ -6,4 +6,9 @@ type SocialMedia = {
   socialMedia: SocialMediaType;
 };
 
-export type { SocialMedia };
+type NewSocialMedia = {
+  link: string;
+  socialMedia: SocialMediaType;
+};
+
+export type { SocialMedia, NewSocialMedia };

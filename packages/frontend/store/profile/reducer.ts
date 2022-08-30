@@ -1,18 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { HydrateAction } from '@types';
-import type { UserAddressDto, UserProfileDto } from '@vse-bude/shared';
+import type { FullUserProfileDto, UserProfileDto } from '@vse-bude/shared';
 import { HYDRATE } from 'next-redux-wrapper';
-import { fetchUserProfileSSR } from './actions';
+import { fetchUserProfileSSR, fetchFullUserProfileSSR } from './actions';
 
 interface ProfileState {
-  user: UserProfileDto | null;
-  address: UserAddressDto | null;
+  user: UserProfileDto | FullUserProfileDto | null;
   loading: boolean;
 }
 
 const initialState: ProfileState = {
   user: null,
-  address: null,
   loading: false,
 };
 
@@ -22,6 +20,9 @@ const profileSlice = createSlice({
   reducers: {},
   extraReducers: {
     [fetchUserProfileSSR.fulfilled.type]: (state, { payload }) => {
+      state.user = payload;
+    },
+    [fetchFullUserProfileSSR.fulfilled.type]: (state, { payload }) => {
       state.user = payload;
     },
     [HYDRATE](state, { payload }: HydrateAction) {

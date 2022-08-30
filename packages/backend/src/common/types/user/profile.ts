@@ -8,10 +8,12 @@ export interface GetUserProfileDto {
 }
 
 export interface GetUserPersonalDataDto {
+  id: string;
+  avatar?: string | null;
   firstName: string;
   lastName: string;
   email: string;
-  phone: string | null;
+  phone?: string | null;
 }
 
 export interface UserSocialMediaDto {
@@ -33,7 +35,7 @@ export interface UpdateUserProfileDto {
   firstName: string;
   lastName: string;
   email: string;
-  phone: string;
+  phone?: string | null;
 }
 
 export interface UpdatePasswordDto {

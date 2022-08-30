@@ -3,7 +3,7 @@ import { SocialMedia, NewSocialMedia } from '../social-media';
 
 type SocialMediaArray = SocialMedia | NewSocialMedia;
 
-type SaveUserProfileDto = {
+type UpdateUserProfileDto = {
   firstName: string;
   lastName: string;
   email: string;
@@ -15,4 +15,4 @@ type SaveUserProfileDto = {
   repeatPassword?: string;
 };
 
-export type { SaveUserProfileDto };
+export type { UpdateUserProfileDto };
