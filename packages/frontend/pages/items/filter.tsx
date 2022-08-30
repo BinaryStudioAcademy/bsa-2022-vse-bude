@@ -24,7 +24,7 @@ const FilteredPage = () => {
 
   useEffect(() => {
     dispatch(fetchProducts(filter));
-  }, [dispatch, router.query, filter]);
+  }, [dispatch, filter]);
 
   return (
     <Layout title="Filtered posts">
