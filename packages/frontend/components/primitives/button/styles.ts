@@ -10,6 +10,7 @@ export const button = ({
   radiuses,
   spaces,
   heights,
+  mq,
 }: Theme) => css`
   ${resetButton};
   display: flex;
@@ -62,5 +63,17 @@ export const button = ({
     border-radius: ${radiuses.sm};
     padding: 0 ${spaces.md};
     font-size: ${fontSizes.smallButton};
+  }
+
+  &[data-size='flexible'] {
+    height: ${heights.controlSm};
+    border-radius: ${radiuses.sm};
+    padding: 0 ${spaces.md};
+    font-size: ${fontSizes.smallButton};
+    ${mq[0]} {
+      height: ${heights.controlBg};
+      border-radius: ${radiuses.md};
+      padding: 0 ${spaces.xl2};
+    }
   }
 `;

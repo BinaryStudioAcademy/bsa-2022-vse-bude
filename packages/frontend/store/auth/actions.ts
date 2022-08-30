@@ -7,10 +7,14 @@ import {
   resendPhoneCode,
   verifyEmail,
   resendEmailCode,
+  resetPasswordLink,
+  updatePassword as updatePasswordRequest,
 } from 'services/auth';
 import type {
   EmailVerifyDto,
   PhoneVerifyDto,
+  ResetPasswordLink,
+  UpdatePassword,
   UserSignInDto,
   UserSignUpDto,
 } from '@vse-bude/shared';
@@ -124,7 +128,30 @@ const logoutUser = createAsyncThunk(
     try {
       // await logout(); delete refresh token on server
       auth.logOut();
+      // TODO: clear all store
       await Router.push(Routes.DEFAULT);
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  },
+);
+
+const sendPasswordResetLink = createAsyncThunk(
+  AuthActions.SEND_RESET_PASSWORD_LINK,
+  async (data: ResetPasswordLink, { rejectWithValue }) => {
+    try {
+      return await resetPasswordLink(data);
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  },
+);
+
+const updatePassword = createAsyncThunk(
+  AuthActions.UPDATE_PASSWORD,
+  async (data: UpdatePassword, { rejectWithValue }) => {
+    try {
+      return await updatePasswordRequest(data);
     } catch (e) {
       return rejectWithValue(e.message);
     }
@@ -140,4 +167,6 @@ export {
   getCurrentUser,
   emailVerification,
   emailCodeResend,
+  sendPasswordResetLink,
+  updatePassword,
 };

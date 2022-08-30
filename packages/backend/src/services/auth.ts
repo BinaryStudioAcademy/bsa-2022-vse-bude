@@ -3,6 +3,7 @@ import type {
   UserSignInDto,
   UserSignUpDto,
   AuthResponse,
+  UpdatePassword,
 } from '@vse-bude/shared';
 import { sign as jwtSign, type UserSessionJwtPayload } from 'jsonwebtoken';
 import { getEnv } from '@helpers';
@@ -26,9 +27,12 @@ import type {
   UpdateRefreshToken,
   SignOut,
 } from '@types';
-import type { HashService } from '@services';
+import {
+  type HashService,
+  type VerifyService,
+  type EmailService,
+} from '@services';
 import type { Request } from 'express';
-import type { VerifyService } from '@services';
 import { authResponseMap } from '@mappers';
 import { AuthApiRoutes } from '@vse-bude/shared';
 import { ResetPasswordMailBuilder } from '../email/reset-password-mail-builder';
@@ -46,6 +50,8 @@ export class AuthService {
 
   private _cache: RedisStorageService;
 
+  private _emailService: EmailService;
+
   private resetLinkLifeTime = 3600000;
 
   constructor(
@@ -54,12 +60,14 @@ export class AuthService {
     hashService: HashService,
     verifyService: VerifyService,
     cache: RedisStorageService,
+    emailService: EmailService,
   ) {
     this._userRepository = userRepository;
     this._refreshTokenRepository = refreshTokenRepository;
     this._hashService = hashService;
     this._verifyService = verifyService;
     this._cache = cache;
+    this._emailService = emailService;
   }
 
   async signOut(signOutDto: SignOut) {
@@ -99,7 +107,7 @@ export class AuthService {
   async signIn(signInDto: UserSignInDto, req: Request): Promise<AuthResponse> {
     const user = await this._userRepository.getByEmail(signInDto.email);
     if (!user) {
-      throw new UserNotFoundError(req);
+      throw new UserNotFoundError();
     }
 
     if (
@@ -180,21 +188,32 @@ export class AuthService {
     await this.saveLink(email, hashValue);
     const link = this.getResetPasswordEmailLink(hashValue, email);
 
-    const resetMail = new ResetPasswordMailBuilder().setText(link).setTo(email);
+    const resetMail = new ResetPasswordMailBuilder(this._emailService)
+      .setText(link)
+      .setTo(email);
 
     await resetMail.send();
 
     return undefined;
   }
 
-  async resetPassword(email: string, hash: string) {
+  async updatePassword(updateDto: UpdatePassword) {
     const resetHash = await this._cache.get<string>(
-      this.getResetPasswordCacheKey(email),
+      this.getResetPasswordCacheKey(updateDto.email),
     );
 
-    if (!resetHash || resetHash !== hash) {
+    if (!resetHash || resetHash !== updateDto.updateHash) {
       throw new ResetPassLinkInvalid();
     }
+
+    const user = this._userRepository.getByEmail(updateDto.email);
+
+    if (!user) {
+      throw new UserNotFoundError();
+    }
+
+    const newPassHash = this._hashService.generateHash(updateDto.password);
+    this._userRepository.updatePassword(updateDto.email, newPassHash);
 
     return {};
   }

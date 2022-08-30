@@ -45,6 +45,7 @@ export const fakeProducts = async (
       authorId: userId,
       categoryId: categoryId,
       winnerId: null,
+      views: faker.datatype.number({ min: 0, max: 100 }),
       createdAt: faker.date.past(),
       updatedAt: faker.date.recent(),
     };

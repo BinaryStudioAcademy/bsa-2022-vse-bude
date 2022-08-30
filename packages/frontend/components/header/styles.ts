@@ -4,7 +4,7 @@ import { resetButton } from 'theme';
 
 export const header = (theme: Theme) => css`
   position: sticky;
-  z-index: 1;
+  z-index: 99;
   top: 0;
   padding: ${theme.spaces.lg} 0;
   background-color: ${theme.colors.backgroundLight};
