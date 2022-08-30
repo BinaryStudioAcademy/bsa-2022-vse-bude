@@ -44,7 +44,10 @@ export const initServices = (repositories: Repositories) => {
 
   return {
     categoryService: new CategoryService(repositories.categoryRepository),
-    productService: new ProductService(repositories.productRepository),
+    productService: new ProductService(
+      repositories.productRepository,
+      verifyService,
+    ),
     newsService: new NewsService(repositories.newsRepository),
     healthService: new HealthService(repositories.healthRepository),
     profileService: new UserProfileService(repositories.profileRepository),

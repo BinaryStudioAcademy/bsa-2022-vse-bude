@@ -9,12 +9,19 @@ import type {
   DeleteProductFromFavorites,
 } from '@vse-bude/shared';
 import { ProductStatus } from '@prisma/client';
+import type { VerifyService } from '@services';
 
 export class ProductService {
   private _productRepository: ProductRepository;
 
-  constructor(categoryRepository: ProductRepository) {
+  private _verifyService: VerifyService;
+
+  constructor(
+    categoryRepository: ProductRepository,
+    verifyService: VerifyService,
+  ) {
     this._productRepository = categoryRepository;
+    this._verifyService = verifyService;
   }
 
   public getAll(query: ProductQuery) {
@@ -92,6 +99,10 @@ export class ProductService {
       ProductStatus.ACTIVE,
     );
     if (!isActive) {
+      return undefined;
+    }
+    const isUserVerified = await this._verifyService.isUserVerified(userId);
+    if (!isUserVerified) {
       return undefined;
     }
     await this._productRepository.buy(
