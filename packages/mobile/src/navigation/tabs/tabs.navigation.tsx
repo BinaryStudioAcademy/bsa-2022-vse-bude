@@ -15,7 +15,7 @@ import {
   UserIcon,
 } from '~/components/components';
 import { AppIcon } from '~/common/types/types';
-import { selectCurrentUser } from '~/store/auth/selectors';
+import { selectCurrentUser } from '~/store/selectors';
 import { WelcomeNavigation } from '../welcome/welcome.navigation';
 
 const Tabs = createBottomTabNavigator();
