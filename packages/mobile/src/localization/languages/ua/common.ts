@@ -13,7 +13,7 @@ export const common = {
   permission: {
     STORAGE_DENIED: 'У дозволі на зберігання відмовлено',
   },
-  user_actions: {
+  errors: {
     DID_CANCEL: 'Скасовано користувачем',
   },
 };

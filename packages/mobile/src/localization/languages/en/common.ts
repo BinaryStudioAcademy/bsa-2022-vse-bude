@@ -13,7 +13,7 @@ export const common = {
   permission: {
     STORAGE_DENIED: 'Storage permission denied',
   },
-  user_actions: {
+  errors: {
     didCancel: 'Cancelled by user',
   },
 };
