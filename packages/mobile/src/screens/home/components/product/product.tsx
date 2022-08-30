@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
 import { useTranslation, useAppSelector, useCustomTheme } from '~/hooks/hooks';
 import { selectProductById } from '~/store/products/selectors';
-import { Button, ClockIcon, Image, Text, View } from '~/components/components';
+import { Button, Image, Text, View } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { ProductType, ProductDto } from '@vse-bude/shared';
 import { formatPrice, getTimeToEvent } from '~/helpers/helpers';
 import { styles } from './styles';
+import { TimeWindow } from './components/time-window/time-window';
 
 type Props = {
   productId: string;
@@ -27,19 +28,10 @@ const Product: FC<Props> = ({ productId }) => {
         <Image source={{ uri: imageLinks[0] }} style={styles.img} />
 
         {type === auction && (
-          <View
-            style={[
-              styles.time,
-              globalStyles.boxShadow,
-              globalStyles.flexDirectionRow,
-              globalStyles.alignItemsCenter,
-              globalStyles.justifyContentCenter,
-              { backgroundColor: colors.whiteColor, borderColor: colors.line },
-            ]}
-          >
-            <ClockIcon style={globalStyles.mr2} />
-            <Text style={globalStyles.fs12}>{duration}</Text>
-          </View>
+          <TimeWindow
+            duration={duration}
+            style={{ position: 'absolute', bottom: -10, alignSelf: 'center' }}
+          />
         )}
       </View>
       <View>

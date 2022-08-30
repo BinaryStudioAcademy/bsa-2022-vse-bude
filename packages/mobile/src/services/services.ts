@@ -5,6 +5,7 @@ import { Storage } from './storage/storage.service';
 import { AuthApi } from './auth-api/auth-api.service';
 import { NotificationService } from './notification/notification.service';
 import { ProductService } from './product/product.service';
+import { AppService } from './app/app.service';
 
 const storage = new Storage({
   storage: new MMKV(),
@@ -26,4 +27,6 @@ const productApi = new ProductService({
 
 const notification = new NotificationService();
 
-export { storage, authApi, notification, productApi };
+const appService = new AppService();
+
+export { storage, authApi, notification, productApi, appService };

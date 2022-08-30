@@ -1,11 +1,14 @@
 import { RootState } from '~/common/types/types';
 import { createSelector } from '@reduxjs/toolkit';
+import { ProductDto } from '@vse-bude/shared';
+
+const selectProducts = (state: RootState) => state.products.products;
 
 const selectProductById = createSelector(
-  (state: RootState) => state.products.products,
-  (state: RootState, productId: string) => productId,
+  [selectProducts, (state: RootState, productId: string) => productId],
 
-  (products, productId) => products.find((item) => item.id === productId),
+  (products, productId) =>
+    products.find((item: ProductDto) => item.id === productId),
 );
 
-export { selectProductById };
+export { selectProductById, selectProducts };
