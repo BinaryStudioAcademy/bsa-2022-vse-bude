@@ -37,7 +37,7 @@ const Product: FC<Props> = ({ productId }) => {
               { backgroundColor: colors.whiteColor, borderColor: colors.line },
             ]}
           >
-            <ClockIcon />
+            <ClockIcon style={globalStyles.mr2} />
             <Text style={globalStyles.fs12}>{duration}</Text>
           </View>
         )}
@@ -61,7 +61,7 @@ const Product: FC<Props> = ({ productId }) => {
           {description}
         </Text>
         {type === ProductType.SELLING && (
-          <Text style={globalStyles.fs12}>{duration}</Text>
+          <Text style={[globalStyles.fs12, globalStyles.mt2]}>{duration}</Text>
         )}
       </View>
       <View style={[styles.divider, { backgroundColor: colors.line }]} />
