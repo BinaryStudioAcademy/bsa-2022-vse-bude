@@ -1,5 +1,5 @@
-import { UserAddressDto } from './user-profile-dto';
-import { SocialMedia, NewSocialMedia } from '../social-media';
+import type { SocialMedia, NewSocialMedia } from '../social-media';
+import type { UserAddressDto } from './user-profile-dto';
 
 type SocialMediaArray = SocialMedia | NewSocialMedia;
 
