@@ -29,7 +29,7 @@ export const Popover = ({ trigger, children }: PopoverProps) => {
 
     return [bodyTop, bodyRight];
   }, [getBodyRectParams]);
-  
+
   const setPopoverPosition = useCallback(() => {
     if (bodyRef.current) {
       const [bodyTop, bodyRight] = calcBodyCoords();
@@ -43,13 +43,19 @@ export const Popover = ({ trigger, children }: PopoverProps) => {
   }, [setPopoverPosition]);
 
   useEffect(() => {
-      setPopoverPosition();
-      window.addEventListener('resize', handleWindowSizeChange);
+    setPopoverPosition();
+    window.addEventListener('resize', handleWindowSizeChange);
 
-      return () => {
-          window.removeEventListener('resize', handleWindowSizeChange);
-      };
-  }, [isVisible, bodyRef, calcBodyCoords, handleWindowSizeChange, setPopoverPosition]);
+    return () => {
+      window.removeEventListener('resize', handleWindowSizeChange);
+    };
+  }, [
+    isVisible,
+    bodyRef,
+    calcBodyCoords,
+    handleWindowSizeChange,
+    setPopoverPosition,
+  ]);
 
   const handleMouseClick = () => {
     setIsVisible(true);
