@@ -2,12 +2,9 @@ import type {
   UserProfileDto,
   FullUserProfileDto,
   Http,
-
-  UpdateFullUserProfileDto} from '@vse-bude/shared';
-import {
-  ApiRoutes,
-  ProfileApiRoutes
+  UpdateFullUserProfileDto,
 } from '@vse-bude/shared';
+import { ApiRoutes, ProfileApiRoutes } from '@vse-bude/shared';
 import { http } from '@helpers';
 
 export const getUserProfileSSR = (params: {

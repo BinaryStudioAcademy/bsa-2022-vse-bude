@@ -99,8 +99,8 @@ export class UserProfileService {
       userId,
       socialMedia,
     });
-    
-return {};
+
+    return {};
   }
 
   public async changePassword({

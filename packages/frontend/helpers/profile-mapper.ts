@@ -4,10 +4,9 @@ import type {
   SaveUserProfileDto,
   UserAddressDto,
   MappedLinks,
-  SocialMedia} from '@vse-bude/shared';
-import {
-  SocialMediaType,
+  SocialMedia,
 } from '@vse-bude/shared';
+import { SocialMediaType } from '@vse-bude/shared';
 
 const addressKeys: string[] = [
   'country',
