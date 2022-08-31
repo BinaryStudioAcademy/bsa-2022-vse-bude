@@ -1,10 +1,10 @@
 import React, { ComponentPropsWithoutRef } from 'react';
-import { ScrollView as ReactScrollView } from 'react-native';
+import { ScrollView as RNScrollView } from 'react-native';
 
-type ScrollViewProps = ComponentPropsWithoutRef<typeof ReactScrollView>;
+type ScrollViewProps = ComponentPropsWithoutRef<typeof RNScrollView>;
 
 const ScrollView: React.FC<ScrollViewProps> = (props) => {
-  return <ReactScrollView keyboardShouldPersistTaps="handled" {...props} />;
+  return <RNScrollView keyboardShouldPersistTaps="handled" {...props} />;
 };
 
 export { ScrollView };
