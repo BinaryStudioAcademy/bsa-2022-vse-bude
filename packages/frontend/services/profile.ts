@@ -10,7 +10,9 @@ export const updateAvatar = (file: FormData) =>
     url: `${ApiRoutes.PROFILE}${ProfileApiRoutes.UPDATE_AVATAR}`,
     body: file ? file : null,
     options: {
-      contentType: file ? HttpContentType.FORM_DATA : HttpContentType.APPLICATION_JSON,
+      contentType: file
+        ? HttpContentType.FORM_DATA
+        : HttpContentType.APPLICATION_JSON,
       needAuthorization: true,
     },
   });

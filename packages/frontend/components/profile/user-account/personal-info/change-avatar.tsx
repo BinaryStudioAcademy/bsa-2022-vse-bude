@@ -8,12 +8,10 @@ import { fetchUpdateUserAvatar } from 'store/profile/actions';
 import dynamic from 'next/dynamic';
 import * as styles from './styles';
 
-const ImageCropModal = dynamic(
-  () => import('../../../imageCrop/component'),
-);
+const ImageCropModal = dynamic(() => import('../../../imageCrop/component'));
 
 const ChangeAvatar = () => {
-    console.log('ChangeAvatar');
+  console.log('ChangeAvatar');
   const { t } = useTranslation();
   const inputFile = useRef(null);
   const dispatch = useAppDispatch();
