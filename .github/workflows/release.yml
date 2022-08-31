@@ -14,6 +14,16 @@ jobs:
       name: Release
       url: http://vse-bude.com.ua
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set deployment status to [in_progress]
+        id: set_state_in_progress
+        uses: rsotnychenko/deployment-status-update@0.2.0
+        with:
+          run_id: ${{ github.run_id }}
+          status: in_progress
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Deploy frontend and backend. Migrate DB.
         uses: appleboy/ssh-action@master
         with:
@@ -39,3 +49,12 @@ jobs:
           url: https://vse-bude.com.ua|http://vse-bude.com.ua/api/health/
           max-attempts: 5
           retry-delay: 10s
+      - name: Set deployment status
+        id: set_state_final
+        if: always()
+        uses: rsotnychenko/deployment-status-update@0.2.0
+        with:
+          status: ${{ job.status }}
+          run_id: ${{ github.run_id }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
