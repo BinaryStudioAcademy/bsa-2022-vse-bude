@@ -6,9 +6,8 @@ import * as styles from './styles';
 
 export const ConsentModal = () => {
   const [value, setValue] = useState(false);
-  const [disabled, setDisabled] = useState(true);
+  const [isDisabled, setIsDisabled] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
-  const [tooltip, setTooltip] = useState('It`s disabled, agree with terms');
 
   const { t } = useTranslation();
 
@@ -17,12 +16,7 @@ export const ConsentModal = () => {
 
   const setAgree = () => {
     setValue(!value);
-    setDisabled(!disabled);
-    if (disabled) {
-      setTooltip('Everything is okay');
-    } else {
-      setTooltip('It`s disabled, agree with terms');
-    }
+    setIsDisabled(!isDisabled);
   };
 
   return (
@@ -39,8 +33,8 @@ export const ConsentModal = () => {
         <div css={styles.consentButtons}>
           <Button
             variant="outlined"
-            disabled={disabled}
-            tooltip={tooltip}
+            disabled={isDisabled}
+            tooltip={isDisabled ? t("rules:createPostRules.tooltip.disabled"): t("rules:createPostRules.tooltip.enabled")}
             onClick={() => setIsVisible(false)}
           >
             {t('rules:createPostRules.button.accept')}
