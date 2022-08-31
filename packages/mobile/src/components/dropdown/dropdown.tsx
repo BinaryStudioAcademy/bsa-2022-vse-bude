@@ -19,6 +19,7 @@ type Props<T extends FormControlValues> = {
     value: string;
   }>;
   zIndex: number;
+  disabled?: boolean;
 };
 
 const DropDown = <T extends FormControlValues>({
@@ -27,6 +28,7 @@ const DropDown = <T extends FormControlValues>({
   control,
   items,
   zIndex,
+  disabled,
 }: Props<T>): ReactElement => {
   const { field } = useFormControl({ name, control });
   const { colors } = useCustomTheme();
@@ -34,7 +36,7 @@ const DropDown = <T extends FormControlValues>({
 
   return (
     <View style={styles.container}>
-      {label && (
+      {!!label && (
         <Text
           style={[
             styles.label,
@@ -53,13 +55,17 @@ const DropDown = <T extends FormControlValues>({
         items={items}
         setOpen={setOpen}
         setValue={field.onChange}
-        textStyle={[{ color: colors.text }, globalStyles.fs14]}
+        textStyle={[
+          disabled ? { color: colors.placeholder } : { color: colors.text },
+          globalStyles.fs14,
+        ]}
         placeholderStyle={[{ color: colors.placeholder }, globalStyles.fs14]}
         style={[
           styles.dropDown,
           { backgroundColor: colors.backgroundElements },
         ]}
         zIndex={zIndex}
+        disabled={disabled}
       />
     </View>
   );
