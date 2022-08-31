@@ -5,9 +5,12 @@ import { useTranslation } from 'next-i18next';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
+import { useTypedSelector } from '@hooks';
+import { useState } from 'react';
 import { CountDownTimer } from '../countdown-timer/component';
 import { ItemTitle, ItemInfo, ItemPrice } from '../item-info';
 import { minBidValidation } from '../validation';
+import { ConfirmationModal } from '../../modal/confirm/component';
 import * as styles from './styles';
 
 interface ItemInfoAuctionProps {
@@ -23,10 +26,17 @@ export const ItemInfoAuction = ({
   onBid,
   onChangeIsFavorite,
 }: ItemInfoAuctionProps) => {
+  const [confirmModalVisible, setModalVisible] = useState(false);
+
   const { t } = useTranslation('item');
 
   const targetDate = new Date(item.endDate);
   const minBidAmount = +item.currentPrice + +item.minimalBid + 1;
+
+  const {
+    permissions: { isAbleToLeaveAuction },
+  } = useTypedSelector((state) => state.auction);
+  const { user } = useTypedSelector((state) => state.auth);
 
   const {
     register,
@@ -38,6 +48,14 @@ export const ItemInfoAuction = ({
 
   const onMakeBid: SubmitHandler<CreateBidRequest> = (data) => {
     onBid(data);
+  };
+
+  const onCancel = () => {
+    setModalVisible(false);
+  };
+
+  const onLeaveAuction = () => {
+    setModalVisible(true);
   };
 
   return (
@@ -79,6 +97,20 @@ export const ItemInfoAuction = ({
           ></FavoriteButton>
         </div>
       </form>
+      {!!isAbleToLeaveAuction && user && (
+        <div css={styles.leaveAuctionBlock}>
+          <Button
+            onClick={onLeaveAuction}
+            variant="danger"
+            tooltip="You will be excluded from the auction and all your bids are deleted!"
+          >
+            Leave Auction
+          </Button>
+        </div>
+      )}
+      {!!isAbleToLeaveAuction && confirmModalVisible && (
+        <ConfirmationModal onClose={onCancel} />
+      )}
     </div>
   );
 };

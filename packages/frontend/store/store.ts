@@ -5,6 +5,7 @@ import { categoryReducer } from './category';
 import { productReducer } from './product';
 import { favoriteProductReducer } from './favorite-product';
 import { profileReducer } from './profile/reducer';
+import { auctionReducer } from './product-auction';
 
 const makeStore = () =>
   configureStore({
@@ -14,6 +15,7 @@ const makeStore = () =>
       category: categoryReducer,
       product: productReducer,
       favoriteProduct: favoriteProductReducer,
+      auction: auctionReducer,
     },
   });
 

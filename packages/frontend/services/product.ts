@@ -1,5 +1,6 @@
 import { http } from '@helpers';
 import type {
+  AuctionPermissionsRequest,
   CreateBidRequest,
   Http,
   ProductDto,
@@ -80,4 +81,9 @@ export const placeBidRequest = (data: CreateBidRequest) =>
   http.post({
     url: `${ApiRoutes.BIDS}`,
     body: { ...data },
+  });
+
+export const fetchAuctionPermissions = (data: AuctionPermissionsRequest) =>
+  http.get({
+    url: `${ApiRoutes.PRODUCTS}${ProductApiRoutes.AUCTION_PERMISSIONS}?productId=${data.productId}`,
   });
