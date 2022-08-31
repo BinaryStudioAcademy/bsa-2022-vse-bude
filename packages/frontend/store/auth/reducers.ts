@@ -1,6 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 import type { UserDto } from '@vse-bude/shared';
 import { combineReducers } from 'redux';
+import { fetchUpdateUserAvatar } from 'store/profile/actions';
 import {
   getCurrentUser,
   emailVerification,
@@ -21,6 +22,12 @@ const user = createReducer<UserDto>(null, {
   [phoneVerification.fulfilled.type]: (state) => {
     state.phoneVerified = true;
   },
+  [fetchUpdateUserAvatar.fulfilled.type]: (state, { payload }) => {
+    state.avatar = payload.avatar;
+  },
+  [fetchUpdateUserAvatar.pending.type]: (state, { _payload }) => {
+    state.avatar = null;
+  },
 });
 
 const loading = createReducer(false, {
@@ -31,6 +38,10 @@ const loading = createReducer(false, {
   [loginUser.pending.type]: () => true,
   [loginUser.fulfilled.type]: () => false,
   [loginUser.rejected.type]: () => false,
+
+  [fetchUpdateUserAvatar.pending.type]: () => true,
+  [fetchUpdateUserAvatar.fulfilled.type]: () => false,
+  [fetchUpdateUserAvatar.rejected.type]: () => false,
 
   [signUpUser.pending.type]: () => true,
   [signUpUser.fulfilled.type]: () => false,
