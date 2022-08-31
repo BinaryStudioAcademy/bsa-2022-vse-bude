@@ -16,4 +16,10 @@ export const common = {
     MINUTES_SHORT: 'min',
     SECONDS_SHORT: 'sek',
   },
+  permission: {
+    STORAGE_DENIED: 'Storage permission denied',
+  },
+  errors: {
+    didCancel: 'Cancelled by user',
+  },
 };
