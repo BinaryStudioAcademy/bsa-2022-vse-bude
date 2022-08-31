@@ -16,5 +16,5 @@ export const getUserProfileSSR = (params: {
 
 export const getFullUserProfile = (): Promise<FullUserProfileDto> =>
   http.get({
-    url: `${ApiRoutes.PROFILE}/${ProfileApiRoutes.GET_FULL_USER_DATA}`,
+    url: `${ApiRoutes.PROFILE}${ProfileApiRoutes.GET_FULL_USER_DATA}`,
   });

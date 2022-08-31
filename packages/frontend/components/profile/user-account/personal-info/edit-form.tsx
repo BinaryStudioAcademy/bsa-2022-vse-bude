@@ -33,7 +33,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
     event.preventDefault();
     console.log('data', data);
   };
-  console.log(errors);
+
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     clearErrors('newPassword');

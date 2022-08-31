@@ -16,7 +16,6 @@ export const authMiddleware = (
     });
   }
   const tokenValue = getBearerValue(authHeader);
-  console.log(tokenValue);
   try {
     const tokenPayload: UserSessionJwtPayload = <UserSessionJwtPayload>(
       jwtVerify(tokenValue, getEnv('JWT_SECRET_KEY'))

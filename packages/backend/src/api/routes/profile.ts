@@ -14,31 +14,14 @@ export const initProfileRoutes = (
   const router = Router();
 
   router.get(
-    apiPath(path, ProfileApiRoutes.GET_USER_BY_ID),
-    wrap(async (req: Request) => {
-      const { userId } = req.params;
-      const { t } = req;
-      const user = await profileService.getUser({ userId, t });
-      const socialMedia = await profileService.getSocialMedia({ userId });
-
-      return {
-        ...user,
-        socialMedia,
-      };
-    }),
-  );
-
-  router.get(
     apiPath(path, ProfileApiRoutes.GET_FULL_USER_DATA),
     authMiddleware,
     wrap(async (req: Request) => {
       const { userId, t } = req;
-      console.log(userId);
       const fullUserProfile = await profileService.getFullUserData({
         userId,
         t,
       });
-      console.log(fullUserProfile);
 
       return {
         ...fullUserProfile,
@@ -82,6 +65,21 @@ export const initProfileRoutes = (
       }
 
       return { ...user, socialMedia: links };
+    }),
+  );
+
+  router.get(
+    apiPath(path, ProfileApiRoutes.GET_USER_BY_ID),
+    wrap(async (req: Request) => {
+      const { userId } = req.params;
+      const { t } = req;
+      const user = await profileService.getUser({ userId, t });
+      const socialMedia = await profileService.getSocialMedia({ userId });
+
+      return {
+        ...user,
+        socialMedia,
+      };
     }),
   );
 

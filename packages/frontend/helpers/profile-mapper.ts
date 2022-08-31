@@ -22,16 +22,29 @@ export const profileMapper = ({
   const { firstName, lastName, email, phone, socialMedia, userAddress } = user;
 
   const mappedAddress = <UserAddressDto>{};
-  addressKeys.forEach((key) => {
-    mappedAddress[key] = userAddress[key] ? userAddress[key] : '';
-  });
 
-  const social = socialMedia.reduce((prev, link) => ({ ...prev, ...link }), {});
+  !userAddress
+    ? addressKeys.forEach((key) => {
+        mappedAddress[key] = '';
+      })
+    : addressKeys.forEach((key) => {
+        mappedAddress[key] = userAddress[key] ? userAddress[key] : '';
+      });
+
+  const social = socialMedia
+    .reduce((prev, link) => {
+      const key = link.socialMedia.toLowerCase();
+      const path = link.link;
+      prev.push({
+        [key]: path,
+      });
+      return prev;
+    }, [])
+    .reduce((prev, link) => ({ ...prev, ...link }), {});
+
   const mappedSocialMedia = <MappedLinks>{};
   socialMediaKeys.forEach((key) => {
-    mappedSocialMedia[key] = social[key.toUpperCase()]
-      ? social[key.toUpperCase()]
-      : '';
+    mappedSocialMedia[key] = social[key] ? social[key] : '';
   });
 
   return {

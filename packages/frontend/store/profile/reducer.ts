@@ -7,11 +7,13 @@ import { fetchUserProfileSSR, fetchFullUserProfile } from './actions';
 interface ProfileState {
   user: UserProfileDto | FullUserProfileDto | null;
   loading: boolean;
+  error: string;
 }
 
 const initialState: ProfileState = {
   user: null,
   loading: false,
+  error: null,
 };
 
 const profileSlice = createSlice({
@@ -26,9 +28,10 @@ const profileSlice = createSlice({
       state.loading = false;
       state.user = payload;
     },
-    [fetchUserProfileSSR.rejected.type]: (state) => {
+    [fetchUserProfileSSR.rejected.type]: (state, { payload }) => {
       state.loading = false;
       state.user = null;
+      state.error = payload;
     },
 
     [fetchFullUserProfile.pending.type]: (state) => {
@@ -38,9 +41,10 @@ const profileSlice = createSlice({
       state.loading = false;
       state.user = payload;
     },
-    [fetchFullUserProfile.rejected.type]: (state) => {
+    [fetchFullUserProfile.rejected.type]: (state, { payload }) => {
       state.loading = false;
       state.user = null;
+      state.error = payload;
     },
 
     [HYDRATE](state, { payload }: HydrateAction) {

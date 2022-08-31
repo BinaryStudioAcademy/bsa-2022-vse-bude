@@ -106,6 +106,7 @@ export const PersonalInfo = () => {
             <Button
               type="button"
               variant="outlined"
+              disabled={loading}
               onClick={() => {
                 setIsEditing(true);
                 onGetFullProfile();
@@ -116,7 +117,7 @@ export const PersonalInfo = () => {
           )}
         </Flex>
         {isEditing && !loading && <EditForm user={user} />}
-        {!isEditing && !loading && <ProfileData user={user} />}
+        {!isEditing && <ProfileData user={user} />}
       </div>
     </NestedLayout>
   );

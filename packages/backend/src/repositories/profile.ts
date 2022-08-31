@@ -33,7 +33,7 @@ export class UserProfileRepository {
   }: {
     userId: string;
   }): Promise<GetUserPersonalDataDto> {
-    return this._dbClient.user.findUnique({
+    return this._dbClient.user.findFirst({
       where: {
         id: userId,
       },
