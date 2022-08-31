@@ -1,9 +1,10 @@
 ﻿import React from 'react';
-import type { ItemDto } from '@vse-bude/shared';
+import type { CreateBidRequest, ItemDto } from '@vse-bude/shared';
 import { ProductType } from '@vse-bude/shared';
 import { Container } from '@primitives';
 import { lightTheme } from 'theme';
-import { useWindowSize } from '@hooks';
+import { useAppDispatch, useWindowSize } from '@hooks';
+import { makeBid } from '../../store/product';
 import { ItemImageSlider } from './image-slider/component';
 import { ItemInfoSelling } from './item-info-selling/component';
 import { ItemInfoAuction } from './item-info-auction/component';
@@ -17,6 +18,8 @@ interface ItemProps {
 export const Item = ({ item }: ItemProps) => {
   const windowSize = useWindowSize();
 
+  const dispatch = useAppDispatch();
+
   // TODO: delete after adding different photos to post
   const images = [
     'https://picsum.photos/id/1/640/480/',
@@ -27,9 +30,13 @@ export const Item = ({ item }: ItemProps) => {
 
   const handleAddFavourite = () => console.log('favourite');
   const handleBuy = () => console.log('buy');
-  const handleBid = (ev) => {
-    console.log('ev');
-    console.log(ev);
+  const handleBid = ({ price }: CreateBidRequest) => {
+    dispatch(
+      makeBid({
+        price: price,
+        productId: item.id,
+      }),
+    );
   };
 
   return (
