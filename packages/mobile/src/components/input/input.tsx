@@ -11,6 +11,7 @@ import {
   View,
   AlertIcon,
   EyeIcon,
+  EyeOffIcon,
   Pressable,
 } from '~/components/components';
 import { useCustomTheme, useFormControl, useState } from '~/hooks/hooks';
@@ -81,7 +82,7 @@ const Input = <T extends FormControlValues>({
         />
         {isSecure && (
           <Pressable style={styles.eyeIconWrapper} onPress={onSecureChange}>
-            <EyeIcon size={22} />
+            {secured ? <EyeOffIcon size={22} /> : <EyeIcon size={22} />}
           </Pressable>
         )}
       </View>
