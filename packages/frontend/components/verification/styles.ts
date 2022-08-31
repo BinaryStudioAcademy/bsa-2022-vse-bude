@@ -1,14 +1,12 @@
 import { css } from '@emotion/react';
 import type { Theme } from '@emotion/react';
 
-export const innerWrapper = ({ spaces, mq }: Theme) => css`
+export const innerWrapper = ({ spaces }: Theme) => css`
   width: 90vw;
+  height: 90vh;
   max-width: 915px;
-  max-height: 90vh;
+  max-height: 650px;
   padding: ${spaces.xl2} ${spaces.md} 50px;
-  ${mq[0]} {
-    padding: ${spaces.xl9} ${spaces.xl9} 120px;
-  }
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -57,6 +55,15 @@ export const xmark = ({ spaces, mq }: Theme) => css`
   ${mq[0]} {
     top: ${spaces.xl2};
     right: ${spaces.xl3};
+  }
+`;
+export const arrow = ({ spaces, mq }: Theme) => css`
+  position: absolute;
+  top: ${spaces.xl};
+  left: ${spaces.xl1};
+  ${mq[0]} {
+    top: ${spaces.xl2};
+    left: ${spaces.xl3};
   }
 `;
 export const imgWrapper = ({ spaces, colors, radiuses }: Theme) => css`

@@ -1,20 +1,43 @@
-import { createSlice } from '@reduxjs/toolkit';
+import type { VerifyAction} from './actions';
+import { VerifyActionTypes } from './action-types';
 
 interface VerifyState {
-  isModal: boolean;
+  isModal: boolean,
+  variant: number,
 }
 
-const initialState: VerifyState = {
+const initialState = {
   isModal: true,
+  variant: 0,
 };
 
-const verifySlice = createSlice({
-  name: 'verify',
-  initialState,
-  reducers: {},
-  extraReducers: {},
-});
+const verifyReducer = (state = initialState, action: VerifyAction) => {
+  switch (action.type) {
+    case VerifyActionTypes.ShowVerifyModal:
+      return {
+        ...state,
+        isModal: true,
+      };
+    case VerifyActionTypes.HideVerifyModal:
+      return {
+        ...state,
+        isModal: false,
+      };
+    case VerifyActionTypes.NextVerifyModal:
+      return {
+        ...state,
+        variant: state.variant + 1,
+      };
+    case VerifyActionTypes.PreviousVerifyModal:
+      return {
+        ...state,
+        variant: state.variant - 1,
+      };
+    default:
+      return state;
+  }
+};
 
-export const verifyReducer = verifySlice.reducer;
+export { verifyReducer };
 
 export type { VerifyState };

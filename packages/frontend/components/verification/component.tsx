@@ -1,56 +1,40 @@
-import { IconName, ItemRoutes, Routes } from '@enums';
-import { Button, IconButton, Input, InternalLink, Modal } from '@primitives';
-import { useTranslation } from 'next-i18next';
-import Image from 'next/image';
-import router from 'next/router';
-import hand from 'public/images/mocup_hand1.png';
+import { useAppDispatch, useTypedSelector } from '@hooks';
+import { Modal } from '@primitives';
 import { useEffect, useState } from 'react';
-import * as styles from './styles';
+import { hideVerifyModal } from 'store/verify/actions';
+import EnterCodeModal from './enter-code/component';
+import EnterPhoneModal from './enter-phone/component';
+import SuccessModal from './ssuccess-verification/component';
 
 export default function VerificationModal() {
-  const [isVisible, setIsVisible] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
+    const dispatch = useAppDispatch();
+    const { variant } = useTypedSelector(state => state.verify);
 
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
+    useEffect(() => {
+        setIsVisible(true);
+    }, []);
 
-  const { t } = useTranslation();
+    const closeModal = () => {
+        dispatch(hideVerifyModal());
+    };
 
-  return (
-    <Modal visible={isVisible}>
-      <div css={styles.innerWrapper}>
-        <h3 css={styles.headline}>{t('verify:headline')}</h3>
-        <span>{t('verify:description')}</span>
-        <IconButton
-          cssExtend={styles.xmark}
-          icon={IconName.XMARK}
-          onClick={() => setIsVisible(false)}
-        />
-        <div css={styles.imgWrapper}>
-          <Image width={285} height={285} src={hand.src} alt="MARK" />
-        </div>
-        <div css={styles.inputsWrappper}>
-          <Input
-            label={t('verify:phone')}
-            variant="primary"
-            type="text"
-            name="phone"
-          />
-          <Button
-            onClick={() =>
-              router.push(`${Routes.ITEMS}${ItemRoutes.CREATE_DIRECT_SALE}`)
+    return (
+        <Modal visible={isVisible}>
+        {variant == 0
+        ?<EnterPhoneModal></EnterPhoneModal>
+        : <>
+            {variant == 1
+                ? <EnterCodeModal></EnterCodeModal>
+                :<>
+                    {variant == 2
+                    ? <SuccessModal></SuccessModal>
+                    :<>{closeModal()}</>
+                    }
+                </> 
             }
-          >
-            {t('verify:button.verify')}
-          </Button>
-        </div>
-
-        <InternalLink
-          variant="dashboard"
-          label={t('verify:link.later')}
-          href={'#'}
-        />
-      </div>
-    </Modal>
-  );
+        </>
+        }
+        </Modal>
+    );
 }
