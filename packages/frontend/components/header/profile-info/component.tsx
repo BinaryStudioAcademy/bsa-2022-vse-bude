@@ -1,5 +1,5 @@
 import { useAuth } from '@hooks';
-import { Popover, Avatar, Icon } from '@primitives';
+import { Popover, Avatar, Icon, InternalLink } from '@primitives';
 import { useRouter } from 'next/router';
 import { IconName, IconColorProps, Routes } from '@enums';
 import * as styles from './styles';
@@ -22,11 +22,15 @@ export const ProfileInfo = () => {
   return (
     <div css={styles.profileInfo}>
       <div css={styles.icons}>
-        <Icon
-          icon={IconName.STAR_OUTLINED}
-          size="md"
-          color={IconColorProps.BLACK}
-        />
+        {/* change link */}
+        <InternalLink href={Routes.DEFAULT}>
+          <Icon
+            icon={IconName.STAR_OUTLINED}
+            size="md"
+            color={IconColorProps.BLACK}
+          />
+        </InternalLink>
+
         <Popover
           trigger={
             <Icon
