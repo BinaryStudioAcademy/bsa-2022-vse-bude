@@ -5,20 +5,18 @@ import { styles } from './styles';
 
 type TextProps = RNTextProps & {
   children: string;
-  color?: string;
 };
 
 const Text: FC<TextProps> = ({
   style,
   children,
-  color,
   ...restProps
 }): ReactElement => {
   const { colors } = useCustomTheme();
 
   return (
     <NativeText
-      style={[styles.default, { color: color ?? colors.text }, style]}
+      style={[styles.default, { color: colors.text }, style]}
       {...restProps}
     >
       {children}

@@ -1,8 +1,12 @@
 import React, { FC } from 'react';
-import { globalStyles } from '~/styles/styles';
-import { ColorPalette } from '@vse-bude/shared';
-import { MOCK_IMAGES } from '~/mock/mock-images';
 import { useTranslation } from 'react-i18next';
+import {
+  ColorPalette,
+  RequestUserProfileDto,
+  SocialMediaType,
+  UserProfileDto,
+} from '@vse-bude/shared';
+import { globalStyles } from '~/styles/styles';
 import {
   Text,
   View,
@@ -12,10 +16,13 @@ import {
   PhoneIcon,
   InstagramIcon,
   GlobeIcon,
-} from '../components';
+  LinkedinIcon,
+} from '../../../../components/components';
 import { styles } from './styles';
 
-const SellerInfo: FC = () => {
+const SellerInfo: FC<
+  Partial<UserProfileDto & Pick<RequestUserProfileDto, 'phone'>>
+> = ({ firstName, avatar, phone, socialMedia }) => {
   const { t } = useTranslation();
 
   return (
@@ -47,7 +54,15 @@ const SellerInfo: FC = () => {
               globalStyles.alignItemsCenter,
             ]}
           >
-            <Image style={styles.avatar} source={MOCK_IMAGES.JYSK} />
+            {avatar ? (
+              <Image style={styles.avatar} source={{ uri: avatar }} />
+            ) : (
+              <View style={styles.noAvatar}>
+                <Text style={[styles.noAvatarText]}>
+                  {firstName ? firstName[0] : 'VB'}
+                </Text>
+              </View>
+            )}
             <Text
               style={[
                 globalStyles.px4,
@@ -55,7 +70,7 @@ const SellerInfo: FC = () => {
                 globalStyles.fs14,
               ]}
             >
-              Jysk.UA
+              {firstName ? firstName : ''}
             </Text>
           </View>
         </View>
@@ -85,66 +100,39 @@ const SellerInfo: FC = () => {
                 globalStyles.fontWeightMedium,
               ]}
             >
-              +3809999999
+              {phone ? phone : ''}
             </Text>
           </View>
-          <Pressable
-            style={[
-              globalStyles.alignItemsCenter,
-              globalStyles.flexDirectionRow,
-              globalStyles.mt4,
-            ]}
-          >
-            <FacebookIcon size={15} color={ColorPalette.YELLOW_200} />
-            <Text
+          {socialMedia?.map((media) => (
+            <Pressable
+              key={media.id}
               style={[
-                globalStyles.px3,
-                globalStyles.fs14,
-                globalStyles.fontWeightMedium,
+                globalStyles.alignItemsCenter,
+                globalStyles.flexDirectionRow,
+                globalStyles.mt4,
               ]}
-              color={ColorPalette.YELLOW_200}
             >
-              jysk_ua
-            </Text>
-          </Pressable>
-          <Pressable
-            style={[
-              globalStyles.alignItemsCenter,
-              globalStyles.flexDirectionRow,
-              globalStyles.mt4,
-            ]}
-          >
-            <InstagramIcon size={15} color={ColorPalette.YELLOW_200} />
-            <Text
-              style={[
-                globalStyles.px3,
-                globalStyles.fs14,
-                globalStyles.fontWeightMedium,
-              ]}
-              color={ColorPalette.YELLOW_200}
-            >
-              jysk_ua
-            </Text>
-          </Pressable>
-          <Pressable
-            style={[
-              globalStyles.alignItemsCenter,
-              globalStyles.flexDirectionRow,
-              globalStyles.mt4,
-            ]}
-          >
-            <GlobeIcon size={15} color={ColorPalette.YELLOW_200} />
-            <Text
-              style={[
-                globalStyles.px3,
-                globalStyles.fs14,
-                globalStyles.fontWeightMedium,
-              ]}
-              color={ColorPalette.YELLOW_200}
-            >
-              jysk.ua
-            </Text>
-          </Pressable>
+              {media.socialMedia == SocialMediaType.FACEBOOK ? (
+                <FacebookIcon size={15} color={ColorPalette.YELLOW_200} />
+              ) : media.socialMedia == SocialMediaType.INSTAGRAM ? (
+                <InstagramIcon size={15} color={ColorPalette.YELLOW_200} />
+              ) : media.socialMedia == SocialMediaType.LINKEDIN ? (
+                <LinkedinIcon size={15} color={ColorPalette.YELLOW_200} />
+              ) : (
+                <GlobeIcon size={15} color={ColorPalette.YELLOW_200} />
+              )}
+              <Text
+                style={[
+                  globalStyles.px3,
+                  globalStyles.fs14,
+                  globalStyles.fontWeightMedium,
+                  styles.link,
+                ]}
+              >
+                {media.link}
+              </Text>
+            </Pressable>
+          ))}
         </View>
       </View>
     </View>

@@ -82,6 +82,10 @@ const GlobeIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="globe" {...iconProps} />
 );
 
+const LinkedinIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="linkedin" {...iconProps} />
+);
+
 export {
   HomeIcon,
   StarIcon,
@@ -103,4 +107,5 @@ export {
   InstagramIcon,
   PhoneIcon,
   GlobeIcon,
+  LinkedinIcon,
 };

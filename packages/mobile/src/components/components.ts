@@ -28,4 +28,3 @@ export { FlagBackgroundView } from './flag-background-view/flag-background-view'
 export { PrimaryButton } from './primary-button/primary-button';
 export { SecondaryButton } from './secondary-button/secondary-button';
 export { BuildInfo } from './build-info/build-info';
-export { SellerInfo } from './seller-info/seller-info';
