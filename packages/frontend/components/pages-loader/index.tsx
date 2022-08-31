@@ -3,7 +3,7 @@ import { Spinner } from 'components/primitives/loader/spinner';
 import { useState } from 'react';
 import { loaderWrapper } from './styles';
 
-export function PagesLoader() {
+function PagesLoader() {
   const [isLoading, setIsLoading] = useState(false);
   Router.events.on('routeChangeStart', () => setIsLoading(true));
   Router.events.on('routeChangeComplete', () => setIsLoading(false));
@@ -19,3 +19,5 @@ export function PagesLoader() {
     </>
   );
 }
+
+export default PagesLoader;
