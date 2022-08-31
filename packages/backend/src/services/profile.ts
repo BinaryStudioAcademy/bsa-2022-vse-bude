@@ -5,9 +5,7 @@ import type {
   UpdatePasswordDto,
   SocialMedia,
 } from '@vse-bude/shared';
-import type{
-  UploadFileRequest,
-} from '@types';
+import type { UploadFileRequest } from '@types';
 import {
   HttpStatusCode,
   UserPersonalInfoValidationMessage,
@@ -97,7 +95,6 @@ export class UserProfileService {
   }) {
     return this._userProfileRepository.updateUserProfile({ userId, data });
   }
-
 
   public async updateAvatar({
     userId,
