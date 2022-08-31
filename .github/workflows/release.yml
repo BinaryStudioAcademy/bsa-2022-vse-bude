@@ -17,7 +17,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: In progress
-        if: failure()
         uses: zattoo/deploy-status@v1
         with:
           token: ${{ github.token }}
