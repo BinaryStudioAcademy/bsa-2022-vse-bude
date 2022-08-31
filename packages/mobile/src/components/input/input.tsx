@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { TextInput, ViewStyle } from 'react-native';
+import { StyleProp, TextInput, ViewStyle } from 'react-native';
 import {
   FormControl,
   FormControlPath,
@@ -17,7 +17,7 @@ type Props<T extends FormControlValues> = {
   control: FormControl<T>;
   errors: FormControlErrors<T>;
   placeholder?: string;
-  contentContainerStyle?: ViewStyle | ViewStyle[];
+  contentContainerStyle?: StyleProp<ViewStyle>;
   isSecure?: boolean;
 };
 
