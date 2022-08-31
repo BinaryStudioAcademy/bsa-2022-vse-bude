@@ -15,15 +15,14 @@ jobs:
       url: http://vse-bude.com.ua
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
-      - name: Set deployment status to [in_progress]
-        id: set_state_in_progress
-        uses: rsotnychenko/deployment-status-update@0.2.0
+        uses: actions/checkout@v2
+      - name: In progress
+        if: failure()
+        uses: zattoo/deploy-status@v1
         with:
-          run_id: ${{ github.run_id }}
-          status: in_progress
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ github.token }}
+          environment: Release
+          state: in_progress
       - name: Deploy frontend and backend. Migrate DB.
         uses: appleboy/ssh-action@master
         with:
@@ -46,15 +45,21 @@ jobs:
       - name: Check app deployed successfully
         uses: jtalk/url-health-check-action@v2
         with:
-          url: https://vse-bude.com.ua|http://vse-bude.com.ua/api/health/
+          url: https://vse-bude.com.ua|https://vse-bude.com.ua/api/health/
           max-attempts: 5
           retry-delay: 10s
-      - name: Set deployment status
-        id: set_state_final
-        if: always()
-        uses: rsotnychenko/deployment-status-update@0.2.0
+      - name: Success
+        if: success()
+        uses: zattoo/deploy-status@v1
         with:
-          status: ${{ job.status }}
-          run_id: ${{ github.run_id }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ github.token }}
+          environment: Release
+          environment_url: https://vse-bude.com.ua
+          state: success
+      - name: Failure
+        if: failure()
+        uses: zattoo/deploy-status@v1
+        with:
+          token: ${{ github.token }}
+          environment: Release
+          state: failure
