@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { globalStyles } from '~/styles/styles';
-import { ButtonAppearance } from '~/common/enums/enums';
 import { ColorPalette } from '@vse-bude/shared';
 import { MOCK_IMAGES } from '~/mock/mock-images';
 import { useTranslation } from 'react-i18next';
@@ -9,7 +8,6 @@ import {
   View,
   Image,
   Pressable,
-  SecondaryButton,
   FacebookIcon,
   PhoneIcon,
   InstagramIcon,
@@ -31,41 +29,52 @@ const SellerInfo: FC = () => {
       ]}
     >
       <View
-        style={[
-          globalStyles.flexDirectionRow,
-          globalStyles.justifyContentSpaceBetween,
-          globalStyles.alignItemsCenter,
-        ]}
+        style={[globalStyles.flexDirectionRow, globalStyles.alignItemsCenter]}
       >
-        <Text style={[globalStyles.fontWeightExtraBold, globalStyles.fs16]}>
-          Seller
-        </Text>
-        <SecondaryButton
-          appearance={ButtonAppearance.OUTLINED}
-          compact={true}
-          label={t('common:components.BUTTON_CONTACT_SELLER')}
-        />
-      </View>
-      <View style={[globalStyles.flexDirectionColumn, globalStyles.mt4]}>
-        <View
-          style={[globalStyles.flexDirectionRow, globalStyles.alignItemsCenter]}
+        <Text
+          style={[
+            globalStyles.fontWeightExtraBold,
+            globalStyles.fs16,
+            styles.title,
+          ]}
         >
-          <Image style={styles.avatar} source={MOCK_IMAGES.JYSK} />
-          <Text
-            style={[
-              globalStyles.px4,
-              globalStyles.fontWeightBold,
-              globalStyles.fs14,
-            ]}
-          >
-            Jysk.UA
-          </Text>
-        </View>
-        <View style={[globalStyles.ml2, globalStyles.mt4]}>
+          {t('screens:words.SELLER')}
+        </Text>
+        <View style={styles.info}>
           <View
             style={[
-              globalStyles.alignItemsCenter,
               globalStyles.flexDirectionRow,
+              globalStyles.alignItemsCenter,
+            ]}
+          >
+            <Image style={styles.avatar} source={MOCK_IMAGES.JYSK} />
+            <Text
+              style={[
+                globalStyles.px4,
+                globalStyles.fontWeightBold,
+                globalStyles.fs14,
+              ]}
+            >
+              Jysk.UA
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View style={[globalStyles.flexDirectionRow, globalStyles.mt6]}>
+        <Text
+          style={[
+            globalStyles.fontWeightExtraBold,
+            globalStyles.fs16,
+            styles.title,
+          ]}
+        >
+          {t('screens:words.CONTACT')}
+        </Text>
+        <View style={[globalStyles.ml2, styles.info]}>
+          <View
+            style={[
+              globalStyles.flexDirectionRow,
+              globalStyles.alignItemsCenter,
             ]}
           >
             <PhoneIcon size={15} color={ColorPalette.YELLOW_200} />
