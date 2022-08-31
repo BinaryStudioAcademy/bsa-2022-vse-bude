@@ -23,10 +23,9 @@ const mockImage = [
 const CategorySection = () => {
   const categories = useTypedSelector((state) => state.category.list);
   const { t } = useTranslation();
+  const limit = 4;
 
-  const categoriesSliced = categories.slice(0, 4);
-
-  const categoriesMapped = categoriesSliced.map((item, i) => ({
+  const categoriesMapped = categories.slice(0, limit).map((item, i) => ({
     ...item,
     image: mockImage[i] || '/images/categories/decor.png',
   }));
