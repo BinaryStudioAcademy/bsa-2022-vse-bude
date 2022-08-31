@@ -9,12 +9,14 @@ import * as styles from './styles';
 
 interface ItemInfoAuctionProps {
   item: ItemDto;
+  isInFavorite: boolean;
   onBid: () => void;
   onChangeIsFavorite: () => void;
 }
 
 export const ItemInfoAuction = ({
   item,
+  isInFavorite,
   onBid,
   onChangeIsFavorite,
 }: ItemInfoAuctionProps) => {
@@ -58,7 +60,7 @@ export const ItemInfoAuction = ({
           <FavoriteButton
             cssExtended={styles.favouriteButton}
             onChangeIsFavorite={onChangeIsFavorite}
-            isFavorite={false}
+            isFavorite={isInFavorite}
             backgroundColor="transparent"
             size="md"
           ></FavoriteButton>
