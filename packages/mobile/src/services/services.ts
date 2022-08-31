@@ -3,6 +3,7 @@ import { ENV } from '~/common/enums/enums';
 import { Http } from './http/http.service';
 import { Storage } from './storage/storage.service';
 import { AuthApi } from './auth-api/auth-api.service';
+import { Image } from './image/image.service';
 import { NotificationService } from './notification/notification.service';
 import { PersonalInfoApi } from './personal-info-api/personal-info-api.service';
 
@@ -19,6 +20,11 @@ const authApi = new AuthApi({
   apiPrefix: ENV.APP.API_ORIGIN_URL,
 });
 
+const image = new Image({
+  http,
+  apiPrefix: ENV.APP.API_ORIGIN_URL,
+});
+
 const notification = new NotificationService();
 
 const personalInfoApi = new PersonalInfoApi({
@@ -26,4 +32,4 @@ const personalInfoApi = new PersonalInfoApi({
   apiPrefix: ENV.APP.API_ORIGIN_URL,
 });
 
-export { storage, authApi, notification, personalInfoApi };
+export { storage, authApi, image, notification, personalInfoApi };

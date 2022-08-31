@@ -10,6 +10,14 @@
     "buttons": {
       "create_account": "Create Account",
       "sign_in": "Sign In"
+    },
+    "popover": {
+      "personalInfo": "Personal Info",
+      "myList": "My List",
+      "settings": "Settings",
+      "messages": "Messages",
+      "support": "Support",
+      "signOut": "Sign Out"
     }
   },
   "footer": {
