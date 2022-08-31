@@ -54,6 +54,8 @@ export const PersonalInfo = () => {
           file={avatar}
           onSave={onCrop}
           onClose={handleCloseCropModal}
+          okLabel={t("personal-info:button.ok")}
+          dismissLabel={t("personal-info:button.cancel")}
           circle
         />
       )}

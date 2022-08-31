@@ -82,6 +82,8 @@ function ImageInput({ images, setImages }: ImageInputProps) {
           file={currentImage}
           onSave={onImageCropModalSave}
           onClose={onImageCropModalClose}
+          okLabel={t('create-post:button.ok')}
+          dismissLabel={t('create-post:button.cancel')}
         />
       )}
 

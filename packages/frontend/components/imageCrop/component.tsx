@@ -1,5 +1,4 @@
 import { Button, Modal } from '@primitives';
-import { useTranslation } from 'next-i18next';
 import { useEffect, useState } from 'react';
 import type { Crop, PixelCrop } from 'react-image-crop';
 import ReactCrop from 'react-image-crop';
@@ -12,9 +11,10 @@ const ImageCropModal = ({
   file,
   onSave,
   onClose,
+  okLabel,
+  dismissLabel,
   circle = false,
 }: ImageCropModalProps) => {
-  const { t } = useTranslation();
   const [crop, setCrop] = useState<Crop>();
   const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
 
@@ -60,10 +60,10 @@ const ImageCropModal = ({
       </div>
       <div css={styles.buttonRow}>
         <Button onClick={handleSaveCroppedImage}>
-          {t('common:components.button.crop' as any)}
+          {okLabel}
         </Button>
         <Button variant="outlined" onClick={onClose}>
-          {t('common:components.button.cancel' as any)}
+          {dismissLabel}
         </Button>
       </div>
     </Modal>

@@ -74,10 +74,6 @@
         "or": "or",
         "directSale": "Direct Sale"
       }
-    },
-    "button": {
-      "crop": "Crop",
-      "cancel": "Cancel"
     }
   },
   "HOURS_SHORT": "h",
