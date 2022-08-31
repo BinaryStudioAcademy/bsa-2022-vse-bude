@@ -13,7 +13,8 @@ export const AccountLayout: FC<AccountPageProps> = ({ children }) => {
   const { query, pathname } = useRouter();
   const { t } = useTranslation();
   const { user: authUser } = useAuth();
-  return (
+  
+return (
     <Layout>
       <Container>
         <div css={styles.wrapper}>
