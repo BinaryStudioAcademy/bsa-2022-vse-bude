@@ -1,5 +1,6 @@
 import Joi from 'joi';
 import { UserPersonalInfoValidationMessage } from '@vse-bude/shared';
+import { ValidationRanges } from '@vse-bude/shared';
 import type { TFunction } from 'next-i18next';
 
 export const userUpdateSchema = (t: TFunction) =>
@@ -8,8 +9,8 @@ export const userUpdateSchema = (t: TFunction) =>
       .trim()
       .required()
       .pattern(/^[^-](([a-zA-Z]+)|([а-яёіїґєА-ЯЁIЇҐЄ]+))$/)
-      .min(1)
-      .max(40)
+      .min(ValidationRanges.MIN_NAME_SYMBOLS)
+      .max(ValidationRanges.MAX_NAME_SYMBOLS)
       .messages({
         'string.pattern.base': t(
           UserPersonalInfoValidationMessage.FIRSTNAME_PATTERN,
@@ -23,8 +24,8 @@ export const userUpdateSchema = (t: TFunction) =>
       .trim()
       .required()
       .pattern(/^[^-](([a-zA-Z]+)|([а-яёіїґєА-ЯЁIЇҐЄ]+))$/)
-      .min(1)
-      .max(40)
+      .min(ValidationRanges.MIN_NAME_SYMBOLS)
+      .max(ValidationRanges.MAX_NAME_SYMBOLS)
       .messages({
         'string.pattern.base': t(
           UserPersonalInfoValidationMessage.LASTNAME_PATTERN,
@@ -69,7 +70,7 @@ export const userUpdateSchema = (t: TFunction) =>
     instagram: Joi.string()
       .allow('')
       .uri()
-      .max(150)
+      .max(ValidationRanges.MAX_SOCIAL_NETWORK_URI_SYMBOLS)
       .messages({
         'string.uri': t(UserPersonalInfoValidationMessage.IS_URI),
         'string.max': t(UserPersonalInfoValidationMessage.URI_MAX_SYMBOLS),
@@ -77,7 +78,7 @@ export const userUpdateSchema = (t: TFunction) =>
     linkedin: Joi.string()
       .allow('')
       .uri()
-      .max(150)
+      .max(ValidationRanges.MAX_SOCIAL_NETWORK_URI_SYMBOLS)
       .messages({
         'string.uri': t(UserPersonalInfoValidationMessage.IS_URI),
         'string.max': t(UserPersonalInfoValidationMessage.URI_MAX_SYMBOLS),
@@ -85,7 +86,7 @@ export const userUpdateSchema = (t: TFunction) =>
     facebook: Joi.string()
       .allow('')
       .uri()
-      .max(150)
+      .max(ValidationRanges.MAX_SOCIAL_NETWORK_URI_SYMBOLS)
       .messages({
         'string.uri': t(UserPersonalInfoValidationMessage.IS_URI),
         'string.max': t(UserPersonalInfoValidationMessage.URI_MAX_SYMBOLS),
@@ -98,8 +99,8 @@ export const userUpdateSchema = (t: TFunction) =>
       then: Joi.string()
         .required()
         .disallow(Joi.ref('password'))
-        .min(8)
-        .max(16)
+        .min(ValidationRanges.MIN_PASSWORD_SYMBOLS)
+        .max(ValidationRanges.MAX_PASSWORD_SYMBOLS)
         .pattern(
           /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z~!@#$%^*\-_=+[{\]}/;:,.?]+$/,
         )

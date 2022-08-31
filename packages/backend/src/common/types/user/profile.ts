@@ -2,9 +2,16 @@ import type { SocialMediaType } from '@prisma/client';
 
 export interface GetUserProfileDto {
   id: string;
-  avatar: string | null;
+  avatar?: string | null;
   firstName: string;
   lastName: string;
+}
+
+export interface GetUserPersonalDataDto {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string | null;
 }
 
 export interface UserSocialMediaDto {
@@ -23,7 +30,13 @@ export interface GetUserAddressDto {
 }
 
 export interface UpdateUserProfileDto {
-  avatar: string | null;
   firstName: string;
   lastName: string;
+  email: string;
+  phone: string;
+}
+
+export interface UpdatePasswordDto {
+  password: string;
+  newPassword: string;
 }
