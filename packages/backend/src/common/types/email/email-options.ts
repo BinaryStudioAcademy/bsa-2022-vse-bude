@@ -1,3 +1,5 @@
+import { getEnv } from '@helpers';
+
 interface IEmail {
   email: string;
   name?: string;
@@ -15,15 +17,10 @@ export interface EmailOptions {
 }
 
 export const defaultEmailOptions: EmailOptions = {
-  to: [
-    {
-      email: '',
-      name: '',
-    },
-  ],
+  to: [],
   from: {
-    email: '',
-    name: '',
+    email: getEnv('APP_EMAIL_FROM'),
+    name: getEnv('APP_NAME'),
   },
   subject: '',
 };
