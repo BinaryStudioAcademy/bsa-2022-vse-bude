@@ -1,15 +1,14 @@
 import { Button, StringCutter } from '@primitives';
 import { useTranslation } from 'next-i18next';
-import { useAppDispatch, useTypedSelector } from '@hooks';
+import { useAppDispatch, useTypedSelector, useInFavorite } from '@hooks';
+import {
+  addProductToFavorites,
+  deleteProductFromFavorites,
+} from 'store/favorite-product';
 import { Price } from '../price';
 import { FavoriteButton } from '../favorite-button/component';
 import { ProductTimer } from '../timer/component';
 import { ImageSlider } from '../image-slider/component';
-import {
-  addProductToFavorites,
-  deleteProductFromFavorites,
-} from '../../../store/favorite-product';
-import { useInFavorite } from '../../../hooks/favorite-product';
 import {
   productFooter,
   productCard,

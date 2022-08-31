@@ -1,5 +1,3 @@
-import { IconName } from '@enums';
-import { Icon } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 import { CategorySection } from './category-section';
@@ -14,9 +12,6 @@ const Home = ({ auctionProducts, sellingProducts }: HomeProps) => {
 
   return (
     <React.Fragment>
-      <Icon icon={IconName.FACEBOOK} color="yellow" />
-      <Icon icon={IconName.LINKEDIN} color="yellow" />
-      <Icon icon={IconName.INSTAGRAM} color="yellow" />
       <PromoSection searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <CategorySection />
       <LotSection

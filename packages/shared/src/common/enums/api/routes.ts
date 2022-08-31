@@ -10,6 +10,7 @@ export enum ApiRoutes {
   VERIFY = '/verify',
   HEALTH = '/health',
   CREATE_POST = '/post',
+  BIDS = '/bids',
 }
 
 export enum AuthApiRoutes {

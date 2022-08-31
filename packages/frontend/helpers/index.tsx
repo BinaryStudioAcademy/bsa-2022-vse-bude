@@ -8,3 +8,4 @@ const http = new Http(process.env.NEXT_PUBLIC_API_ROUTE, auth);
 
 export { cookieStorage, http, CookieStorage, auth, AuthHelper };
 export * from './title';
+export { getCroppedImg } from './getCroppedImg';
