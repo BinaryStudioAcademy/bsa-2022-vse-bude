@@ -33,17 +33,15 @@ export const Header = () => {
 
   const categories = useTypedSelector((state) => state.category.list);
   console.log(categories);
-  
+
   useEffect(() => {
-    if(!categories.length){
+    if (!categories.length) {
       const category: RequestOptions = {
         locale: locale as HttpAcceptLanguage,
       };
 
-      dispatch(
-        fetchCategories({ locale: category.locale }),
-      );
-    }    
+      dispatch(fetchCategories({ locale: category.locale }));
+    }
   }, [dispatch, locale, categories]);
 
   const redirectToCategory = (category: string) => {
