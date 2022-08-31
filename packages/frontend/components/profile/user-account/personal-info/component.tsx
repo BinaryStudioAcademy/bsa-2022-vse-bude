@@ -5,11 +5,11 @@ import { Flex } from 'grapefruit-ui';
 import { useState } from 'react';
 import { Button } from '@primitives';
 import dynamic from 'next/dynamic';
+import { fetchFullUserProfile } from '@store';
 import flag from '../../../../public/images/flagBg.png';
 import { NestedLayout } from '../common';
 import * as styles from './styles';
 import { Noavatar, Avatar, ProfileData } from './primitives';
-import { fetchFullUserProfile } from '@store';
 
 const EditForm = dynamic(() => import('./edit-form'));
 
@@ -51,13 +51,16 @@ export const PersonalInfo = () => {
             <Button
               type="button"
               variant="outlined"
-              onClick={() => {setIsEditing(true); onGetFullProfile()}}
+              onClick={() => {
+                setIsEditing(true);
+                onGetFullProfile();
+              }}
             >
               {t('personal-info:action.edit')}
             </Button>
           )}
         </Flex>
-        {isEditing && !loading && <EditForm user={user}/>}
+        {isEditing && !loading && <EditForm user={user} />}
         {!isEditing && !loading && <ProfileData user={user} />}
       </div>
     </NestedLayout>

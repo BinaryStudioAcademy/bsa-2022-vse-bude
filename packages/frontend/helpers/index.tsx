@@ -1,7 +1,7 @@
 import { Http } from '@vse-bude/shared';
 import { AuthHelper } from './auth';
 import { CookieStorage } from './cookies';
-import {profileMapper} from './profile-mapper'
+import { profileMapper } from './profile-mapper';
 
 const cookieStorage = new CookieStorage();
 const auth = new AuthHelper(cookieStorage);

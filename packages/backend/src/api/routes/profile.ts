@@ -39,6 +39,7 @@ export const initProfileRoutes = (
         t,
       });
       console.log(fullUserProfile);
+
       return {
         ...fullUserProfile,
       };
