@@ -183,7 +183,9 @@ export class AuthService {
   }
 
   async resetPasswordLink(email: string) {
-    const hashValue = this._hashService.generateHash(email);
+    const hashValue = this._hashService.generateHash(
+      `${email}${this._hashService.getRandomHash()}`,
+    );
     await this.deleteLinksByEmail(email);
     await this.saveLink(email, hashValue);
     const link = this.getResetPasswordEmailLink(hashValue, email);
