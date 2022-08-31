@@ -112,7 +112,7 @@ export const Tooltip = ({
       >
         {trigger}
       </span>
-      {isVisible && renderPortal()}
+      {isVisible && children && renderPortal()}
     </Fragment>
   );
 };

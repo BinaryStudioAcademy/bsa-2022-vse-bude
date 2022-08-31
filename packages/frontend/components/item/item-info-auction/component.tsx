@@ -1,16 +1,19 @@
-﻿import type { ItemDto } from '@vse-bude/shared';
+﻿import type { CreateBidRequest, ItemDto } from '@vse-bude/shared';
 import { Button, Input } from '@primitives';
 import { FavoriteButton } from 'components/product/favorite-button/component';
-import { useRef } from 'react';
 import { useTranslation } from 'next-i18next';
+import type { SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
 import { CountDownTimer } from '../countdown-timer/component';
 import { ItemTitle, ItemInfo, ItemPrice } from '../item-info';
+import { minBidValidation } from '../validation';
 import * as styles from './styles';
 
 interface ItemInfoAuctionProps {
   item: ItemDto;
   isInFavorite: boolean;
-  onBid: () => void;
+  onBid: (data: CreateBidRequest) => void;
   onChangeIsFavorite: () => void;
 }
 
@@ -22,11 +25,20 @@ export const ItemInfoAuction = ({
 }: ItemInfoAuctionProps) => {
   const { t } = useTranslation('item');
 
-  const targetDate = new Date('2022-11-17T03:24:00');
-
-  const inputBidRef = useRef<HTMLInputElement>(null);
-
+  const targetDate = new Date(item.endDate);
   const minBidAmount = +item.currentPrice + +item.minimalBid + 1;
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CreateBidRequest>({
+    resolver: joiResolver(minBidValidation(+minBidAmount, t)),
+  });
+
+  const onMakeBid: SubmitHandler<CreateBidRequest> = (data) => {
+    onBid(data);
+  };
 
   return (
     <div css={styles.wrapper}>
@@ -43,20 +55,21 @@ export const ItemInfoAuction = ({
       </div>
       <ItemTitle title={item.title} views={item.views} />
       <ItemInfo item={item} />
-      <div css={styles.controlls}>
+      <form onSubmit={handleSubmit(onMakeBid)} css={styles.controlls}>
         <div css={styles.inputWrapper}>
           <Input
+            {...register('price')}
             variant="primary"
             type="text"
-            ref={inputBidRef}
             placeholder={t('bidInput')}
+            error={errors.price?.message}
           />
           <span>{t('bidInputCaption')} </span>
           <span>UAH {minBidAmount}</span>
         </div>
 
         <div css={styles.buttons}>
-          <Button onClick={onBid}>{t('placeBidBtn')}</Button>
+          <Button type="submit">{t('placeBidBtn')}</Button>
           <FavoriteButton
             cssExtended={styles.favouriteButton}
             onChangeIsFavorite={onChangeIsFavorite}
@@ -65,7 +78,7 @@ export const ItemInfoAuction = ({
             size="md"
           ></FavoriteButton>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

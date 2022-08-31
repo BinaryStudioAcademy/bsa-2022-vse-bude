@@ -10,6 +10,10 @@
       "accept": "Accept",
       "decline": "Decline"
     },
+    "tooltip": {
+      "disabled": "It's disabled, agree with terms",
+      "enabled": "Create a post"
+    },
     "checkbox": "I agree"
   }
 }

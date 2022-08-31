@@ -8,23 +8,40 @@ import {
 } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { Routes, IconName, IconColorProps } from '@enums';
 import { Logo } from 'components/primitives/logo';
 import { useAppDispatch, useAuth, useMounted, useTypedSelector } from '@hooks';
 import { useRouter } from 'next/router';
 import { logoutUser } from 'store/auth';
+import { fetchCategories } from 'store/category';
+import type { HttpAcceptLanguage } from '@vse-bude/shared';
 import { ProfileInfo } from './profile-info';
 import * as styles from './styles';
+
+interface RequestOptions {
+  locale?: HttpAcceptLanguage;
+}
 
 export const Header = () => {
   const [show, setShow] = useState(false);
   const { user } = useAuth();
   const isMounted = useMounted();
-  const { push, pathname } = useRouter();
+  const { push, pathname, locale } = useRouter();
   const { t } = useTranslation();
-  const categories = useTypedSelector((state) => state.category.list);
   const dispatch = useAppDispatch();
+
+  const categories = useTypedSelector((state) => state.category.list);
+
+  useEffect(() => {
+    if (!categories.length) {
+      const category: RequestOptions = {
+        locale: locale as HttpAcceptLanguage,
+      };
+
+      dispatch(fetchCategories({ locale: category.locale }));
+    }
+  }, [dispatch, locale, categories]);
 
   const redirectToCategory = (category: string) => {
     const filters = {

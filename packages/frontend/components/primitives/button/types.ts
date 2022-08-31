@@ -7,4 +7,5 @@ export interface ButtonProps
   variant?: 'filled' | 'outlined';
   size?: 'big' | 'small' | 'flexible';
   width?: string;
+  tooltip?: string;
 }
