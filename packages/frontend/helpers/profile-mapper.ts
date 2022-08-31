@@ -38,8 +38,8 @@ export const profileMapper = ({
       prev.push({
         [key]: path,
       });
-      
-return prev;
+
+      return prev;
     }, [])
     .reduce((prev, link) => ({ ...prev, ...link }), {});
 
