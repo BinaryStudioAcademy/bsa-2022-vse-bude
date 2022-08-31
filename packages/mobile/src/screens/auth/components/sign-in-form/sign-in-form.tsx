@@ -18,14 +18,13 @@ const SignInForm: FC<Props> = ({ onSubmit }) => {
   const { t } = useTranslation();
 
   return (
-    <View>
+    <View style={globalStyles.py5}>
       <Input
         label={t('verification.EMAIL')}
         placeholder={t('verification.EMAIL_HINT')}
         name="email"
         control={control}
         errors={errors}
-        contentContainerStyle={globalStyles.mt5}
       />
       <Input
         label={t('verification.PASSWORD')}
