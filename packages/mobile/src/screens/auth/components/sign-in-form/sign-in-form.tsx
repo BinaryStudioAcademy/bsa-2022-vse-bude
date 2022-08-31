@@ -35,7 +35,7 @@ const SignInForm: FC<Props> = ({ onSubmit }) => {
         contentContainerStyle={globalStyles.mt5}
         isSecure={true}
       />
-      <View style={{ marginTop: 30 }}>
+      <View style={globalStyles.mt5}>
         <PrimaryButton
           label={t('verification.SING_IN')}
           onPress={handleSubmit(onSubmit)}
