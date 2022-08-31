@@ -1,6 +1,7 @@
 import { useAuth } from '@hooks';
-import { Popover, Avatar } from '@primitives';
+import { Popover, Avatar, Icon } from '@primitives';
 import { useRouter } from 'next/router';
+import { IconName, IconColorProps, Routes } from '@enums';
 import * as styles from './styles';
 import { DownArrow } from './sub-components/dropdown';
 import { PopoverContent } from './sub-components/popover-content';
@@ -11,11 +12,34 @@ export const ProfileInfo = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    router.push(e.target.getAttribute('path-label'));
+    router.push(`${Routes.PROFILE}/${user.id}`);
   };
+
+  const newNotifications = true;
+
+  const renderNotifications = () => <div>Notifications!</div>;
 
   return (
     <div css={styles.profileInfo}>
+      <div css={styles.icons}>
+        <Icon
+          icon={IconName.STAR_OUTLINED}
+          size="md"
+          color={IconColorProps.BLACK}
+        />
+        <Popover
+          trigger={
+            <Icon
+              icon={IconName.BELL}
+              size="md"
+              color={IconColorProps.BLACK}
+              cssExtend={[newNotifications && styles.newNotifications]}
+            />
+          }
+        >
+          {() => renderNotifications()}
+        </Popover>
+      </div>
       <Avatar
         firstName={user?.firstName}
         lastName={user?.lastName}

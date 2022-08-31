@@ -18,7 +18,7 @@ import * as styles from './styles';
 
 export const Header = () => {
   const [show, setShow] = useState(false);
-  const { hasToken } = useAuth();
+  const { user } = useAuth();
   const isMounted = useMounted();
   const { push, pathname } = useRouter();
   const { t } = useTranslation();
@@ -98,23 +98,13 @@ export const Header = () => {
           label={t('common:header.nav.home')}
         />
         <Dropdown
-          options={[
-            {
-              value: 'Home',
-              key: 'home',
-              onClick: () => {
-                console.log('home');
-              },
+          options={categories.map((item) => ({
+            value: item.title,
+            key: 'home',
+            onClick: () => {
+              redirectToCategory(item.id);
             },
-            {
-              value: 'About',
-              key: 'about',
-              onClick: () => {
-                console.log('about');
-              },
-              disabled: true,
-            },
-          ]}
+          }))}
         >
           {t('common:header.nav.category')}&nbsp;
           <Icon icon={IconName.ANGLE_DOWN} color="yellow" />
@@ -172,7 +162,7 @@ export const Header = () => {
 
           {isMounted ? (
             <>
-              {hasToken ? (
+              {user ? (
                 <div className="header-content">{renderProfileInfo()}</div>
               ) : (
                 <div className="header-content">{renderAuthButtons()}</div>

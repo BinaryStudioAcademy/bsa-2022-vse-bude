@@ -72,3 +72,28 @@ export const popoverContentItem = ({
     }
   }
 `;
+
+export const icons = ({ spaces }: Theme) => css`
+  display: flex;
+  align-items: center;
+  i {
+    margin-right: ${spaces.md};
+    cursor: pointer;
+  }
+`;
+
+export const newNotifications = ({ spaces, colors, radiuses }: Theme) => css`
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    display: block;
+    width: ${spaces.sm};
+    height: ${spaces.sm};
+    border-radius: ${radiuses.circle};
+    background-color: ${colors.accent};
+  }
+`;
