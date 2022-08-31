@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
+import { ImageSourcePropType } from 'react-native';
 import {
   View,
+  Image,
   UserIcon,
   Pressable,
   CameraIcon,
@@ -9,13 +11,24 @@ import {
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 
-const ProfileImage: FC = () => {
+type Props = {
+  avatar?: string;
+};
+
+const ProfileImage: FC<Props> = ({ avatar }) => {
   return (
     <View style={[styles.container, globalStyles.px5, globalStyles.mt5]}>
       <FlagBackgroundView style={styles.flag} />
       <View style={styles.photoWrapper}>
         <View style={styles.photoContainer}>
-          <UserIcon size={130} />
+          {avatar ? (
+            <Image
+              source={avatar as ImageSourcePropType}
+              style={{ width: 130, height: 130 }}
+            />
+          ) : (
+            <UserIcon size={130} />
+          )}
         </View>
         <Pressable
           style={[

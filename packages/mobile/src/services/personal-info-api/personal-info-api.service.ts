@@ -23,7 +23,7 @@ class PersonalInfoApi {
     this.#apiPrefix = apiPrefix;
   }
 
-  getUserById(_id: string): Promise<UserProfileDto> {
+  getPersonalInfo(_id: string): Promise<UserProfileDto> {
     return this.#http.load(`${this.#apiPrefix}${ApiRoutes.PROFILE}/${_id}`, {
       method: HttpMethod.GET,
       contentType: HttpContentType.APPLICATION_JSON,

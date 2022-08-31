@@ -3,15 +3,16 @@ import { UserProfileDto } from '@vse-bude/shared';
 import { AsyncThunkConfig } from '~/common/types/types';
 import { ActionType } from './common';
 
-const getUserById = createAsyncThunk<UserProfileDto, string, AsyncThunkConfig>(
-  ActionType.GET_USER_BY_ID,
-  async (id, { extra }) => {
-    const { personalInfoApi } = extra;
-    const response = await personalInfoApi.getUserById(id);
+const getPersonalInfo = createAsyncThunk<
+  UserProfileDto,
+  string,
+  AsyncThunkConfig
+>(ActionType.GET_USER_BY_ID, async (id, { extra }) => {
+  const { personalInfoApi } = extra;
+  const response = await personalInfoApi.getPersonalInfo(id);
 
-    return response;
-  },
-);
+  return response;
+});
 
 const updatePersonalInfo = createAsyncThunk<
   UserProfileDto,
@@ -24,4 +25,4 @@ const updatePersonalInfo = createAsyncThunk<
   return response;
 });
 
-export { getUserById, updatePersonalInfo };
+export { getPersonalInfo, updatePersonalInfo };

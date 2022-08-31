@@ -1,7 +1,7 @@
 import { UserAddressDto, UserProfileDto } from '@vse-bude/shared';
 import { createReducer, isAnyOf } from '@reduxjs/toolkit';
 import { DataStatus } from '~/common/enums/enums';
-import { getUserById, updatePersonalInfo } from './actions';
+import { getPersonalInfo, updatePersonalInfo } from './actions';
 
 type State = {
   dataStatus: DataStatus;
@@ -18,20 +18,20 @@ const initialState: State = {
 const reducer = createReducer(initialState, (builder) => {
   builder
     .addMatcher(
-      isAnyOf(getUserById.pending, updatePersonalInfo.pending),
+      isAnyOf(getPersonalInfo.pending, updatePersonalInfo.pending),
       (state) => {
         state.dataStatus = DataStatus.PENDING;
       },
     )
     .addMatcher(
-      isAnyOf(getUserById.fulfilled, updatePersonalInfo.fulfilled),
+      isAnyOf(getPersonalInfo.fulfilled, updatePersonalInfo.fulfilled),
       (state, { payload }) => {
         state.dataStatus = DataStatus.FULFILLED;
         state.user = payload;
       },
     )
     .addMatcher(
-      isAnyOf(getUserById.rejected, updatePersonalInfo.rejected),
+      isAnyOf(getPersonalInfo.rejected, updatePersonalInfo.rejected),
       (state) => {
         state.dataStatus = DataStatus.REJECTED;
       },

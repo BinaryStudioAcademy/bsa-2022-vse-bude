@@ -1,10 +1,10 @@
 import React from 'react';
-import { useAppForm, useTranslation, useAppSelector } from '~/hooks/hooks';
+import { useAppForm, useTranslation } from '~/hooks/hooks';
 import { View, Input, DropDown, PrimaryButton } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { ButtonAppearance } from '~/common/enums/enums';
-import { selectCurrentUser } from '~/store/selectors';
 import { CITIES, COUNTRIES, REGIONS } from '~/mock/mock-personal-info';
+import { UserProfileDto } from '@vse-bude/shared';
 import { Title } from '../components';
 
 type UserPersonalInfo = {
@@ -24,18 +24,17 @@ type UserPersonalInfo = {
 };
 
 type Props = {
-  onSubmit: () => void;
+  personalInfo: UserProfileDto;
 };
 
-const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
+const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
   const { t } = useTranslation();
-  const user = useAppSelector(selectCurrentUser);
   const { control, errors, handleSubmit } = useAppForm<UserPersonalInfo>({
     defaultValues: {
-      firstName: user?.firstName || '',
-      lastName: user?.lastName || '',
-      email: user?.email || '',
-      phone: user?.phone || '',
+      firstName: personalInfo?.firstName || '',
+      lastName: personalInfo?.lastName || '',
+      email: '',
+      phone: '',
       country: '',
       region: '',
       city: '',
@@ -48,6 +47,10 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
     },
     //TODO need add validationSchema: personalInfo,
   });
+
+  const onSubmit = (): void => {
+    //TODO need add update profile
+  };
 
   const handleCancelPress = (): void => {
     //TODO add Cancel handler
