@@ -36,11 +36,6 @@ export const Header = () => {
 
   const renderNavigation = () => (
     <nav className="navigation">
-      <InternalLink
-        variant={pathname === Routes.DEFAULT ? 'primary' : 'default'}
-        href={Routes.DEFAULT}
-        label={t('common:header.nav.home')}
-      />
       <Dropdown
         options={categories.map((item) => ({
           value: item.title,
@@ -53,11 +48,6 @@ export const Header = () => {
         {t('common:header.nav.category')}&nbsp;
         <Icon icon={IconName.ANGLE_DOWN} color={IconColorProps.YELLOW} />
       </Dropdown>
-      <InternalLink
-        href={Routes.SEARCH}
-        label={t('common:header.nav.search')}
-        variant={pathname === Routes.SEARCH ? 'primary' : 'default'}
-      />
       <InternalLink
         href={Routes.NEWS}
         label={t('common:header.nav.news')}
