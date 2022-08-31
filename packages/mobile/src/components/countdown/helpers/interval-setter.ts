@@ -1,4 +1,5 @@
 import { getStrictTimeToEvent } from '~/helpers/date/date';
+import { UPDATE_END_DATE_INTERVAL } from '~/common/constants/constants';
 
 type Time = {
   days: string;
@@ -18,7 +19,7 @@ const intervalSetter = (
     if (totalMs < 1) {
       clearInterval(intervalId);
     }
-  }, 1000);
+  }, UPDATE_END_DATE_INTERVAL);
 
   return intervalId;
 };
