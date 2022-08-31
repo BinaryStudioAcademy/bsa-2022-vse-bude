@@ -59,9 +59,7 @@ const ImageCropModal = ({
         </ReactCrop>
       </div>
       <div css={styles.buttonRow}>
-        <Button onClick={handleSaveCroppedImage}>
-          {okLabel}
-        </Button>
+        <Button onClick={handleSaveCroppedImage}>{okLabel}</Button>
         <Button variant="outlined" onClick={onClose}>
           {dismissLabel}
         </Button>
