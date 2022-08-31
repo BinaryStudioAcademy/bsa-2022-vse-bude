@@ -79,5 +79,5 @@ export const deleteFromFavorites = (productId: string) =>
 export const placeBidRequest = (data: CreateBidRequest) =>
   http.post({
     url: `${ApiRoutes.BIDS}`,
-    body: data,
+    body: { ...data },
   });
