@@ -6,7 +6,7 @@ import { wrap } from '@helpers';
 import { apiPath } from '@helpers';
 import { authMiddleware, uploadImage } from '@middlewares';
 import { profileValidation } from '@validation';
-import { UploadFileRequest } from '@types';
+import type { UploadFileRequest } from '@types';
 
 export const initProfileRoutes = (
   { profileService }: Services,
