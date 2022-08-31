@@ -49,10 +49,12 @@ const loginUser = createAsyncThunk(
     login(data)
       .then((data: IAuth) => {
         if (data?.error) {
-          dispatch(addToast({
-            level: 'error',
-            description: data.error,
-          }));
+          dispatch(
+            addToast({
+              level: 'error',
+              description: data.error,
+            }),
+          );
 
           return rejectWithValue(data.error);
         }
@@ -63,10 +65,12 @@ const loginUser = createAsyncThunk(
       })
       .catch((error) => {
         if (error instanceof Error) {
-          dispatch(addToast({
-            level: 'error',
-            description: error.message,
-          }));
+          dispatch(
+            addToast({
+              level: 'error',
+              description: error.message,
+            }),
+          );
 
           return rejectWithValue(error.message);
         }
@@ -82,10 +86,12 @@ const signUpUser = createAsyncThunk(
 
       await Router.push(Routes.PHONE_VERIFY);
     } catch (e) {
-      dispatch(addToast({
-        level: 'error',
-        description: e.message,
-      }));
+      dispatch(
+        addToast({
+          level: 'error',
+          description: e.message,
+        }),
+      );
 
       return rejectWithValue(e.message);
     }
@@ -99,10 +105,12 @@ const phoneVerification = createAsyncThunk(
       await verifyPhone(data);
       await Router.push(Routes.EMAIL_VERIFY);
     } catch (e) {
-      dispatch(addToast({
-        level: 'error',
-        description: e.message,
-      }));
+      dispatch(
+        addToast({
+          level: 'error',
+          description: e.message,
+        }),
+      );
 
       return rejectWithValue(e.message);
     }
@@ -115,10 +123,12 @@ const phoneCodeResend = createAsyncThunk(
     try {
       return await resendPhoneCode();
     } catch (e) {
-      dispatch(addToast({
-        level: 'error',
-        description: e.message,
-      }));
+      dispatch(
+        addToast({
+          level: 'error',
+          description: e.message,
+        }),
+      );
 
       return rejectWithValue(e.message);
     }
@@ -132,10 +142,12 @@ const emailVerification = createAsyncThunk(
       await verifyEmail(data);
       await Router.push(Routes.DEFAULT);
     } catch (e) {
-      dispatch(addToast({
-        level: 'error',
-        description: e.message,
-      }));
+      dispatch(
+        addToast({
+          level: 'error',
+          description: e.message,
+        }),
+      );
 
       return rejectWithValue(e.message);
     }
@@ -148,10 +160,12 @@ const emailCodeResend = createAsyncThunk(
     try {
       return await resendEmailCode();
     } catch (e) {
-      dispatch(addToast({
-        level: 'error',
-        description: e.message,
-      }));
+      dispatch(
+        addToast({
+          level: 'error',
+          description: e.message,
+        }),
+      );
 
       return rejectWithValue(e.message);
     }
@@ -178,10 +192,12 @@ const sendPasswordResetLink = createAsyncThunk(
     try {
       return await resetPasswordLink(data);
     } catch (e) {
-      dispatch(addToast({
-        level: 'error',
-        description: e.message,
-      }));
+      dispatch(
+        addToast({
+          level: 'error',
+          description: e.message,
+        }),
+      );
 
       return rejectWithValue(e.message);
     }
@@ -194,10 +210,12 @@ const updatePassword = createAsyncThunk(
     try {
       return await updatePasswordRequest(data);
     } catch (e) {
-      dispatch(addToast({
-        level: 'error',
-        description: e.message,
-      }));
+      dispatch(
+        addToast({
+          level: 'error',
+          description: e.message,
+        }),
+      );
 
       return rejectWithValue(e.message);
     }

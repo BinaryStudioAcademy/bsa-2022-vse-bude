@@ -1,10 +1,11 @@
 import { Icon } from '@primitives';
+import { IconColor } from '@enums';
 import type { IconButtonProps } from './types';
 import * as styles from './styles';
 
 export const IconButton = ({
   icon,
-  color = 'yellow',
+  color = IconColor.YELLOW,
   backgroundColor = 'transparent',
   size = 'md',
   cssExtend,

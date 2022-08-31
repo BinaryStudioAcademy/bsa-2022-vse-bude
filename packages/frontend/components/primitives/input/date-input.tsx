@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import DatePicker from 'react-datepicker';
-import { IconName } from '@enums';
+import { IconColor, IconName } from '@enums';
 import { Icon } from '../icon';
 import type { InputDateProps } from './types';
 import * as styles from './styles';
@@ -49,7 +49,7 @@ const InputDate = ({
           calendarStartDay={locale === 'ua' ? 1 : 0}
         />
         <div css={styles.iconWrapper}>
-          <Icon icon={IconName.CALENDAR} color="GRAY" />
+          <Icon icon={IconName.CALENDAR} color={IconColor.GRAY} />
         </div>
       </div>
       {error && <p css={styles.errorMessage}>{error}</p>}

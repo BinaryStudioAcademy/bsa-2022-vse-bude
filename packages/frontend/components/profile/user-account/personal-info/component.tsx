@@ -3,11 +3,9 @@ import { useAuth, useTypedSelector } from '@hooks';
 import { shallowEqual } from 'react-redux';
 import { Flex } from 'grapefruit-ui';
 import { useRef, useState } from 'react';
-import { Button, IconButton } from '@primitives';
+import { Button, IconButton, Avatar } from '@primitives';
 import dynamic from 'next/dynamic';
-import { Avatar } from '@primitives';
-import { IconName } from '@enums';
-import { ColorPalette } from '@vse-bude/shared';
+import { IconColor, IconName } from '@enums';
 import flag from '../../../../public/images/flagBg.png';
 import { NestedLayout } from '../common';
 import * as styles from './styles';
@@ -85,7 +83,7 @@ export const PersonalInfo = () => {
                 icon={IconName.CAMERA}
                 onClick={handleUpdateAvatar}
                 backgroundColor="lightgray"
-                color={ColorPalette.GRAY_300}
+                color={IconColor.GRAY}
                 cssExtend={styles.avatarUpdateButton}
               />
             </div>

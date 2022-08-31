@@ -9,7 +9,7 @@ import {
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { Fragment, useEffect, useState } from 'react';
-import { Routes, IconName, IconColorProps } from '@enums';
+import { Routes, IconName, IconColor } from '@enums';
 import { Logo } from 'components/primitives/logo';
 import { useAppDispatch, useAuth, useMounted, useTypedSelector } from '@hooks';
 import { useRouter } from 'next/router';
@@ -69,7 +69,7 @@ export const Header = () => {
         }))}
       >
         {t('common:header.nav.category')}&nbsp;
-        <Icon icon={IconName.ANGLE_DOWN} color={IconColorProps.YELLOW} />
+        <Icon icon={IconName.ANGLE_DOWN} color={IconColor.YELLOW} />
       </Dropdown>
       <InternalLink
         href={Routes.SEARCH}
@@ -114,7 +114,7 @@ export const Header = () => {
       icon={IconName.LIST}
       size="md"
       onClick={() => setShow(!show)}
-      color="yellow"
+      color={IconColor.YELLOW}
     />
   );
 
@@ -145,7 +145,7 @@ export const Header = () => {
           ]}
         >
           {t('common:header.nav.category')}&nbsp;
-          <Icon icon={IconName.ANGLE_DOWN} color="yellow" />
+          <Icon icon={IconName.ANGLE_DOWN} color={IconColor.YELLOW} />
         </Dropdown>
         <InternalLink
           href={Routes.DEFAULT}
@@ -181,7 +181,7 @@ export const Header = () => {
       icon={IconName.ANGLE_UP}
       size="md"
       onClick={() => setShow(!show)}
-      color="yellow"
+      color={IconColor.YELLOW}
     />
   );
 

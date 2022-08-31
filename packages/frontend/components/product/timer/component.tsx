@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import { useTimer } from '@hooks';
 import { Icon } from '@primitives';
-import { IconName } from '@enums';
+import { IconColor, IconName } from '@enums';
 import { timeToEventObj, timeToEventString } from '../../../helpers/time';
 import type { TimerTranslations } from '../../../common/types/timer';
 import type { TimerProps } from './types';
@@ -36,7 +36,7 @@ export const ProductTimer = ({ date }: TimerProps) => {
   return (
     <div css={timerBadge}>
       <div css={timerIcon}>
-        <Icon icon={IconName.STOPWATCH} color="black" />
+        <Icon icon={IconName.STOPWATCH} color={IconColor.BLACK} />
       </div>
       <div css={timerValue} suppressHydrationWarning={true}>
         {timerValue}

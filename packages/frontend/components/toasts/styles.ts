@@ -1,5 +1,5 @@
-import type { Theme } from "@emotion/react";
-import { css } from "@emotion/react";
+import type { Theme } from '@emotion/react';
+import { css } from '@emotion/react';
 
 export const TRANSITION_TIMEOUT = 300;
 
@@ -13,7 +13,15 @@ export const toastStack = () => css`
   overflow-y: auto;
 `;
 
-export const toast = ({ colors, radiuses, shadows, spaces, fontSizes, fontWeights, lineHeights }: Theme) => css`
+export const toast = ({
+  colors,
+  radiuses,
+  shadows,
+  spaces,
+  fontSizes,
+  fontWeights,
+  lineHeights,
+}: Theme) => css`
   width: 250px;
   border-radius: ${radiuses.sm};
   padding: ${spaces.sm};
@@ -27,7 +35,7 @@ export const toast = ({ colors, radiuses, shadows, spaces, fontSizes, fontWeight
 
   &.toast-enter {
     opacity: 0;
-    transform: translateX(100%)
+    transform: translateX(100%);
   }
   &.toast-enter-active {
     opacity: 1;
@@ -44,25 +52,25 @@ export const toast = ({ colors, radiuses, shadows, spaces, fontSizes, fontWeight
     transition: all ${TRANSITION_TIMEOUT}ms ease-in-out;
   }
 
-  &[data-variant="info"] {
+  &[data-variant='info'] {
     i {
       background-color: rgb(12, 66, 166, 0.2);
     }
   }
 
-  &[data-variant="warning"] {
+  &[data-variant='warning'] {
     i {
       background-color: rgb(255, 184, 0, 0.2);
     }
   }
 
-  &[data-variant="error"] {
+  &[data-variant='error'] {
     i {
       background-color: rgb(232, 20, 20, 0.2);
     }
   }
 
-  &[data-variant="success"] {
+  &[data-variant='success'] {
     i {
       background-color: rgb(0, 204, 102, 0.2);
     }
