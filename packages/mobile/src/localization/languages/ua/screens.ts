@@ -100,9 +100,9 @@ export const screens = {
     PHONE_TOOLTIP: 'Інформація про телефон',
     CALLING_CODE: 'Код',
     INSTAGRAM: 'Instagram',
-    INSTAGRAM_PLACEHOLDER: 'Ввідіть нікнейм',
+    INSTAGRAM_PLACEHOLDER: 'Введіть нікнейм',
     FACEBOOK: 'Facebook',
-    FACEBOOK_PLACEHOLDER: 'Ввідіть нікнейм',
+    FACEBOOK_PLACEHOLDER: 'Введіть нікнейм',
     SITE: 'Сайт',
   },
 };
