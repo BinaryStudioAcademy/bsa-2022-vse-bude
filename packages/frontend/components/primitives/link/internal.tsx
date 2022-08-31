@@ -8,11 +8,16 @@ export function InternalLink({
   label,
   passHref = true,
   children,
+  cssExtend,
   ...props
 }: InternalLinkProps) {
   return (
     <Link passHref={passHref} {...props}>
-      <a data-variant={variant} aria-disabled={disabled} css={linkStyles}>
+      <a
+        data-variant={variant}
+        aria-disabled={disabled}
+        css={[linkStyles, cssExtend]}
+      >
         {label || children}
       </a>
     </Link>

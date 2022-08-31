@@ -21,9 +21,9 @@ export const ProfileInfo = () => {
 
   return (
     <div css={styles.profileInfo}>
-      <div css={styles.icons}>
+      <div css={styles.iconsWrapper}>
         {/* change link */}
-        <InternalLink href={Routes.DEFAULT}>
+        <InternalLink href={Routes.DEFAULT} cssExtend={styles.icons}>
           <Icon
             icon={IconName.STAR_OUTLINED}
             size="md"

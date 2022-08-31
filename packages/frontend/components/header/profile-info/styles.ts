@@ -73,10 +73,11 @@ export const popoverContentItem = ({
   }
 `;
 
-export const icons = ({ spaces }: Theme) => css`
+export const iconsWrapper = ({ spaces }: Theme) => css`
   display: flex;
   align-items: center;
-  i {
+  & > a,
+  & > button {
     margin-right: ${spaces.md};
     cursor: pointer;
   }
@@ -88,12 +89,16 @@ export const newNotifications = ({ spaces, colors, radiuses }: Theme) => css`
   &::after {
     content: '';
     position: absolute;
-    top: -7px;
-    right: -7px;
+    top: -5px;
+    right: -8px;
     display: block;
     width: ${spaces.sm};
     height: ${spaces.sm};
     border-radius: ${radiuses.circle};
     background-color: ${colors.accent};
   }
+`;
+
+export const icons = css`
+  line-height: 18px;
 `;
