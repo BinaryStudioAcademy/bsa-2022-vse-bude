@@ -63,12 +63,8 @@ const Navigation: FC = () => {
             component={NewItemScreen}
             options={{
               title: t('make_a_post.TITLE'),
-              headerLeft: () => {
-                return <HeaderLeft />;
-              },
-              headerRight: () => {
-                return <HeaderSave />;
-              },
+              headerLeft: HeaderLeft,
+              headerRight: HeaderSave,
             }}
           />
         </NativeStack.Group>
