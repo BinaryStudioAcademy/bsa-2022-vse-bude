@@ -76,7 +76,7 @@ export const ItemInfoAuction = ({
             isFavorite={isInFavorite}
             backgroundColor="transparent"
             size="md"
-          ></FavoriteButton>
+          />
         </div>
       </form>
     </div>
