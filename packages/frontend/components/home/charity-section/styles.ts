@@ -69,4 +69,10 @@ export const sliderWrapper = ({
       opacity: 1;
     }
   }
+
+  .splide__slide {
+    display: flex;
+    justify-content: center;
+    padding: 0px ${spaces.xs};
+  }
 `;
