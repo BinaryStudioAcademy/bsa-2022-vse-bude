@@ -106,22 +106,40 @@ export class UserProfileRepository {
       socialMedia.map((userLink) => {
         const { id, link, socialMedia } = userLink;
 
-        return this._dbClient.socialMedia.upsert({
-          where: { id },
-          update: {
-            link,
-          },
-          create: {
-            socialMedia,
-            link,
-            ownedByUserId: userId,
-          },
-          select: {
-            id: true,
-            socialMedia: true,
-            link: true,
-          },
-        });
+        if (id && link) {
+          return this._dbClient.socialMedia.update({
+            where: {
+              id,
+            },
+            data: {
+              link,
+            },
+            select: {
+              id: true,
+              socialMedia: true,
+              link: true,
+            },
+          });
+        } else if (link) {
+          return this._dbClient.socialMedia.create({
+            data: {
+              socialMedia,
+              link,
+              ownedByUserId: userId,
+            },
+            select: {
+              id: true,
+              socialMedia: true,
+              link: true,
+            },
+          });
+        } else if (id && !link) {
+          return this._dbClient.socialMedia.delete({
+            where: {
+              id,
+            },
+          });
+        }
       }),
     );
   }

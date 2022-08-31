@@ -15,7 +15,7 @@ type FullUserProfileDto = {
   lastName: string;
   email: string;
   phone?: string;
-  userAddress: UserAddressDto;
+  userAddress?: UserAddressDto;
   socialMedia: SocialMedia[];
 };
 

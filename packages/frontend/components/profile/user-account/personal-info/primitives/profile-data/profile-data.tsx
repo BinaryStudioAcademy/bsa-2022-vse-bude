@@ -32,7 +32,7 @@ export const ProfileData = ({ user }: { user: UserProfileDto }) => {
       </div>
 
       <div css={styles.section}>
-        {socialMedia.length && (
+        {!!socialMedia.length && (
           <h4 css={styles.sectionHeader}>
             {t('personal-info:headline.socialNetworks')}
           </h4>

@@ -1,6 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import type { Http } from '@vse-bude/shared';
-import { getUserProfileSSR, getFullUserProfile } from '@services';
+import type { Http, UpdateFullUserProfileDto } from '@vse-bude/shared';
+import {
+  getUserProfileSSR,
+  getFullUserProfile,
+  updateUserData,
+} from '@services';
 import { ProfileActions } from './action-types';
 
 export const fetchUserProfileSSR = createAsyncThunk(
@@ -13,4 +17,10 @@ export const fetchFullUserProfile = createAsyncThunk(
   ProfileActions.FETCH_FULL_USER_PROFILE,
   async (_, { rejectWithValue }) =>
     getFullUserProfile().catch((e) => rejectWithValue(e.message)),
+);
+
+export const updateUserProfile = createAsyncThunk(
+  ProfileActions.SAVE_USER_PROFILE,
+  async ({ data }: { data: UpdateFullUserProfileDto }, { rejectWithValue }) =>
+    updateUserData({ data }).catch((e) => rejectWithValue(e.message)),
 );

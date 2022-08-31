@@ -1,8 +1,12 @@
 import type {
   FullUserProfileDto,
+  UpdateFullUserProfileDto,
   SaveUserProfileDto,
   UserAddressDto,
   MappedLinks,
+  SocialMedia} from '@vse-bude/shared';
+import {
+  SocialMediaType,
 } from '@vse-bude/shared';
 
 const addressKeys: string[] = [
@@ -58,5 +62,54 @@ export const profileMapper = ({
     password: '',
     newPassword: '',
     repeatPassword: '',
+  };
+};
+
+export const updateDtoMapper = ({
+  data,
+  currentLinks,
+}: {
+  data: SaveUserProfileDto;
+  currentLinks: SocialMedia[];
+}): UpdateFullUserProfileDto => {
+  const {
+    firstName,
+    lastName,
+    email,
+    phone,
+    instagram,
+    linkedin,
+    facebook,
+    password,
+    newPassword,
+    repeatPassword,
+  } = data;
+
+  const formLinks: MappedLinks = { instagram, linkedin, facebook };
+  const socialMedia: SocialMedia[] = [];
+  for (const key in formLinks) {
+    const socialNetwork = currentLinks.find(
+      (it) => it.socialMedia === key.toUpperCase(),
+    );
+    if (socialNetwork) {
+      const linkToUpd = { ...socialNetwork, link: formLinks[key] };
+      socialMedia.push(linkToUpd);
+    } else if (formLinks[key].trim()) {
+      socialMedia.push({
+        link: formLinks[key],
+        socialMedia: SocialMediaType[key.toUpperCase()],
+      });
+    }
+  }
+
+  return {
+    firstName,
+    lastName,
+    email,
+    phone,
+    socialMedia,
+    password,
+    newPassword,
+    repeatPassword,
   };
 };

@@ -88,17 +88,19 @@ export class UserProfileService {
     return this._userProfileRepository.updateUserProfile({ userId, data });
   }
 
-  public updateUserSocialMedia({
+  public async updateUserSocialMedia({
     userId,
     socialMedia,
   }: {
     userId: string;
     socialMedia: SocialMedia[];
   }) {
-    return this._userProfileRepository.updateUserSocialMedia({
+    await this._userProfileRepository.updateUserSocialMedia({
       userId,
       socialMedia,
     });
+    
+return {};
   }
 
   public async changePassword({
@@ -134,8 +136,7 @@ export class UserProfileService {
     }
 
     const newPasswordHash = this._hashService.generateHash(newPassword);
-
-    this._userProfileRepository.changePassword({
+    await this._userProfileRepository.changePassword({
       userId,
       passwordHash: newPasswordHash,
     });

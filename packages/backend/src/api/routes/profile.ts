@@ -51,10 +51,12 @@ export const initProfileRoutes = (
         data: { firstName, lastName, email, phone },
       });
 
-      const links = await profileService.updateUserSocialMedia({
+      await profileService.updateUserSocialMedia({
         userId,
         socialMedia,
       });
+
+      const links = await profileService.getSocialMedia({ userId });
 
       if (newPassword) {
         await profileService.changePassword({

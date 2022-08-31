@@ -1,4 +1,5 @@
 import { useTranslation } from 'next-i18next';
+import { useAppDispatch } from '@hooks';
 import type React from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
@@ -7,12 +8,14 @@ import { userUpdateSchema } from 'validation-schemas/user/user-update';
 import type { SaveUserProfileDto, FullUserProfileDto } from '@vse-bude/shared';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { UserPersonalInfoValidationMessage } from '@vse-bude/shared';
-import { profileMapper } from '@helpers';
+import { profileMapper, updateDtoMapper } from '@helpers';
+import { updateUserProfile } from '@store';
 import { SectionHeader, NestedLayout } from '../common';
 import * as styles from './styles';
 
 const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -31,7 +34,10 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
 
   const onSave: SubmitHandler<SaveUserProfileDto> = (data, event) => {
     event.preventDefault();
-    console.log('data', data);
+    const currentLinks = user.socialMedia;
+    dispatch(
+      updateUserProfile({ data: updateDtoMapper({ data, currentLinks }) }),
+    );
   };
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
