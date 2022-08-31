@@ -17,6 +17,9 @@ type FullUserProfileDto = {
   phone?: string;
   userAddress: UserAddressDto;
   socialMedia: SocialMedia[];
+  password?: string;
+  newPassword?: string;
+  repeatPassword?: string;
 };
 
 type UserAddressDto = {

@@ -30,4 +30,8 @@ export class HashService {
       'hex',
     );
   }
+
+  public getRandomHash(): string {
+    return randomBytes(32).toString('hex');
+  }
 }

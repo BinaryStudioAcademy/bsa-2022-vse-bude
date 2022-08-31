@@ -9,12 +9,14 @@ import * as styles from './styles';
 
 interface ItemInfoAuctionProps {
   item: ItemDto;
+  isInFavorite: boolean;
   onBid: () => void;
   onChangeIsFavorite: () => void;
 }
 
 export const ItemInfoAuction = ({
   item,
+  isInFavorite,
   onBid,
   onChangeIsFavorite,
 }: ItemInfoAuctionProps) => {
@@ -24,6 +26,8 @@ export const ItemInfoAuction = ({
 
   const inputBidRef = useRef<HTMLInputElement>(null);
 
+  const minBidAmount = +item.currentPrice + +item.minimalBid + 1;
+
   return (
     <div css={styles.wrapper}>
       <div css={styles.priceTimerWrapper}>
@@ -31,7 +35,7 @@ export const ItemInfoAuction = ({
         <div css={styles.priceWrapper}>
           <ItemPrice
             currency="UAH"
-            amount={item.minimalBid}
+            amount={item.currentPrice}
             cssExtended={styles.price}
           />
           <span>{t('currentBid')}</span>
@@ -48,7 +52,7 @@ export const ItemInfoAuction = ({
             placeholder={t('bidInput')}
           />
           <span>{t('bidInputCaption')} </span>
-          <span>UAH {+item.minimalBid + 1}</span>
+          <span>UAH {minBidAmount}</span>
         </div>
 
         <div css={styles.buttons}>
@@ -56,7 +60,7 @@ export const ItemInfoAuction = ({
           <FavoriteButton
             cssExtended={styles.favouriteButton}
             onChangeIsFavorite={onChangeIsFavorite}
-            isFavorite={false}
+            isFavorite={isInFavorite}
             backgroundColor="transparent"
             size="md"
           ></FavoriteButton>

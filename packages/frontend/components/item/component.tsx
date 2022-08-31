@@ -4,6 +4,11 @@ import { ProductType } from '@vse-bude/shared';
 import { Container } from '@primitives';
 import { lightTheme } from 'theme';
 import { useWindowSize } from '@hooks';
+import { useInFavorite, useAppDispatch } from '@hooks';
+import {
+  deleteProductFromFavorites,
+  addProductToFavorites,
+} from 'store/favorite-product';
 import { ItemImageSlider } from './image-slider/component';
 import { ItemInfoSelling } from './item-info-selling/component';
 import { ItemInfoAuction } from './item-info-auction/component';
@@ -25,9 +30,19 @@ export const Item = ({ item }: ItemProps) => {
     'https://picsum.photos/id/4/640/480/',
   ];
 
-  const handleAddFavourite = () => console.log('favourite');
   const handleBuy = () => console.log('buy');
   const handleBid = () => console.log('bid');
+
+  const isInFavorite = useInFavorite(item.id);
+
+  const dispatch = useAppDispatch();
+
+  const onChangeIsFavorite = () => {
+    const favAction = isInFavorite
+      ? deleteProductFromFavorites
+      : addProductToFavorites;
+    dispatch(favAction(item.id));
+  };
 
   return (
     <React.Fragment>
@@ -40,14 +55,16 @@ export const Item = ({ item }: ItemProps) => {
         {item.type === ProductType.SELLING ? (
           <ItemInfoSelling
             item={item}
+            isInFavorite={isInFavorite}
             onBuy={handleBuy}
-            onChangeIsFavorite={handleAddFavourite}
+            onChangeIsFavorite={onChangeIsFavorite}
           />
         ) : (
           <ItemInfoAuction
             item={item}
+            isInFavorite={isInFavorite}
             onBid={handleBid}
-            onChangeIsFavorite={handleAddFavourite}
+            onChangeIsFavorite={onChangeIsFavorite}
           />
         )}
       </Container>

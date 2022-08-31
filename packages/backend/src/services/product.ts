@@ -5,14 +5,23 @@ import type { Request } from 'express';
 import { getUserIdFromRequest } from '@helpers';
 import type {
   AddProductToFavorites,
+  BuyProduct,
   DeleteProductFromFavorites,
 } from '@vse-bude/shared';
+import { ProductStatus } from '@prisma/client';
+import type { VerifyService } from '@services';
 
 export class ProductService {
   private _productRepository: ProductRepository;
 
-  constructor(categoryRepository: ProductRepository) {
+  private _verifyService: VerifyService;
+
+  constructor(
+    categoryRepository: ProductRepository,
+    verifyService: VerifyService,
+  ) {
     this._productRepository = categoryRepository;
+    this._verifyService = verifyService;
   }
 
   public getAll(query: ProductQuery) {
@@ -23,12 +32,19 @@ export class ProductService {
     const { id } = req.params;
     const product = await this._productRepository.getById(id);
     if (!product) {
-      throw new ProductNotFoundError(req);
+      throw new ProductNotFoundError();
     }
 
     product.category.title = req.t(`categories.${product.category.title}`);
 
-    return product;
+    const currentPrice = await this._productRepository.getCurrentPrice(
+      product.id,
+    );
+
+    return {
+      ...product,
+      currentPrice: currentPrice,
+    };
   }
 
   public async incrementViews(id: string, req: Request) {
@@ -80,6 +96,27 @@ export class ProductService {
       return undefined;
     }
     await this._productRepository.deleteFromFavorites(userId, productId);
+
+    return productId;
+  }
+
+  public async buy({ userId, productId }: BuyProduct) {
+    const isActive = await this._productRepository.checkStatus(
+      productId,
+      ProductStatus.ACTIVE,
+    );
+    if (!isActive) {
+      return undefined;
+    }
+    const isUserVerified = await this._verifyService.isUserVerified(userId);
+    if (!isUserVerified) {
+      return undefined;
+    }
+    await this._productRepository.buy(
+      productId,
+      userId,
+      ProductStatus.FINISHED,
+    );
 
     return productId;
   }
