@@ -58,6 +58,10 @@ const CameraIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="camera" {...iconProps} />
 );
 
+const CrossIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="x" {...iconProps} />
+);
+
 const LogInIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="log-in" {...iconProps} />
 );
@@ -83,4 +87,5 @@ export {
   CustomFeatherIcon,
   CameraIcon,
   ClockIcon,
+  CrossIcon,
 };
