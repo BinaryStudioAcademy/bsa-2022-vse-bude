@@ -11,9 +11,9 @@ const errorHandler: Middleware =
       } = action;
 
       notification.error(message, t('common:common.ERROR'));
-
-      return next(action);
     }
+
+    return next(action);
   };
 
 export { errorHandler };
