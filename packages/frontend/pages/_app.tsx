@@ -28,7 +28,7 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
     <ThemeProvider>
       <UserProvider>{getLayout(<Component {...pageProps} />)}</UserProvider>
       <PagesLoader />
-      {isMounted && hasToken && isModal && <VerificationModal></VerificationModal>}
+      {isMounted && hasToken && isModal && <VerificationModal />}
     </ThemeProvider>
   );
 };

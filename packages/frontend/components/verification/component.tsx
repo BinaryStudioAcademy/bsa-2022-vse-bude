@@ -48,7 +48,7 @@ export default function VerificationModal() {
         <InternalLink
           variant="dashboard"
           label={t('verify:link.later')}
-          href={Routes.SIGN_IN}
+          href={'#'}
         />
       </div>
     </Modal>
