@@ -10,9 +10,8 @@ import {
   HttpStatusCode,
   UserPersonalInfoValidationMessage,
 } from '@vse-bude/shared';
-import type { HashService } from '@services';
+import type { HashService, S3StorageService } from '@services';
 import { ProfileError } from '@errors';
-import type { S3StorageService } from '@services';
 import { getFilenameFromUrl } from '@helpers';
 
 export class UserProfileService {
