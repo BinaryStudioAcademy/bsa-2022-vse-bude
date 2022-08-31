@@ -1,3 +1,4 @@
+import { ColorPalette, IPostForms } from '@vse-bude/shared';
 import React, { FC } from 'react';
 import {
   DropDown,
@@ -6,35 +7,20 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Popover,
 } from '~/components/components';
-import Popover from 'react-native-popover-view';
 import { useAppForm, useTranslation } from '~/hooks/hooks';
 import { CALLING_CODE, CITIES, COUNTRIES, CURRENCY } from '~/mock/new-item';
 import { globalStyles } from '~/styles/styles';
-import { ColorPalette } from '@vse-bude/shared';
 import { AddPhotos } from '../add-photos/add-photos';
-import { useStyles } from './styles';
 
-type NewItem = {
-  category: string;
-  titleName: string;
-  description: string;
-  price: number;
-  currency: string;
-  country: string;
-  city: string;
-  phone: string;
-  callingCode: string;
-  instagram?: string;
-  facebook?: string;
-  site?: string;
-};
+import { useStyles } from './styles';
 
 const NewItemForm: FC = () => {
   const { t } = useTranslation();
   const styles = useStyles();
 
-  const { control, errors } = useAppForm<NewItem>({
+  const { control, errors } = useAppForm<IPostForms>({
     defaultValues: {
       currency: 'UAH',
       country: 'Ukraine',
@@ -62,7 +48,7 @@ const NewItemForm: FC = () => {
       <Input
         label={t('make_a_post.TITLE_NAME')}
         placeholder={t('make_a_post.TITLE_NAME_PLACEHOLDER')}
-        name="titleName"
+        name="title"
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
@@ -76,12 +62,19 @@ const NewItemForm: FC = () => {
         contentContainerStyle={globalStyles.mt5}
       />
 
-      <View style={[styles.row, globalStyles.mt5]}>
-        <View style={styles.leftWrap}>
+      <View
+        style={[
+          styles.row,
+          globalStyles.mt5,
+          globalStyles.alignItemsCenter,
+          globalStyles.flexDirectionRow,
+        ]}
+      >
+        <View style={[styles.leftWrap, globalStyles.flexDirectionRow]}>
           <Popover
             popoverStyle={styles.popover}
             from={
-              <TouchableOpacity style={styles.tooltipWrap}>
+              <TouchableOpacity style={globalStyles.flexDirectionRow}>
                 <Text style={[globalStyles.fs12]}>
                   {t('make_a_post.PRICE')}
                 </Text>
@@ -101,7 +94,13 @@ const NewItemForm: FC = () => {
         </View>
       </View>
 
-      <View style={styles.row}>
+      <View
+        style={[
+          styles.row,
+          globalStyles.alignItemsCenter,
+          globalStyles.flexDirectionRow,
+        ]}
+      >
         <Input
           label=""
           placeholder={t('make_a_post.PRICE_PLACEHOLDER')}
@@ -130,6 +129,7 @@ const NewItemForm: FC = () => {
         control={control}
         items={COUNTRIES}
         zIndex={20}
+        disabled={true}
       />
       <DropDown
         label={t('make_a_post.CITY')}
@@ -138,12 +138,19 @@ const NewItemForm: FC = () => {
         items={CITIES}
         zIndex={15}
       />
-      <View style={[styles.row, globalStyles.mt5]}>
-        <View style={styles.leftWrap}>
+      <View
+        style={[
+          styles.row,
+          globalStyles.mt5,
+          globalStyles.alignItemsCenter,
+          globalStyles.flexDirectionRow,
+        ]}
+      >
+        <View style={[styles.leftWrap, globalStyles.flexDirectionRow]}>
           <Popover
             popoverStyle={styles.popover}
             from={
-              <TouchableOpacity style={styles.tooltipWrap}>
+              <TouchableOpacity style={globalStyles.flexDirectionRow}>
                 <Text style={[globalStyles.fs12]}>
                   {t('make_a_post.MOBILE_PHONE')}
                 </Text>
@@ -165,7 +172,13 @@ const NewItemForm: FC = () => {
         </View>
       </View>
 
-      <View style={styles.row}>
+      <View
+        style={[
+          styles.row,
+          globalStyles.alignItemsCenter,
+          globalStyles.flexDirectionRow,
+        ]}
+      >
         <Input
           label=""
           placeholder={t('make_a_post.MOBILE_PHONE_PLACEHOLDER')}
