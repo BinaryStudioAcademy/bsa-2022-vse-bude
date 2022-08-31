@@ -34,7 +34,11 @@ export const ConsentModal = () => {
           <Button
             variant="outlined"
             disabled={isDisabled}
-            tooltip={isDisabled ? t("rules:createPostRules.tooltip.disabled"): t("rules:createPostRules.tooltip.enabled")}
+            tooltip={
+              isDisabled
+                ? t('rules:createPostRules.tooltip.disabled')
+                : t('rules:createPostRules.tooltip.enabled')
+            }
             onClick={() => setIsVisible(false)}
           >
             {t('rules:createPostRules.button.accept')}
