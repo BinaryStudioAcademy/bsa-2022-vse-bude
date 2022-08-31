@@ -7,7 +7,6 @@ import type {
   AddProductToFavorites,
   BuyProduct,
   DeleteProductFromFavorites,
-  CurrentPriceResponse,
 } from '@vse-bude/shared';
 import { ProductStatus } from '@prisma/client';
 import type { VerifyService } from '@services';
@@ -66,16 +65,6 @@ export class ProductService {
     const favProducts = await this._productRepository.favoriteIds(userId);
 
     return favProducts.map((favProd) => favProd.productId);
-  }
-
-  public async getCurrentPrice(
-    productId: string,
-  ): Promise<CurrentPriceResponse> {
-    const price = await this._productRepository.getCurrentPrice(productId);
-
-    return {
-      price: Number(price),
-    };
   }
 
   public async getFavoriteProducts(userId: string) {
