@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 import { AppIcon, IconProps } from '~/common/types/types';
 
 const CustomFeatherIcon: FC<IconProps> = (iconProps) => (
@@ -76,7 +75,7 @@ const ImageIcon: AppIcon = (iconProps) => (
 );
 
 const InfoIcon: AppIcon = (iconProps) => (
-  <Icon name="info-circle" {...iconProps} />
+  <FeatherIcon name="info" {...iconProps} />
 );
 
 export {
