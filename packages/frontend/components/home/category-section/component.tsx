@@ -25,7 +25,7 @@ const CategorySection = () => {
   const { t } = useTranslation();
 
   const categoriesSliced = categories.slice(0, 4);
-  
+
   const categoriesMapped = categoriesSliced.map((item, i) => ({
     ...item,
     image: mockImage[i] || '/images/categories/decor.png',
