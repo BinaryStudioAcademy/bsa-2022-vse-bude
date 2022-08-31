@@ -16,12 +16,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: In progress
-        uses: zattoo/deploy-status@v1
-        with:
-          token: ${{ github.token }}
-          environment: Release
-          state: in_progress
+      - name: Set status [pending]
+        uses: ouzi-dev/commit-status-updater@v1.1.0
       - name: Deploy frontend and backend. Migrate DB.
         uses: appleboy/ssh-action@master
         with:
@@ -47,18 +43,8 @@ jobs:
           url: https://vse-bude.com.ua|https://vse-bude.com.ua/api/health/
           max-attempts: 5
           retry-delay: 10s
-      - name: Success
-        if: success()
-        uses: zattoo/deploy-status@v1
+      - name: Set job status
+        if: always()
+        uses: ouzi-dev/commit-status-updater@v1.1.0
         with:
-          token: ${{ github.token }}
-          environment: Release
-          environment_url: https://vse-bude.com.ua
-          state: success
-      - name: Failure
-        if: failure()
-        uses: zattoo/deploy-status@v1
-        with:
-          token: ${{ github.token }}
-          environment: Release
-          state: failure
+          status: '${{ job.status }}'
