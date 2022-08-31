@@ -50,7 +50,10 @@ export const initServices = (repositories: Repositories) => {
     ),
     newsService: new NewsService(repositories.newsRepository),
     healthService: new HealthService(repositories.healthRepository),
-    profileService: new UserProfileService(repositories.profileRepository),
+    profileService: new UserProfileService({
+      userProfileRepository: repositories.profileRepository,
+      hashService,
+    }),
     authService: new AuthService(
       repositories.userRepository,
       repositories.refreshTokenRepository,

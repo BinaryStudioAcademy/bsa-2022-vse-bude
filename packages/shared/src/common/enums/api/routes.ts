@@ -40,6 +40,7 @@ export enum ProductApiRoutes {
 
 export enum ProfileApiRoutes {
   GET_USER_BY_ID = '/:userId',
+  GET_FULL_USER_DATA = '/full-data',
   UPDATE_DATA = '/save',
 }
 
