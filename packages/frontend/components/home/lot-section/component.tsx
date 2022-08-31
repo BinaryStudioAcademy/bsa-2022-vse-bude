@@ -20,7 +20,6 @@ const LotSection = ({ title, lots, loadMoreTitle }: LotProps) => {
           options={{
             fixedWidth: 320,
             pagination: false,
-            arrows: false,
             gap: 10,
             focus: 'center',
             mediaQuery: 'min',

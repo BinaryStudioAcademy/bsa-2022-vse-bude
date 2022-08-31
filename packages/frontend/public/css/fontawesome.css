@@ -141,6 +141,11 @@
 .fa-xmark::before {
   content: '\f00d';
 }
+
+.fa-calendar-days::before {
+  content: '\f073';
+}
+
 :root,
 :host {
   --fa-font-brands: normal 400 1em/1 'Font Awesome 6 Brands';
