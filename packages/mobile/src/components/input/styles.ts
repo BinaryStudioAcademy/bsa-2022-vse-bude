@@ -11,6 +11,12 @@ const styles = StyleSheet.create({
   label: {
     lineHeight: 14,
   },
+  eyeIcon: {
+    position: 'absolute',
+    right: 5,
+    height: '100%',
+    justifyContent: 'center',
+  },
 });
 
 export { styles };
