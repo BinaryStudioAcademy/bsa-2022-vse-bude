@@ -1,23 +1,8 @@
-import { Router } from 'next/router';
-import { Spinner } from 'components/primitives/loader/spinner';
-import { useState } from 'react';
-import { loaderWrapper } from './styles';
+import { ColorPalette } from '@vse-bude/shared';
+import NextNProgress from 'nextjs-progressbar';
 
-function PagesLoader() {
-  const [isLoading, setIsLoading] = useState(false);
-  Router.events.on('routeChangeStart', () => setIsLoading(true));
-  Router.events.on('routeChangeComplete', () => setIsLoading(false));
-  Router.events.on('routeChangeError', () => setIsLoading(false));
+const PageLoader = () => (
+  <NextNProgress height={4} color={ColorPalette.YELLOW_200} />
+);
 
-  return (
-    <>
-      {isLoading && (
-        <div css={loaderWrapper}>
-          <Spinner size="big" />
-        </div>
-      )}
-    </>
-  );
-}
-
-export default PagesLoader;
+export default PageLoader;

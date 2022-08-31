@@ -31,6 +31,7 @@
     "next": "12.2.5",
     "next-i18next": "11.3.0",
     "next-redux-wrapper": "7.0.5",
+    "nextjs-progressbar": "^0.0.14",
     "react": "18.2.0",
     "react-datepicker": "^4.8.0",
     "react-dom": "18.2.0",
