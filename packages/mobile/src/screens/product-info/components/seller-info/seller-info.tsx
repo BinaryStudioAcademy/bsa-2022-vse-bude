@@ -1,11 +1,6 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  ColorPalette,
-  RequestUserProfileDto,
-  SocialMediaType,
-  UserProfileDto,
-} from '@vse-bude/shared';
+import { AuthorDto, ColorPalette, SocialMediaType } from '@vse-bude/shared';
 import { globalStyles } from '~/styles/styles';
 import {
   Text,
@@ -20,9 +15,12 @@ import {
 } from '../../../../components/components';
 import { styles } from './styles';
 
-const SellerInfo: FC<
-  Partial<UserProfileDto & Pick<RequestUserProfileDto, 'phone'>>
-> = ({ firstName, avatar, phone, socialMedia }) => {
+const SellerInfo: FC<AuthorDto> = ({
+  firstName,
+  avatar,
+  phone,
+  socialMedia,
+}) => {
   const { t } = useTranslation();
 
   return (
