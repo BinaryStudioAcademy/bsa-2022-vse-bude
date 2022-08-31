@@ -15,7 +15,7 @@ jobs:
       url: http://vse-bude.com.ua
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v1
       - name: Set deployment status to [in_progress]
         id: set_state_in_progress
         uses: rsotnychenko/deployment-status-update@0.2.0
