@@ -1,5 +1,5 @@
 import { useTranslation } from 'next-i18next';
-import { useAuth, useTypedSelector } from '@hooks';
+import { useAuth, useTypedSelector, useAppDispatch } from '@hooks';
 import { shallowEqual } from 'react-redux';
 import { Flex } from 'grapefruit-ui';
 import { useState } from 'react';
@@ -9,6 +9,7 @@ import flag from '../../../../public/images/flagBg.png';
 import { NestedLayout } from '../common';
 import * as styles from './styles';
 import { Noavatar, Avatar, ProfileData } from './primitives';
+import { fetchFullUserProfile } from '@store';
 
 const EditForm = dynamic(() => import('./edit-form'));
 
@@ -16,7 +17,13 @@ export const PersonalInfo = () => {
   const { t } = useTranslation();
   const [isEditing, setIsEditing] = useState(false);
   const { user: authUser } = useAuth();
-  const user = useTypedSelector((state) => state.profile.user, shallowEqual);
+  const { user, loading } = useTypedSelector(
+    (state) => state.profile,
+    shallowEqual,
+  );
+
+  const dispatch = useAppDispatch();
+  const onGetFullProfile = () => dispatch(fetchFullUserProfile());
 
   if (!user) {
     return null;
@@ -44,14 +51,14 @@ export const PersonalInfo = () => {
             <Button
               type="button"
               variant="outlined"
-              onClick={() => setIsEditing(true)}
+              onClick={() => {setIsEditing(true); onGetFullProfile()}}
             >
               {t('personal-info:action.edit')}
             </Button>
           )}
         </Flex>
-        {isEditing && <EditForm />}
-        {!isEditing && <ProfileData user={user} />}
+        {isEditing && !loading && <EditForm user={user}/>}
+        {!isEditing && !loading && <ProfileData user={user} />}
       </div>
     </NestedLayout>
   );

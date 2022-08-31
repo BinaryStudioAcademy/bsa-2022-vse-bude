@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import type { Theme } from '@emotion/react';
 
 export const profileWrapper = ({ spaces }: Theme) => css`
-  margin-top: ${spaces.xl7};
+  margin-top: ${spaces.xl};
 `;
 
 export const cell = ({

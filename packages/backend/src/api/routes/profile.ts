@@ -18,8 +18,8 @@ export const initProfileRoutes = (
     wrap(async (req: Request) => {
       const { userId } = req.params;
       const { t } = req;
-      const user = profileService.getUser({ userId, t });
-      const socialMedia = profileService.getSocialMedia({ userId });
+      const user = await profileService.getUser({ userId, t });
+      const socialMedia = await profileService.getSocialMedia({ userId });
 
       return {
         ...user,
@@ -33,8 +33,12 @@ export const initProfileRoutes = (
     authMiddleware,
     wrap(async (req: Request) => {
       const { userId, t } = req;
-      const fullUserProfile = profileService.getFullUserData({ userId, t });
-
+      console.log(userId);
+      const fullUserProfile = await profileService.getFullUserData({
+        userId,
+        t,
+      });
+      console.log(fullUserProfile);
       return {
         ...fullUserProfile,
       };

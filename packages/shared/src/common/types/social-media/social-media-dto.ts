@@ -11,4 +11,10 @@ type NewSocialMedia = {
   socialMedia: SocialMediaType;
 };
 
-export type { SocialMedia, NewSocialMedia };
+type MappedLinks = {
+  facebook: string;
+  linkedin: string;
+  instagram: string;
+};
+
+export type { SocialMedia, NewSocialMedia, MappedLinks };
