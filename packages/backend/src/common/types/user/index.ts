@@ -4,4 +4,6 @@ export type {
   GetUserProfileDto,
   UserSocialMediaDto,
   UpdateUserProfileDto,
+  UpdatePasswordDto,
+  GetUserPersonalDataDto,
 } from './profile';

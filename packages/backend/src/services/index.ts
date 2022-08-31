@@ -18,6 +18,7 @@ import { NewsService } from './news';
 import { HealthService } from './health';
 import { EmailService } from './email';
 import { UserProfileService } from './profile';
+import { BidService } from './bid';
 
 export const initServices = (repositories: Repositories) => {
   const isProduction = getEnv('NODE_ENV') === Environment.PRODUCTION;
@@ -44,10 +45,16 @@ export const initServices = (repositories: Repositories) => {
 
   return {
     categoryService: new CategoryService(repositories.categoryRepository),
-    productService: new ProductService(repositories.productRepository),
+    productService: new ProductService(
+      repositories.productRepository,
+      verifyService,
+    ),
     newsService: new NewsService(repositories.newsRepository),
     healthService: new HealthService(repositories.healthRepository),
-    profileService: new UserProfileService(repositories.profileRepository),
+    profileService: new UserProfileService({
+      userProfileRepository: repositories.profileRepository,
+      hashService,
+    }),
     authService: new AuthService(
       repositories.userRepository,
       repositories.refreshTokenRepository,
@@ -61,6 +68,10 @@ export const initServices = (repositories: Repositories) => {
     emailService: emailService,
     s3StorageService: new S3StorageService(),
     verifyService: verifyService,
+    bidService: new BidService(
+      repositories.bidRepository,
+      repositories.productRepository,
+    ),
   };
 };
 
@@ -76,4 +87,5 @@ export {
   type HealthService,
   type UserProfileService,
   type EmailService,
+  type BidService,
 };

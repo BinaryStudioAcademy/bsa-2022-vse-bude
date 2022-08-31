@@ -24,6 +24,8 @@ export const ItemInfoAuction = ({
 
   const inputBidRef = useRef<HTMLInputElement>(null);
 
+  const minBidAmount = +item.currentPrice + +item.minimalBid + 1;
+
   return (
     <div css={styles.wrapper}>
       <div css={styles.priceTimerWrapper}>
@@ -31,7 +33,7 @@ export const ItemInfoAuction = ({
         <div css={styles.priceWrapper}>
           <ItemPrice
             currency="UAH"
-            amount={item.minimalBid}
+            amount={item.currentPrice}
             cssExtended={styles.price}
           />
           <span>{t('currentBid')}</span>
@@ -48,7 +50,7 @@ export const ItemInfoAuction = ({
             placeholder={t('bidInput')}
           />
           <span>{t('bidInputCaption')} </span>
-          <span>UAH {+item.minimalBid + 1}</span>
+          <span>UAH {minBidAmount}</span>
         </div>
 
         <div css={styles.buttons}>

@@ -10,6 +10,7 @@ export enum ApiRoutes {
   VERIFY = '/verify',
   HEALTH = '/health',
   CREATE_POST = '/post',
+  BIDS = '/bids',
 }
 
 export enum AuthApiRoutes {
@@ -35,10 +36,12 @@ export enum ProductApiRoutes {
   VIEWS = '/views',
   FAVORITE = '/favorite',
   FAVORITE_IDS = '/favorite-ids',
+  BUY = '/buy/:id',
 }
 
 export enum ProfileApiRoutes {
   GET_USER_BY_ID = '/:userId',
+  GET_FULL_USER_DATA = '/full-data',
   UPDATE_DATA = '/save',
 }
 
