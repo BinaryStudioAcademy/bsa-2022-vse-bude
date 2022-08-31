@@ -48,6 +48,7 @@ const InputInner = (
         data-erasable-part={inerasableValue ? 'inerasable' : 'erasable'}
         type={type}
         id={id}
+        placeholder={label}
         {...props}
       />
       {inerasableValue && (

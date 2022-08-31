@@ -7,34 +7,37 @@ import EnterPhoneModal from './enter-phone/component';
 import SuccessModal from './ssuccess-verification/component';
 
 export default function VerificationModal() {
-    const [isVisible, setIsVisible] = useState(false);
-    const dispatch = useAppDispatch();
-    const { variant } = useTypedSelector(state => state.verify);
+  const [isVisible, setIsVisible] = useState(false);
+  const dispatch = useAppDispatch();
+  const { variant } = useTypedSelector((state) => state.verify);
 
-    useEffect(() => {
-        setIsVisible(true);
-    }, []);
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
-    const closeModal = () => {
-        dispatch(hideVerifyModal());
-    };
+  const closeModal = () => {
+    dispatch(hideVerifyModal());
+  };
 
-    return (
-        <Modal visible={isVisible}>
-        {variant == 0
-        ?<EnterPhoneModal></EnterPhoneModal>
-        : <>
-            {variant == 1
-                ? <EnterCodeModal></EnterCodeModal>
-                :<>
-                    {variant == 2
-                    ? <SuccessModal></SuccessModal>
-                    :<>{closeModal()}</>
-                    }
-                </> 
-            }
+  return (
+    <Modal visible={isVisible}>
+      {variant == 0 ? (
+        <EnterPhoneModal></EnterPhoneModal>
+      ) : (
+        <>
+          {variant == 1 ? (
+            <EnterCodeModal></EnterCodeModal>
+          ) : (
+            <>
+              {variant == 2 ? (
+                <SuccessModal></SuccessModal>
+              ) : (
+                <>{closeModal()}</>
+              )}
+            </>
+          )}
         </>
-        }
-        </Modal>
-    );
+      )}
+    </Modal>
+  );
 }

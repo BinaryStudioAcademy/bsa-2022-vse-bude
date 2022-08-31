@@ -4,4 +4,3 @@ export enum VerifyActionTypes {
   NextVerifyModal,
   PreviousVerifyModal,
 }
- 

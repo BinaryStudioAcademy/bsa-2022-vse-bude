@@ -1,9 +1,9 @@
-import type { VerifyAction} from './actions';
+import type { VerifyAction } from './actions';
 import { VerifyActionTypes } from './action-types';
 
 interface VerifyState {
-  isModal: boolean,
-  variant: number,
+  isModal: boolean;
+  variant: number;
 }
 
 const initialState = {
