@@ -8,6 +8,8 @@ export const ConsentModal = () => {
   const [value, setValue] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
+  const [tooltip, setTooltip] = useState('It\'s disabled, agree with terms');
+
   const { t } = useTranslation();
 
   const router = useRouter();
@@ -16,6 +18,11 @@ export const ConsentModal = () => {
   const setAgree = () => {
     setValue(!value);
     setDisabled(!disabled);
+    if (disabled) {
+      setTooltip('Everything is okay');
+    } else {
+      setTooltip('It\'s disabled, agree with terms');
+    }
   };
 
   return (
@@ -33,6 +40,7 @@ export const ConsentModal = () => {
           <Button
             variant="outlined"
             disabled={disabled}
+            tooltip={tooltip}
             onClick={() => setIsVisible(false)}
           >
             {t('rules:createPostRules.button.accept')}
