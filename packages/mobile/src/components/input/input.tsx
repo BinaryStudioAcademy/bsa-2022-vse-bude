@@ -80,7 +80,7 @@ const Input = <T extends FormControlValues>({
           {...props}
         />
         {isSecure && (
-          <Pressable style={styles.eyeIcon} onPress={onSecureChange}>
+          <Pressable style={styles.eyeIconWrapper} onPress={onSecureChange}>
             <EyeIcon size={22} />
           </Pressable>
         )}
