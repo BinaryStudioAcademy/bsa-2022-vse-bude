@@ -17,7 +17,7 @@ interface ItemProps {
 export const Item = ({ item }: ItemProps) => {
   const windowSize = useWindowSize();
 
-  // delete after adding different photos to post
+  // TODO: delete after adding different photos to post
   const images = [
     'https://picsum.photos/id/1/640/480/',
     'https://picsum.photos/id/2/640/480/',
@@ -27,7 +27,10 @@ export const Item = ({ item }: ItemProps) => {
 
   const handleAddFavourite = () => console.log('favourite');
   const handleBuy = () => console.log('buy');
-  const handleBid = () => console.log('bid');
+  const handleBid = (ev) => {
+    console.log('ev');
+    console.log(ev);
+  };
 
   return (
     <React.Fragment>
