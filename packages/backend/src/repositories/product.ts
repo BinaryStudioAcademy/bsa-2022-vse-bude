@@ -142,4 +142,26 @@ export class ProductRepository {
       },
     });
   }
+  
+  public async checkStatus(id: string, status: ProductStatus) {
+    return await this._dbClient.product.findFirst({
+      where: {
+        id,
+        status,
+      },
+    });
+  }
+
+  public async buy(id: string, userId: string, status: ProductStatus) {
+    return await this._dbClient.product.updateMany({
+      where: {
+        id,
+        status: ProductStatus.ACTIVE,
+      },
+      data: {
+        winnerId: userId,
+        status,
+      },
+    });
+  }
 }

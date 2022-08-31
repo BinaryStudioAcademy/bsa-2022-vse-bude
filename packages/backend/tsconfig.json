@@ -14,7 +14,8 @@
       "@routes": ["api/routes"],
       "@middlewares": ["api/middlewares"],
       "@errors": ["error"],
-      "@mappers": ["mapper"]
+      "@mappers": ["mapper"],
+      "@validation": ["validation"]
     },
     "outDir": "build"
   },

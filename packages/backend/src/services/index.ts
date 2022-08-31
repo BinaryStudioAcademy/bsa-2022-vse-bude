@@ -46,10 +46,17 @@ export const initServices = (repositories: Repositories) => {
 
   return {
     categoryService: new CategoryService(repositories.categoryRepository),
-    productService: new ProductService(repositories.productRepository, s3StorageService),
+    productService: new ProductService(
+      repositories.productRepository,
+      verifyService,
+      s3StorageService,
+    ),
     newsService: new NewsService(repositories.newsRepository),
     healthService: new HealthService(repositories.healthRepository),
-    profileService: new UserProfileService(repositories.profileRepository),
+    profileService: new UserProfileService({
+      userProfileRepository: repositories.profileRepository,
+      hashService,
+    }),
     authService: new AuthService(
       repositories.userRepository,
       repositories.refreshTokenRepository,

@@ -9,11 +9,10 @@ import {
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { Fragment, useState } from 'react';
-import { Routes, IconName } from '@enums';
+import { Routes, IconName, IconColorProps } from '@enums';
 import { Logo } from 'components/primitives/logo';
 import { useAuth, useMounted, useTypedSelector } from '@hooks';
 import { useRouter } from 'next/router';
-import { useTheme } from '@emotion/react';
 import { ProfileInfo } from './profile-info';
 import * as styles from './styles';
 
@@ -23,7 +22,6 @@ export const Header = () => {
   const isMounted = useMounted();
   const { push, pathname } = useRouter();
   const { t } = useTranslation();
-  const { colors } = useTheme();
   const categories = useTypedSelector((state) => state.category.list);
 
   const redirectToCategory = (category: string) => {
@@ -53,7 +51,7 @@ export const Header = () => {
         }))}
       >
         {t('common:header.nav.category')}&nbsp;
-        <Icon icon={IconName.ANGLE_DOWN} color={colors.extraDark} />
+        <Icon icon={IconName.ANGLE_DOWN} color={IconColorProps.YELLOW} />
       </Dropdown>
       <InternalLink
         href={Routes.SEARCH}

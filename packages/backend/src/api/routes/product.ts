@@ -128,11 +128,24 @@ export const initProductRoutes = (
     apiPath(path),
     authMiddleware,
     multer().any(),
-    wrap((req: Request) => productService.createProduct({
-      req,
-      userId: req.userId,
-      fieldsData: req.body,
-    })),
+    wrap((req: Request) =>
+      productService.createProduct({
+        req,
+        userId: req.userId,
+        fieldsData: req.body,
+      }),
+    ),
+  );
+
+  router.post(
+    apiPath(path, ProductApiRoutes.BUY),
+    authMiddleware,
+    wrap((req: Request) =>
+      productService.buy({
+        userId: req.userId,
+        productId: req.body.productId,
+      }),
+    ),
   );
 
   return router;

@@ -5,20 +5,27 @@ import type { Request } from 'express';
 import { getUserIdFromRequest } from '@helpers';
 import type {
   AddProductToFavorites,
+  BuyProduct,
   DeleteProductFromFavorites,
 } from '@vse-bude/shared';
+import { ProductStatus } from '@prisma/client';
+import type { VerifyService } from '@services';
 import type { S3StorageService } from './s3-storage';
 
 export class ProductService {
   private _productRepository: ProductRepository;
 
+  private _verifyService: VerifyService;
+
   private _s3StorageService: S3StorageService;
 
   constructor(
     categoryRepository: ProductRepository,
-    s3StorageService: S3StorageService,
+    verifyService: VerifyService,
+    s3StorageService: S3StorageService
   ) {
     this._productRepository = categoryRepository;
+    this._verifyService = verifyService;
     this._s3StorageService = s3StorageService;
   }
 
@@ -101,5 +108,26 @@ export class ProductService {
     const product = await this._productRepository.create(data);
 
     return product;
+  }
+
+  public async buy({ userId, productId }: BuyProduct) {
+    const isActive = await this._productRepository.checkStatus(
+      productId,
+      ProductStatus.ACTIVE,
+    );
+    if (!isActive) {
+      return undefined;
+    }
+    const isUserVerified = await this._verifyService.isUserVerified(userId);
+    if (!isUserVerified) {
+      return undefined;
+    }
+    await this._productRepository.buy(
+      productId,
+      userId,
+      ProductStatus.FINISHED,
+    );
+
+    return productId;
   }
 }

@@ -5,3 +5,4 @@ export {
   MIN_NAME_LENGTH,
   MAX_NAME_LENGTH,
 } from './validation';
+export * from './images';

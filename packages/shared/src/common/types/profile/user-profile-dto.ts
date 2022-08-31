@@ -8,6 +8,18 @@ type UserProfileDto = {
   socialMedia: SocialMedia[];
 };
 
+type RequestUserProfileDto = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone?: string;
+  userAddress: UserAddressDto;
+  socialMedia: SocialMedia[];
+  password?: string;
+  newPassword?: string;
+  repeatPassword?: string;
+};
+
 type UserAddressDto = {
   country?: string;
   region?: string;
@@ -16,4 +28,4 @@ type UserAddressDto = {
   novaPoshtaRef?: string;
 };
 
-export type { UserProfileDto, UserAddressDto };
+export type { UserProfileDto, UserAddressDto, RequestUserProfileDto };

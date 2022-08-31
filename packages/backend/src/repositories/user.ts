@@ -1,5 +1,6 @@
 import type { PrismaClient, User } from '@prisma/client';
 import type { CreateUser } from '@types';
+import type { GetUserVerifiedDto } from 'common/types/services';
 
 export class UserRepository {
   private _dbClient: PrismaClient;
@@ -84,6 +85,23 @@ export class UserRepository {
             email: email,
           },
         ],
+      },
+    });
+  }
+
+  public getVerified({
+    userId,
+  }: {
+    userId: string;
+  }): Promise<GetUserVerifiedDto> {
+    return this._dbClient.user.findUnique({
+      where: {
+        id: userId,
+      },
+      select: {
+        id: true,
+        emailVerified: true,
+        phoneVerified: true,
       },
     });
   }
