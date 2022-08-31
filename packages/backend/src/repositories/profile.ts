@@ -1,8 +1,5 @@
 import type { PrismaClient } from '@prisma/client';
-import type {
-  SocialMedia,
-  UpdateUserProfileDto,
-} from '@vse-bude/shared';
+import type { SocialMedia, UpdateUserProfileDto } from '@vse-bude/shared';
 
 export class UserProfileRepository {
   private _dbClient: PrismaClient;
@@ -25,11 +22,7 @@ export class UserProfileRepository {
     });
   }
 
-  public getFullUserData({
-    userId,
-  }: {
-    userId: string;
-  }) {
+  public getFullUserData({ userId }: { userId: string }) {
     return this._dbClient.user.findUnique({
       where: {
         id: userId,
@@ -45,11 +38,7 @@ export class UserProfileRepository {
     });
   }
 
-  public getAddress({
-    userId,
-  }: {
-    userId: string;
-  }) {
+  public getAddress({ userId }: { userId: string }) {
     return this._dbClient.address.findUnique({
       where: {
         userId,

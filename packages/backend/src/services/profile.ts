@@ -3,7 +3,7 @@ import type { UserProfileRepository } from '@repositories';
 import type {
   UpdateUserProfileDto,
   UpdatePasswordDto,
-  SocialMedia
+  SocialMedia,
 } from '@vse-bude/shared';
 import {
   HttpStatusCode,
