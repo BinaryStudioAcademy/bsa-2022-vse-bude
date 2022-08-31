@@ -7,7 +7,9 @@
   },
   "button": {
     "makePost": "Створити пост",
-    "saveDraft": "Зберегти як шаблон"
+    "saveDraft": "Зберегти як шаблон",
+    "ok": "OK",
+    "cancel": "Відмінити"
   },
   "caption": {
     "downloadPhotos": "Ви можете додати до 30 фотографій"

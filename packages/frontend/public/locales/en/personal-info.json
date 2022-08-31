@@ -11,6 +11,10 @@
     "verify": "Verify",
     "edit": "Edit profile"
   },
+  "button": {
+    "ok": "OK",
+    "cancel": "Cancel"
+  },
   "label": {
     "novaPoshta": "# Nova Poshta",
     "firstName": "First name",
