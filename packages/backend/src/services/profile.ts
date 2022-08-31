@@ -2,9 +2,9 @@ import type { TFunction } from 'i18next';
 import type { UserProfileRepository } from '@repositories';
 import type {
   UpdateUserProfileDto,
-  UserSocialMediaDto,
   UpdatePasswordDto,
-} from '@types';
+  SocialMedia
+} from '@vse-bude/shared';
 import {
   HttpStatusCode,
   UserPersonalInfoValidationMessage,
@@ -93,7 +93,7 @@ export class UserProfileService {
     socialMedia,
   }: {
     userId: string;
-    socialMedia: UserSocialMediaDto[];
+    socialMedia: SocialMedia[];
   }) {
     return this._userProfileRepository.updateUserSocialMedia({
       userId,

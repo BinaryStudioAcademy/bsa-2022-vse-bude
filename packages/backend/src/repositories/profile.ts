@@ -1,11 +1,8 @@
 import type { PrismaClient } from '@prisma/client';
 import type {
-  GetUserAddressDto,
-  GetUserProfileDto,
-  GetUserPersonalDataDto,
-  UserSocialMediaDto,
+  SocialMedia,
   UpdateUserProfileDto,
-} from '@types';
+} from '@vse-bude/shared';
 
 export class UserProfileRepository {
   private _dbClient: PrismaClient;
@@ -14,7 +11,7 @@ export class UserProfileRepository {
     this._dbClient = prismaClient;
   }
 
-  public getUser({ userId }: { userId: string }): Promise<GetUserProfileDto> {
+  public getUser({ userId }: { userId: string }) {
     return this._dbClient.user.findUnique({
       where: {
         id: userId,
@@ -32,8 +29,8 @@ export class UserProfileRepository {
     userId,
   }: {
     userId: string;
-  }): Promise<GetUserPersonalDataDto> {
-    return this._dbClient.user.findFirst({
+  }) {
+    return this._dbClient.user.findUnique({
       where: {
         id: userId,
       },
@@ -52,7 +49,7 @@ export class UserProfileRepository {
     userId,
   }: {
     userId: string;
-  }): Promise<GetUserAddressDto> | Promise<null> {
+  }) {
     return this._dbClient.address.findUnique({
       where: {
         userId,
@@ -61,18 +58,13 @@ export class UserProfileRepository {
         country: true,
         region: true,
         city: true,
-        address: true,
         zip: true,
         novaPoshtaRef: true,
       },
     });
   }
 
-  public getSocialMedia({
-    userId,
-  }: {
-    userId: string;
-  }): Promise<UserSocialMediaDto[]> | Promise<[]> {
+  public getSocialMedia({ userId }: { userId: string }) {
     return this._dbClient.socialMedia.findMany({
       where: {
         ownedByUserId: userId,
@@ -91,7 +83,7 @@ export class UserProfileRepository {
   }: {
     userId: string;
     data: UpdateUserProfileDto;
-  }): Promise<GetUserProfileDto> {
+  }) {
     const { firstName, lastName, email, phone } = data;
 
     return this._dbClient.user.update({
@@ -119,8 +111,8 @@ export class UserProfileRepository {
     socialMedia,
   }: {
     userId: string;
-    socialMedia: UserSocialMediaDto[];
-  }): Promise<UserSocialMediaDto[]> {
+    socialMedia: SocialMedia[];
+  }) {
     return await this._dbClient.$transaction(
       socialMedia.map((userLink) => {
         const { id, link, socialMedia } = userLink;
