@@ -8,7 +8,7 @@ export const ConsentModal = () => {
   const [value, setValue] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
-  const [tooltip, setTooltip] = useState('It\'s disabled, agree with terms');
+  const [tooltip, setTooltip] = useState("It's disabled, agree with terms");
 
   const { t } = useTranslation();
 
@@ -21,7 +21,7 @@ export const ConsentModal = () => {
     if (disabled) {
       setTooltip('Everything is okay');
     } else {
-      setTooltip('It\'s disabled, agree with terms');
+      setTooltip("It's disabled, agree with terms");
     }
   };
 
