@@ -7,7 +7,9 @@
   },
   "button": {
     "makePost": "Make a post",
-    "saveDraft": "Save as draft"
+    "saveDraft": "Save as draft",
+    "ok": "OK",
+    "cancel": "Cancel"
   },
   "caption": {
     "downloadPhotos": "You can add to 30 pics"
