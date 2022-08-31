@@ -1,4 +1,5 @@
-import type { PrismaClient, Product } from '@prisma/client';
+import { ProductStatus } from '@prisma/client';
+import type { Product, PrismaClient } from '@prisma/client';
 import type { ProductQuery } from '@types';
 import { Order } from '@vse-bude/shared';
 
@@ -122,6 +123,28 @@ export class ProductRepository {
         views: {
           increment: 1,
         },
+      },
+    });
+  }
+
+  public async checkStatus(id: string, status: ProductStatus) {
+    return await this._dbClient.product.findFirst({
+      where: {
+        id,
+        status,
+      },
+    });
+  }
+
+  public async buy(id: string, userId: string, status: ProductStatus) {
+    return await this._dbClient.product.updateMany({
+      where: {
+        id,
+        status: ProductStatus.ACTIVE,
+      },
+      data: {
+        winnerId: userId,
+        status,
       },
     });
   }
