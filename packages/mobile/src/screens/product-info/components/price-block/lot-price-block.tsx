@@ -1,12 +1,7 @@
 import { ColorPalette } from '@vse-bude/shared';
 import React, { FC } from 'react';
-import {
-  PlusIcon,
-  PrimaryButton,
-  StarIcon,
-  Text,
-  View,
-} from '~/components/components';
+import { PlusSvg } from '~/assets/svg/plus';
+import { PrimaryButton, StarIcon, Text, View } from '~/components/components';
 import { useCustomTheme, useTranslation } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
@@ -33,7 +28,7 @@ const LotPriceBlock: FC = () => {
             { color: colors.subtitle },
           ]}
         >
-          {t('product_info.CURRENT_BID')}
+          {t('screens:product_info.CURRENT_BID')}
         </Text>
         <Text
           style={[
@@ -43,7 +38,7 @@ const LotPriceBlock: FC = () => {
             { color: colors.titleSecondary },
           ]}
         >
-          UAH 5800
+          {`${t('screens:welcome.UAH')} 5800`}
         </Text>
       </View>
       <View
@@ -56,21 +51,14 @@ const LotPriceBlock: FC = () => {
           styles.footer,
         ]}
       >
-        <View style={[globalStyles.flexDirectionRow, styles.minBid]}>
-          <Text style={[globalStyles.fs14]}>{t('product_info.MIN_UAH')}</Text>
-          <Text style={[globalStyles.fs14]}> 200</Text>
-        </View>
-
+        <Text style={[globalStyles.fs14, styles.minBid]}>{`${t(
+          'screens:product_info.MIN_UAH',
+        )} 200`}</Text>
         <View
           style={[globalStyles.flexDirectionRow, globalStyles.alignItemsCenter]}
         >
           <View style={styles.btnWidth}>
-            {/** TODO: place plusIcon depending on language */}
-            <PlusIcon
-              size={12}
-              color={ColorPalette.WHITE_100}
-              style={styles.btnIcon}
-            />
+            <PlusSvg style={styles.btnIcon} />
             <PrimaryButton label={t('common:components.BUTTON_BID')} />
           </View>
           <View style={[globalStyles.ml5, styles.iconBorder]}>

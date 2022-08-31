@@ -20,26 +20,15 @@ const ProductPriceBlock: FC = () => {
         styles.footer,
       ]}
     >
-      <View style={globalStyles.flexDirectionRow}>
-        <Text
-          style={[
-            globalStyles.fs18,
-            globalStyles.fontWeightBold,
-            { color: colors.text },
-          ]}
-        >
-          {t('welcome.UAH')}
-        </Text>
-        <Text
-          style={[
-            globalStyles.fs18,
-            globalStyles.fontWeightBold,
-            { color: colors.text },
-          ]}
-        >
-          6500
-        </Text>
-      </View>
+      <Text
+        style={[
+          globalStyles.fs18,
+          globalStyles.fontWeightBold,
+          { color: colors.text },
+        ]}
+      >
+        {`${t('screens:welcome.UAH')} 6500`}
+      </Text>
       <View
         style={[globalStyles.flexDirectionRow, globalStyles.alignItemsCenter]}
       >

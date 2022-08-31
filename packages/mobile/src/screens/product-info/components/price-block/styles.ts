@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   btnIcon: {
     position: 'absolute',
     top: 17.5,
-    left: 7,
+    left: 14,
     zIndex: 10,
   },
   iconBorder: {

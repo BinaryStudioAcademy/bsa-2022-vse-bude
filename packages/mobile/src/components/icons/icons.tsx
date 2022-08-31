@@ -70,10 +70,6 @@ const EyeIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="eye" {...iconProps} />
 );
 
-const PlusIcon: AppIcon = (iconProps) => (
-  <FeatherIcon name="plus" {...iconProps} />
-);
-
 export {
   HomeIcon,
   StarIcon,
@@ -92,5 +88,4 @@ export {
   CameraIcon,
   CrossIcon,
   EyeIcon,
-  PlusIcon,
 };

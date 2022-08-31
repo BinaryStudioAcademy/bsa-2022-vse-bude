@@ -27,7 +27,7 @@ const Description: FC = () => {
               { color: colors.subtitle },
             ]}
           >
-            {t('product_info.ENDING_ON')}
+            {t('screens:product_info.ENDING_ON')}
           </Text>
         </View>
         <Text
@@ -56,7 +56,7 @@ const Description: FC = () => {
               { color: colors.subtitle },
             ]}
           >
-            {t('product_info.TIME_ZONE')}
+            {t('screens:product_info.TIME_ZONE')}
           </Text>
         </View>
         <Text
@@ -85,7 +85,7 @@ const Description: FC = () => {
               { color: colors.subtitle },
             ]}
           >
-            {t('product_info.STATUS')}
+            {t('screens:product_info.STATUS')}
           </Text>
         </View>
         <Text
@@ -114,7 +114,7 @@ const Description: FC = () => {
               { color: colors.subtitle },
             ]}
           >
-            {t('product_info.LOCATION')}
+            {t('screens:product_info.LOCATION')}
           </Text>
         </View>
         <Text
@@ -143,7 +143,7 @@ const Description: FC = () => {
               { color: colors.subtitle },
             ]}
           >
-            {t('product_info.DESCRIPTION')}
+            {t('screens:product_info.DESCRIPTION')}
           </Text>
         </View>
         <Text
