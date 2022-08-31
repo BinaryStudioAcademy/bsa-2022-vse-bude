@@ -20,3 +20,9 @@ export type {
 export type { ShowNotificationParams } from './notification/notification';
 export type { AppIcon, IconProps, CustomIconProps } from './ui/ui';
 export type { Theme, ThemeColors } from './theme/theme.type';
+export {
+  PopoverPlacement,
+  PopoverMode,
+  Rect as PopoverRect,
+  Size as PopoverSize,
+} from 'react-native-popover-view';

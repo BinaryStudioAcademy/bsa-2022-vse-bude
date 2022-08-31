@@ -9,6 +9,7 @@ export {
   Modal,
 } from 'react-native';
 export { SafeAreaView } from 'react-native-safe-area-context';
+export { default as Popover } from 'react-native-popover-view';
 
 export * from './icons/icons';
 export { ScreenWrapper } from './screen-wrapper/screen-wrapper';
@@ -29,4 +30,3 @@ export { FlagBackgroundView } from './flag-background-view/flag-background-view'
 export { PrimaryButton } from './primary-button/primary-button';
 export { SecondaryButton } from './secondary-button/secondary-button';
 export { BuildInfo } from './build-info/build-info';
-export * from 'react-native-popover-view';
