@@ -1,4 +1,5 @@
 import type { PrismaClient, Product } from '@prisma/client';
+import { ProductStatus } from '@prisma/client';
 import type { ProductQuery } from '@types';
 import { Order } from '@vse-bude/shared';
 
@@ -126,13 +127,19 @@ export class ProductRepository {
     });
   }
 
-  public createPost(userId: string, productData) {
-    console.log(userId);
-    console.log(productData);
-    // return this._dbClient.product.create({
-    //   data: {
-    //     ,
-    //   },
-    // });
+  public create(data: Product) {
+    return this._dbClient.product.create({
+      data: {
+        imageLinks: data.imageLinks,
+        city: data.city,
+        status: ProductStatus.CREATED,
+        categoryId: data.categoryId,
+        title: data.title,
+        description: data.description,
+        authorId: data.authorId,
+        type: data.type,
+        price: data.price,
+      },
+    });
   }
 }

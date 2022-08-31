@@ -8,6 +8,7 @@ import type { Product } from '@prisma/client';
 import type { ProductQuery } from '@types';
 import { ProductApiRoutes } from '@vse-bude/shared';
 import { authMiddleware } from '@middlewares';
+import multer from 'multer';
 
 export const initProductRoutes = (
   { productService }: Services,
@@ -122,15 +123,16 @@ export const initProductRoutes = (
       }),
     ),
   );
+
   router.post(
     apiPath(path),
     authMiddleware,
-    wrap((req: Request) =>
-      productService.createProduct({
-        userId: req.userId,
-        productData: req.body,
-      }),
-    ),
+    multer().any(),
+    wrap((req: Request) => productService.createProduct({
+      req,
+      userId: req.userId,
+      fieldsData: req.body,
+    })),
   );
 
   return router;

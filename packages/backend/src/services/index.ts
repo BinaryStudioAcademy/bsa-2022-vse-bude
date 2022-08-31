@@ -42,9 +42,11 @@ export const initServices = (repositories: Repositories) => {
     emailService,
   );
 
+  const s3StorageService = new S3StorageService();
+
   return {
     categoryService: new CategoryService(repositories.categoryRepository),
-    productService: new ProductService(repositories.productRepository),
+    productService: new ProductService(repositories.productRepository, s3StorageService),
     newsService: new NewsService(repositories.newsRepository),
     healthService: new HealthService(repositories.healthRepository),
     profileService: new UserProfileService(repositories.profileRepository),
@@ -59,8 +61,8 @@ export const initServices = (repositories: Repositories) => {
     redisStorageService: redisService,
     smsSenderService: smsService,
     emailService: emailService,
-    s3StorageService: new S3StorageService(),
     verifyService: verifyService,
+    s3StorageService,
   };
 };
 

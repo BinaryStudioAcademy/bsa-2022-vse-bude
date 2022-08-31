@@ -7,12 +7,19 @@ import type {
   AddProductToFavorites,
   DeleteProductFromFavorites,
 } from '@vse-bude/shared';
+import type { S3StorageService } from './s3-storage';
 
 export class ProductService {
   private _productRepository: ProductRepository;
 
-  constructor(categoryRepository: ProductRepository) {
+  private _s3StorageService: S3StorageService;
+
+  constructor(
+    categoryRepository: ProductRepository,
+    s3StorageService: S3StorageService,
+  ) {
     this._productRepository = categoryRepository;
+    this._s3StorageService = s3StorageService;
   }
 
   public getAll(query: ProductQuery) {
@@ -84,9 +91,15 @@ export class ProductService {
     return productId;
   }
 
-  public async createProduct({ userId, productData }) {
-    await this._productRepository.createPost(userId, productData);
+  public async createProduct({ req, userId, fieldsData }) {
+    const imageLinks = await this._s3StorageService.uploadProductImages(req);
+    const data = {
+      imageLinks,
+      authorId: userId,
+      ...fieldsData,
+    };
+    const product = await this._productRepository.create(data);
 
-    // return productId;
+    return product;
   }
 }
