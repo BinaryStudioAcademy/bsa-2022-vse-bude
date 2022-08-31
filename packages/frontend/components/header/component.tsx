@@ -8,11 +8,12 @@ import {
 } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
-import { Fragment, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Routes, IconName, IconColorProps } from '@enums';
 import { Logo } from 'components/primitives/logo';
-import { useAuth, useMounted, useTypedSelector } from '@hooks';
+import { useAppDispatch, useAuth, useMounted, useTypedSelector } from '@hooks';
 import { useRouter } from 'next/router';
+import { logoutUser } from 'store/auth';
 import { ProfileInfo } from './profile-info';
 import * as styles from './styles';
 
@@ -23,6 +24,7 @@ export const Header = () => {
   const { push, pathname } = useRouter();
   const { t } = useTranslation();
   const categories = useTypedSelector((state) => state.category.list);
+  const dispatch = useAppDispatch();
 
   const redirectToCategory = (category: string) => {
     const filters = {
@@ -93,10 +95,6 @@ export const Header = () => {
   const renderHamburderMenuContent = () => (
     <div css={styles.burgerOverlay}>
       <nav className="burger-navigation">
-        <InternalLink
-          href={Routes.DEFAULT}
-          label={t('common:header.nav.home')}
-        />
         <Dropdown
           options={categories.map((item) => ({
             value: item.title,
@@ -111,10 +109,6 @@ export const Header = () => {
         </Dropdown>
         <InternalLink
           href={Routes.DEFAULT}
-          label={t('common:header.nav.search')}
-        />
-        <InternalLink
-          href={Routes.DEFAULT}
           label={t('common:header.nav.news')}
         />
         <InternalLink
@@ -122,18 +116,35 @@ export const Header = () => {
           label={t('common:header.nav.about_us')}
         />
       </nav>
+
       <div className="burger-buttons-wrapper">
-        <Button size="small">
-          <span css={styles.buttonCreateAccountText}>
-            {t('common:header.buttons.create_account')}
-          </span>
-        </Button>
-        <Button size="small" variant="outlined">
-          <span css={styles.buttonSignIn}>
-            {t('common:header.buttons.sign_in')}
-          </span>
-        </Button>
+        {!user ? (
+          <React.Fragment>
+            <Button size="small" onClick={() => push(Routes.SIGN_UP)}>
+              <span css={styles.buttonCreateAccountText}>
+                {t('common:header.buttons.create_account')}
+              </span>
+            </Button>
+
+            <Button
+              size="small"
+              variant="outlined"
+              onClick={() => push(Routes.SIGN_IN)}
+            >
+              <span css={styles.buttonSignIn}>
+                {t('common:header.buttons.sign_in')}
+              </span>
+            </Button>
+          </React.Fragment>
+        ) : (
+          <Button size="small" onClick={() => dispatch(logoutUser())}>
+            <span css={styles.buttonSignIn}>
+              {t('common:header.popover.signOut')}
+            </span>
+          </Button>
+        )}
       </div>
+
       <div className="burger-close-button">{renderCloseBurgerButton()}</div>
     </div>
   );
