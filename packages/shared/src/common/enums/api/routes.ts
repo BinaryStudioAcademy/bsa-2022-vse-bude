@@ -37,6 +37,7 @@ export enum ProductApiRoutes {
   FAVORITE = '/favorite',
   FAVORITE_IDS = '/favorite-ids',
   BUY = '/buy/:id',
+  AUCTION_PERMISSIONS = '/auction/permissions',
 }
 
 export enum ProfileApiRoutes {

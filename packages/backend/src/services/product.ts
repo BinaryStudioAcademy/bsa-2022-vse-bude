@@ -1,27 +1,35 @@
 import type { ProductRepository } from '@repositories';
 import type { ProductQuery } from '@types';
-import { ProductNotFoundError } from '@errors';
+import { AuctionEndedError, ProductNotFoundError } from '@errors';
 import type { Request } from 'express';
-import { getUserIdFromRequest } from '@helpers';
+import { getUserIdFromRequest, toUtc } from '@helpers';
 import type {
   AddProductToFavorites,
+  AuctionPermissionsResponse,
   BuyProduct,
   DeleteProductFromFavorites,
 } from '@vse-bude/shared';
+import type { Bid } from '@prisma/client';
 import { ProductStatus } from '@prisma/client';
 import type { VerifyService } from '@services';
+import type { BidRepository } from '@repositories';
+import { auctionPermissionsMapper } from '../mapper/auction-permissions';
 
 export class ProductService {
   private _productRepository: ProductRepository;
 
+  private _bidRepository: BidRepository;
+
   private _verifyService: VerifyService;
 
   constructor(
-    categoryRepository: ProductRepository,
+    productRepository: ProductRepository,
     verifyService: VerifyService,
+    bidRepository: BidRepository,
   ) {
-    this._productRepository = categoryRepository;
+    this._productRepository = productRepository;
     this._verifyService = verifyService;
+    this._bidRepository = bidRepository;
   }
 
   public getAll(query: ProductQuery) {
@@ -69,6 +77,27 @@ export class ProductService {
 
   public async getFavoriteProducts(userId: string) {
     return this._productRepository.getFavorite(userId);
+  }
+
+  public async getAuctionPermissions(
+    userId: string,
+    productId: string,
+  ): Promise<AuctionPermissionsResponse> {
+    const product = await this._productRepository.getById(productId);
+    if (!product) {
+      throw new ProductNotFoundError();
+    }
+
+    if (toUtc(product.endDate) < toUtc()) {
+      throw new AuctionEndedError();
+    }
+
+    const bids: Bid[] = await this._bidRepository.getByUserAndProduct(
+      userId,
+      productId,
+    );
+
+    return auctionPermissionsMapper(!!bids.length);
   }
 
   public async addToFavorites({ userId, productId }: AddProductToFavorites) {

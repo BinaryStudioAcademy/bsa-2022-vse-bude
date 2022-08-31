@@ -60,6 +60,17 @@ export const initProductRoutes = (
     wrap((req: Request) => productService.getFavoriteIds(req.userId)),
   );
 
+  router.get(
+    apiPath(path, ProductApiRoutes.AUCTION_PERMISSIONS),
+    authMiddleware,
+    wrap((req: Request) =>
+      productService.getAuctionPermissions(
+        req.userId,
+        <string>req.query.productId,
+      ),
+    ),
+  );
+
   /**
    * @openapi
    * /products/{type}:

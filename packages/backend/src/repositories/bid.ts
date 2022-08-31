@@ -17,4 +17,13 @@ export class BidRepository {
       },
     });
   }
+
+  async getByUserAndProduct(userId: string, productId: string) {
+    return await this._dbClient.bid.findMany({
+      where: {
+        bidderId: userId,
+        productId: productId,
+      },
+    });
+  }
 }
