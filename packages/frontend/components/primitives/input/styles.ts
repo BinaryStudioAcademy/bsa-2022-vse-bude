@@ -205,3 +205,12 @@ export const inerasableValue = ({
 export const inputValueWrapper = css`
   position: relative;
 `;
+
+export const iconWrapper = css`
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  opacity: 0.5;
+`;

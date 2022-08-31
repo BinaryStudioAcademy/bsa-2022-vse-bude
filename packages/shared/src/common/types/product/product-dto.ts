@@ -13,6 +13,7 @@ type ProductDto = {
   endDate: Date;
   imageLinks: string[];
   views: number;
+  currentPrice: number;
 };
 
 export type { ProductDto };

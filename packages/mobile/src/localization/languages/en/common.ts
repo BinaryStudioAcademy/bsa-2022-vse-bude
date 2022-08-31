@@ -11,6 +11,7 @@ export const common = {
   },
   common: {
     HOME: 'Home',
+    ERROR: 'Error',
   },
   permission: {
     STORAGE_DENIED: 'Storage permission denied',
