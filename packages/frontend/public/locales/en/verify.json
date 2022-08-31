@@ -1,0 +1,11 @@
+{
+    "headline": "Verify",
+    "description": "For further verification of account, please enter your phone here or verify it on your Personal Info page",
+    "phone": "Phone",
+    "button": {
+        "verify": "Verify"
+    },
+    "link":{
+        "later": "Verify later"
+    }
+}

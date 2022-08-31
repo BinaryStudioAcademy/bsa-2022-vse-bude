@@ -48,7 +48,7 @@ export const getServerSideProps = withPublic(
 
     return {
       props: {
-        ...(await serverSideTranslations(locale, ['home', 'common'])),
+        ...(await serverSideTranslations(locale, ['home', 'common', 'verify'])),
         auctionProducts,
         sellingProducts,
       },
