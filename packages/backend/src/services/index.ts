@@ -36,6 +36,8 @@ export const initServices = (repositories: Repositories) => {
   const emailProvider = new SendInBlueEmailProvider();
   const emailService = new EmailService(emailProvider);
 
+  const s3StorageService = new S3StorageService();
+
   const verifyService: VerifyService = new VerifyService(
     repositories.userRepository,
     redisService,
@@ -54,6 +56,7 @@ export const initServices = (repositories: Repositories) => {
     profileService: new UserProfileService({
       userProfileRepository: repositories.profileRepository,
       hashService,
+      storageService: s3StorageService,
     }),
     authService: new AuthService(
       repositories.userRepository,
@@ -66,7 +69,7 @@ export const initServices = (repositories: Repositories) => {
     redisStorageService: redisService,
     smsSenderService: smsService,
     emailService: emailService,
-    s3StorageService: new S3StorageService(),
+    s3StorageService,
     verifyService: verifyService,
     bidService: new BidService(
       repositories.bidRepository,
@@ -88,4 +91,5 @@ export {
   type UserProfileService,
   type EmailService,
   type BidService,
+  type S3StorageService,
 };
