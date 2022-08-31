@@ -22,7 +22,6 @@ export const getServerSideProps = withPublic(
     await store.dispatch(
       fetchCategoriesSSR({
         httpSSR: httpClient,
-        limit: 4,
         locale: locale as HttpAcceptLanguage,
       }),
     );

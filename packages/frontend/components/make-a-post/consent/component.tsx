@@ -6,8 +6,9 @@ import * as styles from './styles';
 
 export const ConsentModal = () => {
   const [value, setValue] = useState(false);
-  const [disabled, setDisabled] = useState(true);
+  const [isDisabled, setIsDisabled] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
+
   const { t } = useTranslation();
 
   const router = useRouter();
@@ -15,7 +16,7 @@ export const ConsentModal = () => {
 
   const setAgree = () => {
     setValue(!value);
-    setDisabled(!disabled);
+    setIsDisabled(!isDisabled);
   };
 
   return (
@@ -32,7 +33,12 @@ export const ConsentModal = () => {
         <div css={styles.consentButtons}>
           <Button
             variant="outlined"
-            disabled={disabled}
+            disabled={isDisabled}
+            tooltip={
+              isDisabled
+                ? t('rules:createPostRules.tooltip.disabled')
+                : t('rules:createPostRules.tooltip.enabled')
+            }
             onClick={() => setIsVisible(false)}
           >
             {t('rules:createPostRules.button.accept')}

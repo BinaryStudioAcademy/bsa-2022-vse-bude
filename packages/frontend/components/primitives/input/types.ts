@@ -15,3 +15,8 @@ export interface InputProps extends PasswordProps {
   tooltip?: string;
   inerasableValue?: string;
 }
+
+export interface InputDateProps extends PasswordProps {
+  value: string;
+  setValue: (string) => void;
+}
