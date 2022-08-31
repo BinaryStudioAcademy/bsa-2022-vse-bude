@@ -61,10 +61,10 @@ export const xmark = ({ spaces, mq }: Theme) => css`
 `;
 export const imgWrapper = ({ spaces, colors, radiuses }: Theme) => css`
   margin: ${spaces.xl1} auto ${spaces.xs};
-  background-color: ${colors.backgroundLight}; 
+  background-color: ${colors.backgroundLight};
   text-align: center;
   border-radius: ${radiuses.circle};
-  & img{
+  & img {
     border-radius: ${radiuses.circle};
     object-fit: cover;
   }
@@ -72,7 +72,7 @@ export const imgWrapper = ({ spaces, colors, radiuses }: Theme) => css`
 
 export const inputsWrappper = ({ spaces }: Theme) => css`
   width: 60%;
-  & *{
+  & * {
     width: 100%;
     margin: ${spaces.xs} 0;
   }

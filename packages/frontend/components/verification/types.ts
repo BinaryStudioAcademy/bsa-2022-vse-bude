@@ -1,5 +1,4 @@
 export type VerificationModalProps = {
-    isOpen: boolean;
-    setIsOpen: (arg0: boolean) => void;
-  };
-  
+  isOpen: boolean;
+  setIsOpen: (arg0: boolean) => void;
+};

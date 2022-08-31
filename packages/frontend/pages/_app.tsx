@@ -6,7 +6,7 @@ import { wrapper } from 'store';
 import { UserProvider, ThemeProvider } from '@providers';
 import '../public/css/fontawesome.css';
 import { PagesLoader } from 'components/primitives/pages-loader';
-import { useTypedSelector } from '@hooks';
+import { useAuth, useMounted, useTypedSelector } from '@hooks';
 import VerificationModal from 'components/verification/component';
 
 export type NextPageWithLayout = NextPage & {
@@ -20,13 +20,15 @@ type AppPropsWithLayout = AppProps & {
 const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? ((page) => page);
 
-  const { isModal } = useTypedSelector(state => state.verify);
-  
+  const { isModal } = useTypedSelector((state) => state.verify);
+  const { hasToken } = useAuth();
+  const isMounted = useMounted();
+
   return (
     <ThemeProvider>
       <UserProvider>{getLayout(<Component {...pageProps} />)}</UserProvider>
       <PagesLoader />
-      {isModal && <VerificationModal></VerificationModal>}
+      {isMounted && hasToken && isModal && <VerificationModal></VerificationModal>}
     </ThemeProvider>
   );
 };

@@ -12,9 +12,7 @@ const verifySlice = createSlice({
   name: 'verify',
   initialState,
   reducers: {},
-  extraReducers: {
-    
-  },
+  extraReducers: {},
 });
 
 export const verifyReducer = verifySlice.reducer;
