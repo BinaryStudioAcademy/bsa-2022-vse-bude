@@ -106,7 +106,9 @@ export class UserProfileService {
     const { avatar } = await this._userProfileRepository.getUser({ userId });
     if (avatar) {
       const filename = getFilenameFromUrl(avatar);
-      filename && (await this._storageService.deleteImage(filename));
+      if (filename) {
+        await this._storageService.deleteImage(filename);
+      }
     }
 
     if (req.file) {
@@ -118,12 +120,10 @@ export class UserProfileService {
       });
     }
 
-    if (!req.file) {
-      return this._userProfileRepository.updateAvatar({
-        userId,
-        avatar: null,
-      });
-    }
+    return this._userProfileRepository.updateAvatar({
+      userId,
+      avatar: null,
+    });
   }
 
   public updateUserSocialMedia({
