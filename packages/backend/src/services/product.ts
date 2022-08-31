@@ -32,12 +32,19 @@ export class ProductService {
     const { id } = req.params;
     const product = await this._productRepository.getById(id);
     if (!product) {
-      throw new ProductNotFoundError(req);
+      throw new ProductNotFoundError();
     }
 
     product.category.title = req.t(`categories.${product.category.title}`);
 
-    return product;
+    const currentPrice = await this._productRepository.getCurrentPrice(
+      product.id,
+    );
+
+    return {
+      ...product,
+      currentPrice: currentPrice,
+    };
   }
 
   public async incrementViews(id: string, req: Request) {
