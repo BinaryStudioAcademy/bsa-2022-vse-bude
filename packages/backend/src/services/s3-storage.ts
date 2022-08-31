@@ -6,7 +6,7 @@ import {
   FileSizeTooLargeError,
 } from '@errors';
 import type { UploadFileRequest } from '@types';
-import { getEnv } from '@helpers';
+import { getEnv, logger } from '@helpers';
 import { randomBytes } from 'crypto';
 
 export class S3StorageService {
@@ -55,6 +55,18 @@ export class S3StorageService {
     return uploadImage.Location;
   }
 
+  async deleteImage(filename: string) {
+    const params = this.createDeleteParams(filename, S3FolderPath.IMAGES);
+
+    const result = await this._client
+      .deleteObject(params, (err, _data) => {
+        err && logger.error(err);
+      })
+      .promise();
+
+    return result;
+  }
+
   private generateFilename(extension: string) {
     return randomBytes(16).toString('hex') + `.${extension}`;
   }
@@ -65,6 +77,13 @@ export class S3StorageService {
       Key: `${folder}/${filename}`,
       Body: body,
       ACL: 'public-read',
+    };
+  }
+
+  private createDeleteParams(filename: string, folder: string) {
+    return {
+      Bucket: this._bucketName,
+      Key: `${folder}/${filename}`,
     };
   }
 

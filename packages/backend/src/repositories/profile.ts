@@ -144,6 +144,26 @@ export class UserProfileRepository {
     );
   }
 
+  public async updateAvatar({
+    userId,
+    avatar,
+  }: {
+    userId: string;
+    avatar: string | null;
+  }) {
+    return this._dbClient.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        avatar,
+      },
+      select: {
+        avatar: true,
+      },
+    });
+  }
+
   public getPasswordHash({ userId }: { userId: string }) {
     return this._dbClient.user.findUnique({
       where: {

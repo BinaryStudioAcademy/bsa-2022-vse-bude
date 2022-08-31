@@ -4,8 +4,9 @@ import type { ApiRoutes } from '@vse-bude/shared';
 import { ProfileApiRoutes } from '@vse-bude/shared';
 import { wrap } from '@helpers';
 import { apiPath } from '@helpers';
-import { authMiddleware } from '@middlewares';
+import { authMiddleware, uploadImage } from '@middlewares';
 import { profileValidation } from '@validation';
+import type { UploadFileRequest } from '@types';
 
 export const initProfileRoutes = (
   { profileService }: Services,
@@ -67,6 +68,18 @@ export const initProfileRoutes = (
       }
 
       return { ...user, socialMedia: links };
+    }),
+  );
+
+  router.put(
+    apiPath(path, ProfileApiRoutes.UPDATE_AVATAR),
+    authMiddleware,
+    uploadImage,
+    wrap(async (req: UploadFileRequest) => {
+      const { userId } = req;
+      const avatar = await profileService.updateAvatar({ userId, req });
+
+      return avatar;
     }),
   );
 
