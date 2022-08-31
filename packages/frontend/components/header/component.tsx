@@ -32,17 +32,19 @@ export const Header = () => {
   const dispatch = useAppDispatch();
 
   const categories = useTypedSelector((state) => state.category.list);
-
+  console.log(categories);
+  
   useEffect(() => {
-    const category: RequestOptions = {
-      limit: 5,
-      locale: locale as HttpAcceptLanguage,
-    };
+    if(!categories.length){
+      const category: RequestOptions = {
+        locale: locale as HttpAcceptLanguage,
+      };
 
-    dispatch(
-      fetchCategories({ limit: category.limit, locale: category.locale }),
-    );
-  }, [dispatch, locale]);
+      dispatch(
+        fetchCategories({ locale: category.locale }),
+      );
+    }    
+  }, [dispatch, locale, categories]);
 
   const redirectToCategory = (category: string) => {
     const filters = {
