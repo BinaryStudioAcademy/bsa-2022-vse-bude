@@ -3,21 +3,23 @@ import { Button, Input } from '@primitives';
 import { FavoriteButton } from 'components/product/favorite-button/component';
 import { useRef } from 'react';
 import { useTranslation } from 'next-i18next';
-import { useInFavorite, useAppDispatch } from '@hooks';
-import {
-  deleteProductFromFavorites,
-  addProductToFavorites,
-} from 'store/favorite-product';
 import { CountDownTimer } from '../countdown-timer/component';
 import { ItemTitle, ItemInfo, ItemPrice } from '../item-info';
 import * as styles from './styles';
 
 interface ItemInfoAuctionProps {
   item: ItemDto;
+  isInFavorite: boolean;
   onBid: () => void;
+  onChangeIsFavorite: () => void;
 }
 
-export const ItemInfoAuction = ({ item, onBid }: ItemInfoAuctionProps) => {
+export const ItemInfoAuction = ({
+  item,
+  isInFavorite,
+  onBid,
+  onChangeIsFavorite,
+}: ItemInfoAuctionProps) => {
   const { t } = useTranslation('item');
 
   const targetDate = new Date('2022-11-17T03:24:00');
@@ -25,17 +27,6 @@ export const ItemInfoAuction = ({ item, onBid }: ItemInfoAuctionProps) => {
   const inputBidRef = useRef<HTMLInputElement>(null);
 
   const minBidAmount = +item.currentPrice + +item.minimalBid + 1;
-
-  const isInFavorite = useInFavorite(item.id);
-
-  const dispatch = useAppDispatch();
-
-  const onChangeIsFavorite = () => {
-    const favAction = isInFavorite
-      ? deleteProductFromFavorites
-      : addProductToFavorites;
-    dispatch(favAction(item.id));
-  };
 
   return (
     <div css={styles.wrapper}>
