@@ -3,145 +3,149 @@
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  * Copyright 2022 Fonticons, Inc.
  */
- .fa {
-    font-family: var(--fa-style-family, 'Font Awesome 6 Free');
-    font-weight: var(--fa-style, 900);
-  }
-  
-  .fa,
-  .fas,
-  .fa-solid,
-  .far,
-  .fa-regular,
-  .fal,
-  .fa-light,
-  .fat,
-  .fa-thin,
-  .fad,
-  .fa-duotone,
-  .fab,
-  .fa-brands {
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    display: var(--fa-display, inline-block);
-    font-style: normal;
-    font-variant: normal;
-    line-height: 1;
-    text-rendering: auto;
-  }
-  
-  .fa-angle-down::before {
-    content: '\f107';
-  }
-  
-  .fa-angle-left::before {
-    content: '\f104';
-  }
-  
-  .fa-angle-right::before {
-    content: '\f105';
-  }
-  
-  .fa-angle-up::before {
-    content: '\f106';
-  }
-  
-  .fa-eye::before {
-    content: '\f06e';
-  }
-  
-  .fa-eye-slash::before {
-    content: '\f070';
-  }
-  
-  .fa-check::before {
-    content: '\f00c';
-  }
-  
-  .fa-star::before {
-    content: '\f005';
-  }
-  
-  .fa-bell::before {
-    content: '\f0f3';
-  }
-  
-  .fa-user::before {
-    content: '\f007';
-  }
-  
-  .fa-list::before {
-    content: '\f03a';
-  }
-  
-  .fa-gear::before {
-    content: '\f013';
-  }
-  
-  .fa-comment-dots::before {
-    content: '\f4ad';
-  }
-  
-  .fa-circle-question::before {
-    content: '\f059';
-  }
-  
-  .fa-arrow-right-from-bracket::before {
-    content: '\f08b';
-  }
-  
-  .fa-camera::before {
-    content: '\f030';
-  }
-  
-  .fa-phone::before {
-    content: '\f095';
-  }
-  
-  .fa-envelope::before {
-    content: '\f0e0';
-  }
-  
-  .fa-user-shield::before {
-    content: '\f505';
-  }
-  
-  .fa-stopwatch::before {
-    content: '\f2f2';
-  }
-  
-  .fa-image::before {
-    content: '\f03e';
-  }
-  
-  .fa-circle-info::before {
-    content: '\f05a';
-  }
-  
-  .fa-square-instagram:before {
-    content: '\e055';
-  }
-  
-  .fa-square-facebook:before {
-    content: '\f082';
-  }
-  
-  .fa-globe::before {
-    content: '\f0ac';
-  }
-  
-  .fa-linkedin:before {
-    content: '\f08c';
-  }
-  
-  .fa-linkedin-in:before {
-    content: '\f0e1';
-  }
-  
-  .fa-xmark::before {
-    content: '\f00d';
-  }
-  :root,
+.fa {
+  font-family: var(--fa-style-family, 'Font Awesome 6 Free');
+  font-weight: var(--fa-style, 900);
+}
+
+.fa,
+.fas,
+.fa-solid,
+.far,
+.fa-regular,
+.fal,
+.fa-light,
+.fat,
+.fa-thin,
+.fad,
+.fa-duotone,
+.fab,
+.fa-brands {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: var(--fa-display, inline-block);
+  font-style: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-rendering: auto;
+}
+
+.fa-angle-down::before {
+  content: '\f107';
+}
+
+.fa-angle-left::before {
+  content: '\f104';
+}
+
+.fa-angle-right::before {
+  content: '\f105';
+}
+
+.fa-angle-up::before {
+  content: '\f106';
+}
+
+.fa-eye::before {
+  content: '\f06e';
+}
+
+.fa-eye-slash::before {
+  content: '\f070';
+}
+
+.fa-check::before {
+  content: '\f00c';
+}
+
+.fa-star::before {
+  content: '\f005';
+}
+
+.fa-bell::before {
+  content: '\f0f3';
+}
+
+.fa-user::before {
+  content: '\f007';
+}
+
+.fa-list::before {
+  content: '\f03a';
+}
+
+.fa-gear::before {
+  content: '\f013';
+}
+
+.fa-comment-dots::before {
+  content: '\f4ad';
+}
+
+.fa-circle-question::before {
+  content: '\f059';
+}
+
+.fa-arrow-right-from-bracket::before {
+  content: '\f08b';
+}
+
+.fa-camera::before {
+  content: '\f030';
+}
+
+.fa-phone::before {
+  content: '\f095';
+}
+
+.fa-envelope::before {
+  content: '\f0e0';
+}
+
+.fa-user-shield::before {
+  content: '\f505';
+}
+
+.fa-stopwatch::before {
+  content: '\f2f2';
+}
+
+.fa-image::before {
+  content: '\f03e';
+}
+
+.fa-circle-info::before {
+  content: '\f05a';
+}
+
+.fa-square-instagram:before {
+  content: '\e055';
+}
+
+.fa-square-facebook:before {
+  content: '\f082';
+}
+
+.fa-globe::before {
+  content: '\f0ac';
+}
+
+.fa-linkedin:before {
+  content: '\f08c';
+}
+
+.fa-linkedin-in:before {
+  content: '\f0e1';
+}
+
+.fa-xmark::before {
+  content: '\f00d';
+}
+
+.fa-calendar-days::before {
+  content: '\f073';
+}
+:root,
 :host {
   --fa-font-brands: normal 400 1em/1 'Font Awesome 6 Brands';
 }
