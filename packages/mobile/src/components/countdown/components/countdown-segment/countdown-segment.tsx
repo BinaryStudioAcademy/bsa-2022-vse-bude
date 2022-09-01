@@ -2,16 +2,20 @@ import React, { FC } from 'react';
 import { View, Text } from '~/components/components';
 import { useCustomTheme } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
-import { BoxType } from '../../common/enums/enums';
+import { SegmentPosition } from '../../common/enums/enums';
 import { styles } from './styles';
 
 type Props = {
   timeName: string;
   timeValue: string;
-  boxPosition?: BoxType;
+  segmentPosition?: SegmentPosition;
 };
 
-const Box: FC<Props> = ({ timeName, timeValue, boxPosition }) => {
+const CountdownSegment: FC<Props> = ({
+  timeName,
+  timeValue,
+  segmentPosition,
+}) => {
   const { colors } = useCustomTheme();
 
   return (
@@ -20,7 +24,7 @@ const Box: FC<Props> = ({ timeName, timeValue, boxPosition }) => {
         globalStyles.alignItemsCenter,
         globalStyles.justifyContentCenter,
         styles.box,
-        boxPosition ? styles[boxPosition] : {},
+        segmentPosition ? styles[segmentPosition] : {},
         { backgroundColor: colors.backgroundElements },
       ]}
     >
@@ -40,4 +44,4 @@ const Box: FC<Props> = ({ timeName, timeValue, boxPosition }) => {
   );
 };
 
-export { Box };
+export { CountdownSegment };

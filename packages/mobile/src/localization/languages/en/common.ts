@@ -15,7 +15,7 @@ export const common = {
     DAYS: 'days',
     HOURS: 'hours',
     MINUTES_SHORT: 'min',
-    SECONDS_SHORT: 'sek',
+    SECONDS_SHORT: 'sec',
   },
   permission: {
     STORAGE_DENIED: 'Storage permission denied',

@@ -6,4 +6,4 @@ export {
   MAX_NAME_LENGTH,
 } from './validation';
 export * from './images';
-export { UPDATE_END_DATE_INTERVAL } from './time';
+export { UPDATE_END_DATE_INTERVAL_MILLISECONDS } from './time';

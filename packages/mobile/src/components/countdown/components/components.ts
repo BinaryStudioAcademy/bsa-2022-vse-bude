@@ -1,1 +1,1 @@
-export { Box } from './box/box';
+export { CountdownSegment } from './countdown-segment/countdown-segment';

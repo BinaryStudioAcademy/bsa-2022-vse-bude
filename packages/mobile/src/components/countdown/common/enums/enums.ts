@@ -1,1 +1,1 @@
-export { BoxType } from './box-type';
+export { SegmentPosition } from './segment-position-type';
