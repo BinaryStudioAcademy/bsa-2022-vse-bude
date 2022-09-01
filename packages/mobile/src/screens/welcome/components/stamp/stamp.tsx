@@ -5,24 +5,26 @@ import { images } from '~/assets/images/images';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './style';
 
-export const Product: FC = () => {
+export const Stamp: FC = () => {
   const { t } = useTranslation();
 
   return (
     <>
       <Image source={images.stamp} style={styles.image} />
       <View style={styles.wrapper}>
-        <Text style={[styles.title, globalStyles.fontWeightBold]}>
+        <Text
+          style={[styles.title, globalStyles.fontWeightBold, globalStyles.fs14]}
+        >
           {t('welcome.TITLE')}
         </Text>
-        <Text style={globalStyles.fs12} numberOfLines={2}>
+        <Text style={globalStyles.fs10} numberOfLines={2}>
           {t('welcome.DESCRIPTION')}
         </Text>
         <View style={styles.divider}></View>
         <View style={styles.priceWrapper}>
           <Text
             style={[
-              globalStyles.fs17,
+              globalStyles.fs16,
               globalStyles.fontWeightBold,
               styles.price,
             ]}
