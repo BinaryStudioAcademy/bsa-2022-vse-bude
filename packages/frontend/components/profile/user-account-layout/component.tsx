@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { useRouter } from 'next/router';
 import { useAuth } from '@hooks';
 import { useTranslation } from 'next-i18next';
-import { Layout } from '@components';
+import { Layout } from '@components/layout';
 import { Container, Flex } from '@primitives';
 import { DashboardLink } from './dashboard-link';
 import type { AccountPageProps } from './types';

@@ -76,6 +76,12 @@
       }
     }
   },
+  "notifications": {
+    "defaultSuccessTitle": "Success",
+    "defaultInfoTitle": "Info",
+    "defaultWarningTitle": "Warning",
+    "defaultErrorTitle": "Error"
+  },
   "months": [
     "Січень",
     "Лютий",

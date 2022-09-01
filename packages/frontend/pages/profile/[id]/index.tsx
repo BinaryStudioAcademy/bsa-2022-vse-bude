@@ -1,12 +1,12 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import type { ReactElement } from 'react';
 import { wrapper } from 'store';
-import { AccountLayout } from '@components';
 import { withPublic } from '@hocs';
 import { Http } from '@vse-bude/shared';
 import { fetchUserProfileSSR } from 'store/profile/actions';
-import { PersonalInfo } from 'components/profile/user-account';
+import { PersonalInfo } from '@components/profile/user-account';
 import type { NextPageWithLayout } from 'pages/_app';
+import { AccountLayout } from '@components/profile/user-account-layout';
 
 export const getServerSideProps = withPublic(
   wrapper.getServerSideProps((store) => async (ctx) => {
