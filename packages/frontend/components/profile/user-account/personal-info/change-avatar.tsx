@@ -3,9 +3,10 @@ import { useAppDispatch } from '@hooks';
 import React, { useRef, useState } from 'react';
 import { Popover, IconButton, Icon } from '@primitives';
 import { IconName } from '@enums';
-import { ColorPalette } from '@vse-bude/shared';
+import { ColorPalette, MAX_IMAGE_SIZE } from '@vse-bude/shared';
 import { updateUserAvatar } from 'store/profile/actions';
 import dynamic from 'next/dynamic';
+import { allowedImgExtension } from 'common/enums/allowedImgExtension';
 import * as styles from './styles';
 
 const ImageCropModal = dynamic(() => import('../../../imageCrop/component'));
@@ -15,12 +16,27 @@ const ChangeAvatar = () => {
   const inputFile = useRef(null);
   const dispatch = useAppDispatch();
   const [newAvatar, setNewAvatar] = useState<File>(null);
+  const [error, setError] = useState('');
   const handleUpdateAvatar = () => {
     inputFile.current.click();
   };
 
   const onSelectFile = (e) => {
     const file = e.target.files[0];
+    if (!file) {
+      return;
+    }
+
+    if (!Object.values(allowedImgExtension).includes(file.type)) {
+      setError(t('personal-info:validation.avatar.fileType'));
+
+      return;
+    }
+    if (file.size > MAX_IMAGE_SIZE) {
+      setError(t('personal-info:validation.avatar.maxSize'));
+
+      return;
+    }
     setNewAvatar(file);
   };
 
@@ -36,6 +52,10 @@ const ChangeAvatar = () => {
     setNewAvatar(null);
   };
 
+  const handleOpenDropdown = () => {
+    setError('');
+  };
+
   const handleDeleteAvatar = () => {
     setNewAvatar(null);
     dispatch(updateUserAvatar(null));
@@ -46,6 +66,7 @@ const ChangeAvatar = () => {
 
   return (
     <React.Fragment>
+      {error && <div css={styles.error}>{error}</div>}
       {newAvatar && (
         <ImageCropModal
           file={newAvatar}
@@ -63,6 +84,7 @@ const ChangeAvatar = () => {
             backgroundColor="lightgray"
             color={ColorPalette.GRAY_300}
             cssExtend={styles.avatarUpdateButton}
+            onClick={handleOpenDropdown}
           />
         }
       >
