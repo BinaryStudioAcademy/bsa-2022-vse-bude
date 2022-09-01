@@ -27,7 +27,7 @@ export const CategoriesList = ({ categories }: CategoriesListProps) => {
     <Dropdown
       options={categories.map((item) => ({
         value: item.title,
-        key: 'home',
+        key: item.id,
         cssExtend: styles.option,
         onClick: () => {
           redirectToCategory(item.id);

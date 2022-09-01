@@ -28,10 +28,11 @@ export const Header = () => {
   const categories = useTypedSelector((state) => state.category.list);
 
   useEffect(() => {
-    if (!categories.length) {
+    if (!categories) {
       const category: RequestOptions = {
         locale: locale as HttpAcceptLanguage,
       };
+      console.log('fecth');
 
       dispatch(fetchCategories({ locale: category.locale }));
     }
