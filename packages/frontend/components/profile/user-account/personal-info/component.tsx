@@ -2,8 +2,8 @@ import { useTranslation } from 'next-i18next';
 import { useAuth, useTypedSelector, useAppDispatch } from '@hooks';
 import { shallowEqual } from 'react-redux';
 import { Flex } from 'grapefruit-ui';
-import { useRef, useState } from 'react';
-import { Button, IconButton } from '@primitives';
+import { useState } from 'react';
+import { Button, Avatar } from '@primitives';
 import dynamic from 'next/dynamic';
 import { fetchFullUserProfile } from '@store';
 import { Avatar } from '@primitives';
@@ -15,13 +15,11 @@ import * as styles from './styles';
 import { ProfileData } from './primitives';
 
 const EditForm = dynamic(() => import('./edit-form'));
-const ImageCropModal = dynamic(() => import('../../../imageCrop/component'));
+const ChangeAvatar = dynamic(() => import('./change-avatar'));
 
 export const PersonalInfo = () => {
   const { t } = useTranslation();
   const [isEditing, setIsEditing] = useState(false);
-  const [avatar, setAvatar] = useState(null);
-  const [croppedAvatar, setCroppedAvatar] = useState(null);
   const { user: authUser } = useAuth();
 
   const { user, loading } = useTypedSelector(
@@ -34,23 +32,7 @@ export const PersonalInfo = () => {
 
   const inputFile = useRef(null);
 
-  const handleUpdateAvatar = () => {
-    inputFile.current.click();
-  };
-
-  const onSelectFile = (e) => {
-    const file = e.target.files[0];
-    setAvatar(file);
-  };
-
-  const handleCloseCropModal = () => {
-    setAvatar(null);
-  };
-
-  const onCrop = (croppedImage) => {
-    setCroppedAvatar(croppedImage);
-    setAvatar(null);
-  };
+  const isAuthUser = authUser?.id === user?.id;
 
   if (!user) {
     return null;
@@ -58,16 +40,6 @@ export const PersonalInfo = () => {
 
   return (
     <NestedLayout>
-      {avatar && (
-        <ImageCropModal
-          file={avatar}
-          onSave={onCrop}
-          onClose={handleCloseCropModal}
-          okLabel={t('personal-info:button.ok')}
-          dismissLabel={t('personal-info:button.cancel')}
-          circle
-        />
-      )}
       <div css={styles.personalHeader}>
         <div css={styles.headerWrapper}>
           <div css={styles.flagWrapper}>
@@ -75,34 +47,19 @@ export const PersonalInfo = () => {
           </div>
 
           <div css={styles.avatarWrapper}>
-            <input
-              type="file"
-              id="file"
-              ref={inputFile}
-              style={{ display: 'none' }}
-              onChange={onSelectFile}
-              accept="image/*"
+            <Avatar
+              image={user.avatar}
+              firstName={user.firstName}
+              lastName={user.lastName}
+              isLarge={true}
+              loading={loading}
             />
-            <div>
-              <Avatar
-                image={croppedAvatar && URL.createObjectURL(croppedAvatar)}
-                firstName={user.firstName}
-                lastName={user.lastName}
-                isLarge={true}
-              />
-              <IconButton
-                icon={IconName.CAMERA}
-                onClick={handleUpdateAvatar}
-                backgroundColor="lightgray"
-                color={ColorPalette.GRAY_300}
-                cssExtend={styles.avatarUpdateButton}
-              />
-            </div>
+            {isAuthUser && <ChangeAvatar />}
           </div>
         </div>
 
         <Flex justify={'flex-end'} css={styles.buttons}>
-          {!isEditing && authUser?.id === user.id && (
+          {!isEditing && isAuthUser && (
             <Button
               type="button"
               variant="outlined"

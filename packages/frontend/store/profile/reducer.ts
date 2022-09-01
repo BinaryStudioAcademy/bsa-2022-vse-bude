@@ -6,6 +6,7 @@ import {
   fetchUserProfileSSR,
   fetchFullUserProfile,
   updateUserProfile,
+  updateUserAvatar
 } from './actions';
 
 interface ProfileState {
@@ -45,6 +46,7 @@ const profileSlice = createSlice({
       state.loading = false;
       state.user = payload;
     },
+
     [fetchFullUserProfile.rejected.type]: (state, { payload }) => {
       state.loading = false;
       state.user = null;
@@ -59,6 +61,18 @@ const profileSlice = createSlice({
       state.loading = false;
       state.user = null;
       state.error = payload;
+    },
+
+    [updateUserAvatar.pending.type]: (state, { _payload }) => {
+      state.loading = true;
+      state.user.avatar = null;
+    },
+    [updateUserAvatar.fulfilled.type]: (state, { payload }) => {
+      state.user.avatar = payload.avatar;
+      state.loading = false;
+    },
+    [updateUserAvatar.rejected.type]: (state, { _payload }) => {
+      state.loading = false;
     },
 
     [HYDRATE](state, { payload }: HydrateAction) {
