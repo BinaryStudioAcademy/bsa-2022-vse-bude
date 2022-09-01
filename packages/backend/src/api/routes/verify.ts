@@ -1,7 +1,7 @@
 import type {
-  ApiRoutes,
   VerifyPhoneDto,
   VerifyEmailDto,
+  ApiRoutes,
 } from '@vse-bude/shared';
 import { VerificationTypes, VerifyApiRoutes } from '@vse-bude/shared';
 import { type Request, Router } from 'express';
@@ -109,14 +109,6 @@ export const initVerifyRoutes = (
 
       return verifyService.verifyEmail(dto);
     }),
-  );
-
-  router.post(
-    apiPath(path, VerifyApiRoutes.EMAIL_RESEND_CODE),
-    authMiddleware,
-    wrap((req: Request) =>
-      verifyService.resendEmailCode(req.userId, VerificationTypes.EMAIL),
-    ),
   );
 
   return router;

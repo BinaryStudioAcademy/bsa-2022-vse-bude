@@ -1,11 +1,10 @@
 import { HttpError, HttpStatusCode } from '@vse-bude/shared';
-import type { Request } from 'express';
 
 class ProductNotFoundError extends HttpError {
-  constructor(req: Request) {
+  constructor() {
     super({
       status: HttpStatusCode.NOT_FOUND,
-      message: req.t('PRODUCT_NOT_FOUND'),
+      message: 'Product not found!',
     });
   }
 }

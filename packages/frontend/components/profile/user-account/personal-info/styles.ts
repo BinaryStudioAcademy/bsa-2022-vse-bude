@@ -85,3 +85,9 @@ export const groupePhone = ({ spaces }: Theme) => css`
 export const phoneRow = () => css`
   flex-grow: 2;
 `;
+
+export const avatarUpdateButton = css`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+`;

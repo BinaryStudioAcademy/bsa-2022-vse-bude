@@ -2,6 +2,7 @@ import type { PrismaClient } from '@prisma/client';
 import type {
   GetUserAddressDto,
   GetUserProfileDto,
+  GetUserPersonalDataDto,
   UserSocialMediaDto,
   UpdateUserProfileDto,
 } from '@types';
@@ -23,6 +24,25 @@ export class UserProfileRepository {
         avatar: true,
         firstName: true,
         lastName: true,
+      },
+    });
+  }
+
+  public getFullUserData({
+    userId,
+  }: {
+    userId: string;
+  }): Promise<GetUserPersonalDataDto> {
+    return this._dbClient.user.findUnique({
+      where: {
+        id: userId,
+      },
+      select: {
+        id: true,
+        firstName: true,
+        lastName: true,
+        email: true,
+        phone: true,
       },
     });
   }
@@ -71,22 +91,24 @@ export class UserProfileRepository {
     userId: string;
     data: UpdateUserProfileDto;
   }): Promise<GetUserProfileDto> {
-    const { avatar, firstName, lastName } = data;
+    const { firstName, lastName, email, phone } = data;
 
     return this._dbClient.user.update({
       where: {
         id: userId,
       },
       data: {
-        avatar,
         firstName,
         lastName,
+        email,
+        phone,
       },
       select: {
         id: true,
-        avatar: true,
         firstName: true,
         lastName: true,
+        email: true,
+        phone: true,
       },
     });
   }
@@ -120,5 +142,53 @@ export class UserProfileRepository {
         });
       }),
     );
+  }
+
+  public async updateAvatar({
+    userId,
+    avatar,
+  }: {
+    userId: string;
+    avatar: string | null;
+  }) {
+    return this._dbClient.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        avatar,
+      },
+      select: {
+        avatar: true,
+      },
+    });
+  }
+
+  public getPasswordHash({ userId }: { userId: string }) {
+    return this._dbClient.user.findUnique({
+      where: {
+        id: userId,
+      },
+      select: {
+        passwordHash: true,
+      },
+    });
+  }
+
+  public changePassword({
+    userId,
+    passwordHash,
+  }: {
+    userId: string;
+    passwordHash: string;
+  }) {
+    return this._dbClient.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        passwordHash,
+      },
+    });
   }
 }

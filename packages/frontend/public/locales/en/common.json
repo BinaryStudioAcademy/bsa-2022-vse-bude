@@ -10,6 +10,14 @@
     "buttons": {
       "create_account": "Create Account",
       "sign_in": "Sign In"
+    },
+    "popover": {
+      "personalInfo": "Personal Info",
+      "myList": "My List",
+      "settings": "Settings",
+      "messages": "Messages",
+      "support": "Support",
+      "signOut": "Sign Out"
     }
   },
   "footer": {
@@ -81,5 +89,20 @@
   "PHONE_NUMBER": "Phone Number",
   "I_HAVE_AN_ACCOUNT": "I have an account",
   "SIGN_IN": "Sign In",
-  "SEND_RESET_LINK_BTN": "Send reset link"
+  "SEND_RESET_LINK_BTN": "Send reset link",
+  "months": [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ],
+  "days": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
 }
