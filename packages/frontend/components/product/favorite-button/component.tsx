@@ -9,8 +9,12 @@ export const FavoriteButton = ({
   backgroundColor = 'darkgray',
   onChangeIsFavorite,
   cssExtended,
+  inFavouriteColor,
+  notInFavouriteColor,
 }: FavoriteButtonProps) => {
-  const color = isFavorite ? IconColor.YELLOW : IconColor.WHITE;
+  const color = isFavorite
+    ? inFavouriteColor || IconColor.YELLOW
+    : notInFavouriteColor || IconColor.WHITE;
   const icon = isFavorite ? IconName.STAR_FULFILLED : IconName.STAR_OUTLINED;
 
   return (

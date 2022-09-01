@@ -52,7 +52,12 @@ export const actionWrapper = ({ mq, spaces }: Theme) => css`
 `;
 
 export const buttons = ({ spaces }: Theme) => css`
+  margin-top: ${spaces.xl};
   gap: ${spaces.sm};
+`;
+
+export const marginBottom = ({ spaces }: Theme) => css`
+  margin-bottom: ${spaces.xl11};
 `;
 
 export const sections = ({ mq }: Theme) => css`
