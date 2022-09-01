@@ -18,7 +18,7 @@ const FlagBackgroundView: React.FC<FlagBackgroundViewProps> = ({
     <LinearGradient
       start={start}
       end={end}
-      colors={[ColorPalette.BLUE_100, ColorPalette.YELLOW_300]}
+      colors={[ColorPalette.BLUE_100, ColorPalette.YELLOW_200]}
       style={style}
       {...viewProps}
     >

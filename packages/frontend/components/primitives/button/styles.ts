@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { Theme } from '@emotion/react';
+import type { Theme } from 'theme';
 import { resetButton } from 'theme';
 
 export const button = ({
@@ -33,6 +33,11 @@ export const button = ({
     :disabled {
       background: ${colors.disabled};
     }
+  }
+
+  &[data-variant='danger'] {
+    background: ${colors.danger};
+    color: ${colors.white};
   }
 
   &[data-variant='outlined'] {

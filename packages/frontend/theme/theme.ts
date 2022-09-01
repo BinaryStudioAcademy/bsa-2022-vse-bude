@@ -9,12 +9,14 @@ const colors = {
   secondaryLight: ColorPalette.GREEN_100,
   secondaryDark: ColorPalette.GREEN_200,
   background: ColorPalette.WHITE_100,
+  white: ColorPalette.WHITE_100,
   backgroundLight: ColorPalette.GRAY_100,
   backgroundDark: ColorPalette.GRAY_200,
   text: ColorPalette.BLACK_100,
   textLight: ColorPalette.GRAY_300,
   textFooter: ColorPalette.WHITE_100,
   error: ColorPalette.RED_100,
+  danger: ColorPalette.RED_100,
   active: ColorPalette.YELLOW_100,
   accent: ColorPalette.YELLOW_200,
   disabled: ColorPalette.GRAY_200,
@@ -41,6 +43,7 @@ const fontSizes = {
   buttonSmall: '12px',
   caption: '12px',
   smallButton: '15px',
+  tooltip: '13px',
   cell: '18px',
 };
 
