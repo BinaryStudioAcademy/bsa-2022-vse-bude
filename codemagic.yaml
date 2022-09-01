@@ -110,6 +110,11 @@ workflows:
           source: false
       cancel_previous_builds: true
 
+    when:
+      changeset:
+        includes:
+          - 'packages/mobile/'
+
     scripts:
       - *npm_install
       - *environment_set
