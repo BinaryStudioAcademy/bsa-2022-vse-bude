@@ -25,17 +25,17 @@ export const Header = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
-  const categories = useTypedSelector((state) => state.category.list);
+  const { list: categories, loading: categoriesLoading } = useTypedSelector((state) => state.category);
 
   useEffect(() => {
-    if (categories.length === 0 && !isMounted) {
+    if (categories.length === 0 && !categoriesLoading) {
       const category: RequestOptions = {
         locale: locale as HttpAcceptLanguage,
       };
 
       dispatch(fetchCategories({ locale: category.locale }));
     }
-  }, [dispatch, isMounted, locale, categories]);
+  }, [dispatch, locale, categories, categoriesLoading]);
 
   const renderAuthButtons = () => (
     <div className="buttons-wrapper">
