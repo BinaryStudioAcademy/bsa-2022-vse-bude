@@ -6,6 +6,7 @@ import {
   getCurrentUser,
   emailVerification,
   loginUser,
+  logoutUser,
   phoneVerification,
   signUpUser,
 } from './actions';
@@ -19,6 +20,7 @@ export interface AuthState {
 const user = createReducer<UserDto>(null, {
   [getCurrentUser.fulfilled.type]: (_, { payload }) => payload,
   [getCurrentUser.rejected.type]: () => null,
+  [logoutUser.fulfilled.type]: () => null,
   [phoneVerification.fulfilled.type]: (state) => {
     state.phoneVerified = true;
   },
