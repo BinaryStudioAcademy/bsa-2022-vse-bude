@@ -19,7 +19,7 @@ export class BidRepository {
   }
 
   async getByUserAndProduct(userId: string, productId: string) {
-    return await this._dbClient.bid.findMany({
+    return this._dbClient.bid.findMany({
       where: {
         bidderId: userId,
         productId: productId,
@@ -28,7 +28,7 @@ export class BidRepository {
   }
 
   async deleteAllByProductAndUser(userId: string, productId: string) {
-    return await this._dbClient.bid.deleteMany({
+    return this._dbClient.bid.deleteMany({
       where: {
         bidderId: userId,
         productId: productId,

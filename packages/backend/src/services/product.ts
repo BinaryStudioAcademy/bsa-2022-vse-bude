@@ -109,7 +109,7 @@ export class ProductService {
 
     await this._bidRepository.deleteAllByProductAndUser(userId, productId);
 
-    return await this.getById(productId);
+    return this.getById(productId);
   }
 
   public async addToFavorites({ userId, productId }: AddProductToFavorites) {

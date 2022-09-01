@@ -9,12 +9,14 @@ export const IconButton = ({
   size = 'md',
   cssExtend,
   onClick,
+  type = 'button',
 }: IconButtonProps) => (
   <button
     css={[styles.iconButton, cssExtend]}
     onClick={onClick}
     data-size={size}
     data-bg-color={backgroundColor}
+    type={type}
   >
     <Icon icon={icon} color={color} />
   </button>
