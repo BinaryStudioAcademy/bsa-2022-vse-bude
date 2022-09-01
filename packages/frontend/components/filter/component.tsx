@@ -2,9 +2,10 @@ import type { ProductType } from '@vse-bude/shared';
 import { useRouter } from 'next/router';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { fetchProducts } from 'store/product';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import { Button } from '@primitives';
+import { PostTypeModal } from '@components/make-a-post/type-of-post';
 import { ProductGrid } from './product-grid/component';
 
 interface RequestOptions {
@@ -13,7 +14,8 @@ interface RequestOptions {
 }
 
 export const Filter = () => {
-  const { query, push } = useRouter();
+  const [isOpenTypeOfPost, setIsOpenTypeOfPost] = useState(false);
+  const { query } = useRouter();
   const { list } = useTypedSelector((store) => store.product);
   const dispatch = useAppDispatch();
 
@@ -27,12 +29,16 @@ export const Filter = () => {
 
   return (
     <div>
+      <PostTypeModal
+        isOpen={isOpenTypeOfPost}
+        setIsOpen={setIsOpenTypeOfPost}
+      />
       <div
         css={css`
           margin: 35px auto 0;
         `}
       >
-        <Button onClick={() => push('/items/create')}>Create a Post</Button>
+        <Button onClick={() => setIsOpenTypeOfPost(true)}>Create a Post</Button>
       </div>
       <ProductGrid lots={list}></ProductGrid>
     </div>
