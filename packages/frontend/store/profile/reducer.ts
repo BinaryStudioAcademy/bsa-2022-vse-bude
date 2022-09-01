@@ -64,7 +64,6 @@ const profileSlice = createSlice({
     },
 
     [updateUserAvatar.pending.type]: (state, { _payload }) => {
-      state.loading = true;
       state.user.avatar = null;
     },
     [updateUserAvatar.fulfilled.type]: (state, { payload }) => {

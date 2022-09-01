@@ -6,9 +6,6 @@ import { useState } from 'react';
 import { Button, Avatar } from '@primitives';
 import dynamic from 'next/dynamic';
 import { fetchFullUserProfile } from '@store';
-import { Avatar } from '@primitives';
-import { IconName } from '@enums';
-import { ColorPalette } from '@vse-bude/shared';
 import flag from '../../../../public/images/flagBg.png';
 import { NestedLayout } from '../common';
 import * as styles from './styles';
@@ -29,8 +26,6 @@ export const PersonalInfo = () => {
 
   const dispatch = useAppDispatch();
   const onGetFullProfile = () => dispatch(fetchFullUserProfile());
-
-  const inputFile = useRef(null);
 
   const isAuthUser = authUser?.id === user?.id;
 

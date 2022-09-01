@@ -28,6 +28,7 @@ export const updateUserData = ({
   http.put({
     url: `${ApiRoutes.PROFILE}${ProfileApiRoutes.UPDATE_DATA}`,
     body: data,
+  });
 
 export const updateAvatar = (file: FormData) =>
   http.put({

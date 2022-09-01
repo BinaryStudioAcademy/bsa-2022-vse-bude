@@ -4,9 +4,8 @@ import {
   getUserProfileSSR,
   getFullUserProfile,
   updateUserData,
-  updateAvatar
+  updateAvatar,
 } from '@services';
-import type { Http } from '@vse-bude/shared';
 import { ProfileActions } from './action-types';
 
 export const fetchUserProfileSSR = createAsyncThunk(
@@ -25,6 +24,7 @@ export const updateUserProfile = createAsyncThunk(
   ProfileActions.SAVE_USER_PROFILE,
   async ({ data }: { data: UpdateFullUserProfileDto }, { rejectWithValue }) =>
     updateUserData({ data }).catch((e) => rejectWithValue(e.message)),
+);
 
 export const updateUserAvatar = createAsyncThunk(
   ProfileActions.UPDATE_USER_AVATAR,
