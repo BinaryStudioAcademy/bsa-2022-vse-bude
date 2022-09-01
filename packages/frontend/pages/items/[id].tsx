@@ -78,12 +78,12 @@ const ItemPage = ({ item, similarItems }: ItemPageProps) => {
           },
           {
             name: t('common:header.nav.category'),
-            route: Routes.DEFAULT, // change
+            route: Routes.ITEMS, // change
           },
-          {
-            name: item.category.title, //change
-            route: Routes.DEFAULT, // change
-          },
+          // {
+          //   name: item.category.title, //change
+          //   route: Routes.DEFAULT, // change
+          // },
         ]}
       />
       <Item item={item} />
