@@ -30,7 +30,7 @@ export const Header = () => {
   );
 
   useEffect(() => {
-    if (categories.length === 0 && !categoriesLoading) {
+    if (!categories.length && !categoriesLoading) {
       const category: RequestOptions = {
         locale: locale as HttpAcceptLanguage,
       };
