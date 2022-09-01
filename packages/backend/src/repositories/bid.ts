@@ -26,4 +26,13 @@ export class BidRepository {
       },
     });
   }
+
+  async deleteAllByProductAndUser(userId: string, productId: string) {
+    return await this._dbClient.bid.deleteMany({
+      where: {
+        bidderId: userId,
+        productId: productId,
+      },
+    });
+  }
 }

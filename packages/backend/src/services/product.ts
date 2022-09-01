@@ -13,6 +13,7 @@ import type { Bid } from '@prisma/client';
 import { ProductStatus } from '@prisma/client';
 import type { VerifyService } from '@services';
 import type { BidRepository } from '@repositories';
+import { productMapper } from '@mappers';
 import { auctionPermissionsMapper } from '../mapper/auction-permissions';
 
 export class ProductService {
@@ -36,23 +37,19 @@ export class ProductService {
     return this._productRepository.getAll(query);
   }
 
-  public async getById(req: Request) {
-    const { id } = req.params;
-    const product = await this._productRepository.getById(id);
+  public async getById(productId: string) {
+    const product = await this._productRepository.getById(productId);
     if (!product) {
       throw new ProductNotFoundError();
     }
-
-    product.category.title = req.t(`categories.${product.category.title}`);
+    // TODO: fix translation after localization refactor
+    // product.category.title = req.t(`categories.${product.category.title}`);
 
     const currentPrice = await this._productRepository.getCurrentPrice(
       product.id,
     );
 
-    return {
-      ...product,
-      currentPrice: currentPrice,
-    };
+    return productMapper(product, +currentPrice);
   }
 
   public async incrementViews(id: string, req: Request) {
@@ -98,6 +95,21 @@ export class ProductService {
     );
 
     return auctionPermissionsMapper(!!bids.length);
+  }
+
+  public async leaveAuction(userId: string, productId: string) {
+    const product = await this._productRepository.getById(productId);
+    if (!product) {
+      throw new ProductNotFoundError();
+    }
+
+    if (toUtc(product.endDate) < toUtc()) {
+      throw new AuctionEndedError();
+    }
+
+    await this._bidRepository.deleteAllByProductAndUser(userId, productId);
+
+    return await this.getById(productId);
   }
 
   public async addToFavorites({ userId, productId }: AddProductToFavorites) {
