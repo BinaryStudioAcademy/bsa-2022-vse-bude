@@ -35,6 +35,7 @@ export const CategoriesList = ({ categories }: CategoriesListProps) => {
         },
       }))}
       onChildrenClick={() => setIsOpen(!isOpen)}
+      cssExtend={styles.wrapper}
     >
       {t('common:header.nav.category')}&nbsp;
       {isOpen ? (

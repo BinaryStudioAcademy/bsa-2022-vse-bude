@@ -1,10 +1,9 @@
-﻿import type { Theme } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { Theme } from 'theme';
 
-export const wrapper = ({ breakpoints }: Theme) => css`
-  @media (max-width: ${breakpoints.lg}px) {
-    left: -100px;
-  }
+export const wrapper = css`
+  z-index: 1;
+  left: -30px;
 `;
 
 export const option = ({ fontSizes, lineHeights }: Theme) => css`

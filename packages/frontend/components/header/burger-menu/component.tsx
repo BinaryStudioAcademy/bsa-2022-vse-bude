@@ -7,6 +7,7 @@ import { useAppDispatch } from '@hooks';
 import { logoutUser } from 'store/auth';
 import React from 'react';
 import { CategoriesList } from '../navigation/categories-list/component';
+import { ProfileDropdown } from './profile-dropdown/component';
 
 import * as styles from './styles';
 
@@ -33,15 +34,7 @@ export const BurgerMenu = ({ user, categories, onClose }: BurgerMenuProps) => {
   return (
     <div css={styles.burgerOverlay}>
       <nav className="burger-navigation">
-        {user && (
-          <InternalLink
-            href={`${Routes.PROFILE}/${user.id}`}
-            label={t('common:header.popover.personalInfo')}
-            variant={
-              pathname.startsWith(Routes.PROFILE) ? 'primary' : 'default'
-            }
-          />
-        )}
+        {user && <ProfileDropdown user={user} />}
         <CategoriesList categories={categories} />
         <InternalLink
           href={Routes.DEFAULT}

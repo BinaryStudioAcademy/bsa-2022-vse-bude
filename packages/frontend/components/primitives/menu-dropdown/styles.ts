@@ -39,7 +39,6 @@ export const dropdownContent = ({
   borders,
   radiuses,
   colors,
-  breakpoints,
 }: Theme) => css`
   position: absolute;
   top: calc(100% + ${spaces.sm});
@@ -52,10 +51,6 @@ export const dropdownContent = ({
   border: ${borders.dropdown};
   border-radius: ${radiuses.xs};
   background-color: ${colors.background};
-
-  @media (max-width: ${breakpoints.lg}px) {
-    left: -100px;
-  }
 `;
 
 export const dropdownItem = ({
