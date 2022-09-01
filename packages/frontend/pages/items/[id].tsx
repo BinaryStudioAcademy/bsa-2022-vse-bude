@@ -77,12 +77,14 @@ const ItemPage = ({ item, similarItems }: ItemPageProps) => {
             route: Routes.DEFAULT,
           },
           {
-            name: t('common:header.nav.category'),
-            route: Routes.DEFAULT, // change
+            name: t('common:header.nav.item'),
+            route: Routes.ITEMS, // change
           },
           {
             name: item.category.title, //change
-            route: Routes.DEFAULT, // change
+            route:
+              Routes.ITEMS +
+              `?filter=%7B%22category%22%3A%22${item.category.id}7%22%7D`, // change
           },
         ]}
       />
