@@ -9,7 +9,7 @@ import { ResetPassword } from '../../components/auth/reset-password';
 
 export const getServerSideProps = withPublic(async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale, ['auth', 'common'])),
+    ...(await serverSideTranslations(locale, ['auth', 'common', 'common'])),
   },
 }));
 

@@ -102,7 +102,19 @@ export const ItemInfoAuction = ({
         </div>
 
         <div css={styles.buttons}>
-          <Button type="submit">{t('placeBidBtn')}</Button>
+          <Button
+            type="submit"
+            disabled={!user || !user.phoneVerified}
+            tooltip={
+              user
+                ? user.phoneVerified
+                  ? t('buttons.placeBid')
+                  : t('buttons.tooltips.notVerified.placeBid')
+                : t('buttons.tooltips.notAuthorized.placeBid')
+            }
+          >
+            {t('buttons.placeBid')}
+          </Button>
           <FavoriteButton
             cssExtended={styles.favouriteButton}
             onChangeIsFavorite={onChangeIsFavorite}
