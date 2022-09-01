@@ -28,14 +28,14 @@ export const Header = () => {
   const categories = useTypedSelector((state) => state.category.list);
 
   useEffect(() => {
-    if (!categories) {
+    if (categories.length === 0 && !isMounted) {
       const category: RequestOptions = {
         locale: locale as HttpAcceptLanguage,
       };
 
       dispatch(fetchCategories({ locale: category.locale }));
     }
-  }, [dispatch, locale, categories]);
+  }, [dispatch, isMounted, locale, categories]);
 
   const renderAuthButtons = () => (
     <div className="buttons-wrapper">
