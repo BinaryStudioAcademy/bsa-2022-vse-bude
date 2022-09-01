@@ -1,5 +1,10 @@
 import { http } from '@helpers';
-import type { Http, ProductDto, ProductType } from '@vse-bude/shared';
+import type {
+  CreateBidRequest,
+  Http,
+  ProductDto,
+  ProductType,
+} from '@vse-bude/shared';
 import { ProductApiRoutes } from '@vse-bude/shared';
 import { ApiRoutes } from '@vse-bude/shared';
 
@@ -69,4 +74,10 @@ export const addToFavorites = (productId: string) =>
 export const deleteFromFavorites = (productId: string) =>
   http.delete({
     url: `${ApiRoutes.PRODUCTS}${ProductApiRoutes.FAVORITE}?productId=${productId}`,
+  });
+
+export const placeBidRequest = (data: CreateBidRequest) =>
+  http.post({
+    url: `${ApiRoutes.BIDS}`,
+    body: { ...data },
   });

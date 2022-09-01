@@ -10,6 +10,7 @@ export const common = {
   },
   common: {
     HOME: 'Головна',
+    ERROR: 'Помилка',
   },
   permission: {
     STORAGE_DENIED: 'У дозволі на зберігання відмовлено',

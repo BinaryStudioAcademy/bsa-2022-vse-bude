@@ -1,3 +1,4 @@
+import { Tooltip } from '../tooltip';
 import * as styles from './styles';
 import type { ButtonProps } from './types';
 
@@ -6,18 +7,25 @@ export const Button = ({
   variant = 'filled',
   size = 'big',
   onClick,
+  tooltip = '',
   children,
   ...props
 }: ButtonProps) => (
-  <button
-    css={styles.button}
-    style={{ width: props.width }}
-    type={type}
-    data-variant={variant}
-    data-size={size}
-    onClick={onClick}
-    {...props}
+  <Tooltip
+    trigger={
+      <button
+        css={styles.button}
+        style={{ width: props.width }}
+        type={type}
+        data-variant={variant}
+        data-size={size}
+        onClick={onClick}
+        {...props}
+      >
+        {children}
+      </button>
+    }
   >
-    {children}
-  </button>
+    {tooltip}
+  </Tooltip>
 );
