@@ -7,7 +7,10 @@ import type {
   AddProductToFavorites,
   BuyProduct,
   DeleteProductFromFavorites,
+  CreateProduct,
+  UpdateProduct,
 } from '@vse-bude/shared';
+import type { Product } from '@prisma/client';
 import { ProductStatus } from '@prisma/client';
 import type { VerifyService } from '@services';
 import type { S3StorageService } from './s3-storage';
@@ -22,7 +25,7 @@ export class ProductService {
   constructor(
     categoryRepository: ProductRepository,
     verifyService: VerifyService,
-    s3StorageService: S3StorageService
+    s3StorageService: S3StorageService,
   ) {
     this._productRepository = categoryRepository;
     this._verifyService = verifyService;
@@ -40,7 +43,9 @@ export class ProductService {
       throw new ProductNotFoundError(req);
     }
 
-    product.category.title = req.t(`categories.${product.category.title}`);
+    if (product.category) {
+      product.category.title = req.t(`categories.${product.category.title}`);
+    }
 
     return product;
   }
@@ -98,7 +103,7 @@ export class ProductService {
     return productId;
   }
 
-  public async createProduct({ req, userId, fieldsData }) {
+  public async createProduct({ req, userId, fieldsData }: CreateProduct) {
     const imageLinks = await this._s3StorageService.uploadProductImages(req);
     const data = {
       imageLinks,
@@ -108,6 +113,43 @@ export class ProductService {
     const product = await this._productRepository.create(data);
 
     return product;
+  }
+
+  public async updateProduct({
+    req,
+    productId,
+    userId,
+    fieldsData,
+  }: UpdateProduct) {
+    const product = (await this._productRepository.getById(
+      productId,
+    )) as Product;
+    const newImageLinks = await this._s3StorageService.uploadProductImages(req);
+    const oldImages = fieldsData?.images || [];
+    const deletedImages = product.imageLinks.reduce(
+      (acc, item) => (oldImages.includes(item) ? acc : [item, ...acc]),
+      [],
+    );
+
+    deletedImages.forEach(
+      async (image) => await this._s3StorageService.deleteImage(image),
+    );
+
+    const imageLinks = oldImages
+      ? [...oldImages, ...newImageLinks]
+      : newImageLinks;
+
+    const data = {
+      imageLinks,
+      authorId: userId,
+      ...fieldsData,
+    };
+    const updatedProduct = await this._productRepository.update(
+      productId,
+      data,
+    );
+
+    return updatedProduct;
   }
 
   public async buy({ userId, productId }: BuyProduct) {

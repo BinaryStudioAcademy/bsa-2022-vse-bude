@@ -9,6 +9,10 @@ import type { ProductQuery } from '@types';
 import { ProductApiRoutes } from '@vse-bude/shared';
 import { authMiddleware } from '@middlewares';
 import multer from 'multer';
+import {
+  createProductValidation,
+  updateProductValidation,
+} from 'validation/product';
 
 export const initProductRoutes = (
   { productService }: Services,
@@ -128,6 +132,7 @@ export const initProductRoutes = (
     apiPath(path),
     authMiddleware,
     multer().any(),
+    createProductValidation,
     wrap((req: Request) =>
       productService.createProduct({
         req,
@@ -137,6 +142,81 @@ export const initProductRoutes = (
     ),
   );
 
+  /**
+   * @openapi
+   * /products/{type}:
+   *   post:
+   *     tags: [Product]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - in: path
+   *         name: type
+   *         required: true
+   *         schema:
+   *           "$ref": "#/definitions/ProductType"
+   *       - in: query
+   *         name: limit
+   *         required: true
+   *         schema:
+   *           format: double
+   *           type: number
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 contribution:
+   *                   $ref: "#/definitions/Product"
+   */
+  router.put(
+    apiPath(path, ProductApiRoutes.UPDATE),
+    authMiddleware,
+    multer().any(),
+    updateProductValidation,
+    wrap((req: Request) =>
+      productService.updateProduct({
+        req,
+        productId: req.params.id,
+        userId: req.userId,
+        fieldsData: req.body,
+      }),
+    ),
+  );
+
+  /**
+   * @openapi
+   * /products/{type}:
+   *   put:
+   *     tags: [Product]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - in: path
+   *         name: type
+   *         required: true
+   *         schema:
+   *           "$ref": "#/definitions/ProductType"
+   *       - in: query
+   *         name: limit
+   *         required: true
+   *         schema:
+   *           format: double
+   *           type: number
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 contribution:
+   *                   $ref: "#/definitions/Product"
+   */
   router.post(
     apiPath(path, ProductApiRoutes.BUY),
     authMiddleware,

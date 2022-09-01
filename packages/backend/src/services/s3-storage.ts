@@ -32,6 +32,10 @@ export class S3StorageService {
     });
   }
 
+  deleteImage(image: string) {
+    console.log(image);
+  }
+
   async uploadImage(req: UploadFileRequest): Promise<string> {
     const { file } = req;
     const uploadImage = await this.validateAndUploadImage(file, req);

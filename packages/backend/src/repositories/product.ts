@@ -127,12 +127,12 @@ export class ProductRepository {
     });
   }
 
-  public create(data: Product) {
+  public create(data) {
     return this._dbClient.product.create({
       data: {
         imageLinks: data.imageLinks,
         city: data.city,
-        status: ProductStatus.CREATED,
+        status: data.status,
         categoryId: data.categoryId,
         title: data.title,
         description: data.description,
@@ -142,7 +142,25 @@ export class ProductRepository {
       },
     });
   }
-  
+
+  public async update(id: string, data) {
+    return await this._dbClient.product.update({
+      where: {
+        id,
+      },
+      data: {
+        imageLinks: data.imageLinks,
+        status: data.status,
+        city: data.city,
+        categoryId: data.categoryId,
+        title: data.title,
+        description: data.description,
+        type: data.type,
+        price: data.price,
+      },
+    });
+  }
+
   public async checkStatus(id: string, status: ProductStatus) {
     return await this._dbClient.product.findFirst({
       where: {
