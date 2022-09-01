@@ -1,7 +1,9 @@
 const formatPrice = (price: number | string): string => {
-  price = price.toString();
+  const priceAsString = price.toString();
 
-  return price.length > 2 ? `${price.slice(0, 2)} ${price.slice(2)}` : price;
+  return priceAsString.length > 2
+    ? `${priceAsString.slice(0, 2)} ${priceAsString.slice(2)}`
+    : priceAsString;
 };
 
 export { formatPrice };

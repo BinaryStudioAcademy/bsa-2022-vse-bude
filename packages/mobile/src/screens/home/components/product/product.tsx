@@ -3,10 +3,10 @@ import { useTranslation, useAppSelector, useCustomTheme } from '~/hooks/hooks';
 import { selectProductById } from '~/store/products/selectors';
 import { Button, Image, Text, View } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { ProductType, ProductDto } from '@vse-bude/shared';
+import { ProductType } from '@vse-bude/shared';
 import { formatPrice, getTimeToEvent } from '~/helpers/helpers';
 import { styles } from './styles';
-import { TimeWindow } from './components/time-window/time-window';
+import { TimeWindow } from './components/components';
 
 type Props = {
   productId: string;
@@ -14,11 +14,9 @@ type Props = {
 
 const Product: FC<Props> = ({ productId }) => {
   const { imageLinks, title, description, price, type, endDate } =
-    useAppSelector((state) =>
-      selectProductById(state, productId),
-    ) as ProductDto;
+    useAppSelector((state) => selectProductById(state, productId));
   const duration = getTimeToEvent(endDate);
-  const auction = ProductType.AUCTION;
+  const isAuction = type === ProductType.AUCTION;
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
 
@@ -27,7 +25,7 @@ const Product: FC<Props> = ({ productId }) => {
       <View style={[styles.imgWrapper, { backgroundColor: colors.card }]}>
         <Image source={{ uri: imageLinks[0] }} style={styles.img} />
 
-        {type === auction && (
+        {isAuction && (
           <TimeWindow
             duration={duration}
             style={{ position: 'absolute', bottom: -10, alignSelf: 'center' }}
@@ -73,7 +71,7 @@ const Product: FC<Props> = ({ productId }) => {
         >{`${formatPrice(price)} ${t('common:currency.UAH')}`}</Text>
         <Button
           label={
-            type === auction
+            isAuction
               ? t('common:components.BUTTON_BID')
               : t('common:components.BUTTON_BUY')
           }
