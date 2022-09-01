@@ -88,14 +88,27 @@ export const groupePhone = ({ spaces }: Theme) => css`
   align-items: flex-end;
 `;
 
-export const phoneRow = () => css`
+export const phoneRow = css`
   flex-grow: 2;
 `;
 
-export const avatarUpdateButton = css`
+export const avatarUpdateButton = ({ colors, spaces, radiuses }: Theme) => css`
   position: absolute;
   bottom: 0;
   right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${colors.backgroundLight};
+  width: ${spaces.xl2};
+  height: ${spaces.xl2};
+  border-radius: ${radiuses.circle};
+  cursor: pointer;
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: ${colors.backgroundDark};
+  }
 `;
 
 export const popoverContentItem = ({
