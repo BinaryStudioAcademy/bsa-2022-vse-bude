@@ -2,11 +2,12 @@ import { useTranslation } from 'next-i18next';
 import { useAppDispatch } from '@hooks';
 import React, { useRef, useState } from 'react';
 import { Popover, IconButton, Icon } from '@primitives';
-import { IconName } from '@enums';
-import { ColorPalette, MAX_IMAGE_SIZE } from '@vse-bude/shared';
+import { IconColor, IconName } from '@enums';
 import { updateUserAvatar } from 'store/profile/actions';
 import dynamic from 'next/dynamic';
 import { allowedImgExtension } from 'common/enums/allowedImgExtension';
+import { MAX_IMAGE_SIZE } from '@vse-bude/shared';
+import { addToast } from 'store/toast/actions';
 import * as styles from './styles';
 
 const ImageCropModal = dynamic(() => import('../../../imageCrop/component'));
@@ -16,7 +17,6 @@ const ChangeAvatar = () => {
   const inputFile = useRef(null);
   const dispatch = useAppDispatch();
   const [newAvatar, setNewAvatar] = useState<File>(null);
-  const [error, setError] = useState('');
   const handleUpdateAvatar = () => {
     inputFile.current.click();
   };
@@ -28,12 +28,22 @@ const ChangeAvatar = () => {
     }
 
     if (!Object.values(allowedImgExtension).includes(file.type)) {
-      setError(t('personal-info:validation.avatar.fileType'));
+      dispatch(
+        addToast({
+          level: 'error',
+          description: t('personal-info:validation.avatar.fileType'),
+        }),
+      );
 
       return;
     }
     if (file.size > MAX_IMAGE_SIZE) {
-      setError(t('personal-info:validation.avatar.maxSize'));
+      dispatch(
+        addToast({
+          level: 'error',
+          description: t('personal-info:validation.avatar.maxSize'),
+        }),
+      );
 
       return;
     }
@@ -52,21 +62,17 @@ const ChangeAvatar = () => {
     setNewAvatar(null);
   };
 
-  const handleOpenDropdown = () => {
-    setError('');
-  };
-
   const handleDeleteAvatar = () => {
     setNewAvatar(null);
     dispatch(updateUserAvatar(null));
   };
+
   const onClickFileInput = (e) => {
     e.target.value = null;
   };
 
   return (
     <React.Fragment>
-      {error && <div css={styles.error}>{error}</div>}
       {newAvatar && (
         <ImageCropModal
           file={newAvatar}
@@ -82,9 +88,8 @@ const ChangeAvatar = () => {
           <IconButton
             icon={IconName.CAMERA}
             backgroundColor="lightgray"
-            color={ColorPalette.GRAY_300}
+            color={IconColor.GRAY}
             cssExtend={styles.avatarUpdateButton}
-            onClick={handleOpenDropdown}
           />
         }
       >
@@ -95,7 +100,7 @@ const ChangeAvatar = () => {
               onClick={handleUpdateAvatar}
               data-variant="icon"
             >
-              <Icon icon={IconName.IMAGE} color="yellow" />
+              <Icon icon={IconName.IMAGE} color={IconColor.YELLOW} />
               <span>{t('personal-info:avatar.change')}</span>
             </button>
             <button
@@ -103,7 +108,7 @@ const ChangeAvatar = () => {
               onClick={handleDeleteAvatar}
               data-variant="icon"
             >
-              <Icon icon={IconName.TRASH} color="yellow" />
+              <Icon icon={IconName.TRASH} color={IconColor.YELLOW} />
               <span>{t('personal-info:avatar.delete')}</span>
             </button>
           </div>

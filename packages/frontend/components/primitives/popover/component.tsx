@@ -58,7 +58,7 @@ export const Popover = ({ trigger, children }: PopoverProps) => {
   ]);
 
   const handleMouseClick = () => {
-    setIsVisible(true);
+    setIsVisible(!isVisible);
   };
 
   const handleClose = useCallback(() => setIsVisible(false), []);

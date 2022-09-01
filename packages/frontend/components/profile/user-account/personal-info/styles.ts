@@ -137,38 +137,3 @@ export const popoverContentWrapper = ({ spaces }: Theme) => css`
   flex-direction: column;
   padding: ${spaces.sm} 0;
 `;
-
-export const error = ({ spaces, colors, radiuses, shadows }: Theme) => css`
-  position: absolute;
-  width: 160px;
-  left: ${spaces.sm};
-  transform: translateX(80%);
-  box-shadow: ${shadows.dropdown};
-  border: 2px solid ${colors.error};
-  color: ${colors.error};
-  background-color: ${colors.background};
-  padding: ${spaces.md};
-  border-radius: ${radiuses.xs};
-  animation: fadeIn 0.1s ease-in-out, error 0.15s ease-in-out 0.1s 3;
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes error {
-    0% {
-      transform: translateX(80%);
-    }
-    50% {
-      transform: translateX(77%);
-    }
-    100% {
-      transform: translateX(80%);
-    }
-  }
-`;
