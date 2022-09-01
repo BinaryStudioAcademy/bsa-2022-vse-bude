@@ -1,5 +1,10 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { hideVerifyModal, nextVerifyModal, previousVerifyModal, showVerifyModal } from './actions';
+import {
+  hideVerifyModal,
+  nextVerifyModal,
+  previousVerifyModal,
+  showVerifyModal,
+} from './actions';
 
 interface VerifyModalState {
   isVerifyPhoneModalOpen: boolean;

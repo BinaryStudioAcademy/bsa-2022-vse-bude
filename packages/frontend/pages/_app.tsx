@@ -19,9 +19,9 @@ type AppPropsWithLayout = AppProps & {
 
 const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? ((page) => page);
-  
+
   const { isVerifyPhoneModalOpen } = useTypedSelector((state) => state.verify);
-  
+
   return (
     <ThemeProvider>
       <UserProvider>{getLayout(<Component {...pageProps} />)}</UserProvider>

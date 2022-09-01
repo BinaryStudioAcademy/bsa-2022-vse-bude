@@ -5,9 +5,7 @@ import { PhoneVerification } from 'components/auth/verification/phone-verificati
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import hand from 'public/images/mocup_hand2.png';
-import {
-  previousVerifyModal,
-} from 'store/verify/actions';
+import { previousVerifyModal } from 'store/verify/actions';
 import * as styles from '../styles';
 
 const EnterCodeModal = () => {
