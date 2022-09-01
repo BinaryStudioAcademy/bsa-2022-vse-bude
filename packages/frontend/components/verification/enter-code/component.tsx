@@ -16,8 +16,7 @@ export default function EnterCodeModal() {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
-  const closeModal = (e) => {
-    e.preventDefault();
+  const closeModal = () => {
     dispatch(hideVerifyModal());
   };
 

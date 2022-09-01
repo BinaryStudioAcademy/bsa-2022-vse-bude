@@ -14,8 +14,7 @@ export default function EnterPhoneModal() {
 
   const { t } = useTranslation();
 
-  const closeModal = (e) => {
-    e.preventDefault();
+  const closeModal = () => {
     dispatch(hideVerifyModal());
   };
 

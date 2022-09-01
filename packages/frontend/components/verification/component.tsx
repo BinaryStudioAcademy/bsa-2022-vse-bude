@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { hideVerifyModal } from 'store/verify/actions';
 import EnterCodeModal from './enter-code/component';
 import EnterPhoneModal from './enter-phone/component';
-import SuccessModal from './ssuccess-verification/component';
+import SuccessModal from './success-verification/component';
 
 const VerificationModal = () => {
   const [isVisible, setIsVisible] = useState(false);
