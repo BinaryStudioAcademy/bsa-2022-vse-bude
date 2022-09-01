@@ -1,5 +1,6 @@
 ﻿import type { CreateBidRequest, ItemDto } from '@vse-bude/shared';
 import { Button, Input } from '@primitives';
+import dynamic from 'next/dynamic';
 import { FavoriteButton } from 'components/product/favorite-button/component';
 import { useTranslation } from 'next-i18next';
 import type { SubmitHandler } from 'react-hook-form';
@@ -8,15 +9,15 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { useState } from 'react';
 import { IconColor } from '@enums';
+import { auctionLeaveAction, auctionPermissions } from 'store/product';
 import { CountDownTimer } from '../countdown-timer/component';
 import { ItemTitle, ItemInfo, ItemPrice } from '../item-info';
 import { minBidValidation } from '../validation';
-import { ConfirmationModal } from '../../modal/confirm/component';
-import {
-  auctionLeaveAction,
-  auctionPermissions,
-} from '../../../store/product-auction';
 import * as styles from './styles';
+
+const ConfirmationModal = dynamic(
+  () => import('@components/modal/confirm/component'),
+);
 
 interface ItemInfoAuctionProps {
   item: ItemDto;
@@ -42,7 +43,7 @@ export const ItemInfoAuction = ({
 
   const {
     permissions: { isAbleToLeaveAuction },
-  } = useTypedSelector((state) => state.auction);
+  } = useTypedSelector((state) => state.product);
   const { user } = useTypedSelector((state) => state.auth);
 
   const {

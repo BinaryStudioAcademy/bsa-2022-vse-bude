@@ -8,7 +8,7 @@ export interface ConfirmationModalProps {
   text: string;
 }
 
-export const ConfirmationModal = ({
+const ConfirmationModal = ({
   text,
   onClose,
   onConfirm,
@@ -30,3 +30,5 @@ export const ConfirmationModal = ({
     </Modal>
   );
 };
+
+export default ConfirmationModal;

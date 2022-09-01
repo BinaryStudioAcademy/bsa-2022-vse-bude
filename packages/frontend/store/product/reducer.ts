@@ -1,17 +1,35 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { HydrateAction } from '@types';
-import type { ProductDto } from '@vse-bude/shared';
+import type { ItemDto, ProductDto } from '@vse-bude/shared';
 import { HYDRATE } from 'next-redux-wrapper';
-import { fetchProducts } from './actions';
+import {
+  auctionLeaveAction,
+  auctionPermissions,
+  fetchProductSSR,
+  fetchProducts,
+  makeBid,
+  updateProductViews,
+  fetchSimilarProducts,
+} from './actions';
 
 interface ProductState {
   list: ProductDto[];
+  currentItem?: ItemDto;
+  similarProducts: ProductDto[];
   loading: boolean;
+  permissions: {
+    isAbleToLeaveAuction: boolean;
+  };
 }
 
 const initialState: ProductState = {
   list: [],
+  similarProducts: [],
   loading: false,
+  currentItem: null,
+  permissions: {
+    isAbleToLeaveAuction: false,
+  },
 };
 
 const productSlice = createSlice({
@@ -19,6 +37,37 @@ const productSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
+    [fetchProductSSR.pending.type]: (state) => {
+      state.loading = true;
+    },
+    [fetchProductSSR.fulfilled.type]: (state, { payload }) => {
+      state.currentItem = payload;
+      state.loading = false;
+    },
+    [updateProductViews.fulfilled.type]: (state) => {
+      state.currentItem.views++;
+    },
+
+    [auctionPermissions.fulfilled.type]: (state, { payload }) => {
+      state.permissions = {
+        ...state.permissions,
+        isAbleToLeaveAuction: payload.isAbleToLeaveAuction,
+      };
+    },
+    [auctionPermissions.rejected.type]: (state) => {
+      state.permissions = {
+        ...state.permissions,
+        isAbleToLeaveAuction: false,
+      };
+    },
+
+    [makeBid.fulfilled.type](state, { payload }) {
+      state.currentItem.currentPrice = payload.price;
+    },
+    [auctionLeaveAction.fulfilled.type](state, { payload }) {
+      state.currentItem.currentPrice = payload.price;
+    },
+
     [fetchProducts.pending.type](state) {
       state.loading = true;
     },
@@ -29,8 +78,18 @@ const productSlice = createSlice({
     [fetchProducts.rejected.type](state) {
       state.loading = false;
     },
+
+    [fetchSimilarProducts.fulfilled.type](state, { payload }) {
+      state.similarProducts = payload;
+    },
+
     [HYDRATE](state, { payload }: HydrateAction) {
-      state.list = payload.product.list;
+      if (payload.product.list) {
+        state.list = payload.product.list;
+      }
+      if (payload.product.currentItem) {
+        state.currentItem = payload.product.currentItem;
+      }
     },
   },
 });
