@@ -196,7 +196,7 @@ export class AuthService {
 
     await resetMail.send();
 
-    return undefined;
+    return {};
   }
 
   async updatePassword(updateDto: UpdatePassword) {

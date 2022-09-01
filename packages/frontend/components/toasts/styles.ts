@@ -4,13 +4,13 @@ import { css } from '@emotion/react';
 export const TRANSITION_TIMEOUT = 300;
 
 export const toastStack = () => css`
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   height: 100%;
   padding: 30px;
   z-index: 125;
-  overflow-y: auto;
+  overflow: hidden;
   :empty {
     display: none;
   }
