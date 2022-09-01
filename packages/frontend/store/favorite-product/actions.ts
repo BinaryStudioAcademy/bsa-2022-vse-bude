@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { addToast } from 'store/toast/actions';
 import {
   addToFavorites,
   deleteFromFavorites,
@@ -19,10 +20,25 @@ export const getFavoriteIds = createAsyncThunk(
 
 export const addProductToFavorites = createAsyncThunk(
   FavoriteProductActions.ADD_PRODUCT_TO_FAVORITES,
-  async (productId: string, { rejectWithValue }) => {
+  async (productId: string, { rejectWithValue, dispatch }) => {
     try {
-      return await addToFavorites(productId);
+      const result = await addToFavorites(productId);
+      dispatch(
+        addToast({
+          level: 'info',
+          description: (t) => t('common:notifications.productAddedToFavorites'),
+        }),
+      );
+
+      return result;
     } catch (e) {
+      dispatch(
+        addToast({
+          level: 'error',
+          description: e.message,
+        }),
+      );
+
       return rejectWithValue(e.message);
     }
   },
@@ -30,10 +46,26 @@ export const addProductToFavorites = createAsyncThunk(
 
 export const deleteProductFromFavorites = createAsyncThunk(
   FavoriteProductActions.DELETE_PRODUCT_FROM_FAVORITES,
-  async (productId: string, { rejectWithValue }) => {
+  async (productId: string, { rejectWithValue, dispatch }) => {
     try {
-      return await deleteFromFavorites(productId);
+      const result = await deleteFromFavorites(productId);
+      dispatch(
+        addToast({
+          level: 'info',
+          description: (t) =>
+            t('common:notifications.productRemovedFromFavorites'),
+        }),
+      );
+
+      return result;
     } catch (e) {
+      dispatch(
+        addToast({
+          level: 'error',
+          description: e.message,
+        }),
+      );
+
       return rejectWithValue(e.message);
     }
   },

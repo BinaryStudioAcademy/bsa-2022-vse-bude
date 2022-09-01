@@ -1,5 +1,5 @@
+import type { PrismaClient, Product } from '@prisma/client';
 import { ProductStatus } from '@prisma/client';
-import type { Product, PrismaClient } from '@prisma/client';
 import type { ProductQuery } from '@types';
 import { Order } from '@vse-bude/shared';
 
@@ -123,6 +123,40 @@ export class ProductRepository {
         views: {
           increment: 1,
         },
+      },
+    });
+  }
+
+  public create(data) {
+    return this._dbClient.product.create({
+      data: {
+        imageLinks: data.imageLinks,
+        city: data.city,
+        status: data.status,
+        categoryId: data.categoryId,
+        title: data.title,
+        description: data.description,
+        authorId: data.authorId,
+        type: data.type,
+        price: data.price,
+      },
+    });
+  }
+
+  public async update(id: string, data) {
+    return await this._dbClient.product.update({
+      where: {
+        id,
+      },
+      data: {
+        imageLinks: data.imageLinks,
+        status: data.status,
+        city: data.city,
+        categoryId: data.categoryId,
+        title: data.title,
+        description: data.description,
+        type: data.type,
+        price: data.price,
       },
     });
   }
