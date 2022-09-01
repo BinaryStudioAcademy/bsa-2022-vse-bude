@@ -23,7 +23,7 @@ export const PersonalInfo = () => {
     (state) => state.profile,
     shallowEqual,
   );
-
+  
   const dispatch = useAppDispatch();
   const onGetFullProfile = () => dispatch(fetchFullUserProfile());
 
