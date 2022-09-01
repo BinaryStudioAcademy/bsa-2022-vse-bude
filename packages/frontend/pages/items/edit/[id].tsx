@@ -1,4 +1,5 @@
-import { SavePost, Layout } from 'components';
+import { Layout } from '@components/layout';
+import { SavePost } from '@components/save-post';
 import { wrapper } from 'store';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
