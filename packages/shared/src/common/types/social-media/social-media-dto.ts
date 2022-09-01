@@ -1,9 +1,15 @@
-import type { SocialMediaType } from '../../enums/social-media';
+import type { SocialMediaType } from '../../enums';
 
 type SocialMedia = {
-  id: string;
-  link: string;
-  socialMedia: SocialMediaType;
+  id?: string;
+  link?: string;
+  socialMedia?: SocialMediaType;
 };
 
-export type { SocialMedia };
+type MappedLinks = {
+  facebook: string;
+  linkedin: string;
+  instagram: string;
+};
+
+export type { SocialMedia, MappedLinks };

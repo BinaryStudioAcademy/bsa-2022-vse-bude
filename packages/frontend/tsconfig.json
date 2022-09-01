@@ -15,8 +15,8 @@
       "@components/*": ["components/*"],
       "@services": ["services"],
       "@primitives": ["components/primitives"],
-      "@sub-pages": ["components/sub-pages"],
-      "@providers": ["providers"]
+      "@providers": ["providers"],
+      "@store": ["store"]
     }
   },
   "include": [

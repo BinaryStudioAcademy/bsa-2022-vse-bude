@@ -6,3 +6,5 @@ export {
   MAX_NAME_LENGTH,
 } from './validation';
 export * from './images';
+export { ENGLISH_LOCALE } from './day-js';
+export { MILLISECOND_IN_MINUTE } from './time';

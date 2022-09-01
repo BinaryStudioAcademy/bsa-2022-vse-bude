@@ -153,7 +153,7 @@ android {
         applicationId "com.vsebude"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 7
+        versionCode 9
         versionName "1.0"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
         setProperty("archivesBaseName", applicationId + "-v" + versionName + "-" + versionCode)

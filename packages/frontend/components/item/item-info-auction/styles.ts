@@ -118,6 +118,12 @@ export const priceWrapper = ({
   }
 `;
 
+export const leaveAuctionBlock = css`
+  display: flex;
+  margin-top: 10px;
+  justify-content: end;
+`;
+
 export const buttons = css`
   display: flex;
   align-items: center;

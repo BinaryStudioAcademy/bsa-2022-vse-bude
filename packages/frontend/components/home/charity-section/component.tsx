@@ -16,15 +16,12 @@ const CharitySection = () => {
         <div css={sliderWrapper}>
           <Splide
             options={{
-              type: 'loop',
-              rewind: true,
-              rewindByDrag: true,
               perPage: 4,
               perMove: 4,
-              mediaQuery: 'max',
               trimSpace: true,
               updateOnMove: true,
               wheel: true,
+              mediaQuery: 'max',
               breakpoints: {
                 [lightTheme.breakpoints.md]: {
                   perPage: 2,
