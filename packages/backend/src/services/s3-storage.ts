@@ -7,12 +7,13 @@ import {
 } from '@errors';
 import type { UploadFileRequest } from '@types';
 import { getEnv, logger } from '@helpers';
+import { MAX_IMAGE_SIZE } from '@vse-bude/shared';
 import { randomBytes } from 'crypto';
 
 export class S3StorageService {
   private _client: S3;
 
-  private _maxImageSizeBytes = 5242880; // 5MB
+  private _maxImageSizeBytes = MAX_IMAGE_SIZE;
 
   private _bucketName: string;
 

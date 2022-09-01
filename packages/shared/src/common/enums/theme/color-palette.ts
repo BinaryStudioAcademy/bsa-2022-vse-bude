@@ -1,4 +1,5 @@
 enum ColorPalette {
+  GREEN_0 = '#00CC66',
   GREEN_100 = '#778684',
   GREEN_200 = '#2C4340',
   YELLOW_50 = '#F4C50A',

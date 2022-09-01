@@ -5,7 +5,8 @@
       "category": "Категорії",
       "search": "Пошук",
       "news": "Новини",
-      "about_us": "Про нас"
+      "about_us": "Про нас",
+      "profile": "Профіль"
     },
     "buttons": {
       "create_account": "Створити Аккаунт",
@@ -75,6 +76,12 @@
         "directSale": "Продаж"
       }
     }
+  },
+  "notifications": {
+    "defaultSuccessTitle": "Success",
+    "defaultInfoTitle": "Info",
+    "defaultWarningTitle": "Warning",
+    "defaultErrorTitle": "Error"
   },
   "months": [
     "Січень",

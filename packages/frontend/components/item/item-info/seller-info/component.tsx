@@ -1,6 +1,5 @@
 ﻿import { Button, Avatar, Icon, Anchor } from '@primitives';
-import { IconName, Routes } from '@enums';
-import { ColorPalette } from '@vse-bude/shared';
+import { IconColor, IconName, Routes } from '@enums';
 import type { AuthorDto } from '@vse-bude/shared';
 import Router from 'next/router';
 import { useTranslation } from 'next-i18next';
@@ -41,11 +40,7 @@ export const SellerInfo = ({ seller, onContactSeller }: SellerInfoProps) => {
       </div>
       <div css={styles.contacts}>
         <div css={styles.phone}>
-          <Icon
-            size="sm"
-            icon={IconName.PHONE}
-            color={ColorPalette.YELLOW_200}
-          />
+          <Icon size="sm" icon={IconName.PHONE} color={IconColor.YELLOW} />
           <span>{seller.phone}</span>
         </div>
         {seller.socialMedia.map((social) => (
@@ -54,7 +49,7 @@ export const SellerInfo = ({ seller, onContactSeller }: SellerInfoProps) => {
               <Icon
                 size="sm"
                 icon={IconName[social.socialMedia]}
-                color={ColorPalette.YELLOW_200}
+                color={IconColor.YELLOW}
               ></Icon>
             </Anchor>
           </div>

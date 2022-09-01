@@ -138,6 +138,7 @@ export class UserProfileRepository {
       },
       select: {
         id: true,
+        avatar: true,
         firstName: true,
         lastName: true,
         email: true,
