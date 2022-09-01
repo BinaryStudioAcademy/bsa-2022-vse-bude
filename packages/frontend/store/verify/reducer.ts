@@ -12,15 +12,20 @@ interface VerifyModalState {
 }
 
 const initialState: VerifyModalState = {
-  isVerifyPhoneModalOpen: true,
+  isVerifyPhoneModalOpen: false,
   variant: 0,
 };
 
 export const verifyModalReducer = createReducer(initialState, {
-  [showVerifyModal.type]: (state) => ({
-    ...state,
-    isVerifyPhoneModalOpen: true,
-  }),
+  [showVerifyModal.type]: (state) => {
+    console.log('obama');
+    console.log(state);
+
+    return {
+      ...state,
+      isVerifyPhoneModalOpen: true,
+    };
+  },
   [hideVerifyModal.type]: (state) => ({
     ...state,
     isVerifyPhoneModalOpen: false,

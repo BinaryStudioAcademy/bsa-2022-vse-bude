@@ -12,7 +12,7 @@
       "@hooks": ["hooks"],
       "@hocs": ["hocs"],
       "@helpers": ["helpers"],
-      "@components/*": ["components/*"],
+      "@components": ["components/*"],
       "@services": ["services"],
       "@primitives": ["components/primitives"],
       "@providers": ["providers"],

@@ -6,8 +6,8 @@ import { wrapper } from 'store';
 import { UserProvider, ThemeProvider } from '@providers';
 import '../public/css/fontawesome.css';
 import { useTypedSelector } from '@hooks';
-import { VerificationModal } from '@components';
 import dynamic from 'next/dynamic';
+import { VerificationModal } from '../components';
 
 const PageLoaderDynamic = dynamic(() => import('../components/pages-loader'));
 const ToastStackDynamic = dynamic(() => import('../components/toasts/stack'));

@@ -91,6 +91,7 @@ export class VerifyService {
     const user = await this._userRepository.getById(userId);
     await this.deleteCodeByType(userId, type);
     const code = await this.createVerificationCode(userId, type);
+    console.log(`phone: ${code}`);
 
     return await this._smsService.send(user.phone, code);
   }
