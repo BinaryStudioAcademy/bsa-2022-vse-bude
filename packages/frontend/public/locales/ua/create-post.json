@@ -1,12 +1,14 @@
 {
   "headline": {
     "makePost": "Створити пост",
+    "editPost": "Редагувати пост",
     "downloadPhotos": "Завантажити фотографії",
     "description": "Опис",
     "contact": "Контакти"
   },
   "button": {
     "makePost": "Створити пост",
+    "editPost": "Редагувати пост",
     "saveDraft": "Зберегти як шаблон",
     "ok": "OK",
     "cancel": "Відмінити"

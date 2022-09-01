@@ -6,14 +6,27 @@ import { useState } from 'react';
 import { createPostSchema } from 'validation-schemas/post';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { createPost } from 'services/post';
+import { useEffect } from 'react';
+import { useAppDispatch, useTypedSelector } from '@hooks';
+import { fetchCurrentProduct } from 'store/product';
+import { fetchCategories } from 'store/category';
+import { useRouter } from 'next/router';
+import type { HttpAcceptLanguage } from '@vse-bude/shared';
 import { SectionHeader } from '../profile/user-account/common';
 import { initialFormState } from './form-utils';
 import ImageInput from './image-input';
 import * as styles from './styles';
 
-export default function PostForm() {
+export default function PostForm({ edit }: { edit: boolean }) {
+  const { locale } = useRouter();
   const { t } = useTranslation();
-  const [images, setImages] = useState<File[]>([]);
+  const dispatch = useAppDispatch();
+  const currentProduct = useTypedSelector(
+    (state) => state.product.currentProduct,
+  );
+  const categories = useTypedSelector((state) => state.category.list);
+
+  const [images, setImages] = useState<(File | string)[]>([]);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showPhone, setShowPhone] = useState(true);
@@ -35,7 +48,9 @@ export default function PostForm() {
     setError('');
     try {
       const formData = new FormData();
-      images.forEach((file) => formData.append('images', file));
+      images
+        .filter((item) => typeof item !== 'string')
+        .forEach((file) => formData.append('images', file));
       Object.keys(data).forEach((key) => formData.append(key, data[key]));
 
       console.log(await createPost(formData));
@@ -49,6 +64,35 @@ export default function PostForm() {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (edit) {
+      dispatch(fetchCurrentProduct('07925f24-a523-488a-9af1-70c77de44057'));
+      dispatch(fetchCategories({ locale: locale as HttpAcceptLanguage }));
+    }
+  }, [edit, dispatch, locale]);
+
+  useEffect(() => {
+    if (edit && currentProduct && categories.length) {
+      Object.keys(initialFormState).forEach((item) => {
+        switch (item) {
+          case 'category':
+            setValue(
+              item,
+              categories.find((item) => item.id === currentProduct.category.id)
+                .title,
+            );
+            break;
+          case 'phone':
+            setValue('phone', currentProduct.author.phone.replace('+380', ''));
+            break;
+          default:
+            setValue(item as 'title', currentProduct[item]);
+        }
+      });
+      setImages(currentProduct.imageLinks);
+    }
+  }, [currentProduct, setValue, edit, categories]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -217,12 +261,16 @@ export default function PostForm() {
           </div>
         )}
         <div css={styles.saveDraftBtn}>
-          <Button disabled={isLoading} variant="outlined">
-            {t('create-post:button.saveDraft')}
-          </Button>
+          {!edit && (
+            <Button disabled={isLoading} variant="outlined">
+              {t('create-post:button.saveDraft')}
+            </Button>
+          )}
         </div>
         <Button disabled={isLoading} type="submit">
-          {t('create-post:button.makePost')}
+          {edit
+            ? t('create-post:button.editPost')
+            : t('create-post:button.makePost')}
         </Button>
       </div>
     </form>

@@ -2,16 +2,18 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { HydrateAction } from '@types';
 import type { ProductDto } from '@vse-bude/shared';
 import { HYDRATE } from 'next-redux-wrapper';
-import { fetchProducts } from './actions';
+import { fetchProducts, fetchCurrentProduct } from './actions';
 
 interface ProductState {
   list: ProductDto[];
   loading: boolean;
+  currentProduct: ProductDto;
 }
 
 const initialState: ProductState = {
   list: [],
   loading: false,
+  currentProduct: null,
 };
 
 const productSlice = createSlice({
@@ -27,6 +29,16 @@ const productSlice = createSlice({
       state.loading = false;
     },
     [fetchProducts.rejected.type](state) {
+      state.loading = false;
+    },
+    [fetchCurrentProduct.pending.type](state) {
+      state.loading = true;
+    },
+    [fetchCurrentProduct.fulfilled.type](state, { payload }) {
+      state.currentProduct = payload;
+      state.loading = false;
+    },
+    [fetchCurrentProduct.rejected.type](state) {
       state.loading = false;
     },
     [HYDRATE](state, { payload }: HydrateAction) {

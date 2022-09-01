@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import type { CreateBidRequest, Http, ProductType } from '@vse-bude/shared';
 import {
+  getProductById,
   getProducts,
   getProductsSSR,
   incrementProductViews,
@@ -30,6 +31,11 @@ export const fetchProductsSSR = createAsyncThunk(
   ProductActions.FETCH_PRODUCTS,
   async ({ httpSSR, limit, type }: RequestOptionsSSR, { rejectWithValue }) =>
     getProductsSSR({ httpSSR, limit, type }).catch(() => rejectWithValue([])),
+);
+
+export const fetchCurrentProduct = createAsyncThunk(
+  ProductActions.GET_CURRENT_PRODUCT,
+  async (id: string) => getProductById(id),
 );
 
 export const fetchIncrementProductViews = createAsyncThunk(

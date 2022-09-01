@@ -1,12 +1,14 @@
 {
   "headline": {
     "makePost": "Make a Post",
+    "editPost": "Edit a Post",
     "downloadPhotos": "Download photos",
     "description": "Description",
     "contact": "Contact"
   },
   "button": {
     "makePost": "Make a post",
+    "editPost": "Edit a post",
     "saveDraft": "Save as draft",
     "ok": "OK",
     "cancel": "Cancel"
