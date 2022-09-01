@@ -66,6 +66,14 @@ const LogInIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="log-in" {...iconProps} />
 );
 
+const EyeIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="eye" {...iconProps} />
+);
+
+const EyeOffIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="eye-off" {...iconProps} />
+);
+
 const FacebookIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="facebook" {...iconProps} />
 );
@@ -103,6 +111,8 @@ export {
   CustomFeatherIcon,
   CameraIcon,
   CrossIcon,
+  EyeIcon,
+  EyeOffIcon,
   FacebookIcon,
   InstagramIcon,
   PhoneIcon,
