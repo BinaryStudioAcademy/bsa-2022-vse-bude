@@ -5,9 +5,9 @@ import type { UserSignUpDto } from '@vse-bude/shared';
 import { useTranslation } from 'next-i18next';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useAppDispatch, useTypedSelector } from '@hooks';
+import { signUpSchema } from 'validation-schemas/user/sign-up';
 import { form, headline, inputWrapper } from '../layout/styles';
 import { signUpUser } from '../../../store/auth';
-import { signUpSchema } from 'validation-schemas/user/sign-up';
 
 export const SignUpForm = () => {
   const { t } = useTranslation();
