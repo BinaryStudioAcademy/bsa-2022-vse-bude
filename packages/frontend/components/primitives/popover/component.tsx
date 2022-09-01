@@ -85,7 +85,9 @@ export const Popover = ({ trigger, children }: PopoverProps) => {
         css={resetButton}
         ref={triggerWrapperRef}
       >
-        {trigger}
+        {typeof trigger === 'function'
+          ? trigger({ isOpen: isVisible })
+          : trigger}
       </button>
       {isVisible && renderPortal()}
     </React.Fragment>

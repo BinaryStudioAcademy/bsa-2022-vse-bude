@@ -8,6 +8,7 @@ import type { Product } from '@prisma/client';
 import type { ProductQuery } from '@types';
 import { ProductApiRoutes } from '@vse-bude/shared';
 import { authMiddleware } from '@middlewares';
+import multer from 'multer';
 
 export const initProductRoutes = (
   { productService }: Services,
@@ -142,6 +143,127 @@ export const initProductRoutes = (
     ),
   );
 
+  router.post(
+    apiPath(path),
+    authMiddleware,
+    multer().any(),
+    wrap((req: Request) =>
+      productService.createProduct({
+        req,
+        userId: req.userId,
+        fieldsData: req.body,
+      }),
+    ),
+  );
+
+  /**
+   * @openapi
+   * /products/:
+   *   post:
+   *     summary: Uploads a file.
+   *     consumes:
+   *       - multipart/form-data
+   *     parameters:
+   *       - in: formData
+   *         name: images
+   *         type: file
+   *         description: receive array of files
+   *       - in: formData
+   *         name: city
+   *         type: string
+   *       - in: formData
+   *         name: status
+   *         required: true
+   *         type: string
+   *       - in: formData
+   *         name: description
+   *         required: true
+   *         type: string
+   *       - in: formData
+   *         name: title
+   *         required: true
+   *         type: string
+   *       - in: formData
+   *         name: type
+   *         required: true
+   *         type: string
+   *       - in: formData
+   *         name: price
+   *         required: true
+   *         type: string
+   *       - in: formData
+   *         name: categoryId
+   *         type: string
+   *     tags: [Product]
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 contribution:
+   *                   $ref: "#/definitions/Product"
+   */
+  router.put(
+    apiPath(path, ProductApiRoutes.UPDATE),
+    authMiddleware,
+    multer().any(),
+    wrap((req: Request) =>
+      productService.updateProduct({
+        req,
+        productId: req.params.id,
+        userId: req.userId,
+        fieldsData: req.body,
+      }),
+    ),
+  );
+
+  /**
+   * @openapi
+   * /products/:id:
+   *   put:
+   *     tags: [Product]
+   *     consumes:
+   *       - multipart/form-data
+   *     parameters:
+   *       - in: formData
+   *         name: images
+   *         type: file
+   *         description: receive array of files and url
+   *       - in: formData
+   *         name: city
+   *         type: string
+   *       - in: formData
+   *         name: status
+   *         type: string
+   *       - in: formData
+   *         name: description
+   *         type: string
+   *       - in: formData
+   *         name: title
+   *         type: string
+   *       - in: formData
+   *         name: type
+   *         type: string
+   *       - in: formData
+   *         name: price
+   *         type: string
+   *       - in: formData
+   *         name: categoryId
+   *         type: string
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 contribution:
+   *                   $ref: "#/definitions/Product"
+   */
   router.post(
     apiPath(path, ProductApiRoutes.BUY),
     authMiddleware,

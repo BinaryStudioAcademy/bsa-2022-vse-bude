@@ -31,18 +31,14 @@ export const PostTypeModal = ({ isOpen, setIsOpen }: PostTypeProps) => {
         </div>
         <div css={styles.btnWrapper}>
           <Button
-            onClick={() =>
-              router.push(`${Routes.ITEMS}${ItemRoutes.CREATE_AUCTION}`)
-            }
+            onClick={() => router.push(`${Routes.ITEMS}${ItemRoutes.CREATE}`)}
             disabled={!isConfirmed}
           >
             {t('common:components.typeOfPost.btn.auction')}
           </Button>
           <span>{t('common:components.typeOfPost.btn.or')}</span>
           <Button
-            onClick={() =>
-              router.push(`${Routes.ITEMS}${ItemRoutes.CREATE_DIRECT_SALE}`)
-            }
+            onClick={() => router.push(`${Routes.ITEMS}${ItemRoutes.CREATE}`)}
             disabled={!isConfirmed}
           >
             {t('common:components.typeOfPost.btn.directSale')}

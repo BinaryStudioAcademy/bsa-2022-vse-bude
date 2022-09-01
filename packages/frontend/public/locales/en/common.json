@@ -81,7 +81,20 @@
     "defaultSuccessTitle": "Success",
     "defaultInfoTitle": "Info",
     "defaultWarningTitle": "Warning",
-    "defaultErrorTitle": "Error"
+    "defaultErrorTitle": "Error",
+    "avatarUpdated": "Avatar updated",
+    "profileUpdated": "Profile updated",
+    "signUpSuccess": "You have successfully registered",
+    "phoneVerifySuccess": "Your phone number has been successfully verified",
+    "emailVerifySuccess": "Your email has been successfully verified",
+    "phoneCodeResendSuccess": "Phone code successfully resend",
+    "emailCodeResendSuccess": "Email code successfully resend",
+    "resetPasswordLinkSent": "Reset password link sent",
+    "passwordUpdated": "Password updated",
+    "productAddedToFavorites": "Product added to favorite",
+    "productRemovedFromFavorites": "Product removed from favorite",
+    "bidPlaced": "Bid placed",
+    "leftAuction": "You left the auction"
   },
   "HOURS_SHORT": "h",
   "DAYS_SHORT": "d",
@@ -111,7 +124,15 @@
     "November",
     "December"
   ],
-  "days": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+  "days": [
+    "Su",
+    "Mo",
+    "Tu",
+    "We",
+    "Th",
+    "Fr",
+    "Sa"
+  ],
   "modal": {
     "confirm": {
       "confirm": "Confirm",

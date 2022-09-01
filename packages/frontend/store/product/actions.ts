@@ -7,6 +7,7 @@ import {
   incrementProductViews,
   placeBidRequest,
 } from 'services/product';
+import { addToast } from 'store/toast/actions';
 import { ProductActions } from './action-types';
 
 interface RequestOptions {
@@ -20,10 +21,18 @@ interface RequestOptionsSSR extends RequestOptions {
 
 export const fetchProducts = createAsyncThunk(
   ProductActions.FETCH_PRODUCTS,
-  async ({ limit, type }: RequestOptions) =>
+  async ({ limit, type }: RequestOptions, { rejectWithValue, dispatch }) =>
     getProducts({
       limit,
       type,
+    }).catch((e) => {
+      dispatch(
+        addToast({
+          level: 'error',
+          description: e.message,
+        }),
+      );
+      rejectWithValue(e.message);
     }),
 );
 
@@ -45,10 +54,25 @@ export const fetchIncrementProductViews = createAsyncThunk(
 
 export const makeBid = createAsyncThunk(
   ProductActions.PLACE_BID,
-  async (data: CreateBidRequest, { rejectWithValue }) => {
+  async (data: CreateBidRequest, { rejectWithValue, dispatch }) => {
     try {
-      return await placeBidRequest(data);
+      const result = await placeBidRequest(data);
+      dispatch(
+        addToast({
+          level: 'success',
+          description: (t) => t('common:notifications.bidPlaced'),
+        }),
+      );
+
+      return result;
     } catch (e) {
+      dispatch(
+        addToast({
+          level: 'error',
+          description: e.message,
+        }),
+      );
+
       return rejectWithValue(e.message);
     }
   },
