@@ -6,7 +6,7 @@ import {
   fetchUserProfileSSR,
   fetchFullUserProfile,
   updateUserProfile,
-  updateUserAvatar
+  updateUserAvatar,
 } from './actions';
 
 interface ProfileState {
