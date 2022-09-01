@@ -30,7 +30,7 @@ export const ItemInfoSelling = ({
       />
       <ItemInfo item={item} />
       <div css={styles.controlls}>
-        <Button onClick={onBuy}>{t('buyBtn')}</Button>
+        <Button onClick={onBuy}>{t('buttons.buyBtn')}</Button>
         <FavoriteButton
           cssExtended={styles.favouriteButton}
           onChangeIsFavorite={onChangeIsFavorite}
