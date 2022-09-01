@@ -19,7 +19,10 @@ export const initProfileRoutes = (
     authMiddleware,
     wrap(async (req: Request) => {
       const { userId, t } = req;
-      const fullUserProfile = profileService.getFullUserData({ userId, t });
+      const fullUserProfile = await profileService.getFullUserData({
+        userId,
+        t,
+      });
 
       return {
         ...fullUserProfile,
@@ -49,10 +52,12 @@ export const initProfileRoutes = (
         data: { firstName, lastName, email, phone },
       });
 
-      const links = await profileService.updateUserSocialMedia({
+      await profileService.updateUserSocialMedia({
         userId,
         socialMedia,
       });
+
+      const links = await profileService.getSocialMedia({ userId });
 
       if (newPassword) {
         await profileService.changePassword({

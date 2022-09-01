@@ -1,17 +1,21 @@
 import { useTranslation } from 'next-i18next';
+import { useAppDispatch } from '@hooks';
 import type React from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { Input, PasswordInput, Column, Flex, Button } from '@primitives';
 import { userUpdateSchema } from 'validation-schemas/user/user-update';
-import type { SaveUserProfileDto } from '@vse-bude/shared';
+import type { SaveUserProfileDto, FullUserProfileDto } from '@vse-bude/shared';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { UserPersonalInfoValidationMessage } from '@vse-bude/shared';
+import { profileMapper, updateDtoMapper } from '@helpers';
+import { updateUserProfile } from '@store';
 import { SectionHeader, NestedLayout } from '../common';
 import * as styles from './styles';
 
-const EditPersonalInfo = () => {
+const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -21,32 +25,21 @@ const EditPersonalInfo = () => {
     clearErrors,
     handleSubmit,
     formState: { errors },
-  } = useForm<SaveUserProfileDto>({
+  } = useForm({
     defaultValues: {
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'example@yahoo.com',
-      phone: '+380999999999',
-      city: '',
-      region: '',
-      country: '',
-      zip: '',
-      novaPoshtaRef: '',
-      linkedin: '',
-      facebook: '',
-      instagram: '',
-      password: '',
-      newPassword: '',
-      repeatPassword: '',
+      ...profileMapper({ user }),
     },
     resolver: joiResolver(userUpdateSchema(t)),
   });
 
   const onSave: SubmitHandler<SaveUserProfileDto> = (data, event) => {
     event.preventDefault();
-    console.log('data', data);
+    const currentLinks = user.socialMedia;
+    dispatch(
+      updateUserProfile({ data: updateDtoMapper({ data, currentLinks }) }),
+    );
   };
-  console.log(errors);
+
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     clearErrors('newPassword');
@@ -66,21 +59,7 @@ const EditPersonalInfo = () => {
   const onResetHandler = () => {
     reset(
       {
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'example@yahoo.com',
-        phone: '+380999999999',
-        city: '',
-        region: '',
-        country: '',
-        zip: '',
-        novaPoshtaRef: '',
-        linkedin: '',
-        facebook: '',
-        instagram: '',
-        password: '',
-        newPassword: '',
-        repeatPassword: '',
+        ...profileMapper({ user }),
       },
       {
         keepDefaultValues: true,

@@ -7,12 +7,8 @@ export enum IconColor {
   WHITE = ColorPalette.WHITE_100,
   GRAY = ColorPalette.GRAY_300,
   GREEN = ColorPalette.GREEN_200,
-}
 
-export enum IconColorProps {
-  YELLOW = 'YELLOW',
-  BLACK = 'BLACK',
-  WHITE = 'WHITE',
-  GRAY = 'GRAY',
-  GREEN = 'GREEN',
+  SUCCESS = ColorPalette.GREEN_0,
+  ERROR = ColorPalette.RED_100,
+  INFO = ColorPalette.BLUE_100,
 }

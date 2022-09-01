@@ -4,18 +4,20 @@ import { Icon } from '@primitives';
 import * as styles from './styles';
 import type { DropdownProps } from './types';
 
-export const Dropdown = ({ options, ...props }: DropdownProps) => {
+export const Dropdown = ({ options, cssExtend, ...props }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClickOutside = useCallback(() => {
     event.stopPropagation();
     setIsOpen(false);
-  }, []);
+    props?.onChildrenClick();
+  }, [props]);
 
   const ref = useOutsideClick(handleClickOutside);
 
   const handleClick = async () => {
     setIsOpen(!isOpen);
+    props?.onChildrenClick();
   };
 
   return (
@@ -25,9 +27,16 @@ export const Dropdown = ({ options, ...props }: DropdownProps) => {
       </button>
 
       {isOpen && (
-        <div ref={ref} css={styles.dropdownContent}>
+        <div ref={ref} css={[styles.dropdownContent, cssExtend]}>
           {options.map((item) => {
-            const { value, key, onClick: callbackFn, disabled, icon } = item;
+            const {
+              value,
+              key,
+              onClick: callbackFn,
+              disabled,
+              icon,
+              cssExtend: optionCss,
+            } = item;
 
             const onClick = () => {
               callbackFn();
@@ -37,7 +46,7 @@ export const Dropdown = ({ options, ...props }: DropdownProps) => {
             return (
               <button
                 key={key || value}
-                css={styles.dropdownItem}
+                css={[styles.dropdownItem, optionCss]}
                 onClick={onClick}
                 disabled={disabled}
                 data-variant={icon && 'icon'}

@@ -5,7 +5,8 @@
       "category": "Category",
       "search": "Search",
       "news": "News",
-      "about_us": "About us"
+      "about_us": "About us",
+      "profile": "Profile"
     },
     "buttons": {
       "create_account": "Create Account",
@@ -76,6 +77,12 @@
       }
     }
   },
+  "notifications": {
+    "defaultSuccessTitle": "Success",
+    "defaultInfoTitle": "Info",
+    "defaultWarningTitle": "Warning",
+    "defaultErrorTitle": "Error"
+  },
   "HOURS_SHORT": "h",
   "DAYS_SHORT": "d",
   "MINUTES_SHORT": "min",
@@ -104,5 +111,12 @@
     "November",
     "December"
   ],
-  "days": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
+  "days": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+  "modal": {
+    "confirm": {
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "header": "Confirm your action"
+    }
+  }
 }
