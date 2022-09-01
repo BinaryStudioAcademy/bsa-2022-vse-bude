@@ -1,6 +1,6 @@
-import { ColorPalette } from '@vse-bude/shared';
 import React, { FC } from 'react';
 import { BackIcon, Pressable, Text } from '~/components/components';
+import { ColorPalette } from '@vse-bude/shared';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 

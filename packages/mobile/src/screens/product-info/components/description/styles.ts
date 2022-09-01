@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   description: {
-    flex: 2.4,
+    flex: 2,
   },
 });
 

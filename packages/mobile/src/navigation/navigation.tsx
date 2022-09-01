@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
-import { useAppSelector } from '~/hooks/hooks';
 import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
+import { useAppSelector } from '~/hooks/hooks';
 import { RootScreenName } from '~/common/enums/enums';
 import { RootNavigationParamList } from '~/common/types/types';
 import {
@@ -14,6 +14,8 @@ import {
   SupportScreen,
 } from '~/screens/screens';
 import { selectCurrentUser } from '~/store/selectors';
+import { HeaderButton } from '~/components/components';
+import { ColorPalette } from '@vse-bude/shared';
 import { MainNavigation } from './tabs/tabs.navigation';
 
 const NativeStack = createNativeStackNavigator<RootNavigationParamList>();
@@ -28,6 +30,20 @@ const accountScreenOptions: NativeStackNavigationOptions = {
   headerTitleAlign: 'center',
 };
 
+const productScreenOptions: NativeStackNavigationOptions = {
+  headerShown: true,
+  headerTitleAlign: 'center',
+  headerLeft: () => (
+    <HeaderButton
+      label="List"
+      onPress={() => {
+        return;
+      }}
+      buttonColor={ColorPalette.YELLOW_200}
+    />
+  ),
+};
+
 const Navigation: FC = () => {
   const user = useAppSelector(selectCurrentUser);
 
@@ -37,10 +53,12 @@ const Navigation: FC = () => {
         name={RootScreenName.MAIN}
         component={MainNavigation}
       />
-      <Stack.Screen
-        name={RootScreenName.PRODUCT_INFO}
-        component={ProductInfo}
-      />
+      <NativeStack.Group screenOptions={productScreenOptions}>
+        <Stack.Screen
+          name={RootScreenName.PRODUCT_INFO}
+          component={ProductInfo}
+        />
+      </NativeStack.Group>
       {user && (
         <NativeStack.Group screenOptions={accountScreenOptions}>
           <Stack.Screen

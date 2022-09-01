@@ -1,6 +1,6 @@
-import { ColorPalette } from '@vse-bude/shared';
 import React from 'react';
 import Svg, { Circle } from 'react-native-svg';
+import { ColorPalette } from '@vse-bude/shared';
 
 const DotSvg = () => {
   return (

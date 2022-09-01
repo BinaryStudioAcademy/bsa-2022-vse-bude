@@ -1,33 +1,22 @@
-import { ProductDto } from '@vse-bude/shared';
 import React, { FC } from 'react';
-import { ListRenderItem } from 'react-native';
-import { Image, Text, View, FlatList } from '~/components/components';
+import { FlatList } from '~/components/components';
+import { ProductDto } from '@vse-bude/shared';
 import { globalStyles } from '~/styles/styles';
-import { styles } from './styles';
+import { RenderImage } from './render-image';
 
-const ImageCarousel: FC<Pick<ProductDto, 'imageLinks'>> = ({ imageLinks }) => {
-  const renderItem: ListRenderItem<string> = ({ item, index }) => (
-    <View style={styles.imgContainer}>
-      <Image source={{ uri: item }} style={styles.image} />
-      <View style={styles.itemsCount}>
-        <Text style={styles.currentItem}>{(index + 1).toString()}</Text>
-        <Text
-          style={styles.totalItems}
-        >{`/${imageLinks.length.toString()}`}</Text>
-      </View>
-    </View>
-  );
+type ImageCarouselProps = Pick<ProductDto, 'imageLinks'>;
 
+const ImageCarousel: FC<ImageCarouselProps> = ({ imageLinks }) => {
   return (
     <FlatList
-      horizontal
+      horizontal={true}
       snapToInterval={0}
       snapToAlignment="center"
       showsHorizontalScrollIndicator={false}
       data={imageLinks}
-      keyExtractor={(item, index) => `${index}_${item}`}
+      keyExtractor={(item) => `${item}`}
       style={[globalStyles.mt6, globalStyles.mb6]}
-      renderItem={renderItem}
+      renderItem={RenderImage}
     />
   );
 };

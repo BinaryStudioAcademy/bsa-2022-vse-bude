@@ -1,6 +1,6 @@
-import { ColorPalette } from '@vse-bude/shared';
 import React from 'react';
 import Svg, { Path, SvgProps } from 'react-native-svg';
+import { ColorPalette } from '@vse-bude/shared';
 
 const PlusSvg = (props: SvgProps) => {
   return (

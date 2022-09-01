@@ -7,7 +7,7 @@ type Props = {
   onPress: () => void;
 };
 
-const BurgerMenu: FC<Props> = ({ onPress }) => {
+const BurgerMenuButton: FC<Props> = ({ onPress }) => {
   return (
     <TouchableOpacity
       style={[styles.wrapper, globalStyles.justifyContentSpaceBetween]}
@@ -19,4 +19,4 @@ const BurgerMenu: FC<Props> = ({ onPress }) => {
     </TouchableOpacity>
   );
 };
-export { BurgerMenu };
+export { BurgerMenuButton };

@@ -11,6 +11,7 @@ export {
 export { SafeAreaView } from 'react-native-safe-area-context';
 
 export * from './icons/icons';
+export * from './svg/svg';
 export { ScreenWrapper } from './screen-wrapper/screen-wrapper';
 export { Button } from './button/button';
 export { Input } from './input/input';
@@ -29,3 +30,4 @@ export { PrimaryButton } from './primary-button/primary-button';
 export { SecondaryButton } from './secondary-button/secondary-button';
 export { BuildInfo } from './build-info/build-info';
 export { ScrollView } from './scroll-view/scroll-view';
+export { BurgerMenuButton } from './burger-menu/burger-menu-button';

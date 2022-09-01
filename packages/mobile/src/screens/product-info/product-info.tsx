@@ -1,7 +1,5 @@
-import { NavigationProp } from '@react-navigation/native';
-import { ProductDto, ProductType } from '@vse-bude/shared';
 import React, { FC, useEffect } from 'react';
-import { RootScreenName } from '~/common/enums/enums';
+import { NavigationProp } from '@react-navigation/native';
 import { RootNavigationParamList } from '~/common/types/types';
 import {
   ScreenWrapper,
@@ -11,33 +9,31 @@ import {
   ScrollView,
 } from '~/components/components';
 import { useCustomTheme, useNavigation } from '~/hooks/hooks';
+import { ProductType } from '@vse-bude/shared';
 import { globalStyles } from '~/styles/styles';
+import { MOCK_PRODUCT } from '~/mock/mock-product-info';
 import { Description } from './components/description/description';
-import { Header } from './components/header/header';
 import { ImageCarousel } from './components/image-carousel/image-carousel';
 import { LotPriceBlock } from './components/price-block/lot-price-block';
 import { ProductPriceBlock } from './components/price-block/product-price-block';
 
-const ProductInfo: FC<Partial<ProductDto>> = ({
-  title,
-  description,
-  price,
-  minimalBid,
-  city,
-  type,
-  status,
-  endDate,
-  imageLinks,
-  views,
-  currentPrice,
-}) => {
+const ProductInfo: FC = () => {
   const { colors } = useCustomTheme();
   const navigation = useNavigation<NavigationProp<RootNavigationParamList>>();
-  endDate = new Date();
 
-  const handleBackPress = () => {
-    navigation.navigate(RootScreenName.MAIN);
-  };
+  const {
+    title,
+    description,
+    price,
+    minimalBid,
+    city,
+    type,
+    status,
+    endDate,
+    imageLinks,
+    views,
+    currentPrice,
+  } = MOCK_PRODUCT;
 
   useEffect(() => {
     navigation.setOptions({
@@ -47,7 +43,6 @@ const ProductInfo: FC<Partial<ProductDto>> = ({
 
   return (
     <ScreenWrapper>
-      <Header onBackPress={handleBackPress} />
       {/** TODO: add countdown for auction item component */}
       <ScrollView
         showsVerticalScrollIndicator={false}

@@ -1,8 +1,8 @@
-import { ProductDto } from '@vse-bude/shared';
 import React, { FC } from 'react';
-import { DotSvg } from '~/assets/svg/dot';
-import { Text, View } from '~/components/components';
 import { useCustomTheme, useTranslation } from '~/hooks/hooks';
+import { Text, View, DotSvg } from '~/components/components';
+import { formatDate } from '~/helpers/helpers';
+import { ProductDto } from '@vse-bude/shared';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 
@@ -14,13 +14,7 @@ const Description: FC<Partial<ProductDto>> = ({
 }) => {
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
-
-  const date = endDate
-    ?.toISOString()
-    .split('T')[0]
-    .split('-')
-    .reverse()
-    .join('.');
+  const date = formatDate(endDate as Date);
   const renderInfo = (title: string, description: string) => {
     return (
       <View style={[globalStyles.flexDirectionRow, globalStyles.py2]}>
