@@ -4,14 +4,13 @@ import React, { useRef, useState } from 'react';
 import { Popover, IconButton, Icon } from '@primitives';
 import { IconName } from '@enums';
 import { ColorPalette } from '@vse-bude/shared';
-import { fetchUpdateUserAvatar } from 'store/profile/actions';
+import { updateUserAvatar } from 'store/profile/actions';
 import dynamic from 'next/dynamic';
 import * as styles from './styles';
 
 const ImageCropModal = dynamic(() => import('../../../imageCrop/component'));
 
 const ChangeAvatar = () => {
-  console.log('ChangeAvatar');
   const { t } = useTranslation();
   const inputFile = useRef(null);
   const dispatch = useAppDispatch();
@@ -32,14 +31,14 @@ const ChangeAvatar = () => {
   const onCropAvatar = (croppedImage) => {
     const formdata = new FormData();
     formdata.append('file', croppedImage);
-    dispatch(fetchUpdateUserAvatar(formdata));
+    dispatch(updateUserAvatar(formdata));
 
     setNewAvatar(null);
   };
 
   const handleDeleteAvatar = () => {
     setNewAvatar(null);
-    dispatch(fetchUpdateUserAvatar(null));
+    dispatch(updateUserAvatar(null));
   };
   const onClickFileInput = (e) => {
     e.target.value = null;

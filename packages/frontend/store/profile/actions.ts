@@ -9,7 +9,7 @@ export const fetchUserProfileSSR = createAsyncThunk(
     getUserProfileSSR(params).catch((e) => rejectWithValue(e.message)),
 );
 
-export const fetchUpdateUserAvatar = createAsyncThunk(
+export const updateUserAvatar = createAsyncThunk(
   ProfileActions.UPDATE_USER_AVATAR,
   async (file: FormData, { rejectWithValue }) =>
     updateAvatar(file).catch((e) => rejectWithValue(e.message)),

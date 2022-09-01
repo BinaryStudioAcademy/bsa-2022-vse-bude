@@ -13,6 +13,5 @@ export const updateAvatar = (file: FormData) =>
       contentType: file
         ? HttpContentType.FORM_DATA
         : HttpContentType.APPLICATION_JSON,
-      needAuthorization: true,
     },
   });
