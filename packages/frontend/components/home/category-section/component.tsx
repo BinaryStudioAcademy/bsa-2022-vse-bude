@@ -4,6 +4,7 @@ import { StringCutter } from '@primitives';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
+import { Routes } from '@enums';
 import { SectionLayout } from '../section-layout';
 import {
   categoryContainer,
@@ -30,6 +31,14 @@ const CategorySection = () => {
 
   const categoriesLimit = categories?.slice(0, limit) || [];
 
+  const redirectToCategory = (category: string) => {
+    const filters = {
+      category: category,
+    };
+
+    return `${Routes.ITEMS}?filter=${JSON.stringify(filters)}`;
+  };
+
   return (
     <SectionLayout
       title={t('home:popularCategories.title')}
@@ -52,7 +61,7 @@ const CategorySection = () => {
         >
           {categoriesLimit.map((item) => (
             <SplideSlideStyled key={item.id}>
-              <Link href="#" passHref>
+              <Link href={redirectToCategory(item.title)} passHref>
                 <a css={categoryItem}>
                   <div css={categoryItemTitle}>
                     <StringCutter>{item.title}</StringCutter>
