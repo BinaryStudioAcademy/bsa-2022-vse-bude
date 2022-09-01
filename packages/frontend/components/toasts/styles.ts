@@ -11,6 +11,9 @@ export const toastStack = () => css`
   padding: 30px;
   z-index: 125;
   overflow: hidden;
+  :empty {
+    display: none;
+  }
 `;
 
 export const toast = ({

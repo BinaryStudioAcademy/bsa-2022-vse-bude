@@ -4,20 +4,25 @@ import { Icon } from '@primitives';
 import * as styles from './styles';
 import type { DropdownProps } from './types';
 
-export const Dropdown = ({ options, cssExtend, ...props }: DropdownProps) => {
+export const Dropdown = ({
+  options,
+  cssExtend,
+  onChildrenClick,
+  ...props
+}: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClickOutside = useCallback(() => {
     event.stopPropagation();
     setIsOpen(false);
-    props?.onChildrenClick();
-  }, [props]);
+    onChildrenClick?.();
+  }, [onChildrenClick]);
 
   const ref = useOutsideClick(handleClickOutside);
 
   const handleClick = async () => {
     setIsOpen(!isOpen);
-    props?.onChildrenClick();
+    onChildrenClick?.();
   };
 
   return (
