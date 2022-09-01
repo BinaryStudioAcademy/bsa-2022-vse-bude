@@ -48,7 +48,6 @@ export const SellerInfo = ({ seller, onContactSeller }: SellerInfoProps) => {
           />
           <span>{seller.phone}</span>
         </div>
-
         {seller.socialMedia.map((social) => (
           <div key={social.id}>
             <Anchor href={social.link}>
@@ -60,34 +59,6 @@ export const SellerInfo = ({ seller, onContactSeller }: SellerInfoProps) => {
             </Anchor>
           </div>
         ))}
-        {/* for ui tests: delete soon*/}
-        <div>
-          <Anchor>
-            <Icon
-              size="sm"
-              icon={IconName.FACEBOOK}
-              color={ColorPalette.YELLOW_200}
-            />
-          </Anchor>
-        </div>
-        <div>
-          <Anchor>
-            <Icon
-              size="sm"
-              icon={IconName.WEBSITE}
-              color={ColorPalette.YELLOW_200}
-            />
-          </Anchor>
-        </div>
-        <div>
-          <Anchor>
-            <Icon
-              size="sm"
-              icon={IconName.LINKEDIN}
-              color={ColorPalette.YELLOW_200}
-            />
-          </Anchor>
-        </div>
       </div>
     </div>
   );

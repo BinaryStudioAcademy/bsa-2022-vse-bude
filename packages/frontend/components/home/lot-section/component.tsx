@@ -18,16 +18,16 @@ const LotSection = ({ title, lots, loadMoreTitle }: LotProps) => {
       <div css={lotContainer}>
         <Splide
           options={{
-            fixedWidth: 320,
-            pagination: false,
-            arrows: false,
-            gap: 10,
+            fixedWidth: 360,
             focus: 'center',
-            mediaQuery: 'min',
+            pagination: false,
+            trimSpace: true,
+            updateOnMove: true,
+            wheel: true,
+            mediaQuery: 'max',
             breakpoints: {
               [lightTheme.breakpoints.md]: {
-                fixedWidth: 360,
-                gap: 25,
+                fixedWidth: 320,
               },
             },
           }}

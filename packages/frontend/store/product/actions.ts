@@ -1,9 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import type { Http, ProductType } from '@vse-bude/shared';
+import type { CreateBidRequest, Http, ProductType } from '@vse-bude/shared';
 import {
   getProducts,
   getProductsSSR,
   incrementProductViews,
+  placeBidRequest,
 } from 'services/product';
 import { ProductActions } from './action-types';
 
@@ -34,4 +35,15 @@ export const fetchProductsSSR = createAsyncThunk(
 export const fetchIncrementProductViews = createAsyncThunk(
   ProductActions.FETCH_INCREMENT_PRODUCT_VIEWS,
   async (id: string) => incrementProductViews(id),
+);
+
+export const makeBid = createAsyncThunk(
+  ProductActions.PLACE_BID,
+  async (data: CreateBidRequest, { rejectWithValue }) => {
+    try {
+      return await placeBidRequest(data);
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  },
 );

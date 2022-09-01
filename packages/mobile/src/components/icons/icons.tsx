@@ -66,6 +66,14 @@ const LogInIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="log-in" {...iconProps} />
 );
 
+const EyeIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="eye" {...iconProps} />
+);
+
+const EyeOffIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="eye-off" {...iconProps} />
+);
+
 const ClockIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="clock" {...iconProps} />
 );
@@ -88,4 +96,6 @@ export {
   CameraIcon,
   ClockIcon,
   CrossIcon,
+  EyeIcon,
+  EyeOffIcon,
 };
