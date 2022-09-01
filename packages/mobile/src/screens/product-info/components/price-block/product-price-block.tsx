@@ -1,11 +1,11 @@
-import { ColorPalette } from '@vse-bude/shared';
+import { ColorPalette, ProductDto } from '@vse-bude/shared';
 import React, { FC } from 'react';
 import { PrimaryButton, StarIcon, Text, View } from '~/components/components';
 import { useCustomTheme, useTranslation } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 
-const ProductPriceBlock: FC = () => {
+const ProductPriceBlock: FC<Pick<ProductDto, 'price'>> = ({ price }) => {
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
 
@@ -27,7 +27,7 @@ const ProductPriceBlock: FC = () => {
           { color: colors.text },
         ]}
       >
-        {`${t('screens:welcome.UAH')} 6500`}
+        {`${t('screens:welcome.UAH')} ${price}`}
       </Text>
       <View
         style={[globalStyles.flexDirectionRow, globalStyles.alignItemsCenter]}

@@ -1,40 +1,31 @@
+import { ProductDto } from '@vse-bude/shared';
 import React, { FC } from 'react';
-import { ImageSourcePropType, ListRenderItem } from 'react-native';
-import { images } from '~/assets/images/images';
+import { ListRenderItem } from 'react-native';
 import { Image, Text, View, FlatList } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 
-type ItemImageType = {
-  img: ImageSourcePropType;
-  id: number;
-};
-
-const mockData: ItemImageType[] = [
-  { img: images.puff, id: 1 },
-  { img: images.puff, id: 2 },
-  { img: images.puff, id: 3 },
-];
-
-const renderItem: ListRenderItem<ItemImageType> = ({ item, index }) => (
-  <View style={styles.imgContainer}>
-    <Image source={item.img} />
-    <View style={styles.itemsCount}>
-      <Text style={styles.currentItem}>{(index + 1).toString()}</Text>
-      <Text style={styles.totalItems}>{`/${mockData.length.toString()}`}</Text>
+const ImageCarousel: FC<Pick<ProductDto, 'imageLinks'>> = ({ imageLinks }) => {
+  const renderItem: ListRenderItem<string> = ({ item, index }) => (
+    <View style={styles.imgContainer}>
+      <Image source={{ uri: item }} style={styles.image} />
+      <View style={styles.itemsCount}>
+        <Text style={styles.currentItem}>{(index + 1).toString()}</Text>
+        <Text
+          style={styles.totalItems}
+        >{`/${imageLinks.length.toString()}`}</Text>
+      </View>
     </View>
-  </View>
-);
+  );
 
-const ImageCarousel: FC = () => {
   return (
     <FlatList
       horizontal
       snapToInterval={0}
       snapToAlignment="center"
       showsHorizontalScrollIndicator={false}
-      data={mockData}
-      keyExtractor={(item: ItemImageType) => item.id.toString()}
+      data={imageLinks}
+      keyExtractor={(item, index) => `${index}_${item}`}
       style={[globalStyles.mt6, globalStyles.mb6]}
       renderItem={renderItem}
     />

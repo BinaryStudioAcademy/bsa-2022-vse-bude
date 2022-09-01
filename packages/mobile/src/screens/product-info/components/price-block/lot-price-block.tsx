@@ -1,4 +1,4 @@
-import { ColorPalette } from '@vse-bude/shared';
+import { ColorPalette, ProductDto } from '@vse-bude/shared';
 import React, { FC } from 'react';
 import { PlusSvg } from '~/assets/svg/plus';
 import { PrimaryButton, StarIcon, Text, View } from '~/components/components';
@@ -6,7 +6,10 @@ import { useCustomTheme, useTranslation } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 
-const LotPriceBlock: FC = () => {
+const LotPriceBlock: FC<Pick<ProductDto, 'currentPrice' | 'minimalBid'>> = ({
+  currentPrice,
+  minimalBid,
+}) => {
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
 
@@ -38,7 +41,7 @@ const LotPriceBlock: FC = () => {
             { color: colors.titleSecondary },
           ]}
         >
-          {`${t('screens:welcome.UAH')} 5800`}
+          {`${t('screens:welcome.UAH')} ${currentPrice}`}
         </Text>
       </View>
       <View
@@ -53,7 +56,7 @@ const LotPriceBlock: FC = () => {
       >
         <Text style={[globalStyles.fs14, styles.minBid]}>{`${t(
           'screens:product_info.MIN_UAH',
-        )} 200`}</Text>
+        )} ${minimalBid}`}</Text>
         <View
           style={[globalStyles.flexDirectionRow, globalStyles.alignItemsCenter]}
         >

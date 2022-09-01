@@ -1,4 +1,5 @@
 import { NavigationProp } from '@react-navigation/native';
+import { ProductDto, ProductType } from '@vse-bude/shared';
 import React, { FC, useEffect } from 'react';
 import { RootScreenName } from '~/common/enums/enums';
 import { RootNavigationParamList } from '~/common/types/types';
@@ -17,10 +18,22 @@ import { ImageCarousel } from './components/image-carousel/image-carousel';
 import { LotPriceBlock } from './components/price-block/lot-price-block';
 import { ProductPriceBlock } from './components/price-block/product-price-block';
 
-const ProductInfo: FC = () => {
+const ProductInfo: FC<Partial<ProductDto>> = ({
+  title,
+  description,
+  price,
+  minimalBid,
+  city,
+  type,
+  status,
+  endDate,
+  imageLinks,
+  views,
+  currentPrice,
+}) => {
   const { colors } = useCustomTheme();
   const navigation = useNavigation<NavigationProp<RootNavigationParamList>>();
-  const itemTypeLot = true;
+  endDate = new Date();
 
   const handleBackPress = () => {
     navigation.navigate(RootScreenName.MAIN);
@@ -38,7 +51,7 @@ const ProductInfo: FC = () => {
       {/** TODO: add countdown for auction item component */}
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={[globalStyles.px5]}
+        style={[globalStyles.px5, globalStyles.mb5]}
       >
         <Text
           style={[
@@ -48,7 +61,7 @@ const ProductInfo: FC = () => {
             { color: colors.text },
           ]}
         >
-          Puff VILDSUND 52x41, gray, “Jysk”
+          {title || ''}
         </Text>
         <View
           style={[globalStyles.flexDirectionRow, globalStyles.alignItemsCenter]}
@@ -61,14 +74,26 @@ const ProductInfo: FC = () => {
               { color: colors.icon },
             ]}
           >
-            834
+            {views?.toString() || ''}
           </Text>
         </View>
-        <ImageCarousel />
-        <Description />
+        {imageLinks && <ImageCarousel imageLinks={imageLinks} />}
+        <Description
+          description={description}
+          city={city}
+          status={status}
+          endDate={endDate}
+        />
         {/** TODO: add seller info component */}
       </ScrollView>
-      {itemTypeLot ? <LotPriceBlock /> : <ProductPriceBlock />}
+      {type == ProductType.SELLING ? (
+        <LotPriceBlock
+          currentPrice={Number(currentPrice)}
+          minimalBid={Number(minimalBid)}
+        />
+      ) : (
+        <ProductPriceBlock price={Number(price)} />
+      )}
     </ScreenWrapper>
   );
 };
