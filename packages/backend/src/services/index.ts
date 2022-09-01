@@ -50,6 +50,7 @@ export const initServices = (repositories: Repositories) => {
     productService: new ProductService(
       repositories.productRepository,
       verifyService,
+      s3StorageService,
       repositories.bidRepository,
     ),
     newsService: new NewsService(repositories.newsRepository),
