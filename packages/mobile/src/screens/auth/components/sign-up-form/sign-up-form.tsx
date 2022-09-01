@@ -18,14 +18,13 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
   });
 
   return (
-    <View>
+    <View style={globalStyles.py5}>
       <Input
         label={t('verification.EMAIL')}
         placeholder={t('verification.EMAIL_HINT')}
         name="email"
         control={control}
         errors={errors}
-        contentContainerStyle={globalStyles.mt5}
       />
       <Input
         label={t('verification.NAME')}
@@ -69,7 +68,7 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
         contentContainerStyle={globalStyles.mt5}
         isSecure={true}
       />
-      <View style={[globalStyles.mt5, globalStyles.mb5]}>
+      <View style={globalStyles.mt5}>
         <PrimaryButton
           label={t('verification.CREATE_ACCOUNT')}
           onPress={handleSubmit(onSubmit)}
