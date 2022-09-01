@@ -1,4 +1,4 @@
-import { Button, Container, IconButton } from '@primitives';
+import { Button, Container, IconButton, Loader } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { Fragment, useState, useEffect } from 'react';
@@ -19,7 +19,7 @@ interface RequestOptions {
 
 export const Header = () => {
   const [show, setShow] = useState(false);
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const isMounted = useMounted();
   const { push, locale } = useRouter();
   const { t } = useTranslation();
@@ -66,7 +66,13 @@ export const Header = () => {
     />
   );
 
-  const renderProfileInfo = () => <ProfileInfo />;
+  const renderProfileInfo = () => {
+    if (loading) {
+      return <Loader size="extraSmall" />;
+    }
+
+    return <ProfileInfo />;
+  };
 
   return (
     <Fragment>
@@ -81,16 +87,14 @@ export const Header = () => {
             {<Navigation categories={categories || []} />}
           </div>
 
-          {isMounted ? (
+          {isMounted && (
             <>
-              {user ? (
+              {user || loading ? (
                 <div className="header-content">{renderProfileInfo()}</div>
               ) : (
                 <div className="header-content">{renderAuthButtons()}</div>
               )}
             </>
-          ) : (
-            <div />
           )}
           <div className="burger-menu-button">{renderBurgerButton()}</div>
         </Container>
