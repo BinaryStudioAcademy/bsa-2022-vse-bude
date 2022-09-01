@@ -8,6 +8,7 @@ export const Dropdown = ({ options, cssExtend, ...props }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClickOutside = useCallback(() => {
+    event.stopPropagation();
     setIsOpen(false);
     props?.onChildrenClick();
   }, [props]);
