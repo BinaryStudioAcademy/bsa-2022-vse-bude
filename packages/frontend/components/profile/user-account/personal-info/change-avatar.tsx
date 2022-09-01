@@ -5,6 +5,9 @@ import { Popover, IconButton, Icon } from '@primitives';
 import { IconColor, IconName } from '@enums';
 import { updateUserAvatar } from 'store/profile/actions';
 import dynamic from 'next/dynamic';
+import { allowedImgExtension } from 'common/enums/allowedImgExtension';
+import { MAX_IMAGE_SIZE } from '@vse-bude/shared';
+import { addToast } from 'store/toast/actions';
 import * as styles from './styles';
 
 const ImageCropModal = dynamic(() => import('../../../imageCrop/component'));
@@ -20,6 +23,10 @@ const ChangeAvatar = () => {
 
   const onSelectFile = (e) => {
     const file = e.target.files[0];
+    if (!file) {
+      return;
+    }
+
     setNewAvatar(file);
   };
 
@@ -28,6 +35,27 @@ const ChangeAvatar = () => {
   };
 
   const onCropAvatar = (croppedImage) => {
+    if (!Object.values(allowedImgExtension).includes(croppedImage.type)) {
+      dispatch(
+        addToast({
+          level: 'error',
+          description: t('personal-info:validation.avatar.fileType'),
+        }),
+      );
+
+      return;
+    }
+    if (croppedImage.size > MAX_IMAGE_SIZE) {
+      dispatch(
+        addToast({
+          level: 'error',
+          description: t('personal-info:validation.avatar.maxSize'),
+        }),
+      );
+
+      return;
+    }
+
     const formdata = new FormData();
     formdata.append('file', croppedImage);
     dispatch(updateUserAvatar(formdata));
@@ -39,6 +67,7 @@ const ChangeAvatar = () => {
     setNewAvatar(null);
     dispatch(updateUserAvatar(null));
   };
+
   const onClickFileInput = (e) => {
     e.target.value = null;
   };
@@ -55,6 +84,7 @@ const ChangeAvatar = () => {
           circle
         />
       )}
+
       <Popover
         trigger={
           <IconButton
@@ -86,6 +116,7 @@ const ChangeAvatar = () => {
           </div>
         )}
       </Popover>
+
       <input
         type="file"
         id="file"
