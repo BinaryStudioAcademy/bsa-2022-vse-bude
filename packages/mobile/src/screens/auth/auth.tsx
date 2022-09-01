@@ -12,13 +12,13 @@ import {
 import {
   Text,
   ScrollView,
-  Divider,
   ScreenWrapper,
   StatusBar,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import {
-  GoogleButton,
+  ForgotPasswordHeader,
+  SignInUpHeader,
   SignInForm,
   SignUpForm,
   Header,
@@ -31,10 +31,20 @@ const Auth: FC = () => {
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
   const navigation = useNavigation();
-  const screenLabel =
-    name === RootScreenName.SIGN_IN
-      ? t('verification.SING_IN')
-      : t('verification.CREATE_ACCOUNT');
+  const isForgotPassword = name === RootScreenName.FORGOT_PASSWORD;
+
+  const getScreenLabel = (screenName: string): string => {
+    switch (screenName) {
+      case RootScreenName.SIGN_IN:
+        return t('verification.SING_IN');
+      case RootScreenName.SIGN_UP:
+        return t('verification.CREATE_ACCOUNT');
+      case RootScreenName.FORGOT_PASSWORD:
+        return t('verification.FORGOT_PASSWORD');
+      default:
+        return '';
+    }
+  };
 
   const handleSignIn = (payload: UserSignInDto): void => {
     dispatch(authActions.signIn(payload));
@@ -87,10 +97,9 @@ const Auth: FC = () => {
             globalStyles.fontWeightExtraBold,
           ]}
         >
-          {screenLabel}
+          {getScreenLabel(name)}
         </Text>
-        <GoogleButton />
-        <Divider text={t('common:text.OR')} />
+        {isForgotPassword ? <ForgotPasswordHeader /> : <SignInUpHeader />}
         {getScreen(name)}
       </ScrollView>
     </ScreenWrapper>

@@ -33,6 +33,8 @@ export const screens = {
     PHONE_NUMBER: 'Телефонний номер',
     PHONE_NUMBER_HINT: 'Введіть свій номер телефону',
     GOOGLE_BUTTON: 'Увійти за допомогою Google',
+    FORGOT_PASSWORD: 'Забули Пароль',
+    ENTER_EMAIL: 'Введіть електронну пошту, щоб отримати пароль',
   },
   personal_info: {
     PERSONAL_INFO: 'Особиста інформація',
