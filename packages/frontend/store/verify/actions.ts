@@ -2,7 +2,7 @@ import { VerifyActionTypes } from './action-types';
 
 export interface VerifyAction {
   type: VerifyActionTypes;
-  payload?: any;
+  payload?: boolean | null;
 }
 
 export const showVerifyModal = (): VerifyAction => ({
