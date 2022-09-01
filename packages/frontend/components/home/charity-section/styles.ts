@@ -47,11 +47,11 @@ export const sliderWrapper = ({
   }
 
   .splide__arrow--next {
-    right: -${spaces.xl1};
+    right: -${spaces.xl3};
   }
 
   .splide__arrow--prev {
-    left: -${spaces.xl1};
+    left: -${spaces.xl3};
   }
 
   .splide__pagination {

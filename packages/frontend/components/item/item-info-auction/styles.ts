@@ -34,7 +34,7 @@ export const inputWrapper = ({
   colors,
   breakpoints,
 }: Theme) => css`
-  div:first-child {
+  div:first-of-type {
     margin-bottom: ${spaces.sm};
   }
   span {
@@ -47,7 +47,7 @@ export const inputWrapper = ({
   @media (max-width: ${breakpoints.md}px) {
     margin-bottom: ${spaces.lg};
 
-    div:first-child {
+    div:first-of-type {
       margin-bottom: ${spaces.sm};
     }
 
@@ -116,6 +116,12 @@ export const priceWrapper = ({
     flex-direction: column;
     margin-top: ${spaces.sm};
   }
+`;
+
+export const leaveAuctionBlock = css`
+  display: flex;
+  margin-top: 10px;
+  justify-content: end;
 `;
 
 export const buttons = css`

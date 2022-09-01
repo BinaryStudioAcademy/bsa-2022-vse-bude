@@ -5,11 +5,11 @@ export const styles = StyleSheet.create({
   wrapper: {
     position: 'absolute',
     borderRadius: 4,
-    right: -15,
-    bottom: -50,
-    width: '55%',
+    right: -8,
+    bottom: -10,
+    width: 180,
     backgroundColor: ColorPalette.WHITE_100,
-    opacity: 0.9,
+    opacity: 0.95,
     padding: 8,
   },
   image: {

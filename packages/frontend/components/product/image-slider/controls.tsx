@@ -1,5 +1,5 @@
 import { IconButton } from '@primitives';
-import { IconName } from '@enums';
+import { IconColor, IconName } from '@enums';
 import { sliderControls } from './styles';
 import type { SliderControlsProps } from './types';
 
@@ -15,7 +15,7 @@ export const SliderControls = ({
         <IconButton
           size="sm"
           icon={IconName.ANGLE_LEFT}
-          color="green"
+          color={IconColor.GREEN}
           backgroundColor="darkgray"
           onClick={onPrev}
         />
@@ -26,7 +26,7 @@ export const SliderControls = ({
         <IconButton
           size="sm"
           icon={IconName.ANGLE_RIGHT}
-          color="green"
+          color={IconColor.GREEN}
           backgroundColor="darkgray"
           onClick={onNext}
         />

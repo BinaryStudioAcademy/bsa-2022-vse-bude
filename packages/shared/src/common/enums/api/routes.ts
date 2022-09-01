@@ -37,12 +37,15 @@ export enum ProductApiRoutes {
   FAVORITE = '/favorite',
   FAVORITE_IDS = '/favorite-ids',
   BUY = '/buy/:id',
+  AUCTION_PERMISSIONS = '/auction/permissions',
+  AUCTION_LEAVE = '/auction/leave',
 }
 
 export enum ProfileApiRoutes {
   GET_USER_BY_ID = '/:userId',
   GET_FULL_USER_DATA = '/full-data',
   UPDATE_DATA = '/save',
+  UPDATE_AVATAR = '/update-avatar',
 }
 
 export enum AccountApiRoutes {

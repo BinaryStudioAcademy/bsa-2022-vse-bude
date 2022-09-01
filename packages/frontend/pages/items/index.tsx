@@ -1,6 +1,7 @@
-import { Filter, Layout } from '@components';
 import { wrapper } from 'store';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { Layout } from '@components/layout';
+import { Filter } from '@components/filter';
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (_store) =>
