@@ -1,4 +1,4 @@
-import { IconName } from '@enums';
+import { IconColor, IconName } from '@enums';
 import { IconButton } from '@primitives';
 import { favoriteIcon } from './styles';
 import type { FavoriteButtonProps } from './types';
@@ -10,7 +10,7 @@ export const FavoriteButton = ({
   onChangeIsFavorite,
   cssExtended,
 }: FavoriteButtonProps) => {
-  const color = isFavorite ? 'yellow' : 'white';
+  const color = isFavorite ? IconColor.YELLOW : IconColor.WHITE;
   const icon = isFavorite ? IconName.STAR_FULFILLED : IconName.STAR_OUTLINED;
 
   return (

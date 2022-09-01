@@ -1,8 +1,9 @@
-import { Layout, SavePost } from '@components';
 import { useRouter } from 'next/router';
 import { wrapper } from 'store';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { ConsentModal } from 'components/make-a-post/consent';
+import { ConsentModal } from '@components/make-a-post/consent';
+import { Layout } from '@components/layout';
+import { SavePost } from '@components/save-post';
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (_store) =>

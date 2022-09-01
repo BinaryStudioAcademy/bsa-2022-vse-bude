@@ -23,6 +23,7 @@ import Router from 'next/router';
 import { auth } from '@helpers';
 import { Routes } from '@enums';
 import type { IAuth } from '@types';
+import { addToast } from 'store/toast/actions';
 import { AuthActions } from './action-types';
 
 const getCurrentUser = createAsyncThunk(
@@ -44,10 +45,17 @@ const getCurrentUser = createAsyncThunk(
 
 const loginUser = createAsyncThunk(
   AuthActions.LOGIN,
-  (data: UserSignInDto, { rejectWithValue }) =>
+  (data: UserSignInDto, { rejectWithValue, dispatch }) =>
     login(data)
       .then((data: IAuth) => {
         if (data?.error) {
+          dispatch(
+            addToast({
+              level: 'error',
+              description: data.error,
+            }),
+          );
+
           return rejectWithValue(data.error);
         }
         auth.setTokens(data.accessToken, data.refreshToken);
@@ -57,6 +65,13 @@ const loginUser = createAsyncThunk(
       })
       .catch((error) => {
         if (error instanceof Error) {
+          dispatch(
+            addToast({
+              level: 'error',
+              description: error.message,
+            }),
+          );
+
           return rejectWithValue(error.message);
         }
       }),
@@ -64,25 +79,39 @@ const loginUser = createAsyncThunk(
 
 const signUpUser = createAsyncThunk(
   AuthActions.SIGN_UP,
-  async (data: UserSignUpDto, { rejectWithValue }) => {
+  async (data: UserSignUpDto, { rejectWithValue, dispatch }) => {
     try {
       const response: IAuth = await signUp(data);
       auth.setTokens(response.accessToken, response.refreshToken);
 
       await Router.push(Routes.PHONE_VERIFY);
-    } catch (error) {
-      return rejectWithValue(error.message);
+    } catch (e) {
+      dispatch(
+        addToast({
+          level: 'error',
+          description: e.message,
+        }),
+      );
+
+      return rejectWithValue(e.message);
     }
   },
 );
 
 const phoneVerification = createAsyncThunk(
   AuthActions.PHONE_VERIFY,
-  async (data: PhoneVerifyDto, { rejectWithValue }) => {
+  async (data: PhoneVerifyDto, { rejectWithValue, dispatch }) => {
     try {
       await verifyPhone(data);
       await Router.push(Routes.EMAIL_VERIFY);
     } catch (e) {
+      dispatch(
+        addToast({
+          level: 'error',
+          description: e.message,
+        }),
+      );
+
       return rejectWithValue(e.message);
     }
   },
@@ -90,10 +119,17 @@ const phoneVerification = createAsyncThunk(
 
 const phoneCodeResend = createAsyncThunk(
   AuthActions.PHONE_RESEND_CODE,
-  async (_, { rejectWithValue }) => {
+  async (_, { rejectWithValue, dispatch }) => {
     try {
       return await resendPhoneCode();
     } catch (e) {
+      dispatch(
+        addToast({
+          level: 'error',
+          description: e.message,
+        }),
+      );
+
       return rejectWithValue(e.message);
     }
   },
@@ -101,11 +137,18 @@ const phoneCodeResend = createAsyncThunk(
 
 const emailVerification = createAsyncThunk(
   AuthActions.EMAIL_VERIFY,
-  async (data: EmailVerifyDto, { rejectWithValue }) => {
+  async (data: EmailVerifyDto, { rejectWithValue, dispatch }) => {
     try {
       await verifyEmail(data);
       await Router.push(Routes.DEFAULT);
     } catch (e) {
+      dispatch(
+        addToast({
+          level: 'error',
+          description: e.message,
+        }),
+      );
+
       return rejectWithValue(e.message);
     }
   },
@@ -113,10 +156,17 @@ const emailVerification = createAsyncThunk(
 
 const emailCodeResend = createAsyncThunk(
   AuthActions.EMAIL_RESEND_CODE,
-  async (_, { rejectWithValue }) => {
+  async (_, { rejectWithValue, dispatch }) => {
     try {
       return await resendEmailCode();
     } catch (e) {
+      dispatch(
+        addToast({
+          level: 'error',
+          description: e.message,
+        }),
+      );
+
       return rejectWithValue(e.message);
     }
   },
@@ -138,10 +188,17 @@ const logoutUser = createAsyncThunk(
 
 const sendPasswordResetLink = createAsyncThunk(
   AuthActions.SEND_RESET_PASSWORD_LINK,
-  async (data: ResetPasswordLink, { rejectWithValue }) => {
+  async (data: ResetPasswordLink, { rejectWithValue, dispatch }) => {
     try {
       return await resetPasswordLink(data);
     } catch (e) {
+      dispatch(
+        addToast({
+          level: 'error',
+          description: e.message,
+        }),
+      );
+
       return rejectWithValue(e.message);
     }
   },
@@ -149,10 +206,17 @@ const sendPasswordResetLink = createAsyncThunk(
 
 const updatePassword = createAsyncThunk(
   AuthActions.UPDATE_PASSWORD,
-  async (data: UpdatePassword, { rejectWithValue }) => {
+  async (data: UpdatePassword, { rejectWithValue, dispatch }) => {
     try {
       return await updatePasswordRequest(data);
     } catch (e) {
+      dispatch(
+        addToast({
+          level: 'error',
+          description: e.message,
+        }),
+      );
+
       return rejectWithValue(e.message);
     }
   },

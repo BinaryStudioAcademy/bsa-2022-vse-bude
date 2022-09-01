@@ -1,4 +1,4 @@
-import { IconName } from '@enums';
+import { IconColor, IconName } from '@enums';
 import React from 'react';
 import { Icon } from '../icon';
 import { Tooltip } from '../tooltip';
@@ -28,7 +28,7 @@ const InputInner = (
           <Tooltip
             trigger={
               <Icon
-                color="yellow"
+                color={IconColor.YELLOW}
                 icon={IconName.INFO}
                 cssExtend={styles.infoIco}
               />

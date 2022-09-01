@@ -1,6 +1,10 @@
 import { Button } from '@primitives';
 import { useTranslation } from 'next-i18next';
-import { useAppDispatch, useAuth, useTypedSelector } from '@hooks';
+import {
+  useAppDispatch,
+  // useAuth,
+  useTypedSelector,
+} from '@hooks';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import type { PhoneVerifyDto } from '@vse-bude/shared';
@@ -14,7 +18,7 @@ import { verifyCodeSchema } from './validation';
 import { ResendCodeButton } from './resend-code';
 
 export const PhoneVerification = () => {
-  const { user } = useAuth();
+  // const { user } = useAuth();
   const { error } = useTypedSelector((state) => state.auth);
 
   const dispatch = useAppDispatch();
@@ -39,16 +43,16 @@ export const PhoneVerification = () => {
   return (
     <form css={verifyForm} onSubmit={handleSubmit(onSubmit)}>
       <div css={inputWrapper}>
-        {/* <div css={verifyText}>
-          <span>
-            {t('auth:phoneText')}
-            {user && (
-              <span css={verifyEntity}> {hideMainTextPart(user.phone)}</span>
-            )}
-            !
-          </span>
-          <span>{t('auth:enterCode')}!</span>
-        </div> */}
+        {/*<div css={verifyText}>*/}
+        {/*  <span>*/}
+        {/*    {t('auth:phoneText')}*/}
+        {/*    {user && (*/}
+        {/*      <span css={verifyEntity}> {hideMainTextPart(user.phone)}</span>*/}
+        {/*    )}*/}
+        {/*    !*/}
+        {/*  </span>*/}
+        {/*  <span>{t('auth:enterCode')}!</span>*/}
+        {/*</div>*/}
         <Input
           {...register('code')}
           css={verifyInput}

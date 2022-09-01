@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { IconName } from '@enums';
+import { IconColor, IconName } from '@enums';
 import { Icon } from '../icon';
 import * as styles from './styles';
 import type { PasswordProps } from './types';
@@ -28,7 +28,7 @@ const PasswordInputInner = (
           <Icon
             icon={passwordIcon}
             cssExtend={styles.passwordVisibilityIcon}
-            color="gray"
+            color={IconColor.YELLOW}
           />
         </button>
         <input

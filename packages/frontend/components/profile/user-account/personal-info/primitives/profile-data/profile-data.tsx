@@ -9,16 +9,33 @@ export const ProfileData = ({ user }: { user: UserProfileDto }) => {
 
   return (
     <div css={styles.profileWrapper}>
-      <div css={styles.fullName}>
-        <span css={styles.name}>{firstName}</span>
-        <span css={styles.name}>{lastName}</span>
+      <div css={styles.section}>
+        <h4 css={styles.sectionHeader}>
+          {t('personal-info:headline.personalInfo')}
+        </h4>
+        <table>
+          <tbody>
+            <tr>
+              <td css={styles.cell}>
+                {t('personal-info:label.firstName') + ':'}
+              </td>
+              <td css={[styles.cell, styles.name]}>{firstName}</td>
+            </tr>
+            <tr>
+              <td css={styles.cell}>
+                {t('personal-info:label.lastName') + ':'}
+              </td>
+              <td css={[styles.cell, styles.name]}>{lastName}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
-      <div css={styles.networks}>
-        {socialMedia.length && (
-          <h5 css={styles.sectionHeader}>
+      <div css={styles.section}>
+        {!!socialMedia.length && (
+          <h4 css={styles.sectionHeader}>
             {t('personal-info:headline.socialNetworks')}
-          </h5>
+          </h4>
         )}
         <Flex>
           {socialMedia.map((it) => {

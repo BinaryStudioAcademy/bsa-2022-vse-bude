@@ -5,13 +5,11 @@ import type { UserSignUpDto } from '@vse-bude/shared';
 import { useTranslation } from 'next-i18next';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useAppDispatch, useTypedSelector } from '@hooks';
+import { signUpSchema } from 'validation-schemas/user/sign-up';
 import { form, headline, inputWrapper } from '../layout/styles';
-// import { getErrorKey } from '../../../helpers/validation';
 import { signUpUser } from '../../../store/auth';
-import { signUpSchema } from './validation';
 
 export const SignUpForm = () => {
-  // const { t: lang } = useTranslation('validation');
   const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
@@ -20,12 +18,29 @@ export const SignUpForm = () => {
   const {
     register,
     handleSubmit,
-    // formState: { errors },
+    formState: { errors },
   } = useForm<UserSignUpDto>({
-    resolver: joiResolver(signUpSchema),
+    resolver: joiResolver(signUpSchema(t)),
   });
+
   const onSubmit: SubmitHandler<UserSignUpDto> = (data) => {
     dispatch(signUpUser(data));
+  };
+
+  const onCutHandler = (event: React.ClipboardEvent<HTMLInputElement>) => {
+    event.preventDefault();
+
+    return false;
+  };
+  const onCopyHandler = (event: React.ClipboardEvent<HTMLInputElement>) => {
+    event.preventDefault();
+
+    return false;
+  };
+  const onPastHandler = (event: React.ClipboardEvent<HTMLInputElement>) => {
+    event.preventDefault();
+
+    return false;
   };
 
   return (
@@ -41,7 +56,7 @@ export const SignUpForm = () => {
           type="text"
           name="firstName"
           disabled={isLoading}
-          // error={lang(getErrorKey('firstName', errors.firstName?.type))}
+          error={errors.firstName?.message}
         />
       </div>
       <div css={inputWrapper}>
@@ -53,7 +68,7 @@ export const SignUpForm = () => {
           type="text"
           name="lastName"
           disabled={isLoading}
-          // error={lang(getErrorKey('lastName', errors.lastName?.type))}
+          error={errors.lastName?.message}
         />
       </div>
       <div css={inputWrapper}>
@@ -65,7 +80,7 @@ export const SignUpForm = () => {
           type="text"
           name="phone"
           disabled={isLoading}
-          // error={lang(getErrorKey('phone', errors.phone?.type))}
+          error={errors.phone?.message}
         />
       </div>
       <div css={inputWrapper}>
@@ -77,7 +92,7 @@ export const SignUpForm = () => {
           type="email"
           name="email"
           disabled={isLoading}
-          // error={lang(getErrorKey('email', errors.email?.type))}
+          error={errors.email?.message}
         />
       </div>
       <div css={inputWrapper}>
@@ -88,7 +103,10 @@ export const SignUpForm = () => {
           variant="primary"
           name="password"
           disabled={isLoading}
-          // error={lang(getErrorKey('password', errors.password?.type))}
+          onCut={onCutHandler}
+          onCopy={onCopyHandler}
+          onPaste={onPastHandler}
+          error={errors.password?.message}
         />
       </div>
       <div css={inputWrapper}>
@@ -99,9 +117,10 @@ export const SignUpForm = () => {
           variant="primary"
           name="repeatPassword"
           disabled={isLoading}
-          // error={lang(
-          //   getErrorKey('repeatPassword', errors.repeatPassword?.type),
-          // )}
+          onCut={onCutHandler}
+          onCopy={onCopyHandler}
+          onPaste={onPastHandler}
+          error={errors.repeatPassword?.message}
         />
       </div>
       <Button type="submit" width={'100%'} disabled={isLoading}>
