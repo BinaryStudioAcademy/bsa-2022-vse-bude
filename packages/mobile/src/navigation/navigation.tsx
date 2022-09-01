@@ -14,8 +14,7 @@ import {
   SupportScreen,
 } from '~/screens/screens';
 import { selectCurrentUser } from '~/store/selectors';
-import { HeaderButton } from '~/components/components';
-import { ColorPalette } from '@vse-bude/shared';
+import { HeaderLeft } from '~/components/components';
 import { MainNavigation } from './tabs/tabs.navigation';
 
 const NativeStack = createNativeStackNavigator<RootNavigationParamList>();
@@ -33,15 +32,7 @@ const accountScreenOptions: NativeStackNavigationOptions = {
 const productScreenOptions: NativeStackNavigationOptions = {
   headerShown: true,
   headerTitleAlign: 'center',
-  headerLeft: () => (
-    <HeaderButton
-      label="List"
-      onPress={() => {
-        return;
-      }}
-      buttonColor={ColorPalette.YELLOW_200}
-    />
-  ),
+  headerLeft: () => <HeaderLeft label="List" />,
 };
 
 const Navigation: FC = () => {
