@@ -76,9 +76,7 @@ export const BurgerMenu = ({ user, categories, onClose }: BurgerMenuProps) => {
           </React.Fragment>
         ) : (
           <Button size="small" onClick={() => dispatch(logoutUser())}>
-            <span css={styles.buttonSignIn}>
-              {t('common:header.popover.signOut')}
-            </span>
+            {t('common:header.popover.signOut')}
           </Button>
         )}
       </div>

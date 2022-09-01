@@ -3,7 +3,7 @@ import { Dropdown, Icon } from '@primitives';
 import { Routes, IconName, IconColorProps } from '@enums';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
-
+import { useState } from 'react';
 import * as styles from './styles';
 
 interface CategoriesListProps {
@@ -13,6 +13,7 @@ interface CategoriesListProps {
 export const CategoriesList = ({ categories }: CategoriesListProps) => {
   const { t } = useTranslation();
   const { push } = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
   const redirectToCategory = (category: string) => {
     const filters = {
       category: category,
@@ -33,9 +34,14 @@ export const CategoriesList = ({ categories }: CategoriesListProps) => {
           redirectToCategory(item.id);
         },
       }))}
+      onChildrenClick={() => setIsOpen(!isOpen)}
     >
       {t('common:header.nav.category')}&nbsp;
-      <Icon icon={IconName.ANGLE_DOWN} color={IconColorProps.GRAY} />
+      {isOpen ? (
+        <Icon icon={IconName.ANGLE_UP} color={IconColorProps.BLACK} />
+      ) : (
+        <Icon icon={IconName.ANGLE_DOWN} color={IconColorProps.BLACK} />
+      )}
     </Dropdown>
   );
 };

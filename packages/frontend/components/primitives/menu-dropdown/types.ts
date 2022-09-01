@@ -5,6 +5,7 @@ export type DropdownProps = {
   children: string | React.ReactNode;
   options: DropdownOptionProps[];
   cssExtend?: Interpolation<Theme>;
+  onChildrenClick?: () => void;
 };
 
 export type DropdownOptionProps = {

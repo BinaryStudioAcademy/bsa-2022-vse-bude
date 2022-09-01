@@ -23,6 +23,19 @@ export const burgerOverlay = (theme: Theme) => css`
     gap: ${theme.spaces.md};
   }
 
+  .burger-navigation {
+    a,
+    button {
+      color: ${theme.colors.extraDark} !important;
+      &:hover {
+        color: ${theme.colors.lightDark} !important;
+        i {
+          color: ${theme.colors.primary} !important;
+        }
+      }
+    }
+  }
+
   .burger-close-button {
     position: fixed;
     top: ${theme.spaces.xl1};

@@ -1,5 +1,4 @@
 import { IconColor, IconNameToClassName } from '@enums';
-
 import type { IconProps } from './types';
 import * as styles from './styles';
 

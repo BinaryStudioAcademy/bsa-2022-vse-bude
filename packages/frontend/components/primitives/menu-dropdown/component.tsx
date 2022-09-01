@@ -7,12 +7,16 @@ import type { DropdownProps } from './types';
 export const Dropdown = ({ options, cssExtend, ...props }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleClickOutside = useCallback(() => setIsOpen(false), []);
+  const handleClickOutside = useCallback(() => {
+    setIsOpen(false);
+    props?.onChildrenClick();
+  }, [props]);
 
   const ref = useOutsideClick(handleClickOutside);
 
   const handleClick = async () => {
     setIsOpen(!isOpen);
+    props?.onChildrenClick();
   };
 
   return (

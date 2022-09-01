@@ -48,7 +48,6 @@ export const dropdownContent = ({
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: ${spaces.sm} 0;
   box-shadow: ${shadows.dropdown};
   border: ${borders.dropdown};
   border-radius: ${radiuses.xs};
