@@ -3,8 +3,10 @@ export type { HttpOptions, GetHeadersParams } from './http/http';
 export type {
   RootNavigationParamList,
   MainNavigationParamList,
+  VerifyNavigationParamList,
   RootNavigationProps,
   MainNavigationProps,
+  VerifyNavigationProps,
 } from './navigation/navigation';
 export type { ValidationSchema } from './validation/validation';
 export type {
