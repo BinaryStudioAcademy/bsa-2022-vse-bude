@@ -1,7 +1,7 @@
 import { useTranslation } from 'next-i18next';
 import { useAppDispatch } from '@hooks';
 import React, { useRef, useState } from 'react';
-import { Popover, IconButton, Icon } from '@primitives';
+import { Popover, Icon } from '@primitives';
 import { IconColor, IconName } from '@enums';
 import { updateUserAvatar } from 'store/profile/actions';
 import dynamic from 'next/dynamic';
