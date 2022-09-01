@@ -24,6 +24,7 @@ import { auth } from '@helpers';
 import { Routes } from '@enums';
 import type { IAuth } from '@types';
 import { addToast } from 'store/toast/actions';
+import { hideVerifyModal, showVerifyModal } from '../verify/actions';
 import { AuthActions } from './action-types';
 
 const getCurrentUser = createAsyncThunk(
@@ -47,7 +48,7 @@ const loginUser = createAsyncThunk(
   AuthActions.LOGIN,
   (data: UserSignInDto, { rejectWithValue, dispatch }) =>
     login(data)
-      .then((data: IAuth) => {
+      .then(async (data: IAuth) => {
         if (data?.error) {
           dispatch(
             addToast({
@@ -60,6 +61,11 @@ const loginUser = createAsyncThunk(
         }
         auth.setTokens(data.accessToken, data.refreshToken);
         Router.push(Routes.DEFAULT);
+        await dispatch(getCurrentUser);
+
+        if (!data.user.phoneVerified) {
+          dispatch(showVerifyModal());
+        }
 
         return data;
       })
@@ -115,7 +121,7 @@ const phoneVerification = createAsyncThunk(
           description: (t) => t('common:notifications.phoneVerifySuccess'),
         }),
       );
-      await Router.push(Routes.EMAIL_VERIFY);
+      dispatch(hideVerifyModal());
     } catch (e) {
       dispatch(
         addToast({
