@@ -27,14 +27,13 @@ export const Filter = () => {
 
   return (
     <div>
-      <Button
+      <div
         css={css`
           margin: 35px auto 0;
         `}
-        onClick={() => push('/items/create')}
       >
-        Create a Post
-      </Button>
+        <Button onClick={() => push('/items/create')}>Create a Post</Button>
+      </div>
       <ProductGrid lots={list}></ProductGrid>
     </div>
   );
