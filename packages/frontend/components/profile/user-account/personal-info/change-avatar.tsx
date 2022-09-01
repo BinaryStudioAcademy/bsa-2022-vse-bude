@@ -27,7 +27,15 @@ const ChangeAvatar = () => {
       return;
     }
 
-    if (!Object.values(allowedImgExtension).includes(file.type)) {
+    setNewAvatar(file);
+  };
+
+  const onCloseCropModal = () => {
+    setNewAvatar(null);
+  };
+
+  const onCropAvatar = (croppedImage) => {
+    if (!Object.values(allowedImgExtension).includes(croppedImage.type)) {
       dispatch(
         addToast({
           level: 'error',
@@ -37,7 +45,7 @@ const ChangeAvatar = () => {
 
       return;
     }
-    if (file.size > MAX_IMAGE_SIZE) {
+    if (croppedImage.size > MAX_IMAGE_SIZE) {
       dispatch(
         addToast({
           level: 'error',
@@ -47,14 +55,7 @@ const ChangeAvatar = () => {
 
       return;
     }
-    setNewAvatar(file);
-  };
 
-  const onCloseCropModal = () => {
-    setNewAvatar(null);
-  };
-
-  const onCropAvatar = (croppedImage) => {
     const formdata = new FormData();
     formdata.append('file', croppedImage);
     dispatch(updateUserAvatar(formdata));
@@ -83,6 +84,7 @@ const ChangeAvatar = () => {
           circle
         />
       )}
+
       <Popover
         trigger={
           <IconButton
@@ -114,6 +116,7 @@ const ChangeAvatar = () => {
           </div>
         )}
       </Popover>
+
       <input
         type="file"
         id="file"
