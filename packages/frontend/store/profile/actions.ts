@@ -6,6 +6,7 @@ import {
   updateUserData,
   updateAvatar,
 } from '@services';
+import { addToast } from 'store/toast/actions';
 import { ProfileActions } from './action-types';
 
 export const fetchUserProfileSSR = createAsyncThunk(
@@ -22,12 +23,54 @@ export const fetchFullUserProfile = createAsyncThunk(
 
 export const updateUserProfile = createAsyncThunk(
   ProfileActions.SAVE_USER_PROFILE,
-  async ({ data }: { data: UpdateFullUserProfileDto }, { rejectWithValue }) =>
-    updateUserData({ data }).catch((e) => rejectWithValue(e.message)),
+  async (
+    { data }: { data: UpdateFullUserProfileDto },
+    { rejectWithValue, dispatch },
+  ) =>
+    updateUserData({ data })
+      .then((data) => {
+        dispatch(
+          addToast({
+            level: 'success',
+            description: (t) => t('common:notifications.profileUpdated'),
+          }),
+        );
+
+        return data;
+      })
+      .catch((e) => {
+        dispatch(
+          addToast({
+            level: 'error',
+            description: e.message,
+          }),
+        );
+        rejectWithValue(e.message);
+      }),
 );
 
 export const updateUserAvatar = createAsyncThunk(
   ProfileActions.UPDATE_USER_AVATAR,
-  async (file: FormData, { rejectWithValue }) =>
-    updateAvatar(file).catch((e) => rejectWithValue(e.message)),
+  async (file: FormData, { rejectWithValue, dispatch }) =>
+    updateAvatar(file)
+      .then((data) => {
+        dispatch(
+          addToast({
+            level: 'success',
+            description: (t) => t('common:notifications.avatarUpdated'),
+          }),
+        );
+
+        return data;
+      })
+      .catch((e) => {
+        dispatch(
+          addToast({
+            level: 'error',
+            description: e.message,
+          }),
+        );
+
+        return rejectWithValue(e.message);
+      }),
 );

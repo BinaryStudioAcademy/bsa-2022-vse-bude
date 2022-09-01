@@ -78,10 +78,23 @@
     }
   },
   "notifications": {
-    "defaultSuccessTitle": "Success",
-    "defaultInfoTitle": "Info",
-    "defaultWarningTitle": "Warning",
-    "defaultErrorTitle": "Error"
+    "defaultSuccessTitle": "Успіх",
+    "defaultInfoTitle": "Інформація",
+    "defaultWarningTitle": "Увага",
+    "defaultErrorTitle": "Помилка",
+    "avatarUpdated": "Аватар оновлений",
+    "profileUpdated": "Профіль оновлено",
+    "signUpSuccess": "Ви успішно зареєструвалися",
+    "phoneVerifySuccess": "Ваш номер телефону успішно перевірено",
+    "emailVerifySuccess": "Вашу електронну пошту успішно перевірено",
+    "phoneCodeResendSuccess": "Код для перевірки номеру телефону відправлено",
+    "emailCodeResendSuccess": "Код для перевірки електронної пошти відправлено",
+    "resetPasswordLinkSent": "Скиньте посилання на пароль надіслано",
+    "passwordUpdated": "Пароль оновлено",
+    "productAddedToFavorites": "Продукт додано до обраних",
+    "productRemovedFromFavorites": "Продукт видалено з обраних",
+    "bidPlaced": "Ставка зроблена",
+    "leftAuction": "Ви вийшли з аукціону"
   },
   "months": [
     "Січень",
@@ -97,7 +110,15 @@
     "Листопад",
     "Грудень"
   ],
-  "days": ["нд", "пн", "вт", "ср", "чт", "пт", "сб"],
+  "days": [
+    "нд",
+    "пн",
+    "вт",
+    "ср",
+    "чт",
+    "пт",
+    "сб"
+  ],
   "modal": {
     "confirm": {
       "confirm": "Підтвердити",
