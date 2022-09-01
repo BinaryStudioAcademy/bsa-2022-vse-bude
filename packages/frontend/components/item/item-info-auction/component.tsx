@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { useState } from 'react';
+import { IconColor } from '@enums';
 import { CountDownTimer } from '../countdown-timer/component';
 import { ItemTitle, ItemInfo, ItemPrice } from '../item-info';
 import { minBidValidation } from '../validation';
@@ -120,6 +121,8 @@ export const ItemInfoAuction = ({
             onChangeIsFavorite={onChangeIsFavorite}
             isFavorite={isInFavorite}
             backgroundColor="transparent"
+            inFavouriteColor={IconColor.YELLOW}
+            notInFavouriteColor={IconColor.YELLOW}
             size="md"
           />
         </div>
