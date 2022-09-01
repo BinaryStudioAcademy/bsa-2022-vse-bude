@@ -73,12 +73,12 @@ export const dropdownItem = ({
   font-size: ${fontSizes.body1};
   line-height: ${lineHeights.body1};
   font-weight: ${fontWeights.body1};
-  color: ${colors.text};
+  color: ${colors.extraDark};
   white-space: nowrap;
   text-align: left;
 
   :hover {
-    background-color: ${colors.backgroundDark};
+    background-color: ${colors.backgroundLight};
   }
 
   :disabled {

@@ -8,7 +8,7 @@ export const wrapper = ({ spaces, colors }: Theme) => css`
   gap: ${spaces.lg};
   margin: 0 ${spaces.xl};
   a,
-  button {
+  & > div > button {
     color: ${colors.extraDark} !important;
     &:hover {
       color: ${colors.lightDark} !important;

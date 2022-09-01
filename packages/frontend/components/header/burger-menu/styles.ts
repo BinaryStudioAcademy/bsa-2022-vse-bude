@@ -25,7 +25,7 @@ export const burgerOverlay = (theme: Theme) => css`
 
   .burger-navigation {
     a,
-    button {
+    & > div > button {
       color: ${theme.colors.extraDark} !important;
       &:hover {
         color: ${theme.colors.lightDark} !important;
