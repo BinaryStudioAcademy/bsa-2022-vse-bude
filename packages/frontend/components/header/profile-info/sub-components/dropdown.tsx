@@ -1,9 +1,11 @@
-import { IconName } from '@enums';
+import { IconName, IconColor } from '@enums';
 import { Icon } from '@primitives';
 import type { DropdownProfileProps } from '../types';
 
-export const DownArrow = ({ style }: DropdownProfileProps) => (
-  <div css={style}>
-    <Icon icon={IconName.ANGLE_DOWN} color="yellow" />
-  </div>
+export const DownArrow = ({ style, isOpen }: DropdownProfileProps) => (
+  <Icon
+    icon={isOpen ? IconName.ANGLE_UP : IconName.ANGLE_DOWN}
+    color={IconColor.BLACK}
+    cssExtend={style}
+  />
 );

@@ -6,6 +6,8 @@ export const common = {
     HEADER_BUTTON_BACK: 'Назад',
     BUTTON_SAVE: 'Зберегти',
     BUTTON_CANCEL: 'Відмінити зміни',
+    BUTTON_BID: 'Ставка',
+    BUTTON_BUY: 'Купити',
     BUTTON_CONTACT_SELLER: "Зв'язатися з продавцем",
   },
   common: {
@@ -17,5 +19,12 @@ export const common = {
   },
   errors: {
     DID_CANCEL: 'Скасовано користувачем',
+  },
+  currency: {
+    UAH: 'ГРН',
+  },
+  time: {
+    HOURS_SHORT: 'г',
+    MINUTES_SHORT: 'хв',
   },
 };

@@ -5,7 +5,8 @@
       "category": "Category",
       "search": "Search",
       "news": "News",
-      "about_us": "About us"
+      "about_us": "About us",
+      "profile": "Profile"
     },
     "buttons": {
       "create_account": "Create Account",
@@ -76,6 +77,55 @@
       }
     }
   },
+  "notifications": {
+    "defaultSuccessTitle": "Success",
+    "defaultInfoTitle": "Info",
+    "defaultWarningTitle": "Warning",
+    "defaultErrorTitle": "Error",
+    "avatarUpdated": "Avatar updated",
+    "profileUpdated": "Profile updated",
+    "signUpSuccess": "You have successfully registered",
+    "phoneVerifySuccess": "Your phone number has been successfully verified",
+    "emailVerifySuccess": "Your email has been successfully verified",
+    "phoneCodeResendSuccess": "Phone code successfully resend",
+    "emailCodeResendSuccess": "Email code successfully resend",
+    "resetPasswordLinkSent": "Reset password link sent",
+    "passwordUpdated": "Password updated",
+    "productAddedToFavorites": "Product added to favorite",
+    "productRemovedFromFavorites": "Product removed from favorite",
+    "bidPlaced": "Bid placed",
+    "leftAuction": "You left the auction"
+  },
+  "verify": {
+    "enterPhone": {
+      "headline": "Verify",
+      "description": "For further verification of account, please enter your phone here or verify it on your Personal Info page",
+      "input": "Phone",
+      "button": {
+        "verify": "Verify"
+      },
+      "link": {
+        "later": "Verify later"
+      }
+    },
+    "enterCode": {
+      "headline": "Verify",
+      "description": "We just sent a code to",
+      "input": "Enter the verification code we just sent to you",
+      "button": {
+        "continue": "Continue"
+      },
+      "link": {
+        "sendAgain": "Click here"
+      }
+    },
+    "success": {
+      "headline": "Your account has fully been verified",
+      "button": {
+        "continue": "Continue"
+      }
+    }
+  },
   "HOURS_SHORT": "h",
   "DAYS_SHORT": "d",
   "MINUTES_SHORT": "min",
@@ -104,5 +154,20 @@
     "November",
     "December"
   ],
-  "days": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
+  "days": [
+    "Su",
+    "Mo",
+    "Tu",
+    "We",
+    "Th",
+    "Fr",
+    "Sa"
+  ],
+  "modal": {
+    "confirm": {
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "header": "Confirm your action"
+    }
+  }
 }

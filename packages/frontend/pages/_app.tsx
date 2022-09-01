@@ -5,7 +5,12 @@ import type { AppProps } from 'next/app';
 import { wrapper } from 'store';
 import { UserProvider, ThemeProvider } from '@providers';
 import '../public/css/fontawesome.css';
-import { PagesLoader } from 'components/primitives/pages-loader';
+import { useTypedSelector } from '@hooks';
+import dynamic from 'next/dynamic';
+import { VerificationModal } from '../components';
+
+const PageLoaderDynamic = dynamic(() => import('../components/pages-loader'));
+const ToastStackDynamic = dynamic(() => import('../components/toasts/stack'));
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -18,10 +23,14 @@ type AppPropsWithLayout = AppProps & {
 const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? ((page) => page);
 
+  const { isVerifyPhoneModalOpen } = useTypedSelector((state) => state.verify);
+
   return (
     <ThemeProvider>
       <UserProvider>{getLayout(<Component {...pageProps} />)}</UserProvider>
-      <PagesLoader />
+      {isVerifyPhoneModalOpen && <VerificationModal />}
+      <PageLoaderDynamic />
+      <ToastStackDynamic />
     </ThemeProvider>
   );
 };

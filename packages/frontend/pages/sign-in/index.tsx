@@ -11,7 +11,7 @@ const LoginPage = () => (
 
 export const getServerSideProps = withPublic(async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale, ['auth', 'public'])),
+    ...(await serverSideTranslations(locale, ['auth', 'public', 'common'])),
   },
 }));
 
