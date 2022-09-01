@@ -5,18 +5,18 @@ import { Input, Column, Flex, Button, Loader, Checkbox } from '@primitives';
 import { useState } from 'react';
 import { createPostSchema } from 'validation-schemas/post';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { createPost } from 'services/post';
 import { useEffect } from 'react';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { fetchCurrentProduct } from 'store/product';
 import { useRouter } from 'next/router';
+import { updateProduct } from 'services/product';
 import { SectionHeader } from '../profile/user-account/common';
 import { initialFormState } from './form-utils';
 import ImageInput from './image-input';
 import * as styles from './styles';
 
 export default function PostForm({ edit }: { edit: boolean }) {
-  const { query } = useRouter();
+  const { query, push } = useRouter();
 
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -50,9 +50,23 @@ export default function PostForm({ edit }: { edit: boolean }) {
       images
         .filter((item) => typeof item !== 'string')
         .forEach((file) => formData.append('images', file));
-      Object.keys(data).forEach((key) => formData.append(key, data[key]));
+      Object.keys(data).forEach((key) => {
+        switch (key) {
+          case 'category':
+            formData.append(key, '0bfc0f51-e082-4dc9-b545-ae0afedbd330');
+            break;
+          case 'phone':
+            formData.append(key, `+380${data[key]}`);
+            break;
+          default:
+            formData.append(key, data[key] ?? '');
+        }
+      });
 
-      console.log(await createPost(formData));
+      if (edit) {
+        await updateProduct(query.id as string, formData);
+      }
+      push(`/items/${query.id}`);
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
@@ -71,7 +85,7 @@ export default function PostForm({ edit }: { edit: boolean }) {
   }, [edit, dispatch, query.id]);
 
   useEffect(() => {
-    if (edit && currentProduct && categories.length) {
+    if (edit && currentProduct && categories) {
       Object.keys(initialFormState).forEach((item) => {
         switch (item) {
           case 'category':
