@@ -48,7 +48,9 @@ export const userNameValidation = ({ req }: { req: Request }) => {
     });
   }
 
-  const isLastName = /^[^-](([a-zA-Z]+)|([а-яёіїґєА-ЯЁIЇҐЄ]+))$/.test(lastName);
+  const isLastName = /^[^-](([a-zA-Z]+)|([а-яёіїґєА-ЯЁIЇҐЄ'-]+))[^-]$$/.test(
+    lastName,
+  );
 
   if (!isLastName) {
     throw new ProfileError({
