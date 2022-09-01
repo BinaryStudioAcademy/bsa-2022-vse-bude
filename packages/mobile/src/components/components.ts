@@ -3,7 +3,6 @@ export {
   View,
   StatusBar,
   Pressable,
-  ScrollView,
   TouchableOpacity,
   TouchableWithoutFeedback,
   Modal,
@@ -28,4 +27,5 @@ export { FlagBackgroundView } from './flag-background-view/flag-background-view'
 export { PrimaryButton } from './primary-button/primary-button';
 export { SecondaryButton } from './secondary-button/secondary-button';
 export { BuildInfo } from './build-info/build-info';
+export { ScrollView } from './scroll-view/scroll-view';
 export { Countdown } from './countdown/countdown';

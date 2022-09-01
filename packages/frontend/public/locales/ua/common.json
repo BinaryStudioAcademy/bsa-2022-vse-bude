@@ -76,6 +76,12 @@
       }
     }
   },
+  "notifications": {
+    "defaultSuccessTitle": "Success",
+    "defaultInfoTitle": "Info",
+    "defaultWarningTitle": "Warning",
+    "defaultErrorTitle": "Error"
+  },
   "months": [
     "Січень",
     "Лютий",
@@ -90,5 +96,12 @@
     "Листопад",
     "Грудень"
   ],
-  "days": ["нд", "пн", "вт", "ср", "чт", "пт", "сб"]
+  "days": ["нд", "пн", "вт", "ср", "чт", "пт", "сб"],
+  "modal": {
+    "confirm": {
+      "confirm": "Підтвердити",
+      "cancel": "Відміна",
+      "header": "Підтвердіть вашу дію"
+    }
+  }
 }

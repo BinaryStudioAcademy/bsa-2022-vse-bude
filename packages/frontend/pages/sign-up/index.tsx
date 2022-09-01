@@ -13,7 +13,12 @@ import { SignUpForm } from '../../components/auth/sign-up/component';
 
 export const getServerSideProps = withPublic(async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale, ['public', 'auth'])),
+    ...(await serverSideTranslations(locale, [
+      'public',
+      'auth',
+      'personal-info',
+      'common',
+    ])),
   },
 }));
 

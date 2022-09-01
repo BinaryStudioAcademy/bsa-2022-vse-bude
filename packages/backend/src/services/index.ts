@@ -50,6 +50,7 @@ export const initServices = (repositories: Repositories) => {
     productService: new ProductService(
       repositories.productRepository,
       verifyService,
+      repositories.bidRepository,
     ),
     newsService: new NewsService(repositories.newsRepository),
     healthService: new HealthService(repositories.healthRepository),

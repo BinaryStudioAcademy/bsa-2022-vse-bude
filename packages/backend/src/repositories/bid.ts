@@ -17,4 +17,22 @@ export class BidRepository {
       },
     });
   }
+
+  async getByUserAndProduct(userId: string, productId: string) {
+    return this._dbClient.bid.findMany({
+      where: {
+        bidderId: userId,
+        productId: productId,
+      },
+    });
+  }
+
+  async deleteAllByProductAndUser(userId: string, productId: string) {
+    return this._dbClient.bid.deleteMany({
+      where: {
+        bidderId: userId,
+        productId: productId,
+      },
+    });
+  }
 }
