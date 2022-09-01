@@ -24,7 +24,8 @@
     "**/*.ts",
     "**/*.tsx",
     "emotion.d.ts",
-    "../shared/src/common/constants/post.ts"
-  , "components/imageCrop/component.tsx"],
+    "../shared/src/common/constants/post.ts",
+    "components/imageCrop/component.tsx"
+  ],
   "exclude": ["node_modules"]
 }

@@ -5,7 +5,11 @@ import { LinkButton } from 'components/primitives/link-button';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import hand from 'public/images/mocup_hand2.png';
-import { hideVerifyModal, nextVerifyModal, previousVerifyModal } from 'store/verify/actions';
+import {
+  hideVerifyModal,
+  nextVerifyModal,
+  previousVerifyModal,
+} from 'store/verify/actions';
 import * as styles from '../styles';
 
 export default function EnterCodeModal() {
@@ -16,7 +20,7 @@ export default function EnterCodeModal() {
     e.preventDefault();
     dispatch(hideVerifyModal());
   };
-  
+
   const previousModal = (e) => {
     e.preventDefault();
     dispatch(previousVerifyModal());
@@ -52,8 +56,8 @@ export default function EnterCodeModal() {
       </div>
 
       <LinkButton size={'small'} onClickHook={closeModal}>
-          {t('common:verify.enterCode.link.sendAgain')}
-        </LinkButton>
+        {t('common:verify.enterCode.link.sendAgain')}
+      </LinkButton>
     </div>
   );
 }

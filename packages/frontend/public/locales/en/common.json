@@ -84,7 +84,7 @@
       "button": {
         "verify": "Verify"
       },
-      "link":{
+      "link": {
         "later": "Verify later"
       }
     },
@@ -95,7 +95,7 @@
       "button": {
         "continue": "Continue"
       },
-      "link":{
+      "link": {
         "sendAgain": "Click here"
       }
     },

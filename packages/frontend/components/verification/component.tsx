@@ -22,24 +22,23 @@ const VerificationModal = () => {
   };
 
   const renderSwitch = (param) => {
-    switch(param) {
+    switch (param) {
       case 0:
-        return (<EnterPhoneModal />);
+        return <EnterPhoneModal />;
       case 1:
-        return (<EnterCodeModal />);
+        return <EnterCodeModal />;
       case 2:
-        return (<SuccessModal />);
+        return <SuccessModal />;
       default:
         return <>{closeModal()}</>;
     }
   };
-  
-  const renderModal = () => (<Modal visible={isVisible}>{renderSwitch(variant)}</Modal>);
 
-  return (<>
-      {isMounted && hasToken && renderModal()}
-  </> 
+  const renderModal = () => (
+    <Modal visible={isVisible}>{renderSwitch(variant)}</Modal>
   );
+
+  return <>{isMounted && hasToken && renderModal()}</>;
 };
 
 export { VerificationModal };

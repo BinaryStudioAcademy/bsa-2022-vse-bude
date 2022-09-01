@@ -49,9 +49,9 @@ export default function EnterPhoneModal() {
         </Button>
       </div>
 
-        <LinkButton size={'small'} onClickHook={closeModal}>
-          {t('common:verify.enterPhone.link.later')}
-        </LinkButton>
+      <LinkButton size={'small'} onClickHook={closeModal}>
+        {t('common:verify.enterPhone.link.later')}
+      </LinkButton>
     </div>
   );
 }
