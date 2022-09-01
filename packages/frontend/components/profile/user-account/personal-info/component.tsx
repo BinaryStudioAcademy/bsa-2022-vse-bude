@@ -1,10 +1,11 @@
 import { useTranslation } from 'next-i18next';
-import { useAuth, useTypedSelector } from '@hooks';
+import { useAuth, useTypedSelector, useAppDispatch } from '@hooks';
 import { shallowEqual } from 'react-redux';
 import { Flex } from 'grapefruit-ui';
 import { useState } from 'react';
 import { Button, Avatar } from '@primitives';
 import dynamic from 'next/dynamic';
+import { fetchFullUserProfile } from '@store';
 import flag from '../../../../public/images/flagBg.png';
 import { NestedLayout } from '../common';
 import * as styles from './styles';
@@ -22,6 +23,10 @@ export const PersonalInfo = () => {
     (state) => state.profile,
     shallowEqual,
   );
+
+  const dispatch = useAppDispatch();
+  const onGetFullProfile = () => dispatch(fetchFullUserProfile());
+
   const isAuthUser = authUser?.id === user?.id;
 
   if (!user) {
@@ -53,13 +58,17 @@ export const PersonalInfo = () => {
             <Button
               type="button"
               variant="outlined"
-              onClick={() => setIsEditing(true)}
+              disabled={loading}
+              onClick={() => {
+                setIsEditing(true);
+                onGetFullProfile();
+              }}
             >
               {t('personal-info:action.edit')}
             </Button>
           )}
         </Flex>
-        {isEditing && <EditForm />}
+        {isEditing && !loading && <EditForm user={user} />}
         {!isEditing && <ProfileData user={user} />}
       </div>
     </NestedLayout>
