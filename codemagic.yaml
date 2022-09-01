@@ -107,7 +107,7 @@ workflows:
       branch_patterns:
         - pattern: main
           include: true
-          source: true
+          source: false
       cancel_previous_builds: true
 
     scripts:
