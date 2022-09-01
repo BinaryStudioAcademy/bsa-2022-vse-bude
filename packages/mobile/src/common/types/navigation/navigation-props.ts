@@ -1,7 +1,10 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-
-import { RootNavigationParamList } from '~/common/types/navigation/navigation';
+import {
+  RootNavigationParamList,
+  MainNavigationParamList,
+} from '~/common/types/navigation/navigation';
 
 type RootNavigationProps = NativeStackNavigationProp<RootNavigationParamList>;
+type MainNavigationProps = NativeStackNavigationProp<MainNavigationParamList>;
 
-export type { RootNavigationProps };
+export type { RootNavigationProps, MainNavigationProps };

@@ -2,7 +2,9 @@ export type { RootState, AppDispatch, AsyncThunkConfig } from './app/app';
 export type { HttpOptions, GetHeadersParams } from './http/http';
 export type {
   RootNavigationParamList,
+  MainNavigationParamList,
   RootNavigationProps,
+  MainNavigationProps,
 } from './navigation/navigation';
 export type { ValidationSchema } from './validation/validation';
 export type {
@@ -20,3 +22,4 @@ export type {
 export type { ShowNotificationParams } from './notification/notification';
 export type { AppIcon, IconProps, CustomIconProps } from './ui/ui';
 export type { Theme, ThemeColors } from './theme/theme.type';
+export type { VerifyPhone, VerifyCode } from './verify/verify';
