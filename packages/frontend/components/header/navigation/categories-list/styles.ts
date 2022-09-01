@@ -3,7 +3,8 @@ import { css } from '@emotion/react';
 
 export const wrapper = ({ breakpoints }: Theme) => css`
   @media (max-width: ${breakpoints.lg}px) {
-    left: -100px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 `;
 
