@@ -24,7 +24,16 @@ export const getServerSideProps = withPublic(
     const http = new Http(process.env.NEXT_PUBLIC_API_ROUTE);
     const id = query.id as string;
 
-    await store.dispatch(fetchProductSSR({ id, http }));
+    const { payload } = await store.dispatch(fetchProductSSR({ id, http }));
+
+    if (!payload) {
+      return {
+        redirect: {
+          destination: Routes.NOT_FOUND,
+        },
+        props: {},
+      };
+    }
 
     return {
       props: {
@@ -71,9 +80,11 @@ const ItemPage = () => {
           },
           {
             name: item.category.title,
-            route:
-              Routes.ITEMS +
-              `?filter=%7B%22category%22%3A%22${item.category.id}7%22%7D`, // change
+            route: encodeURI(
+              `${Routes.ITEMS}?filter=${JSON.stringify({
+                category: item.category.id,
+              })}`,
+            ),
           },
         ]}
       />

@@ -96,7 +96,7 @@ const signUpUser = createAsyncThunk(
         }),
       );
 
-      await Router.push(Routes.PHONE_VERIFY);
+      await Router.push(Routes.EMAIL_VERIFY);
     } catch (e) {
       dispatch(
         addToast({
