@@ -33,13 +33,16 @@
     "placeBid": "Place Bid",
     "buyBtn": "Buy",
     "tooltips": {
+      "favBtn": "You can add product to your favorites list for a quick availability!",
+      "favBtnRemove": "You can remove product from your favorites!",
       "notVerified": {
         "placeBid": "You are not verified to place a bid",
         "buyBtn": "You are not verified to buy"
       },
       "notAuthorized": {
         "placeBid": "You are not authorized to place a bid",
-        "buyBtn": "You are not authorized to buy"
+        "buyBtn": "You are not authorized to buy",
+        "favBtn": "You are not authorized to add product to favorites"
       }
     }
   }
