@@ -28,8 +28,6 @@ const CategorySection = () => {
   const { t } = useTranslation();
   const limit = 4;
 
-  console.log(categories);
-
   const categoriesLimit = categories?.slice(0, limit) || [];
 
   return (
