@@ -10,7 +10,7 @@ import type {
   UploadFileRequest,
   UploadFilesRequest,
 } from '@types';
-import { getEnv } from '@helpers';
+import { getEnv, logger } from '@helpers';
 import { randomBytes } from 'crypto';
 
 export class S3StorageService {
@@ -33,7 +33,18 @@ export class S3StorageService {
   }
 
   deleteImage(image: string) {
-    console.log(image);
+    return this._client
+      .deleteObject(
+        {
+          Bucket: this._bucketName,
+          Key: image.replace(
+            'https://vse-bude.fra1.digitaloceanspaces.com/',
+            '',
+          ),
+        },
+        (err) => logger.error(err),
+      )
+      .promise();
   }
 
   async uploadImage(req: UploadFileRequest): Promise<string> {
@@ -78,6 +89,7 @@ export class S3StorageService {
       file.buffer,
     );
     const uploadImage = await this._client.upload(params).promise();
+    console.log(uploadImage);
 
     return uploadImage.Location;
   }

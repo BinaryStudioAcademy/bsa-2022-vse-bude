@@ -1,6 +1,6 @@
 import type { ProductRepository } from '@repositories';
 import type { ProductQuery } from '@types';
-import { ProductNotFoundError } from '@errors';
+import { ProductNotFoundError, UnauthorizedError } from '@errors';
 import type { Request } from 'express';
 import { getUserIdFromRequest } from '@helpers';
 import type {
@@ -124,6 +124,7 @@ export class ProductService {
     const product = (await this._productRepository.getById(
       productId,
     )) as Product;
+    if (product.authorId !== userId) throw new UnauthorizedError(req);
     const newImageLinks = await this._s3StorageService.uploadProductImages(req);
     const oldImages = fieldsData?.images || [];
     const deletedImages = product.imageLinks.reduce(

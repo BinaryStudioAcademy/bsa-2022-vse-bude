@@ -144,23 +144,43 @@ export const initProductRoutes = (
 
   /**
    * @openapi
-   * /products/{type}:
+   * /products/:
    *   post:
-   *     tags: [Product]
-   *     produces:
-   *       - application/json
+   *     summary: Uploads a file.
+   *     consumes:
+   *       - multipart/form-data
    *     parameters:
-   *       - in: path
+   *       - in: formData
+   *         name: images
+   *         type: file
+   *         description: receive array of files
+   *       - in: formData
+   *         name: city
+   *         type: string
+   *       - in: formData
+   *         name: status
+   *         required: true
+   *         type: string
+   *       - in: formData
+   *         name: description
+   *         required: true
+   *         type: string
+   *       - in: formData
+   *         name: title
+   *         required: true
+   *         type: string
+   *       - in: formData
    *         name: type
    *         required: true
-   *         schema:
-   *           "$ref": "#/definitions/ProductType"
-   *       - in: query
-   *         name: limit
+   *         type: string
+   *       - in: formData
+   *         name: price
    *         required: true
-   *         schema:
-   *           format: double
-   *           type: number
+   *         type: string
+   *       - in: formData
+   *         name: categoryId
+   *         type: string
+   *     tags: [Product]
    *     responses:
    *       200:
    *         description: Ok
@@ -189,23 +209,37 @@ export const initProductRoutes = (
 
   /**
    * @openapi
-   * /products/{type}:
+   * /products/:id:
    *   put:
    *     tags: [Product]
-   *     produces:
-   *       - application/json
+   *     consumes:
+   *       - multipart/form-data
    *     parameters:
-   *       - in: path
+   *       - in: formData
+   *         name: images
+   *         type: file
+   *         description: receive array of files and url
+   *       - in: formData
+   *         name: city
+   *         type: string
+   *       - in: formData
+   *         name: status
+   *         type: string
+   *       - in: formData
+   *         name: description
+   *         type: string
+   *       - in: formData
+   *         name: title
+   *         type: string
+   *       - in: formData
    *         name: type
-   *         required: true
-   *         schema:
-   *           "$ref": "#/definitions/ProductType"
-   *       - in: query
-   *         name: limit
-   *         required: true
-   *         schema:
-   *           format: double
-   *           type: number
+   *         type: string
+   *       - in: formData
+   *         name: price
+   *         type: string
+   *       - in: formData
+   *         name: categoryId
+   *         type: string
    *     responses:
    *       200:
    *         description: Ok

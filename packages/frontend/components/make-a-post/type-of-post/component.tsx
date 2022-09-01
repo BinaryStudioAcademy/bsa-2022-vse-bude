@@ -32,7 +32,7 @@ export const PostTypeModal = ({ isOpen, setIsOpen }: PostTypeProps) => {
         <div css={styles.btnWrapper}>
           <Button
             onClick={() =>
-              router.push(`${Routes.ITEMS}${ItemRoutes.CREATE_AUCTION}`)
+              router.push(`${Routes.ITEMS}${ItemRoutes.CREATE}`)
             }
             disabled={!isConfirmed}
           >
@@ -41,7 +41,7 @@ export const PostTypeModal = ({ isOpen, setIsOpen }: PostTypeProps) => {
           <span>{t('common:components.typeOfPost.btn.or')}</span>
           <Button
             onClick={() =>
-              router.push(`${Routes.ITEMS}${ItemRoutes.CREATE_DIRECT_SALE}`)
+              router.push(`${Routes.ITEMS}${ItemRoutes.CREATE}`)
             }
             disabled={!isConfirmed}
           >
