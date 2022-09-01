@@ -1,8 +1,59 @@
 import type { PrismaClient } from '@prisma/client';
-import type { SocialMedia, UpdateUserProfileDto } from '@vse-bude/shared';
+import type {
+  SocialMedia,
+  SocialMediaType,
+  UpdateUserProfileDto,
+} from '@vse-bude/shared';
 
 export class UserProfileRepository {
   private _dbClient: PrismaClient;
+
+  private _updateSocialMediaLinks({ id, link }: { id: string; link: string }) {
+    return this._dbClient.socialMedia.update({
+      where: {
+        id,
+      },
+      data: {
+        link,
+      },
+      select: {
+        id: true,
+        socialMedia: true,
+        link: true,
+      },
+    });
+  }
+
+  private _createSocialMediaLinks({
+    link,
+    socialMedia,
+    userId,
+  }: {
+    link: string;
+    socialMedia: SocialMediaType;
+    userId: string;
+  }) {
+    return this._dbClient.socialMedia.create({
+      data: {
+        socialMedia,
+        link,
+        ownedByUserId: userId,
+      },
+      select: {
+        id: true,
+        socialMedia: true,
+        link: true,
+      },
+    });
+  }
+
+  private _deleteSocialMediaLinks({ id }: { id: string }) {
+    return this._dbClient.socialMedia.delete({
+      where: {
+        id,
+      },
+    });
+  }
 
   constructor(prismaClient: PrismaClient) {
     this._dbClient = prismaClient;
@@ -102,43 +153,16 @@ export class UserProfileRepository {
     userId: string;
     socialMedia: SocialMedia[];
   }) {
-    return await this._dbClient.$transaction(
+    return this._dbClient.$transaction(
       socialMedia.map((userLink) => {
         const { id, link, socialMedia } = userLink;
 
         if (id && link) {
-          return this._dbClient.socialMedia.update({
-            where: {
-              id,
-            },
-            data: {
-              link,
-            },
-            select: {
-              id: true,
-              socialMedia: true,
-              link: true,
-            },
-          });
+          return this._updateSocialMediaLinks({ id, link });
         } else if (link) {
-          return this._dbClient.socialMedia.create({
-            data: {
-              socialMedia,
-              link,
-              ownedByUserId: userId,
-            },
-            select: {
-              id: true,
-              socialMedia: true,
-              link: true,
-            },
-          });
+          return this._createSocialMediaLinks({ link, socialMedia, userId });
         } else if (id && !link) {
-          return this._dbClient.socialMedia.delete({
-            where: {
-              id,
-            },
-          });
+          return this._deleteSocialMediaLinks({ id });
         }
       }),
     );

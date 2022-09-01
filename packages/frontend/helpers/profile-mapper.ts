@@ -6,6 +6,7 @@ import type {
   MappedLinks,
   SocialMedia,
 } from '@vse-bude/shared';
+import { DefaultInpValue } from '@vse-bude/shared';
 import { SocialMediaType } from '@vse-bude/shared';
 
 const addressKeys: string[] = [
@@ -34,17 +35,16 @@ export const profileMapper = ({
         mappedAddress[key] = userAddress[key] ? userAddress[key] : '';
       });
 
-  const social = socialMedia
-    .reduce((prev, link) => {
-      const key = link.socialMedia.toLowerCase();
-      const path = link.link;
-      prev.push({
-        [key]: path,
-      });
+  const social = socialMedia.reduce((prev, link) => {
+    const key = link.socialMedia.toLowerCase();
+    const path = link.link;
+    prev = {
+      ...prev,
+      [key]: path,
+    };
 
-      return prev;
-    }, [])
-    .reduce((prev, link) => ({ ...prev, ...link }), {});
+    return prev;
+  }, {});
 
   const mappedSocialMedia = <MappedLinks>{};
   socialMediaKeys.forEach((key) => {
@@ -55,7 +55,7 @@ export const profileMapper = ({
     firstName,
     lastName,
     email,
-    phone: phone || '',
+    phone: phone || DefaultInpValue.PHONE,
     ...mappedAddress,
     ...mappedSocialMedia,
     password: '',
@@ -105,7 +105,7 @@ export const updateDtoMapper = ({
     firstName,
     lastName,
     email,
-    phone,
+    phone: phone === DefaultInpValue.PHONE ? '' : phone,
     socialMedia,
     password,
     newPassword,
