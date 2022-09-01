@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useState } from 'react';
+import React, { FC, ReactElement } from 'react';
 import { ColorPalette, UserSignInDto, UserSignUpDto } from '@vse-bude/shared';
 import {
   DataStatus,
@@ -35,7 +35,6 @@ import {
 import { styles } from './styles';
 
 const Auth: FC = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const { name } = useRoute();
   const dataStatus = useAppSelector(selectUserActionDataStatus);
   const dispatch = useAppDispatch();
@@ -48,18 +47,14 @@ const Auth: FC = () => {
       : t('verification.CREATE_ACCOUNT');
 
   const handleSignIn = (payload: UserSignInDto): void => {
-    setIsLoading(true);
     dispatch(authActions.signIn(payload));
-    setIsLoading(false);
     if (dataStatus == DataStatus.FULFILLED) {
       navigation.navigate(MainScreenName.HOME);
     }
   };
 
   const handleSignUp = (payload: UserSignUpDto): void => {
-    setIsLoading(true);
     dispatch(authActions.signUp(payload));
-    setIsLoading(false);
   };
 
   const handleGoBack = (): void => {
@@ -78,7 +73,7 @@ const Auth: FC = () => {
 
     return null;
   };
-  if (isLoading) {
+  if (dataStatus == DataStatus.PENDING) {
     return <Spinner isOverflow={true} />;
   }
 
