@@ -2,8 +2,7 @@ import { useTranslation } from 'next-i18next';
 import { useAppDispatch } from '@hooks';
 import React, { useRef, useState } from 'react';
 import { Popover, IconButton, Icon } from '@primitives';
-import { IconName } from '@enums';
-import { ColorPalette } from '@vse-bude/shared';
+import { IconColor, IconName } from '@enums';
 import { updateUserAvatar } from 'store/profile/actions';
 import dynamic from 'next/dynamic';
 import * as styles from './styles';
@@ -61,7 +60,7 @@ const ChangeAvatar = () => {
           <IconButton
             icon={IconName.CAMERA}
             backgroundColor="lightgray"
-            color={ColorPalette.GRAY_300}
+            color={IconColor.GRAY}
             cssExtend={styles.avatarUpdateButton}
           />
         }
@@ -73,7 +72,7 @@ const ChangeAvatar = () => {
               onClick={handleUpdateAvatar}
               data-variant="icon"
             >
-              <Icon icon={IconName.IMAGE} color="yellow" />
+              <Icon icon={IconName.IMAGE} color={IconColor.YELLOW} />
               <span>{t('personal-info:avatar.change')}</span>
             </button>
             <button
@@ -81,7 +80,7 @@ const ChangeAvatar = () => {
               onClick={handleDeleteAvatar}
               data-variant="icon"
             >
-              <Icon icon={IconName.TRASH} color="yellow" />
+              <Icon icon={IconName.TRASH} color={IconColor.YELLOW} />
               <span>{t('personal-info:avatar.delete')}</span>
             </button>
           </div>
