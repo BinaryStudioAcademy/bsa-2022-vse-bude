@@ -15,7 +15,7 @@ import {
 } from '../../../../components/components';
 import { styles } from './styles';
 
-const SellerInfo: FC<AuthorDto> = ({
+const SellerInfo: FC<Partial<AuthorDto>> = ({
   firstName,
   avatar,
   phone,
@@ -68,7 +68,7 @@ const SellerInfo: FC<AuthorDto> = ({
                 globalStyles.fs14,
               ]}
             >
-              {firstName ? firstName : ''}
+              {firstName || ''}
             </Text>
           </View>
         </View>
@@ -98,7 +98,7 @@ const SellerInfo: FC<AuthorDto> = ({
                 globalStyles.fontWeightMedium,
               ]}
             >
-              {phone ? phone : ''}
+              {phone || ''}
             </Text>
           </View>
           {socialMedia?.map((media) => (
