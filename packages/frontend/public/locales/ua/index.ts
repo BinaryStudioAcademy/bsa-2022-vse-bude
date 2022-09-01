@@ -8,7 +8,6 @@ import auth from './auth.json';
 import createPost from './create-post.json';
 import item from './item.json';
 import rules from './rules.json';
-import verify from './verify.json';
 
 export const ua = {
   home,
@@ -20,5 +19,4 @@ export const ua = {
   auth,
   item,
   rules,
-  verify,
 };

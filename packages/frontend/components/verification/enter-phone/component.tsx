@@ -1,6 +1,7 @@
 import { IconName } from '@enums';
 import { useAppDispatch, useTypedSelector } from '@hooks';
-import { Button, IconButton, Input, InternalLink } from '@primitives';
+import { Button, IconButton, Input } from '@primitives';
+import { LinkButton } from 'components/primitives/link-button';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import hand from 'public/images/mocup_hand1.png';
@@ -26,8 +27,8 @@ export default function EnterPhoneModal() {
 
   return (
     <div css={styles.innerWrapper}>
-      <h3 css={styles.headline}>{t('verify:enterPhone.headline')}</h3>
-      <span>{t('verify:enterPhone.description')}</span>
+      <h3 css={styles.headline}>{t('common:verify.enterPhone.headline')}</h3>
+      <span>{t('common:verify.enterPhone.description')}</span>
       <IconButton
         cssExtend={styles.xmark}
         icon={IconName.XMARK}
@@ -38,21 +39,19 @@ export default function EnterPhoneModal() {
       </div>
       <div css={styles.inputsWrappper}>
         <Input
-          label={t('verify:enterPhone.input')}
+          label={t('common:verify.enterPhone.input')}
           variant="primary"
           type="text"
           name="phone"
         />
         <Button onClick={changeModal}>
-          {t('verify:enterPhone.button.verify')}
+          {t('common:verify.enterPhone.button.verify')}
         </Button>
       </div>
 
-      <InternalLink
-        variant="dashboard"
-        label={t('verify:enterPhone.link.later')}
-        href={'#'}
-      />
+        <LinkButton size={'small'} onClickHook={closeModal}>
+          {t('common:verify.enterPhone.link.later')}
+        </LinkButton>
     </div>
   );
 }

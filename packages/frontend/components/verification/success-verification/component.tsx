@@ -19,13 +19,13 @@ export default function SuccessModal() {
 
   return (
     <div css={styles.innerWrapper}>
-      <h3 css={styles.headline}>{t('common:verify.success.headline')}</h3>
+      <h3 css={styles.headline}>{t('verify:success.headline')}</h3>
       <div css={styles.imgWrapper}>
         <Image width={255} height={255} src={hand.src} alt="MARK" />
       </div>
       <div css={styles.inputsWrappper}>
         <Button onClick={changeModal}>
-          {t('common:verify.success.button.continue')}
+          {t('verify:success.button.continue')}
         </Button>
       </div>
     </div>

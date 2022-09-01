@@ -2,12 +2,12 @@ import type { VerifyAction } from './actions';
 import { VerifyActionTypes } from './action-types';
 
 interface VerifyState {
-  isModal: boolean;
+  isVerifyPhoneModalOpen: boolean;
   variant: number;
 }
 
 const initialState = {
-  isModal: true,
+  isVerifyPhoneModalOpen: true,
   variant: 0,
 };
 
@@ -16,12 +16,12 @@ const verifyReducer = (state = initialState, action: VerifyAction) => {
     case VerifyActionTypes.ShowVerifyModal:
       return {
         ...state,
-        isModal: true,
+        isVerifyPhoneModalOpen: true,
       };
     case VerifyActionTypes.HideVerifyModal:
       return {
         ...state,
-        isModal: false,
+        isVerifyPhoneModalOpen: false,
       };
     case VerifyActionTypes.NextVerifyModal:
       return {

@@ -6,3 +6,4 @@ export * from './save-post';
 export * from './filter';
 export * from './rules';
 export * from './imageCrop';
+export * from './verification';
