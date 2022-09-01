@@ -2,9 +2,9 @@ import { useAppDispatch, useAuth, useMounted, useTypedSelector } from '@hooks';
 import { Modal } from '@primitives';
 import { useEffect, useState } from 'react';
 import { hideVerifyModal } from 'store/verify/actions';
-import EnterCodeModal from './enter-code/component';
-import EnterPhoneModal from './enter-phone/component';
-import SuccessModal from './success-verification/component';
+import { EnterCodeModal } from './enter-code/component';
+import { EnterPhoneModal } from './enter-phone/component';
+import { SuccessModal } from './success-verification/component';
 
 const VerificationModal = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -21,7 +21,7 @@ const VerificationModal = () => {
     dispatch(hideVerifyModal());
   };
 
-  const renderSwitch = (param) => {
+  const renderContent = (param) => {
     switch (param) {
       case 0:
         return <EnterPhoneModal />;
@@ -35,7 +35,7 @@ const VerificationModal = () => {
   };
 
   const renderModal = () => (
-    <Modal visible={isVisible}>{renderSwitch(variant)}</Modal>
+    <Modal visible={isVisible}>{renderContent(variant)}</Modal>
   );
 
   return <>{isMounted && hasToken && renderModal()}</>;

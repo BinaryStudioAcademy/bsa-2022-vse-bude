@@ -34,6 +34,7 @@ export const btnWrapper = ({
     color: ${colors.textLight};
   }
 `;
+
 export const headline = ({
   spaces,
   fontSizes,
@@ -48,6 +49,7 @@ export const headline = ({
   line-height: ${lineHeights.h4};
   color: ${colors.text};
 `;
+
 export const xmark = ({ spaces, mq }: Theme) => css`
   position: absolute;
   top: ${spaces.xl};
@@ -57,6 +59,7 @@ export const xmark = ({ spaces, mq }: Theme) => css`
     right: ${spaces.xl3};
   }
 `;
+
 export const arrow = ({ spaces, mq }: Theme) => css`
   position: absolute;
   top: ${spaces.xl};
@@ -66,6 +69,7 @@ export const arrow = ({ spaces, mq }: Theme) => css`
     left: ${spaces.xl3};
   }
 `;
+
 export const imgWrapper = ({ spaces, colors, radiuses }: Theme) => css`
   margin: ${spaces.xl1} auto ${spaces.xs};
   background-color: ${colors.backgroundLight};

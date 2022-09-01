@@ -1,33 +1,22 @@
 import { IconName } from '@enums';
 import { useAppDispatch } from '@hooks';
-import { Button, IconButton, Input } from '@primitives';
-import { LinkButton } from 'components/primitives/link-button';
+import { IconButton } from '@primitives';
+import { PhoneVerification } from 'components/auth/verification/phone-verification';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import hand from 'public/images/mocup_hand2.png';
 import {
-  hideVerifyModal,
-  nextVerifyModal,
   previousVerifyModal,
 } from 'store/verify/actions';
 import * as styles from '../styles';
 
-export default function EnterCodeModal() {
+const EnterCodeModal = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
-
-  const closeModal = () => {
-    dispatch(hideVerifyModal());
-  };
 
   const previousModal = (e) => {
     e.preventDefault();
     dispatch(previousVerifyModal());
-  };
-
-  const changeModal = (e) => {
-    e.preventDefault();
-    dispatch(nextVerifyModal());
   };
 
   return (
@@ -43,20 +32,10 @@ export default function EnterCodeModal() {
         <Image width={255} height={255} src={hand.src} alt="MARK" />
       </div>
       <div css={styles.inputsWrappper}>
-        <Input
-          label={t('common:verify.enterCode.input')}
-          variant="primary"
-          type="text"
-          name="phone"
-        />
-        <Button onClick={changeModal}>
-          {t('common:verify.enterCode.button.continue')}
-        </Button>
+        <PhoneVerification></PhoneVerification>
       </div>
-
-      <LinkButton size={'small'} onClickHook={closeModal}>
-        {t('common:verify.enterCode.link.sendAgain')}
-      </LinkButton>
     </div>
   );
-}
+};
+
+export { EnterCodeModal };

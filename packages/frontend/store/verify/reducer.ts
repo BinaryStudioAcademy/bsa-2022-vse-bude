@@ -1,43 +1,33 @@
-import type { VerifyAction } from './actions';
-import { VerifyActionTypes } from './action-types';
+import { createReducer } from '@reduxjs/toolkit';
+import { hideVerifyModal, nextVerifyModal, previousVerifyModal, showVerifyModal } from './actions';
 
-interface VerifyState {
+interface VerifyModalState {
   isVerifyPhoneModalOpen: boolean;
   variant: number;
 }
 
-const initialState = {
+const initialState: VerifyModalState = {
   isVerifyPhoneModalOpen: true,
   variant: 0,
 };
 
-const verifyReducer = (state = initialState, action: VerifyAction) => {
-  switch (action.type) {
-    case VerifyActionTypes.ShowVerifyModal:
-      return {
-        ...state,
-        isVerifyPhoneModalOpen: true,
-      };
-    case VerifyActionTypes.HideVerifyModal:
-      return {
-        ...state,
-        isVerifyPhoneModalOpen: false,
-      };
-    case VerifyActionTypes.NextVerifyModal:
-      return {
-        ...state,
-        variant: state.variant + 1,
-      };
-    case VerifyActionTypes.PreviousVerifyModal:
-      return {
-        ...state,
-        variant: state.variant - 1,
-      };
-    default:
-      return state;
-  }
-};
+export const verifyModalReducer = createReducer(initialState, {
+  [showVerifyModal.type]: (state) => ({
+    ...state,
+    isVerifyPhoneModalOpen: true,
+  }),
+  [hideVerifyModal.type]: (state) => ({
+    ...state,
+    isVerifyPhoneModalOpen: false,
+  }),
+  [nextVerifyModal.type]: (state) => ({
+    ...state,
+    variant: state.variant + 1,
+  }),
+  [previousVerifyModal.type]: (state) => ({
+    ...state,
+    variant: state.variant - 1,
+  }),
+});
 
-export { verifyReducer };
-
-export type { VerifyState };
+export type { VerifyModalState };

@@ -1,4 +1,4 @@
-import { useAppDispatch, useTypedSelector } from '@hooks';
+import { useAppDispatch } from '@hooks';
 import { Button } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
@@ -6,15 +6,13 @@ import hand from 'public/images/mocup_hand3.png';
 import { nextVerifyModal } from 'store/verify/actions';
 import * as styles from '../styles';
 
-export default function SuccessModal() {
+const SuccessModal = () => {
   const dispatch = useAppDispatch();
-  const { variant } = useTypedSelector((state) => state.verify);
   const { t } = useTranslation();
 
   const changeModal = (e) => {
     e.preventDefault();
     dispatch(nextVerifyModal());
-    console.log(variant);
   };
 
   return (
@@ -30,4 +28,6 @@ export default function SuccessModal() {
       </div>
     </div>
   );
-}
+};
+
+export { SuccessModal };

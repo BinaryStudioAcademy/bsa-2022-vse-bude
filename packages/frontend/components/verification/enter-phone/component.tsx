@@ -8,7 +8,7 @@ import hand from 'public/images/mocup_hand1.png';
 import { nextVerifyModal, hideVerifyModal } from 'store/verify/actions';
 import * as styles from '../styles';
 
-export default function EnterPhoneModal() {
+const EnterPhoneModal = () => {
   const dispatch = useAppDispatch();
   const { variant } = useTypedSelector((state) => state.verify);
 
@@ -53,4 +53,6 @@ export default function EnterPhoneModal() {
       </LinkButton>
     </div>
   );
-}
+};
+
+export { EnterPhoneModal };
