@@ -11,12 +11,13 @@ import type {
   UploadFilesRequest,
 } from '@types';
 import { getEnv, logger } from '@helpers';
+import { MAX_IMAGE_SIZE } from '@vse-bude/shared';
 import { randomBytes } from 'crypto';
 
 export class S3StorageService {
   private _client: S3;
 
-  private _maxImageSizeBytes = 5242880; // 5MB
+  private _maxImageSizeBytes = MAX_IMAGE_SIZE;
 
   private _bucketName: string;
 
@@ -32,19 +33,17 @@ export class S3StorageService {
     });
   }
 
-  deleteImage(image: string) {
-    return this._client
-      .deleteObject(
-        {
-          Bucket: this._bucketName,
-          Key: image.replace(
-            'https://vse-bude.fra1.digitaloceanspaces.com/',
-            '',
-          ),
-        },
-        (err) => logger.error(err),
-      )
+  async deleteImage(filename: string) {
+    console.log(filename);
+    const params = this.createDeleteParams(filename, S3FolderPath.IMAGES);
+
+    const result = await this._client
+      .deleteObject(params, (err, _data) => {
+        err && logger.error(err);
+      })
       .promise();
+
+    return result;
   }
 
   async uploadImage(req: UploadFileRequest): Promise<string> {
@@ -89,7 +88,6 @@ export class S3StorageService {
       file.buffer,
     );
     const uploadImage = await this._client.upload(params).promise();
-    console.log(uploadImage);
 
     return uploadImage.Location;
   }
@@ -104,6 +102,13 @@ export class S3StorageService {
       Key: `${folder}/${filename}`,
       Body: body,
       ACL: 'public-read',
+    };
+  }
+
+  private createDeleteParams(filename: string, folder: string) {
+    return {
+      Bucket: this._bucketName,
+      Key: `${folder}/${filename}`,
     };
   }
 

@@ -1,53 +1,71 @@
 import type { ProductRepository } from '@repositories';
 import type { ProductQuery } from '@types';
-import { ProductNotFoundError, UnauthorizedError } from '@errors';
+import {
+  ProductNotFoundError,
+  UnauthorizedError,
+  AuctionEndedError,
+} from '@errors';
 import type { Request } from 'express';
-import { getUserIdFromRequest } from '@helpers';
+import { getFilenameFromUrl, getUserIdFromRequest, toUtc } from '@helpers';
 import type {
   AddProductToFavorites,
+  AuctionPermissionsResponse,
   BuyProduct,
   DeleteProductFromFavorites,
   CreateProduct,
   UpdateProduct,
 } from '@vse-bude/shared';
 import type { Product } from '@prisma/client';
+import type { Bid } from '@prisma/client';
 import { ProductStatus } from '@prisma/client';
 import type { VerifyService } from '@services';
+import type { BidRepository } from '@repositories';
+import { productMapper } from '@mappers';
+import { FieldError } from 'error/product/field-error';
+import { createPostSchema, updatePostSchema } from 'validation/product/schemas';
+import { auctionPermissionsMapper } from '../mapper/auction-permissions';
 import type { S3StorageService } from './s3-storage';
 
 export class ProductService {
   private _productRepository: ProductRepository;
+
+  private _bidRepository: BidRepository;
 
   private _verifyService: VerifyService;
 
   private _s3StorageService: S3StorageService;
 
   constructor(
-    categoryRepository: ProductRepository,
+    productRepository: ProductRepository,
     verifyService: VerifyService,
     s3StorageService: S3StorageService,
+    bidRepository: BidRepository,
   ) {
-    this._productRepository = categoryRepository;
+    this._productRepository = productRepository;
     this._verifyService = verifyService;
     this._s3StorageService = s3StorageService;
+    this._bidRepository = bidRepository;
   }
 
   public getAll(query: ProductQuery) {
     return this._productRepository.getAll(query);
   }
 
-  public async getById(req: Request) {
-    const { id } = req.params;
-    const product = await this._productRepository.getById(id);
+  public async getById(productId: string) {
+    const product = await this._productRepository.getById(productId);
     if (!product) {
-      throw new ProductNotFoundError(req);
+      throw new ProductNotFoundError();
     }
+    // TODO: fix translation after localization refactor
+    // if (product.category) {
+    //   product.category.title = req.t(`categories.${product.category.title}`);
+    // }
 
-    if (product.category) {
-      product.category.title = req.t(`categories.${product.category.title}`);
-    }
+    const currentPrice = await this._productRepository.getCurrentPrice(
+      product.id,
+    );
 
-    return product;
+    return productMapper(product, +currentPrice);
   }
 
   public async incrementViews(id: string, req: Request) {
@@ -72,6 +90,42 @@ export class ProductService {
 
   public async getFavoriteProducts(userId: string) {
     return this._productRepository.getFavorite(userId);
+  }
+
+  public async getAuctionPermissions(
+    userId: string,
+    productId: string,
+  ): Promise<AuctionPermissionsResponse> {
+    const product = await this._productRepository.getById(productId);
+    if (!product) {
+      throw new ProductNotFoundError();
+    }
+
+    if (toUtc(product.endDate) < toUtc()) {
+      throw new AuctionEndedError();
+    }
+
+    const bids: Bid[] = await this._bidRepository.getByUserAndProduct(
+      userId,
+      productId,
+    );
+
+    return auctionPermissionsMapper(!!bids.length);
+  }
+
+  public async leaveAuction(userId: string, productId: string) {
+    const product = await this._productRepository.getById(productId);
+    if (!product) {
+      throw new ProductNotFoundError();
+    }
+
+    if (toUtc(product.endDate) < toUtc()) {
+      throw new AuctionEndedError();
+    }
+
+    await this._bidRepository.deleteAllByProductAndUser(userId, productId);
+
+    return this.getById(productId);
   }
 
   public async addToFavorites({ userId, productId }: AddProductToFavorites) {
@@ -104,6 +158,11 @@ export class ProductService {
   }
 
   public async createProduct({ req, userId, fieldsData }: CreateProduct) {
+    const { t } = req;
+    const { error } = createPostSchema(t).validate(req.body);
+    if (error) {
+      throw new FieldError(error.message);
+    }
     const imageLinks = await this._s3StorageService.uploadProductImages(req);
     const data = {
       imageLinks,
@@ -121,6 +180,11 @@ export class ProductService {
     userId,
     fieldsData,
   }: UpdateProduct) {
+    const { t } = req;
+    const { error } = updatePostSchema(t).validate(req.body);
+    if (error) {
+      throw new FieldError(error.message);
+    }
     const product = (await this._productRepository.getById(
       productId,
     )) as Product;
@@ -133,7 +197,8 @@ export class ProductService {
     );
 
     deletedImages.forEach(
-      async (image) => await this._s3StorageService.deleteImage(image),
+      async (image) =>
+        await this._s3StorageService.deleteImage(getFilenameFromUrl(image)),
     );
 
     const imageLinks = oldImages

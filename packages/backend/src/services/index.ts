@@ -18,6 +18,7 @@ import { NewsService } from './news';
 import { HealthService } from './health';
 import { EmailService } from './email';
 import { UserProfileService } from './profile';
+import { BidService } from './bid';
 
 export const initServices = (repositories: Repositories) => {
   const isProduction = getEnv('NODE_ENV') === Environment.PRODUCTION;
@@ -35,6 +36,8 @@ export const initServices = (repositories: Repositories) => {
   const emailProvider = new SendInBlueEmailProvider();
   const emailService = new EmailService(emailProvider);
 
+  const s3StorageService = new S3StorageService();
+
   const verifyService: VerifyService = new VerifyService(
     repositories.userRepository,
     redisService,
@@ -42,20 +45,20 @@ export const initServices = (repositories: Repositories) => {
     emailService,
   );
 
-  const s3StorageService = new S3StorageService();
-
   return {
     categoryService: new CategoryService(repositories.categoryRepository),
     productService: new ProductService(
       repositories.productRepository,
       verifyService,
       s3StorageService,
+      repositories.bidRepository,
     ),
     newsService: new NewsService(repositories.newsRepository),
     healthService: new HealthService(repositories.healthRepository),
     profileService: new UserProfileService({
       userProfileRepository: repositories.profileRepository,
       hashService,
+      storageService: s3StorageService,
     }),
     authService: new AuthService(
       repositories.userRepository,
@@ -68,8 +71,12 @@ export const initServices = (repositories: Repositories) => {
     redisStorageService: redisService,
     smsSenderService: smsService,
     emailService: emailService,
-    verifyService: verifyService,
     s3StorageService,
+    verifyService: verifyService,
+    bidService: new BidService(
+      repositories.bidRepository,
+      repositories.productRepository,
+    ),
   };
 };
 
@@ -85,4 +92,6 @@ export {
   type HealthService,
   type UserProfileService,
   type EmailService,
+  type BidService,
+  type S3StorageService,
 };

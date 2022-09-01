@@ -11,6 +11,14 @@
     "verify": "Verify",
     "edit": "Edit profile"
   },
+  "button": {
+    "ok": "OK",
+    "cancel": "Cancel"
+  },
+  "avatar": {
+    "change": "Change the Photo",
+    "delete": "Delete the Photo"
+  },
   "label": {
     "novaPoshta": "# Nova Poshta",
     "firstName": "First name",
@@ -75,6 +83,10 @@
       "newPasswordPattern": "Password should include at least one uppercase, one lowercase and one number",
       "spacesInPassword": "Spaces are not allowed",
       "differentPasswords": "Passwords are not same"
+    },
+    "avatar": {
+      "maxSize": "The file size should not exceed 10MB",
+      "fileType": "The file type should be .jpg or .png"
     }
   }
 }

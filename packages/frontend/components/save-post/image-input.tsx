@@ -1,7 +1,8 @@
 import { Column, Icon } from '@primitives';
 import Image from 'next/image';
-import { IconName } from '@enums';
+import { IconColor, IconName } from '@enums';
 import { useTranslation } from 'next-i18next';
+import dynamic from 'next/dynamic';
 import { useCallback, useState } from 'react';
 import { allowedImgExtension } from 'common/enums/allowedImgExtension';
 import { MAX_IMAGE_SIZE } from '@vse-bude/shared';
@@ -10,10 +11,17 @@ import { SectionHeader } from '../profile/user-account/common';
 import type { ImageInputProps } from './types';
 import * as styles from './styles';
 
+const ImageCropModal = dynamic(
+  () => import('../../components/imageCrop/component'),
+);
+
+const MAX_IMAGE_COUNT = 30;
+
 function ImageInput({ images, setImages }: ImageInputProps) {
   const { t } = useTranslation();
   const [error, setError] = useState('');
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+  const [currentImage, setCurrentImage] = useState<File>();
 
   const validateFile = useCallback(
     (file) => {
@@ -31,17 +39,10 @@ function ImageInput({ images, setImages }: ImageInputProps) {
 
         return;
       }
+      setCurrentImage(file);
       setError('');
-      setImages([...images, file]);
-
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const preview = reader.result as string;
-        setImagePreviews((prev) => [...prev, preview]);
-      };
-      reader.readAsDataURL(file);
     },
-    [t, setImages, images],
+    [t, setCurrentImage],
   );
 
   const onDrop = useCallback(
@@ -59,8 +60,35 @@ function ImageInput({ images, setImages }: ImageInputProps) {
   };
   const getVariant = () => (images.length !== 0 ? 'filled' : 'empty');
 
+  const onImageCropModalSave = (croppedImage) => {
+    setImages([...images, croppedImage]);
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const preview = reader.result as string;
+      setImagePreviews((prev) => [...prev, preview]);
+    };
+    reader.readAsDataURL(croppedImage);
+
+    setCurrentImage(undefined);
+  };
+
+  const onImageCropModalClose = () => {
+    setCurrentImage(undefined);
+  };
+
   return (
     <Column css={styles.sectionRow}>
+      {currentImage && (
+        <ImageCropModal
+          file={currentImage}
+          onSave={onImageCropModalSave}
+          onClose={onImageCropModalClose}
+          okLabel={t('create-post:button.ok')}
+          dismissLabel={t('create-post:button.cancel')}
+        />
+      )}
+
       <SectionHeader>{t('create-post:headline.downloadPhotos')}</SectionHeader>
       <p css={styles.photosCaption}>
         {t('create-post:caption.downloadPhotos')}
@@ -80,7 +108,7 @@ function ImageInput({ images, setImages }: ImageInputProps) {
               <Image objectFit="cover" layout="fill" src={item} />
             </div>
           ))}
-        {imagePreviews.length < 30 && (
+        {imagePreviews.length < MAX_IMAGE_COUNT && (
           <div data-variant={getVariant()} css={styles.photosLabelWrapper}>
             <div
               {...getRootProps()}
@@ -91,7 +119,7 @@ function ImageInput({ images, setImages }: ImageInputProps) {
               <div css={styles.icoWrapper}>
                 <Icon
                   data-variant={getVariant()}
-                  color="yellow"
+                  color={IconColor.YELLOW}
                   icon={IconName.IMAGE}
                   cssExtend={styles.photoIco}
                 />

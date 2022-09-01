@@ -9,10 +9,6 @@ import type { ProductQuery } from '@types';
 import { ProductApiRoutes } from '@vse-bude/shared';
 import { authMiddleware } from '@middlewares';
 import multer from 'multer';
-import {
-  createProductValidation,
-  updateProductValidation,
-} from 'validation/product';
 
 export const initProductRoutes = (
   { productService }: Services,
@@ -65,6 +61,25 @@ export const initProductRoutes = (
     wrap((req: Request) => productService.getFavoriteIds(req.userId)),
   );
 
+  router.get(
+    apiPath(path, ProductApiRoutes.AUCTION_PERMISSIONS),
+    authMiddleware,
+    wrap((req: Request) =>
+      productService.getAuctionPermissions(
+        req.userId,
+        <string>req.query.productId,
+      ),
+    ),
+  );
+
+  router.post(
+    apiPath(path, ProductApiRoutes.AUCTION_LEAVE),
+    authMiddleware,
+    wrap((req: Request) =>
+      productService.leaveAuction(req.userId, <string>req.query.productId),
+    ),
+  );
+
   /**
    * @openapi
    * /products/{type}:
@@ -98,7 +113,7 @@ export const initProductRoutes = (
 
   router.get(
     apiPath(path, ProductApiRoutes.ID),
-    wrap((req) => productService.getById(req)),
+    wrap((req: Request) => productService.getById(req.params.id)),
   );
 
   router.put(
@@ -132,7 +147,6 @@ export const initProductRoutes = (
     apiPath(path),
     authMiddleware,
     multer().any(),
-    createProductValidation,
     wrap((req: Request) =>
       productService.createProduct({
         req,
@@ -196,7 +210,6 @@ export const initProductRoutes = (
     apiPath(path, ProductApiRoutes.UPDATE),
     authMiddleware,
     multer().any(),
-    updateProductValidation,
     wrap((req: Request) =>
       productService.updateProduct({
         req,

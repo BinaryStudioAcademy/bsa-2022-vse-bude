@@ -1,31 +1,33 @@
 {
-  "images": {
-    "unsupportedType": "Unsupported file extension!",
-    "large": "File size too large!"
-  },
-  "title": {
-    "long": "Title too long",
-    "empty": "Title cannot be empty"
-  },
-  "description": {
-    "long": "Description too long",
-    "empty": "Description cannot be empty"
-  },
-  "phone": {
-    "pattern": "Wrong phone format",
-    "empty": "Description cannot be empty"
-  },
-  "price": {
-    "base": "Wrong price format",
-    "empty": "Price cannot be empty"
-  },
-  "country": {
-    "empty": "Country cannot be empty"
-  },
-  "type": {
-    "empty": "Field type cannot be empty"
-  },
-  "status": {
-    "empty": "Field status cannot be empty"
+  "validation": {
+    "images": {
+      "unsupportedType": "Unsupported file extension!",
+      "large": "File size too large!"
+    },
+    "title": {
+      "long": "Title too long",
+      "empty": "Title cannot be empty"
+    },
+    "description": {
+      "long": "Description too long",
+      "empty": "Description cannot be empty"
+    },
+    "phone": {
+      "pattern": "Wrong phone format",
+      "empty": "Description cannot be empty"
+    },
+    "price": {
+      "base": "Wrong price format",
+      "empty": "Price cannot be empty"
+    },
+    "country": {
+      "empty": "Country cannot be empty"
+    },
+    "type": {
+      "empty": "Field type cannot be empty"
+    },
+    "status": {
+      "empty": "Field status cannot be empty"
+    }
   }
 }
