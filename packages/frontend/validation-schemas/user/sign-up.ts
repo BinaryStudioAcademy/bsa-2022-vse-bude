@@ -1,10 +1,11 @@
 import Joi from 'joi';
+import type { UserSignUpDto } from '@vse-bude/shared';
 import { UserPersonalInfoValidationMessage } from '@vse-bude/shared';
 import { ValidationRanges } from '@vse-bude/shared';
 import type { TFunction } from 'next-i18next';
 
-export const userUpdateSchema = (t: TFunction) =>
-  Joi.object({
+export const signUpSchema = (t: TFunction) =>
+  Joi.object<UserSignUpDto>({
     firstName: Joi.string()
       .trim()
       .required()
@@ -51,71 +52,34 @@ export const userUpdateSchema = (t: TFunction) =>
       }),
 
     phone: Joi.string()
-      .allow('')
+      .trim()
       .pattern(/^((\+\d{12,15})|(\+380\d{9}))$/)
+      .required()
       .messages({
         'string.pattern.base': t(
           UserPersonalInfoValidationMessage.PHONE_PATTERN,
         ),
+        'string.empty': t(UserPersonalInfoValidationMessage.PHONE_REQUIRED),
       }),
 
-    country: Joi.string().allow(''),
-    region: Joi.string().allow(''),
-    city: Joi.string().allow(''),
-    zip: Joi.string().allow(''),
-    novaPoshtaRef: Joi.string().allow(''),
-
-    instagram: Joi.string()
-      .allow('')
-      .uri()
-      .max(ValidationRanges.MAX_SOCIAL_NETWORK_URI_SYMBOLS)
+    password: Joi.string()
+      .required()
+      .min(ValidationRanges.MIN_PASSWORD_SYMBOLS)
+      .max(ValidationRanges.MAX_PASSWORD_SYMBOLS)
+      .pattern(
+        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z~!@#$%^*\-_=+[{\]}/;:,.?]+$/,
+      )
       .messages({
-        'string.uri': t(UserPersonalInfoValidationMessage.IS_URI),
-        'string.max': t(UserPersonalInfoValidationMessage.URI_MAX_SYMBOLS),
+        'string.pattern.base': t(
+          UserPersonalInfoValidationMessage.NEW_PASSWORD,
+        ),
+        'string.min': t(UserPersonalInfoValidationMessage.MIN_SYMBOLS),
+        'string.max': t(UserPersonalInfoValidationMessage.MAX_SYMBOLS),
+        'string.empty': t(UserPersonalInfoValidationMessage.EMPTY_PASSWORD),
       }),
-    linkedin: Joi.string()
-      .allow('')
-      .uri()
-      .max(ValidationRanges.MAX_SOCIAL_NETWORK_URI_SYMBOLS)
-      .messages({
-        'string.uri': t(UserPersonalInfoValidationMessage.IS_URI),
-        'string.max': t(UserPersonalInfoValidationMessage.URI_MAX_SYMBOLS),
-      }),
-    facebook: Joi.string()
-      .allow('')
-      .uri()
-      .max(ValidationRanges.MAX_SOCIAL_NETWORK_URI_SYMBOLS)
-      .messages({
-        'string.uri': t(UserPersonalInfoValidationMessage.IS_URI),
-        'string.max': t(UserPersonalInfoValidationMessage.URI_MAX_SYMBOLS),
-      }),
-
-    password: Joi.string().allow(''),
-
-    newPassword: Joi.string().when('password', {
-      is: Joi.string().min(1),
-      then: Joi.string()
-        .required()
-        .disallow(Joi.ref('password'))
-        .min(ValidationRanges.MIN_PASSWORD_SYMBOLS)
-        .max(ValidationRanges.MAX_PASSWORD_SYMBOLS)
-        .pattern(
-          /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z~!@#$%^*\-_=+[{\]}/;:,.?]+$/,
-        )
-        .messages({
-          'string.pattern.base': t(
-            UserPersonalInfoValidationMessage.NEW_PASSWORD,
-          ),
-          'string.min': t(UserPersonalInfoValidationMessage.MIN_SYMBOLS),
-          'string.max': t(UserPersonalInfoValidationMessage.MAX_SYMBOLS),
-          'string.empty': t(UserPersonalInfoValidationMessage.EMPTY_PASSWORD),
-          'any.invalid': t(UserPersonalInfoValidationMessage.SAME_PASSWORD),
-        }),
-      otherwise: Joi.string().allow(''),
-    }),
 
     repeatPassword: Joi.any()
-      .valid(Joi.ref('newPassword'))
+      .valid(Joi.ref('password'))
       .messages({
         'any.only': t(UserPersonalInfoValidationMessage.DIFFERENT_PASSWORDS),
       }),

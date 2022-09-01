@@ -44,6 +44,7 @@ const fontSizes = {
   caption: '12px',
   smallButton: '15px',
   tooltip: '13px',
+  cell: '18px',
 };
 
 const fontWeights = {
@@ -59,6 +60,7 @@ const fontWeights = {
   toggle: '600',
   button: '700',
   caption: '400',
+  cell: '600',
 };
 
 const lineHeights = {
@@ -74,6 +76,7 @@ const lineHeights = {
   toggle: '16px',
   button: '19px',
   caption: '14px',
+  cell: '21px',
 };
 
 const spaces = {
@@ -147,6 +150,7 @@ const iconSizes = {
 };
 
 const breakpoints = {
+  xs: 480,
   sm: 576,
   md: 768,
   lg: 992,
