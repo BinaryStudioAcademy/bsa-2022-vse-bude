@@ -3,6 +3,7 @@ import type {
   AuctionPermissionsRequest,
   ProductIdRequest,
 } from '@vse-bude/shared';
+import { addToast } from 'store/toast/actions';
 import {
   fetchAuctionPermissions,
   leaveAuctionRequest,
@@ -22,10 +23,25 @@ export const auctionPermissions = createAsyncThunk(
 
 export const auctionLeaveAction = createAsyncThunk(
   AuctionProductActions.AUCTION_LEAVE,
-  async (data: ProductIdRequest, { rejectWithValue }) => {
+  async (data: ProductIdRequest, { rejectWithValue, dispatch }) => {
     try {
-      return await leaveAuctionRequest(data);
+      const result = await leaveAuctionRequest(data);
+      dispatch(
+        addToast({
+          level: 'info',
+          description: (t) => t('common:notifications.leftAuction'),
+        }),
+      );
+
+      return result;
     } catch (e) {
+      dispatch(
+        addToast({
+          level: 'error',
+          description: e.message,
+        }),
+      );
+
       return rejectWithValue(e.message);
     }
   },

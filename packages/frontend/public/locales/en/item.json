@@ -1,6 +1,4 @@
 {
-  "placeBidBtn": "Place Bid",
-  "buyBtn": "Buy",
   "bidInput": "Enter the bid amount",
   "bidInputCaption": "Enter more than or equal to:",
   "currentBid": "Current bid",
@@ -30,5 +28,19 @@
     "btnText": "Leave Auction",
     "tooltip": "You will be excluded from the auction and all your bids are deleted!",
     "confirmText": "Are you sure to leave the auction? All bids will be deleted!"
+  },
+  "buttons": {
+    "placeBid": "Place Bid",
+    "buyBtn": "Buy",
+    "tooltips": {
+      "notVerified": {
+        "placeBid": "You are not verified to place a bid",
+        "buyBtn": "You are not verified to buy"
+      },
+      "notAuthorized": {
+        "placeBid": "You are not authorized to place a bid",
+        "buyBtn": "You are not authorized to buy"
+      }
+    }
   }
 }
