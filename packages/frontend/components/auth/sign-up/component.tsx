@@ -36,6 +36,7 @@ export const SignUpForm = () => {
         <Input
           {...register('firstName')}
           label={t('auth:sign-up.firstName')}
+          placeholder={t('auth:sign-up.firstNamePlaceholder')}
           variant="primary"
           type="text"
           name="firstName"
@@ -47,6 +48,7 @@ export const SignUpForm = () => {
         <Input
           {...register('lastName')}
           label={t('auth:sign-up.lastName')}
+          placeholder={t('auth:sign-up.lastNamePlaceholder')}
           variant="primary"
           type="text"
           name="lastName"
@@ -58,6 +60,7 @@ export const SignUpForm = () => {
         <Input
           {...register('phone')}
           label={t('auth:sign-up.phone')}
+          placeholder={t('auth:sign-up.phonePlaceholder')}
           variant="primary"
           type="text"
           name="phone"
@@ -69,6 +72,7 @@ export const SignUpForm = () => {
         <Input
           {...register('email')}
           label={t('auth:sign-up.email')}
+          placeholder={t('auth:sign-up.emailPlaceholder')}
           variant="primary"
           type="email"
           name="email"
@@ -80,6 +84,7 @@ export const SignUpForm = () => {
         <PasswordInput
           {...register('password')}
           label={t('auth:sign-up.password')}
+          placeholder={t('auth:sign-up.passwordPlaceholder')}
           variant="primary"
           name="password"
           disabled={isLoading}
@@ -90,6 +95,7 @@ export const SignUpForm = () => {
         <PasswordInput
           {...register('repeatPassword')}
           label={t('auth:sign-up.passwordRepeat')}
+          placeholder={t('auth:sign-up.passwordRepeatPlaceholder')}
           variant="primary"
           name="repeatPassword"
           disabled={isLoading}

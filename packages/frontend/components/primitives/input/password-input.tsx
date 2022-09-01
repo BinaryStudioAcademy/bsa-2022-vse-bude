@@ -38,7 +38,6 @@ const PasswordInputInner = (
           data-status={error ? 'error' : 'successfully'}
           type={passwordVisible ? 'text' : 'password'}
           id={id}
-          placeholder={label}
           {...props}
         />
       </div>
