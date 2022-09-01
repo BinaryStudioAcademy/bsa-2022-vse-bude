@@ -26,6 +26,11 @@ export const dropdownArrow = ({
   padding: ${spaces.xs};
   background-color: ${colors.backgroundLight};
   cursor: pointer;
+  :hover {
+    i {
+      color: ${colors.primary} !important;
+    }
+  }
 `;
 
 export const popoverContentWrapper = ({ spaces }: Theme) => css`
@@ -76,6 +81,7 @@ export const popoverContentItem = ({
 export const iconsWrapper = ({ spaces }: Theme) => css`
   display: flex;
   align-items: center;
+  margin-right: ${spaces.xs};
   & > a,
   & > button {
     margin-right: ${spaces.md};

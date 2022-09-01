@@ -2,6 +2,7 @@ import { useAuth } from '@hooks';
 import { Popover, Avatar, Icon, InternalLink } from '@primitives';
 import { useRouter } from 'next/router';
 import { IconName, IconColorProps, Routes } from '@enums';
+import { useState } from 'react';
 import * as styles from './styles';
 import { DownArrow } from './sub-components/dropdown';
 import { PopoverContent } from './sub-components/popover-content';
@@ -9,7 +10,7 @@ import { PopoverContent } from './sub-components/popover-content';
 export const ProfileInfo = () => {
   const router = useRouter();
   const { user, loading } = useAuth();
-
+  const [isOpen, setIsOpen] = useState(false);
   const handleClick = (e) => {
     e.preventDefault();
     router.push(`${Routes.PROFILE}/${user.id}`);
@@ -51,7 +52,15 @@ export const ProfileInfo = () => {
         loading={loading}
         handleClick={handleClick}
       />
-      <Popover trigger={<DownArrow style={styles.dropdownArrow} />}>
+      <Popover
+        trigger={
+          <DownArrow
+            style={styles.dropdownArrow}
+            isOpen={isOpen}
+            onClick={() => setIsOpen(!isOpen)}
+          />
+        }
+      >
         {(handleClose) => <PopoverContent handleClose={handleClose} />}
       </Popover>
     </div>
