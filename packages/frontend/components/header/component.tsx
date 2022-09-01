@@ -32,7 +32,6 @@ export const Header = () => {
       const category: RequestOptions = {
         locale: locale as HttpAcceptLanguage,
       };
-      console.log('fecth');
 
       dispatch(fetchCategories({ locale: category.locale }));
     }
@@ -79,7 +78,7 @@ export const Header = () => {
             </a>
           </Link>
           <div className="header-content">
-            {<Navigation categories={categories} />}
+            {<Navigation categories={categories || []} />}
           </div>
 
           {isMounted ? (
@@ -98,7 +97,7 @@ export const Header = () => {
       </header>
       {show && (
         <BurgerMenu
-          categories={categories}
+          categories={categories || []}
           user={user}
           onClose={() => setShow(false)}
         />
