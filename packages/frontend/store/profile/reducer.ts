@@ -51,9 +51,6 @@ const profileSlice = createSlice({
       state.error = payload;
     },
 
-    [updateUserProfile.pending.type]: (state) => {
-      state.loading = true;
-    },
     [updateUserProfile.fulfilled.type]: (state, { payload }) => {
       state.loading = false;
       state.user = payload;
