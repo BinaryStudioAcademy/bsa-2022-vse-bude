@@ -25,10 +25,12 @@ const CategorySection = () => {
   const { t } = useTranslation();
   const limit = 4;
 
-  const categoriesMapped = categories.slice(0, limit).map((item, i) => ({
-    ...item,
-    image: mockImage[i] || '/images/categories/decor.png',
-  }));
+  const categoriesMapped = categories
+    ? categories.slice(0, limit).map((item, i) => ({
+        ...item,
+        image: mockImage[i] || '/images/categories/decor.png',
+      }))
+    : [];
 
   return (
     <SectionLayout
