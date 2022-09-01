@@ -1,7 +1,7 @@
 import { Dropdown, Icon } from '@primitives';
 import type { UserDto } from '@vse-bude/shared';
 import { useRouter } from 'next/router';
-import { Routes, IconColorProps, IconName, ProfileRoutes } from '@enums';
+import { Routes, IconColor, IconName, ProfileRoutes } from '@enums';
 import { useState } from 'react';
 import { useTranslation } from 'next-i18next';
 
@@ -59,9 +59,9 @@ export const ProfileDropdown = ({ user }: ProfileDropdownProps) => {
     >
       {t('common:header.nav.profile')}&nbsp;
       {isOpen ? (
-        <Icon icon={IconName.ANGLE_UP} color={IconColorProps.BLACK} />
+        <Icon icon={IconName.ANGLE_UP} color={IconColor.BLACK} />
       ) : (
-        <Icon icon={IconName.ANGLE_DOWN} color={IconColorProps.BLACK} />
+        <Icon icon={IconName.ANGLE_DOWN} color={IconColor.BLACK} />
       )}
     </Dropdown>
   );

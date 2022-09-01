@@ -2,7 +2,7 @@ import { Button, Container, IconButton, Loader } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { Fragment, useState, useEffect } from 'react';
-import { Routes, IconName } from '@enums';
+import { Routes, IconName, IconColor } from '@enums';
 import { Logo } from 'components/primitives/logo';
 import { useAppDispatch, useAuth, useMounted, useTypedSelector } from '@hooks';
 import { useRouter } from 'next/router';

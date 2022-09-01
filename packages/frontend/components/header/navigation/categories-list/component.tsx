@@ -1,6 +1,6 @@
 ﻿import type { CategoryDto } from '@vse-bude/shared';
 import { Dropdown, Icon } from '@primitives';
-import { Routes, IconName, IconColorProps } from '@enums';
+import { Routes, IconName, IconColor } from '@enums';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
@@ -39,9 +39,9 @@ export const CategoriesList = ({ categories }: CategoriesListProps) => {
     >
       {t('common:header.nav.category')}&nbsp;
       {isOpen ? (
-        <Icon icon={IconName.ANGLE_UP} color={IconColorProps.BLACK} />
+        <Icon icon={IconName.ANGLE_UP} color={IconColor.BLACK} />
       ) : (
-        <Icon icon={IconName.ANGLE_DOWN} color={IconColorProps.BLACK} />
+        <Icon icon={IconName.ANGLE_DOWN} color={IconColor.BLACK} />
       )}
     </Dropdown>
   );

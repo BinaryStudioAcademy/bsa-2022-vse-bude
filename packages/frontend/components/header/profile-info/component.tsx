@@ -1,7 +1,7 @@
 import { useAuth } from '@hooks';
 import { Popover, Avatar, Icon, InternalLink } from '@primitives';
 import { useRouter } from 'next/router';
-import { IconName, IconColorProps, Routes } from '@enums';
+import { IconName, IconColor, Routes } from '@enums';
 import { useState } from 'react';
 import * as styles from './styles';
 import { DownArrow } from './sub-components/dropdown';
@@ -28,7 +28,7 @@ export const ProfileInfo = () => {
           <Icon
             icon={IconName.STAR_OUTLINED}
             size="md"
-            color={IconColorProps.BLACK}
+            color={IconColor.BLACK}
           />
         </InternalLink>
 
@@ -37,7 +37,7 @@ export const ProfileInfo = () => {
             <Icon
               icon={IconName.BELL}
               size="md"
-              color={IconColorProps.BLACK}
+              color={IconColor.BLACK}
               cssExtend={[newNotifications && styles.newNotifications]}
             />
           }

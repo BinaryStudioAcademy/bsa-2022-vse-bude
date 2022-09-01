@@ -1,5 +1,5 @@
 ﻿import type { CategoryDto, UserDto } from '@vse-bude/shared';
-import { Routes, IconName } from '@enums';
+import { Routes, IconName, IconColor } from '@enums';
 import { IconButton, InternalLink, Button } from '@primitives';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
@@ -27,7 +27,7 @@ export const BurgerMenu = ({ user, categories, onClose }: BurgerMenuProps) => {
       icon={IconName.ANGLE_UP}
       size="md"
       onClick={onClose}
-      color="yellow"
+      color={IconColor.ORANGE}
     />
   );
 
