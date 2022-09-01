@@ -52,14 +52,12 @@ export const signUpSchema = (t: TFunction) =>
       }),
 
     phone: Joi.string()
-      .trim()
+      .allow('')
       .pattern(/^((\+\d{12,15})|(\+380\d{9}))$/)
-      .required()
       .messages({
         'string.pattern.base': t(
           UserPersonalInfoValidationMessage.PHONE_PATTERN,
         ),
-        'string.empty': t(UserPersonalInfoValidationMessage.PHONE_REQUIRED),
       }),
 
     password: Joi.string()
