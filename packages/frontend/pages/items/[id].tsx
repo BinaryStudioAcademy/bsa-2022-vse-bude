@@ -8,7 +8,7 @@ import {
 } from 'services/product';
 import { LotSection } from '@components/home/lot-section';
 import { Routes } from '@enums';
-import { Breadcrumbs } from '@primitives';
+import { Breadcrumbs, Button, Container } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import type { ItemDto } from '@vse-bude/shared';
 import { Http } from '@vse-bude/shared';
@@ -16,6 +16,7 @@ import { withPublic } from '@hocs';
 import { Layout } from '@components/layout';
 import { Item } from '@components/item';
 import { useAppDispatch } from '@hooks';
+import Link from 'next/link';
 import { auctionPermissions } from '../../store/product-auction';
 
 export const getServerSideProps = withPublic(async (ctx) => {
@@ -86,6 +87,13 @@ const ItemPage = ({ item, similarItems }: ItemPageProps) => {
           },
         ]}
       />
+      <Container style={{ marginBottom: '20px' }}>
+        <Link href={`/items/edit/${item.id}`}>
+          <a style={{ textDecoration: 'none' }}>
+            <Button>Edit</Button>
+          </a>
+        </Link>
+      </Container>
       <Item item={item} />
       <LotSection
         title={t('item:similarItems')}

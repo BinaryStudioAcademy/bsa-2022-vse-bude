@@ -9,12 +9,15 @@ import { createPost } from 'services/post';
 import { useEffect } from 'react';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { fetchCurrentProduct } from 'store/product';
+import { useRouter } from 'next/router';
 import { SectionHeader } from '../profile/user-account/common';
 import { initialFormState } from './form-utils';
 import ImageInput from './image-input';
 import * as styles from './styles';
 
 export default function PostForm({ edit }: { edit: boolean }) {
+  const { query } = useRouter();
+
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const currentProduct = useTypedSelector(
@@ -62,10 +65,10 @@ export default function PostForm({ edit }: { edit: boolean }) {
   };
 
   useEffect(() => {
-    if (edit) {
-      dispatch(fetchCurrentProduct('07925f24-a523-488a-9af1-70c77de44057'));
+    if (edit && query.id) {
+      dispatch(fetchCurrentProduct(query.id as string));
     }
-  }, [edit, dispatch]);
+  }, [edit, dispatch, query.id]);
 
   useEffect(() => {
     if (edit && currentProduct && categories.length) {
