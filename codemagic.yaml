@@ -101,6 +101,15 @@ workflows:
         - play_console
       node: 16
 
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: main
+          include: true
+          source: true
+      cancel_previous_builds: true
+
     scripts:
       - *npm_install
       - *environment_set
