@@ -63,6 +63,7 @@ const productSlice = createSlice({
 
     [makeBid.fulfilled.type](state, { payload }) {
       state.currentItem.currentPrice = payload.price;
+      state.permissions.isAbleToLeaveAuction = true;
     },
     [auctionLeaveAction.fulfilled.type](state, { payload }) {
       state.currentItem.currentPrice = payload.price;
