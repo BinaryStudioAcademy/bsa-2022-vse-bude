@@ -96,6 +96,36 @@
     "bidPlaced": "Bid placed",
     "leftAuction": "You left the auction"
   },
+  "verify": {
+    "enterPhone": {
+      "headline": "Verify",
+      "description": "For further verification of account, please enter your phone here or verify it on your Personal Info page",
+      "input": "Phone",
+      "button": {
+        "verify": "Verify"
+      },
+      "link": {
+        "later": "Verify later"
+      }
+    },
+    "enterCode": {
+      "headline": "Verify",
+      "description": "We just sent a code to",
+      "input": "Enter the verification code we just sent to you",
+      "button": {
+        "continue": "Continue"
+      },
+      "link": {
+        "sendAgain": "Click here"
+      }
+    },
+    "success": {
+      "headline": "Your account has fully been verified",
+      "button": {
+        "continue": "Continue"
+      }
+    }
+  },
   "HOURS_SHORT": "h",
   "DAYS_SHORT": "d",
   "MINUTES_SHORT": "min",

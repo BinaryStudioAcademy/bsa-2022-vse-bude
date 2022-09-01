@@ -3,6 +3,7 @@ import type { CategoryState } from 'store/category';
 import type { ProductState } from 'store/product';
 import type { ProfileState } from 'store/profile/reducer';
 import type { FavoriteProductState } from 'store/favorite-product';
+import type { VerifyModalState } from 'store/verify/reducer';
 import type { ToastState } from 'store/toast/reducers';
 import type { ProductAuctionState } from 'store/product-auction';
 
@@ -12,6 +13,7 @@ export interface RootState {
   category: CategoryState;
   product: ProductState;
   favoriteProduct: FavoriteProductState;
+  verify: VerifyModalState;
   toast: ToastState;
   auction: ProductAuctionState;
 }

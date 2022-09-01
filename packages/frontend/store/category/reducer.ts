@@ -10,7 +10,7 @@ interface CategoryState {
 }
 
 const initialState: CategoryState = {
-  list: null,
+  list: [],
   loading: false,
 };
 
