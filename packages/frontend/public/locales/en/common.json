@@ -3,6 +3,7 @@
     "nav": {
       "home": "Home",
       "category": "Category",
+      "item": "Items",
       "search": "Search",
       "news": "News",
       "about_us": "About us",
@@ -124,15 +125,7 @@
     "November",
     "December"
   ],
-  "days": [
-    "Su",
-    "Mo",
-    "Tu",
-    "We",
-    "Th",
-    "Fr",
-    "Sa"
-  ],
+  "days": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
   "modal": {
     "confirm": {
       "confirm": "Confirm",
