@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import type { Theme } from '@emotion/react';
+import { resetButton } from 'theme';
 
 export const form = () => css`
   display: flex;
@@ -84,4 +85,55 @@ export const groupePhone = ({ spaces }: Theme) => css`
 
 export const phoneRow = () => css`
   flex-grow: 2;
+`;
+
+export const avatarUpdateButton = css`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+`;
+
+export const popoverContentItem = ({
+  spaces,
+  fontSizes,
+  lineHeights,
+  fontWeights,
+  colors,
+}: Theme) => css`
+  ${resetButton}
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+  padding: ${spaces.xs} ${spaces.lg};
+  cursor: pointer;
+  font-size: ${fontSizes.body1};
+  line-height: ${lineHeights.body1};
+  font-weight: ${fontWeights.body1};
+  color: ${colors.text};
+
+  :hover {
+    background-color: ${colors.backgroundLight};
+  }
+
+  & span {
+    float: left;
+  }
+
+  &[data-variant='icon'] {
+    padding: ${spaces.xs} ${spaces.md};
+    & > i {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      float: left;
+      width: ${spaces.sm};
+      margin-right: ${spaces.md};
+      color: ${colors.primaryLight};
+    }
+  }
+`;
+
+export const popoverContentWrapper = ({ spaces }: Theme) => css`
+  display: flex;
+  flex-direction: column;
+  padding: ${spaces.sm} 0;
 `;

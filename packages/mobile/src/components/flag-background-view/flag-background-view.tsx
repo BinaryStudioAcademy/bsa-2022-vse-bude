@@ -5,20 +5,19 @@ import LinearGradient, {
 
 import { ColorPalette } from '@vse-bude/shared';
 
-type FlagBackgroundViewProps = Omit<
-  LinearGradientProps,
-  'start' | 'end' | 'colors'
->;
+type FlagBackgroundViewProps = Omit<LinearGradientProps, 'colors'>;
 
 const FlagBackgroundView: React.FC<FlagBackgroundViewProps> = ({
+  start = { x: 0, y: 0.15 },
+  end = { x: 0, y: 0.85 },
   children,
   style,
   ...viewProps
 }) => {
   return (
     <LinearGradient
-      start={{ x: 0, y: 0.15 }}
-      end={{ x: 0, y: 0.85 }}
+      start={start}
+      end={end}
       colors={[ColorPalette.BLUE_100, ColorPalette.YELLOW_200]}
       style={style}
       {...viewProps}

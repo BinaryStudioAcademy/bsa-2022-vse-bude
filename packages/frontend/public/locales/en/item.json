@@ -18,5 +18,17 @@
     "seconds": "sec"
   },
   "similarItems": "Similar items",
-  "seeMoreItems": "See more"
+  "seeMoreItems": "See more",
+  "bid": {
+    "validation": {
+      "required": "Bid field is required",
+      "min": "Bid amount is too low",
+      "numeric": "Bid amount must be a number"
+    }
+  },
+  "leave": {
+    "btnText": "Leave Auction",
+    "tooltip": "You will be excluded from the auction and all your bids are deleted!",
+    "confirmText": "Are you sure to leave the auction? All bids will be deleted!"
+  }
 }

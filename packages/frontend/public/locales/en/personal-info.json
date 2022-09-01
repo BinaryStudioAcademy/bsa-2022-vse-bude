@@ -11,6 +11,14 @@
     "verify": "Verify",
     "edit": "Edit profile"
   },
+  "button": {
+    "ok": "OK",
+    "cancel": "Cancel"
+  },
+  "avatar": {
+    "change": "Change the Photo",
+    "delete": "Delete the Photo"
+  },
   "label": {
     "novaPoshta": "# Nova Poshta",
     "firstName": "First name",

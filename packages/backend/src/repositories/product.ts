@@ -1,4 +1,5 @@
-import type { PrismaClient, Product } from '@prisma/client';
+import { ProductStatus } from '@prisma/client';
+import type { Product, PrismaClient } from '@prisma/client';
 import type { ProductQuery } from '@types';
 import { Order } from '@vse-bude/shared';
 
@@ -122,6 +123,56 @@ export class ProductRepository {
         views: {
           increment: 1,
         },
+      },
+    });
+  }
+
+  public async getCurrentPrice(productId: string) {
+    const lastBid = await this._dbClient.bid.findFirst({
+      where: {
+        productId: productId,
+      },
+      orderBy: [
+        {
+          createdAt: 'desc',
+        },
+      ],
+    });
+
+    if (lastBid) {
+      return lastBid.price;
+    }
+
+    const product = await this._dbClient.product.findUnique({
+      where: {
+        id: productId,
+      },
+      select: {
+        price: true,
+      },
+    });
+
+    return product.price;
+  }
+
+  public async checkStatus(id: string, status: ProductStatus) {
+    return await this._dbClient.product.findFirst({
+      where: {
+        id,
+        status,
+      },
+    });
+  }
+
+  public async buy(id: string, userId: string, status: ProductStatus) {
+    return await this._dbClient.product.updateMany({
+      where: {
+        id,
+        status: ProductStatus.ACTIVE,
+      },
+      data: {
+        winnerId: userId,
+        status,
       },
     });
   }

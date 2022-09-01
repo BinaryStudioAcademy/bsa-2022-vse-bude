@@ -5,7 +5,8 @@
       "category": "Категорії",
       "search": "Пошук",
       "news": "Новини",
-      "about_us": "Про нас"
+      "about_us": "Про нас",
+      "profile": "Профіль"
     },
     "buttons": {
       "create_account": "Створити Аккаунт",
@@ -74,6 +75,34 @@
         "or": "або",
         "directSale": "Продаж"
       }
+    }
+  },
+  "notifications": {
+    "defaultSuccessTitle": "Success",
+    "defaultInfoTitle": "Info",
+    "defaultWarningTitle": "Warning",
+    "defaultErrorTitle": "Error"
+  },
+  "months": [
+    "Січень",
+    "Лютий",
+    "Березень",
+    "Квітень",
+    "Травень",
+    "Червень",
+    "Липень",
+    "Серпень",
+    "Вересень",
+    "Жовтень",
+    "Листопад",
+    "Грудень"
+  ],
+  "days": ["нд", "пн", "вт", "ср", "чт", "пт", "сб"],
+  "modal": {
+    "confirm": {
+      "confirm": "Підтвердити",
+      "cancel": "Відміна",
+      "header": "Підтвердіть вашу дію"
     }
   }
 }

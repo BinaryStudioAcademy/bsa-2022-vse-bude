@@ -1,9 +1,9 @@
 import type { Interpolation, Theme } from '@emotion/react';
-import type { IconName } from '@enums';
+import type { IconColor, IconName } from '@enums';
 
 export type IconProps = {
-  icon: typeof IconName[keyof typeof IconName];
-  color: string;
+  icon: IconName;
+  color: IconColor;
   cssExtend?: Interpolation<Theme>;
   size?: SizeProp;
 };

@@ -27,6 +27,7 @@
     "@reduxjs/toolkit": "1.8.3",
     "@vse-bude/shared": "file:../shared/build",
     "color": "4.2.3",
+    "dayjs": "1.11.5",
     "fast-text-encoding": "1.0.4",
     "i18next": "21.9.0",
     "joi": "17.6.0",
