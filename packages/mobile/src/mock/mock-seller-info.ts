@@ -5,9 +5,33 @@ export const MOCK_SELLER = {
   phone: '+380999999999',
   avatar: '',
   socialMedia: [
-    { id: '1', link: 'jusk_ua', socialMedia: SocialMediaType.FACEBOOK },
-    { id: '2', link: 'jusk_ua', socialMedia: SocialMediaType.INSTAGRAM },
-    { id: '3', link: 'jusk.ua', socialMedia: SocialMediaType.WEBSITE },
-    { id: '4', link: 'jusk_ua', socialMedia: SocialMediaType.LINKEDIN },
+    {
+      id: '1',
+      link: 'jusk_ua',
+      socialMedia: SocialMediaType.FACEBOOK,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      id: '2',
+      link: 'jusk_ua',
+      socialMedia: SocialMediaType.INSTAGRAM,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      id: '3',
+      link: 'jusk.ua',
+      socialMedia: SocialMediaType.WEBSITE,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      id: '4',
+      link: 'jusk_ua',
+      socialMedia: SocialMediaType.LINKEDIN,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
   ],
 };

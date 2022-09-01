@@ -1,27 +1,17 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { AuthorDto, ColorPalette, SocialMediaType } from '@vse-bude/shared';
+import { AuthorDto, ColorPalette, SocialMedia } from '@vse-bude/shared';
 import { globalStyles } from '~/styles/styles';
-import {
-  Text,
-  View,
-  Image,
-  Pressable,
-  FacebookIcon,
-  PhoneIcon,
-  InstagramIcon,
-  GlobeIcon,
-  LinkedinIcon,
-} from '../../../../components/components';
+import { Text, View, Image, PhoneIcon } from '~/components/components';
+import { MOCK_SELLER } from '~/mock/mock-seller-info';
 import { styles } from './styles';
+import { SocialButtons } from './social-buttons';
 
-const SellerInfo: FC<Partial<AuthorDto>> = ({
-  firstName,
-  avatar,
-  phone,
-  socialMedia,
-}) => {
+type SellerInfoProps = Partial<AuthorDto & SocialMedia>;
+
+const SellerInfo: FC<SellerInfoProps> = () => {
   const { t } = useTranslation();
+  const { firstName, avatar, phone, socialMedia } = MOCK_SELLER;
 
   return (
     <View
@@ -101,36 +91,7 @@ const SellerInfo: FC<Partial<AuthorDto>> = ({
               {phone || ''}
             </Text>
           </View>
-          {socialMedia?.map((media) => (
-            <Pressable
-              key={media.id}
-              style={[
-                globalStyles.alignItemsCenter,
-                globalStyles.flexDirectionRow,
-                globalStyles.mt4,
-              ]}
-            >
-              {media.socialMedia == SocialMediaType.FACEBOOK ? (
-                <FacebookIcon size={15} color={ColorPalette.YELLOW_200} />
-              ) : media.socialMedia == SocialMediaType.INSTAGRAM ? (
-                <InstagramIcon size={15} color={ColorPalette.YELLOW_200} />
-              ) : media.socialMedia == SocialMediaType.LINKEDIN ? (
-                <LinkedinIcon size={15} color={ColorPalette.YELLOW_200} />
-              ) : (
-                <GlobeIcon size={15} color={ColorPalette.YELLOW_200} />
-              )}
-              <Text
-                style={[
-                  globalStyles.px3,
-                  globalStyles.fs14,
-                  globalStyles.fontWeightMedium,
-                  styles.link,
-                ]}
-              >
-                {media.link}
-              </Text>
-            </Pressable>
-          ))}
+          {socialMedia && <SocialButtons socialMedia={socialMedia} />}
         </View>
       </View>
     </View>
