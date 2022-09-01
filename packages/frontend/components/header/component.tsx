@@ -25,7 +25,9 @@ export const Header = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
-  const { list: categories, loading: categoriesLoading } = useTypedSelector((state) => state.category);
+  const { list: categories, loading: categoriesLoading } = useTypedSelector(
+    (state) => state.category,
+  );
 
   useEffect(() => {
     if (categories.length === 0 && !categoriesLoading) {
