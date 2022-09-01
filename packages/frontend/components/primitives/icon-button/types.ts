@@ -10,7 +10,7 @@ export type IconButtonProps = {
   isBackgroundDisplayed?: boolean;
   cssExtend?: Interpolation<Theme>;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  type: 'button' | 'submit';
+  type?: 'button' | 'submit';
 };
 
 export type BackgroundColorProp = 'lightgray' | 'darkgray' | 'transparent';

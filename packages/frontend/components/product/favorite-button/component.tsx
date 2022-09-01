@@ -21,7 +21,6 @@ export const FavoriteButton = ({
       color={color}
       backgroundColor={backgroundColor}
       size={size}
-      type="button"
     />
   );
 };
