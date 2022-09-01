@@ -1,23 +1,32 @@
 import { Button, Modal } from '@primitives';
+import { useTranslation } from 'next-i18next';
 import { actionBtns, header, mainText } from './styles';
 
 export interface ConfirmationModalProps {
   onClose: () => void;
+  onConfirm: () => void;
+  text: string;
 }
 
-export const ConfirmationModal = ({ onClose }: ConfirmationModalProps) => (
-  <Modal visible={true}>
-    <div css={header}>Confirm your action</div>
-    <div css={mainText}>
-      Are you sure to leave the auction? All bids will be deleted!
-    </div>
-    <div css={actionBtns}>
-      <Button variant="danger" size="small">
-        Confirm
-      </Button>
-      <Button onClick={onClose} size="small">
-        Cancel
-      </Button>
-    </div>
-  </Modal>
-);
+export const ConfirmationModal = ({
+  text,
+  onClose,
+  onConfirm,
+}: ConfirmationModalProps) => {
+  const { t } = useTranslation('common');
+
+  return (
+    <Modal visible={true}>
+      <div css={header}>{t('modal.confirm.header')}</div>
+      <div css={mainText}>{text}</div>
+      <div css={actionBtns}>
+        <Button onClick={onConfirm} variant="danger" size="small">
+          {t('modal.confirm.confirm')}
+        </Button>
+        <Button onClick={onClose} size="small">
+          {t('modal.confirm.cancel')}
+        </Button>
+      </div>
+    </Modal>
+  );
+};

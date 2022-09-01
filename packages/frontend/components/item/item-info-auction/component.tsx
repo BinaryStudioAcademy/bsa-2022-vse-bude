@@ -5,12 +5,16 @@ import { useTranslation } from 'next-i18next';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { useTypedSelector } from '@hooks';
+import { useAppDispatch, useTypedSelector } from '@hooks';
 import { useState } from 'react';
 import { CountDownTimer } from '../countdown-timer/component';
 import { ItemTitle, ItemInfo, ItemPrice } from '../item-info';
 import { minBidValidation } from '../validation';
 import { ConfirmationModal } from '../../modal/confirm/component';
+import {
+  auctionLeaveAction,
+  auctionPermissions,
+} from '../../../store/product-auction';
 import * as styles from './styles';
 
 interface ItemInfoAuctionProps {
@@ -29,6 +33,8 @@ export const ItemInfoAuction = ({
   const [confirmModalVisible, setModalVisible] = useState(false);
 
   const { t } = useTranslation('item');
+
+  const dispatch = useAppDispatch();
 
   const targetDate = new Date(item.endDate);
   const minBidAmount = +item.currentPrice + +item.minimalBid + 1;
@@ -54,8 +60,17 @@ export const ItemInfoAuction = ({
     setModalVisible(false);
   };
 
-  const onLeaveAuction = () => {
+  const confirmLeave = () => {
     setModalVisible(true);
+  };
+
+  const onLeaveAuction = async () => {
+    const reqData = {
+      productId: item.id,
+    };
+    await dispatch(auctionLeaveAction(reqData));
+    await dispatch(auctionPermissions(reqData));
+    onCancel();
   };
 
   return (
@@ -100,16 +115,20 @@ export const ItemInfoAuction = ({
       {!!isAbleToLeaveAuction && user && (
         <div css={styles.leaveAuctionBlock}>
           <Button
-            onClick={onLeaveAuction}
+            onClick={confirmLeave}
             variant="danger"
-            tooltip="You will be excluded from the auction and all your bids are deleted!"
+            tooltip={t('leave.tooltip')}
           >
-            Leave Auction
+            {t('leave.btnText')}
           </Button>
         </div>
       )}
       {!!isAbleToLeaveAuction && confirmModalVisible && (
-        <ConfirmationModal onClose={onCancel} />
+        <ConfirmationModal
+          onClose={onCancel}
+          onConfirm={onLeaveAuction}
+          text={t('leave.confirmText')}
+        />
       )}
     </div>
   );

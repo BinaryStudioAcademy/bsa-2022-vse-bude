@@ -4,6 +4,7 @@ import type {
   CreateBidRequest,
   Http,
   ProductDto,
+  ProductIdRequest,
   ProductType,
 } from '@vse-bude/shared';
 import { ProductApiRoutes } from '@vse-bude/shared';
@@ -86,4 +87,10 @@ export const placeBidRequest = (data: CreateBidRequest) =>
 export const fetchAuctionPermissions = (data: AuctionPermissionsRequest) =>
   http.get({
     url: `${ApiRoutes.PRODUCTS}${ProductApiRoutes.AUCTION_PERMISSIONS}?productId=${data.productId}`,
+  });
+
+export const leaveAuctionRequest = (data: ProductIdRequest) =>
+  http.post({
+    url: `${ApiRoutes.PRODUCTS}${ProductApiRoutes.AUCTION_LEAVE}?productId=${data.productId}`,
+    body: {},
   });
