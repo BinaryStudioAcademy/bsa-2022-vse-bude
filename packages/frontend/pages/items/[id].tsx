@@ -1,4 +1,4 @@
-﻿import { Layout, Item } from '@components';
+﻿import { useEffect } from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { AuthHelper, CookieStorage } from '@helpers';
 import {
@@ -6,14 +6,17 @@ import {
   getProductsSSR,
   incrementProductViews,
 } from 'services/product';
-import { LotSection } from 'components/home/lot-section';
+import { LotSection } from '@components/home/lot-section';
 import { Routes } from '@enums';
 import { Breadcrumbs } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import type { ItemDto } from '@vse-bude/shared';
 import { Http } from '@vse-bude/shared';
 import { withPublic } from '@hocs';
-import { useEffect } from 'react';
+import { Layout } from '@components/layout';
+import { Item } from '@components/item';
+import { useAppDispatch } from '@hooks';
+import { auctionPermissions } from '../../store/product-auction';
 
 export const getServerSideProps = withPublic(async (ctx) => {
   const { locale } = ctx;
@@ -54,9 +57,16 @@ interface ItemPageProps {
 const ItemPage = ({ item, similarItems }: ItemPageProps) => {
   const { t } = useTranslation();
 
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
     incrementProductViews(item.id);
-  }, [item.id]);
+    dispatch(
+      auctionPermissions({
+        productId: item.id,
+      }),
+    );
+  }, [item.id, dispatch]);
 
   return (
     <Layout title={item.title}>

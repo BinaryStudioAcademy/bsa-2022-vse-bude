@@ -1,8 +1,7 @@
 import type { FC } from 'react';
 import { useTranslation } from 'next-i18next';
-import { IconName } from '@enums';
+import { IconName, IconColor } from '@enums';
 import { Anchor, Icon } from '@primitives';
-import { IconColorProps } from '@enums';
 import { ColumnHeader } from '../common/column-header';
 import * as styles from './styles';
 import type { ContactsProps } from './types';
@@ -17,7 +16,7 @@ export const Contacts: FC<ContactsProps> = ({ email, phone }) => {
       <div css={styles.footerLinksRow}>
         <Icon
           cssExtend={styles.phone}
-          color={IconColorProps.YELLOW}
+          color={IconColor.YELLOW}
           icon={IconName.PHONE}
         />
         <Anchor
@@ -31,7 +30,7 @@ export const Contacts: FC<ContactsProps> = ({ email, phone }) => {
       <div css={styles.footerLinksRow}>
         <Icon
           cssExtend={styles.email}
-          color={IconColorProps.YELLOW}
+          color={IconColor.YELLOW}
           icon={IconName.EMAIL}
         />
         <Anchor

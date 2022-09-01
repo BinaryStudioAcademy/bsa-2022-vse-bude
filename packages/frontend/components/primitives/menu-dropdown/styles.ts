@@ -42,7 +42,7 @@ export const dropdownContent = ({
 }: Theme) => css`
   position: absolute;
   top: calc(100% + ${spaces.sm});
-  left: -20px;
+  left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -83,8 +83,10 @@ export const dropdownItem = ({
 
   &[data-variant='icon'] {
     padding: ${spaces.xs} ${spaces.md};
-    & > svg {
+    & > i {
       margin-right: ${spaces.md};
+      width: ${spaces.md};
+      text-align: center;
     }
   }
 `;

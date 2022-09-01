@@ -62,7 +62,7 @@ export const Header = () => {
       icon={IconName.LIST}
       size="md"
       onClick={() => setShow(!show)}
-      color="yellow"
+      color={IconColor.YELLOW}
     />
   );
 

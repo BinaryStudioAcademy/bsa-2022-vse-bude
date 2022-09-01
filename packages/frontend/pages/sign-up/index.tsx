@@ -17,6 +17,7 @@ export const getServerSideProps = withPublic(async ({ locale }) => ({
       'public',
       'auth',
       'personal-info',
+      'common',
     ])),
   },
 }));
