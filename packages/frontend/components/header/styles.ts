@@ -19,6 +19,10 @@ export const header = (theme: Theme) => css`
     margin: 0 ${theme.spaces.xl};
   }
 
+  .header-content {
+    margin-left: ${theme.spaces.xl5};
+  }
+
   .burger-menu-wrapper {
     display: flex;
     flex-grow: 1;

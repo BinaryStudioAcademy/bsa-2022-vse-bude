@@ -24,7 +24,16 @@ export const getServerSideProps = withPublic(
     const http = new Http(process.env.NEXT_PUBLIC_API_ROUTE);
     const id = query.id as string;
 
-    await store.dispatch(fetchProductSSR({ id, http }));
+    const { payload } = await store.dispatch(fetchProductSSR({ id, http }));
+
+    if (!payload) {
+      return {
+        redirect: {
+          destination: Routes.NOT_FOUND,
+        },
+        props: {},
+      };
+    }
 
     return {
       props: {

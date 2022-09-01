@@ -1,4 +1,3 @@
-import { Routes } from '@enums';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import type {
   AuctionPermissionsRequest,
@@ -7,8 +6,6 @@ import type {
   ProductIdRequest,
 } from '@vse-bude/shared';
 import { ProductType } from '@vse-bude/shared';
-import { HttpStatusCode } from '@vse-bude/shared';
-import Router from 'next/router';
 import {
   fetchAuctionPermissions,
   getProductByIdSSR,
@@ -72,12 +69,8 @@ export const fetchSimilarProducts = createAsyncThunk(
 export const fetchProductSSR = createAsyncThunk(
   ProductActions.FETCH_PRODUCT,
   (params: { id: string; http: Http }, { rejectWithValue }) =>
-    getProductByIdSSR(params.http, params.id).catch(async (e) => {
-      if (e.status === HttpStatusCode.NOT_FOUND) {
-        await Router.push(Routes.NOT_FOUND);
-      }
-
-      rejectWithValue(e.message);
+    getProductByIdSSR(params.http, params.id).catch(() => {
+      rejectWithValue(null);
     }),
 );
 
