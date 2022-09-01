@@ -19,4 +19,11 @@ export const common = {
   errors: {
     DID_CANCEL: 'Скасовано користувачем',
   },
+  currency: {
+    UAH: 'ГРН',
+  },
+  time: {
+    HOURS_SHORT: 'г',
+    MINUTES_SHORT: 'хв',
+  },
 };

@@ -19,4 +19,11 @@ export const common = {
   errors: {
     didCancel: 'Cancelled by user',
   },
+  currency: {
+    UAH: 'UAH',
+  },
+  time: {
+    HOURS_SHORT: 'h',
+    MINUTES_SHORT: 'min',
+  },
 };

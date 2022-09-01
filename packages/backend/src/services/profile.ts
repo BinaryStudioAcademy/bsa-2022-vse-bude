@@ -2,17 +2,16 @@ import type { TFunction } from 'i18next';
 import type { UserProfileRepository } from '@repositories';
 import type {
   UpdateUserProfileDto,
-  UserSocialMediaDto,
   UpdatePasswordDto,
-  UploadFileRequest,
-} from '@types';
+  SocialMedia,
+} from '@vse-bude/shared';
+import type { UploadFileRequest } from '@types';
 import {
   HttpStatusCode,
   UserPersonalInfoValidationMessage,
 } from '@vse-bude/shared';
-import type { HashService } from '@services';
+import type { HashService, S3StorageService } from '@services';
 import { ProfileError } from '@errors';
-import type { S3StorageService } from '@services';
 import { getFilenameFromUrl } from '@helpers';
 
 export class UserProfileService {
@@ -126,17 +125,19 @@ export class UserProfileService {
     });
   }
 
-  public updateUserSocialMedia({
+  public async updateUserSocialMedia({
     userId,
     socialMedia,
   }: {
     userId: string;
-    socialMedia: UserSocialMediaDto[];
+    socialMedia: SocialMedia[];
   }) {
-    return this._userProfileRepository.updateUserSocialMedia({
+    await this._userProfileRepository.updateUserSocialMedia({
       userId,
       socialMedia,
     });
+
+    return {};
   }
 
   public async changePassword({
@@ -172,8 +173,7 @@ export class UserProfileService {
     }
 
     const newPasswordHash = this._hashService.generateHash(newPassword);
-
-    this._userProfileRepository.changePassword({
+    await this._userProfileRepository.changePassword({
       userId,
       passwordHash: newPasswordHash,
     });

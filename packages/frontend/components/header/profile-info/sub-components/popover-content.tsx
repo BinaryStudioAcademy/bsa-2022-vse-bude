@@ -1,4 +1,4 @@
-import { ProfileRoutes, Routes, IconName } from '@enums';
+import { ProfileRoutes, Routes, IconName, IconColor } from '@enums';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { Icon } from '@primitives';
 import { useTranslation } from 'next-i18next';
@@ -33,7 +33,7 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
         path-label={`${Routes.PROFILE}/${userId}${ProfileRoutes.PERSONAL_INFO}`}
         data-variant="icon"
       >
-        <Icon icon={IconName.USER} color="yellow" />
+        <Icon icon={IconName.USER} color={IconColor.YELLOW} />
         <span>{t('common:header.popover.personalInfo')}</span>
       </button>
       <button
@@ -42,7 +42,7 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
         path-label={`${Routes.PROFILE}/${userId}${ProfileRoutes.LIST}`}
         data-variant="icon"
       >
-        <Icon icon={IconName.LIST} color="yellow" />
+        <Icon icon={IconName.LIST} color={IconColor.YELLOW} />
         <span>{t('common:header.popover.myList')}</span>
       </button>
       <button
@@ -51,7 +51,7 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
         path-label={`${Routes.PROFILE}/${userId}${ProfileRoutes.ACCOUNT_SETTINGS}`}
         data-variant="icon"
       >
-        <Icon icon={IconName.SETTINGS} color="yellow" />
+        <Icon icon={IconName.SETTINGS} color={IconColor.YELLOW} />
         <span>{t('common:header.popover.settings')}</span>
       </button>
       <button
@@ -60,7 +60,7 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
         path-label={`${Routes.PROFILE}/${userId}${ProfileRoutes.MESSAGES}`}
         data-variant="icon"
       >
-        <Icon icon={IconName.MESSAGE} color="yellow" />
+        <Icon icon={IconName.MESSAGE} color={IconColor.YELLOW} />
         <span>{t('common:header.popover.messages')}</span>
       </button>
       <button
@@ -69,7 +69,7 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
         path-label={`${Routes.PROFILE}/${userId}${ProfileRoutes.SUPPORT}`}
         data-variant="icon"
       >
-        <Icon icon={IconName.SUPPORT} color="yellow" />
+        <Icon icon={IconName.SUPPORT} color={IconColor.YELLOW} />
         <span>{t('common:header.popover.support')}</span>
       </button>
       <button
@@ -79,7 +79,7 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
         }}
         data-variant="icon"
       >
-        <Icon icon={IconName.SIGN_OUT} color="yellow" />
+        <Icon icon={IconName.SIGN_OUT} color={IconColor.YELLOW} />
         <span>{t('common:header.popover.signOut')}</span>
       </button>
     </div>
