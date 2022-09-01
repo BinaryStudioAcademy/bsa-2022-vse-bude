@@ -8,6 +8,7 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { useState } from 'react';
 import { IconColor } from '@enums';
+import type { PlaceBidResponse } from '@vse-bude/shared';
 import { CountDownTimer } from '../countdown-timer/component';
 import { ItemTitle, ItemInfo, ItemPrice } from '../item-info';
 import { minBidValidation } from '../validation';
@@ -16,45 +17,58 @@ import {
   auctionLeaveAction,
   auctionPermissions,
 } from '../../../store/product-auction';
+import { makeBid } from '../../../store/product';
 import * as styles from './styles';
 
 interface ItemInfoAuctionProps {
   item: ItemDto;
   isInFavorite: boolean;
-  onBid: (data: CreateBidRequest) => void;
   onChangeIsFavorite: () => void;
 }
 
 export const ItemInfoAuction = ({
   item,
   isInFavorite,
-  onBid,
   onChangeIsFavorite,
 }: ItemInfoAuctionProps) => {
-  const [confirmModalVisible, setModalVisible] = useState(false);
-
   const { t } = useTranslation('item');
+  const [confirmModalVisible, setModalVisible] = useState(false);
+  const minBidAmount = +item.currentPrice + +item.minimalBid + 1;
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm<CreateBidRequest>({
+    resolver: joiResolver(minBidValidation(+minBidAmount, t)),
+  });
 
   const dispatch = useAppDispatch();
 
+  const handleBid = ({ price }: CreateBidRequest) => {
+    dispatch(
+      makeBid({
+        price: price,
+        productId: item.id,
+      }),
+    )
+      .unwrap()
+      .then(({ price }: PlaceBidResponse) => {
+        item.currentPrice = +price;
+        setValue('price', null);
+      });
+  };
+
   const targetDate = new Date(item.endDate);
-  const minBidAmount = +item.currentPrice + +item.minimalBid + 1;
 
   const {
     permissions: { isAbleToLeaveAuction },
   } = useTypedSelector((state) => state.auction);
   const { user } = useTypedSelector((state) => state.auth);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<CreateBidRequest>({
-    resolver: joiResolver(minBidValidation(+minBidAmount, t)),
-  });
-
   const onMakeBid: SubmitHandler<CreateBidRequest> = (data) => {
-    onBid(data);
+    handleBid(data);
   };
 
   const onCancel = () => {

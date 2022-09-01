@@ -17,7 +17,7 @@ export const mainText = ({ fontSizes, fontWeights, colors }: Theme) => css`
 export const actionBtns = css`
   display: flex;
   justify-content: center;
-  & button:first-child {
+  & button:first-of-type {
     margin-right: 10px;
   }
 `;

@@ -7,6 +7,7 @@ import {
   placeBidRequest,
 } from 'services/product';
 import { addToast } from 'store/toast/actions';
+import { auctionPermissions } from '../product-auction';
 import { ProductActions } from './action-types';
 
 interface RequestOptions {
@@ -55,6 +56,11 @@ export const makeBid = createAsyncThunk(
         addToast({
           level: 'success',
           description: (t) => t('common:notifications.bidPlaced'),
+        }),
+      );
+      dispatch(
+        auctionPermissions({
+          productId: data.productId,
         }),
       );
 

@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { HydrateAction } from '@types';
 import type { ProductDto } from '@vse-bude/shared';
 import { HYDRATE } from 'next-redux-wrapper';
-import { fetchProducts } from './actions';
+import { fetchProducts, makeBid } from './actions';
 
 interface ProductState {
   list: ProductDto[];
@@ -31,6 +31,10 @@ const productSlice = createSlice({
     },
     [HYDRATE](state, { payload }: HydrateAction) {
       state.list = payload.product.list;
+    },
+    [makeBid.fulfilled.type](state, { payload }) {
+      console.log('pay');
+      console.log(payload);
     },
   },
 });
