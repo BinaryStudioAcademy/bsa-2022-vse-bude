@@ -9,7 +9,7 @@ export const toastStack = () => css`
   right: 0;
   height: 100%;
   padding: 30px;
-  z-index: 125;
+  z-index: 1000;
   overflow: hidden;
   :empty {
     display: none;

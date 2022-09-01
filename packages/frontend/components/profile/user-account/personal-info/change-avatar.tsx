@@ -87,9 +87,8 @@ const ChangeAvatar = () => {
 
       <Popover
         trigger={
-          <IconButton
+          <Icon
             icon={IconName.CAMERA}
-            backgroundColor="lightgray"
             color={IconColor.GRAY}
             cssExtend={styles.avatarUpdateButton}
           />
