@@ -106,10 +106,10 @@ export const ItemInfoAuction = ({
             type="submit"
             disabled={!user || !user.phoneVerified}
             tooltip={
-              user.phoneVerified
-                ? t('buttons.placeBid')
-                : user
-                ? t('buttons.tooltips.notVerified.placeBid')
+              user
+                ? user.phoneVerified
+                  ? t('buttons.placeBid')
+                  : t('buttons.tooltips.notVerified.placeBid')
                 : t('buttons.tooltips.notAuthorized.placeBid')
             }
           >
