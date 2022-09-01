@@ -1,24 +1,17 @@
-import type { UserProfileDto } from '@vse-bude/shared';
-import { SocialMediaType } from '@vse-bude/shared';
+import { ApiRoutes, HttpContentType, ProfileApiRoutes } from '@vse-bude/shared';
+import type { Http } from '@vse-bude/shared';
+import { http } from '@helpers';
 
-// import { ApiRoutes } from "@vse-bude/shared";
+export const getUserProfileSSR = (params: { userId: string; http: Http }) =>
+  params.http.get({ url: `${ApiRoutes.PROFILE}/${params.userId}` });
 
-export const getUserProfileSSR = (_params): Promise<UserProfileDto> =>
-  Promise.resolve({
-    id: '21sdasds',
-    firstName: 'Vasyl',
-    lastName: 'Lukash',
-    socialMedia: [
-      {
-        socialMedia: SocialMediaType.FACEBOOK,
-        link: 'https://uk-ua.facebook.com/',
-        id: '12345',
-      },
-      { socialMedia: SocialMediaType.INSTAGRAM, link: '#', id: '67891' },
-      { socialMedia: SocialMediaType.LINKEDIN, link: '#', id: '01112' },
-    ],
+export const updateAvatar = (file: FormData) =>
+  http.put({
+    url: `${ApiRoutes.PROFILE}${ProfileApiRoutes.UPDATE_AVATAR}`,
+    body: file ? file : null,
+    options: {
+      contentType: file
+        ? HttpContentType.FORM_DATA
+        : HttpContentType.APPLICATION_JSON,
+    },
   });
-// (params: { userId: string, http: Http }) =>
-// params.http.get({
-//   url: `${ApiRoutes.PROFILE}/${params.userId}`,
-// });

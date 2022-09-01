@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { HydrateAction } from '@types';
 import type { UserAddressDto, UserProfileDto } from '@vse-bude/shared';
 import { HYDRATE } from 'next-redux-wrapper';
-import { fetchUserProfileSSR } from './actions';
+import { updateUserAvatar, fetchUserProfileSSR } from './actions';
 
 interface ProfileState {
   user: UserProfileDto | null;
@@ -23,6 +23,17 @@ const profileSlice = createSlice({
   extraReducers: {
     [fetchUserProfileSSR.fulfilled.type]: (state, { payload }) => {
       state.user = payload;
+    },
+    [updateUserAvatar.pending.type]: (state, { _payload }) => {
+      state.loading = true;
+      state.user.avatar = null;
+    },
+    [updateUserAvatar.fulfilled.type]: (state, { payload }) => {
+      state.user.avatar = payload.avatar;
+      state.loading = false;
+    },
+    [updateUserAvatar.rejected.type]: (state, { _payload }) => {
+      state.loading = false;
     },
     [HYDRATE](state, { payload }: HydrateAction) {
       if (payload.profile.user) {
