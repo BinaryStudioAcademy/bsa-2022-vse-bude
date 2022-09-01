@@ -17,15 +17,10 @@ const initialState: VerifyModalState = {
 };
 
 export const verifyModalReducer = createReducer(initialState, {
-  [showVerifyModal.type]: (state) => {
-    console.log('obama');
-    console.log(state);
-
-    return {
-      ...state,
-      isVerifyPhoneModalOpen: true,
-    };
-  },
+  [showVerifyModal.type]: (state) => ({
+    ...state,
+    isVerifyPhoneModalOpen: true,
+  }),
   [hideVerifyModal.type]: (state) => ({
     ...state,
     isVerifyPhoneModalOpen: false,
