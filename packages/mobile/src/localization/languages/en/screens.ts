@@ -97,7 +97,6 @@ export const screens = {
     COUNTRY: 'Country',
     CITY: 'City',
     MOBILE_PHONE: 'Mobile Phone',
-    MOBILE_PHONE_PLACEHOLDER: '+380 ()',
     PHONE_TOOLTIP: 'Info about phone',
     CALLING_CODE: 'Calling Code',
     INSTAGRAM: 'Instagram',

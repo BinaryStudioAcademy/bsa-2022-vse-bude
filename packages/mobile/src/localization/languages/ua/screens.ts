@@ -96,7 +96,6 @@ export const screens = {
     COUNTRY: 'Країна',
     CITY: 'Місто',
     MOBILE_PHONE: 'Телефон',
-    MOBILE_PHONE_PLACEHOLDER: '+380 ()',
     PHONE_TOOLTIP: 'Інформація про телефон',
     CALLING_CODE: 'Код',
     INSTAGRAM: 'Instagram',

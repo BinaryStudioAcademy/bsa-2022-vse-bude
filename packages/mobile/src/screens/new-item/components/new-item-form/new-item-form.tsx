@@ -1,5 +1,5 @@
-import { ColorPalette, IPostForms } from '@vse-bude/shared';
 import React, { FC } from 'react';
+import { ColorPalette, IPostForms } from '@vse-bude/shared';
 import {
   DropDown,
   Input,
@@ -102,7 +102,6 @@ const NewItemForm: FC = () => {
         ]}
       >
         <Input
-          label=""
           placeholder={t('make_a_post.PRICE_PLACEHOLDER')}
           name="price"
           control={control}
@@ -180,8 +179,7 @@ const NewItemForm: FC = () => {
         ]}
       >
         <Input
-          label=""
-          placeholder={t('make_a_post.MOBILE_PHONE_PLACEHOLDER')}
+          placeholder={'+380 ()'}
           name="phone"
           control={control}
           errors={errors}

@@ -12,7 +12,7 @@ import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 
 type Props<T extends FormControlValues> = {
-  label: string;
+  label?: string;
   name: FormControlPath<T>;
   control: FormControl<T>;
   errors: FormControlErrors<T>;
@@ -22,7 +22,7 @@ type Props<T extends FormControlValues> = {
 };
 
 const Input = <T extends FormControlValues>({
-  label,
+  label = '',
   name,
   control,
   errors,
