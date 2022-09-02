@@ -16,6 +16,7 @@ export const linkStyles = ({
   &[aria-disabled='true'] {
     color: ${colors.disabled};
     pointer-events: none;
+    cursor: not-allowed;
   }
 
   &[data-variant='default'] {
@@ -67,10 +68,5 @@ export const linkStyles = ({
     font-weight: ${fontWeights.tub};
     line-height: ${lineHeights.tub};
     color: ${colors.text};
-  }
-
-  :disabled {
-    color: ${colors.disabled};
-    cursor: not-allowed;
   }
 `;
