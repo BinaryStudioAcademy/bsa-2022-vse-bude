@@ -1,5 +1,5 @@
 ﻿import type { CreateBidRequest, ItemDto } from '@vse-bude/shared';
-import { Button, Input } from '@primitives';
+import { Button, Input, Tooltip } from '@primitives';
 import dynamic from 'next/dynamic';
 import { FavoriteButton } from 'components/product/favorite-button/component';
 import { useTranslation } from 'next-i18next';
@@ -104,6 +104,25 @@ export const ItemInfoAuction = ({
         </div>
 
         <div css={styles.buttons}>
+          <Tooltip
+            trigger={
+              <FavoriteButton
+                cssExtended={styles.favouriteButton}
+                onChangeIsFavorite={onChangeIsFavorite}
+                isFavorite={isInFavorite}
+                backgroundColor="transparent"
+                inFavouriteColor={IconColor.YELLOW}
+                notInFavouriteColor={IconColor.YELLOW}
+                size="md"
+              />
+            }
+          >
+            {user
+              ? isInFavorite
+                ? t('buttons.tooltips.favBtnRemove')
+                : t('buttons.tooltips.favBtn')
+              : t('buttons.tooltips.notAuthorized.favBtn')}
+          </Tooltip>
           <Button
             type="submit"
             disabled={!user || !user.phoneVerified}
@@ -117,15 +136,6 @@ export const ItemInfoAuction = ({
           >
             {t('buttons.placeBid')}
           </Button>
-          <FavoriteButton
-            cssExtended={styles.favouriteButton}
-            onChangeIsFavorite={onChangeIsFavorite}
-            isFavorite={isInFavorite}
-            backgroundColor="transparent"
-            inFavouriteColor={IconColor.YELLOW}
-            notInFavouriteColor={IconColor.YELLOW}
-            size="md"
-          />
         </div>
       </form>
       {!!isAbleToLeaveAuction && user && (
