@@ -33,7 +33,6 @@ export const button = ({
     :disabled {
       background: ${colors.disabled};
       pointer-events: none;
-      cursor: not-allowed;
     }
   }
 
@@ -57,7 +56,6 @@ export const button = ({
       border: 1px solid ${colors.disabled};
       color: ${colors.disabled};
       pointer-events: none;
-      cursor: not-allowed;
     }
   }
 
@@ -84,5 +82,11 @@ export const button = ({
       border-radius: ${radiuses.md};
       padding: 0 ${spaces.xl2};
     }
+  }
+`;
+
+export const buttonWrapper = () => css`
+  &[disabled-button='true']{
+    cursor: not-allowed;
   }
 `;
