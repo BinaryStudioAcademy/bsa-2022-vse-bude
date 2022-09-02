@@ -41,7 +41,10 @@ const MyList: FC = () => {
         </TouchableOpacity>
       )}
       {user && (
-        <TouchableOpacity onPress={handleCreateNewAuctionPress} style={styles.row}>
+        <TouchableOpacity
+          onPress={handleCreateNewAuctionPress}
+          style={styles.row}
+        >
           <PlusIcon size={30} style={styles.icon} />
           <Text style={styles.btnText}>{t('make_a_post.AUCTION_TITLE')}</Text>
         </TouchableOpacity>

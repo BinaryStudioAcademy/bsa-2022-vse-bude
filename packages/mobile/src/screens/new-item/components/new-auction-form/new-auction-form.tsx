@@ -86,7 +86,7 @@ const NewAuctionForm: FC = () => {
           onChange={(_, selectedDate) => {
             setOpenDate(false);
             const currentDate = dayjs(selectedDate).format('DD/MM/YYYY');
-            setDate(selectedDate ?? new Date() );
+            setDate(selectedDate ?? new Date());
             setValue('endDate', currentDate);
           }}
         />
@@ -117,7 +117,7 @@ const NewAuctionForm: FC = () => {
           onChange={(_, selectedTime) => {
             setOpenTime(false);
             const currentTime = dayjs(selectedTime).format('HH:mm');
-            setTime(selectedTime ?? new Date() );
+            setTime(selectedTime ?? new Date());
             setValue('endTime', currentTime);
           }}
         />

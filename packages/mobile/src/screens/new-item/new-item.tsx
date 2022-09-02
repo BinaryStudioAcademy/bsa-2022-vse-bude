@@ -18,9 +18,7 @@ const NewItemScreen: FC = () => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => (
-        <HeaderSave onPress={handleSaveForm} />
-      ),
+      headerRight: () => <HeaderSave onPress={handleSaveForm} />,
     });
   }, [navigation]);
 
