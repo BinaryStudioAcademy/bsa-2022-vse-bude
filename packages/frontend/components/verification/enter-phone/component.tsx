@@ -10,7 +10,7 @@ import * as styles from '../styles';
 
 const EnterPhoneModal = () => {
   const dispatch = useAppDispatch();
-  const { variant } = useTypedSelector((state) => state.verify);
+  const { variant } = useTypedSelector((state) => state.modals);
 
   const { t } = useTranslation();
 

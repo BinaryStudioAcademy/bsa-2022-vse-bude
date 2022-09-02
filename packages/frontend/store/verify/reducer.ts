@@ -6,17 +6,19 @@ import {
   showVerifyModal,
 } from './actions';
 
-interface VerifyModalState {
+interface ModalsState {
   isVerifyPhoneModalOpen: boolean;
-  variant: number;
+  variant: number; 
+  isCreatePostModalShown: boolean;
 }
 
-const initialState: VerifyModalState = {
+const initialState: ModalsState = {
   isVerifyPhoneModalOpen: false,
   variant: 0,
+  isCreatePostModalShown: false,
 };
 
-export const verifyModalReducer = createReducer(initialState, {
+export const modalsReducer = createReducer(initialState, {
   [showVerifyModal.type]: (state) => ({
     ...state,
     isVerifyPhoneModalOpen: true,
@@ -35,4 +37,4 @@ export const verifyModalReducer = createReducer(initialState, {
   }),
 });
 
-export type { VerifyModalState };
+export type { ModalsState };

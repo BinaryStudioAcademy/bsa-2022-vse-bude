@@ -8,7 +8,7 @@ import { SuccessModal } from './success-verification/component';
 
 const VerificationModal = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const { variant } = useTypedSelector((state) => state.verify);
+  const { variant } = useTypedSelector((state) => state.modals);
   const dispatch = useAppDispatch();
   const { hasToken } = useAuth();
   const isMounted = useMounted();
