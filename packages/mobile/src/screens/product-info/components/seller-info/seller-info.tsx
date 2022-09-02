@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { AuthorDto, ColorPalette, SocialMedia } from '@vse-bude/shared';
-import { globalStyles } from '~/styles/styles';
 import { Text, View, Image, PhoneIcon } from '~/components/components';
 import { MOCK_SELLER } from '~/mock/mock-seller-info';
+import { globalStyles } from '~/styles/styles';
+import { AuthorDto, ColorPalette, SocialMedia } from '@vse-bude/shared';
+import { SocialButton } from './social-button';
 import { styles } from './styles';
-import { SocialButtons } from './social-buttons';
 
 type SellerInfoProps = Partial<AuthorDto & SocialMedia>;
 
@@ -91,7 +91,9 @@ const SellerInfo: FC<SellerInfoProps> = () => {
               {phone || ''}
             </Text>
           </View>
-          {socialMedia && <SocialButtons socialMedia={socialMedia} />}
+          {socialMedia.map((media) => (
+            <SocialButton type={media.socialMedia} link={media.link} />
+          ))}
         </View>
       </View>
     </View>
