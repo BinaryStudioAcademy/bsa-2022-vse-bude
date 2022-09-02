@@ -17,6 +17,7 @@ const SellerInfo: FC<SellerInfoProps> = () => {
     <View
       style={[
         styles.wrapper,
+        globalStyles.mt5,
         globalStyles.ml4,
         globalStyles.mr4,
         globalStyles.px6,

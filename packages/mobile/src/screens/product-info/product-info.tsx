@@ -16,6 +16,7 @@ import { Description } from './components/description/description';
 import { ImageCarousel } from './components/image-carousel/image-carousel';
 import { LotPriceBlock } from './components/price-block/lot-price-block';
 import { ProductPriceBlock } from './components/price-block/product-price-block';
+import { SellerInfo } from './components/seller-info/seller-info';
 
 const ProductInfo: FC = () => {
   const { colors } = useCustomTheme();
@@ -79,7 +80,7 @@ const ProductInfo: FC = () => {
           status={status}
           endDate={endDate}
         />
-        {/** TODO: add seller info component */}
+        <SellerInfo />
       </ScrollView>
       {type == ProductType.SELLING ? (
         <LotPriceBlock

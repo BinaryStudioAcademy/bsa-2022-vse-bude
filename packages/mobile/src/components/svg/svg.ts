@@ -1,2 +1,2 @@
-export { DotSvg } from '~/components/svg/dot/dot';
-export { PlusSvg } from '~/components/svg/plus/plus';
+export { DotSvg } from './dot/dot';
+export { PlusSvg } from './plus/plus';
