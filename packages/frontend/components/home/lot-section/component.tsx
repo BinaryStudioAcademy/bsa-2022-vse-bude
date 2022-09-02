@@ -22,7 +22,7 @@ const LotSection = ({ title, lots, loadMoreTitle }: LotProps) => {
           options={{
             role: 'region',
             fixedWidth: 360,
-            focus: 'center',
+            focus: 0,
             pagination: false,
             trimSpace: true,
             updateOnMove: true,
@@ -31,8 +31,14 @@ const LotSection = ({ title, lots, loadMoreTitle }: LotProps) => {
             direction: 'ltr',
             mediaQuery: 'max',
             breakpoints: {
+              [lightTheme.breakpoints.sm]: {
+                fixedWidth: 300,
+              },
               [lightTheme.breakpoints.md]: {
-                fixedWidth: 320,
+                arrows: false,
+              },
+              [lightTheme.breakpoints.xl]: {
+                fixedWidth: 340,
               },
             },
           }}
