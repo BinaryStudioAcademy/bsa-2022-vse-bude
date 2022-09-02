@@ -16,7 +16,7 @@ const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const [theme] = useState(colorSchemes['light']);
 
   useInsertionEffect(() => {
-    document.html.style.opacity = '1';
+    document.body.style.opacity = '1';
   }, []);
 
   return (
