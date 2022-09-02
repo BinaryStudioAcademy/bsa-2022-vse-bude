@@ -150,7 +150,7 @@ int getMyVersionCode = { ->
 }
 
 // get version name from the specified property argument `-PversionName` during the build call
-def getMyVersionName = { ->
+def getMyVersionName() = {
     return project.hasProperty('versionName') ? versionName : "1.0"
 }
 
