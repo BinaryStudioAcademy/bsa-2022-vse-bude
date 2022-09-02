@@ -1,4 +1,4 @@
-﻿import { useMouseLeave } from 'hooks/use-mouse-leave';
+﻿import { useMouseLeave } from '@hooks';
 import { Fragment, useRef, useEffect, useState, useCallback } from 'react';
 import * as ReactDOM from 'react-dom';
 import * as styles from './styles';
