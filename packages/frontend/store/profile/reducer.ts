@@ -13,6 +13,7 @@ interface ProfileState {
   user: UserProfileDto | FullUserProfileDto | null;
   isEditing: boolean;
   loading: boolean;
+  saveLoader: boolean;
   error: string;
 }
 
@@ -20,6 +21,7 @@ const initialState: ProfileState = {
   user: null,
   isEditing: false,
   loading: false,
+  saveLoader: false,
   error: null,
 };
 
@@ -60,11 +62,16 @@ const profileSlice = createSlice({
     },
 
     [updateUserProfile.fulfilled.type]: (state, { payload }) => {
-      state.loading = false;
+      state.saveLoader = false;
       state.user = payload;
     },
+
+    [updateUserProfile.pending.type]: (state) => {
+      state.saveLoader = true;
+    },
+
     [updateUserProfile.rejected.type]: (state, { payload }) => {
-      state.loading = false;
+      state.saveLoader = false;
       state.error = payload;
     },
 

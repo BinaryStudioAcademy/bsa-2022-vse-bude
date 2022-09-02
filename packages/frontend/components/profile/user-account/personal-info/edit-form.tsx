@@ -3,24 +3,31 @@ import { useAppDispatch, useTypedSelector } from '@hooks';
 import type React from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-import { Input, PasswordInput, Column, Flex, Button } from '@primitives';
+import {
+  Input,
+  PasswordInput,
+  Column,
+  Flex,
+  Button,
+  Loader,
+} from '@primitives';
 import { userUpdateSchema } from 'validation-schemas/user/user-update';
 import type { SaveUserProfileDto, FullUserProfileDto } from '@vse-bude/shared';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { UserPersonalInfoValidationMessage } from '@vse-bude/shared';
 import { profileMapper, updateDtoMapper } from '@helpers';
 import { updateUserProfile, setIsEditing } from '@store';
 import { useEffect, useState } from 'react';
 import type { RootState } from '@types';
 import { SectionHeader, NestedLayout } from '../common';
 import * as styles from './styles';
+import { onChangeNewPassword } from './utils';
 
 const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
   const [isSubmit, setIsSubmit] = useState(false);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
-  const { loading } = useTypedSelector((state: RootState) => state.profile);
+  const { saveLoader } = useTypedSelector((state: RootState) => state.profile);
 
   const {
     register,
@@ -31,7 +38,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    mode: 'onChange',
+    //mode: 'onChange',
     defaultValues: profileMapper({ user }),
     resolver: joiResolver(userUpdateSchema(t)),
   });
@@ -52,20 +59,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     clearErrors('newPassword');
-    if (value.includes(' ')) {
-      setError('newPassword', {
-        message: t(UserPersonalInfoValidationMessage.SPACES_IN_PASSWORD),
-      });
-    } else if (/^[А-ЯЁIЇҐЄЂЃЀЅЍЈЉЊЋЌЎа-яёіїґєђѓѐѕѝјљњћќў]+$/.test(value)) {
-      setError('newPassword', {
-        message: t(UserPersonalInfoValidationMessage.CYRILLIC),
-      });
-    } else if (
-      !/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z~!@#$%^*\-_=+[{\]}/;:,.?]+$/.test(
-        value,
-      )
-    )
-      setValue('newPassword', event.target.value);
+    onChangeNewPassword({ value, t, setError, setValue });
   };
   const onResetHandler = () => {
     reset(profileMapper({ user }), {
@@ -99,13 +93,17 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
               size="flexible"
               type="button"
               variant="outlined"
-              disabled={loading}
+              disabled={saveLoader}
               onClick={onResetHandler}
             >
               {t('personal-info:action.cancel')}
             </Button>
-            <Button size="flexible" type="submit" disabled={loading}>
-              {t('personal-info:action.save')}
+            <Button size="flexible" type="submit" disabled={saveLoader}>
+              {saveLoader ? (
+                <Loader size={'extraSmall'} />
+              ) : (
+                t('personal-info:action.save')
+              )}
             </Button>
           </Flex>
         </div>

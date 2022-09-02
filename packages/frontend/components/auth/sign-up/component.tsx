@@ -5,7 +5,7 @@ import type { UserSignUpDto } from '@vse-bude/shared';
 import { useTranslation } from 'next-i18next';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useAppDispatch, useTypedSelector } from '@hooks';
-import { UserPersonalInfoValidationMessage } from '@vse-bude/shared';
+// import { UserPersonalInfoValidationMessage } from '@vse-bude/shared';
 import { signUpSchema } from 'validation-schemas/user/sign-up';
 import { form, headline, inputWrapper } from '../layout/styles';
 import { signUpUser } from '../../../store/auth';
@@ -19,12 +19,12 @@ export const SignUpForm = () => {
   const {
     register,
     handleSubmit,
-    setError,
-    setValue,
-    clearErrors,
+    // setError,
+    // setValue,
+    // clearErrors,
     formState: { errors },
   } = useForm<UserSignUpDto>({
-    mode: 'onChange',
+    //mode: 'onChange',
     resolver: joiResolver(signUpSchema(t)),
   });
 
@@ -32,21 +32,21 @@ export const SignUpForm = () => {
     dispatch(signUpUser(data));
   };
 
-  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    clearErrors('password');
-    if (value.includes(' ')) {
-      setError('password', {
-        message: t(UserPersonalInfoValidationMessage.SPACES_IN_PASSWORD),
-      });
-    } else if (/^[А-ЯЁIЇҐЄЂЃЀЅЍЈЉЊЋЌЎа-яёіїґєђѓѐѕѝјљњћќў]+$/.test(value)) {
-      setError('password', {
-        message: t(UserPersonalInfoValidationMessage.CYRILLIC),
-      });
-    } else {
-      setValue('password', event.target.value);
-    }
-  };
+  // const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const value = event.target.value;
+  //   clearErrors('password');
+  //   if (value.includes(' ')) {
+  //     setError('password', {
+  //       message: t(UserPersonalInfoValidationMessage.SPACES_IN_PASSWORD),
+  //     });
+  //   } else if (/^[А-ЯЁIЇҐЄЂЃЀЅЍЈЉЊЋЌЎа-яёіїґєђѓѐѕѝјљњћќў]+$/.test(value)) {
+  //     setError('password', {
+  //       message: t(UserPersonalInfoValidationMessage.CYRILLIC),
+  //     });
+  //   } else {
+  //     setValue('password', event.target.value);
+  //   }
+  // };
 
   const onCutHandler = (event: React.ClipboardEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -114,7 +114,7 @@ export const SignUpForm = () => {
       </div>
       <div css={inputWrapper}>
         <PasswordInput
-          {...(register('password'), { onChange: onChangeHandler })}
+          {...register('password')}
           label={t('auth:sign-up.password')}
           variant="primary"
           name="password"
