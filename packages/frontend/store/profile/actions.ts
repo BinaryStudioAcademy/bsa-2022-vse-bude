@@ -45,7 +45,8 @@ export const updateUserProfile = createAsyncThunk(
             description: e.message,
           }),
         );
-        rejectWithValue(e.message);
+
+        return rejectWithValue(e.message);
       }),
 );
 
