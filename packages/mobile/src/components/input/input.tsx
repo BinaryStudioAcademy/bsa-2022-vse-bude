@@ -72,7 +72,7 @@ const Input = <T extends FormControlValues>({
           style={[
             styles.input,
             {
-              color: colors.text,
+              color: colors.blackColor,
               backgroundColor: colors.backgroundElements,
               borderColor: error ? colors.error : colors.backgroundElements,
             },
