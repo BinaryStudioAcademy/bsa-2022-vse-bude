@@ -13,20 +13,22 @@ export const Button = ({
 }: ButtonProps) => (
   <Tooltip
     trigger={
-      <div css={styles.buttonWrapper} disabled-button={props.disabled ? 'true' : 'false'}>
-        <button
-        css={styles.button}
-        style={{ width: props.width }}
-        type={type}
-        data-variant={variant}
-        data-size={size}
-        onClick={onClick}
-        {...props}
+      <div
+        css={styles.buttonWrapper}
+        disabled-button={props.disabled ? 'true' : 'false'}
       >
-        {children}
-      </button>
+        <button
+          css={styles.button}
+          style={{ width: props.width }}
+          type={type}
+          data-variant={variant}
+          data-size={size}
+          onClick={onClick}
+          {...props}
+        >
+          {children}
+        </button>
       </div>
-      
     }
   >
     {tooltip}

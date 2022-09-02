@@ -86,7 +86,7 @@ export const button = ({
 `;
 
 export const buttonWrapper = () => css`
-  &[disabled-button='true']{
+  &[disabled-button='true'] {
     cursor: not-allowed;
   }
 `;
