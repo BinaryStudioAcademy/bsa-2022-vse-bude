@@ -159,9 +159,3 @@ export const popoverContentWrapper = ({ spaces, shadows }: Theme) => css`
   padding: ${spaces.sm} 0;
   box-shadow: ${shadows.bottom};
 `;
-
-export const popover = (scrollTop) => css`
-  transform: translateY(${scrollTop}px);
-  position: absolute;
-  z-index: 0;
-`;

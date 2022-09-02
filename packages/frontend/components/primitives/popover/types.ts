@@ -4,9 +4,11 @@ import type { Interpolation, Theme } from '@emotion/react';
 export interface PopoverProps {
   trigger: ReactNode | ((params: { isOpen: boolean }) => ReactNode);
   children: (callback: () => void) => ReactNode;
-  placement?: PopoverPosition;
+  position?: PopoverPosition;
+  placement?: PopoverPlacement;
   bodyWrapperCssExtend?: Interpolation<Theme>;
   triggerWrapperCssExtend?: Interpolation<Theme>;
 }
 
-export type PopoverPosition = 'bottom-left' | 'bottom-right';
+export type PopoverPlacement = 'bottom-left' | 'bottom-right';
+export type PopoverPosition = 'fixed' | 'absolute';

@@ -9,6 +9,7 @@ export const Popover = ({
   trigger,
   children,
   placement = 'bottom-right',
+  position = 'fixed',
   bodyWrapperCssExtend,
   triggerWrapperCssExtend,
 }: PopoverProps) => {
@@ -32,7 +33,9 @@ export const Popover = ({
     const triggerRectParams = getTriggerRectParams();
     const bodyRectParams = getBodyRectParams();
 
-    const bodyTop = triggerRectParams.top + triggerRectParams.height;
+    let bodyTop = triggerRectParams.top + triggerRectParams.height;
+    bodyTop += position === 'absolute' ? window.scrollY : 0;
+
     let bodyRight = triggerRectParams.left;
     bodyRight +=
       placement === 'bottom-right'
@@ -40,7 +43,7 @@ export const Popover = ({
         : 0;
 
     return [bodyTop, bodyRight];
-  }, [getBodyRectParams, placement]);
+  }, [getBodyRectParams, placement, position]);
 
   const setPopoverPosition = useCallback(() => {
     if (bodyRef.current) {
@@ -76,7 +79,14 @@ export const Popover = ({
   const handleClose = useCallback(() => setIsVisible(false), []);
 
   const renderPortalBody = () => (
-    <div ref={bodyRef} css={[styles.popover, bodyWrapperCssExtend]}>
+    <div
+      ref={bodyRef}
+      css={[
+        styles.popover,
+        position === 'absolute' && styles.absolute,
+        bodyWrapperCssExtend,
+      ]}
+    >
       {children(handleClose)}
     </div>
   );
