@@ -1,3 +1,9 @@
+export {
+  PopoverPlacement,
+  PopoverMode,
+  Rect as PopoverRect,
+  Size as PopoverSize,
+} from 'react-native-popover-view';
 export type { RootState, AppDispatch, AsyncThunkConfig } from './app/app';
 export type { HttpOptions, GetHeadersParams } from './http/http';
 export type {
@@ -19,6 +25,5 @@ export type {
 } from './styles/styles';
 export type { ShowNotificationParams } from './notification/notification';
 export type { AppIcon, IconProps, CustomIconProps } from './ui/ui';
-export type { AuthResponseDto } from './auth/auth';
 export type { Theme, ThemeColors } from './theme/theme.type';
 export type { LotParams } from './server-data/lot-params/lot-params';

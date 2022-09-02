@@ -1,23 +1,30 @@
-import { IconName } from '@enums';
+import { IconColor, IconName } from '@enums';
 import { IconButton } from '@primitives';
 import { favoriteIcon } from './styles';
 import type { FavoriteButtonProps } from './types';
 
 export const FavoriteButton = ({
   isFavorite = false,
+  size = 'sm',
+  backgroundColor = 'darkgray',
   onChangeIsFavorite,
+  cssExtended,
+  inFavouriteColor,
+  notInFavouriteColor,
 }: FavoriteButtonProps) => {
-  const color = isFavorite ? 'yellow' : 'white';
+  const color = isFavorite
+    ? inFavouriteColor || IconColor.YELLOW
+    : notInFavouriteColor || IconColor.WHITE;
   const icon = isFavorite ? IconName.STAR_FULFILLED : IconName.STAR_OUTLINED;
 
   return (
     <IconButton
-      cssExtend={favoriteIcon}
+      cssExtend={cssExtended || favoriteIcon}
       onClick={onChangeIsFavorite}
       icon={icon}
       color={color}
-      backgroundColor="darkgray"
-      size="sm"
+      backgroundColor={backgroundColor}
+      size={size}
     />
   );
 };

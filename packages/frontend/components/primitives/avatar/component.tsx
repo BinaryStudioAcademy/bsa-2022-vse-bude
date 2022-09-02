@@ -1,6 +1,5 @@
-import { ColorsAvatar } from '@enums';
 import Image from 'next/image';
-import { AccountRoutes, Routes } from '@enums';
+import { ProfileRoutes, Routes, ColorsAvatar } from '@enums';
 import { Loader } from '../loader';
 import * as styles from './styles';
 import type { AvatarProps } from './types';
@@ -10,28 +9,43 @@ export const Avatar = ({
   lastName = '',
   image,
   loading = false,
+  isLarge = false,
   handleClick,
 }: AvatarProps) => {
   const colors = Object.values(ColorsAvatar);
   const colorByName = colors[firstName.charCodeAt(0) % colors.length ?? 0];
+  const size = isLarge ? '128px' : '35px';
 
   return (
     <button
       css={styles.wrapper}
-      style={{ backgroundColor: colorByName }}
+      style={{
+        backgroundColor: image ? 'transparent' : colorByName,
+        width: size,
+        height: size,
+        cursor: handleClick ? 'pointer' : 'default',
+      }}
       onClick={handleClick}
-      path-label={Routes.USER_ACCOUNT + AccountRoutes.ACCOUNT_PERSONAL}
+      path-label={Routes.PROFILE + ProfileRoutes.PERSONAL_INFO}
     >
-      {!!image && (
+      {image ? (
         <Image
           css={styles.avatar}
+          style={{ width: size, height: size }}
           src={image}
           alt={'avatar image'}
-          height={35}
-          width={35}
+          height={size}
+          width={size}
         />
+      ) : (
+        <div css={styles.initials} style={{ fontSize: isLarge && '52px' }}>
+          {loading ? (
+            <Loader size={isLarge ? 'big' : 'extraSmall'} />
+          ) : (
+            !image && `${firstName[0]}${lastName[0]}`
+          )}
+        </div>
       )}
-      {loading ? <Loader size="extraSmall" /> : `${firstName[0]}${lastName[0]}`}
     </button>
   );
 };

@@ -16,6 +16,7 @@ export const linkStyles = ({
   &[aria-disabled='true'] {
     color: ${colors.disabled};
     pointer-events: none;
+    cursor: not-allowed;
   }
 
   &[data-variant='default'] {

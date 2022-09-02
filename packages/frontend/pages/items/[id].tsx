@@ -1,25 +1,99 @@
-﻿import { Layout } from '@components';
-import { useRouter } from 'next/router';
-import { wrapper } from 'store';
+﻿import { useEffect } from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { Item } from '@components';
+import { LotSection } from '@components/home/lot-section';
+import { Routes } from '@enums';
+import { Breadcrumbs } from '@primitives';
+import { useTranslation } from 'next-i18next';
+import { Http } from '@vse-bude/shared';
+import { withPublic } from '@hocs';
+import { Layout } from '@components/layout';
+import { Item } from '@components/item';
+import { useAppDispatch, useTypedSelector } from '@hooks';
+import {
+  auctionPermissions,
+  fetchProductSSR,
+  updateProductViews,
+  fetchSimilarProducts,
+} from 'store/product';
+import { wrapper } from '@store';
+import { shallowEqual } from 'react-redux';
 
-export const getServerSideProps = wrapper.getServerSideProps(
-  (_store) =>
-    async ({ locale }) => ({
+export const getServerSideProps = withPublic(
+  wrapper.getServerSideProps((store) => async (ctx) => {
+    const { locale, query } = ctx;
+    const http = new Http(process.env.NEXT_PUBLIC_API_ROUTE);
+    const id = query.id as string;
+
+    const { payload } = await store.dispatch(fetchProductSSR({ id, http }));
+
+    if (!payload) {
+      return {
+        redirect: {
+          destination: Routes.NOT_FOUND,
+        },
+        props: {},
+      };
+    }
+
+    return {
       props: {
-        ...(await serverSideTranslations(locale, ['common', 'footer'])),
+        ...(await serverSideTranslations(locale, ['common', 'item'])),
       },
-    }),
+    };
+  }),
 );
 
 const ItemPage = () => {
-  const router = useRouter();
-  const id = router.query.id as string;
+  const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const item = useTypedSelector(
+    (state) => state.product.currentItem,
+    shallowEqual,
+  );
+
+  const similarProducts = useTypedSelector(
+    (state) => state.product.similarProducts,
+    shallowEqual,
+  );
+
+  useEffect(() => {
+    dispatch(updateProductViews(item.id));
+    dispatch(
+      auctionPermissions({
+        productId: item.id,
+      }),
+    );
+    dispatch(fetchSimilarProducts(item.id));
+  }, [item.id, dispatch]);
 
   return (
-    <Layout title="Item name">
-      <Item id={id}></Item>
+    <Layout title={item.title}>
+      <Breadcrumbs
+        paths={[
+          {
+            name: t('common:header.nav.home'),
+            route: Routes.DEFAULT,
+          },
+          {
+            name: t('common:header.nav.item'),
+            route: Routes.ITEMS,
+          },
+          {
+            name: item.category.title,
+            route: encodeURI(
+              `${Routes.ITEMS}?filter=${JSON.stringify({
+                category: item.category.id,
+              })}`,
+            ),
+          },
+        ]}
+      />
+      <Item item={item} />
+      <LotSection
+        title={t('item:similarItems')}
+        lots={similarProducts}
+        loadMoreTitle={t('item:seeMoreItems')}
+      />
     </Layout>
   );
 };

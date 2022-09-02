@@ -10,14 +10,22 @@
       "@enums": ["common/enums"],
       "@constants": ["common/constants"],
       "@hooks": ["hooks"],
+      "@hocs": ["hocs"],
       "@helpers": ["helpers"],
-      "@components": ["components"],
+      "@components/*": ["components/*"],
       "@services": ["services"],
       "@primitives": ["components/primitives"],
-      "@sub-pages": ["components/sub-pages"],
-      "@providers": ["providers"]
+      "@providers": ["providers"],
+      "@store": ["store"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "emotion.d.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "emotion.d.ts",
+    "../shared/src/common/constants/post.ts",
+    "components/imageCrop/component.tsx"
+  ],
   "exclude": ["node_modules"]
 }

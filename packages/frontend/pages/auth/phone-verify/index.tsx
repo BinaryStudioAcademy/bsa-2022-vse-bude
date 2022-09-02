@@ -1,5 +1,5 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { withProtected } from '@helpers';
+import { withProtected } from '@hocs';
 import { PhoneVerification } from '../../../components/auth/verification/phone-verification';
 import { AuthLayout } from '../../../components/authLayout';
 import {
@@ -9,7 +9,7 @@ import {
 
 export const getServerSideProps = withProtected(async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale, ['auth', 'public'])),
+    ...(await serverSideTranslations(locale, ['auth', 'public', 'common'])),
   },
 }));
 

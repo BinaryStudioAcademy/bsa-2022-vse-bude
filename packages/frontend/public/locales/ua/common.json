@@ -3,13 +3,23 @@
     "nav": {
       "home": "Головна",
       "category": "Категорії",
+      "item": "Речі",
       "search": "Пошук",
       "news": "Новини",
-      "about_us": "Про нас"
+      "about_us": "Про нас",
+      "profile": "Профіль"
     },
     "buttons": {
       "create_account": "Створити Аккаунт",
       "sign_in": "Увійти в Аккаунт"
+    },
+    "popover": {
+      "personalInfo": "Мій аккаунт",
+      "myList": "Мій спсиок",
+      "settings": "Налаштування",
+      "messages": "Повідомлення",
+      "support": "Підтримка",
+      "signOut": "Вийти"
     }
   },
   "footer": {
@@ -28,7 +38,7 @@
       "send": "Відправити"
     }
   },
-  "catergories": {
+  "categories": {
     "LAPTOPS_AND_PC_CATEGORY_NAME": "Ноутбуки та комп'ютери",
     "SMARTPHONES_TV_AND_ELECTRONICS_CATEGORY_NAME": "Смартфони, ТВ і електроніка",
     "GOODS_FOR_GAMERS_CATEGORY_NAME": "Товари для геймерів",
@@ -55,6 +65,93 @@
         "minutes": "хв",
         "seconds": "с"
       }
+    },
+    "input": {
+      "searchProductsPlaceholder": "Пошук продуктів"
+    },
+    "typeOfPost": {
+      "headline": "Який тип продажу ви оберете?",
+      "btn": {
+        "auction": "Аукціон",
+        "or": "або",
+        "directSale": "Продаж",
+        "tooltip": {
+          "auction": "Вам потрібно підтвердити свій номер телефону, щоб вибрати \"Аукціон\"",
+          "directSale": "Вам потрібно підтвердити свій номер телефону, щоб вибрати \"Продаж\""
+        }
+      }
+    }
+  },
+  "verify": {
+    "enterPhone": {
+      "headline": "Підтвердити",
+      "description": "Для підтвердження облікового запису, будь ласка, введіть свій телефон тут або на сторінці особистої інформації",
+      "input": "Телефон",
+      "button": {
+        "verify": "Підтвердити"
+      },
+      "link": {
+        "later": "Підтвердити пізніше"
+      }
+    },
+    "enterCode": {
+      "headline": "Підтвердити",
+      "description": "Код щойно було надіслано на номер",
+      "input": "Введіть код підтвердження з повідомлень",
+      "resend": "Надіслати ще раз",
+      "button": {
+        "continue": "Продовжити"
+      },
+      "link": {
+        "sendAgain": "Натисніть сюди"
+      }
+    },
+    "success": {
+      "headline": "Ваш акаунт було успішно підтверджено",
+      "button": {
+        "continue": "Продовжити"
+      }
+    }
+  },
+  "notifications": {
+    "defaultSuccessTitle": "Успіх",
+    "defaultInfoTitle": "Інформація",
+    "defaultWarningTitle": "Увага",
+    "defaultErrorTitle": "Помилка",
+    "avatarUpdated": "Аватар оновлений",
+    "profileUpdated": "Профіль оновлено",
+    "signUpSuccess": "Ви успішно зареєструвалися",
+    "phoneVerifySuccess": "Ваш номер телефону успішно перевірено",
+    "emailVerifySuccess": "Вашу електронну пошту успішно перевірено",
+    "phoneCodeResendSuccess": "Код для перевірки номеру телефону відправлено",
+    "emailCodeResendSuccess": "Код для перевірки електронної пошти відправлено",
+    "resetPasswordLinkSent": "Скиньте посилання на пароль надіслано",
+    "passwordUpdated": "Пароль оновлено",
+    "productAddedToFavorites": "Продукт додано до обраних",
+    "productRemovedFromFavorites": "Продукт видалено з обраних",
+    "bidPlaced": "Ставка зроблена",
+    "leftAuction": "Ви вийшли з аукціону"
+  },
+  "months": [
+    "Січень",
+    "Лютий",
+    "Березень",
+    "Квітень",
+    "Травень",
+    "Червень",
+    "Липень",
+    "Серпень",
+    "Вересень",
+    "Жовтень",
+    "Листопад",
+    "Грудень"
+  ],
+  "days": ["нд", "пн", "вт", "ср", "чт", "пт", "сб"],
+  "modal": {
+    "confirm": {
+      "confirm": "Підтвердити",
+      "cancel": "Відміна",
+      "header": "Підтвердіть вашу дію"
     }
   }
 }

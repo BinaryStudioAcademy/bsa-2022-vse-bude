@@ -9,12 +9,14 @@ const colors = {
   secondaryLight: ColorPalette.GREEN_100,
   secondaryDark: ColorPalette.GREEN_200,
   background: ColorPalette.WHITE_100,
+  white: ColorPalette.WHITE_100,
   backgroundLight: ColorPalette.GRAY_100,
   backgroundDark: ColorPalette.GRAY_200,
   text: ColorPalette.BLACK_100,
   textLight: ColorPalette.GRAY_300,
   textFooter: ColorPalette.WHITE_100,
   error: ColorPalette.RED_100,
+  danger: ColorPalette.RED_100,
   active: ColorPalette.YELLOW_100,
   accent: ColorPalette.YELLOW_200,
   disabled: ColorPalette.GRAY_200,
@@ -33,6 +35,7 @@ const fontSizes = {
   h6: '16px',
   body1: '16px',
   body2: '14px',
+  body3: '12px',
   label: '14px',
   tub: '18px',
   toggle: '14px',
@@ -40,6 +43,8 @@ const fontSizes = {
   buttonSmall: '12px',
   caption: '12px',
   smallButton: '15px',
+  tooltip: '13px',
+  cell: '18px',
 };
 
 const fontWeights = {
@@ -55,6 +60,7 @@ const fontWeights = {
   toggle: '600',
   button: '700',
   caption: '400',
+  cell: '600',
 };
 
 const lineHeights = {
@@ -70,6 +76,7 @@ const lineHeights = {
   toggle: '16px',
   button: '19px',
   caption: '14px',
+  cell: '21px',
 };
 
 const spaces = {
@@ -102,6 +109,7 @@ const radiuses = {
 
 const heights = {
   header: '80px',
+  textarea: '96px',
   checkbox: '20px',
   controlSm: '35px',
   controlBg: '45px',
@@ -142,6 +150,7 @@ const iconSizes = {
 };
 
 const breakpoints = {
+  xs: 480,
   sm: 576,
   md: 768,
   lg: 992,

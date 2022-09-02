@@ -4,7 +4,7 @@ import { resetButton } from 'theme';
 
 export const header = (theme: Theme) => css`
   position: sticky;
-  z-index: 1;
+  z-index: 99;
   top: 0;
   padding: ${theme.spaces.lg} 0;
   background-color: ${theme.colors.backgroundLight};
@@ -17,6 +17,10 @@ export const header = (theme: Theme) => css`
     justify-content: space-between;
     gap: ${theme.spaces.lg};
     margin: 0 ${theme.spaces.xl};
+  }
+
+  .header-content {
+    margin-left: ${theme.spaces.xl5};
   }
 
   .burger-menu-wrapper {

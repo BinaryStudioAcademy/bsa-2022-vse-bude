@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { Theme } from '@emotion/react';
+import type { Theme } from 'theme';
 import { resetButton } from 'theme';
 
 export const button = ({
@@ -10,6 +10,7 @@ export const button = ({
   radiuses,
   spaces,
   heights,
+  mq,
 }: Theme) => css`
   ${resetButton};
   display: flex;
@@ -31,7 +32,13 @@ export const button = ({
 
     :disabled {
       background: ${colors.disabled};
+      cursor: not-allowed;
     }
+  }
+
+  &[data-variant='danger'] {
+    background: ${colors.danger};
+    color: ${colors.white};
   }
 
   &[data-variant='outlined'] {
@@ -48,6 +55,7 @@ export const button = ({
     :disabled {
       border: 1px solid ${colors.disabled};
       color: ${colors.disabled};
+      cursor: not-allowed;
     }
   }
 
@@ -62,5 +70,17 @@ export const button = ({
     border-radius: ${radiuses.sm};
     padding: 0 ${spaces.md};
     font-size: ${fontSizes.smallButton};
+  }
+
+  &[data-size='flexible'] {
+    height: ${heights.controlSm};
+    border-radius: ${radiuses.sm};
+    padding: 0 ${spaces.md};
+    font-size: ${fontSizes.smallButton};
+    ${mq[0]} {
+      height: ${heights.controlBg};
+      border-radius: ${radiuses.md};
+      padding: 0 ${spaces.xl2};
+    }
   }
 `;

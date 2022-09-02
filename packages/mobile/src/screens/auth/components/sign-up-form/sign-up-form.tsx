@@ -1,6 +1,6 @@
 import React from 'react';
 import { UserSignUpDto } from '@vse-bude/shared';
-import { View, Button, Input } from '~/components/components';
+import { View, Input, PrimaryButton } from '~/components/components';
 import { useAppForm, useTranslation } from '~/hooks/hooks';
 import { signUp } from '~/validation-schemas/validation-schemas';
 import { globalStyles } from '~/styles/styles';
@@ -18,14 +18,13 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
   });
 
   return (
-    <View>
+    <View style={globalStyles.py5}>
       <Input
         label={t('verification.EMAIL')}
         placeholder={t('verification.EMAIL_HINT')}
         name="email"
         control={control}
         errors={errors}
-        contentContainerStyle={globalStyles.mt5}
       />
       <Input
         label={t('verification.NAME')}
@@ -58,17 +57,19 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
+        isSecure={true}
       />
       <Input
         label={t('verification.PASSWORD_REPEAT')}
         placeholder={t('verification.PASSWORD_HINT')}
-        name="password"
+        name="repeatPassword"
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
+        isSecure={true}
       />
-      <View style={[globalStyles.mt5, globalStyles.mb5]}>
-        <Button
+      <View style={globalStyles.mt5}>
+        <PrimaryButton
           label={t('verification.CREATE_ACCOUNT')}
           onPress={handleSubmit(onSubmit)}
         />

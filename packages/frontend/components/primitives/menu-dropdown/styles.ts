@@ -18,15 +18,18 @@ export const dropdownTitle = ({
   align-items: center;
   height: 100%;
   cursor: pointer;
+  font-size: ${fontSizes.body1};
+  line-height: ${lineHeights.body1};
+  font-weight: ${fontWeights.body1};
   /* font-size: ${fontSizes.tub};
   line-height: ${lineHeights.tub};
   font-weight: ${fontWeights.tub}; */
   /* color: ${colors.text}; */
-  color: ${colors.extraDark};
+  color: ${colors.lightDark};
 
   :hover,
   :active {
-    color: ${colors.lightDark};
+    color: ${colors.extraDark};
   }
 `;
 
@@ -39,12 +42,11 @@ export const dropdownContent = ({
 }: Theme) => css`
   position: absolute;
   top: calc(100% + ${spaces.sm});
-  right: 0;
+  left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: ${spaces.sm} 0;
   box-shadow: ${shadows.dropdown};
   border: ${borders.dropdown};
   border-radius: ${radiuses.xs};
@@ -61,12 +63,14 @@ export const dropdownItem = ({
   ${resetButton}
   transition: all 0.2s ease-in-out;
   width: 100%;
-  padding: ${spaces.xs} ${spaces.lg};
+  padding: ${spaces.sm} ${spaces.lg};
   cursor: pointer;
   font-size: ${fontSizes.body1};
   line-height: ${lineHeights.body1};
   font-weight: ${fontWeights.body1};
-  color: ${colors.text};
+  color: ${colors.extraDark};
+  white-space: nowrap;
+  text-align: left;
 
   :hover {
     background-color: ${colors.backgroundLight};
@@ -79,8 +83,14 @@ export const dropdownItem = ({
 
   &[data-variant='icon'] {
     padding: ${spaces.xs} ${spaces.md};
-    & > svg {
+    & > i {
       margin-right: ${spaces.md};
+      width: ${spaces.md};
+      text-align: center;
     }
   }
+`;
+
+export const icon = ({ colors }: Theme) => css`
+  color: ${colors.extraDark};
 `;

@@ -20,6 +20,16 @@ export enum IconName {
   EMAIL = 'envelope',
   PRIVACY_POLICY = 'user-shield',
   STOPWATCH = 'stopwatch',
+  IMAGE = 'image',
+  INFO = 'info',
+  SMARTPHONE = 'smartphone',
+  INSTAGRAM = 'instagram',
+  FACEBOOK = 'facebook',
+  WEBSITE = 'website',
+  LINKEDIN = 'linkedin',
+  XMARK = 'xmark',
+  CALENDAR = 'calendar',
+  TRASH = 'trash',
 }
 
 export const IconNameToClassName = {
@@ -44,4 +54,14 @@ export const IconNameToClassName = {
   [IconName.EMAIL]: 'fa-regular fa-envelope',
   [IconName.PRIVACY_POLICY]: 'fa-solid fa-user-shield',
   [IconName.STOPWATCH]: 'fa-solid fa-stopwatch',
+  [IconName.IMAGE]: 'fa-regular fa-image',
+  [IconName.INFO]: 'fa-solid fa-circle-info',
+  [IconName.SMARTPHONE]: 'fa-thin fa-mobile-notch',
+  [IconName.INSTAGRAM]: 'fa-brands fa-square-instagram',
+  [IconName.FACEBOOK]: 'fa-brands fa-square-facebook',
+  [IconName.WEBSITE]: 'fa-solid fa-globe',
+  [IconName.LINKEDIN]: 'fa-brands fa-linkedin',
+  [IconName.XMARK]: 'fa-solid fa-xmark',
+  [IconName.CALENDAR]: 'fa-solid fa-calendar-days',
+  [IconName.TRASH]: 'fa-regular fa-trash-can',
 };

@@ -4,7 +4,8 @@ export interface ButtonProps
     'size' | 'className' | 'style' | 'type'
   > {
   type?: 'button' | 'submit' | 'reset';
-  variant?: 'filled' | 'outlined';
-  size?: 'big' | 'small';
+  variant?: 'filled' | 'outlined' | 'danger';
+  size?: 'big' | 'small' | 'flexible';
   width?: string;
+  tooltip?: string;
 }

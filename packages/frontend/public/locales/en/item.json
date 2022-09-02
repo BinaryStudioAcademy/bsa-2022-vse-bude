@@ -1,0 +1,49 @@
+{
+  "bidInput": "Enter the bid amount",
+  "bidInputCaption": "Enter more than or equal to:",
+  "currentBid": "Current bid",
+  "endingCaption": "Ending on",
+  "timezoneCaption": "Timezone",
+  "statusCaption": "The status",
+  "locationCaption": "Location",
+  "descriptionCaption": "Description",
+  "sellerCaption": "Seller",
+  "contactSellerBtn": "Contact Seller",
+  "time": {
+    "hours": "hours",
+    "days": "day",
+    "minutes": "min",
+    "seconds": "sec"
+  },
+  "similarItems": "Similar items",
+  "seeMoreItems": "See more",
+  "bid": {
+    "validation": {
+      "required": "Bid field is required",
+      "min": "Bid amount is too low",
+      "numeric": "Bid amount must be a number"
+    }
+  },
+  "leave": {
+    "btnText": "Leave Auction",
+    "tooltip": "You will be excluded from the auction and all your bids are deleted!",
+    "confirmText": "Are you sure to leave the auction? All bids will be deleted!"
+  },
+  "buttons": {
+    "placeBid": "Place Bid",
+    "buyBtn": "Buy",
+    "tooltips": {
+      "favBtn": "You can add product to your favorites list for a quick availability!",
+      "favBtnRemove": "You can remove product from your favorites!",
+      "notVerified": {
+        "placeBid": "You are not verified to place a bid",
+        "buyBtn": "You are not verified to buy"
+      },
+      "notAuthorized": {
+        "placeBid": "You are not authorized to place a bid",
+        "buyBtn": "You are not authorized to buy",
+        "favBtn": "You are not authorized to add product to favorites"
+      }
+    }
+  }
+}

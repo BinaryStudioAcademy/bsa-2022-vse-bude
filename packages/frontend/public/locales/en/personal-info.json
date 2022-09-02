@@ -7,7 +7,17 @@
   },
   "action": {
     "save": "Save",
+    "cancel": "Cancel",
+    "verify": "Verify",
+    "edit": "Edit profile"
+  },
+  "button": {
+    "ok": "OK",
     "cancel": "Cancel"
+  },
+  "avatar": {
+    "change": "Change the Photo",
+    "delete": "Delete the Photo"
   },
   "label": {
     "novaPoshta": "# Nova Poshta",
@@ -34,13 +44,49 @@
     "country": "Choose your country",
     "region": "Choose your region",
     "city": "Choose your settlement",
-    "zipCode": "Enter ZIP Code",
+    "zip": "Enter ZIP Code",
     "instagram": "Enter your Instagram",
     "linkedin": "Enter your Linkedin",
     "facebook": "Enter your Facebook",
-    "currentPassword": "Enter your current password",
-    "newPassword": "Enter new password",
-    "repeatPassword": "Repeat new password",
-    "novaPoshta": "Enter office of Nova Poshta"
+    "password": "Enter password",
+    "newPassword": "Enter password",
+    "repeatPassword": "Enter password",
+    "novaPoshtaRef": "Enter office of Nova Poshta"
+  },
+  "validation": {
+    "personal": {
+      "firstNamePattern": "First name should consist of letters: А-Я or A-Z",
+      "firstnameRequired": "Enter your name please!",
+      "firstnameMin": "First name should have a minimum of 1 symbol",
+      "firstnameMax": "First name should have a maximum of 40 symbols",
+      "lastNamePattern": "Last name should consist of letters: А-Я or A-Z",
+      "lastnameRequired": "Enter your last name please!",
+      "lastnameMin": "Last name name should have a minimum of 1 symbol",
+      "lastnameMax": "Last name should have a maximum of 40 symbols",
+      "emailRequired": "Fill the email please!",
+      "emailPattern": "Check your email please. Example: my-email@example.com",
+      "phoneRequired": "Fill the mobile phone number please!",
+      "phonePattern": "Check your mobile phone number please. Example: +380999999999"
+    },
+    "address": {},
+    "socialNetworks": {
+      "uri": "Example of link to your profile in the network: https://some-net/me-id-1234",
+      "maxSymbols": "The link cannot exceed 150 characters"
+    },
+    "password": {
+      "minSymbols": "Password length must be at least 8 characters",
+      "maxSymbols": "Password length must not exceed 16 characters",
+      "cyrillic": "You can use only Latin letters",
+      "wrongPassword": "Please enter correct password",
+      "samePassword": "The new password should not match the current one!",
+      "emptyPassword": "Fill the password please!",
+      "newPasswordPattern": "Password should include at least one uppercase, one lowercase and one number",
+      "spacesInPassword": "Spaces are not allowed",
+      "differentPasswords": "Passwords are not same"
+    },
+    "avatar": {
+      "maxSize": "The file size should not exceed 10MB",
+      "fileType": "The file type should be .jpg or .png"
+    }
   }
 }

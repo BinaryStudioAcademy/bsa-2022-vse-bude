@@ -7,14 +7,14 @@ import { ButtonAppearance, RootScreenName } from '~/common/enums/enums';
 import { RootNavigationParamList } from '~/common/types/types';
 import {
   View,
-  Button,
   FlagBackgroundView,
   ScreenWrapper,
   StatusBar,
   LogoWhite,
+  SecondaryButton,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { Product } from './components/components';
+import { Stamp } from './components/components';
 import { styles } from './styles';
 
 type Props = NativeStackScreenProps<
@@ -33,6 +33,8 @@ const Welcome: FC<Props> = ({ navigation }) => {
         barStyle="light-content"
       />
       <FlagBackgroundView
+        start={{ x: 0, y: 0.45 }}
+        end={{ x: 0, y: 0.55 }}
         style={[
           globalStyles.flex1,
           globalStyles.alignItemsCenter,
@@ -41,20 +43,18 @@ const Welcome: FC<Props> = ({ navigation }) => {
       >
         <LogoWhite style={styles.logo} />
         <View style={globalStyles.py7}>
-          <Product />
+          <Stamp />
         </View>
         <View style={styles.buttonsWrapper}>
-          <Button
+          <SecondaryButton
             label={t('verification.CREATE_ACCOUNT')}
-            background={ColorPalette.GREEN_200}
             onPress={() => {
               navigation.navigate(RootScreenName.SIGN_UP);
             }}
           />
-          <Button
+          <SecondaryButton
+            appearance={ButtonAppearance.OUTLINED}
             label={t('verification.SING_IN')}
-            view={ButtonAppearance.TRANSPARENT}
-            textColor={ColorPalette.GREEN_200}
             onPress={() => {
               navigation.navigate(RootScreenName.SIGN_IN);
             }}

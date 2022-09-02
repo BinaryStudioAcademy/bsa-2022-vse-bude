@@ -58,11 +58,56 @@ const CameraIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="camera" {...iconProps} />
 );
 
+const CrossIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="x" {...iconProps} />
+);
+
 const LogInIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="log-in" {...iconProps} />
 );
+
+const EyeIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="eye" {...iconProps} />
+);
+
+const EyeOffIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="eye-off" {...iconProps} />
+);
+
 const ClockIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="clock" {...iconProps} />
+);
+
+const PlusIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="plus-circle" {...iconProps} />
+);
+
+const ImageIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="image" {...iconProps} />
+);
+
+const InfoIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="info" {...iconProps} />
+);
+
+const FacebookIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="facebook" {...iconProps} />
+);
+
+const InstagramIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="instagram" {...iconProps} />
+);
+
+const PhoneIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="smartphone" {...iconProps} />
+);
+
+const GlobeIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="globe" {...iconProps} />
+);
+
+const LinkedinIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="linkedin" {...iconProps} />
 );
 
 const SearchIcon: AppIcon = (iconProps) => (
@@ -84,7 +129,18 @@ export {
   AlertIcon,
   BackIcon,
   CustomFeatherIcon,
-  SearchIcon,
   CameraIcon,
   ClockIcon,
+  CrossIcon,
+  EyeIcon,
+  EyeOffIcon,
+  PlusIcon,
+  ImageIcon,
+  InfoIcon,
+  FacebookIcon,
+  InstagramIcon,
+  PhoneIcon,
+  GlobeIcon,
+  LinkedinIcon,
+  SearchIcon,
 };

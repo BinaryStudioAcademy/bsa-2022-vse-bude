@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Button, View, Input } from '~/components/components';
+import { View, Input, PrimaryButton } from '~/components/components';
 import { UserSignInDto } from '@vse-bude/shared';
 import { useAppForm, useTranslation } from '~/hooks/hooks';
 import { signIn } from '~/validation-schemas/validation-schemas';
@@ -18,14 +18,13 @@ const SignInForm: FC<Props> = ({ onSubmit }) => {
   const { t } = useTranslation();
 
   return (
-    <View>
+    <View style={globalStyles.py5}>
       <Input
         label={t('verification.EMAIL')}
         placeholder={t('verification.EMAIL_HINT')}
         name="email"
         control={control}
         errors={errors}
-        contentContainerStyle={globalStyles.mt5}
       />
       <Input
         label={t('verification.PASSWORD')}
@@ -34,9 +33,10 @@ const SignInForm: FC<Props> = ({ onSubmit }) => {
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
+        isSecure={true}
       />
-      <View style={{ marginTop: 30 }}>
-        <Button
+      <View style={globalStyles.mt5}>
+        <PrimaryButton
           label={t('verification.SING_IN')}
           onPress={handleSubmit(onSubmit)}
         />

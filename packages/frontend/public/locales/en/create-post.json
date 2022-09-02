@@ -1,0 +1,79 @@
+{
+  "headline": {
+    "makePost": "Make a Post",
+    "downloadPhotos": "Download photos",
+    "description": "Description",
+    "contact": "Contact"
+  },
+  "button": {
+    "makePost": "Make a post",
+    "saveDraft": "Save as draft",
+    "ok": "OK",
+    "cancel": "Cancel"
+  },
+  "caption": {
+    "downloadPhotos": "You can add to 30 pics"
+  },
+  "tooltip": {
+    "price": "Make sure that you enter the correct price in digits!",
+    "phone": "Your phone number must be filled according to Ukrainian format. Sample: +XXX XX XXX XX XX. Make sure that the phone number is correct!"
+  },
+  "label": {
+    "photosMain": "Drag and drop an image here or ",
+    "photosCaption": "choose image",
+    "category": "Category",
+    "name": "Title name",
+    "description": "Description",
+    "price": "Price",
+    "currency": "Currency",
+    "country": "Country",
+    "city": "City",
+    "callingCode": "Calling Code",
+    "phone": "Mobile phone",
+    "instagram": "Instagram",
+    "linkedin": "Linkedin",
+    "facebook": "Facebook",
+    "site": "Site",
+    "checkbox": "Hide phone number"
+  },
+  "placeholder": {
+    "category": "Select the category",
+    "name": "Enter title",
+    "description": "Enter your product description",
+    "price": "Enter your price",
+    "currency": "UAH",
+    "country": "Ukraine",
+    "city": "Lviv",
+    "callingCode": "UA",
+    "phone": "()",
+    "instagram": "Enter your nickname",
+    "linkedin": "Enter your nickname",
+    "facebook": "Enter your nickname",
+    "site": "Enter site address"
+  },
+  "validation": {
+    "images": {
+      "unsupportedType": "Unsupported file extension!",
+      "large": "File size too large!"
+    },
+    "title": {
+      "long": "Title too long",
+      "empty": "Title cannot be empty"
+    },
+    "description": {
+      "long": "Description too long",
+      "empty": "Description cannot be empty"
+    },
+    "phone": {
+      "pattern": "Wrong phone format",
+      "empty": "Description cannot be empty"
+    },
+    "price": {
+      "base": "Wrong price format",
+      "empty": "Price cannot be empty"
+    },
+    "country": {
+      "empty": "Country cannot be empty"
+    }
+  }
+}

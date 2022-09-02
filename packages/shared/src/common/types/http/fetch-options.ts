@@ -1,9 +1,14 @@
-import type { HttpContentType, HttpMethod } from '../../enums';
+import type {
+  HttpAcceptLanguage,
+  HttpContentType,
+  HttpMethod,
+} from '../../enums';
 
 interface FetchOptions {
   external?: boolean;
   needAuthorization?: boolean;
   contentType?: HttpContentType;
+  acceptLanguage?: HttpAcceptLanguage;
 }
 
 export interface RequestArgs {
@@ -23,11 +28,11 @@ export interface GetRequestParams extends BaseRequestParams {
 }
 
 export interface PostRequestParams extends BaseRequestParams {
-  body: Record<string, unknown>;
+  body: Record<string, unknown> | FormData;
 }
 
 export interface PutRequestParams extends BaseRequestParams {
-  body: Record<string, unknown>;
+  body: Record<string, unknown> | FormData;
 }
 
 export type DeleteRequestParams = BaseRequestParams;

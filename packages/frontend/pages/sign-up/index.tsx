@@ -2,7 +2,7 @@ import { Routes } from '@enums';
 import { InternalLink } from 'components/primitives/link';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { withPublic } from '@helpers';
+import { withPublic } from '@hocs';
 import { AuthLayout } from '../../components/authLayout';
 import {
   contentWrapper,
@@ -13,7 +13,12 @@ import { SignUpForm } from '../../components/auth/sign-up/component';
 
 export const getServerSideProps = withPublic(async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale, ['public', 'auth'])),
+    ...(await serverSideTranslations(locale, [
+      'public',
+      'auth',
+      'personal-info',
+      'common',
+    ])),
   },
 }));
 
