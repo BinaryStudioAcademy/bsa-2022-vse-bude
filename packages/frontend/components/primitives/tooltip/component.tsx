@@ -1,4 +1,5 @@
-﻿import { Fragment, useRef, useEffect, useState, useCallback } from 'react';
+﻿import { useMouseLeave } from 'hooks/use-mouse-leave';
+import { Fragment, useRef, useEffect, useState, useCallback } from 'react';
 import * as ReactDOM from 'react-dom';
 import * as styles from './styles';
 import type { TooltipProps } from './types';
@@ -84,6 +85,8 @@ export const Tooltip = ({
       setIsVisible(false);
     }, hideTimeoutMs);
   };
+
+  useMouseLeave(handleMouseLeave);
 
   const renderPortalBody = () => (
     <div
