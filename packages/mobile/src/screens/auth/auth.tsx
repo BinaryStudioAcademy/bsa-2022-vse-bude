@@ -1,6 +1,6 @@
 import React, { FC, ReactElement } from 'react';
 import { ColorPalette, UserSignInDto, UserSignUpDto } from '@vse-bude/shared';
-import { RootScreenName, VerifyScreenName } from '~/common/enums/enums';
+import { RootScreenName } from '~/common/enums/enums';
 import { auth as authActions } from '~/store/actions';
 import {
   useAppDispatch,
@@ -17,7 +17,7 @@ import {
   StatusBar,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { VerifyNavigationProps } from '~/common/types/types';
+import { RootNavigationProps } from '~/common/types/types';
 import {
   GoogleButton,
   SignInForm,
@@ -31,7 +31,7 @@ const Auth: FC = () => {
   const dispatch = useAppDispatch();
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
-  const navigation = useNavigation<VerifyNavigationProps>();
+  const navigation = useNavigation<RootNavigationProps>();
   const screenLabel =
     name === RootScreenName.SIGN_IN
       ? t('verification.SING_IN')
@@ -43,7 +43,7 @@ const Auth: FC = () => {
 
   const handleSignUp = (payload: UserSignUpDto): void => {
     dispatch(authActions.signUp(payload)).then(() => {
-      navigation.navigate(VerifyScreenName.VERIFY_PHONE);
+      navigation.navigate(RootScreenName.VERIFY);
     });
   };
 

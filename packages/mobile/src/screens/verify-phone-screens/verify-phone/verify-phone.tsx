@@ -1,7 +1,17 @@
 import React, { FC } from 'react';
-import { useAppForm, useCustomTheme, useNavigation } from '~/hooks/hooks';
-import { ButtonAppearance, MainScreenName } from '~/common/enums/enums';
-import { MainNavigationProps, VerifyPhone } from '~/common/types/types';
+import {
+  useAppForm,
+  useAppSelector,
+  useCustomTheme,
+  useNavigation,
+} from '~/hooks/hooks';
+import {
+  ButtonAppearance,
+  MainScreenName,
+  RootScreenName,
+  VerifyScreenName,
+} from '~/common/enums/enums';
+import { RootNavigationProps, VerifyPhone } from '~/common/types/types';
 import {
   Input,
   KeyboardAvoiding,
@@ -11,6 +21,7 @@ import {
 import { images } from '~/assets/images/images';
 import { phone } from '~/validation-schemas/validation-schemas';
 import { globalStyles } from '~/styles/styles';
+import { selectUserPhone } from '~/store/selectors';
 import {
   ButtonsContainer,
   Container,
@@ -23,25 +34,28 @@ import {
 import { styles } from './styles';
 
 const VerifyPhoneScreen: FC = () => {
-  const navigation = useNavigation<MainNavigationProps>();
+  const navigation = useNavigation<RootNavigationProps>();
   const { colors } = useCustomTheme();
+  const userPhone = useAppSelector(selectUserPhone);
   const { control, errors, handleSubmit } = useAppForm<VerifyPhone>({
     defaultValues: {
-      phone: '+380',
+      phone: userPhone,
     },
     validationSchema: phone,
   });
 
   const handleBackButton = (): void => {
-    navigation.navigate(MainScreenName.HOME);
+    navigation.navigate(RootScreenName.MAIN, { screen: MainScreenName.HOME });
   };
 
   const handleLaterPress = (): void => {
-    //TODO add Cancel handler
+    navigation.navigate(RootScreenName.PERSONAL_INFO);
   };
 
   const onSubmit = (): void => {
-    // TODO: handle submit
+    navigation.navigate(RootScreenName.VERIFY, {
+      screen: VerifyScreenName.VERIFY_CODE,
+    });
   };
 
   return (

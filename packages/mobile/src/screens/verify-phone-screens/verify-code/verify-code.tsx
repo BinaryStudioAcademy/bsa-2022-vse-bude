@@ -1,6 +1,15 @@
 import React, { FC } from 'react';
-import { useAppForm, useCustomTheme, useNavigation } from '~/hooks/hooks';
-import { ButtonAppearance } from '~/common/enums/enums';
+import {
+  useAppForm,
+  useAppSelector,
+  useCustomTheme,
+  useNavigation,
+} from '~/hooks/hooks';
+import {
+  ButtonAppearance,
+  RootScreenName,
+  VerifyScreenName,
+} from '~/common/enums/enums';
 import {
   Input,
   KeyboardAvoiding,
@@ -9,7 +18,8 @@ import {
 } from '~/components/components';
 import { images } from '~/assets/images/images';
 import { globalStyles } from '~/styles/styles';
-import { VerifyCode } from '~/common/types/types';
+import { RootNavigationProps, VerifyCode } from '~/common/types/types';
+import { selectUserPhone } from '~/store/selectors';
 import {
   ButtonsContainer,
   Container,
@@ -22,8 +32,9 @@ import {
 import { styles } from './styles';
 
 const VerifyCodeScreen: FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootNavigationProps>();
   const { colors } = useCustomTheme();
+  const userPhone = useAppSelector(selectUserPhone);
   const { control, errors, handleSubmit } = useAppForm<VerifyCode>({
     defaultValues: {
       code: '',
@@ -39,7 +50,9 @@ const VerifyCodeScreen: FC = () => {
   };
 
   const onSubmit = (): void => {
-    // TODO: handle submit
+    navigation.navigate(RootScreenName.VERIFY, {
+      screen: VerifyScreenName.VERIFIED,
+    });
   };
 
   return (
@@ -56,7 +69,7 @@ const VerifyCodeScreen: FC = () => {
             contentContainerStyle={globalStyles.mt6}
           />
           <CustomText
-            label="We just sent a code to +380999999999"
+            label={`We just sent a code to ${userPhone}`}
             contentContainerStyle={globalStyles.mt3}
           />
           <Input

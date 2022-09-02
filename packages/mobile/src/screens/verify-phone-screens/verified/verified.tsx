@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useCustomTheme } from '~/hooks/hooks';
+import { useCustomTheme, useNavigation } from '~/hooks/hooks';
 import {
   ArrowRightIcon,
   KeyboardAvoiding,
@@ -8,6 +8,8 @@ import {
 } from '~/components/components';
 import { images } from '~/assets/images/images';
 import { globalStyles } from '~/styles/styles';
+import { RootNavigationProps } from '~/common/types/types';
+import { RootScreenName } from '~/common/enums/enums';
 import {
   Container,
   Header,
@@ -18,10 +20,11 @@ import {
 import { styles } from './styles';
 
 const VerifiedScreen: FC = () => {
+  const navigation = useNavigation<RootNavigationProps>();
   const { colors } = useCustomTheme();
 
   const handleContinuePress = (): void => {
-    //TODO add Cancel handler
+    navigation.navigate(RootScreenName.PERSONAL_INFO);
   };
 
   return (

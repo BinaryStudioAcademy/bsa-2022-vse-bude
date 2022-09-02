@@ -15,6 +15,7 @@ import {
 } from '~/screens/screens';
 import { selectCurrentUser } from '~/store/selectors';
 import { MainNavigation } from './tabs/tabs.navigation';
+import { VerifyNavigation } from './verify/verify.navigation';
 
 const NativeStack = createNativeStackNavigator<RootNavigationParamList>();
 const Stack = createNativeStackNavigator<RootNavigationParamList>();
@@ -57,6 +58,13 @@ const Navigation: FC = () => {
           <Stack.Screen
             name={RootScreenName.SUPPORT}
             component={SupportScreen}
+          />
+          <Stack.Screen
+            name={RootScreenName.VERIFY}
+            component={VerifyNavigation}
+            options={{
+              headerShown: false,
+            }}
           />
         </NativeStack.Group>
       )}
