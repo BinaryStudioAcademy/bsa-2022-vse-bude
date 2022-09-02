@@ -10,10 +10,12 @@ export const DashboardLink: FC<LinkProps> = ({
   label,
   location,
   path,
+  onClick,
 }) => {
   const router = useRouter();
 
   const handleClick = () => {
+    onClick?.();
     router.push(path);
   };
 

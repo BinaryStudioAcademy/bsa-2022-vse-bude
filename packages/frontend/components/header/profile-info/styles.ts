@@ -27,9 +27,7 @@ export const dropdownArrow = ({
   background-color: ${colors.backgroundLight};
   cursor: pointer;
   :hover {
-    i {
-      color: ${colors.primary} !important;
-    }
+    color: ${colors.primary} !important;
   }
 `;
 
