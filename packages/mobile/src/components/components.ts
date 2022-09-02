@@ -9,6 +9,7 @@ export {
   FlatList,
 } from 'react-native';
 export { SafeAreaView } from 'react-native-safe-area-context';
+export { default as Popover } from 'react-native-popover-view';
 
 export * from './icons/icons';
 export * from './svg/svg';
@@ -20,6 +21,7 @@ export { Spinner } from './spinner/spinner';
 export { Logo } from './logo/logo';
 export { LogoWhite } from './logo/logo-white';
 export { HeaderLeft } from './header-left/header-left';
+export { HeaderSave } from './header-save/header-save';
 export { DropDown } from './dropdown/dropdown';
 export { HeaderButton } from './header-button/header-button';
 export { Divider } from '~/components/divider/divider';

@@ -7,6 +7,7 @@ enum RootScreenName {
   MESSAGES = 'Messages',
   SUPPORT = 'Support',
   WELCOME = 'Welcome',
+  NEW_ITEM = 'Make a post',
   PRODUCT_INFO = 'Product Info',
 }
 
