@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { useState } from 'react';
+import { useState, useInsertionEffect } from 'react';
 import { Global, ThemeProvider as ThemeProviderEmotion } from '@emotion/react';
 import { darkTheme, lightTheme, globalStyles } from 'theme';
 
@@ -14,6 +14,10 @@ const colorSchemes = {
 
 const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const [theme] = useState(colorSchemes['light']);
+
+  useInsertionEffect(() => {
+    document.html.style.opacity = '1';
+  }, []);
 
   return (
     <ThemeProviderEmotion theme={theme}>
