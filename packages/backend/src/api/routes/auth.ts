@@ -12,6 +12,7 @@ import { wrap } from '@helpers';
 import type { SignOut, UpdateRefreshToken, AuthTokenData } from '@types';
 import { apiPath } from '@helpers';
 import { authMiddleware } from '@middlewares';
+import { langService } from '../middlewares/lang';
 
 export const initAuthRoutes = (
   { authService }: Services,
@@ -42,6 +43,12 @@ export const initAuthRoutes = (
    *             schema:
    *               $ref: "#/definitions/SignInResponse"
    */
+
+  router.get(apiPath(path, '/test'), (req, res) => {
+    res.json({
+      locale: langService.getLocale(),
+    });
+  });
 
   router.post(
     apiPath(path, AuthApiRoutes.SIGN_IN),

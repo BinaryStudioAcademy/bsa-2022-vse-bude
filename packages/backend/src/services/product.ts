@@ -23,7 +23,8 @@ import type { BidRepository } from '@repositories';
 import { productMapper } from '@mappers';
 import { FieldError } from 'error/product/field-error';
 import { createPostSchema, updatePostSchema } from 'validation/product/schemas';
-import { auctionPermissionsMapper } from '../mapper/auction-permissions';
+import { auctionPermissionsMapper } from '@mappers';
+import { t } from 'i18next';
 import type { S3StorageService } from './s3-storage';
 
 export class ProductService {
@@ -60,6 +61,8 @@ export class ProductService {
     // if (product.category) {
     //   product.category.title = req.t(`categories.${product.category.title}`);
     // }
+
+    console.log(t('translation.NO_FILE_ERROR'));
 
     const currentPrice = await this._productRepository.getCurrentPrice(
       product.id,

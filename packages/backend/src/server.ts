@@ -7,8 +7,10 @@ import { initServices } from '@services';
 import { loggerMiddleware, localizationMiddleware } from '@middlewares';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
+import cookieParser from 'cookie-parser';
 import { prismaClient as database } from './data/db';
 import { errorHandler } from './error/error-handler';
+import { langMiddleware } from './api/middlewares/lang';
 
 const app = express();
 const repositories = initRepositories(database);
@@ -30,9 +32,11 @@ const swaggerSpecification = swaggerJsdoc(options);
 
 app
   .use(cors())
+  .use(cookieParser())
   .use(loggerMiddleware)
   .use(json())
   .use(localizationMiddleware)
+  .use(langMiddleware)
   .use(routes)
   .use(errorHandler)
   .use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecification))
