@@ -23,7 +23,7 @@ const useStyles = () => {
           zIndex: 5,
         },
         leftInput: {
-          marginTop: -15,
+          marginTop: 5,
           width: '60%',
           paddingRight: 10,
         },

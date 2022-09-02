@@ -29,7 +29,7 @@ type Props<T extends FormControlValues> = {
 };
 
 const Input = <T extends FormControlValues>({
-  label = '',
+  label,
   name,
   control,
   errors,
@@ -49,16 +49,18 @@ const Input = <T extends FormControlValues>({
 
   return (
     <View style={contentContainerStyle}>
-      <Text
-        style={[
-          styles.label,
-          globalStyles.mb2,
-          globalStyles.fs12,
-          { color: colors.titlePrimary },
-        ]}
-      >
-        {label}
-      </Text>
+      {!!label && (
+        <Text
+          style={[
+            styles.label,
+            globalStyles.mb2,
+            globalStyles.fs12,
+            { color: colors.titlePrimary },
+          ]}
+        >
+          {label}
+        </Text>
+      )}
       <View>
         <TextInput
           value={field.value}
