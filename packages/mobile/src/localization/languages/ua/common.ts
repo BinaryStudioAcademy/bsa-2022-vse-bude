@@ -8,6 +8,7 @@ export const common = {
     BUTTON_CANCEL: 'Відмінити зміни',
     BUTTON_BID: 'Ставка',
     BUTTON_BUY: 'Купити',
+    BUTTON_CONTACT_SELLER: "Зв'язатися з продавцем",
   },
   common: {
     HOME: 'Головна',

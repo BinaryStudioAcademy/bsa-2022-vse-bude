@@ -1,22 +1,24 @@
 import { Button } from '@primitives';
 import { useTranslation } from 'next-i18next';
-import { useAppDispatch, useAuth, useTypedSelector } from '@hooks';
+import {
+  useAppDispatch,
+  // useAuth,
+  useTypedSelector,
+} from '@hooks';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import type { PhoneVerifyDto } from '@vse-bude/shared';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { Input, Error } from '@primitives';
 import { inputWrapper } from '../layout/styles';
-import { verifyEntity, verifyForm, verifyInput, verifyText } from '../styles';
-import { hideMainTextPart } from '../../../helpers/text';
+import { verifyForm, verifyInput } from '../styles';
 import { phoneCodeResend, phoneVerification } from '../../../store/auth';
 import { RESEND_VERIFICATION_CODE_LIMIT_SEC } from '../../../common/constants/app';
 import { verifyCodeSchema } from './validation';
-import { divider } from './styles';
 import { ResendCodeButton } from './resend-code';
 
 export const PhoneVerification = () => {
-  const { user } = useAuth();
+  // const { user } = useAuth();
   const { error } = useTypedSelector((state) => state.auth);
 
   const dispatch = useAppDispatch();
@@ -41,20 +43,20 @@ export const PhoneVerification = () => {
   return (
     <form css={verifyForm} onSubmit={handleSubmit(onSubmit)}>
       <div css={inputWrapper}>
-        <div css={verifyText}>
-          <span>
-            {t('auth:phoneText')}
-            {user && (
-              <span css={verifyEntity}> {hideMainTextPart(user.phone)}</span>
-            )}
-            !
-          </span>
-          <span>{t('auth:enterCode')}!</span>
-        </div>
+        {/*<div css={verifyText}>*/}
+        {/*  <span>*/}
+        {/*    {t('auth:phoneText')}*/}
+        {/*    {user && (*/}
+        {/*      <span css={verifyEntity}> {hideMainTextPart(user.phone)}</span>*/}
+        {/*    )}*/}
+        {/*    !*/}
+        {/*  </span>*/}
+        {/*  <span>{t('auth:enterCode')}!</span>*/}
+        {/*</div>*/}
         <Input
           {...register('code')}
           css={verifyInput}
-          label={t('auth:code')}
+          label={t('common:verify.enterCode.input')}
           variant="primary"
           type="text"
           name="code"
@@ -63,9 +65,8 @@ export const PhoneVerification = () => {
         <Error text={error} />
       </div>
       <Button type="submit" width={'100%'}>
-        {t('auth:text')}
+        {t('common:verify.enterCode.button.continue')}
       </Button>
-      <hr css={divider} />
       <div>
         <ResendCodeButton
           onClickResend={onResendCode}
