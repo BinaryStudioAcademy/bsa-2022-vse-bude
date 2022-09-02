@@ -9,7 +9,7 @@ export const ResendCodeButton = ({
   onClickResend,
   timeLimit,
 }: ResendCodeButtonProps) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(['common', 'auth']);
 
   const [resendDisabled, setResendDisabled] = useState(false);
   const [timeToResend, setTimeToResend] = useState(timeLimit);
