@@ -71,9 +71,7 @@ const Product: FC<Props> = ({ productId }) => {
         >{`${formatPrice(price)} ${t('common:currency.UAH')}`}</Text>
         <Button
           label={
-            isAuction
-              ? t('common:components.BUTTON_BID')
-              : t('common:components.BUTTON_BUY')
+            isAuction ? t('common:components.BUTTON_BID') : t('common:components.BUTTON_BUY')
           }
           onPress={() => {
             //TODO
