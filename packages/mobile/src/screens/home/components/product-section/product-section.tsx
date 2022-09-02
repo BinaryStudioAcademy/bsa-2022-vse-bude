@@ -1,33 +1,27 @@
 import React, { FC } from 'react';
 import { View, Text, FlatList, TextButton } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { LotType } from '~/common/enums/enums';
-import { LotParams } from '~/common/types/types';
+import { ProductDto } from '@vse-bude/shared';
 import { FlexStyle } from 'react-native';
-import { Lot } from '../components';
+import { cutProductsDataLength } from '~/helpers/helpers';
+import { Product } from '../components';
 import { styles } from './styles';
 
 type Props = {
   sectionTitle: string;
   extendTitle: string;
-  lotType: LotType;
-  data: LotParams;
+  data: ProductDto[];
   onExtendPress: () => void;
   wrapperStyles?: FlexStyle[];
 };
 
-const LotSection: FC<Props> = ({
+const ProductsSection: FC<Props> = ({
   sectionTitle,
   extendTitle,
-  lotType,
   data,
   onExtendPress,
   wrapperStyles,
 }) => {
-  const dataLengthCheck = (data: LotParams) => {
-    return data.length > 10 ? data.slice(0, 11) : data;
-  };
-
   return (
     <View style={wrapperStyles}>
       <View
@@ -49,22 +43,15 @@ const LotSection: FC<Props> = ({
         <TextButton text={extendTitle} onPress={onExtendPress} />
       </View>
       <FlatList
+        keyExtractor={(item) => item.id}
         style={globalStyles.mt6}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
-        data={dataLengthCheck(data)}
-        renderItem={({ item }) => (
-          <Lot
-            type={lotType}
-            price={item.price}
-            imgSrc={item.imageLinks}
-            description={item.description}
-            title={item.title}
-          />
-        )}
+        data={cutProductsDataLength(data)}
+        renderItem={({ item }) => <Product productId={item.id} />}
       />
     </View>
   );
 };
 
-export { LotSection };
+export { ProductsSection };
