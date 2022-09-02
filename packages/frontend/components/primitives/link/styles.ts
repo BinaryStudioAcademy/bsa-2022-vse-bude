@@ -68,4 +68,9 @@ export const linkStyles = ({
     line-height: ${lineHeights.tub};
     color: ${colors.text};
   }
+
+  :disabled {
+    color: ${colors.disabled};
+    cursor: not-allowed;
+  }
 `;
