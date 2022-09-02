@@ -113,6 +113,7 @@
       "headline": "Verify",
       "description": "We just sent a code to",
       "input": "Enter the verification code we just sent to you",
+      "resend": "Resend code",
       "button": {
         "continue": "Continue"
       },
