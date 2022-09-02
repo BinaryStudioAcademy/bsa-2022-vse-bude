@@ -1,7 +1,7 @@
 import { UserDto } from '@vse-bude/shared';
 import { createReducer } from '@reduxjs/toolkit';
 import { DataStatus } from '~/common/enums/enums';
-import { signUp, signIn } from './actions';
+import { signUp, signIn, logOut } from './actions';
 
 type State = {
   dataStatus: DataStatus;
@@ -33,6 +33,14 @@ const reducer = createReducer(initialState, (builder) => {
     state.user = payload;
   });
   builder.addCase(signIn.rejected, (state) => {
+    state.dataStatus = DataStatus.REJECTED;
+    state.user = null;
+  });
+  builder.addCase(logOut.fulfilled, (state) => {
+    state.dataStatus = DataStatus.FULFILLED;
+    state.user = null;
+  });
+  builder.addCase(logOut.rejected, (state) => {
     state.dataStatus = DataStatus.REJECTED;
     state.user = null;
   });

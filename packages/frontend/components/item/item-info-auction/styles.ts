@@ -15,7 +15,9 @@ export const favouriteButton = ({ spaces }: Theme) => css`
   margin-left: ${spaces.sm};
   width: ${spaces.xl4};
   height: ${spaces.xl4};
+  margin-right: 10px;
 `;
+
 export const controlls = ({ breakpoints }: Theme) => css`
   width: 100%;
   display: flex;

@@ -21,6 +21,7 @@ const CharitySection = () => {
               trimSpace: true,
               updateOnMove: true,
               wheel: true,
+              releaseWheel: true,
               mediaQuery: 'max',
               breakpoints: {
                 [lightTheme.breakpoints.md]: {

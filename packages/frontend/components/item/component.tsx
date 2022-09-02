@@ -24,14 +24,6 @@ export const Item = ({ item }: ItemProps) => {
 
   const dispatch = useAppDispatch();
 
-  // TODO: delete after adding different photos to post
-  const images = [
-    'https://picsum.photos/id/1/640/480/',
-    'https://picsum.photos/id/2/640/480/',
-    'https://picsum.photos/id/3/640/480/',
-    'https://picsum.photos/id/4/640/480/',
-  ];
-
   const handleBuy = () => console.log('buy');
   const handleBid = ({ price }: CreateBidRequest) => {
     dispatch(
@@ -55,9 +47,9 @@ export const Item = ({ item }: ItemProps) => {
     <React.Fragment>
       <Container cssExtend={styles.itemWrapper}>
         {windowSize.width > lightTheme.breakpoints.sm ? (
-          <ItemImageSlider imageLinks={images} />
+          <ItemImageSlider imageLinks={item.imageLinks} />
         ) : (
-          <ImageSliderSplide imageLinks={images} />
+          <ImageSliderSplide imageLinks={item.imageLinks} />
         )}
         {item.type === ProductType.SELLING ? (
           <ItemInfoSelling
