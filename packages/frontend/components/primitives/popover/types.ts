@@ -10,8 +10,3 @@ export interface PopoverProps {
 }
 
 export type PopoverPosition = 'bottom-left' | 'bottom-right';
-
-export enum PopoverPositionProps {
-  BOTTOM_LEFT = 'bottom-left',
-  BOTTOM_RIGHT = 'bottom-right',
-}

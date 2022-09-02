@@ -2,8 +2,8 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { resetButton } from 'theme';
 import { useOutsideClick } from '@hooks';
+import type { PopoverProps } from './types';
 import * as styles from './styles';
-import { PopoverPositionProps, type PopoverProps } from './types';
 
 export const Popover = ({
   trigger,
@@ -35,7 +35,7 @@ export const Popover = ({
     const bodyTop = triggerRectParams.top + triggerRectParams.height;
     let bodyRight = triggerRectParams.left;
     bodyRight +=
-      placement === PopoverPositionProps.BOTTOM_RIGHT
+      placement === 'bottom-right'
         ? triggerRectParams.width - bodyRectParams.width
         : 0;
 
