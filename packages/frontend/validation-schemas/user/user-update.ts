@@ -52,7 +52,7 @@ export const userUpdateSchema = (t: TFunction) =>
 
     phone: Joi.string()
       .allow('')
-      .pattern(/^((\+\d{12,15})|(\+380\d{9}))$/)
+      //.pattern(/^((\+\d{12,15})|(\+380\d{9}))$/)
       .messages({
         'string.pattern.base': t(
           UserPersonalInfoValidationMessage.PHONE_PATTERN,
