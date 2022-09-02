@@ -31,7 +31,7 @@ scripts:
   - &android_build_apk
     name: Build Android release
     script: |
-      cd ./android && ./gradlew clean assembleRelease -PversionCode=$UPDATED_BUILD_NUMBER -PversionName=1.0.$UPDATED_BUILD_NUMBER
+      cd ./android && ./gradlew clean assembleRelease
 
   - &android_build_aab
     name: Build Android release
@@ -41,7 +41,7 @@ scripts:
   - &update_build_number
     name: Update Build Number
     script: |
-      LATEST_GOOGLE_PLAY_BUILD_NUMBER=$(google-play get-latest-build-number --package-name '$PACKAGE_NAME')
+      LATEST_GOOGLE_PLAY_BUILD_NUMBER=$(google-play get-latest-build-number --package-name "$PACKAGE_NAME" --tracks=internal)
       if [ -z LATEST_BUILD_NUMBER ]; then
           UPDATED_BUILD_NUMBER=$BUILD_NUMBER
       else
@@ -73,7 +73,6 @@ workflows:
       - *environment_set
       - *android_sdk_set
       - *android_keystore_set
-      - *update_build_number
       - *android_build_apk
 
     artifacts:
