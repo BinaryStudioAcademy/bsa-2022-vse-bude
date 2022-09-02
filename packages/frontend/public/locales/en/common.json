@@ -74,7 +74,11 @@
       "btn": {
         "auction": "Auction",
         "or": "or",
-        "directSale": "Direct Sale"
+        "directSale": "Direct Sale",
+        "tooltip": {
+          "auction": "Auction",
+          "directSale": "Direct Sale"
+        }
       }
     }
   },

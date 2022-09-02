@@ -74,7 +74,11 @@
       "btn": {
         "auction": "Аукціон",
         "or": "або",
-        "directSale": "Продаж"
+        "directSale": "Продаж",
+        "tooltip": {
+          "auction": "Аукціон",
+          "directSale": "Продаж"
+        }
       }
     }
   },
