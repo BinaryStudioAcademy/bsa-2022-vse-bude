@@ -104,7 +104,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
             >
               {t('personal-info:action.cancel')}
             </Button>
-            <Button size="flexible" type="submit" disabled={loading}> 
+            <Button size="flexible" type="submit" disabled={loading}>
               {t('personal-info:action.save')}
             </Button>
           </Flex>
