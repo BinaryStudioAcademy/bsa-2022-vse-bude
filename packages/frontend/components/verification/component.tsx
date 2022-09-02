@@ -8,7 +8,7 @@ import { SuccessModal } from './success-verification/component';
 
 const VerificationModal = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const { variant } = useTypedSelector((state) => state.modals);
+  const { step } = useTypedSelector((state) => state.modals.verifyPhoneModal);
   const dispatch = useAppDispatch();
   const { hasToken } = useAuth();
   const isMounted = useMounted();
@@ -21,7 +21,7 @@ const VerificationModal = () => {
     dispatch(hideVerifyModal());
   };
 
-  const renderContent = (param) => {
+  const renderContent = (param) => {    
     switch (param) {
       case 0:
         return <EnterPhoneModal />;
@@ -35,10 +35,10 @@ const VerificationModal = () => {
   };
 
   const renderModal = () => (
-    <Modal visible={isVisible}>{renderContent(variant)}</Modal>
+    <Modal visible={isVisible}>{renderContent(step)}</Modal>
   );
 
   return <>{isMounted && hasToken && renderModal()}</>;
 };
 
-export { VerificationModal };
+export default VerificationModal;

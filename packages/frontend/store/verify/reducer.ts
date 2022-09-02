@@ -7,14 +7,18 @@ import {
 } from './actions';
 
 interface ModalsState {
-  isVerifyPhoneModalOpen: boolean;
-  variant: number; 
+  verifyPhoneModal: {
+    isModalOpen: boolean;
+    step: number;
+  };
   isCreatePostModalShown: boolean;
 }
 
 const initialState: ModalsState = {
-  isVerifyPhoneModalOpen: false,
-  variant: 0,
+  verifyPhoneModal: {
+    isModalOpen: true,
+    step: 0,
+  },
   isCreatePostModalShown: false,
 };
 
@@ -29,11 +33,11 @@ export const modalsReducer = createReducer(initialState, {
   }),
   [nextVerifyModal.type]: (state) => ({
     ...state,
-    variant: state.variant + 1,
+    variant: state.verifyPhoneModal.step + 1,
   }),
   [previousVerifyModal.type]: (state) => ({
     ...state,
-    variant: state.variant - 1,
+    variant: state.verifyPhoneModal.step - 1,
   }),
 });
 

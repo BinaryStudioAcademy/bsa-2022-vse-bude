@@ -25,7 +25,7 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   return (
     <ThemeProvider>
       <UserProvider>{getLayout(<Component {...pageProps} />)}</UserProvider>
-        <Modals />
+      <Modals />
       <PageLoaderDynamic />
       <ToastStackDynamic />
     </ThemeProvider>

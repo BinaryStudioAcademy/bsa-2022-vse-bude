@@ -1,17 +1,10 @@
-import { useTypedSelector } from "@hooks";
-import { lazy } from "react";
+import { useTypedSelector } from '@hooks';
+import dynamic from 'next/dynamic';
 
-const VerificationModal = lazy(() =>
-  import('@components/verification')
-    .then(({ VerificationModal }) => ({ default: VerificationModal })),
-);
+const VerificationModal = dynamic(() => import('@components/verification/component'));
 
 export const Modals = () => {
-    const { isVerifyPhoneModalOpen } = useTypedSelector((state) => state.modals);
+  const { isModalOpen } = useTypedSelector((state) => state.modals.verifyPhoneModal);
 
-    return (
-        <>
-            {isVerifyPhoneModalOpen && <VerificationModal />}
-        </>
-    );
+  return <>{isModalOpen && <VerificationModal />}</>;
 };

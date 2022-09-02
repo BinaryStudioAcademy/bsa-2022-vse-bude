@@ -1,5 +1,5 @@
 import { IconName } from '@enums';
-import { useAppDispatch, useTypedSelector } from '@hooks';
+import { useAppDispatch } from '@hooks';
 import { Button, IconButton, Input } from '@primitives';
 import { LinkButton } from 'components/primitives/link-button';
 import { useTranslation } from 'next-i18next';
@@ -10,7 +10,6 @@ import * as styles from '../styles';
 
 const EnterPhoneModal = () => {
   const dispatch = useAppDispatch();
-  const { variant } = useTypedSelector((state) => state.modals);
 
   const { t } = useTranslation();
 
@@ -21,7 +20,6 @@ const EnterPhoneModal = () => {
   const changeModal = (e) => {
     e.preventDefault();
     dispatch(nextVerifyModal());
-    console.log(variant);
   };
 
   return (
