@@ -93,7 +93,9 @@ const ChangeAvatar = () => {
             cssExtend={styles.avatarUpdateButton}
           />
         }
-        cssExtend={() => styles.popover(window.scrollY)}
+        bodyWrapperCssExtend={() => styles.popover(window.scrollY)}
+        triggerWrapperCssExtend={styles.avatarPopoverTrigger}
+        placement="bottom-left"
       >
         {() => (
           <div css={styles.popoverContentWrapper}>

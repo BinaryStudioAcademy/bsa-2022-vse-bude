@@ -92,10 +92,13 @@ export const phoneRow = css`
   flex-grow: 2;
 `;
 
-export const avatarUpdateButton = ({ colors, spaces, radiuses }: Theme) => css`
+export const avatarPopoverTrigger = css`
   position: absolute;
   bottom: 0;
   right: 0;
+`;
+
+export const avatarUpdateButton = ({ colors, spaces, radiuses }: Theme) => css`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -158,7 +161,7 @@ export const popoverContentWrapper = ({ spaces, shadows }: Theme) => css`
 `;
 
 export const popover = (scrollTop) => css`
-  transform: translate(78%, ${scrollTop}px);
+  transform: translateY(${scrollTop}px);
   position: absolute;
   z-index: 0;
 `;

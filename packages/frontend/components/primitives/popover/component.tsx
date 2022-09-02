@@ -3,9 +3,15 @@ import ReactDOM from 'react-dom';
 import { resetButton } from 'theme';
 import { useOutsideClick } from '@hooks';
 import * as styles from './styles';
-import type { PopoverProps } from './types';
+import { PopoverPositionProps, type PopoverProps } from './types';
 
-export const Popover = ({ trigger, children, cssExtend }: PopoverProps) => {
+export const Popover = ({
+  trigger,
+  children,
+  placement = 'bottom-right',
+  bodyWrapperCssExtend,
+  triggerWrapperCssExtend,
+}: PopoverProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const triggerWrapperRef = useRef<HTMLButtonElement>();
   const handleClickOutside = useCallback(() => {
@@ -20,18 +26,21 @@ export const Popover = ({ trigger, children, cssExtend }: PopoverProps) => {
   );
 
   const getTriggerRectParams = () =>
-    triggerWrapperRef.current.parentElement.getBoundingClientRect();
+    triggerWrapperRef.current.getBoundingClientRect();
 
   const calcBodyCoords = useCallback(() => {
     const triggerRectParams = getTriggerRectParams();
     const bodyRectParams = getBodyRectParams();
 
-    const bodyTop = triggerRectParams.bottom;
-    const bodyRight =
-      triggerRectParams.left + triggerRectParams.width - bodyRectParams.width;
+    const bodyTop = triggerRectParams.top + triggerRectParams.height;
+    let bodyRight = triggerRectParams.left;
+    bodyRight +=
+      placement === PopoverPositionProps.BOTTOM_RIGHT
+        ? triggerRectParams.width - bodyRectParams.width
+        : 0;
 
     return [bodyTop, bodyRight];
-  }, [getBodyRectParams]);
+  }, [getBodyRectParams, placement]);
 
   const setPopoverPosition = useCallback(() => {
     if (bodyRef.current) {
@@ -67,7 +76,7 @@ export const Popover = ({ trigger, children, cssExtend }: PopoverProps) => {
   const handleClose = useCallback(() => setIsVisible(false), []);
 
   const renderPortalBody = () => (
-    <div ref={bodyRef} css={[styles.popover, cssExtend]}>
+    <div ref={bodyRef} css={[styles.popover, bodyWrapperCssExtend]}>
       {children(handleClose)}
     </div>
   );
@@ -82,7 +91,7 @@ export const Popover = ({ trigger, children, cssExtend }: PopoverProps) => {
     <React.Fragment>
       <button
         onClick={handleMouseClick}
-        css={resetButton}
+        css={[resetButton, triggerWrapperCssExtend]}
         ref={triggerWrapperRef}
       >
         {typeof trigger === 'function'
