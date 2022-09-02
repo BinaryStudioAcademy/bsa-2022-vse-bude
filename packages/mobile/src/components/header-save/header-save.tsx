@@ -3,14 +3,9 @@ import { ColorPalette } from '@vse-bude/shared';
 import { RootNavigationProps } from '~/common/types/navigation/navigation-props';
 import { useNavigation, useTranslation } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
-import {
-  ArrowLeftIcon,
-  Text,
-  TouchableWithoutFeedback,
-  View,
-} from '../components';
+import { Text, TouchableWithoutFeedback, View } from '../components';
 
-const HeaderLeft: FC = () => {
+const HeaderSave: FC = () => {
   const navigation = useNavigation<RootNavigationProps>();
   const { t } = useTranslation();
 
@@ -19,13 +14,12 @@ const HeaderLeft: FC = () => {
       <View
         style={[globalStyles.flexDirectionRow, globalStyles.alignItemsCenter]}
       >
-        <ArrowLeftIcon size={35} style={{ color: ColorPalette.YELLOW_100 }} />
         <Text style={{ color: ColorPalette.YELLOW_100 }}>
-          {t('common:common.HOME')}
+          {t('common:components.BUTTON_SAVE')}
         </Text>
       </View>
     </TouchableWithoutFeedback>
   );
 };
 
-export { HeaderLeft };
+export { HeaderSave };
