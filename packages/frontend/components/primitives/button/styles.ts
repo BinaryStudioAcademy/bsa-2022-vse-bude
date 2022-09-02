@@ -32,6 +32,7 @@ export const button = ({
 
     :disabled {
       background: ${colors.disabled};
+      cursor: not-allowed;
     }
   }
 
@@ -54,6 +55,7 @@ export const button = ({
     :disabled {
       border: 1px solid ${colors.disabled};
       color: ${colors.disabled};
+      cursor: not-allowed;
     }
   }
 

@@ -11,7 +11,7 @@ import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 
 type Props<T extends FormControlValues> = {
-  label: string;
+  label?: string;
   name: FormControlPath<T>;
   control: FormControl<T>;
   items: Array<{
@@ -19,6 +19,7 @@ type Props<T extends FormControlValues> = {
     value: string;
   }>;
   zIndex: number;
+  disabled?: boolean;
 };
 
 const DropDown = <T extends FormControlValues>({
@@ -27,6 +28,7 @@ const DropDown = <T extends FormControlValues>({
   control,
   items,
   zIndex,
+  disabled,
 }: Props<T>): ReactElement => {
   const { field } = useFormControl({ name, control });
   const { colors } = useCustomTheme();
@@ -34,16 +36,18 @@ const DropDown = <T extends FormControlValues>({
 
   return (
     <View style={styles.container}>
-      <Text
-        style={[
-          styles.label,
-          globalStyles.mb2,
-          globalStyles.fs12,
-          { color: colors.titlePrimary },
-        ]}
-      >
-        {label}
-      </Text>
+      {!!label && (
+        <Text
+          style={[
+            styles.label,
+            globalStyles.mb2,
+            globalStyles.fs12,
+            { color: colors.titlePrimary },
+          ]}
+        >
+          {label}
+        </Text>
+      )}
       <DropDownPicker
         listMode="SCROLLVIEW"
         open={open}
@@ -51,12 +55,17 @@ const DropDown = <T extends FormControlValues>({
         items={items}
         setOpen={setOpen}
         setValue={field.onChange}
-        textStyle={[{ color: colors.text }, globalStyles.fs14]}
+        textStyle={[
+          disabled ? { color: colors.placeholder } : { color: colors.text },
+          globalStyles.fs14,
+        ]}
+        placeholderStyle={[{ color: colors.placeholder }, globalStyles.fs14]}
         style={[
           styles.dropDown,
           { backgroundColor: colors.backgroundElements },
         ]}
         zIndex={zIndex}
+        disabled={disabled}
       />
     </View>
   );

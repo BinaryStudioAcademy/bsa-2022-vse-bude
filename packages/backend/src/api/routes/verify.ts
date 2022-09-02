@@ -111,5 +111,21 @@ export const initVerifyRoutes = (
     }),
   );
 
+  router.post(
+    apiPath(path, VerifyApiRoutes.PHONE_RESEND_CODE),
+    authMiddleware,
+    wrap((req: Request) =>
+      verifyService.resendPhoneCode(req.userId, VerificationTypes.PHONE),
+    ),
+  );
+
+  router.post(
+    apiPath(path, VerifyApiRoutes.EMAIL_RESEND_CODE),
+    authMiddleware,
+    wrap((req: Request) =>
+      verifyService.resendEmailCode(req.userId, VerificationTypes.EMAIL),
+    ),
+  );
+
   return router;
 };
