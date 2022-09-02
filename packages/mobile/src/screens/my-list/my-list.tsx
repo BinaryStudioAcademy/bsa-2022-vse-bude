@@ -27,6 +27,9 @@ const MyList: FC = () => {
   const handleCreateNewItemPress = () => {
     navigation.navigate(RootScreenName.NEW_ITEM);
   };
+  const handleCreateNewAuctionPress = () => {
+    navigation.navigate(RootScreenName.NEW_AUCTION);
+  };
 
   return (
     <ScreenWrapper style={styles.screen}>
@@ -35,6 +38,12 @@ const MyList: FC = () => {
         <TouchableOpacity onPress={handleCreateNewItemPress} style={styles.row}>
           <PlusIcon size={30} style={styles.icon} />
           <Text style={styles.btnText}>{t('make_a_post.TITLE')}</Text>
+        </TouchableOpacity>
+      )}
+      {user && (
+        <TouchableOpacity onPress={handleCreateNewAuctionPress} style={styles.row}>
+          <PlusIcon size={30} style={styles.icon} />
+          <Text style={styles.btnText}>{t('make_a_post.AUCTION_TITLE')}</Text>
         </TouchableOpacity>
       )}
     </ScreenWrapper>

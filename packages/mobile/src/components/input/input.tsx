@@ -26,6 +26,7 @@ type Props<T extends FormControlValues> = {
   placeholder?: string;
   contentContainerStyle?: StyleProp<ViewStyle>;
   isSecure?: boolean;
+  editable?: boolean;
 };
 
 const Input = <T extends FormControlValues>({
