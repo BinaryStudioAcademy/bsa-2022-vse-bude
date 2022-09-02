@@ -59,7 +59,6 @@ const profileSlice = createSlice({
     },
     [updateUserProfile.rejected.type]: (state, { payload }) => {
       state.loading = false;
-      state.user = null;
       state.error = payload;
     },
 

@@ -7,7 +7,7 @@ interface ItemImageSliderProps {
 }
 
 export const ItemImageSlider = ({ imageLinks }: ItemImageSliderProps) => {
-  const [focusedImage, setFocusedImage] = useState(imageLinks[0]);
+  const [focusedImage, setFocusedImage] = useState(0);
 
   const handleClick = (imageLink) => {
     setFocusedImage(imageLink);
@@ -19,11 +19,11 @@ export const ItemImageSlider = ({ imageLinks }: ItemImageSliderProps) => {
         {imageLinks.map((link, index) => (
           <div
             key={link + index}
-            css={[styles.image, link === focusedImage && styles.pickedImage]}
+            css={[styles.image, index === focusedImage && styles.pickedImage]}
           >
             <Image
               key={index}
-              onClick={() => handleClick(link)}
+              onClick={() => handleClick(index)}
               src={link}
               alt="item image"
               layout="fill"
@@ -34,7 +34,7 @@ export const ItemImageSlider = ({ imageLinks }: ItemImageSliderProps) => {
       </div>
       <div css={styles.focusedImage}>
         <Image
-          src={focusedImage}
+          src={imageLinks[focusedImage]}
           alt="item image"
           layout="fill"
           objectFit="cover"

@@ -24,6 +24,7 @@ import { auth } from '@helpers';
 import { Routes } from '@enums';
 import type { IAuth } from '@types';
 import { addToast } from 'store/toast/actions';
+import { hideVerifyModal, showVerifyModal } from '../verify/actions';
 import { AuthActions } from './action-types';
 
 const getCurrentUser = createAsyncThunk(
@@ -47,7 +48,7 @@ const loginUser = createAsyncThunk(
   AuthActions.LOGIN,
   (data: UserSignInDto, { rejectWithValue, dispatch }) =>
     login(data)
-      .then((data: IAuth) => {
+      .then(async (data: IAuth) => {
         if (data?.error) {
           dispatch(
             addToast({
@@ -60,6 +61,11 @@ const loginUser = createAsyncThunk(
         }
         auth.setTokens(data.accessToken, data.refreshToken);
         Router.push(Routes.DEFAULT);
+        await dispatch(getCurrentUser);
+
+        if (!data.user.phoneVerified) {
+          dispatch(showVerifyModal());
+        }
 
         return data;
       })
@@ -83,8 +89,14 @@ const signUpUser = createAsyncThunk(
     try {
       const response: IAuth = await signUp(data);
       auth.setTokens(response.accessToken, response.refreshToken);
+      dispatch(
+        addToast({
+          level: 'success',
+          description: (t) => t('common:notifications.signUpSuccess'),
+        }),
+      );
 
-      await Router.push(Routes.PHONE_VERIFY);
+      await Router.push(Routes.EMAIL_VERIFY);
     } catch (e) {
       dispatch(
         addToast({
@@ -103,7 +115,13 @@ const phoneVerification = createAsyncThunk(
   async (data: PhoneVerifyDto, { rejectWithValue, dispatch }) => {
     try {
       await verifyPhone(data);
-      await Router.push(Routes.EMAIL_VERIFY);
+      dispatch(
+        addToast({
+          level: 'success',
+          description: (t) => t('common:notifications.phoneVerifySuccess'),
+        }),
+      );
+      dispatch(hideVerifyModal());
     } catch (e) {
       dispatch(
         addToast({
@@ -121,7 +139,15 @@ const phoneCodeResend = createAsyncThunk(
   AuthActions.PHONE_RESEND_CODE,
   async (_, { rejectWithValue, dispatch }) => {
     try {
-      return await resendPhoneCode();
+      const result = await resendPhoneCode();
+      dispatch(
+        addToast({
+          level: 'info',
+          description: (t) => t('common:notifications.phoneCodeResendSuccess'),
+        }),
+      );
+
+      return result;
     } catch (e) {
       dispatch(
         addToast({
@@ -140,6 +166,12 @@ const emailVerification = createAsyncThunk(
   async (data: EmailVerifyDto, { rejectWithValue, dispatch }) => {
     try {
       await verifyEmail(data);
+      dispatch(
+        addToast({
+          level: 'success',
+          description: (t) => t('common:notifications.emailVerifySuccess'),
+        }),
+      );
       await Router.push(Routes.DEFAULT);
     } catch (e) {
       dispatch(
@@ -158,7 +190,15 @@ const emailCodeResend = createAsyncThunk(
   AuthActions.EMAIL_RESEND_CODE,
   async (_, { rejectWithValue, dispatch }) => {
     try {
-      return await resendEmailCode();
+      const result = await resendEmailCode();
+      dispatch(
+        addToast({
+          level: 'success',
+          description: (t) => t('common:notifications.emailCodeResendSuccess'),
+        }),
+      );
+
+      return result;
     } catch (e) {
       dispatch(
         addToast({
@@ -190,7 +230,15 @@ const sendPasswordResetLink = createAsyncThunk(
   AuthActions.SEND_RESET_PASSWORD_LINK,
   async (data: ResetPasswordLink, { rejectWithValue, dispatch }) => {
     try {
-      return await resetPasswordLink(data);
+      const result = await resetPasswordLink(data);
+      dispatch(
+        addToast({
+          level: 'success',
+          description: (t) => t('common:notifications.resetPasswordLinkSent'),
+        }),
+      );
+
+      return result;
     } catch (e) {
       dispatch(
         addToast({
@@ -208,7 +256,15 @@ const updatePassword = createAsyncThunk(
   AuthActions.UPDATE_PASSWORD,
   async (data: UpdatePassword, { rejectWithValue, dispatch }) => {
     try {
-      return await updatePasswordRequest(data);
+      const result = await updatePasswordRequest(data);
+      dispatch(
+        addToast({
+          level: 'success',
+          description: (t) => t('common:notifications.passwordUpdated'),
+        }),
+      );
+
+      return result;
     } catch (e) {
       dispatch(
         addToast({

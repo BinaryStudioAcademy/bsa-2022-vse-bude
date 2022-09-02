@@ -36,7 +36,7 @@ export const PersonalInfo = () => {
   return (
     <NestedLayout>
       <div css={styles.personalHeader}>
-        <div css={styles.headerWrapper}>
+        <div css={[styles.headerWrapper, !isAuthUser && styles.marginBottom]}>
           <div css={styles.flagWrapper}>
             <img css={styles.flag} src={flag.src} alt="flag" />
           </div>
@@ -52,9 +52,8 @@ export const PersonalInfo = () => {
             {isAuthUser && <ChangeAvatar />}
           </div>
         </div>
-
-        <Flex justify={'flex-end'} css={styles.buttons}>
-          {!isEditing && isAuthUser && (
+        {!isEditing && isAuthUser && (
+          <Flex justify={'flex-end'} css={styles.buttons}>
             <Button
               type="button"
               variant="outlined"
@@ -66,8 +65,9 @@ export const PersonalInfo = () => {
             >
               {t('personal-info:action.edit')}
             </Button>
-          )}
-        </Flex>
+          </Flex>
+        )}
+
         {isEditing && !loading && <EditForm user={user} />}
         {!isEditing && <ProfileData user={user} />}
       </div>
