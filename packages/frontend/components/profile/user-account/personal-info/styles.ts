@@ -150,8 +150,15 @@ export const popoverContentItem = ({
   }
 `;
 
-export const popoverContentWrapper = ({ spaces }: Theme) => css`
+export const popoverContentWrapper = ({ spaces, shadows }: Theme) => css`
   display: flex;
   flex-direction: column;
   padding: ${spaces.sm} 0;
+  box-shadow: ${shadows.bottom};
+`;
+
+export const popover = (scrollTop) => css`
+  transform: translate(78%, ${scrollTop}px);
+  position: absolute;
+  z-index: 0;
 `;

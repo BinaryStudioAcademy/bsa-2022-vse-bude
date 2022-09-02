@@ -5,7 +5,7 @@ import { useOutsideClick } from '@hooks';
 import * as styles from './styles';
 import type { PopoverProps } from './types';
 
-export const Popover = ({ trigger, children }: PopoverProps) => {
+export const Popover = ({ trigger, children, cssExtend }: PopoverProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const triggerWrapperRef = useRef<HTMLButtonElement>();
   const handleClickOutside = useCallback(() => {
@@ -67,7 +67,7 @@ export const Popover = ({ trigger, children }: PopoverProps) => {
   const handleClose = useCallback(() => setIsVisible(false), []);
 
   const renderPortalBody = () => (
-    <div ref={bodyRef} css={styles.popover}>
+    <div ref={bodyRef} css={[styles.popover, cssExtend]}>
       {children(handleClose)}
     </div>
   );
