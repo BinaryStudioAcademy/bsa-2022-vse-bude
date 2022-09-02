@@ -11,12 +11,14 @@ import {
 
 interface ProfileState {
   user: UserProfileDto | FullUserProfileDto | null;
+  isEditing: boolean;
   loading: boolean;
   error: string;
 }
 
 const initialState: ProfileState = {
   user: null,
+  isEditing: false,
   loading: false,
   error: null,
 };
@@ -24,7 +26,11 @@ const initialState: ProfileState = {
 const profileSlice = createSlice({
   name: 'profile',
   initialState,
-  reducers: {},
+  reducers: {
+    setIsEditing: (state) => {
+      state.isEditing = !state.isEditing;
+    },
+  },
   extraReducers: {
     [fetchUserProfileSSR.pending.type]: (state) => {
       state.loading = true;
@@ -59,7 +65,6 @@ const profileSlice = createSlice({
     },
     [updateUserProfile.rejected.type]: (state, { payload }) => {
       state.loading = false;
-      state.user = null;
       state.error = payload;
     },
 
@@ -83,5 +88,7 @@ const profileSlice = createSlice({
 });
 
 export const profileReducer = profileSlice.reducer;
+
+export const { setIsEditing } = profileSlice.actions;
 
 export type { ProfileState };

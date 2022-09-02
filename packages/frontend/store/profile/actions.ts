@@ -7,6 +7,8 @@ import {
   updateAvatar,
 } from '@services';
 import { addToast } from 'store/toast/actions';
+import { useTypedSelector } from '@hooks';
+import type { RootState } from '@types';
 import { ProfileActions } from './action-types';
 
 export const fetchUserProfileSSR = createAsyncThunk(
@@ -46,6 +48,9 @@ export const updateUserProfile = createAsyncThunk(
           }),
         );
         rejectWithValue(e.message);
+        const { user } = useTypedSelector((state: RootState) => state.profile);
+
+        return user;
       }),
 );
 

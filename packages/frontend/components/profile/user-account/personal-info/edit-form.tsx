@@ -1,5 +1,5 @@
 import { useTranslation } from 'next-i18next';
-import { useAppDispatch } from '@hooks';
+import { useAppDispatch, useTypedSelector } from '@hooks';
 import type React from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
@@ -9,13 +9,18 @@ import type { SaveUserProfileDto, FullUserProfileDto } from '@vse-bude/shared';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { UserPersonalInfoValidationMessage } from '@vse-bude/shared';
 import { profileMapper, updateDtoMapper } from '@helpers';
-import { updateUserProfile } from '@store';
+import { updateUserProfile, setIsEditing } from '@store';
+import { useEffect, useState } from 'react';
+import type { RootState } from '@types';
 import { SectionHeader, NestedLayout } from '../common';
 import * as styles from './styles';
 
 const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
+  const [isSubmit, setIsSubmit] = useState(false);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+
+  const { loading } = useTypedSelector((state: RootState) => state.profile);
 
   const {
     register,
@@ -26,15 +31,19 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    defaultValues: {
-      ...profileMapper({ user }),
-    },
+    mode: 'onChange',
+    defaultValues: profileMapper({ user }),
     resolver: joiResolver(userUpdateSchema(t)),
   });
+
+  useEffect(() => {
+    reset({ 'password': '', 'repeatPassword': '', 'newPassword': '' });
+  }, [isSubmit, reset]);
 
   const onSave: SubmitHandler<SaveUserProfileDto> = (data, event) => {
     event.preventDefault();
     const currentLinks = user.socialMedia;
+    setIsSubmit(!isSubmit);
     dispatch(
       updateUserProfile({ data: updateDtoMapper({ data, currentLinks }) }),
     );
@@ -51,20 +60,18 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
       setError('newPassword', {
         message: t(UserPersonalInfoValidationMessage.CYRILLIC),
       });
-    } else {
+    } else if (
+      !/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z~!@#$%^*\-_=+[{\]}/;:,.?]+$/.test(
+        value,
+      )
+    )
       setValue('newPassword', event.target.value);
-    }
   };
-
   const onResetHandler = () => {
-    reset(
-      {
-        ...profileMapper({ user }),
-      },
-      {
-        keepDefaultValues: true,
-      },
-    );
+    reset(profileMapper({ user }), {
+      keepDefaultValues: true,
+    });
+    dispatch(setIsEditing());
   };
 
   const onCutHandler = (event: React.ClipboardEvent<HTMLInputElement>) => {
@@ -92,11 +99,12 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
               size="flexible"
               type="button"
               variant="outlined"
+              disabled={loading}
               onClick={onResetHandler}
             >
               {t('personal-info:action.cancel')}
             </Button>
-            <Button size="flexible" type="submit">
+            <Button size="flexible" type="submit" disabled={loading}> 
               {t('personal-info:action.save')}
             </Button>
           </Flex>
