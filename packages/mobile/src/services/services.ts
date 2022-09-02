@@ -35,4 +35,4 @@ const notification = new NotificationService();
 
 const appService = new AppService();
 
-export { storage, authApi, image, notification, productApi, appService };
+export { storage, authApi, image, notification, productApi, appService, http };

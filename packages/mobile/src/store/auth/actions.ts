@@ -1,5 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { UserSignUpDto, UserSignInDto, UserDto } from '@vse-bude/shared';
+import {
+  UserSignUpDto,
+  UserSignInDto,
+  UserDto,
+  ResetPasswordLink,
+} from '@vse-bude/shared';
 import { StorageKey } from '~/common/enums/enums';
 import { AsyncThunkConfig } from '~/common/types/types';
 import { ActionType } from './common';
@@ -30,4 +35,15 @@ const signIn = createAsyncThunk<UserDto, UserSignInDto, AsyncThunkConfig>(
   },
 );
 
-export { signUp, signIn };
+const resetPassword = createAsyncThunk<
+  unknown,
+  ResetPasswordLink,
+  AsyncThunkConfig
+>(ActionType.UPDATE_PASSWORD, async (payload, { extra }) => {
+  const { authApi } = extra;
+  const response = await authApi.resetPassword(payload);
+
+  return response;
+});
+
+export { signUp, signIn, resetPassword };

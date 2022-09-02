@@ -25,8 +25,8 @@ const SignInForm: FC<Props> = ({ onSubmit }) => {
   const { t } = useTranslation();
   const { navigate } = useNavigation<RootNavigationProps>();
 
-  const handleForgotPassword = () => {
-    navigate(RootScreenName.FORGOT_PASSWORD);
+  const navigateResetPassword = () => {
+    navigate(RootScreenName.RESET_PASSWORD);
   };
 
   return (
@@ -48,7 +48,7 @@ const SignInForm: FC<Props> = ({ onSubmit }) => {
         isSecure={true}
       />
       <ButtonText
-        onPress={handleForgotPassword}
+        onPress={navigateResetPassword}
         style={[
           { color: ColorPalette.YELLOW_100 },
           { textAlign: 'right' },

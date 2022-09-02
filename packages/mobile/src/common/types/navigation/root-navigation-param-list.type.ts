@@ -9,7 +9,7 @@ type RootNavigationParamList = {
   [RootScreenName.MESSAGES]: undefined;
   [RootScreenName.SUPPORT]: undefined;
   [RootScreenName.WELCOME]: undefined;
-  [RootScreenName.FORGOT_PASSWORD]: undefined;
+  [RootScreenName.RESET_PASSWORD]: undefined;
 };
 
 export type { RootNavigationParamList };

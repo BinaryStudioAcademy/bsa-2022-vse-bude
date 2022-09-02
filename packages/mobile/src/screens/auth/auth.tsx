@@ -1,5 +1,10 @@
 import React, { FC, ReactElement } from 'react';
-import { ColorPalette, UserSignInDto, UserSignUpDto } from '@vse-bude/shared';
+import {
+  ColorPalette,
+  ResetPasswordLink,
+  UserSignInDto,
+  UserSignUpDto,
+} from '@vse-bude/shared';
 import { RootScreenName } from '~/common/enums/enums';
 import { auth as authActions } from '~/store/actions';
 import {
@@ -17,11 +22,12 @@ import {
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import {
-  ForgotPasswordHeader,
+  ResetPasswordHeader,
   SignInUpHeader,
   SignInForm,
   SignUpForm,
   Header,
+  ResetPassword,
 } from './components/components';
 import { styles } from './styles';
 
@@ -31,7 +37,7 @@ const Auth: FC = () => {
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
   const navigation = useNavigation();
-  const isForgotPassword = name === RootScreenName.FORGOT_PASSWORD;
+  const isResetPassword = name === RootScreenName.RESET_PASSWORD;
 
   const getScreenLabel = (screenName: string): string => {
     switch (screenName) {
@@ -39,7 +45,7 @@ const Auth: FC = () => {
         return t('verification.SING_IN');
       case RootScreenName.SIGN_UP:
         return t('verification.CREATE_ACCOUNT');
-      case RootScreenName.FORGOT_PASSWORD:
+      case RootScreenName.RESET_PASSWORD:
         return t('verification.FORGOT_PASSWORD');
       default:
         return '';
@@ -54,6 +60,10 @@ const Auth: FC = () => {
     dispatch(authActions.signUp(payload));
   };
 
+  const handleResetPassword = (payload: ResetPasswordLink): void => {
+    dispatch(authActions.resetPassword(payload));
+  };
+
   const handleGoBack = (): void => {
     navigation.goBack();
   };
@@ -65,6 +75,9 @@ const Auth: FC = () => {
       }
       case RootScreenName.SIGN_UP: {
         return <SignUpForm onSubmit={handleSignUp} />;
+      }
+      case RootScreenName.RESET_PASSWORD: {
+        return <ResetPassword onSubmit={handleResetPassword} />;
       }
     }
 
@@ -99,7 +112,7 @@ const Auth: FC = () => {
         >
           {getScreenLabel(name)}
         </Text>
-        {isForgotPassword ? <ForgotPasswordHeader /> : <SignInUpHeader />}
+        {isResetPassword ? <ResetPasswordHeader /> : <SignInUpHeader />}
         {getScreen(name)}
       </ScrollView>
     </ScreenWrapper>
