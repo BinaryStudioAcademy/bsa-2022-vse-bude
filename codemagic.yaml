@@ -31,22 +31,14 @@ scripts:
   - &android_build_apk
     name: Build Android release
     script: |
+      export LATEST_GOOGLE_PLAY_BUILD_NUMBER=$(($(google-play get-latest-build-number --package-name "$PACKAGE_NAME" --tracks=internal) + 1))
       cd ./android && ./gradlew clean assembleRelease
 
   - &android_build_aab
     name: Build Android release
     script: |
-      export VERSION_CODE=$UPDATED_BUILD_NUMBER && cd ./android && ./gradlew clean bundleRelease
-
-  - &update_build_number
-    name: Update Build Number
-    script: |
-      LATEST_GOOGLE_PLAY_BUILD_NUMBER=$(google-play get-latest-build-number --package-name "$PACKAGE_NAME" --tracks=internal)
-      if [ -z LATEST_BUILD_NUMBER ]; then
-          UPDATED_BUILD_NUMBER=$BUILD_NUMBER
-      else
-          UPDATED_BUILD_NUMBER=$(($LATEST_GOOGLE_PLAY_BUILD_NUMBER + 1))
-      fi
+      export LATEST_GOOGLE_PLAY_BUILD_NUMBER=$(($(google-play get-latest-build-number --package-name "$PACKAGE_NAME" --tracks=internal) + 1))
+      cd ./android && ./gradlew clean bundleRelease
 
 workflows:
   # MAIN
@@ -119,7 +111,6 @@ workflows:
       - *environment_set
       - *android_sdk_set
       - *android_keystore_set
-      - *update_build_number
       - *android_build_aab
 
     artifacts:

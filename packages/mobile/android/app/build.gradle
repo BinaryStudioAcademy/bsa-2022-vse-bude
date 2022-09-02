@@ -144,20 +144,18 @@ def keystoreProperties = new Properties()
 
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
-def getVersionCode() {
-    return Integer.valueOf(System.env.VERSION_CODE ?: 1)
-}
-
 android {
     ndkVersion rootProject.ext.ndkVersion
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
+    def latestGooglePlayBuildNumber = Integer.valueOf(System.env.LATEST_GOOGLE_PLAY_BUILD_NUMBER ?: System.env.BUILD_NUMBER ?: 1)
+
     defaultConfig {
         applicationId "com.vsebude"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode getVersionCode()
+        versionCode latestGooglePlayBuildNumber + 1
         versionName "1.0"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
         setProperty("archivesBaseName", applicationId + "-v" + versionName + "-" + versionCode)
