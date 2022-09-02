@@ -21,6 +21,7 @@ import type { RootState } from '@types';
 import { SectionHeader, NestedLayout } from '../common';
 import * as styles from './styles';
 import { onChangeNewPassword } from './utils';
+import { showVerifyModal } from 'store/verify/actions';
 
 const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
   const [isSubmit, setIsSubmit] = useState(false);
@@ -162,7 +163,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
                   error={errors.phone?.message}
                 />
               </div>
-              <Button type="button" size="big" variant="outlined">
+              <Button type="button" size="big" variant="outlined" onClick={() => dispatch(showVerifyModal())}>
                 {t('personal-info:action.verify')}
               </Button>
             </Flex>
