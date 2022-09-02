@@ -90,6 +90,26 @@ const InfoIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="info" {...iconProps} />
 );
 
+const FacebookIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="facebook" {...iconProps} />
+);
+
+const InstagramIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="instagram" {...iconProps} />
+);
+
+const PhoneIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="smartphone" {...iconProps} />
+);
+
+const GlobeIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="globe" {...iconProps} />
+);
+
+const LinkedinIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="linkedin" {...iconProps} />
+);
+
 export {
   HomeIcon,
   StarIcon,
@@ -113,4 +133,9 @@ export {
   PlusIcon,
   ImageIcon,
   InfoIcon,
+  FacebookIcon,
+  InstagramIcon,
+  PhoneIcon,
+  GlobeIcon,
+  LinkedinIcon,
 };

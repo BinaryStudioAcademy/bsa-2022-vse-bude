@@ -9,6 +9,8 @@ export const screens = {
   words: {
     FIRST_NAME: "Ім'я",
     LAST_NAME: 'Прізвище',
+    SELLER: 'Продавець',
+    CONTACT: 'Контакти',
   },
   welcome: {
     TITLE: 'Марка "Русский военный корабль"',
