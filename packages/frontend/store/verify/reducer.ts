@@ -16,7 +16,7 @@ interface ModalsState {
 
 const initialState: ModalsState = {
   verifyPhoneModal: {
-    isModalOpen: true,
+    isModalOpen: false,
     step: 0,
   },
   isCreatePostModalShown: false,

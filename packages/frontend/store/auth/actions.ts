@@ -61,7 +61,6 @@ const loginUser = createAsyncThunk(
         }
         auth.setTokens(data.accessToken, data.refreshToken);
         Router.push(Routes.DEFAULT);
-        await dispatch(getCurrentUser);
 
         return data;
       })
