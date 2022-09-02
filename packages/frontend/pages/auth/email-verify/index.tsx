@@ -9,7 +9,7 @@ import {
 
 export const getServerSideProps = withProtected(async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale, ['auth', 'public'])),
+    ...(await serverSideTranslations(locale, ['auth', 'public', 'common'])),
   },
 }));
 

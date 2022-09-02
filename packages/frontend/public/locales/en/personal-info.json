@@ -83,6 +83,10 @@
       "newPasswordPattern": "Password should include at least one uppercase, one lowercase and one number",
       "spacesInPassword": "Spaces are not allowed",
       "differentPasswords": "Passwords are not same"
+    },
+    "avatar": {
+      "maxSize": "The file size should not exceed 10MB",
+      "fileType": "The file type should be .jpg or .png"
     }
   }
 }

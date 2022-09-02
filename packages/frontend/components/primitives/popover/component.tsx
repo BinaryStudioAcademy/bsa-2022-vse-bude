@@ -8,7 +8,10 @@ import type { PopoverProps } from './types';
 export const Popover = ({ trigger, children }: PopoverProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const triggerWrapperRef = useRef<HTMLButtonElement>();
-  const handleClickOutside = useCallback(() => setIsVisible(false), []);
+  const handleClickOutside = useCallback(() => {
+    event.stopPropagation();
+    setIsVisible(false);
+  }, []);
   const bodyRef = useOutsideClick(handleClickOutside);
 
   const getBodyRectParams = useCallback(
@@ -82,7 +85,9 @@ export const Popover = ({ trigger, children }: PopoverProps) => {
         css={resetButton}
         ref={triggerWrapperRef}
       >
-        {trigger}
+        {typeof trigger === 'function'
+          ? trigger({ isOpen: isVisible })
+          : trigger}
       </button>
       {isVisible && renderPortal()}
     </React.Fragment>

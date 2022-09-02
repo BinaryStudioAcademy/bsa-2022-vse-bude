@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { t } from 'i18next';
 import { useAppSelector } from '~/hooks/hooks';
 import {
   createNativeStackNavigator,
@@ -41,6 +42,9 @@ const Navigation: FC = () => {
           <Stack.Screen
             name={RootScreenName.PERSONAL_INFO}
             component={PersonalInfoScreen}
+            options={{
+              title: t('personal_info.PERSONAL_INFO'),
+            }}
           />
           <Stack.Screen
             name={RootScreenName.SETTINGS}
