@@ -1,9 +1,10 @@
 import type { FC } from 'react';
 import { useRouter } from 'next/router';
-import { useAuth } from '@hooks';
+import { useAppDispatch, useAuth } from '@hooks';
 import { useTranslation } from 'next-i18next';
 import { Layout } from '@components/layout';
 import { Container, Flex } from '@primitives';
+import { logoutUser } from 'store/auth';
 import { DashboardLink } from './dashboard-link';
 import type { AccountPageProps } from './types';
 import { getLinksData } from './account-links-data';
@@ -13,6 +14,7 @@ export const AccountLayout: FC<AccountPageProps> = ({ children }) => {
   const { query, pathname } = useRouter();
   const { t } = useTranslation();
   const { user: authUser } = useAuth();
+  const dispatch = useAppDispatch();
 
   return (
     <Layout>
@@ -34,6 +36,11 @@ export const AccountLayout: FC<AccountPageProps> = ({ children }) => {
                       label={tLabel}
                       location={location}
                       path={path}
+                      onClick={
+                        label === 'account:signOut'
+                          ? () => dispatch(logoutUser())
+                          : null
+                      }
                     />
                   );
                 })}

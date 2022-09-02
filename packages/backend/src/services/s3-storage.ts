@@ -5,7 +5,11 @@ import {
   NoFileProvidedError,
   FileSizeTooLargeError,
 } from '@errors';
-import type { UploadFileRequest } from '@types';
+import type {
+  IFileUpload,
+  UploadFileRequest,
+  UploadFilesRequest,
+} from '@types';
 import { getEnv, logger } from '@helpers';
 import { MAX_IMAGE_SIZE } from '@vse-bude/shared';
 import { randomBytes } from 'crypto';
@@ -29,9 +33,41 @@ export class S3StorageService {
     });
   }
 
+  async deleteImage(filename: string) {
+    console.log(filename);
+    const params = this.createDeleteParams(filename, S3FolderPath.IMAGES);
+
+    const result = await this._client
+      .deleteObject(params, (err, _data) => {
+        err && logger.error(err);
+      })
+      .promise();
+
+    return result;
+  }
+
   async uploadImage(req: UploadFileRequest): Promise<string> {
     const { file } = req;
+    const uploadImage = await this.validateAndUploadImage(file, req);
 
+    return uploadImage;
+  }
+
+  async uploadProductImages(req: UploadFilesRequest): Promise<string[]> {
+    const { files } = req;
+
+    const imagePromises = files.map((file) =>
+      this.validateAndUploadImage(file, req),
+    );
+    const imageLinks = await Promise.all(imagePromises);
+
+    return imageLinks;
+  }
+
+  private async validateAndUploadImage(
+    file: IFileUpload,
+    req: UploadFilesRequest | UploadFileRequest,
+  ) {
     if (!file) {
       throw new NoFileProvidedError(req);
     }
@@ -41,7 +77,7 @@ export class S3StorageService {
       throw new UnsupportedFileExtensionError(req);
     }
 
-    if (!this.isFileSizeValid(req.file.size)) {
+    if (!this.isFileSizeValid(file.size)) {
       throw new FileSizeTooLargeError(req);
     }
 
@@ -54,18 +90,6 @@ export class S3StorageService {
     const uploadImage = await this._client.upload(params).promise();
 
     return uploadImage.Location;
-  }
-
-  async deleteImage(filename: string) {
-    const params = this.createDeleteParams(filename, S3FolderPath.IMAGES);
-
-    const result = await this._client
-      .deleteObject(params, (err, _data) => {
-        err && logger.error(err);
-      })
-      .promise();
-
-    return result;
   }
 
   private generateFilename(extension: string) {
