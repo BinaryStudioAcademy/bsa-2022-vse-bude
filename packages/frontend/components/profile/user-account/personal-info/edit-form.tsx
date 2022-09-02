@@ -18,6 +18,7 @@ import { profileMapper, updateDtoMapper } from '@helpers';
 import { updateUserProfile, setIsEditing } from '@store';
 import { useEffect, useState } from 'react';
 import type { RootState } from '@types';
+import { showVerifyModal } from 'store/verify/actions';
 import { SectionHeader, NestedLayout } from '../common';
 import * as styles from './styles';
 import { onChangeNewPassword } from './utils';
@@ -162,7 +163,12 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
                   error={errors.phone?.message}
                 />
               </div>
-              <Button type="button" size="big" variant="outlined">
+              <Button
+                type="button"
+                size="big"
+                variant="outlined"
+                onClick={() => dispatch(showVerifyModal())}
+              >
                 {t('personal-info:action.verify')}
               </Button>
             </Flex>
