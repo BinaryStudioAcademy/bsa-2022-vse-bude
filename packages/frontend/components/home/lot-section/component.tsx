@@ -27,6 +27,7 @@ const LotSection = ({ title, lots, loadMoreTitle }: LotProps) => {
             trimSpace: true,
             updateOnMove: true,
             wheel: true,
+            releaseWheel: true,
             direction: 'ltr',
             mediaQuery: 'max',
             breakpoints: {
