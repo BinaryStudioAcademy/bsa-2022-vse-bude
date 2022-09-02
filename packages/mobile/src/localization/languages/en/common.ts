@@ -16,6 +16,7 @@ export const common = {
   time: {
     DAYS: 'days',
     HOURS: 'hours',
+    HOURS_SHORT: 'h',
     MINUTES_SHORT: 'min',
     SECONDS_SHORT: 'sec',
   },
@@ -27,9 +28,5 @@ export const common = {
   },
   currency: {
     UAH: 'UAH',
-  },
-  time: {
-    HOURS_SHORT: 'h',
-    MINUTES_SHORT: 'min',
   },
 };

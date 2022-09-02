@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { View } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { useTranslation, useCountdownInterval } from '~/hooks/hooks';
+import { useCountdownInterval } from '~/hooks/hooks';
 import { CountdownSegment } from './components/components';
 import { SegmentPosition } from './common/enums/enums';
 import { styles } from './styles';
@@ -11,25 +11,23 @@ type Props = {
 };
 
 const Countdown: FC<Props> = ({ endDate }) => {
-  const { t } = useTranslation();
-
-  const { days, hours, minutes, seconds } = useCountdownInterval(endDate);
+  const {
+    duration: { days, hours, minutes, seconds },
+    timeNames: { daysName, hoursName, minutesName, secondsName },
+  } = useCountdownInterval(endDate);
 
   return (
     <View style={[globalStyles.flexDirectionRow, styles.wrapper]}>
       <CountdownSegment
         segmentPosition={SegmentPosition.LEFT}
-        timeName={t('common:time.DAYS')}
+        timeName={daysName}
         timeValue={days}
       />
-      <CountdownSegment timeName={t('common:time.HOURS')} timeValue={hours} />
-      <CountdownSegment
-        timeName={t('common:time.MINUTES_SHORT')}
-        timeValue={minutes}
-      />
+      <CountdownSegment timeName={hoursName} timeValue={hours} />
+      <CountdownSegment timeName={minutesName} timeValue={minutes} />
       <CountdownSegment
         segmentPosition={SegmentPosition.RIGHT}
-        timeName={t('common:time.SECONDS_SHORT')}
+        timeName={secondsName}
         timeValue={seconds}
       />
     </View>
