@@ -27,7 +27,9 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
-  const { saveLoader } = useTypedSelector((state: RootState) => state.profile);
+  const saveLoader = useTypedSelector(
+    (state: RootState) => state.profile.saveLoader,
+  );
 
   const {
     register,
