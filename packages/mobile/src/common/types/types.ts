@@ -1,3 +1,9 @@
+export {
+  PopoverPlacement,
+  PopoverMode,
+  Rect as PopoverRect,
+  Size as PopoverSize,
+} from 'react-native-popover-view';
 export type { RootState, AppDispatch, AsyncThunkConfig } from './app/app';
 export type { HttpOptions, GetHeadersParams } from './http/http';
 export type {

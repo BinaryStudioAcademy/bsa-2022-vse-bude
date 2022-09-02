@@ -1,19 +1,21 @@
 import React, { FC } from 'react';
 import { t } from 'i18next';
-import { useAppSelector } from '~/hooks/hooks';
 import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
 import { RootScreenName } from '~/common/enums/enums';
 import { RootNavigationParamList } from '~/common/types/types';
+import { useAppSelector } from '~/hooks/hooks';
+import { selectCurrentUser } from '~/store/selectors';
 import {
   MessagesScreen,
   PersonalInfoScreen,
   SettingsScreen,
   SupportScreen,
+  NewItemScreen,
 } from '~/screens/screens';
-import { selectCurrentUser } from '~/store/selectors';
+import { HeaderLeft, HeaderSave } from '~/components/components';
 import { MainNavigation } from './tabs/tabs.navigation';
 
 const NativeStack = createNativeStackNavigator<RootNavigationParamList>();
@@ -26,6 +28,7 @@ const mainScreenOptions: NativeStackNavigationOptions = {
 const accountScreenOptions: NativeStackNavigationOptions = {
   headerShown: true,
   headerTitleAlign: 'center',
+  headerTitleStyle: { fontSize: 16 },
 };
 
 const Navigation: FC = () => {
@@ -57,6 +60,15 @@ const Navigation: FC = () => {
           <Stack.Screen
             name={RootScreenName.SUPPORT}
             component={SupportScreen}
+          />
+          <Stack.Screen
+            name={RootScreenName.NEW_ITEM}
+            component={NewItemScreen}
+            options={{
+              title: t('make_a_post.TITLE'),
+              headerLeft: HeaderLeft,
+              headerRight: HeaderSave,
+            }}
           />
         </NativeStack.Group>
       )}
