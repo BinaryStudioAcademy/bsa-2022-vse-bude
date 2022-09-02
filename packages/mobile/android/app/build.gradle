@@ -144,14 +144,8 @@ def keystoreProperties = new Properties()
 
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
-int getMyVersionCode() {
-    def version = project.hasProperty('versionCode') ? project.getProperties().get("versionCode") : 1
-    println "[$version]"
-    return project.hasProperty('versionCode') ? project.getProperties().get("versionCode").toInteger() : 1
-}
-
-def getMyVersionName() {
-    return project.hasProperty('versionName') ? versionName : "1.0"
+def getVersionCode() {
+    return Integer.valueOf(System.env.VERSION_CODE ?: 1)
 }
 
 android {
@@ -163,8 +157,8 @@ android {
         applicationId "com.vsebude"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode getMyVersionCode()
-        versionName getMyVersionName()
+        versionCode getVersionCode()
+        versionName "1.0"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
         setProperty("archivesBaseName", applicationId + "-v" + versionName + "-" + versionCode)
 

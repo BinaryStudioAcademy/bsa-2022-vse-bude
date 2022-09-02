@@ -36,7 +36,7 @@ scripts:
   - &android_build_aab
     name: Build Android release
     script: |
-      cd ./android && ./gradlew clean bundleRelease -PversionCode=$UPDATED_BUILD_NUMBER -PversionName=1.0.$UPDATED_BUILD_NUMBER
+      export VERSION_CODE=$UPDATED_BUILD_NUMBER && cd ./android && ./gradlew clean bundleRelease
 
   - &update_build_number
     name: Update Build Number
