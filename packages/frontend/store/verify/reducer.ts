@@ -25,19 +25,31 @@ const initialState: ModalsState = {
 export const modalsReducer = createReducer(initialState, {
   [showVerifyModal.type]: (state) => ({
     ...state,
-    isVerifyPhoneModalOpen: true,
+    verifyPhoneModal: {
+      isModalOpen: true,
+      step: state.verifyPhoneModal.step,
+    },
   }),
   [hideVerifyModal.type]: (state) => ({
     ...state,
-    isVerifyPhoneModalOpen: false,
+    verifyPhoneModal: {
+      isModalOpen: false,
+      step: state.verifyPhoneModal.step,
+    },
   }),
   [nextVerifyModal.type]: (state) => ({
     ...state,
-    variant: state.verifyPhoneModal.step + 1,
+    verifyPhoneModal: {
+      isModalOpen: state.verifyPhoneModal.isModalOpen,
+      step: state.verifyPhoneModal.step + 1,
+    },
   }),
   [previousVerifyModal.type]: (state) => ({
     ...state,
-    variant: state.verifyPhoneModal.step - 1,
+    verifyPhoneModal: {
+      isModalOpen: state.verifyPhoneModal.isModalOpen,
+      step: state.verifyPhoneModal.step - 1,
+    },
   }),
 });
 
