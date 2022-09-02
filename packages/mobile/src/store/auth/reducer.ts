@@ -36,9 +36,9 @@ const reducer = createReducer(initialState, (builder) => {
     state.dataStatus = DataStatus.REJECTED;
     state.user = null;
   });
-  builder.addCase(logOut.fulfilled, (state, { payload }) => {
+  builder.addCase(logOut.fulfilled, (state) => {
     state.dataStatus = DataStatus.FULFILLED;
-    state.user = payload;
+    state.user = null;
   });
   builder.addCase(logOut.rejected, (state) => {
     state.dataStatus = DataStatus.REJECTED;
