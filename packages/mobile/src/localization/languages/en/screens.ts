@@ -79,4 +79,21 @@ export const screens = {
     LAST_NAME_INVALID: 'The invalid last name format',
     WRONG_FORMAT: 'Wrong format',
   },
+  verificationPhone: {
+    VERIFY: 'Verify',
+    VERIFY_PHONE: 'Verify phone',
+    ENTER_NUMBER: 'Enter Your Phone Number',
+    PLEASE_ENTER:
+      'For further verification of account, please enter your phone here or verify it on your Personal Info page.',
+    INPUT_LABEL_PHONE: 'Phone',
+    VERIFY_LATER: 'Verify later',
+    BACK_HOME: 'Home',
+    BACK_BUTTON: 'Back',
+    ENTER_CODE: 'Enter a code',
+    JUST_SENT: 'We just sent a code to',
+    INPUT_LABEL_CODE: 'Enter the verification code we just sent to you',
+    RESEND_CODE: 'Resend code',
+    CONTINUE: 'Continue',
+    VERIFIED_TITLE: 'Your account has fully been verified',
+  },
 };

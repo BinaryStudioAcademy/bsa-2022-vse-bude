@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useCustomTheme } from '~/hooks/hooks';
+import { useCustomTheme, useTranslation } from '~/hooks/hooks';
 import { Pressable, Text } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 
@@ -8,12 +8,13 @@ type Props = {
 };
 
 const VerifyPhoneField: FC<Props> = ({ onPress }) => {
+  const { t } = useTranslation();
   const { colors } = useCustomTheme();
 
   return (
     <Pressable style={globalStyles.mt2} onPress={onPress}>
       <Text style={[globalStyles.fs14, { color: colors.accent }]}>
-        Verify phone
+        {t('verificationPhone.VERIFY_PHONE')}
       </Text>
     </Pressable>
   );

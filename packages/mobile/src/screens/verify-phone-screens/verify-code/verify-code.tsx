@@ -4,6 +4,7 @@ import {
   useAppSelector,
   useCustomTheme,
   useNavigation,
+  useTranslation,
 } from '~/hooks/hooks';
 import {
   ButtonAppearance,
@@ -32,6 +33,7 @@ import {
 import { styles } from './styles';
 
 const VerifyCodeScreen: FC = () => {
+  const { t } = useTranslation();
   const navigation = useNavigation<RootNavigationProps>();
   const { colors } = useCustomTheme();
   const userPhone = useAppSelector(selectUserPhone);
@@ -57,7 +59,10 @@ const VerifyCodeScreen: FC = () => {
 
   return (
     <Wrapper>
-      <Header labelButton="Back" onPress={handleBackButton} />
+      <Header
+        labelButton={t('verificationPhone.BACK_BUTTON')}
+        onPress={handleBackButton}
+      />
       <KeyboardAvoiding>
         <Container>
           <VerifyImage
@@ -65,16 +70,16 @@ const VerifyCodeScreen: FC = () => {
             contentContainerStyle={globalStyles.mt6}
           />
           <Title
-            label="Enter a code"
+            label={t('verificationPhone.ENTER_CODE')}
             contentContainerStyle={globalStyles.mt6}
           />
           <CustomText
-            label={`We just sent a code to ${userPhone}`}
+            label={`${t('verificationPhone.JUST_SENT')} ${userPhone}`}
             contentContainerStyle={globalStyles.mt3}
           />
           <Input
-            label="Enter the verification code we just sent to you"
-            placeholder="Enter a code"
+            label={t('verificationPhone.INPUT_LABEL_CODE')}
+            placeholder={t('verificationPhone.ENTER_CODE')}
             name="code"
             control={control}
             errors={errors}
@@ -83,7 +88,7 @@ const VerifyCodeScreen: FC = () => {
           <ButtonsContainer>
             <View style={styles.buttonContainer}>
               <PrimaryButton
-                label="Resend code"
+                label={t('verificationPhone.RESEND_CODE')}
                 appearance={ButtonAppearance.TRANSPARENT}
                 textColor={colors.text}
                 onPress={handleResendPress}
@@ -91,7 +96,7 @@ const VerifyCodeScreen: FC = () => {
             </View>
             <View style={styles.buttonContainer}>
               <PrimaryButton
-                label="Continue"
+                label={t('verificationPhone.CONTINUE')}
                 onPress={handleSubmit(onSubmit)}
               />
             </View>

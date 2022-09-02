@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useCustomTheme, useNavigation } from '~/hooks/hooks';
+import { useCustomTheme, useNavigation, useTranslation } from '~/hooks/hooks';
 import {
   ArrowRightIcon,
   KeyboardAvoiding,
@@ -20,6 +20,7 @@ import {
 import { styles } from './styles';
 
 const VerifiedScreen: FC = () => {
+  const { t } = useTranslation();
   const navigation = useNavigation<RootNavigationProps>();
   const { colors } = useCustomTheme();
 
@@ -37,13 +38,13 @@ const VerifiedScreen: FC = () => {
             contentContainerStyle={globalStyles.mt6}
           />
           <Title
-            label="Your account has fully been verified"
+            label={t('verificationPhone.VERIFIED_TITLE')}
             contentContainerStyle={{ ...globalStyles.mt6, marginTop: 75 }}
             contentStyle={{ textAlign: 'center' }}
           />
           <View style={styles.buttonContainer}>
             <PrimaryButton
-              label="Continue"
+              label={t('verificationPhone.CONTINUE')}
               onPress={handleContinuePress}
               iconRight={<ArrowRightIcon size={24} color={colors.whiteColor} />}
             />

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useCustomTheme } from '~/hooks/hooks';
+import { useCustomTheme, useTranslation } from '~/hooks/hooks';
 import { View, HeaderButton, Text } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
@@ -11,6 +11,7 @@ type Props = {
 };
 
 const Header: FC<Props> = ({ labelButton, onPress, hideButton }) => {
+  const { t } = useTranslation();
   const { colors } = useCustomTheme();
   const isShowButton = !hideButton && onPress && labelButton;
 
@@ -40,7 +41,7 @@ const Header: FC<Props> = ({ labelButton, onPress, hideButton }) => {
             { color: colors.text },
           ]}
         >
-          Verify
+          {t('verificationPhone.VERIFY')}
         </Text>
       </View>
     </View>

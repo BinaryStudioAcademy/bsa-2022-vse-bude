@@ -4,6 +4,7 @@ import {
   useAppSelector,
   useCustomTheme,
   useNavigation,
+  useTranslation,
 } from '~/hooks/hooks';
 import {
   ButtonAppearance,
@@ -34,6 +35,7 @@ import {
 import { styles } from './styles';
 
 const VerifyPhoneScreen: FC = () => {
+  const { t } = useTranslation();
   const navigation = useNavigation<RootNavigationProps>();
   const { colors } = useCustomTheme();
   const userPhone = useAppSelector(selectUserPhone);
@@ -60,7 +62,10 @@ const VerifyPhoneScreen: FC = () => {
 
   return (
     <Wrapper>
-      <Header labelButton="Home" onPress={handleBackButton} />
+      <Header
+        labelButton={t('verificationPhone.BACK_HOME')}
+        onPress={handleBackButton}
+      />
       <KeyboardAvoiding>
         <Container>
           <VerifyImage
@@ -68,15 +73,15 @@ const VerifyPhoneScreen: FC = () => {
             contentContainerStyle={globalStyles.mt6}
           />
           <Title
-            label="Enter Your Phone Number"
+            label={t('verificationPhone.ENTER_NUMBER')}
             contentContainerStyle={globalStyles.mt6}
           />
           <CustomText
-            label="For further verification of account, please enter your phone here or verify it on your Personal Info page."
+            label={t('verificationPhone.PLEASE_ENTER')}
             contentContainerStyle={globalStyles.mt3}
           />
           <Input
-            label="Phone"
+            label={t('verificationPhone.INPUT_LABEL_PHONE')}
             placeholder="+380"
             name="phone"
             control={control}
@@ -86,14 +91,17 @@ const VerifyPhoneScreen: FC = () => {
           <ButtonsContainer>
             <View style={styles.buttonContainer}>
               <PrimaryButton
-                label="Verify later"
+                label={t('verificationPhone.VERIFY_LATER')}
                 appearance={ButtonAppearance.TRANSPARENT}
                 textColor={colors.text}
                 onPress={handleLaterPress}
               />
             </View>
             <View style={styles.buttonContainer}>
-              <PrimaryButton label="Verify" onPress={handleSubmit(onSubmit)} />
+              <PrimaryButton
+                label={t('verificationPhone.VERIFY')}
+                onPress={handleSubmit(onSubmit)}
+              />
             </View>
           </ButtonsContainer>
         </Container>
