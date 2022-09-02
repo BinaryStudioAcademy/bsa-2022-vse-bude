@@ -1,10 +1,9 @@
 import React, { FC } from 'react';
-import { useCustomTheme, useTranslation } from '~/hooks/hooks';
-import { Text, View, DotSvg } from '~/components/components';
+import { useTranslation } from '~/hooks/hooks';
+import { View } from '~/components/components';
 import { formaTotDateTime, getSellerTimeZone } from '~/helpers/helpers';
 import { ProductDto } from '@vse-bude/shared';
-import { globalStyles } from '~/styles/styles';
-import { styles } from './styles';
+import { RenderDescriptionInfo } from './renderDescriptionInfo';
 
 const Description: FC<Partial<ProductDto>> = ({
   description,
@@ -12,52 +11,32 @@ const Description: FC<Partial<ProductDto>> = ({
   status,
   endDate,
 }) => {
-  const { colors } = useCustomTheme();
   const { t } = useTranslation();
   const date = formaTotDateTime(endDate as Date);
   const timeZone = getSellerTimeZone(endDate as Date);
 
-  const renderInfo = (title: string, description: string) => {
-    return (
-      <View style={[globalStyles.flexDirectionRow, globalStyles.py2]}>
-        <View
-          style={[
-            styles.title,
-            globalStyles.flexDirectionRow,
-            globalStyles.alignItemsCenter,
-          ]}
-        >
-          <DotSvg />
-          <Text
-            style={[
-              globalStyles.fs14,
-              styles.titleText,
-              { color: colors.subtitle },
-            ]}
-          >
-            {title}
-          </Text>
-        </View>
-        <Text
-          style={[
-            globalStyles.fs14,
-            styles.description,
-            { color: colors.text },
-          ]}
-        >
-          {description}
-        </Text>
-      </View>
-    );
-  };
-
   return (
     <View>
-      {renderInfo(t('screens:product_info.ENDING_ON'), date || '')}
-      {renderInfo(t('screens:product_info.TIME_ZONE'), `GMT ${timeZone}`)}
-      {renderInfo(t('screens:product_info.STATUS'), status || '')}
-      {renderInfo(t('screens:product_info.LOCATION'), city || '')}
-      {renderInfo(t('screens:product_info.DESCRIPTION'), description || '')}
+      <RenderDescriptionInfo
+        title={t('screens:product_info.ENDING_ON')}
+        description={date || ''}
+      />
+      <RenderDescriptionInfo
+        title={t('screens:product_info.TIME_ZONE')}
+        description={`GMT ${timeZone}`}
+      />
+      <RenderDescriptionInfo
+        title={t('screens:product_info.STATUS')}
+        description={status || ''}
+      />
+      <RenderDescriptionInfo
+        title={t('screens:product_info.LOCATION')}
+        description={city || ''}
+      />
+      <RenderDescriptionInfo
+        title={t('screens:product_info.DESCRIPTION')}
+        description={description || ''}
+      />
     </View>
   );
 };
