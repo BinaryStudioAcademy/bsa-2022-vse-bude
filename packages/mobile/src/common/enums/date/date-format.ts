@@ -1,5 +1,5 @@
 enum DateFormat {
-  dateTime = 'DD.MM.YYYY HH:mm a',
+  dateTime = 'DD.MM.YYYY HH:mm',
   timeZone = 'Z',
 }
 

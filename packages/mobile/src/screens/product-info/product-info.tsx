@@ -1,6 +1,4 @@
-import React, { FC, useEffect } from 'react';
-import { NavigationProp } from '@react-navigation/native';
-import { RootNavigationParamList } from '~/common/types/types';
+import React, { FC } from 'react';
 import {
   ScreenWrapper,
   View,
@@ -8,7 +6,7 @@ import {
   EyeIcon,
   ScrollView,
 } from '~/components/components';
-import { useCustomTheme, useNavigation } from '~/hooks/hooks';
+import { useCustomTheme } from '~/hooks/hooks';
 import { ProductType } from '@vse-bude/shared';
 import { globalStyles } from '~/styles/styles';
 import { MOCK_PRODUCT } from '~/mock/mock-product-info';
@@ -20,8 +18,6 @@ import { SellerInfo } from './components/seller-info/seller-info';
 
 const ProductInfo: FC = () => {
   const { colors } = useCustomTheme();
-  const navigation = useNavigation<NavigationProp<RootNavigationParamList>>();
-
   const {
     title,
     description,
@@ -35,12 +31,6 @@ const ProductInfo: FC = () => {
     views,
     currentPrice,
   } = MOCK_PRODUCT;
-
-  useEffect(() => {
-    navigation.setOptions({
-      tabBarStyle: { display: 'none' },
-    });
-  }, []);
 
   return (
     <ScreenWrapper>

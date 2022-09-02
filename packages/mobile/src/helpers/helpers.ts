@@ -4,6 +4,6 @@ export { requestExternalStoragePermission } from './permissions/permissions';
 export { formatPrice } from './dto-name-modifiers/dto-name-modifiers';
 export {
   getTimeToEvent,
-  formaTotDateTime,
+  formatToDateTime,
   getSellerTimeZone,
 } from './date/date';

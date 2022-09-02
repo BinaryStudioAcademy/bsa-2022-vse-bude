@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { useTranslation } from '~/hooks/hooks';
 import { View } from '~/components/components';
-import { formaTotDateTime, getSellerTimeZone } from '~/helpers/helpers';
+import { formatToDateTime, getSellerTimeZone } from '~/helpers/helpers';
 import { ProductDto } from '@vse-bude/shared';
-import { RenderDescriptionInfo } from './renderDescriptionInfo';
+import { RenderDescriptionInfo } from './render-description-info';
 
 const Description: FC<Partial<ProductDto>> = ({
   description,
@@ -12,7 +12,7 @@ const Description: FC<Partial<ProductDto>> = ({
   endDate,
 }) => {
   const { t } = useTranslation();
-  const date = formaTotDateTime(endDate as Date);
+  const date = formatToDateTime(endDate as Date);
   const timeZone = getSellerTimeZone(endDate as Date);
 
   return (
