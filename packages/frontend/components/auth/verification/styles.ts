@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
+import type { Theme } from 'theme';
 
-export const divider = css`
-  border-top: 1px solid gray;
+export const resendButton = ({ spaces }: Theme) => css`
+  margin-top: ${spaces.lg};
 `;

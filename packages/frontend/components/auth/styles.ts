@@ -22,7 +22,14 @@ export const verifyInput = css`
 
 export const verifyForm = css`
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
+  max-width: 400px;
+  > span {
+    width: 100%;
+  }
 `;
 
 export const verifyEntity = css`
