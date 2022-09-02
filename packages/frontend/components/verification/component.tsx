@@ -21,7 +21,7 @@ const VerificationModal = () => {
     dispatch(hideVerifyModal());
   };
 
-  const renderContent = (param) => {    
+  const renderContent = (param) => {
     switch (param) {
       case 0:
         return <EnterPhoneModal />;
