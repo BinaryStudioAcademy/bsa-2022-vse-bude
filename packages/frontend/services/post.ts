@@ -5,7 +5,7 @@ export const getPostById = () => Promise.resolve();
 
 export const createPost = (data: FormData) =>
   http.post({
-    url: ApiRoutes.CREATE_POST,
+    url: ApiRoutes.PRODUCTS,
     body: data,
     options: {
       contentType: HttpContentType.FORM_DATA,

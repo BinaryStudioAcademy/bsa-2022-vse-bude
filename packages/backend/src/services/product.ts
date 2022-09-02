@@ -190,7 +190,8 @@ export class ProductService {
     )) as Product;
     if (product.authorId !== userId) throw new UnauthorizedError(req);
     const newImageLinks = await this._s3StorageService.uploadProductImages(req);
-    const oldImages = fieldsData?.images || [];
+    const oldImages = fieldsData?.images ? [...fieldsData.images] : [];
+    console.log(oldImages);
     const deletedImages = product.imageLinks.reduce(
       (acc, item) => (oldImages.includes(item) ? acc : [item, ...acc]),
       [],

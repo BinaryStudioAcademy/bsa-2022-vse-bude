@@ -56,7 +56,9 @@
   "validation": {
     "images": {
       "unsupportedType": "Unsupported file extension!",
-      "large": "File size too large!"
+      "large": "File size too large!",
+      "many":"Too many images uploaded!",
+      "few": "Upload 2 or more images!"
     },
     "title": {
       "long": "Title too long",

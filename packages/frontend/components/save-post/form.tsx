@@ -10,6 +10,9 @@ import { useAppDispatch, useTypedSelector } from '@hooks';
 import { fetchCurrentProduct } from 'store/product';
 import { useRouter } from 'next/router';
 import { updateProduct } from 'services/product';
+import { createPost } from 'services/post';
+import { ProductStatus, ProductType } from '@vse-bude/shared';
+import { Routes } from '@enums';
 import { SectionHeader } from '../profile/user-account/common';
 import { initialFormState } from './form-utils';
 import ImageInput from './image-input';
@@ -43,20 +46,32 @@ export default function PostForm({ edit }: { edit: boolean }) {
     setShowPhone(value);
   };
   const onSubmit = async (data) => {
+    if (images.length < 2) {
+      setError(t('create-post:validation.images.few'));
+
+      return;
+    }
+    if (images.length > 30) {
+      setError(t('create-post:validation.images.many'));
+
+      return;
+    }
     setIsLoading(true);
     setError('');
     try {
       const formData = new FormData();
       images
-        .filter((item) => typeof item !== 'string')
+        // .filter((item) => typeof item !== 'string')
         .forEach((file) => formData.append('images', file));
+      formData.append('type', ProductType.SELLING);
+      formData.append('status', ProductStatus[0]);
       Object.keys(data).forEach((key) => {
         switch (key) {
           case 'category':
             formData.append(key, '0bfc0f51-e082-4dc9-b545-ae0afedbd330');
             break;
           case 'phone':
-            formData.append(key, `+380${data[key]}`);
+            data[key] && formData.append(key, `+380${data[key]}`);
             break;
           default:
             formData.append(key, data[key] ?? '');
@@ -65,8 +80,11 @@ export default function PostForm({ edit }: { edit: boolean }) {
 
       if (edit) {
         await updateProduct(query.id as string, formData);
+        push(`${Routes.ITEMS}/${query.id}`);
+      } else {
+        const { id } = await createPost(formData);
+        push(`${Routes.ITEMS}/${id}`);
       }
-      push(`/items/${query.id}`);
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
@@ -91,8 +109,8 @@ export default function PostForm({ edit }: { edit: boolean }) {
           case 'category':
             setValue(
               item,
-              categories.find((item) => item.id === currentProduct.category.id)
-                .title,
+              categories.find((item) => item.id === currentProduct.category?.id)
+                ?.title,
             );
             break;
           case 'phone':
@@ -184,9 +202,9 @@ export default function PostForm({ edit }: { edit: boolean }) {
         <Flex css={styles.groupInputs}>
           <div css={styles.inputRow}>
             <Input
-              labelRequiredMark
+              // labelRequiredMark
+              // required
               error={errors.country?.message}
-              required
               id="post-country"
               type="text"
               name="country"
@@ -274,7 +292,7 @@ export default function PostForm({ edit }: { edit: boolean }) {
         )}
         <div css={styles.saveDraftBtn}>
           {!edit && (
-            <Button disabled={isLoading} variant="outlined">
+            <Button type="submit" disabled={isLoading} variant="outlined">
               {t('create-post:button.saveDraft')}
             </Button>
           )}

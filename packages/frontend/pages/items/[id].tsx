@@ -82,7 +82,7 @@ const ItemPage = ({ item, similarItems }: ItemPageProps) => {
             route: Routes.DEFAULT, // change
           },
           {
-            name: item.category.title, //change
+            name: item.category?.title, //change
             route: Routes.DEFAULT, // change
           },
         ]}

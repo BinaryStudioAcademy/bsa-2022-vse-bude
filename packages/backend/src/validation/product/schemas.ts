@@ -84,11 +84,12 @@ export const updatePostSchema = (t) =>
     instagram: Joi.string().max(50).allow(''),
     facebook: Joi.string().max(50).allow(''),
     city: Joi.string().max(50).allow(''),
-    country: Joi.string()
-      .trim()
-      .messages({
-        'string.empty': t('product:validation.title.empty'),
-      }),
+    country: Joi.string().max(50).allow(''),
+    // country: Joi.string()
+    //   .trim()
+    //   .messages({
+    //     'string.empty': t('product:validation.title.empty'),
+    //   }),
     title: Joi.string()
       .trim()
       .max(50)
@@ -108,7 +109,7 @@ export const updatePostSchema = (t) =>
     phone: Joi.string()
       .trim()
       .allow('')
-      .pattern(/\+380\d{9}/)
+      // .pattern(/\+380\d{9}/)
       .messages({
         'string.pattern.base': t('product:validation.phone.pattern'),
       }),
