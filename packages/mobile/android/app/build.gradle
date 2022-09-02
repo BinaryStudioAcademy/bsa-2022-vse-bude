@@ -146,7 +146,7 @@ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 int getMyVersionCode() {
     def versionCode = project.hasProperty('versionCode')
-    println versionCode
+    println "[$versionCode]"
     return versionCode ? versionCode.toInteger() : 1
 }
 
