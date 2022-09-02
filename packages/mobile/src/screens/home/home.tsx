@@ -8,6 +8,7 @@ import {
   Text,
   SearchInput,
   StatusBar,
+  ScreenWrapper,
 } from '~/components/components';
 import { ColorPalette } from '@vse-bude/shared';
 import { organizations, categories } from '~/mock/mock';
@@ -36,113 +37,116 @@ const Home: FC = () => {
   return (
     <>
       {products && (
-        <ScrollView>
-          <StatusBar
-            backgroundColor={ColorPalette.WHITE_100}
-            barStyle="dark-content"
-          />
-          <Wrapper>
-            <BurgerMenu
-              onPress={() => {
-                //TODO
-              }}
+        <ScreenWrapper>
+          <ScrollView>
+            <StatusBar
+              backgroundColor={ColorPalette.WHITE_100}
+              translucent={true}
+              barStyle="light-content"
             />
+            <Wrapper>
+              <BurgerMenu
+                onPress={() => {
+                  //TODO
+                }}
+              />
+              <View
+                style={[
+                  styles.header,
+                  globalStyles.flexDirectionRow,
+                  globalStyles.alignItemsCenter,
+                ]}
+              >
+                <Text
+                  style={[
+                    styles.title,
+                    globalStyles.fs36,
+                    globalStyles.fontWeightExtraBold,
+                  ]}
+                >
+                  {t('home.HELP_UKRAINE')}
+                </Text>
+                <Flag />
+              </View>
+              <SearchInput
+                placeHolder={t('home.SEARCH_PLACEHOLDER')}
+                onValueChange={() => {
+                  //TODO
+                }}
+              />
+              <FlatList
+                style={styles.categories}
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                data={categories}
+                renderItem={({ item }) => (
+                  <Category
+                    title={item.title}
+                    imageSource={item.src}
+                    onPress={() => {
+                      // TODO
+                    }}
+                  />
+                )}
+              />
+              <ProductsSection
+                sectionTitle={t('home.POPULAR_LOTS')}
+                extendTitle={t('home.SEE_ALL_LOTS')}
+                data={splitProductType(products).auction}
+                onExtendPress={() => {
+                  // TODO
+                }}
+                wrapperStyles={[globalStyles.mt6]}
+              />
+            </Wrapper>
             <View
               style={[
-                styles.header,
-                globalStyles.flexDirectionRow,
-                globalStyles.alignItemsCenter,
+                styles.organizationsWrapper,
+                globalStyles.justifyContentCenter,
               ]}
             >
               <Text
                 style={[
-                  styles.title,
-                  globalStyles.fs36,
+                  styles.organizationTitle,
+                  globalStyles.fs22,
                   globalStyles.fontWeightExtraBold,
                 ]}
               >
-                {t('home.HELP_UKRAINE')}
+                {t('home.CHARITY_ORGANIZATIONS')}
               </Text>
-              <Flag />
+              <View
+                style={[
+                  styles.imgWrapper,
+                  globalStyles.justifyContentSpaceBetween,
+                  globalStyles.alignItemsCenter,
+                  globalStyles.flexDirectionRow,
+                ]}
+              >
+                {organizations.map((item) => {
+                  return (
+                    <Organization
+                      imageSource={item.src}
+                      maxHeight={50}
+                      width="30%"
+                      props={[globalStyles.mt6]}
+                    />
+                  );
+                })}
+              </View>
             </View>
-            <SearchInput
-              placeHolder={t('home.SEARCH_PLACEHOLDER')}
-              onValueChange={() => {
-                //TODO
-              }}
-            />
-            <FlatList
-              style={styles.categories}
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-              data={categories}
-              renderItem={({ item }) => (
-                <Category
-                  title={item.title}
-                  imageSource={item.src}
-                  onPress={() => {
-                    // TODO
-                  }}
-                />
-              )}
-            />
-            <ProductsSection
-              sectionTitle={t('home.POPULAR_LOTS')}
-              extendTitle={t('home.SEE_ALL_LOTS')}
-              data={splitProductType(products).auction}
-              onExtendPress={() => {
-                // TODO
-              }}
-              wrapperStyles={[globalStyles.mt6]}
-            />
-          </Wrapper>
-          <View
-            style={[
-              styles.organizationsWrapper,
-              globalStyles.justifyContentCenter,
-            ]}
-          >
-            <Text
-              style={[
-                styles.organizationTitle,
-                globalStyles.fs22,
-                globalStyles.fontWeightExtraBold,
-              ]}
-            >
-              {t('home.CHARITY_ORGANIZATIONS')}
-            </Text>
-            <View
-              style={[
-                styles.imgWrapper,
-                globalStyles.justifyContentSpaceBetween,
-                globalStyles.alignItemsCenter,
-                globalStyles.flexDirectionRow,
-              ]}
-            >
-              {organizations.map((item) => {
-                return (
-                  <Organization
-                    imageSource={item.src}
-                    maxHeight={50}
-                    width="30%"
-                    props={[globalStyles.mt6]}
-                  />
-                );
-              })}
-            </View>
-          </View>
-          <Wrapper>
-            <ProductsSection
-              sectionTitle={t('home.POPULAR_ITEMS')}
-              extendTitle={t('home.SEE_ALL_LOTS')}
-              data={splitProductType(products).selling}
-              onExtendPress={() => {
-                // TODO
-              }}
-              wrapperStyles={[globalStyles.mt6]}
-            />
-          </Wrapper>
-        </ScrollView>
+            <Wrapper>
+              <ProductsSection
+                sectionTitle={t('home.POPULAR_ITEMS')}
+                extendTitle={t('home.SEE_ALL_LOTS')}
+                data={splitProductType(products).selling}
+                onExtendPress={() => {
+                  // TODO
+                }}
+                wrapperStyles={[globalStyles.mt6]}
+              />
+            </Wrapper>
+          </ScrollView>
+        </ScreenWrapper>
       )}
     </>
   );
