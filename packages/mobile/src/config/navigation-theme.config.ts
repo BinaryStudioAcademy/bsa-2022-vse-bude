@@ -16,6 +16,7 @@ const COMMON_COLORS = {
   flagTop: ColorPalette.BLUE_100,
   flagBottom: ColorPalette.YELLOW_50,
   whiteColor: ColorPalette.WHITE_100,
+  blackColor: ColorPalette.BLACK,
 };
 
 const NavigationTheme = {
