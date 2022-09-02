@@ -10,6 +10,7 @@ type RootNavigationParamList = {
   [RootScreenName.VERIFY]?: { screen: string };
   [RootScreenName.SUPPORT]: undefined;
   [RootScreenName.WELCOME]: undefined;
+  [RootScreenName.NEW_ITEM]: undefined;
 };
 
 export type { RootNavigationParamList };

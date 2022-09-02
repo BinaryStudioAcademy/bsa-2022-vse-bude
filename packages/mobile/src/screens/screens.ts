@@ -13,3 +13,4 @@ export {
   VerifyCodeScreen,
   VerifiedScreen,
 } from './verify-phone-screens/verify-phone-screens';
+export { NewItemScreen } from '~/screens/new-item/new-item';

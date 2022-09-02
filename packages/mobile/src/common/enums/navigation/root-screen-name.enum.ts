@@ -8,6 +8,7 @@ enum RootScreenName {
   SUPPORT = 'Support',
   WELCOME = 'Welcome',
   VERIFY = 'Verify',
+  NEW_ITEM = 'Make a post',
 }
 
 export { RootScreenName };

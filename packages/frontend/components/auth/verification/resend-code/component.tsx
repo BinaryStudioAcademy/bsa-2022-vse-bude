@@ -39,7 +39,7 @@ export const ResendCodeButton = ({
     <div css={resendCodeBlock}>
       {!resendDisabled && (
         <LinkButton size={'small'} onClickHook={onResendCode}>
-          {t('auth:resendBtn.resendCode')}
+          {t('common:verify.enterCode.resend')}
         </LinkButton>
       )}
       {resendDisabled && (
