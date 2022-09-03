@@ -5,7 +5,7 @@ import {
   PrimaryButton,
   ButtonText,
 } from '~/components/components';
-import { UserSignInDto, ColorPalette } from '@vse-bude/shared';
+import { UserSignInDto } from '@vse-bude/shared';
 import { useAppForm, useTranslation, useNavigation } from '~/hooks/hooks';
 import { signIn } from '~/validation-schemas/validation-schemas';
 import { globalStyles } from '~/styles/styles';
@@ -49,11 +49,7 @@ const SignInForm: FC<Props> = ({ onSubmit }) => {
       />
       <ButtonText
         onPress={navigateResetPassword}
-        style={[
-          { color: ColorPalette.YELLOW_100 },
-          { textAlign: 'right' },
-          globalStyles.mt5,
-        ]}
+        style={[{ textAlign: 'right' }]}
       >
         Forgot password
       </ButtonText>

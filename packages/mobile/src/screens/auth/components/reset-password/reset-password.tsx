@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useAppForm, useTranslation, useState } from '~/hooks/hooks';
 import { resetPassword } from '~/validation-schemas/validation-schemas';
-import { ColorPalette, ResetPasswordLink } from '@vse-bude/shared';
+import { ResetPasswordLink } from '@vse-bude/shared';
 import {
   View,
   PrimaryButton,
@@ -16,7 +16,7 @@ type Props = {
   onSubmit: (payload: ResetPasswordLink) => void;
 };
 const ResetPassword: FC<Props> = ({ onSubmit }) => {
-  const [isHidden, setIsHidden] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const { t } = useTranslation();
   const { control, errors, handleSubmit } = useAppForm<ResetPasswordLink>({
     defaultValues: DEFAULT_RESET_PASSWORD_PAYLOAD,
@@ -32,7 +32,7 @@ const ResetPassword: FC<Props> = ({ onSubmit }) => {
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
-        secureTextEntry={isHidden}
+        secureTextEntry={hidden}
       />
       <View
         style={[
@@ -41,14 +41,7 @@ const ResetPassword: FC<Props> = ({ onSubmit }) => {
           globalStyles.mt5,
         ]}
       >
-        <CheckBox
-          tintColors={{
-            true: ColorPalette.YELLOW_100,
-            false: ColorPalette.YELLOW_100,
-          }}
-          value={isHidden}
-          onValueChange={(newValue) => setIsHidden(newValue)}
-        />
+        <CheckBox onChange={setHidden} />
         <Text style={globalStyles.fs14}>{t('verification.HIDE_EMAIL')}</Text>
       </View>
 
