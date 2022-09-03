@@ -111,8 +111,8 @@ export const userUpdateSchema = (t: TFunction) =>
           if (value.includes(' ')) {
             return helpers.error('string.spaces');
           }
-          
-return value;
+
+          return value;
         })
         .messages({
           'string.pattern.base': t(
