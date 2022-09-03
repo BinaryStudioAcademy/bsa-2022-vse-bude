@@ -1,5 +1,6 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import { languages } from '~/common/enums/enums';
 import { ua, en } from './languages/languages';
 
 const resources = {
@@ -19,8 +20,8 @@ const i18 = () => {
     defaultNS: 'screens',
     compatibilityJSON: 'v3',
     // debug: true,
-    lng: 'ua',
-    fallbackLng: 'en',
+    lng: languages.UA,
+    fallbackLng: languages.EN,
     interpolation: {
       escapeValue: false,
     },
