@@ -7,6 +7,7 @@ import type {
   ProductIdRequest,
   ProductType,
 } from '@vse-bude/shared';
+import { HttpContentType } from '@vse-bude/shared';
 import { ProductApiRoutes } from '@vse-bude/shared';
 import { ApiRoutes } from '@vse-bude/shared';
 
@@ -52,6 +53,15 @@ export const getProductById = (id: string) =>
 export const getProductByIdSSR = (httpSSR: Http, id: string) =>
   httpSSR.get({
     url: `${ApiRoutes.PRODUCTS}/${id}`,
+  });
+
+export const updateProduct = (id: string, body) =>
+  http.put({
+    url: `${ApiRoutes.PRODUCTS}/update/${id}`,
+    body,
+    options: {
+      contentType: HttpContentType.FORM_DATA,
+    },
   });
 
 export const incrementProductViews = (id: string): Promise<ProductDto> =>

@@ -1,13 +1,14 @@
-﻿import { useEffect } from 'react';
+import { useEffect } from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { LotSection } from '@components/home/lot-section';
 import { Routes } from '@enums';
-import { Breadcrumbs } from '@primitives';
+import { Breadcrumbs, Button, Container } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import { Http } from '@vse-bude/shared';
 import { withPublic } from '@hocs';
 import { Layout } from '@components/layout';
 import { Item } from '@components/item';
+import Link from 'next/link';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import {
   auctionPermissions,
@@ -79,7 +80,7 @@ const ItemPage = () => {
             route: Routes.ITEMS,
           },
           {
-            name: item.category.title,
+            name: item.category?.title, //change
             route: encodeURI(
               `${Routes.ITEMS}?filter=${JSON.stringify({
                 category: item.category.id,
@@ -88,6 +89,13 @@ const ItemPage = () => {
           },
         ]}
       />
+      <Container style={{ marginBottom: '20px' }}>
+        <Link href={`/items/edit/${item.id}`}>
+          <a style={{ textDecoration: 'none' }}>
+            <Button>Edit</Button>
+          </a>
+        </Link>
+      </Container>
       <Item item={item} />
       <LotSection
         title={t('item:similarItems')}
