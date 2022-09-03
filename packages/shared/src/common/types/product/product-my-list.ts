@@ -1,4 +1,4 @@
-import { Prisma, ProductType, ProductStatus } from '@prisma';
+import type { Prisma, ProductType, ProductStatus } from '@prisma';
 
 export interface MyListItem {
   id: string;

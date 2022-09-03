@@ -1,11 +1,7 @@
 import type { Services } from '@services';
 import { type Request, Router } from 'express';
-import type { ApiRoutes } from '@vse-bude/shared';
-import {
-  ProfileApiRoutes,
-  AccountApiRoutes,
-  MyListResponse,
-} from '@vse-bude/shared';
+import type { ApiRoutes, MyListResponse } from '@vse-bude/shared';
+import { ProfileApiRoutes, AccountApiRoutes } from '@vse-bude/shared';
 import { wrap } from '@helpers';
 import { apiPath } from '@helpers';
 import { authMiddleware, uploadImage } from '@middlewares';
