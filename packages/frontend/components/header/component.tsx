@@ -1,4 +1,4 @@
-import { Button, Container, Flex, IconButton, Loader } from '@primitives';
+import { Button, Container, IconButton, Loader } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { Fragment, useState, useEffect } from 'react';
@@ -80,16 +80,14 @@ export const Header = () => {
     <Fragment>
       <header css={styles.header}>
         <Container cssExtend={styles.headerInner}>
-          <Flex align="center">
-            <Link href={Routes.DEFAULT}>
-              <a>
-                <Logo />
-              </a>
-            </Link>
-            <div className="header-content">
-              <Navigation categories={categories || []} />
-            </div>
-          </Flex>
+          <Link href={Routes.DEFAULT}>
+            <a>
+              <Logo />
+            </a>
+          </Link>
+          <div className="header-content">
+            {<Navigation categories={categories || []} />}
+          </div>
 
           {isMounted && (
             <>

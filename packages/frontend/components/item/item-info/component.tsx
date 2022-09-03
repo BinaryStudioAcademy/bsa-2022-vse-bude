@@ -36,17 +36,11 @@ export const ItemInfo = ({ item }: ItemInfoProps) => {
           </tr>
           <tr>
             <td>{t('locationCaption')}</td>
-            <td>Ukraine, Kyiv</td>
+            <td>Ukraine, {item.city}</td>
           </tr>
           <tr>
             <td>{t('descriptionCaption')}</td>
-            <td>
-              {item.description} Lorem ipsum dolor sit, amet consectetur
-              adipisicing elit. Voluptatum labore aspernatur dolore illum sed
-              autem, consequatur cupiditate unde quibusdam officiis ipsum amet
-              temporibus accusamus maxime, consectetur doloremque voluptas
-              voluptatem praesentium.
-            </td>
+            <td>{item.description}</td>
           </tr>
         </tbody>
       </table>

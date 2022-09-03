@@ -54,6 +54,7 @@ export const ProfileInfo = () => {
         trigger={({ isOpen }) => (
           <DownArrow style={styles.dropdownArrow} isOpen={isOpen} />
         )}
+        triggerWrapperCssExtend={styles.popoverTriggerWrapper}
       >
         {(handleClose) => <PopoverContent handleClose={handleClose} />}
       </Popover>

@@ -5,6 +5,7 @@ export interface ProductQuery {
   limit?: number;
   from?: number;
   type?: ProductType;
+  categoryId?: string;
   sortBy?: string;
   order?: Order;
 }

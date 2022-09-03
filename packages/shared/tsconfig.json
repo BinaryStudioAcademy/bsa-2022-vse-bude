@@ -5,6 +5,7 @@
     "declaration": true,
     "declarationDir": "types",
     "declarationMap": true,
+    "paths": {},
     "outDir": "build"
   },
   "include": ["src/**/*.ts"],

@@ -1,11 +1,12 @@
 import { http } from '@helpers';
+import type { ProductDto } from '@vse-bude/shared';
 import { ApiRoutes, HttpContentType } from '@vse-bude/shared';
 
 export const getPostById = () => Promise.resolve();
 
-export const createPost = (data: FormData) =>
+export const createPost = (data: FormData): Promise<ProductDto> =>
   http.post({
-    url: ApiRoutes.CREATE_POST,
+    url: ApiRoutes.PRODUCTS,
     body: data,
     options: {
       contentType: HttpContentType.FORM_DATA,

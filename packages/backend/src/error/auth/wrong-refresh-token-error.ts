@@ -1,11 +1,11 @@
 import { HttpError, HttpStatusCode } from '@vse-bude/shared';
-import type { Request } from 'express';
+import { lang } from '../../lang';
 
 class WrongRefreshTokenError extends HttpError {
-  constructor(req: Request) {
+  constructor() {
     super({
       status: HttpStatusCode.BAD_REQUEST,
-      message: req.t('WRONG_REFRESH_TOKEN'),
+      message: lang('translation:WRONG_REFRESH_TOKEN'),
     });
   }
 }
