@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from 'express';
-import { LOCALE_COOKIE_KEY, DEFAULT_LOCALE } from '@vse-bude/shared';
+import { LOCALE_HEADER_KEY, DEFAULT_LOCALE } from '@vse-bude/shared';
 import { langService } from '../../lang';
 
 export const langMiddleware = (
@@ -7,7 +7,7 @@ export const langMiddleware = (
   res: Response,
   next: NextFunction,
 ) => {
-  const locale = req.cookies[LOCALE_COOKIE_KEY] ?? DEFAULT_LOCALE;
-  langService.setLocale(locale);
+  const locale = req.headers[LOCALE_HEADER_KEY] ?? DEFAULT_LOCALE;
+  langService.setLocale(<string>locale);
   next();
 };

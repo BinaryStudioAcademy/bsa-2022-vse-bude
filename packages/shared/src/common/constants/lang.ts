@@ -1,2 +1,2 @@
 export const DEFAULT_LOCALE = 'ua';
-export const LOCALE_COOKIE_KEY = 'locale_name';
+export const LOCALE_HEADER_KEY = 'locale-name';

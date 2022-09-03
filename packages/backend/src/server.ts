@@ -7,7 +7,6 @@ import { initServices } from '@services';
 import { loggerMiddleware } from '@middlewares';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
-import cookieParser from 'cookie-parser';
 import { prismaClient as database } from './data/db';
 import { errorHandler } from './error/error-handler';
 import { langMiddleware } from './api/middlewares/lang';
@@ -32,7 +31,6 @@ const swaggerSpecification = swaggerJsdoc(options);
 
 app
   .use(cors())
-  .use(cookieParser())
   .use(loggerMiddleware)
   .use(json())
   .use(langMiddleware)
