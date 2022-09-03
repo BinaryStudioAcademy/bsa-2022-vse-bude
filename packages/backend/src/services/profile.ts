@@ -1,4 +1,3 @@
-import type { TFunction } from 'i18next';
 import type { UserProfileRepository } from '@repositories';
 import type {
   UpdateUserProfileDto,
@@ -13,6 +12,7 @@ import {
 import type { HashService, S3StorageService } from '@services';
 import { ProfileError } from '@errors';
 import { getFilenameFromUrl } from '@helpers';
+import { lang } from '../lang';
 
 export class UserProfileService {
   private _userProfileRepository: UserProfileRepository;
@@ -35,30 +35,24 @@ export class UserProfileService {
     this._storageService = storageService;
   }
 
-  public async getUser({ userId, t }: { userId: string; t: TFunction }) {
+  public async getUser({ userId }: { userId: string }) {
     const user = await this._userProfileRepository.getUser({ userId });
     if (!user) {
       throw new ProfileError({
         status: HttpStatusCode.BAD_REQUEST,
-        message: t(UserPersonalInfoValidationMessage.USER_NOT_EXISTS),
+        message: lang(UserPersonalInfoValidationMessage.USER_NOT_EXISTS),
       });
     }
 
     return user;
   }
 
-  public async getFullUserData({
-    userId,
-    t,
-  }: {
-    userId: string;
-    t: TFunction;
-  }) {
+  public async getFullUserData({ userId }: { userId: string }) {
     const user = await this._userProfileRepository.getFullUserData({ userId });
     if (!user) {
       throw new ProfileError({
         status: HttpStatusCode.BAD_REQUEST,
-        message: t(UserPersonalInfoValidationMessage.USER_NOT_EXISTS),
+        message: lang(UserPersonalInfoValidationMessage.USER_NOT_EXISTS),
       });
     }
 
@@ -141,11 +135,9 @@ export class UserProfileService {
   }
 
   public async changePassword({
-    t,
     userId,
     data,
   }: {
-    t: TFunction;
     userId: string;
     data: UpdatePasswordDto;
   }) {
@@ -156,7 +148,7 @@ export class UserProfileService {
     if (!passwordHash) {
       throw new ProfileError({
         status: HttpStatusCode.BAD_REQUEST,
-        message: t(UserPersonalInfoValidationMessage.USER_NOT_EXISTS),
+        message: lang(UserPersonalInfoValidationMessage.USER_NOT_EXISTS),
       });
     }
 
@@ -168,7 +160,7 @@ export class UserProfileService {
     if (!isCurrentPassword) {
       throw new ProfileError({
         status: HttpStatusCode.BAD_REQUEST,
-        message: t(UserPersonalInfoValidationMessage.WRONG_PASSWORD),
+        message: lang(UserPersonalInfoValidationMessage.WRONG_PASSWORD),
       });
     }
 

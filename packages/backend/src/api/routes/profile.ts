@@ -18,10 +18,9 @@ export const initProfileRoutes = (
     apiPath(path, ProfileApiRoutes.GET_FULL_USER_DATA),
     authMiddleware,
     wrap(async (req: Request) => {
-      const { userId, t } = req;
+      const { userId } = req;
       const fullUserProfile = await profileService.getFullUserData({
         userId,
-        t,
       });
 
       return {
@@ -49,7 +48,7 @@ export const initProfileRoutes = (
     apiPath(path, ProfileApiRoutes.UPDATE_DATA),
     authMiddleware,
     wrap(async (req: Request) => {
-      const { userId, t } = req;
+      const { userId } = req;
       profileValidation({ req });
 
       const {
@@ -77,7 +76,6 @@ export const initProfileRoutes = (
       if (newPassword) {
         await profileService.changePassword({
           userId,
-          t,
           data: { newPassword, password },
         });
       }
@@ -92,9 +90,8 @@ export const initProfileRoutes = (
     uploadImage,
     wrap(async (req: UploadFileRequest) => {
       const { userId } = req;
-      const avatar = await profileService.updateAvatar({ userId, req });
 
-      return avatar;
+      return await profileService.updateAvatar({ userId, req });
     }),
   );
 
@@ -102,8 +99,7 @@ export const initProfileRoutes = (
     apiPath(path, ProfileApiRoutes.GET_USER_BY_ID),
     wrap(async (req: Request) => {
       const { userId } = req.params;
-      const { t } = req;
-      const user = await profileService.getUser({ userId, t });
+      const user = await profileService.getUser({ userId });
       const socialMedia = await profileService.getSocialMedia({ userId });
 
       return {
