@@ -1,5 +1,6 @@
 export enum ApiRoutes {
   USERS = '/users',
+  ACCOUNT = "/account",
   CATEGORIES = '/categories',
   PRODUCTS = '/products',
   NEWS = '/news',
@@ -49,5 +50,6 @@ export enum ProfileApiRoutes {
 }
 
 export enum AccountApiRoutes {
+  PERSONAL_INFO = '/personal-info',
   MY_LIST = '/my-list',
 }

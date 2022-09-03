@@ -39,16 +39,10 @@ export const initProfileRoutes = (
         userId,
         t,
       });
-      const purchased = await myListService.getPurchasedItems({ userId });
-      const sold = await myListService.getPurchasedItems({ userId });
-      const drafted = await myListService.getDraftedItems({ userId });
-      const posted = await myListService.getPostedItems({ userId });
+      const userItemsList = await myListService.getAllUserItems({ userId });
 
       return {
-        purchased,
-        sold,
-        posted,
-        drafted,
+        userItemsList,
       };
     }),
   );

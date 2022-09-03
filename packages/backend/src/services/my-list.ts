@@ -7,19 +7,7 @@ export class MyListService {
     this._myListRepository = myListRepository;
   }
 
-  public async getPurchasedItems({ userId }: { userId: string }) {
-    return this._myListRepository.getPurchasedItems({ userId });
-  }
-
-  public async getSoldItems({ userId }: { userId: string }) {
-    return this._myListRepository.getSoldItems({ userId });
-  }
-
-  public async getDraftedItems({ userId }: { userId: string }) {
-    return this._myListRepository.getDraftedItems({ userId });
-  }
-
-  public async getPostedItems({ userId }: { userId: string }) {
-    return this._myListRepository.getPostedItems({ userId });
+  public async getAllUserItems({ userId }: { userId: string }) {
+    return this._myListRepository.getAllUserItems({ userId });
   }
 }
