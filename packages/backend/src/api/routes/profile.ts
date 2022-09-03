@@ -49,7 +49,7 @@ export const initProfileRoutes = (
         purchased,
         sold,
         posted,
-        drafted
+        drafted,
       };
     }),
   );
