@@ -18,6 +18,7 @@ import { HealthService } from './health';
 import { EmailService } from './email';
 import { UserProfileService } from './profile';
 import { BidService } from './bid';
+import { MyListService } from './my-list';
 
 export const initServices = (repositories: Repositories) => {
   const hashService: HashService = new HashService();
@@ -74,6 +75,9 @@ export const initServices = (repositories: Repositories) => {
       repositories.bidRepository,
       repositories.productRepository,
     ),
+    myListService: new MyListService({
+      myListRepository: repositories.myListRepository,
+    }),
   };
 };
 
@@ -91,4 +95,5 @@ export {
   type EmailService,
   type BidService,
   type S3StorageService,
+  type MyListService,
 };
