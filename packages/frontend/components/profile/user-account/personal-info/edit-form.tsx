@@ -21,7 +21,7 @@ import type { RootState } from '@types';
 import { showVerifyModal } from 'store/verify/actions';
 import { SectionHeader, NestedLayout } from '../common';
 import * as styles from './styles';
-import { onChangeNewPassword } from './utils';
+// import { onChangeNewPassword } from './utils';
 
 const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
   const [isSubmit, setIsSubmit] = useState(false);
@@ -35,13 +35,13 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
   const {
     register,
     reset,
-    setValue,
-    setError,
-    clearErrors,
+    // setValue,
+    // setError,
+    // clearErrors,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    //mode: 'onChange',
+    mode: 'onChange',
     defaultValues: profileMapper({ user }),
     resolver: joiResolver(userUpdateSchema(t)),
   });
@@ -59,11 +59,11 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
     );
   };
 
-  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    clearErrors('newPassword');
-    onChangeNewPassword({ value, t, setError, setValue });
-  };
+  // const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const value = event.target.value;
+  //   clearErrors('newPassword');
+  //   onChangeNewPassword({ value, t, setError, setValue });
+  // };
   const onResetHandler = () => {
     reset(profileMapper({ user }), {
       keepDefaultValues: true,
@@ -310,7 +310,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
                 onCut={onCutHandler}
                 onCopy={onCopyHandler}
                 onPaste={onPastHandler}
-                {...(register('newPassword'), { onChange: onChangeHandler })}
+                {...register('newPassword')}
                 error={errors.newPassword?.message}
               />
             </div>

@@ -1,3 +1,4 @@
+import type { CustomHelpers } from 'joi';
 import Joi from 'joi';
 import { UserPersonalInfoValidationMessage } from '@vse-bude/shared';
 import { ValidationRanges } from '@vse-bude/shared';
@@ -102,6 +103,17 @@ export const userUpdateSchema = (t: TFunction) =>
         .pattern(
           /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z~!@#$%^*\-_=+[{\]}/;:,.?]+$/,
         )
+        .custom((value: string, helpers: CustomHelpers<any>) => {
+          if (/^[А-ЯЁIЇҐЄЂЃЀЅЍЈЉЊЋЌЎа-яёіїґєђѓѐѕѝјљњћќў]+$/.test(value)) {
+            return helpers.error('string.cyrilic');
+          }
+
+          if (value.includes(' ')) {
+            return helpers.error('string.spaces');
+          }
+          
+return value;
+        })
         .messages({
           'string.pattern.base': t(
             UserPersonalInfoValidationMessage.NEW_PASSWORD,
@@ -109,6 +121,10 @@ export const userUpdateSchema = (t: TFunction) =>
           'string.min': t(UserPersonalInfoValidationMessage.MIN_SYMBOLS),
           'string.max': t(UserPersonalInfoValidationMessage.MAX_SYMBOLS),
           'string.empty': t(UserPersonalInfoValidationMessage.EMPTY_PASSWORD),
+          'string.cyrilic': t(UserPersonalInfoValidationMessage.CYRILLIC),
+          'string.spaces': t(
+            UserPersonalInfoValidationMessage.SPACES_IN_PASSWORD,
+          ),
           'any.invalid': t(UserPersonalInfoValidationMessage.SAME_PASSWORD),
         }),
       otherwise: Joi.string().allow(''),
