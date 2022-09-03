@@ -57,7 +57,7 @@ model Address {
   city          String?  @db.VarChar(512)
   address       String?  @db.VarChar(1024)
   zip           String?  @db.VarChar(32)
-  novaPoshtaRef String?
+  deliveryData  String?  @db.VarChar(1024)
   user          User?    @relation(fields: [userId], references: [id])
   userId        String?  @unique @db.Uuid
   createdAt     DateTime @default(now())
