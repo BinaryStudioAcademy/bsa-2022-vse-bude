@@ -1,10 +1,13 @@
 import React, { FC } from 'react';
+import { PhoneVerifyDto } from '@vse-bude/shared';
 import {
+  useAppDispatch,
   useAppForm,
   useAppSelector,
   useCustomTheme,
   useNavigation,
   useTranslation,
+  useState,
 } from '~/hooks/hooks';
 import {
   ButtonAppearance,
@@ -17,10 +20,12 @@ import {
   PrimaryButton,
   View,
 } from '~/components/components';
+import { auth as authActions } from '~/store/actions';
 import { images } from '~/assets/images/images';
 import { globalStyles } from '~/styles/styles';
-import { RootNavigationProps, VerifyCode } from '~/common/types/types';
+import { RootNavigationProps } from '~/common/types/types';
 import { selectUserPhone } from '~/store/selectors';
+import { notification } from '~/services/services';
 import {
   ButtonsContainer,
   Container,
@@ -34,10 +39,12 @@ import { styles } from './styles';
 
 const VerifyCodeScreen: FC = () => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
   const navigation = useNavigation<RootNavigationProps>();
   const { colors } = useCustomTheme();
+  const [isLoading, setIsLoading] = useState(false);
   const userPhone = useAppSelector(selectUserPhone);
-  const { control, errors, handleSubmit } = useAppForm<VerifyCode>({
+  const { control, errors, handleSubmit } = useAppForm<PhoneVerifyDto>({
     defaultValues: {
       code: '',
     },
@@ -48,13 +55,29 @@ const VerifyCodeScreen: FC = () => {
   };
 
   const handleResendPress = (): void => {
-    //TODO add Cancel handler
+    setIsLoading(true);
+    dispatch(authActions.sendCodeVerifyPhone())
+      .unwrap()
+      .then(() => {
+        notification.success(t('verificationPhone.CODE_SENT'));
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
-  const onSubmit = (): void => {
-    navigation.navigate(RootScreenName.VERIFY, {
-      screen: VerifyScreenName.VERIFIED,
-    });
+  const onSubmit = (payload: PhoneVerifyDto): void => {
+    setIsLoading(true);
+    dispatch(authActions.verifyPhone(payload))
+      .unwrap()
+      .then(() => {
+        navigation.navigate(RootScreenName.VERIFY, {
+          screen: VerifyScreenName.VERIFIED,
+        });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
@@ -92,12 +115,14 @@ const VerifyCodeScreen: FC = () => {
                 appearance={ButtonAppearance.TRANSPARENT}
                 textColor={colors.text}
                 onPress={handleResendPress}
+                disabled={isLoading}
               />
             </View>
             <View style={styles.buttonContainer}>
               <PrimaryButton
                 label={t('verificationPhone.CONTINUE')}
                 onPress={handleSubmit(onSubmit)}
+                disabled={isLoading}
               />
             </View>
           </ButtonsContainer>

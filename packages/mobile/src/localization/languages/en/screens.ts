@@ -97,6 +97,7 @@ export const screens = {
     RESEND_CODE: 'Resend code',
     CONTINUE: 'Continue',
     VERIFIED_TITLE: 'Your account has fully been verified',
+    CODE_SENT: 'Code sent',
   },
   make_a_post: {
     TITLE: 'Make a Post',

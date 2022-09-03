@@ -96,6 +96,7 @@ export const screens = {
     RESEND_CODE: 'Надіслати повторно',
     CONTINUE: 'Продовжити',
     VERIFIED_TITLE: 'Ваш обліковий запис повністю підтверджено',
+    CODE_SENT: 'Код надіслано',
   },
   make_a_post: {
     TITLE: 'Створити публікацію',

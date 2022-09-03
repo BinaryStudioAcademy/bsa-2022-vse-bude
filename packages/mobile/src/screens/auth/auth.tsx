@@ -42,9 +42,11 @@ const Auth: FC = () => {
   };
 
   const handleSignUp = (payload: UserSignUpDto): void => {
-    dispatch(authActions.signUp(payload)).then(() => {
-      navigation.navigate(RootScreenName.VERIFY);
-    });
+    dispatch(authActions.signUp(payload))
+      .unwrap()
+      .then(() => {
+        navigation.navigate(RootScreenName.VERIFY);
+      });
   };
 
   const handleGoBack = (): void => {

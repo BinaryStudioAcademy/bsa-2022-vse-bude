@@ -28,4 +28,4 @@ export type {
 export type { ShowNotificationParams } from './notification/notification';
 export type { AppIcon, IconProps, CustomIconProps } from './ui/ui';
 export type { Theme, ThemeColors } from './theme/theme.type';
-export type { VerifyPhone, VerifyCode } from './verify/verify';
+export type { VerifyPhone } from './verify/verify';

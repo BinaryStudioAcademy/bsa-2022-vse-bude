@@ -1,10 +1,12 @@
 import React, { FC } from 'react';
 import {
+  useAppDispatch,
   useAppForm,
   useAppSelector,
   useCustomTheme,
   useNavigation,
   useTranslation,
+  useState,
 } from '~/hooks/hooks';
 import {
   ButtonAppearance,
@@ -19,10 +21,12 @@ import {
   PrimaryButton,
   View,
 } from '~/components/components';
+import { auth as authActions } from '~/store/actions';
 import { images } from '~/assets/images/images';
 import { phone } from '~/validation-schemas/validation-schemas';
 import { globalStyles } from '~/styles/styles';
 import { selectUserPhone } from '~/store/selectors';
+import { notification } from '~/services/services';
 import {
   ButtonsContainer,
   Container,
@@ -36,9 +40,11 @@ import { styles } from './styles';
 
 const VerifyPhoneScreen: FC = () => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
   const navigation = useNavigation<RootNavigationProps>();
   const { colors } = useCustomTheme();
   const userPhone = useAppSelector(selectUserPhone);
+  const [isLoading, setIsLoading] = useState(false);
   const { control, errors, handleSubmit } = useAppForm<VerifyPhone>({
     defaultValues: {
       phone: userPhone,
@@ -57,9 +63,18 @@ const VerifyPhoneScreen: FC = () => {
   };
 
   const onSubmit = (): void => {
-    navigation.navigate(RootScreenName.VERIFY, {
-      screen: VerifyScreenName.VERIFY_CODE,
-    });
+    setIsLoading(true);
+    dispatch(authActions.sendCodeVerifyPhone())
+      .unwrap()
+      .then(() => {
+        notification.success(t('verificationPhone.CODE_SENT'));
+        navigation.navigate(RootScreenName.VERIFY, {
+          screen: VerifyScreenName.VERIFY_CODE,
+        });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
@@ -97,12 +112,14 @@ const VerifyPhoneScreen: FC = () => {
                 appearance={ButtonAppearance.TRANSPARENT}
                 textColor={colors.text}
                 onPress={handleLaterPress}
+                disabled={isLoading}
               />
             </View>
             <View style={styles.buttonContainer}>
               <PrimaryButton
                 label={t('verificationPhone.VERIFY')}
                 onPress={handleSubmit(onSubmit)}
+                disabled={isLoading}
               />
             </View>
           </ButtonsContainer>
