@@ -23,7 +23,7 @@ import type { BidRepository } from '@repositories';
 import { productMapper } from '@mappers';
 import { FieldError } from 'error/product/field-error';
 import { createPostSchema, updatePostSchema } from 'validation/product/schemas';
-import { auctionPermissionsMapper } from '../mapper/auction-permissions';
+import { auctionPermissionsMapper } from '@mappers';
 import type { S3StorageService } from './s3-storage';
 
 export class ProductService {

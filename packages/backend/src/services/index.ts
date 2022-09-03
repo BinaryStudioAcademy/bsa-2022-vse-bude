@@ -1,11 +1,10 @@
-import { Environment } from '@vse-bude/shared';
 import type { Repositories } from '@repositories';
 import {
   TwilioSMSProvider,
   BarSMSProvider,
   SendInBlueEmailProvider,
 } from '@providers';
-import { getEnv } from '@helpers';
+import { isProduction } from '@helpers';
 import { CategoryService } from './category';
 import { ProductService } from './product';
 import { AuthService } from './auth';
@@ -21,8 +20,6 @@ import { UserProfileService } from './profile';
 import { BidService } from './bid';
 
 export const initServices = (repositories: Repositories) => {
-  const isProduction = getEnv('NODE_ENV') === Environment.PRODUCTION;
-
   const hashService: HashService = new HashService();
   const redisService: RedisStorageService = new RedisStorageService(
     isProduction,

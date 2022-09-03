@@ -9,7 +9,7 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { useState } from 'react';
 import { IconColor } from '@enums';
-import { auctionLeaveAction, auctionPermissions } from 'store/product';
+import { auctionLeaveAction, auctionPermissions, makeBid } from 'store/product';
 import { CountDownTimer } from '../countdown-timer/component';
 import { ItemTitle, ItemInfo, ItemPrice } from '../item-info';
 import { minBidValidation } from '../validation';
@@ -22,14 +22,12 @@ const ConfirmationModal = dynamic(
 interface ItemInfoAuctionProps {
   item: ItemDto;
   isInFavorite: boolean;
-  onBid: (data: CreateBidRequest) => void;
   onChangeIsFavorite: () => void;
 }
 
 export const ItemInfoAuction = ({
   item,
   isInFavorite,
-  onBid,
   onChangeIsFavorite,
 }: ItemInfoAuctionProps) => {
   const [confirmModalVisible, setModalVisible] = useState(false);
@@ -49,13 +47,23 @@ export const ItemInfoAuction = ({
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<CreateBidRequest>({
     resolver: joiResolver(minBidValidation(+minBidAmount, t)),
   });
 
   const onMakeBid: SubmitHandler<CreateBidRequest> = (data) => {
-    onBid(data);
+    dispatch(
+      makeBid({
+        price: data.price,
+        productId: item.id,
+      }),
+    )
+      .unwrap()
+      .then(() => {
+        setValue('price', null);
+      });
   };
 
   const onCancel = () => {

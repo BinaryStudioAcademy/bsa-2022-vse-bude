@@ -167,5 +167,11 @@
       "cancel": "Cancel",
       "header": "Confirm your action"
     }
+  },
+  "resendBtn": {
+    "codeTimeLeft": "Time left to resend code again",
+    "resendCode": "Resend verification code",
+    "seconds": "s",
+    "text": "Send reset link"
   }
 }
