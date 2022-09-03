@@ -21,6 +21,10 @@ export const globalStyles = (theme: Theme) => css`
     min-height: 100vh;
   }
 
+  body {
+    opacity: 0;
+  }
+
   body,
   ul,
   li {

@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 
 import { RootNavigationProps } from '~/common/types/types';
 import { RootScreenName } from '~/common/enums/enums';
+import { auth as authActions } from '~/store/actions';
 import {
   View,
   ScreenWrapper,
@@ -14,15 +15,22 @@ import {
   Logo,
   TouchableOpacity,
 } from '~/components/components';
-import { useCustomTheme, useNavigation, useTranslation } from '~/hooks/hooks';
+import {
+  useAppDispatch,
+  useCustomTheme,
+  useNavigation,
+  useTranslation,
+  useMemo,
+} from '~/hooks/hooks';
 import { createStyles } from './styles';
 
 const Account: FC = () => {
+  const dispatch = useAppDispatch();
   const navigation = useNavigation<RootNavigationProps>();
   const { t } = useTranslation();
   const { dark, colors } = useCustomTheme();
 
-  const styles = React.useMemo(() => createStyles(colors), [dark, colors]);
+  const styles = useMemo(() => createStyles(colors), [dark, colors]);
 
   const handlePersonalInfoPress = () => {
     navigation.navigate(RootScreenName.PERSONAL_INFO);
@@ -37,7 +45,7 @@ const Account: FC = () => {
     navigation.navigate(RootScreenName.SUPPORT);
   };
   const handleLogOut = () => {
-    //TODO
+    dispatch(authActions.logOut());
   };
 
   return (

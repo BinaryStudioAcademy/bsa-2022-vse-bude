@@ -11,4 +11,6 @@ export const initialFormState: IPostForms = {
   instagram: '',
   facebook: '',
   site: '',
+  phone: '',
+  callingCode: '',
 };

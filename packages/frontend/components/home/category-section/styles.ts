@@ -4,7 +4,11 @@ import type { Theme } from '@emotion/react';
 import styled from '@emotion/styled';
 
 export const categoryContainer = ({ spaces, breakpoints }: Theme) => css`
-  margin-top: ${spaces.xl1};
+  margin-top: ${spaces.md};
+
+  @media (min-width: ${breakpoints.sm}px) {
+    margin-top: ${spaces.xl1};
+  }
   @media (min-width: ${breakpoints.md}px) {
     margin-top: ${spaces.xl2};
   }

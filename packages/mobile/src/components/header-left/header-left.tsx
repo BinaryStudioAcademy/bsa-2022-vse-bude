@@ -19,7 +19,7 @@ const HeaderLeft: FC = () => {
       <View
         style={[globalStyles.flexDirectionRow, globalStyles.alignItemsCenter]}
       >
-        <ArrowLeftIcon style={{ color: ColorPalette.YELLOW_100 }} />
+        <ArrowLeftIcon size={35} style={{ color: ColorPalette.YELLOW_100 }} />
         <Text style={{ color: ColorPalette.YELLOW_100 }}>
           {t('common:common.HOME')}
         </Text>

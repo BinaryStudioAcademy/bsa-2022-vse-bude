@@ -5,6 +5,7 @@ import type { UserSignUpDto } from '@vse-bude/shared';
 import { useTranslation } from 'next-i18next';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useAppDispatch, useTypedSelector } from '@hooks';
+// import { UserPersonalInfoValidationMessage } from '@vse-bude/shared';
 import { signUpSchema } from 'validation-schemas/user/sign-up';
 import { form, headline, inputWrapper } from '../layout/styles';
 import { signUpUser } from '../../../store/auth';
@@ -18,14 +19,34 @@ export const SignUpForm = () => {
   const {
     register,
     handleSubmit,
+    // setError,
+    // setValue,
+    // clearErrors,
     formState: { errors },
   } = useForm<UserSignUpDto>({
+    //mode: 'onChange',
     resolver: joiResolver(signUpSchema(t)),
   });
 
   const onSubmit: SubmitHandler<UserSignUpDto> = (data) => {
     dispatch(signUpUser(data));
   };
+
+  // const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const value = event.target.value;
+  //   clearErrors('password');
+  //   if (value.includes(' ')) {
+  //     setError('password', {
+  //       message: t(UserPersonalInfoValidationMessage.SPACES_IN_PASSWORD),
+  //     });
+  //   } else if (/^[А-ЯЁIЇҐЄЂЃЀЅЍЈЉЊЋЌЎа-яёіїґєђѓѐѕѝјљњћќў]+$/.test(value)) {
+  //     setError('password', {
+  //       message: t(UserPersonalInfoValidationMessage.CYRILLIC),
+  //     });
+  //   } else {
+  //     setValue('password', event.target.value);
+  //   }
+  // };
 
   const onCutHandler = (event: React.ClipboardEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -51,6 +72,7 @@ export const SignUpForm = () => {
         <Input
           {...register('firstName')}
           label={t('auth:sign-up.firstName')}
+          placeholder={t('auth:sign-up.firstNamePlaceholder')}
           variant="primary"
           type="text"
           name="firstName"
@@ -62,6 +84,7 @@ export const SignUpForm = () => {
         <Input
           {...register('lastName')}
           label={t('auth:sign-up.lastName')}
+          placeholder={t('auth:sign-up.lastNamePlaceholder')}
           variant="primary"
           type="text"
           name="lastName"
@@ -73,6 +96,7 @@ export const SignUpForm = () => {
         <Input
           {...register('phone')}
           label={t('auth:sign-up.phone')}
+          placeholder={t('auth:sign-up.phonePlaceholder')}
           variant="primary"
           type="text"
           name="phone"
@@ -84,6 +108,7 @@ export const SignUpForm = () => {
         <Input
           {...register('email')}
           label={t('auth:sign-up.email')}
+          placeholder={t('auth:sign-up.emailPlaceholder')}
           variant="primary"
           type="email"
           name="email"
@@ -95,6 +120,7 @@ export const SignUpForm = () => {
         <PasswordInput
           {...register('password')}
           label={t('auth:sign-up.password')}
+          placeholder={t('auth:sign-up.passwordPlaceholder')}
           variant="primary"
           name="password"
           disabled={isLoading}
@@ -108,6 +134,7 @@ export const SignUpForm = () => {
         <PasswordInput
           {...register('repeatPassword')}
           label={t('auth:sign-up.passwordRepeat')}
+          placeholder={t('auth:sign-up.passwordRepeatPlaceholder')}
           variant="primary"
           name="repeatPassword"
           disabled={isLoading}

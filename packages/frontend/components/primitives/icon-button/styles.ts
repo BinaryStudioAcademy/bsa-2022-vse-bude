@@ -70,4 +70,9 @@ export const iconButton = ({ colors, radiuses }: Theme) => css`
     ${hover}
     ${active}
   }
+
+  :disabled {
+    color: ${colors.disabled};
+    cursor: not-allowed;
+  }
 `;

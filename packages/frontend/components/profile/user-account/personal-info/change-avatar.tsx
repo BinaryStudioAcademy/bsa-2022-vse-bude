@@ -1,7 +1,7 @@
 import { useTranslation } from 'next-i18next';
 import { useAppDispatch } from '@hooks';
 import React, { useRef, useState } from 'react';
-import { Popover, IconButton, Icon } from '@primitives';
+import { Popover, Icon } from '@primitives';
 import { IconColor, IconName } from '@enums';
 import { updateUserAvatar } from 'store/profile/actions';
 import dynamic from 'next/dynamic';
@@ -87,13 +87,15 @@ const ChangeAvatar = () => {
 
       <Popover
         trigger={
-          <IconButton
+          <Icon
             icon={IconName.CAMERA}
-            backgroundColor="lightgray"
-            color={IconColor.GRAY}
+            color={IconColor.ORANGE}
             cssExtend={styles.avatarUpdateButton}
           />
         }
+        triggerWrapperCssExtend={styles.avatarPopoverTrigger}
+        placement="bottom-left"
+        position="absolute"
       >
         {() => (
           <div css={styles.popoverContentWrapper}>

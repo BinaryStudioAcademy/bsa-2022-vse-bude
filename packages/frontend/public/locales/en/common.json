@@ -3,6 +3,7 @@
     "nav": {
       "home": "Home",
       "category": "Category",
+      "item": "Items",
       "search": "Search",
       "news": "News",
       "about_us": "About us",
@@ -73,7 +74,11 @@
       "btn": {
         "auction": "Auction",
         "or": "or",
-        "directSale": "Direct Sale"
+        "directSale": "Direct Sale",
+        "tooltip": {
+          "auction": "You need to verify you phone number to choose \"Auction\"",
+          "directSale": "You need to verify you phone number to choose \"Direct Sale\""
+        }
       }
     }
   },
@@ -95,6 +100,37 @@
     "productRemovedFromFavorites": "Product removed from favorite",
     "bidPlaced": "Bid placed",
     "leftAuction": "You left the auction"
+  },
+  "verify": {
+    "enterPhone": {
+      "headline": "Verify",
+      "description": "For further verification of account, please enter your phone here or verify it on your Personal Info page",
+      "input": "Phone",
+      "button": {
+        "verify": "Verify"
+      },
+      "link": {
+        "later": "Verify later"
+      }
+    },
+    "enterCode": {
+      "headline": "Verify",
+      "description": "We just sent a code to",
+      "input": "Enter the verification code we just sent to you",
+      "resend": "Resend code",
+      "button": {
+        "continue": "Continue"
+      },
+      "link": {
+        "sendAgain": "Click here"
+      }
+    },
+    "success": {
+      "headline": "Your account has fully been verified",
+      "button": {
+        "continue": "Continue"
+      }
+    }
   },
   "HOURS_SHORT": "h",
   "DAYS_SHORT": "d",
@@ -124,20 +160,18 @@
     "November",
     "December"
   ],
-  "days": [
-    "Su",
-    "Mo",
-    "Tu",
-    "We",
-    "Th",
-    "Fr",
-    "Sa"
-  ],
+  "days": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
   "modal": {
     "confirm": {
       "confirm": "Confirm",
       "cancel": "Cancel",
       "header": "Confirm your action"
     }
+  },
+  "resendBtn": {
+    "codeTimeLeft": "Time left to resend code again",
+    "resendCode": "Resend verification code",
+    "seconds": "s",
+    "text": "Send reset link"
   }
 }

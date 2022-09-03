@@ -27,9 +27,7 @@ export const dropdownArrow = ({
   background-color: ${colors.backgroundLight};
   cursor: pointer;
   :hover {
-    i {
-      color: ${colors.primary} !important;
-    }
+    color: ${colors.primary} !important;
   }
 `;
 
@@ -107,4 +105,8 @@ export const newNotifications = ({ spaces, colors, radiuses }: Theme) => css`
 
 export const icons = css`
   line-height: 18px;
+`;
+
+export const popoverTriggerWrapper = ({ spaces }: Theme) => css`
+  height: ${spaces.xl3};
 `;

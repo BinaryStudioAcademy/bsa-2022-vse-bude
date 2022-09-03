@@ -1,5 +1,6 @@
 ﻿import type { CreateBidRequest, ItemDto } from '@vse-bude/shared';
-import { Button, Input } from '@primitives';
+import { Button, Input, Tooltip } from '@primitives';
+import dynamic from 'next/dynamic';
 import { FavoriteButton } from 'components/product/favorite-button/component';
 import { useTranslation } from 'next-i18next';
 import type { SubmitHandler } from 'react-hook-form';
@@ -7,27 +8,26 @@ import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { useState } from 'react';
+import { IconColor } from '@enums';
+import { auctionLeaveAction, auctionPermissions, makeBid } from 'store/product';
 import { CountDownTimer } from '../countdown-timer/component';
 import { ItemTitle, ItemInfo, ItemPrice } from '../item-info';
 import { minBidValidation } from '../validation';
-import { ConfirmationModal } from '../../modal/confirm/component';
-import {
-  auctionLeaveAction,
-  auctionPermissions,
-} from '../../../store/product-auction';
 import * as styles from './styles';
+
+const ConfirmationModal = dynamic(
+  () => import('@components/modal/confirm/component'),
+);
 
 interface ItemInfoAuctionProps {
   item: ItemDto;
   isInFavorite: boolean;
-  onBid: (data: CreateBidRequest) => void;
   onChangeIsFavorite: () => void;
 }
 
 export const ItemInfoAuction = ({
   item,
   isInFavorite,
-  onBid,
   onChangeIsFavorite,
 }: ItemInfoAuctionProps) => {
   const [confirmModalVisible, setModalVisible] = useState(false);
@@ -41,19 +41,29 @@ export const ItemInfoAuction = ({
 
   const {
     permissions: { isAbleToLeaveAuction },
-  } = useTypedSelector((state) => state.auction);
+  } = useTypedSelector((state) => state.product);
   const { user } = useTypedSelector((state) => state.auth);
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<CreateBidRequest>({
     resolver: joiResolver(minBidValidation(+minBidAmount, t)),
   });
 
   const onMakeBid: SubmitHandler<CreateBidRequest> = (data) => {
-    onBid(data);
+    dispatch(
+      makeBid({
+        price: data.price,
+        productId: item.id,
+      }),
+    )
+      .unwrap()
+      .then(() => {
+        setValue('price', null);
+      });
   };
 
   const onCancel = () => {
@@ -102,14 +112,38 @@ export const ItemInfoAuction = ({
         </div>
 
         <div css={styles.buttons}>
-          <Button type="submit">{t('placeBidBtn')}</Button>
-          <FavoriteButton
-            cssExtended={styles.favouriteButton}
-            onChangeIsFavorite={onChangeIsFavorite}
-            isFavorite={isInFavorite}
-            backgroundColor="transparent"
-            size="md"
-          />
+          <Tooltip
+            trigger={
+              <FavoriteButton
+                cssExtended={styles.favouriteButton}
+                onChangeIsFavorite={onChangeIsFavorite}
+                isFavorite={isInFavorite}
+                backgroundColor="transparent"
+                inFavouriteColor={IconColor.YELLOW}
+                notInFavouriteColor={IconColor.YELLOW}
+                size="md"
+              />
+            }
+          >
+            {user
+              ? isInFavorite
+                ? t('buttons.tooltips.favBtnRemove')
+                : t('buttons.tooltips.favBtn')
+              : t('buttons.tooltips.notAuthorized.favBtn')}
+          </Tooltip>
+          <Button
+            type="submit"
+            disabled={!user || !user.phoneVerified}
+            tooltip={
+              user
+                ? user.phoneVerified
+                  ? t('buttons.placeBid')
+                  : t('buttons.tooltips.notVerified.placeBid')
+                : t('buttons.tooltips.notAuthorized.placeBid')
+            }
+          >
+            {t('buttons.placeBid')}
+          </Button>
         </div>
       </form>
       {!!isAbleToLeaveAuction && user && (

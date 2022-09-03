@@ -2,10 +2,10 @@ import { useTranslation } from 'next-i18next';
 import { useAuth, useTypedSelector, useAppDispatch } from '@hooks';
 import { shallowEqual } from 'react-redux';
 import { Flex } from 'grapefruit-ui';
-import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Button, Avatar } from '@primitives';
 import { fetchFullUserProfile } from '@store';
+import { setIsEditing } from '@store';
 import flag from '../../../../public/images/flagBg.png';
 import { NestedLayout } from '../common';
 import * as styles from './styles';
@@ -16,10 +16,9 @@ const ChangeAvatar = dynamic(() => import('./change-avatar'));
 
 export const PersonalInfo = () => {
   const { t } = useTranslation();
-  const [isEditing, setIsEditing] = useState(false);
   const { user: authUser } = useAuth();
 
-  const { user, loading } = useTypedSelector(
+  const { user, loading, isEditing } = useTypedSelector(
     (state) => state.profile,
     shallowEqual,
   );
@@ -36,7 +35,7 @@ export const PersonalInfo = () => {
   return (
     <NestedLayout>
       <div css={styles.personalHeader}>
-        <div css={styles.headerWrapper}>
+        <div css={[styles.headerWrapper, !isAuthUser && styles.marginBottom]}>
           <div css={styles.flagWrapper}>
             <img css={styles.flag} src={flag.src} alt="flag" />
           </div>
@@ -52,22 +51,22 @@ export const PersonalInfo = () => {
             {isAuthUser && <ChangeAvatar />}
           </div>
         </div>
-
-        <Flex justify={'flex-end'} css={styles.buttons}>
-          {!isEditing && isAuthUser && (
+        {!isEditing && isAuthUser && (
+          <Flex justify={'flex-end'} css={styles.buttons}>
             <Button
               type="button"
               variant="outlined"
               disabled={loading}
               onClick={() => {
-                setIsEditing(true);
                 onGetFullProfile();
+                dispatch(setIsEditing());
               }}
             >
               {t('personal-info:action.edit')}
             </Button>
-          )}
-        </Flex>
+          </Flex>
+        )}
+
         {isEditing && !loading && <EditForm user={user} />}
         {!isEditing && <ProfileData user={user} />}
       </div>
