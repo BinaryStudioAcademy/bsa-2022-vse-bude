@@ -59,9 +59,7 @@ export class ProductService {
     }
 
     if (product.category) {
-      product.category.title = lang(
-        `translation.categories.${product.category.title}`,
-      );
+      product.category.title = lang(`categories:${product.category.title}`);
     }
 
     const currentPrice = await this._productRepository.getCurrentPrice(
