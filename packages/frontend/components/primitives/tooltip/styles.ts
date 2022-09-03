@@ -1,10 +1,6 @@
 ﻿import { css } from '@emotion/react';
 import type { Theme } from '../../../theme';
 
-export const trigger = css`
-  cursor: pointer;
-`;
-
 export const body = ({ colors, spaces, fontSizes }: Theme) => css`
   position: absolute;
   z-index: 101;
