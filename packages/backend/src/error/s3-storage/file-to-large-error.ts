@@ -1,11 +1,11 @@
 ﻿import { HttpError, HttpStatusCode } from '@vse-bude/shared';
-import type { Request } from 'express';
+import { lang } from '../../lang';
 
 class FileSizeTooLargeError extends HttpError {
-  constructor(req: Request) {
+  constructor() {
     super({
       status: HttpStatusCode.BAD_REQUEST,
-      message: req.t('FILE_SIZE_TOO_LARGE'),
+      message: lang('translation:FILE_SIZE_TOO_LARGE'),
     });
   }
 }

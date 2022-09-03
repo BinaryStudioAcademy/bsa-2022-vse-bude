@@ -4,6 +4,7 @@ import {
   UserPersonalInfoValidationMessage,
 } from '@vse-bude/shared';
 import { ProfileError } from '@errors';
+import { lang } from '../../../lang';
 
 export const passwordValidation = ({ req }: { req: Request }) => {
   const { password, newPassword, repeatPassword } = req.body;
@@ -17,14 +18,14 @@ export const passwordValidation = ({ req }: { req: Request }) => {
     if (!isNewPassword) {
       throw new ProfileError({
         status: HttpStatusCode.BAD_REQUEST,
-        message: req.t(UserPersonalInfoValidationMessage.NEW_PASSWORD),
+        message: lang(UserPersonalInfoValidationMessage.NEW_PASSWORD),
       });
     }
 
     if (newPassword !== repeatPassword) {
       throw new ProfileError({
         status: HttpStatusCode.BAD_REQUEST,
-        message: req.t(UserPersonalInfoValidationMessage.DIFFERENT_PASSWORDS),
+        message: lang(UserPersonalInfoValidationMessage.DIFFERENT_PASSWORDS),
       });
     }
   }

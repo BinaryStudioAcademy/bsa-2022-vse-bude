@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react';
 
-export interface SectionLayotProps {
+export interface SectionLayoutProps {
   title: string;
-  loadMoreTitle: string;
+  loadMoreTitle?: string;
+  loadMoreHref?: string;
   children: ReactNode;
 }

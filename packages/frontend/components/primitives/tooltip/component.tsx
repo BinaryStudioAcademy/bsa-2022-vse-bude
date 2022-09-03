@@ -8,7 +8,7 @@ const marginScreenLeftRightPx = 10;
 export const Tooltip = ({
   trigger,
   children,
-  hideTimeoutMs = 300,
+  hideTimeoutMs = 100,
 }: TooltipProps) => {
   const [isVisible, setIsVisible] = useState(false);
 

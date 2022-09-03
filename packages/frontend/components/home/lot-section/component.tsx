@@ -8,14 +8,18 @@ import { SectionLayout } from '../section-layout';
 import { lotContainer } from './styles';
 import type { LotProps } from './types';
 
-const LotSection = ({ title, lots, loadMoreTitle }: LotProps) => {
+const LotSection = ({ title, lots, loadMoreTitle, loadMoreHref }: LotProps) => {
   const router = Router;
   const handleBidBuyProduct = (productId: string) => {
     router.push(`${Routes.ITEMS}/${productId}`);
   };
 
   return (
-    <SectionLayout title={title} loadMoreTitle={loadMoreTitle}>
+    <SectionLayout
+      title={title}
+      loadMoreTitle={loadMoreTitle}
+      loadMoreHref={loadMoreHref}
+    >
       <div css={lotContainer}>
         <Splide
           aria-label="items-carousel"
