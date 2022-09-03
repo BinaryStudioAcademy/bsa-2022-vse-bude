@@ -12,7 +12,7 @@ import { wrap } from '@helpers';
 import type { SignOut, UpdateRefreshToken, AuthTokenData } from '@types';
 import { apiPath } from '@helpers';
 import { authMiddleware } from '@middlewares';
-import { langService } from '../middlewares/lang';
+import { langService } from '../../lang';
 
 export const initAuthRoutes = (
   { authService }: Services,

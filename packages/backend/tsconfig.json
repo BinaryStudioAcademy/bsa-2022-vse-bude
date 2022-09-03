@@ -15,7 +15,8 @@
       "@middlewares": ["api/middlewares"],
       "@errors": ["error"],
       "@mappers": ["mapper"],
-      "@validation": ["validation"]
+      "@validation": ["validation"],
+      "@config": ["config"],
     },
     "outDir": "build"
   },
