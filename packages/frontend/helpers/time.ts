@@ -8,17 +8,19 @@ export const timeToEventString = (
   date: Date,
   { hoursText, daysText, minsText, secsText }: TimerTranslations,
 ): string => {
-  const toTheEnd = timeToEventObj(date);
-
   let timeString = '';
+
+  const toTheEnd = timeToEventObj(date);
   const days = toTheEnd.days();
-  if (days) {
-    timeString += `${toTheEnd.days()} ${daysText} `;
-  }
-  timeString += `${toTheEnd.hours()} ${hoursText} `;
-  timeString += `${toTheEnd.minutes()} ${minsText}`;
-  if (!days) {
-    timeString += ` ${toTheEnd.seconds()} ${secsText}`;
+  const hours = toTheEnd.hours();
+  const minutes = toTheEnd.minutes();
+  const seconds = toTheEnd.seconds();
+
+  if (days > 0) timeString += `${days} ${daysText} `;
+  if (hours > 0) timeString += `${hours} ${hoursText} `;
+  if (minutes > 0) timeString += `${minutes} ${minsText} `;
+  if (days <= 0) {
+    timeString += `${seconds > 0 ? seconds : `0`} ${secsText}`;
   }
 
   return timeString;
