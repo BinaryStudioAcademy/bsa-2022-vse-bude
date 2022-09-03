@@ -1,15 +1,15 @@
-﻿import { useMouseLeave } from '@hooks';
-import { Fragment, useRef, useEffect, useState, useCallback } from 'react';
+﻿import { Fragment, useRef, useEffect, useState, useCallback } from 'react';
 import * as ReactDOM from 'react-dom';
 import * as styles from './styles';
 import type { TooltipProps } from './types';
 
 const marginScreenLeftRightPx = 10;
+const tooltipOffset = 10;
 
 export const Tooltip = ({
   trigger,
   children,
-  hideTimeoutMs = 300,
+  hideTimeoutMs = 100,
 }: TooltipProps) => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -63,7 +63,7 @@ export const Tooltip = ({
     if (bodyRef.current) {
       const [bodyTop, bodyLeft] = calcBodyCoords();
 
-      bodyRef.current.style.top = `${bodyTop}px`;
+      bodyRef.current.style.top = `${bodyTop - tooltipOffset}px`;
       bodyRef.current.style.left = `${bodyLeft}px`;
     }
   }, [isVisible, calcBodyCoords]);
@@ -80,13 +80,11 @@ export const Tooltip = ({
     }
   };
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = () => {    
     timerRef.current = setTimeout(() => {
       setIsVisible(false);
     }, hideTimeoutMs);
   };
-
-  useMouseLeave(handleMouseLeave);
 
   const renderPortalBody = () => (
     <div
@@ -111,7 +109,6 @@ export const Tooltip = ({
         ref={triggerWrapperRef}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        css={styles.trigger}
       >
         {trigger}
       </span>

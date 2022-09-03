@@ -13,10 +13,6 @@ export const Button = ({
 }: ButtonProps) => (
   <Tooltip
     trigger={
-      <div
-        css={styles.buttonWrapper}
-        disabled-button={props.disabled ? 'true' : 'false'}
-      >
         <button
           css={styles.button}
           style={{ width: props.width }}
@@ -28,7 +24,6 @@ export const Button = ({
         >
           {children}
         </button>
-      </div>
     }
   >
     {tooltip}
