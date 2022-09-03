@@ -1,7 +1,7 @@
 import type { Services } from '@services';
 import { type Request, Router } from 'express';
 import type { ApiRoutes } from '@vse-bude/shared';
-import { ProfileApiRoutes } from '@vse-bude/shared';
+import { ProfileApiRoutes, AccountApiRoutes } from '@vse-bude/shared';
 import { wrap } from '@helpers';
 import { apiPath } from '@helpers';
 import { authMiddleware, uploadImage } from '@middlewares';
@@ -9,7 +9,7 @@ import { profileValidation } from '@validation';
 import type { UploadFileRequest } from '@types';
 
 export const initProfileRoutes = (
-  { profileService }: Services,
+  { profileService, myListService }: Services,
   path: ApiRoutes,
 ): Router => {
   const router = Router();
@@ -26,6 +26,30 @@ export const initProfileRoutes = (
 
       return {
         ...fullUserProfile,
+      };
+    }),
+  );
+
+  router.get(
+    apiPath(path, AccountApiRoutes.MY_LIST),
+    //authMiddleware,
+    wrap(async (req: Request) => {
+      const { t } = req;
+      const userId = '807f73fb-31b8-4e66-9f74-babc8ee95d94';
+      await profileService.getUser({
+        userId,
+        t,
+      });
+      const purchased = await myListService.getPurchasedItems({ userId });
+      const sold = await myListService.getPurchasedItems({ userId });
+      const drafted = await myListService.getDraftedItems({ userId });
+      const posted = await myListService.getPostedItems({ userId });
+
+      return {
+        purchased,
+        sold,
+        posted,
+        drafted
       };
     }),
   );

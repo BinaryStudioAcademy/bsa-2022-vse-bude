@@ -19,6 +19,7 @@ import { HealthService } from './health';
 import { EmailService } from './email';
 import { UserProfileService } from './profile';
 import { BidService } from './bid';
+import { MyListService } from './my-list';
 
 export const initServices = (repositories: Repositories) => {
   const isProduction = getEnv('NODE_ENV') === Environment.PRODUCTION;
@@ -77,6 +78,9 @@ export const initServices = (repositories: Repositories) => {
       repositories.bidRepository,
       repositories.productRepository,
     ),
+    myListService: new MyListService({
+      myListRepository: repositories.myListRepository,
+    }),
   };
 };
 
@@ -94,4 +98,5 @@ export {
   type EmailService,
   type BidService,
   type S3StorageService,
+  type MyListService,
 };
