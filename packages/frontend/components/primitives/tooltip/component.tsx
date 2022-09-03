@@ -80,7 +80,7 @@ export const Tooltip = ({
     }
   };
 
-  const handleMouseLeave = () => {    
+  const handleMouseLeave = () => {
     timerRef.current = setTimeout(() => {
       setIsVisible(false);
     }, hideTimeoutMs);
