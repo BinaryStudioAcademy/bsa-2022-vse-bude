@@ -6,8 +6,7 @@ import { useState } from 'react';
 import { createPostSchema } from 'validation-schemas/post';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useEffect } from 'react';
-import { useAppDispatch, useTypedSelector } from '@hooks';
-import { fetchCurrentProduct } from 'store/product';
+import { useTypedSelector } from '@hooks';
 import { useRouter } from 'next/router';
 import { updateProduct } from 'services/product';
 import { createPost } from 'services/post';
@@ -22,10 +21,7 @@ export default function PostForm({ edit }: { edit: boolean }) {
   const { query, push } = useRouter();
 
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
-  const currentProduct = useTypedSelector(
-    (state) => state.product.currentProduct,
-  );
+  const currentProduct = useTypedSelector((state) => state.product.currentItem);
   const categories = useTypedSelector((state) => state.category.list);
 
   const [images, setImages] = useState<(File | string)[]>([]);
@@ -60,9 +56,7 @@ export default function PostForm({ edit }: { edit: boolean }) {
     setError('');
     try {
       const formData = new FormData();
-      images
-        // .filter((item) => typeof item !== 'string')
-        .forEach((file) => formData.append('images', file));
+      images.forEach((file) => formData.append('images', file));
       formData.append('type', ProductType.SELLING);
       formData.append('status', ProductStatus[0]);
       Object.keys(data).forEach((key) => {
@@ -95,12 +89,6 @@ export default function PostForm({ edit }: { edit: boolean }) {
       setIsLoading(false);
     }
   };
-
-  useEffect(() => {
-    if (edit && query.id) {
-      dispatch(fetchCurrentProduct(query.id as string));
-    }
-  }, [edit, dispatch, query.id]);
 
   useEffect(() => {
     if (edit && currentProduct && categories) {
