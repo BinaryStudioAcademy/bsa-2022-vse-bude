@@ -1,5 +1,6 @@
 import type { CategoryRepository } from '@repositories';
 import type { Request } from 'express';
+import { lang } from '../lang';
 
 export class CategoryService {
   private _categoryRepository: CategoryRepository;
@@ -14,7 +15,7 @@ export class CategoryService {
 
       return result.map((item) => ({
         ...item,
-        title: req.t(`categories.${item.title}`),
+        title: lang(`translation:categories.${item.title}`),
       }));
     } catch (err) {
       throw new Error(err);
