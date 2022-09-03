@@ -1,10 +1,11 @@
 import { HttpError, HttpStatusCode } from '@vse-bude/shared';
+import { lang } from '../../lang';
 
 class LowBidPriceError extends HttpError {
   constructor() {
     super({
       status: HttpStatusCode.BAD_REQUEST,
-      message: 'Bid price is too low!',
+      message: lang('translation:BID_PRICE_IS_TOO_LOW'),
     });
   }
 }

@@ -1,7 +1,7 @@
 import type { Services } from '@services';
 import { type Request, Router } from 'express';
-import type { ApiRoutes } from '@vse-bude/shared';
-import { ProfileApiRoutes } from '@vse-bude/shared';
+import type { ApiRoutes, MyListItem } from '@vse-bude/shared';
+import { ProfileApiRoutes, AccountApiRoutes } from '@vse-bude/shared';
 import { wrap } from '@helpers';
 import { apiPath } from '@helpers';
 import { authMiddleware, uploadImage } from '@middlewares';
@@ -9,7 +9,7 @@ import { profileValidation } from '@validation';
 import type { UploadFileRequest } from '@types';
 
 export const initProfileRoutes = (
-  { profileService }: Services,
+  { profileService, myListService }: Services,
   path: ApiRoutes,
 ): Router => {
   const router = Router();
@@ -18,10 +18,9 @@ export const initProfileRoutes = (
     apiPath(path, ProfileApiRoutes.GET_FULL_USER_DATA),
     authMiddleware,
     wrap(async (req: Request) => {
-      const { userId, t } = req;
+      const { userId } = req;
       const fullUserProfile = await profileService.getFullUserData({
         userId,
-        t,
       });
 
       return {
@@ -30,11 +29,25 @@ export const initProfileRoutes = (
     }),
   );
 
+  router.get(
+    apiPath(path, AccountApiRoutes.MY_LIST),
+    authMiddleware,
+    wrap(async (req: Request): Promise<MyListItem[]> => {
+      const { userId } = req;
+      await profileService.getUser({
+        userId,
+      });
+      const userItemsList = await myListService.getAllUserItems({ userId });
+
+      return userItemsList;
+    }),
+  );
+
   router.put(
     apiPath(path, ProfileApiRoutes.UPDATE_DATA),
     authMiddleware,
     wrap(async (req: Request) => {
-      const { userId, t } = req;
+      const { userId } = req;
       profileValidation({ req });
 
       const {
@@ -62,7 +75,6 @@ export const initProfileRoutes = (
       if (newPassword) {
         await profileService.changePassword({
           userId,
-          t,
           data: { newPassword, password },
         });
       }
@@ -77,9 +89,8 @@ export const initProfileRoutes = (
     uploadImage,
     wrap(async (req: UploadFileRequest) => {
       const { userId } = req;
-      const avatar = await profileService.updateAvatar({ userId, req });
 
-      return avatar;
+      return await profileService.updateAvatar({ userId, req });
     }),
   );
 
@@ -87,8 +98,7 @@ export const initProfileRoutes = (
     apiPath(path, ProfileApiRoutes.GET_USER_BY_ID),
     wrap(async (req: Request) => {
       const { userId } = req.params;
-      const { t } = req;
-      const user = await profileService.getUser({ userId, t });
+      const user = await profileService.getUser({ userId });
       const socialMedia = await profileService.getSocialMedia({ userId });
 
       return {

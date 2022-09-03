@@ -1,0 +1,41 @@
+{
+  "USER_NOT_FOUND": "Користувач не знайдений!",
+  "USER_ALREADY_EXISTS": "Користувач уже існує!",
+  "UNAUTHORIZED": "Не авторизовано!",
+  "WRONG_REFRESH_TOKEN": "Неправильний Refresh Token!",
+  "EXPIRED_REFRESH_TOKEN": "Прострочений Refresh Token!",
+  "WRONG_PASSWORD": "Неправильний пароль!",
+  "INTERNAL_ERROR": "Внутрішня помилка!",
+  "UNSUPPORTED_FILE_EXTENSION": "Непідтримуване розширення файлу!",
+  "FILE_SIZE_TOO_LARGE": "Розмір файлу занадто великий!",
+  "NO_FILE_ERROR": "Файл не надано!",
+  "INVALID_RESET_PASSWORD_LINK": "Термін дії посилання минув!",
+  "AUCTION_IS_ALREADY_ENDED": "Аукціон вже закінчено!",
+  "BID_PRICE_IS_TOO_LOW": "Ставка занадто мала!",
+  "CODE_NOT_FOUND": "Код не знайдено!",
+  "mailing": {
+    "verification": {
+      "subject": "Підтвердження електронної пошти",
+      "body": "Будь ласка, завершіть процес підтвердження електронної пошти за допомогою цього коду: "
+    }
+  },
+  "PRODUCT_NOT_FOUND": "Продукт не знайдений!",
+  "categories": {
+    "LAPTOPS_AND_PC_CATEGORY_NAME": "Ноутбуки та комп'ютери",
+    "SMARTPHONES_TV_AND_ELECTRONICS_CATEGORY_NAME": "Смартфони, ТВ і електроніка",
+    "GOODS_FOR_GAMERS_CATEGORY_NAME": "Товари для геймерів",
+    "HOUSEHOLD_APPLIANCES_CATEGORY_NAME": "Побутова техніка",
+    "HOME_GOODS_CATEGORY_NAME": "Товари для дому",
+    "TOOLS_AND_AUTO_GOODS_CATEGORY_NAME": "Інструменти та автотовари",
+    "PLUMBING_AND_REPAIR_CATEGORY_NAME": "Сантехніка та ремонт",
+    "COTTAGE_GARDEN_AND_VEGETABLE_GARDEN_CATEGORY_NAME": "Дача, сад і город",
+    "SPORTS_AND_HOBBY_CATEGORY_NAME": "Спорт і захоплення",
+    "CLOTHES_SHOES_AND_JEWELRY_CATEGORY_NAME": "Одяг, взуття та прикраси",
+    "BEAUTY_AND_HEALTH_CATEGORY_NAME": "Краса та здоров'я",
+    "CHILDRENS_GOODS_CATEGORY_NAME": "Дитячі товари",
+    "PET_PRODUCTS_CATEGORY_NAME": "Зоотовари",
+    "OFFICE_SCHOOL_BOOKS_CATEGORY_NAME": "Офіс, школа, книги",
+    "ALCOHOLIC_BEVERAGES_AND_PRODUCTS_CATEGORY_NAME": "Алкогольні напої та продукти",
+    "SERVICES_CATEGORY_NAME": "Послуги"
+  }
+}

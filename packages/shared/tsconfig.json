@@ -5,7 +5,10 @@
     "declaration": true,
     "declarationDir": "types",
     "declarationMap": true,
-    "outDir": "build"
+    "paths": {
+      "@prisma": ["../backend/node_modules/@prisma/client"]
+    },
+    "outDir": "build",
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]

@@ -1,10 +1,11 @@
 import { HttpError, HttpStatusCode } from '@vse-bude/shared';
+import { lang } from '../../lang';
 
 class ProductNotFoundError extends HttpError {
   constructor() {
     super({
       status: HttpStatusCode.NOT_FOUND,
-      message: 'Product not found!',
+      message: lang('translation:PRODUCT_NOT_FOUND'),
     });
   }
 }
