@@ -9,10 +9,7 @@ import {
   View,
   PrimaryButton,
 } from '~/components/components';
-import {
-  useNavigation,
-  useTranslation,
-} from '~/hooks/hooks';
+import { useNavigation, useTranslation } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
 import { useStyles } from './styles';
 
