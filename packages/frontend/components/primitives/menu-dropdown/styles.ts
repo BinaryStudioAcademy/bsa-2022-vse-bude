@@ -17,6 +17,7 @@ export const dropdownTitle = ({
   display: flex;
   align-items: center;
   height: 100%;
+  width: 100%;
   cursor: pointer;
   font-size: ${fontSizes.body1};
   line-height: ${lineHeights.body1};

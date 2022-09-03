@@ -1,4 +1,4 @@
-type images = File[];
+type images = (File | string)[];
 
 export type ImageInputProps = {
   images: images;

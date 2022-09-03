@@ -8,8 +8,8 @@ import '../public/css/fontawesome.css';
 import dynamic from 'next/dynamic';
 import { Modals } from '@components/modals/component';
 
-const PageLoaderDynamic = dynamic(() => import('../components/pages-loader'));
-const ToastStackDynamic = dynamic(() => import('../components/toasts/stack'));
+const PageLoaderDynamic = dynamic(() => import('@components/pages-loader'));
+const ToastStackDynamic = dynamic(() => import('@components/toasts/stack'));
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;

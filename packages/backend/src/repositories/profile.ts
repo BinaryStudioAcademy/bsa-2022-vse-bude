@@ -85,6 +85,7 @@ export class UserProfileRepository {
         lastName: true,
         email: true,
         phone: true,
+        phoneVerified: true,
       },
     });
   }

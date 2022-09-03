@@ -24,7 +24,6 @@ import { productMapper } from '@mappers';
 import { FieldError } from 'error/product/field-error';
 import { createPostSchema, updatePostSchema } from 'validation/product/schemas';
 import { auctionPermissionsMapper } from '@mappers';
-import { t } from 'i18next';
 import type { S3StorageService } from './s3-storage';
 
 export class ProductService {
@@ -61,8 +60,6 @@ export class ProductService {
     // if (product.category) {
     //   product.category.title = req.t(`categories.${product.category.title}`);
     // }
-
-    console.log(t('translation.NO_FILE_ERROR'));
 
     const currentPrice = await this._productRepository.getCurrentPrice(
       product.id,
@@ -193,7 +190,7 @@ export class ProductService {
     )) as Product;
     if (product.authorId !== userId) throw new UnauthorizedError(req);
     const newImageLinks = await this._s3StorageService.uploadProductImages(req);
-    const oldImages = fieldsData?.images || [];
+    const oldImages = fieldsData?.images ? [...fieldsData.images] : [];
     const deletedImages = product.imageLinks.reduce(
       (acc, item) => (oldImages.includes(item) ? acc : [item, ...acc]),
       [],

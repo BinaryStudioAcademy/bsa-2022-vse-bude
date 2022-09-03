@@ -7,6 +7,7 @@ import type {
 } from '@vse-bude/shared';
 import { ProductType } from '@vse-bude/shared';
 import {
+  getProductById,
   fetchAuctionPermissions,
   getProductByIdSSR,
   getProducts,
@@ -72,6 +73,11 @@ export const fetchProductSSR = createAsyncThunk(
     getProductByIdSSR(params.http, params.id).catch(() => {
       rejectWithValue(null);
     }),
+);
+
+export const fetchCurrentProduct = createAsyncThunk(
+  ProductActions.GET_CURRENT_PRODUCT,
+  async (id: string) => getProductById(id),
 );
 
 export const updateProductViews = createAsyncThunk(
