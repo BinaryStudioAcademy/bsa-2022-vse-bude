@@ -36,33 +36,21 @@ export class MyListRepository {
         title: true,
         description: true,
         price: true,
-        imageLinks: true,
+        recommendedPrice: true,
         minimalBid: true,
         country: true,
         city: true,
         phone: true,
         type: true,
         status: true,
+        imageLinks: true,
+        views: true,
         authorId: true,
         winnerId: true,
-        recommendedPrice: true,
         categoryId: true,
-        views: true,
         postDate: true,
         updatedAt: true,
-        author: {
-          select: {
-            socialMedia: {
-              select: {
-                id: true,
-                socialMedia: true,
-                link: true,
-              },
-            },
-          },
-        },
       },
-
       orderBy: {
         createdAt: Order.DESC,
       },

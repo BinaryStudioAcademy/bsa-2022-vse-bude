@@ -1,7 +1,11 @@
 import type { Services } from '@services';
 import { type Request, Router } from 'express';
 import type { ApiRoutes } from '@vse-bude/shared';
-import { ProfileApiRoutes, AccountApiRoutes } from '@vse-bude/shared';
+import {
+  ProfileApiRoutes,
+  AccountApiRoutes,
+  MyListResponse,
+} from '@vse-bude/shared';
 import { wrap } from '@helpers';
 import { apiPath } from '@helpers';
 import { authMiddleware, uploadImage } from '@middlewares';
@@ -33,7 +37,7 @@ export const initProfileRoutes = (
   router.get(
     apiPath(path, AccountApiRoutes.MY_LIST),
     authMiddleware,
-    wrap(async (req: Request) => {
+    wrap(async (req: Request): Promise<MyListResponse> => {
       const { userId, t } = req;
       await profileService.getUser({
         userId,
