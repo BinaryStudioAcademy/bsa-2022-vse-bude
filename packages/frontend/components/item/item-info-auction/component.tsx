@@ -98,7 +98,7 @@ export const ItemInfoAuction = ({
       </div>
       <ItemTitle title={item.title} views={item.views} />
       <ItemInfo item={item} />
-      <form onSubmit={handleSubmit(onMakeBid)} css={styles.controlls}>
+      <form onSubmit={handleSubmit(onMakeBid)} css={styles.controls}>
         <div css={styles.inputWrapper}>
           <Input
             {...register('price')}
@@ -144,19 +144,18 @@ export const ItemInfoAuction = ({
           >
             {t('buttons.placeBid')}
           </Button>
+          {!!isAbleToLeaveAuction && user && (
+            <Button
+              onClick={confirmLeave}
+              variant="danger"
+              tooltip={t('leave.tooltip')}
+            >
+              {t('leave.btnText')}
+            </Button>
+          )}
         </div>
       </form>
-      {!!isAbleToLeaveAuction && user && (
-        <div css={styles.leaveAuctionBlock}>
-          <Button
-            onClick={confirmLeave}
-            variant="danger"
-            tooltip={t('leave.tooltip')}
-          >
-            {t('leave.btnText')}
-          </Button>
-        </div>
-      )}
+
       {!!isAbleToLeaveAuction && confirmModalVisible && (
         <ConfirmationModal
           onClose={onCancel}
