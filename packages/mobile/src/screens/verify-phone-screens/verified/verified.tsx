@@ -9,7 +9,7 @@ import {
 import { images } from '~/assets/images/images';
 import { globalStyles } from '~/styles/styles';
 import { RootNavigationProps } from '~/common/types/types';
-import { RootScreenName } from '~/common/enums/enums';
+import { MainScreenName, RootScreenName } from '~/common/enums/enums';
 import {
   Container,
   Header,
@@ -25,7 +25,9 @@ const VerifiedScreen: FC = () => {
   const { colors } = useCustomTheme();
 
   const handleContinuePress = (): void => {
-    navigation.navigate(RootScreenName.PERSONAL_INFO);
+    navigation.navigate(RootScreenName.MAIN, {
+      screen: MainScreenName.ACCOUNT_ROOT,
+    });
   };
 
   return (

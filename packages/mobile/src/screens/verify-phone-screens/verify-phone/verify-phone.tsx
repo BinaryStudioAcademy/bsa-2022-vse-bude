@@ -51,7 +51,9 @@ const VerifyPhoneScreen: FC = () => {
   };
 
   const handleLaterPress = (): void => {
-    navigation.navigate(RootScreenName.PERSONAL_INFO);
+    navigation.navigate(RootScreenName.MAIN, {
+      screen: MainScreenName.ACCOUNT_ROOT,
+    });
   };
 
   const onSubmit = (): void => {
