@@ -74,7 +74,11 @@
       "btn": {
         "auction": "Auction",
         "or": "or",
-        "directSale": "Direct Sale"
+        "directSale": "Direct Sale",
+        "tooltip": {
+          "auction": "You need to verify you phone number to choose \"Auction\"",
+          "directSale": "You need to verify you phone number to choose \"Direct Sale\""
+        }
       }
     }
   },
@@ -113,6 +117,7 @@
       "headline": "Verify",
       "description": "We just sent a code to",
       "input": "Enter the verification code we just sent to you",
+      "resend": "Resend code",
       "button": {
         "continue": "Continue"
       },
@@ -162,5 +167,11 @@
       "cancel": "Cancel",
       "header": "Confirm your action"
     }
+  },
+  "resendBtn": {
+    "codeTimeLeft": "Time left to resend code again",
+    "resendCode": "Resend verification code",
+    "seconds": "s",
+    "text": "Send reset link"
   }
 }

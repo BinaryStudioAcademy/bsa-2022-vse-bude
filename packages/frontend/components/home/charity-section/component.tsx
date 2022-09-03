@@ -21,11 +21,17 @@ const CharitySection = () => {
               trimSpace: true,
               updateOnMove: true,
               wheel: true,
+              releaseWheel: true,
               mediaQuery: 'max',
               breakpoints: {
+                [lightTheme.breakpoints.sm]: {
+                  perPage: 1,
+                  perMove: 1,
+                },
                 [lightTheme.breakpoints.md]: {
                   perPage: 2,
                   perMove: 2,
+                  arrows: false,
                 },
                 [lightTheme.breakpoints.lg]: {
                   perPage: 3,

@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { HydrateAction } from '@types';
 import type { FullUserProfileDto, UserProfileDto } from '@vse-bude/shared';
 import { HYDRATE } from 'next-redux-wrapper';
+import { phoneVerification } from '../auth';
 import {
   fetchUserProfileSSR,
   fetchFullUserProfile,
@@ -11,20 +12,28 @@ import {
 
 interface ProfileState {
   user: UserProfileDto | FullUserProfileDto | null;
+  isEditing: boolean;
   loading: boolean;
+  saveLoader: boolean;
   error: string;
 }
 
 const initialState: ProfileState = {
   user: null,
+  isEditing: false,
   loading: false,
+  saveLoader: false,
   error: null,
 };
 
 const profileSlice = createSlice({
   name: 'profile',
   initialState,
-  reducers: {},
+  reducers: {
+    setIsEditing: (state) => {
+      state.isEditing = !state.isEditing;
+    },
+  },
   extraReducers: {
     [fetchUserProfileSSR.pending.type]: (state) => {
       state.loading = true;
@@ -54,12 +63,23 @@ const profileSlice = createSlice({
     },
 
     [updateUserProfile.fulfilled.type]: (state, { payload }) => {
-      state.loading = false;
+      state.saveLoader = false;
       state.user = payload;
     },
+
+    [phoneVerification.fulfilled.type]: (state) => {
+      state.user = {
+        ...state.user,
+        phoneVerified: true,
+      };
+    },
+
+    [updateUserProfile.pending.type]: (state) => {
+      state.saveLoader = true;
+    },
+
     [updateUserProfile.rejected.type]: (state, { payload }) => {
-      state.loading = false;
-      state.user = null;
+      state.saveLoader = false;
       state.error = payload;
     },
 
@@ -83,5 +103,7 @@ const profileSlice = createSlice({
 });
 
 export const profileReducer = profileSlice.reducer;
+
+export const { setIsEditing } = profileSlice.actions;
 
 export type { ProfileState };

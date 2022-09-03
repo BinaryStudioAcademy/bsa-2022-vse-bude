@@ -46,12 +46,22 @@ export const sliderWrapper = ({
     }
   }
 
+  @media (max-width: ${breakpoints.lg}px) {
+    .splide__arrow--next {
+      right: -${spaces.lg};
+    }
+
+    .splide__arrow--prev {
+      left: -${spaces.lg};
+    }
+  }
+
   .splide__arrow--next {
-    right: -${spaces.xl3};
+    right: -${spaces.xl};
   }
 
   .splide__arrow--prev {
-    left: -${spaces.xl3};
+    left: -${spaces.xl};
   }
 
   .splide__pagination {
@@ -67,6 +77,14 @@ export const sliderWrapper = ({
     .is-active {
       transform: unset;
       opacity: 1;
+    }
+  }
+
+  @media (max-width: ${breakpoints.md}px) {
+    .splide__pagination {
+      .splide__pagination__page {
+        width: 30px;
+      }
     }
   }
 

@@ -12,7 +12,7 @@ import { inputWrapper } from '../layout/styles';
 import { verifyEntity, verifyForm, verifyInput, verifyText } from '../styles';
 import { verifyCodeSchema } from './validation';
 import { ResendCodeButton } from './resend-code';
-import { divider } from './styles';
+import { resendButton } from './styles';
 
 export const EmailVerification = () => {
   const { error, user } = useTypedSelector((state) => state.auth);
@@ -60,8 +60,7 @@ export const EmailVerification = () => {
       <Button type="submit" width={'100%'}>
         {t('auth:text')}
       </Button>
-      <hr css={divider} />
-      <div>
+      <div css={resendButton}>
         <ResendCodeButton
           onClickResend={onResendCode}
           timeLimit={RESEND_VERIFICATION_CODE_LIMIT_SEC}

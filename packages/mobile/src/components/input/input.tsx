@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { TextInput, ViewStyle } from 'react-native';
+import { StyleProp, TextInput, ViewStyle } from 'react-native';
 import {
   FormControl,
   FormControlPath,
@@ -19,12 +19,12 @@ import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 
 type Props<T extends FormControlValues> = {
-  label: string;
+  label?: string;
   name: FormControlPath<T>;
   control: FormControl<T>;
   errors: FormControlErrors<T>;
   placeholder?: string;
-  contentContainerStyle?: ViewStyle;
+  contentContainerStyle?: StyleProp<ViewStyle>;
   isSecure?: boolean;
   secureTextEntry?: boolean;
 };
@@ -51,16 +51,18 @@ const Input = <T extends FormControlValues>({
 
   return (
     <View style={contentContainerStyle}>
-      <Text
-        style={[
-          styles.label,
-          globalStyles.mb2,
-          globalStyles.fs12,
-          { color: colors.titlePrimary },
-        ]}
-      >
-        {label}
-      </Text>
+      {!!label && (
+        <Text
+          style={[
+            styles.label,
+            globalStyles.mb2,
+            globalStyles.fs12,
+            { color: colors.titlePrimary },
+          ]}
+        >
+          {label}
+        </Text>
+      )}
       <View>
         <TextInput
           value={field.value}

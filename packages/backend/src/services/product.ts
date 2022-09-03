@@ -23,7 +23,7 @@ import type { BidRepository } from '@repositories';
 import { productMapper } from '@mappers';
 import { FieldError } from 'error/product/field-error';
 import { createPostSchema, updatePostSchema } from 'validation/product/schemas';
-import { auctionPermissionsMapper } from '../mapper/auction-permissions';
+import { auctionPermissionsMapper } from '@mappers';
 import type { S3StorageService } from './s3-storage';
 
 export class ProductService {
@@ -190,7 +190,8 @@ export class ProductService {
     )) as Product;
     if (product.authorId !== userId) throw new UnauthorizedError(req);
     const newImageLinks = await this._s3StorageService.uploadProductImages(req);
-    const oldImages = fieldsData?.images || [];
+    const oldImages = fieldsData?.images ? [...fieldsData.images] : [];
+    console.log(oldImages);
     const deletedImages = product.imageLinks.reduce(
       (acc, item) => (oldImages.includes(item) ? acc : [item, ...acc]),
       [],

@@ -5,9 +5,8 @@ import { categoryReducer } from './category';
 import { productReducer } from './product';
 import { favoriteProductReducer } from './favorite-product';
 import { profileReducer } from './profile/reducer';
-import { verifyModalReducer } from './verify/reducer';
+import { modalsReducer } from './verify/reducer';
 import { toastReducer } from './toast/reducers';
-import { auctionReducer } from './product-auction';
 
 const makeStore = () =>
   configureStore({
@@ -18,8 +17,7 @@ const makeStore = () =>
       product: productReducer,
       toast: toastReducer,
       favoriteProduct: favoriteProductReducer,
-      verify: verifyModalReducer,
-      auction: auctionReducer,
+      modals: modalsReducer,
     },
   });
 

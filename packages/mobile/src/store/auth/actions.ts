@@ -35,6 +35,17 @@ const signIn = createAsyncThunk<UserDto, UserSignInDto, AsyncThunkConfig>(
   },
 );
 
+const logOut = createAsyncThunk<null, undefined, AsyncThunkConfig>(
+  ActionType.LOG_OUT,
+  async (_, { extra }) => {
+    const { storage } = extra;
+    storage.removeItem(StorageKey.ACCESS_TOKEN);
+    storage.removeItem(StorageKey.REFRESH_TOKEN);
+
+    return null;
+  },
+);
+
 const resetPassword = createAsyncThunk<
   unknown,
   ResetPasswordLink,
@@ -46,4 +57,4 @@ const resetPassword = createAsyncThunk<
   return response;
 });
 
-export { signUp, signIn, resetPassword };
+export { signUp, signIn, logOut, resetPassword };

@@ -10,12 +10,12 @@ export const createPostSchema = (t: TFunction) =>
     instagram: Joi.any().allow(''),
     facebook: Joi.any().allow(''),
     city: Joi.any().allow(''),
-    country: Joi.string()
-      .trim()
-      .required()
-      .messages({
-        'string.empty': t('create-post:validation.title.empty'),
-      }),
+    country: Joi.string().allow(''),
+    // .trim()
+    // .required()
+    // .messages({
+    //   'string.empty': t('create-post:validation.title.empty'),
+    // })
     title: Joi.string()
       .trim()
       .required()

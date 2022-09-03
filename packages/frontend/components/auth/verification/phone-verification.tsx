@@ -16,6 +16,7 @@ import { phoneCodeResend, phoneVerification } from '../../../store/auth';
 import { RESEND_VERIFICATION_CODE_LIMIT_SEC } from '../../../common/constants/app';
 import { verifyCodeSchema } from './validation';
 import { ResendCodeButton } from './resend-code';
+import { resendButton } from './styles';
 
 export const PhoneVerification = () => {
   // const { user } = useAuth();
@@ -43,16 +44,6 @@ export const PhoneVerification = () => {
   return (
     <form css={verifyForm} onSubmit={handleSubmit(onSubmit)}>
       <div css={inputWrapper}>
-        {/*<div css={verifyText}>*/}
-        {/*  <span>*/}
-        {/*    {t('auth:phoneText')}*/}
-        {/*    {user && (*/}
-        {/*      <span css={verifyEntity}> {hideMainTextPart(user.phone)}</span>*/}
-        {/*    )}*/}
-        {/*    !*/}
-        {/*  </span>*/}
-        {/*  <span>{t('auth:enterCode')}!</span>*/}
-        {/*</div>*/}
         <Input
           {...register('code')}
           css={verifyInput}
@@ -67,7 +58,7 @@ export const PhoneVerification = () => {
       <Button type="submit" width={'100%'}>
         {t('common:verify.enterCode.button.continue')}
       </Button>
-      <div>
+      <div css={resendButton}>
         <ResendCodeButton
           onClickResend={onResendCode}
           timeLimit={RESEND_VERIFICATION_CODE_LIMIT_SEC}

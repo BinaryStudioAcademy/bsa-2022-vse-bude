@@ -3,7 +3,7 @@ import { useTranslation } from 'next-i18next';
 import { useTimer } from '@hooks';
 import { Icon } from '@primitives';
 import { IconColor, IconName } from '@enums';
-import { timeToEventObj, timeToEventString } from '../../../helpers/time';
+import { timeToEventString } from '../../../helpers/time';
 import type { TimerTranslations } from '../../../common/types/timer';
 import type { TimerProps } from './types';
 import { timerBadge, timerIcon } from './styles';
@@ -27,10 +27,7 @@ export const ProductTimer = ({ date }: TimerProps) => {
   );
 
   useTimer(() => {
-    const toTheEndObj = timeToEventObj(date);
-    if (!toTheEndObj.days()) {
-      setTimerValue(timeToEventString(date, timeTranslations));
-    }
+    setTimerValue(timeToEventString(date, timeTranslations));
   });
 
   return (

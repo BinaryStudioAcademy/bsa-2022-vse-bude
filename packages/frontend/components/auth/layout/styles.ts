@@ -2,10 +2,9 @@ import type { Theme } from '@emotion/react';
 import { css } from '@emotion/react';
 
 export const contentWrapper = ({ spaces }: Theme) => css`
-  height: 100vh;
   display: flex;
   flex-direction: column;
-  padding: ${spaces.xl6} 0;
+  padding: 0 ${spaces.xl6};
 `;
 export const formWrapper = () => css`
   display: flex;
@@ -39,7 +38,7 @@ export const headline = ({
   font-weight: ${fontWeights.h4};
   color: ${colors.secondaryDark};
   font-size: ${fontSizes.h3};
-  ${mq[1]} {
+  ${mq[2]} {
     font-size: ${fontSizes.h4};
   }
 `;

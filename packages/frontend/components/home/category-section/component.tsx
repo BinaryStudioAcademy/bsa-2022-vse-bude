@@ -4,6 +4,7 @@ import { StringCutter } from '@primitives';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
+import { Routes } from '@enums';
 import { SectionLayout } from '../section-layout';
 import {
   categoryContainer,
@@ -12,16 +13,7 @@ import {
   SplideSlideStyled,
   imageWrapper,
 } from './styles';
-
-const categoryImageById = {
-  '51dea135-fca2-4cc0-ab5b-a32c909f14e7': '/images/categories/appliances.png',
-  '50d4f365-e241-4783-8b2c-809a7d83771b': '/images/categories/appliances.png',
-  '3f9bd5c0-f9a8-4763-b020-eac58681b1cf': '/images/categories/toys.png',
-  '0e86f866-2146-4a5a-970b-7a62f07144a6': '/images/categories/decor.png',
-  'beff46f0-133b-4af7-8206-83419b526734': '/images/categories/arts.png',
-};
-
-const DEFAULT_IMAGE = '/images/categories/decor.png';
+import { categoryImageById, DEFAULT_IMAGE } from './utlis';
 
 const CategorySection = () => {
   const categories = useTypedSelector((state) => state.category.list);
@@ -29,6 +21,14 @@ const CategorySection = () => {
   const limit = 4;
 
   const categoriesLimit = categories?.slice(0, limit) || [];
+
+  const redirectToCategory = (category: string) => {
+    const filters = {
+      category: category,
+    };
+
+    return encodeURI(`${Routes.ITEMS}?filter=${JSON.stringify(filters)}`);
+  };
 
   return (
     <SectionLayout
@@ -52,7 +52,7 @@ const CategorySection = () => {
         >
           {categoriesLimit.map((item) => (
             <SplideSlideStyled key={item.id}>
-              <Link href="#" passHref>
+              <Link href={redirectToCategory(item.title)} passHref>
                 <a css={categoryItem}>
                   <div css={categoryItemTitle}>
                     <StringCutter>{item.title}</StringCutter>
@@ -63,6 +63,7 @@ const CategorySection = () => {
                       alt={item.title}
                       layout="fill"
                       objectFit="contain"
+                      priority
                     />
                   </div>
                 </a>
