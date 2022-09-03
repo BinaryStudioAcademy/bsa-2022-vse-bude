@@ -3,6 +3,7 @@ import { VerificationTypes } from '@vse-bude/shared';
 import type { UserRepository } from '@repositories';
 import { t } from 'i18next';
 import { EmailFrom } from '@enums';
+import { isProduction } from '@helpers';
 import { CodeNotFoundError } from '../error/verify/code-not-found-error';
 import { WrongCodeError } from '../error/verify/wrong-code-error';
 import type { SaveVerifyCode } from '../common/types/verification-code';
@@ -92,6 +93,10 @@ export class VerifyService {
     await this.deleteCodeByType(userId, type);
     const code = await this.createVerificationCode(userId, type);
 
+    if (!isProduction) {
+      console.log(`Phone verification code: ${code}`);
+    }
+
     return await this._smsService.send(user.phone, code);
   }
 
@@ -99,6 +104,10 @@ export class VerifyService {
     const user = await this._userRepository.getById(userId);
     await this.deleteCodeByType(userId, type);
     const code = await this.createVerificationCode(userId, type);
+
+    if (!isProduction) {
+      console.log(`Email verification code: ${code}`);
+    }
 
     return await this._emailService.send({
       from: { email: EmailFrom.NO_REPLY_EMAIL, name: EmailFrom.NO_REPLY_NAME },

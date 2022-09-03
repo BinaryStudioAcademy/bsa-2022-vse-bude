@@ -89,10 +89,13 @@ const ChangeAvatar = () => {
         trigger={
           <Icon
             icon={IconName.CAMERA}
-            color={IconColor.GRAY}
+            color={IconColor.ORANGE}
             cssExtend={styles.avatarUpdateButton}
           />
         }
+        triggerWrapperCssExtend={styles.avatarPopoverTrigger}
+        placement="bottom-left"
+        position="absolute"
       >
         {() => (
           <div css={styles.popoverContentWrapper}>

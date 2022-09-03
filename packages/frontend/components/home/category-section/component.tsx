@@ -63,6 +63,7 @@ const CategorySection = () => {
                       alt={item.title}
                       layout="fill"
                       objectFit="contain"
+                      priority
                     />
                   </div>
                 </a>
