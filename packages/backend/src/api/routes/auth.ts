@@ -12,7 +12,6 @@ import { wrap } from '@helpers';
 import type { SignOut, UpdateRefreshToken, AuthTokenData } from '@types';
 import { apiPath } from '@helpers';
 import { authMiddleware } from '@middlewares';
-import { langService } from '../../lang';
 
 export const initAuthRoutes = (
   { authService }: Services,
@@ -44,16 +43,10 @@ export const initAuthRoutes = (
    *               $ref: "#/definitions/SignInResponse"
    */
 
-  router.get(apiPath(path, '/test'), (req, res) => {
-    res.json({
-      locale: langService.getLocale(),
-    });
-  });
-
   router.post(
     apiPath(path, AuthApiRoutes.SIGN_IN),
     wrap<Empty, AuthResponse, UserSignInDto>((req: Request) =>
-      authService.signIn(req.body, req),
+      authService.signIn(req.body),
     ),
   );
 
@@ -119,7 +112,7 @@ export const initAuthRoutes = (
   router.post(
     apiPath(path, AuthApiRoutes.REFRESH_TOKEN),
     wrap<Empty, AuthTokenData, UpdateRefreshToken>((req: Request) =>
-      authService.refreshToken(req.body, req),
+      authService.refreshToken(req.body),
     ),
   );
 
@@ -165,7 +158,7 @@ export const initAuthRoutes = (
   router.post(
     apiPath(path, AuthApiRoutes.SIGN_UP),
     wrap<Empty, AuthResponse, UserSignUpDto>((req: Request) =>
-      authService.signUp(req.body, req),
+      authService.signUp(req.body),
     ),
   );
 

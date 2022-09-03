@@ -1,5 +1,5 @@
 import { localesDir } from '@helpers';
-import { DEFAULT_LOCALE } from '@config';
+import { DEFAULT_LOCALE } from '@vse-bude/shared';
 import fs from 'fs';
 import path from 'path';
 
@@ -19,7 +19,7 @@ export class LangService {
   }
 
   private getPath(key: string) {
-    const namespace = key.split('.')[0];
+    const namespace = key.split(':')[0];
 
     return path.resolve(`${localesDir}/${this._locale}/${namespace}.json`);
   }
@@ -30,11 +30,11 @@ export class LangService {
     return JSON.parse(t);
   }
 
-  private getKeyWithoutNs(key: string) {
-    const parts = key.split('.');
+  private getKeyWithoutNs(key: string): string {
+    const parts = key.split(':');
     parts.shift();
 
-    return parts.join('.');
+    return parts[0] ?? '';
   }
 
   public translate(key: string) {
@@ -44,6 +44,10 @@ export class LangService {
     }
     const translations = this.readTranslations(langPath);
     const resultKey = this.getKeyWithoutNs(key);
+
+    if (!resultKey) {
+      return null;
+    }
 
     return translations[resultKey] ?? null;
   }

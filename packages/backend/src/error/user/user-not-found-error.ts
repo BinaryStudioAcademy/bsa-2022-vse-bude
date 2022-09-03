@@ -5,7 +5,7 @@ class UserNotFoundError extends HttpError {
   constructor() {
     super({
       status: HttpStatusCode.NOT_FOUND,
-      message: lang('translation.USER_NOT_FOUND'),
+      message: lang('translation:USER_NOT_FOUND'),
     });
   }
 }

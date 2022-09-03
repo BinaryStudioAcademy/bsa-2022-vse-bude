@@ -9,6 +9,10 @@
   "UNSUPPORTED_FILE_EXTENSION": "Unsupported file extension!",
   "FILE_SIZE_TOO_LARGE": "File size too large!",
   "NO_FILE_ERROR": "No file provided!",
+  "INVALID_RESET_PASSWORD_LINK": "Reset Password Link is invalid!",
+  "AUCTION_IS_ALREADY_ENDED": "Auction is already ended!",
+  "BID_PRICE_IS_TOO_LOW": "Bid price is too low!",
+  "CODE_NOT_FOUND": "Code not found!",
   "mailing": {
     "verification": {
       "subject": "Email confirmation",

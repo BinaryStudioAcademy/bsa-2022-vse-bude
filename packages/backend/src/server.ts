@@ -4,7 +4,7 @@ import express, { json } from 'express';
 import { initRepositories } from '@repositories';
 import { getEnv, logger } from '@helpers';
 import { initServices } from '@services';
-import { loggerMiddleware, localizationMiddleware } from '@middlewares';
+import { loggerMiddleware } from '@middlewares';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import cookieParser from 'cookie-parser';
@@ -35,7 +35,6 @@ app
   .use(cookieParser())
   .use(loggerMiddleware)
   .use(json())
-  .use(localizationMiddleware)
   .use(langMiddleware)
   .use(routes)
   .use(errorHandler)

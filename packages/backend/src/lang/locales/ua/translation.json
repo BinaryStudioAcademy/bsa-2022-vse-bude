@@ -9,6 +9,10 @@
   "UNSUPPORTED_FILE_EXTENSION": "Непідтримуване розширення файлу!",
   "FILE_SIZE_TOO_LARGE": "Розмір файлу занадто великий!",
   "NO_FILE_ERROR": "Файл не надано!",
+  "INVALID_RESET_PASSWORD_LINK": "Термін дії посилання минув!",
+  "AUCTION_IS_ALREADY_ENDED": "Аукціон вже закінчено!",
+  "BID_PRICE_IS_TOO_LOW": "Ставка занадто мала!",
+  "CODE_NOT_FOUND": "Код не знайдено!",
   "mailing": {
     "verification": {
       "subject": "Підтвердження електронної пошти",
