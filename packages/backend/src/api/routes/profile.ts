@@ -32,10 +32,9 @@ export const initProfileRoutes = (
 
   router.get(
     apiPath(path, AccountApiRoutes.MY_LIST),
-    //authMiddleware,
+    authMiddleware,
     wrap(async (req: Request) => {
-      const { t } = req;
-      const userId = '807f73fb-31b8-4e66-9f74-babc8ee95d94';
+      const { userId, t } = req;
       await profileService.getUser({
         userId,
         t,
