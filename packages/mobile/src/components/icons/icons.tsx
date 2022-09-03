@@ -110,6 +110,10 @@ const LinkedinIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="linkedin" {...iconProps} />
 );
 
+const CalendarIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="calendar" {...iconProps} />
+);
+
 export {
   HomeIcon,
   StarIcon,
@@ -138,4 +142,5 @@ export {
   PhoneIcon,
   GlobeIcon,
   LinkedinIcon,
+  CalendarIcon,
 };

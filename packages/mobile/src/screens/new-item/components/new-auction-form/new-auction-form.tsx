@@ -9,6 +9,8 @@ import {
   View,
   Popover,
   DateTimePicker,
+  ClockIcon,
+  CalendarIcon,
 } from '~/components/components';
 import { useAppForm, useTranslation, useState } from '~/hooks/hooks';
 import { CALLING_CODE, CITIES, COUNTRIES } from '~/mock/new-item';
@@ -22,8 +24,12 @@ import { useStyles } from './styles';
 const NewAuctionForm: FC = () => {
   const { t } = useTranslation();
   const styles = useStyles();
-  const [date, setDate] = useState(new Date());
-  const [time, setTime] = useState(new Date());
+
+  const today = new Date();
+  const tomorrow = new Date();
+  tomorrow.setDate(today.getDate() + 1);
+  const [date, setDate] = useState(tomorrow);
+  const [time, setTime] = useState(tomorrow);
   const [openDate, setOpenDate] = useState(false);
   const [openTime, setOpenTime] = useState(false);
 
@@ -75,6 +81,11 @@ const NewAuctionForm: FC = () => {
           editable={false}
           contentContainerStyle={globalStyles.mt5}
         />
+        <CalendarIcon
+          size={22}
+          color={ColorPalette.GRAY_300}
+          style={[styles.inputIcon]}
+        />
       </TouchableOpacity>
       {openDate && (
         <DateTimePicker
@@ -82,15 +93,16 @@ const NewAuctionForm: FC = () => {
           mode={'date'}
           is24Hour={true}
           display="default"
-          minimumDate={new Date()}
+          minimumDate={tomorrow}
           onChange={(_, selectedDate) => {
             setOpenDate(false);
             const currentDate = dayjs(selectedDate).format('DD/MM/YYYY');
-            setDate(selectedDate ?? new Date());
+            setDate(selectedDate ?? tomorrow);
             setValue('endDate', currentDate);
           }}
         />
       )}
+
       <TouchableOpacity
         onPress={() => {
           setOpenTime(true);
@@ -105,19 +117,23 @@ const NewAuctionForm: FC = () => {
           editable={false}
           contentContainerStyle={globalStyles.mt5}
         />
+        <ClockIcon
+          size={22}
+          color={ColorPalette.GRAY_300}
+          style={[styles.inputIcon]}
+        />
       </TouchableOpacity>
       {openTime && (
         <DateTimePicker
-          testID="dateTimePicker"
           value={time}
           mode={'time'}
           is24Hour={true}
-          display="default"
-          minimumDate={new Date()}
+          display="spinner"
+          minimumDate={tomorrow}
           onChange={(_, selectedTime) => {
             setOpenTime(false);
             const currentTime = dayjs(selectedTime).format('HH:mm');
-            setTime(selectedTime ?? new Date());
+            setTime(selectedTime ?? tomorrow);
             setValue('endTime', currentTime);
           }}
         />
@@ -178,10 +194,7 @@ const NewAuctionForm: FC = () => {
           name="minimalBid"
           control={control}
           errors={errors}
-          contentContainerStyle={[
-            globalStyles.mt5,
-            { width: '50%', paddingRight: 5 },
-          ]}
+          contentContainerStyle={[globalStyles.mt5, styles.oneHalfItem]}
         />
         <Input
           label={t('make_a_post.MAX_RANGE')}
@@ -189,10 +202,7 @@ const NewAuctionForm: FC = () => {
           name="recommendedPrice"
           control={control}
           errors={errors}
-          contentContainerStyle={[
-            globalStyles.mt5,
-            { width: '50%', paddingLeft: 5 },
-          ]}
+          contentContainerStyle={[globalStyles.mt5, styles.twoHalfItem]}
         />
       </View>
 

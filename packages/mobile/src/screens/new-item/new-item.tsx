@@ -12,7 +12,7 @@ const NewItemScreen: FC = () => {
   const navigation = useNavigation<RootNavigationProps>();
 
   const handleSaveForm = (): void => {
-    // TODO dispatch
+    // TODO: dispatch
     navigation.goBack();
   };
 

@@ -38,6 +38,20 @@ const useStyles = () => {
         tooltipIcon: {
           marginLeft: 5,
         },
+        oneHalfItem: {
+          width: '50%',
+          paddingRight: 5,
+        },
+        twoHalfItem: {
+          width: '50%',
+          paddingLeft: 5,
+        },
+        inputIcon: {
+          position: 'absolute',
+          top: '50%',
+          paddingTop: 6,
+          right: 15,
+        },
       }),
     [dark, colors],
   );
