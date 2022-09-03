@@ -20,7 +20,3 @@ export interface MyListItem {
   postDate: Date;
   updatedAt: Date;
 }
-
-export interface MyListResponse {
-  userItemsList: MyListItem[];
-}

@@ -1,6 +1,6 @@
 import type { Services } from '@services';
 import { type Request, Router } from 'express';
-import type { ApiRoutes, MyListResponse } from '@vse-bude/shared';
+import type { ApiRoutes, MyListItem } from '@vse-bude/shared';
 import { ProfileApiRoutes, AccountApiRoutes } from '@vse-bude/shared';
 import { wrap } from '@helpers';
 import { apiPath } from '@helpers';
@@ -33,7 +33,7 @@ export const initProfileRoutes = (
   router.get(
     apiPath(path, AccountApiRoutes.MY_LIST),
     authMiddleware,
-    wrap(async (req: Request): Promise<MyListResponse> => {
+    wrap(async (req: Request): Promise<MyListItem[]> => {
       const { userId, t } = req;
       await profileService.getUser({
         userId,
@@ -41,9 +41,7 @@ export const initProfileRoutes = (
       });
       const userItemsList = await myListService.getAllUserItems({ userId });
 
-      return {
-        userItemsList,
-      };
+      return userItemsList;
     }),
   );
 
