@@ -15,7 +15,11 @@ const LotSection = ({ title, lots, loadMoreTitle, loadMoreHref }: LotProps) => {
   };
 
   return (
-    <SectionLayout title={title} loadMoreTitle={loadMoreTitle} loadMoreHref={loadMoreHref}>
+    <SectionLayout
+      title={title}
+      loadMoreTitle={loadMoreTitle}
+      loadMoreHref={loadMoreHref}
+    >
       <div css={lotContainer}>
         <Splide
           aria-label="items-carousel"
