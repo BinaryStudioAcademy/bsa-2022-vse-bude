@@ -28,7 +28,14 @@ const CountdownSegment: FC<Props> = ({
         { backgroundColor: colors.backgroundElements },
       ]}
     >
-      <Text style={[globalStyles.fs36, styles.number, { color: colors.text }]}>
+      <Text
+        style={[
+          globalStyles.fs36,
+          styles.number,
+          { color: colors.text },
+          globalStyles.fontWeightExtraBold,
+        ]}
+      >
         {timeValue.toString()}
       </Text>
       <Text

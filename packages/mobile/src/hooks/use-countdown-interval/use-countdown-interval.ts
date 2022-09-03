@@ -1,33 +1,20 @@
 import { useEffect, useState } from 'react';
 import { getStrictTimeToEvent } from '~/helpers/date/date';
 import { UPDATE_END_DATE_INTERVAL_MILLISECONDS } from '~/common/constants/constants';
-import { useTranslation } from '~/hooks/hooks';
 
 const useCountdownInterval = (endDate: Date) => {
-  const { t } = useTranslation();
   const [duration, setDuration] = useState({
-    days: '0',
+    days: '00',
     hours: '00',
     minutes: '00',
     seconds: '00',
   });
-  const [timeNames, setTimeNames] = useState({
-    daysName: t('common:time.DAYS'),
-    hoursName: t('common:time.HOURS'),
-    minutesName: t('common:time.MINUTES_SHORT'),
-    secondsName: t('common:time.SECONDS_SHORT'),
-  });
+
   useEffect(() => {
-    const { values, names } = getStrictTimeToEvent(endDate);
-    setDuration(values);
-    setTimeNames(names);
+    setDuration(getStrictTimeToEvent(endDate));
     const intervalId = setInterval(() => {
-      const {
-        values: { totalMs, ...duration },
-        names,
-      } = getStrictTimeToEvent(endDate);
-      setTimeNames(names);
-      setDuration(duration);
+      const { totalMs, ...time } = getStrictTimeToEvent(endDate);
+      setDuration(time);
       if (totalMs < 1) {
         clearInterval(intervalId);
       }
@@ -36,7 +23,7 @@ const useCountdownInterval = (endDate: Date) => {
     return () => clearInterval(intervalId);
   }, [endDate]);
 
-  return { duration, timeNames };
+  return duration;
 };
 
 export { useCountdownInterval };

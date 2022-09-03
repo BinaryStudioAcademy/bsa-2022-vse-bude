@@ -7,8 +7,6 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   number: {
-    fontFamily: 'Roboto',
-    fontWeight: '800',
     lineHeight: 36,
   },
   left: {
