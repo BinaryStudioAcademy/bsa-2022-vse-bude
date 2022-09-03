@@ -33,10 +33,9 @@ export const initProfileRoutes = (
     apiPath(path, AccountApiRoutes.MY_LIST),
     authMiddleware,
     wrap(async (req: Request): Promise<MyListItem[]> => {
-      const { userId, t } = req;
+      const { userId } = req;
       await profileService.getUser({
         userId,
-        t,
       });
       const userItemsList = await myListService.getAllUserItems({ userId });
 

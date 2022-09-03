@@ -15,6 +15,7 @@ export class ProductRepository {
       limit = 10,
       from = 0,
       type,
+      categoryId,
       sortBy = 'createdAt',
       order = Order.ASC,
     } = query;
@@ -27,6 +28,7 @@ export class ProductRepository {
       },
       where: {
         type,
+        categoryId,
       },
     });
   }

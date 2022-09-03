@@ -5,6 +5,7 @@ import { Routes } from '@enums';
 import { Breadcrumbs, Button, Container } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import { Http } from '@vse-bude/shared';
+import type { ProductType } from '@vse-bude/shared';
 import { withPublic } from '@hocs';
 import { Layout } from '@components/layout';
 import { Item } from '@components/item';
@@ -57,6 +58,9 @@ const ItemPage = () => {
     shallowEqual,
   );
 
+  const redirectToFilterByType = (type: ProductType) =>
+    encodeURI(`${Routes.ITEMS}?filter={"type":"${type}"}`);
+
   useEffect(() => {
     dispatch(updateProductViews(item.id));
     dispatch(
@@ -101,6 +105,7 @@ const ItemPage = () => {
         title={t('item:similarItems')}
         lots={similarProducts}
         loadMoreTitle={t('item:seeMoreItems')}
+        loadMoreHref={redirectToFilterByType(item.type)}
       />
     </Layout>
   );

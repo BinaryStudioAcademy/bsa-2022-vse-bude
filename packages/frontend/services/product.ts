@@ -14,6 +14,7 @@ import { ApiRoutes } from '@vse-bude/shared';
 interface ProductOptions {
   limit: number;
   type?: ProductType;
+  categoryId?: string;
 }
 
 interface ProductOptionsSSR extends ProductOptions {
@@ -23,12 +24,14 @@ interface ProductOptionsSSR extends ProductOptions {
 export const getProducts = ({
   limit,
   type,
+  categoryId,
 }: ProductOptions): Promise<ProductDto[]> =>
   http.get({
     url: `${ApiRoutes.PRODUCTS}`,
     payload: {
       limit,
       type,
+      categoryId,
     },
   });
 
