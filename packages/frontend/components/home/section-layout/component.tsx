@@ -6,6 +6,7 @@ import { wrapper, title as titleStyled, loadMore } from './styles';
 const SectionLayout = ({
   title,
   loadMoreTitle,
+  loadMoreHref,
   children,
 }: SectionLayoutProps) => (
   <section css={wrapper}>
@@ -13,7 +14,7 @@ const SectionLayout = ({
       <div css={titleStyled}>
         <h2>{title}</h2>
         {loadMoreTitle && (
-          <Link href="#" passHref>
+          <Link href={loadMoreHref || '#'} passHref>
             <a css={loadMore}>{loadMoreTitle}</a>
           </Link>
         )}

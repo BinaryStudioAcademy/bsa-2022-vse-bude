@@ -40,17 +40,18 @@ export const SellerInfo = ({ seller, onContactSeller }: SellerInfoProps) => {
       </div>
       <div css={styles.contacts}>
         <div css={styles.phone}>
-          <Icon size="sm" icon={IconName.PHONE} color={IconColor.YELLOW} />
-          <span>{seller.phone}</span>
+          <Icon size="md" icon={IconName.PHONE} color={IconColor.YELLOW} />
+          <div css={styles.sellerInfoLink}>{seller.phone}</div>
         </div>
         {seller.socialMedia.map((social) => (
           <div key={social.id}>
             <Anchor href={social.link}>
               <Icon
-                size="sm"
+                size="md"
                 icon={IconName[social.socialMedia]}
                 color={IconColor.YELLOW}
-              ></Icon>
+              />
+              <div css={styles.sellerInfoLink}>{social.socialMedia}</div>
             </Anchor>
           </div>
         ))}
