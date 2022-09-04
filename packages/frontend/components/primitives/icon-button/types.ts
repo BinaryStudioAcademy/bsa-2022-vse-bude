@@ -3,6 +3,7 @@ import type { IconColor, IconName } from '@enums';
 
 export type IconButtonProps = {
   icon: typeof IconName[keyof typeof IconName];
+  ariaLabel: string;
   size?: SizeProp;
   color?: IconColor;
   backgroundColor?: BackgroundColorProp;

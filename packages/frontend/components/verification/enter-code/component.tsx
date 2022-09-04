@@ -31,6 +31,7 @@ const EnterCodeModal = () => {
         cssExtend={styles.arrow}
         icon={IconName.ANGLE_LEFT}
         onClick={previousModal}
+        ariaLabel={t('common:components.slider.prevStep')}
       />
       <div css={styles.imgWrapper}>
         <Image width={255} height={255} src={hand.src} alt="MARK" />

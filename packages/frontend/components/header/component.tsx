@@ -63,6 +63,7 @@ export const Header = () => {
       size="md"
       onClick={() => setShow(!show)}
       color={IconColor.YELLOW}
+      ariaLabel={t('common:header.buttons.openMenu')}
     />
   );
 
@@ -85,7 +86,7 @@ export const Header = () => {
               </a>
             </Link>
             <div className="header-content">
-              {<Navigation categories={categories || []} />}
+              <Navigation categories={categories || []} />
             </div>
           </Flex>
           {isMounted && (

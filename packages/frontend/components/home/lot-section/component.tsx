@@ -4,9 +4,15 @@ import '@splidejs/react-splide/css';
 import { lightTheme } from 'theme';
 import { SectionLayout } from '../section-layout';
 import { lotContainer } from './styles';
-import type { LotProps } from './types';
+import type { LotSectionProps } from './types';
 
-const LotSection = ({ title, lots, loadMoreTitle, loadMoreHref }: LotProps) => (
+const LotSection = ({
+  title,
+  lots,
+  loadMoreTitle,
+  loadMoreHref,
+  loadImageHighPriority,
+}: LotSectionProps) => (
   <SectionLayout
     title={title}
     loadMoreTitle={loadMoreTitle}
@@ -39,7 +45,7 @@ const LotSection = ({ title, lots, loadMoreTitle, loadMoreHref }: LotProps) => (
           },
         }}
       >
-        {lots.map((item) => (
+        {lots.map((item, index) => (
           <SplideSlide key={item.id + item.title}>
             <ProductCard
               data={item}
@@ -49,6 +55,7 @@ const LotSection = ({ title, lots, loadMoreTitle, loadMoreHref }: LotProps) => (
               images={item.imageLinks}
               currency="UAH"
               auctionDate={item.endDate}
+              loadImageHighPriority={loadImageHighPriority && index < 2}
             />
           </SplideSlide>
         ))}
