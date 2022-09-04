@@ -14,7 +14,7 @@ const addressKeys: string[] = [
   'region',
   'city',
   'zip',
-  'novaPoshtaRef',
+  'deliveryData',
 ];
 const socialMediaKeys: string[] = ['facebook', 'instagram', 'linkedin'];
 

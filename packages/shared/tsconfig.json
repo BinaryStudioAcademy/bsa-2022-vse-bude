@@ -5,8 +5,7 @@
     "declaration": true,
     "declarationDir": "types",
     "declarationMap": true,
-    "paths": {},
-    "outDir": "build"
+    "outDir": "build",
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]

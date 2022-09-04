@@ -196,7 +196,7 @@ export class ProductRepository {
   }
 
   public async checkStatus(id: string, status: ProductStatus) {
-    return await this._dbClient.product.findFirst({
+    return this._dbClient.product.findFirst({
       where: {
         id,
         status,

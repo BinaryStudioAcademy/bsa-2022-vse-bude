@@ -7,7 +7,7 @@ export const verifyText = css`
   font-size: 14px;
   margin-bottom: 20px;
   text-align: center;
-  > span:first-child {
+  > span:first-of-type {
     display: block;
     margin-bottom: 10px;
   }

@@ -1,3 +1,4 @@
+import type { SaveUserProfileDto } from '@vse-bude/shared';
 import { UserPersonalInfoValidationMessage } from '@vse-bude/shared';
 import type { TFunction } from 'next-i18next';
 import type { UseFormSetError, UseFormSetValue } from 'react-hook-form';
@@ -10,8 +11,8 @@ export const onChangeNewPassword = ({
 }: {
   value: string;
   t: TFunction;
-  setError: UseFormSetError<any>;
-  setValue: UseFormSetValue<any>;
+  setError: UseFormSetError<SaveUserProfileDto>;
+  setValue: UseFormSetValue<SaveUserProfileDto>;
 }) => {
   if (value.includes(' ')) {
     setError('newPassword', {

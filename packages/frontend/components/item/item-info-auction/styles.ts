@@ -1,5 +1,5 @@
-﻿import { css } from '@emotion/react';
-import type { Theme } from 'theme';
+import type { Theme } from '@emotion/react';
+import { css } from '@emotion/react';
 
 export const wrapper = ({ spaces, breakpoints }: Theme) => css`
   margin-left: ${spaces.xl3};

@@ -21,7 +21,7 @@
     "delete": "Видалити фото"
   },
   "label": {
-    "novaPoshta": "# Нова Пошта",
+    "deliveryData": "Дані про доставку",
     "firstName": "Ім'я",
     "lastName": "Прізвище",
     "email": "Електронна пошта",
@@ -52,7 +52,7 @@
     "password": "Введіть пароль",
     "newPassword": "Введіть пароль",
     "repeatPassword": "Введіть пароль",
-    "novaPoshtaRef": "Введіть відділення Нової Пошти"
+    "deliveryData": "Введіть адресу доставки"
   },
   "validation": {
     "personal": {
