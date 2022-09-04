@@ -17,3 +17,5 @@ export const CAMERA_OPTIONS: CameraOptions = {
   quality: 0.4,
   includeBase64: false,
 };
+
+export const ALLOW_IMAGE_TYPES = ['image/png', 'image/jpg'];
