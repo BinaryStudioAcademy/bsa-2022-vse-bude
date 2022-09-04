@@ -52,7 +52,7 @@ const ItemPage = () => {
     (state) => state.product.currentItem,
     shallowEqual,
   );
-  const user = useTypedSelector((state) => state.user, shallowEqual);
+  const { user } = useTypedSelector((state) => state.auth, shallowEqual);
 
   const similarProducts = useTypedSelector(
     (state) => state.product.similarProducts,
