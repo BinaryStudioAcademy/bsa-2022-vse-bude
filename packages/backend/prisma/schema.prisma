@@ -95,7 +95,7 @@ model Product {
   recommendedPrice Decimal?     @db.Money
   minimalBid      Decimal?      @db.Money
   imageLinks      String[]      @db.VarChar(2048)
-  country         String        @db.VarChar(512)
+  country         String?        @db.VarChar(512)
   city            String?       @db.VarChar(512)
   phone           String?       @db.VarChar(32)
   type            ProductType
