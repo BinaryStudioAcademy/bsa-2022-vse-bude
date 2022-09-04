@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+﻿import { useEffect } from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { LotSection } from '@components/home/lot-section';
 import { Routes } from '@enums';
@@ -80,7 +80,7 @@ const ItemPage = () => {
             route: Routes.ITEMS,
           },
           {
-            name: item.category?.title, //change
+            name: item.category?.title,
             route: encodeURI(
               `${Routes.ITEMS}?filter=${JSON.stringify({
                 category: item.category.id,

@@ -1,5 +1,5 @@
+import type { Theme } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { Theme } from '../../../theme';
 
 export const header = ({ fontSizes }: Theme) => css`
   font-size: ${fontSizes.h4};
@@ -14,10 +14,8 @@ export const mainText = ({ fontSizes, fontWeights, colors }: Theme) => css`
   border-top: 1px solid ${colors.textLight};
 `;
 
-export const actionBtns = css`
+export const actionBtns = ({ spaces }: Theme) => css`
   display: flex;
   justify-content: center;
-  & button:first-child {
-    margin-right: 10px;
-  }
+  gap: ${spaces.sm};
 `;
