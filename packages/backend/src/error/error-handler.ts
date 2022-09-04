@@ -1,6 +1,7 @@
 import type { Request, Response, NextFunction } from 'express';
 import { HttpError, HttpStatusCode } from '@vse-bude/shared';
 import { logger } from '@helpers';
+import { langService } from 'lang';
 
 export const errorHandler = (
   err: Error,
@@ -31,6 +32,6 @@ export const errorHandler = (
   logger.error(err.message);
 
   return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
-    error: req.t('INTERNAL_ERROR'),
+    error: langService.translate('INTERNAL_ERROR'),
   });
 };
