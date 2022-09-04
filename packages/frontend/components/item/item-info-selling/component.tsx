@@ -31,7 +31,7 @@ export const ItemInfoSelling = ({
         cssExtended={styles.price}
       />
       <ItemInfo item={item} />
-      <div css={styles.controlls}>
+      <div css={styles.controls}>
         <FavoriteButton
           cssExtended={styles.favouriteButton}
           onChangeIsFavorite={onChangeIsFavorite}
