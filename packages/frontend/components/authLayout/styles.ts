@@ -133,3 +133,28 @@ export const price = ({ colors, fontSizes, fontWeights }: Theme) => css`
   font-weight: ${fontWeights.h4};
   color: ${colors.primaryLight};
 `;
+export const flagBg = ({ breakpoints }: Theme) => css`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(#0c42a6 50%, #f4c50a 50%);
+  filter: blur(100px);
+  transition: filter 0.3s ease-in-out;
+  @media (max-width: ${breakpoints.xxl}px) {
+    filter: blur(80px);
+  }
+
+  @media (max-width: ${breakpoints.xl}px) {
+    filter: blur(60px);
+  }
+
+  @media (max-width: ${breakpoints.lg}px) {
+    filter: blur(40px);
+  }
+
+  @media (max-width: ${breakpoints.md}px) {
+    filter: blur(20px);
+  }
+`;
