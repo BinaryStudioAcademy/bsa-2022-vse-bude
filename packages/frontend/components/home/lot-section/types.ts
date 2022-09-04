@@ -4,4 +4,5 @@ export interface LotProps {
   title: string;
   lots: ProductDto[];
   loadMoreTitle: string;
+  loadMoreHref: string;
 }

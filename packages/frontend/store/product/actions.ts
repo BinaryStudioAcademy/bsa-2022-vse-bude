@@ -21,6 +21,7 @@ import { ProductActions } from './action-types';
 interface RequestOptions {
   limit?: number;
   type?: ProductType;
+  categoryId?: string;
 }
 
 // interface RequestOptionsSSR extends RequestOptions {
@@ -29,10 +30,14 @@ interface RequestOptions {
 
 export const fetchProducts = createAsyncThunk(
   ProductActions.FETCH_PRODUCTS,
-  async ({ limit, type }: RequestOptions, { rejectWithValue, dispatch }) =>
+  async (
+    { limit, type, categoryId }: RequestOptions,
+    { rejectWithValue, dispatch },
+  ) =>
     getProducts({
       limit,
       type,
+      categoryId,
     }).catch((e) => {
       dispatch(
         addToast({

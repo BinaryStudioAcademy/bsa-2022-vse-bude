@@ -12,7 +12,11 @@ import * as styles from './styles';
 
 const ImageCropModal = dynamic(() => import('../../../imageCrop/component'));
 
-const ChangeAvatar = () => {
+interface ChangeAvatarProps {
+  isAvatarExist: boolean;
+}
+
+const ChangeAvatar = ({ isAvatarExist }: ChangeAvatarProps) => {
   const { t } = useTranslation();
   const inputFile = useRef(null);
   const dispatch = useAppDispatch();
@@ -105,16 +109,22 @@ const ChangeAvatar = () => {
               data-variant="icon"
             >
               <Icon icon={IconName.IMAGE} color={IconColor.YELLOW} />
-              <span>{t('personal-info:avatar.change')}</span>
+              <span>
+                {isAvatarExist
+                  ? t('personal-info:avatar.change')
+                  : t('personal-info:avatar.upload')}
+              </span>
             </button>
-            <button
-              css={styles.popoverContentItem}
-              onClick={handleDeleteAvatar}
-              data-variant="icon"
-            >
-              <Icon icon={IconName.TRASH} color={IconColor.YELLOW} />
-              <span>{t('personal-info:avatar.delete')}</span>
-            </button>
+            {isAvatarExist && (
+              <button
+                css={styles.popoverContentItem}
+                onClick={handleDeleteAvatar}
+                data-variant="icon"
+              >
+                <Icon icon={IconName.TRASH} color={IconColor.YELLOW} />
+                <span>{t('personal-info:avatar.delete')}</span>
+              </button>
+            )}
           </div>
         )}
       </Popover>

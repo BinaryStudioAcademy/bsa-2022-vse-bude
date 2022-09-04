@@ -2,18 +2,5 @@
   "generalRules": {
     "title": "Rules",
     "policy": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatibus, recusandae esse. Iure consequuntur voluptatem animi impedit, voluptates minus maiores id consectetur, soluta incidunt non ducimus itaque aspernatur sunt! Reiciendis voluptatibus necessitatibus animi illum tempore enim odio ab ipsam porro numquam in, delectus saepe dolore. Quae, ut. Quam distinctio vero voluptas rem veniam incidunt, eligendi ipsa odit magni molestiae modi ullam minus delectus, ducimus doloribus, vitae nihil fugiat et quasi sequi. Nihil culpa laboriosam aliquam nostrum. Possimus delectus culpa commodi libero, iste laborum facilis consectetur esse maxime repellat voluptatibus consequuntur, ducimus accusamus, nihil perspiciatis corporis quasi doloremque tempore vel iure nesciunt natus omnis eligendi! Nostrum numquam ut vitae quibusdam velit, laborum amet rerum id dolorem nisi asperiores magnam fugit? Vitae ab alias, labore nostrum aliquam, enim illum pariatur ratione est iure rerum officiis, eos culpa in temporibus possimus tempore beatae libero laboriosam? Aliquam corrupti quasi veritatis eveniet. Sed consectetur incidunt accusantium quibusdam omnis quaerat numquam aliquam nihil labore sint. Sequi assumenda voluptates adipisci ipsum debitis eaque unde iusto mollitia. Temporibus aperiam unde, ullam, quibusdam doloremque est quo magni voluptatem corrupti minus officiis maxime doloribus cupiditate officia ducimus optio eius porro, culpa ad. Minus vero laboriosam adipisci saepe rerum ullam tempore repellat?"
-  },
-  "createPostRules": {
-    "title": "Rules",
-    "policy": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatibus, recusandae esse. Iure consequuntur voluptatem animi impedit, voluptates minus maiores id consectetur, soluta incidunt non ducimus itaque aspernatur sunt! Reiciendis voluptatibus necessitatibus animi illum tempore enim odio ab ipsam porro numquam in, delectus saepe dolore. Quae, ut. Quam distinctio vero voluptas rem veniam incidunt, eligendi ipsa odit magni molestiae modi ullam minus delectus, ducimus doloribus, vitae nihil fugiat et quasi sequi. Nihil culpa laboriosam aliquam nostrum. Possimus delectus culpa commodi libero, iste laborum facilis consectetur esse maxime repellat voluptatibus consequuntur, ducimus accusamus, nihil perspiciatis corporis quasi doloremque tempore vel iure nesciunt natus omnis eligendi! Nostrum numquam ut vitae quibusdam velit, laborum amet rerum id dolorem nisi asperiores magnam fugit? Vitae ab alias, labore nostrum aliquam, enim illum pariatur ratione est iure rerum officiis, eos culpa in temporibus possimus tempore beatae libero laboriosam? Aliquam corrupti quasi veritatis eveniet. Sed consectetur incidunt accusantium quibusdam omnis quaerat numquam aliquam nihil labore sint. Sequi assumenda voluptates adipisci ipsum debitis eaque unde iusto mollitia. Temporibus aperiam unde, ullam, quibusdam doloremque est quo magni voluptatem corrupti minus officiis maxime doloribus cupiditate officia ducimus optio eius porro, culpa ad. Minus vero laboriosam adipisci saepe rerum ullam tempore repellat?",
-    "button": {
-      "accept": "Accept",
-      "decline": "Decline"
-    },
-    "tooltip": {
-      "disabled": "It's disabled, agree with terms",
-      "enabled": "Create a post"
-    },
-    "checkbox": "I agree"
   }
 }
