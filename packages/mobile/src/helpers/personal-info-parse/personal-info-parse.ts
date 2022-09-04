@@ -18,7 +18,7 @@ const DEFAULT_ADDRESS_PAYLOAD: UserAddressDto = {
   region: '',
   city: '',
   zip: '',
-  novaPoshtaRef: '',
+  deliveryData: '',
 };
 
 const DEFAULT_SOCIAL_PAYLOAD: MappedLinks = {
