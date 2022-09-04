@@ -100,7 +100,7 @@ export class UserProfileRepository {
         region: true,
         city: true,
         zip: true,
-        novaPoshtaRef: true,
+        deliveryData: true,
       },
     });
   }
