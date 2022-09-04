@@ -64,7 +64,7 @@ export const userUpdateSchema = (t: TFunction) =>
     region: Joi.string().allow(''),
     city: Joi.string().allow(''),
     zip: Joi.string().allow(''),
-    novaPoshtaRef: Joi.string().allow(''),
+    deliveryData: Joi.string().allow(''),
 
     instagram: Joi.string()
       .allow('')

@@ -235,9 +235,9 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
                 id="novaposhta-profile"
                 type="text"
                 variant="primary"
-                label={t('personal-info:label.novaPoshta')}
-                placeholder={t('personal-info:placeholder.novaPoshtaRef')}
-                {...register('novaPoshtaRef')}
+                label={t('personal-info:label.deliveryData')}
+                placeholder={t('personal-info:placeholder.deliveryData')}
+                {...register('deliveryData')}
               />
             </div>
           </Column>

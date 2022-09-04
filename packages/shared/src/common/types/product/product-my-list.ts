@@ -1,5 +1,5 @@
 import type { ProductStatus } from './product-status-dto';
-import type { ProductType } from './product-type';
+import type { ProductType } from './product-type-dto';
 
 export interface MyListItem {
   id: string;
