@@ -1,7 +1,13 @@
 ﻿import type { Theme } from '@emotion/react';
 import { css } from '@emotion/react';
 
-export const body = ({ colors, spaces, radiuses, fontSizes, breakpoints }: Theme) => css`
+export const body = ({
+  colors,
+  spaces,
+  radiuses,
+  fontSizes,
+  breakpoints,
+}: Theme) => css`
   position: absolute;
   z-index: 101;
   animation: fade-in 0.15s ease-in-out;
