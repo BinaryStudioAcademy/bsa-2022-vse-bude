@@ -66,9 +66,6 @@ export const contacts = ({
   flex-wrap: wrap;
   div {
     margin-right: ${spaces.lg};
-    span {
-      margin-left: ${spaces.xs};
-    }
   }
 
   @media (max-width: ${breakpoints.md}px) {
@@ -99,5 +96,16 @@ export const contactSeller = ({ fontSizes, breakpoints }: Theme) => css`
 
   @media (max-width: ${breakpoints.sm}px) {
     font-size: ${fontSizes.body3};
+  }
+`;
+
+export const sellerInfoLink = ({ colors, spaces }: Theme) => css`
+  display: inline-block;
+  margin-left: ${spaces.sm};
+  color: ${colors.text};
+  text-transform: lowercase;
+
+  &::first-letter {
+    text-transform: uppercase !important;
   }
 `;

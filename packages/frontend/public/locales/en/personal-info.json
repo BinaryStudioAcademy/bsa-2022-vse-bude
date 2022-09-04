@@ -17,10 +17,11 @@
   },
   "avatar": {
     "change": "Change the Photo",
+    "upload": "Upload the Photo",
     "delete": "Delete the Photo"
   },
   "label": {
-    "novaPoshta": "# Nova Poshta",
+    "deliveryData": "Delivery data",
     "firstName": "First name",
     "lastName": "Last name",
     "email": "Email",
@@ -51,7 +52,7 @@
     "password": "Enter password",
     "newPassword": "Enter password",
     "repeatPassword": "Enter password",
-    "novaPoshtaRef": "Enter office of Nova Poshta"
+    "deliveryData": "Enter delivery address"
   },
   "validation": {
     "personal": {

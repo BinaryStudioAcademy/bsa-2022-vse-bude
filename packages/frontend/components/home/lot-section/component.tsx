@@ -6,8 +6,12 @@ import { SectionLayout } from '../section-layout';
 import { lotContainer } from './styles';
 import type { LotProps } from './types';
 
-const LotSection = ({ title, lots, loadMoreTitle }: LotProps) => (
-  <SectionLayout title={title} loadMoreTitle={loadMoreTitle}>
+const LotSection = ({ title, lots, loadMoreTitle, loadMoreHref }: LotProps) => (
+  <SectionLayout
+    title={title}
+    loadMoreTitle={loadMoreTitle}
+    loadMoreHref={loadMoreHref}
+  >
     <div css={lotContainer}>
       <Splide
         aria-label="items-carousel"
