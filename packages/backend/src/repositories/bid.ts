@@ -14,10 +14,13 @@ export class BidRepository {
         data: {
           bidderId,
           productId,
-          price
-        }
+          price,
+        },
       }),
-      this._dbClient.product.update({ data: { price }, where: { id: productId } })
+      this._dbClient.product.update({
+        data: { price },
+        where: { id: productId },
+      }),
     ]);
   }
 
