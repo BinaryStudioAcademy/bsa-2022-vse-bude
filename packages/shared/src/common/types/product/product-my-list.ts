@@ -1,12 +1,13 @@
-import type { Prisma, ProductType, ProductStatus } from '@prisma';
+import type { ProductStatus } from './product-status-dto';
+import { ProductType } from './product-type-dto';
 
 export interface MyListItem {
   id: string;
   title: string;
   description: string;
-  price: Prisma.Decimal;
-  recommendedPrice: Prisma.Decimal;
-  minimalBid: Prisma.Decimal;
+  price: number;
+  recommendedPrice: number;
+  minimalBid: number;
   country: string;
   city: string;
   phone: string;
