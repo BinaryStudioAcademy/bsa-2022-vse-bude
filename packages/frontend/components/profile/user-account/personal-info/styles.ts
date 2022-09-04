@@ -20,12 +20,15 @@ export const headerWrapper = ({ spaces }: Theme) => css`
 
 export const flagWrapper = ({ radiuses }: Theme) => css`
   border-radius: ${radiuses.md};
+  overflow: hidden;
 `;
 
 export const flag = ({ heights, radiuses }: Theme) => css`
   display: block;
   height: ${heights.flag};
   width: 100%;
+  background: linear-gradient(#0c42a6 50%, #f4c50a 50%);
+  filter: blur(20px);
   border-radius: ${radiuses.md};
 `;
 
