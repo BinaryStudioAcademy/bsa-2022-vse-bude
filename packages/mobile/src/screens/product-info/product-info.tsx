@@ -6,10 +6,11 @@ import {
   EyeIcon,
   ScrollView,
 } from '~/components/components';
-import { useCustomTheme } from '~/hooks/hooks';
-import { ProductType } from '@vse-bude/shared';
+import { selectProductById } from '~/store/products/selectors';
+import { useAppSelector, useCustomTheme, useRoute } from '~/hooks/hooks';
+import { ProductDto, ProductType } from '@vse-bude/shared';
 import { globalStyles } from '~/styles/styles';
-import { MOCK_PRODUCT } from '~/mock/mock-product-info';
+import { formatToDateTime } from '~/helpers/helpers';
 import { Description } from './components/description/description';
 import { ImageCarousel } from './components/image-carousel/image-carousel';
 import { LotPriceBlock } from './components/price-block/lot-price-block';
@@ -17,7 +18,14 @@ import { ProductPriceBlock } from './components/price-block/product-price-block'
 import { SellerInfo } from './components/seller-info/seller-info';
 
 const ProductInfo: FC = () => {
+  const route = useRoute();
   const { colors } = useCustomTheme();
+  const id = route.params;
+
+  const product = useAppSelector((state) =>
+    selectProductById(state, id?.toString() as string),
+  );
+
   const {
     title,
     description,
@@ -30,7 +38,9 @@ const ProductInfo: FC = () => {
     imageLinks,
     views,
     currentPrice,
-  } = MOCK_PRODUCT;
+  } = product as ProductDto;
+
+  const date = formatToDateTime(endDate as Date);
 
   return (
     <ScreenWrapper>
@@ -68,11 +78,11 @@ const ProductInfo: FC = () => {
           description={description}
           city={city}
           status={status}
-          endDate={endDate}
+          date={date}
         />
         <SellerInfo />
       </ScrollView>
-      {type == ProductType.SELLING ? (
+      {type == ProductType.AUCTION ? (
         <LotPriceBlock
           currentPrice={Number(currentPrice)}
           minimalBid={Number(minimalBid)}

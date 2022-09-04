@@ -18,8 +18,6 @@ const SellerInfo: FC<SellerInfoProps> = () => {
       style={[
         styles.wrapper,
         globalStyles.mt5,
-        globalStyles.ml4,
-        globalStyles.mr4,
         globalStyles.px6,
         globalStyles.py6,
       ]}

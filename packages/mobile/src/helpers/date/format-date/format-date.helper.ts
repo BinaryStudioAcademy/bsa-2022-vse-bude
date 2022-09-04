@@ -5,8 +5,4 @@ const formatToDateTime = (date: Date) => {
   return dayjs(date).format(DateFormat.dateTime);
 };
 
-const getSellerTimeZone = (date: Date) => {
-  return dayjs(date).format(DateFormat.timeZone);
-};
-
-export { formatToDateTime, getSellerTimeZone };
+export { formatToDateTime };

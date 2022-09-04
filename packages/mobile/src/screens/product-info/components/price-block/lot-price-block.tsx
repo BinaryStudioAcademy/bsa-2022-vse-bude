@@ -5,10 +5,13 @@ import {
   Text,
   View,
   PlusSvg,
+  Input,
 } from '~/components/components';
-import { useCustomTheme, useTranslation } from '~/hooks/hooks';
+import { useAppForm, useCustomTheme, useTranslation } from '~/hooks/hooks';
 import { ColorPalette, ProductDto } from '@vse-bude/shared';
 import { globalStyles } from '~/styles/styles';
+import { makeBid } from '~/validation-schemas/bid/make-bid';
+import { DEFAULT_BID_VALUE } from '../../common/constants';
 import { PriceWrapper } from './price-wrapper';
 import { styles } from './styles';
 
@@ -20,6 +23,10 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
 }) => {
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
+  const { control, errors } = useAppForm({
+    defaultValues: DEFAULT_BID_VALUE,
+    validationSchema: makeBid(minimalBid),
+  });
 
   return (
     <>
@@ -49,14 +56,18 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
             { color: colors.titleSecondary },
           ]}
         >
-          {`${t('screens:welcome.UAH')} ${currentPrice}`}
+          {`${t('screens:welcome.UAH')} ${currentPrice || 0}`}
         </Text>
       </View>
       <PriceWrapper>
         <>
-          <Text style={[globalStyles.fs14, styles.minBid]}>{`${t(
-            'screens:product_info.MIN_UAH',
-          )} ${minimalBid}`}</Text>
+          <Input
+            name="bid"
+            control={control}
+            errors={errors}
+            placeholder={`${t('screens:product_info.MIN_UAH')} ${minimalBid}`}
+          />
+
           <View
             style={[
               globalStyles.flexDirectionRow,
