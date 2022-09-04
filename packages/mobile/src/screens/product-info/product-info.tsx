@@ -76,7 +76,7 @@ const ProductInfo: FC = () => {
         {imageLinks && <ImageCarousel imageLinks={imageLinks} />}
         <Description
           description={description}
-          city={city}
+          city={city || ''}
           status={status}
           date={date}
         />
