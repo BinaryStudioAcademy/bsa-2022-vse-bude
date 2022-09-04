@@ -14,4 +14,5 @@ export interface LinkData {
 export interface LinkProps extends Omit<LinkData, 'label'> {
   location: boolean;
   label: string;
+  onClick?: () => void;
 }

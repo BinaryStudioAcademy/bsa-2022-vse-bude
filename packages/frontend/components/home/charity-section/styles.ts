@@ -46,12 +46,22 @@ export const sliderWrapper = ({
     }
   }
 
+  @media (max-width: ${breakpoints.lg}px) {
+    .splide__arrow--next {
+      right: -${spaces.lg};
+    }
+
+    .splide__arrow--prev {
+      left: -${spaces.lg};
+    }
+  }
+
   .splide__arrow--next {
-    right: -${spaces.xl1};
+    right: -${spaces.xl};
   }
 
   .splide__arrow--prev {
-    left: -${spaces.xl1};
+    left: -${spaces.xl};
   }
 
   .splide__pagination {
@@ -68,5 +78,19 @@ export const sliderWrapper = ({
       transform: unset;
       opacity: 1;
     }
+  }
+
+  @media (max-width: ${breakpoints.md}px) {
+    .splide__pagination {
+      .splide__pagination__page {
+        width: 30px;
+      }
+    }
+  }
+
+  .splide__slide {
+    display: flex;
+    justify-content: center;
+    padding: 0px ${spaces.xs};
   }
 `;

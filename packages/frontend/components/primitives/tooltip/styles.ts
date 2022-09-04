@@ -1,16 +1,14 @@
 ﻿import { css } from '@emotion/react';
-import type { Theme } from '@emotion/react';
+import type { Theme } from '../../../theme';
 
-export const trigger = css`
-  cursor: pointer;
-`;
-
-export const body = ({ colors, spaces }: Theme) => css`
+export const body = ({ colors, spaces, fontSizes }: Theme) => css`
   position: absolute;
-  max-width: 50%;
+  z-index: 101;
+  max-width: 30%;
   overflow: hidden;
   background-color: ${colors.background};
   border-radius: ${spaces.xs};
-  padding: ${spaces.sm};
+  padding: ${spaces.xs};
+  font-size: ${fontSizes.tooltip};
   box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.3);
 `;

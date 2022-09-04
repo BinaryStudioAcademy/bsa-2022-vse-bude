@@ -1,5 +1,5 @@
+import type { PrismaClient } from '@prisma/client';
 import { ProductStatus } from '@prisma/client';
-import type { Product, PrismaClient } from '@prisma/client';
 import type { ProductQuery } from '@types';
 import { Order } from '@vse-bude/shared';
 
@@ -10,11 +10,12 @@ export class ProductRepository {
     this._dbClient = prismaClient;
   }
 
-  public getAll(query: ProductQuery): Promise<Product[]> {
+  public getAll(query: ProductQuery) {
     const {
       limit = 10,
       from = 0,
       type,
+      categoryId,
       sortBy = 'createdAt',
       order = Order.ASC,
     } = query;
@@ -27,6 +28,7 @@ export class ProductRepository {
       },
       where: {
         type,
+        categoryId,
       },
     });
   }
@@ -125,6 +127,72 @@ export class ProductRepository {
         },
       },
     });
+  }
+
+  public create(data) {
+    return this._dbClient.product.create({
+      data: {
+        imageLinks: data.imageLinks,
+        country: data.country,
+        city: data.city,
+        phone: data.phone,
+        status: data.status,
+        categoryId: data.categoryId,
+        title: data.title,
+        description: data.description,
+        authorId: data.authorId,
+        type: data.type,
+        price: data.price,
+      },
+    });
+  }
+
+  public async update(id: string, data) {
+    return await this._dbClient.product.update({
+      where: {
+        id,
+      },
+      data: {
+        imageLinks: data.imageLinks,
+        status: data.status,
+        country: data.country,
+        city: data.city,
+        phone: data.phone,
+        categoryId: data.categoryId,
+        title: data.title,
+        description: data.description,
+        type: data.type,
+        price: data.price,
+      },
+    });
+  }
+
+  public async getCurrentPrice(productId: string) {
+    const lastBid = await this._dbClient.bid.findFirst({
+      where: {
+        productId: productId,
+      },
+      orderBy: [
+        {
+          createdAt: 'desc',
+        },
+      ],
+    });
+
+    if (lastBid) {
+      return lastBid.price;
+    }
+
+    const product = await this._dbClient.product.findUnique({
+      where: {
+        id: productId,
+      },
+      select: {
+        price: true,
+      },
+    });
+
+    return product.price;
   }
 
   public async checkStatus(id: string, status: ProductStatus) {

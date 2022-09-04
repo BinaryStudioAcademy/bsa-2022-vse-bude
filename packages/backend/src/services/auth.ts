@@ -32,7 +32,6 @@ import {
   type VerifyService,
   type EmailService,
 } from '@services';
-import type { Request } from 'express';
 import { authResponseMap } from '@mappers';
 import { AuthApiRoutes } from '@vse-bude/shared';
 import { ResetPasswordMailBuilder } from '../email/reset-password-mail-builder';
@@ -74,13 +73,13 @@ export class AuthService {
     await this._refreshTokenRepository.deleteByUserId(signOutDto.userId);
   }
 
-  async signUp(signUpDto: UserSignUpDto, req: Request): Promise<AuthResponse> {
+  async signUp(signUpDto: UserSignUpDto): Promise<AuthResponse> {
     const userByEmailOrPhone = await this._userRepository.getByEmailOrPhone(
       signUpDto.email,
       signUpDto.phone,
     );
     if (userByEmailOrPhone) {
-      throw new UserExistsError(req);
+      throw new UserExistsError();
     }
     const createUserDto: CreateUser = {
       firstName: signUpDto.firstName,
@@ -90,7 +89,6 @@ export class AuthService {
       passwordHash: this._hashService.generateHash(signUpDto.password),
     };
     const newUser = await this._userRepository.create(createUserDto);
-    await this._verifyService.initPhoneVerification(newUser.id);
     await this._verifyService.initEmailVerification(newUser.id);
     const tokenData = this.getTokenData(newUser.id);
 
@@ -104,7 +102,7 @@ export class AuthService {
     return authResponseMap(tokenData, newUser);
   }
 
-  async signIn(signInDto: UserSignInDto, req: Request): Promise<AuthResponse> {
+  async signIn(signInDto: UserSignInDto): Promise<AuthResponse> {
     const user = await this._userRepository.getByEmail(signInDto.email);
     if (!user) {
       throw new UserNotFoundError();
@@ -116,7 +114,7 @@ export class AuthService {
         signInDto.password,
       )
     ) {
-      throw new WrongPasswordError(req);
+      throw new WrongPasswordError();
     }
 
     const tokenData = this.getTokenData(user.id);
@@ -145,19 +143,19 @@ export class AuthService {
     );
   }
 
-  async refreshToken(updateDto: UpdateRefreshToken, req) {
+  async refreshToken(updateDto: UpdateRefreshToken) {
     if (!updateDto.tokenValue) {
-      throw new WrongRefreshTokenError(req);
+      throw new WrongRefreshTokenError();
     }
     const token = await this._refreshTokenRepository.getTokenByValue(
       updateDto.tokenValue,
     );
     if (!token) {
-      throw new UnauthorizedError(req);
+      throw new UnauthorizedError();
     }
 
     if (new Date(token.expiresAt) < new Date()) {
-      throw new ExpiredRefreshTokenError(req);
+      throw new ExpiredRefreshTokenError();
     }
 
     const newTokenData = this.getTokenData(token.userId);
@@ -183,7 +181,9 @@ export class AuthService {
   }
 
   async resetPasswordLink(email: string) {
-    const hashValue = this._hashService.generateHash(email);
+    const hashValue = this._hashService.generateHash(
+      `${email}${this._hashService.getRandomHash()}`,
+    );
     await this.deleteLinksByEmail(email);
     await this.saveLink(email, hashValue);
     const link = this.getResetPasswordEmailLink(hashValue, email);
@@ -194,7 +194,7 @@ export class AuthService {
 
     await resetMail.send();
 
-    return undefined;
+    return {};
   }
 
   async updatePassword(updateDto: UpdatePassword) {

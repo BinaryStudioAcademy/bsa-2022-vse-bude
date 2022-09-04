@@ -7,12 +7,14 @@ import * as styles from './styles';
 
 interface ItemInfoSellingProps {
   item: ItemDto;
+  isInFavorite: boolean;
   onBuy: () => void;
   onChangeIsFavorite: () => void;
 }
 
 export const ItemInfoSelling = ({
   item,
+  isInFavorite,
   onBuy,
   onChangeIsFavorite,
 }: ItemInfoSellingProps) => {
@@ -28,14 +30,14 @@ export const ItemInfoSelling = ({
       />
       <ItemInfo item={item} />
       <div css={styles.controlls}>
-        <Button onClick={onBuy}>{t('buyBtn')}</Button>
         <FavoriteButton
           cssExtended={styles.favouriteButton}
           onChangeIsFavorite={onChangeIsFavorite}
-          isFavorite={false}
+          isFavorite={isInFavorite}
           backgroundColor="transparent"
           size="md"
-        ></FavoriteButton>
+        />
+        <Button onClick={onBuy}>{t('buttons.buyBtn')}</Button>
       </div>
     </div>
   );

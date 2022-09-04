@@ -3,7 +3,11 @@ import type { ItemDto } from '@vse-bude/shared';
 import { ProductType } from '@vse-bude/shared';
 import { Container } from '@primitives';
 import { lightTheme } from 'theme';
-import { useWindowSize } from '@hooks';
+import {
+  deleteProductFromFavorites,
+  addProductToFavorites,
+} from 'store/favorite-product';
+import { useAppDispatch, useWindowSize, useInFavorite } from '@hooks';
 import { ItemImageSlider } from './image-slider/component';
 import { ItemInfoSelling } from './item-info-selling/component';
 import { ItemInfoAuction } from './item-info-auction/component';
@@ -17,37 +21,39 @@ interface ItemProps {
 export const Item = ({ item }: ItemProps) => {
   const windowSize = useWindowSize();
 
-  // delete after adding different photos to post
-  const images = [
-    'https://picsum.photos/id/1/640/480/',
-    'https://picsum.photos/id/2/640/480/',
-    'https://picsum.photos/id/3/640/480/',
-    'https://picsum.photos/id/4/640/480/',
-  ];
+  const dispatch = useAppDispatch();
 
-  const handleAddFavourite = () => console.log('favourite');
   const handleBuy = () => console.log('buy');
-  const handleBid = () => console.log('bid');
+
+  const isInFavorite = useInFavorite(item.id);
+
+  const onChangeIsFavorite = () => {
+    const favAction = isInFavorite
+      ? deleteProductFromFavorites
+      : addProductToFavorites;
+    dispatch(favAction(item.id));
+  };
 
   return (
     <React.Fragment>
       <Container cssExtend={styles.itemWrapper}>
         {windowSize.width > lightTheme.breakpoints.sm ? (
-          <ItemImageSlider imageLinks={images} />
+          <ItemImageSlider imageLinks={item.imageLinks} />
         ) : (
-          <ImageSliderSplide imageLinks={images} />
+          <ImageSliderSplide imageLinks={item.imageLinks} />
         )}
         {item.type === ProductType.SELLING ? (
           <ItemInfoSelling
             item={item}
+            isInFavorite={isInFavorite}
             onBuy={handleBuy}
-            onChangeIsFavorite={handleAddFavourite}
+            onChangeIsFavorite={onChangeIsFavorite}
           />
         ) : (
           <ItemInfoAuction
             item={item}
-            onBid={handleBid}
-            onChangeIsFavorite={handleAddFavourite}
+            isInFavorite={isInFavorite}
+            onChangeIsFavorite={onChangeIsFavorite}
           />
         )}
       </Container>

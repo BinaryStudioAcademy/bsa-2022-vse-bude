@@ -1,5 +1,5 @@
-import { IconName } from '@enums';
-import { Icon } from '@primitives';
+import { Routes } from '@enums';
+import { ProductType } from '@vse-bude/shared';
 import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 import { CategorySection } from './category-section';
@@ -12,23 +12,25 @@ const Home = ({ auctionProducts, sellingProducts }: HomeProps) => {
   const [searchQuery, setSearchQuery] = useState('');
   const { t } = useTranslation();
 
+  const redirectToFilterByType = (type: ProductType) =>
+    encodeURI(`${Routes.ITEMS}?filter={"type":"${type}"}`);
+
   return (
     <React.Fragment>
-      <Icon icon={IconName.FACEBOOK} color="yellow" />
-      <Icon icon={IconName.LINKEDIN} color="yellow" />
-      <Icon icon={IconName.INSTAGRAM} color="yellow" />
       <PromoSection searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <CategorySection />
       <LotSection
         title={t('home:popularLots.title')}
         lots={auctionProducts}
         loadMoreTitle={t('home:popularLots.link')}
+        loadMoreHref={redirectToFilterByType(ProductType.AUCTION)}
       />
       <CharitySection />
       <LotSection
         title={t('home:popularItems.title')}
         lots={sellingProducts}
         loadMoreTitle={t('home:popularItems.link')}
+        loadMoreHref={redirectToFilterByType(ProductType.SELLING)}
       />
     </React.Fragment>
   );

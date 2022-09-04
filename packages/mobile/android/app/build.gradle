@@ -149,11 +149,13 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
+    def newVersionCode = Integer.valueOf(System.env.INCREMENTED_GOOGLE_PLAY_BUILD_NUMBER ?: System.env.BUILD_NUMBER ?: 1)
+
     defaultConfig {
         applicationId "com.vsebude"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 6
+        versionCode newVersionCode
         versionName "1.0"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
         setProperty("archivesBaseName", applicationId + "-v" + versionName + "-" + versionCode)

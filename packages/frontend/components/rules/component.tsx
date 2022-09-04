@@ -9,8 +9,8 @@ export const RulesPageInner = () => {
     <Container>
       <header>
         <h3 css={styles.heading}>{t('generalRules.title')}</h3>
-        <p>{t('generalRules.policy')}</p>
       </header>
+      <p>{t('generalRules.policy')}</p>
     </Container>
   );
 };

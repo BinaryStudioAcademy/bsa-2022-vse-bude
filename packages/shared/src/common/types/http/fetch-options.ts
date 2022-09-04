@@ -32,7 +32,7 @@ export interface PostRequestParams extends BaseRequestParams {
 }
 
 export interface PutRequestParams extends BaseRequestParams {
-  body: Record<string, unknown>;
+  body: Record<string, unknown> | FormData;
 }
 
 export type DeleteRequestParams = BaseRequestParams;

@@ -1,62 +1,75 @@
-﻿import { Layout, Item } from '@components';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { AuthHelper, CookieStorage } from '@helpers';
-import {
-  getProductByIdSSR,
-  getProductsSSR,
-  incrementProductViews,
-} from 'services/product';
-import { LotSection } from 'components/home/lot-section';
-import { Routes } from '@enums';
-import { Breadcrumbs } from '@primitives';
-import { useTranslation } from 'next-i18next';
-import type { ItemDto } from '@vse-bude/shared';
-import { Http } from '@vse-bude/shared';
-import { withPublic } from '@hocs';
 import { useEffect } from 'react';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { LotSection } from '@components/home/lot-section';
+import { Routes } from '@enums';
+import { Breadcrumbs, Button, Container } from '@primitives';
+import { useTranslation } from 'next-i18next';
+import { Http } from '@vse-bude/shared';
+import type { ProductType } from '@vse-bude/shared';
+import { withPublic } from '@hocs';
+import { Layout } from '@components/layout';
+import { Item } from '@components/item';
+import Link from 'next/link';
+import { useAppDispatch, useTypedSelector } from '@hooks';
+import {
+  auctionPermissions,
+  fetchProductSSR,
+  updateProductViews,
+  fetchSimilarProducts,
+} from 'store/product';
+import { wrapper } from '@store';
+import { shallowEqual } from 'react-redux';
 
-export const getServerSideProps = withPublic(async (ctx) => {
-  const { locale } = ctx;
+export const getServerSideProps = withPublic(
+  wrapper.getServerSideProps((store) => async (ctx) => {
+    const { locale, query } = ctx;
+    const http = new Http(process.env.NEXT_PUBLIC_API_ROUTE);
+    const id = query.id as string;
 
-  const id = ctx.query.id as string;
-  const storage = new CookieStorage(ctx);
-  const auth = new AuthHelper(storage);
-  const httpSSR = new Http(process.env.NEXT_PUBLIC_API_ROUTE, auth);
+    const { payload } = await store.dispatch(fetchProductSSR({ id, http }));
 
-  try {
-    const item = await getProductByIdSSR(httpSSR, id);
-    const similarItems = await getProductsSSR({
-      httpSSR,
-      limit: 10,
-    });
+    if (!payload) {
+      return {
+        redirect: {
+          destination: Routes.NOT_FOUND,
+        },
+        props: {},
+      };
+    }
 
     return {
       props: {
         ...(await serverSideTranslations(locale, ['common', 'item'])),
-        item,
-        similarItems,
       },
     };
-  } catch {
-    return {
-      redirect: {
-        destination: Routes.NOT_FOUND,
-      },
-    };
-  }
-});
+  }),
+);
 
-interface ItemPageProps {
-  item: ItemDto;
-  similarItems: ItemDto[];
-}
-
-const ItemPage = ({ item, similarItems }: ItemPageProps) => {
+const ItemPage = () => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const item = useTypedSelector(
+    (state) => state.product.currentItem,
+    shallowEqual,
+  );
+
+  const similarProducts = useTypedSelector(
+    (state) => state.product.similarProducts,
+    shallowEqual,
+  );
+
+  const redirectToFilterByType = (type: ProductType) =>
+    encodeURI(`${Routes.ITEMS}?filter={"type":"${type}"}`);
 
   useEffect(() => {
-    incrementProductViews(item.id);
-  }, [item.id]);
+    dispatch(updateProductViews(item.id));
+    dispatch(
+      auctionPermissions({
+        productId: item.id,
+      }),
+    );
+    dispatch(fetchSimilarProducts(item.id));
+  }, [item.id, dispatch]);
 
   return (
     <Layout title={item.title}>
@@ -67,20 +80,32 @@ const ItemPage = ({ item, similarItems }: ItemPageProps) => {
             route: Routes.DEFAULT,
           },
           {
-            name: t('common:header.nav.category'),
-            route: Routes.DEFAULT, // change
+            name: t('common:header.nav.item'),
+            route: Routes.ITEMS,
           },
           {
-            name: item.category.title, //change
-            route: Routes.DEFAULT, // change
+            name: item.category?.title, //change
+            route: encodeURI(
+              `${Routes.ITEMS}?filter=${JSON.stringify({
+                category: item.category.id,
+              })}`,
+            ),
           },
         ]}
       />
+      <Container style={{ marginBottom: '20px' }}>
+        <Link href={`/items/edit/${item.id}`}>
+          <a style={{ textDecoration: 'none' }}>
+            <Button>Edit</Button>
+          </a>
+        </Link>
+      </Container>
       <Item item={item} />
       <LotSection
         title={t('item:similarItems')}
-        lots={similarItems}
+        lots={similarProducts}
         loadMoreTitle={t('item:seeMoreItems')}
+        loadMoreHref={redirectToFilterByType(item.type)}
       />
     </Layout>
   );

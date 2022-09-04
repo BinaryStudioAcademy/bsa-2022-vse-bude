@@ -5,6 +5,7 @@ import {
   ValidationRanges,
 } from '@vse-bude/shared';
 import { ProfileError } from '@errors';
+import { lang } from '../../../lang';
 
 export const userNameValidation = ({ req }: { req: Request }) => {
   const { firstName, lastName } = req.body;
@@ -12,28 +13,28 @@ export const userNameValidation = ({ req }: { req: Request }) => {
   if (firstName.trim().length < ValidationRanges.MIN_NAME_SYMBOLS) {
     throw new ProfileError({
       status: HttpStatusCode.BAD_REQUEST,
-      message: req.t(UserPersonalInfoValidationMessage.FIRSTNAME_REQUIRED),
+      message: lang(UserPersonalInfoValidationMessage.FIRSTNAME_REQUIRED),
     });
   }
 
   if (firstName.trim().length > ValidationRanges.MAX_NAME_SYMBOLS) {
     throw new ProfileError({
       status: HttpStatusCode.BAD_REQUEST,
-      message: req.t(UserPersonalInfoValidationMessage.FIRSTNAME_MAX),
+      message: lang(UserPersonalInfoValidationMessage.FIRSTNAME_MAX),
     });
   }
 
   if (lastName.trim().length < ValidationRanges.MIN_NAME_SYMBOLS) {
     throw new ProfileError({
       status: HttpStatusCode.BAD_REQUEST,
-      message: req.t(UserPersonalInfoValidationMessage.LASTNAME_REQUIRED),
+      message: lang(UserPersonalInfoValidationMessage.LASTNAME_REQUIRED),
     });
   }
 
   if (lastName.trim().length > ValidationRanges.MAX_NAME_SYMBOLS) {
     throw new ProfileError({
       status: HttpStatusCode.BAD_REQUEST,
-      message: req.t(UserPersonalInfoValidationMessage.LASTNAME_MAX),
+      message: lang(UserPersonalInfoValidationMessage.LASTNAME_MAX),
     });
   }
 
@@ -44,16 +45,18 @@ export const userNameValidation = ({ req }: { req: Request }) => {
   if (!isFirstName) {
     throw new ProfileError({
       status: HttpStatusCode.BAD_REQUEST,
-      message: req.t(UserPersonalInfoValidationMessage.FIRSTNAME_PATTERN),
+      message: lang(UserPersonalInfoValidationMessage.FIRSTNAME_PATTERN),
     });
   }
 
-  const isLastName = /^[^-](([a-zA-Z]+)|([а-яёіїґєА-ЯЁIЇҐЄ]+))$/.test(lastName);
+  const isLastName = /^[^-](([a-zA-Z]+)|([а-яёіїґєА-ЯЁIЇҐЄ'-]+))[^-]$$/.test(
+    lastName,
+  );
 
   if (!isLastName) {
     throw new ProfileError({
       status: HttpStatusCode.BAD_REQUEST,
-      message: req.t(UserPersonalInfoValidationMessage.LASTNAME_PATTERN),
+      message: lang(UserPersonalInfoValidationMessage.LASTNAME_PATTERN),
     });
   }
 };

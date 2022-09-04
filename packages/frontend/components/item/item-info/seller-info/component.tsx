@@ -1,6 +1,5 @@
 ﻿import { Button, Avatar, Icon, Anchor } from '@primitives';
-import { IconName, Routes } from '@enums';
-import { ColorPalette } from '@vse-bude/shared';
+import { IconColor, IconName, Routes } from '@enums';
 import type { AuthorDto } from '@vse-bude/shared';
 import Router from 'next/router';
 import { useTranslation } from 'next-i18next';
@@ -41,53 +40,21 @@ export const SellerInfo = ({ seller, onContactSeller }: SellerInfoProps) => {
       </div>
       <div css={styles.contacts}>
         <div css={styles.phone}>
-          <Icon
-            size="sm"
-            icon={IconName.PHONE}
-            color={ColorPalette.YELLOW_200}
-          />
-          <span>{seller.phone}</span>
+          <Icon size="md" icon={IconName.PHONE} color={IconColor.YELLOW} />
+          <div css={styles.sellerInfoLink}>{seller.phone}</div>
         </div>
-
         {seller.socialMedia.map((social) => (
           <div key={social.id}>
             <Anchor href={social.link}>
               <Icon
-                size="sm"
+                size="md"
                 icon={IconName[social.socialMedia]}
-                color={ColorPalette.YELLOW_200}
-              ></Icon>
+                color={IconColor.YELLOW}
+              />
+              <div css={styles.sellerInfoLink}>{social.socialMedia}</div>
             </Anchor>
           </div>
         ))}
-        {/* for ui tests: delete soon*/}
-        <div>
-          <Anchor>
-            <Icon
-              size="sm"
-              icon={IconName.FACEBOOK}
-              color={ColorPalette.YELLOW_200}
-            />
-          </Anchor>
-        </div>
-        <div>
-          <Anchor>
-            <Icon
-              size="sm"
-              icon={IconName.WEBSITE}
-              color={ColorPalette.YELLOW_200}
-            />
-          </Anchor>
-        </div>
-        <div>
-          <Anchor>
-            <Icon
-              size="sm"
-              icon={IconName.LINKEDIN}
-              color={ColorPalette.YELLOW_200}
-            />
-          </Anchor>
-        </div>
       </div>
     </div>
   );

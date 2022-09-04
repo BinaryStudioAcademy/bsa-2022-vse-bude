@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { Flex, Icon } from '@primitives';
-import { IconColorProps } from '@enums';
+import { IconColor } from '@enums';
 import { useRouter } from 'next/router';
 import type { LinkProps } from '../types';
 import * as styles from './styles';
@@ -10,10 +10,12 @@ export const DashboardLink: FC<LinkProps> = ({
   label,
   location,
   path,
+  onClick,
 }) => {
   const router = useRouter();
 
   const handleClick = () => {
+    onClick?.();
     router.push(path);
   };
 
@@ -22,7 +24,7 @@ export const DashboardLink: FC<LinkProps> = ({
       <Flex css={styles.linkContent}>
         <Icon
           cssExtend={styles.icon}
-          color={IconColorProps.YELLOW}
+          color={IconColor.YELLOW}
           icon={iconPath}
         />
         <div>

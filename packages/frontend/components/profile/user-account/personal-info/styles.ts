@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import type { Theme } from '@emotion/react';
+import { resetButton } from 'theme';
 
 export const form = () => css`
   display: flex;
@@ -51,7 +52,12 @@ export const actionWrapper = ({ mq, spaces }: Theme) => css`
 `;
 
 export const buttons = ({ spaces }: Theme) => css`
+  margin-top: ${spaces.xl};
   gap: ${spaces.sm};
+`;
+
+export const marginBottom = ({ spaces }: Theme) => css`
+  margin-bottom: ${spaces.xl11};
 `;
 
 export const sections = ({ mq }: Theme) => css`
@@ -82,6 +88,74 @@ export const groupePhone = ({ spaces }: Theme) => css`
   align-items: flex-end;
 `;
 
-export const phoneRow = () => css`
+export const phoneRow = css`
   flex-grow: 2;
+`;
+
+export const avatarPopoverTrigger = css`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+`;
+
+export const avatarUpdateButton = ({ colors, spaces, radiuses }: Theme) => css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${colors.backgroundLight};
+  width: ${spaces.xl2};
+  height: ${spaces.xl2};
+  border-radius: ${radiuses.circle};
+  cursor: pointer;
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: ${colors.backgroundDark};
+  }
+`;
+
+export const popoverContentItem = ({
+  spaces,
+  fontSizes,
+  lineHeights,
+  fontWeights,
+  colors,
+}: Theme) => css`
+  ${resetButton}
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+  padding: ${spaces.xs} ${spaces.lg};
+  cursor: pointer;
+  font-size: ${fontSizes.body1};
+  line-height: ${lineHeights.body1};
+  font-weight: ${fontWeights.body1};
+  color: ${colors.text};
+
+  :hover {
+    background-color: ${colors.backgroundLight};
+  }
+
+  & span {
+    float: left;
+  }
+
+  &[data-variant='icon'] {
+    padding: ${spaces.xs} ${spaces.md};
+    & > i {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      float: left;
+      width: ${spaces.sm};
+      margin-right: ${spaces.md};
+      color: ${colors.primaryLight};
+    }
+  }
+`;
+
+export const popoverContentWrapper = ({ spaces, shadows }: Theme) => css`
+  display: flex;
+  flex-direction: column;
+  padding: ${spaces.sm} 0;
+  box-shadow: ${shadows.bottom};
 `;

@@ -48,10 +48,20 @@ export const productTimer = css`
   left: 16%;
 `;
 
-export const productCard = ({ spaces, colors, radiuses }: Theme) => css`
+export const productCard = ({
+  spaces,
+  colors,
+  radiuses,
+  breakpoints,
+}: Theme) => css`
   border: 1px solid transparent;
   padding: ${spaces.lg} ${spaces.xl};
   border-radius: ${radiuses.xs};
+  box-sizing: border-box;
+
+  @media (max-width: ${breakpoints.md}px) {
+    padding: ${spaces.sm} ${spaces.md};
+  }
 
   &:hover {
     border: 1px solid ${colors.accent};

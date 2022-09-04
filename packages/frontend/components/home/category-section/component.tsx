@@ -4,6 +4,7 @@ import { StringCutter } from '@primitives';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
+import { Routes } from '@enums';
 import { SectionLayout } from '../section-layout';
 import {
   categoryContainer,
@@ -12,26 +13,27 @@ import {
   SplideSlideStyled,
   imageWrapper,
 } from './styles';
-
-const mockImage = [
-  '/images/categories/arts.png',
-  '/images/categories/toys.png',
-  '/images/categories/appliances.png',
-  '/images/categories/decor.png',
-];
+import { categoryImageById, DEFAULT_IMAGE } from './utlis';
 
 const CategorySection = () => {
   const categories = useTypedSelector((state) => state.category.list);
   const { t } = useTranslation();
-  const categoriesMapped = categories.map((item, i) => ({
-    ...item,
-    image: mockImage[i] || '/images/categories/decor.png',
-  }));
+  const limit = 4;
+
+  const categoriesLimit = categories?.slice(0, limit) || [];
+
+  const redirectToCategory = (category: string) => {
+    const filters = {
+      category: category,
+    };
+
+    return encodeURI(`${Routes.ITEMS}?filter=${JSON.stringify(filters)}`);
+  };
 
   return (
     <SectionLayout
       title={t('home:popularCategories.title')}
-      loadMoreTitle={t('home:popularCategories.link')}
+      // loadMoreTitle={t('home:popularCategories.link')}
     >
       <div css={categoryContainer}>
         <Splide
@@ -48,19 +50,20 @@ const CategorySection = () => {
             },
           }}
         >
-          {categoriesMapped.map((item) => (
+          {categoriesLimit.map((item) => (
             <SplideSlideStyled key={item.id}>
-              <Link href="#" passHref>
+              <Link href={redirectToCategory(item.title)} passHref>
                 <a css={categoryItem}>
                   <div css={categoryItemTitle}>
                     <StringCutter>{item.title}</StringCutter>
                   </div>
                   <div css={imageWrapper}>
                     <Image
-                      src={item.image}
+                      src={categoryImageById[item.id] || DEFAULT_IMAGE}
                       alt={item.title}
                       layout="fill"
                       objectFit="contain"
+                      priority
                     />
                   </div>
                 </a>

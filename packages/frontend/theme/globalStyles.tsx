@@ -11,10 +11,18 @@ export const globalStyles = (theme: Theme) => css`
     --grid-columns: 12;
   }
 
+  #nprogress .spinner {
+    visibility: hidden !important;
+  }
+
   #__next {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+  }
+
+  body {
+    opacity: 0;
   }
 
   body,

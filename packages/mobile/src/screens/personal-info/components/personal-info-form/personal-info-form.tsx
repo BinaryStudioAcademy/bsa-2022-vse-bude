@@ -21,6 +21,8 @@ type UserPersonalInfo = {
   linkedin?: string;
   facebook?: string;
   password: string;
+  newPassword: string;
+  repeatNewPassword: string;
 };
 
 type Props = {
@@ -162,22 +164,25 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
+        isSecure={true}
       />
       <Input
         label={t('verification.PASSWORD_NEW')}
         placeholder={t('verification.PASSWORD_HINT')}
-        name="password"
+        name="newPassword"
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
+        isSecure={true}
       />
       <Input
         label={t('verification.PASSWORD_REPEAT')}
         placeholder={t('verification.PASSWORD_HINT')}
-        name="password"
+        name="repeatNewPassword"
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
+        isSecure={true}
       />
       <View style={[globalStyles.mt5, globalStyles.mb3]}>
         <PrimaryButton
