@@ -21,13 +21,14 @@ export const Filter = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const filter: RequestOptions = JSON.parse(query.filter as string);
+    const filter: RequestOptions =
+      query.filter && JSON.parse(query.filter as string);
 
     dispatch(
       fetchProducts({
-        limit: filter.limit,
-        type: filter.type,
-        categoryId: filter.category,
+        limit: filter?.limit,
+        type: filter?.type,
+        categoryId: filter?.category,
       }),
     );
   }, [dispatch, query]);

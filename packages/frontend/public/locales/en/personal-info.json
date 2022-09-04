@@ -17,6 +17,7 @@
   },
   "avatar": {
     "change": "Change the Photo",
+    "upload": "Upload the Photo",
     "delete": "Delete the Photo"
   },
   "label": {

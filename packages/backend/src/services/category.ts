@@ -15,7 +15,7 @@ export class CategoryService {
 
       return result.map((item) => ({
         ...item,
-        title: lang(`translation:categories.${item.title}`),
+        title: lang(`categories:${item.title}`),
       }));
     } catch (err) {
       throw new Error(err);

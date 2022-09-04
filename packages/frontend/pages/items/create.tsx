@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import { wrapper } from 'store';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { ConsentModal } from '@components/make-a-post/consent';
 import { Layout } from '@components/layout';
 import { SavePost } from '@components/save-post';
 
@@ -24,7 +23,6 @@ const CreatePage = () => {
 
   return (
     <Layout title="Create post">
-      <ConsentModal></ConsentModal>
       <SavePost create={create} />
     </Layout>
   );
