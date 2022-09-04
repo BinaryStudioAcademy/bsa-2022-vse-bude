@@ -47,38 +47,31 @@ export class S3StorageService {
   }
 
   async uploadImage(req: UploadFileRequest): Promise<string> {
-    const { file } = req;
-    const uploadImage = await this.validateAndUploadImage(file, req);
-
-    return uploadImage;
+    return await this.validateAndUploadImage(req.file);
   }
 
   async uploadProductImages(req: UploadFilesRequest): Promise<string[]> {
     const { files } = req;
 
     const imagePromises = files.map((file) =>
-      this.validateAndUploadImage(file, req),
+      this.validateAndUploadImage(file),
     );
-    const imageLinks = await Promise.all(imagePromises);
 
-    return imageLinks;
+    return await Promise.all(imagePromises);
   }
 
-  private async validateAndUploadImage(
-    file: IFileUpload,
-    req: UploadFilesRequest | UploadFileRequest,
-  ) {
+  private async validateAndUploadImage(file: IFileUpload) {
     if (!file) {
-      throw new NoFileProvidedError(req);
+      throw new NoFileProvidedError();
     }
 
     const extension = file.mimetype.split('/')[1];
     if (!this.isFileExtensionValid(extension)) {
-      throw new UnsupportedFileExtensionError(req);
+      throw new UnsupportedFileExtensionError();
     }
 
     if (!this.isFileSizeValid(file.size)) {
-      throw new FileSizeTooLargeError(req);
+      throw new FileSizeTooLargeError();
     }
 
     const filename = this.generateFilename(extension);

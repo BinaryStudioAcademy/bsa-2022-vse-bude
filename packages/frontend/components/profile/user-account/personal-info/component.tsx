@@ -2,10 +2,10 @@ import { useTranslation } from 'next-i18next';
 import { useAuth, useTypedSelector, useAppDispatch } from '@hooks';
 import { shallowEqual } from 'react-redux';
 import { Flex } from 'grapefruit-ui';
-import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Button, Avatar } from '@primitives';
 import { fetchFullUserProfile } from '@store';
+import { setIsEditing } from '@store';
 import flag from '../../../../public/images/flagBg.png';
 import { NestedLayout } from '../common';
 import * as styles from './styles';
@@ -16,10 +16,9 @@ const ChangeAvatar = dynamic(() => import('./change-avatar'));
 
 export const PersonalInfo = () => {
   const { t } = useTranslation();
-  const [isEditing, setIsEditing] = useState(false);
   const { user: authUser } = useAuth();
 
-  const { user, loading } = useTypedSelector(
+  const { user, loading, isEditing } = useTypedSelector(
     (state) => state.profile,
     shallowEqual,
   );
@@ -49,7 +48,7 @@ export const PersonalInfo = () => {
               isLarge={true}
               loading={loading}
             />
-            {isAuthUser && <ChangeAvatar />}
+            {isAuthUser && <ChangeAvatar isAvatarExist={user.avatar} />}
           </div>
         </div>
         {!isEditing && isAuthUser && (
@@ -59,8 +58,8 @@ export const PersonalInfo = () => {
               variant="outlined"
               disabled={loading}
               onClick={() => {
-                setIsEditing(true);
                 onGetFullProfile();
+                dispatch(setIsEditing());
               }}
             >
               {t('personal-info:action.edit')}

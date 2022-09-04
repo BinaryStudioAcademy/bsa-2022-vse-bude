@@ -5,7 +5,7 @@ export const authSection = ({ mq }: Theme) => css`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  ${mq[1]} {
+  ${mq[2]} {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -17,7 +17,7 @@ export const bgWrapper = ({ mq }: Theme) => css`
   height: 100px;
   width: 100%;
 
-  ${mq[1]} {
+  ${mq[2]} {
     max-width: 56%;
     min-height: 100vh;
     overflow: hidden;
@@ -37,7 +37,7 @@ export const formWrapper = ({ mq, colors, radiuses }: Theme) => css`
   width: 100%;
   border-radius: ${radiuses.md} ${radiuses.md} 0 0;
   background-color: ${colors.background};
-  ${mq[1]} {
+  ${mq[2]} {
     position: static;
     width: 44%;
     border-radius: 0;
@@ -57,7 +57,7 @@ export const productImgWrapper = ({ mq }: Theme) => css`
   padding-top: 75%;
   width: 100%;
   display: none;
-  ${mq[1]} {
+  ${mq[2]} {
     display: block;
   }
 `;
@@ -88,7 +88,7 @@ export const controlsWrapper = css`
 `;
 export const logo = ({ mq, spaces }: Theme) => css`
   text-align: center;
-  ${mq[1]} {
+  ${mq[2]} {
     text-align: left;
     margin-bottom: ${spaces.xl4};
   }

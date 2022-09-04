@@ -1,5 +1,4 @@
 ﻿import { css } from '@emotion/react';
-import { ColorPalette } from '@vse-bude/shared';
 import type { Theme } from 'theme';
 
 export const wrapper = ({ spaces, breakpoints }: Theme) => css`
@@ -10,13 +9,13 @@ export const wrapper = ({ spaces, breakpoints }: Theme) => css`
   }
 `;
 
-export const favouriteButton = ({ spaces }: Theme) => css`
-  color: ${ColorPalette.YELLOW_200};
-  margin-left: ${spaces.sm};
+export const favouriteButton = ({ spaces, colors }: Theme) => css`
+  color: ${colors.primary};
   width: ${spaces.xl4};
   height: ${spaces.xl4};
 `;
-export const controlls = ({ breakpoints }: Theme) => css`
+
+export const controls = ({ breakpoints }: Theme) => css`
   width: 100%;
   display: flex;
   align-items: flex-start;
@@ -118,13 +117,12 @@ export const priceWrapper = ({
   }
 `;
 
-export const leaveAuctionBlock = css`
-  display: flex;
-  margin-top: 10px;
-  justify-content: end;
-`;
-
-export const buttons = css`
+export const buttons = ({ spaces, breakpoints }: Theme) => css`
   display: flex;
   align-items: center;
+  margin-left: ${spaces.md};
+  gap: ${spaces.md};
+  @media (max-width: ${breakpoints.md}px) {
+    margin-left: 0;
+  }
 `;

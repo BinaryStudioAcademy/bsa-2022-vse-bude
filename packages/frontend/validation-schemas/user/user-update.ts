@@ -8,7 +8,7 @@ export const userUpdateSchema = (t: TFunction) =>
     firstName: Joi.string()
       .trim()
       .required()
-      .pattern(/^[^-](([a-zA-Z]+)|([а-яёіїґєА-ЯЁIЇҐЄ]+))$/)
+      .pattern(/^[^-](([a-zA-Z'-]+)|([а-яёіїґєА-ЯЁIЇҐЄ'-]+))[^-]$/)
       .min(ValidationRanges.MIN_NAME_SYMBOLS)
       .max(ValidationRanges.MAX_NAME_SYMBOLS)
       .messages({
@@ -23,7 +23,7 @@ export const userUpdateSchema = (t: TFunction) =>
     lastName: Joi.string()
       .trim()
       .required()
-      .pattern(/^[^-](([a-zA-Z]+)|([а-яёіїґєА-ЯЁIЇҐЄ'-]+))[^-]$/)
+      .pattern(/^[^-](([a-zA-Z'-]+)|([а-яёіїґєА-ЯЁIЇҐЄ'-]+))[^-]$/)
       .min(ValidationRanges.MIN_NAME_SYMBOLS)
       .max(ValidationRanges.MAX_NAME_SYMBOLS)
       .messages({
@@ -52,7 +52,7 @@ export const userUpdateSchema = (t: TFunction) =>
 
     phone: Joi.string()
       .allow('')
-      .pattern(/^((\+\d{12,15})|(\+380\d{9}))$/)
+      //.pattern(/^((\+\d{12,15})|(\+380\d{9}))$/)
       .messages({
         'string.pattern.base': t(
           UserPersonalInfoValidationMessage.PHONE_PATTERN,

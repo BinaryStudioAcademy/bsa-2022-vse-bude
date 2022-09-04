@@ -7,6 +7,7 @@ import type {
 } from '@vse-bude/shared';
 import { ProductType } from '@vse-bude/shared';
 import {
+  getProductById,
   fetchAuctionPermissions,
   getProductByIdSSR,
   getProducts,
@@ -20,6 +21,7 @@ import { ProductActions } from './action-types';
 interface RequestOptions {
   limit?: number;
   type?: ProductType;
+  categoryId?: string;
 }
 
 // interface RequestOptionsSSR extends RequestOptions {
@@ -28,10 +30,14 @@ interface RequestOptions {
 
 export const fetchProducts = createAsyncThunk(
   ProductActions.FETCH_PRODUCTS,
-  async ({ limit, type }: RequestOptions, { rejectWithValue, dispatch }) =>
+  async (
+    { limit, type, categoryId }: RequestOptions,
+    { rejectWithValue, dispatch },
+  ) =>
     getProducts({
       limit,
       type,
+      categoryId,
     }).catch((e) => {
       dispatch(
         addToast({
@@ -72,6 +78,11 @@ export const fetchProductSSR = createAsyncThunk(
     getProductByIdSSR(params.http, params.id).catch(() => {
       rejectWithValue(null);
     }),
+);
+
+export const fetchCurrentProduct = createAsyncThunk(
+  ProductActions.GET_CURRENT_PRODUCT,
+  async (id: string) => getProductById(id),
 );
 
 export const updateProductViews = createAsyncThunk(

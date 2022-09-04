@@ -111,5 +111,13 @@ export const initVerifyRoutes = (
     }),
   );
 
+  router.post(
+    apiPath(path, VerifyApiRoutes.EMAIL_RESEND_CODE),
+    authMiddleware,
+    wrap((req: Request) =>
+      verifyService.resendEmailCode(req.userId, VerificationTypes.EMAIL),
+    ),
+  );
+
   return router;
 };

@@ -6,33 +6,51 @@ import {
   showVerifyModal,
 } from './actions';
 
-interface VerifyModalState {
-  isVerifyPhoneModalOpen: boolean;
-  variant: number;
+interface ModalsState {
+  verifyPhoneModal: {
+    isModalOpen: boolean;
+    step: number;
+  };
+  isCreatePostModalShown: boolean;
 }
 
-const initialState: VerifyModalState = {
-  isVerifyPhoneModalOpen: false,
-  variant: 0,
+const initialState: ModalsState = {
+  verifyPhoneModal: {
+    isModalOpen: false,
+    step: 0,
+  },
+  isCreatePostModalShown: false,
 };
 
-export const verifyModalReducer = createReducer(initialState, {
+export const modalsReducer = createReducer(initialState, {
   [showVerifyModal.type]: (state) => ({
     ...state,
-    isVerifyPhoneModalOpen: true,
+    verifyPhoneModal: {
+      isModalOpen: true,
+      step: state.verifyPhoneModal.step,
+    },
   }),
   [hideVerifyModal.type]: (state) => ({
     ...state,
-    isVerifyPhoneModalOpen: false,
+    verifyPhoneModal: {
+      isModalOpen: false,
+      step: state.verifyPhoneModal.step,
+    },
   }),
   [nextVerifyModal.type]: (state) => ({
     ...state,
-    variant: state.variant + 1,
+    verifyPhoneModal: {
+      isModalOpen: state.verifyPhoneModal.isModalOpen,
+      step: state.verifyPhoneModal.step + 1,
+    },
   }),
   [previousVerifyModal.type]: (state) => ({
     ...state,
-    variant: state.variant - 1,
+    verifyPhoneModal: {
+      isModalOpen: state.verifyPhoneModal.isModalOpen,
+      step: state.verifyPhoneModal.step - 1,
+    },
   }),
 });
 
-export type { VerifyModalState };
+export type { ModalsState };

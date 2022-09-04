@@ -7,8 +7,7 @@ export const createProductValidation = (
   _res: Response,
   next: NextFunction,
 ) => {
-  const { t } = req;
-  const { error } = createPostSchema(t).validate(req.body);
+  const { error } = createPostSchema.validate(req.body);
   if (error) {
     throw new FieldError(error.message);
   }

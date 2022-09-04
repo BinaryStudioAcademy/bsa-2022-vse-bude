@@ -33,7 +33,7 @@ const CategorySection = () => {
   return (
     <SectionLayout
       title={t('home:popularCategories.title')}
-      loadMoreTitle={t('home:popularCategories.link')}
+      // loadMoreTitle={t('home:popularCategories.link')}
     >
       <div css={categoryContainer}>
         <Splide
@@ -63,6 +63,7 @@ const CategorySection = () => {
                       alt={item.title}
                       layout="fill"
                       objectFit="contain"
+                      priority
                     />
                   </div>
                 </a>

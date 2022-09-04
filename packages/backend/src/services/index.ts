@@ -1,11 +1,10 @@
-import { Environment } from '@vse-bude/shared';
 import type { Repositories } from '@repositories';
 import {
   TwilioSMSProvider,
   BarSMSProvider,
   SendInBlueEmailProvider,
 } from '@providers';
-import { getEnv } from '@helpers';
+import { isProduction } from '@helpers';
 import { CategoryService } from './category';
 import { ProductService } from './product';
 import { AuthService } from './auth';
@@ -19,10 +18,9 @@ import { HealthService } from './health';
 import { EmailService } from './email';
 import { UserProfileService } from './profile';
 import { BidService } from './bid';
+import { MyListService } from './my-list';
 
 export const initServices = (repositories: Repositories) => {
-  const isProduction = getEnv('NODE_ENV') === Environment.PRODUCTION;
-
   const hashService: HashService = new HashService();
   const redisService: RedisStorageService = new RedisStorageService(
     isProduction,
@@ -77,6 +75,9 @@ export const initServices = (repositories: Repositories) => {
       repositories.bidRepository,
       repositories.productRepository,
     ),
+    myListService: new MyListService({
+      myListRepository: repositories.myListRepository,
+    }),
   };
 };
 
@@ -94,4 +95,5 @@ export {
   type EmailService,
   type BidService,
   type S3StorageService,
+  type MyListService,
 };

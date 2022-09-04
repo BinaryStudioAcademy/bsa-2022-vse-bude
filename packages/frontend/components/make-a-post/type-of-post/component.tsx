@@ -33,6 +33,11 @@ export const PostTypeModal = ({ isOpen, setIsOpen }: PostTypeProps) => {
           <Button
             onClick={() => router.push(`${Routes.ITEMS}${ItemRoutes.CREATE}`)}
             disabled={!isConfirmed}
+            tooltip={
+              isConfirmed
+                ? t('common:components.typeOfPost.btn.auction')
+                : t('common:components.typeOfPost.btn.tooltip.auction')
+            }
           >
             {t('common:components.typeOfPost.btn.auction')}
           </Button>
@@ -40,6 +45,11 @@ export const PostTypeModal = ({ isOpen, setIsOpen }: PostTypeProps) => {
           <Button
             onClick={() => router.push(`${Routes.ITEMS}${ItemRoutes.CREATE}`)}
             disabled={!isConfirmed}
+            tooltip={
+              isConfirmed
+                ? t('common:components.typeOfPost.btn.directSale')
+                : t('common:components.typeOfPost.btn.tooltip.directSale')
+            }
           >
             {t('common:components.typeOfPost.btn.directSale')}
           </Button>
