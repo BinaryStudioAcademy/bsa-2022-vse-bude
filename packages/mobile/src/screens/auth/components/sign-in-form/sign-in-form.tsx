@@ -47,12 +47,11 @@ const SignInForm: FC<Props> = ({ onSubmit }) => {
         contentContainerStyle={globalStyles.mt5}
         isSecure={true}
       />
-      <ButtonText
-        onPress={navigateResetPassword}
-        style={[{ textAlign: 'right' }]}
-      >
-        Forgot password
-      </ButtonText>
+      <View style={globalStyles.mt5}>
+        <ButtonText alignSelf="flex-end" onPress={navigateResetPassword}>
+          Forgot password
+        </ButtonText>
+      </View>
       <View style={globalStyles.mt5}>
         <PrimaryButton
           label={t('verification.SING_IN')}

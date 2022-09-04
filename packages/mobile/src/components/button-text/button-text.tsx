@@ -6,14 +6,24 @@ import { globalStyles } from '~/styles/styles';
 type Props = {
   onPress: () => void;
   children: string;
-  style?: TextStyle[];
+  alignSelf: 'flex-end' | 'flex-start' | 'center';
+  textStyle?: TextStyle[];
 };
 
-const ButtonText: FC<Props> = ({ onPress, children, style = [] }) => {
+const ButtonText: FC<Props> = ({
+  onPress,
+  children,
+  alignSelf = 'flex-start',
+  textStyle = [],
+}) => {
   return (
-    <TouchableOpacity onPress={() => onPress()}>
+    <TouchableOpacity style={{ alignSelf }} onPress={() => onPress()}>
       <Text
-        style={[{ color: ColorPalette.YELLOW_100 }, globalStyles.mt5, ...style]}
+        style={[
+          { color: ColorPalette.YELLOW_100 },
+          globalStyles.fs12,
+          ...textStyle,
+        ]}
       >
         {children}
       </Text>
