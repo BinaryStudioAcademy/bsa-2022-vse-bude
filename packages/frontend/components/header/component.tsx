@@ -1,4 +1,4 @@
-import { Button, Container, IconButton, Loader } from '@primitives';
+import { Button, Container, Flex, IconButton, Loader } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { Fragment, useState, useEffect } from 'react';
@@ -25,19 +25,17 @@ export const Header = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
-  const { list: categories, loading: categoriesLoading } = useTypedSelector(
-    (state) => state.category,
-  );
+  const categories = useTypedSelector((state) => state.category.list);
 
   useEffect(() => {
-    if (!categories.length && !categoriesLoading) {
+    if (!categories.length) {
       const category: RequestOptions = {
         locale: locale as HttpAcceptLanguage,
       };
 
       dispatch(fetchCategories({ locale: category.locale }));
     }
-  }, [dispatch, locale, categories, categoriesLoading]);
+  }, [dispatch, locale, categories]);
 
   const renderAuthButtons = () => (
     <div className="buttons-wrapper">
@@ -80,15 +78,16 @@ export const Header = () => {
     <Fragment>
       <header css={styles.header}>
         <Container cssExtend={styles.headerInner}>
-          <Link href={Routes.DEFAULT}>
-            <a>
-              <Logo />
-            </a>
-          </Link>
-          <div className="header-content">
-            {<Navigation categories={categories || []} />}
-          </div>
-
+          <Flex align="center">
+            <Link href={Routes.DEFAULT}>
+              <a>
+                <Logo />
+              </a>
+            </Link>
+            <div className="header-content">
+              {<Navigation categories={categories || []} />}
+            </div>
+          </Flex>
           {isMounted && (
             <>
               {user || loading ? (

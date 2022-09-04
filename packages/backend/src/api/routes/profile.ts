@@ -1,6 +1,6 @@
 import type { Services } from '@services';
 import { type Request, Router } from 'express';
-import type { ApiRoutes, MyListItem } from '@vse-bude/shared';
+import type { ApiRoutes } from '@vse-bude/shared';
 import { ProfileApiRoutes, AccountApiRoutes } from '@vse-bude/shared';
 import { wrap } from '@helpers';
 import { apiPath } from '@helpers';
@@ -32,7 +32,7 @@ export const initProfileRoutes = (
   router.get(
     apiPath(path, AccountApiRoutes.MY_LIST),
     authMiddleware,
-    wrap(async (req: Request): Promise<MyListItem[]> => {
+    wrap(async (req: Request) => {
       const { userId } = req;
       await profileService.getUser({
         userId,
