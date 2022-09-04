@@ -4,6 +4,7 @@ import { FavoriteButton } from 'components/product/favorite-button/component';
 import { useTranslation } from 'next-i18next';
 import { ItemTitle, ItemInfo, ItemPrice } from '../item-info';
 import * as styles from './styles';
+import { useTypedSelector } from '@hooks';
 
 interface ItemInfoSellingProps {
   item: ItemDto;
@@ -19,6 +20,7 @@ export const ItemInfoSelling = ({
   onChangeIsFavorite,
 }: ItemInfoSellingProps) => {
   const { t } = useTranslation('item');
+  const { user } = useTypedSelector((state) => state.auth);
 
   return (
     <div css={styles.wrapper}>
@@ -36,6 +38,7 @@ export const ItemInfoSelling = ({
           isFavorite={isInFavorite}
           backgroundColor="transparent"
           size="md"
+          disabled={!user}
         />
         <Button onClick={onBuy}>{t('buttons.buyBtn')}</Button>
       </div>

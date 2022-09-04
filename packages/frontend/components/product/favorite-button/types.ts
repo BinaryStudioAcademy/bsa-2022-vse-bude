@@ -12,4 +12,5 @@ export interface FavoriteButtonProps {
   cssExtended?: Interpolation<Theme>;
   inFavouriteColor?: IconColor;
   notInFavouriteColor?: IconColor;
+  disabled?: boolean;
 }

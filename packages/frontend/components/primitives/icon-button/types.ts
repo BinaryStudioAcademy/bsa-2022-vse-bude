@@ -10,6 +10,7 @@ export type IconButtonProps = {
   cssExtend?: Interpolation<Theme>;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   type?: 'button' | 'submit';
+  disabled?: boolean;
 };
 
 export type BackgroundColorProp = 'lightgray' | 'darkgray' | 'transparent';

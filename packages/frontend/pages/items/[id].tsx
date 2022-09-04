@@ -52,6 +52,7 @@ const ItemPage = () => {
     (state) => state.product.currentItem,
     shallowEqual,
   );
+  const user = useTypedSelector((state) => state.user, shallowEqual);
 
   const similarProducts = useTypedSelector(
     (state) => state.product.similarProducts,
@@ -63,13 +64,15 @@ const ItemPage = () => {
 
   useEffect(() => {
     dispatch(updateProductViews(item.id));
-    dispatch(
-      auctionPermissions({
-        productId: item.id,
-      }),
-    );
+    if (user) {
+      dispatch(
+        auctionPermissions({
+          productId: item.id,
+        }),
+      );
+    }
     dispatch(fetchSimilarProducts(item.id));
-  }, [item.id, dispatch]);
+  }, [item.id, dispatch, user]);
 
   return (
     <Layout title={item.title}>
