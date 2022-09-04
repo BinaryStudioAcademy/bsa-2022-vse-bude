@@ -2,9 +2,9 @@
 import { Button } from '@primitives';
 import { FavoriteButton } from 'components/product/favorite-button/component';
 import { useTranslation } from 'next-i18next';
+import { useTypedSelector } from '@hooks';
 import { ItemTitle, ItemInfo, ItemPrice } from '../item-info';
 import * as styles from './styles';
-import { useTypedSelector } from '@hooks';
 
 interface ItemInfoSellingProps {
   item: ItemDto;
