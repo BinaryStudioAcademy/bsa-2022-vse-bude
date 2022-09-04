@@ -37,6 +37,14 @@ export const pickImageCamera = async (): Promise<Asset | null> => {
   if (response.didCancel) {
     notification.info(i18n.t('common:errors.DID_CANCEL'));
   }
+  if (
+    response?.assets?.[0]?.fileSize !== undefined &&
+    response?.assets?.[0]?.fileSize >= MAX_IMAGE_SIZE
+  ) {
+    notification.error(i18n.t('errors.MAX_IMAGE_SIZE'));
+
+    return null;
+  }
 
   return response?.assets?.[0] || null;
 };
