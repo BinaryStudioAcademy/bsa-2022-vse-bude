@@ -5,7 +5,6 @@ import {
   UserAddressDto,
   MappedLinks,
   DefaultInpValue,
-  SocialMedia,
   SocialMediaType,
 } from '@vse-bude/shared';
 
@@ -27,21 +26,6 @@ const DEFAULT_SOCIAL_PAYLOAD: MappedLinks = {
   instagram: '',
   linkedin: '',
 };
-
-const DEFAULT_SOCIAL_UPDATE_PAYLOAD: SocialMedia[] = [
-  {
-    link: '',
-    socialMedia: SocialMediaType.FACEBOOK,
-  },
-  {
-    link: '',
-    socialMedia: SocialMediaType.INSTAGRAM,
-  },
-  {
-    link: '',
-    socialMedia: SocialMediaType.LINKEDIN,
-  },
-];
 
 const personalInfoParser: PersonalInfoParser = (user) => {
   const { firstName, lastName, email, phone, socialMedia, userAddress } = user;
@@ -92,32 +76,20 @@ const updatePersonalInfoParser: UpdatePersonalInfoParser = (data) => {
     repeatPassword,
   } = data;
 
-  const socialMedia: SocialMedia[] = [];
-
-  DEFAULT_SOCIAL_UPDATE_PAYLOAD.forEach((item) => {
-    switch (item.socialMedia) {
-      case SocialMediaType.FACEBOOK:
-        socialMedia.push({
-          link: facebook,
-          socialMedia: item.socialMedia,
-        });
-        break;
-      case SocialMediaType.INSTAGRAM:
-        socialMedia.push({
-          link: instagram,
-          socialMedia: item.socialMedia,
-        });
-        break;
-      case SocialMediaType.LINKEDIN:
-        socialMedia.push({
-          link: linkedin,
-          socialMedia: item.socialMedia,
-        });
-        break;
-      default:
-        break;
-    }
-  });
+  const socialMedia = [
+    {
+      link: facebook || '',
+      socialMedia: SocialMediaType.FACEBOOK,
+    },
+    {
+      link: instagram || '',
+      socialMedia: SocialMediaType.INSTAGRAM,
+    },
+    {
+      link: linkedin || '',
+      socialMedia: SocialMediaType.LINKEDIN,
+    },
+  ];
 
   return {
     firstName,
