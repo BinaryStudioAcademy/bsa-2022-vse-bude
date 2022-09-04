@@ -98,6 +98,7 @@ const ChangeAvatar = ({ isAvatarExist }: ChangeAvatarProps) => {
           />
         }
         triggerWrapperCssExtend={styles.avatarPopoverTrigger}
+        bodyWrapperCssExtend={styles.bodyWrapper}
         placement="bottom-left"
         position="absolute"
       >
