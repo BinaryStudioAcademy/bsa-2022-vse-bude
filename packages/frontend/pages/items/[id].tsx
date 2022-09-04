@@ -64,6 +64,10 @@ const ItemPage = () => {
 
   useEffect(() => {
     dispatch(updateProductViews(item.id));
+    dispatch(fetchSimilarProducts(item.id));
+  }, [item.id, dispatch]);
+
+  useEffect(() => {
     if (user) {
       dispatch(
         auctionPermissions({
@@ -71,7 +75,6 @@ const ItemPage = () => {
         }),
       );
     }
-    dispatch(fetchSimilarProducts(item.id));
   }, [item.id, dispatch, user]);
 
   return (
