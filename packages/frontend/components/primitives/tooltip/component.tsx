@@ -12,6 +12,7 @@ export const Tooltip = ({
   hideTimeoutMs = 100,
 }: TooltipProps) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [fadeOut, setFadeOut] = useState(false);
 
   const bodyRef = useRef<HTMLDivElement>();
   const triggerWrapperRef = useRef<HTMLSpanElement>();
@@ -82,7 +83,11 @@ export const Tooltip = ({
 
   const handleMouseLeave = () => {
     timerRef.current = setTimeout(() => {
-      setIsVisible(false);
+      setFadeOut(true);
+      setTimeout(() => {
+        setIsVisible(false);
+        setFadeOut(false);
+      }, hideTimeoutMs);
     }, hideTimeoutMs);
   };
 
@@ -91,7 +96,7 @@ export const Tooltip = ({
       ref={bodyRef}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      css={styles.body}
+      css={[styles.body, fadeOut && styles.fadeOut]}
     >
       {children}
     </div>
