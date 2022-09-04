@@ -73,9 +73,9 @@ const productSlice = createSlice({
       state.loading = false;
     },
     [makeBid.rejected.type](state) {
-      state.loading = true;
+      state.loading = false;
     },
-    
+
     [auctionLeaveAction.fulfilled.type](state, { payload }) {
       state.currentItem.currentPrice = payload.price;
     },
