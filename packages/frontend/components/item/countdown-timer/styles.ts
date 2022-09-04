@@ -1,5 +1,5 @@
-﻿import { css } from '@emotion/react';
-import type { Theme } from 'theme';
+﻿import type { Theme } from '@emotion/react';
+import { css } from '@emotion/react';
 
 export const wrapper = ({
   spaces,
@@ -21,7 +21,7 @@ export const wrapper = ({
 
     span {
       display: block;
-      &:first-child {
+      &:first-of-type {
         font-size: ${fontSizes.h3};
         margin-bottom: ${spaces.xs};
         font-family: Roboto, sans-serif;
@@ -41,21 +41,21 @@ export const wrapper = ({
     flex: 1;
     div {
       span {
-        &:first-child {
+        &:first-of-type {
           font-size: ${fontSizes.h3};
+        }
       }
     }
-  }
 
-  @media (max-width: ${breakpoints.sm}px) {
-    flex: 1;
-    div {
-      span {
-        &:first-child {
-          font-size: ${fontSizes.h4};
+    @media (max-width: ${breakpoints.sm}px) {
+      flex: 1;
+      div {
+        span {
+          &:first-of-type {
+            font-size: ${fontSizes.h4};
+          }
+        }
       }
     }
   }
 `;
-
-export const cell = css``;

@@ -197,5 +197,3 @@ const darkTheme = {
 };
 
 export { lightTheme, darkTheme };
-
-export type Theme = typeof lightTheme;

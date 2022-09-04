@@ -1,5 +1,5 @@
-﻿import { css } from '@emotion/react';
-import type { Theme } from '../../../theme';
+﻿import type { Theme } from '@emotion/react';
+import { css } from '@emotion/react';
 
 export const body = ({ colors, spaces, fontSizes }: Theme) => css`
   position: absolute;
