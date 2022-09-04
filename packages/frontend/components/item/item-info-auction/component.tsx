@@ -1,5 +1,5 @@
 ﻿import type { CreateBidRequest, ItemDto } from '@vse-bude/shared';
-import { Button, Input, Tooltip } from '@primitives';
+import { Button, Input, Loader, Tooltip } from '@primitives';
 import dynamic from 'next/dynamic';
 import { FavoriteButton } from 'components/product/favorite-button/component';
 import { useTranslation } from 'next-i18next';
@@ -43,6 +43,7 @@ export const ItemInfoAuction = ({
     permissions: { isAbleToLeaveAuction },
   } = useTypedSelector((state) => state.product);
   const { user } = useTypedSelector((state) => state.auth);
+  const { loading } = useTypedSelector((state) => state.product);
 
   const {
     register,
@@ -133,7 +134,7 @@ export const ItemInfoAuction = ({
           </Tooltip>
           <Button
             type="submit"
-            disabled={!user || !user.phoneVerified}
+            disabled={!user || !user.phoneVerified || loading}
             tooltip={
               user
                 ? user.phoneVerified
@@ -142,7 +143,7 @@ export const ItemInfoAuction = ({
                 : t('buttons.tooltips.notAuthorized.placeBid')
             }
           >
-            {t('buttons.placeBid')}
+            {loading ? <Loader size="extraSmall" /> : t('buttons.placeBid')}
           </Button>
           {!!isAbleToLeaveAuction && user && (
             <Button
