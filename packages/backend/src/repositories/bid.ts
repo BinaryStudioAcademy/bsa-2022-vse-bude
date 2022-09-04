@@ -8,14 +8,17 @@ export class BidRepository {
     this._dbClient = dbClient;
   }
 
-  create(dto: CreateBidDto) {
-    return this._dbClient.bid.create({
-      data: {
-        bidderId: dto.bidderId,
-        productId: dto.productId,
-        price: dto.price,
-      },
-    });
+  create({ bidderId, price, productId }: CreateBidDto) {
+    return this._dbClient.$transaction([
+      this._dbClient.bid.create({
+        data: {
+          bidderId,
+          productId,
+          price
+        }
+      }),
+      this._dbClient.product.update({ data: { price }, where: { id: productId } })
+    ]);
   }
 
   async getByUserAndProduct(userId: string, productId: string) {

@@ -37,6 +37,8 @@ export class BidService {
       throw new LowBidPriceError();
     }
 
-    return this._bidRepository.create(dto);
+    const [bid] = await this._bidRepository.create(dto);
+
+    return bid;
   }
 }
