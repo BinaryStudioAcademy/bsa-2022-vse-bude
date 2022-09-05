@@ -5,7 +5,7 @@ import { LinkButton } from 'components/primitives/link-button';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import hand from 'public/images/mocup_hand1.png';
-import { nextVerifyModal, hideVerifyModal } from 'store/verify/actions';
+import { nextVerifyModal, hideVerifyModal } from 'store/modals/actions';
 import * as styles from '../styles';
 
 const EnterPhoneModal = () => {
@@ -18,7 +18,7 @@ const EnterPhoneModal = () => {
   };
 
   const changeModal = (e) => {
-    e.preventDefault();
+    e.preventDefault();    
     dispatch(nextVerifyModal());
   };
 
