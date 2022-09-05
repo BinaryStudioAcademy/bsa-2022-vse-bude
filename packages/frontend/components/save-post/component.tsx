@@ -1,18 +1,14 @@
 import { useTranslation } from 'next-i18next';
 import { Container } from '@primitives';
+import { ProductType } from '@vse-bude/shared';
 import { NestedLayout } from '../profile/user-account/common';
-import PostForm from './form';
+import type { SavePostProps } from './types';
+import AuctionForm from './auction-form';
+import ProductForm from './product-form';
 import * as styles from './styles';
 
-export const SavePost = ({
-  create,
-  edit,
-}: {
-  create: string;
-  edit?: boolean;
-}) => {
+export const SavePost = ({ type, edit }: SavePostProps) => {
   const { t } = useTranslation();
-  console.log(create);
 
   const title = edit
     ? t('create-post:headline.editPost')
@@ -24,7 +20,8 @@ export const SavePost = ({
         <h3 css={styles.pageHeader}>{title}</h3>
         <div css={styles.form}>
           <div css={styles.sections}>
-            <PostForm edit={edit} />
+            {type === ProductType.AUCTION && <AuctionForm edit={edit} />}
+            {type === ProductType.SELLING && <ProductForm edit={edit} />}
           </div>
         </div>
       </Container>

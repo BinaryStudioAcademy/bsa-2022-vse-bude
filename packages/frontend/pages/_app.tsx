@@ -7,6 +7,8 @@ import { UserProvider, ThemeProvider } from '@providers';
 import '../public/css/fontawesome.css';
 import dynamic from 'next/dynamic';
 import { Modals } from '@components/modals/component';
+import { useRouter } from 'next/router';
+import { http } from '@helpers';
 
 const PageLoaderDynamic = dynamic(() => import('@components/pages-loader'));
 const ToastStackDynamic = dynamic(() => import('@components/toasts/stack'));
@@ -20,7 +22,10 @@ type AppPropsWithLayout = AppProps & {
 };
 
 const App = ({ Component, pageProps }: AppPropsWithLayout) => {
+  const { locale } = useRouter();
   const getLayout = Component.getLayout ?? ((page) => page);
+
+  http.setLocale(locale);
 
   return (
     <ThemeProvider>

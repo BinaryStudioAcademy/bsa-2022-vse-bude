@@ -23,7 +23,8 @@ import { shallowEqual } from 'react-redux';
 export const getServerSideProps = withPublic(
   wrapper.getServerSideProps((store) => async (ctx) => {
     const { locale, query } = ctx;
-    const http = new Http(process.env.NEXT_PUBLIC_API_ROUTE);
+
+    const http = new Http(process.env.NEXT_PUBLIC_API_ROUTE, locale);
     const id = query.id as string;
 
     const { payload } = await store.dispatch(fetchProductSSR({ id, http }));

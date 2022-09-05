@@ -6,7 +6,6 @@ import dynamic from 'next/dynamic';
 import { Button, Avatar } from '@primitives';
 import { fetchFullUserProfile } from '@store';
 import { setIsEditing } from '@store';
-import flag from '../../../../public/images/flagBg.png';
 import { NestedLayout } from '../common';
 import * as styles from './styles';
 import { ProfileData } from './primitives';
@@ -37,7 +36,7 @@ export const PersonalInfo = () => {
       <div css={styles.personalHeader}>
         <div css={[styles.headerWrapper, !isAuthUser && styles.marginBottom]}>
           <div css={styles.flagWrapper}>
-            <img css={styles.flag} src={flag.src} alt="flag" />
+            <div css={styles.flag}></div>
           </div>
 
           <div css={styles.avatarWrapper}>

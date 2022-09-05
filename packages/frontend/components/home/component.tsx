@@ -23,6 +23,7 @@ const Home = ({ auctionProducts, sellingProducts }: HomeProps) => {
         title={t('home:popularLots.title')}
         lots={auctionProducts}
         loadMoreTitle={t('home:popularLots.link')}
+        loadImageHighPriority
         loadMoreHref={redirectToFilterByType(ProductType.AUCTION)}
       />
       <CharitySection />

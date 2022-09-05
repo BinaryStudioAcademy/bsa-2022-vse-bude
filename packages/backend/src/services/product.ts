@@ -15,6 +15,7 @@ import type {
   CreateProduct,
   UpdateProduct,
 } from '@vse-bude/shared';
+import { ProductType } from '@vse-bude/shared';
 import type { Product } from '@prisma/client';
 import type { Bid } from '@prisma/client';
 import { ProductStatus } from '@prisma/client';
@@ -164,6 +165,12 @@ export class ProductService {
       throw new FieldError(error.message);
     }
     const imageLinks = await this._s3StorageService.uploadProductImages(req);
+    if (fieldsData.type === ProductType.AUCTION) {
+      fieldsData.price = fieldsData.recommendedPrice;
+    }
+    if (fieldsData.status !== ProductStatus.DRAFT) {
+      fieldsData.postDate = new Date();
+    }
     const data = {
       imageLinks,
       authorId: userId,
@@ -195,15 +202,19 @@ export class ProductService {
       [],
     );
 
-    deletedImages.forEach(
-      async (image) =>
-        await this._s3StorageService.deleteImage(getFilenameFromUrl(image)),
-    );
+    for await (const image of deletedImages) {
+      await this._s3StorageService.deleteImage(getFilenameFromUrl(image));
+    }
 
     const imageLinks = oldImages
       ? [...oldImages, ...newImageLinks]
       : newImageLinks;
-
+    if (
+      product.status === ProductStatus.DRAFT &&
+      fieldsData.status !== ProductStatus.DRAFT
+    ) {
+      fieldsData.postDate = new Date();
+    }
     const data = {
       imageLinks,
       authorId: userId,

@@ -5,7 +5,7 @@ class WrongPasswordError extends HttpError {
   constructor() {
     super({
       status: HttpStatusCode.BAD_REQUEST,
-      message: lang('translation:WRONG_PASSWORD'),
+      message: lang('personal-info:validation.password.wrongPassword'),
     });
   }
 }

@@ -55,7 +55,7 @@ export const profileMapper = ({
     firstName,
     lastName,
     email,
-    phone: phone || DefaultInpValue.PHONE,
+    phone,
     ...mappedAddress,
     ...mappedSocialMedia,
     password: '',
@@ -76,6 +76,11 @@ export const updateDtoMapper = ({
     lastName,
     email,
     phone,
+    country,
+    region,
+    city,
+    zip,
+    deliveryData,
     instagram,
     linkedin,
     facebook,
@@ -101,11 +106,22 @@ export const updateDtoMapper = ({
     }
   }
 
+  let isAddressNull = true;
+  const addressDto = { country, region, city, zip, deliveryData };
+  const mappedAddress: UserAddressDto = {};
+  addressKeys.forEach((key) => {
+    if (addressDto[key]) {
+      mappedAddress[key] = addressDto[key] ? addressDto[key] : null;
+      isAddressNull = false;
+    }
+  });
+
   return {
     firstName,
     lastName,
     email,
-    phone: phone === DefaultInpValue.PHONE ? '' : phone,
+    phone: phone ? DefaultInpValue.PHONE + phone : null,
+    userAddress: !isAddressNull ? mappedAddress : null,
     socialMedia,
     password,
     newPassword,

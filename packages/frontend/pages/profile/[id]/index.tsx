@@ -11,7 +11,8 @@ import { AccountLayout } from '@components/profile/user-account-layout';
 export const getServerSideProps = withPublic(
   wrapper.getServerSideProps((store) => async (ctx) => {
     const { locale, query } = ctx;
-    const httpClient = new Http(process.env.NEXT_PUBLIC_API_ROUTE);
+
+    const httpClient = new Http(process.env.NEXT_PUBLIC_API_ROUTE, locale);
 
     await store.dispatch(
       fetchUserProfileSSR({

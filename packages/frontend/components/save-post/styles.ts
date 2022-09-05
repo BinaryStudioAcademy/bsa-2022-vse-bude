@@ -26,6 +26,10 @@ export const inputRow = ({ spaces }: Theme) => css`
   flex-grow: 1;
 `;
 
+export const selectRow = ({ spaces }: Theme) => css`
+  margin-bottom: ${spaces.md};
+`;
+
 export const pageHeader = ({
   colors,
   fontSizes,

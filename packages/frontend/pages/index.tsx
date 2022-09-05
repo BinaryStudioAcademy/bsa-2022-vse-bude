@@ -3,7 +3,7 @@ import { wrapper } from 'store';
 import { withPublic } from '@hocs';
 import { AuthHelper, CookieStorage } from '@helpers';
 import { fetchCategoriesSSR } from 'store/category';
-import type { HttpAcceptLanguage, ProductDto } from '@vse-bude/shared';
+import type { ProductDto } from '@vse-bude/shared';
 import { Http, ProductType } from '@vse-bude/shared';
 import { getProductsSSR } from 'services/product';
 import type { HomeProps } from '@components/home/types';
@@ -16,14 +16,18 @@ export const getServerSideProps = withPublic(
     let auctionProducts: ProductDto[] = [];
     let sellingProducts: ProductDto[] = [];
 
-    const storage = new CookieStorage(ctx);
-    const auth = new AuthHelper(storage);
-    const httpClient = new Http(process.env.NEXT_PUBLIC_API_ROUTE, auth);
+    const cookieStorage = new CookieStorage(ctx);
+    const auth = new AuthHelper(cookieStorage);
+
+    const httpClient = new Http(
+      process.env.NEXT_PUBLIC_API_ROUTE,
+      locale,
+      auth,
+    );
 
     await store.dispatch(
       fetchCategoriesSSR({
         httpSSR: httpClient,
-        locale: locale as HttpAcceptLanguage,
       }),
     );
 

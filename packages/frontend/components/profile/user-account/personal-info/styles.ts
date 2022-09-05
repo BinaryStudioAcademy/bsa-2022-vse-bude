@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import type { Theme } from '@emotion/react';
 import { resetButton } from 'theme';
+import { ColorPalette } from '@vse-bude/shared';
 
 export const form = () => css`
   display: flex;
@@ -20,12 +21,18 @@ export const headerWrapper = ({ spaces }: Theme) => css`
 
 export const flagWrapper = ({ radiuses }: Theme) => css`
   border-radius: ${radiuses.md};
+  overflow: hidden;
 `;
 
 export const flag = ({ heights, radiuses }: Theme) => css`
   display: block;
   height: ${heights.flag};
   width: 100%;
+  background: linear-gradient(
+    ${ColorPalette.BLUE} 50%,
+    ${ColorPalette.YELLOW} 50%
+  );
+  filter: blur(20px);
   border-radius: ${radiuses.md};
 `;
 
@@ -62,10 +69,10 @@ export const marginBottom = ({ spaces }: Theme) => css`
 
 export const sections = ({ mq }: Theme) => css`
   width: 450px;
-  ${mq[0]} {
+  ${mq[1]} {
     width: 500px;
   }
-  ${mq[3]} {
+  ${mq[4]} {
     width: 700px;
   }
 `;

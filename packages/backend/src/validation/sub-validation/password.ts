@@ -1,19 +1,17 @@
 import type { Request } from 'express';
 import {
   HttpStatusCode,
+  PASSWORD,
   UserPersonalInfoValidationMessage,
 } from '@vse-bude/shared';
 import { ProfileError } from '@errors';
-import { lang } from '../../../lang';
+import { lang } from '@lang';
 
 export const passwordValidation = ({ req }: { req: Request }) => {
   const { password, newPassword, repeatPassword } = req.body;
 
   if (password || newPassword) {
-    const isNewPassword =
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z~!@#$%^*\-_=+[{\]}/;:,.?]+$/.test(
-        newPassword,
-      );
+    const isNewPassword = PASSWORD.test(newPassword);
 
     if (!isNewPassword) {
       throw new ProfileError({

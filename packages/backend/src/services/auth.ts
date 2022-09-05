@@ -15,6 +15,7 @@ import {
 import {
   UserNotFoundError,
   UserExistsError,
+  UserPhoneExistsError,
   WrongPasswordError,
   UnauthorizedError,
   WrongRefreshTokenError,
@@ -74,24 +75,34 @@ export class AuthService {
   }
 
   async signUp(signUpDto: UserSignUpDto): Promise<AuthResponse> {
-    const userByEmailOrPhone = await this._userRepository.getByEmailOrPhone(
+    const userByEmail = await this._userRepository.getNewByEmail(
       signUpDto.email,
-      signUpDto.phone,
     );
-    if (userByEmailOrPhone) {
+
+    if (userByEmail) {
       throw new UserExistsError();
     }
+
+    if (signUpDto.phone) {
+      const userByPhone = await this._userRepository.getNewByPhone({
+        phone: signUpDto.phone,
+      });
+      if (userByPhone) {
+        throw new UserPhoneExistsError();
+      }
+    }
+    const phone = signUpDto.phone ? signUpDto.phone : null;
     const createUserDto: CreateUser = {
       firstName: signUpDto.firstName,
       lastName: signUpDto.lastName,
       email: signUpDto.email,
-      phone: signUpDto.phone,
+      phone,
       passwordHash: this._hashService.generateHash(signUpDto.password),
     };
     const newUser = await this._userRepository.create(createUserDto);
+
     await this._verifyService.initEmailVerification(newUser.id);
     const tokenData = this.getTokenData(newUser.id);
-
     const refreshToken: CreateRefreshToken = {
       userId: newUser.id,
       token: tokenData.refreshToken,
