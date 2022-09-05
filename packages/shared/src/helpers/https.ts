@@ -13,7 +13,7 @@ import type {
   PostRequestParams,
   PutRequestParams,
   RequestArgs,
-  IAuthHelper,
+  IStorageService,
 } from '../common/types';
 import { HttpError, type ErrorResponse } from '../exceptions';
 
@@ -25,11 +25,11 @@ interface MakeRequest {
 class Http {
   private _baseUrl: string;
 
-  private _auth: IAuthHelper | null;
+  private _storageService: IStorageService | null;
 
-  constructor(baseUrl: string, auth?: IAuthHelper) {
+  constructor(baseUrl: string, storageService?: IStorageService) {
     this._baseUrl = baseUrl;
-    this._auth = auth;
+    this._storageService = storageService || null;
   }
 
   public get<T>({ url, payload, options }: GetRequestParams) {
@@ -101,10 +101,13 @@ class Http {
 
     if (acceptLanguage) {
       headers[HttpHeader.ACCEPT_LANGUAGE] = acceptLanguage;
+    } else {
+      headers[HttpHeader.ACCEPT_LANGUAGE] =
+        this._storageService?._locale?.getLocale();
     }
 
-    if (needAuthorization && this._auth) {
-      const token = this._auth.getAccessToken();
+    if (needAuthorization && this._storageService?._auth) {
+      const token = this._storageService._auth.getAccessToken();
       headers[HttpHeader.AUTHORIZATION] = `Bearer ${token}`;
     }
 
@@ -129,7 +132,7 @@ class Http {
   }
 
   private getRefreshedAuthReqConfig(config: RequestInit) {
-    const accessToken = this._auth.getAccessToken();
+    const accessToken = this._storageService._auth.getAccessToken();
     config.headers[HttpHeader.AUTHORIZATION] = `Bearer ${accessToken}`;
 
     return config;
@@ -169,7 +172,7 @@ class Http {
   }
 
   private async updateAuthorizationToken() {
-    const refreshToken = this._auth.getRefreshToken();
+    const refreshToken = this._storageService._auth.getRefreshToken();
 
     const res = await fetch(
       `${this._baseUrl}${ApiRoutes.AUTH}${AuthApiRoutes.REFRESH_TOKEN}`,
@@ -183,13 +186,13 @@ class Http {
     );
 
     if (!res.ok) {
-      this._auth.logOut();
+      this._storageService._auth.logOut();
       throw new HttpError(res);
     }
 
     const { accessToken, refreshToken: newRefreshToken } = await res.json();
 
-    this._auth.setTokens(accessToken, newRefreshToken);
+    this._storageService._auth.setTokens(accessToken, newRefreshToken);
   }
 }
 

@@ -9,6 +9,7 @@ import { getProductsSSR } from 'services/product';
 import type { HomeProps } from '@components/home/types';
 import { Layout } from '@components/layout';
 import { Home } from '@components/home';
+import { StorageService } from 'helpers/storage';
 
 export const getServerSideProps = withPublic(
   wrapper.getServerSideProps((store) => async (ctx) => {
@@ -16,9 +17,10 @@ export const getServerSideProps = withPublic(
     let auctionProducts: ProductDto[] = [];
     let sellingProducts: ProductDto[] = [];
 
-    const storage = new CookieStorage(ctx);
-    const auth = new AuthHelper(storage);
-    const httpClient = new Http(process.env.NEXT_PUBLIC_API_ROUTE, auth);
+    const cookieStorage = new CookieStorage(ctx);
+    const auth = new AuthHelper(cookieStorage);
+    const storage = new StorageService(auth);
+    const httpClient = new Http(process.env.NEXT_PUBLIC_API_ROUTE, storage);
 
     await store.dispatch(
       fetchCategoriesSSR({
