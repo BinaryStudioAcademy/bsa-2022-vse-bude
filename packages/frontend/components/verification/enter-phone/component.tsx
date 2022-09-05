@@ -18,7 +18,7 @@ const EnterPhoneModal = () => {
   };
 
   const changeModal = (e) => {
-    e.preventDefault();    
+    e.preventDefault();
     dispatch(nextVerifyModal());
   };
 

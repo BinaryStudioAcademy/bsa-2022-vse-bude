@@ -13,9 +13,9 @@ import { getCurrentUser, phoneCodeResend } from '../../../store/auth';
 const EnterCodeModal = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
-  
+
   const { user } = useAuth();
-  
+
   useEffect(() => {
     dispatch(phoneCodeResend());
     dispatch(getCurrentUser());
@@ -29,7 +29,9 @@ const EnterCodeModal = () => {
   return (
     <div css={styles.innerWrapper}>
       <h3 css={styles.headline}>{t('common:verify.enterCode.headline')}</h3>
-      <span>{t('common:verify.enterCode.description')} {user.phone}</span>
+      <span>
+        {t('common:verify.enterCode.description')} {user.phone}
+      </span>
       <IconButton
         cssExtend={styles.arrow}
         icon={IconName.ANGLE_LEFT}
