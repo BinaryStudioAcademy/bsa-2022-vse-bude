@@ -1,5 +1,10 @@
-import React, { FC, useEffect } from 'react';
-import { useTranslation, useAppDispatch, useAppSelector } from '~/hooks/hooks';
+import React, { FC } from 'react';
+import {
+  useTranslation,
+  useAppDispatch,
+  useAppSelector,
+  useEffect,
+} from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
 import {
   ScrollView,
