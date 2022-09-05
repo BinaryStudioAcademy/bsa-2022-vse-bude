@@ -241,4 +241,8 @@ export class ProductService {
   public async getSimilar(city: string, categoryId: string) {
     return this._productRepository.findSimilar(city, categoryId);
   }
+
+  public async getMostPopular(limit: string) {
+    return this._productRepository.getFourMostPopular(+limit);
+  }
 }

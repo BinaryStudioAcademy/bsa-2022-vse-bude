@@ -226,4 +226,16 @@ export class ProductRepository {
       },
     });
   }
+
+  public async getFourMostPopular(limit: number) {
+    return await this._dbClient.product.findMany({
+      take: limit,
+      where: {
+        status: ProductStatus.ACTIVE,
+      },
+      orderBy: {
+        views: Order.DESC,
+      },
+    });
+  }
 }

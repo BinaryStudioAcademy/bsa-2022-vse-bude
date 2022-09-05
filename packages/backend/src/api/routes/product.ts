@@ -262,6 +262,74 @@ export const initProductRoutes = (
 
   /**
    * @openapi
+   * /products/popular-lots:
+   *   get:
+   *     description: Get list of most popular products
+   *     tags: [Product]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - in: query
+   *         name: limit
+   *         required: true
+   *         type: string
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Product"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
+  router.get(
+    apiPath(path, ProductApiRoutes.POPULAR_LOTS),
+    wrap((req: Request) =>
+      productService.getMostPopular(<string>req.query.limit),
+    ),
+  );
+
+  /**
+   * @openapi
+   * /products/popular-products:
+   *   get:
+   *     description: Get list of most popular products
+   *     tags: [Product]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - in: query
+   *         name: limit
+   *         required: true
+   *         type: string
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Product"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
+  router.get(
+    apiPath(path, ProductApiRoutes.POPULAR_PRODUCTS),
+    wrap((req: Request) =>
+      productService.getMostPopular(<string>req.query.limit),
+    ),
+  );
+
+  /**
+   * @openapi
    * /products/favorite:
    *   post:
    *     description: Add product to favorites list
