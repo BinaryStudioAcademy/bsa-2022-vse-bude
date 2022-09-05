@@ -17,6 +17,7 @@ import ImageInput from './image-input';
 import DescriptionBlock from './description';
 import * as styles from './styles';
 import ContactBlock from './contact';
+import type { registerFieldType, setValueType } from './types';
 import { PostStatuses } from './types';
 
 export default function ProductForm({ edit }: { edit: boolean }) {
@@ -140,7 +141,7 @@ export default function ProductForm({ edit }: { edit: boolean }) {
       <Column css={styles.sectionRow}>
         <DescriptionBlock
           category={category}
-          register={register as any}
+          register={register as registerFieldType}
           setCategories={setCategoryWrapper}
           errors={errors}
         />
@@ -213,8 +214,8 @@ export default function ProductForm({ edit }: { edit: boolean }) {
       </Column>
       <Column>
         <ContactBlock
-          setValue={setValue as any}
-          register={register as any}
+          setValue={setValue as setValueType}
+          register={register as registerFieldType}
           errors={errors}
         />
       </Column>

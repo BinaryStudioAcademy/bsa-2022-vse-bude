@@ -19,17 +19,19 @@ export interface SavePostProps {
   type: ProductType.AUCTION | ProductType.SELLING;
 }
 
+export type registerFieldType = UseFormRegister<ICreateAuction | IPostForms>;
+export type setValueType = UseFormSetValue<ICreateAuction | IPostForms>;
 export interface DescriptionBlockProps {
   errors: FieldErrorsImpl<ICreateAuction | IPostForms>;
-  register: UseFormRegister<ICreateAuction | IPostForms>;
+  register: registerFieldType;
   category: SelectOption;
   setCategories: (arg0: SelectOption) => void;
 }
 
 export interface ContactBlockProps {
-  setValue: UseFormSetValue<ICreateAuction | IPostForms>;
+  setValue: setValueType;
   errors: FieldErrorsImpl<ICreateAuction | IPostForms>;
-  register: UseFormRegister<ICreateAuction | IPostForms>;
+  register: registerFieldType;
 }
 
 export type SellerFieldsType = {
