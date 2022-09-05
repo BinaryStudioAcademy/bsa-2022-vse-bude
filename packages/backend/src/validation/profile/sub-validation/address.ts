@@ -1,9 +1,10 @@
 import type { Request } from 'express';
+import type {
+  UserAddressDto} from '@vse-bude/shared';
 import {
   HttpStatusCode,
   PLACE,
   ZIP,
-  UserAddressDto,
   ValidationRanges,
   UserPersonalInfoValidationMessage,
 } from '@vse-bude/shared';

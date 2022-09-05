@@ -12,7 +12,12 @@ import {
   Loader,
 } from '@primitives';
 import { userUpdateSchema } from 'validation-schemas/user/user-update';
-import { SaveUserProfileDto, FullUserProfileDto, DefaultInpValue } from '@vse-bude/shared';
+import type {
+  SaveUserProfileDto,
+  FullUserProfileDto} from '@vse-bude/shared';
+import {
+  DefaultInpValue,
+} from '@vse-bude/shared';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { profileMapper, updateDtoMapper } from '@helpers';
 import { updateUserProfile, setIsEditing } from '@store';
@@ -26,7 +31,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
   const [isSubmit, setIsSubmit] = useState(false);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  console.log(user)
+  console.log(user);
   const saveLoader = useTypedSelector(
     (state: RootState) => state.profile.saveLoader,
   );
@@ -184,6 +189,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
                   label={t('personal-info:label.country')}
                   placeholder={t('personal-info:placeholder.country')}
                   {...register('country')}
+                  error={errors.country?.message}
                 />
               </div>
 
@@ -195,6 +201,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
                   label={t('personal-info:label.region')}
                   placeholder={t('personal-info:placeholder.region')}
                   {...register('region')}
+                  error={errors.region?.message}
                 />
               </div>
             </Flex>
@@ -208,6 +215,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
                   label={t('personal-info:label.city')}
                   placeholder={t('personal-info:placeholder.city')}
                   {...register('city')}
+                  error={errors.city?.message}
                 />
               </div>
               <div css={styles.inputRow}>
@@ -231,6 +239,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
                 label={t('personal-info:label.deliveryData')}
                 placeholder={t('personal-info:placeholder.deliveryData')}
                 {...register('deliveryData')}
+                error={errors.deliveryData?.message}
               />
             </div>
           </Column>

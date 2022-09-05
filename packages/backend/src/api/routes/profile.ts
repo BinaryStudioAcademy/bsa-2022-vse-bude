@@ -66,7 +66,15 @@ export const initProfileRoutes = (
         data: { firstName, lastName, email, phone },
       });
 
-      const address = await profileService.updateUserAddress({userId, userAddress})
+      if (!phone) {
+        const is = await profileService.cancelPhoneVerified({ userId });
+        console.log(is);
+      }
+
+      const address = await profileService.updateUserAddress({
+        userId,
+        userAddress,
+      });
 
       await profileService.updateUserSocialMedia({
         userId,

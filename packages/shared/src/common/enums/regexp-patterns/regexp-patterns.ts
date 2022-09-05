@@ -6,7 +6,7 @@ export const EMAIL = new RegExp(
 );
 export const PHONE = new RegExp(/^(\+380\d{9})$/);
 export const PERSONAL_PHONE = new RegExp(/^\d{9}$/);
-export const PLACE = new RegExp(/^(([a-zA-Z'-]+)|([а-яёіїґєА-ЯЁIЇҐЄ'-]+))$/);
+export const PLACE = new RegExp(/^(([a-zA-Z'-\s]+)|([а-яёіїґєА-ЯЁIЇҐЄ'-\s]+))$/);
 export const PASSWORD = new RegExp(
   /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z~!@#$%^*\-_=+[{\]}/;:,.?]+$/,
 );

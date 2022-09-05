@@ -90,6 +90,10 @@ export class UserProfileService {
     return this._userProfileRepository.updateUserProfile({ userId, data });
   }
 
+  public cancelPhoneVerified({ userId }: { userId: string }) {
+    return this._userProfileRepository.cancelPhoneVerified({ userId });
+  }
+
   public async updateAvatar({
     userId,
     req,
@@ -130,6 +134,7 @@ export class UserProfileService {
     if (!userAddress) {
       return null;
     }
+
     return this._userProfileRepository.updateAddress({
       userId,
       data: userAddress,

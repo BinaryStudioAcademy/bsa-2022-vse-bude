@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { TFunction } from 'next-i18next';
+import type { TFunction } from 'next-i18next';
 import {
   UserPersonalInfoValidationMessage,
   ValidationRanges,

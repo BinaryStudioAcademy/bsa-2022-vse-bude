@@ -121,7 +121,7 @@ export const updateDtoMapper = ({
     lastName,
     email,
     phone: phone ? DefaultInpValue.PHONE + phone : null,
-    userAddres: !isAddressNull ? mappedAddress : null,
+    userAddress: !isAddressNull ? mappedAddress : null,
     socialMedia,
     password,
     newPassword,

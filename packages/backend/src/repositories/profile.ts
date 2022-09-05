@@ -3,7 +3,7 @@ import type {
   SocialMedia,
   SocialMediaType,
   UpdateUserProfileDto,
-  UserAddressDto
+  UserAddressDto,
 } from '@vse-bude/shared';
 
 export class UserProfileRepository {
@@ -106,36 +106,6 @@ export class UserProfileRepository {
     });
   }
 
-  public updateAddress({userId, data}: {userId: string, data: UserAddressDto}) {
-    const {country, region, city, zip, deliveryData} = data
-    return this._dbClient.address.upsert({
-      where: {
-        userId
-      },
-      update: {
-        country,
-        region,
-        city,
-        zip,
-        deliveryData
-      },
-      create: {
-        country,
-        region,
-        city,
-        zip,
-        deliveryData
-      },
-      select: {
-        country: true,
-        region: true,
-        city: true,
-        zip: true,
-        deliveryData: true
-      }
-    })
-  }
-
   public getSocialMedia({ userId }: { userId: string }) {
     return this._dbClient.socialMedia.findMany({
       where: {
@@ -179,6 +149,43 @@ export class UserProfileRepository {
     });
   }
 
+  public updateAddress({
+    userId,
+    data,
+  }: {
+    userId: string;
+    data: UserAddressDto;
+  }) {
+    const { country, region, city, zip, deliveryData } = data;
+
+    return this._dbClient.address.upsert({
+      where: {
+        userId,
+      },
+      update: {
+        country,
+        region,
+        city,
+        zip,
+        deliveryData,
+      },
+      create: {
+        country,
+        region,
+        city,
+        zip,
+        deliveryData,
+      },
+      select: {
+        country: true,
+        region: true,
+        city: true,
+        zip: true,
+        deliveryData: true,
+      },
+    });
+  }
+
   public async updateUserSocialMedia({
     userId,
     socialMedia,
@@ -218,6 +225,20 @@ export class UserProfileRepository {
       select: {
         avatar: true,
       },
+    });
+  }
+
+  public cancelPhoneVerified({ userId }: { userId: string }) {
+    return this._dbClient.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        phoneVerified: false
+      },
+      select: {
+        phoneVerified: true
+      }
     });
   }
 
