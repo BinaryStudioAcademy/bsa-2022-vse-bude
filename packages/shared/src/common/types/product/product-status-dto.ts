@@ -1,8 +1,8 @@
 export enum ProductStatus {
-  CREATED,
-  ACTIVE,
-  CANCELLED,
-  FINISHED,
-  CLOSED,
-  DRAFT,
+  CREATED = 0,
+  ACTIVE = 1,
+  CANCELLED = 2,
+  FINISHED = 3,
+  CLOSED = 4,
+  DRAFT = 5,
 }
