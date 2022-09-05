@@ -202,10 +202,9 @@ export class ProductService {
       [],
     );
 
-    deletedImages.forEach(
-      async (image) =>
-        await this._s3StorageService.deleteImage(getFilenameFromUrl(image)),
-    );
+    for await (const image of deletedImages) {
+      await this._s3StorageService.deleteImage(getFilenameFromUrl(image));
+    }
 
     const imageLinks = oldImages
       ? [...oldImages, ...newImageLinks]
