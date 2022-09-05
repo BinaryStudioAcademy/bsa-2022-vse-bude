@@ -57,8 +57,11 @@ export class ProductService {
     if (!product) {
       throw new ProductNotFoundError();
     }
+    console.log(product);
 
     if (product.category) {
+      console.log(lang(`categories:${product.category.title}`));
+
       product.category.title = lang(`categories:${product.category.title}`);
     }
 

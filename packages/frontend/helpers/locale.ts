@@ -4,8 +4,9 @@ import { StorageKey } from '@vse-bude/shared';
 class LocaleHelper implements ILocaleHelper {
   private _storage: Storage;
 
-  constructor(storage: Storage) {
+  constructor(storage: Storage, locale?: string) {
     this._storage = storage;
+    this.setLocale(locale);
   }
 
   getLocale(): string {
