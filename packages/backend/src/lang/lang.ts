@@ -3,6 +3,13 @@ import { DEFAULT_LOCALE } from '@vse-bude/shared';
 import fs from 'fs';
 import path from 'path';
 
+function getValue(obj, keys, currentKey) {
+  if (keys[currentKey + 1]) {
+    return getValue(obj[keys[currentKey]], keys, currentKey + 1);
+  }
+
+  return obj[keys[currentKey]];
+}
 export class LangService {
   private _locale: string;
 
@@ -39,9 +46,11 @@ export class LangService {
 
   public translate(key: string) {
     const langPath = this.getPath(key);
+
     if (!fs.existsSync(langPath)) {
       return null;
     }
+
     const translations = this.readTranslations(langPath);
     const resultKey = this.getKeyWithoutNs(key);
 
@@ -49,6 +58,6 @@ export class LangService {
       return null;
     }
 
-    return translations[resultKey] ?? null;
+    return getValue(translations, resultKey.split('.'), 0) ?? null;
   }
 }

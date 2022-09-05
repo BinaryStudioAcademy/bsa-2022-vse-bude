@@ -67,4 +67,4 @@ export const headline = ({
 export const error = ({ colors }: Theme) => css`
   color: ${colors.danger};
   text-align: center;
-`
+`;
