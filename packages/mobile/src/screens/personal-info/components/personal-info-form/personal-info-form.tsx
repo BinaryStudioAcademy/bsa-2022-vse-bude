@@ -1,11 +1,18 @@
 import React from 'react';
-import { useAppDispatch, useAppForm, useTranslation } from '~/hooks/hooks';
+import { SaveUserProfileDto } from '@vse-bude/shared';
+import {
+  useAppDispatch,
+  useAppForm,
+  useAppSelector,
+  useTranslation,
+} from '~/hooks/hooks';
 import { View, Input, DropDown, PrimaryButton } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { ButtonAppearance } from '~/common/enums/enums';
+import { ButtonAppearance, DataStatus } from '~/common/enums/enums';
 import { personalInfo as personalInfoActions } from '~/store/actions';
 import { CITIES, COUNTRIES, REGIONS } from '~/mock/mock-personal-info';
-import { SaveUserProfileDto } from '@vse-bude/shared';
+import { personalInfoSchema } from '~/validation-schemas/validation-schemas';
+import { selectDataStatusPersonalInfo } from '~/store/selectors';
 import { Title } from '../components';
 
 type Props = {
@@ -15,6 +22,8 @@ type Props = {
 const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const dataStatus = useAppSelector(selectDataStatusPersonalInfo);
+  const isLoading = dataStatus === DataStatus.PENDING;
   const { control, errors, handleSubmit } = useAppForm<SaveUserProfileDto>({
     defaultValues: {
       firstName: personalInfo.firstName,
@@ -33,7 +42,7 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
       newPassword: personalInfo.newPassword,
       repeatPassword: personalInfo.repeatPassword,
     },
-    //TODO need add validationSchema: personalInfo,
+    validationSchema: personalInfoSchema,
   });
 
   const onSubmit = (payload: SaveUserProfileDto): void => {
@@ -174,6 +183,7 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
         <PrimaryButton
           label={t('common:components.BUTTON_SAVE')}
           onPress={handleSubmit(onSubmit)}
+          disabled={isLoading}
         />
       </View>
       <View style={[globalStyles.mt3, globalStyles.mb5]}>
@@ -181,6 +191,7 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
           label={t('common:components.BUTTON_CANCEL')}
           appearance={ButtonAppearance.TRANSPARENT}
           onPress={handleCancelPress}
+          disabled={isLoading}
         />
       </View>
     </View>
