@@ -156,7 +156,8 @@ export const initAuthRoutes = (
     apiPath(path, AuthApiRoutes.SIGN_UP),
     wrap<Empty, AuthResponse, UserSignUpDto>((req: Request) => {
       signupValidation({ req });
-      return authService.signUp(req.body);
+      
+return authService.signUp(req.body);
     }),
   );
 
