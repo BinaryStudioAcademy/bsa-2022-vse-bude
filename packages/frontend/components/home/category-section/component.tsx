@@ -52,7 +52,7 @@ const CategorySection = () => {
         >
           {categoriesLimit.map((item) => (
             <SplideSlideStyled key={item.id}>
-              <Link href={redirectToCategory(item.title)} passHref>
+              <Link href={redirectToCategory(item.id)} passHref>
                 <a css={categoryItem}>
                   <div css={categoryItemTitle}>
                     <StringCutter>{item.title}</StringCutter>

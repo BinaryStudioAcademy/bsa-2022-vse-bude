@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import type { Theme } from '@emotion/react';
 import { resetButton } from 'theme';
+import { ColorPalette } from '@vse-bude/shared';
 
 export const form = () => css`
   display: flex;
@@ -20,12 +21,18 @@ export const headerWrapper = ({ spaces }: Theme) => css`
 
 export const flagWrapper = ({ radiuses }: Theme) => css`
   border-radius: ${radiuses.md};
+  overflow: hidden;
 `;
 
 export const flag = ({ heights, radiuses }: Theme) => css`
   display: block;
   height: ${heights.flag};
   width: 100%;
+  background: linear-gradient(
+    ${ColorPalette.BLUE} 50%,
+    ${ColorPalette.YELLOW} 50%
+  );
+  filter: blur(20px);
   border-radius: ${radiuses.md};
 `;
 
@@ -96,6 +103,11 @@ export const avatarPopoverTrigger = css`
   position: absolute;
   bottom: 0;
   right: 0;
+`;
+
+export const bodyWrapper = ({ spaces }: Theme) => css`
+  margin-top: ${spaces.xs};
+  z-index: 0;
 `;
 
 export const avatarUpdateButton = ({ colors, spaces, radiuses }: Theme) => css`

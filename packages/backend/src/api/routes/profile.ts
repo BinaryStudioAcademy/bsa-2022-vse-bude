@@ -7,6 +7,8 @@ import { apiPath } from '@helpers';
 import { authMiddleware, uploadImage } from '@middlewares';
 import { profileValidation } from '@validation';
 import type { UploadFileRequest } from '@types';
+import type { User } from '@prisma/client';
+import { userMap } from '@mappers';
 
 export const initProfileRoutes = (
   { profileService, myListService }: Services,
@@ -14,18 +16,40 @@ export const initProfileRoutes = (
 ): Router => {
   const router = Router();
 
+  /**
+   * @openapi
+   * /profile/full-data:
+   *   get:
+   *     description: Get Full user's profile data
+   *     security:
+   *       - Bearer: []
+   *     tags: [Profile]
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               $ref: "#/definitions/GetProfileFullUserData"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
   router.get(
     apiPath(path, ProfileApiRoutes.GET_FULL_USER_DATA),
     authMiddleware,
     wrap(async (req: Request) => {
       const { userId } = req;
-      const fullUserProfile = await profileService.getFullUserData({
+
+      return await profileService.getFullUserData({
         userId,
       });
-
-      return {
-        ...fullUserProfile,
-      };
     }),
   );
 
@@ -37,12 +61,39 @@ export const initProfileRoutes = (
       await profileService.getUser({
         userId,
       });
-      const userItemsList = await myListService.getAllUserItems({ userId });
 
-      return userItemsList;
+      return await myListService.getAllUserItems({ userId });
     }),
   );
 
+  /**
+   * @openapi
+   * /profile/save:
+   *   put:
+   *     description: Updates user profile data
+   *     security:
+   *       - Bearer: []
+   *     tags: [Profile]
+   *     produces:
+   *       - application/json
+   *     requestBody:
+   *        schema:
+   *          $ref: "#/definitions/UpdateProfileBody"
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               $ref: "#/definitions/UpdateProfileResponse"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
   router.put(
     apiPath(path, ProfileApiRoutes.UPDATE_DATA),
     authMiddleware,
@@ -61,7 +112,7 @@ export const initProfileRoutes = (
         newPassword,
       } = req.body;
 
-      const user = await profileService.updateUserProfile({
+      const user: User = await profileService.updateUserProfile({
         userId,
         data: { firstName, lastName, email, phone },
       });
@@ -90,7 +141,7 @@ export const initProfileRoutes = (
         });
       }
 
-      return { ...user, userAddress: address, socialMedia: links };
+      return { ...userMap(user), userAddress: address, socialMedia: links };
     }),
   );
 
@@ -105,6 +156,36 @@ export const initProfileRoutes = (
     }),
   );
 
+  /**
+   * @openapi
+   * /profile/:userId:
+   *   get:
+   *     description: Get user's profile
+   *     security:
+   *       - Bearer: []
+   *     tags: [Profile]
+   *     parameters:
+   *       - in: path
+   *         name: userId
+   *         required: true
+   *         type: string
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               $ref: "#/definitions/GetProfileResponse"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
   router.get(
     apiPath(path, ProfileApiRoutes.GET_USER_BY_ID),
     wrap(async (req: Request) => {
@@ -113,7 +194,7 @@ export const initProfileRoutes = (
       const socialMedia = await profileService.getSocialMedia({ userId });
 
       return {
-        ...user,
+        ...userMap(user),
         socialMedia,
       };
     }),

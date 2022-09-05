@@ -19,7 +19,7 @@ import { profileMapper, updateDtoMapper } from '@helpers';
 import { updateUserProfile, setIsEditing } from '@store';
 import { useEffect, useState } from 'react';
 import type { RootState } from '@types';
-import { showVerifyModal } from 'store/verify/actions';
+import { showVerifyModal } from 'store/modals/actions';
 import { SectionHeader, NestedLayout } from '../common';
 import * as styles from './styles';
 
