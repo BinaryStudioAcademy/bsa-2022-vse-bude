@@ -152,8 +152,6 @@ export class ProductRepository {
   }
 
   public async update(id: string, data) {
-    console.log('dfsfdsdfs ', data.postDate);
-
     return await this._dbClient.product.update({
       where: {
         id,
