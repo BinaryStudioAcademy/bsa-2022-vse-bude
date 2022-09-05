@@ -12,6 +12,7 @@ export function useTimer(
   }
 
   useEffect(() => {
+    timerCallback.current();
     const timer = setInterval(timerCallback.current, interval);
 
     return () => clearInterval(timer);
