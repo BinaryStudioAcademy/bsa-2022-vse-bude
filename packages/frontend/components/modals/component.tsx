@@ -7,14 +7,14 @@ const VerificationModal = dynamic(
 );
 
 export const Modals = () => {
-    const { isModalOpen } = useTypedSelector(
-      (state) => state.modals.verifyPhoneModal,
-    );
-    
-    useEffect(() => {
-      if(isModalOpen) document.body.style.overflow = 'hidden';
-      else document.body.style.overflow = 'scroll';
-    }, [isModalOpen]);
+  const { isModalOpen } = useTypedSelector(
+    (state) => state.modals.verifyPhoneModal,
+  );
 
-    return <>{isModalOpen && <VerificationModal />}</>;
+  useEffect(() => {
+    if (isModalOpen) document.body.style.overflow = 'hidden';
+    else document.body.style.overflow = 'scroll';
+  }, [isModalOpen]);
+
+  return <>{isModalOpen && <VerificationModal />}</>;
 };
