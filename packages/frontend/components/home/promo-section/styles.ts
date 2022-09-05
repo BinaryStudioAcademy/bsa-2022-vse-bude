@@ -114,3 +114,8 @@ export const greeting = ({
     color: #ffffff;
   }
 `;
+
+export const flag = css`
+  border-radius: 4px;
+  background: linear-gradient(to top, #f4c50a 50%, #0c42a6 50%);
+`;
