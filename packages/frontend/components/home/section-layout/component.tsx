@@ -1,7 +1,6 @@
-import { Container } from '@primitives';
-import Link from 'next/link';
+import { Container, InternalLink } from '@primitives';
 import type { SectionLayoutProps } from './types';
-import { wrapper, title as titleStyled, loadMore } from './styles';
+import { wrapper, title as titleStyled } from './styles';
 
 const SectionLayout = ({
   title,
@@ -14,9 +13,7 @@ const SectionLayout = ({
       <div css={titleStyled}>
         <h2>{title}</h2>
         {loadMoreTitle && (
-          <Link href={loadMoreHref || '#'} passHref>
-            <a css={loadMore}>{loadMoreTitle}</a>
-          </Link>
+          <InternalLink href={loadMoreHref}>{loadMoreTitle}</InternalLink>
         )}
       </div>
       {children}

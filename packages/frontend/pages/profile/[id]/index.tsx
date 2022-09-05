@@ -7,14 +7,10 @@ import { fetchUserProfileSSR } from 'store/profile/actions';
 import { PersonalInfo } from '@components/profile/user-account';
 import type { NextPageWithLayout } from 'pages/_app';
 import { AccountLayout } from '@components/profile/user-account-layout';
-import { CookieStorage, LocaleHelper } from '@helpers';
 
 export const getServerSideProps = withPublic(
   wrapper.getServerSideProps((store) => async (ctx) => {
-    const { locale: language, query } = ctx;
-
-    const cookieStorage = new CookieStorage(ctx);
-    const locale = new LocaleHelper(cookieStorage, language);
+    const { locale, query } = ctx;
 
     const httpClient = new Http(process.env.NEXT_PUBLIC_API_ROUTE, locale);
 
@@ -27,7 +23,7 @@ export const getServerSideProps = withPublic(
 
     return {
       props: {
-        ...(await serverSideTranslations(language, [
+        ...(await serverSideTranslations(locale, [
           'common',
           'account',
           'personal-info',

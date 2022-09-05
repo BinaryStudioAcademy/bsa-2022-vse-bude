@@ -106,14 +106,24 @@ export const initProfileRoutes = (
         lastName,
         email,
         phone,
+        userAddress,
         socialMedia,
         password,
         newPassword,
       } = req.body;
 
+      if (!phone) {
+        await profileService.cancelPhoneVerified({ userId });
+      }
+
       const user: User = await profileService.updateUserProfile({
         userId,
         data: { firstName, lastName, email, phone },
+      });
+
+      const address = await profileService.updateUserAddress({
+        userId,
+        userAddress,
       });
 
       await profileService.updateUserSocialMedia({
@@ -130,7 +140,7 @@ export const initProfileRoutes = (
         });
       }
 
-      return { ...userMap(user), socialMedia: links };
+      return { ...userMap(user), userAddress: address, socialMedia: links };
     }),
   );
 

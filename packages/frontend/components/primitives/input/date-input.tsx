@@ -8,6 +8,8 @@ import * as styles from './styles';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
+export const MIN_DATE = Date.now() + 86400000; // +1 day
+
 const InputDate = ({
   value,
   setValue,
@@ -40,12 +42,14 @@ const InputDate = ({
       )}
       <div css={styles.inputValueWrapper}>
         <DatePicker
+          onFocus={(e) => e.target.blur()}
           onChange={setValue}
           selected={value}
           css={styles.input}
           placeholderText="-/-/-"
           id={id}
           locale={customLocale}
+          minDate={MIN_DATE}
           calendarStartDay={locale === 'ua' ? 1 : 0}
         />
         <div css={styles.iconWrapper}>

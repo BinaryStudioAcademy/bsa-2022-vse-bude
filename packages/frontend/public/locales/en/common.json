@@ -11,7 +11,9 @@
     },
     "buttons": {
       "create_account": "Create Account",
-      "sign_in": "Sign In"
+      "sign_in": "Sign In",
+      "openMenu": "Open menu",
+      "closeMenu": "Close menu"
     },
     "popover": {
       "personalInfo": "Personal Info",
@@ -64,10 +66,19 @@
         "days": "d",
         "minutes": "min",
         "seconds": "s"
-      }
+      },
+      "addToFavorites": "Add to favorites",
+      "removeFromFavorites": "Remove from favorites"
+    },
+    "slider": {
+      "prevStep": "Go to previous step",
+      "nextStep": "Go to next step"
     },
     "input": {
       "searchProductsPlaceholder": "Search the products"
+    },
+    "modal": {
+      "closeLabel": "Close modal"
     },
     "typeOfPost": {
       "headline": "What type a post do you create?",
@@ -111,7 +122,8 @@
       },
       "link": {
         "later": "Verify later"
-      }
+      },
+      "prevPageLabel": "Go to previous step"
     },
     "enterCode": {
       "headline": "Verify",

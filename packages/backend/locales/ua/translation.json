@@ -1,6 +1,7 @@
 {
   "USER_NOT_FOUND": "Користувач не знайдений!",
   "USER_ALREADY_EXISTS": "Користувач уже існує!",
+  "USER_PHONE_ALREADY_EXISTS": "Користувач, з вказаним номером, вже існує!",
   "UNAUTHORIZED": "Не авторизовано!",
   "WRONG_REFRESH_TOKEN": "Неправильний Refresh Token!",
   "EXPIRED_REFRESH_TOKEN": "Прострочений Refresh Token!",

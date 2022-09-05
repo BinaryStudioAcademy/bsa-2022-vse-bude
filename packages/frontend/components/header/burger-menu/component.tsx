@@ -28,6 +28,7 @@ export const BurgerMenu = ({ user, categories, onClose }: BurgerMenuProps) => {
       size="md"
       onClick={onClose}
       color={IconColor.ORANGE}
+      ariaLabel={t('common:header.buttons.closeMenu')}
     />
   );
 
