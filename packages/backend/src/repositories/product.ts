@@ -135,17 +135,23 @@ export class ProductRepository {
         city: data.city,
         phone: data.phone,
         status: data.status,
-        categoryId: data.categoryId,
+        categoryId: data.category,
         title: data.title,
         description: data.description,
         authorId: data.authorId,
         type: data.type,
         price: data.price,
+        minimalBid: data.minimalBid,
+        recommendedPrice: data.recommendedPrice,
+        endDate: data.endDate,
+        postDate: data.postDate,
       },
     });
   }
 
   public async update(id: string, data) {
+    console.log('dfsfdsdfs ', data.postDate);
+
     return await this._dbClient.product.update({
       where: {
         id,
@@ -156,11 +162,15 @@ export class ProductRepository {
         country: data.country,
         city: data.city,
         phone: data.phone,
-        categoryId: data.categoryId,
+        categoryId: data.category,
         title: data.title,
         description: data.description,
         type: data.type,
         price: data.price,
+        minimalBid: data.minimalBid,
+        recommendedPrice: data.recommendedPrice,
+        endDate: data.endDate,
+        postDate: data.postDate,
       },
     });
   }

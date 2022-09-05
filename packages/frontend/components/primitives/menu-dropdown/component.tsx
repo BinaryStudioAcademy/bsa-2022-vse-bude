@@ -20,7 +20,8 @@ export const Dropdown = ({
 
   const ref = useOutsideClick(handleClickOutside);
 
-  const handleClick = async () => {
+  const handleClick = async (event) => {
+    event.preventDefault();
     setIsOpen(!isOpen);
     onChildrenClick?.();
   };
@@ -43,9 +44,9 @@ export const Dropdown = ({
               cssExtend: optionCss,
             } = item;
 
-            const onClick = () => {
+            const onClick = (e) => {
               callbackFn();
-              handleClick();
+              handleClick(e);
             };
 
             return (

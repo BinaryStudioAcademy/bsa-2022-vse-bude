@@ -16,3 +16,11 @@ export interface IPostForms {
 export interface ICreatePost extends IPostForms {
   imageLinks: string[];
 }
+
+export interface ICreateAuction extends Omit<IPostForms, 'price'> {
+  endDate: string;
+  recommendedPrice: string;
+  minimalBid: string;
+  minimalBidCurrency: string;
+  recommendedPriceCurrency: string;
+}

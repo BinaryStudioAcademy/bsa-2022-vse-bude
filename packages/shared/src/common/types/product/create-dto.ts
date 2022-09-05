@@ -1,10 +1,9 @@
 import type { ProductDto } from './product-dto';
-import type { ProductStatus } from './product-status-dto';
 
-export interface ProductCreateDto extends Omit<ProductDto, 'status'> {
+export interface ProductCreateDto extends ProductDto {
   categoryId: string;
-  status: ProductStatus;
   authorId: string;
+  postDate: Date;
 }
 export interface CreateProduct {
   req: Request;

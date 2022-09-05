@@ -1,6 +1,8 @@
-import type { IPostForms } from '@vse-bude/shared';
+import type { IPostForms, ICreateAuction } from '@vse-bude/shared';
+import type { TFunction } from 'next-i18next';
+import type { SellerFieldsType } from './types';
 
-export const initialFormState: IPostForms = {
+export const initialProductFormState: IPostForms = {
   category: '',
   title: '',
   description: '',
@@ -14,3 +16,33 @@ export const initialFormState: IPostForms = {
   phone: '',
   callingCode: '',
 };
+
+export const initialAuctionFormState: ICreateAuction = {
+  category: '',
+  title: '',
+  description: '',
+  recommendedPrice: '',
+  minimalBid: '',
+  minimalBidCurrency: 'UAH',
+  recommendedPriceCurrency: 'UAH',
+  currency: 'UAH',
+  country: '',
+  city: '',
+  instagram: '',
+  facebook: '',
+  site: '',
+  phone: '',
+  callingCode: '',
+  endDate: '',
+};
+
+export const SellerFields = (t: TFunction): SellerFieldsType => ({
+  USER: {
+    value: 'CURRENT_USER',
+    title: t('create-post:sellerSelect.currentUser'),
+  },
+  OTHER: {
+    value: 'OTHER',
+    title: t('create-post:sellerSelect.otherUser'),
+  },
+});
