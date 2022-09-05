@@ -221,14 +221,18 @@ export const initProductRoutes = (
 
   /**
    * @openapi
-   * /products/:id:
+   * /products/similar:
    *   get:
    *     tags: [Product]
    *     produces:
    *       - application/json
    *     parameters:
-   *       - in: path
-   *         name: id
+   *       - in: query
+   *         name: city
+   *         required: true
+   *         type: string
+   *       - in: query
+   *         name: categoryId
    *         required: true
    *         type: string
    *     responses:
@@ -237,7 +241,7 @@ export const initProductRoutes = (
    *         content:
    *           application/json:
    *             schema:
-   *               $ref: "#/definitions/GetProductByIdResponse"
+   *               $ref: "#/definitions/Product"
    *       4**:
    *         description: Something went wrong
    *         content:
@@ -247,13 +251,13 @@ export const initProductRoutes = (
    */
 
   router.get(
-    apiPath(path, ProductApiRoutes.ID),
-    wrap((req: Request) => productService.getById(req.params.id)),
-  );
-
-  router.put(
-    apiPath(path, ProductApiRoutes.ID + ProductApiRoutes.VIEWS),
-    wrap((req) => productService.incrementViews(req.params.id, req)),
+    apiPath(path, ProductApiRoutes.SIMILAR),
+    wrap((req: Request) =>
+      productService.getSimilar(
+        <string>req.query.city,
+        <string>req.query.categoryId,
+      ),
+    ),
   );
 
   /**
@@ -383,7 +387,7 @@ export const initProductRoutes = (
 
   /**
    * @openapi
-   * /products/:
+   * /products/update/:id:
    *   post:
    *     summary: Uploads a file.
    *     consumes:
@@ -447,7 +451,7 @@ export const initProductRoutes = (
 
   /**
    * @openapi
-   * /products/:id:
+   * /products/buy/:id:
    *   put:
    *     tags: [Product]
    *     consumes:
@@ -502,18 +506,14 @@ export const initProductRoutes = (
 
   /**
    * @openapi
-   * /products/similar:
+   * /products/:id:
    *   get:
    *     tags: [Product]
    *     produces:
    *       - application/json
    *     parameters:
    *       - in: path
-   *         name: city
-   *         required: true
-   *         type: string
-   *       - in: path
-   *         name: categoryId
+   *         name: id
    *         required: true
    *         type: string
    *     responses:
@@ -522,7 +522,7 @@ export const initProductRoutes = (
    *         content:
    *           application/json:
    *             schema:
-   *               $ref: "#/definitions/Product"
+   *               $ref: "#/definitions/GetProductByIdResponse"
    *       4**:
    *         description: Something went wrong
    *         content:
@@ -532,10 +532,13 @@ export const initProductRoutes = (
    */
 
   router.get(
-    apiPath(path, ProductApiRoutes.SIMILAR),
-    wrap((req: Request) =>
-      productService.getSimilar(req.params.city, req.params.categoryId),
-    ),
+    apiPath(path, ProductApiRoutes.ID),
+    wrap((req: Request) => productService.getById(req.params.id)),
+  );
+
+  router.put(
+    apiPath(path, ProductApiRoutes.ID + ProductApiRoutes.VIEWS),
+    wrap((req) => productService.incrementViews(req.params.id, req)),
   );
 
   return router;
