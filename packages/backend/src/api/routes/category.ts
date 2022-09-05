@@ -19,12 +19,12 @@ export const initCategoryRoutes = (
    *     produces:
    *       - application/json
    *     parameters:
-   *       - name: limit
-   *         in: query
-   *         required: true
+   *       - in: query
+   *         required: false
+   *         name: limit
    *         schema:
-   *           format: double
-   *           type: number
+   *            type: number
+   *            format: integer
    *     responses:
    *       200:
    *         description: Ok
@@ -32,9 +32,13 @@ export const initCategoryRoutes = (
    *           application/json:
    *             schema:
    *               type: object
-   *               properties:
-   *                 contribution:
-   *                   $ref: "#/definitions/Category"
+   *               $ref: "#/definitions/GetCategoriesResponse"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
    */
 
   router.get(
