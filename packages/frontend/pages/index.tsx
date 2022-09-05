@@ -21,11 +21,7 @@ export const getServerSideProps = withPublic(
     const auth = new AuthHelper(cookieStorage);
     const locale = new LocaleHelper(cookieStorage, language);
 
-    const httpClient = new Http(
-      process.env.NEXT_PUBLIC_API_ROUTE,
-      auth,
-      locale,
-    );
+    const httpClient = new Http(process.env.NEXT_PUBLIC_API_ROUTE, locale, auth);
 
     await store.dispatch(
       fetchCategoriesSSR({
