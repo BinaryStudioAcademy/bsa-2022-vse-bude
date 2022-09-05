@@ -1,6 +1,7 @@
 import type { PrismaClient } from '@prisma/client';
 import { OrderStatus } from '@vse-bude/shared';
 import type { CreateOrderDto } from '@vse-bude/shared';
+import type { OrderQuery } from '@types';
 
 export class OrderRepository {
   private _dbClient: PrismaClient;
@@ -9,25 +10,18 @@ export class OrderRepository {
     this._dbClient = dbClient;
   }
 
-  public getAll() {
-    return this._dbClient.order.findMany();
+  public getAll({ buyerId, productId }: OrderQuery) {
+    return this._dbClient.order.findMany({
+      where: {
+        buyerId,
+        productId,
+      },
+    });
   }
 
   public getById(id: string) {
     return this._dbClient.order.findUnique({
       where: { id },
-    });
-  }
-
-  public getByBuyerId(buyerId: string) {
-    return this._dbClient.order.findMany({
-      where: { buyerId },
-    });
-  }
-
-  public getByProductId(productId: string) {
-    return this._dbClient.order.findMany({
-      where: { productId },
     });
   }
 
