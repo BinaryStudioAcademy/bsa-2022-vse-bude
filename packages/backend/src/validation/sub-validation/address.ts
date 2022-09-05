@@ -8,15 +8,14 @@ import {
   UserPersonalInfoValidationMessage,
 } from '@vse-bude/shared';
 import { ProfileError } from '@errors';
-import { lang } from '../../../lang';
+import { lang } from '@lang';
 
 export const addressValidation = ({ req }: { req: Request }) => {
   const { userAddress } = req.body;
 
   if (userAddress) {
-    const { country, region, city, zip, deliveryData } = <UserAddressDto>(
-      userAddress
-    );
+    const { country, region, city, zip, deliveryData }: UserAddressDto =
+      userAddress;
 
     if (country) {
       const isCountry = PLACE.test(country);
@@ -70,7 +69,7 @@ export const addressValidation = ({ req }: { req: Request }) => {
     }
 
     if (deliveryData) {
-      if (deliveryData.length > ValidationRanges.MAX_CITY_SYMBOLS) {
+      if (deliveryData.length > ValidationRanges.MAX_DELIVERY_DATA) {
         throw new ProfileError({
           status: HttpStatusCode.BAD_REQUEST,
           message: lang(UserPersonalInfoValidationMessage.CITY),

@@ -12,6 +12,7 @@ import { wrap } from '@helpers';
 import type { SignOut, UpdateRefreshToken, AuthTokenData } from '@types';
 import { apiPath } from '@helpers';
 import { authMiddleware } from '@middlewares';
+import { signupValidation } from '@validation';
 
 export const initAuthRoutes = (
   { authService }: Services,
@@ -153,9 +154,10 @@ export const initAuthRoutes = (
 
   router.post(
     apiPath(path, AuthApiRoutes.SIGN_UP),
-    wrap<Empty, AuthResponse, UserSignUpDto>((req: Request) =>
-      authService.signUp(req.body),
-    ),
+    wrap<Empty, AuthResponse, UserSignUpDto>((req: Request) => {
+      signupValidation({ req });
+      return authService.signUp(req.body);
+    }),
   );
 
   /**

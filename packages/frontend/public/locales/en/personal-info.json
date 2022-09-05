@@ -74,7 +74,7 @@
       "region": "The name of the region should contain no more than 30 characters",
       "city": "The name of the settlement should contain no more than 30 characters",
       "zip": "Zip code should consist of 5 digits",
-      "deliveryData": "Delivery details should contain no more than 200 characters"
+      "deliveryData": "Delivery details should contain no more than 256 characters"
     },
     "socialNetworks": {
       "uri": "Example of link to your profile in the network: https://some-net/me-id-1234",

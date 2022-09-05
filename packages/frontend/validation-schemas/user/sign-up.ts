@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import type { TFunction } from 'next-i18next';
 import type { UserSignUpDto } from '@vse-bude/shared';
 import {
   UserPersonalInfoValidationMessage,
@@ -8,7 +9,6 @@ import {
   EMAIL,
   PHONE,
 } from '@vse-bude/shared';
-import type { TFunction } from 'next-i18next';
 
 export const signUpSchema = (t: TFunction) =>
   Joi.object<UserSignUpDto>({
@@ -26,7 +26,6 @@ export const signUpSchema = (t: TFunction) =>
         'string.max': t(UserPersonalInfoValidationMessage.FIRSTNAME_MAX),
         'string.empty': t(UserPersonalInfoValidationMessage.FIRSTNAME_REQUIRED),
       }),
-
     lastName: Joi.string()
       .trim()
       .required()
@@ -41,7 +40,6 @@ export const signUpSchema = (t: TFunction) =>
         'string.max': t(UserPersonalInfoValidationMessage.LASTNAME_MAX),
         'string.empty': t(UserPersonalInfoValidationMessage.LASTNAME_REQUIRED),
       }),
-
     email: Joi.string()
       .trim()
       .pattern(EMAIL)
@@ -54,7 +52,6 @@ export const signUpSchema = (t: TFunction) =>
         'string.email': t(UserPersonalInfoValidationMessage.EMAIL_REQUIRED),
         'string.empty': t(UserPersonalInfoValidationMessage.EMAIL_REQUIRED),
       }),
-
     phone: Joi.string()
       .allow('')
       .pattern(PHONE)

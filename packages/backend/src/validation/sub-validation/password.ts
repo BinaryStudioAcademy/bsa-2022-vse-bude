@@ -5,7 +5,7 @@ import {
   UserPersonalInfoValidationMessage,
 } from '@vse-bude/shared';
 import { ProfileError } from '@errors';
-import { lang } from '../../../lang';
+import { lang } from '@lang';
 
 export const passwordValidation = ({ req }: { req: Request }) => {
   const { password, newPassword, repeatPassword } = req.body;

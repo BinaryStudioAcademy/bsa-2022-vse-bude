@@ -27,7 +27,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
   const [isSubmit, setIsSubmit] = useState(false);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  console.log(user);
+
   const saveLoader = useTypedSelector(
     (state: RootState) => state.profile.saveLoader,
   );

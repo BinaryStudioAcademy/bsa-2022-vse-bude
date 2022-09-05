@@ -112,15 +112,14 @@ export const initProfileRoutes = (
         newPassword,
       } = req.body;
 
+      if (!phone) {
+        await profileService.cancelPhoneVerified({ userId });
+      }
+
       const user: User = await profileService.updateUserProfile({
         userId,
         data: { firstName, lastName, email, phone },
       });
-
-      if (!phone) {
-        const is = await profileService.cancelPhoneVerified({ userId });
-        console.log(is);
-      }
 
       const address = await profileService.updateUserAddress({
         userId,
