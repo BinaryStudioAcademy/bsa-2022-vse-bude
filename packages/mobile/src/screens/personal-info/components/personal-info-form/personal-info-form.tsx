@@ -24,33 +24,35 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
   const dispatch = useAppDispatch();
   const dataStatus = useAppSelector(selectDataStatusPersonalInfo);
   const isLoading = dataStatus === DataStatus.PENDING;
-  const { control, errors, handleSubmit } = useAppForm<SaveUserProfileDto>({
-    defaultValues: {
-      firstName: personalInfo.firstName,
-      lastName: personalInfo.lastName,
-      email: personalInfo.email,
-      phone: personalInfo.phone,
-      country: personalInfo.country,
-      region: personalInfo.region,
-      city: personalInfo.city,
-      zip: personalInfo.zip,
-      deliveryData: personalInfo.deliveryData,
-      instagram: personalInfo.instagram,
-      linkedin: personalInfo.linkedin,
-      facebook: personalInfo.facebook,
-      password: personalInfo.password,
-      newPassword: personalInfo.newPassword,
-      repeatPassword: personalInfo.repeatPassword,
-    },
-    validationSchema: personalInfoSchema,
-  });
+  const DEFAULT_VALUES = {
+    firstName: personalInfo.firstName,
+    lastName: personalInfo.lastName,
+    email: personalInfo.email,
+    phone: personalInfo.phone,
+    country: personalInfo.country,
+    region: personalInfo.region,
+    city: personalInfo.city,
+    zip: personalInfo.zip,
+    deliveryData: personalInfo.deliveryData,
+    instagram: personalInfo.instagram,
+    linkedin: personalInfo.linkedin,
+    facebook: personalInfo.facebook,
+    password: personalInfo.password,
+    newPassword: personalInfo.newPassword,
+    repeatPassword: personalInfo.repeatPassword,
+  };
+  const { control, errors, handleSubmit, reset } =
+    useAppForm<SaveUserProfileDto>({
+      defaultValues: DEFAULT_VALUES,
+      validationSchema: personalInfoSchema,
+    });
 
   const onSubmit = (payload: SaveUserProfileDto): void => {
     dispatch(personalInfoActions.updatePersonalInfo(payload));
   };
 
   const handleCancelPress = (): void => {
-    //TODO add Cancel handler
+    reset({ ...DEFAULT_VALUES });
   };
 
   return (

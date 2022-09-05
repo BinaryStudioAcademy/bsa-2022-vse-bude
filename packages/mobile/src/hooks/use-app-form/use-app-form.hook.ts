@@ -1,4 +1,9 @@
-import { useForm, UseFormHandleSubmit, DeepPartial } from 'react-hook-form';
+import {
+  useForm,
+  UseFormHandleSubmit,
+  DeepPartial,
+  UseFormReset,
+} from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import {
   FormControl,
@@ -16,6 +21,7 @@ type UseAppFormResult<T extends FormControlValues = FormControlValues> = {
   control: FormControl<T>;
   errors: FormControlErrors<T>;
   handleSubmit: UseFormHandleSubmit<T>;
+  reset: UseFormReset<T>;
 };
 
 const useAppForm = <T extends FormControlValues = FormControlValues>({
@@ -26,6 +32,7 @@ const useAppForm = <T extends FormControlValues = FormControlValues>({
     control,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<T>({
     defaultValues,
     resolver: validationSchema ? joiResolver(validationSchema) : undefined,
@@ -35,6 +42,7 @@ const useAppForm = <T extends FormControlValues = FormControlValues>({
     control,
     errors,
     handleSubmit: handleSubmit as UseFormHandleSubmit<T>,
+    reset,
   };
 };
 
