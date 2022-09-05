@@ -10,6 +10,10 @@ export const Modal = ({ visible, children }: ModalProps) => {
     } else {
       document.body.style.overflow = 'visible';
     }
+
+    return () => {
+      document.body.style.overflow = 'visible';
+    };
   }, [visible]);
 
   const renderPortalBody = () => (
