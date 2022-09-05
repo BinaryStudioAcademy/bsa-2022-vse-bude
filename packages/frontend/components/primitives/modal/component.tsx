@@ -5,7 +5,11 @@ import type { ModalProps } from './types';
 
 export const Modal = ({ visible, children }: ModalProps) => {
   useEffect(() => {
-    if (visible) document.body.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+
+    return() => {
+      document.body.style.overflow = 'auto';
+    };
   }, [visible]);
 
   const renderPortalBody = () => (
