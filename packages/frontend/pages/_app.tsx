@@ -1,4 +1,4 @@
-import { appWithTranslation, i18n } from 'next-i18next';
+import { appWithTranslation } from 'next-i18next';
 import type { ReactElement, ReactNode } from 'react';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
@@ -7,7 +7,8 @@ import { UserProvider, ThemeProvider } from '@providers';
 import '../public/css/fontawesome.css';
 import dynamic from 'next/dynamic';
 import { Modals } from '@components/modals/component';
-import { locale } from '@helpers';
+import { useRouter } from 'next/router';
+import { http } from '@helpers';
 
 const PageLoaderDynamic = dynamic(() => import('@components/pages-loader'));
 const ToastStackDynamic = dynamic(() => import('@components/toasts/stack'));
@@ -21,8 +22,10 @@ type AppPropsWithLayout = AppProps & {
 };
 
 const App = ({ Component, pageProps }: AppPropsWithLayout) => {
+  const { locale } = useRouter();
   const getLayout = Component.getLayout ?? ((page) => page);
-  locale.setLocale(i18n?.language);
+
+  http.setLocale(locale);
 
   return (
     <ThemeProvider>

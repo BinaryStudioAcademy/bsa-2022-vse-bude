@@ -9,17 +9,15 @@ import { getProductsSSR } from 'services/product';
 import type { HomeProps } from '@components/home/types';
 import { Layout } from '@components/layout';
 import { Home } from '@components/home';
-import { LocaleHelper } from 'helpers/locale';
 
 export const getServerSideProps = withPublic(
   wrapper.getServerSideProps((store) => async (ctx) => {
-    const { locale: language } = ctx;
+    const { locale } = ctx;
     let auctionProducts: ProductDto[] = [];
     let sellingProducts: ProductDto[] = [];
 
     const cookieStorage = new CookieStorage(ctx);
     const auth = new AuthHelper(cookieStorage);
-    const locale = new LocaleHelper(cookieStorage, language);
 
     const httpClient = new Http(
       process.env.NEXT_PUBLIC_API_ROUTE,
@@ -55,7 +53,7 @@ export const getServerSideProps = withPublic(
 
     return {
       props: {
-        ...(await serverSideTranslations(language, ['home', 'common'])),
+        ...(await serverSideTranslations(locale, ['home', 'common'])),
         auctionProducts,
         sellingProducts,
       },

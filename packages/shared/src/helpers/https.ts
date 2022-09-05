@@ -14,7 +14,6 @@ import type {
   PutRequestParams,
   RequestArgs,
   IAuthHelper,
-  ILocaleHelper,
 } from '../common/types';
 import { HttpError, type ErrorResponse } from '../exceptions';
 
@@ -28,9 +27,9 @@ class Http {
 
   private _auth: IAuthHelper | null;
 
-  private _locale: ILocaleHelper;
+  private _locale: string;
 
-  constructor(baseUrl: string, locale: ILocaleHelper, auth?: IAuthHelper) {
+  constructor(baseUrl: string, locale: string, auth?: IAuthHelper) {
     this._baseUrl = baseUrl;
     this._auth = auth;
     this._locale = locale;
@@ -96,16 +95,14 @@ class Http {
       external = false,
       needAuthorization = true,
       contentType = HttpContentType.APPLICATION_JSON,
+      acceptLanguage,
     } = options ?? {};
 
     const headers: HeadersInit = {
       [HttpHeader.CONTENT_TYPE]: contentType,
     };
 
-    const locale = this._locale?.getLocale();
-    if (locale) {
-      headers[HttpHeader.ACCEPT_LANGUAGE] = locale;
-    }
+    headers[HttpHeader.ACCEPT_LANGUAGE] = acceptLanguage ?? this._locale;
 
     if (needAuthorization && this._auth) {
       const token = this._auth.getAccessToken();
@@ -194,6 +191,10 @@ class Http {
     const { accessToken, refreshToken: newRefreshToken } = await res.json();
 
     this._auth.setTokens(accessToken, newRefreshToken);
+  }
+
+  public setLocale(locale: string) {
+    this._locale = locale;
   }
 }
 
