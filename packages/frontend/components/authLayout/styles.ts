@@ -1,5 +1,6 @@
 import type { Theme } from '@emotion/react';
 import { css } from '@emotion/react';
+import { ColorPalette } from '@vse-bude/shared';
 
 export const authSection = ({ mq }: Theme) => css`
   display: flex;
@@ -139,7 +140,10 @@ export const flagBg = ({ breakpoints }: Theme) => css`
   right: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(#0c42a6 50%, #f4c50a 50%);
+  background: linear-gradient(
+    ${ColorPalette.BLUE} 50%,
+    ${ColorPalette.YELLOW} 50%
+  );
   filter: blur(100px);
   transition: filter 0.3s ease-in-out;
   @media (max-width: ${breakpoints.xxl}px) {
