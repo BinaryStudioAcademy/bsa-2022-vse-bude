@@ -234,6 +234,7 @@ export class ProductService {
       userId,
       ProductStatus.FINISHED,
     );
+    
 
     return productId;
   }

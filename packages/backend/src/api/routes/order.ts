@@ -1,11 +1,11 @@
 import type { Services } from '@services';
-import type { ApiRoutes } from '@vse-bude/shared';
+import { type ApiRoutes, OrderApiRoutes } from '@vse-bude/shared';
 import { type Request, Router } from 'express';
 import { wrap, apiPath } from '@helpers';
 import { authMiddleware } from '@middlewares';
 
 export const initOrderRoutes = (
-  { orderService }: Services,
+  { orderService, paymentService }: Services,
   path: ApiRoutes,
 ): Router => {
   const router = Router();
@@ -16,6 +16,11 @@ export const initOrderRoutes = (
     wrap((req: Request) =>
       orderService.create({ ...req.body, buyerId: req.userId }),
     ),
+  );
+
+  router.post(
+    apiPath(path, OrderApiRoutes.STATUS),
+    wrap(async (req: Request) => paymentService.setStatus(req.body)),
   );
 
   router.get(

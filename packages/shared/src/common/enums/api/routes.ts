@@ -54,3 +54,8 @@ export enum AccountApiRoutes {
   PERSONAL_INFO = '/personal-info',
   MY_LIST = '/my-list',
 }
+
+export enum OrderApiRoutes {
+  STATUS = '/status',
+  SUCCESS = '/success',
+}

@@ -23,9 +23,9 @@ type S3StorageEnvKey =
   | 'S3_API_LINK'
   | 'S3_BUCKET_NAME';
 
-type AppEnvKeys = 'APP_URL' | 'APP_EMAIL_FROM' | 'APP_NAME';
+type AppEnvKeys = 'APP_URL' | 'APP_EMAIL_FROM' | 'APP_NAME' | 'APP_API_URL';
 
-type MerchantEnvKeys =
+type WayForPayEnvKeys =
   | 'WAY_FOR_PAY_MERCHANT_ACCOUNT'
   | 'WAY_FOR_PAY_MERCHANT_SECRET_KEY';
 
@@ -37,7 +37,7 @@ type EnvKeys =
   | EmailEnvKey
   | S3StorageEnvKey
   | AppEnvKeys
-  | MerchantEnvKeys;
+  | WayForPayEnvKeys;
 
 export const getEnv = (key: EnvKeys) => process.env[key];
 

@@ -6,3 +6,4 @@ export * from './user';
 export * from './email';
 export * from './bid';
 export * from './order';
+export * from './payment';
