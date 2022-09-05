@@ -6,10 +6,10 @@ import {
   useCustomTheme,
   useNavigation,
   useTranslation,
-  useState,
 } from '~/hooks/hooks';
 import {
   ButtonAppearance,
+  DataStatus,
   MainScreenName,
   RootScreenName,
   VerifyScreenName,
@@ -25,7 +25,7 @@ import { auth as authActions } from '~/store/actions';
 import { images } from '~/assets/images/images';
 import { phone } from '~/validation-schemas/validation-schemas';
 import { globalStyles } from '~/styles/styles';
-import { selectUserPhone } from '~/store/selectors';
+import { selectUserActionDataStatus, selectUserPhone } from '~/store/selectors';
 import { notification } from '~/services/services';
 import {
   ButtonsContainer,
@@ -44,7 +44,8 @@ const VerifyPhoneScreen: FC = () => {
   const navigation = useNavigation<RootNavigationProps>();
   const { colors } = useCustomTheme();
   const userPhone = useAppSelector(selectUserPhone);
-  const [isLoading, setIsLoading] = useState(false);
+  const dataStatus = useAppSelector(selectUserActionDataStatus);
+  const isLoading = dataStatus === DataStatus.PENDING;
   const { control, errors, handleSubmit } = useAppForm<VerifyPhone>({
     defaultValues: {
       phone: userPhone,
@@ -63,7 +64,6 @@ const VerifyPhoneScreen: FC = () => {
   };
 
   const onSubmit = (): void => {
-    setIsLoading(true);
     dispatch(authActions.sendCodeVerifyPhone())
       .unwrap()
       .then(() => {
@@ -71,9 +71,6 @@ const VerifyPhoneScreen: FC = () => {
         navigation.navigate(RootScreenName.VERIFY, {
           screen: VerifyScreenName.VERIFY_CODE,
         });
-      })
-      .finally(() => {
-        setIsLoading(false);
       });
   };
 

@@ -7,10 +7,10 @@ import {
   useCustomTheme,
   useNavigation,
   useTranslation,
-  useState,
 } from '~/hooks/hooks';
 import {
   ButtonAppearance,
+  DataStatus,
   RootScreenName,
   VerifyScreenName,
 } from '~/common/enums/enums';
@@ -24,7 +24,7 @@ import { auth as authActions } from '~/store/actions';
 import { images } from '~/assets/images/images';
 import { globalStyles } from '~/styles/styles';
 import { RootNavigationProps } from '~/common/types/types';
-import { selectUserPhone } from '~/store/selectors';
+import { selectUserActionDataStatus, selectUserPhone } from '~/store/selectors';
 import { notification } from '~/services/services';
 import {
   ButtonsContainer,
@@ -42,8 +42,9 @@ const VerifyCodeScreen: FC = () => {
   const dispatch = useAppDispatch();
   const navigation = useNavigation<RootNavigationProps>();
   const { colors } = useCustomTheme();
-  const [isLoading, setIsLoading] = useState(false);
   const userPhone = useAppSelector(selectUserPhone);
+  const dataStatus = useAppSelector(selectUserActionDataStatus);
+  const isLoading = dataStatus === DataStatus.PENDING;
   const { control, errors, handleSubmit } = useAppForm<PhoneVerifyDto>({
     defaultValues: {
       code: '',
@@ -55,28 +56,20 @@ const VerifyCodeScreen: FC = () => {
   };
 
   const handleResendPress = (): void => {
-    setIsLoading(true);
     dispatch(authActions.sendCodeVerifyPhone())
       .unwrap()
       .then(() => {
         notification.success(t('verificationPhone.CODE_SENT'));
-      })
-      .finally(() => {
-        setIsLoading(false);
       });
   };
 
   const onSubmit = (payload: PhoneVerifyDto): void => {
-    setIsLoading(true);
     dispatch(authActions.verifyPhone(payload))
       .unwrap()
       .then(() => {
         navigation.navigate(RootScreenName.VERIFY, {
           screen: VerifyScreenName.VERIFIED,
         });
-      })
-      .finally(() => {
-        setIsLoading(false);
       });
   };
 
