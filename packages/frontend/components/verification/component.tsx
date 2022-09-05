@@ -15,7 +15,8 @@ const VerificationModal = () => {
 
   useEffect(() => {
     setIsVisible(true);
-  }, []);
+    document.body.style.overflow = 'hidden';
+  }, [isVisible]);
 
   const closeModal = () => {
     dispatch(hideVerifyModal());

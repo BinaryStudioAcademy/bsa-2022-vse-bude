@@ -12,9 +12,8 @@ export const Modals = () => {
   );
 
   useEffect(() => {
-    if (isModalOpen) document.body.style.overflow = 'hidden';
-    else document.body.style.overflow = 'scroll';
-  }, [isModalOpen]);
+    document.body.style.overflow = 'auto';
+}, [isModalOpen]);
 
   return <>{isModalOpen && <VerificationModal />}</>;
 };
