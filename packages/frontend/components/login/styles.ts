@@ -63,3 +63,8 @@ export const headline = ({
     font-size: ${fontSizes.h4};
   }
 `;
+
+export const error = ({ colors }: Theme) => css`
+  color: ${colors.danger};
+  text-align: center;
+`
