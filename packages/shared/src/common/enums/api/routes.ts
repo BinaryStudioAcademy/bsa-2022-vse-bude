@@ -40,6 +40,9 @@ export enum ProductApiRoutes {
   UPDATE = '/update/:id',
   AUCTION_PERMISSIONS = '/auction/permissions',
   AUCTION_LEAVE = '/auction/leave',
+  SIMILAR = '/similar',
+  POPULAR_LOTS = '/popular-lots',
+  POPULAR_PRODUCTS = '/popular-products',
 }
 
 export enum ProfileApiRoutes {
