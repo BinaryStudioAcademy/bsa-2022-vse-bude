@@ -62,6 +62,10 @@
     "username": "Enter user`s name"
   },
   "validation": {
+    "link": {
+      "max": "Link too long",
+      "uri": "Invalid link format"
+    },
     "images": {
       "unsupportedType": "Unsupported file extension!",
       "large": "File size too large!",

@@ -117,6 +117,7 @@ export default function ContactBlock({
               variant="primary"
               label={t('create-post:label.instagram')}
               placeholder={t('create-post:placeholder.instagram')}
+              error={errors.instagram?.message}
               {...register('instagram')}
             />
           </div>
@@ -129,6 +130,7 @@ export default function ContactBlock({
               label={t('create-post:label.facebook')}
               placeholder={t('create-post:placeholder.facebook')}
               {...register('facebook')}
+              error={errors.facebook?.message}
             />
           </div>
           <div css={styles.inputRow}>
@@ -139,6 +141,7 @@ export default function ContactBlock({
               variant="primary"
               label={t('create-post:label.site')}
               placeholder={t('create-post:placeholder.site')}
+              error={errors.site?.message}
               {...register('site')}
             />
           </div>
