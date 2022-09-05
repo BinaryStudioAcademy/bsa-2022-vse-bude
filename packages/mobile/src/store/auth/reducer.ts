@@ -4,6 +4,7 @@ import { DataStatus } from '~/common/enums/enums';
 import {
   signUp,
   signIn,
+  getCurrentUser,
   logOut,
   verifyPhone,
   sendCodeVerifyPhone,
@@ -29,17 +30,18 @@ const reducer = createReducer(initialState, (builder) => {
       state.dataStatus = DataStatus.REJECTED;
       state.user = null;
     })
-    .addCase(verifyPhone.fulfilled, (state, { payload }) => {
-      state.dataStatus = DataStatus.FULFILLED;
-      if (state.user) {
-        state.user.phoneVerified = payload;
-      }
-    })
-    .addCase(sendCodeVerifyPhone.fulfilled, (state) => {
-      state.dataStatus = DataStatus.FULFILLED;
-    })
     .addMatcher(
-      isAnyOf(verifyPhone.rejected, sendCodeVerifyPhone.rejected),
+      isAnyOf(verifyPhone.fulfilled, sendCodeVerifyPhone.fulfilled),
+      (state) => {
+        state.dataStatus = DataStatus.FULFILLED;
+      },
+    )
+    .addMatcher(
+      isAnyOf(
+        verifyPhone.rejected,
+        sendCodeVerifyPhone.rejected,
+        getCurrentUser.rejected,
+      ),
       (state) => {
         state.dataStatus = DataStatus.REJECTED;
       },
@@ -48,6 +50,7 @@ const reducer = createReducer(initialState, (builder) => {
       isAnyOf(
         signUp.pending,
         signIn.pending,
+        getCurrentUser.pending,
         verifyPhone.pending,
         sendCodeVerifyPhone.pending,
       ),
@@ -56,7 +59,7 @@ const reducer = createReducer(initialState, (builder) => {
       },
     )
     .addMatcher(
-      isAnyOf(signUp.fulfilled, signIn.fulfilled),
+      isAnyOf(signUp.fulfilled, signIn.fulfilled, getCurrentUser.fulfilled),
       (state, { payload }) => {
         state.dataStatus = DataStatus.FULFILLED;
         state.user = payload;

@@ -8,6 +8,7 @@ import {
   AuthResponse,
   VerifyApiRoutes,
   PhoneVerifyDto,
+  UserResponseDto,
 } from '@vse-bude/shared';
 import { Http } from '~/services/http/http.service';
 
@@ -46,6 +47,20 @@ class AuthApi {
         contentType: HttpContentType.APPLICATION_JSON,
         payload: JSON.stringify(_payload),
         hasAuth: false,
+      },
+    );
+  }
+
+  getCurrentUser(_userId: string): Promise<UserResponseDto> {
+    return this.#http.load(
+      `${this.#apiPrefix}${ApiRoutes.AUTH}${AuthApiRoutes.USER}`,
+      {
+        method: HttpMethod.GET,
+        contentType: HttpContentType.APPLICATION_JSON,
+        params: {
+          userId: _userId,
+        },
+        hasAuth: true,
       },
     );
   }
