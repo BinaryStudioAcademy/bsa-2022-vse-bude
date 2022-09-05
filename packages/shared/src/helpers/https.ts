@@ -92,18 +92,15 @@ class Http {
       external = false,
       needAuthorization = true,
       contentType = HttpContentType.APPLICATION_JSON,
-      acceptLanguage,
     } = options ?? {};
 
     const headers: HeadersInit = {
       [HttpHeader.CONTENT_TYPE]: contentType,
     };
 
-    if (acceptLanguage) {
-      headers[HttpHeader.ACCEPT_LANGUAGE] = acceptLanguage;
-    } else {
-      headers[HttpHeader.ACCEPT_LANGUAGE] =
-        this._storageService?._locale?.getLocale();
+    const locale = this._storageService?._locale?.getLocale();
+    if (locale) {
+      headers[HttpHeader.ACCEPT_LANGUAGE] = locale;
     }
 
     if (needAuthorization && this._storageService?._auth) {
