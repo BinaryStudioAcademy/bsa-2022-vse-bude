@@ -14,6 +14,7 @@ import type {
   PutRequestParams,
   RequestArgs,
   IAuthHelper,
+  ILocaleHelper,
 } from '../common/types';
 import { HttpError, type ErrorResponse } from '../exceptions';
 
@@ -27,9 +28,12 @@ class Http {
 
   private _auth: IAuthHelper | null;
 
-  constructor(baseUrl: string, auth?: IAuthHelper) {
+  private _locale: ILocaleHelper;
+
+  constructor(baseUrl: string, locale: ILocaleHelper, auth?: IAuthHelper) {
     this._baseUrl = baseUrl;
     this._auth = auth;
+    this._locale = locale;
   }
 
   public get<T>({ url, payload, options }: GetRequestParams) {
@@ -92,15 +96,15 @@ class Http {
       external = false,
       needAuthorization = true,
       contentType = HttpContentType.APPLICATION_JSON,
-      acceptLanguage,
     } = options ?? {};
 
     const headers: HeadersInit = {
       [HttpHeader.CONTENT_TYPE]: contentType,
     };
 
-    if (acceptLanguage) {
-      headers[HttpHeader.ACCEPT_LANGUAGE] = acceptLanguage;
+    const locale = this._locale?.getLocale();
+    if (locale) {
+      headers[HttpHeader.ACCEPT_LANGUAGE] = locale;
     }
 
     if (needAuthorization && this._auth) {
