@@ -13,7 +13,7 @@ export const Modals = () => {
 
   useEffect(() => {
     document.body.style.overflow = 'auto';
-}, [isModalOpen]);
+  }, [isModalOpen]);
 
   return <>{isModalOpen && <VerificationModal />}</>;
 };
