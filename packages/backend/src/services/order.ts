@@ -29,4 +29,8 @@ export class OrderService {
   public async getAll({ buyerId, productId }: OrderQuery) {
     return this._orderRepository.getAll({ buyerId, productId });
   }
+
+  public async getById(id: string) {
+    return this._orderRepository.getById(id);
+  }
 }

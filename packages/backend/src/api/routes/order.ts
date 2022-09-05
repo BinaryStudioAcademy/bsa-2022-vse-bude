@@ -17,7 +17,7 @@ export const initOrderRoutes = (
       orderService.create({ ...req.body, buyerId: req.userId }),
     ),
   );
-  
+
   router.get(
     apiPath(path),
     authMiddleware,
@@ -27,6 +27,12 @@ export const initOrderRoutes = (
         productId: req.query.productId as string,
       }),
     ),
+  );
+
+  router.get(
+    apiPath(path, ':id'),
+    authMiddleware,
+    wrap((req: Request) => orderService.getById(req.params.id)),
   );
 
   return router;
