@@ -64,12 +64,6 @@ export class UserProfileRepository {
       where: {
         id: userId,
       },
-      select: {
-        id: true,
-        avatar: true,
-        firstName: true,
-        lastName: true,
-      },
     });
   }
 
@@ -77,15 +71,6 @@ export class UserProfileRepository {
     return this._dbClient.user.findUnique({
       where: {
         id: userId,
-      },
-      select: {
-        id: true,
-        avatar: true,
-        firstName: true,
-        lastName: true,
-        email: true,
-        phone: true,
-        phoneVerified: true,
       },
     });
   }
@@ -136,14 +121,6 @@ export class UserProfileRepository {
         lastName,
         email,
         phone,
-      },
-      select: {
-        id: true,
-        avatar: true,
-        firstName: true,
-        lastName: true,
-        email: true,
-        phone: true,
       },
     });
   }

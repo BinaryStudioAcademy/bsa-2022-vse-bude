@@ -3,7 +3,7 @@ import { Button } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import hand from 'public/images/mocup_hand3.png';
-import { nextVerifyModal } from 'store/verify/actions';
+import { nextVerifyModal } from 'store/modals/actions';
 import * as styles from '../styles';
 
 const SuccessModal = () => {

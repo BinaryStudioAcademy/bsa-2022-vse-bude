@@ -7,11 +7,16 @@ import { Routes } from '@enums';
 import { Http } from '@vse-bude/shared';
 import { fetchProductSSR } from 'store/product';
 import { withPublic } from '@hocs';
+import { CookieStorage, LocaleHelper } from '@helpers';
 
 export const getServerSideProps = withPublic(
   wrapper.getServerSideProps((store) => async (ctx) => {
-    const { locale, query } = ctx;
-    const http = new Http(process.env.NEXT_PUBLIC_API_ROUTE);
+    const { locale: language, query } = ctx;
+
+    const cookieStorage = new CookieStorage(ctx);
+    const locale = new LocaleHelper(cookieStorage, language);
+
+    const http = new Http(process.env.NEXT_PUBLIC_API_ROUTE, locale);
     const id = query.id as string;
 
     const { payload } = await store.dispatch(fetchProductSSR({ id, http }));
@@ -28,7 +33,7 @@ export const getServerSideProps = withPublic(
 
     return {
       props: {
-        ...(await serverSideTranslations(locale, [
+        ...(await serverSideTranslations(language, [
           'common',
           'create-post',
           'rules',

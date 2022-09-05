@@ -7,11 +7,16 @@ import { fetchUserProfileSSR } from 'store/profile/actions';
 import { PersonalInfo } from '@components/profile/user-account';
 import type { NextPageWithLayout } from 'pages/_app';
 import { AccountLayout } from '@components/profile/user-account-layout';
+import { CookieStorage, LocaleHelper } from '@helpers';
 
 export const getServerSideProps = withPublic(
   wrapper.getServerSideProps((store) => async (ctx) => {
-    const { locale, query } = ctx;
-    const httpClient = new Http(process.env.NEXT_PUBLIC_API_ROUTE);
+    const { locale: language, query } = ctx;
+
+    const cookieStorage = new CookieStorage(ctx);
+    const locale = new LocaleHelper(cookieStorage, language);
+
+    const httpClient = new Http(process.env.NEXT_PUBLIC_API_ROUTE, locale);
 
     await store.dispatch(
       fetchUserProfileSSR({
@@ -22,7 +27,7 @@ export const getServerSideProps = withPublic(
 
     return {
       props: {
-        ...(await serverSideTranslations(locale, [
+        ...(await serverSideTranslations(language, [
           'common',
           'account',
           'personal-info',

@@ -19,11 +19,17 @@ import {
 } from 'store/product';
 import { wrapper } from '@store';
 import { shallowEqual } from 'react-redux';
+import { CookieStorage } from '@helpers';
+import { LocaleHelper } from 'helpers/locale';
 
 export const getServerSideProps = withPublic(
   wrapper.getServerSideProps((store) => async (ctx) => {
-    const { locale, query } = ctx;
-    const http = new Http(process.env.NEXT_PUBLIC_API_ROUTE);
+    const { locale: language, query } = ctx;
+
+    const cookieStorage = new CookieStorage(ctx);
+    const locale = new LocaleHelper(cookieStorage, language);
+
+    const http = new Http(process.env.NEXT_PUBLIC_API_ROUTE, locale);
     const id = query.id as string;
 
     const { payload } = await store.dispatch(fetchProductSSR({ id, http }));
@@ -39,7 +45,7 @@ export const getServerSideProps = withPublic(
 
     return {
       props: {
-        ...(await serverSideTranslations(locale, ['common', 'item'])),
+        ...(await serverSideTranslations(language, ['common', 'item'])),
       },
     };
   }),
@@ -52,6 +58,7 @@ const ItemPage = () => {
     (state) => state.product.currentItem,
     shallowEqual,
   );
+  const { user } = useTypedSelector((state) => state.auth, shallowEqual);
 
   const similarProducts = useTypedSelector(
     (state) => state.product.similarProducts,
@@ -63,13 +70,18 @@ const ItemPage = () => {
 
   useEffect(() => {
     dispatch(updateProductViews(item.id));
-    dispatch(
-      auctionPermissions({
-        productId: item.id,
-      }),
-    );
     dispatch(fetchSimilarProducts(item.id));
   }, [item.id, dispatch]);
+
+  useEffect(() => {
+    if (user) {
+      dispatch(
+        auctionPermissions({
+          productId: item.id,
+        }),
+      );
+    }
+  }, [item.id, dispatch, user]);
 
   return (
     <Layout title={item.title}>

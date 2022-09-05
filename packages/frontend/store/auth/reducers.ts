@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 import type { UserDto } from '@vse-bude/shared';
 import { combineReducers } from 'redux';
-import { updateUserAvatar } from 'store/profile/actions';
+import { updateUserAvatar, updateUserProfile } from 'store/profile/actions';
 import {
   getCurrentUser,
   emailVerification,
@@ -26,6 +26,10 @@ const user = createReducer<UserDto>(null, {
   },
   [updateUserAvatar.fulfilled.type]: (state, { payload }) => {
     state.avatar = payload.avatar;
+  },
+  [updateUserProfile.fulfilled.type]: (state, { payload }) => {
+    state.lastName = payload.lastName;
+    state.firstName = payload.firstName;
   },
   [updateUserAvatar.pending.type]: (state, { _payload }) => {
     state.avatar = null;

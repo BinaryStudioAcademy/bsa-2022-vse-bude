@@ -3,27 +3,33 @@ import { wrapper } from 'store';
 import { withPublic } from '@hocs';
 import { AuthHelper, CookieStorage } from '@helpers';
 import { fetchCategoriesSSR } from 'store/category';
-import type { HttpAcceptLanguage, ProductDto } from '@vse-bude/shared';
+import type { ProductDto } from '@vse-bude/shared';
 import { Http, ProductType } from '@vse-bude/shared';
 import { getProductsSSR } from 'services/product';
 import type { HomeProps } from '@components/home/types';
 import { Layout } from '@components/layout';
 import { Home } from '@components/home';
+import { LocaleHelper } from 'helpers/locale';
 
 export const getServerSideProps = withPublic(
   wrapper.getServerSideProps((store) => async (ctx) => {
-    const { locale } = ctx;
+    const { locale: language } = ctx;
     let auctionProducts: ProductDto[] = [];
     let sellingProducts: ProductDto[] = [];
 
-    const storage = new CookieStorage(ctx);
-    const auth = new AuthHelper(storage);
-    const httpClient = new Http(process.env.NEXT_PUBLIC_API_ROUTE, auth);
+    const cookieStorage = new CookieStorage(ctx);
+    const auth = new AuthHelper(cookieStorage);
+    const locale = new LocaleHelper(cookieStorage, language);
+
+    const httpClient = new Http(
+      process.env.NEXT_PUBLIC_API_ROUTE,
+      locale,
+      auth,
+    );
 
     await store.dispatch(
       fetchCategoriesSSR({
         httpSSR: httpClient,
-        locale: locale as HttpAcceptLanguage,
       }),
     );
 
@@ -49,7 +55,7 @@ export const getServerSideProps = withPublic(
 
     return {
       props: {
-        ...(await serverSideTranslations(locale, ['home', 'common'])),
+        ...(await serverSideTranslations(language, ['home', 'common'])),
         auctionProducts,
         sellingProducts,
       },

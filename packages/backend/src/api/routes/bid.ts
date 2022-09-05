@@ -34,6 +34,12 @@ export const initBidRoutes = (
    *           application/json:
    *             schema:
    *               $ref: "#/definitions/CreateBidResponse"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
    */
 
   router.post(
