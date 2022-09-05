@@ -237,4 +237,8 @@ export class ProductService {
 
     return productId;
   }
+
+  public async getSimilar(city: string, categoryId: string) {
+    return this._productRepository.findSimilar(city, categoryId);
+  }
 }

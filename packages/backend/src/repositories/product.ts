@@ -216,4 +216,14 @@ export class ProductRepository {
       },
     });
   }
+
+  public async findSimilar(city: string, categoryId: string) {
+    return await this._dbClient.product.findMany({
+      where: {
+        city,
+        categoryId,
+        status: ProductStatus.ACTIVE,
+      },
+    });
+  }
 }

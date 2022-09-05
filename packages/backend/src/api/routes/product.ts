@@ -500,5 +500,12 @@ export const initProductRoutes = (
     ),
   );
 
+  router.get(
+    apiPath(path, ProductApiRoutes.SIMILAR),
+    wrap((req: Request) =>
+      productService.getSimilar(req.params.city, req.params.categoryId),
+    ),
+  );
+
   return router;
 };
