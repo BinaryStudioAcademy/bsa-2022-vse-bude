@@ -7,7 +7,7 @@ export const Modal = ({ visible, children }: ModalProps) => {
   useEffect(() => {
     document.body.style.overflow = 'hidden';
 
-    return() => {
+    return () => {
       document.body.style.overflow = 'auto';
     };
   }, [visible]);
