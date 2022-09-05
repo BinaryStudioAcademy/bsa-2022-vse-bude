@@ -1,11 +1,11 @@
-import { UserAddressDto, UserProfileDto } from '@vse-bude/shared';
+import { SaveUserProfileDto, UserAddressDto } from '@vse-bude/shared';
 import { createReducer, isAnyOf } from '@reduxjs/toolkit';
 import { DataStatus } from '~/common/enums/enums';
 import { getPersonalInfo, updatePersonalInfo } from './actions';
 
 type State = {
   dataStatus: DataStatus;
-  user: UserProfileDto | null;
+  user: SaveUserProfileDto | null;
   address: UserAddressDto | null;
 };
 

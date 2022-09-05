@@ -1,57 +1,43 @@
 import React from 'react';
-import { useAppForm, useTranslation } from '~/hooks/hooks';
+import { useAppDispatch, useAppForm, useTranslation } from '~/hooks/hooks';
 import { View, Input, DropDown, PrimaryButton } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { ButtonAppearance } from '~/common/enums/enums';
+import { personalInfo as personalInfoActions } from '~/store/actions';
 import { CITIES, COUNTRIES, REGIONS } from '~/mock/mock-personal-info';
-import { UserProfileDto } from '@vse-bude/shared';
+import { SaveUserProfileDto } from '@vse-bude/shared';
 import { Title } from '../components';
 
-type UserPersonalInfo = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  country: string;
-  region: string;
-  city: string;
-  zipCode: string;
-  novaPoshta: string;
-  instagram?: string;
-  linkedin?: string;
-  facebook?: string;
-  password: string;
-  newPassword: string;
-  repeatNewPassword: string;
-};
-
 type Props = {
-  personalInfo: UserProfileDto;
+  personalInfo: SaveUserProfileDto;
 };
 
 const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
   const { t } = useTranslation();
-  const { control, errors, handleSubmit } = useAppForm<UserPersonalInfo>({
+  const dispatch = useAppDispatch();
+  const { control, errors, handleSubmit } = useAppForm<SaveUserProfileDto>({
     defaultValues: {
-      firstName: personalInfo?.firstName || '',
-      lastName: personalInfo?.lastName || '',
-      email: '',
-      phone: '',
-      country: '',
-      region: '',
-      city: '',
-      zipCode: '',
-      novaPoshta: '',
-      instagram: '',
-      linkedin: '',
-      facebook: '',
-      password: '',
+      firstName: personalInfo.firstName,
+      lastName: personalInfo.lastName,
+      email: personalInfo.email,
+      phone: personalInfo.phone,
+      country: personalInfo.country,
+      region: personalInfo.region,
+      city: personalInfo.city,
+      zip: personalInfo.zip,
+      deliveryData: personalInfo.deliveryData,
+      instagram: personalInfo.instagram,
+      linkedin: personalInfo.linkedin,
+      facebook: personalInfo.facebook,
+      password: personalInfo.password,
+      newPassword: personalInfo.newPassword,
+      repeatPassword: personalInfo.repeatPassword,
     },
     //TODO need add validationSchema: personalInfo,
   });
 
-  const onSubmit = (): void => {
-    //TODO need add update profile
+  const onSubmit = (payload: SaveUserProfileDto): void => {
+    dispatch(personalInfoActions.updatePersonalInfo(payload));
   };
 
   const handleCancelPress = (): void => {
@@ -118,7 +104,7 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
       <Input
         label={t('personal_info.ZIP_CODE')}
         placeholder={t('personal_info.ZIP_CODE_HINT')}
-        name="zipCode"
+        name="zip"
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
@@ -126,7 +112,7 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
       <Input
         label={t('personal_info.NOVA_POSHTA')}
         placeholder={t('personal_info.NOVA_POSHTA_HINT')}
-        name="novaPoshta"
+        name="deliveryData"
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
@@ -178,7 +164,7 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
       <Input
         label={t('verification.PASSWORD_REPEAT')}
         placeholder={t('verification.PASSWORD_HINT')}
-        name="repeatNewPassword"
+        name="repeatPassword"
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}

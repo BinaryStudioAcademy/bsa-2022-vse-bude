@@ -2,8 +2,9 @@ import {
   HttpContentType,
   HttpMethod,
   ApiRoutes,
-  UserProfileDto,
   ProfileApiRoutes,
+  FullUserProfileDto,
+  UpdateFullUserProfileDto,
 } from '@vse-bude/shared';
 
 import { Http } from '~/services/http/http.service';
@@ -23,15 +24,22 @@ class PersonalInfoApi {
     this.#apiPrefix = apiPrefix;
   }
 
-  getPersonalInfo(_id: string): Promise<UserProfileDto> {
-    return this.#http.load(`${this.#apiPrefix}${ApiRoutes.PROFILE}/${_id}`, {
-      method: HttpMethod.GET,
-      contentType: HttpContentType.APPLICATION_JSON,
-      hasAuth: true,
-    });
+  getPersonalInfo(_id: string): Promise<FullUserProfileDto> {
+    return this.#http.load(
+      `${this.#apiPrefix}${ApiRoutes.PROFILE}${
+        ProfileApiRoutes.GET_FULL_USER_DATA
+      }`,
+      {
+        method: HttpMethod.GET,
+        contentType: HttpContentType.APPLICATION_JSON,
+        hasAuth: true,
+      },
+    );
   }
 
-  updatePersonalInfo(_payload: UserProfileDto): Promise<UserProfileDto> {
+  updatePersonalInfo(
+    _payload: UpdateFullUserProfileDto,
+  ): Promise<FullUserProfileDto> {
     return this.#http.load(
       `${this.#apiPrefix}${ApiRoutes.PROFILE}${ProfileApiRoutes.UPDATE_DATA}`,
       {
