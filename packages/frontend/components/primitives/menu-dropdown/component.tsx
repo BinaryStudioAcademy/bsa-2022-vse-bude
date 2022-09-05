@@ -1,4 +1,4 @@
-import { useOutsideClick } from '@hooks';
+import { useOutsideClick, useWindowSize } from '@hooks';
 import { useCallback, useState } from 'react';
 import { Icon } from '@primitives';
 import * as styles from './styles';
@@ -11,6 +11,7 @@ export const Dropdown = ({
   ...props
 }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const size = useWindowSize();
 
   const handleClickOutside = useCallback(() => {
     event.stopPropagation();
@@ -32,7 +33,15 @@ export const Dropdown = ({
       </button>
 
       {isOpen && (
-        <div ref={ref} css={[styles.dropdownContent, cssExtend]}>
+        <div
+          ref={ref}
+          css={[styles.dropdownContent, cssExtend]}
+          style={
+            size.height < 600
+              ? { paddingTop: '180px', maxHeight: '400px', overflowY: 'scroll' }
+              : {}
+          }
+        >
           {options.map((item) => {
             const {
               value,

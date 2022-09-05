@@ -1,11 +1,15 @@
 import { Http } from '@vse-bude/shared';
 import { AuthHelper } from './auth';
 import { CookieStorage } from './cookies';
+import { LocaleHelper } from './locale';
 import { profileMapper, updateDtoMapper } from './profile-mapper';
 
 const cookieStorage = new CookieStorage();
+
 const auth = new AuthHelper(cookieStorage);
-const http = new Http(process.env.NEXT_PUBLIC_API_ROUTE, auth);
+const locale = new LocaleHelper(cookieStorage);
+
+const http = new Http(process.env.NEXT_PUBLIC_API_ROUTE, locale, auth);
 
 export {
   cookieStorage,
@@ -13,6 +17,8 @@ export {
   CookieStorage,
   auth,
   AuthHelper,
+  locale,
+  LocaleHelper,
   profileMapper,
   updateDtoMapper,
 };
