@@ -11,7 +11,7 @@ type RootNavigationParamList = {
   [RootScreenName.SUPPORT]: undefined;
   [RootScreenName.WELCOME]: undefined;
   [RootScreenName.NEW_ITEM]: undefined;
-  [RootScreenName.PRODUCT_INFO]: Partial<ProductDto> | undefined;
+  [RootScreenName.PRODUCT_INFO]: Pick<ProductDto, 'id'> | undefined;
 };
 
 export type { RootNavigationParamList };

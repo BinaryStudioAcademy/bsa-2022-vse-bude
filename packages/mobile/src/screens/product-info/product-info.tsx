@@ -11,6 +11,8 @@ import { useAppSelector, useCustomTheme, useRoute } from '~/hooks/hooks';
 import { ProductDto, ProductType } from '@vse-bude/shared';
 import { globalStyles } from '~/styles/styles';
 import { formatToDateTime } from '~/helpers/helpers';
+import { RootNavigationParamList } from '~/common/types/types';
+import { RouteProp } from '@react-navigation/native';
 import { Description } from './components/description/description';
 import { ImageCarousel } from './components/image-carousel/image-carousel';
 import { LotPriceBlock } from './components/price-block/lot-price-block';
@@ -18,12 +20,12 @@ import { ProductPriceBlock } from './components/price-block/product-price-block'
 import { SellerInfo } from './components/seller-info/seller-info';
 
 const ProductInfo: FC = () => {
-  const route = useRoute();
+  const route = useRoute<RouteProp<RootNavigationParamList>>();
   const { colors } = useCustomTheme();
-  const id = route.params;
+  const id = route.params?.id;
 
   const product = useAppSelector((state) =>
-    selectProductById(state, id?.toString() as string),
+    selectProductById(state, id as string),
   );
 
   const {
