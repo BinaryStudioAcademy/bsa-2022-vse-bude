@@ -32,7 +32,7 @@ import {
   type VerifyService,
   type EmailService,
 } from '@services';
-import { authResponseMap } from '@mappers';
+import { authResponseMap, userMap } from '@mappers';
 import { AuthApiRoutes } from '@vse-bude/shared';
 import { ResetPasswordMailBuilder } from '../email/reset-password-mail-builder';
 import { ResetPassLinkInvalid } from '../error/reset-password/reset-pass-link-invalid';
@@ -129,7 +129,9 @@ export class AuthService {
   }
 
   async getCurrentUser(userId: string) {
-    return this._userRepository.getById(userId);
+    const user = await this._userRepository.getById(userId);
+
+    return userMap(user);
   }
 
   private getAccessToken(userPayload: UserSessionJwtPayload): string {
@@ -193,8 +195,6 @@ export class AuthService {
       .setTo(email);
 
     await resetMail.send();
-
-    return {};
   }
 
   async updatePassword(updateDto: UpdatePassword) {
@@ -214,8 +214,6 @@ export class AuthService {
 
     const newPassHash = this._hashService.generateHash(updateDto.password);
     this._userRepository.updatePassword(updateDto.email, newPassHash);
-
-    return {};
   }
 
   private getResetPasswordEmailLink(hash: string, email: string): string {

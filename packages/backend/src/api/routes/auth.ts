@@ -64,14 +64,14 @@ export const initAuthRoutes = (
    *         schema:
    *           type: string
    *     responses:
-   *       200:
-   *         description: Ok
+   *       204:
+   *         description: Empty response
+   *       4**:
+   *         description: Something went wrong
    *         content:
    *           application/json:
    *             schema:
-   *               type: object
-   *               properties:
-   *                 $ref: "#/definitions/User"
+   *               $ref: "#/definitions/Response400"
    */
 
   router.post(
@@ -88,25 +88,31 @@ export const initAuthRoutes = (
 
   /**
    * @openapi
-   * definitions:
-   *   RefreshToken:
-   *     properties:
-   *       expiresAt:
-   *         type: string
-   *         format: date-time
-   *       token:
-   *         type: string
-   *       userId:
-   *         type: string
-   *       id:
-   *         type: string
-   *     required:
-   *     - expiresAt
-   *     - token
-   *     - userId
-   *     - id
-   *     type: object
-   *     description: Model RefreshToken
+   * /auth/refresh-token:
+   *   post:
+   *     tags: [Auth]
+   *     produces:
+   *       - application/json
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             $ref: "#/definitions/RefreshTokenBody"
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               $ref: "#/definitions/RefreshTokenResponse"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
    */
 
   router.post(
@@ -119,40 +125,30 @@ export const initAuthRoutes = (
   /**
    * @openapi
    * /auth/sign-up:
+   *   description: Creates user's account, but unverified (phoneVerified = false, emailVerified = false)
    *   post:
    *     tags: [Auth]
    *     produces:
    *       - application/json
-   *     parameters:
-   *       - name: body
-   *         in: body
-   *         required: true
-   *         schema:
-   *           type: object
-   *           required:
-   *             - firstName
-   *             - lastName
-   *           properties:
-   *             firstName:
-   *               type: string
-   *             lastName:
-   *               type: string
-   *             email:
-   *               type: string
-   *             phone:
-   *               type: string
-   *             password:
-   *               type: string
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             $ref: "#/definitions/SignUpBody"
    *     responses:
    *       200:
    *         description: Ok
    *         content:
    *           application/json:
    *             schema:
-   *               type: object
-   *               properties:
-   *                 contribution:
-   *                   $ref: "#/definitions/User"
+   *               $ref: "#/definitions/SignUpResponse"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
    */
 
   router.post(
@@ -182,9 +178,7 @@ export const initAuthRoutes = (
    *           application/json:
    *             schema:
    *               type: object
-   *               properties:
-   *                 contribution:
-   *                   $ref: "#/definitions/User"
+   *               $ref: "#/definitions/User"
    */
 
   router.get(
@@ -193,11 +187,59 @@ export const initAuthRoutes = (
     wrap((req: Request) => authService.getCurrentUser(req.userId)),
   );
 
+  /**
+   * @openapi
+   * /auth/reset-password-link:
+   *   post:
+   *     tags: [Auth]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - name: body
+   *         in: body
+   *         required: true
+   *         schema:
+   *           type: object
+   *           $ref: "#/definitions/ResetPasswordLinkBody"
+   *     responses:
+   *       204:
+   *         description: Empty Response
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
   router.post(
     apiPath(path, AuthApiRoutes.RESET_PASSWORD_LINK),
     wrap((req: Request) => authService.resetPasswordLink(req.body.email)),
   );
 
+  /**
+   * @openapi
+   * /auth/update-password:
+   *   post:
+   *     tags: [Auth]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - name: body
+   *         in: body
+   *         required: true
+   *         schema:
+   *           type: object
+   *           $ref: "#/definitions/UpdatePasswordBody"
+   *     responses:
+   *       204:
+   *         description: Empty Response
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
   router.post(
     apiPath(path, AuthApiRoutes.UPDATE_PASSWORD),
     wrap((req: Request) => {
