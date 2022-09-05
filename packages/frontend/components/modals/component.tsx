@@ -1,4 +1,5 @@
 import { useTypedSelector } from '@hooks';
+import { useWindowScroll } from 'hooks/use-window-scroll';
 import dynamic from 'next/dynamic';
 
 const VerificationModal = dynamic(
@@ -6,9 +7,14 @@ const VerificationModal = dynamic(
 );
 
 export const Modals = () => {
-  const { isModalOpen } = useTypedSelector(
-    (state) => state.modals.verifyPhoneModal,
-  );
+    const [blockScroll, allowScroll] = useWindowScroll();
 
-  return <>{isModalOpen && <VerificationModal />}</>;
+    const { isModalOpen } = useTypedSelector(
+      (state) => state.modals.verifyPhoneModal,
+    );
+
+    if(isModalOpen) blockScroll();
+    else allowScroll();
+
+    return <>{isModalOpen && <VerificationModal />}</>;
 };
