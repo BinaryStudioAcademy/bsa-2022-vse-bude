@@ -19,15 +19,10 @@ import {
 } from 'store/product';
 import { wrapper } from '@store';
 import { shallowEqual } from 'react-redux';
-import { CookieStorage } from '@helpers';
-import { LocaleHelper } from 'helpers/locale';
 
 export const getServerSideProps = withPublic(
   wrapper.getServerSideProps((store) => async (ctx) => {
-    const { locale: language, query } = ctx;
-
-    const cookieStorage = new CookieStorage(ctx);
-    const locale = new LocaleHelper(cookieStorage, language);
+    const { locale, query } = ctx;
 
     const http = new Http(process.env.NEXT_PUBLIC_API_ROUTE, locale);
     const id = query.id as string;
@@ -45,7 +40,7 @@ export const getServerSideProps = withPublic(
 
     return {
       props: {
-        ...(await serverSideTranslations(language, ['common', 'item'])),
+        ...(await serverSideTranslations(locale, ['common', 'item'])),
       },
     };
   }),

@@ -6,7 +6,7 @@ type UpdateFullUserProfileDto = {
   lastName: string;
   email: string;
   phone: string | null;
-  userAddres?: UserAddressDto | null;
+  userAddress?: UserAddressDto | null;
   socialMedia: SocialMedia[] | [];
   password?: string;
   newPassword?: string;
