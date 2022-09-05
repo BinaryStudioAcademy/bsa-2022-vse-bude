@@ -6,7 +6,7 @@
     "city": "West Quentinville",
     "address": "Nolan Prairie",
     "zip": "60679",
-    "novaPoshtaRef": null,
+    "deliveryData": "look towards the horizon and turn right",
     "userId": "807f73fb-31b8-4e66-9f74-babc8ee95d94",
     "createdAt": "2021-11-04T02:24:59.076Z",
     "updatedAt": "2022-08-11T17:19:36.048Z"
@@ -18,7 +18,7 @@
     "city": "Cormierville",
     "address": "Cyrus Mills",
     "zip": "18750-4455",
-    "novaPoshtaRef": null,
+    "deliveryData": "look towards the horizon and turn right",
     "userId": "b8f594a9-e836-4e25-9979-a56500b21be2",
     "createdAt": "2022-07-31T20:59:16.768Z",
     "updatedAt": "2022-08-11T10:37:04.891Z"
@@ -30,7 +30,7 @@
     "city": "East Kyleestead",
     "address": "Rasheed Shores",
     "zip": "94012-2217",
-    "novaPoshtaRef": null,
+    "deliveryData": "look towards the horizon and turn right",
     "userId": "f5cf90f8-6943-4e42-b006-03cf9bb707a4",
     "createdAt": "2021-12-03T09:13:27.244Z",
     "updatedAt": "2022-08-11T19:39:03.137Z"
@@ -42,7 +42,7 @@
     "city": "Leonardberg",
     "address": "Jewel Hills",
     "zip": "24386",
-    "novaPoshtaRef": null,
+    "deliveryData": "look towards the horizon and turn right",
     "userId": "47504cdd-55e6-4584-9539-6eef69c6deed",
     "createdAt": "2021-11-28T07:23:58.700Z",
     "updatedAt": "2022-08-11T09:10:28.027Z"
@@ -54,7 +54,7 @@
     "city": "Stracketown",
     "address": "Wehner Park",
     "zip": "63137",
-    "novaPoshtaRef": null,
+    "deliveryData": "look towards the horizon and turn right",
     "userId": "79946740-1328-414f-bef0-926cb4eb59be",
     "createdAt": "2021-12-05T00:17:13.033Z",
     "updatedAt": "2022-08-11T13:20:49.157Z"

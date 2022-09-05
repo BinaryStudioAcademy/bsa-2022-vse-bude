@@ -58,7 +58,7 @@
   },
   "components": {
     "product": {
-      "placeBidBtn": "Place a Bid",
+      "placeBidBtn": "Place Bid",
       "time": {
         "hours": "h",
         "days": "d",
@@ -167,5 +167,11 @@
       "cancel": "Cancel",
       "header": "Confirm your action"
     }
+  },
+  "resendBtn": {
+    "codeTimeLeft": "Time left to resend code again",
+    "resendCode": "Resend verification code",
+    "seconds": "s",
+    "text": "Send reset link"
   }
 }

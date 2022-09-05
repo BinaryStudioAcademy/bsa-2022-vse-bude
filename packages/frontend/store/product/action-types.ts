@@ -9,4 +9,5 @@ export enum ProductActions {
   PLACE_BID = 'product/place-bid',
   AUCTION_PERMISSIONS = 'product/auction-permissions',
   AUCTION_LEAVE = 'product/auction-leave',
+  GET_CURRENT_PRODUCT = 'product/fetch-current-product',
 }

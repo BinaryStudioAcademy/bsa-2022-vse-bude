@@ -7,12 +7,14 @@ import type {
   ProductIdRequest,
   ProductType,
 } from '@vse-bude/shared';
+import { HttpContentType } from '@vse-bude/shared';
 import { ProductApiRoutes } from '@vse-bude/shared';
 import { ApiRoutes } from '@vse-bude/shared';
 
 interface ProductOptions {
   limit: number;
   type?: ProductType;
+  categoryId?: string;
 }
 
 interface ProductOptionsSSR extends ProductOptions {
@@ -22,12 +24,14 @@ interface ProductOptionsSSR extends ProductOptions {
 export const getProducts = ({
   limit,
   type,
+  categoryId,
 }: ProductOptions): Promise<ProductDto[]> =>
   http.get({
     url: `${ApiRoutes.PRODUCTS}`,
     payload: {
       limit,
       type,
+      categoryId,
     },
   });
 
@@ -52,6 +56,15 @@ export const getProductById = (id: string) =>
 export const getProductByIdSSR = (httpSSR: Http, id: string) =>
   httpSSR.get({
     url: `${ApiRoutes.PRODUCTS}/${id}`,
+  });
+
+export const updateProduct = (id: string, body) =>
+  http.put({
+    url: `${ApiRoutes.PRODUCTS}/update/${id}`,
+    body,
+    options: {
+      contentType: HttpContentType.FORM_DATA,
+    },
   });
 
 export const incrementProductViews = (id: string): Promise<ProductDto> =>

@@ -27,7 +27,7 @@ export const fakeAddress = async (
       city: faker.address.city(),
       address: faker.address.street(),
       zip: faker.address.zipCode(),
-      novaPoshtaRef: null,
+      deliveryData: faker.address.direction(),
       userId: userId,
       createdAt: faker.date.past(),
       updatedAt: faker.date.recent(),

@@ -1,5 +1,5 @@
-﻿import { css } from '@emotion/react';
-import type { Theme } from 'theme';
+﻿import type { Theme } from '@emotion/react';
+import { css } from '@emotion/react';
 
 export const wrapper = ({ fontSizes, lineHeights }: Theme) => css`
   font-size: ${fontSizes.body2};
@@ -13,7 +13,7 @@ export const table = ({ spaces, colors, radiuses, breakpoints }: Theme) => css`
   td {
     vertical-align: top;
     overflow-wrap: break-word;
-    &:first-child {
+    &:first-of-type {
       max-width: 100%;
       white-space: nowrap;
       position: relative;

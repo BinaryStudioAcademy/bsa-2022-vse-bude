@@ -14,6 +14,7 @@ export const title = ({
   fontSizes,
   fontWeights,
   lineHeights,
+  breakpoints,
 }: Theme) => css`
   display: flex;
   justify-content: space-between;
@@ -22,6 +23,12 @@ export const title = ({
   font-size: ${fontSizes.h4};
   font-weight: ${fontWeights.h4};
   line-height: ${lineHeights.h4};
+
+  @media (max-width: ${breakpoints.sm}px) {
+    font-size: ${fontSizes.h5};
+    font-weight: ${fontSizes.h5};
+    line-height: ${fontSizes.h4};
+  }
 `;
 
 export const loadMore = ({

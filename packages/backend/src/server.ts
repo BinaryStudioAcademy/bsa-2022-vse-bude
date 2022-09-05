@@ -4,11 +4,12 @@ import express, { json } from 'express';
 import { initRepositories } from '@repositories';
 import { getEnv, logger } from '@helpers';
 import { initServices } from '@services';
-import { loggerMiddleware, localizationMiddleware } from '@middlewares';
+import { loggerMiddleware } from '@middlewares';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import { prismaClient as database } from './data/db';
 import { errorHandler } from './error/error-handler';
+import { langMiddleware } from './api/middlewares/lang';
 
 const app = express();
 const repositories = initRepositories(database);
@@ -32,7 +33,7 @@ app
   .use(cors())
   .use(loggerMiddleware)
   .use(json())
-  .use(localizationMiddleware)
+  .use(langMiddleware)
   .use(routes)
   .use(errorHandler)
   .use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecification))

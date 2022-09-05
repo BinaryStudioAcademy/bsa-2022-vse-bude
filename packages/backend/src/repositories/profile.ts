@@ -85,6 +85,7 @@ export class UserProfileRepository {
         lastName: true,
         email: true,
         phone: true,
+        phoneVerified: true,
       },
     });
   }
@@ -99,7 +100,7 @@ export class UserProfileRepository {
         region: true,
         city: true,
         zip: true,
-        novaPoshtaRef: true,
+        deliveryData: true,
       },
     });
   }

@@ -1,5 +1,5 @@
+import type { Theme } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { Theme } from 'theme';
 
 export const buttonRow = ({ breakpoints, spaces }: Theme) => css`
   display: flex;

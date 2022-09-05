@@ -4,6 +4,7 @@ import {
   UserPersonalInfoValidationMessage,
 } from '@vse-bude/shared';
 import { ProfileError } from '@errors';
+import { lang } from '../../../lang';
 
 export const phoneValidation = ({ req }: { req: Request }) => {
   const { phone } = req.body;
@@ -14,7 +15,7 @@ export const phoneValidation = ({ req }: { req: Request }) => {
     if (!isPhone) {
       throw new ProfileError({
         status: HttpStatusCode.BAD_REQUEST,
-        message: req.t(UserPersonalInfoValidationMessage.PHONE_PATTERN),
+        message: lang(UserPersonalInfoValidationMessage.PHONE_PATTERN),
       });
     }
   }

@@ -17,6 +17,7 @@ type FullUserProfileDto = {
   phone?: string;
   userAddress?: UserAddressDto;
   socialMedia: SocialMedia[];
+  phoneVerified: boolean;
 };
 
 type UserAddressDto = {
@@ -24,7 +25,7 @@ type UserAddressDto = {
   region?: string;
   city?: string;
   zip?: string;
-  novaPoshtaRef?: string;
+  deliveryData?: string;
 };
 
 type UpdateUserProfileDto = {

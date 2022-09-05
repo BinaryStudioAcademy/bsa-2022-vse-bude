@@ -87,6 +87,10 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
     return false;
   };
 
+  const onVerifyPhone = () => {
+    dispatch(showVerifyModal());
+  };
+
   return (
     <NestedLayout>
       <form css={styles.form} onSubmit={handleSubmit(onSave)}>
@@ -163,14 +167,16 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
                   error={errors.phone?.message}
                 />
               </div>
-              <Button
-                type="button"
-                size="big"
-                variant="outlined"
-                onClick={() => dispatch(showVerifyModal())}
-              >
-                {t('personal-info:action.verify')}
-              </Button>
+              {!user.phoneVerified && (
+                <Button
+                  type="button"
+                  size="big"
+                  variant="outlined"
+                  onClick={onVerifyPhone}
+                >
+                  {t('personal-info:action.verify')}
+                </Button>
+              )}
             </Flex>
           </Column>
 
@@ -229,9 +235,9 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
                 id="novaposhta-profile"
                 type="text"
                 variant="primary"
-                label={t('personal-info:label.novaPoshta')}
-                placeholder={t('personal-info:placeholder.novaPoshtaRef')}
-                {...register('novaPoshtaRef')}
+                label={t('personal-info:label.deliveryData')}
+                placeholder={t('personal-info:placeholder.deliveryData')}
+                {...register('deliveryData')}
               />
             </div>
           </Column>

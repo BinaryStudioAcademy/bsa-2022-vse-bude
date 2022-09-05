@@ -11,6 +11,7 @@ import { ProductGrid } from './product-grid/component';
 interface RequestOptions {
   limit?: number;
   type?: ProductType;
+  category?: string;
 }
 
 export const Filter = () => {
@@ -20,11 +21,16 @@ export const Filter = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const filter: RequestOptions = Object.fromEntries(
-      new URLSearchParams(query as unknown as string),
-    );
+    const filter: RequestOptions =
+      query.filter && JSON.parse(query.filter as string);
 
-    dispatch(fetchProducts({ limit: filter.limit, type: filter.type }));
+    dispatch(
+      fetchProducts({
+        limit: filter?.limit,
+        type: filter?.type,
+        categoryId: filter?.category,
+      }),
+    );
   }, [dispatch, query]);
 
   return (
@@ -35,7 +41,10 @@ export const Filter = () => {
       />
       <div
         css={css`
-          margin: 35px auto 0;
+          margin: 20px auto 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         `}
       >
         <Button onClick={() => setIsOpenTypeOfPost(true)}>Create a Post</Button>
