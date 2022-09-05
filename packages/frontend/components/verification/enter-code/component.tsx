@@ -8,7 +8,7 @@ import hand from 'public/images/mocup_hand2.png';
 import { previousVerifyModal } from 'store/modals/actions';
 import { useEffect } from 'react';
 import * as styles from '../styles';
-import { getCurrentUser, phoneCodeResend } from '../../../store/auth';
+import { phoneCodeResend } from '../../../store/auth';
 
 const EnterCodeModal = () => {
   const dispatch = useAppDispatch();
@@ -18,7 +18,6 @@ const EnterCodeModal = () => {
 
   useEffect(() => {
     dispatch(phoneCodeResend());
-    dispatch(getCurrentUser());
   }, [dispatch]);
 
   const previousModal = (e) => {
