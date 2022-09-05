@@ -1,6 +1,5 @@
 import type { Request } from 'express';
-import type {
-  UserAddressDto} from '@vse-bude/shared';
+import type { UserAddressDto } from '@vse-bude/shared';
 import {
   HttpStatusCode,
   PLACE,

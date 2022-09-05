@@ -12,12 +12,8 @@ import {
   Loader,
 } from '@primitives';
 import { userUpdateSchema } from 'validation-schemas/user/user-update';
-import type {
-  SaveUserProfileDto,
-  FullUserProfileDto} from '@vse-bude/shared';
-import {
-  DefaultInpValue,
-} from '@vse-bude/shared';
+import type { SaveUserProfileDto, FullUserProfileDto } from '@vse-bude/shared';
+import { DefaultInpValue } from '@vse-bude/shared';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { profileMapper, updateDtoMapper } from '@helpers';
 import { updateUserProfile, setIsEditing } from '@store';

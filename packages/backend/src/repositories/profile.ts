@@ -234,11 +234,11 @@ export class UserProfileRepository {
         id: userId,
       },
       data: {
-        phoneVerified: false
+        phoneVerified: false,
       },
       select: {
-        phoneVerified: true
-      }
+        phoneVerified: true,
+      },
     });
   }
 
