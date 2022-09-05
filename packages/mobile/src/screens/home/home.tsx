@@ -91,9 +91,9 @@ const Home: FC = () => {
               />
               <ProductsSection
                 sectionTitle={t('home.POPULAR_LOTS')}
-                extendTitle={t('home.SEE_ALL_LOTS')}
+                seeAllTitle={t('home.SEE_ALL_LOTS')}
                 data={splitProductType(products).auction}
-                onExtendPress={() => {
+                onSeeAllPress={() => {
                   // TODO
                 }}
                 wrapperStyles={[globalStyles.mt6]}
@@ -137,9 +137,9 @@ const Home: FC = () => {
             <Wrapper>
               <ProductsSection
                 sectionTitle={t('home.POPULAR_ITEMS')}
-                extendTitle={t('home.SEE_ALL_LOTS')}
+                seeAllTitle={t('home.SEE_ALL_LOTS')}
                 data={splitProductType(products).selling}
-                onExtendPress={() => {
+                onSeeAllPress={() => {
                   // TODO
                 }}
                 wrapperStyles={[globalStyles.mt6]}

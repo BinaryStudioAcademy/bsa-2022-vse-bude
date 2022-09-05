@@ -1,27 +1,29 @@
 import React, { FC } from 'react';
-import { View, Text, FlatList, TextButton } from '~/components/components';
+import { View, Text, FlatList, ButtonText } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { ProductDto } from '@vse-bude/shared';
-import { FlexStyle } from 'react-native';
+import { ViewStyle } from 'react-native';
 import { cutProductsDataLength } from '~/helpers/helpers';
+import { useCustomTheme } from '~/hooks/hooks';
 import { Product } from '../components';
-import { styles } from './styles';
 
 type Props = {
   sectionTitle: string;
-  extendTitle: string;
+  seeAllTitle: string;
   data: ProductDto[];
-  onExtendPress: () => void;
-  wrapperStyles?: FlexStyle[];
+  onSeeAllPress: () => void;
+  wrapperStyles?: ViewStyle[];
 };
 
 const ProductsSection: FC<Props> = ({
   sectionTitle,
-  extendTitle,
+  seeAllTitle,
   data,
-  onExtendPress,
+  onSeeAllPress,
   wrapperStyles,
 }) => {
+  const { colors } = useCustomTheme();
+
   return (
     <View style={wrapperStyles}>
       <View
@@ -35,12 +37,12 @@ const ProductsSection: FC<Props> = ({
           style={[
             globalStyles.fs22,
             globalStyles.fontWeightBold,
-            styles.lotTitle,
+            { color: colors.titlePrimary },
           ]}
         >
           {sectionTitle}
         </Text>
-        <TextButton text={extendTitle} onPress={onExtendPress} />
+        <ButtonText onPress={onSeeAllPress}>{seeAllTitle}</ButtonText>
       </View>
       <FlatList
         keyExtractor={(item) => item.id}

@@ -21,7 +21,7 @@ export { Spinner } from './spinner/spinner';
 export { Logo } from './logo/logo';
 export { LogoWhite } from './logo/logo-white';
 export { SearchInput } from './search-input/search-input';
-export { TextButton } from './text-button/text-button';
+export { ButtonText } from './button-text/button-text';
 export { HeaderLeft } from './header-left/header-left';
 export { HeaderSave } from './header-save/header-save';
 export { DropDown } from './dropdown/dropdown';

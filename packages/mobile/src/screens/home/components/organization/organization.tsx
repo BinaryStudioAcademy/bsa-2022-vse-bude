@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { View, Image } from '~/components/components';
-import { FlexStyle, ImageURISource } from 'react-native';
+import { ViewStyle, ImageURISource } from 'react-native';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 
@@ -8,7 +8,7 @@ type Props = {
   imageSource: ImageURISource;
   width?: number | string;
   maxHeight?: number | string;
-  props?: FlexStyle[];
+  props?: ViewStyle[];
 };
 
 const Organization: FC<Props> = ({ imageSource, width, maxHeight, props }) => {
