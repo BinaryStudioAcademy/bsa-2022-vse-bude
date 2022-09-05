@@ -33,7 +33,15 @@ export const Dropdown = ({
       </button>
 
       {isOpen && (
-        <div ref={ref} css={[styles.dropdownContent, cssExtend]} style={size.height < 600 ? {paddingTop: '180px', maxHeight: '400px', overflowY: 'scroll'} : {}}>
+        <div
+          ref={ref}
+          css={[styles.dropdownContent, cssExtend]}
+          style={
+            size.height < 600
+              ? { paddingTop: '180px', maxHeight: '400px', overflowY: 'scroll' }
+              : {}
+          }
+        >
           {options.map((item) => {
             const {
               value,
