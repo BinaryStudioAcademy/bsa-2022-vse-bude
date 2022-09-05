@@ -1,8 +1,9 @@
+import { MIN_DATE } from '@components/primitives/input/date-input';
 import { ValidationRanges } from '@vse-bude/shared';
 import Joi from 'joi';
 import type { TFunction } from 'next-i18next';
 
-export const createPostSchema = (t: TFunction) =>
+export const createAuctionSchema = (t: TFunction) =>
   Joi.object({
     category: Joi.string()
       .required()
@@ -10,6 +11,8 @@ export const createPostSchema = (t: TFunction) =>
         'string.empty': t('create-post:validation.category.empty'),
       }),
     currency: Joi.any().allow(''),
+    recommendedPriceCurrency: Joi.any().allow(''),
+    minimalBidCurrency: Joi.any().allow(''),
     callingCode: Joi.any().allow(''),
     site: Joi.string()
       .allow('')
@@ -67,11 +70,24 @@ export const createPostSchema = (t: TFunction) =>
       .messages({
         'string.pattern.base': t('create-post:validation.phone.pattern'),
       }),
-    price: Joi.number()
+    recommendedPrice: Joi.number()
       .min(1)
       .required()
       .messages({
         'number.base': t('create-post:validation.price.base'),
         'number.empty': t('create-post:validation.price.empty'),
+      }),
+    minimalBid: Joi.number()
+      .min(1)
+      .required()
+      .messages({
+        'number.base': t('create-post:validation.price.base'),
+        'number.empty': t('create-post:validation.price.empty'),
+      }),
+    endDate: Joi.date()
+      .min(MIN_DATE)
+      .required()
+      .messages({
+        'date.base': t('create-post:validation.date.base'),
       }),
   });

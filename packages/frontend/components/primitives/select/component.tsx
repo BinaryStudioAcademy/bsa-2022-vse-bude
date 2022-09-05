@@ -8,7 +8,7 @@ import * as styles from './styles';
 export const Select = ({
   options,
   error,
-  value,
+  value = '',
   setValue,
   ...props
 }: SelectProps) => {
@@ -21,7 +21,7 @@ export const Select = ({
       }
       onChildrenClick={() => setIsOpen(!isOpen)}
       options={options.map((item) => ({
-        value: item,
+        value: item.title,
         onClick: () => setValue(item),
       }))}
     >
