@@ -123,6 +123,7 @@ export const ItemInfoAuction = ({
                 inFavouriteColor={IconColor.YELLOW}
                 notInFavouriteColor={IconColor.YELLOW}
                 size="md"
+                disabled={!user}
               />
             }
           >
