@@ -101,6 +101,11 @@ export const avatarPopoverTrigger = css`
   right: 0;
 `;
 
+export const bodyWrapper = ({ spaces }: Theme) => css`
+  margin-top: ${spaces.xs};
+  z-index: 0;
+`;
+
 export const avatarUpdateButton = ({ colors, spaces, radiuses }: Theme) => css`
   display: flex;
   align-items: center;

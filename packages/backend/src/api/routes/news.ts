@@ -19,12 +19,12 @@ export const initNewsRoutes = (
    *     produces:
    *       - application/json
    *     parameters:
-   *       - name: limit
-   *         in: query
-   *         required: true
+   *       - in: query
+   *         required: false
+   *         name: limit
    *         schema:
-   *           format: double
-   *           type: number
+   *            type: number
+   *            format: integer
    *     responses:
    *       200:
    *         description: Ok
@@ -32,9 +32,13 @@ export const initNewsRoutes = (
    *           application/json:
    *             schema:
    *               type: object
-   *               properties:
-   *                 contribution:
-   *                   $ref: "#/definitions/News"
+   *               $ref: "#/definitions/GetNewsResponse"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
    */
 
   router.get(

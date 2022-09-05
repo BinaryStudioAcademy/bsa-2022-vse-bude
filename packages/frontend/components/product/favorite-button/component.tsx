@@ -11,6 +11,7 @@ export const FavoriteButton = ({
   cssExtended,
   inFavouriteColor,
   notInFavouriteColor,
+  disabled = false,
 }: FavoriteButtonProps) => {
   const color = isFavorite
     ? inFavouriteColor || IconColor.YELLOW
@@ -25,6 +26,7 @@ export const FavoriteButton = ({
       color={color}
       backgroundColor={backgroundColor}
       size={size}
+      disabled={disabled}
     />
   );
 };
