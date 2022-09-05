@@ -69,10 +69,10 @@ export const marginBottom = ({ spaces }: Theme) => css`
 
 export const sections = ({ mq }: Theme) => css`
   width: 450px;
-  ${mq[0]} {
+  ${mq[1]} {
     width: 500px;
   }
-  ${mq[3]} {
+  ${mq[4]} {
     width: 700px;
   }
 `;

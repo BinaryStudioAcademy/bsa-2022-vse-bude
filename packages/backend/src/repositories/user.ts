@@ -74,17 +74,18 @@ export class UserRepository {
     });
   }
 
-  public getByEmailOrPhone(email: string, phone: string) {
+  public getNewByPhone({ phone }: { phone: string }) {
     return this._dbClient.user.findFirst({
       where: {
-        OR: [
-          {
-            phone: phone,
-          },
-          {
-            email: email,
-          },
-        ],
+        phone: phone,
+      },
+    });
+  }
+
+  public getNewByEmail(email: string) {
+    return this._dbClient.user.findFirst({
+      where: {
+        email: email,
       },
     });
   }
