@@ -12,6 +12,7 @@ export const FavoriteButton = ({
   cssExtended,
   inFavouriteColor,
   notInFavouriteColor,
+  disabled = false,
 }: FavoriteButtonProps) => {
   const { t } = useTranslation();
   const color = isFavorite
@@ -32,6 +33,7 @@ export const FavoriteButton = ({
           ? t('common:components.product.removeFromFavorites')
           : t('common:components.product.addToFavorites')
       }
+      disabled={disabled}
     />
   );
 };

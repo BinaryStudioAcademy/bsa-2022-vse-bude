@@ -1,6 +1,7 @@
 import type { AuthTokenData } from '@types';
 import type { AuthResponse } from '@vse-bude/shared';
 import type { User } from '@prisma/client';
+import { userMap } from './user';
 
 export const authResponseMap = (
   tokens: AuthTokenData,
@@ -9,17 +10,5 @@ export const authResponseMap = (
   accessToken: tokens.accessToken,
   refreshToken: tokens.refreshToken,
   accessExpiresAt: tokens.accessExpiresAt,
-  user: {
-    id: userData.id,
-    firstName: userData.firstName,
-    lastName: userData.lastName,
-    phone: userData.phone,
-    email: userData.email,
-    avatar: userData.avatar,
-    role: userData.role,
-    createdAt: userData.createdAt.getTime(),
-    updatedAt: userData.updatedAt.getTime(),
-    phoneVerified: userData.phoneVerified,
-    emailVerified: userData.emailVerified,
-  },
+  user: userMap(userData),
 });

@@ -14,6 +14,7 @@ export enum Routes {
   ABOUT = '/about',
   CATEGORIES = '/categories',
   NOT_FOUND = '/404',
+  RULES = '/rules',
 }
 
 export enum ProfileRoutes {

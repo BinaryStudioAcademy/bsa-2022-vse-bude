@@ -17,7 +17,7 @@
  *         nullable: true
  *       authorId:
  *         type: string
- *       cancellReason:
+ *       cancelReason:
  *         type: string
  *         nullable: true
  *       endDate:
@@ -29,6 +29,9 @@
  *       type:
  *         "$ref": "#/definitions/ProductType"
  *       city:
+ *         type: string
+ *         nullable: true
+ *       country:
  *         type: string
  *         nullable: true
  *       imageLinks:
@@ -51,24 +54,9 @@
  *         type: string
  *       id:
  *         type: string
- *     required:
- *     - updatedAt
- *     - createdAt
- *     - winnerId
- *     - categoryId
- *     - authorId
- *     - cancellReason
- *     - endDate
- *     - status
- *     - type
- *     - city
- *     - imageLinks
- *     - minimalBid
- *     - recommendedPrice
- *     - price
- *     - description
- *     - title
- *     - id
+ *       views:
+ *         type: number
+ *         format: integer
  *     type: object
  *     description: Model Product
  *

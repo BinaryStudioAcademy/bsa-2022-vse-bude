@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import type { Theme } from '@emotion/react';
+import { ColorPalette } from '@vse-bude/shared';
 
 export const wrapper = ({ breakpoints, spaces }: Theme) => css`
   margin-bottom: ${spaces.xl1};
@@ -105,7 +106,10 @@ export const greeting = ({
 
   @media (min-width: ${breakpoints.md}px) {
     height: 420px;
-    background: linear-gradient(to top, #f4c50a 50%, #0c42a6 50%);
+    background: linear-gradient(
+      ${ColorPalette.BLUE} 50%,
+      ${ColorPalette.YELLOW} 50%
+    );
     display: grid;
     place-items: center;
     font-weight: ${fontWeights.h1};

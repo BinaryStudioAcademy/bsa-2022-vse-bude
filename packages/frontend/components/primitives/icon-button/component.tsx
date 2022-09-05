@@ -12,6 +12,7 @@ export const IconButton = ({
   onClick,
   type = 'button',
   ariaLabel,
+  disabled = false,
 }: IconButtonProps) => (
   <button
     aria-label={ariaLabel}
@@ -20,6 +21,7 @@ export const IconButton = ({
     data-size={size}
     data-bg-color={backgroundColor}
     type={type}
+    disabled={disabled}
   >
     <Icon icon={icon} color={color} />
   </button>
