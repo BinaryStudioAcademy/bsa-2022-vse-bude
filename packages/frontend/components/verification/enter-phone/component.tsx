@@ -12,7 +12,7 @@ const EnterPhoneModal = () => {
   const dispatch = useAppDispatch();
 
   const { t } = useTranslation();
-  
+
   const { user } = useAuth();
 
   const closeModal = () => {
