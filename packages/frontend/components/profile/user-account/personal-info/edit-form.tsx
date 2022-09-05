@@ -12,7 +12,7 @@ import {
   Loader,
 } from '@primitives';
 import { userUpdateSchema } from 'validation-schemas/user/user-update';
-import type { SaveUserProfileDto, FullUserProfileDto } from '@vse-bude/shared';
+import { SaveUserProfileDto, FullUserProfileDto, DefaultInpValue } from '@vse-bude/shared';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { profileMapper, updateDtoMapper } from '@helpers';
 import { updateUserProfile, setIsEditing } from '@store';
@@ -21,13 +21,12 @@ import type { RootState } from '@types';
 import { showVerifyModal } from 'store/verify/actions';
 import { SectionHeader, NestedLayout } from '../common';
 import * as styles from './styles';
-// import { onChangeNewPassword } from './utils';
 
 const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
   const [isSubmit, setIsSubmit] = useState(false);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-
+  console.log(user)
   const saveLoader = useTypedSelector(
     (state: RootState) => state.profile.saveLoader,
   );
@@ -35,9 +34,6 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
   const {
     register,
     reset,
-    // setValue,
-    // setError,
-    // clearErrors,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -59,11 +55,6 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
     );
   };
 
-  // const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const value = event.target.value;
-  //   clearErrors('newPassword');
-  //   onChangeNewPassword({ value, t, setError, setValue });
-  // };
   const onResetHandler = () => {
     reset(profileMapper({ user }), {
       keepDefaultValues: true,
@@ -159,6 +150,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
               <div css={styles.phoneRow}>
                 <Input
                   id="phone-profile"
+                  inerasableValue={DefaultInpValue.PHONE}
                   type="text"
                   variant="primary"
                   label={t('personal-info:label.phone')}
@@ -226,6 +218,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
                   label={t('personal-info:label.zipCode')}
                   placeholder={t('personal-info:placeholder.zip')}
                   {...register('zip')}
+                  error={errors.zip?.message}
                 />
               </div>
             </Flex>

@@ -4,6 +4,7 @@ import {
   passwordValidation,
   phoneValidation,
   userNameValidation,
+  addressValidation,
 } from './sub-validation';
 
 export const profileValidation = ({ req }: { req: Request }) => {
@@ -11,4 +12,5 @@ export const profileValidation = ({ req }: { req: Request }) => {
   emailValidation({ req });
   passwordValidation({ req });
   phoneValidation({ req });
+  addressValidation({ req });
 };

@@ -55,6 +55,7 @@ export const initProfileRoutes = (
         lastName,
         email,
         phone,
+        userAddress,
         socialMedia,
         password,
         newPassword,
@@ -64,6 +65,8 @@ export const initProfileRoutes = (
         userId,
         data: { firstName, lastName, email, phone },
       });
+
+      const address = await profileService.updateUserAddress({userId, userAddress})
 
       await profileService.updateUserSocialMedia({
         userId,
@@ -79,7 +82,7 @@ export const initProfileRoutes = (
         });
       }
 
-      return { ...user, socialMedia: links };
+      return { ...user, userAddress: address, socialMedia: links };
     }),
   );
 

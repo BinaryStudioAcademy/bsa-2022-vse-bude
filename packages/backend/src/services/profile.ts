@@ -2,6 +2,7 @@ import type { UserProfileRepository } from '@repositories';
 import type {
   UpdateUserProfileDto,
   UpdatePasswordDto,
+  UserAddressDto,
   SocialMedia,
 } from '@vse-bude/shared';
 import type { UploadFileRequest } from '@types';
@@ -116,6 +117,22 @@ export class UserProfileService {
     return this._userProfileRepository.updateAvatar({
       userId,
       avatar: null,
+    });
+  }
+
+  public updateUserAddress({
+    userId,
+    userAddress,
+  }: {
+    userId: string;
+    userAddress: UserAddressDto;
+  }) {
+    if (!userAddress) {
+      return null;
+    }
+    return this._userProfileRepository.updateAddress({
+      userId,
+      data: userAddress,
     });
   }
 

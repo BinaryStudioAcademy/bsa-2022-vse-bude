@@ -1,7 +1,13 @@
 import Joi from 'joi';
 import type { UserSignUpDto } from '@vse-bude/shared';
-import { UserPersonalInfoValidationMessage } from '@vse-bude/shared';
-import { ValidationRanges } from '@vse-bude/shared';
+import {
+  UserPersonalInfoValidationMessage,
+  ValidationRanges,
+  NAME,
+  PASSWORD,
+  EMAIL,
+  PHONE,
+} from '@vse-bude/shared';
 import type { TFunction } from 'next-i18next';
 
 export const signUpSchema = (t: TFunction) =>
@@ -9,9 +15,9 @@ export const signUpSchema = (t: TFunction) =>
     firstName: Joi.string()
       .trim()
       .required()
-      .pattern(/^[^-](([a-zA-Z'-]+)|([а-яёіїґєА-ЯЁIЇҐЄ'-]+))[^-]$/)
       .min(ValidationRanges.MIN_NAME_SYMBOLS)
       .max(ValidationRanges.MAX_NAME_SYMBOLS)
+      .pattern(NAME)
       .messages({
         'string.pattern.base': t(
           UserPersonalInfoValidationMessage.FIRSTNAME_PATTERN,
@@ -24,9 +30,9 @@ export const signUpSchema = (t: TFunction) =>
     lastName: Joi.string()
       .trim()
       .required()
-      .pattern(/^[^-](([a-zA-Z'-]+)|([а-яёіїґєА-ЯЁIЇҐЄ'-]+))[^-]$/)
       .min(ValidationRanges.MIN_NAME_SYMBOLS)
       .max(ValidationRanges.MAX_NAME_SYMBOLS)
+      .pattern(NAME)
       .messages({
         'string.pattern.base': t(
           UserPersonalInfoValidationMessage.LASTNAME_PATTERN,
@@ -38,9 +44,7 @@ export const signUpSchema = (t: TFunction) =>
 
     email: Joi.string()
       .trim()
-      .pattern(
-        /^(([^.]([a-zA-Z\d!#$%&'*+\-/=?^_`{|}~]{1,32})(.[^.]([a-zA-Z\d!#$%&'*+\-/=?^_`{|}~]{1,31}))*)|([a-zA-Z\d!#$%&'*+\-/=?^_`{|}~]{1,64}))@[^-]([\da-zA-Z-]{1,63}\.)([a-zA-Z]{2,6})$/,
-      )
+      .pattern(EMAIL)
       .email({ tlds: { allow: false } })
       .required()
       .messages({
@@ -53,7 +57,7 @@ export const signUpSchema = (t: TFunction) =>
 
     phone: Joi.string()
       .allow('')
-      .pattern(/^((\+\d{12,15})|(\+380\d{9}))$/)
+      .pattern(PHONE)
       .messages({
         'string.pattern.base': t(
           UserPersonalInfoValidationMessage.PHONE_PATTERN,
@@ -64,9 +68,7 @@ export const signUpSchema = (t: TFunction) =>
       .required()
       .min(ValidationRanges.MIN_PASSWORD_SYMBOLS)
       .max(ValidationRanges.MAX_PASSWORD_SYMBOLS)
-      .pattern(
-        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z~!@#$%^*\-_=+[{\]}/;:,.?]+$/,
-      )
+      .pattern(PASSWORD)
       .messages({
         'string.pattern.base': t(
           UserPersonalInfoValidationMessage.NEW_PASSWORD,
