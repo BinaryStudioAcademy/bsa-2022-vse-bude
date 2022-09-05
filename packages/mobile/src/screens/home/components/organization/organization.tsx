@@ -8,12 +8,19 @@ type Props = {
   imageSource: ImageURISource;
   width?: number | string;
   maxHeight?: number | string;
-  props?: ViewStyle[];
+  style?: ViewStyle[];
 };
 
-const Organization: FC<Props> = ({ imageSource, width, maxHeight, props }) => {
+const Organization: FC<Props> = ({
+  imageSource,
+  width,
+  maxHeight,
+  style = [],
+}) => {
   return (
-    <View style={[globalStyles.alignItemsCenter, { width, maxHeight }, props]}>
+    <View
+      style={[globalStyles.alignItemsCenter, { width, maxHeight }, ...style]}
+    >
       <Image source={imageSource} style={styles.image} />
     </View>
   );

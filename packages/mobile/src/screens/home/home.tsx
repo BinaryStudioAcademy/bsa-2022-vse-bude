@@ -133,7 +133,7 @@ const Home: FC = () => {
                       imageSource={item.src}
                       maxHeight={50}
                       width="30%"
-                      props={[globalStyles.mt6]}
+                      style={[globalStyles.mt6]}
                     />
                   );
                 })}
