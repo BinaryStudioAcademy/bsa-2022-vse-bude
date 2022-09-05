@@ -10,6 +10,7 @@ type RootNavigationParamList = {
   [RootScreenName.SUPPORT]: undefined;
   [RootScreenName.WELCOME]: undefined;
   [RootScreenName.NEW_ITEM]: undefined;
+  [RootScreenName.MAIN_WITH_MENU]: undefined;
 };
 
 export type { RootNavigationParamList };

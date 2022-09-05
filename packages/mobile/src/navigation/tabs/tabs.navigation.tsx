@@ -4,7 +4,7 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import { MainScreenName } from '~/common/enums/enums';
-import { Home, Favorite, MyList, Account } from '~/screens/screens';
+import { Home, Favourite, MyList, Account } from '~/screens/screens';
 import { useAppSelector, useCustomTheme } from '~/hooks/hooks';
 import {
   HomeIcon,
@@ -55,9 +55,9 @@ const MainNavigation: FC = () => {
         options={getTabOptions(MainScreenName.HOME, HomeIcon)}
       />
       <Tabs.Screen
-        name={MainScreenName.FAVORITE}
-        component={Favorite}
-        options={getTabOptions(MainScreenName.FAVORITE, StarIcon)}
+        name={MainScreenName.FAVOURITE}
+        component={Favourite}
+        options={getTabOptions(MainScreenName.FAVOURITE, StarIcon)}
       />
       <Tabs.Screen
         name={MainScreenName.MY_LIST}

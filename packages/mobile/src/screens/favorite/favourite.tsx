@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Text, ScreenWrapper } from '~/components/components';
 
-const Favorite: FC = () => {
+const Favourite: FC = () => {
   return (
     <ScreenWrapper>
       <Text>Favorite screen</Text>
@@ -9,4 +9,4 @@ const Favorite: FC = () => {
   );
 };
 
-export { Favorite };
+export { Favourite };
