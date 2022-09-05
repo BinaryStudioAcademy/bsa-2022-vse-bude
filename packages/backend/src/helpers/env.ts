@@ -25,6 +25,10 @@ type S3StorageEnvKey =
 
 type AppEnvKeys = 'APP_URL' | 'APP_EMAIL_FROM' | 'APP_NAME';
 
+type MerchantEnvKeys =
+  | 'WAY_FOR_PAY_MERCHANT_ACCOUNT'
+  | 'WAY_FOR_PAY_MERCHANT_SECRET_KEY';
+
 type EnvKeys =
   | ProcessEnvKey
   | AuthEnvKeys
@@ -32,7 +36,8 @@ type EnvKeys =
   | TwilioEnvKey
   | EmailEnvKey
   | S3StorageEnvKey
-  | AppEnvKeys;
+  | AppEnvKeys
+  | MerchantEnvKeys;
 
 export const getEnv = (key: EnvKeys) => process.env[key];
 
