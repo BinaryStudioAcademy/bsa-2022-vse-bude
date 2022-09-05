@@ -500,6 +500,37 @@ export const initProductRoutes = (
     ),
   );
 
+  /**
+   * @openapi
+   * /products/similar:
+   *   get:
+   *     tags: [Product]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - in: path
+   *         name: city
+   *         required: true
+   *         type: string
+   *       - in: path
+   *         name: categoryId
+   *         required: true
+   *         type: string
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Product"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
+
   router.get(
     apiPath(path, ProductApiRoutes.SIMILAR),
     wrap((req: Request) =>
