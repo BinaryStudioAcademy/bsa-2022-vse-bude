@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { useState } from '~/hooks/hooks';
-import { TextInput, Text, View, SearchIcon } from '~/components/components';
+import { TextInput, View, SearchIcon } from '~/components/components';
 import { ColorPalette } from '@vse-bude/shared';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
@@ -8,10 +8,9 @@ import { styles } from './styles';
 type Props = {
   placeHolder: string;
   onValueChange: (value: string) => void;
-  title?: string;
 };
 
-const SearchInput: FC<Props> = ({ placeHolder, onValueChange, title }) => {
+const SearchInput: FC<Props> = ({ placeHolder, onValueChange }) => {
   const [value, setValue] = useState('');
   const handleChangeText = (text: string) => {
     setValue(text);
@@ -27,9 +26,6 @@ const SearchInput: FC<Props> = ({ placeHolder, onValueChange, title }) => {
         styles.inputContainer,
       ]}
     >
-      {!!title && (
-        <Text style={[globalStyles.fs14, globalStyles.mr5]}>{title}</Text>
-      )}
       <View
         style={[
           styles.inputWrapper,
