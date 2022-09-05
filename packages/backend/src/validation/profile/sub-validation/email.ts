@@ -4,6 +4,7 @@ import {
   UserPersonalInfoValidationMessage,
 } from '@vse-bude/shared';
 import { ProfileError } from '@errors';
+import { lang } from '../../../lang';
 
 export const emailValidation = ({ req }: { req: Request }) => {
   const { email } = req.body;
@@ -11,7 +12,7 @@ export const emailValidation = ({ req }: { req: Request }) => {
   if (!email) {
     throw new ProfileError({
       status: HttpStatusCode.BAD_REQUEST,
-      message: req.t(UserPersonalInfoValidationMessage.EMAIL_REQUIRED),
+      message: lang(UserPersonalInfoValidationMessage.EMAIL_REQUIRED),
     });
   }
 
@@ -23,7 +24,7 @@ export const emailValidation = ({ req }: { req: Request }) => {
   if (!isEmail) {
     throw new ProfileError({
       status: HttpStatusCode.BAD_REQUEST,
-      message: req.t(UserPersonalInfoValidationMessage.EMAIL_REQUIRED),
+      message: lang(UserPersonalInfoValidationMessage.EMAIL_REQUIRED),
     });
   }
 };

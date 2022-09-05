@@ -25,19 +25,17 @@ export const Header = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
-  const { list: categories, loading: categoriesLoading } = useTypedSelector(
-    (state) => state.category,
-  );
+  const categories = useTypedSelector((state) => state.category.list);
 
   useEffect(() => {
-    if (!categories.length && !categoriesLoading) {
+    if (!categories.length) {
       const category: RequestOptions = {
         locale: locale as HttpAcceptLanguage,
       };
 
       dispatch(fetchCategories({ locale: category.locale }));
     }
-  }, [dispatch, locale, categories, categoriesLoading]);
+  }, [dispatch, locale, categories]);
 
   const renderAuthButtons = () => (
     <div className="buttons-wrapper">
@@ -87,10 +85,9 @@ export const Header = () => {
               </a>
             </Link>
             <div className="header-content">
-              <Navigation categories={categories || []} />
+              {<Navigation categories={categories || []} />}
             </div>
           </Flex>
-
           {isMounted && (
             <>
               {user || loading ? (

@@ -1,10 +1,12 @@
-import { Button, StringCutter } from '@primitives';
+import { InternalLink, StringCutter } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import { useAppDispatch, useTypedSelector, useInFavorite } from '@hooks';
 import {
   addProductToFavorites,
   deleteProductFromFavorites,
 } from 'store/favorite-product';
+import { shallowEqual } from 'react-redux';
+import { Routes } from '@enums';
 import { Price } from '../price';
 import { FavoriteButton } from '../favorite-button/component';
 import { ProductTimer } from '../timer/component';
@@ -21,7 +23,7 @@ import {
 import type { ProductCardProps } from './types';
 
 export const ProductCard = (props: ProductCardProps) => {
-  const { user } = useTypedSelector((state) => state.auth);
+  const { user } = useTypedSelector((state) => state.auth, shallowEqual);
 
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -63,14 +65,14 @@ export const ProductCard = (props: ProductCardProps) => {
           <Price amount={props.price} currency={props.currency} />
         </div>
         <div className="productAction">
-          <Button
-            title="Place a Bid"
-            variant="filled"
-            size="small"
-            onClick={() => props.onButtonClick(props.data.id)}
+          <InternalLink
+            title={t('common:components.product.placeBidBtn')}
+            href={`${Routes.ITEMS}/${props.data.id}`}
+            prefetch={false}
+            variant="button"
           >
             {t('common:components.product.placeBidBtn')}
-          </Button>
+          </InternalLink>
         </div>
       </div>
     </div>

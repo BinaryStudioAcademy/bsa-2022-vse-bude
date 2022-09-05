@@ -57,7 +57,7 @@ model Address {
   city          String?  @db.VarChar(512)
   address       String?  @db.VarChar(1024)
   zip           String?  @db.VarChar(32)
-  novaPoshtaRef String?
+  deliveryData  String?  @db.VarChar(1024)
   user          User?    @relation(fields: [userId], references: [id])
   userId        String?  @unique @db.Uuid
   createdAt     DateTime @default(now())
@@ -92,13 +92,16 @@ model Product {
   title           String        @db.VarChar(512)
   description     String
   price           Decimal       @db.Money
-  recommendedPrice Decimal?      @db.Money
+  recommendedPrice Decimal?     @db.Money
   minimalBid      Decimal?      @db.Money
   imageLinks      String[]      @db.VarChar(2048)
+  country         String?        @db.VarChar(512)
   city            String?       @db.VarChar(512)
+  phone           String?       @db.VarChar(32)
   type            ProductType
   status          ProductStatus
   endDate         DateTime?
+  postDate        DateTime?
   cancelReason   String?
   author          User          @relation(name: "ownProducts", fields: [authorId], references: [id])
   authorId        String        @db.Uuid

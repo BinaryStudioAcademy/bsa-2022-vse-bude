@@ -25,7 +25,7 @@ type UserAddressDto = {
   region?: string;
   city?: string;
   zip?: string;
-  novaPoshtaRef?: string;
+  deliveryData?: string;
 };
 
 type UpdateUserProfileDto = {

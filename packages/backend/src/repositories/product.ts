@@ -1,4 +1,4 @@
-import type { PrismaClient, Product } from '@prisma/client';
+import type { PrismaClient } from '@prisma/client';
 import { ProductStatus } from '@prisma/client';
 import type { ProductQuery } from '@types';
 import { Order } from '@vse-bude/shared';
@@ -10,11 +10,12 @@ export class ProductRepository {
     this._dbClient = prismaClient;
   }
 
-  public getAll(query: ProductQuery): Promise<Product[]> {
+  public getAll(query: ProductQuery) {
     const {
       limit = 10,
       from = 0,
       type,
+      categoryId,
       sortBy = 'createdAt',
       order = Order.ASC,
     } = query;
@@ -27,6 +28,7 @@ export class ProductRepository {
       },
       where: {
         type,
+        categoryId,
       },
     });
   }
@@ -131,7 +133,9 @@ export class ProductRepository {
     return this._dbClient.product.create({
       data: {
         imageLinks: data.imageLinks,
+        country: data.country,
         city: data.city,
+        phone: data.phone,
         status: data.status,
         categoryId: data.categoryId,
         title: data.title,
@@ -151,7 +155,9 @@ export class ProductRepository {
       data: {
         imageLinks: data.imageLinks,
         status: data.status,
+        country: data.country,
         city: data.city,
+        phone: data.phone,
         categoryId: data.categoryId,
         title: data.title,
         description: data.description,
@@ -190,7 +196,7 @@ export class ProductRepository {
   }
 
   public async checkStatus(id: string, status: ProductStatus) {
-    return await this._dbClient.product.findFirst({
+    return this._dbClient.product.findFirst({
       where: {
         id,
         status,
