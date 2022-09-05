@@ -46,7 +46,6 @@ export const initAuthRoutes = (
   router.post(
     apiPath(path, AuthApiRoutes.SIGN_IN),
     wrap<Empty, AuthResponse, UserSignInDto>((req: Request) =>
-      //console.log(req)
       authService.signIn(req.body),
     ),
   );
