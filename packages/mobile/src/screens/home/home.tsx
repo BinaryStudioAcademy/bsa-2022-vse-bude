@@ -16,9 +16,12 @@ import {
   ScreenWrapper,
 } from '~/components/components';
 import { ColorPalette } from '@vse-bude/shared';
-import { organizations, categories } from '~/mock/mock';
-import { loadAllProducts } from '~/store/products/actions';
-import { selectProducts } from '~/store/products/selectors';
+import { organizations } from '~/mock/mock';
+import {
+  products as productsActions,
+  categories as categoriesActions,
+} from '~/store/actions';
+import { selectProducts, selectCategories } from '~/store/selectors';
 import { splitProductType } from '~/helpers/helpers';
 import {
   BurgerMenu,
@@ -34,9 +37,11 @@ const Home: FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const products = useAppSelector(selectProducts);
+  const categories = useAppSelector(selectCategories);
 
   useEffect(() => {
-    dispatch(loadAllProducts());
+    dispatch(productsActions.loadAllProducts());
+    dispatch(categoriesActions.loadAllCategories());
   }, []);
 
   return (
@@ -79,21 +84,23 @@ const Home: FC = () => {
                   //TODO
                 }}
               />
-              <FlatList
-                style={styles.categories}
-                horizontal={true}
-                showsHorizontalScrollIndicator={false}
-                data={categories}
-                renderItem={({ item }) => (
-                  <Category
-                    title={item.title}
-                    imageSource={item.src}
-                    onPress={() => {
-                      // TODO
-                    }}
-                  />
-                )}
-              />
+              {categories && (
+                <FlatList
+                  style={styles.categories}
+                  horizontal={true}
+                  showsHorizontalScrollIndicator={false}
+                  data={categories}
+                  renderItem={({ item }) => (
+                    <Category
+                      categoryId={item.id}
+                      onPress={() => {
+                        // TODO
+                      }}
+                    />
+                  )}
+                />
+              )}
+
               <ProductsSection
                 sectionTitle={t('home.POPULAR_LOTS')}
                 seeAllTitle={t('home.SEE_ALL_LOTS')}

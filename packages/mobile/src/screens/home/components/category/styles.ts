@@ -4,19 +4,17 @@ import { ColorPalette } from '@vse-bude/shared';
 const styles = StyleSheet.create({
   wrapper: {
     width: 92,
-    height: 110,
     backgroundColor: ColorPalette.GRAY_100,
     borderRadius: 5,
-    paddingVertical: 10,
-    marginRight: 10,
   },
   title: {
+    height: 50,
     color: ColorPalette.BLACK_100,
     textAlign: 'center',
   },
   image: {
-    maxWidth: '60%',
-    maxHeight: '65%',
+    width: 60,
+    height: 60,
     resizeMode: 'contain',
   },
 });
