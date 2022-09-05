@@ -1,6 +1,5 @@
 import type { PrismaClient } from '@prisma/client';
-import { OrderStatus } from '@vse-bude/shared';
-import type { CreateOrderDto } from '@vse-bude/shared';
+import { type CreateOrderDto, OrderStatus } from '@vse-bude/shared';
 import type { OrderQuery } from '@types';
 
 export class OrderRepository {
