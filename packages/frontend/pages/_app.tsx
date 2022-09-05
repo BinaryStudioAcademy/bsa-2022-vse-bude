@@ -22,7 +22,7 @@ type AppPropsWithLayout = AppProps & {
 
 const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? ((page) => page);
-  locale.setLocale(i18n.language);
+  locale.setLocale(i18n?.language);
 
   return (
     <ThemeProvider>
