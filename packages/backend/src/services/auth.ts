@@ -32,8 +32,7 @@ import {
   type VerifyService,
   type EmailService,
 } from '@services';
-import type { Request } from 'express';
-import { authResponseMap } from '@mappers';
+import { authResponseMap, userMap } from '@mappers';
 import { AuthApiRoutes } from '@vse-bude/shared';
 import { ResetPasswordMailBuilder } from '../email/reset-password-mail-builder';
 import { ResetPassLinkInvalid } from '../error/reset-password/reset-pass-link-invalid';
@@ -74,13 +73,13 @@ export class AuthService {
     await this._refreshTokenRepository.deleteByUserId(signOutDto.userId);
   }
 
-  async signUp(signUpDto: UserSignUpDto, req: Request): Promise<AuthResponse> {
+  async signUp(signUpDto: UserSignUpDto): Promise<AuthResponse> {
     const userByEmailOrPhone = await this._userRepository.getByEmailOrPhone(
       signUpDto.email,
       signUpDto.phone,
     );
     if (userByEmailOrPhone) {
-      throw new UserExistsError(req);
+      throw new UserExistsError();
     }
     const createUserDto: CreateUser = {
       firstName: signUpDto.firstName,
@@ -90,7 +89,6 @@ export class AuthService {
       passwordHash: this._hashService.generateHash(signUpDto.password),
     };
     const newUser = await this._userRepository.create(createUserDto);
-    await this._verifyService.initPhoneVerification(newUser.id);
     await this._verifyService.initEmailVerification(newUser.id);
     const tokenData = this.getTokenData(newUser.id);
 
@@ -104,7 +102,7 @@ export class AuthService {
     return authResponseMap(tokenData, newUser);
   }
 
-  async signIn(signInDto: UserSignInDto, req: Request): Promise<AuthResponse> {
+  async signIn(signInDto: UserSignInDto): Promise<AuthResponse> {
     const user = await this._userRepository.getByEmail(signInDto.email);
     if (!user) {
       throw new UserNotFoundError();
@@ -116,7 +114,7 @@ export class AuthService {
         signInDto.password,
       )
     ) {
-      throw new WrongPasswordError(req);
+      throw new WrongPasswordError();
     }
 
     const tokenData = this.getTokenData(user.id);
@@ -131,7 +129,9 @@ export class AuthService {
   }
 
   async getCurrentUser(userId: string) {
-    return this._userRepository.getById(userId);
+    const user = await this._userRepository.getById(userId);
+
+    return userMap(user);
   }
 
   private getAccessToken(userPayload: UserSessionJwtPayload): string {
@@ -145,19 +145,19 @@ export class AuthService {
     );
   }
 
-  async refreshToken(updateDto: UpdateRefreshToken, req) {
+  async refreshToken(updateDto: UpdateRefreshToken) {
     if (!updateDto.tokenValue) {
-      throw new WrongRefreshTokenError(req);
+      throw new WrongRefreshTokenError();
     }
     const token = await this._refreshTokenRepository.getTokenByValue(
       updateDto.tokenValue,
     );
     if (!token) {
-      throw new UnauthorizedError(req);
+      throw new UnauthorizedError();
     }
 
     if (new Date(token.expiresAt) < new Date()) {
-      throw new ExpiredRefreshTokenError(req);
+      throw new ExpiredRefreshTokenError();
     }
 
     const newTokenData = this.getTokenData(token.userId);
@@ -195,8 +195,6 @@ export class AuthService {
       .setTo(email);
 
     await resetMail.send();
-
-    return {};
   }
 
   async updatePassword(updateDto: UpdatePassword) {
@@ -216,8 +214,6 @@ export class AuthService {
 
     const newPassHash = this._hashService.generateHash(updateDto.password);
     this._userRepository.updatePassword(updateDto.email, newPassHash);
-
-    return {};
   }
 
   private getResetPasswordEmailLink(hash: string, email: string): string {

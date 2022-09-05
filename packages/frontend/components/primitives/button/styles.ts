@@ -1,5 +1,5 @@
+import type { Theme } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { Theme } from 'theme';
 import { resetButton } from 'theme';
 
 export const button = ({
@@ -32,7 +32,7 @@ export const button = ({
 
     :disabled {
       background: ${colors.disabled};
-      cursor: not-allowed;
+      pointer-events: none;
     }
   }
 
@@ -55,7 +55,7 @@ export const button = ({
     :disabled {
       border: 1px solid ${colors.disabled};
       color: ${colors.disabled};
-      cursor: not-allowed;
+      pointer-events: none;
     }
   }
 

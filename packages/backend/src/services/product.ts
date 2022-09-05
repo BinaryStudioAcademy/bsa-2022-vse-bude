@@ -25,6 +25,7 @@ import { productMapper } from '@mappers';
 import { FieldError } from 'error/product/field-error';
 import { createPostSchema, updatePostSchema } from 'validation/product/schemas';
 import { auctionPermissionsMapper } from '@mappers';
+import { lang } from '../lang';
 import type { S3StorageService } from './s3-storage';
 
 export class ProductService {
@@ -57,10 +58,10 @@ export class ProductService {
     if (!product) {
       throw new ProductNotFoundError();
     }
-    // TODO: fix translation after localization refactor
-    // if (product.category) {
-    //   product.category.title = req.t(`categories.${product.category.title}`);
-    // }
+
+    if (product.category) {
+      product.category.title = lang(`categories:${product.category.title}`);
+    }
 
     const currentPrice = await this._productRepository.getCurrentPrice(
       product.id,
@@ -159,8 +160,7 @@ export class ProductService {
   }
 
   public async createProduct({ req, userId, fieldsData }: CreateProduct) {
-    const { t } = req;
-    const { error } = createPostSchema(t).validate(req.body);
+    const { error } = createPostSchema.validate(req.body);
     if (error) {
       throw new FieldError(error.message);
     }
@@ -187,15 +187,14 @@ export class ProductService {
     userId,
     fieldsData,
   }: UpdateProduct) {
-    const { t } = req;
-    const { error } = updatePostSchema(t).validate(req.body);
+    const { error } = updatePostSchema.validate(req.body);
     if (error) {
       throw new FieldError(error.message);
     }
     const product = (await this._productRepository.getById(
       productId,
     )) as Product;
-    if (product.authorId !== userId) throw new UnauthorizedError(req);
+    if (product.authorId !== userId) throw new UnauthorizedError();
     const newImageLinks = await this._s3StorageService.uploadProductImages(req);
     const oldImages = fieldsData?.images ? [...fieldsData.images] : [];
     const deletedImages = product.imageLinks.reduce(

@@ -1,4 +1,4 @@
-﻿import type { Theme } from 'theme';
+﻿import type { Theme } from '@emotion/react';
 import { css } from '@emotion/react';
 
 export const wrapper = ({ spaces, breakpoints }: Theme) => css`
@@ -10,7 +10,7 @@ export const wrapper = ({ spaces, breakpoints }: Theme) => css`
   }
 `;
 
-export const controlls = css`
+export const controls = css`
   width: 100%;
   display: flex;
   align-items: center;
@@ -29,5 +29,4 @@ export const price = ({ spaces, breakpoints }: Theme) => css`
   @media (max-width: ${breakpoints.md}px) {
     text-align: center;
   }
-}
 `;

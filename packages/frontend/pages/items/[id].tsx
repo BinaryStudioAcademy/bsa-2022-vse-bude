@@ -1,10 +1,11 @@
-import { useEffect } from 'react';
+﻿import { useEffect } from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { LotSection } from '@components/home/lot-section';
 import { Routes } from '@enums';
 import { Breadcrumbs, Button, Container } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import { Http } from '@vse-bude/shared';
+import type { ProductType } from '@vse-bude/shared';
 import { withPublic } from '@hocs';
 import { Layout } from '@components/layout';
 import { Item } from '@components/item';
@@ -51,21 +52,30 @@ const ItemPage = () => {
     (state) => state.product.currentItem,
     shallowEqual,
   );
+  const { user } = useTypedSelector((state) => state.auth, shallowEqual);
 
   const similarProducts = useTypedSelector(
     (state) => state.product.similarProducts,
     shallowEqual,
   );
 
+  const redirectToFilterByType = (type: ProductType) =>
+    encodeURI(`${Routes.ITEMS}?filter={"type":"${type}"}`);
+
   useEffect(() => {
     dispatch(updateProductViews(item.id));
-    dispatch(
-      auctionPermissions({
-        productId: item.id,
-      }),
-    );
     dispatch(fetchSimilarProducts(item.id));
   }, [item.id, dispatch]);
+
+  useEffect(() => {
+    if (user) {
+      dispatch(
+        auctionPermissions({
+          productId: item.id,
+        }),
+      );
+    }
+  }, [item.id, dispatch, user]);
 
   return (
     <Layout title={item.title}>
@@ -80,7 +90,7 @@ const ItemPage = () => {
             route: Routes.ITEMS,
           },
           {
-            name: item.category?.title, //change
+            name: item.category?.title,
             route: encodeURI(
               `${Routes.ITEMS}?filter=${JSON.stringify({
                 category: item.category.id,
@@ -101,6 +111,7 @@ const ItemPage = () => {
         title={t('item:similarItems')}
         lots={similarProducts}
         loadMoreTitle={t('item:seeMoreItems')}
+        loadMoreHref={redirectToFilterByType(item.type)}
       />
     </Layout>
   );

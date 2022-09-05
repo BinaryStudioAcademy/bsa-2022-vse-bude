@@ -7,6 +7,8 @@ import { apiPath } from '@helpers';
 import { authMiddleware, uploadImage } from '@middlewares';
 import { profileValidation } from '@validation';
 import type { UploadFileRequest } from '@types';
+import type { User } from '@prisma/client';
+import { userMap } from '@mappers';
 
 export const initProfileRoutes = (
   { profileService, myListService }: Services,
@@ -14,19 +16,40 @@ export const initProfileRoutes = (
 ): Router => {
   const router = Router();
 
+  /**
+   * @openapi
+   * /profile/full-data:
+   *   get:
+   *     description: Get Full user's profile data
+   *     security:
+   *       - Bearer: []
+   *     tags: [Profile]
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               $ref: "#/definitions/GetProfileFullUserData"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
   router.get(
     apiPath(path, ProfileApiRoutes.GET_FULL_USER_DATA),
     authMiddleware,
     wrap(async (req: Request) => {
-      const { userId, t } = req;
-      const fullUserProfile = await profileService.getFullUserData({
-        userId,
-        t,
-      });
+      const { userId } = req;
 
-      return {
-        ...fullUserProfile,
-      };
+      return await profileService.getFullUserData({
+        userId,
+      });
     }),
   );
 
@@ -34,24 +57,48 @@ export const initProfileRoutes = (
     apiPath(path, AccountApiRoutes.MY_LIST),
     authMiddleware,
     wrap(async (req: Request) => {
-      const { userId, t } = req;
+      const { userId } = req;
       await profileService.getUser({
         userId,
-        t,
       });
-      const userItemsList = await myListService.getAllUserItems({ userId });
 
-      return {
-        userItemsList,
-      };
+      return await myListService.getAllUserItems({ userId });
     }),
   );
 
+  /**
+   * @openapi
+   * /profile/save:
+   *   put:
+   *     description: Updates user profile data
+   *     security:
+   *       - Bearer: []
+   *     tags: [Profile]
+   *     produces:
+   *       - application/json
+   *     requestBody:
+   *        schema:
+   *          $ref: "#/definitions/UpdateProfileBody"
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               $ref: "#/definitions/UpdateProfileResponse"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
   router.put(
     apiPath(path, ProfileApiRoutes.UPDATE_DATA),
     authMiddleware,
     wrap(async (req: Request) => {
-      const { userId, t } = req;
+      const { userId } = req;
       profileValidation({ req });
 
       const {
@@ -64,7 +111,7 @@ export const initProfileRoutes = (
         newPassword,
       } = req.body;
 
-      const user = await profileService.updateUserProfile({
+      const user: User = await profileService.updateUserProfile({
         userId,
         data: { firstName, lastName, email, phone },
       });
@@ -79,12 +126,11 @@ export const initProfileRoutes = (
       if (newPassword) {
         await profileService.changePassword({
           userId,
-          t,
           data: { newPassword, password },
         });
       }
 
-      return { ...user, socialMedia: links };
+      return { ...userMap(user), socialMedia: links };
     }),
   );
 
@@ -94,22 +140,50 @@ export const initProfileRoutes = (
     uploadImage,
     wrap(async (req: UploadFileRequest) => {
       const { userId } = req;
-      const avatar = await profileService.updateAvatar({ userId, req });
 
-      return avatar;
+      return await profileService.updateAvatar({ userId, req });
     }),
   );
 
+  /**
+   * @openapi
+   * /profile/:userId:
+   *   get:
+   *     description: Get user's profile
+   *     security:
+   *       - Bearer: []
+   *     tags: [Profile]
+   *     parameters:
+   *       - in: path
+   *         name: userId
+   *         required: true
+   *         type: string
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               $ref: "#/definitions/GetProfileResponse"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
   router.get(
     apiPath(path, ProfileApiRoutes.GET_USER_BY_ID),
     wrap(async (req: Request) => {
       const { userId } = req.params;
-      const { t } = req;
-      const user = await profileService.getUser({ userId, t });
+      const user = await profileService.getUser({ userId });
       const socialMedia = await profileService.getSocialMedia({ userId });
 
       return {
-        ...user,
+        ...userMap(user),
         socialMedia,
       };
     }),

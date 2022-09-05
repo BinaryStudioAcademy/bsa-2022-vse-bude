@@ -1,4 +1,5 @@
 import { Environment } from '@vse-bude/shared';
+import path from 'path';
 
 type EmailEnvKey = 'EMAIL_SERVICE_API_KEY';
 
@@ -36,3 +37,8 @@ type EnvKeys =
 export const getEnv = (key: EnvKeys) => process.env[key];
 
 export const isProduction = getEnv('NODE_ENV') === Environment.PRODUCTION;
+
+export const rootDir = path.resolve(`${__dirname}/../../`);
+export const srcDir = path.resolve(`${rootDir}/src`);
+export const langDir = path.resolve(`${srcDir}/lang`);
+export const localesDir = path.resolve(`${langDir}/locales`);

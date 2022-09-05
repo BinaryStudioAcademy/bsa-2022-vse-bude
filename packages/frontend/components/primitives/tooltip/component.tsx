@@ -4,13 +4,15 @@ import * as styles from './styles';
 import type { TooltipProps } from './types';
 
 const marginScreenLeftRightPx = 10;
+const tooltipOffset = 10;
 
 export const Tooltip = ({
   trigger,
   children,
-  hideTimeoutMs = 300,
+  hideTimeoutMs = 100,
 }: TooltipProps) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [fadeOut, setFadeOut] = useState(false);
 
   const bodyRef = useRef<HTMLDivElement>();
   const triggerWrapperRef = useRef<HTMLSpanElement>();
@@ -62,7 +64,7 @@ export const Tooltip = ({
     if (bodyRef.current) {
       const [bodyTop, bodyLeft] = calcBodyCoords();
 
-      bodyRef.current.style.top = `${bodyTop}px`;
+      bodyRef.current.style.top = `${bodyTop - tooltipOffset}px`;
       bodyRef.current.style.left = `${bodyLeft}px`;
     }
   }, [isVisible, calcBodyCoords]);
@@ -81,7 +83,11 @@ export const Tooltip = ({
 
   const handleMouseLeave = () => {
     timerRef.current = setTimeout(() => {
-      setIsVisible(false);
+      setFadeOut(true);
+      setTimeout(() => {
+        setIsVisible(false);
+        setFadeOut(false);
+      }, hideTimeoutMs);
     }, hideTimeoutMs);
   };
 
@@ -90,7 +96,7 @@ export const Tooltip = ({
       ref={bodyRef}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      css={styles.body}
+      css={[styles.body, fadeOut && styles.fadeOut]}
     >
       {children}
     </div>
@@ -108,7 +114,6 @@ export const Tooltip = ({
         ref={triggerWrapperRef}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        css={styles.trigger}
       >
         {trigger}
       </span>

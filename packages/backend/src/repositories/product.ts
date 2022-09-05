@@ -15,6 +15,7 @@ export class ProductRepository {
       limit = 10,
       from = 0,
       type,
+      categoryId,
       sortBy = 'createdAt',
       order = Order.ASC,
     } = query;
@@ -27,6 +28,7 @@ export class ProductRepository {
       },
       where: {
         type,
+        categoryId,
       },
     });
   }
@@ -204,7 +206,7 @@ export class ProductRepository {
   }
 
   public async checkStatus(id: string, status: ProductStatus) {
-    return await this._dbClient.product.findFirst({
+    return this._dbClient.product.findFirst({
       where: {
         id,
         status,
