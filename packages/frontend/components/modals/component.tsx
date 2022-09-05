@@ -7,14 +7,14 @@ const VerificationModal = dynamic(
 );
 
 export const Modals = () => {
-    const [blockScroll, allowScroll] = useWindowScroll();
+  const [blockScroll, allowScroll] = useWindowScroll();
 
-    const { isModalOpen } = useTypedSelector(
-      (state) => state.modals.verifyPhoneModal,
-    );
+  const { isModalOpen } = useTypedSelector(
+    (state) => state.modals.verifyPhoneModal,
+  );
 
-    if(isModalOpen) blockScroll();
-    else allowScroll();
+  if (isModalOpen) blockScroll();
+  else allowScroll();
 
-    return <>{isModalOpen && <VerificationModal />}</>;
+  return <>{isModalOpen && <VerificationModal />}</>;
 };
