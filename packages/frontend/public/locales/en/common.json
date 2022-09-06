@@ -91,6 +91,9 @@
           "directSale": "You need to verify you phone number to choose \"Direct Sale\""
         }
       }
+    },
+    "badge": {
+      "removeLabel": "Remove filter {{param}}"
     }
   },
   "notifications": {
