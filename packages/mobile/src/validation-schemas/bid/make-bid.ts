@@ -1,7 +1,7 @@
 import * as Joi from 'joi';
 import i18next from 'i18next';
 
-const makeBid = (minimalBid: number) =>
+const getBidValidationSchema = (minimalBid: number) =>
   Joi.object({
     bid: Joi.number()
       .min(Number(minimalBid))
@@ -11,4 +11,4 @@ const makeBid = (minimalBid: number) =>
       }),
   });
 
-export { makeBid };
+export { getBidValidationSchema };

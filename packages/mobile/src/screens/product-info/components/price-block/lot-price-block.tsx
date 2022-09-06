@@ -10,7 +10,7 @@ import {
 import { useAppForm, useCustomTheme, useTranslation } from '~/hooks/hooks';
 import { ColorPalette, ProductDto } from '@vse-bude/shared';
 import { globalStyles } from '~/styles/styles';
-import { makeBid } from '~/validation-schemas/bid/make-bid';
+import { getBidValidationSchema } from '~/validation-schemas/bid/make-bid';
 import { DEFAULT_BID_VALUE } from '../../common/constants';
 import { PriceWrapper } from './price-wrapper';
 import { styles } from './styles';
@@ -25,7 +25,7 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
   const { t } = useTranslation();
   const { control, errors } = useAppForm({
     defaultValues: DEFAULT_BID_VALUE,
-    validationSchema: makeBid(minimalBid),
+    validationSchema: getBidValidationSchema(minimalBid),
   });
 
   return (

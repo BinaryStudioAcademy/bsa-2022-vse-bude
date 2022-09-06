@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { RouteProp } from '@react-navigation/native';
 import { RootNavigationParamList } from '~/common/types/types';
-import { formatToDateTime } from '~/helpers/helpers';
 import { useAppSelector, useCustomTheme, useRoute } from '~/hooks/hooks';
 import { selectProductById } from '~/store/products/selectors';
 import {
@@ -29,20 +28,8 @@ const ProductInfo: FC = () => {
   if (route.params?.itemId) {
     const id = route.params?.itemId;
     const product = useAppSelector((state) => selectProductById(state, id));
-    const {
-      title,
-      description,
-      price,
-      minimalBid,
-      city,
-      type,
-      status,
-      endDate,
-      imageLinks,
-      views,
-      currentPrice,
-    } = product;
-    const date = formatToDateTime(endDate);
+    const { title, price, minimalBid, type, imageLinks, views, currentPrice } =
+      product;
 
     return (
       <ScreenWrapper>
@@ -79,12 +66,7 @@ const ProductInfo: FC = () => {
             </Text>
           </View>
           {imageLinks && <ImageCarousel imageLinks={imageLinks} />}
-          <Description
-            description={description}
-            city={city || ''}
-            status={status}
-            date={date}
-          />
+          <Description product={product} />
           <SellerInfo />
         </ScrollView>
         {type == ProductType.AUCTION ? (

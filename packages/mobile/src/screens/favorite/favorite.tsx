@@ -39,7 +39,7 @@ const Favorite: FC = () => {
       <Text>Favorite screen</Text>
       <FlatList
         data={products}
-        keyExtractor={(item) => `${item.id}`}
+        keyExtractor={(item) => item.id}
         renderItem={renderItem}
       />
     </ScreenWrapper>

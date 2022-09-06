@@ -1,24 +1,14 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { useTranslation } from '~/hooks/hooks';
+import { formatToDateTime } from '~/helpers/helpers';
 import { View } from '~/components/components';
+import { ProductDto } from '@vse-bude/shared';
 import { RenderDescriptionInfo } from './render-description-info';
 
-type DescriptionProps = {
-  description: string;
-  city: string;
-  status: string;
-  date: string;
-  timeZone?: number;
-};
-
-const Description: FC<DescriptionProps> = ({
-  description,
-  city,
-  status,
-  date,
-  timeZone,
-}) => {
+const Description = ({ product }: { product: ProductDto }) => {
   const { t } = useTranslation();
+  const { endDate, status, city, description } = product;
+  const date = formatToDateTime(endDate);
 
   return (
     <View>
@@ -28,7 +18,7 @@ const Description: FC<DescriptionProps> = ({
       />
       <RenderDescriptionInfo
         title={t('screens:product_info.TIME_ZONE')}
-        description={`GMT ${timeZone || '+0'}`}
+        description="GMT +0"
       />
       <RenderDescriptionInfo
         title={t('screens:product_info.STATUS')}
