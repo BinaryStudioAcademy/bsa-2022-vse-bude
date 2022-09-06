@@ -25,6 +25,7 @@ export default function ProductForm({ edit }: { edit: boolean }) {
   const currentProduct = useTypedSelector((state) => state.product.currentItem);
   const categories = useTypedSelector((state) => state.category.list);
   const [category, setCategory] = useState<SelectOption>(null);
+  const [condition, setCondition] = useState<SelectOption>(null);
   const [images, setImages] = useState<(File | string)[]>([]);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -64,6 +65,9 @@ export default function ProductForm({ edit }: { edit: boolean }) {
         switch (key) {
           case 'category':
             formData.append(key, category.value);
+            break;
+          case 'condition':
+            formData.append(key, condition.value);
             break;
           case 'phone':
             formData.append(key, data[key] ? `+380${data[key]}` : '');
@@ -107,6 +111,14 @@ export default function ProductForm({ edit }: { edit: boolean }) {
             });
             break;
           }
+          case 'condition': {
+            setValue('condition', currentProduct?.condition);
+            setCondition({
+              value: currentProduct?.condition.toUpperCase(),
+              title: currentProduct?.condition,
+            });
+            break;
+          }
           case 'endDate':
             setValue(item, new Date(currentProduct?.endDate).toString());
             setEndDate(new Date(currentProduct?.endDate));
@@ -129,6 +141,12 @@ export default function ProductForm({ edit }: { edit: boolean }) {
     setCategory(category);
     setValue('category', category.value);
   };
+
+  const setConditionWrapper = (condition: SelectOption) => {
+    setCondition(condition);
+    setValue('condition', condition.value);
+  };
+
   const setEndDateWrapper = (date) => {
     setEndDate(date);
     setValue('endDate', date);
@@ -140,8 +158,10 @@ export default function ProductForm({ edit }: { edit: boolean }) {
       <Column css={styles.sectionRow}>
         <DescriptionBlock
           category={category}
+          condition={condition}
           register={register as registerFieldType}
           setCategories={setCategoryWrapper}
+          setCondition={setConditionWrapper}
           errors={errors}
         />
         <Flex css={styles.groupInputs}>
