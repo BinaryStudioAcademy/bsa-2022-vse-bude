@@ -127,15 +127,10 @@ export class ProductService {
 
     await this._bidRepository.deleteAllByProductAndUser(userId, productId);
 
-    this.getById(productId).then((res) =>
-      this._productRepository.update(productId, {
-        ...res,
-        category: res.categoryId,
-        price: res.currentPrice,
-      }),
-    );
+    const newProduct = await this.getById(productId);
+    this._bidRepository.retrieve(productId, newProduct.currentPrice);
 
-    return this.getById(productId);
+    return newProduct;
   }
 
   public async addToFavorites({ userId, productId }: AddProductToFavorites) {

@@ -41,4 +41,13 @@ export class BidRepository {
       },
     });
   }
+
+  async retrieve(productId: string, price: number) {
+    return this._dbClient.$transaction([
+      this._dbClient.product.update({
+        data: { price },
+        where: { id: productId },
+      }),
+    ]);
+  }
 }
