@@ -21,7 +21,7 @@ const processImageResponse = (response: ImagePickerResponse) => {
     notification.info(i18n.t('common:errors.DID_CANCEL'));
   }
   if (response?.assets?.[0]?.type) {
-    if (!ALLOW_IMAGE_TYPES.includes(response?.assets?.[0]?.type.toString())) {
+    if (!ALLOW_IMAGE_TYPES.includes(response?.assets?.[0]?.type)) {
       notification.error(i18n.t('errors.WRONG_FORMAT'));
 
       return null;
