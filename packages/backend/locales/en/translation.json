@@ -16,6 +16,9 @@
       "body": "Please complete the e-mail confirmation process with this code: "
     }
   },
+  "userValidation": {
+    "notVerified": "User not verified!"
+  },
   "PRODUCT_NOT_FOUND": "Product not found!",
   "categories": {
     "LAPTOPS_AND_PC_CATEGORY_NAME": "Laptops and computers",
