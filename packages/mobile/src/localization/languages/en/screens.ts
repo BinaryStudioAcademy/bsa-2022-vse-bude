@@ -1,3 +1,4 @@
+import { MAX_IMAGE_SIZE } from '@vse-bude/shared';
 import {
   MAX_NAME_LENGTH,
   MAX_PASSWORD_LENGTH,
@@ -80,6 +81,7 @@ export const screens = {
     FIRST_NAME_INVALID: 'The invalid first name format',
     LAST_NAME_INVALID: 'The invalid last name format',
     WRONG_FORMAT: 'Wrong format',
+    MAX_IMAGE_SIZE: `Maximum file size is ${MAX_IMAGE_SIZE / 1000000} Mb`,
   },
   make_a_post: {
     TITLE: 'Make a Post',

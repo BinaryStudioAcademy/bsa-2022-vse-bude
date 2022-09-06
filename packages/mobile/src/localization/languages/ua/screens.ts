@@ -1,3 +1,4 @@
+import { MAX_IMAGE_SIZE } from '@vse-bude/shared';
 import {
   MAX_NAME_LENGTH,
   MAX_PASSWORD_LENGTH,
@@ -79,6 +80,7 @@ export const screens = {
     FIRST_NAME_INVALID: 'Неправильний формат імені',
     LAST_NAME_INVALID: 'Неправильний формат прізвища',
     WRONG_FORMAT: 'Невірний формат',
+    MAX_IMAGE_SIZE: `Максимальний розмір файлу ${MAX_IMAGE_SIZE / 1000000} МБ`,
   },
   make_a_post: {
     TITLE: 'Створити публікацію',
