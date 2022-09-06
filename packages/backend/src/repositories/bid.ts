@@ -56,8 +56,8 @@ export class BidRepository {
       this._dbClient.bid.deleteMany({
         where: {
           productId,
-          NOT: [{deletedAt: null}],
-        }
+          NOT: [{ deletedAt: null }],
+        },
       }),
       this._dbClient.product.update({
         data: {
@@ -74,13 +74,11 @@ export class BidRepository {
     ]);
   }
 
-  async getAll(productId: string){
-    return(
-      this._dbClient.bid.findMany({
-        where: {
-          productId
-        }
-      })
-    );
+  async getAll(productId: string) {
+    return this._dbClient.bid.findMany({
+      where: {
+        productId,
+      },
+    });
   }
 }
