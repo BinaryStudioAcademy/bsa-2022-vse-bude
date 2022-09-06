@@ -1,4 +1,5 @@
 import type { Category, Product, User } from '@prisma/client';
+import { Wear } from '@prisma/client';
 import { ProductStatus, ProductType } from '@prisma/client';
 import { faker } from '@faker-js/faker';
 import { Decimal } from '@prisma/client/runtime';
@@ -42,6 +43,7 @@ export const fakeProducts = async (
       phone: faker.phone.number('+380 ## ### ####'),
       type: ProductType.AUCTION,
       status: ProductStatus.ACTIVE,
+      wear: Wear.NEW,
       endDate: faker.date.future(),
       postDate: faker.date.recent(),
       cancelReason: faker.random.word(),
