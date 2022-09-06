@@ -38,7 +38,7 @@ const TypeOfPostScreen: FC = () => {
       >
         {t('type_of_post.HEADER')}
       </Text>
-      <View style={[globalStyles.py7]}>
+      <View style={globalStyles.py7}>
         <Image source={images.chooseTypeThumb} style={styles.image} />
       </View>
       <View style={globalStyles.mt5}>
