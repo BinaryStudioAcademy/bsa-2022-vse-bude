@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import React, { FC } from 'react';
 import { ColorPalette, IPostForms } from '@vse-bude/shared';
 import {
@@ -9,14 +8,12 @@ import {
   TouchableOpacity,
   View,
   Popover,
-  DateTimePicker,
-  ClockIcon,
-  CalendarIcon,
 } from '~/components/components';
-import { useAppForm, useTranslation, useState } from '~/hooks/hooks';
+import { useAppForm, useTranslation } from '~/hooks/hooks';
 import { CALLING_CODE, CITIES, COUNTRIES } from '~/mock/new-item';
 import { globalStyles } from '~/styles/styles';
 
+import { DatePicker } from '~/components/date-time-picker/date-time-picker';
 import { AddPhotos } from '../add-photos/add-photos';
 
 import { useStyles } from './styles';
@@ -25,14 +22,7 @@ const NewAuctionForm: FC = () => {
   const { t } = useTranslation();
   const styles = useStyles();
 
-  const today = dayjs();
-  const tomorrow = today.add(1, 'day');
-  const [date, setDate] = useState(tomorrow.toDate());
-  const [time, setTime] = useState(tomorrow.toDate());
-  const [openDate, setOpenDate] = useState(false);
-  const [openTime, setOpenTime] = useState(false);
-
-  const { control, errors, setValue } = useAppForm<IPostForms>({
+  const { control, errors } = useAppForm<IPostForms>({
     defaultValues: {
       country: 'Ukraine',
       callingCode: 'UA',
@@ -66,77 +56,25 @@ const NewAuctionForm: FC = () => {
         contentContainerStyle={globalStyles.mt5}
       />
 
-      <TouchableOpacity
-        onPress={() => {
-          setOpenDate(true);
-        }}
-      >
-        <Input
-          label={t('make_a_post.ENDING_DATE')}
-          placeholder={'-/-/-'}
-          name="endDate"
-          control={control}
-          errors={errors}
-          editable={false}
-          contentContainerStyle={globalStyles.mt5}
-        />
-        <CalendarIcon
-          size={22}
-          color={ColorPalette.GRAY_300}
-          style={[styles.inputIcon]}
-        />
-      </TouchableOpacity>
-      {openDate && (
-        <DateTimePicker
-          value={date}
-          mode={'date'}
-          is24Hour={true}
-          display="default"
-          minimumDate={tomorrow.toDate()}
-          onChange={(_, selectedDate) => {
-            setOpenDate(false);
-            const currentDate = dayjs(selectedDate).format('DD/MM/YYYY');
-            setDate(selectedDate ?? tomorrow.toDate());
-            setValue('endDate', currentDate);
-          }}
-        />
-      )}
+      <DatePicker
+        label={t('make_a_post.ENDING_DATE')}
+        name="endDate"
+        control={control}
+        errors={errors}
+        placeholder={'-/-/-'}
+        mode={'date'}
+        contentContainerStyle={globalStyles.mt5}
+      />
 
-      <TouchableOpacity
-        onPress={() => {
-          setOpenTime(true);
-        }}
-      >
-        <Input
-          label={t('make_a_post.ENDING_TIME')}
-          placeholder={'-:-'}
-          name="endTime"
-          control={control}
-          errors={errors}
-          editable={false}
-          contentContainerStyle={globalStyles.mt5}
-        />
-        <ClockIcon
-          size={22}
-          color={ColorPalette.GRAY_300}
-          style={[styles.inputIcon]}
-        />
-      </TouchableOpacity>
-      {openTime && (
-        <DateTimePicker
-          value={time}
-          mode={'time'}
-          is24Hour={true}
-          display="spinner"
-          minimumDate={tomorrow.toDate()}
-          onChange={(_, selectedTime) => {
-            setOpenTime(false);
-            const currentTime = dayjs(selectedTime).format('HH:mm');
-            setTime(selectedTime ?? tomorrow.toDate());
-            setValue('endTime', currentTime);
-          }}
-        />
-      )}
+      <DatePicker
+        label={t('make_a_post.ENDING_TIME')}
+        name="endDate"
+        control={control}
+        errors={errors}
+        placeholder={'-:-'}
+        mode={'time'}
+        contentContainerStyle={globalStyles.mt5}
+      />
 
       <Input
         label={t('make_a_post.DESCRIPTION')}
