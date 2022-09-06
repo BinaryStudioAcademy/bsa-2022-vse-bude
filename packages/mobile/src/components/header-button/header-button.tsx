@@ -1,6 +1,6 @@
 import { ColorPalette } from '@vse-bude/shared';
 import React, { FC } from 'react';
-import { BackIcon, Pressable, Text } from '~/components/components';
+import { ArrowLeftIcon, Pressable, Text } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 
@@ -19,7 +19,7 @@ const HeaderButton: FC<Props> = ({ label, onPress }) => {
         globalStyles.justifyContentStart,
       ]}
     >
-      <BackIcon size={35} style={{ color: ColorPalette.WHITE_100 }} />
+      <ArrowLeftIcon size={35} style={{ color: ColorPalette.WHITE_100 }} />
       <Text
         style={[
           styles.buttonText,

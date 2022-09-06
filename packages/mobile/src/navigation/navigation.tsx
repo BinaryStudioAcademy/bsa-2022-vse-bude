@@ -15,7 +15,7 @@ import {
   SupportScreen,
   NewItemScreen,
 } from '~/screens/screens';
-import { HeaderLeft, HeaderSave } from '~/components/components';
+import { HeaderCustom } from '~/components/components';
 import { MainNavigation } from './tabs/tabs.navigation';
 
 const NativeStack = createNativeStackNavigator<RootNavigationParamList>();
@@ -31,6 +31,17 @@ const accountScreenOptions: NativeStackNavigationOptions = {
   headerTitleStyle: { fontSize: 16 },
 };
 
+const newItemScreenOptions: NativeStackNavigationOptions = {
+  title: t('make_a_post.TITLE'),
+  headerTitleAlign: 'center',
+  headerLeft: () => (
+    <HeaderCustom label={t('common:common.HOME')} hasIcon={true} />
+  ),
+  headerRight: () => (
+    <HeaderCustom label={t('common:components.BUTTON_SAVE')} />
+  ),
+};
+
 const Navigation: FC = () => {
   const user = useAppSelector(selectCurrentUser);
 
@@ -39,6 +50,7 @@ const Navigation: FC = () => {
       <NativeStack.Screen
         name={RootScreenName.MAIN}
         component={MainNavigation}
+        options={newItemScreenOptions}
       />
       {user && (
         <NativeStack.Group screenOptions={accountScreenOptions}>
@@ -64,11 +76,7 @@ const Navigation: FC = () => {
           <Stack.Screen
             name={RootScreenName.NEW_ITEM}
             component={NewItemScreen}
-            options={{
-              title: t('make_a_post.TITLE'),
-              headerLeft: HeaderLeft,
-              headerRight: HeaderSave,
-            }}
+            options={newItemScreenOptions}
           />
         </NativeStack.Group>
       )}
