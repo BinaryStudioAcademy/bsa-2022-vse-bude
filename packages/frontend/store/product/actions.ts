@@ -94,7 +94,7 @@ export const updateProductViews = createAsyncThunk(
 export const makeBid = createAsyncThunk(
   ProductActions.PLACE_BID,
   async (data: CreateBidRequest, { rejectWithValue, dispatch }) => {
-    try {      
+    try {
       const result = await placeBidRequest(data);
       dispatch(
         addToast({
@@ -157,7 +157,7 @@ export const auctionLeaveAction = createAsyncThunk(
 export const retrieveBid = createAsyncThunk(
   ProductActions.RETRIEVE_BID,
   async (data: CreateBidRequest, { rejectWithValue }) => {
-    try {      
+    try {
       return await retrieveBidRequest(data);
     } catch (e) {
       return rejectWithValue(e.message);
