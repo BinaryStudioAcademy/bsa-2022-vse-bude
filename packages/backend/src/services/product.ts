@@ -131,7 +131,7 @@ export class ProductService {
     if (toUtc(product.endDate) < toUtc()) {
       throw new AuctionEndedError();
     }
-    
+
     await this._bidRepository.retrieve(
       userId,
       productId,
