@@ -32,4 +32,5 @@ export enum UserPersonalInfoValidationMessage {
   SAME_PASSWORD = 'personal-info:validation.password.samePassword',
 
   USER_NOT_EXISTS = 'personal-info:validation.notExists.user',
+  PHONE_EXISTS = 'personal-info:validation.exists.phone',
 }

@@ -34,6 +34,7 @@ export enum VerifyApiRoutes {
 
 export enum ProductApiRoutes {
   ID = '/:id',
+  EDIT_ID = '/edit/:id',
   VIEWS = '/views',
   FAVORITE = '/favorite',
   FAVORITE_IDS = '/favorite-ids',
@@ -41,6 +42,9 @@ export enum ProductApiRoutes {
   UPDATE = '/update/:id',
   AUCTION_PERMISSIONS = '/auction/permissions',
   AUCTION_LEAVE = '/auction/leave',
+  SIMILAR = '/similar',
+  POPULAR_LOTS = '/popular-lots',
+  POPULAR_PRODUCTS = '/popular-products',
 }
 
 export enum ProfileApiRoutes {

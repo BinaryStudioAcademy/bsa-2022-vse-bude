@@ -3,7 +3,7 @@ import path from 'path';
 
 type EmailEnvKey = 'EMAIL_SERVICE_API_KEY';
 
-type ProcessEnvKey = 'NODE_ENV' | 'PORT';
+type ProcessEnvKey = 'NODE_ENV' | 'PORT' | 'SOCKETS_PORT';
 
 type RedisEnvKey = 'REDIS_CONNECTION_STRING';
 

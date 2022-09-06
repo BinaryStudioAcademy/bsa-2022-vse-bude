@@ -101,6 +101,7 @@ model Product {
   phone           String?       @db.VarChar(32)
   type            ProductType
   status          ProductStatus
+  condition       Condition     @default(NEW)
   endDate         DateTime?
   postDate        DateTime?
   cancelReason   String?
@@ -237,6 +238,11 @@ enum SocialMediaType {
   WEBSITE
   INSTAGRAM
   LINKEDIN
+}
+
+enum Condition {
+  NEW
+  USED
 }
 
 enum OrderStatus {

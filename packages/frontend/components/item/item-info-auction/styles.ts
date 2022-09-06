@@ -26,6 +26,10 @@ export const controls = ({ breakpoints }: Theme) => css`
   }
 `;
 
+export const editButton = css`
+  justify-content: flex-end;
+`;
+
 export const inputWrapper = ({
   fontSizes,
   lineHeights,
