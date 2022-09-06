@@ -100,5 +100,8 @@
   "sellerSelect": {
     "currentUser": "Поточний користувач",
     "otherUser": "Інший користувач"
+  },
+  "notification": {
+    "notVerified": "Please confirm your phone and email address first"
   }
 }

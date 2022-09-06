@@ -21,7 +21,7 @@ export const getServerSideProps = withPublic(
       payload: UserResponseDto;
     };
 
-    if (!payload.phoneVerified || !payload.emailVerified) {
+    if (!payload?.id) {
       return {
         redirect: {
           destination: Routes.NOT_FOUND,

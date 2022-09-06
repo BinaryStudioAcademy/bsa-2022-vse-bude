@@ -84,8 +84,7 @@ export const fetchProductSSR = createAsyncThunk(
 export const fetchEditProductSSR = createAsyncThunk(
   ProductActions.FETCH_PRODUCT,
   (params: { id: string; http: Http }, { rejectWithValue }) =>
-    getProductEditByIdSSR(params.http, params.id).catch((er) => {
-      console.log('dsfdssd ', er.message);
+    getProductEditByIdSSR(params.http, params.id).catch(() => {
       rejectWithValue(null);
     }),
 );
