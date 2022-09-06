@@ -45,5 +45,6 @@
         "favBtn": "You are not authorized to add product to favorites"
       }
     }
-  }
+  },
+  "remove": "Remove"
 }
