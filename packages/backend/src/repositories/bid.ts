@@ -51,11 +51,15 @@ export class BidRepository {
         },
       }),
       this._dbClient.product.update({
-        data: { price: (await this._dbClient.bid.findFirst({
-          where: {
-            productId: productId,
-          }
-        })).price },
+        data: {
+          price: (
+            await this._dbClient.bid.findFirst({
+              where: {
+                productId: productId,
+              },
+            })
+          ).price,
+        },
         where: { id: productId },
       }),
     ]);
