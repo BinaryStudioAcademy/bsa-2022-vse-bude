@@ -1,4 +1,4 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import type {
   AuctionPermissionsRequest,
   CreateBidRequest,
@@ -95,6 +95,13 @@ export const fetchCurrentProduct = createAsyncThunk(
 export const updateProductViews = createAsyncThunk(
   ProductActions.INCREMENT_PRODUCT_VIEWS,
   async (id: string) => incrementProductViews(id),
+);
+
+export const updateCurrentItemPrice = createAction(
+  ProductActions.UPDATE_CURRENT_ITEM_PRICE,
+  (price: number) => ({
+    payload: price,
+  }),
 );
 
 export const makeBid = createAsyncThunk(

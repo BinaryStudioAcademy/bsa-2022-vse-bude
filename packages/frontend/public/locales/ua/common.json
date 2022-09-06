@@ -145,7 +145,8 @@
     "productAddedToFavorites": "Продукт додано до обраних",
     "productRemovedFromFavorites": "Продукт видалено з обраних",
     "bidPlaced": "Ставка зроблена",
-    "leftAuction": "Ви вийшли з аукціону"
+    "leftAuction": "Ви вийшли з аукціону",
+    "newBidPlaced": "Зроблена нова ставка на поточний товар"
   },
   "months": [
     "Січень",

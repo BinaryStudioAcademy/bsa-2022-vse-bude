@@ -113,7 +113,8 @@
     "productAddedToFavorites": "Product added to favorite",
     "productRemovedFromFavorites": "Product removed from favorite",
     "bidPlaced": "Bid placed",
-    "leftAuction": "You left the auction"
+    "leftAuction": "You left the auction",
+    "newBidPlaced": "New bid was placed to current product"
   },
   "verify": {
     "enterPhone": {
