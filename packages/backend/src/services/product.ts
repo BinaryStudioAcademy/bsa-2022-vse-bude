@@ -253,7 +253,11 @@ export class ProductService {
     return this._productRepository.findSimilar(city, categoryId);
   }
 
-  public async getMostPopular(limit: string) {
-    return this._productRepository.getFourMostPopular(+limit);
+  public async getMostPopularLots(limit: string) {
+    return this._productRepository.getMostPopularLots(+limit);
+  }
+
+  public async getMostPopularProducts(limit: string) {
+    return this._productRepository.getMostPopularProducts(+limit);
   }
 }

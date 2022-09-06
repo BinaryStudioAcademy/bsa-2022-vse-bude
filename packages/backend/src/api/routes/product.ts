@@ -290,7 +290,7 @@ export const initProductRoutes = (
   router.get(
     apiPath(path, ProductApiRoutes.POPULAR_LOTS),
     wrap((req: Request) =>
-      productService.getMostPopular(<string>req.query.limit),
+      productService.getMostPopularLots(<string>req.query.limit),
     ),
   );
 
@@ -324,7 +324,7 @@ export const initProductRoutes = (
   router.get(
     apiPath(path, ProductApiRoutes.POPULAR_PRODUCTS),
     wrap((req: Request) =>
-      productService.getMostPopular(<string>req.query.limit),
+      productService.getMostPopularProducts(<string>req.query.limit),
     ),
   );
 
