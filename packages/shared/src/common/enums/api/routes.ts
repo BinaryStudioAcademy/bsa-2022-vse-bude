@@ -33,6 +33,7 @@ export enum VerifyApiRoutes {
 
 export enum ProductApiRoutes {
   ID = '/:id',
+  EDIT_ID = '/edit/:id',
   VIEWS = '/views',
   FAVORITE = '/favorite',
   FAVORITE_IDS = '/favorite-ids',

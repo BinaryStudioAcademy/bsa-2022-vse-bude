@@ -25,6 +25,7 @@ import * as styles from './styles';
 
 const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
   const [isSubmit, setIsSubmit] = useState(false);
+  const [updatedPhone, setUpdatedPhone] = useState(null);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
@@ -44,23 +45,30 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
   });
 
   useEffect(() => {
-    reset({ 'password': '', 'repeatPassword': '', 'newPassword': '' });
-  }, [isSubmit, reset]);
-
-  const onSave: SubmitHandler<SaveUserProfileDto> = (data, event) => {
-    event.preventDefault();
-    const currentLinks = user.socialMedia;
-    setIsSubmit(!isSubmit);
-    dispatch(
-      updateUserProfile({ data: updateDtoMapper({ data, currentLinks }) }),
-    );
-  };
+    const resetPhone = !user.phone ? null : user.phone;
+    setUpdatedPhone(resetPhone);
+    reset({
+      'phone': user.phone,
+      'password': '',
+      'repeatPassword': '',
+      'newPassword': '',
+    });
+  }, [isSubmit, reset, user.phone]);
 
   const onResetHandler = () => {
     reset(profileMapper({ user }), {
       keepDefaultValues: true,
     });
     dispatch(setIsEditing());
+  };
+
+  const onSave: SubmitHandler<SaveUserProfileDto> = async (data, event) => {
+    event.preventDefault();
+    const currentLinks = user.socialMedia;
+    setIsSubmit(!isSubmit);
+    dispatch(
+      updateUserProfile({ data: updateDtoMapper({ data, currentLinks }) }),
+    );
   };
 
   const onCutHandler = (event: React.ClipboardEvent<HTMLInputElement>) => {
@@ -147,11 +155,12 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
                 error={errors.email?.message}
               />
             </div>
+
             <Flex css={styles.groupePhone}>
               <div css={styles.phoneRow}>
                 <Input
                   id="phone-profile"
-                  inerasableValue={DefaultInpValue.PHONE}
+                  inerasableValue={!updatedPhone ? DefaultInpValue.PHONE : null}
                   type="text"
                   variant="primary"
                   label={t('personal-info:label.phone')}
@@ -161,14 +170,16 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
                 />
               </div>
               {!user.phoneVerified && (
-                <Button
-                  type="button"
-                  size="big"
-                  variant="outlined"
-                  onClick={onVerifyPhone}
-                >
-                  {t('personal-info:action.verify')}
-                </Button>
+                <div css={styles.verifyButtonWrapper}>
+                  <Button
+                    type="button"
+                    size="big"
+                    variant="outlined"
+                    onClick={onVerifyPhone}
+                  >
+                    {t('personal-info:action.verify')}
+                  </Button>
+                </div>
               )}
             </Flex>
           </Column>

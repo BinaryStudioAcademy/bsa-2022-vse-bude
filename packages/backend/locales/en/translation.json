@@ -1,7 +1,6 @@
 {
   "USER_NOT_FOUND": "User not found!",
   "USER_ALREADY_EXISTS": "User already exists!",
-  "USER_PHONE_ALREADY_EXISTS": "User with such phone already exists!",
   "UNAUTHORIZED": "Unauthorized!",
   "WRONG_REFRESH_TOKEN": "Wrong Refresh Token!",
   "EXPIRED_REFRESH_TOKEN": "Expired Refresh Token!",
@@ -15,6 +14,9 @@
       "subject": "Email confirmation",
       "body": "Please complete the e-mail confirmation process with this code: "
     }
+  },
+  "userValidation": {
+    "notVerified": "User not verified!"
   },
   "PRODUCT_NOT_FOUND": "Product not found!",
   "categories": {

@@ -59,6 +59,14 @@ export const getProductByIdSSR = (httpSSR: Http, id: string) =>
     url: `${ApiRoutes.PRODUCTS}/${id}`,
   });
 
+export const getProductEditByIdSSR = (httpSSR: Http, id: string) =>
+  httpSSR.get({
+    url: `${ApiRoutes.PRODUCTS}/edit/${id}`,
+    options: {
+      needAuthorization: true,
+    },
+  });
+
 export const updateProduct = (id: string, body) =>
   http.put({
     url: `${ApiRoutes.PRODUCTS}/update/${id}`,
