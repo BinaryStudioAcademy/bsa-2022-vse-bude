@@ -68,6 +68,11 @@ const updatePersonalInfoParser: UpdatePersonalInfoParser = (data) => {
     lastName,
     email,
     phone,
+    country,
+    region,
+    city,
+    zip,
+    deliveryData,
     instagram,
     linkedin,
     facebook,
@@ -91,11 +96,20 @@ const updatePersonalInfoParser: UpdatePersonalInfoParser = (data) => {
     },
   ];
 
+  const userAddress = {
+    country,
+    region,
+    city,
+    zip,
+    deliveryData,
+  };
+
   return {
     firstName,
     lastName,
     email,
     phone: phone === DefaultInpValue.PHONE ? '' : phone,
+    userAddress,
     socialMedia,
     password,
     newPassword,

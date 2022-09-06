@@ -6,13 +6,13 @@ import {
   useAppSelector,
   useTranslation,
 } from '~/hooks/hooks';
-import { View, Input, DropDown, PrimaryButton } from '~/components/components';
+import { View, Input, PrimaryButton } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { ButtonAppearance, DataStatus } from '~/common/enums/enums';
 import { personalInfo as personalInfoActions } from '~/store/actions';
-import { CITIES, COUNTRIES, REGIONS } from '~/mock/mock-personal-info';
 import { personalInfoSchema } from '~/validation-schemas/validation-schemas';
 import { selectDataStatusPersonalInfo } from '~/store/selectors';
+import { notification } from '~/services/services';
 import { Title } from '../components';
 
 type Props = {
@@ -48,11 +48,16 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
     });
 
   const onSubmit = (payload: SaveUserProfileDto): void => {
-    dispatch(personalInfoActions.updatePersonalInfo(payload));
+    dispatch(personalInfoActions.updatePersonalInfo(payload))
+      .unwrap()
+      .then(() => {
+        notification.success(t('personal_info.CHANGES_SAVED'));
+      });
   };
 
   const handleCancelPress = (): void => {
     reset({ ...DEFAULT_VALUES });
+    notification.success(t('personal_info.CHANGES_CANCELED'));
   };
 
   return (
@@ -91,26 +96,29 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
         contentContainerStyle={globalStyles.mt5}
       />
       <Title label={t('personal_info.ADDRESS')} />
-      <DropDown
+      <Input
         label={t('personal_info.COUNTRY')}
+        placeholder={t('personal_info.COUNTRY_HINT')}
         name="country"
         control={control}
-        items={COUNTRIES}
-        zIndex={15}
+        errors={errors}
+        contentContainerStyle={globalStyles.mt5}
       />
-      <DropDown
+      <Input
         label={t('personal_info.REGION')}
+        placeholder={t('personal_info.REGION_HINT')}
         name="region"
         control={control}
-        items={REGIONS}
-        zIndex={10}
+        errors={errors}
+        contentContainerStyle={globalStyles.mt5}
       />
-      <DropDown
+      <Input
         label={t('personal_info.CITY')}
+        placeholder={t('personal_info.CITY_HINT')}
         name="city"
         control={control}
-        items={CITIES}
-        zIndex={5}
+        errors={errors}
+        contentContainerStyle={globalStyles.mt5}
       />
       <Input
         label={t('personal_info.ZIP_CODE')}
@@ -121,8 +129,8 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
         contentContainerStyle={globalStyles.mt5}
       />
       <Input
-        label={t('personal_info.NOVA_POSHTA')}
-        placeholder={t('personal_info.NOVA_POSHTA_HINT')}
+        label={t('personal_info.DELIVERY_DATA')}
+        placeholder={t('personal_info.DELIVERY_DATA_HINT')}
         name="deliveryData"
         control={control}
         errors={errors}

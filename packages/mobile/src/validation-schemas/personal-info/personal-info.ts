@@ -1,7 +1,8 @@
 import * as Joi from 'joi';
 import i18next from 'i18next';
-import { SaveUserProfileDto } from '@vse-bude/shared';
+import { PLACE, SaveUserProfileDto } from '@vse-bude/shared';
 import { PHONE_NUMBER_REGEX } from '~/common/regexp/regexp';
+import { MAX_COUNTRY_LENGTH } from '~/common/constants/constants';
 import { emailValidator, nameValidator } from '../helpers/helpers';
 
 const personalInfoSchema = Joi.object<SaveUserProfileDto>({
@@ -34,7 +35,14 @@ const personalInfoSchema = Joi.object<SaveUserProfileDto>({
     .messages({
       'string.pattern.base': i18next.t('errors.WRONG_FORMAT'),
     }),
-  country: Joi.string().empty(''),
+  country: Joi.string()
+    .empty('')
+    .max(MAX_COUNTRY_LENGTH)
+    .pattern(PLACE)
+    .messages({
+      'string.max': i18next.t('errors.MAX_COUNTRY_LENGTH'),
+      'string.pattern.base': i18next.t('errors.PLACE_NAME'),
+    }),
   region: Joi.string().empty(''),
   city: Joi.string().empty(''),
   zip: Joi.string().empty(''),
