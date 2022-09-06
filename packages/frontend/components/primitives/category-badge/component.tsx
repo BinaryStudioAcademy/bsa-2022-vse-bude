@@ -6,11 +6,11 @@ import * as styles from './styles';
 interface CategoryBadgesProps {
   badges: {
     name: string;
+    onClick?: () => void;
   }[];
-  onClick?: () => void;
 }
 
-export const CategoryBadges = ({ badges, onClick }: CategoryBadgesProps) => (
+export const CategoryBadges = ({ badges }: CategoryBadgesProps) => (
   <Container>
     <Splide
       options={{
@@ -30,7 +30,7 @@ export const CategoryBadges = ({ badges, onClick }: CategoryBadgesProps) => (
             <IconButton
               icon={IconName.XMARK}
               size="xs"
-              onClick={onClick}
+              onClick={badge.onClick}
               color={IconColor.GRAY}
               ariaLabel={badge.name + '_xmark'}
               cssExtend={styles.cross}
