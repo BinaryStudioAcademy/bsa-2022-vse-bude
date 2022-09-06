@@ -12,9 +12,10 @@ import { ProductApiRoutes } from '@vse-bude/shared';
 import { ApiRoutes } from '@vse-bude/shared';
 
 interface ProductOptions {
-  limit: number;
+  limit?: number;
   type?: ProductType;
   categoryId?: string;
+  city?: string;
 }
 
 interface ProductOptionsSSR extends ProductOptions {
@@ -127,5 +128,19 @@ export const getPopularProducts = ({
     url: `${ApiRoutes.PRODUCTS}${ProductApiRoutes.POPULAR_PRODUCTS}`,
     payload: {
       limit,
+    },
+  });
+
+export const getSilimar = ({
+  city,
+  categoryId,
+  type,
+}: ProductOptions): Promise<ProductDto[]> =>
+  http.get({
+    url: `${ApiRoutes.PRODUCTS}${ProductApiRoutes.SIMILAR}`,
+    payload: {
+      city,
+      categoryId,
+      type,
     },
   });

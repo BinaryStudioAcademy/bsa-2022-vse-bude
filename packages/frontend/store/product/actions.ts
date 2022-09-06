@@ -5,7 +5,7 @@ import type {
   Http,
   ProductIdRequest,
 } from '@vse-bude/shared';
-import { ProductType } from '@vse-bude/shared';
+import type { ProductType } from '@vse-bude/shared';
 import {
   getProductById,
   fetchAuctionPermissions,
@@ -14,6 +14,7 @@ import {
   incrementProductViews,
   leaveAuctionRequest,
   placeBidRequest,
+  getSilimar,
 } from 'services/product';
 import { addToast } from 'store/toast/actions';
 import { ProductActions } from './action-types';
@@ -51,10 +52,14 @@ export const fetchProducts = createAsyncThunk(
 
 export const fetchSimilarProducts = createAsyncThunk(
   ProductActions.FETCH_SIMILAR_PRODUCTS,
-  async (id: string, { rejectWithValue, dispatch }) =>
-    getProducts({
-      limit: 4,
-      type: ProductType.AUCTION,
+  async (
+    params: { city: string; categoryId: string; type: ProductType },
+    { rejectWithValue, dispatch },
+  ) =>
+    getSilimar({
+      city: params.city,
+      categoryId: params.categoryId,
+      type: params.type,
     }).catch((e) => {
       dispatch(
         addToast({
