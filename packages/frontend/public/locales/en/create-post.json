@@ -110,5 +110,9 @@
   "conditionSelect": {
     "used": "used",
     "new": "new"
+  },
+  "notVerified": {
+    "text": "Please confirm your phone and email address first",
+    "btn": "Go to verify"
   }
 }

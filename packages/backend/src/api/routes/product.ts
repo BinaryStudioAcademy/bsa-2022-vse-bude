@@ -523,6 +523,42 @@ export const initProductRoutes = (
       }),
     ),
   );
+  /**
+   * @openapi
+   * /products/edit/:id:
+   *   get:
+   *     tags: [Product]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - in: path
+   *         name: id
+   *         required: true
+   *         type: string
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/GetProductByIdResponse"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
+  router.get(
+    apiPath(path, ProductApiRoutes.EDIT_ID),
+    authMiddleware,
+    wrap((req: Request) =>
+      productService.getEditProductById({
+        userId: req.userId,
+        productId: req.params.id,
+      }),
+    ),
+  );
 
   return router;
 };
