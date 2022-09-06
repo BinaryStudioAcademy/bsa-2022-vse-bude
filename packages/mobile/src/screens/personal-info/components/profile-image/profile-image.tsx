@@ -66,6 +66,7 @@ const ProfileImage: FC = () => {
 
   const handleRemovePhoto = () => {
     setPhotoUri('');
+    setIsUploading(false);
   };
 
   return (
