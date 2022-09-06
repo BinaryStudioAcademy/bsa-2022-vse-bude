@@ -1,7 +1,7 @@
 enum RootScreenName {
   SIGN_UP = 'Sign Up',
   SIGN_IN = 'Sign In',
-  RESET_PASSWORD = 'ResetPassword',
+  FORGOT_PASSWORD = 'Forgot Password',
   MAIN = 'Main',
   PERSONAL_INFO = 'Personal Info',
   SETTINGS = 'Settings',

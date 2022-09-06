@@ -37,7 +37,7 @@ const Auth: FC = () => {
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
   const navigation = useNavigation();
-  const isResetPassword = name === RootScreenName.RESET_PASSWORD;
+  const isResetPassword = name === RootScreenName.FORGOT_PASSWORD;
 
   const getScreenLabel = (screenName: string): string => {
     switch (screenName) {
@@ -45,7 +45,7 @@ const Auth: FC = () => {
         return t('verification.SING_IN');
       case RootScreenName.SIGN_UP:
         return t('verification.CREATE_ACCOUNT');
-      case RootScreenName.RESET_PASSWORD:
+      case RootScreenName.FORGOT_PASSWORD:
         return t('verification.FORGOT_PASSWORD');
       default:
         return '';
@@ -76,7 +76,7 @@ const Auth: FC = () => {
       case RootScreenName.SIGN_UP: {
         return <SignUpForm onSubmit={handleSignUp} />;
       }
-      case RootScreenName.RESET_PASSWORD: {
+      case RootScreenName.FORGOT_PASSWORD: {
         return <ResetPassword onSubmit={handleResetPassword} />;
       }
     }

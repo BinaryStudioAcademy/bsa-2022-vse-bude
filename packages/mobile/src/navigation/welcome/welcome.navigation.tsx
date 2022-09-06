@@ -19,7 +19,7 @@ const WelcomeNavigation: FC = () => {
       <NativeStack.Screen name={RootScreenName.SIGN_UP} component={Auth} />
       <NativeStack.Screen name={RootScreenName.SIGN_IN} component={Auth} />
       <NativeStack.Screen
-        name={RootScreenName.RESET_PASSWORD}
+        name={RootScreenName.FORGOT_PASSWORD}
         component={Auth}
       />
     </NativeStack.Navigator>

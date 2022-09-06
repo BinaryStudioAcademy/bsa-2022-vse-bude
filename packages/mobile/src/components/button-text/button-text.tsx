@@ -1,28 +1,29 @@
 import React, { FC } from 'react';
-import { TouchableOpacity, Text, TextStyle } from 'react-native';
 import { ColorPalette } from '@vse-bude/shared';
 import { globalStyles } from '~/styles/styles';
+import { TextStyle, ViewStyle, StyleProp } from 'react-native';
+import { TouchableOpacity, Text } from '../components';
 
 type Props = {
   onPress: () => void;
   children: string;
-  alignSelf: 'flex-end' | 'flex-start' | 'center';
-  textStyle?: TextStyle[];
+  contentContainerStyle?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
 };
 
 const ButtonText: FC<Props> = ({
   onPress,
   children,
-  alignSelf = 'flex-start',
-  textStyle = [],
+  textStyle,
+  contentContainerStyle,
 }) => {
   return (
-    <TouchableOpacity style={{ alignSelf }} onPress={() => onPress()}>
+    <TouchableOpacity style={contentContainerStyle} onPress={onPress}>
       <Text
         style={[
           { color: ColorPalette.YELLOW_100 },
           globalStyles.fs12,
-          ...textStyle,
+          textStyle,
         ]}
       >
         {children}

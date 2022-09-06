@@ -31,4 +31,4 @@ export { SecondaryButton } from './secondary-button/secondary-button';
 export { BuildInfo } from './build-info/build-info';
 export { ScrollView } from './scroll-view/scroll-view';
 export { ButtonText } from './button-text/button-text';
-export { CheckBox } from './check-box/check-box';
+export { default as CheckBox } from '@react-native-community/checkbox';

@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { StyleProp, TextInput, ViewStyle } from 'react-native';
+import { StyleProp, TextInput, ViewStyle, TextInputProps } from 'react-native';
 import {
   FormControl,
   FormControlPath,
@@ -26,10 +26,10 @@ type Props<T extends FormControlValues> = {
   placeholder?: string;
   contentContainerStyle?: StyleProp<ViewStyle>;
   isSecure?: boolean;
-  secureTextEntry?: boolean;
+  textInputProps?: TextInputProps;
 };
 
-const Input = <T extends FormControlValues>({
+const Input = <T extends FormControlValues, textInputProps>({
   label,
   name,
   control,
@@ -37,12 +37,11 @@ const Input = <T extends FormControlValues>({
   placeholder,
   contentContainerStyle,
   isSecure,
-  secureTextEntry,
-  ...props
+  textInputProps,
 }: Props<T>): ReactElement => {
   const { field } = useFormControl({ name, control });
   const { colors } = useCustomTheme();
-  const [secured, setSecured] = useState(isSecure ? true : false);
+  const [secured, setSecured] = useState(isSecure);
 
   const error = errors[name]?.message as string;
   const onSecureChange = () => {
@@ -71,8 +70,8 @@ const Input = <T extends FormControlValues>({
           onChangeText={field.onChange}
           onBlur={field.onBlur}
           placeholderTextColor={colors.placeholder}
-          secureTextEntry={secureTextEntry || secured}
-          selectTextOnFocus={field.name === 'password' ? false : true}
+          secureTextEntry={secured}
+          selectTextOnFocus={field.name !== 'password'}
           style={[
             styles.input,
             {
@@ -82,7 +81,7 @@ const Input = <T extends FormControlValues>({
             },
             globalStyles.fs14,
           ]}
-          {...props}
+          {...textInputProps}
         />
         {isSecure && (
           <Pressable style={styles.eyeIconWrapper} onPress={onSecureChange}>

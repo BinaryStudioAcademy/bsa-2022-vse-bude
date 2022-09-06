@@ -26,7 +26,7 @@ const SignInForm: FC<Props> = ({ onSubmit }) => {
   const { navigate } = useNavigation<RootNavigationProps>();
 
   const navigateResetPassword = () => {
-    navigate(RootScreenName.RESET_PASSWORD);
+    navigate(RootScreenName.FORGOT_PASSWORD);
   };
 
   return (
@@ -48,8 +48,11 @@ const SignInForm: FC<Props> = ({ onSubmit }) => {
         isSecure={true}
       />
       <View style={globalStyles.mt5}>
-        <ButtonText alignSelf="flex-end" onPress={navigateResetPassword}>
-          Forgot password
+        <ButtonText
+          onPress={navigateResetPassword}
+          contentContainerStyle={{ alignSelf: 'flex-end' }}
+        >
+          {t('verification.FORGOT_PASSWORD')}
         </ButtonText>
       </View>
       <View style={globalStyles.mt5}>
