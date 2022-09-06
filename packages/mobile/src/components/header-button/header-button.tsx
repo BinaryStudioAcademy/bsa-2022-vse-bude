@@ -20,16 +20,13 @@ const HeaderButton: FC<Props> = ({ label, onPress, color }) => {
         globalStyles.justifyContentStart,
       ]}
     >
-      <BackIcon
-        size={35}
-        style={{ color: color ? color : ColorPalette.WHITE_100 }}
-      />
+      <BackIcon size={35} style={{ color: color || ColorPalette.WHITE_100 }} />
       <Text
         style={[
           styles.buttonText,
           globalStyles.fs17,
           globalStyles.fontWeightMedium,
-          { color: color ? color : ColorPalette.WHITE_100, textAlign: 'left' },
+          { color: color || ColorPalette.WHITE_100, textAlign: 'left' },
         ]}
       >
         {label}
