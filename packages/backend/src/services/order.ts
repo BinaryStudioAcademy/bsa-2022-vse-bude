@@ -1,3 +1,4 @@
+import { UnauthorizedError } from '@errors';
 import type { ProductRepository, OrderRepository } from '@repositories';
 import type { OrderQuery } from '@types';
 import type { CreateOrderDto } from '@vse-bude/shared';
@@ -15,19 +16,25 @@ export class OrderService {
     this._productRepository = productRepository;
   }
 
-  public async create(createOrderDto: CreateOrderDto) {
+  public async create(data: CreateOrderDto) {
     const product = await this._productRepository.getById(
-      createOrderDto.productId,
+      data.productId,
     );
     if (!product) {
       throw new Error('Product not found');
     }
 
-    return this._orderRepository.create(createOrderDto);
+    const order = this._orderRepository.create(data);
+
+    return order;
   }
 
-  public async getAll({ buyerId, productId }: OrderQuery) {
-    return this._orderRepository.getAll({ buyerId, productId });
+  public async getAll({ buyerId, productId, userId }: OrderQuery) {
+    if (buyerId === userId) {
+      return this._orderRepository.getAll({ buyerId, productId });
+    }
+
+    throw new UnauthorizedError();
   }
 
   public async getById(id: string) {

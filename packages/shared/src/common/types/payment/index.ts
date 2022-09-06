@@ -15,6 +15,12 @@ export interface PurchaseRequestData extends MerchantSignatureData {
   merchantSignature: string;
   returnUrl: string;
   serviceUrl: string;
+  clientFirstName?: string;
+  clientLastName?: string;
+  clientEmail?: string;
+  clientPhone?: string;
+  orderLifetime?: number;
+  orderTimeout?: number;
 }
 
 export type PaymentServiceStatusRequest = {

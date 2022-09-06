@@ -23,5 +23,4 @@ export interface OrderDto {
 export interface CreateOrderDto {
   productId: string;
   buyerId: string;
-  cost: number;
 }

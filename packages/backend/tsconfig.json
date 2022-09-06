@@ -20,7 +20,7 @@
     },
     "outDir": "build"
   },
-  "include": ["src"],
+  "include": ["src", "../shared/src/common/types/payment"],
   "exclude": ["node_modules"],
   "ts-node": {
     "require": ["tsconfig-paths/register"]

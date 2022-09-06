@@ -23,6 +23,14 @@ export const initOrderRoutes = (
     wrap(async (req: Request) => paymentService.setStatus(req.body)),
   );
 
+  router.post(
+    apiPath(path, OrderApiRoutes.CREATE_PAYMENT),
+    authMiddleware,
+    wrap(async (req: Request) =>
+      paymentService.createRequestData(req.body.orderId, req.userId),
+    ),
+  );
+
   router.get(
     apiPath(path),
     authMiddleware,
@@ -35,7 +43,7 @@ export const initOrderRoutes = (
   );
 
   router.get(
-    apiPath(path, ':id'),
+    apiPath(path, '/:id'),
     authMiddleware,
     wrap((req: Request) => orderService.getById(req.params.id)),
   );

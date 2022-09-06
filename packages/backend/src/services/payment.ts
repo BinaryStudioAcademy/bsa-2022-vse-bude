@@ -1,36 +1,36 @@
-import {
-  type OrderDto,
-  ApiRoutes,
-  OrderApiRoutes,
-  OrderStatus,
-} from '@vse-bude/shared';
-import FormData from 'form-data';
-import { getEnv, logger } from '@helpers';
+import { ApiRoutes, OrderApiRoutes, OrderStatus } from '@vse-bude/shared';
 import type {
+  OrderDto,
   MerchantSignatureData,
-  PaymentServiceStatusRequest,
   PaymentServiceStatusResponse,
   PaymentServiceStatusResponseSignature,
   PurchaseRequestData,
-} from '@types';
+  PaymentServiceStatusRequest,
+} from '@vse-bude/shared';
+import { getEnv, logger } from '@helpers';
 import { ProductStatus } from '@prisma/client';
 import type { OrderRepository, ProductRepository } from '@repositories';
+import { UnauthorizedError } from '@errors';
 import crypto from 'crypto';
 
 export class PaymentService {
-  readonly PRODUCT_COUNT: number;
+  private readonly PRODUCT_COUNT: number;
 
-  readonly merchantAccount: string;
+  private readonly merchantAccount: string;
 
-  readonly merchantDomainName: string;
+  private readonly merchantDomainName: string;
 
-  readonly merchantSecretKey: string;
+  private readonly merchantSecretKey: string;
 
-  readonly apiUrl: string;
+  private readonly apiUrl: string;
 
-  private _orderRepository: OrderRepository;
+  private readonly _orderRepository: OrderRepository;
 
-  private _productRepository: ProductRepository;
+  private readonly _productRepository: ProductRepository;
+
+  private readonly ORDER_TIMEOUT_IN_SECONDS: number;
+
+  private readonly ORDER_LIFETIME_IN_SECONDS: number;
 
   constructor(
     orderRepository: OrderRepository,
@@ -43,60 +43,93 @@ export class PaymentService {
     this.apiUrl = getEnv('APP_API_URL');
     this._orderRepository = orderRepository;
     this._productRepository = productRepository;
+    this.ORDER_TIMEOUT_IN_SECONDS = 600;
+    this.ORDER_LIFETIME_IN_SECONDS = 600;
   }
 
-  public async setStatus(body: PaymentServiceStatusRequest) {
-    const { orderReference, transactionStatus } = body;
+  public async setStatus(body: string) {
+    const data = Object.keys(body)[0];
+
+    let orderCreatedAt: Date;
+
+    const {
+      orderReference,
+      transactionStatus,
+      reason,
+      reasonCode,
+    }: PaymentServiceStatusRequest = JSON.parse(data);
+
+    logger.log({ orderReference, transactionStatus, reason, reasonCode });
 
     if (transactionStatus === 'Approved') {
-      try {
-        const { productId } = await this._orderRepository.updateStatus(
-          orderReference,
-          OrderStatus.PAID,
-        );
-        await this._productRepository.update(productId, {
-          status: ProductStatus.FINISHED,
-        });
-      } catch (e) {
-        logger.error(e);
-      }
+      const { productId, createdAt } = await this._orderRepository.updateStatus(
+        orderReference,
+        OrderStatus.PAID,
+      );
+
+      orderCreatedAt = createdAt;
+
+      await this._productRepository.update(productId, {
+        status: ProductStatus.FINISHED,
+      });
 
       return {
-        ...this.generateResponseData(orderReference),
+        ...this.generateResponseData(orderReference, orderCreatedAt),
       };
     }
+
+    return {
+      ...this.generateResponseData(orderReference, orderCreatedAt),
+    };
   }
 
-  public generateRequestData(order: OrderDto): PurchaseRequestData {
-    const merchantSignature = this.generateRequestMerchantSignature(order);
+  public async createRequestData(
+    orderId: string,
+    userId: string,
+  ): Promise<PurchaseRequestData> {
+    const order = await this._orderRepository.getById(orderId);
+
+    if (userId !== order.buyerId) {
+      throw new UnauthorizedError();
+    }
+
+    const merchantSignature = this.generateRequestMerchantSignature(
+      order as any,
+    );
 
     const data: PurchaseRequestData = {
       merchantAccount: this.merchantAccount,
       merchantDomainName: this.merchantDomainName,
       orderReference: order.id,
-      orderDate: order.createdAt.getTime(),
-      amount: order.cost,
+      orderDate: new Date(order.createdAt).getTime(),
+      amount: Number(order.cost),
       currency: 'UAH',
       productName: order.product.title,
       productCount: this.PRODUCT_COUNT,
-      productPrice: order.product.price,
+      productPrice: Number(order.product.price),
       merchantTransactionSecureType: 'AUTO',
       merchantSignature,
       returnUrl: `${this.merchantDomainName}${ApiRoutes.ORDERS}${OrderApiRoutes.SUCCESS}`,
       serviceUrl: `${this.apiUrl}${ApiRoutes.ORDERS}${OrderApiRoutes.STATUS}`,
+      clientFirstName: order.buyer.firstName,
+      clientLastName: order.buyer.lastName,
+      clientPhone: order.buyer.phone,
+      clientEmail: order.buyer.email,
+      orderLifetime: this.ORDER_LIFETIME_IN_SECONDS,
+      orderTimeout: this.ORDER_TIMEOUT_IN_SECONDS,
     };
 
-    const formData = new FormData();
-
-    Object.entries(data).forEach(([key, value]) => {
-      formData.append(key, value);
-    });
-
-    return formData;
+    return data;
   }
 
-  private generateResponseData(orderId: string): PaymentServiceStatusResponse {
-    const signature = this.generateResponseSignature(orderId);
+  private async generateResponseData(
+    orderId: string,
+    orderCreatedAt: Date,
+  ): Promise<PaymentServiceStatusResponse> {
+    const signature = await this.generateResponseSignature(
+      orderId,
+      orderCreatedAt,
+    );
 
     const data: PaymentServiceStatusResponse = {
       orderReference: orderId,
@@ -119,7 +152,7 @@ export class PaymentService {
       merchantDomainName: this.merchantDomainName,
       orderReference: id,
       orderDate: new Date(createdAt).getTime(),
-      amount: cost,
+      amount: Number(cost),
       currency: 'UAH',
       productName: product.title,
       productCount: this.PRODUCT_COUNT,
@@ -135,11 +168,14 @@ export class PaymentService {
     return hash;
   }
 
-  private generateResponseSignature(orderId: string): string {
+  private async generateResponseSignature(
+    orderId: string,
+    orderCreatedAt: Date,
+  ): Promise<string> {
     const signatureData: PaymentServiceStatusResponseSignature = {
       orderReference: orderId,
       status: 'accept',
-      time: new Date().getTime(),
+      time: new Date(orderCreatedAt).getTime(),
     };
 
     const string = Object.values(signatureData).join(';');

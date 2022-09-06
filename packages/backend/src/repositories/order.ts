@@ -1,4 +1,5 @@
-import type { PrismaClient } from '@prisma/client';
+import type { PrismaClient, Product } from '@prisma/client';
+import { ProductStatus } from '@prisma/client';
 import { type CreateOrderDto, OrderStatus } from '@vse-bude/shared';
 import type { OrderQuery } from '@types';
 
@@ -21,18 +22,50 @@ export class OrderRepository {
   public getById(id: string) {
     return this._dbClient.order.findUnique({
       where: { id },
+      include: {
+        product: true,
+        buyer: {
+          select: {
+            id: true,
+            email: true,
+            firstName: true,
+            lastName: true,
+            phone: true,
+          },
+        },
+      },
     });
   }
 
-  public create({ productId, buyerId, cost }: CreateOrderDto) {
-    return this._dbClient.order.create({
-      data: {
-        productId,
-        buyerId,
-        cost,
-        status: OrderStatus.CREATED,
-      },
+  public async create({ productId, buyerId }: CreateOrderDto) {
+    const product: Product = await this._dbClient.product.findUnique({
+      where: { id: productId },
     });
+
+    if (product.status === ProductStatus.ACTIVE) {
+      return this._dbClient.order.create({
+        data: {
+          productId,
+          buyerId,
+          cost: product.price,
+          status: OrderStatus.CREATED,
+        },
+        include: {
+          product: true,
+          buyer: {
+            select: {
+              id: true,
+              email: true,
+              firstName: true,
+              lastName: true,
+              phone: true,
+            },
+          },
+        },
+      });
+    }
+
+    return null;
   }
 
   public updateStatus(id: string, status: OrderStatus) {
