@@ -5,6 +5,10 @@ import type {
   AuthResponse,
   UpdatePassword,
 } from '@vse-bude/shared';
+import {
+  HttpStatusCode,
+  UserPersonalInfoValidationMessage,
+} from '@vse-bude/shared';
 import { sign as jwtSign, type UserSessionJwtPayload } from 'jsonwebtoken';
 import { getEnv } from '@helpers';
 import {
@@ -15,7 +19,7 @@ import {
 import {
   UserNotFoundError,
   UserExistsError,
-  UserPhoneExistsError,
+  ProfileError,
   WrongPasswordError,
   UnauthorizedError,
   WrongRefreshTokenError,
@@ -35,6 +39,7 @@ import {
 } from '@services';
 import { authResponseMap, userMap } from '@mappers';
 import { AuthApiRoutes } from '@vse-bude/shared';
+import { lang } from '@lang';
 import { ResetPasswordMailBuilder } from '../email/reset-password-mail-builder';
 import { ResetPassLinkInvalid } from '../error/reset-password/reset-pass-link-invalid';
 import type { RedisStorageService } from './redis-storage';
@@ -88,7 +93,10 @@ export class AuthService {
         phone: signUpDto.phone,
       });
       if (userByPhone) {
-        throw new UserPhoneExistsError();
+        throw new ProfileError({
+          status: HttpStatusCode.BAD_REQUEST,
+          message: lang(UserPersonalInfoValidationMessage.PHONE_EXISTS),
+        });
       }
     }
     const phone = signUpDto.phone ? signUpDto.phone : null;

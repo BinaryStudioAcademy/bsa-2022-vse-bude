@@ -55,6 +55,7 @@ export const userUpdateSchema = (t: TFunction) =>
       }),
     phone: Joi.string()
       .allow('')
+      .replace('+380', '')
       .pattern(PERSONAL_PHONE)
       .messages({
         'string.pattern.base': t(
