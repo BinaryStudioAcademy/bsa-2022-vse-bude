@@ -5,7 +5,7 @@ import { Routes } from '@enums';
 import { Breadcrumbs, Button, Container } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import { Http } from '@vse-bude/shared';
-import type { ProductType } from '@vse-bude/shared';
+import type { ProductType, ItemDto } from '@vse-bude/shared';
 import { withPublic } from '@hocs';
 import { Layout } from '@components/layout';
 import { Item } from '@components/item';
@@ -49,7 +49,7 @@ export const getServerSideProps = withPublic(
 const ItemPage = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const item = useTypedSelector(
+  const item: ItemDto = useTypedSelector(
     (state) => state.product.currentItem,
     shallowEqual,
   );
