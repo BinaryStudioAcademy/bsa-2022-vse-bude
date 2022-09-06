@@ -19,7 +19,7 @@ const makeStore = () =>
       toast: toastReducer,
       favoriteProduct: favoriteProductReducer,
       modals: modalsReducer,
-      checkout: checkoutReducer
+      checkout: checkoutReducer,
     },
   });
 

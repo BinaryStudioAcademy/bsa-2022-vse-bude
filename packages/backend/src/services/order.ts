@@ -17,9 +17,7 @@ export class OrderService {
   }
 
   public async create(data: CreateOrderDto) {
-    const product = await this._productRepository.getById(
-      data.productId,
-    );
+    const product = await this._productRepository.getById(data.productId);
     if (!product) {
       throw new Error('Product not found');
     }
