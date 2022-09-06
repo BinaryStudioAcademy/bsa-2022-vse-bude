@@ -2,7 +2,7 @@
   "headline": {
     "makePost": "Make a Post",
     "editPost": "Edit a Post",
-    "downloadPhotos": "Download photos",
+    "uploadPhotos": "Uploaded photos",
     "description": "Description",
     "contact": "Contact"
   },
@@ -14,7 +14,7 @@
     "cancel": "Cancel"
   },
   "caption": {
-    "downloadPhotos": "You can add to 30 pics"
+    "uploadPhotos": "You can add to 30 pics"
   },
   "tooltip": {
     "price": "Make sure that you enter the correct price in digits!",

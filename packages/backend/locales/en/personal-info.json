@@ -34,6 +34,9 @@
     },
     "notExists": {
       "user": "User not found!"
+    },
+    "exists": {
+      "phone": "User with such phone already exists!"
     }
   }
 }

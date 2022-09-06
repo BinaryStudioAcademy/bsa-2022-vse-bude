@@ -97,10 +97,8 @@ function ImageInput({ images, setImages }: ImageInputProps) {
         />
       )}
 
-      <SectionHeader>{t('create-post:headline.downloadPhotos')}</SectionHeader>
-      <p css={styles.photosCaption}>
-        {t('create-post:caption.downloadPhotos')}
-      </p>
+      <SectionHeader>{t('create-post:headline.uploadPhotos')}</SectionHeader>
+      <p css={styles.photosCaption}>{t('create-post:caption.uploadPhotos')}</p>
       <div data-variant={getVariant()} css={styles.photosWrapper}>
         <input
           css={styles.photosInput}
