@@ -131,16 +131,10 @@ export const getPopularProducts = ({
     },
   });
 
-export const getSilimar = ({
-  city,
-  categoryId,
-  type,
-}: ProductOptions): Promise<ProductDto[]> =>
+export const getSilimar = (productId: string): Promise<ProductDto[]> =>
   http.get({
     url: `${ApiRoutes.PRODUCTS}${ProductApiRoutes.SIMILAR}`,
     payload: {
-      city,
-      categoryId,
-      type,
+      productId,
     },
   });

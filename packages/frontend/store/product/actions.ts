@@ -52,15 +52,8 @@ export const fetchProducts = createAsyncThunk(
 
 export const fetchSimilarProducts = createAsyncThunk(
   ProductActions.FETCH_SIMILAR_PRODUCTS,
-  async (
-    params: { city: string; categoryId: string; type: ProductType },
-    { rejectWithValue, dispatch },
-  ) =>
-    getSilimar({
-      city: params.city,
-      categoryId: params.categoryId,
-      type: params.type,
-    }).catch((e) => {
+  async (productId: string, { rejectWithValue, dispatch }) =>
+    getSilimar(productId).catch((e) => {
       dispatch(
         addToast({
           level: 'error',

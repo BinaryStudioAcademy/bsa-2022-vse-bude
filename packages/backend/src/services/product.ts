@@ -249,8 +249,14 @@ export class ProductService {
     return productId;
   }
 
-  public async getSimilar(city: string, categoryId: string, type: ProductType) {
-    return this._productRepository.findSimilar(city, categoryId, type);
+  public async getSimilar(productId: string) {
+    const product = await this._productRepository.getById(productId);
+
+    return this._productRepository.findSimilar(
+      product.city,
+      product.categoryId,
+      product.type,
+    );
   }
 
   public async getMostPopularLots(limit: string) {

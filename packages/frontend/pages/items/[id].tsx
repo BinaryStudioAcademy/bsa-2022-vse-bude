@@ -65,14 +65,8 @@ const ItemPage = () => {
 
   useEffect(() => {
     dispatch(updateProductViews(item.id));
-    dispatch(
-      fetchSimilarProducts({
-        city: item.city,
-        categoryId: item.category.id,
-        type: item.type,
-      }),
-    );
-  }, [item.id, dispatch, item.city, item.category.id, item.type]);
+    dispatch(fetchSimilarProducts(item.id));
+  }, [item.id, dispatch]);
 
   useEffect(() => {
     if (user) {
