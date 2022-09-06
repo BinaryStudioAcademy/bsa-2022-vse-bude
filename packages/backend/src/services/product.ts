@@ -124,8 +124,9 @@ export class ProductService {
     if (toUtc(product.endDate) < toUtc()) {
       throw new AuctionEndedError();
     }
-
-    await this._bidRepository.retrieve(userId, productId);
+    console.log(await this._bidRepository.getAll(productId));
+    
+    await this._bidRepository.retrieve(userId, productId, new Date(Date.now()).toISOString());
 
     return this.getById(productId);
   }
