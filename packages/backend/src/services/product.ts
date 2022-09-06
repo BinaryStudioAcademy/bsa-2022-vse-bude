@@ -63,14 +63,8 @@ export class ProductService {
       product.category.title = lang(`categories:${product.category.title}`);
     }
 
-    console.log(lang(`product-wear:${product.wear}`));
-
-    try {
-      if (product.wear) {
-        product.wear = lang(`product-wear:${product.wear}`);
-      }
-    } catch (e) {
-      console.log(e);
+    if (product.wear) {
+      product.wear = lang(`product-wear:${product.wear}`);
     }
 
     const currentPrice = await this._productRepository.getCurrentPrice(

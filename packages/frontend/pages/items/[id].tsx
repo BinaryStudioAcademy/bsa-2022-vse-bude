@@ -28,7 +28,6 @@ export const getServerSideProps = withPublic(
     const id = query.id as string;
 
     const { payload } = await store.dispatch(fetchProductSSR({ id, http }));
-    console.log(payload);
 
     if (!payload) {
       return {
