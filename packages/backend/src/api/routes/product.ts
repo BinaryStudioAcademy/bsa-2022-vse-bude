@@ -1,4 +1,4 @@
-import type { ApiRoutes } from '@vse-bude/shared';
+import type { ApiRoutes, ProductType } from '@vse-bude/shared';
 import type { Request } from 'express';
 import { Router } from 'express';
 import { wrap } from '@helpers';
@@ -235,6 +235,11 @@ export const initProductRoutes = (
    *         name: categoryId
    *         required: true
    *         type: string
+   *       - in: query
+   *         name: type
+   *         required: false
+   *         schema:
+   *            $ref: "#/definitions/ProductType"
    *     responses:
    *       200:
    *         description: Ok
@@ -256,6 +261,7 @@ export const initProductRoutes = (
       productService.getSimilar(
         <string>req.query.city,
         <string>req.query.categoryId,
+        <ProductType>req.query.type,
       ),
     ),
   );

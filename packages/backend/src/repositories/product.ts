@@ -225,11 +225,16 @@ export class ProductRepository {
     });
   }
 
-  public async findSimilar(city: string, categoryId: string) {
+  public async findSimilar(
+    city: string,
+    categoryId: string,
+    type: ProductType,
+  ) {
     return await this._dbClient.product.findMany({
       where: {
         city,
         categoryId,
+        type,
         status: ProductStatus.ACTIVE,
       },
     });
