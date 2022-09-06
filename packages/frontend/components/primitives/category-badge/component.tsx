@@ -36,7 +36,9 @@ export const CategoryBadges = ({ badges }: CategoryBadgesProps) => {
                 size="xs"
                 onClick={badge.onClick}
                 color={IconColor.GRAY}
-                ariaLabel={t(`common:components.badge.removeLabel`, badge.name)}
+                ariaLabel={t(`common:components.badge.removeLabel`, {
+                  param: badge.name,
+                })}
                 cssExtend={styles.cross}
               />
             </div>
