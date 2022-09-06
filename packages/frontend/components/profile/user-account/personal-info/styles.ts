@@ -79,6 +79,9 @@ export const sections = ({ mq }: Theme) => css`
 
 export const sectionRow = ({ spaces }: Theme) => css`
   margin-bottom: ${spaces.xl1};
+  &:first-of-type {
+    margin-bottom: 0;
+  }
 `;
 
 export const groupeInputs = ({ spaces }: Theme) => css`
@@ -90,18 +93,17 @@ export const inputRow = ({ spaces }: Theme) => css`
   flex-grow: 1;
 `;
 
-export const subGroupe = ({ spaces }: Theme) => css`
-  display: flex;
-  align-items: flex-end;
+export const groupePhone = ({ spaces }: Theme) => css`
   gap: ${spaces.md};
 `;
-
-export const groupePhone = () => css``;
 
 export const phoneRow = css`
   flex-grow: 2;
 `;
 
+export const verifyButtonWrapper = ({ spaces }: Theme) => css`
+  padding: 18px 0 ${spaces.xl1} 0;
+`;
 export const avatarPopoverTrigger = css`
   position: absolute;
   bottom: 0;

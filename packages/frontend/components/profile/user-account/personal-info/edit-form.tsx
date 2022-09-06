@@ -12,12 +12,8 @@ import {
   Loader,
 } from '@primitives';
 import { userUpdateSchema } from 'validation-schemas/user/user-update';
-import type {
-  SaveUserProfileDto,
-  FullUserProfileDto} from '@vse-bude/shared';
-import {
-  DefaultInpValue,
-} from '@vse-bude/shared';
+import type { SaveUserProfileDto, FullUserProfileDto } from '@vse-bude/shared';
+import { DefaultInpValue } from '@vse-bude/shared';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { profileMapper, updateDtoMapper } from '@helpers';
 import { updateUserProfile, setIsEditing } from '@store';
@@ -32,7 +28,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
   const [updatedPhone, setUpdatedPhone] = useState(null);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  console.log(user);
+
   const saveLoader = useTypedSelector(
     (state: RootState) => state.profile.saveLoader,
   );
@@ -49,14 +45,14 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
   });
 
   useEffect(() => {
+    const resetPhone = !user.phone ? null : user.phone;
+    setUpdatedPhone(resetPhone);
     reset({
+      'phone': user.phone,
       'password': '',
       'repeatPassword': '',
       'newPassword': '',
     });
-
-    const resetPhone = !user.phone ? null : user.phone;
-    setUpdatedPhone(resetPhone);
   }, [isSubmit, reset, user.phone]);
 
   const onResetHandler = () => {
@@ -159,23 +155,22 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
                 error={errors.email?.message}
               />
             </div>
+
             <Flex css={styles.groupePhone}>
-              <div css={styles.subGroupe}>
-                <div css={styles.phoneRow}>
-                  <Input
-                    id="phone-profile"
-                    inerasableValue={
-                      !updatedPhone ? DefaultInpValue.PHONE : null
-                    }
-                    type="text"
-                    variant="primary"
-                    label={t('personal-info:label.phone')}
-                    placeholder={t('personal-info:placeholder.phone')}
-                    {...register('phone')}
-                    error={errors.phone?.message}
-                  />
-                </div>
-                {!user.phoneVerified && (
+              <div css={styles.phoneRow}>
+                <Input
+                  id="phone-profile"
+                  inerasableValue={!updatedPhone ? DefaultInpValue.PHONE : null}
+                  type="text"
+                  variant="primary"
+                  label={t('personal-info:label.phone')}
+                  placeholder={t('personal-info:placeholder.phone')}
+                  {...register('phone')}
+                  error={errors.phone?.message}
+                />
+              </div>
+              {!user.phoneVerified && (
+                <div css={styles.verifyButtonWrapper}>
                   <Button
                     type="button"
                     size="big"
@@ -184,8 +179,8 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
                   >
                     {t('personal-info:action.verify')}
                   </Button>
-                )}
-              </div>
+                </div>
+              )}
             </Flex>
           </Column>
 

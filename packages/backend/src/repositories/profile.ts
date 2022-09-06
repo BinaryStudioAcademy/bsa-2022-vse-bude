@@ -145,8 +145,8 @@ export class UserProfileRepository {
   }) {
     const { firstName, lastName, email, phone } = data;
     this._updatePhoneVerifiedStatus({ userId, phone });
-    
-return this._dbClient.user.update({
+
+    return this._dbClient.user.update({
       where: {
         id: userId,
       },
@@ -244,6 +244,26 @@ return this._dbClient.user.update({
       },
       select: {
         avatar: true,
+      },
+    });
+  }
+
+  public checkIsPhoneExists({
+    userId,
+    phone,
+  }: {
+    userId: string;
+    phone: string;
+  }) {
+    return this._dbClient.user.findFirst({
+      where: {
+        id: {
+          not: userId,
+        },
+        phone,
+      },
+      select: {
+        phone: true,
       },
     });
   }

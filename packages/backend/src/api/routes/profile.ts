@@ -31,7 +31,7 @@ export const initProfileRoutes = (
    *           application/json:
    *             schema:
    *               type: object
-   *               $ref: "#/definitions/GetProfileFullUserData"
+   *               $ref: "#/definitions/FullUserProfileDto"
    *       4**:
    *         description: Something went wrong
    *         content:
@@ -53,12 +53,12 @@ export const initProfileRoutes = (
 
   /**
    * @openapi
-   * /profile/full-data:
+   * /profile/my-list:
    *   get:
-   *     description: Get Full user's profile data
+   *     description: Get user's items data
    *     security:
    *       - Bearer: []
-   *     tags: [Profile]
+   *     tags: [Items]
    *     produces:
    *       - application/json
    *     responses:
@@ -68,7 +68,7 @@ export const initProfileRoutes = (
    *           application/json:
    *             schema:
    *               type: object
-   *               $ref: "#/definitions/"
+   *               $ref: "#/definitions/MyListItem"
    *       4**:
    *         description: Something went wrong
    *         content:
@@ -76,7 +76,6 @@ export const initProfileRoutes = (
    *             schema:
    *               $ref: "#/definitions/Response400"
    */
-  //!add dto getAllUserItems
   router.get(
     apiPath(path, AccountApiRoutes.MY_LIST),
     authMiddleware,
@@ -110,7 +109,7 @@ export const initProfileRoutes = (
    *           application/json:
    *             schema:
    *               type: object
-   *               $ref: "#/definitions/UpdateProfileResponse"
+   *               $ref: "#/definitions/FullUserProfileDto"
    *       4**:
    *         description: Something went wrong
    *         content:
@@ -135,6 +134,13 @@ export const initProfileRoutes = (
         password,
         newPassword,
       } = req.body;
+
+      if (phone) {
+        await profileService.checkIsPhoneExists({
+          userId,
+          phone,
+        });
+      }
 
       if (!phone) {
         await profileService.cancelPhoneVerified({ userId });
@@ -201,7 +207,7 @@ export const initProfileRoutes = (
    *           application/json:
    *             schema:
    *               type: object
-   *               $ref: "#/definitions/GetProfileResponse"
+   *               $ref: "#/definitions/UserProfileDto"
    *       4**:
    *         description: Something went wrong
    *         content:
