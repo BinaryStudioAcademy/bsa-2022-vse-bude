@@ -85,6 +85,61 @@ export const ItemInfoAuction = ({
     onCancel();
   };
 
+  const renderEditButton = () => (
+    <Link href={`/items/edit/${item.id}`}>
+      <a style={{ textDecoration: 'none' }}>
+        <Button>Edit</Button>
+      </a>
+    </Link>
+  );
+
+  const renderBidButtons = () => (
+    <>
+      <Tooltip
+        trigger={
+          <FavoriteButton
+            cssExtended={styles.favouriteButton}
+            onChangeIsFavorite={onChangeIsFavorite}
+            isFavorite={isInFavorite}
+            backgroundColor="transparent"
+            inFavouriteColor={IconColor.YELLOW}
+            notInFavouriteColor={IconColor.YELLOW}
+            size="md"
+            disabled={!user}
+          />
+        }
+      >
+        {user
+          ? isInFavorite
+            ? t('buttons.tooltips.favBtnRemove')
+            : t('buttons.tooltips.favBtn')
+          : t('buttons.tooltips.notAuthorized.favBtn')}
+      </Tooltip>
+      <Button
+        type="submit"
+        disabled={!user || !user.phoneVerified || loading}
+        tooltip={
+          user
+            ? user.phoneVerified
+              ? t('buttons.placeBid')
+              : t('buttons.tooltips.notVerified.placeBid')
+            : t('buttons.tooltips.notAuthorized.placeBid')
+        }
+      >
+        {loading ? <Loader size="extraSmall" /> : t('buttons.placeBid')}
+      </Button>
+      {!!isAbleToLeaveAuction && user && (
+        <Button
+          onClick={confirmLeave}
+          variant="danger"
+          tooltip={t('leave.tooltip')}
+        >
+          {t('leave.btnText')}
+        </Button>
+      )}
+    </>
+  );
+
   return (
     <div css={styles.wrapper}>
       <div css={styles.priceTimerWrapper}>
@@ -119,58 +174,7 @@ export const ItemInfoAuction = ({
         )}
 
         <div css={styles.buttons}>
-          {isAuthor ? (
-            <Link href={`/items/edit/${item.id}`}>
-              <a style={{ textDecoration: 'none' }}>
-                <Button>Edit</Button>
-              </a>
-            </Link>
-          ) : (
-            <>
-              <Tooltip
-                trigger={
-                  <FavoriteButton
-                    cssExtended={styles.favouriteButton}
-                    onChangeIsFavorite={onChangeIsFavorite}
-                    isFavorite={isInFavorite}
-                    backgroundColor="transparent"
-                    inFavouriteColor={IconColor.YELLOW}
-                    notInFavouriteColor={IconColor.YELLOW}
-                    size="md"
-                    disabled={!user}
-                  />
-                }
-              >
-                {user
-                  ? isInFavorite
-                    ? t('buttons.tooltips.favBtnRemove')
-                    : t('buttons.tooltips.favBtn')
-                  : t('buttons.tooltips.notAuthorized.favBtn')}
-              </Tooltip>
-              <Button
-                type="submit"
-                disabled={!user || !user.phoneVerified || loading}
-                tooltip={
-                  user
-                    ? user.phoneVerified
-                      ? t('buttons.placeBid')
-                      : t('buttons.tooltips.notVerified.placeBid')
-                    : t('buttons.tooltips.notAuthorized.placeBid')
-                }
-              >
-                {loading ? <Loader size="extraSmall" /> : t('buttons.placeBid')}
-              </Button>
-              {!!isAbleToLeaveAuction && user && (
-                <Button
-                  onClick={confirmLeave}
-                  variant="danger"
-                  tooltip={t('leave.tooltip')}
-                >
-                  {t('leave.btnText')}
-                </Button>
-              )}
-            </>
-          )}
+          {isAuthor ? renderEditButton() : renderBidButtons()}
         </div>
       </form>
 
