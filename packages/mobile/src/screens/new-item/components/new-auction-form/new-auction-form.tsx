@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import React, { FC } from 'react';
 import { ColorPalette, IPostForms } from '@vse-bude/shared';
 import {
@@ -15,7 +16,6 @@ import {
 import { useAppForm, useTranslation, useState } from '~/hooks/hooks';
 import { CALLING_CODE, CITIES, COUNTRIES } from '~/mock/new-item';
 import { globalStyles } from '~/styles/styles';
-import dayjs from 'dayjs';
 
 import { AddPhotos } from '../add-photos/add-photos';
 
@@ -25,11 +25,10 @@ const NewAuctionForm: FC = () => {
   const { t } = useTranslation();
   const styles = useStyles();
 
-  const today = new Date();
-  const tomorrow = new Date();
-  tomorrow.setDate(today.getDate() + 1);
-  const [date, setDate] = useState(tomorrow);
-  const [time, setTime] = useState(tomorrow);
+  const today = dayjs();
+  const tomorrow = today.add(1, 'day');
+  const [date, setDate] = useState(tomorrow.toDate());
+  const [time, setTime] = useState(tomorrow.toDate());
   const [openDate, setOpenDate] = useState(false);
   const [openTime, setOpenTime] = useState(false);
 
@@ -93,11 +92,11 @@ const NewAuctionForm: FC = () => {
           mode={'date'}
           is24Hour={true}
           display="default"
-          minimumDate={tomorrow}
+          minimumDate={tomorrow.toDate()}
           onChange={(_, selectedDate) => {
             setOpenDate(false);
             const currentDate = dayjs(selectedDate).format('DD/MM/YYYY');
-            setDate(selectedDate ?? tomorrow);
+            setDate(selectedDate ?? tomorrow.toDate());
             setValue('endDate', currentDate);
           }}
         />
@@ -129,11 +128,11 @@ const NewAuctionForm: FC = () => {
           mode={'time'}
           is24Hour={true}
           display="spinner"
-          minimumDate={tomorrow}
+          minimumDate={tomorrow.toDate()}
           onChange={(_, selectedTime) => {
             setOpenTime(false);
             const currentTime = dayjs(selectedTime).format('HH:mm');
-            setTime(selectedTime ?? tomorrow);
+            setTime(selectedTime ?? tomorrow.toDate());
             setValue('endTime', currentTime);
           }}
         />

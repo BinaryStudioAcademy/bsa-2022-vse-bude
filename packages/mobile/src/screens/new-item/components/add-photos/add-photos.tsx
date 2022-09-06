@@ -35,9 +35,7 @@ const AddPhotos: FC = () => {
   }, []);
 
   const deleteImage = (index: number) => {
-    const updateImages = [...images];
-    updateImages.splice(index, 1);
-    setImages(updateImages);
+    setImages((state) => state.filter((_, idx) => idx !== index));
   };
 
   const renderImage = (image: string, index: number) => {
@@ -72,9 +70,7 @@ const AddPhotos: FC = () => {
     <>
       <View>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {images.map((imageItem, index) => {
-            return renderImage(imageItem, index);
-          })}
+          {images.map(renderImage)}
         </ScrollView>
       </View>
       <TouchableOpacity
