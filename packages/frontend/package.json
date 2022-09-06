@@ -39,7 +39,8 @@
     "react-hook-form": "7.34.2",
     "react-image-crop": "^10.0.6",
     "react-redux": "8.0.2",
-    "react-transition-group": "4.4.5"
+    "react-transition-group": "4.4.5",
+    "socket.io-client": "^4.5.2"
   },
   "devDependencies": {
     "@types/node": "18.7.14",

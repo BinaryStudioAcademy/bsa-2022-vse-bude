@@ -23,4 +23,5 @@ export {
   updateDtoMapper,
 };
 export * from './title';
+export * from './socket';
 export { getCroppedImg } from './getCroppedImg';

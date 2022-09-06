@@ -7,9 +7,16 @@ import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useAppDispatch, useTypedSelector } from '@hooks';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IconColor } from '@enums';
-import { auctionLeaveAction, auctionPermissions, makeBid } from 'store/product';
+import {
+  auctionLeaveAction,
+  auctionPermissions,
+  makeBid,
+  updateCurrentItemPrice,
+} from 'store/product';
+import { UPDATE_PRODUCT_PRICE } from '@vse-bude/shared';
+import { getAuctionItemIo } from '@helpers';
 import { CountDownTimer } from '../countdown-timer/component';
 import { ItemTitle, ItemInfo, ItemPrice } from '../item-info';
 import { minBidValidation } from '../validation';
@@ -35,6 +42,17 @@ export const ItemInfoAuction = ({
   const { t } = useTranslation('item');
 
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const socket = getAuctionItemIo(item.id);
+    socket.on(UPDATE_PRODUCT_PRICE, (data) => {
+      dispatch(updateCurrentItemPrice(+data.price));
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  });
 
   const targetDate = new Date(item.endDate);
   const minBidAmount = +item.currentPrice + +item.minimalBid + 1;
