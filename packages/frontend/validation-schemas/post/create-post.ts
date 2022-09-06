@@ -9,10 +9,10 @@ export const createPostSchema = (t: TFunction) =>
       .messages({
         'string.empty': t('create-post:validation.category.empty'),
       }),
-    wear: Joi.string()
+    condition: Joi.string()
       .required()
       .messages({
-        'string.empty': t('create-post:validation.wear.empty'),
+        'string.empty': t('create-post:validation.condition.empty'),
       }),
     currency: Joi.any().allow(''),
     callingCode: Joi.any().allow(''),

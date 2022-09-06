@@ -159,6 +159,7 @@ export class ProductRepository {
       data: {
         imageLinks: data.imageLinks,
         status: data.status,
+        condition: data.condition,
         country: data.country,
         city: data.city,
         phone: data.phone,

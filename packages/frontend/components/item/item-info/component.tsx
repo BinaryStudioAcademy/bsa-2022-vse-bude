@@ -32,7 +32,7 @@ export const ItemInfo = ({ item }: ItemInfoProps) => {
           )}
           <tr>
             <td>{t('statusCaption')}</td>
-            <td>{item.wear}</td>
+            <td>{item.condition}</td>
           </tr>
           <tr>
             <td>{t('locationCaption')}</td>

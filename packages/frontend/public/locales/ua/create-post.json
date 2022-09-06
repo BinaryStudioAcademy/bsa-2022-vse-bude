@@ -42,7 +42,7 @@
     "endDate": "Кінцева дата",
     "username": "Ім'я",
     "seller": "Продавець",
-    "wear": "Стан"
+    "condition": "Стан"
   },
   "placeholder": {
     "category": "Виберіть категорію",
@@ -61,7 +61,7 @@
     "minimalBid": "Введіть мінімальну ставку",
     "recommendedPrice": "Введіть рекомендовану ціну",
     "username": "Введіть ім'я користувача",
-    "wear": "Виберіть стан товару"
+    "condition": "Виберіть стан товару"
   },
   "validation": {
     "link": {
@@ -95,7 +95,7 @@
     "category": {
       "empty": "Категорія не може бути порожньою"
     },
-    "wear": {
+    "condition": {
       "empty": "Стан не може бути порожнім"
     },
     "date": {
@@ -106,7 +106,7 @@
     "currentUser": "Поточний користувач",
     "otherUser": "Інший користувач"
   },
-  "wearSelect": {
+  "conditionSelect": {
     "used": "уживаний",
     "new": "новий"
   }

@@ -42,7 +42,7 @@
     "endDate": "End date",
     "username": "Name",
     "seller": "Seller",
-    "wear": "Wear"
+    "condition": "Condition"
   },
   "placeholder": {
     "category": "Select the category",
@@ -61,7 +61,7 @@
     "minimalBid": "Enter minimal bid",
     "recommendedPrice": "Enter recommended price",
     "username": "Enter user`s name",
-    "wear": "Select wear of item"
+    "condition": "Select condition of item"
   },
   "validation": {
     "link": {
@@ -96,8 +96,8 @@
     "category": {
       "empty": "Category cannot be empty"
     },
-    "wear": {
-      "empty": "Wear cannot be empty"
+    "condition": {
+      "empty": "condition cannot be empty"
     },
     "date": {
       "base": "Enter a date after today"
@@ -107,7 +107,7 @@
     "currentUser": "Current user",
     "otherUser": "Other user"
   },
-  "wearSelect": {
+  "conditionSelect": {
     "used": "used",
     "new": "new"
   }

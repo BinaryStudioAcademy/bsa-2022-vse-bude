@@ -13,8 +13,8 @@ export default function DescriptionBlock({
   register,
   category,
   setCategories,
-  wear,
-  setWear,
+  condition,
+  setCondition,
 }: DescriptionBlockProps) {
   const categories = useTypedSelector((state) => state.category.list);
 
@@ -72,21 +72,21 @@ export default function DescriptionBlock({
           required
           options={[
             {
-              title: t('create-post:wearSelect.used'),
+              title: t('create-post:conditionSelect.used'),
               value: 'USED',
             },
             {
-              title: t('create-post:wearSelect.new'),
+              title: t('create-post:conditionSelect.new'),
               value: 'NEW',
             },
           ]}
-          value={wear?.title}
-          setValue={setWear}
-          id="post-wear"
-          name="wear"
-          label={t('create-post:label.wear')}
-          placeholder={t('create-post:placeholder.wear')}
-          error={errors.category?.message}
+          value={condition?.title}
+          setValue={setCondition}
+          id="post-condition"
+          name="condition"
+          label={t('create-post:label.condition')}
+          placeholder={t('create-post:placeholder.condition')}
+          error={errors.condition?.message}
         />
       </div>
     </>

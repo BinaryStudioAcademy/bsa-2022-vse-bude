@@ -100,7 +100,7 @@ model Product {
   phone           String?       @db.VarChar(32)
   type            ProductType
   status          ProductStatus
-  wear            Wear          @default(NEW)
+  condition       Condition     @default(NEW)
   endDate         DateTime?
   postDate        DateTime?
   cancelReason   String?
@@ -226,7 +226,7 @@ enum SocialMediaType {
   LINKEDIN
 }
 
-enum Wear {
+enum Condition {
   NEW
   USED
 }

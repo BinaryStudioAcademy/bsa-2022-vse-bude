@@ -63,8 +63,8 @@ export class ProductService {
       product.category.title = lang(`categories:${product.category.title}`);
     }
 
-    if (product.wear) {
-      product.wear = lang(`product-wear:${product.wear}`);
+    if (product.condition) {
+      product.condition = lang(`product-condition:${product.condition}`);
     }
 
     const currentPrice = await this._productRepository.getCurrentPrice(
@@ -195,6 +195,7 @@ export class ProductService {
     if (error) {
       throw new FieldError(error.message);
     }
+
     const product = (await this._productRepository.getById(
       productId,
     )) as Product;
