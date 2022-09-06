@@ -6,13 +6,9 @@ import { ActionType } from './common';
 
 const sendCodeVerifyPhone = createAsyncThunk<null, undefined, AsyncThunkConfig>(
   ActionType.SEND_CODE,
-  async (_, { extra, getState }) => {
+  async (_, { extra }) => {
     const { verifyPhoneApi } = extra;
-    const userId = getState().auth.user?.id;
-
-    if (userId) {
-      await verifyPhoneApi.sendCodeVerifyPhone(userId);
-    }
+    await verifyPhoneApi.sendCodeVerifyPhone();
 
     return null;
   },
@@ -20,13 +16,10 @@ const sendCodeVerifyPhone = createAsyncThunk<null, undefined, AsyncThunkConfig>(
 
 const verifyPhone = createAsyncThunk<null, PhoneVerifyDto, AsyncThunkConfig>(
   ActionType.VERIFY_PHONE,
-  async (payload, { extra, getState, dispatch }) => {
+  async (payload, { extra, dispatch }) => {
     const { verifyPhoneApi } = extra;
-    const userId = getState().auth.user?.id;
-    if (userId) {
-      await verifyPhoneApi.verifyPhone(payload, userId);
-      dispatch(authActions.getCurrentUser());
-    }
+    await verifyPhoneApi.verifyPhone(payload);
+    dispatch(authActions.getCurrentUser());
 
     return null;
   },

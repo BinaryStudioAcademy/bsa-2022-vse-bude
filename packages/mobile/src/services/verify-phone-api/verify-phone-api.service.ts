@@ -22,7 +22,7 @@ class VerifyPhoneApi {
     this.#apiPrefix = apiPrefix;
   }
 
-  sendCodeVerifyPhone(_payload: string): Promise<boolean> {
+  sendCodeVerifyPhone(): Promise<boolean> {
     return this.#http.load(
       `${this.#apiPrefix}${ApiRoutes.VERIFY}${
         VerifyApiRoutes.PHONE_RESEND_CODE
@@ -35,7 +35,7 @@ class VerifyPhoneApi {
     );
   }
 
-  verifyPhone(_payload: PhoneVerifyDto, _userId: string): Promise<unknown> {
+  verifyPhone(_payload: PhoneVerifyDto): Promise<unknown> {
     return this.#http.load(
       `${this.#apiPrefix}${ApiRoutes.VERIFY}${VerifyApiRoutes.VERIFY_PHONE}`,
       {

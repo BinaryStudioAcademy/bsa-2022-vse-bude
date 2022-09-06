@@ -7,6 +7,7 @@ import {
   useCustomTheme,
   useNavigation,
   useTranslation,
+  useState,
 } from '~/hooks/hooks';
 import {
   ButtonAppearance,
@@ -14,6 +15,7 @@ import {
   RootScreenName,
 } from '~/common/enums/enums';
 import {
+  CheckCircleIcon,
   Input,
   KeyboardAvoiding,
   PrimaryButton,
@@ -29,6 +31,7 @@ import {
   selectUserPhone,
 } from '~/store/selectors';
 import { notification } from '~/services/services';
+import { CODE_REGEX } from '~/common/regexp/regexp';
 import {
   ButtonsContainer,
   CustomText,
@@ -47,6 +50,7 @@ const VerifyCodeScreen: FC = () => {
   const userPhone = useAppSelector(selectUserPhone);
   const dataStatusVerify = useAppSelector(selectVerifyPhoneDataStatus);
   const dataStatusAuth = useAppSelector(selectAuthDataStatus);
+  const [isValidCode, setIsValidCode] = useState(false);
   const isLoading =
     dataStatusVerify === DataStatus.PENDING ||
     dataStatusAuth === DataStatus.PENDING;
@@ -82,6 +86,15 @@ const VerifyCodeScreen: FC = () => {
       });
   };
 
+  const handleChange = (text: string): unknown => {
+    if (text.match(CODE_REGEX)) {
+      setIsValidCode(true);
+
+      return;
+    }
+    setIsValidCode(false);
+  };
+
   return (
     <Wrapper>
       <Header
@@ -102,14 +115,24 @@ const VerifyCodeScreen: FC = () => {
             label={`${t('verificationPhone.JUST_SENT')} ${userPhone}`}
             contentContainerStyle={globalStyles.mt3}
           />
-          <Input
-            label={t('verificationPhone.INPUT_LABEL_CODE')}
-            placeholder={t('verificationPhone.ENTER_CODE')}
-            name="code"
-            control={control}
-            errors={errors}
-            contentContainerStyle={globalStyles.mt6}
-          />
+          <View>
+            <Input
+              label={t('verificationPhone.INPUT_LABEL_CODE')}
+              placeholder={t('verificationPhone.ENTER_CODE')}
+              name="code"
+              control={control}
+              errors={errors}
+              contentContainerStyle={globalStyles.mt6}
+              onChange={handleChange}
+            />
+            {isValidCode && (
+              <CheckCircleIcon
+                style={styles.icon}
+                size={20}
+                color={colors.accent}
+              />
+            )}
+          </View>
           <ButtonsContainer>
             <View style={styles.buttonContainer}>
               <PrimaryButton
