@@ -9,11 +9,7 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { useState } from 'react';
 import { IconColor } from '@enums';
-import {
-  auctionLeaveAction,
-  auctionPermissions,
-  makeBid,
-} from 'store/product';
+import { auctionLeaveAction, auctionPermissions, makeBid } from 'store/product';
 import { CountDownTimer } from '../countdown-timer/component';
 import { ItemTitle, ItemInfo, ItemPrice } from '../item-info';
 import { minBidValidation } from '../validation';
