@@ -1,1 +1,1 @@
-export { SegmentPosition } from './segment-position-type';
+export { SegmentPosition } from './segment-position';

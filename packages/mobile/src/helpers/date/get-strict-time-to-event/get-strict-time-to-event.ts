@@ -5,7 +5,7 @@ const getStrictTimeToEvent = (date: Date) => {
   const duration = dayjs.duration(dayjs(date).diff(new Date()));
   const totalMs = duration.asMilliseconds();
   const [days, hours, minutes, seconds] = duration
-    .format(DateTimeFormat.DD_HH_mm_ss)
+    .format(DateTimeFormat.COUNTDOWN)
     .split('-');
   if (totalMs > 0) {
     return {

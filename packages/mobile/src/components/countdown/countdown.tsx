@@ -2,12 +2,13 @@ import React, { FC } from 'react';
 import { View } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { useCountdownInterval, useTranslation } from '~/hooks/hooks';
+import { ProductDto } from '@vse-bude/shared';
 import { CountdownSegment } from './components/components';
 import { SegmentPosition } from './common/enums/enums';
 import { styles } from './styles';
 
 type Props = {
-  endDate: Date;
+  endDate: ProductDto['endDate'];
 };
 
 const Countdown: FC<Props> = ({ endDate }) => {

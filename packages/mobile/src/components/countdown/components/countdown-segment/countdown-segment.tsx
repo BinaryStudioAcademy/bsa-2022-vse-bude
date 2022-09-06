@@ -36,7 +36,7 @@ const CountdownSegment: FC<Props> = ({
           globalStyles.fontWeightExtraBold,
         ]}
       >
-        {timeValue.toString()}
+        {timeValue}
       </Text>
       <Text
         style={[
