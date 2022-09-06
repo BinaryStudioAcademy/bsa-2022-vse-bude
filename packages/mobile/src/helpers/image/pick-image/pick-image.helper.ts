@@ -6,7 +6,11 @@ import {
   ImagePickerResponse,
 } from 'react-native-image-picker';
 import { notification } from '~/services/services';
-import { CAMERA_OPTIONS, IMAGE_OPTIONS } from '~/common/constants/constants';
+import {
+  ALLOW_IMAGE_TYPES,
+  CAMERA_OPTIONS,
+  IMAGE_OPTIONS,
+} from '~/common/constants/constants';
 import i18n from 'i18next';
 
 const processImageResponse = (response: ImagePickerResponse) => {
@@ -15,6 +19,13 @@ const processImageResponse = (response: ImagePickerResponse) => {
   }
   if (response.didCancel) {
     notification.info(i18n.t('common:errors.DID_CANCEL'));
+  }
+  if (response?.assets?.[0]?.type) {
+    if (!ALLOW_IMAGE_TYPES.includes(response?.assets?.[0]?.type)) {
+      notification.error(i18n.t('errors.WRONG_FORMAT'));
+
+      return null;
+    }
   }
   if (response?.assets?.[0]?.fileSize) {
     if (response?.assets?.[0]?.fileSize >= MAX_IMAGE_SIZE) {
