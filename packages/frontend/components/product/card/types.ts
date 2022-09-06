@@ -4,6 +4,7 @@ export interface ProductCardProps {
   auctionDate: Date;
   name: string;
   description: string;
+  type: string;
   price: number;
   currency: string;
   isFavorite?: boolean;

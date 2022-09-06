@@ -7,6 +7,7 @@ import {
 } from 'store/favorite-product';
 import { shallowEqual } from 'react-redux';
 import { Routes } from '@enums';
+import { ProductType } from '@vse-bude/shared';
 import { Price } from '../price';
 import { FavoriteButton } from '../favorite-button/component';
 import { ProductTimer } from '../timer/component';
@@ -37,6 +38,30 @@ export const ProductCard = (props: ProductCardProps) => {
     dispatch(favAction(props.data.id));
   };
 
+  const renderButton = () => {
+    if (props.type === ProductType.AUCTION) {
+      return (
+        <InternalLink
+          title={t('common:components.product.placeBidBtn')}
+          href={`${Routes.ITEMS}/${props.data.id}`}
+          variant="button"
+        >
+          {t('common:components.product.placeBidBtn')}
+        </InternalLink>
+      );
+    }
+
+    return (
+      <InternalLink
+        title={t('common:components.product.buyBtn')}
+        href={`${Routes.ITEMS}/${props.data.id}`}
+        variant="button"
+      >
+        {t('common:components.product.buyBtn')}
+      </InternalLink>
+    );
+  };
+
   return (
     <div className="cardBlock" css={productCard}>
       <div css={productHeader}>
@@ -52,9 +77,11 @@ export const ProductCard = (props: ProductCardProps) => {
             isFavorite={isInFavorite}
           />
         )}
-        <div css={productTimer}>
-          <ProductTimer date={props.auctionDate} />
-        </div>
+        {props.type === ProductType.AUCTION && (
+          <div css={productTimer}>
+            <ProductTimer date={props.auctionDate} />
+          </div>
+        )}
       </div>
       <div>
         <div css={productName}>{props.name}</div>
@@ -67,15 +94,7 @@ export const ProductCard = (props: ProductCardProps) => {
         <div className="productPrice">
           <Price amount={props.price} currency={props.currency} />
         </div>
-        <div className="productAction">
-          <InternalLink
-            title={t('common:components.product.placeBidBtn')}
-            href={`${Routes.ITEMS}/${props.data.id}`}
-            variant="button"
-          >
-            {t('common:components.product.placeBidBtn')}
-          </InternalLink>
-        </div>
+        <div className="productAction">{renderButton()}</div>
       </div>
     </div>
   );
