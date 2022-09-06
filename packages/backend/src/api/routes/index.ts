@@ -10,6 +10,7 @@ import { initHealthRoutes } from './health';
 import { initProfileRoutes } from './profile';
 import { initPostRoutes } from './post';
 import { initBidRoutes } from './bid';
+import { initRetrieveRoutes } from './retrieve';
 
 export const initRoutes = (services: Services) => [
   initCategoryRoutes(services, ApiRoutes.CATEGORIES),
@@ -22,4 +23,5 @@ export const initRoutes = (services: Services) => [
   initProfileRoutes(services, ApiRoutes.PROFILE),
   initPostRoutes(ApiRoutes.CREATE_POST),
   initBidRoutes(services, ApiRoutes.BIDS),
+  initRetrieveRoutes(services, ApiRoutes.RETRIEVE),
 ];
