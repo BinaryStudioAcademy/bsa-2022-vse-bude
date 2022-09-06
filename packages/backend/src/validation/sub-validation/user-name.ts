@@ -5,7 +5,7 @@ import {
   ValidationRanges,
 } from '@vse-bude/shared';
 import { ProfileError } from '@errors';
-import { lang } from '../../../lang';
+import { lang } from '@lang';
 
 export const userNameValidation = ({ req }: { req: Request }) => {
   const { firstName, lastName } = req.body;
