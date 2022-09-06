@@ -11,6 +11,7 @@ import {
   updateProductViews,
   fetchSimilarProducts,
   fetchCurrentProduct,
+  retrieveBid,
 } from './actions';
 
 interface ProductState {
@@ -103,6 +104,18 @@ const productSlice = createSlice({
 
     [fetchSimilarProducts.fulfilled.type](state, { payload }) {
       state.similarProducts = payload;
+    },
+
+    [retrieveBid.pending.type](state) {
+      state.loading = true;
+    },
+    [retrieveBid.fulfilled.type](state, { payload }) {
+      state.currentItem.currentPrice = payload.price;
+      state.permissions.isAbleToLeaveAuction = true;
+      state.loading = false;
+    },
+    [retrieveBid.rejected.type](state) {
+      state.loading = false;
     },
 
     [HYDRATE](state, { payload }: HydrateAction) {
