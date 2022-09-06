@@ -4,8 +4,8 @@ import { withPublic } from '@hocs';
 import { AuthHelper, CookieStorage } from '@helpers';
 import { fetchCategoriesSSR } from 'store/category';
 import type { ProductDto } from '@vse-bude/shared';
-import { Http, ProductType } from '@vse-bude/shared';
-import { getProductsSSR } from 'services/product';
+import { Http } from '@vse-bude/shared';
+import { getPopularLots } from 'services/product';
 import type { HomeProps } from '@components/home/types';
 import { Layout } from '@components/layout';
 import { Home } from '@components/home';
@@ -32,21 +32,19 @@ export const getServerSideProps = withPublic(
     );
 
     try {
-      const products = await Promise.all([
-        getProductsSSR({
-          httpSSR: httpClient,
-          limit: 4,
-          type: ProductType.AUCTION,
-        }),
-        getProductsSSR({
-          httpSSR: httpClient,
-          limit: 4,
-          type: ProductType.SELLING,
-        }),
-      ]);
+      auctionProducts = await getPopularLots({
+        httpSSR: httpClient,
+        limit: 4,
+      });
 
-      auctionProducts = products[0];
-      sellingProducts = products[1];
+      sellingProducts = auctionProducts; // remove
+
+      // use this one below
+
+      // sellingProducts = await getPopularProducts({
+      //   httpSSR: httpClient,
+      //   limit: 4,
+      // });
     } catch (err) {
       console.log(err);
     }

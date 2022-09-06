@@ -6,8 +6,12 @@ import type {
   MappedLinks,
   SocialMedia,
 } from '@vse-bude/shared';
-import { DefaultInpValue } from '@vse-bude/shared';
-import { SocialMediaType } from '@vse-bude/shared';
+import {
+  DefaultInpValue,
+  SocialMediaType,
+  PHONE,
+  PERSONAL_PHONE,
+} from '@vse-bude/shared';
 
 const addressKeys: string[] = [
   'country',
@@ -116,11 +120,21 @@ export const updateDtoMapper = ({
     }
   });
 
+  const updatedPhone = ({ phone }: { phone: string }): string | null => {
+    if (!phone) return null;
+    const isPhone = PHONE.test(phone);
+    if (isPhone) return phone;
+    const isPersonalPhone = PERSONAL_PHONE.test(phone);
+    if (isPersonalPhone) {
+      return DefaultInpValue.PHONE + phone;
+    }
+  };
+
   return {
     firstName,
     lastName,
     email,
-    phone: phone ? DefaultInpValue.PHONE + phone : null,
+    phone: updatedPhone({ phone }),
     userAddress: !isAddressNull ? mappedAddress : null,
     socialMedia,
     password,

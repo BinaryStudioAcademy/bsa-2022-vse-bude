@@ -18,6 +18,6 @@ export interface MyListItem {
   authorId: string;
   winnerId: string;
   categoryId: string;
-  postDate: Date;
-  updatedAt: Date;
+  postDate: string;
+  updatedAt: string;
 }
