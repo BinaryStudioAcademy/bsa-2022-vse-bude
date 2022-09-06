@@ -34,6 +34,9 @@ const accountScreenOptions: NativeStackNavigationOptions = {
 const newItemScreenOptions: NativeStackNavigationOptions = {
   title: t('make_a_post.TITLE'),
   headerTitleAlign: 'center',
+  headerTitleStyle: {
+    fontSize: 17,
+  },
   headerLeft: () => (
     <HeaderCustom label={t('common:common.HOME')} hasIcon={true} />
   ),
