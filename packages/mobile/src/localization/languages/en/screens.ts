@@ -107,4 +107,10 @@ export const screens = {
     FACEBOOK_PLACEHOLDER: 'Enter your nickname',
     SITE: 'Site',
   },
+  type_of_post: {
+    TITLE: 'Make a Post',
+    HEADER: 'What type a post do you create?',
+    AUCTION: 'Auction',
+    DIRECT_SALE: 'Direct Sale',
+  },
 };

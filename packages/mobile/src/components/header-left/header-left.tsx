@@ -14,6 +14,8 @@ const HeaderLeft: FC = () => {
   const navigation = useNavigation<RootNavigationProps>();
   const { t } = useTranslation();
 
+  //TODO: add ability to change label text (Home, Back, List)
+
   return (
     <TouchableWithoutFeedback onPress={navigation.goBack}>
       <View
@@ -21,7 +23,7 @@ const HeaderLeft: FC = () => {
       >
         <ArrowLeftIcon size={35} style={{ color: ColorPalette.YELLOW_100 }} />
         <Text style={{ color: ColorPalette.YELLOW_100 }}>
-          {t('common:common.HOME')}
+          {t('common:components.HEADER_BUTTON_BACK')}
         </Text>
       </View>
     </TouchableWithoutFeedback>

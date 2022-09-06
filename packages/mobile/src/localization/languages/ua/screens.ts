@@ -106,4 +106,10 @@ export const screens = {
     FACEBOOK_PLACEHOLDER: 'Введіть нікнейм',
     SITE: 'Сайт',
   },
+  type_of_post: {
+    TITLE: 'Створити публікацію',
+    HEADER: 'Якого типу ви бажаєте створити публікацію?',
+    AUCTION: 'Аукціон',
+    DIRECT_SALE: 'Прямий продаж',
+  },
 };
