@@ -5,7 +5,7 @@ import { AuthHelper, CookieStorage } from '@helpers';
 import { fetchCategoriesSSR } from 'store/category';
 import type { ProductDto } from '@vse-bude/shared';
 import { Http } from '@vse-bude/shared';
-import { getPopularLots, getPopularProducts } from 'services/product';
+import { getPopularLots } from 'services/product';
 import type { HomeProps } from '@components/home/types';
 import { Layout } from '@components/layout';
 import { Home } from '@components/home';
@@ -37,10 +37,14 @@ export const getServerSideProps = withPublic(
         limit: 4,
       });
 
-      sellingProducts = await getPopularProducts({
-        httpSSR: httpClient,
-        limit: 4,
-      });
+      sellingProducts = auctionProducts; // remove
+
+      // use this one below
+
+      // sellingProducts = await getPopularProducts({
+      //   httpSSR: httpClient,
+      //   limit: 4,
+      // });
     } catch (err) {
       console.log(err);
     }
