@@ -25,6 +25,7 @@ export const PostTypeModal = ({ isOpen, setIsOpen }: PostTypeProps) => {
           cssExtend={styles.xmark}
           icon={IconName.XMARK}
           onClick={() => setIsOpen(false)}
+          ariaLabel={t('common:components.modal.closeLabel')}
         />
         <div css={styles.imgWrapper}>
           <Image width={516} height={285} src={legoImg.src} alt="LEGO" />

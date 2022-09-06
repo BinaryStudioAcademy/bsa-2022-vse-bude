@@ -7,8 +7,6 @@ import { apiPath } from '@helpers';
 import { authMiddleware, uploadImage } from '@middlewares';
 import { profileValidation } from '@validation';
 import type { UploadFileRequest } from '@types';
-import type { User } from '@prisma/client';
-import { userMap } from '@mappers';
 
 export const initProfileRoutes = (
   { profileService, myListService }: Services,
@@ -33,7 +31,7 @@ export const initProfileRoutes = (
    *           application/json:
    *             schema:
    *               type: object
-   *               $ref: "#/definitions/GetProfileFullUserData"
+   *               $ref: "#/definitions/FullUserProfileDto"
    *       4**:
    *         description: Something went wrong
    *         content:
@@ -53,6 +51,31 @@ export const initProfileRoutes = (
     }),
   );
 
+  /**
+   * @openapi
+   * /profile/my-list:
+   *   get:
+   *     description: Get user's items data
+   *     security:
+   *       - Bearer: []
+   *     tags: [Items]
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               $ref: "#/definitions/MyListItem"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
   router.get(
     apiPath(path, AccountApiRoutes.MY_LIST),
     authMiddleware,
@@ -86,7 +109,7 @@ export const initProfileRoutes = (
    *           application/json:
    *             schema:
    *               type: object
-   *               $ref: "#/definitions/UpdateProfileResponse"
+   *               $ref: "#/definitions/FullUserProfileDto"
    *       4**:
    *         description: Something went wrong
    *         content:
@@ -106,14 +129,31 @@ export const initProfileRoutes = (
         lastName,
         email,
         phone,
+        userAddress,
         socialMedia,
         password,
         newPassword,
       } = req.body;
 
-      const user: User = await profileService.updateUserProfile({
+      if (phone) {
+        await profileService.checkIsPhoneExists({
+          userId,
+          phone,
+        });
+      }
+
+      if (!phone) {
+        await profileService.cancelPhoneVerified({ userId });
+      }
+
+      const user = await profileService.updateUserProfile({
         userId,
         data: { firstName, lastName, email, phone },
+      });
+
+      const address = await profileService.updateUserAddress({
+        userId,
+        userAddress,
       });
 
       await profileService.updateUserSocialMedia({
@@ -130,7 +170,7 @@ export const initProfileRoutes = (
         });
       }
 
-      return { ...userMap(user), socialMedia: links };
+      return { ...user, userAddress: address, socialMedia: links };
     }),
   );
 
@@ -167,7 +207,7 @@ export const initProfileRoutes = (
    *           application/json:
    *             schema:
    *               type: object
-   *               $ref: "#/definitions/GetProfileResponse"
+   *               $ref: "#/definitions/UserProfileDto"
    *       4**:
    *         description: Something went wrong
    *         content:
@@ -183,7 +223,7 @@ export const initProfileRoutes = (
       const socialMedia = await profileService.getSocialMedia({ userId });
 
       return {
-        ...userMap(user),
+        ...user,
         socialMedia,
       };
     }),

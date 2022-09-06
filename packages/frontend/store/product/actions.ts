@@ -14,6 +14,7 @@ import {
   incrementProductViews,
   leaveAuctionRequest,
   placeBidRequest,
+  getProductEditByIdSSR,
 } from 'services/product';
 import { addToast } from 'store/toast/actions';
 import { ProductActions } from './action-types';
@@ -76,6 +77,14 @@ export const fetchProductSSR = createAsyncThunk(
   ProductActions.FETCH_PRODUCT,
   (params: { id: string; http: Http }, { rejectWithValue }) =>
     getProductByIdSSR(params.http, params.id).catch(() => {
+      rejectWithValue(null);
+    }),
+);
+
+export const fetchEditProductSSR = createAsyncThunk(
+  ProductActions.FETCH_PRODUCT,
+  (params: { id: string; http: Http }, { rejectWithValue }) =>
+    getProductEditByIdSSR(params.http, params.id).catch(() => {
       rejectWithValue(null);
     }),
 );

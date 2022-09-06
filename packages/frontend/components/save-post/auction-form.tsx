@@ -1,9 +1,8 @@
 import { useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
 import { Input, Column, Flex, Button, Loader, InputDate } from '@primitives';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { useEffect } from 'react';
 import { useTypedSelector } from '@hooks';
 import { useRouter } from 'next/router';
 import { updateProduct } from 'services/product';

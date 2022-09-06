@@ -32,6 +32,7 @@ const EnterPhoneModal = () => {
         cssExtend={styles.xmark}
         icon={IconName.XMARK}
         onClick={closeModal}
+        ariaLabel={t('common:components.modal.closeLabel')}
       />
       <div css={styles.imgWrapper}>
         <Image width={255} height={255} src={hand.src} alt="MARK" />

@@ -11,7 +11,14 @@
       "emailPattern": "Check your email please. Example: my-email@example.com",
       "phonePattern": "Check your mobile phone number please. Example: +380999999999"
     },
-    "address": {},
+    "address": {
+      "placeName": "Should consist of letters: А-Я or A-Z",
+      "country": "The country name should contain no more than 60 characters",
+      "region": "The name of the region should contain no more than 30 characters",
+      "city": "The name of the settlement should contain no more than 30 characters",
+      "zip": "Zip code should consist of 5 digits",
+      "deliveryData": "Delivery details should contain no more than 256 characters"
+    },
     "socialNetworks": {
       "uri": "Example of link to your profile in the network: https://some-net/me-id-1234",
       "maxSymbols": "The link cannot exceed 150 characters"
@@ -27,6 +34,9 @@
     },
     "notExists": {
       "user": "User not found!"
+    },
+    "exists": {
+      "phone": "User with such phone already exists!"
     }
   }
 }

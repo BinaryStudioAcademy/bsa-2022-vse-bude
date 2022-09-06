@@ -11,7 +11,9 @@
     },
     "buttons": {
       "create_account": "Створити Аккаунт",
-      "sign_in": "Увійти в Аккаунт"
+      "sign_in": "Увійти в Аккаунт",
+      "openMenu": "Відкрити меню",
+      "closeMenu": "Закрити меню"
     },
     "popover": {
       "personalInfo": "Мій аккаунт",
@@ -64,10 +66,19 @@
         "days": "д",
         "minutes": "хв",
         "seconds": "с"
-      }
+      },
+      "addToFavorites": "Додати до вподобань",
+      "removeFromFavorites": "Прибрати з вподобань"
+    },
+    "slider": {
+      "prevStep": "Перейти до попереднього кроку",
+      "nextStep": "Перейти до наступного кроку"
     },
     "input": {
       "searchProductsPlaceholder": "Пошук продуктів"
+    },
+    "modal": {
+      "closeLabel": "Закрити модальне вікно"
     },
     "typeOfPost": {
       "headline": "Який тип продажу ви оберете?",
@@ -104,7 +115,8 @@
       },
       "link": {
         "sendAgain": "Натисніть сюди"
-      }
+      },
+      "prevPageLabel": "Повернутись до попередньої сторінки"
     },
     "success": {
       "headline": "Ваш акаунт було успішно підтверджено",

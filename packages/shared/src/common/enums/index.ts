@@ -10,3 +10,4 @@ export * from './social-media';
 export * from './environment';
 export * from './events';
 export * from './default-inp-value';
+export * from './regexp-patterns';

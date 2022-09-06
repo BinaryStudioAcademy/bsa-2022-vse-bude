@@ -25,6 +25,7 @@ import { productMapper } from '@mappers';
 import { FieldError } from 'error/product/field-error';
 import { createPostSchema, updatePostSchema } from 'validation/product/schemas';
 import { auctionPermissionsMapper } from '@mappers';
+import { NotVerifiedError } from 'error/user/not-verified';
 import { lang } from '../lang';
 import type { S3StorageService } from './s3-storage';
 
@@ -164,6 +165,11 @@ export class ProductService {
     if (error) {
       throw new FieldError(error.message);
     }
+    const isUserVerified = await this._verifyService.isUserVerified(userId);
+
+    if (!isUserVerified) {
+      throw new NotVerifiedError();
+    }
     const imageLinks = await this._s3StorageService.uploadProductImages(req);
     if (fieldsData.type === ProductType.AUCTION) {
       fieldsData.price = fieldsData.recommendedPrice;
@@ -202,10 +208,9 @@ export class ProductService {
       [],
     );
 
-    deletedImages.forEach(
-      async (image) =>
-        await this._s3StorageService.deleteImage(getFilenameFromUrl(image)),
-    );
+    for await (const image of deletedImages) {
+      await this._s3StorageService.deleteImage(getFilenameFromUrl(image));
+    }
 
     const imageLinks = oldImages
       ? [...oldImages, ...newImageLinks]
@@ -239,7 +244,7 @@ export class ProductService {
     }
     const isUserVerified = await this._verifyService.isUserVerified(userId);
     if (!isUserVerified) {
-      return undefined;
+      throw new NotVerifiedError();
     }
     await this._productRepository.buy(
       productId,
@@ -248,5 +253,18 @@ export class ProductService {
     );
 
     return productId;
+  }
+
+  public async getEditProductById({ userId, productId }) {
+    const product = await this.getById(productId);
+
+    if (!product) {
+      throw new ProductNotFoundError();
+    }
+    if (product.authorId !== userId) {
+      throw new UnauthorizedError();
+    }
+
+    return product;
   }
 }

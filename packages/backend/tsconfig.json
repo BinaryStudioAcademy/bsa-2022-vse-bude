@@ -16,6 +16,7 @@
       "@errors": ["error"],
       "@mappers": ["mapper"],
       "@validation": ["validation"],
+      "@lang": ["lang"]
     },
     "outDir": "build"
   },
