@@ -90,10 +90,13 @@ export const inputRow = ({ spaces }: Theme) => css`
   flex-grow: 1;
 `;
 
-export const groupePhone = ({ spaces }: Theme) => css`
-  gap: ${spaces.md};
+export const subGroupe = ({ spaces }: Theme) => css`
+  display: flex;
   align-items: flex-end;
+  gap: ${spaces.md};
 `;
+
+export const groupePhone = () => css``;
 
 export const phoneRow = css`
   flex-grow: 2;

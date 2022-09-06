@@ -56,6 +56,22 @@ export class UserProfileRepository {
     });
   }
 
+  private async _updatePhoneVerifiedStatus({
+    userId,
+    phone,
+  }: {
+    userId: string;
+    phone: string;
+  }) {
+    const dbPhone = await this._dbClient.user.findUnique({
+      where: { id: userId },
+      select: { phone: true },
+    });
+    if (dbPhone.phone !== phone) {
+      this.cancelPhoneVerified({ userId });
+    }
+  }
+
   constructor(prismaClient: PrismaClient) {
     this._dbClient = prismaClient;
   }
@@ -65,6 +81,12 @@ export class UserProfileRepository {
       where: {
         id: userId,
       },
+      select: {
+        id: true,
+        avatar: true,
+        firstName: true,
+        lastName: true,
+      },
     });
   }
 
@@ -72,6 +94,16 @@ export class UserProfileRepository {
     return this._dbClient.user.findUnique({
       where: {
         id: userId,
+      },
+      select: {
+        id: true,
+        avatar: true,
+        firstName: true,
+        lastName: true,
+        phone: true,
+        email: true,
+        emailVerified: true,
+        phoneVerified: true,
       },
     });
   }
@@ -112,8 +144,9 @@ export class UserProfileRepository {
     data: UpdateUserProfileDto;
   }) {
     const { firstName, lastName, email, phone } = data;
-
-    return this._dbClient.user.update({
+    this._updatePhoneVerifiedStatus({ userId, phone });
+    
+return this._dbClient.user.update({
       where: {
         id: userId,
       },
@@ -122,6 +155,16 @@ export class UserProfileRepository {
         lastName,
         email,
         phone,
+      },
+      select: {
+        id: true,
+        avatar: true,
+        firstName: true,
+        lastName: true,
+        phone: true,
+        email: true,
+        emailVerified: true,
+        phoneVerified: true,
       },
     });
   }

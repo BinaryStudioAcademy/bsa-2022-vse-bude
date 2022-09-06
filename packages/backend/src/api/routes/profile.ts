@@ -7,8 +7,6 @@ import { apiPath } from '@helpers';
 import { authMiddleware, uploadImage } from '@middlewares';
 import { profileValidation } from '@validation';
 import type { UploadFileRequest } from '@types';
-import type { User } from '@prisma/client';
-import { userMap } from '@mappers';
 
 export const initProfileRoutes = (
   { profileService, myListService }: Services,
@@ -53,6 +51,32 @@ export const initProfileRoutes = (
     }),
   );
 
+  /**
+   * @openapi
+   * /profile/full-data:
+   *   get:
+   *     description: Get Full user's profile data
+   *     security:
+   *       - Bearer: []
+   *     tags: [Profile]
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               $ref: "#/definitions/"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
+  //!add dto getAllUserItems
   router.get(
     apiPath(path, AccountApiRoutes.MY_LIST),
     authMiddleware,
@@ -116,7 +140,7 @@ export const initProfileRoutes = (
         await profileService.cancelPhoneVerified({ userId });
       }
 
-      const user: User = await profileService.updateUserProfile({
+      const user = await profileService.updateUserProfile({
         userId,
         data: { firstName, lastName, email, phone },
       });
@@ -140,7 +164,7 @@ export const initProfileRoutes = (
         });
       }
 
-      return { ...userMap(user), userAddress: address, socialMedia: links };
+      return { ...user, userAddress: address, socialMedia: links };
     }),
   );
 
@@ -193,7 +217,7 @@ export const initProfileRoutes = (
       const socialMedia = await profileService.getSocialMedia({ userId });
 
       return {
-        ...userMap(user),
+        ...user,
         socialMedia,
       };
     }),

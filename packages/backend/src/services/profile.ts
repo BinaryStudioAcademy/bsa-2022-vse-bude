@@ -13,7 +13,6 @@ import {
 import type { HashService, S3StorageService } from '@services';
 import { ProfileError } from '@errors';
 import { getFilenameFromUrl } from '@helpers';
-import { userMap } from '@mappers';
 import { lang } from '../lang';
 
 export class UserProfileService {
@@ -67,7 +66,7 @@ export class UserProfileService {
     });
 
     return {
-      ...userMap(user),
+      ...user,
       userAddress,
       socialMedia,
     };

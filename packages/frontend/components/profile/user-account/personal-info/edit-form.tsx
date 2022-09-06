@@ -12,8 +12,12 @@ import {
   Loader,
 } from '@primitives';
 import { userUpdateSchema } from 'validation-schemas/user/user-update';
-import type { SaveUserProfileDto, FullUserProfileDto } from '@vse-bude/shared';
-import { DefaultInpValue } from '@vse-bude/shared';
+import type {
+  SaveUserProfileDto,
+  FullUserProfileDto} from '@vse-bude/shared';
+import {
+  DefaultInpValue,
+} from '@vse-bude/shared';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { profileMapper, updateDtoMapper } from '@helpers';
 import { updateUserProfile, setIsEditing } from '@store';
@@ -25,9 +29,10 @@ import * as styles from './styles';
 
 const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
   const [isSubmit, setIsSubmit] = useState(false);
+  const [updatedPhone, setUpdatedPhone] = useState(null);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-
+  console.log(user);
   const saveLoader = useTypedSelector(
     (state: RootState) => state.profile.saveLoader,
   );
@@ -44,23 +49,30 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
   });
 
   useEffect(() => {
-    reset({ 'password': '', 'repeatPassword': '', 'newPassword': '' });
-  }, [isSubmit, reset]);
+    reset({
+      'password': '',
+      'repeatPassword': '',
+      'newPassword': '',
+    });
 
-  const onSave: SubmitHandler<SaveUserProfileDto> = (data, event) => {
-    event.preventDefault();
-    const currentLinks = user.socialMedia;
-    setIsSubmit(!isSubmit);
-    dispatch(
-      updateUserProfile({ data: updateDtoMapper({ data, currentLinks }) }),
-    );
-  };
+    const resetPhone = !user.phone ? null : user.phone;
+    setUpdatedPhone(resetPhone);
+  }, [isSubmit, reset, user.phone]);
 
   const onResetHandler = () => {
     reset(profileMapper({ user }), {
       keepDefaultValues: true,
     });
     dispatch(setIsEditing());
+  };
+
+  const onSave: SubmitHandler<SaveUserProfileDto> = async (data, event) => {
+    event.preventDefault();
+    const currentLinks = user.socialMedia;
+    setIsSubmit(!isSubmit);
+    dispatch(
+      updateUserProfile({ data: updateDtoMapper({ data, currentLinks }) }),
+    );
   };
 
   const onCutHandler = (event: React.ClipboardEvent<HTMLInputElement>) => {
@@ -148,28 +160,32 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
               />
             </div>
             <Flex css={styles.groupePhone}>
-              <div css={styles.phoneRow}>
-                <Input
-                  id="phone-profile"
-                  inerasableValue={DefaultInpValue.PHONE}
-                  type="text"
-                  variant="primary"
-                  label={t('personal-info:label.phone')}
-                  placeholder={t('personal-info:placeholder.phone')}
-                  {...register('phone')}
-                  error={errors.phone?.message}
-                />
+              <div css={styles.subGroupe}>
+                <div css={styles.phoneRow}>
+                  <Input
+                    id="phone-profile"
+                    inerasableValue={
+                      !updatedPhone ? DefaultInpValue.PHONE : null
+                    }
+                    type="text"
+                    variant="primary"
+                    label={t('personal-info:label.phone')}
+                    placeholder={t('personal-info:placeholder.phone')}
+                    {...register('phone')}
+                    error={errors.phone?.message}
+                  />
+                </div>
+                {!user.phoneVerified && (
+                  <Button
+                    type="button"
+                    size="big"
+                    variant="outlined"
+                    onClick={onVerifyPhone}
+                  >
+                    {t('personal-info:action.verify')}
+                  </Button>
+                )}
               </div>
-              {!user.phoneVerified && (
-                <Button
-                  type="button"
-                  size="big"
-                  variant="outlined"
-                  onClick={onVerifyPhone}
-                >
-                  {t('personal-info:action.verify')}
-                </Button>
-              )}
             </Flex>
           </Column>
 
