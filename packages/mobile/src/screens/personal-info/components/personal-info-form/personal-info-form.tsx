@@ -121,8 +121,8 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
         contentContainerStyle={globalStyles.mt5}
       />
       <Input
-        label={t('personal_info.NOVA_POSHTA')}
-        placeholder={t('personal_info.NOVA_POSHTA_HINT')}
+        label={t('personal_info.DELIVERY_DATA')}
+        placeholder={t('personal_info.DELIVERY_DATA_HINT')}
         name="novaPoshta"
         control={control}
         errors={errors}
