@@ -2,8 +2,7 @@ import React, { FC } from 'react';
 import { View, Text, FlatList, ButtonText } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { ProductDto } from '@vse-bude/shared';
-import { ViewStyle } from 'react-native';
-import { cutProductsDataLength } from '~/helpers/helpers';
+import { StyleProp, ViewStyle } from 'react-native';
 import { useCustomTheme } from '~/hooks/hooks';
 import { Product } from '../components';
 
@@ -12,7 +11,7 @@ type Props = {
   seeAllTitle: string;
   data: ProductDto[];
   onSeeAllPress: () => void;
-  wrapperStyles?: ViewStyle[];
+  contentContainerStyle?: StyleProp<ViewStyle>;
 };
 
 const ProductsSection: FC<Props> = ({
@@ -20,12 +19,12 @@ const ProductsSection: FC<Props> = ({
   seeAllTitle,
   data,
   onSeeAllPress,
-  wrapperStyles,
+  contentContainerStyle,
 }) => {
   const { colors } = useCustomTheme();
 
   return (
-    <View style={wrapperStyles}>
+    <View style={contentContainerStyle}>
       <View
         style={[
           globalStyles.flexDirectionRow,
@@ -49,7 +48,7 @@ const ProductsSection: FC<Props> = ({
         style={globalStyles.mt6}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
-        data={cutProductsDataLength(data)}
+        data={data}
         renderItem={({ item }) => <Product productId={item.id} />}
       />
     </View>

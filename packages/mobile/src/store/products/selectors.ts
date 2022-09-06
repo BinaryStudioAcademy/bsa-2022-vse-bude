@@ -1,11 +1,9 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { ProductDto } from '@vse-bude/shared';
+import { ProductDto, ProductType } from '@vse-bude/shared';
 import { RootState } from '~/common/types/types';
 
 const selectProducts = (state: RootState): ProductDto[] => {
-  const products = state.products.products;
-
-  return products as ProductDto[];
+  return state.products.products;
 };
 
 const selectProductById = createSelector(
@@ -18,4 +16,21 @@ const selectProductById = createSelector(
   },
 );
 
-export { selectProductById, selectProducts };
+const selectAuctionProducts = (state: RootState): ProductDto[] => {
+  return state.products.products.filter(
+    (item) => item.type === ProductType.AUCTION,
+  );
+};
+
+const selectSellingProducts = (state: RootState): ProductDto[] => {
+  return state.products.products.filter(
+    (item) => item.type === ProductType.SELLING,
+  );
+};
+
+export {
+  selectProductById,
+  selectProducts,
+  selectAuctionProducts,
+  selectSellingProducts,
+};

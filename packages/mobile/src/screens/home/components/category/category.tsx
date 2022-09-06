@@ -25,7 +25,7 @@ const Category: FC<Props> = ({ categoryId, onPress }) => {
         globalStyles.py3,
         globalStyles.mr3,
       ]}
-      onPress={() => onPress()}
+      onPress={onPress}
     >
       <Text style={[styles.title, globalStyles.fs14]} numberOfLines={3}>
         {title}

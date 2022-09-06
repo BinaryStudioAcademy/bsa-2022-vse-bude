@@ -26,3 +26,4 @@ export type {
 export type { ShowNotificationParams } from './notification/notification';
 export type { AppIcon, IconProps, CustomIconProps } from './ui/ui';
 export type { Theme, ThemeColors } from './theme/theme.type';
+export type { ProductQuery } from './queries/products-query';

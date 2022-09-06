@@ -15,16 +15,18 @@ import {
   StatusBar,
   ScreenWrapper,
 } from '~/components/components';
-import { ColorPalette } from '@vse-bude/shared';
+import { ColorPalette, ProductType } from '@vse-bude/shared';
 import { organizations } from '~/mock/mock';
 import {
   products as productsActions,
   categories as categoriesActions,
 } from '~/store/actions';
-import { selectProducts, selectCategories } from '~/store/selectors';
-import { splitProductType } from '~/helpers/helpers';
 import {
-  BurgerMenu,
+  selectCategories,
+  selectAuctionProducts,
+  selectSellingProducts,
+} from '~/store/selectors';
+import {
   Category,
   Flag,
   Organization,
@@ -36,131 +38,128 @@ import { styles } from './styles';
 const Home: FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const products = useAppSelector(selectProducts);
+  const auctionProducts = useAppSelector(selectAuctionProducts);
+  const sellingProducts = useAppSelector(selectSellingProducts);
   const categories = useAppSelector(selectCategories);
 
   useEffect(() => {
-    dispatch(productsActions.loadAllProducts());
+    dispatch(
+      productsActions.loadProducts({ limit: 10, type: ProductType.AUCTION }),
+    );
+    dispatch(
+      productsActions.loadProducts({ limit: 10, type: ProductType.SELLING }),
+    );
     dispatch(categoriesActions.loadAllCategories());
   }, []);
 
   return (
-    <>
-      {products && (
-        <ScreenWrapper>
-          <ScrollView>
-            <StatusBar
-              backgroundColor={ColorPalette.WHITE_100}
-              translucent={true}
-              barStyle="light-content"
-            />
-            <Wrapper>
-              <BurgerMenu
-                onPress={() => {
-                  //TODO
-                }}
-              />
-              <View
-                style={[
-                  styles.header,
-                  globalStyles.flexDirectionRow,
-                  globalStyles.alignItemsCenter,
-                ]}
-              >
-                <Text
-                  style={[
-                    styles.title,
-                    globalStyles.fs36,
-                    globalStyles.fontWeightExtraBold,
-                  ]}
-                >
-                  {t('home.HELP_UKRAINE')}
-                </Text>
-                <Flag />
-              </View>
-              <SearchInput
-                placeHolder={t('home.SEARCH_PLACEHOLDER')}
-                onValueChange={() => {
-                  //TODO
-                }}
-              />
-              {categories && (
-                <FlatList
-                  style={styles.categories}
-                  horizontal={true}
-                  showsHorizontalScrollIndicator={false}
-                  data={categories}
-                  renderItem={({ item }) => (
-                    <Category
-                      categoryId={item.id}
-                      onPress={() => {
-                        // TODO
-                      }}
-                    />
-                  )}
-                />
-              )}
-
-              <ProductsSection
-                sectionTitle={t('home.POPULAR_LOTS')}
-                seeAllTitle={t('home.SEE_ALL_LOTS')}
-                data={splitProductType(products).auction}
-                onSeeAllPress={() => {
-                  // TODO
-                }}
-                wrapperStyles={[globalStyles.mt6]}
-              />
-            </Wrapper>
-            <View
+    <ScreenWrapper>
+      <ScrollView>
+        <StatusBar
+          backgroundColor={ColorPalette.WHITE_100}
+          translucent={true}
+          barStyle="light-content"
+        />
+        <Wrapper>
+          <View
+            style={[
+              styles.header,
+              globalStyles.flexDirectionRow,
+              globalStyles.alignItemsCenter,
+            ]}
+          >
+            <Text
               style={[
-                styles.organizationsWrapper,
-                globalStyles.justifyContentCenter,
+                styles.title,
+                globalStyles.fs36,
+                globalStyles.fontWeightExtraBold,
               ]}
             >
-              <Text
-                style={[
-                  styles.organizationTitle,
-                  globalStyles.fs22,
-                  globalStyles.fontWeightExtraBold,
-                ]}
-              >
-                {t('home.CHARITY_ORGANIZATIONS')}
-              </Text>
-              <View
-                style={[
-                  styles.imgWrapper,
-                  globalStyles.justifyContentSpaceBetween,
-                  globalStyles.alignItemsCenter,
-                  globalStyles.flexDirectionRow,
-                ]}
-              >
-                {organizations.map((item) => {
-                  return (
-                    <Organization
-                      imageSource={item.src}
-                      maxHeight={50}
-                      width="30%"
-                      style={[globalStyles.mt6]}
-                    />
-                  );
-                })}
-              </View>
-            </View>
-            <Wrapper>
-              <ProductsSection
-                sectionTitle={t('home.POPULAR_ITEMS')}
-                seeAllTitle={t('home.SEE_ALL_LOTS')}
-                data={splitProductType(products).selling}
-                onSeeAllPress={() => {
-                  // TODO
-                }}
-                wrapperStyles={[globalStyles.mt6]}
-              />
-            </Wrapper>
-          </ScrollView>
-        </ScreenWrapper>
-      )}
-    </>
+              {t('home.HELP_UKRAINE')}
+            </Text>
+            <Flag />
+          </View>
+          <SearchInput
+            placeHolder={t('home.SEARCH_PLACEHOLDER')}
+            onValueChange={() => {
+              //TODO
+            }}
+          />
+          {categories && (
+            <FlatList
+              style={styles.categories}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              data={categories}
+              renderItem={({ item }) => (
+                <Category
+                  categoryId={item.id}
+                  onPress={() => {
+                    // TODO
+                  }}
+                />
+              )}
+            />
+          )}
+
+          <ProductsSection
+            sectionTitle={t('home.POPULAR_LOTS')}
+            seeAllTitle={t('home.SEE_ALL_LOTS')}
+            data={auctionProducts}
+            onSeeAllPress={() => {
+              // TODO
+            }}
+            contentContainerStyle={[globalStyles.mt6]}
+          />
+        </Wrapper>
+        <View
+          style={[
+            styles.organizationsWrapper,
+            globalStyles.justifyContentCenter,
+          ]}
+        >
+          <Text
+            style={[
+              styles.organizationTitle,
+              globalStyles.fs22,
+              globalStyles.fontWeightExtraBold,
+            ]}
+          >
+            {t('home.CHARITY_ORGANIZATIONS')}
+          </Text>
+          <View
+            style={[
+              styles.imgWrapper,
+              globalStyles.justifyContentSpaceBetween,
+              globalStyles.alignItemsCenter,
+              globalStyles.flexDirectionRow,
+            ]}
+          >
+            {organizations.map((item) => {
+              return (
+                <Organization
+                  imageSource={item.src}
+                  maxHeight={50}
+                  width="30%"
+                  style={[globalStyles.mt6]}
+                />
+              );
+            })}
+          </View>
+        </View>
+        <Wrapper>
+          <ProductsSection
+            sectionTitle={t('home.POPULAR_ITEMS')}
+            seeAllTitle={t('home.SEE_ALL_LOTS')}
+            data={sellingProducts}
+            onSeeAllPress={() => {
+              // TODO
+            }}
+            contentContainerStyle={globalStyles.mt6}
+          />
+        </Wrapper>
+      </ScrollView>
+    </ScreenWrapper>
   );
 };
 

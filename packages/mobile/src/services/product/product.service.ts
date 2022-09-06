@@ -1,4 +1,5 @@
 import { ApiRoutes, ProductDto } from '@vse-bude/shared';
+import { ProductQuery } from '~/common/types/types';
 
 import { Http } from '~/services/http/http.service';
 
@@ -17,8 +18,16 @@ class ProductService {
     this.#apiPrefix = apiPrefix;
   }
 
-  getAllProducts(): Promise<ProductDto[]> {
-    return this.#http.load(`${this.#apiPrefix}${ApiRoutes.PRODUCTS}`);
+  getProducts({ limit, type, categoryId }: ProductQuery = {}): Promise<
+    ProductDto[]
+  > {
+    return this.#http.load(`${this.#apiPrefix}${ApiRoutes.PRODUCTS}`, {
+      params: {
+        type,
+        limit,
+        categoryId,
+      },
+    });
   }
 }
 
