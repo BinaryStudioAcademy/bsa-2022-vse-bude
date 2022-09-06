@@ -10,7 +10,7 @@ export const wrapper = ({ spaces, breakpoints }: Theme) => css`
   }
 `;
 
-export const controlls = css`
+export const controls = css`
   width: 100%;
   display: flex;
   align-items: center;

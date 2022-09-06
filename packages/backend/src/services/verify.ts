@@ -47,8 +47,6 @@ export class VerifyService {
 
     await this._userRepository.verifyPhone(dto.userId);
     await this.deleteCodeByType(dto.userId, dto.type);
-
-    return {};
   }
 
   async initPhoneVerification(userId: string, type = VerificationTypes.PHONE) {
@@ -66,8 +64,6 @@ export class VerifyService {
 
     await this._userRepository.verifyEmail(dto.userId);
     await this.deleteCodeByType(dto.userId, dto.type);
-
-    return {};
   }
 
   async initEmailVerification(userId: string, type = VerificationTypes.EMAIL) {
@@ -104,7 +100,6 @@ export class VerifyService {
     const user = await this._userRepository.getById(userId);
     await this.deleteCodeByType(userId, type);
     const code = await this.createVerificationCode(userId, type);
-
     if (!isProduction) {
       console.log(`Email verification code: ${code}`);
     }

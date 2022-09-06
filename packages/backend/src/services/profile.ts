@@ -2,6 +2,7 @@ import type { UserProfileRepository } from '@repositories';
 import type {
   UpdateUserProfileDto,
   UpdatePasswordDto,
+  UserAddressDto,
   SocialMedia,
 } from '@vse-bude/shared';
 import type { UploadFileRequest } from '@types';
@@ -12,7 +13,7 @@ import {
 import type { HashService, S3StorageService } from '@services';
 import { ProfileError } from '@errors';
 import { getFilenameFromUrl } from '@helpers';
-import { lang } from '../lang';
+import { lang } from '@lang';
 
 export class UserProfileService {
   private _userProfileRepository: UserProfileRepository;
@@ -89,6 +90,29 @@ export class UserProfileService {
     return this._userProfileRepository.updateUserProfile({ userId, data });
   }
 
+  public cancelPhoneVerified({ userId }: { userId: string }) {
+    return this._userProfileRepository.cancelPhoneVerified({ userId });
+  }
+
+  public async checkIsPhoneExists({
+    userId,
+    phone,
+  }: {
+    userId: string;
+    phone: string;
+  }) {
+    const userPhone = await this._userProfileRepository.checkIsPhoneExists({
+      userId,
+      phone,
+    });
+    if (userPhone) {
+      throw new ProfileError({
+        status: HttpStatusCode.BAD_REQUEST,
+        message: lang(UserPersonalInfoValidationMessage.PHONE_EXISTS),
+      });
+    }
+  }
+
   public async updateAvatar({
     userId,
     req,
@@ -116,6 +140,23 @@ export class UserProfileService {
     return this._userProfileRepository.updateAvatar({
       userId,
       avatar: null,
+    });
+  }
+
+  public updateUserAddress({
+    userId,
+    userAddress,
+  }: {
+    userId: string;
+    userAddress: UserAddressDto;
+  }) {
+    if (!userAddress) {
+      return null;
+    }
+
+    return this._userProfileRepository.updateAddress({
+      userId,
+      data: userAddress,
     });
   }
 

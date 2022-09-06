@@ -24,7 +24,7 @@ import { auth } from '@helpers';
 import { Routes } from '@enums';
 import type { IAuth } from '@types';
 import { addToast } from 'store/toast/actions';
-import { hideVerifyModal } from '../verify/actions';
+import { hideVerifyModal } from '../modals/actions';
 import { AuthActions } from './action-types';
 
 const getCurrentUser = createAsyncThunk(

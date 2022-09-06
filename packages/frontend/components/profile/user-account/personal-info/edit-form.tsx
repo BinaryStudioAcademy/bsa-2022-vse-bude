@@ -13,18 +13,19 @@ import {
 } from '@primitives';
 import { userUpdateSchema } from 'validation-schemas/user/user-update';
 import type { SaveUserProfileDto, FullUserProfileDto } from '@vse-bude/shared';
+import { DefaultInpValue } from '@vse-bude/shared';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { profileMapper, updateDtoMapper } from '@helpers';
 import { updateUserProfile, setIsEditing } from '@store';
 import { useEffect, useState } from 'react';
 import type { RootState } from '@types';
-import { showVerifyModal } from 'store/verify/actions';
+import { showVerifyModal } from 'store/modals/actions';
 import { SectionHeader, NestedLayout } from '../common';
 import * as styles from './styles';
-import { onChangeNewPassword } from './utils';
 
 const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
   const [isSubmit, setIsSubmit] = useState(false);
+  const [updatedPhone, setUpdatedPhone] = useState(null);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
@@ -35,40 +36,39 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
   const {
     register,
     reset,
-    setValue,
-    setError,
-    clearErrors,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    //mode: 'onChange',
+    mode: 'onChange',
     defaultValues: profileMapper({ user }),
     resolver: joiResolver(userUpdateSchema(t)),
   });
 
   useEffect(() => {
-    reset({ 'password': '', 'repeatPassword': '', 'newPassword': '' });
-  }, [isSubmit, reset]);
+    const resetPhone = !user.phone ? null : user.phone;
+    setUpdatedPhone(resetPhone);
+    reset({
+      'phone': user.phone,
+      'password': '',
+      'repeatPassword': '',
+      'newPassword': '',
+    });
+  }, [isSubmit, reset, user.phone]);
 
-  const onSave: SubmitHandler<SaveUserProfileDto> = (data, event) => {
+  const onResetHandler = () => {
+    reset(profileMapper({ user }), {
+      keepDefaultValues: true,
+    });
+    dispatch(setIsEditing());
+  };
+
+  const onSave: SubmitHandler<SaveUserProfileDto> = async (data, event) => {
     event.preventDefault();
     const currentLinks = user.socialMedia;
     setIsSubmit(!isSubmit);
     dispatch(
       updateUserProfile({ data: updateDtoMapper({ data, currentLinks }) }),
     );
-  };
-
-  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    clearErrors('newPassword');
-    onChangeNewPassword({ value, t, setError, setValue });
-  };
-  const onResetHandler = () => {
-    reset(profileMapper({ user }), {
-      keepDefaultValues: true,
-    });
-    dispatch(setIsEditing());
   };
 
   const onCutHandler = (event: React.ClipboardEvent<HTMLInputElement>) => {
@@ -155,10 +155,12 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
                 error={errors.email?.message}
               />
             </div>
+
             <Flex css={styles.groupePhone}>
               <div css={styles.phoneRow}>
                 <Input
                   id="phone-profile"
+                  inerasableValue={!updatedPhone ? DefaultInpValue.PHONE : null}
                   type="text"
                   variant="primary"
                   label={t('personal-info:label.phone')}
@@ -168,14 +170,16 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
                 />
               </div>
               {!user.phoneVerified && (
-                <Button
-                  type="button"
-                  size="big"
-                  variant="outlined"
-                  onClick={onVerifyPhone}
-                >
-                  {t('personal-info:action.verify')}
-                </Button>
+                <div css={styles.verifyButtonWrapper}>
+                  <Button
+                    type="button"
+                    size="big"
+                    variant="outlined"
+                    onClick={onVerifyPhone}
+                  >
+                    {t('personal-info:action.verify')}
+                  </Button>
+                </div>
               )}
             </Flex>
           </Column>
@@ -192,6 +196,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
                   label={t('personal-info:label.country')}
                   placeholder={t('personal-info:placeholder.country')}
                   {...register('country')}
+                  error={errors.country?.message}
                 />
               </div>
 
@@ -203,6 +208,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
                   label={t('personal-info:label.region')}
                   placeholder={t('personal-info:placeholder.region')}
                   {...register('region')}
+                  error={errors.region?.message}
                 />
               </div>
             </Flex>
@@ -216,6 +222,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
                   label={t('personal-info:label.city')}
                   placeholder={t('personal-info:placeholder.city')}
                   {...register('city')}
+                  error={errors.city?.message}
                 />
               </div>
               <div css={styles.inputRow}>
@@ -226,6 +233,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
                   label={t('personal-info:label.zipCode')}
                   placeholder={t('personal-info:placeholder.zip')}
                   {...register('zip')}
+                  error={errors.zip?.message}
                 />
               </div>
             </Flex>
@@ -238,6 +246,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
                 label={t('personal-info:label.deliveryData')}
                 placeholder={t('personal-info:placeholder.deliveryData')}
                 {...register('deliveryData')}
+                error={errors.deliveryData?.message}
               />
             </div>
           </Column>
@@ -310,7 +319,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
                 onCut={onCutHandler}
                 onCopy={onCopyHandler}
                 onPaste={onPastHandler}
-                {...(register('newPassword'), { onChange: onChangeHandler })}
+                {...register('newPassword')}
                 error={errors.newPassword?.message}
               />
             </div>

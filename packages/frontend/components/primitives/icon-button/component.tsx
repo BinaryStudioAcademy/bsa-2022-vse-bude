@@ -11,13 +11,17 @@ export const IconButton = ({
   cssExtend,
   onClick,
   type = 'button',
+  ariaLabel,
+  disabled = false,
 }: IconButtonProps) => (
   <button
+    aria-label={ariaLabel}
     css={[styles.iconButton, cssExtend]}
     onClick={onClick}
     data-size={size}
     data-bg-color={backgroundColor}
     type={type}
+    disabled={disabled}
   >
     <Icon icon={icon} color={color} />
   </button>

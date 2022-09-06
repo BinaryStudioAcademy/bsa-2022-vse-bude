@@ -9,10 +9,11 @@ export function InternalLink({
   passHref = true,
   children,
   cssExtend,
+  prefetch = false,
   ...props
 }: InternalLinkProps) {
   return (
-    <Link passHref={passHref} {...props}>
+    <Link prefetch={prefetch} passHref={passHref} {...props}>
       <a
         data-variant={variant}
         aria-disabled={disabled}

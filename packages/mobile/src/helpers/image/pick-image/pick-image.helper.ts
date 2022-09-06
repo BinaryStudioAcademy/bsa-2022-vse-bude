@@ -1,3 +1,4 @@
+import { MAX_IMAGE_SIZE } from '@vse-bude/shared';
 import {
   launchImageLibrary,
   launchCamera,
@@ -22,6 +23,13 @@ const processImageResponse = (response: ImagePickerResponse) => {
   if (response?.assets?.[0]?.type) {
     if (!ALLOW_IMAGE_TYPES.includes(response?.assets?.[0]?.type.toString())) {
       notification.error(i18n.t('errors.WRONG_FORMAT'));
+
+      return null;
+    }
+  }
+  if (response?.assets?.[0]?.fileSize) {
+    if (response?.assets?.[0]?.fileSize >= MAX_IMAGE_SIZE) {
+      notification.error(i18n.t('errors.MAX_IMAGE_SIZE'));
 
       return null;
     }

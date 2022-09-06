@@ -1,17 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import type { ImageSliderProps } from './types';
 import { imageSliderBlock } from './styles';
 import { SliderControls } from './controls';
 
-export const ImageSlider = ({ images }: ImageSliderProps) => {
+export const ImageSlider = ({ priority, images }: ImageSliderProps) => {
   const maxSlide = images.length - 1;
   const [slide, setSlide] = useState(0);
-  const [image, setImage] = useState(images[0]);
-
-  useEffect(() => {
-    setImage(images[slide]);
-  }, [slide, images]);
 
   const onPrevImage = () => {
     if (slide) {
@@ -20,14 +15,19 @@ export const ImageSlider = ({ images }: ImageSliderProps) => {
   };
 
   const onNextImage = () => {
-    if (slide !== maxSlide) {
+    if (slide < maxSlide) {
       setSlide(slide + 1);
     }
   };
 
   return (
     <div css={imageSliderBlock}>
-      <Image src={image} objectFit="cover" layout="fill" />
+      <Image
+        priority={priority && slide < 2}
+        src={images[slide]}
+        objectFit="cover"
+        layout="fill"
+      />
       <SliderControls
         onPrev={onPrevImage}
         onNext={onNextImage}

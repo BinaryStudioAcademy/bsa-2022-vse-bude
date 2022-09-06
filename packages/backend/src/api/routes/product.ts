@@ -30,6 +30,35 @@ export const initProductRoutes = (
    *     tags: [Product]
    *     produces:
    *       - application/json
+   *     parameters:
+   *       - in: query
+   *         name: limit
+   *         required: false
+   *         type: number
+   *         format: integer
+   *       - in: query
+   *         name: from
+   *         required: false
+   *         type: number
+   *         format: integer
+   *       - in: query
+   *         name: type
+   *         required: false
+   *         schema:
+   *            $ref: "#/definitions/ProductType"
+   *       - in: query
+   *         name: categoryId
+   *         required: false
+   *         type: string
+   *         format: uuid
+   *       - in: query
+   *         name: sortBy
+   *         required: false
+   *         type: string
+   *       - in: query
+   *         name: order
+   *         required: false
+   *         type: string
    *     responses:
    *       200:
    *         description: Ok
@@ -37,9 +66,13 @@ export const initProductRoutes = (
    *           application/json:
    *             schema:
    *               type: object
-   *               properties:
-   *                 contribution:
-   *                   $ref: "#/definitions/Product"
+   *               $ref: "#/definitions/GetAllProductsResponse"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
    */
 
   router.get(
@@ -49,18 +82,96 @@ export const initProductRoutes = (
     ),
   );
 
+  /**
+   * @openapi
+   * /products/favorite:
+   *   get:
+   *     description: Get list of favorite products
+   *     tags: [Product]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *      - in: query
+   *        name: limit
+   *        type: number
+   *        format: integer
+   *        required: false
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/GetFavoriteProductsResponse"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
   router.get(
     apiPath(path, ProductApiRoutes.FAVORITE),
     authMiddleware,
     wrap((req: Request) => productService.getFavoriteProducts(req.userId)),
   );
 
+  /**
+   * @openapi
+   * /products/favorite-ids:
+   *   get:
+   *     description: Get list of favorite product ids
+   *     tags: [Product]
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/GetFavoriteProductsIdsResponse"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
   router.get(
     apiPath(path, ProductApiRoutes.FAVORITE_IDS),
     authMiddleware,
     wrap((req: Request) => productService.getFavoriteIds(req.userId)),
   );
 
+  /**
+   * @openapi
+   * /products/auction/permissions:
+   *   get:
+   *     description: Get permissions for certain product auction
+   *     tags: [Product]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - in: query
+   *         name: productId
+   *         type: string
+   *         format: uuid
+   *         required: true
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/GetAuctionPermissionsResponse"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
   router.get(
     apiPath(path, ProductApiRoutes.AUCTION_PERMISSIONS),
     authMiddleware,
@@ -72,6 +183,34 @@ export const initProductRoutes = (
     ),
   );
 
+  /**
+   * @openapi
+   * /products/auction/leave:
+   *   post:
+   *     description: User leaves from the auction
+   *     tags: [Product]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - in: query
+   *         name: productId
+   *         type: string
+   *         format: uuid
+   *         required: true
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/LeaveAuctionResponse"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
   router.post(
     apiPath(path, ProductApiRoutes.AUCTION_LEAVE),
     authMiddleware,
@@ -82,33 +221,29 @@ export const initProductRoutes = (
 
   /**
    * @openapi
-   * /products/{type}:
+   * /products/:id:
    *   get:
    *     tags: [Product]
    *     produces:
    *       - application/json
    *     parameters:
    *       - in: path
-   *         name: type
+   *         name: id
    *         required: true
-   *         schema:
-   *           "$ref": "#/definitions/ProductType"
-   *       - in: query
-   *         name: limit
-   *         required: true
-   *         schema:
-   *           format: double
-   *           type: number
+   *         type: string
    *     responses:
    *       200:
    *         description: Ok
    *         content:
    *           application/json:
    *             schema:
-   *               type: object
-   *               properties:
-   *                 contribution:
-   *                   $ref: "#/definitions/Product"
+   *               $ref: "#/definitions/GetProductByIdResponse"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
    */
 
   router.get(
@@ -121,6 +256,34 @@ export const initProductRoutes = (
     wrap((req) => productService.incrementViews(req.params.id, req)),
   );
 
+  /**
+   * @openapi
+   * /products/favorite:
+   *   post:
+   *     description: Add product to favorites list
+   *     tags: [Product]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - in: query
+   *         name: productId
+   *         type: string
+   *         format: uuid
+   *         required: true
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/AddProductToFavorites"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
   router.post(
     apiPath(path, ProductApiRoutes.FAVORITE),
     authMiddleware,
@@ -132,6 +295,34 @@ export const initProductRoutes = (
     ),
   );
 
+  /**
+   * @openapi
+   * /products/favorite:
+   *   delete:
+   *     description: Delete product from favorites list
+   *     tags: [Product]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - in: query
+   *         name: productId
+   *         type: string
+   *         format: uuid
+   *         required: true
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/DeleteProductToFavorites"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
   router.delete(
     apiPath(path, ProductApiRoutes.FAVORITE),
     authMiddleware,
@@ -143,6 +334,40 @@ export const initProductRoutes = (
     ),
   );
 
+  /**
+   * @openapi
+   * /products:
+   *   post:
+   *     description: Create product
+   *     tags: [Product]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - in: query
+   *         name: productId
+   *         type: string
+   *         format: uuid
+   *         required: true
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             $ref: "#/definitions/CreateProductBody"
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/DeleteProductToFavorites"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
   router.post(
     apiPath(path),
     authMiddleware,
@@ -172,6 +397,10 @@ export const initProductRoutes = (
    *         name: city
    *         type: string
    *       - in: formData
+   *         required: true
+   *         name: country
+   *         type: string
+   *       - in: formData
    *         name: status
    *         required: true
    *         type: string
@@ -189,11 +418,19 @@ export const initProductRoutes = (
    *         type: string
    *       - in: formData
    *         name: price
-   *         required: true
-   *         type: string
+   *         type: number
    *       - in: formData
    *         name: categoryId
    *         type: string
+   *       - in: formData
+   *         name: endDate
+   *         type: string
+   *       - in: formData
+   *         name: recommendedPrice
+   *         type: number
+   *       - in: formData
+   *         name: minimalBid
+   *         type: number
    *     tags: [Product]
    *     responses:
    *       200:
@@ -236,6 +473,9 @@ export const initProductRoutes = (
    *         name: city
    *         type: string
    *       - in: formData
+   *         type: string
+   *         name: country
+   *       - in: formData
    *         name: status
    *         type: string
    *       - in: formData
@@ -249,10 +489,19 @@ export const initProductRoutes = (
    *         type: string
    *       - in: formData
    *         name: price
-   *         type: string
+   *         type: number
    *       - in: formData
    *         name: categoryId
    *         type: string
+   *       - in: formData
+   *         name: endDate
+   *         type: string
+   *       - in: formData
+   *         name: recommendedPrice
+   *         type: number
+   *       - in: formData
+   *         name: minimalBid
+   *         type: number
    *     responses:
    *       200:
    *         description: Ok

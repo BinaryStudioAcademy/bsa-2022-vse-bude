@@ -1,5 +1,5 @@
 import { HttpError, HttpStatusCode } from '@vse-bude/shared';
-import { lang } from '../../lang';
+import { lang } from '@lang';
 
 class UserExistsError extends HttpError {
   constructor() {

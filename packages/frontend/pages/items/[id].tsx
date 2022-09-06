@@ -23,7 +23,8 @@ import { shallowEqual } from 'react-redux';
 export const getServerSideProps = withPublic(
   wrapper.getServerSideProps((store) => async (ctx) => {
     const { locale, query } = ctx;
-    const http = new Http(process.env.NEXT_PUBLIC_API_ROUTE);
+
+    const http = new Http(process.env.NEXT_PUBLIC_API_ROUTE, locale);
     const id = query.id as string;
 
     const { payload } = await store.dispatch(fetchProductSSR({ id, http }));
@@ -52,6 +53,7 @@ const ItemPage = () => {
     (state) => state.product.currentItem,
     shallowEqual,
   );
+  const { user } = useTypedSelector((state) => state.auth, shallowEqual);
 
   const similarProducts = useTypedSelector(
     (state) => state.product.similarProducts,
@@ -63,13 +65,18 @@ const ItemPage = () => {
 
   useEffect(() => {
     dispatch(updateProductViews(item.id));
-    dispatch(
-      auctionPermissions({
-        productId: item.id,
-      }),
-    );
     dispatch(fetchSimilarProducts(item.id));
   }, [item.id, dispatch]);
+
+  useEffect(() => {
+    if (user) {
+      dispatch(
+        auctionPermissions({
+          productId: item.id,
+        }),
+      );
+    }
+  }, [item.id, dispatch, user]);
 
   return (
     <Layout title={item.title}>
