@@ -41,21 +41,4 @@ export class BidService {
 
     return bid;
   }
-
-  public async retrieveBid(dto: CreateBidDto) {
-    const product = await this._productRepository.getById(dto.productId);
-    console.log(product);
-
-    if (!product) {
-      throw new ProductNotFoundError();
-    }
-
-    if (toUtc(product.endDate) < toUtc()) {
-      throw new AuctionEndedError();
-    }
-
-    const [bid] = await this._bidRepository.create(dto);
-
-    return bid;
-  }
 }

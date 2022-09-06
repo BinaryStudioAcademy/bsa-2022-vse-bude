@@ -97,12 +97,6 @@ export const placeBidRequest = (data: CreateBidRequest) =>
     body: { ...data },
   });
 
-export const retrieveBidRequest = (data: CreateBidRequest) =>
-  http.post({
-    url: `${ApiRoutes.RETRIEVE}`,
-    body: { ...data },
-  });
-
 export const fetchAuctionPermissions = (data: AuctionPermissionsRequest) =>
   http.get({
     url: `${ApiRoutes.PRODUCTS}${ProductApiRoutes.AUCTION_PERMISSIONS}?productId=${data.productId}`,

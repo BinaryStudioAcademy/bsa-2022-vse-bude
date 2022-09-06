@@ -13,7 +13,6 @@ import {
   auctionLeaveAction,
   auctionPermissions,
   makeBid,
-  retrieveBid,
 } from 'store/product';
 import { CountDownTimer } from '../countdown-timer/component';
 import { ItemTitle, ItemInfo, ItemPrice } from '../item-info';
@@ -35,7 +34,6 @@ export const ItemInfoAuction = ({
   isInFavorite,
   onChangeIsFavorite,
 }: ItemInfoAuctionProps) => {
-  const [price, setPrice] = useState(item.price);
   const [confirmModalVisible, setModalVisible] = useState(false);
 
   const { t } = useTranslation('item');
@@ -61,8 +59,6 @@ export const ItemInfoAuction = ({
   });
 
   const onMakeBid: SubmitHandler<CreateBidRequest> = (data) => {
-    setPrice(item.price);
-
     dispatch(
       makeBid({
         price: data.price,
@@ -87,13 +83,6 @@ export const ItemInfoAuction = ({
     const reqData = {
       productId: item.id,
     };
-
-    await dispatch(
-      retrieveBid({
-        price: price,
-        productId: item.id,
-      }),
-    );
 
     await dispatch(auctionLeaveAction(reqData));
     await dispatch(auctionPermissions(reqData));

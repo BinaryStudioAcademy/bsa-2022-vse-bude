@@ -127,6 +127,12 @@ export class ProductService {
 
     await this._bidRepository.deleteAllByProductAndUser(userId, productId);
 
+    this.getById(productId).then(res => this._productRepository.update(productId, {
+      ...res,
+      category: res.categoryId,
+      price: res.currentPrice,
+    }));
+
     return this.getById(productId);
   }
 
