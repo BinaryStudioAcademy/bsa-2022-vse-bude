@@ -1,28 +1,23 @@
 import { ColorPalette } from '@vse-bude/shared';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
+const { width, height } = Dimensions.get('window');
 export const styles = StyleSheet.create({
   wrapper: {
     position: 'absolute',
     borderRadius: 4,
-    right: -8,
-    bottom: -10,
-    width: 180,
+    right: '-3%',
+    bottom: -43,
+    width: '55%',
     backgroundColor: ColorPalette.WHITE_100,
     opacity: 0.95,
     padding: 8,
   },
   image: {
-    width: 345,
-    height: 240,
+    width: width * 0.9,
+    height: height * 0.35,
     resizeMode: 'contain',
     alignSelf: 'center',
-  },
-  priceWrapper: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 5,
-    alignItems: 'center',
   },
   title: {
     color: ColorPalette.BLACK_100,
