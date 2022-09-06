@@ -101,7 +101,8 @@
     "currentUser": "Поточний користувач",
     "otherUser": "Інший користувач"
   },
-  "notification": {
-    "notVerified": "Please confirm your phone and email address first"
+  "notVerified": {
+    "text": "Спочатку підтвердіть свій телефон та електронну адресу",
+    "btn": "Перейти до верифікації"
   }
 }
