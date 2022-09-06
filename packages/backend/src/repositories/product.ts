@@ -1,5 +1,5 @@
 import type { PrismaClient } from '@prisma/client';
-import { ProductStatus } from '@prisma/client';
+import { ProductStatus, ProductType } from '@prisma/client';
 import type { ProductQuery } from '@types';
 import { Order } from '@vse-bude/shared';
 
@@ -222,6 +222,47 @@ export class ProductRepository {
       data: {
         winnerId: userId,
         status,
+      },
+    });
+  }
+
+  public async findSimilar(
+    city: string,
+    categoryId: string,
+    type: ProductType,
+  ) {
+    return await this._dbClient.product.findMany({
+      where: {
+        city,
+        categoryId,
+        type,
+        status: ProductStatus.ACTIVE,
+      },
+    });
+  }
+
+  public async getMostPopularLots(limit: number) {
+    return await this._dbClient.product.findMany({
+      take: limit,
+      where: {
+        status: ProductStatus.ACTIVE,
+        type: ProductType.AUCTION,
+      },
+      orderBy: {
+        views: Order.DESC,
+      },
+    });
+  }
+
+  public async getMostPopularProducts(limit: number) {
+    return await this._dbClient.product.findMany({
+      take: limit,
+      where: {
+        status: ProductStatus.ACTIVE,
+        type: ProductType.SELLING,
+      },
+      orderBy: {
+        views: Order.DESC,
       },
     });
   }

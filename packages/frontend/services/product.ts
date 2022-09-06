@@ -12,9 +12,10 @@ import { ProductApiRoutes } from '@vse-bude/shared';
 import { ApiRoutes } from '@vse-bude/shared';
 
 interface ProductOptions {
-  limit: number;
+  limit?: number;
   type?: ProductType;
   categoryId?: string;
+  city?: string;
 }
 
 interface ProductOptionsSSR extends ProductOptions {
@@ -114,4 +115,34 @@ export const leaveAuctionRequest = (data: ProductIdRequest) =>
   http.post({
     url: `${ApiRoutes.PRODUCTS}${ProductApiRoutes.AUCTION_LEAVE}?productId=${data.productId}`,
     body: {},
+  });
+
+export const getPopularLots = ({
+  httpSSR,
+  limit,
+}: ProductOptionsSSR): Promise<ProductDto[]> =>
+  httpSSR.get({
+    url: `${ApiRoutes.PRODUCTS}${ProductApiRoutes.POPULAR_LOTS}`,
+    payload: {
+      limit,
+    },
+  });
+
+export const getPopularProducts = ({
+  httpSSR,
+  limit,
+}: ProductOptionsSSR): Promise<ProductDto[]> =>
+  httpSSR.get({
+    url: `${ApiRoutes.PRODUCTS}${ProductApiRoutes.POPULAR_PRODUCTS}`,
+    payload: {
+      limit,
+    },
+  });
+
+export const getSilimar = (productId: string): Promise<ProductDto[]> =>
+  http.get({
+    url: `${ApiRoutes.PRODUCTS}${ProductApiRoutes.SIMILAR}`,
+    payload: {
+      productId,
+    },
   });
