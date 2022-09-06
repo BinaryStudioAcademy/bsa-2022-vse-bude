@@ -1,14 +1,7 @@
 import { createReducer, isAnyOf } from '@reduxjs/toolkit';
 import { UserDto } from '@vse-bude/shared';
 import { DataStatus } from '~/common/enums/enums';
-import {
-  signUp,
-  signIn,
-  getCurrentUser,
-  logOut,
-  verifyPhone,
-  sendCodeVerifyPhone,
-} from './actions';
+import { signUp, signIn, getCurrentUser, logOut } from './actions';
 
 type State = {
   dataStatus: DataStatus;
@@ -30,30 +23,11 @@ const reducer = createReducer(initialState, (builder) => {
       state.dataStatus = DataStatus.REJECTED;
       state.user = null;
     })
+    .addCase(getCurrentUser.rejected, (state) => {
+      state.dataStatus = DataStatus.REJECTED;
+    })
     .addMatcher(
-      isAnyOf(verifyPhone.fulfilled, sendCodeVerifyPhone.fulfilled),
-      (state) => {
-        state.dataStatus = DataStatus.FULFILLED;
-      },
-    )
-    .addMatcher(
-      isAnyOf(
-        verifyPhone.rejected,
-        sendCodeVerifyPhone.rejected,
-        getCurrentUser.rejected,
-      ),
-      (state) => {
-        state.dataStatus = DataStatus.REJECTED;
-      },
-    )
-    .addMatcher(
-      isAnyOf(
-        signUp.pending,
-        signIn.pending,
-        getCurrentUser.pending,
-        verifyPhone.pending,
-        sendCodeVerifyPhone.pending,
-      ),
+      isAnyOf(signUp.pending, signIn.pending, getCurrentUser.pending),
       (state) => {
         state.dataStatus = DataStatus.PENDING;
       },

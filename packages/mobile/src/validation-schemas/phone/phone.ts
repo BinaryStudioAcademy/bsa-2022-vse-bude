@@ -1,9 +1,9 @@
 import * as Joi from 'joi';
 import i18next from 'i18next';
 import { PHONE_NUMBER_REGEX } from '~/common/regexp/regexp';
-import { VerifyPhone } from '~/common/types/types';
+import { VerifyPhoneRequestDto } from '~/common/types/types';
 
-const phone = Joi.object<VerifyPhone>({
+const phone = Joi.object<VerifyPhoneRequestDto>({
   phone: Joi.string()
     .pattern(PHONE_NUMBER_REGEX)
     .trim()

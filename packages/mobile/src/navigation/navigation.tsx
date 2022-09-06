@@ -14,10 +14,12 @@ import {
   SettingsScreen,
   SupportScreen,
   NewItemScreen,
+  VerifyPhoneScreen,
+  VerifyCodeScreen,
+  VerifiedScreen,
 } from '~/screens/screens';
 import { HeaderLeft, HeaderSave } from '~/components/components';
 import { MainNavigation } from './tabs/tabs.navigation';
-import { VerifyNavigation } from './verify/verify.navigation';
 
 const NativeStack = createNativeStackNavigator<RootNavigationParamList>();
 const Stack = createNativeStackNavigator<RootNavigationParamList>();
@@ -30,6 +32,10 @@ const accountScreenOptions: NativeStackNavigationOptions = {
   headerShown: true,
   headerTitleAlign: 'center',
   headerTitleStyle: { fontSize: 16 },
+};
+
+const verifyScreenOptions: NativeStackNavigationOptions = {
+  headerShown: false,
 };
 
 const Navigation: FC = () => {
@@ -62,13 +68,20 @@ const Navigation: FC = () => {
             name={RootScreenName.SUPPORT}
             component={SupportScreen}
           />
-          <Stack.Screen
-            name={RootScreenName.VERIFY}
-            component={VerifyNavigation}
-            options={{
-              headerShown: false,
-            }}
-          />
+          <NativeStack.Group screenOptions={verifyScreenOptions}>
+            <Stack.Screen
+              name={RootScreenName.VERIFY_PHONE}
+              component={VerifyPhoneScreen}
+            />
+            <Stack.Screen
+              name={RootScreenName.VERIFY_CODE}
+              component={VerifyCodeScreen}
+            />
+            <Stack.Screen
+              name={RootScreenName.VERIFIED}
+              component={VerifiedScreen}
+            />
+          </NativeStack.Group>
           <Stack.Screen
             name={RootScreenName.NEW_ITEM}
             component={NewItemScreen}

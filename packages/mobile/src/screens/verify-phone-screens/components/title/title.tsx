@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { TextStyle, ViewStyle } from 'react-native';
+import { StyleProp, TextStyle, ViewStyle } from 'react-native';
 import { useCustomTheme } from '~/hooks/hooks';
 import { Text, View } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
@@ -7,11 +7,11 @@ import { styles } from './styles';
 
 type Props = {
   label: string;
-  contentStyle?: TextStyle;
-  contentContainerStyle?: ViewStyle;
+  textStyle?: StyleProp<TextStyle>;
+  contentContainerStyle?: StyleProp<ViewStyle>;
 };
 
-const Title: FC<Props> = ({ label, contentContainerStyle, contentStyle }) => {
+const Title: FC<Props> = ({ label, contentContainerStyle, textStyle }) => {
   const { colors } = useCustomTheme();
 
   return (
@@ -22,7 +22,7 @@ const Title: FC<Props> = ({ label, contentContainerStyle, contentStyle }) => {
           globalStyles.fs22,
           globalStyles.fontWeightExtraBold,
           { color: colors.text },
-          contentStyle,
+          textStyle,
         ]}
       >
         {label}

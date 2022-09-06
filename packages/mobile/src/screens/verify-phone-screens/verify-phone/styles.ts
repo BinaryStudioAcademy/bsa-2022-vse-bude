@@ -1,10 +1,8 @@
-import { StyleSheet, Dimensions } from 'react-native';
-
-const { width } = Dimensions.get('window');
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    width: width / 2.3,
+    width: 170,
   },
 });
 

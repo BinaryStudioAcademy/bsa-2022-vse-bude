@@ -8,12 +8,12 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   text: {
-    position: 'absolute',
-    zIndex: -1,
-    bottom: 5,
-    width: width,
+    width: '100%',
     textAlign: 'center',
     lineHeight: 22,
+  },
+  section: {
+    width: width / 3,
   },
 });
 

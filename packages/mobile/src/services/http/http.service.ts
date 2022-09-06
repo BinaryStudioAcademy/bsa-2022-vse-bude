@@ -38,7 +38,13 @@ class Http {
       body: payload,
     })
       .then(this.checkStatus)
-      .then((res) => this.parseJSON<T>(res))
+      .then((res) => {
+        if (res) {
+          return this.parseJSON<T>(res);
+        }
+
+        return res;
+      })
       .catch(this.throwError);
   }
 

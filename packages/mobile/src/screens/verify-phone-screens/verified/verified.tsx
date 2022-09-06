@@ -10,13 +10,7 @@ import { images } from '~/assets/images/images';
 import { globalStyles } from '~/styles/styles';
 import { RootNavigationProps } from '~/common/types/types';
 import { MainScreenName, RootScreenName } from '~/common/enums/enums';
-import {
-  Container,
-  Header,
-  Title,
-  VerifyImage,
-  Wrapper,
-} from '../components/components';
+import { Header, Title, VerifyImage, Wrapper } from '../components/components';
 import { styles } from './styles';
 
 const VerifiedScreen: FC = () => {
@@ -32,17 +26,17 @@ const VerifiedScreen: FC = () => {
 
   return (
     <Wrapper>
-      <Header hideButton />
+      <Header hideButton={true} />
       <KeyboardAvoiding>
-        <Container>
+        <View style={globalStyles.px5}>
           <VerifyImage
             source={images.verified}
             contentContainerStyle={globalStyles.mt6}
           />
           <Title
             label={t('verificationPhone.VERIFIED_TITLE')}
-            contentContainerStyle={{ ...globalStyles.mt6, marginTop: 75 }}
-            contentStyle={{ textAlign: 'center' }}
+            contentContainerStyle={[globalStyles.mt6, { marginTop: 75 }]}
+            textStyle={{ textAlign: 'center' }}
           />
           <View style={styles.buttonContainer}>
             <PrimaryButton
@@ -51,7 +45,7 @@ const VerifiedScreen: FC = () => {
               iconRight={<ArrowRightIcon size={24} color={colors.whiteColor} />}
             />
           </View>
-        </Container>
+        </View>
       </KeyboardAvoiding>
     </Wrapper>
   );

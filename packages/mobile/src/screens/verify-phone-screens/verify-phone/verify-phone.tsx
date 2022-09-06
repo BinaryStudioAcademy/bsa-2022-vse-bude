@@ -12,24 +12,28 @@ import {
   DataStatus,
   MainScreenName,
   RootScreenName,
-  VerifyScreenName,
 } from '~/common/enums/enums';
-import { RootNavigationProps, VerifyPhone } from '~/common/types/types';
+import {
+  RootNavigationProps,
+  VerifyPhoneRequestDto,
+} from '~/common/types/types';
 import {
   Input,
   KeyboardAvoiding,
   PrimaryButton,
   View,
 } from '~/components/components';
-import { auth as authActions } from '~/store/actions';
+import { verifyPhoneActions } from '~/store/actions';
 import { images } from '~/assets/images/images';
 import { phone } from '~/validation-schemas/validation-schemas';
 import { globalStyles } from '~/styles/styles';
-import { selectUserActionDataStatus, selectUserPhone } from '~/store/selectors';
+import {
+  selectVerifyPhoneDataStatus,
+  selectUserPhone,
+} from '~/store/selectors';
 import { notification } from '~/services/services';
 import {
   ButtonsContainer,
-  Container,
   CustomText,
   Header,
   Title,
@@ -44,16 +48,16 @@ const VerifyPhoneScreen: FC = () => {
   const navigation = useNavigation<RootNavigationProps>();
   const { colors } = useCustomTheme();
   const userPhone = useAppSelector(selectUserPhone);
-  const dataStatus = useAppSelector(selectUserActionDataStatus);
+  const dataStatus = useAppSelector(selectVerifyPhoneDataStatus);
   const isLoading = dataStatus === DataStatus.PENDING;
-  const { control, errors, handleSubmit } = useAppForm<VerifyPhone>({
+  const { control, errors, handleSubmit } = useAppForm<VerifyPhoneRequestDto>({
     defaultValues: {
       phone: userPhone,
     },
     validationSchema: phone,
   });
 
-  const handleBackButton = (): void => {
+  const handleBackButtonPress = (): void => {
     navigation.navigate(RootScreenName.MAIN, { screen: MainScreenName.HOME });
   };
 
@@ -64,13 +68,14 @@ const VerifyPhoneScreen: FC = () => {
   };
 
   const onSubmit = (): void => {
-    dispatch(authActions.sendCodeVerifyPhone())
+    dispatch(verifyPhoneActions.sendCodeVerifyPhone())
       .unwrap()
       .then(() => {
         notification.success(t('verificationPhone.CODE_SENT'));
-        navigation.navigate(RootScreenName.VERIFY, {
-          screen: VerifyScreenName.VERIFY_CODE,
-        });
+        navigation.navigate(RootScreenName.VERIFY_CODE);
+      })
+      .catch((err) => {
+        throw err;
       });
   };
 
@@ -78,10 +83,10 @@ const VerifyPhoneScreen: FC = () => {
     <Wrapper>
       <Header
         labelButton={t('verificationPhone.BACK_HOME')}
-        onPress={handleBackButton}
+        onPress={handleBackButtonPress}
       />
       <KeyboardAvoiding>
-        <Container>
+        <View style={globalStyles.px5}>
           <VerifyImage
             source={images.verify_phone}
             contentContainerStyle={globalStyles.mt6}
@@ -120,7 +125,7 @@ const VerifyPhoneScreen: FC = () => {
               />
             </View>
           </ButtonsContainer>
-        </Container>
+        </View>
       </KeyboardAvoiding>
     </Wrapper>
   );

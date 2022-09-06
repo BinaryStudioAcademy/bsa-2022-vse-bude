@@ -96,7 +96,7 @@ export const screens = {
     INPUT_LABEL_CODE: 'Enter the verification code we just sent to you',
     RESEND_CODE: 'Resend code',
     CONTINUE: 'Continue',
-    VERIFIED_TITLE: 'Your account has fully been verified',
+    VERIFIED_TITLE: 'Your account has been fully verified',
     CODE_SENT: 'Code sent',
   },
   make_a_post: {

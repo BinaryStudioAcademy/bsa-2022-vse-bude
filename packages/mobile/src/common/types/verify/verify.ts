@@ -1,5 +1,5 @@
-type VerifyPhone = {
+type VerifyPhoneRequestDto = {
   phone: string;
 };
 
-export type { VerifyPhone };
+export type { VerifyPhoneRequestDto };

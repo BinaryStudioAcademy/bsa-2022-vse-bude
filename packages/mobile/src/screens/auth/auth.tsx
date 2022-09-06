@@ -45,7 +45,10 @@ const Auth: FC = () => {
     dispatch(authActions.signUp(payload))
       .unwrap()
       .then(() => {
-        navigation.navigate(RootScreenName.VERIFY);
+        navigation.navigate(RootScreenName.VERIFY_PHONE);
+      })
+      .catch((err) => {
+        throw err;
       });
   };
 

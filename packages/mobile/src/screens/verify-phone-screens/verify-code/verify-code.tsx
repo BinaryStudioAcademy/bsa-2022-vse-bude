@@ -12,7 +12,6 @@ import {
   ButtonAppearance,
   DataStatus,
   RootScreenName,
-  VerifyScreenName,
 } from '~/common/enums/enums';
 import {
   Input,
@@ -20,15 +19,18 @@ import {
   PrimaryButton,
   View,
 } from '~/components/components';
-import { auth as authActions } from '~/store/actions';
+import { verifyPhoneActions } from '~/store/actions';
 import { images } from '~/assets/images/images';
 import { globalStyles } from '~/styles/styles';
 import { RootNavigationProps } from '~/common/types/types';
-import { selectUserActionDataStatus, selectUserPhone } from '~/store/selectors';
+import {
+  selectAuthDataStatus,
+  selectVerifyPhoneDataStatus,
+  selectUserPhone,
+} from '~/store/selectors';
 import { notification } from '~/services/services';
 import {
   ButtonsContainer,
-  Container,
   CustomText,
   Header,
   Title,
@@ -43,33 +45,40 @@ const VerifyCodeScreen: FC = () => {
   const navigation = useNavigation<RootNavigationProps>();
   const { colors } = useCustomTheme();
   const userPhone = useAppSelector(selectUserPhone);
-  const dataStatus = useAppSelector(selectUserActionDataStatus);
-  const isLoading = dataStatus === DataStatus.PENDING;
+  const dataStatusVerify = useAppSelector(selectVerifyPhoneDataStatus);
+  const dataStatusAuth = useAppSelector(selectAuthDataStatus);
+  const isLoading =
+    dataStatusVerify === DataStatus.PENDING ||
+    dataStatusAuth === DataStatus.PENDING;
   const { control, errors, handleSubmit } = useAppForm<PhoneVerifyDto>({
     defaultValues: {
       code: '',
     },
   });
 
-  const handleBackButton = (): void => {
+  const handleBackButtonPress = (): void => {
     navigation.goBack();
   };
 
   const handleResendPress = (): void => {
-    dispatch(authActions.sendCodeVerifyPhone())
+    dispatch(verifyPhoneActions.sendCodeVerifyPhone())
       .unwrap()
       .then(() => {
         notification.success(t('verificationPhone.CODE_SENT'));
+      })
+      .catch((err) => {
+        throw err;
       });
   };
 
   const onSubmit = (payload: PhoneVerifyDto): void => {
-    dispatch(authActions.verifyPhone(payload))
+    dispatch(verifyPhoneActions.verifyPhone(payload))
       .unwrap()
       .then(() => {
-        navigation.navigate(RootScreenName.VERIFY, {
-          screen: VerifyScreenName.VERIFIED,
-        });
+        navigation.navigate(RootScreenName.VERIFIED);
+      })
+      .catch((err) => {
+        throw err;
       });
   };
 
@@ -77,10 +86,10 @@ const VerifyCodeScreen: FC = () => {
     <Wrapper>
       <Header
         labelButton={t('verificationPhone.BACK_BUTTON')}
-        onPress={handleBackButton}
+        onPress={handleBackButtonPress}
       />
       <KeyboardAvoiding>
-        <Container>
+        <View style={globalStyles.px5}>
           <VerifyImage
             source={images.verification_code}
             contentContainerStyle={globalStyles.mt6}
@@ -119,7 +128,7 @@ const VerifyCodeScreen: FC = () => {
               />
             </View>
           </ButtonsContainer>
-        </Container>
+        </View>
       </KeyboardAvoiding>
     </Wrapper>
   );

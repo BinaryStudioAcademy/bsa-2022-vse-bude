@@ -7,11 +7,7 @@ import {
 } from '~/hooks/hooks';
 import { View, Input, DropDown, PrimaryButton } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import {
-  ButtonAppearance,
-  RootScreenName,
-  VerifyScreenName,
-} from '~/common/enums/enums';
+import { ButtonAppearance, RootScreenName } from '~/common/enums/enums';
 import { RootNavigationProps } from '~/common/types/types';
 import { selectCurrentUser, selectPhoneVerified } from '~/store/selectors';
 import { CITIES, COUNTRIES, REGIONS } from '~/mock/mock-personal-info';
@@ -68,9 +64,7 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
   };
 
   const handleVerifyPhonePress = () => {
-    navigation.navigate(RootScreenName.VERIFY, {
-      screen: VerifyScreenName.VERIFY_PHONE,
-    });
+    navigation.navigate(RootScreenName.VERIFY_PHONE);
   };
 
   return (

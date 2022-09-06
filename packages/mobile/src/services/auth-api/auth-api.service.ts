@@ -6,11 +6,9 @@ import {
   UserSignInDto,
   UserSignUpDto,
   AuthResponse,
-  VerifyApiRoutes,
-  PhoneVerifyDto,
   UserResponseDto,
 } from '@vse-bude/shared';
-import { Http } from '~/services/http/http.service';
+import { Http } from '../http/http.service';
 
 type Constructor = {
   http: Http;
@@ -57,37 +55,6 @@ class AuthApi {
       {
         method: HttpMethod.GET,
         contentType: HttpContentType.APPLICATION_JSON,
-        params: {
-          userId: _userId,
-        },
-        hasAuth: true,
-      },
-    );
-  }
-
-  sendCodeVerifyPhone(_payload: string): Promise<boolean> {
-    return this.#http.load(
-      `${this.#apiPrefix}${ApiRoutes.VERIFY}${
-        VerifyApiRoutes.PHONE_RESEND_CODE
-      }`,
-      {
-        method: HttpMethod.POST,
-        contentType: HttpContentType.APPLICATION_JSON,
-        params: {
-          userId: _payload,
-        },
-        hasAuth: true,
-      },
-    );
-  }
-
-  verifyPhone(_payload: PhoneVerifyDto, _userId: string): Promise<unknown> {
-    return this.#http.load(
-      `${this.#apiPrefix}${ApiRoutes.VERIFY}${VerifyApiRoutes.VERIFY_PHONE}`,
-      {
-        method: HttpMethod.POST,
-        contentType: HttpContentType.APPLICATION_JSON,
-        payload: JSON.stringify(_payload),
         params: {
           userId: _userId,
         },
