@@ -26,6 +26,7 @@ export default function ProductForm({ edit }: { edit: boolean }) {
   const currentProduct = useTypedSelector((state) => state.product.currentItem);
   const categories = useTypedSelector((state) => state.category.list);
   const [category, setCategory] = useState<SelectOption>(null);
+  const [wear, setWear] = useState<SelectOption>(null);
   const [images, setImages] = useState<(File | string)[]>([]);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -124,11 +125,18 @@ export default function ProductForm({ edit }: { edit: boolean }) {
     setValue('category', category.value);
   };
 
+  const setWearWrapper = (wear: SelectOption) => {
+    setWear(wear);
+    setValue('wear', wear.value);
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <ImageInput images={images} setImages={setImages} />
       <Column css={styles.sectionRow}>
         <DescriptionBlock
+          wear={wear}
+          setWear={setWearWrapper}
           category={category}
           register={register as registerFieldType}
           setCategories={setCategoryWrapper}

@@ -13,6 +13,8 @@ export default function DescriptionBlock({
   register,
   category,
   setCategories,
+  wear,
+  setWear,
 }: DescriptionBlockProps) {
   const categories = useTypedSelector((state) => state.category.list);
 
@@ -62,6 +64,29 @@ export default function DescriptionBlock({
           label={t('create-post:label.description')}
           placeholder={t('create-post:placeholder.description')}
           {...register('description')}
+        />
+      </div>
+      <div css={styles.inputRow}>
+        <Select
+          labelRequiredMark
+          required
+          options={[
+            {
+              title: t('create-post:wearSelect.used'),
+              value: 'USED',
+            },
+            {
+              title: t('create-post:wearSelect.new'),
+              value: 'NEW',
+            },
+          ]}
+          value={wear?.title}
+          setValue={setWear}
+          id="post-wear"
+          name="wear"
+          label={t('create-post:label.wear')}
+          placeholder={t('create-post:placeholder.wear')}
+          error={errors.category?.message}
         />
       </div>
     </>

@@ -25,6 +25,7 @@ export default function ProductForm({ edit }: { edit: boolean }) {
   const currentProduct = useTypedSelector((state) => state.product.currentItem);
   const categories = useTypedSelector((state) => state.category.list);
   const [category, setCategory] = useState<SelectOption>(null);
+  const [wear, setWear] = useState<SelectOption>(null);
   const [images, setImages] = useState<(File | string)[]>([]);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -129,6 +130,12 @@ export default function ProductForm({ edit }: { edit: boolean }) {
     setCategory(category);
     setValue('category', category.value);
   };
+
+  const setWearWrapper = (wear: SelectOption) => {
+    setWear(wear);
+    setValue('wear', wear.value);
+  };
+
   const setEndDateWrapper = (date) => {
     setEndDate(date);
     setValue('endDate', date);
@@ -140,8 +147,10 @@ export default function ProductForm({ edit }: { edit: boolean }) {
       <Column css={styles.sectionRow}>
         <DescriptionBlock
           category={category}
+          wear={wear}
           register={register as registerFieldType}
           setCategories={setCategoryWrapper}
+          setWear={setWearWrapper}
           errors={errors}
         />
         <Flex css={styles.groupInputs}>

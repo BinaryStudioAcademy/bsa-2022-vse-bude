@@ -10,6 +10,11 @@ export const createAuctionSchema = (t: TFunction) =>
       .messages({
         'string.empty': t('create-post:validation.category.empty'),
       }),
+    wear: Joi.string()
+      .required()
+      .messages({
+        'string.empty': t('create-post:validation.wear.empty'),
+      }),
     currency: Joi.any().allow(''),
     recommendedPriceCurrency: Joi.any().allow(''),
     minimalBidCurrency: Joi.any().allow(''),

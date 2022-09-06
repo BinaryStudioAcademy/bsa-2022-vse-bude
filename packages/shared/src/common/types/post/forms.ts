@@ -1,5 +1,6 @@
 export interface IPostForms {
   category: string;
+  wear: string;
   title: string;
   description: string;
   price: string;
