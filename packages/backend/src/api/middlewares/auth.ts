@@ -3,7 +3,7 @@ import { HttpHeader, HttpStatusCode } from '@vse-bude/shared';
 import { verify as jwtVerify } from 'jsonwebtoken';
 import { getEnv, getBearerValue } from '@helpers';
 import type { UserSessionJwtPayload } from 'jsonwebtoken';
-import { langService } from 'lang';
+import { lang } from '@lang';
 
 export const authMiddleware = (
   req: Request,
@@ -14,7 +14,7 @@ export const authMiddleware = (
 
   if (!authHeader) {
     return res.status(HttpStatusCode.UNAUTHORIZED).json({
-      error: langService.translate('UNAUTHORIZED'),
+      error: lang('translation:UNAUTHORIZED'),
     });
   }
   const tokenValue = getBearerValue(authHeader);
@@ -25,7 +25,7 @@ export const authMiddleware = (
     req.userId = tokenPayload.userId;
   } catch (e) {
     return res.status(HttpStatusCode.UNAUTHORIZED).json({
-      error: langService.translate('UNAUTHORIZED'),
+      error: lang('translation:UNAUTHORIZED'),
     });
   }
 
