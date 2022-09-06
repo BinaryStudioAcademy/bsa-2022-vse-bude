@@ -1,4 +1,5 @@
 import type {
+  Http,
   PhoneVerifyDto,
   ResetPasswordLink,
   UpdatePassword,
@@ -24,6 +25,11 @@ export const signUp = (signUpData: UserSignUpDto): Promise<IAuth> =>
 
 export const getUser = () =>
   http.get({
+    url: `${ApiRoutes.AUTH}${AuthApiRoutes.USER}`,
+  });
+
+export const getUserSSR = (httpSSR: Http) =>
+  httpSSR.get({
     url: `${ApiRoutes.AUTH}${AuthApiRoutes.USER}`,
   });
 

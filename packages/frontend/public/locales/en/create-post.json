@@ -101,5 +101,9 @@
   "sellerSelect": {
     "currentUser": "Current user",
     "otherUser": "Other user"
+  },
+  "notVerified": {
+    "text": "Please confirm your phone and email address first",
+    "btn": "Go to verify"
   }
 }
