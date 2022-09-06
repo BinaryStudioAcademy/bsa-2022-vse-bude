@@ -116,7 +116,8 @@ export const screens = {
     APPLIANCES: 'Appliances',
     POPULAR_LOTS: 'Popular Lots',
     SEE_ALL_LOTS: 'See All Lots',
+    SEE_ALL_ITEMS: 'See All Items',
     CHARITY_ORGANIZATIONS: 'Charity Organizations',
-    POPULAR_ITEMS: 'Popular Lots',
+    POPULAR_ITEMS: 'Popular Items',
   },
 };

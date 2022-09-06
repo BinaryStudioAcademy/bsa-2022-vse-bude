@@ -150,7 +150,7 @@ const Home: FC = () => {
         <Wrapper>
           <ProductsSection
             sectionTitle={t('home.POPULAR_ITEMS')}
-            seeAllTitle={t('home.SEE_ALL_LOTS')}
+            seeAllTitle={t('home.SEE_ALL_ITEMS')}
             data={sellingProducts}
             onSeeAllPress={() => {
               // TODO
