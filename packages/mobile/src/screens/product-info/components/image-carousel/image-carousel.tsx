@@ -13,7 +13,7 @@ const ImageCarousel: FC<ImageCarouselProps> = ({ imageLinks }) => {
     <View style={styles.imgContainer}>
       <Image source={{ uri: item }} style={styles.image} />
       <View style={styles.itemsCount}>
-        <Text style={styles.currentItem}>{(index + 1).toString()}</Text>
+        <Text style={styles.currentItem}>{`${index + 1}`}</Text>
         <Text style={styles.totalItems}>{`/${totalCount}`}</Text>
       </View>
     </View>

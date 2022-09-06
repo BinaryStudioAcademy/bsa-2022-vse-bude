@@ -48,10 +48,7 @@ const Navigation: FC = () => {
         component={MainNavigation}
       />
       <NativeStack.Group screenOptions={productScreenOptions}>
-        <Stack.Screen
-          name={RootScreenName.PRODUCT_INFO}
-          component={ProductInfo}
-        />
+        <Stack.Screen name={RootScreenName.ITEM_INFO} component={ProductInfo} />
       </NativeStack.Group>
       {user && (
         <NativeStack.Group screenOptions={accountScreenOptions}>

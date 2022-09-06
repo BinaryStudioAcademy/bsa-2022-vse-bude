@@ -27,7 +27,7 @@ const Favorite: FC = () => {
   const renderItem: ListRenderItem<ProductDto> = ({ item }) => (
     <TouchableOpacity
       onPress={() =>
-        navigation.navigate(RootScreenName.PRODUCT_INFO, { id: item.id })
+        navigation.navigate(RootScreenName.ITEM_INFO, { itemId: item.id })
       }
     >
       <Text style={globalStyles.mt4}>{item.title || ''}</Text>

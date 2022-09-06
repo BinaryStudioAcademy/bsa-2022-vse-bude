@@ -1,4 +1,3 @@
-import { ProductDto } from '@vse-bude/shared';
 import { RootScreenName } from '~/common/enums/enums';
 
 type RootNavigationParamList = {
@@ -11,7 +10,7 @@ type RootNavigationParamList = {
   [RootScreenName.SUPPORT]: undefined;
   [RootScreenName.WELCOME]: undefined;
   [RootScreenName.NEW_ITEM]: undefined;
-  [RootScreenName.PRODUCT_INFO]: Pick<ProductDto, 'id'> | undefined;
+  [RootScreenName.ITEM_INFO]: { itemId: string };
 };
 
 export type { RootNavigationParamList };

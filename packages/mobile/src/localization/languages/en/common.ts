@@ -19,7 +19,7 @@ export const common = {
   },
   errors: {
     didCancel: 'Cancelled by user',
-    LOW_BID: "Mustn't be lower then minimal bid",
+    LOW_BID: 'Must not be lower then minimal bid',
     INVALID_BID: 'Please enter number',
   },
   currency: {
