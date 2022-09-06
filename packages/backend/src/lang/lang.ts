@@ -39,9 +39,11 @@ export class LangService {
 
   public translate(key: string) {
     const langPath = this.getPath(key);
+
     if (!fs.existsSync(langPath)) {
       return null;
     }
+
     const translations = this.readTranslations(langPath);
     const resultKey = this.getKeyWithoutNs(key);
 
@@ -49,6 +51,14 @@ export class LangService {
       return null;
     }
 
-    return translations[resultKey] ?? null;
+    return this.getValue(translations, resultKey.split('.'), 0) ?? null;
+  }
+
+  private getValue(obj: any, keys: string[], currentKey: number) {
+    if (keys[currentKey + 1]) {
+      return this.getValue(obj[keys[currentKey]], keys, currentKey + 1);
+    }
+
+    return obj[keys[currentKey]];
   }
 }

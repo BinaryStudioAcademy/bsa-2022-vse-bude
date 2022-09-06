@@ -397,6 +397,10 @@ export const initProductRoutes = (
    *         name: city
    *         type: string
    *       - in: formData
+   *         required: true
+   *         name: country
+   *         type: string
+   *       - in: formData
    *         name: status
    *         required: true
    *         type: string
@@ -414,11 +418,19 @@ export const initProductRoutes = (
    *         type: string
    *       - in: formData
    *         name: price
-   *         required: true
-   *         type: string
+   *         type: number
    *       - in: formData
    *         name: categoryId
    *         type: string
+   *       - in: formData
+   *         name: endDate
+   *         type: string
+   *       - in: formData
+   *         name: recommendedPrice
+   *         type: number
+   *       - in: formData
+   *         name: minimalBid
+   *         type: number
    *     tags: [Product]
    *     responses:
    *       200:
@@ -461,6 +473,9 @@ export const initProductRoutes = (
    *         name: city
    *         type: string
    *       - in: formData
+   *         type: string
+   *         name: country
+   *       - in: formData
    *         name: status
    *         type: string
    *       - in: formData
@@ -474,10 +489,19 @@ export const initProductRoutes = (
    *         type: string
    *       - in: formData
    *         name: price
-   *         type: string
+   *         type: number
    *       - in: formData
    *         name: categoryId
    *         type: string
+   *       - in: formData
+   *         name: endDate
+   *         type: string
+   *       - in: formData
+   *         name: recommendedPrice
+   *         type: number
+   *       - in: formData
+   *         name: minimalBid
+   *         type: number
    *     responses:
    *       200:
    *         description: Ok

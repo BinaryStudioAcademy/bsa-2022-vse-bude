@@ -100,7 +100,6 @@ export class VerifyService {
     const user = await this._userRepository.getById(userId);
     await this.deleteCodeByType(userId, type);
     const code = await this.createVerificationCode(userId, type);
-
     if (!isProduction) {
       console.log(`Email verification code: ${code}`);
     }

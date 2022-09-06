@@ -61,7 +61,7 @@ export default function Login() {
             />
           </div>
           {/* TODO: add styles to error */}
-          {authError && <p>{authError}</p>}
+          {authError && <p css={styles.error}>{authError}</p>}
           <div css={styles.inputWrapper}>
             <Button type="submit" width={'100%'} disabled={isLoading}>
               {isLoading && <Loader size={'extraSmall'} />}
