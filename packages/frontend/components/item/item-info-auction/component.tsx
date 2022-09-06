@@ -10,6 +10,7 @@ import { useAppDispatch, useTypedSelector } from '@hooks';
 import { useState } from 'react';
 import { IconColor } from '@enums';
 import { auctionLeaveAction, auctionPermissions, makeBid } from 'store/product';
+import Link from 'next/link';
 import { CountDownTimer } from '../countdown-timer/component';
 import { ItemTitle, ItemInfo, ItemPrice } from '../item-info';
 import { minBidValidation } from '../validation';
@@ -44,7 +45,7 @@ export const ItemInfoAuction = ({
   } = useTypedSelector((state) => state.product);
   const { user } = useTypedSelector((state) => state.auth);
   const { loading } = useTypedSelector((state) => state.product);
-
+  const isAuthor = user?.id === item.author.id;
   const {
     register,
     handleSubmit,
@@ -99,61 +100,76 @@ export const ItemInfoAuction = ({
       </div>
       <ItemTitle title={item.title} views={item.views} />
       <ItemInfo item={item} />
-      <form onSubmit={handleSubmit(onMakeBid)} css={styles.controls}>
-        <div css={styles.inputWrapper}>
-          <Input
-            {...register('price')}
-            variant="primary"
-            type="text"
-            placeholder={t('bidInput')}
-            error={errors.price?.message}
-          />
-          <span>{t('bidInputCaption')} </span>
-          <span>UAH {minBidAmount}</span>
-        </div>
+      <form
+        onSubmit={handleSubmit(onMakeBid)}
+        css={[styles.controls, isAuthor && styles.editButton]}
+      >
+        {!isAuthor && (
+          <div css={styles.inputWrapper}>
+            <Input
+              {...register('price')}
+              variant="primary"
+              type="text"
+              placeholder={t('bidInput')}
+              error={errors.price?.message}
+            />
+            <span>{t('bidInputCaption')} </span>
+            <span>UAH {minBidAmount}</span>
+          </div>
+        )}
 
         <div css={styles.buttons}>
-          <Tooltip
-            trigger={
-              <FavoriteButton
-                cssExtended={styles.favouriteButton}
-                onChangeIsFavorite={onChangeIsFavorite}
-                isFavorite={isInFavorite}
-                backgroundColor="transparent"
-                inFavouriteColor={IconColor.YELLOW}
-                notInFavouriteColor={IconColor.YELLOW}
-                size="md"
-                disabled={!user}
-              />
-            }
-          >
-            {user
-              ? isInFavorite
-                ? t('buttons.tooltips.favBtnRemove')
-                : t('buttons.tooltips.favBtn')
-              : t('buttons.tooltips.notAuthorized.favBtn')}
-          </Tooltip>
-          <Button
-            type="submit"
-            disabled={!user || !user.phoneVerified || loading}
-            tooltip={
-              user
-                ? user.phoneVerified
-                  ? t('buttons.placeBid')
-                  : t('buttons.tooltips.notVerified.placeBid')
-                : t('buttons.tooltips.notAuthorized.placeBid')
-            }
-          >
-            {loading ? <Loader size="extraSmall" /> : t('buttons.placeBid')}
-          </Button>
-          {!!isAbleToLeaveAuction && user && (
-            <Button
-              onClick={confirmLeave}
-              variant="danger"
-              tooltip={t('leave.tooltip')}
-            >
-              {t('leave.btnText')}
-            </Button>
+          {isAuthor ? (
+            <Link href={`/items/edit/${item.id}`}>
+              <a style={{ textDecoration: 'none' }}>
+                <Button>Edit</Button>
+              </a>
+            </Link>
+          ) : (
+            <>
+              <Tooltip
+                trigger={
+                  <FavoriteButton
+                    cssExtended={styles.favouriteButton}
+                    onChangeIsFavorite={onChangeIsFavorite}
+                    isFavorite={isInFavorite}
+                    backgroundColor="transparent"
+                    inFavouriteColor={IconColor.YELLOW}
+                    notInFavouriteColor={IconColor.YELLOW}
+                    size="md"
+                    disabled={!user}
+                  />
+                }
+              >
+                {user
+                  ? isInFavorite
+                    ? t('buttons.tooltips.favBtnRemove')
+                    : t('buttons.tooltips.favBtn')
+                  : t('buttons.tooltips.notAuthorized.favBtn')}
+              </Tooltip>
+              <Button
+                type="submit"
+                disabled={!user || !user.phoneVerified || loading}
+                tooltip={
+                  user
+                    ? user.phoneVerified
+                      ? t('buttons.placeBid')
+                      : t('buttons.tooltips.notVerified.placeBid')
+                    : t('buttons.tooltips.notAuthorized.placeBid')
+                }
+              >
+                {loading ? <Loader size="extraSmall" /> : t('buttons.placeBid')}
+              </Button>
+              {!!isAbleToLeaveAuction && user && (
+                <Button
+                  onClick={confirmLeave}
+                  variant="danger"
+                  tooltip={t('leave.tooltip')}
+                >
+                  {t('leave.btnText')}
+                </Button>
+              )}
+            </>
           )}
         </div>
       </form>

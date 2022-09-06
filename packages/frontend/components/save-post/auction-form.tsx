@@ -66,6 +66,9 @@ export default function ProductForm({ edit }: { edit: boolean }) {
           case 'category':
             formData.append(key, category.value);
             break;
+          case 'condition':
+            formData.append(key, condition.value);
+            break;
           case 'phone':
             formData.append(key, data[key] ? `+380${data[key]}` : '');
             break;
@@ -105,6 +108,14 @@ export default function ProductForm({ edit }: { edit: boolean }) {
             setCategory({
               value: currentCategory?.id,
               title: currentCategory?.title,
+            });
+            break;
+          }
+          case 'condition': {
+            setValue('condition', currentProduct?.condition);
+            setCondition({
+              value: currentProduct?.condition.toUpperCase(),
+              title: currentProduct?.condition,
             });
             break;
           }
