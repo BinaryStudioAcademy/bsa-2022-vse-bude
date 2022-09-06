@@ -14,6 +14,7 @@ import {
   incrementProductViews,
   leaveAuctionRequest,
   placeBidRequest,
+  retrieveBidRequest,
 } from 'services/product';
 import { addToast } from 'store/toast/actions';
 import { ProductActions } from './action-types';
@@ -93,7 +94,7 @@ export const updateProductViews = createAsyncThunk(
 export const makeBid = createAsyncThunk(
   ProductActions.PLACE_BID,
   async (data: CreateBidRequest, { rejectWithValue, dispatch }) => {
-    try {
+    try {      
       const result = await placeBidRequest(data);
       dispatch(
         addToast({
@@ -148,6 +149,17 @@ export const auctionLeaveAction = createAsyncThunk(
         }),
       );
 
+      return rejectWithValue(e.message);
+    }
+  },
+);
+
+export const retrieveBid = createAsyncThunk(
+  ProductActions.RETRIEVE_BID,
+  async (data: CreateBidRequest, { rejectWithValue }) => {
+    try {      
+      return await retrieveBidRequest(data);
+    } catch (e) {
       return rejectWithValue(e.message);
     }
   },
