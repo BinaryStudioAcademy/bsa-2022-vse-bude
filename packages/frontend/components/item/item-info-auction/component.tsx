@@ -20,6 +20,7 @@ import { getAuctionItemIo } from '@helpers';
 import { CountDownTimer } from '../countdown-timer/component';
 import { ItemTitle, ItemInfo, ItemPrice } from '../item-info';
 import { minBidValidation } from '../validation';
+import { addToast } from '../../../store/toast/actions';
 import * as styles from './styles';
 
 const ConfirmationModal = dynamic(
@@ -40,6 +41,7 @@ export const ItemInfoAuction = ({
   const [confirmModalVisible, setModalVisible] = useState(false);
 
   const { t } = useTranslation('item');
+  const { user } = useTypedSelector((state) => state.auth);
 
   const dispatch = useAppDispatch();
 
@@ -47,6 +49,14 @@ export const ItemInfoAuction = ({
     const socket = getAuctionItemIo(item.id);
     socket.on(UPDATE_PRODUCT_PRICE, (data) => {
       dispatch(updateCurrentItemPrice(+data.price));
+      if (data.bidderId !== user?.id || !user) {
+        dispatch(
+          addToast({
+            level: 'success',
+            description: (t) => t('common:notifications.newBidPlaced'),
+          }),
+        );
+      }
     });
 
     return () => {
@@ -60,7 +70,6 @@ export const ItemInfoAuction = ({
   const {
     permissions: { isAbleToLeaveAuction },
   } = useTypedSelector((state) => state.product);
-  const { user } = useTypedSelector((state) => state.auth);
   const { loading } = useTypedSelector((state) => state.product);
 
   const {

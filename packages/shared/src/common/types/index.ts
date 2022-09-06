@@ -9,5 +9,4 @@ export * from './category';
 export * from './social-media';
 export * from './profile';
 export * from './bid';
-export * from './locale';
 export * from './event';

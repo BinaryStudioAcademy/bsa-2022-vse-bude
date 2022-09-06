@@ -8,10 +8,11 @@ export const eventListener = new EventEmitter();
 export const appEventsListener = (io: Server) => {
   eventListener.on(
     UPDATE_PRODUCT_PRICE,
-    ({ productId, price }: UpdateProductPriceEvent) => {
+    ({ productId, price, bidderId }: UpdateProductPriceEvent) => {
       io.of(AUCTION_ITEM_NS(productId)).emit(UPDATE_PRODUCT_PRICE, {
         productId,
         price,
+        bidderId,
       });
     },
   );

@@ -44,6 +44,7 @@ export class BidService {
     eventListener.emit(UPDATE_PRODUCT_PRICE, {
       productId: product.id,
       price: bid.price,
+      bidderId: bid.bidderId,
     });
 
     return bid;
