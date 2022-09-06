@@ -20,7 +20,6 @@ export class BidService {
 
   public async createBid(dto: CreateBidDto) {
     const product = await this._productRepository.getById(dto.productId);
-    console.log(product);
 
     if (!product) {
       throw new ProductNotFoundError();
