@@ -125,12 +125,9 @@ export class ProductService {
       throw new AuctionEndedError();
     }
 
-    await this._bidRepository.deleteAllByProductAndUser(userId, productId);
+    await this._bidRepository.retrieve(userId, productId);
 
-    const newProduct = await this.getById(productId);
-    this._bidRepository.retrieve(productId, newProduct.currentPrice);
-
-    return newProduct;
+    return this.getById(productId);
   }
 
   public async addToFavorites({ userId, productId }: AddProductToFavorites) {

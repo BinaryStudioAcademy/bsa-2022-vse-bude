@@ -42,10 +42,20 @@ export class BidRepository {
     });
   }
 
-  async retrieve(productId: string, price: number) {
+  async retrieve(userId: string, productId: string) {
     return this._dbClient.$transaction([
+      this._dbClient.bid.deleteMany({
+        where: {
+          bidderId: userId,
+          productId: productId,
+        },
+      }),
       this._dbClient.product.update({
-        data: { price },
+        data: { price: (await this._dbClient.bid.findFirst({
+          where: {
+            productId: productId,
+          }
+        })).price },
         where: { id: productId },
       }),
     ]);
