@@ -7,6 +7,7 @@ export enum ProductActions {
   DELETE_PRODUCT_FROM_FAVORITES = 'product/delete-from-favorites',
   GET_FAVORITE_PRODUCT_IDS = 'product/get-favorite-ids',
   PLACE_BID = 'product/place-bid',
+  RETRIEVE_BID = 'product/retrieve-bid',
   AUCTION_PERMISSIONS = 'product/auction-permissions',
   AUCTION_LEAVE = 'product/auction-leave',
   GET_CURRENT_PRODUCT = 'product/fetch-current-product',
