@@ -3,7 +3,8 @@ import type {
   UserSignInDto,
   UserSignUpDto,
   AuthResponse,
-  UpdatePassword} from '@vse-bude/shared';
+  UpdatePassword,
+} from '@vse-bude/shared';
 import {
   HttpStatusCode,
   UserPersonalInfoValidationMessage,
