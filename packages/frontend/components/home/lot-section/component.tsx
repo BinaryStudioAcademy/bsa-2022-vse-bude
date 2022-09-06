@@ -13,7 +13,7 @@ const LotSection = ({
   loadMoreHref,
   loadImageHighPriority,
 }: LotSectionProps) => {
-  if (!lots?.length ) {
+  if (!lots?.length) {
     return null;
   }
 
