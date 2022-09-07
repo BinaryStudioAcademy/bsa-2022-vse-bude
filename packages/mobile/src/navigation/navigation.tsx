@@ -1,9 +1,6 @@
 import React, { FC } from 'react';
 import { t } from 'i18next';
-import {
-  createNativeStackNavigator,
-  NativeStackNavigationOptions,
-} from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { RootScreenName } from '~/common/enums/enums';
 import { RootNavigationParamList } from '~/common/types/types';
 import { useAppSelector } from '~/hooks/hooks';
@@ -16,40 +13,16 @@ import {
   NewItemScreen,
   TypeOfPostScreen,
 } from '~/screens/screens';
-import { HeaderCustom } from '~/components/components';
 import { MainNavigation } from './tabs/tabs.navigation';
+import {
+  mainScreenOptions,
+  accountScreenOptions,
+  newItemScreenOptions,
+  typeOfPostScreenOptions,
+} from './common/screen-options';
 
 const NativeStack = createNativeStackNavigator<RootNavigationParamList>();
 const Stack = createNativeStackNavigator<RootNavigationParamList>();
-
-const mainScreenOptions: NativeStackNavigationOptions = {
-  headerShown: false,
-};
-
-const accountScreenOptions: NativeStackNavigationOptions = {
-  headerShown: true,
-  headerTitleAlign: 'center',
-  headerTitleStyle: { fontSize: 16 },
-};
-
-const newItemScreenOptions: NativeStackNavigationOptions = {
-  title: t('make_a_post.TITLE'),
-  headerTitleAlign: 'center',
-  headerTitleStyle: {
-    fontSize: 17,
-  },
-  headerLeft: () => (
-    <HeaderCustom label={t('common:common.HOME')} hasIcon={true} />
-  ),
-  headerRight: () => (
-    <HeaderCustom label={t('common:components.BUTTON_SAVE')} />
-  ),
-};
-
-const typeOfPostScreenOptions: NativeStackNavigationOptions = {
-  title: t('make_a_post.TITLE'),
-  headerLeft: () => <HeaderCustom />,
-};
 
 const Navigation: FC = () => {
   const user = useAppSelector(selectCurrentUser);
