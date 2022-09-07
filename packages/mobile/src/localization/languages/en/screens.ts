@@ -66,6 +66,7 @@ export const screens = {
     SIGN_OUT: 'Sign Out',
   },
   errors: {
+    UNKNOWN_ERROR: 'Something went wrong',
     EMPTY_EMAIL: 'Fill the email please',
     EMPTY_FIRST_NAME: 'Fill the first name please!',
     EMPTY_LAST_NAME: 'Fill the last name please!”',
