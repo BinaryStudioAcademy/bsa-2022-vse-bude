@@ -9,4 +9,5 @@ export { SupportScreen } from '~/screens/support/support';
 export { Auth } from '~/screens/auth/auth';
 export { Home } from '~/screens/home/home';
 export { NewItemScreen } from '~/screens/new-item/new-item';
+export { TypeOfPostScreen } from '~/screens/type-of-post/type-of-post';
 export { ProductInfo } from '~/screens/product-info/product-info';

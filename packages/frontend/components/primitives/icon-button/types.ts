@@ -3,6 +3,7 @@ import type { IconColor, IconName } from '@enums';
 
 export type IconButtonProps = {
   icon: typeof IconName[keyof typeof IconName];
+  ariaLabel: string;
   size?: SizeProp;
   color?: IconColor;
   backgroundColor?: BackgroundColorProp;
@@ -10,6 +11,7 @@ export type IconButtonProps = {
   cssExtend?: Interpolation<Theme>;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   type?: 'button' | 'submit';
+  disabled?: boolean;
 };
 
 export type BackgroundColorProp = 'lightgray' | 'darkgray' | 'transparent';

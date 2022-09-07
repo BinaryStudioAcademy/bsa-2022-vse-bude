@@ -14,21 +14,68 @@ export const initProfileRoutes = (
 ): Router => {
   const router = Router();
 
+  /**
+   * @openapi
+   * /profile/full-data:
+   *   get:
+   *     description: Get Full user's profile data
+   *     security:
+   *       - Bearer: []
+   *     tags: [Profile]
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               $ref: "#/definitions/FullUserProfileDto"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
   router.get(
     apiPath(path, ProfileApiRoutes.GET_FULL_USER_DATA),
     authMiddleware,
     wrap(async (req: Request) => {
       const { userId } = req;
-      const fullUserProfile = await profileService.getFullUserData({
+
+      return await profileService.getFullUserData({
         userId,
       });
-
-      return {
-        ...fullUserProfile,
-      };
     }),
   );
 
+  /**
+   * @openapi
+   * /profile/my-list:
+   *   get:
+   *     description: Get user's items data
+   *     security:
+   *       - Bearer: []
+   *     tags: [Items]
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               $ref: "#/definitions/MyListItem"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
   router.get(
     apiPath(path, AccountApiRoutes.MY_LIST),
     authMiddleware,
@@ -37,12 +84,39 @@ export const initProfileRoutes = (
       await profileService.getUser({
         userId,
       });
-      const userItemsList = await myListService.getAllUserItems({ userId });
 
-      return userItemsList;
+      return await myListService.getAllUserItems({ userId });
     }),
   );
 
+  /**
+   * @openapi
+   * /profile/save:
+   *   put:
+   *     description: Updates user profile data
+   *     security:
+   *       - Bearer: []
+   *     tags: [Profile]
+   *     produces:
+   *       - application/json
+   *     requestBody:
+   *        schema:
+   *          $ref: "#/definitions/UpdateProfileBody"
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               $ref: "#/definitions/FullUserProfileDto"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
   router.put(
     apiPath(path, ProfileApiRoutes.UPDATE_DATA),
     authMiddleware,
@@ -55,14 +129,31 @@ export const initProfileRoutes = (
         lastName,
         email,
         phone,
+        userAddress,
         socialMedia,
         password,
         newPassword,
       } = req.body;
 
+      if (phone) {
+        await profileService.checkIsPhoneExists({
+          userId,
+          phone,
+        });
+      }
+
+      if (!phone) {
+        await profileService.cancelPhoneVerified({ userId });
+      }
+
       const user = await profileService.updateUserProfile({
         userId,
         data: { firstName, lastName, email, phone },
+      });
+
+      const address = await profileService.updateUserAddress({
+        userId,
+        userAddress,
       });
 
       await profileService.updateUserSocialMedia({
@@ -79,7 +170,7 @@ export const initProfileRoutes = (
         });
       }
 
-      return { ...user, socialMedia: links };
+      return { ...user, userAddress: address, socialMedia: links };
     }),
   );
 
@@ -94,6 +185,36 @@ export const initProfileRoutes = (
     }),
   );
 
+  /**
+   * @openapi
+   * /profile/:userId:
+   *   get:
+   *     description: Get user's profile
+   *     security:
+   *       - Bearer: []
+   *     tags: [Profile]
+   *     parameters:
+   *       - in: path
+   *         name: userId
+   *         required: true
+   *         type: string
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               $ref: "#/definitions/UserProfileDto"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
   router.get(
     apiPath(path, ProfileApiRoutes.GET_USER_BY_ID),
     wrap(async (req: Request) => {

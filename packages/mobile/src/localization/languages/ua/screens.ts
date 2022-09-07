@@ -1,3 +1,4 @@
+import { MAX_IMAGE_SIZE } from '@vse-bude/shared';
 import {
   MAX_NAME_LENGTH,
   MAX_PASSWORD_LENGTH,
@@ -44,8 +45,8 @@ export const screens = {
     CITY: 'Місто',
     ZIP_CODE: 'Поштовий індекс',
     ZIP_CODE_HINT: 'Введіть поштовий індекс',
-    NOVA_POSHTA: '# Нова Пошта',
-    NOVA_POSHTA_HINT: 'Введіть відділення Нової Пошти',
+    DELIVERY_DATA: 'Дані про доставку',
+    DELIVERY_DATA_HINT: 'Введіть адресу доставки',
     SOCIAL_NETWORKS: 'Соціальні мережі',
     INSTAGRAM_HINT: 'Введіть свій Instagram',
     LINKEDIN_HINT: 'Введіть свій Linkedin',
@@ -79,6 +80,7 @@ export const screens = {
     FIRST_NAME_INVALID: 'Неправильний формат імені',
     LAST_NAME_INVALID: 'Неправильний формат прізвища',
     WRONG_FORMAT: 'Невірний формат',
+    MAX_IMAGE_SIZE: `Максимальний розмір файлу ${MAX_IMAGE_SIZE / 1000000} МБ`,
   },
   make_a_post: {
     TITLE: 'Створити публікацію',
@@ -105,6 +107,12 @@ export const screens = {
     FACEBOOK: 'Facebook',
     FACEBOOK_PLACEHOLDER: 'Введіть нікнейм',
     SITE: 'Сайт',
+  },
+  type_of_post: {
+    TITLE: 'Створити публікацію',
+    HEADER: 'Якого типу ви бажаєте створити публікацію?',
+    AUCTION: 'Аукціон',
+    DIRECT_SALE: 'Прямий продаж',
   },
   product_info: {
     ENDING_ON: 'Закінчується',

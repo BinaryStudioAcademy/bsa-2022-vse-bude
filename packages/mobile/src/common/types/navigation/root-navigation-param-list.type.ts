@@ -11,6 +11,7 @@ type RootNavigationParamList = {
   [RootScreenName.WELCOME]: undefined;
   [RootScreenName.NEW_ITEM]: undefined;
   [RootScreenName.ITEM_INFO]: { itemId: string };
+  [RootScreenName.TYPE_OF_NEW_POST]: undefined;
 };
 
 export type { RootNavigationParamList };

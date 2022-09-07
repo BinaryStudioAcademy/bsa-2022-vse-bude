@@ -15,6 +15,7 @@ import {
   SettingsScreen,
   SupportScreen,
   NewItemScreen,
+  TypeOfPostScreen,
 } from '~/screens/screens';
 import { HeaderLeft, HeaderSave } from '~/components/components';
 import { MainNavigation } from './tabs/tabs.navigation';
@@ -80,6 +81,14 @@ const Navigation: FC = () => {
                 <HeaderLeft label={`${t('common:common.HOME')}`} />
               ),
               headerRight: HeaderSave,
+            }}
+          />
+          <Stack.Screen
+            name={RootScreenName.TYPE_OF_NEW_POST}
+            component={TypeOfPostScreen}
+            options={{
+              title: t('make_a_post.TITLE'),
+              headerLeft: HeaderLeft,
             }}
           />
         </NativeStack.Group>

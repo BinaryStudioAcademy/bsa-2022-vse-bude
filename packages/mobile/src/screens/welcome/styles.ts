@@ -8,7 +8,8 @@ export const styles = StyleSheet.create({
     marginTop: 70,
   },
   stampWrapper: {
-    marginTop: 50,
+    position: 'absolute',
+    top: '23%',
   },
   buttonsWrapper: {
     position: 'absolute',

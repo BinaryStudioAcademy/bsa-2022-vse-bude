@@ -1,4 +1,5 @@
 export interface ImageSliderProps {
+  priority?: boolean;
   images: string[];
 }
 
