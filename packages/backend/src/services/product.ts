@@ -132,7 +132,11 @@ export class ProductService {
       throw new AuctionEndedError();
     }
 
-    await this._bidRepository.deleteAllByProductAndUser(userId, productId);
+    await this._bidRepository.retrieve(
+      userId,
+      productId,
+      new Date(Date.now()).toISOString(),
+    );
 
     return this.getById(productId);
   }

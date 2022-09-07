@@ -107,6 +107,7 @@ export const ItemInfoAuction = ({
     const reqData = {
       productId: item.id,
     };
+
     await dispatch(auctionLeaveAction(reqData));
     await dispatch(auctionPermissions(reqData));
     onCancel();
