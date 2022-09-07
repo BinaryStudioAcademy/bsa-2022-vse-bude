@@ -1,29 +1,29 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { DataStatus } from '~/common/enums/enums';
-import { ProductDto } from '@vse-bude/shared';
-import { loadProducts } from './actions';
+import { CategoryDto } from '@vse-bude/shared';
+import { loadAllCategories } from './action';
 
 type InitialState = {
-  products: ProductDto[] | [];
+  categories: CategoryDto[] | null;
   dataStatus: DataStatus;
 };
 
 const initialState: InitialState = {
-  products: [],
+  categories: null,
   dataStatus: DataStatus.IDLE,
 };
 
 const reducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(loadProducts.pending, (state) => {
+    .addCase(loadAllCategories.pending, (state) => {
       state.dataStatus = DataStatus.PENDING;
     })
-    .addCase(loadProducts.rejected, (state) => {
+    .addCase(loadAllCategories.rejected, (state) => {
       state.dataStatus = DataStatus.REJECTED;
     })
-    .addCase(loadProducts.fulfilled, (state, action) => {
+    .addCase(loadAllCategories.fulfilled, (state, action) => {
       state.dataStatus = DataStatus.FULFILLED;
-      state.products = [...state.products, ...action.payload];
+      state.categories = action.payload;
     });
 });
 
