@@ -43,7 +43,7 @@ class Http {
   }
 
   private getUrl(url: string, params?: Record<string, unknown>): string {
-    return `${url}${params ? `?${getQueryString(params)}` : ''}`;
+    return `${url}${params ? `${getQueryString(params)}` : ''}`;
   }
 
   private getHeaders({ contentType, hasAuth }: GetHeadersParams): Headers {
