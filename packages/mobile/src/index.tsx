@@ -8,11 +8,12 @@ import { Navigation } from '~/navigation/navigation';
 import { store } from '~/store/store';
 import { NavigationDarkTheme, NavigationTheme } from '~/config/config';
 import { useColorScheme } from '~/hooks/hooks';
-import { appService } from '~/services/services';
+import { appService, pushApi } from '~/services/services';
 import { i18 } from './localization/localization';
 
 i18();
 appService.init();
+pushApi.init();
 
 const App: FC = () => {
   const colorScheme = useColorScheme();
