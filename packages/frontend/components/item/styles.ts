@@ -19,8 +19,8 @@ export const itemWrapper = ({ spaces, breakpoints }: Theme) => css`
   @media (max-width: ${breakpoints.sm}px) {
     .desktop-gallery-wrapper {
       display: none;
-      }
     }
+  }
 
   @media (min-width: ${breakpoints.sm + 1}px) {
     .mobile-gallery-wrapper {
