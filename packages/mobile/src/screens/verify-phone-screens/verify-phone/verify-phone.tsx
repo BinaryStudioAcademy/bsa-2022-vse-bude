@@ -68,14 +68,15 @@ const VerifyPhoneScreen: FC = () => {
   };
 
   const onSubmit = (): void => {
-    dispatch(verifyPhoneActions.sendCodeVerifyPhone())
+    dispatch(verifyPhoneActions.getVerificationCode())
       .unwrap()
       .then(() => {
         notification.success(t('verificationPhone.CODE_SENT'));
         navigation.navigate(RootScreenName.VERIFY_CODE);
       })
       .catch((err) => {
-        throw err;
+        // eslint-disable-next-line
+        console.warn(err);
       });
   };
 

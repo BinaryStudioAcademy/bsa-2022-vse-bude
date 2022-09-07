@@ -48,7 +48,8 @@ const Auth: FC = () => {
         navigation.navigate(RootScreenName.VERIFY_PHONE);
       })
       .catch((err) => {
-        throw err;
+        // eslint-disable-next-line
+        console.warn(err);
       });
   };
 

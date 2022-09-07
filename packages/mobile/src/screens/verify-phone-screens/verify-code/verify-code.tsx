@@ -7,7 +7,6 @@ import {
   useCustomTheme,
   useNavigation,
   useTranslation,
-  useState,
 } from '~/hooks/hooks';
 import {
   ButtonAppearance,
@@ -15,7 +14,6 @@ import {
   RootScreenName,
 } from '~/common/enums/enums';
 import {
-  CheckCircleIcon,
   Input,
   KeyboardAvoiding,
   PrimaryButton,
@@ -31,7 +29,7 @@ import {
   selectUserPhone,
 } from '~/store/selectors';
 import { notification } from '~/services/services';
-import { CODE_REGEX } from '~/common/regexp/regexp';
+import { codeSchema } from '~/validation-schemas/validation-schemas';
 import {
   ButtonsContainer,
   CustomText,
@@ -50,14 +48,14 @@ const VerifyCodeScreen: FC = () => {
   const userPhone = useAppSelector(selectUserPhone);
   const dataStatusVerify = useAppSelector(selectVerifyPhoneDataStatus);
   const dataStatusAuth = useAppSelector(selectAuthDataStatus);
-  const [isValidCode, setIsValidCode] = useState(false);
-  const isLoading =
-    dataStatusVerify === DataStatus.PENDING ||
-    dataStatusAuth === DataStatus.PENDING;
+  const isLoading = [dataStatusVerify, dataStatusAuth].includes(
+    DataStatus.PENDING,
+  );
   const { control, errors, handleSubmit } = useAppForm<PhoneVerifyDto>({
     defaultValues: {
       code: '',
     },
+    validationSchema: codeSchema,
   });
 
   const handleBackButtonPress = (): void => {
@@ -65,13 +63,14 @@ const VerifyCodeScreen: FC = () => {
   };
 
   const handleResendPress = (): void => {
-    dispatch(verifyPhoneActions.sendCodeVerifyPhone())
+    dispatch(verifyPhoneActions.getVerificationCode())
       .unwrap()
       .then(() => {
         notification.success(t('verificationPhone.CODE_SENT'));
       })
       .catch((err) => {
-        throw err;
+        // eslint-disable-next-line
+        console.warn(err);
       });
   };
 
@@ -82,17 +81,9 @@ const VerifyCodeScreen: FC = () => {
         navigation.navigate(RootScreenName.VERIFIED);
       })
       .catch((err) => {
-        throw err;
+        // eslint-disable-next-line
+        console.warn(err);
       });
-  };
-
-  const handleChange = (text: string): unknown => {
-    if (text.match(CODE_REGEX)) {
-      setIsValidCode(true);
-
-      return;
-    }
-    setIsValidCode(false);
   };
 
   return (
@@ -123,15 +114,14 @@ const VerifyCodeScreen: FC = () => {
               control={control}
               errors={errors}
               contentContainerStyle={globalStyles.mt6}
-              onChange={handleChange}
             />
-            {isValidCode && (
+            {/* {!errors?.code && (
               <CheckCircleIcon
                 style={styles.icon}
                 size={20}
                 color={colors.accent}
               />
-            )}
+            )} */}
           </View>
           <ButtonsContainer>
             <View style={styles.buttonContainer}>

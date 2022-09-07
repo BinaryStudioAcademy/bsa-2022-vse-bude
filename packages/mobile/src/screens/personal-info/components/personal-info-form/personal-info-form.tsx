@@ -39,7 +39,7 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
   const { t } = useTranslation();
   const navigation = useNavigation<RootNavigationProps>();
   const user = useAppSelector(selectCurrentUser);
-  const verified = useAppSelector(selectPhoneVerified);
+  const isPhoneVerified = useAppSelector(selectPhoneVerified);
   const { control, errors, handleSubmit } = useAppForm<UserPersonalInfo>({
     defaultValues: {
       firstName: user?.firstName || '',
@@ -102,7 +102,9 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
       />
-      {!verified && <VerifyPhoneField onPress={handleVerifyPhonePress} />}
+      {!isPhoneVerified && (
+        <VerifyPhoneField onPress={handleVerifyPhonePress} />
+      )}
       <Title label={t('personal_info.ADDRESS')} />
       <DropDown
         label={t('personal_info.COUNTRY')}

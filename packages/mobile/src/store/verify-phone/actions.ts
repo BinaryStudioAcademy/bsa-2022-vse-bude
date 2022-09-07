@@ -4,11 +4,11 @@ import { auth as authActions } from '~/store/actions';
 import { AsyncThunkConfig } from '~/common/types/types';
 import { ActionType } from './common';
 
-const sendCodeVerifyPhone = createAsyncThunk<null, undefined, AsyncThunkConfig>(
+const getVerificationCode = createAsyncThunk<null, undefined, AsyncThunkConfig>(
   ActionType.SEND_CODE,
   async (_, { extra }) => {
-    const { verifyPhoneApi } = extra;
-    await verifyPhoneApi.sendCodeVerifyPhone();
+    const { phoneVerificationApi } = extra;
+    await phoneVerificationApi.getVerificationCode();
 
     return null;
   },
@@ -17,12 +17,12 @@ const sendCodeVerifyPhone = createAsyncThunk<null, undefined, AsyncThunkConfig>(
 const verifyPhone = createAsyncThunk<null, PhoneVerifyDto, AsyncThunkConfig>(
   ActionType.VERIFY_PHONE,
   async (payload, { extra, dispatch }) => {
-    const { verifyPhoneApi } = extra;
-    await verifyPhoneApi.verifyPhone(payload);
+    const { phoneVerificationApi } = extra;
+    await phoneVerificationApi.verifyPhone(payload);
     dispatch(authActions.getCurrentUser());
 
     return null;
   },
 );
 
-export { sendCodeVerifyPhone, verifyPhone };
+export { getVerificationCode, verifyPhone };

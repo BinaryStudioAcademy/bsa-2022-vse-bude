@@ -5,8 +5,8 @@ import { VerifyPhoneRequestDto } from '~/common/types/types';
 
 const phone = Joi.object<VerifyPhoneRequestDto>({
   phone: Joi.string()
-    .pattern(PHONE_NUMBER_REGEX)
     .trim()
+    .pattern(PHONE_NUMBER_REGEX)
     .required()
     .messages({
       'string.pattern.base': i18next.t('errors.WRONG_FORMAT'),

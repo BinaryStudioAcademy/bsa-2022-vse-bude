@@ -66,6 +66,7 @@ export const screens = {
     EMPTY_FIRST_NAME: 'Fill the first name please!',
     EMPTY_LAST_NAME: 'Fill the last name please!”',
     EMPTY_PHONE: 'Fill the phone number please!',
+    EMPTY_CODE: 'Fill the code please!',
     EMPTY_PASSWORD: 'Fill the password please!',
     LATIN: 'You can use only Latin letters',
     INVALID_EMAIL: 'The invalid email format',
