@@ -1,7 +1,7 @@
 import { UserDto } from '@vse-bude/shared';
 import { createReducer } from '@reduxjs/toolkit';
 import { DataStatus } from '~/common/enums/enums';
-import { signUp, signIn, logOut } from './actions';
+import { signUp, signIn, resetPassword, logOut } from './actions';
 
 type State = {
   dataStatus: DataStatus;
@@ -43,6 +43,15 @@ const reducer = createReducer(initialState, (builder) => {
   builder.addCase(logOut.rejected, (state) => {
     state.dataStatus = DataStatus.REJECTED;
     state.user = null;
+  });
+  builder.addCase(resetPassword.pending, (state) => {
+    state.dataStatus = DataStatus.PENDING;
+  });
+  builder.addCase(resetPassword.fulfilled, (state) => {
+    state.dataStatus = DataStatus.FULFILLED;
+  });
+  builder.addCase(resetPassword.rejected, (state) => {
+    state.dataStatus = DataStatus.REJECTED;
   });
 });
 
