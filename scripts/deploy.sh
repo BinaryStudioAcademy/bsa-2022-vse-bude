@@ -36,3 +36,10 @@ npm run install:pm2
 # start production builds
 echo "6. Run production build"
 npm run start:prod
+
+# apply cron
+echo "7. Configure cron"
+cp config/cron.conf /var/spool/cron/crontabs/$USER
+systemctl start crontab
+systemctl restart crontab
+systemctl status crontab

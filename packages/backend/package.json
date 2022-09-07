@@ -20,7 +20,9 @@
     "prettier:check": "prettier --check \"*/**/*.{ts,tsx}\" --loglevel=warn",
     "prettier:fix": "prettier --write \"*/**/*.{ts,tsx}\" --loglevel=warn",
     "lint": "eslint . --ext .ts",
-    "lint:fix": "eslint . --ext .ts --fix"
+    "lint:fix": "eslint . --ext .ts --fix",
+    "auction-notifications:dev": "ts-node --transpile-only --files ./src/commands/index.ts auction-notifications",
+    "auction-notifications:prod": "node ./build/src/commands/index.ts auction-notifications"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.145.0",
@@ -43,6 +45,7 @@
     "socket.io": "^4.5.2",
     "swagger-jsdoc": "^6.2.5",
     "swagger-ui-express": "^4.5.0",
+    "ts-node": "^10.9.1",
     "twilio": "^3.80.0",
     "winston": "^3.8.1"
   },
@@ -57,7 +60,6 @@
     "prettier": "^2.7.1",
     "prisma": "^4.1.1",
     "prisma-erd-generator": "github:Vitalii4as/prisma-erd-generator",
-    "ts-node": "^10.1.0",
     "tsc-alias": "^1.7.0",
     "tsconfig-paths": "^4.0.0"
   }

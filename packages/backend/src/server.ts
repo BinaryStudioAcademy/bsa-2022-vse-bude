@@ -52,3 +52,5 @@ const io = new Server(socketsPort, {
 });
 
 appEventsListener(io);
+
+export { repositories };

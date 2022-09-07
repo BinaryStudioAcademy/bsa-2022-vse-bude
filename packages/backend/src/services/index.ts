@@ -22,6 +22,9 @@ import { MyListService } from './my-list';
 import { OrderService } from './order';
 import { PaymentService } from './payment';
 
+const emailProvider = new SendInBlueEmailProvider();
+export const emailService = new EmailService(emailProvider);
+
 export const initServices = (repositories: Repositories) => {
   const hashService: HashService = new HashService();
   const redisService: RedisStorageService = new RedisStorageService(
@@ -31,11 +34,8 @@ export const initServices = (repositories: Repositories) => {
   const smsProvider = isProduction
     ? new TwilioSMSProvider()
     : new BarSMSProvider();
+
   const smsService = new SMSSenderService(smsProvider);
-
-  const emailProvider = new SendInBlueEmailProvider();
-  const emailService = new EmailService(emailProvider);
-
   const s3StorageService = new S3StorageService();
 
   const verifyService: VerifyService = new VerifyService(
