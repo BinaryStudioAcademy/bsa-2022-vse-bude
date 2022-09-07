@@ -63,7 +63,7 @@ export const ItemInfoAuction = ({
     return () => {
       socket.disconnect();
     };
-  });
+  }, [item.id, user, dispatch]);
 
   const targetDate = new Date(item.endDate);
   const minBidAmount = +item.currentPrice + +item.minimalBid + 1;
