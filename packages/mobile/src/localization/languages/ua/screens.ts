@@ -127,8 +127,8 @@ export const screens = {
   },
   type_of_post: {
     TITLE: 'Створити публікацію',
-    HEADER: 'Якого типу ви бажаєте створити публікацію?',
+    HEADER: 'Який тип продажу ви оберете?',
     AUCTION: 'Аукціон',
-    DIRECT_SALE: 'Прямий продаж',
+    DIRECT_SALE: 'Продаж',
   },
 };
