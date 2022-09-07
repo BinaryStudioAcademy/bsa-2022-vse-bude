@@ -14,6 +14,7 @@ import {
   SettingsScreen,
   SupportScreen,
   NewItemScreen,
+  TypeOfPostScreen,
 } from '~/screens/screens';
 import { HeaderCustom } from '~/components/components';
 import { MainNavigation } from './tabs/tabs.navigation';
@@ -43,6 +44,11 @@ const newItemScreenOptions: NativeStackNavigationOptions = {
   headerRight: () => (
     <HeaderCustom label={t('common:components.BUTTON_SAVE')} />
   ),
+};
+
+const typeOfPostScreenOptions: NativeStackNavigationOptions = {
+  title: t('make_a_post.TITLE'),
+  headerLeft: () => <HeaderCustom />,
 };
 
 const Navigation: FC = () => {
@@ -80,6 +86,11 @@ const Navigation: FC = () => {
             name={RootScreenName.NEW_ITEM}
             component={NewItemScreen}
             options={newItemScreenOptions}
+          />
+          <Stack.Screen
+            name={RootScreenName.TYPE_OF_NEW_POST}
+            component={TypeOfPostScreen}
+            options={typeOfPostScreenOptions}
           />
         </NativeStack.Group>
       )}

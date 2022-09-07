@@ -10,13 +10,4 @@ class UserExistsError extends HttpError {
   }
 }
 
-class UserPhoneExistsError extends HttpError {
-  constructor() {
-    super({
-      status: HttpStatusCode.BAD_REQUEST,
-      message: lang('translation:USER_PHONE_ALREADY_EXISTS'),
-    });
-  }
-}
-
-export { UserExistsError, UserPhoneExistsError };
+export { UserExistsError };

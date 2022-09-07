@@ -7,6 +7,11 @@ export const wrapper = ({ spaces, breakpoints }: Theme) => css`
 
   @media (max-width: ${breakpoints.xl}px) {
     margin-left: 0;
+    min-width: 70%;
+  }
+
+  @media (max-width: ${breakpoints.lg}px) {
+    min-width: 100%;
   }
 `;
 

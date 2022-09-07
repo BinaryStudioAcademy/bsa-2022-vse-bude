@@ -1,11 +1,11 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import type {
   AuctionPermissionsRequest,
   CreateBidRequest,
   Http,
   ProductIdRequest,
 } from '@vse-bude/shared';
-import { ProductType } from '@vse-bude/shared';
+import type { ProductType } from '@vse-bude/shared';
 import {
   getProductById,
   fetchAuctionPermissions,
@@ -14,6 +14,8 @@ import {
   incrementProductViews,
   leaveAuctionRequest,
   placeBidRequest,
+  getSilimar,
+  getProductEditByIdSSR,
 } from 'services/product';
 import { addToast } from 'store/toast/actions';
 import { ProductActions } from './action-types';
@@ -51,11 +53,8 @@ export const fetchProducts = createAsyncThunk(
 
 export const fetchSimilarProducts = createAsyncThunk(
   ProductActions.FETCH_SIMILAR_PRODUCTS,
-  async (id: string, { rejectWithValue, dispatch }) =>
-    getProducts({
-      limit: 4,
-      type: ProductType.AUCTION,
-    }).catch((e) => {
+  async (productId: string, { rejectWithValue, dispatch }) =>
+    getSilimar(productId).catch((e) => {
       dispatch(
         addToast({
           level: 'error',
@@ -80,6 +79,14 @@ export const fetchProductSSR = createAsyncThunk(
     }),
 );
 
+export const fetchEditProductSSR = createAsyncThunk(
+  ProductActions.FETCH_PRODUCT,
+  (params: { id: string; http: Http }, { rejectWithValue }) =>
+    getProductEditByIdSSR(params.http, params.id).catch(() => {
+      rejectWithValue(null);
+    }),
+);
+
 export const fetchCurrentProduct = createAsyncThunk(
   ProductActions.GET_CURRENT_PRODUCT,
   async (id: string) => getProductById(id),
@@ -88,6 +95,13 @@ export const fetchCurrentProduct = createAsyncThunk(
 export const updateProductViews = createAsyncThunk(
   ProductActions.INCREMENT_PRODUCT_VIEWS,
   async (id: string) => incrementProductViews(id),
+);
+
+export const updateCurrentItemPrice = createAction(
+  ProductActions.UPDATE_CURRENT_ITEM_PRICE,
+  (price: number) => ({
+    payload: price,
+  }),
 );
 
 export const makeBid = createAsyncThunk(

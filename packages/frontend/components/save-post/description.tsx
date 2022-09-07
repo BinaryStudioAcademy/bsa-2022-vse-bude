@@ -13,6 +13,8 @@ export default function DescriptionBlock({
   register,
   category,
   setCategories,
+  condition,
+  setCondition,
 }: DescriptionBlockProps) {
   const categories = useTypedSelector((state) => state.category.list);
 
@@ -62,6 +64,29 @@ export default function DescriptionBlock({
           label={t('create-post:label.description')}
           placeholder={t('create-post:placeholder.description')}
           {...register('description')}
+        />
+      </div>
+      <div css={styles.inputRow}>
+        <Select
+          labelRequiredMark
+          required
+          options={[
+            {
+              title: t('create-post:conditionSelect.used'),
+              value: 'USED',
+            },
+            {
+              title: t('create-post:conditionSelect.new'),
+              value: 'NEW',
+            },
+          ]}
+          value={condition?.title}
+          setValue={setCondition}
+          id="post-condition"
+          name="condition"
+          label={t('create-post:label.condition')}
+          placeholder={t('create-post:placeholder.condition')}
+          error={errors.condition?.message}
         />
       </div>
     </>

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { ColorPalette } from '@vse-bude/shared';
 import { RootNavigationProps } from '~/common/types/navigation/navigation-props';
-import { useNavigation } from '~/hooks/hooks';
+import { useNavigation, useTranslation } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
 import {
   ArrowLeftIcon,
@@ -11,7 +11,7 @@ import {
 } from '../components';
 
 type HeaderCustomProps = {
-  label: string;
+  label?: string;
   hasIcon?: boolean;
   onPress?: () => void;
 };
@@ -22,6 +22,7 @@ const HeaderCustom: FC<HeaderCustomProps> = ({
   onPress,
 }) => {
   const navigation = useNavigation<RootNavigationProps>();
+  const { t } = useTranslation();
 
   return (
     <TouchableWithoutFeedback onPress={onPress ?? navigation.goBack}>
@@ -33,7 +34,9 @@ const HeaderCustom: FC<HeaderCustomProps> = ({
         ]}
       >
         {hasIcon && <ArrowLeftIcon size={35} color={ColorPalette.YELLOW_100} />}
-        <Text style={{ color: ColorPalette.YELLOW_100 }}>{label}</Text>
+        <Text style={{ color: ColorPalette.YELLOW_100 }}>
+          {label ?? t('common:components.HEADER_BUTTON_BACK')}
+        </Text>
       </View>
     </TouchableWithoutFeedback>
   );

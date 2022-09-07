@@ -100,6 +100,7 @@ model Product {
   phone           String?       @db.VarChar(32)
   type            ProductType
   status          ProductStatus
+  condition       Condition     @default(NEW)
   endDate         DateTime?
   postDate        DateTime?
   cancelReason   String?
@@ -127,6 +128,7 @@ model Bid {
   price     Decimal  @db.Money
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  deletedAt DateTime? @db.Timestamp(0)
 }
 
 model Chat {
@@ -223,4 +225,9 @@ enum SocialMediaType {
   WEBSITE
   INSTAGRAM
   LINKEDIN
+}
+
+enum Condition {
+  NEW
+  USED
 }
