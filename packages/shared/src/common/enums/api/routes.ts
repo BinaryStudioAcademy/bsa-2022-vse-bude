@@ -11,6 +11,7 @@ export enum ApiRoutes {
   HEALTH = '/health',
   CREATE_POST = '/post',
   BIDS = '/bids',
+  ORDERS = '/orders',
 }
 
 export enum AuthApiRoutes {
@@ -56,4 +57,11 @@ export enum ProfileApiRoutes {
 export enum AccountApiRoutes {
   PERSONAL_INFO = '/personal-info',
   MY_LIST = '/my-list',
+}
+
+export enum OrderApiRoutes {
+  STATUS = '/status',
+  SUCCESS = '/success',
+  CREATE_PAYMENT = '/create-payment',
+  ID = '/:id',
 }
