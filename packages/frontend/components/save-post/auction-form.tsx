@@ -60,7 +60,7 @@ export default function ProductForm({ edit }: { edit: boolean }) {
       const formData = new FormData();
       images.forEach((file) => formData.append('images', file));
       formData.append('type', ProductType.AUCTION);
-      formData.append('status', status);
+      formData.append('status', status + '');
       Object.keys(data).forEach((key) => {
         switch (key) {
           case 'category':
@@ -247,7 +247,7 @@ export default function ProductForm({ edit }: { edit: boolean }) {
           </div>
         )}
         <div css={styles.saveDraftBtn}>
-          {(!edit || currentProduct.status === PostStatuses.DRAFT) && (
+          {(!edit || currentProduct.status === PostStatuses.DRAFT + '') && (
             <Button
               onClick={() => setStatus(PostStatuses.DRAFT)}
               type="submit"
