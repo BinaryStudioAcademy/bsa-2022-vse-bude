@@ -21,25 +21,25 @@ import {
   products as productsActions,
   categories as categoriesActions,
 } from '~/store/actions';
-import {
-  selectCategories,
-  selectAuctionProducts,
-  selectSellingProducts,
-} from '~/store/selectors';
+import { selectCategories, selectProductsByType } from '~/store/selectors';
 import {
   Category,
   Flag,
   Organization,
   ProductsSection,
-  Wrapper,
+  HomeScreenWrapper,
 } from './components/components';
 import { styles } from './styles';
 
 const Home: FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const auctionProducts = useAppSelector(selectAuctionProducts);
-  const sellingProducts = useAppSelector(selectSellingProducts);
+  const auctionProducts = useAppSelector((state) =>
+    selectProductsByType(state, ProductType.AUCTION),
+  );
+  const sellingProducts = useAppSelector((state) =>
+    selectProductsByType(state, ProductType.SELLING),
+  );
   const categories = useAppSelector(selectCategories);
 
   useEffect(() => {
@@ -60,7 +60,7 @@ const Home: FC = () => {
           translucent={true}
           barStyle="light-content"
         />
-        <Wrapper>
+        <HomeScreenWrapper>
           <View
             style={[
               styles.header,
@@ -85,23 +85,20 @@ const Home: FC = () => {
               //TODO
             }}
           />
-          {categories && (
-            <FlatList
-              style={styles.categories}
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-              data={categories}
-              renderItem={({ item }) => (
-                <Category
-                  categoryId={item.id}
-                  onPress={() => {
-                    // TODO
-                  }}
-                />
-              )}
-            />
-          )}
-
+          <FlatList
+            style={styles.categories}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            data={categories}
+            renderItem={({ item }) => (
+              <Category
+                categoryId={item.id}
+                onPress={() => {
+                  // TODO
+                }}
+              />
+            )}
+          />
           <ProductsSection
             sectionTitle={t('home.POPULAR_LOTS')}
             seeAllTitle={t('home.SEE_ALL_LOTS')}
@@ -111,7 +108,7 @@ const Home: FC = () => {
             }}
             contentContainerStyle={[globalStyles.mt6]}
           />
-        </Wrapper>
+        </HomeScreenWrapper>
         <View
           style={[
             styles.organizationsWrapper,
@@ -147,7 +144,7 @@ const Home: FC = () => {
             })}
           </View>
         </View>
-        <Wrapper>
+        <HomeScreenWrapper>
           <ProductsSection
             sectionTitle={t('home.POPULAR_ITEMS')}
             seeAllTitle={t('home.SEE_ALL_ITEMS')}
@@ -157,7 +154,7 @@ const Home: FC = () => {
             }}
             contentContainerStyle={globalStyles.mt6}
           />
-        </Wrapper>
+        </HomeScreenWrapper>
       </ScrollView>
     </ScreenWrapper>
   );

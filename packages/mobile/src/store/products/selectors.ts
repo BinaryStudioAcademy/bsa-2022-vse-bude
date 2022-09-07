@@ -16,21 +16,9 @@ const selectProductById = createSelector(
   },
 );
 
-const selectAuctionProducts = (state: RootState): ProductDto[] => {
-  return state.products.products.filter(
-    (item) => item.type === ProductType.AUCTION,
-  );
-};
+const selectProductsByType = createSelector(
+  [selectProducts, (state: RootState, productType: ProductType) => productType],
+  (products, type) => products.filter((item) => item.type === type),
+);
 
-const selectSellingProducts = (state: RootState): ProductDto[] => {
-  return state.products.products.filter(
-    (item) => item.type === ProductType.SELLING,
-  );
-};
-
-export {
-  selectProductById,
-  selectProducts,
-  selectAuctionProducts,
-  selectSellingProducts,
-};
+export { selectProductById, selectProducts, selectProductsByType };

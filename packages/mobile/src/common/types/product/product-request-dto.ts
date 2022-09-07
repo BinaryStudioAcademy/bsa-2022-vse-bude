@@ -1,9 +1,9 @@
 import { ProductType } from '@vse-bude/shared';
 
-type ProductQuery = {
+type ProductRequestDto = {
   limit?: number;
   type?: ProductType;
   categoryId?: string;
 };
 
-export type { ProductQuery };
+export type { ProductRequestDto };
