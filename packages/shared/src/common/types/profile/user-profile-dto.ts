@@ -18,6 +18,7 @@ type FullUserProfileDto = {
   userAddress?: UserAddressDto;
   socialMedia: SocialMedia[];
   phoneVerified: boolean;
+  emailVerified: boolean;
 };
 
 type UserAddressDto = {

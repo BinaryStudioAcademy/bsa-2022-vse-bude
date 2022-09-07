@@ -3,7 +3,9 @@ import type { CreateBidDto } from '@types';
 import type { ProductRepository } from '@repositories';
 import { AuctionEndedError, ProductNotFoundError } from '@errors';
 import { toUtc } from '@helpers';
+import { UPDATE_PRODUCT_PRICE } from '@vse-bude/shared';
 import { LowBidPriceError } from '../error/product/low-bid-price-error';
+import { eventListener } from '../events';
 
 export class BidService {
   private _bidRepository: BidRepository;
@@ -38,6 +40,12 @@ export class BidService {
     }
 
     const [bid] = await this._bidRepository.create(dto);
+
+    eventListener.emit(UPDATE_PRODUCT_PRICE, {
+      productId: product.id,
+      price: bid.price,
+      bidderId: bid.bidderId,
+    });
 
     return bid;
   }

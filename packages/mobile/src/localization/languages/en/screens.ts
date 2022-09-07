@@ -1,3 +1,4 @@
+import { MAX_IMAGE_SIZE } from '@vse-bude/shared';
 import {
   MAX_NAME_LENGTH,
   MAX_PASSWORD_LENGTH,
@@ -45,8 +46,8 @@ export const screens = {
     CITY: 'City',
     ZIP_CODE: 'ZIP Code',
     ZIP_CODE_HINT: 'Enter ZIP Code',
-    NOVA_POSHTA: '# Nova Poshta',
-    NOVA_POSHTA_HINT: 'Enter Nova Poshta office',
+    DELIVERY_DATA: 'Delivery data',
+    DELIVERY_DATA_HINT: 'Enter delivery address',
     SOCIAL_NETWORKS: 'Social networks',
     INSTAGRAM_HINT: 'Enter you Instagram',
     LINKEDIN_HINT: 'Enter you Linkedin',
@@ -80,6 +81,7 @@ export const screens = {
     FIRST_NAME_INVALID: 'The invalid first name format',
     LAST_NAME_INVALID: 'The invalid last name format',
     WRONG_FORMAT: 'Wrong format',
+    MAX_IMAGE_SIZE: `Maximum file size is ${MAX_IMAGE_SIZE / 1000000} Mb`,
   },
   make_a_post: {
     TITLE: 'Make a Post',
@@ -119,5 +121,11 @@ export const screens = {
     SEE_ALL_ITEMS: 'See All Items',
     CHARITY_ORGANIZATIONS: 'Charity Organizations',
     POPULAR_ITEMS: 'Popular Items',
+  },
+  type_of_post: {
+    TITLE: 'Make a Post',
+    HEADER: 'What type a post do you create?',
+    AUCTION: 'Auction',
+    DIRECT_SALE: 'Direct Sale',
   },
 };

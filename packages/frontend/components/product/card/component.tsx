@@ -41,7 +41,10 @@ export const ProductCard = (props: ProductCardProps) => {
     <div className="cardBlock" css={productCard}>
       <div css={productHeader}>
         <div className="imageSlider">
-          <ImageSlider images={props.images} />
+          <ImageSlider
+            priority={props.loadImageHighPriority}
+            images={props.images}
+          />
         </div>
         {!!user && (
           <FavoriteButton
@@ -68,7 +71,6 @@ export const ProductCard = (props: ProductCardProps) => {
           <InternalLink
             title={t('common:components.product.placeBidBtn')}
             href={`${Routes.ITEMS}/${props.data.id}`}
-            prefetch={false}
             variant="button"
           >
             {t('common:components.product.placeBidBtn')}

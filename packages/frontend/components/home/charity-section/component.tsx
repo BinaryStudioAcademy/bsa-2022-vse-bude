@@ -1,13 +1,16 @@
 import { useTranslation } from 'next-i18next';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
+import { useTheme } from '@emotion/react';
+import Image from 'next/image';
 import { Container } from '@primitives';
-import { lightTheme } from 'theme';
+import {} from 'theme';
 import { wrapper, title, sliderWrapper } from './styles';
 
 import '@splidejs/react-splide/css';
 
 const CharitySection = () => {
   const { t } = useTranslation();
+  const { breakpoints } = useTheme();
 
   return (
     <section css={wrapper}>
@@ -24,16 +27,16 @@ const CharitySection = () => {
               releaseWheel: true,
               mediaQuery: 'max',
               breakpoints: {
-                [lightTheme.breakpoints.sm]: {
+                [breakpoints.sm]: {
                   perPage: 1,
                   perMove: 1,
                 },
-                [lightTheme.breakpoints.md]: {
+                [breakpoints.md]: {
                   perPage: 2,
                   perMove: 2,
                   arrows: false,
                 },
-                [lightTheme.breakpoints.lg]: {
+                [breakpoints.lg]: {
                   perPage: 3,
                   perMove: 3,
                 },
@@ -41,22 +44,52 @@ const CharitySection = () => {
             }}
           >
             <SplideSlide>
-              <img src="images/charity/hope.svg" alt="logo" />
+              <Image
+                src="/images/charity/hope.svg"
+                width={199}
+                height={56}
+                alt="hope fund"
+              />
             </SplideSlide>
             <SplideSlide>
-              <img src="images/charity/international.svg" alt="logo" />
+              <Image
+                src="/images/charity/international.svg"
+                width={172}
+                height={52}
+                alt="international fund"
+              />
             </SplideSlide>
             <SplideSlide>
-              <img src="/images/charity/prytula.svg" alt="logo" />
+              <Image
+                src="/images/charity/prytula.svg"
+                width={220}
+                height={68}
+                alt="prytula fund"
+              />
             </SplideSlide>
             <SplideSlide>
-              <img src="images/charity/live.svg" alt="logo" />
+              <Image
+                src="/images/charity/live.svg"
+                width={123}
+                height={75}
+                alt="live fund"
+              />
             </SplideSlide>
             <SplideSlide>
-              <img src="images/charity/humanitarian.png" alt="logo" />
+              <Image
+                src="/images/charity/humanitarian.png"
+                width={216}
+                height={59}
+                alt="humanitarian fund"
+              />
             </SplideSlide>
             <SplideSlide>
-              <img src="images/charity/medicine.svg" alt="logo" />
+              <Image
+                src="/images/charity/medicine.svg"
+                width={52}
+                height={70}
+                alt="medicine fund"
+              />
             </SplideSlide>
           </Splide>
         </div>

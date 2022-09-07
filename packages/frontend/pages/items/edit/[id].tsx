@@ -2,22 +2,27 @@ import { Layout } from '@components/layout';
 import { SavePost } from '@components/save-post';
 import { wrapper } from 'store';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useRouter } from 'next/router';
 import { Routes } from '@enums';
 import { Http } from '@vse-bude/shared';
-import { fetchProductSSR } from 'store/product';
+import { fetchEditProductSSR } from 'store/product';
 import { withPublic } from '@hocs';
+import { useTypedSelector } from '@hooks';
+import { AuthHelper, CookieStorage } from '@helpers';
 
 export const getServerSideProps = withPublic(
   wrapper.getServerSideProps((store) => async (ctx) => {
     const { locale, query } = ctx;
-    const http = new Http(process.env.NEXT_PUBLIC_API_ROUTE);
     const id = query.id as string;
 
-    const { payload } = await store.dispatch(fetchProductSSR({ id, http }));
-    console.log(payload);
+    const cookieStorage = new CookieStorage(ctx);
+    const auth = new AuthHelper(cookieStorage);
+    const http = new Http(process.env.NEXT_PUBLIC_API_ROUTE, locale, auth);
 
-    if (!payload) {
+    const { payload: productPayload } = await store.dispatch(
+      fetchEditProductSSR({ id, http }),
+    );
+
+    if (!productPayload) {
       return {
         redirect: {
           destination: Routes.NOT_FOUND,
@@ -39,14 +44,12 @@ export const getServerSideProps = withPublic(
 );
 
 const EditPage = () => {
-  const router = useRouter();
-  const create = router.query.create as string;
+  const currentProduct = useTypedSelector((state) => state.product.currentItem);
 
   return (
     <Layout title="Edit post">
-      <SavePost edit create={create} />
+      <SavePost type={currentProduct.type} edit />
     </Layout>
   );
 };
-
 export default EditPage;

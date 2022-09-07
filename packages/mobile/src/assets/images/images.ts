@@ -7,5 +7,6 @@ const images = {
   ihf: require('~/assets/images/organizations/ihf.png'),
   ico: require('~/assets/images/organizations/ico.png'),
   hospitallers: require('~/assets/images/organizations/hospitallers.png'),
+  chooseTypeThumb: require('~/assets/images/choose-type.png'),
 };
 export { images };

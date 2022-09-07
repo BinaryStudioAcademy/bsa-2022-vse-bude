@@ -25,13 +25,16 @@ export const PostTypeModal = ({ isOpen, setIsOpen }: PostTypeProps) => {
           cssExtend={styles.xmark}
           icon={IconName.XMARK}
           onClick={() => setIsOpen(false)}
+          ariaLabel={t('common:components.modal.closeLabel')}
         />
         <div css={styles.imgWrapper}>
           <Image width={516} height={285} src={legoImg.src} alt="LEGO" />
         </div>
         <div css={styles.btnWrapper}>
           <Button
-            onClick={() => router.push(`${Routes.ITEMS}${ItemRoutes.CREATE}`)}
+            onClick={() =>
+              router.push(`${Routes.ITEMS}${ItemRoutes.CREATE_AUCTION}`)
+            }
             disabled={!isConfirmed}
             tooltip={
               isConfirmed
@@ -43,7 +46,9 @@ export const PostTypeModal = ({ isOpen, setIsOpen }: PostTypeProps) => {
           </Button>
           <span>{t('common:components.typeOfPost.btn.or')}</span>
           <Button
-            onClick={() => router.push(`${Routes.ITEMS}${ItemRoutes.CREATE}`)}
+            onClick={() =>
+              router.push(`${Routes.ITEMS}${ItemRoutes.CREATE_DIRECT_SALE}`)
+            }
             disabled={!isConfirmed}
             tooltip={
               isConfirmed
