@@ -114,6 +114,10 @@ const CheckCircleIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="check-circle" {...iconProps} />
 );
 
+const SearchIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="search" {...iconProps} />
+);
+
 export {
   HomeIcon,
   StarIcon,
@@ -143,4 +147,5 @@ export {
   GlobeIcon,
   LinkedinIcon,
   CheckCircleIcon,
+  SearchIcon,
 };

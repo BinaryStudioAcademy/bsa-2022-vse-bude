@@ -5,6 +5,7 @@ import {
   AuthApiRoutes,
   UserSignInDto,
   UserSignUpDto,
+  ResetPasswordLink,
   AuthResponse,
   UserResponseDto,
 } from '@vse-bude/shared';
@@ -59,6 +60,18 @@ class AuthApi {
           userId: _userId,
         },
         hasAuth: true,
+      },
+    );
+  }
+
+  resetPassword(_payload: ResetPasswordLink): Promise<unknown> {
+    return this.#http.load(
+      `${this.#apiPrefix}${ApiRoutes.AUTH}${AuthApiRoutes.RESET_PASSWORD_LINK}`,
+      {
+        method: HttpMethod.POST,
+        contentType: HttpContentType.APPLICATION_JSON,
+        payload: JSON.stringify(_payload),
+        hasAuth: false,
       },
     );
   }

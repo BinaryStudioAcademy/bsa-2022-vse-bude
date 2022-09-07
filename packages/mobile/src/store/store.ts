@@ -4,6 +4,7 @@ import {
   authApi,
   productApi,
   phoneVerificationApi,
+  categoryApi,
 } from '~/services/services';
 import { rootReducer } from './root-reducer';
 import { errorHandler } from './middlewares/middlewares';
@@ -13,6 +14,7 @@ const extraArgument = {
   authApi,
   productApi,
   phoneVerificationApi,
+  categoryApi,
 };
 
 const store = configureStore({

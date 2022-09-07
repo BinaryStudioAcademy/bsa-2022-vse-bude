@@ -1,7 +1,13 @@
 import { createReducer, isAnyOf } from '@reduxjs/toolkit';
 import { UserDto } from '@vse-bude/shared';
 import { DataStatus } from '~/common/enums/enums';
-import { signUp, signIn, getCurrentUser, logOut } from './actions';
+import {
+  signUp,
+  signIn,
+  getCurrentUser,
+  resetPassword,
+  logOut,
+} from './actions';
 
 type State = {
   dataStatus: DataStatus;
@@ -23,11 +29,16 @@ const reducer = createReducer(initialState, (builder) => {
       state.dataStatus = DataStatus.REJECTED;
       state.user = null;
     })
-    .addCase(getCurrentUser.rejected, (state) => {
-      state.dataStatus = DataStatus.REJECTED;
+    .addCase(resetPassword.fulfilled, (state) => {
+      state.dataStatus = DataStatus.FULFILLED;
     })
     .addMatcher(
-      isAnyOf(signUp.pending, signIn.pending, getCurrentUser.pending),
+      isAnyOf(
+        signUp.pending,
+        signIn.pending,
+        getCurrentUser.pending,
+        resetPassword.pending,
+      ),
       (state) => {
         state.dataStatus = DataStatus.PENDING;
       },
@@ -42,7 +53,13 @@ const reducer = createReducer(initialState, (builder) => {
     .addMatcher(isAnyOf(signUp.rejected, signIn.rejected), (state) => {
       state.dataStatus = DataStatus.REJECTED;
       state.user = null;
-    });
+    })
+    .addMatcher(
+      isAnyOf(resetPassword.rejected, getCurrentUser.rejected),
+      (state) => {
+        state.dataStatus = DataStatus.REJECTED;
+      },
+    );
 });
 
 export { reducer };

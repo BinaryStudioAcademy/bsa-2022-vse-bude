@@ -8,6 +8,7 @@ import { NotificationService } from './notification/notification.service';
 import { ProductService } from './product/product.service';
 import { AppService } from './app/app.service';
 import { PhoneVerificationApi } from './phone-verification-api/phone-verification-api.service';
+import { CategoryService } from './categories/categories';
 
 const storage = new Storage({
   storage: new MMKV(),
@@ -37,6 +38,11 @@ const phoneVerificationApi = new PhoneVerificationApi({
   apiPrefix: ENV.APP.API_ORIGIN_URL,
 });
 
+const categoryApi = new CategoryService({
+  http,
+  apiPrefix: ENV.APP.API_ORIGIN_URL,
+});
+
 const notification = new NotificationService();
 
 const appService = new AppService();
@@ -49,4 +55,5 @@ export {
   productApi,
   phoneVerificationApi,
   appService,
+  categoryApi,
 };
