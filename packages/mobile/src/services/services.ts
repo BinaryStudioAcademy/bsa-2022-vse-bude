@@ -6,6 +6,7 @@ import { AuthApi } from './auth-api/auth-api.service';
 import { Image } from './image/image.service';
 import { NotificationService } from './notification/notification.service';
 import { ProductService } from './product/product.service';
+import { PushController } from './push-notifications/push-notifications';
 import { AppService } from './app/app.service';
 import { CategoryService } from './categories/categories';
 
@@ -41,6 +42,8 @@ const notification = new NotificationService();
 
 const appService = new AppService();
 
+const pushApi = new PushController();
+
 export {
   storage,
   authApi,
@@ -49,4 +52,5 @@ export {
   productApi,
   appService,
   categoryApi,
+  pushApi,
 };
