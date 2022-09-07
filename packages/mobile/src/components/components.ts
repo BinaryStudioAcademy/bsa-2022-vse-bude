@@ -18,8 +18,6 @@ export { Text } from './text/text';
 export { Spinner } from './spinner/spinner';
 export { Logo } from './logo/logo';
 export { LogoWhite } from './logo/logo-white';
-export { HeaderLeft } from './header-left/header-left';
-export { HeaderSave } from './header-save/header-save';
 export { DropDown } from './dropdown/dropdown';
 export { HeaderButton } from './header-button/header-button';
 export { Divider } from '~/components/divider/divider';
