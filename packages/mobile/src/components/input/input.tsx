@@ -71,7 +71,7 @@ const Input = <T extends FormControlValues>({
           onBlur={field.onBlur}
           placeholderTextColor={colors.placeholder}
           secureTextEntry={secured}
-          selectTextOnFocus={field.name !== 'password'}
+          selectTextOnFocus={isSecure}
           style={[
             styles.input,
             {
