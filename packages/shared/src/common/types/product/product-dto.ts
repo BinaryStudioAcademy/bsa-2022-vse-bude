@@ -20,9 +20,12 @@ type ProductDto = {
   price: number;
   recommendedPrice: number;
   minimalBid: number;
-  city: string;
+  country: string;
+  city?: string;
+  phone?: string;
   type: ProductType;
   status: string;
+  condition: string;
   endDate: Date;
   imageLinks: string[];
   views: number;

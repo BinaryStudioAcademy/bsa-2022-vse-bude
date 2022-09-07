@@ -25,7 +25,7 @@ export const updateAddress = async (prismaClient: PrismaClient) => {
           city: _dataJSON.city,
           address: _dataJSON.address,
           zip: _dataJSON.zip,
-          novaPoshtaRef: _dataJSON.novaPoshtaRef,
+          deliveryData: _dataJSON.deliveryData,
           userId: _dataJSON.userId,
           createdAt: _dataJSON.createdAt,
           updatedAt: _dataJSON.updatedAt,

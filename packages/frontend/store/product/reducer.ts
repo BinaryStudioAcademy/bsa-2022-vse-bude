@@ -11,6 +11,7 @@ import {
   updateProductViews,
   fetchSimilarProducts,
   fetchCurrentProduct,
+  updateCurrentItemPrice,
 } from './actions';
 
 interface ProductState {
@@ -63,11 +64,21 @@ const productSlice = createSlice({
         isAbleToLeaveAuction: false,
       };
     },
-
+    [updateCurrentItemPrice.type](state, { payload }) {
+      state.currentItem.currentPrice = payload;
+    },
+    [makeBid.pending.type](state) {
+      state.loading = true;
+    },
     [makeBid.fulfilled.type](state, { payload }) {
       state.currentItem.currentPrice = payload.price;
       state.permissions.isAbleToLeaveAuction = true;
+      state.loading = false;
     },
+    [makeBid.rejected.type](state) {
+      state.loading = false;
+    },
+
     [auctionLeaveAction.fulfilled.type](state, { payload }) {
       state.currentItem.currentPrice = payload.price;
     },

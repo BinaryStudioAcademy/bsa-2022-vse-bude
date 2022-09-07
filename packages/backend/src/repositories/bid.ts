@@ -8,14 +8,20 @@ export class BidRepository {
     this._dbClient = dbClient;
   }
 
-  create(dto: CreateBidDto) {
-    return this._dbClient.bid.create({
-      data: {
-        bidderId: dto.bidderId,
-        productId: dto.productId,
-        price: dto.price,
-      },
-    });
+  create({ bidderId, price, productId }: CreateBidDto) {
+    return this._dbClient.$transaction([
+      this._dbClient.bid.create({
+        data: {
+          bidderId,
+          productId,
+          price,
+        },
+      }),
+      this._dbClient.product.update({
+        data: { price },
+        where: { id: productId },
+      }),
+    ]);
   }
 
   async getByUserAndProduct(userId: string, productId: string) {
@@ -32,6 +38,46 @@ export class BidRepository {
       where: {
         bidderId: userId,
         productId: productId,
+      },
+    });
+  }
+
+  async retrieve(userId: string, productId: string, time: string) {
+    return this._dbClient.$transaction([
+      this._dbClient.bid.updateMany({
+        data: {
+          deletedAt: time,
+        },
+        where: {
+          bidderId: userId,
+          productId: productId,
+        },
+      }),
+      this._dbClient.bid.deleteMany({
+        where: {
+          productId,
+          NOT: [{ deletedAt: null }],
+        },
+      }),
+      this._dbClient.product.update({
+        data: {
+          price: (
+            await this._dbClient.bid.findFirst({
+              where: {
+                productId,
+              },
+            })
+          ).price,
+        },
+        where: { id: productId },
+      }),
+    ]);
+  }
+
+  async getAll(productId: string) {
+    return this._dbClient.bid.findMany({
+      where: {
+        productId,
       },
     });
   }

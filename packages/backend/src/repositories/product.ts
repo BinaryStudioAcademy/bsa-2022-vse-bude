@@ -1,5 +1,5 @@
-import type { PrismaClient, Product } from '@prisma/client';
-import { ProductStatus } from '@prisma/client';
+import type { PrismaClient } from '@prisma/client';
+import { ProductStatus, ProductType } from '@prisma/client';
 import type { ProductQuery } from '@types';
 import { Order } from '@vse-bude/shared';
 
@@ -10,11 +10,12 @@ export class ProductRepository {
     this._dbClient = prismaClient;
   }
 
-  public getAll(query: ProductQuery): Promise<Product[]> {
+  public getAll(query: ProductQuery) {
     const {
       limit = 10,
       from = 0,
       type,
+      categoryId,
       sortBy = 'createdAt',
       order = Order.ASC,
     } = query;
@@ -27,6 +28,7 @@ export class ProductRepository {
       },
       where: {
         type,
+        categoryId,
       },
     });
   }
@@ -131,14 +133,20 @@ export class ProductRepository {
     return this._dbClient.product.create({
       data: {
         imageLinks: data.imageLinks,
+        country: data.country,
         city: data.city,
+        phone: data.phone,
         status: data.status,
-        categoryId: data.categoryId,
+        categoryId: data.category,
         title: data.title,
         description: data.description,
         authorId: data.authorId,
         type: data.type,
         price: data.price,
+        minimalBid: data.minimalBid,
+        recommendedPrice: data.recommendedPrice,
+        endDate: data.endDate,
+        postDate: data.postDate,
       },
     });
   }
@@ -151,12 +159,19 @@ export class ProductRepository {
       data: {
         imageLinks: data.imageLinks,
         status: data.status,
+        condition: data.condition,
+        country: data.country,
         city: data.city,
-        categoryId: data.categoryId,
+        phone: data.phone,
+        categoryId: data.category,
         title: data.title,
         description: data.description,
         type: data.type,
         price: data.price,
+        minimalBid: data.minimalBid,
+        recommendedPrice: data.recommendedPrice,
+        endDate: data.endDate,
+        postDate: data.postDate,
       },
     });
   }
@@ -190,7 +205,7 @@ export class ProductRepository {
   }
 
   public async checkStatus(id: string, status: ProductStatus) {
-    return await this._dbClient.product.findFirst({
+    return this._dbClient.product.findFirst({
       where: {
         id,
         status,
@@ -207,6 +222,47 @@ export class ProductRepository {
       data: {
         winnerId: userId,
         status,
+      },
+    });
+  }
+
+  public async findSimilar(
+    city: string,
+    categoryId: string,
+    type: ProductType,
+  ) {
+    return await this._dbClient.product.findMany({
+      where: {
+        city,
+        categoryId,
+        type,
+        status: ProductStatus.ACTIVE,
+      },
+    });
+  }
+
+  public async getMostPopularLots(limit: number) {
+    return await this._dbClient.product.findMany({
+      take: limit,
+      where: {
+        status: ProductStatus.ACTIVE,
+        type: ProductType.AUCTION,
+      },
+      orderBy: {
+        views: Order.DESC,
+      },
+    });
+  }
+
+  public async getMostPopularProducts(limit: number) {
+    return await this._dbClient.product.findMany({
+      take: limit,
+      where: {
+        status: ProductStatus.ACTIVE,
+        type: ProductType.SELLING,
+      },
+      orderBy: {
+        views: Order.DESC,
       },
     });
   }

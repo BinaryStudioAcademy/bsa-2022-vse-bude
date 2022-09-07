@@ -32,3 +32,4 @@ export { BuildInfo } from './build-info/build-info';
 export { ScrollView } from './scroll-view/scroll-view';
 export { ButtonText } from './button-text/button-text';
 export { default as CheckBox } from '@react-native-community/checkbox';
+export { Countdown } from './countdown/countdown';

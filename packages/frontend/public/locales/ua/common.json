@@ -11,7 +11,9 @@
     },
     "buttons": {
       "create_account": "Створити Аккаунт",
-      "sign_in": "Увійти в Аккаунт"
+      "sign_in": "Увійти в Аккаунт",
+      "openMenu": "Відкрити меню",
+      "closeMenu": "Закрити меню"
     },
     "popover": {
       "personalInfo": "Мій аккаунт",
@@ -59,15 +61,25 @@
   "components": {
     "product": {
       "placeBidBtn": "Зробити ставку",
+      "buyBtn": "Купити",
       "time": {
         "hours": "г",
         "days": "д",
         "minutes": "хв",
         "seconds": "с"
-      }
+      },
+      "addToFavorites": "Додати до вподобань",
+      "removeFromFavorites": "Прибрати з вподобань"
+    },
+    "slider": {
+      "prevStep": "Перейти до попереднього кроку",
+      "nextStep": "Перейти до наступного кроку"
     },
     "input": {
       "searchProductsPlaceholder": "Пошук продуктів"
+    },
+    "modal": {
+      "closeLabel": "Закрити модальне вікно"
     },
     "typeOfPost": {
       "headline": "Який тип продажу ви оберете?",
@@ -80,6 +92,9 @@
           "directSale": "Вам потрібно підтвердити свій номер телефону, щоб вибрати \"Продаж\""
         }
       }
+    },
+    "badge": {
+      "removeLabel": "Видалити фільтр {{param}}"
     }
   },
   "verify": {
@@ -104,7 +119,8 @@
       },
       "link": {
         "sendAgain": "Натисніть сюди"
-      }
+      },
+      "prevPageLabel": "Повернутись до попередньої сторінки"
     },
     "success": {
       "headline": "Ваш акаунт було успішно підтверджено",
@@ -130,7 +146,8 @@
     "productAddedToFavorites": "Продукт додано до обраних",
     "productRemovedFromFavorites": "Продукт видалено з обраних",
     "bidPlaced": "Ставка зроблена",
-    "leftAuction": "Ви вийшли з аукціону"
+    "leftAuction": "Ви вийшли з аукціону",
+    "newBidPlaced": "Зроблена нова ставка на поточний товар"
   },
   "months": [
     "Січень",

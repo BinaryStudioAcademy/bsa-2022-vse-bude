@@ -3,6 +3,7 @@ import type {
   SocialMedia,
   SocialMediaType,
   UpdateUserProfileDto,
+  UserAddressDto,
 } from '@vse-bude/shared';
 
 export class UserProfileRepository {
@@ -55,6 +56,22 @@ export class UserProfileRepository {
     });
   }
 
+  private async _updatePhoneVerifiedStatus({
+    userId,
+    phone,
+  }: {
+    userId: string;
+    phone: string;
+  }) {
+    const dbPhone = await this._dbClient.user.findUnique({
+      where: { id: userId },
+      select: { phone: true },
+    });
+    if (dbPhone.phone !== phone) {
+      this.cancelPhoneVerified({ userId });
+    }
+  }
+
   constructor(prismaClient: PrismaClient) {
     this._dbClient = prismaClient;
   }
@@ -83,8 +100,9 @@ export class UserProfileRepository {
         avatar: true,
         firstName: true,
         lastName: true,
-        email: true,
         phone: true,
+        email: true,
+        emailVerified: true,
         phoneVerified: true,
       },
     });
@@ -100,7 +118,7 @@ export class UserProfileRepository {
         region: true,
         city: true,
         zip: true,
-        novaPoshtaRef: true,
+        deliveryData: true,
       },
     });
   }
@@ -126,6 +144,7 @@ export class UserProfileRepository {
     data: UpdateUserProfileDto;
   }) {
     const { firstName, lastName, email, phone } = data;
+    this._updatePhoneVerifiedStatus({ userId, phone });
 
     return this._dbClient.user.update({
       where: {
@@ -142,8 +161,47 @@ export class UserProfileRepository {
         avatar: true,
         firstName: true,
         lastName: true,
-        email: true,
         phone: true,
+        email: true,
+        emailVerified: true,
+        phoneVerified: true,
+      },
+    });
+  }
+
+  public updateAddress({
+    userId,
+    data,
+  }: {
+    userId: string;
+    data: UserAddressDto;
+  }) {
+    const { country, region, city, zip, deliveryData } = data;
+
+    return this._dbClient.address.upsert({
+      where: {
+        userId,
+      },
+      update: {
+        country,
+        region,
+        city,
+        zip,
+        deliveryData,
+      },
+      create: {
+        country,
+        region,
+        city,
+        zip,
+        deliveryData,
+      },
+      select: {
+        country: true,
+        region: true,
+        city: true,
+        zip: true,
+        deliveryData: true,
       },
     });
   }
@@ -186,6 +244,40 @@ export class UserProfileRepository {
       },
       select: {
         avatar: true,
+      },
+    });
+  }
+
+  public checkIsPhoneExists({
+    userId,
+    phone,
+  }: {
+    userId: string;
+    phone: string;
+  }) {
+    return this._dbClient.user.findFirst({
+      where: {
+        id: {
+          not: userId,
+        },
+        phone,
+      },
+      select: {
+        phone: true,
+      },
+    });
+  }
+
+  public cancelPhoneVerified({ userId }: { userId: string }) {
+    return this._dbClient.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        phoneVerified: false,
+      },
+      select: {
+        phoneVerified: true,
       },
     });
   }

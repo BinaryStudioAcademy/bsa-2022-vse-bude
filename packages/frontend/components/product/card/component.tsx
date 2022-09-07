@@ -1,10 +1,13 @@
-import { Button, StringCutter } from '@primitives';
+import { InternalLink, StringCutter } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import { useAppDispatch, useTypedSelector, useInFavorite } from '@hooks';
 import {
   addProductToFavorites,
   deleteProductFromFavorites,
 } from 'store/favorite-product';
+import { shallowEqual } from 'react-redux';
+import { Routes } from '@enums';
+import { ProductType } from '@vse-bude/shared';
 import { Price } from '../price';
 import { FavoriteButton } from '../favorite-button/component';
 import { ProductTimer } from '../timer/component';
@@ -21,7 +24,7 @@ import {
 import type { ProductCardProps } from './types';
 
 export const ProductCard = (props: ProductCardProps) => {
-  const { user } = useTypedSelector((state) => state.auth);
+  const { user } = useTypedSelector((state) => state.auth, shallowEqual);
 
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -35,11 +38,38 @@ export const ProductCard = (props: ProductCardProps) => {
     dispatch(favAction(props.data.id));
   };
 
+  const renderButton = () => {
+    if (props.type === ProductType.AUCTION) {
+      return (
+        <InternalLink
+          title={t('common:components.product.placeBidBtn')}
+          href={`${Routes.ITEMS}/${props.data.id}`}
+          variant="button"
+        >
+          {t('common:components.product.placeBidBtn')}
+        </InternalLink>
+      );
+    }
+
+    return (
+      <InternalLink
+        title={t('common:components.product.buyBtn')}
+        href={`${Routes.ITEMS}/${props.data.id}`}
+        variant="button"
+      >
+        {t('common:components.product.buyBtn')}
+      </InternalLink>
+    );
+  };
+
   return (
     <div className="cardBlock" css={productCard}>
       <div css={productHeader}>
         <div className="imageSlider">
-          <ImageSlider images={props.images} />
+          <ImageSlider
+            priority={props.loadImageHighPriority}
+            images={props.images}
+          />
         </div>
         {!!user && (
           <FavoriteButton
@@ -47,9 +77,11 @@ export const ProductCard = (props: ProductCardProps) => {
             isFavorite={isInFavorite}
           />
         )}
-        <div css={productTimer}>
-          <ProductTimer date={props.auctionDate} />
-        </div>
+        {props.type === ProductType.AUCTION && (
+          <div css={productTimer}>
+            <ProductTimer date={props.auctionDate} />
+          </div>
+        )}
       </div>
       <div>
         <div css={productName}>{props.name}</div>
@@ -62,16 +94,7 @@ export const ProductCard = (props: ProductCardProps) => {
         <div className="productPrice">
           <Price amount={props.price} currency={props.currency} />
         </div>
-        <div className="productAction">
-          <Button
-            title="Place a Bid"
-            variant="filled"
-            size="small"
-            onClick={() => props.onButtonClick(props.data.id)}
-          >
-            {t('common:components.product.placeBidBtn')}
-          </Button>
-        </div>
+        <div className="productAction">{renderButton()}</div>
       </div>
     </div>
   );

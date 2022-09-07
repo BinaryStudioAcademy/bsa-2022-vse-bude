@@ -2,6 +2,7 @@ enum ColorPalette {
   GREEN_0 = '#00CC66',
   GREEN_100 = '#778684',
   GREEN_200 = '#2C4340',
+  YELLOW = '#F4C50A',
   YELLOW_50 = '#F4C50A',
   YELLOW_100 = '#F1B313',
   YELLOW_200 = '#FFB800',
@@ -15,6 +16,7 @@ enum ColorPalette {
   GRAY_700 = '#595959',
   WHITE_100 = '#FFFFFF',
   BLUE_100 = '#0C42A6',
+  BLUE = '#0C42A6',
 }
 
 export { ColorPalette };

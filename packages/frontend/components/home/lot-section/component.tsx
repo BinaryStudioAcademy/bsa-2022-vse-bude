@@ -2,20 +2,27 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { ProductCard } from 'components/product/card/component';
 import '@splidejs/react-splide/css';
 import { lightTheme } from 'theme';
-import Router from 'next/router';
-import { Routes } from '@enums';
 import { SectionLayout } from '../section-layout';
 import { lotContainer } from './styles';
-import type { LotProps } from './types';
+import type { LotSectionProps } from './types';
 
-const LotSection = ({ title, lots, loadMoreTitle }: LotProps) => {
-  const router = Router;
-  const handleBidBuyProduct = (productId: string) => {
-    router.push(`${Routes.ITEMS}/${productId}`);
-  };
+const LotSection = ({
+  title,
+  lots,
+  loadMoreTitle,
+  loadMoreHref,
+  loadImageHighPriority,
+}: LotSectionProps) => {
+  if (!lots?.length) {
+    return null;
+  }
 
   return (
-    <SectionLayout title={title} loadMoreTitle={loadMoreTitle}>
+    <SectionLayout
+      title={title}
+      loadMoreTitle={loadMoreTitle}
+      loadMoreHref={loadMoreHref}
+    >
       <div css={lotContainer}>
         <Splide
           aria-label="items-carousel"
@@ -43,7 +50,7 @@ const LotSection = ({ title, lots, loadMoreTitle }: LotProps) => {
             },
           }}
         >
-          {lots.map((item) => (
+          {lots.map((item, index) => (
             <SplideSlide key={item.id + item.title}>
               <ProductCard
                 data={item}
@@ -51,9 +58,10 @@ const LotSection = ({ title, lots, loadMoreTitle }: LotProps) => {
                 description={item.description}
                 price={item.price}
                 images={item.imageLinks}
+                type={item.type}
                 currency="UAH"
                 auctionDate={item.endDate}
-                onButtonClick={handleBidBuyProduct}
+                loadImageHighPriority={loadImageHighPriority && index < 2}
               />
             </SplideSlide>
           ))}

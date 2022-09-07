@@ -33,7 +33,7 @@ const CategorySection = () => {
   return (
     <SectionLayout
       title={t('home:popularCategories.title')}
-      loadMoreTitle={t('home:popularCategories.link')}
+      // loadMoreTitle={t('home:popularCategories.link')}
     >
       <div css={categoryContainer}>
         <Splide
@@ -52,7 +52,11 @@ const CategorySection = () => {
         >
           {categoriesLimit.map((item) => (
             <SplideSlideStyled key={item.id}>
-              <Link href={redirectToCategory(item.title)} passHref>
+              <Link
+                prefetch={false}
+                href={redirectToCategory(item.id)}
+                passHref
+              >
                 <a css={categoryItem}>
                   <div css={categoryItemTitle}>
                     <StringCutter>{item.title}</StringCutter>

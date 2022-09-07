@@ -21,7 +21,13 @@ export const Stamp: FC = () => {
           {t('welcome.DESCRIPTION')}
         </Text>
         <View style={styles.divider}></View>
-        <View style={styles.priceWrapper}>
+        <View
+          style={[
+            globalStyles.flexDirectionRow,
+            globalStyles.justifyContentSpaceBetween,
+            globalStyles.alignItemsCenter,
+          ]}
+        >
           <Text
             style={[
               globalStyles.fs16,

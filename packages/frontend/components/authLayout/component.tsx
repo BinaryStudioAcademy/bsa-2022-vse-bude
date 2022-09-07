@@ -3,7 +3,6 @@ import { Button } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import postStamp from '../../public/images/postStamp.png';
 import logoImg from '../../public/images/logo.png';
-import flagBg from '../../public/images/flagBg.png';
 import * as styles from './styles';
 import type { LayoutProps } from './types';
 
@@ -15,7 +14,7 @@ export const AuthLayout = ({ children }: LayoutProps) => {
       <div css={styles.formWrapper}>{children}</div>
 
       <div css={styles.bgWrapper}>
-        <Image layout="fill" priority objectFit="cover" src={flagBg.src} />
+        <div css={styles.flagBg}></div>
         <div css={styles.productWrapper}>
           <div css={styles.logo}>
             <Image width="185px" priority height="46px" src={logoImg.src} />
