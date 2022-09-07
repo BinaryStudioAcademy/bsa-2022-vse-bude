@@ -4,7 +4,7 @@ import { useCustomTheme } from '~/hooks/hooks';
 import { styles } from './styles';
 
 type TextProps = RNTextProps & {
-  children: string;
+  children: string | number;
 };
 
 const Text: FC<TextProps> = ({

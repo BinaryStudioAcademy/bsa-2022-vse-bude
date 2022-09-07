@@ -26,7 +26,7 @@ const Description = ({ product }: { product: ProductDto }) => {
       />
       <RenderDescriptionInfo
         title={t('screens:product_info.LOCATION')}
-        description={city || ''}
+        description={city ?? ''}
       />
       <RenderDescriptionInfo
         title={t('screens:product_info.DESCRIPTION')}

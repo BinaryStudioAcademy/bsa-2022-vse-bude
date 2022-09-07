@@ -46,7 +46,7 @@ const ProductInfo: FC = () => {
               { color: colors.text },
             ]}
           >
-            {title || ''}
+            {title ?? ''}
           </Text>
           <View
             style={[
@@ -62,7 +62,7 @@ const ProductInfo: FC = () => {
                 { color: colors.icon },
               ]}
             >
-              {views.toString() || ''}
+              {views ?? ''}
             </Text>
           </View>
           {imageLinks && <ImageCarousel imageLinks={imageLinks} />}
@@ -70,12 +70,9 @@ const ProductInfo: FC = () => {
           <SellerInfo />
         </ScrollView>
         {type == ProductType.AUCTION ? (
-          <LotPriceBlock
-            currentPrice={Number(currentPrice)}
-            minimalBid={Number(minimalBid)}
-          />
+          <LotPriceBlock currentPrice={currentPrice} minimalBid={minimalBid} />
         ) : (
-          <ProductPriceBlock price={Number(price)} />
+          <ProductPriceBlock price={price} />
         )}
       </ScreenWrapper>
     );

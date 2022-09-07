@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { AuthorDto, ColorPalette, SocialMedia } from '@vse-bude/shared';
 import { Text, View, Image, PhoneIcon } from '~/components/components';
 import { MOCK_SELLER } from '~/mock/mock-seller-info';
 import { globalStyles } from '~/styles/styles';
-import { AuthorDto, ColorPalette, SocialMedia } from '@vse-bude/shared';
 import { SocialButton } from './social-button';
 import { styles } from './styles';
 
@@ -46,7 +46,7 @@ const SellerInfo: FC<SellerInfoProps> = () => {
             ) : (
               <View style={styles.noAvatar}>
                 <Text style={[styles.noAvatarText]}>
-                  {firstName ? firstName[0] : 'VB'}
+                  {firstName[0] ?? 'VB'}
                 </Text>
               </View>
             )}
@@ -57,7 +57,7 @@ const SellerInfo: FC<SellerInfoProps> = () => {
                 globalStyles.fs14,
               ]}
             >
-              {firstName || ''}
+              {firstName ?? ''}
             </Text>
           </View>
         </View>
@@ -87,7 +87,7 @@ const SellerInfo: FC<SellerInfoProps> = () => {
                 globalStyles.fontWeightMedium,
               ]}
             >
-              {phone || ''}
+              {phone ?? ''}
             </Text>
           </View>
           {socialMedia.map((media) => (

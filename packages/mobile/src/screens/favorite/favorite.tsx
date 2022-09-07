@@ -2,7 +2,9 @@ import React, { FC, useEffect } from 'react';
 import { ListRenderItem } from 'react-native';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { selectProducts } from '~/store/products/selectors';
+import { loadAllProducts } from '~/store/products/actions';
 import { RootScreenName } from '~/common/enums/enums';
+import { ProductDto } from '@vse-bude/shared';
 import { RootNavigationParamList } from '~/common/types/types';
 import { useAppDispatch, useAppSelector } from '~/hooks/hooks';
 import {
@@ -12,8 +14,6 @@ import {
   TouchableOpacity,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { loadAllProducts } from '~/store/products/actions';
-import { ProductDto } from '@vse-bude/shared';
 
 const Favorite: FC = () => {
   const navigation = useNavigation<NavigationProp<RootNavigationParamList>>();
@@ -30,7 +30,7 @@ const Favorite: FC = () => {
         navigation.navigate(RootScreenName.ITEM_INFO, { itemId: item.id })
       }
     >
-      <Text style={globalStyles.mt4}>{item.title || ''}</Text>
+      <Text style={globalStyles.mt4}>{item.title ?? ''}</Text>
     </TouchableOpacity>
   );
 

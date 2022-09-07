@@ -77,7 +77,7 @@ const Navigation: FC = () => {
             component={NewItemScreen}
             options={{
               title: t('make_a_post.TITLE'),
-              headerLeft: () => <HeaderLeft />,
+              headerLeft: HeaderLeft,
               headerRight: HeaderSave,
             }}
           />
