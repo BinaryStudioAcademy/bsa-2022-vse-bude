@@ -8,5 +8,8 @@ const images = {
   ico: require('~/assets/images/organizations/ico.png'),
   hospitallers: require('~/assets/images/organizations/hospitallers.png'),
   chooseTypeThumb: require('~/assets/images/choose-type.png'),
+  list_item_image: require('~/assets/images/list-item-image.png'),
+  list_item_avatar: require('~/assets/images/list-item-avatar.png'),
+  list_item_organization: require('~/assets/images/list-item-organization.png'),
 };
 export { images };

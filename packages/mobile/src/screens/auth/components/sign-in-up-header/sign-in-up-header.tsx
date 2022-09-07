@@ -9,7 +9,10 @@ const SignInUpHeader = () => {
   return (
     <>
       <GoogleButton />
-      <Divider text={t('common:text.OR')} />
+      <Divider
+        text={t('common:text.OR')}
+        contentContainerStyle={{ marginTop: 20 }}
+      />
     </>
   );
 };
