@@ -43,7 +43,7 @@ const TypeOfPostScreen: FC = () => {
       <View style={globalStyles.mt5}>
         <PrimaryButton
           label={t('type_of_post.AUCTION')}
-          onPress={handleMakePost}
+          onPress={handleMakeAuction}
         />
       </View>
       <View style={[globalStyles.mt5, globalStyles.alignItemsCenter]}>
@@ -52,7 +52,7 @@ const TypeOfPostScreen: FC = () => {
       <View style={globalStyles.mt5}>
         <PrimaryButton
           label={t('type_of_post.DIRECT_SALE')}
-          onPress={handleMakeAuction}
+          onPress={handleMakePost}
         />
       </View>
     </ScreenWrapper>
