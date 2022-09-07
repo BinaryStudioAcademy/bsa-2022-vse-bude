@@ -36,7 +36,7 @@ const accountScreenOptions: NativeStackNavigationOptions = {
 const productScreenOptions: NativeStackNavigationOptions = {
   headerShown: true,
   headerTitleAlign: 'center',
-  headerLeft: () => <HeaderLeft label="List" />,
+  headerLeft: () => <HeaderLeft />,
 };
 
 const Navigation: FC = () => {
@@ -77,9 +77,7 @@ const Navigation: FC = () => {
             component={NewItemScreen}
             options={{
               title: t('make_a_post.TITLE'),
-              headerLeft: () => (
-                <HeaderLeft label={`${t('common:common.HOME')}`} />
-              ),
+              headerLeft: () => <HeaderLeft />,
               headerRight: HeaderSave,
             }}
           />
