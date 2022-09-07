@@ -14,6 +14,7 @@ import { useFormControl, useState } from '~/hooks/hooks';
 import { ColorPalette } from '@vse-bude/shared';
 import { globalStyles } from '~/styles/styles';
 import { StyleProp, ViewStyle } from 'react-native';
+import { DateTimeFormat, DateTimeType } from '~/common/enums/ui/ui';
 import {
   CalendarIcon,
   ClockIcon,
@@ -31,7 +32,7 @@ type Props<T extends FormControlValues> = {
   control: FormControl<T>;
   errors: FormControlErrors<T>;
   contentContainerStyle?: StyleProp<ViewStyle>;
-  mode: 'date' | 'time';
+  mode: DateTimeType;
 };
 
 const DatePicker = <T extends FormControlValues>({
@@ -43,15 +44,17 @@ const DatePicker = <T extends FormControlValues>({
   contentContainerStyle,
 }: Props<T>): ReactElement => {
   const [open, setOpen] = useState(false);
-  const { field } = useFormControl({ name, control });
+  const {
+    field: { value, onChange },
+  } = useFormControl({ name, control });
   const styles = useStyles();
-  const { value, onChange } = field;
 
   const today = dayjs();
   const tomorrow = today.add(1, 'day');
-  const date = value ? dayjs(value).format('DD/MM/YYYY') : null;
-  const time = value ? dayjs(value).format('HH:mm') : null;
+  const date = value ? dayjs(value).format(DateTimeFormat.DATE_ONLY) : null;
+  const time = value ? dayjs(value).format(DateTimeFormat.TIME_ONLY) : null;
   const textValue = mode === 'date' ? date : time;
+  const Icon = mode === 'time' ? ClockIcon : CalendarIcon;
 
   const handleOnChange = (
     _event: DateTimePickerEvent,
@@ -78,20 +81,12 @@ const DatePicker = <T extends FormControlValues>({
             {placeholder}
           </Text>
         )}
-        {mode === 'date' && (
-          <CalendarIcon
-            size={22}
-            color={ColorPalette.GRAY_300}
-            style={styles.inputIcon}
-          />
-        )}
-        {mode === 'time' && (
-          <ClockIcon
-            size={22}
-            color={ColorPalette.GRAY_300}
-            style={styles.inputIcon}
-          />
-        )}
+
+        <Icon
+          size={22}
+          color={ColorPalette.GRAY_300}
+          style={styles.inputIcon}
+        />
       </TouchableOpacity>
       {open && (
         <DateTimePicker
