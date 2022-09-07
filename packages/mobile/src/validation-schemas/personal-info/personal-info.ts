@@ -1,9 +1,19 @@
 import * as Joi from 'joi';
 import i18next from 'i18next';
-import { PLACE, SaveUserProfileDto } from '@vse-bude/shared';
+import { PLACE, SaveUserProfileDto, ZIP } from '@vse-bude/shared';
 import { PHONE_NUMBER_REGEX } from '~/common/regexp/regexp';
-import { MAX_COUNTRY_LENGTH } from '~/common/constants/constants';
-import { emailValidator, nameValidator } from '../helpers/helpers';
+import {
+  MAX_COUNTRY_LENGTH,
+  MAX_REGION_LENGTH,
+  MAX_CITY_LENGTH,
+  MAX_DELIVERY_DATA_LENGTH,
+  MAX_SOCIAL_NETWORK_LENGTH,
+} from '~/common/constants/constants';
+import {
+  emailValidator,
+  nameValidator,
+  passwordValidator,
+} from '../helpers/helpers';
 
 const personalInfoSchema = Joi.object<SaveUserProfileDto>({
   email: Joi.string()
@@ -43,31 +53,65 @@ const personalInfoSchema = Joi.object<SaveUserProfileDto>({
       'string.max': i18next.t('errors.MAX_COUNTRY_LENGTH'),
       'string.pattern.base': i18next.t('errors.PLACE_NAME'),
     }),
-  region: Joi.string().empty(''),
-  city: Joi.string().empty(''),
-  zip: Joi.string().empty(''),
-  deliveryData: Joi.string().empty(''),
-  instagram: Joi.string()
-    .uri()
+  region: Joi.string()
     .empty('')
+    .max(MAX_REGION_LENGTH)
+    .pattern(PLACE)
     .messages({
-      'string.uri': i18next.t('errors.WRONG_FORMAT'),
+      'string.max': i18next.t('errors.MAX_REGION_LENGTH'),
+      'string.pattern.base': i18next.t('errors.PLACE_NAME'),
+    }),
+  city: Joi.string()
+    .empty('')
+    .max(MAX_CITY_LENGTH)
+    .pattern(PLACE)
+    .messages({
+      'string.max': i18next.t('errors.MAX_CITY_LENGTH'),
+      'string.pattern.base': i18next.t('errors.PLACE_NAME'),
+    }),
+  zip: Joi.string()
+    .empty('')
+    .pattern(ZIP)
+    .messages({
+      'string.pattern.base': i18next.t('errors.INVALID_ZIP'),
+    }),
+  deliveryData: Joi.string()
+    .empty('')
+    .max(MAX_DELIVERY_DATA_LENGTH)
+    .messages({
+      'string.max': i18next.t('errors.MAX_DELIVERY_DATA_LENGTH'),
+    }),
+  instagram: Joi.string()
+    .empty('')
+    .uri()
+    .max(MAX_SOCIAL_NETWORK_LENGTH)
+    .messages({
+      'string.uri': i18next.t('errors.INVALID_URI'),
+      'string.max': i18next.t('errors.MAX_SOCIAL_NETWORK_LENGTH'),
     }),
   linkedin: Joi.string()
-    .uri()
     .empty('')
+    .uri()
+    .max(MAX_SOCIAL_NETWORK_LENGTH)
     .messages({
-      'string.uri': i18next.t('errors.WRONG_FORMAT'),
+      'string.uri': i18next.t('errors.INVALID_URI'),
+      'string.max': i18next.t('errors.MAX_SOCIAL_NETWORK_LENGTH'),
     }),
   facebook: Joi.string()
-    .uri()
     .empty('')
+    .uri()
+    .max(MAX_SOCIAL_NETWORK_LENGTH)
     .messages({
-      'string.uri': i18next.t('errors.WRONG_FORMAT'),
+      'string.uri': i18next.t('errors.INVALID_URI'),
+      'string.max': i18next.t('errors.MAX_SOCIAL_NETWORK_LENGTH'),
     }),
   password: Joi.string().empty(''),
-  newPassword: Joi.string().empty(''),
-  repeatPassword: Joi.string().empty(''),
+  newPassword: Joi.string().empty('').custom(passwordValidator).trim(),
+  repeatPassword: Joi.string()
+    .valid(Joi.ref('newPassword'))
+    .messages({
+      'any.only': i18next.t('errors.REPEAT_PASSWORD_INVALID'),
+    }),
 });
 
 export { personalInfoSchema };

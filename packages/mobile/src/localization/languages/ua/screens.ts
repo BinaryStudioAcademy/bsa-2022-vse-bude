@@ -3,6 +3,11 @@ import {
   MAX_PASSWORD_LENGTH,
   MIN_NAME_LENGTH,
   MIN_PASSWORD_LENGTH,
+  MAX_COUNTRY_LENGTH,
+  MAX_REGION_LENGTH,
+  MAX_CITY_LENGTH,
+  MAX_DELIVERY_DATA_LENGTH,
+  MAX_SOCIAL_NETWORK_LENGTH,
 } from '~/common/constants/constants';
 
 export const screens = {
@@ -84,6 +89,15 @@ export const screens = {
     FIRST_NAME_INVALID: 'Неправильний формат імені',
     LAST_NAME_INVALID: 'Неправильний формат прізвища',
     WRONG_FORMAT: 'Невірний формат',
+    PLACE_NAME: 'Має складатися з літер: А-Я або A-Z',
+    MAX_COUNTRY_LENGTH: `Назва країни має містити не більше ${MAX_COUNTRY_LENGTH} символів`,
+    MAX_REGION_LENGTH: `Назва області має містити не більше ${MAX_REGION_LENGTH} символів`,
+    MAX_CITY_LENGTH: `Назва населеного пункту має містити не більше ${MAX_CITY_LENGTH} символів`,
+    INVALID_ZIP: 'Поштовий індекс має складатися із 5 цифр',
+    MAX_DELIVERY_DATA_LENGTH: `Деталі доставки мають містити не більше ${MAX_DELIVERY_DATA_LENGTH} символів`,
+    INVALID_URI:
+      'Приклад посилання на Ваш профіль у мережі: https://some-net/me-id-1234',
+    MAX_SOCIAL_NETWORK_LENGTH: `Посилання не може перевищувати ${MAX_SOCIAL_NETWORK_LENGTH} символів`,
   },
   make_a_post: {
     TITLE: 'Створити публікацію',
