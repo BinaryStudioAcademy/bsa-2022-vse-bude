@@ -1,4 +1,5 @@
-﻿import { useEffect, useRef, useState } from 'react';
+﻿import { useTranslation } from 'next-i18next';
+import { useState } from 'react';
 import { ImageModal } from '../image-modal/component';
 import * as styles from './styles';
 
@@ -9,24 +10,26 @@ interface ItemImageSliderProps {
 export const ItemImageSlider = ({ imageLinks }: ItemImageSliderProps) => {
   const [focusedImage, setFocusedImage] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const imagesWrapper = useRef<HTMLDivElement>(null);
+
+  const { t } = useTranslation();
 
   const handleClick = (imageLink) => {
     setFocusedImage(imageLink);
   };
 
-  useEffect(() => {
-    function handleWheelScroll(e) {
-      e.preventDefault();
-      imagesWrapper.current.scrollLeft += e.deltaY;
-      imagesWrapper.current.scrollTop += e.deltaY;
-    }
-    imagesWrapper.current.addEventListener('wheel', handleWheelScroll);
-  }, []);
+  const handleKeyCodes = ['Spaces', 'Enter'];
+
+  const handleKeyDownPreview = (e, index) => {
+    handleKeyCodes.includes(e.code) && handleClick(index);
+  };
+
+  const handleKeyDownShowModal = (e) => {
+    handleKeyCodes.includes(e.code) && setIsModalOpen(true);
+  };
 
   return (
     <div css={styles.sliderWrapper}>
-      <div css={styles.imagesWrapper} ref={imagesWrapper}>
+      <div css={styles.imagesWrapper}>
         {imageLinks.map((link, index) => (
           <div
             key={link + index}
@@ -34,8 +37,10 @@ export const ItemImageSlider = ({ imageLinks }: ItemImageSliderProps) => {
               styles.imageWrapper,
               index === focusedImage && styles.pickedImage,
             ]}
+            tabIndex={0}
+            role="button"
+            onKeyDown={(e) => handleKeyDownPreview(e, index)}
             onClick={() => handleClick(index)}
-            aria-hidden="true"
           >
             <img key={index} src={link} alt="item" css={styles.image} />
           </div>
@@ -50,9 +55,11 @@ export const ItemImageSlider = ({ imageLinks }: ItemImageSliderProps) => {
         <div
           css={styles.seeImageCaption}
           onClick={() => setIsModalOpen(true)}
-          aria-hidden="true"
+          tabIndex={0}
+          role="button"
+          onKeyDown={(e) => handleKeyDownShowModal(e)}
         >
-          Open full image
+          {t('item:showImageCaption')}
         </div>
       </div>
       <ImageModal

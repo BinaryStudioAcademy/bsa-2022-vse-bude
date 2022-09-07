@@ -25,7 +25,7 @@ export const sliderWrapper = ({ spaces, breakpoints }: Theme) => css`
 export const imagesWrapper = ({ spaces, breakpoints }: Theme) => css`
   display: flex;
   flex-direction: column;
-  justify-content: fle;
+  justify-content: flex-start;
   margin-right: ${spaces.md};
   overflow: auto;
   @media (max-width: ${breakpoints.xxl}px) {
