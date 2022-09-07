@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { HydrateAction } from '@types';
 import type { FullUserProfileDto, UserProfileDto } from '@vse-bude/shared';
 import { HYDRATE } from 'next-redux-wrapper';
+import { phoneVerification } from '../auth';
 import {
   fetchUserProfileSSR,
   fetchFullUserProfile,
@@ -64,6 +65,13 @@ const profileSlice = createSlice({
     [updateUserProfile.fulfilled.type]: (state, { payload }) => {
       state.saveLoader = false;
       state.user = payload;
+    },
+
+    [phoneVerification.fulfilled.type]: (state) => {
+      state.user = {
+        ...state.user,
+        phoneVerified: true,
+      };
     },
 
     [updateUserProfile.pending.type]: (state) => {

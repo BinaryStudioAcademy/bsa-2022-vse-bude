@@ -14,6 +14,7 @@ import {
   SettingsScreen,
   SupportScreen,
   NewItemScreen,
+  TypeOfPostScreen,
 } from '~/screens/screens';
 import { HeaderLeft } from '~/components/components';
 import { MainNavigation } from './tabs/tabs.navigation';
@@ -74,6 +75,14 @@ const Navigation: FC = () => {
             component={NewItemScreen}
             options={{
               title: t('make_a_post.AUCTION_TITLE'),
+              headerLeft: HeaderLeft,
+            }}
+          />
+          <Stack.Screen
+            name={RootScreenName.TYPE_OF_NEW_POST}
+            component={TypeOfPostScreen}
+            options={{
+              title: t('make_a_post.TITLE'),
               headerLeft: HeaderLeft,
             }}
           />

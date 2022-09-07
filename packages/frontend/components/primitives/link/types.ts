@@ -3,7 +3,7 @@ import type { LinkProps } from 'next/link';
 import type React from 'react';
 
 interface LinkStyleProps {
-  variant?: 'primary' | 'secondary' | 'accent' | 'dashboard' | 'default';
+  variant?: 'primary' | 'secondary' | 'accent' | 'default' | 'button';
   label?: string;
   disabled?: boolean;
   title?: string;

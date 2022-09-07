@@ -7,8 +7,7 @@ export const updateProductValidation = (
   _res: Response,
   next: NextFunction,
 ) => {
-  const { t } = req;
-  const { error } = updatePostSchema(t).validate(req.body);
+  const { error } = updatePostSchema.validate(req.body);
   if (error) {
     throw new FieldError(error.message);
   }

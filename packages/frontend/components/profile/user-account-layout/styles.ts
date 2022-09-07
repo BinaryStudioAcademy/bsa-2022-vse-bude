@@ -30,7 +30,7 @@ export const pageHeader = ({
 
 export const linksContainer = ({ mq, spaces }: Theme) => css`
   display: none;
-  ${mq[2]} {
+  ${mq[3]} {
     display: flex;
     flex-direction: column;
     margin-right: ${spaces.xl3};

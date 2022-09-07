@@ -1,6 +1,6 @@
 type UserSignUpDto = {
   email: string;
-  phone: string;
+  phone?: string;
   firstName: string;
   lastName: string;
   password: string;

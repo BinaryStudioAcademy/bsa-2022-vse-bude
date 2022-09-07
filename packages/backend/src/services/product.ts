@@ -6,7 +6,12 @@ import {
   AuctionEndedError,
 } from '@errors';
 import type { Request } from 'express';
-import { getFilenameFromUrl, getUserIdFromRequest, toUtc } from '@helpers';
+import {
+  getFilenameFromUrl,
+  getUserIdFromRequest,
+  toUtc,
+  translateCondition,
+} from '@helpers';
 import type {
   AddProductToFavorites,
   AuctionPermissionsResponse,
@@ -15,16 +20,16 @@ import type {
   CreateProduct,
   UpdateProduct,
 } from '@vse-bude/shared';
-import type { Product } from '@prisma/client';
-import type { Bid } from '@prisma/client';
+import { ProductType } from '@vse-bude/shared';
 import { ProductStatus } from '@prisma/client';
-import type { VerifyService } from '@services';
+import type { Product, Bid } from '@prisma/client';
+import type { VerifyService, S3StorageService } from '@services';
 import type { BidRepository } from '@repositories';
-import { productMapper } from '@mappers';
+import { productMapper, auctionPermissionsMapper } from '@mappers';
 import { FieldError } from 'error/product/field-error';
 import { createPostSchema, updatePostSchema } from 'validation/product/schemas';
-import { auctionPermissionsMapper } from '../mapper/auction-permissions';
-import type { S3StorageService } from './s3-storage';
+import { NotVerifiedError } from 'error/user/not-verified';
+import { lang } from '@lang';
 
 export class ProductService {
   private _productRepository: ProductRepository;
@@ -56,10 +61,14 @@ export class ProductService {
     if (!product) {
       throw new ProductNotFoundError();
     }
-    // TODO: fix translation after localization refactor
-    // if (product.category) {
-    //   product.category.title = req.t(`categories.${product.category.title}`);
-    // }
+
+    if (product.category) {
+      product.category.title = lang(`categories:${product.category.title}`);
+    }
+
+    if (product.condition) {
+      product.condition = translateCondition(product.condition);
+    }
 
     const currentPrice = await this._productRepository.getCurrentPrice(
       product.id,
@@ -158,12 +167,22 @@ export class ProductService {
   }
 
   public async createProduct({ req, userId, fieldsData }: CreateProduct) {
-    const { t } = req;
-    const { error } = createPostSchema(t).validate(req.body);
+    const { error } = createPostSchema.validate(req.body);
     if (error) {
       throw new FieldError(error.message);
     }
+    const isUserVerified = await this._verifyService.isUserVerified(userId);
+
+    if (!isUserVerified) {
+      throw new NotVerifiedError();
+    }
     const imageLinks = await this._s3StorageService.uploadProductImages(req);
+    if (fieldsData.type === ProductType.AUCTION) {
+      fieldsData.price = fieldsData.recommendedPrice;
+    }
+    if (fieldsData.status !== ProductStatus.DRAFT) {
+      fieldsData.postDate = new Date();
+    }
     const data = {
       imageLinks,
       authorId: userId,
@@ -180,31 +199,35 @@ export class ProductService {
     userId,
     fieldsData,
   }: UpdateProduct) {
-    const { t } = req;
-    const { error } = updatePostSchema(t).validate(req.body);
+    const { error } = updatePostSchema.validate(req.body);
     if (error) {
       throw new FieldError(error.message);
     }
+
     const product = (await this._productRepository.getById(
       productId,
     )) as Product;
-    if (product.authorId !== userId) throw new UnauthorizedError(req);
+    if (product.authorId !== userId) throw new UnauthorizedError();
     const newImageLinks = await this._s3StorageService.uploadProductImages(req);
-    const oldImages = fieldsData?.images || [];
+    const oldImages = fieldsData?.images ? [...fieldsData.images] : [];
     const deletedImages = product.imageLinks.reduce(
       (acc, item) => (oldImages.includes(item) ? acc : [item, ...acc]),
       [],
     );
 
-    deletedImages.forEach(
-      async (image) =>
-        await this._s3StorageService.deleteImage(getFilenameFromUrl(image)),
-    );
+    for await (const image of deletedImages) {
+      await this._s3StorageService.deleteImage(getFilenameFromUrl(image));
+    }
 
     const imageLinks = oldImages
       ? [...oldImages, ...newImageLinks]
       : newImageLinks;
-
+    if (
+      product.status === ProductStatus.DRAFT &&
+      fieldsData.status !== ProductStatus.DRAFT
+    ) {
+      fieldsData.postDate = new Date();
+    }
     const data = {
       imageLinks,
       authorId: userId,
@@ -228,7 +251,7 @@ export class ProductService {
     }
     const isUserVerified = await this._verifyService.isUserVerified(userId);
     if (!isUserVerified) {
-      return undefined;
+      throw new NotVerifiedError();
     }
     await this._productRepository.buy(
       productId,
@@ -237,5 +260,36 @@ export class ProductService {
     );
 
     return productId;
+  }
+
+  public async getSimilar(productId: string) {
+    const product = await this._productRepository.getById(productId);
+
+    return this._productRepository.findSimilar(
+      product.city,
+      product.categoryId,
+      product.type,
+    );
+  }
+
+  public async getMostPopularLots(limit: string) {
+    return this._productRepository.getMostPopularLots(+limit);
+  }
+
+  public async getMostPopularProducts(limit: string) {
+    return this._productRepository.getMostPopularProducts(+limit);
+  }
+
+  public async getEditProductById({ userId, productId }) {
+    const product = await this.getById(productId);
+
+    if (!product) {
+      throw new ProductNotFoundError();
+    }
+    if (product.authorId !== userId) {
+      throw new UnauthorizedError();
+    }
+
+    return product;
   }
 }

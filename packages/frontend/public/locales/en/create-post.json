@@ -1,18 +1,20 @@
 {
   "headline": {
     "makePost": "Make a Post",
-    "downloadPhotos": "Download photos",
+    "editPost": "Edit a Post",
+    "uploadPhotos": "Uploaded photos",
     "description": "Description",
     "contact": "Contact"
   },
   "button": {
     "makePost": "Make a post",
+    "editPost": "Save and publish post",
     "saveDraft": "Save as draft",
     "ok": "OK",
     "cancel": "Cancel"
   },
   "caption": {
-    "downloadPhotos": "You can add to 30 pics"
+    "uploadPhotos": "You can add to 30 pics"
   },
   "tooltip": {
     "price": "Make sure that you enter the correct price in digits!",
@@ -34,7 +36,13 @@
     "linkedin": "Linkedin",
     "facebook": "Facebook",
     "site": "Site",
-    "checkbox": "Hide phone number"
+    "checkbox": "Hide phone number",
+    "minimalBid": "Minimal bid",
+    "recommendedPrice": "Recommended price",
+    "endDate": "End date",
+    "username": "Name",
+    "seller": "Seller",
+    "condition": "Condition"
   },
   "placeholder": {
     "category": "Select the category",
@@ -49,12 +57,22 @@
     "instagram": "Enter your nickname",
     "linkedin": "Enter your nickname",
     "facebook": "Enter your nickname",
-    "site": "Enter site address"
+    "site": "Enter site address",
+    "minimalBid": "Enter minimal bid",
+    "recommendedPrice": "Enter recommended price",
+    "username": "Enter user`s name",
+    "condition": "Select condition of item"
   },
   "validation": {
+    "link": {
+      "max": "Link too long",
+      "uri": "Invalid link format"
+    },
     "images": {
       "unsupportedType": "Unsupported file extension!",
-      "large": "File size too large!"
+      "large": "File size too large!",
+      "many": "Too many images uploaded!",
+      "few": "Upload 2 or more images!"
     },
     "title": {
       "long": "Title too long",
@@ -74,6 +92,27 @@
     },
     "country": {
       "empty": "Country cannot be empty"
+    },
+    "category": {
+      "empty": "Category cannot be empty"
+    },
+    "condition": {
+      "empty": "condition cannot be empty"
+    },
+    "date": {
+      "base": "Enter a date after today"
     }
+  },
+  "sellerSelect": {
+    "currentUser": "Current user",
+    "otherUser": "Other user"
+  },
+  "conditionSelect": {
+    "used": "used",
+    "new": "new"
+  },
+  "notVerified": {
+    "text": "Please confirm your phone and email address first",
+    "btn": "Go to verify"
   }
 }

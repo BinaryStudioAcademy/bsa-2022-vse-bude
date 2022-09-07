@@ -20,34 +20,26 @@ export const initVerifyRoutes = (
    * /verify/phone-verify:
    *   post:
    *     tags: [Verify]
+   *     security:
+   *      - Bearer: []
+   *     description: Verifies user's phone using code -> phoneVerified = true
    *     produces:
    *       - application/json
-   *     parameters:
-   *       - name: userId
-   *         in: query
-   *         required: true
-   *         schema:
-   *           type: string
-   *       - name: code
-   *         in: body
-   *         required: true
-   *         schema:
-   *           type: object
-   *           required:
-   *             - code
-   *           properties:
-   *             code:
-   *               type: string
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             $ref: "#/definitions/VerifyPhoneBody"
    *     responses:
-   *       200:
-   *         description: Ok
+   *       204:
+   *         description: Empty Response
+   *       4**:
+   *         description: Something went wrong
    *         content:
    *           application/json:
    *             schema:
-   *               type: object
-   *               properties:
-   *                 contribution:
-   *                   $ref: "#/definitions/User"
+   *               $ref: "#/definitions/Response400"
    */
 
   router.post(
@@ -69,24 +61,20 @@ export const initVerifyRoutes = (
    * /verify/phone/resend-code:
    *   post:
    *     tags: [Verify]
+   *     security:
+   *      - Bearer: []
+   *     description: Resends phone verification code | Sends SMS to user's phone number
    *     produces:
    *       - application/json
-   *     parameters:
-   *       - name: userId
-   *         in: query
-   *         required: true
-   *         schema:
-   *           type: string
    *     responses:
-   *       200:
-   *         description: Ok
+   *       204:
+   *         description: Empty Response
+   *       4**:
+   *         description: Something went wrong
    *         content:
    *           application/json:
    *             schema:
-   *               type: object
-   *               properties:
-   *                 contribution:
-   *                   $ref: "#/definitions/User"
+   *               $ref: "#/definitions/Response400"
    */
 
   router.post(
@@ -96,6 +84,33 @@ export const initVerifyRoutes = (
       verifyService.resendPhoneCode(req.userId, VerificationTypes.PHONE),
     ),
   );
+
+  /**
+   * @openapi
+   * /verify/email-verify:
+   *   post:
+   *     tags: [Verify]
+   *     security:
+   *      - Bearer: []
+   *     description: Verifies user's email using code -> emailVerified = true
+   *     produces:
+   *       - application/json
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             $ref: "#/definitions/VerifyEmailBody"
+   *     responses:
+   *       204:
+   *         description: Empty Response
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
 
   router.post(
     apiPath(path, VerifyApiRoutes.VERIFY_EMAIL),
@@ -111,13 +126,26 @@ export const initVerifyRoutes = (
     }),
   );
 
-  router.post(
-    apiPath(path, VerifyApiRoutes.PHONE_RESEND_CODE),
-    authMiddleware,
-    wrap((req: Request) =>
-      verifyService.resendPhoneCode(req.userId, VerificationTypes.PHONE),
-    ),
-  );
+  /**
+   * @openapi
+   * /verify/email/resend-code:
+   *   post:
+   *     tags: [Verify]
+   *     security:
+   *      - Bearer: []
+   *     description: Resends email verification code | Sends Email to user's email
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       204:
+   *         description: Empty Response
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
 
   router.post(
     apiPath(path, VerifyApiRoutes.EMAIL_RESEND_CODE),

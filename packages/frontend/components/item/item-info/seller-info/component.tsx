@@ -3,6 +3,7 @@ import { IconColor, IconName, Routes } from '@enums';
 import type { AuthorDto } from '@vse-bude/shared';
 import Router from 'next/router';
 import { useTranslation } from 'next-i18next';
+import Link from 'next/link';
 import * as styles from './styles';
 
 interface SellerInfoProps {
@@ -36,21 +37,26 @@ export const SellerInfo = ({ seller, onContactSeller }: SellerInfoProps) => {
           image={seller.avatar}
           handleClick={handleAvatarClick}
         />
-        <span>{seller.firstName + ' ' + seller.lastName}</span>
+        <Link href={`${Routes.PROFILE}/${seller.id}`} passHref>
+          <span>{seller.firstName + ' ' + seller.lastName}</span>
+        </Link>
       </div>
       <div css={styles.contacts}>
         <div css={styles.phone}>
-          <Icon size="sm" icon={IconName.PHONE} color={IconColor.YELLOW} />
-          <span>{seller.phone}</span>
+          <Icon size="md" icon={IconName.PHONE} color={IconColor.YELLOW} />
+          <a css={styles.sellerSocialLink} href={`tel:${seller.phone}`}>
+            {seller.phone}
+          </a>
         </div>
         {seller.socialMedia.map((social) => (
           <div key={social.id}>
             <Anchor href={social.link}>
               <Icon
-                size="sm"
+                size="md"
                 icon={IconName[social.socialMedia]}
                 color={IconColor.YELLOW}
-              ></Icon>
+              />
+              <div css={styles.sellerSocialLink}>{social.socialMedia}</div>
             </Anchor>
           </div>
         ))}

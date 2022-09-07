@@ -42,7 +42,7 @@ const Welcome: FC<Props> = ({ navigation }) => {
         ]}
       >
         <LogoWhite style={styles.logo} />
-        <View style={globalStyles.py7}>
+        <View style={styles.stampWrapper}>
           <Stamp />
         </View>
         <View style={styles.buttonsWrapper}>

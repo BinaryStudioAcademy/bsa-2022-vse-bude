@@ -44,16 +44,6 @@ export const PhoneVerification = () => {
   return (
     <form css={verifyForm} onSubmit={handleSubmit(onSubmit)}>
       <div css={inputWrapper}>
-        {/*<div css={verifyText}>*/}
-        {/*  <span>*/}
-        {/*    {t('auth:phoneText')}*/}
-        {/*    {user && (*/}
-        {/*      <span css={verifyEntity}> {hideMainTextPart(user.phone)}</span>*/}
-        {/*    )}*/}
-        {/*    !*/}
-        {/*  </span>*/}
-        {/*  <span>{t('auth:enterCode')}!</span>*/}
-        {/*</div>*/}
         <Input
           {...register('code')}
           css={verifyInput}

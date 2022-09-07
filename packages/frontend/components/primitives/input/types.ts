@@ -16,7 +16,7 @@ export interface InputProps extends PasswordProps {
   inerasableValue?: string;
 }
 
-export interface InputDateProps extends PasswordProps {
-  value: string;
+export interface InputDateProps extends Omit<InputProps, 'value' | 'type'> {
+  value: Date;
   setValue: (string) => void;
 }

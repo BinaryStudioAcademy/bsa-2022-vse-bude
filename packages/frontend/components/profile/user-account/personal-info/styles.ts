@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import type { Theme } from '@emotion/react';
 import { resetButton } from 'theme';
+import { ColorPalette } from '@vse-bude/shared';
 
 export const form = () => css`
   display: flex;
@@ -20,12 +21,18 @@ export const headerWrapper = ({ spaces }: Theme) => css`
 
 export const flagWrapper = ({ radiuses }: Theme) => css`
   border-radius: ${radiuses.md};
+  overflow: hidden;
 `;
 
 export const flag = ({ heights, radiuses }: Theme) => css`
   display: block;
   height: ${heights.flag};
   width: 100%;
+  background: linear-gradient(
+    ${ColorPalette.BLUE} 50%,
+    ${ColorPalette.YELLOW} 50%
+  );
+  filter: blur(20px);
   border-radius: ${radiuses.md};
 `;
 
@@ -62,16 +69,19 @@ export const marginBottom = ({ spaces }: Theme) => css`
 
 export const sections = ({ mq }: Theme) => css`
   width: 450px;
-  ${mq[0]} {
+  ${mq[1]} {
     width: 500px;
   }
-  ${mq[3]} {
+  ${mq[4]} {
     width: 700px;
   }
 `;
 
 export const sectionRow = ({ spaces }: Theme) => css`
   margin-bottom: ${spaces.xl1};
+  &:first-of-type {
+    margin-bottom: 0;
+  }
 `;
 
 export const groupeInputs = ({ spaces }: Theme) => css`
@@ -85,17 +95,27 @@ export const inputRow = ({ spaces }: Theme) => css`
 
 export const groupePhone = ({ spaces }: Theme) => css`
   gap: ${spaces.md};
-  align-items: flex-end;
 `;
 
 export const phoneRow = css`
   flex-grow: 2;
 `;
 
-export const avatarUpdateButton = ({ colors, spaces, radiuses }: Theme) => css`
+export const verifyButtonWrapper = ({ spaces }: Theme) => css`
+  padding: 18px 0 ${spaces.xl1} 0;
+`;
+export const avatarPopoverTrigger = css`
   position: absolute;
   bottom: 0;
   right: 0;
+`;
+
+export const bodyWrapper = ({ spaces }: Theme) => css`
+  margin-top: ${spaces.xs};
+  z-index: 0;
+`;
+
+export const avatarUpdateButton = ({ colors, spaces, radiuses }: Theme) => css`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -150,8 +170,9 @@ export const popoverContentItem = ({
   }
 `;
 
-export const popoverContentWrapper = ({ spaces }: Theme) => css`
+export const popoverContentWrapper = ({ spaces, shadows }: Theme) => css`
   display: flex;
   flex-direction: column;
   padding: ${spaces.sm} 0;
+  box-shadow: ${shadows.bottom};
 `;

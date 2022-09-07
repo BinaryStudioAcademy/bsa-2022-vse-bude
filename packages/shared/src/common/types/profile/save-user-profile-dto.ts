@@ -7,7 +7,7 @@ type SaveUserProfileDto = {
   region?: string;
   city?: string;
   zip?: string;
-  novaPoshtaRef?: string;
+  deliveryData?: string;
   facebook?: string;
   linkedin?: string;
   instagram?: string;

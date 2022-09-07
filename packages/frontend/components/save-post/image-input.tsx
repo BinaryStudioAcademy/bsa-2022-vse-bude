@@ -7,6 +7,7 @@ import { useCallback, useState } from 'react';
 import { allowedImgExtension } from 'common/enums/allowedImgExtension';
 import { MAX_IMAGE_SIZE } from '@vse-bude/shared';
 import { useDropzone } from 'react-dropzone';
+import { useEffect } from 'react';
 import { SectionHeader } from '../profile/user-account/common';
 import type { ImageInputProps } from './types';
 import * as styles from './styles';
@@ -77,6 +78,13 @@ function ImageInput({ images, setImages }: ImageInputProps) {
     setCurrentImage(undefined);
   };
 
+  useEffect(() => {
+    if (
+      images.filter((item) => typeof item === 'string').length === images.length
+    )
+      setImagePreviews(images as string[]);
+  }, [images]);
+
   return (
     <Column css={styles.sectionRow}>
       {currentImage && (
@@ -89,10 +97,8 @@ function ImageInput({ images, setImages }: ImageInputProps) {
         />
       )}
 
-      <SectionHeader>{t('create-post:headline.downloadPhotos')}</SectionHeader>
-      <p css={styles.photosCaption}>
-        {t('create-post:caption.downloadPhotos')}
-      </p>
+      <SectionHeader>{t('create-post:headline.uploadPhotos')}</SectionHeader>
+      <p css={styles.photosCaption}>{t('create-post:caption.uploadPhotos')}</p>
       <div data-variant={getVariant()} css={styles.photosWrapper}>
         <input
           css={styles.photosInput}

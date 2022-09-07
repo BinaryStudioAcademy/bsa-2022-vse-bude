@@ -9,9 +9,11 @@ import {
   resendEmailCode,
   resetPasswordLink,
   updatePassword as updatePasswordRequest,
+  getUserSSR,
 } from 'services/auth';
 import type {
   EmailVerifyDto,
+  Http,
   PhoneVerifyDto,
   ResetPasswordLink,
   UpdatePassword,
@@ -24,7 +26,7 @@ import { auth } from '@helpers';
 import { Routes } from '@enums';
 import type { IAuth } from '@types';
 import { addToast } from 'store/toast/actions';
-import { hideVerifyModal } from '../verify/actions';
+import { hideVerifyModal } from '../modals/actions';
 import { AuthActions } from './action-types';
 
 const getCurrentUser = createAsyncThunk(
@@ -32,6 +34,22 @@ const getCurrentUser = createAsyncThunk(
   async (_request, { rejectWithValue }) => {
     try {
       return await getUser();
+    } catch (e) {
+      if (e instanceof HttpError) {
+        if (e.status === HttpStatusCode.UNAUTHORIZED) {
+          auth.logOut();
+        }
+      }
+
+      return rejectWithValue(e.message);
+    }
+  },
+);
+const getCurrentUserSSR = createAsyncThunk(
+  AuthActions.FETCH_USER,
+  async (httpSSR: Http, { rejectWithValue }) => {
+    try {
+      return await getUserSSR(httpSSR);
     } catch (e) {
       if (e instanceof HttpError) {
         if (e.status === HttpStatusCode.UNAUTHORIZED) {
@@ -274,6 +292,7 @@ const updatePassword = createAsyncThunk(
 );
 
 export {
+  getCurrentUserSSR,
   loginUser,
   logoutUser,
   signUpUser,

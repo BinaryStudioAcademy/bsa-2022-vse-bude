@@ -1,7 +1,7 @@
 import type { Services } from '@services';
 import { type Request, Router } from 'express';
 import type { ApiRoutes } from '@vse-bude/shared';
-import { ProfileApiRoutes } from '@vse-bude/shared';
+import { ProfileApiRoutes, AccountApiRoutes } from '@vse-bude/shared';
 import { wrap } from '@helpers';
 import { apiPath } from '@helpers';
 import { authMiddleware, uploadImage } from '@middlewares';
@@ -9,32 +9,119 @@ import { profileValidation } from '@validation';
 import type { UploadFileRequest } from '@types';
 
 export const initProfileRoutes = (
-  { profileService }: Services,
+  { profileService, myListService }: Services,
   path: ApiRoutes,
 ): Router => {
   const router = Router();
 
+  /**
+   * @openapi
+   * /profile/full-data:
+   *   get:
+   *     description: Get Full user's profile data
+   *     security:
+   *       - Bearer: []
+   *     tags: [Profile]
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               $ref: "#/definitions/FullUserProfileDto"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
   router.get(
     apiPath(path, ProfileApiRoutes.GET_FULL_USER_DATA),
     authMiddleware,
     wrap(async (req: Request) => {
-      const { userId, t } = req;
-      const fullUserProfile = await profileService.getFullUserData({
-        userId,
-        t,
-      });
+      const { userId } = req;
 
-      return {
-        ...fullUserProfile,
-      };
+      return await profileService.getFullUserData({
+        userId,
+      });
     }),
   );
 
+  /**
+   * @openapi
+   * /profile/my-list:
+   *   get:
+   *     description: Get user's items data
+   *     security:
+   *       - Bearer: []
+   *     tags: [Items]
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               $ref: "#/definitions/MyListItem"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
+  router.get(
+    apiPath(path, AccountApiRoutes.MY_LIST),
+    authMiddleware,
+    wrap(async (req: Request) => {
+      const { userId } = req;
+      await profileService.getUser({
+        userId,
+      });
+
+      return await myListService.getAllUserItems({ userId });
+    }),
+  );
+
+  /**
+   * @openapi
+   * /profile/save:
+   *   put:
+   *     description: Updates user profile data
+   *     security:
+   *       - Bearer: []
+   *     tags: [Profile]
+   *     produces:
+   *       - application/json
+   *     requestBody:
+   *        schema:
+   *          $ref: "#/definitions/UpdateProfileBody"
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               $ref: "#/definitions/FullUserProfileDto"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
   router.put(
     apiPath(path, ProfileApiRoutes.UPDATE_DATA),
     authMiddleware,
     wrap(async (req: Request) => {
-      const { userId, t } = req;
+      const { userId } = req;
       profileValidation({ req });
 
       const {
@@ -42,14 +129,31 @@ export const initProfileRoutes = (
         lastName,
         email,
         phone,
+        userAddress,
         socialMedia,
         password,
         newPassword,
       } = req.body;
 
+      if (phone) {
+        await profileService.checkIsPhoneExists({
+          userId,
+          phone,
+        });
+      }
+
+      if (!phone) {
+        await profileService.cancelPhoneVerified({ userId });
+      }
+
       const user = await profileService.updateUserProfile({
         userId,
         data: { firstName, lastName, email, phone },
+      });
+
+      const address = await profileService.updateUserAddress({
+        userId,
+        userAddress,
       });
 
       await profileService.updateUserSocialMedia({
@@ -62,12 +166,11 @@ export const initProfileRoutes = (
       if (newPassword) {
         await profileService.changePassword({
           userId,
-          t,
           data: { newPassword, password },
         });
       }
 
-      return { ...user, socialMedia: links };
+      return { ...user, userAddress: address, socialMedia: links };
     }),
   );
 
@@ -77,18 +180,46 @@ export const initProfileRoutes = (
     uploadImage,
     wrap(async (req: UploadFileRequest) => {
       const { userId } = req;
-      const avatar = await profileService.updateAvatar({ userId, req });
 
-      return avatar;
+      return await profileService.updateAvatar({ userId, req });
     }),
   );
 
+  /**
+   * @openapi
+   * /profile/:userId:
+   *   get:
+   *     description: Get user's profile
+   *     security:
+   *       - Bearer: []
+   *     tags: [Profile]
+   *     parameters:
+   *       - in: path
+   *         name: userId
+   *         required: true
+   *         type: string
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               $ref: "#/definitions/UserProfileDto"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
   router.get(
     apiPath(path, ProfileApiRoutes.GET_USER_BY_ID),
     wrap(async (req: Request) => {
       const { userId } = req.params;
-      const { t } = req;
-      const user = await profileService.getUser({ userId, t });
+      const user = await profileService.getUser({ userId });
       const socialMedia = await profileService.getSocialMedia({ userId });
 
       return {
