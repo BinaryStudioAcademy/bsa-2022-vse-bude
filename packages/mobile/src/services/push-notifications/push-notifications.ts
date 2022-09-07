@@ -1,8 +1,6 @@
 import PushNotification from 'react-native-push-notification';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
-
-const PUSH_CHANNEL_NAME = 'vsebude_push_notifications';
-const PUSH_ICON_FILENAME = 'ic_notification';
+import { PUSH_CHANNEL, PUSH_ICON } from '~/common/constants/constants';
 
 type PushNotificationProps = {
   title?: string;
@@ -14,8 +12,8 @@ class PushController {
     PushNotification.localNotification({
       title,
       message: body,
-      smallIcon: PUSH_ICON_FILENAME,
-      channelId: PUSH_CHANNEL_NAME,
+      smallIcon: PUSH_ICON,
+      channelId: PUSH_CHANNEL,
     });
   }
 
@@ -28,8 +26,8 @@ class PushController {
     return new Promise((resolve) => {
       PushNotification.createChannel(
         {
-          channelId: PUSH_CHANNEL_NAME,
-          channelName: PUSH_CHANNEL_NAME,
+          channelId: PUSH_CHANNEL,
+          channelName: PUSH_CHANNEL,
         },
         () => resolve(),
       );
