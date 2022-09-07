@@ -1,7 +1,5 @@
-﻿import { useState } from 'react';
-import Image from 'next/image';
-import { Modal, IconButton } from '@components/primitives';
-import { IconColor, IconName } from '@enums';
+﻿import { useEffect, useRef, useState } from 'react';
+import { ImageModal } from '../image-modal/component';
 import * as styles from './styles';
 
 interface ItemImageSliderProps {
@@ -11,6 +9,7 @@ interface ItemImageSliderProps {
 export const ItemImageSlider = ({ imageLinks }: ItemImageSliderProps) => {
   const [focusedImage, setFocusedImage] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const imagesWrapper = useRef<HTMLDivElement>(null);
 
   const handleClick = (imageLink) => {
     setFocusedImage(imageLink);
@@ -19,36 +18,44 @@ export const ItemImageSlider = ({ imageLinks }: ItemImageSliderProps) => {
     'https://loremflickr.com/640/480/abstract',
     'https://loremflickr.com/640/480/abstract',
     'https://loremflickr.com/640/480/abstract',
+    'https://loremflickr.com/640/480/abstract',
+    'https://loremflickr.com/640/480/abstract',
   ];
 
   imageLinks = [...imageLinks, ...extendLinks];
 
+  useEffect(() => {
+    function handleWheelScroll(e) {
+      e.preventDefault();
+      imagesWrapper.current.scrollLeft += e.deltaY;
+      imagesWrapper.current.scrollTop += e.deltaY;
+    }
+    imagesWrapper.current.addEventListener('wheel', handleWheelScroll);
+  }, []);
+
   return (
     <div css={styles.sliderWrapper}>
-      <div css={styles.imagesWrapper}>
+      <div css={styles.imagesWrapper} ref={imagesWrapper}>
         {imageLinks.map((link, index) => (
           <div
             key={link + index}
-            css={[styles.image, index === focusedImage && styles.pickedImage]}
+            css={[
+              styles.imageWrapper,
+              index === focusedImage && styles.pickedImage,
+            ]}
+            onClick={() => handleClick(index)}
+            aria-hidden="true"
           >
-            <Image
-              key={index}
-              onClick={() => handleClick(index)}
-              src={link}
-              alt="item image"
-              layout="fill"
-            />
+            <img key={index} src={link} alt="item" css={styles.image} />
           </div>
         ))}
       </div>
-      <div css={styles.focusedImage}>
-        <Image
-          src={imageLinks[focusedImage]}
-          onClick={() => setIsModalOpen(true)}
-          alt="item image"
-          layout="fill"
-          objectFit="cover"
-        />
+      <div
+        css={styles.focusedImageWrapper}
+        onClick={() => setIsModalOpen(true)}
+        aria-hidden="true"
+      >
+        <img src={imageLinks[focusedImage]} alt="item" css={styles.image} />
         <div
           css={styles.seeImageCaption}
           onClick={() => setIsModalOpen(true)}
@@ -57,25 +64,11 @@ export const ItemImageSlider = ({ imageLinks }: ItemImageSliderProps) => {
           Open full image
         </div>
       </div>
-      <Modal visible={isModalOpen}>
-        <div css={styles.modalImageWrapper}>
-          <img
-            src={imageLinks[focusedImage]}
-            alt="item"
-            css={styles.modalImage}
-          />
-          <div css={styles.modalClose}>
-            <IconButton
-              ariaLabel="closeModal"
-              icon={IconName.XMARK}
-              color={IconColor.ORANGE}
-              backgroundColor={'lightgray'}
-              size="md"
-              onClick={() => setIsModalOpen(false)}
-            ></IconButton>
-          </div>
-        </div>
-      </Modal>
+      <ImageModal
+        image={imageLinks[focusedImage]}
+        isOpen={isModalOpen}
+        setModalVisible={setIsModalOpen}
+      />
     </div>
   );
 };

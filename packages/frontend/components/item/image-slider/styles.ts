@@ -3,8 +3,8 @@ import { css } from '@emotion/react';
 
 export const sliderWrapper = ({ spaces, breakpoints }: Theme) => css`
   display: flex;
-  width: 600px;
-  height: 300px;
+  width: 650px;
+  height: 350px;
 
   @media (max-width: ${breakpoints.xxl}px) {
     flex-direction: column;
@@ -25,8 +25,8 @@ export const sliderWrapper = ({ spaces, breakpoints }: Theme) => css`
 export const imagesWrapper = ({ spaces, breakpoints }: Theme) => css`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  margin-right: ${spaces.lg};
+  justify-content: fle;
+  margin-right: ${spaces.md};
   overflow: auto;
   @media (max-width: ${breakpoints.xxl}px) {
     width: 100%;
@@ -35,15 +35,19 @@ export const imagesWrapper = ({ spaces, breakpoints }: Theme) => css`
   }
 `;
 
-export const image = ({ spaces, breakpoints }: Theme) => css`
+export const imageWrapper = ({ spaces, breakpoints }: Theme) => css`
   position: relative;
-  margin-bottom: ${spaces.lg};
-  min-width: 120px;
-  min-height: 80px;
+  margin-bottom: ${spaces.md};
+  max-width: 120px;
+  min-width: 100px;
+  max-height: 80px;
   &:last-child {
     margin-bottom: 0;
   }
   transition: 0.6s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   @media (max-width: ${breakpoints.xxl}px) {
     margin-bottom: 0;
@@ -55,22 +59,30 @@ export const image = ({ spaces, breakpoints }: Theme) => css`
   }
 `;
 
+export const image = css`
+  height: 100%;
+  max-width: 100%;
+`;
+
 export const pickedImage = ({ opacities }: Theme) => css`
   opacity: ${opacities.sm};
 `;
 
-export const focusedImage = ({ spaces, breakpoints }: Theme) => css`
+export const focusedImageWrapper = ({ spaces, breakpoints }: Theme) => css`
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex: 1;
+  max-height: 400px;
   transition: 0.6s;
   @media (max-width: ${breakpoints.xxl}px) {
     width: 100%;
     order: -1;
-    margin-bottom: ${spaces.lg};
+    margin-bottom: ${spaces.md};
   }
-
-  @media (max-width: ${breakpoints.md}px) {
-    margin-bottom: ${spaces.sm};
+  @media (max-width: ${breakpoints.xxl}px) {
+    max-height: 320px;
   }
   :hover {
     > div {
@@ -102,22 +114,4 @@ export const seeImageCaption = ({
   font-weight: ${fontWeights.h4};
   opacity: ${opacities.sm};
   cursor: pointer;
-`;
-
-export const modalImageWrapper = css`
-  max-width: 100vw;
-  max-height: 70vh;
-  position: relative;
-`;
-
-export const modalImage = css`
-  display: block;
-  width: 100%;
-  max-height: inherit;
-`;
-
-export const modalClose = ({ spaces }: Theme) => css`
-  position: absolute;
-  top: ${spaces.md};
-  right: ${spaces.md};
 `;
