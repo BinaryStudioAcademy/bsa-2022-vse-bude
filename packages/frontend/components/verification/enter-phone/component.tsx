@@ -5,6 +5,7 @@ import { LinkButton } from 'components/primitives/link-button';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import hand from 'public/images/mocup_hand1.png';
+import type { ChangeEvent } from 'react';
 import { nextVerifyModal, hideVerifyModal } from 'store/modals/actions';
 import * as styles from '../styles';
 
@@ -27,6 +28,10 @@ const EnterPhoneModal = ({ phone, setPhone }: ModalProps) => {
     dispatch(nextVerifyModal());
   };
 
+  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPhone(e.target.value);
+  };
+
   return (
     <div css={styles.innerWrapper}>
       <h3 css={styles.headline}>{t('common:verify.enterPhone.headline')}</h3>
@@ -47,7 +52,7 @@ const EnterPhoneModal = ({ phone, setPhone }: ModalProps) => {
           type="text"
           name="phone"
           value={phone}
-          onChange={(e) => setPhone(e.target.value)}
+          onChange={handleOnChange}
         />
         <Button onClick={changeModal}>
           {t('common:verify.enterPhone.button.verify')}
