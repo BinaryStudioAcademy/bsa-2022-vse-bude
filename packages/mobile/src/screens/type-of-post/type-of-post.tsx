@@ -23,8 +23,7 @@ const TypeOfPostScreen: FC = () => {
   };
 
   const handleMakeAuction = () => {
-    // TODO: change to RootScreenName.NEW_AUCTION after merge
-    navigation.navigate(RootScreenName.NEW_ITEM);
+    navigation.navigate(RootScreenName.NEW_AUCTION);
   };
 
   return (
