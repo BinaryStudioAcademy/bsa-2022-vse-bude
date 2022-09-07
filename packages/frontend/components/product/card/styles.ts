@@ -38,7 +38,7 @@ export const productDescription = ({
   font-weight: ${fontWeights.body2};
   line-height: ${lineHeights.body2};
   word-break: break-all;
-  min-height: ${2*/\d+/.exec(lineHeights.body2)}px;
+  min-height: ${2 * Number(/\d+/.exec(lineHeights.body2))}px;
 `;
 
 export const divider = ({ colors }: Theme) => css`
