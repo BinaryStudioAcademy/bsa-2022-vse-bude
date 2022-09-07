@@ -6,28 +6,21 @@ import {
 import { Dimensions } from 'react-native';
 import { RootScreenName } from '~/common/enums/enums';
 import { MainNavigation } from '../tabs/tabs.navigation';
-import { DrawerContent } from './components/drawer-content';
 
 const HomeWithMenuNavigation: FC = () => {
   const Drawer = createDrawerNavigator();
 
   const options: DrawerNavigationOptions = {
-    headerShown: true,
+    headerShown: false,
+    swipeEdgeWidth: 200,
     drawerStyle: {
       width: Dimensions.get('screen').width,
     },
   };
 
   return (
-    <Drawer.Navigator
-      drawerContent={(props) => <DrawerContent {...props} />}
-      screenOptions={options}
-    >
-      <Drawer.Screen
-        name={RootScreenName.MAIN}
-        component={MainNavigation}
-        options={{ drawerItemStyle: { height: 0 } }}
-      />
+    <Drawer.Navigator screenOptions={options}>
+      <Drawer.Screen name={RootScreenName.MAIN} component={MainNavigation} />
     </Drawer.Navigator>
   );
 };
