@@ -105,7 +105,20 @@ export const seeImageCaption = ({
   cursor: pointer;
 `;
 
-export const modalImage = () => css`
-  max-width: 600px;
-  height: auto;
+export const modalImageWrapper = css`
+  max-width: 800px;
+  max-height: 70vh;
+  position: relative;
+`;
+
+export const modalImage = css`
+  display: block;
+  max-width: 100%;
+  max-height: inherit;
+`;
+
+export const modalClose = ({ spaces }: Theme) => css`
+  position: absolute;
+  top: ${spaces.md};
+  right: ${spaces.md};
 `;

@@ -1,6 +1,7 @@
 ﻿import { useState } from 'react';
 import Image from 'next/image';
-import { Modal } from '@components/primitives';
+import { Modal, IconButton } from '@components/primitives';
+import { IconColor, IconName } from '@enums';
 import * as styles from './styles';
 
 interface ItemImageSliderProps {
@@ -57,14 +58,22 @@ export const ItemImageSlider = ({ imageLinks }: ItemImageSliderProps) => {
         </div>
       </div>
       <Modal visible={isModalOpen}>
-        <div css={styles.modalImage}>
-          <Image
+        <div css={styles.modalImageWrapper}>
+          <img
             src={imageLinks[focusedImage]}
-            onClick={() => setIsModalOpen(false)}
-            alt="item image"
-            layout="fill"
-            objectFit="contain"
+            alt="item"
+            css={styles.modalImage}
           />
+          <div css={styles.modalClose}>
+            <IconButton
+              ariaLabel="closeModal"
+              icon={IconName.XMARK}
+              color={IconColor.ORANGE}
+              backgroundColor={'lightgray'}
+              size="md"
+              onClick={() => setIsModalOpen(false)}
+            ></IconButton>
+          </div>
         </div>
       </Modal>
     </div>
