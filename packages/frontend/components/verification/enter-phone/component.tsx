@@ -1,5 +1,5 @@
 import { IconName } from '@enums';
-import { useAppDispatch, useAuth } from '@hooks';
+import { useAppDispatch } from '@hooks';
 import { Button, IconButton, Input } from '@primitives';
 import { LinkButton } from 'components/primitives/link-button';
 import { useTranslation } from 'next-i18next';
@@ -8,12 +8,15 @@ import hand from 'public/images/mocup_hand1.png';
 import { nextVerifyModal, hideVerifyModal } from 'store/modals/actions';
 import * as styles from '../styles';
 
-const EnterPhoneModal = () => {
+interface ModalProps {
+  phone: string;
+  setPhone: (phone: string) => void;
+}
+
+const EnterPhoneModal = ({ phone, setPhone }: ModalProps) => {
   const dispatch = useAppDispatch();
 
   const { t } = useTranslation();
-
-  const { user } = useAuth();
 
   const closeModal = () => {
     dispatch(hideVerifyModal());
@@ -43,7 +46,8 @@ const EnterPhoneModal = () => {
           variant="primary"
           type="text"
           name="phone"
-          value={user.phone}
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
         />
         <Button onClick={changeModal}>
           {t('common:verify.enterPhone.button.verify')}
