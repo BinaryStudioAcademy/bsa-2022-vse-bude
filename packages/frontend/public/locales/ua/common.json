@@ -61,6 +61,7 @@
   "components": {
     "product": {
       "placeBidBtn": "Зробити ставку",
+      "buyBtn": "Купити",
       "time": {
         "hours": "г",
         "days": "д",

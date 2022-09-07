@@ -41,4 +41,44 @@ export class BidRepository {
       },
     });
   }
+
+  async retrieve(userId: string, productId: string, time: string) {
+    return this._dbClient.$transaction([
+      this._dbClient.bid.updateMany({
+        data: {
+          deletedAt: time,
+        },
+        where: {
+          bidderId: userId,
+          productId: productId,
+        },
+      }),
+      this._dbClient.bid.deleteMany({
+        where: {
+          productId,
+          NOT: [{ deletedAt: null }],
+        },
+      }),
+      this._dbClient.product.update({
+        data: {
+          price: (
+            await this._dbClient.bid.findFirst({
+              where: {
+                productId,
+              },
+            })
+          ).price,
+        },
+        where: { id: productId },
+      }),
+    ]);
+  }
+
+  async getAll(productId: string) {
+    return this._dbClient.bid.findMany({
+      where: {
+        productId,
+      },
+    });
+  }
 }

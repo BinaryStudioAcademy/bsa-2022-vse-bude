@@ -14,6 +14,7 @@ export const ProductGrid = ({ lots }: ProductGridProps) => (
             description={item.description}
             price={item.price}
             images={item.imageLinks}
+            type={item.type}
             currency="UAH"
             auctionDate={item.endDate}
           />

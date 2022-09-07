@@ -130,6 +130,7 @@ model Bid {
   price     Decimal  @db.Money
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  deletedAt DateTime? @db.Timestamp(0)
 }
 
 model Order {

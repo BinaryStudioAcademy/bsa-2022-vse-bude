@@ -28,7 +28,10 @@ export const common = {
     UAH: 'ГРН',
   },
   time: {
+    DAYS: 'дні',
+    HOURS: 'години',
     HOURS_SHORT: 'г',
     MINUTES_SHORT: 'хв',
+    SECONDS_SHORT: 'сек',
   },
 };
