@@ -1,6 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { DataStatus } from '~/common/enums/enums';
 import { ProductDto } from '@vse-bude/shared';
+import { removeIdDuplicates } from '~/helpers/helpers';
 import { loadProducts } from './actions';
 
 type InitialState = {
@@ -23,7 +24,10 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadProducts.fulfilled, (state, action) => {
       state.dataStatus = DataStatus.FULFILLED;
-      state.products = [...state.products, ...action.payload];
+      state.products =
+        state.products.length > 0
+          ? removeIdDuplicates<ProductDto>(state.products, action.payload)
+          : action.payload;
     });
 });
 

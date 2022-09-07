@@ -90,6 +90,7 @@ const Home: FC = () => {
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             data={categories}
+            keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
               <Category
                 categoryId={item.id}
@@ -135,10 +136,12 @@ const Home: FC = () => {
             {organizations.map((item) => {
               return (
                 <Organization
+                  key={item.id}
                   imageSource={item.src}
-                  maxHeight={50}
-                  width="30%"
-                  style={[globalStyles.mt6]}
+                  contentContainerStyle={[
+                    globalStyles.mt6,
+                    { width: '30%', height: 50 },
+                  ]}
                 />
               );
             })}
