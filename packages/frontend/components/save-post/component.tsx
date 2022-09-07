@@ -32,8 +32,7 @@ export const SavePost = ({ type, edit }: SavePostProps) => {
               {type === ProductType.AUCTION && <AuctionForm edit={edit} />}
               {type === ProductType.SELLING && <ProductForm edit={edit} />}
             </div>
-          </div >
-          
+          </div>
         </div>
       </Container>
     </NestedLayout>
