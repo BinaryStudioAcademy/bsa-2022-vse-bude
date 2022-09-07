@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
+import { Dimensions } from 'react-native';
 import {
   createDrawerNavigator,
   DrawerNavigationOptions,
 } from '@react-navigation/drawer';
-import { Dimensions } from 'react-native';
 import { RootScreenName } from '~/common/enums/enums';
 import { MainNavigation } from '../tabs/tabs.navigation';
 
