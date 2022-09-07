@@ -14,3 +14,4 @@ export {
   VerifiedScreen,
 } from './verify-phone-screens/verify-phone-screens';
 export { NewItemScreen } from '~/screens/new-item/new-item';
+export { TypeOfPostScreen } from '~/screens/type-of-post/type-of-post';

@@ -221,14 +221,14 @@ export const initProductRoutes = (
 
   /**
    * @openapi
-   * /products/:id:
+   * /products/similar:
    *   get:
    *     tags: [Product]
    *     produces:
    *       - application/json
    *     parameters:
-   *       - in: path
-   *         name: id
+   *       - in: query
+   *         name: productId
    *         required: true
    *         type: string
    *     responses:
@@ -237,7 +237,7 @@ export const initProductRoutes = (
    *         content:
    *           application/json:
    *             schema:
-   *               $ref: "#/definitions/GetProductByIdResponse"
+   *               $ref: "#/definitions/Product"
    *       4**:
    *         description: Something went wrong
    *         content:
@@ -247,13 +247,78 @@ export const initProductRoutes = (
    */
 
   router.get(
-    apiPath(path, ProductApiRoutes.ID),
-    wrap((req: Request) => productService.getById(req.params.id)),
+    apiPath(path, ProductApiRoutes.SIMILAR),
+    wrap((req: Request) =>
+      productService.getSimilar(<string>req.query.productId),
+    ),
   );
 
-  router.put(
-    apiPath(path, ProductApiRoutes.ID + ProductApiRoutes.VIEWS),
-    wrap((req) => productService.incrementViews(req.params.id, req)),
+  /**
+   * @openapi
+   * /products/popular-lots:
+   *   get:
+   *     description: Get list of most popular products
+   *     tags: [Product]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - in: query
+   *         name: limit
+   *         required: true
+   *         type: string
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Product"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
+  router.get(
+    apiPath(path, ProductApiRoutes.POPULAR_LOTS),
+    wrap((req: Request) =>
+      productService.getMostPopularLots(<string>req.query.limit),
+    ),
+  );
+
+  /**
+   * @openapi
+   * /products/popular-products:
+   *   get:
+   *     description: Get list of most popular products
+   *     tags: [Product]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - in: query
+   *         name: limit
+   *         required: true
+   *         type: string
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Product"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
+  router.get(
+    apiPath(path, ProductApiRoutes.POPULAR_PRODUCTS),
+    wrap((req: Request) =>
+      productService.getMostPopularProducts(<string>req.query.limit),
+    ),
   );
 
   /**
@@ -383,7 +448,7 @@ export const initProductRoutes = (
 
   /**
    * @openapi
-   * /products/:
+   * /products/update/:id:
    *   post:
    *     summary: Uploads a file.
    *     consumes:
@@ -459,7 +524,7 @@ export const initProductRoutes = (
 
   /**
    * @openapi
-   * /products/:id:
+   * /products/buy/:id:
    *   put:
    *     tags: [Product]
    *     consumes:
@@ -522,6 +587,79 @@ export const initProductRoutes = (
         productId: req.body.productId,
       }),
     ),
+  );
+  /**
+   * @openapi
+   * /products/edit/:id:
+   *   get:
+   *     tags: [Product]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - in: path
+   *         name: id
+   *         required: true
+   *         type: string
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/GetProductByIdResponse"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
+  router.get(
+    apiPath(path, ProductApiRoutes.EDIT_ID),
+    authMiddleware,
+    wrap((req: Request) =>
+      productService.getEditProductById({
+        userId: req.userId,
+        productId: req.params.id,
+      }),
+    ),
+  );
+
+  /**
+   * @openapi
+   * /products/:id:
+   *   get:
+   *     tags: [Product]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - in: path
+   *         name: id
+   *         required: true
+   *         type: string
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/GetProductByIdResponse"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
+
+  router.get(
+    apiPath(path, ProductApiRoutes.ID),
+    wrap((req: Request) => productService.getById(req.params.id)),
+  );
+
+  router.put(
+    apiPath(path, ProductApiRoutes.ID + ProductApiRoutes.VIEWS),
+    wrap((req) => productService.incrementViews(req.params.id, req)),
   );
 
   return router;

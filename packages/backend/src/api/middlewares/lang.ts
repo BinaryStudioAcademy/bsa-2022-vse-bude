@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from 'express';
 import { DEFAULT_LOCALE, HttpHeader } from '@vse-bude/shared';
-import { langService } from '../../lang';
+import { langService } from '@lang';
 
 export const langMiddleware = (
   req: Request,

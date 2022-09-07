@@ -26,6 +26,8 @@ export interface DescriptionBlockProps {
   register: registerFieldType;
   category: SelectOption;
   setCategories: (arg0: SelectOption) => void;
+  condition: SelectOption;
+  setCondition: (arg0: SelectOption) => void;
 }
 
 export interface ContactBlockProps {
