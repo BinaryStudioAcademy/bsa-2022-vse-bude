@@ -66,6 +66,7 @@ export const screens = {
   },
   errors: {
     EMPTY_EMAIL: 'Будь-ласка, введіть email',
+    WRONG_EMAIL: 'Неправильна електронна адреса!',
     EMPTY_FIRST_NAME: 'Будь-ласка, введіть ім`я',
     EMPTY_LAST_NAME: 'Будь-ласка, введіть прізвище',
     EMPTY_PHONE: 'Будь-ласка, введіть номер телефону',
