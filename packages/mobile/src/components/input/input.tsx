@@ -29,7 +29,7 @@ type Props<T extends FormControlValues> = {
   textInputProps?: TextInputProps;
 };
 
-const Input = <T extends FormControlValues, textInputProps>({
+const Input = <T extends FormControlValues>({
   label,
   name,
   control,
