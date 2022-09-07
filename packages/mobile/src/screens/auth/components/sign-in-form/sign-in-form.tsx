@@ -1,9 +1,16 @@
 import React, { FC } from 'react';
-import { View, Input, PrimaryButton } from '~/components/components';
+import {
+  View,
+  Input,
+  PrimaryButton,
+  ButtonText,
+} from '~/components/components';
 import { UserSignInDto } from '@vse-bude/shared';
-import { useAppForm, useTranslation } from '~/hooks/hooks';
+import { useAppForm, useTranslation, useNavigation } from '~/hooks/hooks';
 import { signIn } from '~/validation-schemas/validation-schemas';
 import { globalStyles } from '~/styles/styles';
+import { RootScreenName } from '~/common/enums/enums';
+import { RootNavigationProps } from '~/common/types/types';
 import { DEFAULT_SIGN_IN_PAYLOAD } from './common/constants';
 
 type Props = {
@@ -16,6 +23,11 @@ const SignInForm: FC<Props> = ({ onSubmit }) => {
     validationSchema: signIn,
   });
   const { t } = useTranslation();
+  const { navigate } = useNavigation<RootNavigationProps>();
+
+  const navigateResetPassword = () => {
+    navigate(RootScreenName.FORGOT_PASSWORD);
+  };
 
   return (
     <View style={globalStyles.py5}>
@@ -35,6 +47,14 @@ const SignInForm: FC<Props> = ({ onSubmit }) => {
         contentContainerStyle={globalStyles.mt5}
         isSecure={true}
       />
+      <View style={globalStyles.mt5}>
+        <ButtonText
+          onPress={navigateResetPassword}
+          contentContainerStyle={{ alignSelf: 'flex-end' }}
+        >
+          {t('verification.FORGOT_PASSWORD')}
+        </ButtonText>
+      </View>
       <View style={globalStyles.mt5}>
         <PrimaryButton
           label={t('verification.SING_IN')}

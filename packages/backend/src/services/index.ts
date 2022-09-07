@@ -19,6 +19,8 @@ import { EmailService } from './email';
 import { UserProfileService } from './profile';
 import { BidService } from './bid';
 import { MyListService } from './my-list';
+import { OrderService } from './order';
+import { PaymentService } from './payment';
 
 export const initServices = (repositories: Repositories) => {
   const hashService: HashService = new HashService();
@@ -78,6 +80,14 @@ export const initServices = (repositories: Repositories) => {
     myListService: new MyListService({
       myListRepository: repositories.myListRepository,
     }),
+    orderService: new OrderService(
+      repositories.orderRepository,
+      repositories.productRepository,
+    ),
+    paymentService: new PaymentService(
+      repositories.orderRepository,
+      repositories.productRepository,
+    ),
   };
 };
 
@@ -96,4 +106,6 @@ export {
   type BidService,
   type S3StorageService,
   type MyListService,
+  type OrderService,
+  type PaymentService,
 };

@@ -114,10 +114,6 @@ const SearchIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="search" {...iconProps} />
 );
 
-const NewsIcon: AppIcon = (iconProps) => (
-  <FeatherIcon name="file-text" {...iconProps} />
-);
-
 export {
   HomeIcon,
   StarIcon,
@@ -147,5 +143,4 @@ export {
   GlobeIcon,
   LinkedinIcon,
   SearchIcon,
-  NewsIcon,
 };
