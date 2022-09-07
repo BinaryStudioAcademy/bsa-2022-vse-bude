@@ -18,6 +18,13 @@ export const common = {
     HOME: 'Home',
     ERROR: 'Error',
   },
+  time: {
+    DAYS: 'days',
+    HOURS: 'hours',
+    HOURS_SHORT: 'h',
+    MINUTES_SHORT: 'min',
+    SECONDS_SHORT: 'sec',
+  },
   permission: {
     STORAGE_DENIED: 'Storage permission denied',
   },
@@ -28,9 +35,5 @@ export const common = {
   },
   currency: {
     UAH: 'UAH',
-  },
-  time: {
-    HOURS_SHORT: 'h',
-    MINUTES_SHORT: 'min',
   },
 };
