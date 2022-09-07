@@ -37,6 +37,10 @@ export const screens = {
     PHONE_NUMBER: 'Phone Number',
     PHONE_NUMBER_HINT: 'Enter your phone',
     GOOGLE_BUTTON: 'Sign in with Google',
+    FORGOT_PASSWORD: 'Forgot Password',
+    ENTER_EMAIL: 'Enter your email to retrieve your password',
+    HIDE_EMAIL: 'Hide Email',
+    RESET_PASSWORD: 'Reset Password',
   },
   personal_info: {
     PERSONAL_INFO: 'Personal Info',
