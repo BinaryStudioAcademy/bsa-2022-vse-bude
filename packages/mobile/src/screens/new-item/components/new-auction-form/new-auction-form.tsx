@@ -14,6 +14,7 @@ import { CALLING_CODE, CITIES, COUNTRIES } from '~/mock/new-item';
 import { globalStyles } from '~/styles/styles';
 
 import { DatePicker } from '~/components/date-time-picker/date-time-picker';
+import { DateTimeType } from '~/common/enums/ui/ui';
 import { AddPhotos } from '../add-photos/add-photos';
 
 import { useStyles } from './styles';
@@ -62,17 +63,17 @@ const NewAuctionForm: FC = () => {
         control={control}
         errors={errors}
         placeholder={'-/-/-'}
-        mode={'date'}
+        mode={DateTimeType.DATE}
         contentContainerStyle={globalStyles.mt5}
       />
 
       <DatePicker
         label={t('make_a_post.ENDING_TIME')}
-        name="endDate"
+        name="endTime"
         control={control}
         errors={errors}
         placeholder={'-:-'}
-        mode={'time'}
+        mode={DateTimeType.TIME}
         contentContainerStyle={globalStyles.mt5}
       />
 
