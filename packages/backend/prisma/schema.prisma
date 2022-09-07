@@ -28,6 +28,7 @@ model User {
   socialMedia   SocialMedia[]
   ownProducts   Product[]      @relation("ownProducts")
   wonProducts   Product[]      @relation("wonProducts")
+  orders        Order[]
   bids          Bid[]
   chats         ChatMember[]
   messages      Message[]
@@ -112,6 +113,7 @@ model Product {
   winnerId        String?       @db.Uuid
   socialMedia     SocialMedia[]
   bids            Bid[]
+  orders          Order[]
   chat            Chat?
   views           Int           @default(0)
   createdAt       DateTime      @default(now())
@@ -129,6 +131,18 @@ model Bid {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   deletedAt DateTime? @db.Timestamp(0)
+}
+
+model Order {
+  id        String   @id @default(uuid()) @db.Uuid
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String   @db.Uuid
+  buyer     User     @relation(fields: [buyerId], references: [id])
+  buyerId   String   @db.Uuid
+  cost      Decimal  @db.Money
+  status    OrderStatus
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Chat {
@@ -230,4 +244,11 @@ enum SocialMediaType {
 enum Condition {
   NEW
   USED
+}
+
+enum OrderStatus {
+  CREATED
+  PAID
+  DELIVERED
+  CANCELLED
 }
