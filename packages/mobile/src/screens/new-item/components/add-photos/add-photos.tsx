@@ -18,20 +18,15 @@ import { styles } from './styles';
 const AddPhotos: FC = () => {
   const { t } = useTranslation();
   const [images, setImages] = useState<string[]>([]);
-  const [, setIsUploading] = useState(false);
 
   const onGalleryOpen = useCallback(async () => {
-    setIsUploading(true);
     const file = await pickImageLibrary();
     if (!file) {
-      setIsUploading(false);
-
       return;
     }
     const link = await imageService.uploadImage(file);
 
     setImages((state) => [...state, link]);
-    setIsUploading(false);
   }, []);
 
   const deleteImage = (index: number) => {
