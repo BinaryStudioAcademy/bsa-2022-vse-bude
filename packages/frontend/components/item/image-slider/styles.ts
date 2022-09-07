@@ -31,7 +31,6 @@ export const imagesWrapper = ({ spaces, breakpoints }: Theme) => css`
   @media (max-width: ${breakpoints.xxl}px) {
     width: 100%;
     flex-direction: row;
-    justify-content: center;
     margin-right: 0;
   }
 `;
@@ -106,14 +105,14 @@ export const seeImageCaption = ({
 `;
 
 export const modalImageWrapper = css`
-  max-width: 800px;
+  max-width: 100vw;
   max-height: 70vh;
   position: relative;
 `;
 
 export const modalImage = css`
   display: block;
-  max-width: 100%;
+  width: 100%;
   max-height: inherit;
 `;
 
