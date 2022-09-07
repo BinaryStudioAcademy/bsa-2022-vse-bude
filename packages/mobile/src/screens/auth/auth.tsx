@@ -1,5 +1,10 @@
 import React, { FC, ReactElement } from 'react';
-import { ColorPalette, UserSignInDto, UserSignUpDto } from '@vse-bude/shared';
+import {
+  ColorPalette,
+  ResetPasswordLink,
+  UserSignInDto,
+  UserSignUpDto,
+} from '@vse-bude/shared';
 import { RootScreenName } from '~/common/enums/enums';
 import { auth as authActions } from '~/store/actions';
 import {
@@ -12,16 +17,17 @@ import {
 import {
   Text,
   ScrollView,
-  Divider,
   ScreenWrapper,
   StatusBar,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import {
-  GoogleButton,
+  ResetPasswordHeader,
+  SignInUpHeader,
   SignInForm,
   SignUpForm,
   Header,
+  ResetPassword,
 } from './components/components';
 import { styles } from './styles';
 
@@ -31,10 +37,20 @@ const Auth: FC = () => {
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
   const navigation = useNavigation();
-  const screenLabel =
-    name === RootScreenName.SIGN_IN
-      ? t('verification.SING_IN')
-      : t('verification.CREATE_ACCOUNT');
+  const isResetPassword = name === RootScreenName.FORGOT_PASSWORD;
+
+  const getScreenLabel = (screenName: string): string => {
+    switch (screenName) {
+      case RootScreenName.SIGN_IN:
+        return t('verification.SING_IN');
+      case RootScreenName.SIGN_UP:
+        return t('verification.CREATE_ACCOUNT');
+      case RootScreenName.FORGOT_PASSWORD:
+        return t('verification.FORGOT_PASSWORD');
+      default:
+        return '';
+    }
+  };
 
   const handleSignIn = (payload: UserSignInDto): void => {
     dispatch(authActions.signIn(payload));
@@ -42,6 +58,10 @@ const Auth: FC = () => {
 
   const handleSignUp = (payload: UserSignUpDto): void => {
     dispatch(authActions.signUp(payload));
+  };
+
+  const handleResetPassword = (payload: ResetPasswordLink): void => {
+    dispatch(authActions.resetPassword(payload));
   };
 
   const handleGoBack = (): void => {
@@ -55,6 +75,9 @@ const Auth: FC = () => {
       }
       case RootScreenName.SIGN_UP: {
         return <SignUpForm onSubmit={handleSignUp} />;
+      }
+      case RootScreenName.FORGOT_PASSWORD: {
+        return <ResetPassword onSubmit={handleResetPassword} />;
       }
     }
 
@@ -87,10 +110,9 @@ const Auth: FC = () => {
             globalStyles.fontWeightExtraBold,
           ]}
         >
-          {screenLabel}
+          {getScreenLabel(name)}
         </Text>
-        <GoogleButton />
-        <Divider text={t('common:text.OR')} />
+        {isResetPassword ? <ResetPasswordHeader /> : <SignInUpHeader />}
         {getScreen(name)}
       </ScrollView>
     </ScreenWrapper>
