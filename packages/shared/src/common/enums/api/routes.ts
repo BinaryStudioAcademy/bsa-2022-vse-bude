@@ -63,4 +63,5 @@ export enum OrderApiRoutes {
   STATUS = '/status',
   SUCCESS = '/success',
   CREATE_PAYMENT = '/create-payment',
+  ID = '/:id',
 }

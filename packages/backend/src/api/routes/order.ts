@@ -43,7 +43,7 @@ export const initOrderRoutes = (
   );
 
   router.get(
-    apiPath(path, '/:id'),
+    apiPath(path, OrderApiRoutes.ID),
     authMiddleware,
     wrap((req: Request) => orderService.getById(req.params.id)),
   );

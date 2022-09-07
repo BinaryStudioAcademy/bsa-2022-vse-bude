@@ -11,6 +11,10 @@ import { getEnv, logger } from '@helpers';
 import { ProductStatus } from '@prisma/client';
 import type { OrderRepository, ProductRepository } from '@repositories';
 import { UnauthorizedError } from '@errors';
+import {
+  TransactionResponseStatus,
+  TransactionStatus,
+} from 'common/enums/services/payment';
 import crypto from 'crypto';
 
 export class PaymentService {
@@ -50,8 +54,6 @@ export class PaymentService {
   public async setStatus(body: string) {
     const data = Object.keys(body)[0];
 
-    let orderCreatedAt: Date;
-
     const {
       orderReference,
       transactionStatus,
@@ -61,25 +63,23 @@ export class PaymentService {
 
     logger.log({ orderReference, transactionStatus, reason, reasonCode });
 
-    if (transactionStatus === 'Approved') {
-      const { productId, createdAt } = await this._orderRepository.updateStatus(
-        orderReference,
-        OrderStatus.PAID,
-      );
+    const { productId, createdAt } = await this._orderRepository.updateStatus(
+      orderReference,
+      OrderStatus.PAID,
+    );
 
-      orderCreatedAt = createdAt;
-
+    if (transactionStatus === TransactionStatus.APPROVED) {
       await this._productRepository.update(productId, {
         status: ProductStatus.FINISHED,
       });
 
       return {
-        ...this.generateResponseData(orderReference, orderCreatedAt),
+        ...this.generateResponseData(orderReference, createdAt),
       };
     }
 
     return {
-      ...this.generateResponseData(orderReference, orderCreatedAt),
+      ...this.generateResponseData(orderReference, createdAt),
     };
   }
 
@@ -94,7 +94,7 @@ export class PaymentService {
     }
 
     const merchantSignature = this.generateRequestMerchantSignature(
-      order as any,
+      order as unknown as OrderDto,
     );
 
     const data: PurchaseRequestData = {
@@ -133,7 +133,7 @@ export class PaymentService {
 
     const data: PaymentServiceStatusResponse = {
       orderReference: orderId,
-      status: 'accept',
+      status: TransactionResponseStatus.ACCEPT,
       time: Date.now(),
       signature,
     };
@@ -161,11 +161,7 @@ export class PaymentService {
 
     const string = Object.values(signatureData).join(';');
 
-    const key = this.merchantSecretKey;
-
-    const hash = crypto.createHmac('md5', key).update(string).digest('hex');
-
-    return hash;
+    return this.createHash(string);
   }
 
   private async generateResponseSignature(
@@ -174,13 +170,17 @@ export class PaymentService {
   ): Promise<string> {
     const signatureData: PaymentServiceStatusResponseSignature = {
       orderReference: orderId,
-      status: 'accept',
+      status: TransactionResponseStatus.ACCEPT,
       time: new Date(orderCreatedAt).getTime(),
     };
 
     const string = Object.values(signatureData).join(';');
 
-    const key = getEnv('WAY_FOR_PAY_MERCHANT_SECRET_KEY');
+    return this.createHash(string);
+  }
+
+  private createHash(string: string): string {
+    const key = this.merchantSecretKey;
 
     const hash = crypto.createHmac('md5', key).update(string).digest('hex');
 
