@@ -42,6 +42,6 @@ export type SellerFieldsType = {
 };
 
 export const PostStatuses = {
-  CREATE: ProductStatus[0],
-  DRAFT: ProductStatus[5],
+  CREATE: ProductStatus.ACTIVE,
+  DRAFT: ProductStatus.DRAFT,
 };
