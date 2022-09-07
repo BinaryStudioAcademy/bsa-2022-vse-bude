@@ -1,25 +1,56 @@
+import { ValidationRanges } from '@vse-bude/shared';
 import Joi from 'joi';
 import type { TFunction } from 'next-i18next';
 
 export const createPostSchema = (t: TFunction) =>
   Joi.object({
-    category: Joi.any().allow(''),
-    callingCode: Joi.any().allow(''),
+    category: Joi.string()
+      .required()
+      .messages({
+        'string.empty': t('create-post:validation.category.empty'),
+      }),
+    condition: Joi.string()
+      .required()
+      .messages({
+        'string.empty': t('create-post:validation.condition.empty'),
+      }),
     currency: Joi.any().allow(''),
-    site: Joi.any().allow(''),
-    instagram: Joi.any().allow(''),
-    facebook: Joi.any().allow(''),
-    city: Joi.any().allow(''),
-    country: Joi.string().allow(''),
-    // .trim()
-    // .required()
-    // .messages({
-    //   'string.empty': t('create-post:validation.title.empty'),
-    // })
+    callingCode: Joi.any().allow(''),
+    site: Joi.string()
+      .allow('')
+      .uri()
+      .max(ValidationRanges.MAX_SOCIAL_NETWORK_URI_SYMBOLS)
+      .messages({
+        'string.uri': 'create-post:validation.link.uri',
+        'string.max': 'create-post:validation.link.max',
+      }),
+    instagram: Joi.string()
+      .allow('')
+      .uri()
+      .max(ValidationRanges.MAX_SOCIAL_NETWORK_URI_SYMBOLS)
+      .messages({
+        'string.uri': 'create-post:validation.link.uri',
+        'string.max': 'create-post:validation.link.max',
+      }),
+    facebook: Joi.string()
+      .allow('')
+      .uri()
+      .max(ValidationRanges.MAX_SOCIAL_NETWORK_URI_SYMBOLS)
+      .messages({
+        'string.uri': 'create-post:validation.link.uri',
+        'string.max': 'create-post:validation.link.max',
+      }),
+    city: Joi.string().allow(''),
+    country: Joi.string()
+      .trim()
+      .required()
+      .messages({
+        'string.empty': t('create-post:validation.title.empty'),
+      }),
     title: Joi.string()
       .trim()
       .required()
-      .max(50)
+      .max(ValidationRanges.MAX_TITLE_SYMBOLS)
       .messages({
         'string.max': t('create-post:validation.title.long'),
         'string.empty': t('create-post:validation.title.empty'),
@@ -28,7 +59,7 @@ export const createPostSchema = (t: TFunction) =>
     description: Joi.string()
       .trim()
       .required()
-      .max(6000)
+      .max(ValidationRanges.MAX_DESCRIPTION_SYMBOLS)
       .messages({
         'string.max': t('create-post:validation.description.long'),
         'string.empty': t('create-post:validation.description.empty'),
@@ -42,6 +73,7 @@ export const createPostSchema = (t: TFunction) =>
         'string.pattern.base': t('create-post:validation.phone.pattern'),
       }),
     price: Joi.number()
+      .min(1)
       .required()
       .messages({
         'number.base': t('create-post:validation.price.base'),

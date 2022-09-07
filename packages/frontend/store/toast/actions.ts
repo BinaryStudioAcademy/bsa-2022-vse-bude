@@ -5,7 +5,7 @@ import { i18n } from 'next-i18next';
 import { ToastActions } from './action-types';
 
 const CLOSE_NOTIFICATION_TIMEOUT: Record<ToastLevel, number> = {
-  success: 1500,
+  success: 2500,
   info: 1500,
   warning: 2000,
   error: 3000,

@@ -27,9 +27,12 @@ class Http {
 
   private _auth: IAuthHelper | null;
 
-  constructor(baseUrl: string, auth?: IAuthHelper) {
+  private _locale: string;
+
+  constructor(baseUrl: string, locale: string, auth?: IAuthHelper) {
     this._baseUrl = baseUrl;
     this._auth = auth;
+    this._locale = locale;
   }
 
   public get<T>({ url, payload, options }: GetRequestParams) {
@@ -99,9 +102,7 @@ class Http {
       [HttpHeader.CONTENT_TYPE]: contentType,
     };
 
-    if (acceptLanguage) {
-      headers[HttpHeader.ACCEPT_LANGUAGE] = acceptLanguage;
-    }
+    headers[HttpHeader.ACCEPT_LANGUAGE] = acceptLanguage ?? this._locale;
 
     if (needAuthorization && this._auth) {
       const token = this._auth.getAccessToken();
@@ -190,6 +191,10 @@ class Http {
     const { accessToken, refreshToken: newRefreshToken } = await res.json();
 
     this._auth.setTokens(accessToken, newRefreshToken);
+  }
+
+  public setLocale(locale: string) {
+    this._locale = locale;
   }
 }
 

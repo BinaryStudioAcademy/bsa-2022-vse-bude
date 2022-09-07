@@ -19,5 +19,8 @@
       "subject": "Email confirmation",
       "body": "Please complete the e-mail confirmation process with this code: "
     }
+  },
+  "userValidation": {
+    "notVerified": "User not verified!"
   }
 }

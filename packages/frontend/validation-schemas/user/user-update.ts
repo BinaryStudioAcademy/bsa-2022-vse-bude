@@ -1,16 +1,24 @@
 import Joi from 'joi';
-import { UserPersonalInfoValidationMessage } from '@vse-bude/shared';
-import { ValidationRanges } from '@vse-bude/shared';
 import type { TFunction } from 'next-i18next';
+import {
+  UserPersonalInfoValidationMessage,
+  ValidationRanges,
+  NAME,
+  PASSWORD,
+  EMAIL,
+  PERSONAL_PHONE,
+  PLACE,
+  ZIP,
+} from '@vse-bude/shared';
 
 export const userUpdateSchema = (t: TFunction) =>
   Joi.object({
     firstName: Joi.string()
       .trim()
       .required()
-      .pattern(/^[^-](([a-zA-Z'-]+)|([а-яёіїґєА-ЯЁIЇҐЄ'-]+))[^-]$/)
       .min(ValidationRanges.MIN_NAME_SYMBOLS)
       .max(ValidationRanges.MAX_NAME_SYMBOLS)
+      .pattern(NAME)
       .messages({
         'string.pattern.base': t(
           UserPersonalInfoValidationMessage.FIRSTNAME_PATTERN,
@@ -19,13 +27,12 @@ export const userUpdateSchema = (t: TFunction) =>
         'string.max': t(UserPersonalInfoValidationMessage.FIRSTNAME_MAX),
         'string.empty': t(UserPersonalInfoValidationMessage.FIRSTNAME_REQUIRED),
       }),
-
     lastName: Joi.string()
       .trim()
       .required()
-      .pattern(/^[^-](([a-zA-Z'-]+)|([а-яёіїґєА-ЯЁIЇҐЄ'-]+))[^-]$/)
       .min(ValidationRanges.MIN_NAME_SYMBOLS)
       .max(ValidationRanges.MAX_NAME_SYMBOLS)
+      .pattern(NAME)
       .messages({
         'string.pattern.base': t(
           UserPersonalInfoValidationMessage.LASTNAME_PATTERN,
@@ -34,12 +41,9 @@ export const userUpdateSchema = (t: TFunction) =>
         'string.max': t(UserPersonalInfoValidationMessage.LASTNAME_MAX),
         'string.empty': t(UserPersonalInfoValidationMessage.LASTNAME_REQUIRED),
       }),
-
     email: Joi.string()
       .trim()
-      .pattern(
-        /^(([^.]([a-zA-Z\d!#$%&'*+\-/=?^_`{|}~]{1,32})(.[^.]([a-zA-Z\d!#$%&'*+\-/=?^_`{|}~]{1,31}))*)|([a-zA-Z\d!#$%&'*+\-/=?^_`{|}~]{1,64}))@[^-]([\da-zA-Z-]{1,63}\.)([a-zA-Z]{2,6})$/,
-      )
+      .pattern(EMAIL)
       .email({ tlds: { allow: false } })
       .required()
       .messages({
@@ -49,21 +53,52 @@ export const userUpdateSchema = (t: TFunction) =>
         'string.email': t(UserPersonalInfoValidationMessage.EMAIL_REQUIRED),
         'string.empty': t(UserPersonalInfoValidationMessage.EMAIL_REQUIRED),
       }),
-
     phone: Joi.string()
       .allow('')
-      //.pattern(/^((\+\d{12,15})|(\+380\d{9}))$/)
+      .replace('+380', '')
+      .pattern(PERSONAL_PHONE)
       .messages({
         'string.pattern.base': t(
           UserPersonalInfoValidationMessage.PHONE_PATTERN,
         ),
       }),
 
-    country: Joi.string().allow(''),
-    region: Joi.string().allow(''),
-    city: Joi.string().allow(''),
-    zip: Joi.string().allow(''),
-    deliveryData: Joi.string().allow(''),
+    country: Joi.string()
+      .allow('')
+      .max(ValidationRanges.MAX_COUNTRY_SYMBOLS)
+      .pattern(PLACE)
+      .messages({
+        'string.max': t(UserPersonalInfoValidationMessage.COUNTRY),
+        'string.pattern.base': t(UserPersonalInfoValidationMessage.PLACE_NAME),
+      }),
+    region: Joi.string()
+      .allow('')
+      .max(ValidationRanges.MAX_REGION_SYMBOLS)
+      .pattern(PLACE)
+      .messages({
+        'string.max': t(UserPersonalInfoValidationMessage.REGION),
+        'string.pattern.base': t(UserPersonalInfoValidationMessage.PLACE_NAME),
+      }),
+    city: Joi.string()
+      .allow('')
+      .max(ValidationRanges.MAX_CITY_SYMBOLS)
+      .pattern(PLACE)
+      .messages({
+        'string.max': t(UserPersonalInfoValidationMessage.CITY),
+        'string.pattern.base': t(UserPersonalInfoValidationMessage.PLACE_NAME),
+      }),
+    zip: Joi.string()
+      .allow('')
+      .pattern(ZIP)
+      .messages({
+        'string.pattern.base': t(UserPersonalInfoValidationMessage.ZIP),
+      }),
+    deliveryData: Joi.string()
+      .allow('')
+      .max(ValidationRanges.MAX_DELIVERY_DATA)
+      .messages({
+        'string.max': t(UserPersonalInfoValidationMessage.DELIVERY_DATA),
+      }),
 
     instagram: Joi.string()
       .allow('')
@@ -92,27 +127,21 @@ export const userUpdateSchema = (t: TFunction) =>
 
     password: Joi.string().allow(''),
 
-    newPassword: Joi.string().when('password', {
-      is: Joi.string().min(1),
-      then: Joi.string()
-        .required()
-        .disallow(Joi.ref('password'))
-        .min(ValidationRanges.MIN_PASSWORD_SYMBOLS)
-        .max(ValidationRanges.MAX_PASSWORD_SYMBOLS)
-        .pattern(
-          /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\da-zA-Z~!@#$%^*\-_=+[{\]}/;:,.?]+$/,
-        )
-        .messages({
-          'string.pattern.base': t(
-            UserPersonalInfoValidationMessage.NEW_PASSWORD,
-          ),
-          'string.min': t(UserPersonalInfoValidationMessage.MIN_SYMBOLS),
-          'string.max': t(UserPersonalInfoValidationMessage.MAX_SYMBOLS),
-          'string.empty': t(UserPersonalInfoValidationMessage.EMPTY_PASSWORD),
-          'any.invalid': t(UserPersonalInfoValidationMessage.SAME_PASSWORD),
-        }),
-      otherwise: Joi.string().allow(''),
-    }),
+    newPassword: Joi.string()
+      .allow('')
+      .disallow(Joi.ref('password'))
+      .min(ValidationRanges.MIN_PASSWORD_SYMBOLS)
+      .max(ValidationRanges.MAX_PASSWORD_SYMBOLS)
+      .pattern(PASSWORD)
+      .messages({
+        'string.pattern.base': t(
+          UserPersonalInfoValidationMessage.NEW_PASSWORD,
+        ),
+        'string.min': t(UserPersonalInfoValidationMessage.MIN_SYMBOLS),
+        'string.max': t(UserPersonalInfoValidationMessage.MAX_SYMBOLS),
+        'string.empty': t(UserPersonalInfoValidationMessage.EMPTY_PASSWORD),
+        'any.invalid': t(UserPersonalInfoValidationMessage.SAME_PASSWORD),
+      }),
 
     repeatPassword: Joi.any()
       .valid(Joi.ref('newPassword'))

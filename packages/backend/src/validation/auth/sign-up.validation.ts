@@ -1,17 +1,14 @@
-import type { NextFunction, Request, Response } from 'express';
+import type { Request } from 'express';
+import {
+  emailValidation,
+  signupPasswordValidation,
+  phoneValidation,
+  userNameValidation,
+} from '../sub-validation';
 
-export const validation = (req: Request, res: Response, next: NextFunction) => {
-  // const userSignUpDto: UserSignUpDto = {
-  //   email: req.body.email,
-  //   password: req.body.password,
-  //   name: req.body.name,
-  //   phoneNumber: req.body.phoneNumber,
-  // };
-  // const validation = signUpValidationSchema.validate(userSignUpDto);
-  // if (validation.error) {
-  //   return res.status(HttpStatusCode.UNPROCESSABLE_ENTITY).send({
-  //     error: validation.error.details[0]?.message,
-  //   });
-  // }
-  next();
+export const signupValidation = ({ req }: { req: Request }) => {
+  userNameValidation({ req });
+  emailValidation({ req });
+  signupPasswordValidation({ req });
+  phoneValidation({ req });
 };

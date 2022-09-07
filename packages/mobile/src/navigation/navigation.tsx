@@ -14,6 +14,7 @@ import {
   SettingsScreen,
   SupportScreen,
   NewItemScreen,
+  TypeOfPostScreen,
 } from '~/screens/screens';
 import { HeaderLeft, HeaderSave } from '~/components/components';
 import { HomeWithMenuNavigation } from './drawer/drawer.navigation';
@@ -68,6 +69,14 @@ const Navigation: FC = () => {
               title: t('make_a_post.TITLE'),
               headerLeft: HeaderLeft,
               headerRight: HeaderSave,
+            }}
+          />
+          <Stack.Screen
+            name={RootScreenName.TYPE_OF_NEW_POST}
+            component={TypeOfPostScreen}
+            options={{
+              title: t('make_a_post.TITLE'),
+              headerLeft: HeaderLeft,
             }}
           />
         </NativeStack.Group>

@@ -1,10 +1,11 @@
 import type { Request } from 'express';
 import {
   HttpStatusCode,
+  EMAIL,
   UserPersonalInfoValidationMessage,
 } from '@vse-bude/shared';
 import { ProfileError } from '@errors';
-import { lang } from '../../../lang';
+import { lang } from '@lang';
 
 export const emailValidation = ({ req }: { req: Request }) => {
   const { email } = req.body;
@@ -16,10 +17,7 @@ export const emailValidation = ({ req }: { req: Request }) => {
     });
   }
 
-  const isEmail =
-    /^(([^.]([a-zA-Z\d!#$%&'*+\-/=?^_`{|}~]{1,32})(.[^.]([a-zA-Z\d!#$%&'*+\-/=?^_`{|}~]{1,31}))*)|([a-zA-Z\d!#$%&'*+\-/=?^_`{|}~]{1,64}))@[^-]([\da-zA-Z-]{1,63}\.)([a-zA-Z]{2,6})$/.test(
-      email,
-    );
+  const isEmail = EMAIL.test(email);
 
   if (!isEmail) {
     throw new ProfileError({

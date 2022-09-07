@@ -5,6 +5,10 @@ import type {
   AuthResponse,
   UpdatePassword,
 } from '@vse-bude/shared';
+import {
+  HttpStatusCode,
+  UserPersonalInfoValidationMessage,
+} from '@vse-bude/shared';
 import { sign as jwtSign, type UserSessionJwtPayload } from 'jsonwebtoken';
 import { getEnv } from '@helpers';
 import {
@@ -15,6 +19,7 @@ import {
 import {
   UserNotFoundError,
   UserExistsError,
+  ProfileError,
   WrongPasswordError,
   UnauthorizedError,
   WrongRefreshTokenError,
@@ -34,6 +39,7 @@ import {
 } from '@services';
 import { authResponseMap, userMap } from '@mappers';
 import { AuthApiRoutes } from '@vse-bude/shared';
+import { lang } from '@lang';
 import { ResetPasswordMailBuilder } from '../email/reset-password-mail-builder';
 import { ResetPassLinkInvalid } from '../error/reset-password/reset-pass-link-invalid';
 import type { RedisStorageService } from './redis-storage';
@@ -74,24 +80,37 @@ export class AuthService {
   }
 
   async signUp(signUpDto: UserSignUpDto): Promise<AuthResponse> {
-    const userByEmailOrPhone = await this._userRepository.getByEmailOrPhone(
+    const userByEmail = await this._userRepository.getNewByEmail(
       signUpDto.email,
-      signUpDto.phone,
     );
-    if (userByEmailOrPhone) {
+
+    if (userByEmail) {
       throw new UserExistsError();
     }
+
+    if (signUpDto.phone) {
+      const userByPhone = await this._userRepository.getNewByPhone({
+        phone: signUpDto.phone,
+      });
+      if (userByPhone) {
+        throw new ProfileError({
+          status: HttpStatusCode.BAD_REQUEST,
+          message: lang(UserPersonalInfoValidationMessage.PHONE_EXISTS),
+        });
+      }
+    }
+    const phone = signUpDto.phone ? signUpDto.phone : null;
     const createUserDto: CreateUser = {
       firstName: signUpDto.firstName,
       lastName: signUpDto.lastName,
       email: signUpDto.email,
-      phone: signUpDto.phone,
+      phone,
       passwordHash: this._hashService.generateHash(signUpDto.password),
     };
     const newUser = await this._userRepository.create(createUserDto);
+
     await this._verifyService.initEmailVerification(newUser.id);
     const tokenData = this.getTokenData(newUser.id);
-
     const refreshToken: CreateRefreshToken = {
       userId: newUser.id,
       token: tokenData.refreshToken,
