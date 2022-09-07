@@ -14,15 +14,6 @@ export const ItemImageSlider = ({ imageLinks }: ItemImageSliderProps) => {
   const handleClick = (imageLink) => {
     setFocusedImage(imageLink);
   };
-  const extendLinks = [
-    'https://loremflickr.com/640/480/abstract',
-    'https://loremflickr.com/640/480/abstract',
-    'https://loremflickr.com/640/480/abstract',
-    'https://loremflickr.com/640/480/abstract',
-    'https://loremflickr.com/640/480/abstract',
-  ];
-
-  imageLinks = [...imageLinks, ...extendLinks];
 
   useEffect(() => {
     function handleWheelScroll(e) {
