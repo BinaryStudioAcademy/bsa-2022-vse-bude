@@ -10,19 +10,21 @@ import {
   Popover,
 } from '~/components/components';
 import { useAppForm, useTranslation } from '~/hooks/hooks';
-import { CALLING_CODE, CITIES, COUNTRIES, CURRENCY } from '~/mock/new-item';
+import { CALLING_CODE, CITIES, COUNTRIES } from '~/mock/new-item';
 import { globalStyles } from '~/styles/styles';
+
+import { DatePicker } from '~/components/date-time-picker/date-time-picker';
+import { DateTimeType } from '~/common/enums/ui/ui';
 import { AddPhotos } from '../add-photos/add-photos';
 
 import { useStyles } from './styles';
 
-const NewItemForm: FC = () => {
+const NewAuctionForm: FC = () => {
   const { t } = useTranslation();
   const styles = useStyles();
 
   const { control, errors } = useAppForm<IPostForms>({
     defaultValues: {
-      currency: 'UAH',
       country: 'Ukraine',
       callingCode: 'UA',
     },
@@ -45,6 +47,7 @@ const NewItemForm: FC = () => {
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
       />
+
       <Input
         label={t('make_a_post.TITLE_NAME')}
         placeholder={t('make_a_post.TITLE_NAME_PLACEHOLDER')}
@@ -53,6 +56,27 @@ const NewItemForm: FC = () => {
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
       />
+
+      <DatePicker
+        label={t('make_a_post.ENDING_DATE')}
+        name="endDate"
+        control={control}
+        errors={errors}
+        placeholder={'-/-/-'}
+        mode={DateTimeType.DATE}
+        contentContainerStyle={globalStyles.mt5}
+      />
+
+      <DatePicker
+        label={t('make_a_post.ENDING_TIME')}
+        name="endTime"
+        control={control}
+        errors={errors}
+        placeholder={'-:-'}
+        mode={DateTimeType.TIME}
+        contentContainerStyle={globalStyles.mt5}
+      />
+
       <Input
         label={t('make_a_post.DESCRIPTION')}
         placeholder={t('make_a_post.DESCRIPTION_PLACEHOLDER')}
@@ -61,7 +85,6 @@ const NewItemForm: FC = () => {
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
       />
-
       <View
         style={[
           styles.row,
@@ -70,30 +93,32 @@ const NewItemForm: FC = () => {
           globalStyles.flexDirectionRow,
         ]}
       >
-        <View style={[styles.leftWrap, globalStyles.flexDirectionRow]}>
-          <Popover
-            popoverStyle={styles.popover}
-            from={
-              <TouchableOpacity style={globalStyles.flexDirectionRow}>
-                <Text style={[globalStyles.fs12]}>
-                  {t('make_a_post.PRICE')}
-                </Text>
-                <InfoIcon
-                  size={13}
-                  color={ColorPalette.YELLOW_200}
-                  style={styles.tooltipIcon}
-                />
-              </TouchableOpacity>
-            }
-          >
-            <Text>{t('make_a_post.PRICE_TOOLTIP')}</Text>
-          </Popover>
-        </View>
-        <View style={styles.rightWrap}>
-          <Text style={[globalStyles.fs12]}>{t('make_a_post.CURRENCY')}</Text>
-        </View>
+        <Popover
+          popoverStyle={styles.popover}
+          from={
+            <TouchableOpacity style={globalStyles.flexDirectionRow}>
+              <Text style={[globalStyles.fs12]}>
+                {t('make_a_post.STARTING_BID_PRICE')}
+              </Text>
+              <InfoIcon
+                size={13}
+                color={ColorPalette.YELLOW_200}
+                style={styles.tooltipIcon}
+              />
+            </TouchableOpacity>
+          }
+        >
+          <Text>{t('make_a_post.STARTING_BID_PRICE')}</Text>
+        </Popover>
       </View>
 
+      <Input
+        placeholder={t('make_a_post.STARTING_PRICE_PLACEHOLDER')}
+        name="price"
+        control={control}
+        errors={errors}
+        contentContainerStyle={globalStyles.mt2}
+      />
       <View
         style={[
           styles.row,
@@ -102,21 +127,21 @@ const NewItemForm: FC = () => {
         ]}
       >
         <Input
-          placeholder={t('make_a_post.PRICE_PLACEHOLDER')}
-          name="price"
+          label={t('make_a_post.MIN_RANGE')}
+          placeholder={t('make_a_post.MIN_RANGE_PLACEHOLDER')}
+          name="minimalBid"
           control={control}
           errors={errors}
-          contentContainerStyle={styles.leftInput}
+          contentContainerStyle={[globalStyles.mt5, styles.oneHalfItem]}
         />
-
-        <View style={styles.rightInput}>
-          <DropDown
-            name="currency"
-            control={control}
-            items={CURRENCY}
-            zIndex={25}
-          />
-        </View>
+        <Input
+          label={t('make_a_post.MAX_RANGE')}
+          placeholder={t('make_a_post.MAX_RANGE_PLACEHOLDER')}
+          name="recommendedPrice"
+          control={control}
+          errors={errors}
+          contentContainerStyle={[globalStyles.mt5, styles.twoHalfItem]}
+        />
       </View>
 
       <Text style={[globalStyles.fs14, globalStyles.mt6, styles.title]}>
@@ -223,4 +248,4 @@ const NewItemForm: FC = () => {
   );
 };
 
-export { NewItemForm };
+export { NewAuctionForm };
