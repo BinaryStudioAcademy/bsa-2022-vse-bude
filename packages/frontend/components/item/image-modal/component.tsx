@@ -1,8 +1,6 @@
 import { Modal, IconButton } from '@primitives';
 import { IconName, IconColor } from '@enums';
 import { useTranslation } from 'next-i18next';
-import { useRef } from 'react';
-import { useOnLoadImage } from '@hooks/image-load';
 
 import * as styles from './styles';
 
@@ -18,8 +16,6 @@ export const ImageModal = ({
   setModalVisible,
 }: ImageModalProps) => {
   const { t } = useTranslation();
-  const ref = useRef<HTMLImageElement>(null);
-  const loading = useOnLoadImage(ref);
 
   return (
     <Modal visible={isOpen}>
