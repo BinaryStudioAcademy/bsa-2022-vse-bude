@@ -4,10 +4,6 @@ export interface IPostForms {
   title: string;
   description: string;
   price: number;
-  recommendedPrice?: number;
-  minimalBid?: number;
-  endDate?: string;
-  endTime?: string;
   currency: string;
   country: string;
   city: string;
