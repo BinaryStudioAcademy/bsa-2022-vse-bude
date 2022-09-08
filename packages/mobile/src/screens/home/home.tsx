@@ -140,7 +140,7 @@ const Home: FC = () => {
                   imageSource={item.src}
                   contentContainerStyle={[
                     globalStyles.mt6,
-                    { width: '30%', height: 50 },
+                    styles.organizationIcon,
                   ]}
                 />
               );

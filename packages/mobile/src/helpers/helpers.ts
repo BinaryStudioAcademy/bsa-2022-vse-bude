@@ -3,4 +3,3 @@ export { pickImageLibrary, pickImageCamera } from './image/image';
 export { requestExternalStoragePermission } from './permissions/permissions';
 export { formatPrice } from './dto-name-modifiers/dto-name-modifiers';
 export { getTimeToEvent } from './date/date';
-export { removeIdDuplicates } from './reducer-data-modifiers/reducer-data-modifier';
