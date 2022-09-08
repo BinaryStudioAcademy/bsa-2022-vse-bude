@@ -1,3 +1,4 @@
+import { ButtonGroup } from '@components/primitives/button-group';
 import { Routes } from '@enums';
 import { ProductType } from '@vse-bude/shared';
 import { useTranslation } from 'next-i18next';
@@ -33,6 +34,20 @@ const Home = ({ auctionProducts, sellingProducts }: HomeProps) => {
         loadMoreTitle={t('home:popularItems.link')}
         loadMoreHref={redirectToFilterByType(ProductType.SELLING)}
       />
+      <ButtonGroup
+        size="big"
+        buttons={[
+          {
+            name: 'hey',
+          },
+          {
+            name: 'bro',
+          },
+          {
+            name: 'am not',
+          },
+        ]}
+      ></ButtonGroup>
     </React.Fragment>
   );
 };
