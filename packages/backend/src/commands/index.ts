@@ -1,9 +1,6 @@
 import { logger } from '@helpers';
-import { auctionNotificationsCommand } from './auction-notifications';
 
-const commands = {
-  [auctionNotificationsCommand.getCommandAlias()]: auctionNotificationsCommand,
-};
+const commands = {};
 
 const args = process.argv;
 const defaultArgsCount = 2;

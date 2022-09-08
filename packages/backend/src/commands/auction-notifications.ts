@@ -15,7 +15,7 @@ import { ProductSoldAuthorBuilder } from '../email/product-sold-author-builder';
 import { ProductSoldWinnerBuilder } from '../email/product-sold-winner-builder';
 import { BaseCommand } from './base-command';
 
-class AuctionNotificationsCommand extends BaseCommand {
+export class AuctionNotificationsCommand extends BaseCommand {
   private _prodRepository: ProductRepositoryType;
 
   private _userRepository: UserRepositoryType;
@@ -24,8 +24,11 @@ class AuctionNotificationsCommand extends BaseCommand {
 
   private limit = 20;
 
-  constructor() {
+  private _product: Product;
+
+  constructor(product: Product) {
     super();
+    this._product = product;
     this.commandAlias = 'auction-notifications';
     this._prodRepository = new ProductRepository(database);
     this._userRepository = new UserRepository(database);
@@ -35,28 +38,12 @@ class AuctionNotificationsCommand extends BaseCommand {
   async execute() {
     logger.log(`Command ${this.commandAlias} started!`);
     try {
-      const finishedLots = await this.getLots();
-      for (const lot of finishedLots) {
-        await this.handleParticipants(lot);
-        await this._prodRepository.markProductNotified(lot.id);
-      }
+      await this.handleParticipants(this._product);
+      await this._prodRepository.markProductNotified(this._product.id);
     } catch (e) {
       logger.error(`Command ${this.commandAlias} failed with error!`);
       logger.error(e);
     }
-  }
-
-  private async getLots() {
-    const result = [];
-    let offset = 0;
-    let lots = await this._prodRepository.getFinishedLots(this.limit, offset);
-    do {
-      lots = await this._prodRepository.getFinishedLots(this.limit, offset);
-      result.push(...lots);
-      offset += this.limit;
-    } while (lots.length === this.limit);
-
-    return result;
   }
 
   private async handleParticipants(productItem: Product) {
@@ -120,5 +107,3 @@ class AuctionNotificationsCommand extends BaseCommand {
     }
   }
 }
-
-export const auctionNotificationsCommand = new AuctionNotificationsCommand();

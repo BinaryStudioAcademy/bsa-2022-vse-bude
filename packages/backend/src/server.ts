@@ -2,7 +2,7 @@ import { initRoutes } from '@routes';
 import cors from 'cors';
 import express, { json, urlencoded } from 'express';
 import { initRepositories } from '@repositories';
-import { getEnv, logger } from '@helpers';
+import { getEnv, isProduction, logger } from '@helpers';
 import { initServices } from '@services';
 import { loggerMiddleware } from '@middlewares';
 import swaggerUi from 'swagger-ui-express';
@@ -13,6 +13,7 @@ import { errorHandler } from './error/error-handler';
 import { langMiddleware } from './api/middlewares/lang';
 import { appEventsListener } from './events';
 import { socketCors } from './config';
+import { clearAllJobs, initAuctionJobs } from './scheduler';
 
 const app = express();
 const repositories = initRepositories(database);
@@ -32,6 +33,11 @@ const options = {
   apis: ['**/routes/*.ts', '**/docs/**/*.ts'],
 };
 const swaggerSpecification = swaggerJsdoc(options);
+
+if (isProduction) {
+  clearAllJobs();
+  initAuctionJobs(repositories.productRepository);
+}
 
 app
   .use(cors())
