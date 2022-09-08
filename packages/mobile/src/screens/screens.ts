@@ -1,5 +1,5 @@
 export { Welcome } from '~/screens/welcome/welcome';
-export { Favourite } from '~/screens/favorite/favourite';
+export { Favorite } from '~/screens/favorite/favorite';
 export { MyList } from '~/screens/my-list/my-list';
 export { Account } from '~/screens/account/account';
 export { MessagesScreen } from '~/screens/messages/messages';

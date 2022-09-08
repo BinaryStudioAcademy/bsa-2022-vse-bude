@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { Dimensions } from 'react-native';
 import {
   createDrawerNavigator,
   DrawerNavigationOptions,
@@ -13,9 +12,6 @@ const HomeWithMenuNavigation: FC = () => {
   const options: DrawerNavigationOptions = {
     headerShown: false,
     swipeEdgeWidth: 200,
-    drawerStyle: {
-      width: Dimensions.get('screen').width,
-    },
   };
 
   return (
