@@ -291,6 +291,8 @@ const updatePassword = createAsyncThunk(
   },
 );
 
+const clearAuthError = createAsyncThunk(AuthActions.CLEAR_ERRORS, () => false);
+
 export {
   getCurrentUserSSR,
   loginUser,
@@ -303,4 +305,5 @@ export {
   emailCodeResend,
   sendPasswordResetLink,
   updatePassword,
+  clearAuthError,
 };

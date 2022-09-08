@@ -9,6 +9,7 @@ import {
   logoutUser,
   phoneVerification,
   signUpUser,
+  clearAuthError,
 } from './actions';
 
 export interface AuthState {
@@ -61,6 +62,7 @@ const error = createReducer('', {
   [phoneVerification.rejected.type]: (_, { payload }) => payload,
   [emailVerification.rejected.type]: (_, { payload }) => payload,
   [loginUser.pending.type]: () => '',
+  [clearAuthError.fulfilled.type]: () => '',
 });
 
 export const authReducer = combineReducers({

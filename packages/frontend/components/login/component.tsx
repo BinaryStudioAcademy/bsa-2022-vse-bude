@@ -11,9 +11,10 @@ import {
 } from '@primitives';
 import type { UserSignInDto } from '@vse-bude/shared';
 import { Routes } from '@enums';
-import { getAuthErrorSelector, loginUser } from 'store/auth';
+import { clearAuthError, getAuthErrorSelector, loginUser } from 'store/auth';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { signInSchema } from 'validation-schemas/user';
+import { useEffect } from 'react';
 import { Divider } from '../primitives/divider';
 import * as styles from './styles';
 
@@ -23,6 +24,11 @@ export default function Login() {
   const dispatch = useAppDispatch();
   const authError = useTypedSelector(getAuthErrorSelector);
   const isLoading = useTypedSelector((state) => state.auth.loading);
+
+  useEffect(() => {
+    console.log('authError', authError);
+    dispatch(clearAuthError());
+  });
 
   const {
     register,
