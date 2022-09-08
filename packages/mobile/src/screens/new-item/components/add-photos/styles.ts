@@ -23,6 +23,16 @@ const styles = StyleSheet.create({
     marginRight: 5,
     alignSelf: 'center',
   },
+  deleteButton: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    zIndex: 2,
+    width: 38,
+    height: 38,
+    borderRadius: 20,
+    backgroundColor: ColorPalette.WHITE_100,
+  },
 });
 
 export { styles };
