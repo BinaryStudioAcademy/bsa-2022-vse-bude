@@ -35,6 +35,17 @@ const signIn = createAsyncThunk<UserDto, UserSignInDto, AsyncThunkConfig>(
   },
 );
 
+const getCurrentUser = createAsyncThunk<UserDto, undefined, AsyncThunkConfig>(
+  ActionType.CURRENT_USER,
+  async (_, { extra }) => {
+    const { authApi } = extra;
+
+    const response = await authApi.getCurrentUser();
+
+    return response;
+  },
+);
+
 const logOut = createAsyncThunk<null, undefined, AsyncThunkConfig>(
   ActionType.LOG_OUT,
   async (_, { extra }) => {
@@ -57,4 +68,4 @@ const resetPassword = createAsyncThunk<
   return response;
 });
 
-export { signUp, signIn, logOut, resetPassword };
+export { signUp, signIn, getCurrentUser, logOut, resetPassword };

@@ -16,6 +16,8 @@ const Button: FC<ButtonProps> = ({
   textColor,
   buttonColor,
   compact,
+  iconLeft,
+  iconRight,
 }) => {
   const { containerStyle, buttonStyle, textStyle, rippleConfig } =
     useButtonStyle({
@@ -41,11 +43,13 @@ const Button: FC<ButtonProps> = ({
         ]}
         android_ripple={rippleConfig}
       >
+        {iconLeft && <View style={globalStyles.mr1}>{iconLeft}</View>}
         <Text
           style={[globalStyles.fontWeightSemiBold, styles.label, textStyle]}
         >
           {label}
         </Text>
+        {iconRight && <View style={globalStyles.ml1}>{iconRight}</View>}
       </Pressable>
     </View>
   );

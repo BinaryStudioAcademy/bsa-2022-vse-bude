@@ -23,6 +23,7 @@ const ImageSliderSplide = ({ imageLinks }: ImageSliderSplideProps) => (
               key={link + index}
               layout="fill"
               objectFit="cover"
+              priority={index === 0}
             />
             <span css={styles.numberSlide}>
               <span css={styles.current}>{index + 1}</span>/
