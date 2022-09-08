@@ -20,6 +20,7 @@ import {
   Countdown,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
+import { RootScreenName } from '~/common/enums/enums';
 import {
   Description,
   ImageCarousel,
@@ -32,7 +33,10 @@ const ProductInfo: FC = () => {
   const { colors } = useCustomTheme();
   const dispatch = useAppDispatch();
   const product = useAppSelector(selectProduct);
-  const route = useRoute<RouteProp<RootNavigationParamList>>();
+  const route =
+    useRoute<
+      RouteProp<Pick<RootNavigationParamList, RootScreenName.ITEM_INFO>>
+    >();
   const id = route.params?.itemId as string;
 
   useEffect(() => {
