@@ -27,7 +27,7 @@ type ProductDto = {
   phone?: string;
   type: ProductType;
   status: string;
-  condition: string;
+  condition: Condition;
   endDate: Date;
   imageLinks: string[];
   views: number;
