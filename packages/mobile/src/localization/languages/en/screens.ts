@@ -152,4 +152,13 @@ export const screens = {
     AUCTION: 'Auction',
     DIRECT_SALE: 'Direct Sale',
   },
+  product_info: {
+    ENDING_ON: 'Ending on',
+    TIME_ZONE: 'Time zone',
+    STATUS: 'Status',
+    LOCATION: 'Location',
+    DESCRIPTION: 'Description',
+    CURRENT_BID: 'Current bid',
+    MIN_UAH: 'Min UAH',
+  },
 };

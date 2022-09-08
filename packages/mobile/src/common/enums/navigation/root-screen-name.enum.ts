@@ -12,6 +12,7 @@ enum RootScreenName {
   VERIFY_CODE = 'Verify code',
   VERIFIED = 'Verified',
   NEW_ITEM = 'Make a post',
+  ITEM_INFO = 'Product Info',
   TYPE_OF_NEW_POST = 'Type of post',
 }
 
