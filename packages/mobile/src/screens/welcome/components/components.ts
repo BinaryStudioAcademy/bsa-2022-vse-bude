@@ -1,1 +1,1 @@
-export { Product } from './product/product';
+export { Stamp } from './stamp/stamp';

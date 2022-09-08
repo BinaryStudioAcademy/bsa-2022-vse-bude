@@ -8,16 +8,17 @@ type UserProfileDto = {
   socialMedia: SocialMedia[];
 };
 
-type RequestUserProfileDto = {
+type FullUserProfileDto = {
+  id: string;
+  avatar?: string;
   firstName: string;
   lastName: string;
   email: string;
   phone?: string;
-  userAddress: UserAddressDto;
+  userAddress?: UserAddressDto;
   socialMedia: SocialMedia[];
-  password?: string;
-  newPassword?: string;
-  repeatPassword?: string;
+  phoneVerified: boolean;
+  emailVerified: boolean;
 };
 
 type UserAddressDto = {
@@ -25,7 +26,25 @@ type UserAddressDto = {
   region?: string;
   city?: string;
   zip?: string;
-  novaPoshtaRef?: string;
+  deliveryData?: string;
 };
 
-export type { UserProfileDto, UserAddressDto, RequestUserProfileDto };
+type UpdateUserProfileDto = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone?: string | null;
+};
+
+type UpdatePasswordDto = {
+  password: string;
+  newPassword: string;
+};
+
+export type {
+  UserProfileDto,
+  UserAddressDto,
+  FullUserProfileDto,
+  UpdateUserProfileDto,
+  UpdatePasswordDto,
+};

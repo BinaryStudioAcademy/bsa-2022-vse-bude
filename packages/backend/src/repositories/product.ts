@@ -1,5 +1,5 @@
-import { ProductStatus } from '@prisma/client';
-import type { Product, PrismaClient } from '@prisma/client';
+import type { PrismaClient } from '@prisma/client';
+import { ProductStatus, ProductType } from '@prisma/client';
 import type { ProductQuery } from '@types';
 import { Order } from '@vse-bude/shared';
 
@@ -10,11 +10,12 @@ export class ProductRepository {
     this._dbClient = prismaClient;
   }
 
-  public getAll(query: ProductQuery): Promise<Product[]> {
+  public getAll(query: ProductQuery) {
     const {
       limit = 10,
       from = 0,
       type,
+      categoryId,
       sortBy = 'createdAt',
       order = Order.ASC,
     } = query;
@@ -27,6 +28,7 @@ export class ProductRepository {
       },
       where: {
         type,
+        categoryId,
       },
     });
   }
@@ -127,6 +129,53 @@ export class ProductRepository {
     });
   }
 
+  public create(data) {
+    return this._dbClient.product.create({
+      data: {
+        imageLinks: data.imageLinks,
+        country: data.country,
+        city: data.city,
+        phone: data.phone,
+        status: data.status,
+        categoryId: data.category,
+        title: data.title,
+        description: data.description,
+        authorId: data.authorId,
+        type: data.type,
+        price: data.price,
+        minimalBid: data.minimalBid,
+        recommendedPrice: data.recommendedPrice,
+        endDate: data.endDate,
+        postDate: data.postDate,
+      },
+    });
+  }
+
+  public async update(id: string, data) {
+    return await this._dbClient.product.update({
+      where: {
+        id,
+      },
+      data: {
+        imageLinks: data.imageLinks,
+        status: data.status,
+        condition: data.condition,
+        country: data.country,
+        city: data.city,
+        phone: data.phone,
+        categoryId: data.category,
+        title: data.title,
+        description: data.description,
+        type: data.type,
+        price: data.price,
+        minimalBid: data.minimalBid,
+        recommendedPrice: data.recommendedPrice,
+        endDate: data.endDate,
+        postDate: data.postDate,
+      },
+    });
+  }
+
   public async getCurrentPrice(productId: string) {
     const lastBid = await this._dbClient.bid.findFirst({
       where: {
@@ -156,7 +205,7 @@ export class ProductRepository {
   }
 
   public async checkStatus(id: string, status: ProductStatus) {
-    return await this._dbClient.product.findFirst({
+    return this._dbClient.product.findFirst({
       where: {
         id,
         status,
@@ -173,6 +222,51 @@ export class ProductRepository {
       data: {
         winnerId: userId,
         status,
+      },
+    });
+  }
+
+  public async findSimilar(
+    city: string,
+    categoryId: string,
+    type: ProductType,
+    productId: string,
+  ) {
+    return await this._dbClient.product.findMany({
+      where: {
+        city,
+        categoryId,
+        type,
+        status: ProductStatus.ACTIVE,
+        NOT: {
+          id: productId,
+        },
+      },
+    });
+  }
+
+  public async getMostPopularLots(limit: number) {
+    return await this._dbClient.product.findMany({
+      take: limit,
+      where: {
+        status: ProductStatus.ACTIVE,
+        type: ProductType.AUCTION,
+      },
+      orderBy: {
+        views: Order.DESC,
+      },
+    });
+  }
+
+  public async getMostPopularProducts(limit: number) {
+    return await this._dbClient.product.findMany({
+      take: limit,
+      where: {
+        status: ProductStatus.ACTIVE,
+        type: ProductType.SELLING,
+      },
+      orderBy: {
+        views: Order.DESC,
       },
     });
   }

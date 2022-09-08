@@ -31,11 +31,13 @@ scripts:
   - &android_build_apk
     name: Build Android release
     script: |
+      export INCREMENTED_GOOGLE_PLAY_BUILD_NUMBER=$(($(google-play get-latest-build-number --package-name "$PACKAGE_NAME" --tracks=internal) + 1))
       cd ./android && ./gradlew clean assembleRelease
 
   - &android_build_aab
     name: Build Android release
     script: |
+      export INCREMENTED_GOOGLE_PLAY_BUILD_NUMBER=$(($(google-play get-latest-build-number --package-name "$PACKAGE_NAME" --tracks=internal) + 1))
       cd ./android && ./gradlew clean bundleRelease
 
 workflows:
@@ -89,6 +91,20 @@ workflows:
         - android_keystore
         - play_console
       node: 16
+
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: main
+          include: true
+          source: false
+      cancel_previous_builds: true
+
+    when:
+      changeset:
+        includes:
+          - 'packages/mobile/'
 
     scripts:
       - *npm_install

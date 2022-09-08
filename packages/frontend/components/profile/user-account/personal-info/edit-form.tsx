@@ -1,90 +1,73 @@
 import { useTranslation } from 'next-i18next';
+import { useAppDispatch, useTypedSelector } from '@hooks';
 import type React from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-import { Input, PasswordInput, Column, Flex, Button } from '@primitives';
+import {
+  Input,
+  PasswordInput,
+  Column,
+  Flex,
+  Button,
+  Loader,
+} from '@primitives';
 import { userUpdateSchema } from 'validation-schemas/user/user-update';
-import type { SaveUserProfileDto } from '@vse-bude/shared';
+import type { SaveUserProfileDto, FullUserProfileDto } from '@vse-bude/shared';
+import { DefaultInpValue } from '@vse-bude/shared';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { UserPersonalInfoValidationMessage } from '@vse-bude/shared';
+import { profileMapper, updateDtoMapper } from '@helpers';
+import { updateUserProfile, setIsEditing } from '@store';
+import { useEffect, useState } from 'react';
+import type { RootState } from '@types';
+import { showVerifyModal } from 'store/modals/actions';
 import { SectionHeader, NestedLayout } from '../common';
 import * as styles from './styles';
 
-const EditPersonalInfo = () => {
+const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
+  const [isSubmit, setIsSubmit] = useState(false);
+  const [updatedPhone, setUpdatedPhone] = useState(null);
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+
+  const saveLoader = useTypedSelector(
+    (state: RootState) => state.profile.saveLoader,
+  );
 
   const {
     register,
     reset,
-    setValue,
-    setError,
-    clearErrors,
     handleSubmit,
     formState: { errors },
-  } = useForm<SaveUserProfileDto>({
-    defaultValues: {
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'example@yahoo.com',
-      phone: '+380999999999',
-      city: '',
-      region: '',
-      country: '',
-      zip: '',
-      novaPoshtaRef: '',
-      linkedin: '',
-      facebook: '',
-      instagram: '',
-      password: '',
-      newPassword: '',
-      repeatPassword: '',
-    },
+  } = useForm({
+    mode: 'onChange',
+    defaultValues: profileMapper({ user }),
     resolver: joiResolver(userUpdateSchema(t)),
   });
 
-  const onSave: SubmitHandler<SaveUserProfileDto> = (data, event) => {
-    event.preventDefault();
-    console.log('data', data);
-  };
-  console.log(errors);
-  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    clearErrors('newPassword');
-    if (value.includes(' ')) {
-      setError('newPassword', {
-        message: t(UserPersonalInfoValidationMessage.SPACES_IN_PASSWORD),
-      });
-    } else if (/^[А-ЯЁIЇҐЄЂЃЀЅЍЈЉЊЋЌЎа-яёіїґєђѓѐѕѝјљњћќў]+$/.test(value)) {
-      setError('newPassword', {
-        message: t(UserPersonalInfoValidationMessage.CYRILLIC),
-      });
-    } else {
-      setValue('newPassword', event.target.value);
-    }
-  };
+  useEffect(() => {
+    const resetPhone = !user.phone ? null : user.phone;
+    setUpdatedPhone(resetPhone);
+    reset({
+      'phone': user.phone,
+      'password': '',
+      'repeatPassword': '',
+      'newPassword': '',
+    });
+  }, [isSubmit, reset, user.phone]);
 
   const onResetHandler = () => {
-    reset(
-      {
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'example@yahoo.com',
-        phone: '+380999999999',
-        city: '',
-        region: '',
-        country: '',
-        zip: '',
-        novaPoshtaRef: '',
-        linkedin: '',
-        facebook: '',
-        instagram: '',
-        password: '',
-        newPassword: '',
-        repeatPassword: '',
-      },
-      {
-        keepDefaultValues: true,
-      },
+    reset(profileMapper({ user }), {
+      keepDefaultValues: true,
+    });
+    dispatch(setIsEditing());
+  };
+
+  const onSave: SubmitHandler<SaveUserProfileDto> = async (data, event) => {
+    event.preventDefault();
+    const currentLinks = user.socialMedia;
+    setIsSubmit(!isSubmit);
+    dispatch(
+      updateUserProfile({ data: updateDtoMapper({ data, currentLinks }) }),
     );
   };
 
@@ -104,6 +87,10 @@ const EditPersonalInfo = () => {
     return false;
   };
 
+  const onVerifyPhone = () => {
+    dispatch(showVerifyModal());
+  };
+
   return (
     <NestedLayout>
       <form css={styles.form} onSubmit={handleSubmit(onSave)}>
@@ -113,12 +100,17 @@ const EditPersonalInfo = () => {
               size="flexible"
               type="button"
               variant="outlined"
+              disabled={saveLoader}
               onClick={onResetHandler}
             >
               {t('personal-info:action.cancel')}
             </Button>
-            <Button size="flexible" type="submit">
-              {t('personal-info:action.save')}
+            <Button size="flexible" type="submit" disabled={saveLoader}>
+              {saveLoader ? (
+                <Loader size={'extraSmall'} />
+              ) : (
+                t('personal-info:action.save')
+              )}
             </Button>
           </Flex>
         </div>
@@ -163,10 +155,12 @@ const EditPersonalInfo = () => {
                 error={errors.email?.message}
               />
             </div>
+
             <Flex css={styles.groupePhone}>
               <div css={styles.phoneRow}>
                 <Input
                   id="phone-profile"
+                  inerasableValue={!updatedPhone ? DefaultInpValue.PHONE : null}
                   type="text"
                   variant="primary"
                   label={t('personal-info:label.phone')}
@@ -175,9 +169,18 @@ const EditPersonalInfo = () => {
                   error={errors.phone?.message}
                 />
               </div>
-              <Button type="button" size="big" variant="outlined">
-                {t('personal-info:action.verify')}
-              </Button>
+              {!user.phoneVerified && (
+                <div css={styles.verifyButtonWrapper}>
+                  <Button
+                    type="button"
+                    size="big"
+                    variant="outlined"
+                    onClick={onVerifyPhone}
+                  >
+                    {t('personal-info:action.verify')}
+                  </Button>
+                </div>
+              )}
             </Flex>
           </Column>
 
@@ -193,6 +196,7 @@ const EditPersonalInfo = () => {
                   label={t('personal-info:label.country')}
                   placeholder={t('personal-info:placeholder.country')}
                   {...register('country')}
+                  error={errors.country?.message}
                 />
               </div>
 
@@ -204,6 +208,7 @@ const EditPersonalInfo = () => {
                   label={t('personal-info:label.region')}
                   placeholder={t('personal-info:placeholder.region')}
                   {...register('region')}
+                  error={errors.region?.message}
                 />
               </div>
             </Flex>
@@ -217,6 +222,7 @@ const EditPersonalInfo = () => {
                   label={t('personal-info:label.city')}
                   placeholder={t('personal-info:placeholder.city')}
                   {...register('city')}
+                  error={errors.city?.message}
                 />
               </div>
               <div css={styles.inputRow}>
@@ -227,6 +233,7 @@ const EditPersonalInfo = () => {
                   label={t('personal-info:label.zipCode')}
                   placeholder={t('personal-info:placeholder.zip')}
                   {...register('zip')}
+                  error={errors.zip?.message}
                 />
               </div>
             </Flex>
@@ -236,9 +243,10 @@ const EditPersonalInfo = () => {
                 id="novaposhta-profile"
                 type="text"
                 variant="primary"
-                label={t('personal-info:label.novaPoshta')}
-                placeholder={t('personal-info:placeholder.novaPoshtaRef')}
-                {...register('novaPoshtaRef')}
+                label={t('personal-info:label.deliveryData')}
+                placeholder={t('personal-info:placeholder.deliveryData')}
+                {...register('deliveryData')}
+                error={errors.deliveryData?.message}
               />
             </div>
           </Column>
@@ -311,7 +319,7 @@ const EditPersonalInfo = () => {
                 onCut={onCutHandler}
                 onCopy={onCopyHandler}
                 onPaste={onPastHandler}
-                {...(register('newPassword'), { onChange: onChangeHandler })}
+                {...register('newPassword')}
                 error={errors.newPassword?.message}
               />
             </div>

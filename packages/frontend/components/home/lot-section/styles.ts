@@ -8,15 +8,19 @@ export const lotContainer = ({
   opacities,
   breakpoints,
 }: Theme) => css`
-  margin-top: ${spaces.xl2};
+  margin-top: ${spaces.md};
+
+  @media (min-width: ${breakpoints.sm}px) {
+    margin-top: ${spaces.xl2};
+  }
 
   @media (min-width: ${breakpoints.md}px) {
     .splide__arrow--next {
-      right: -${spaces.xl1};
+      right: -${spaces.xl2};
     }
 
     .splide__arrow--prev {
-      left: -${spaces.xl1};
+      left: -${spaces.xl2};
     }
   }
 
@@ -31,11 +35,11 @@ export const lotContainer = ({
   }
 
   .splide__arrow--next {
-    right: -${spaces.xl3};
+    right: -${spaces.xl};
   }
 
   .splide__arrow--prev {
-    left: -${spaces.xl3};
+    left: -${spaces.xl};
   }
 
   .splide__pagination {

@@ -11,6 +11,7 @@ export enum ApiRoutes {
   HEALTH = '/health',
   CREATE_POST = '/post',
   BIDS = '/bids',
+  ORDERS = '/orders',
 }
 
 export enum AuthApiRoutes {
@@ -33,10 +34,17 @@ export enum VerifyApiRoutes {
 
 export enum ProductApiRoutes {
   ID = '/:id',
+  EDIT_ID = '/edit/:id',
   VIEWS = '/views',
   FAVORITE = '/favorite',
   FAVORITE_IDS = '/favorite-ids',
   BUY = '/buy/:id',
+  UPDATE = '/update/:id',
+  AUCTION_PERMISSIONS = '/auction/permissions',
+  AUCTION_LEAVE = '/auction/leave',
+  SIMILAR = '/similar',
+  POPULAR_LOTS = '/popular-lots',
+  POPULAR_PRODUCTS = '/popular-products',
 }
 
 export enum ProfileApiRoutes {
@@ -49,4 +57,11 @@ export enum ProfileApiRoutes {
 export enum AccountApiRoutes {
   PERSONAL_INFO = '/personal-info',
   MY_LIST = '/my-list',
+}
+
+export enum OrderApiRoutes {
+  STATUS = '/status',
+  SUCCESS = '/success',
+  CREATE_PAYMENT = '/create-payment',
+  ID = '/:id',
 }

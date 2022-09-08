@@ -1,62 +1,81 @@
-﻿import { Layout, Item } from '@components';
+﻿import { useEffect } from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { AuthHelper, CookieStorage } from '@helpers';
-import {
-  getProductByIdSSR,
-  getProductsSSR,
-  incrementProductViews,
-} from 'services/product';
-import { LotSection } from 'components/home/lot-section';
+import { LotSection } from '@components/home/lot-section';
 import { Routes } from '@enums';
 import { Breadcrumbs } from '@primitives';
 import { useTranslation } from 'next-i18next';
-import type { ItemDto } from '@vse-bude/shared';
 import { Http } from '@vse-bude/shared';
+import type { ProductType, ItemDto } from '@vse-bude/shared';
 import { withPublic } from '@hocs';
-import { useEffect } from 'react';
+import { Layout } from '@components/layout';
+import { Item } from '@components/item';
+import { useAppDispatch, useTypedSelector } from '@hooks';
+import {
+  auctionPermissions,
+  fetchProductSSR,
+  updateProductViews,
+  fetchSimilarProducts,
+} from 'store/product';
+import { wrapper } from '@store';
+import { shallowEqual } from 'react-redux';
 
-export const getServerSideProps = withPublic(async (ctx) => {
-  const { locale } = ctx;
+export const getServerSideProps = withPublic(
+  wrapper.getServerSideProps((store) => async (ctx) => {
+    const { locale, query } = ctx;
 
-  const id = ctx.query.id as string;
-  const storage = new CookieStorage(ctx);
-  const auth = new AuthHelper(storage);
-  const httpSSR = new Http(process.env.NEXT_PUBLIC_API_ROUTE, auth);
+    const http = new Http(process.env.NEXT_PUBLIC_API_ROUTE, locale);
+    const id = query.id as string;
 
-  try {
-    const item = await getProductByIdSSR(httpSSR, id);
-    const similarItems = await getProductsSSR({
-      httpSSR,
-      limit: 10,
-    });
+    const { payload } = await store.dispatch(fetchProductSSR({ id, http }));
+
+    if (!payload) {
+      return {
+        redirect: {
+          destination: Routes.NOT_FOUND,
+        },
+        props: {},
+      };
+    }
 
     return {
       props: {
         ...(await serverSideTranslations(locale, ['common', 'item'])),
-        item,
-        similarItems,
       },
     };
-  } catch {
-    return {
-      redirect: {
-        destination: Routes.NOT_FOUND,
-      },
-    };
-  }
-});
+  }),
+);
 
-interface ItemPageProps {
-  item: ItemDto;
-  similarItems: ItemDto[];
-}
-
-const ItemPage = ({ item, similarItems }: ItemPageProps) => {
+const ItemPage = () => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const item: ItemDto = useTypedSelector(
+    (state) => state.product.currentItem,
+    shallowEqual,
+  );
+  const { user } = useTypedSelector((state) => state.auth, shallowEqual);
+
+  const similarProducts = useTypedSelector(
+    (state) => state.product.similarProducts,
+    shallowEqual,
+  );
+
+  const redirectToFilterByType = (type: ProductType) =>
+    encodeURI(`${Routes.ITEMS}?filter={"type":"${type}"}`);
 
   useEffect(() => {
-    incrementProductViews(item.id);
-  }, [item.id]);
+    dispatch(updateProductViews(item.id));
+    dispatch(fetchSimilarProducts(item.id));
+  }, [item.id, dispatch]);
+
+  useEffect(() => {
+    if (user) {
+      dispatch(
+        auctionPermissions({
+          productId: item.id,
+        }),
+      );
+    }
+  }, [item.id, dispatch, user]);
 
   return (
     <Layout title={item.title}>
@@ -67,20 +86,25 @@ const ItemPage = ({ item, similarItems }: ItemPageProps) => {
             route: Routes.DEFAULT,
           },
           {
-            name: t('common:header.nav.category'),
-            route: Routes.DEFAULT, // change
+            name: t('common:header.nav.item'),
+            route: Routes.ITEMS,
           },
           {
-            name: item.category.title, //change
-            route: Routes.DEFAULT, // change
+            name: item.category?.title,
+            route: encodeURI(
+              `${Routes.ITEMS}?filter=${JSON.stringify({
+                category: item.category.id,
+              })}`,
+            ),
           },
         ]}
       />
       <Item item={item} />
       <LotSection
         title={t('item:similarItems')}
-        lots={similarItems}
+        lots={similarProducts}
         loadMoreTitle={t('item:seeMoreItems')}
+        loadMoreHref={redirectToFilterByType(item.type)}
       />
     </Layout>
   );

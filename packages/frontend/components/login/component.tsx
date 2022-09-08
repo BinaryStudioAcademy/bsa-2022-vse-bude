@@ -2,7 +2,13 @@ import { useTranslation } from 'next-i18next';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { Input, PasswordInput, InternalLink, Button } from '@primitives';
+import {
+  Input,
+  PasswordInput,
+  InternalLink,
+  Button,
+  Loader,
+} from '@primitives';
 import type { UserSignInDto } from '@vse-bude/shared';
 import { Routes } from '@enums';
 import { getAuthErrorSelector, loginUser } from 'store/auth';
@@ -16,6 +22,7 @@ export default function Login() {
 
   const dispatch = useAppDispatch();
   const authError = useTypedSelector(getAuthErrorSelector);
+  const isLoading = useTypedSelector((state) => state.auth.loading);
 
   const {
     register,
@@ -54,9 +61,12 @@ export default function Login() {
             />
           </div>
           {/* TODO: add styles to error */}
-          {authError && <p>{authError}</p>}
+          {authError && <p css={styles.error}>{authError}</p>}
           <div css={styles.inputWrapper}>
-            <Button type="submit">{t('auth:sign-in.loginBtn')}</Button>
+            <Button type="submit" width={'100%'} disabled={isLoading}>
+              {isLoading && <Loader size={'extraSmall'} />}
+              {t('auth:sign-in.loginBtn')}
+            </Button>
           </div>
           <Divider />
           <div>

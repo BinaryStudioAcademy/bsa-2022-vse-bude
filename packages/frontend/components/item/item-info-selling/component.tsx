@@ -2,6 +2,8 @@
 import { Button } from '@primitives';
 import { FavoriteButton } from 'components/product/favorite-button/component';
 import { useTranslation } from 'next-i18next';
+import { useTypedSelector } from '@hooks';
+import { useRouter } from 'next/router';
 import { ItemTitle, ItemInfo, ItemPrice } from '../item-info';
 import * as styles from './styles';
 
@@ -19,6 +21,9 @@ export const ItemInfoSelling = ({
   onChangeIsFavorite,
 }: ItemInfoSellingProps) => {
   const { t } = useTranslation('item');
+  const { push } = useRouter();
+  const { user } = useTypedSelector((state) => state.auth);
+  const isAuthor = user?.id === item.author.id;
 
   return (
     <div css={styles.wrapper}>
@@ -29,15 +34,22 @@ export const ItemInfoSelling = ({
         cssExtended={styles.price}
       />
       <ItemInfo item={item} />
-      <div css={styles.controlls}>
-        <Button onClick={onBuy}>{t('buyBtn')}</Button>
-        <FavoriteButton
-          cssExtended={styles.favouriteButton}
-          onChangeIsFavorite={onChangeIsFavorite}
-          isFavorite={isInFavorite}
-          backgroundColor="transparent"
-          size="md"
-        ></FavoriteButton>
+      <div css={styles.controls}>
+        {isAuthor ? (
+          <Button onClick={() => push(`/items/edit/${item.id}`)}>Edit</Button>
+        ) : (
+          <>
+            <FavoriteButton
+              cssExtended={styles.favouriteButton}
+              onChangeIsFavorite={onChangeIsFavorite}
+              isFavorite={isInFavorite}
+              backgroundColor="transparent"
+              size="md"
+              disabled={!user}
+            />
+            <Button onClick={onBuy}>{t('buttons.buyBtn')}</Button>
+          </>
+        )}
       </div>
     </div>
   );

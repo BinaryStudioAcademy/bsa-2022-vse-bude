@@ -5,6 +5,9 @@ import { categoryReducer } from './category';
 import { productReducer } from './product';
 import { favoriteProductReducer } from './favorite-product';
 import { profileReducer } from './profile/reducer';
+import { modalsReducer } from './modals/reducer';
+import { toastReducer } from './toast/reducers';
+import { checkoutReducer } from './checkout';
 
 const makeStore = () =>
   configureStore({
@@ -13,7 +16,10 @@ const makeStore = () =>
       profile: profileReducer,
       category: categoryReducer,
       product: productReducer,
+      toast: toastReducer,
       favoriteProduct: favoriteProductReducer,
+      modals: modalsReducer,
+      checkout: checkoutReducer,
     },
   });
 

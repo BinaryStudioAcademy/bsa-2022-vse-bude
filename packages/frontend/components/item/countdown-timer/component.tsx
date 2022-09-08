@@ -46,7 +46,7 @@ export const CountDownTimer = ({ targetDate }: CountDownTimerProps) => {
   });
 
   const getShownValue = (value: number) =>
-    value >= 10 ? `${value}` : `0${value}`;
+    value >= 10 ? `${value}` : value >= 0 ? `0${value}` : `00`;
 
   return (
     <div css={styles.wrapper}>

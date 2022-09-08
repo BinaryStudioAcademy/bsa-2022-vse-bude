@@ -4,6 +4,9 @@ import type { Theme } from '@emotion/react';
 export const linkStyles = ({
   colors,
   fontSizes,
+  heights,
+  radiuses,
+  spaces,
   lineHeights,
   fontWeights,
 }: Theme) => css`
@@ -16,6 +19,7 @@ export const linkStyles = ({
   &[aria-disabled='true'] {
     color: ${colors.disabled};
     pointer-events: none;
+    cursor: not-allowed;
   }
 
   &[data-variant='default'] {
@@ -62,10 +66,23 @@ export const linkStyles = ({
     }
   }
 
-  &[data-variant='dashboard'] {
-    font-size: ${fontSizes.tub};
-    font-weight: ${fontWeights.tub};
-    line-height: ${lineHeights.tub};
-    color: ${colors.text};
+  &[data-variant='button'] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    height: ${heights.controlBg};
+    border-radius: ${radiuses.md};
+    padding: 0 ${spaces.xl2};
+    background: ${colors.primaryLight};
+    font-size: ${fontSizes.button};
+    line-height: ${lineHeights.button};
+    font-weight: ${fontWeights.button};
+    color: white;
+
+    :hover,
+    :active {
+      background: ${colors.primaryLightHover};
+    }
   }
 `;

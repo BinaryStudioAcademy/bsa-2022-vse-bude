@@ -1,14 +1,15 @@
-﻿import React from 'react';
-import type { CreateBidRequest, ItemDto } from '@vse-bude/shared';
+﻿import React, { useEffect } from 'react';
+import type { ItemDto } from '@vse-bude/shared';
 import { ProductType } from '@vse-bude/shared';
 import { Container } from '@primitives';
-import { lightTheme } from 'theme';
 import {
   deleteProductFromFavorites,
   addProductToFavorites,
 } from 'store/favorite-product';
-import { useAppDispatch, useWindowSize, useInFavorite } from '@hooks';
-import { makeBid } from '../../store/product';
+import { useAppDispatch, useInFavorite, useTypedSelector } from '@hooks';
+import { fetchCreateOrder } from 'store/checkout';
+import { useRouter } from 'next/router';
+import { Routes } from '@enums';
 import { ItemImageSlider } from './image-slider/component';
 import { ItemInfoSelling } from './item-info-selling/component';
 import { ItemInfoAuction } from './item-info-auction/component';
@@ -20,26 +21,14 @@ interface ItemProps {
 }
 
 export const Item = ({ item }: ItemProps) => {
-  const windowSize = useWindowSize();
-
   const dispatch = useAppDispatch();
 
-  // TODO: delete after adding different photos to post
-  const images = [
-    'https://picsum.photos/id/1/640/480/',
-    'https://picsum.photos/id/2/640/480/',
-    'https://picsum.photos/id/3/640/480/',
-    'https://picsum.photos/id/4/640/480/',
-  ];
+  const router = useRouter();
 
-  const handleBuy = () => console.log('buy');
-  const handleBid = ({ price }: CreateBidRequest) => {
-    dispatch(
-      makeBid({
-        price: price,
-        productId: item.id,
-      }),
-    );
+  const order = useTypedSelector((state) => state.checkout.order);
+
+  const handleBuy = () => {
+    dispatch(fetchCreateOrder(item.id));
   };
 
   const isInFavorite = useInFavorite(item.id);
@@ -51,14 +40,21 @@ export const Item = ({ item }: ItemProps) => {
     dispatch(favAction(item.id));
   };
 
+  useEffect(() => {
+    if (order?.id) {
+      router.push(`${Routes.CHECKOUT}?id=${order?.id}`);
+    }
+  }, [order?.id, router]);
+
   return (
     <React.Fragment>
       <Container cssExtend={styles.itemWrapper}>
-        {windowSize.width > lightTheme.breakpoints.sm ? (
-          <ItemImageSlider imageLinks={images} />
-        ) : (
-          <ImageSliderSplide imageLinks={images} />
-        )}
+        <div className="desktop-gallery-wrapper">
+          <ItemImageSlider imageLinks={item.imageLinks} />
+        </div>
+        <div className="mobile-gallery-wrapper">
+          <ImageSliderSplide imageLinks={item.imageLinks} />
+        </div>
         {item.type === ProductType.SELLING ? (
           <ItemInfoSelling
             item={item}
@@ -70,7 +66,6 @@ export const Item = ({ item }: ItemProps) => {
           <ItemInfoAuction
             item={item}
             isInFavorite={isInFavorite}
-            onBid={handleBid}
             onChangeIsFavorite={onChangeIsFavorite}
           />
         )}

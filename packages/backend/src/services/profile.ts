@@ -1,19 +1,19 @@
-import type { TFunction } from 'i18next';
 import type { UserProfileRepository } from '@repositories';
 import type {
   UpdateUserProfileDto,
-  UserSocialMediaDto,
   UpdatePasswordDto,
-  UploadFileRequest,
-} from '@types';
+  UserAddressDto,
+  SocialMedia,
+} from '@vse-bude/shared';
+import type { UploadFileRequest } from '@types';
 import {
   HttpStatusCode,
   UserPersonalInfoValidationMessage,
 } from '@vse-bude/shared';
-import type { HashService } from '@services';
+import type { HashService, S3StorageService } from '@services';
 import { ProfileError } from '@errors';
-import type { S3StorageService } from '@services';
 import { getFilenameFromUrl } from '@helpers';
+import { lang } from '@lang';
 
 export class UserProfileService {
   private _userProfileRepository: UserProfileRepository;
@@ -36,30 +36,24 @@ export class UserProfileService {
     this._storageService = storageService;
   }
 
-  public async getUser({ userId, t }: { userId: string; t: TFunction }) {
+  public async getUser({ userId }: { userId: string }) {
     const user = await this._userProfileRepository.getUser({ userId });
     if (!user) {
       throw new ProfileError({
         status: HttpStatusCode.BAD_REQUEST,
-        message: t(UserPersonalInfoValidationMessage.USER_NOT_EXISTS),
+        message: lang(UserPersonalInfoValidationMessage.USER_NOT_EXISTS),
       });
     }
 
     return user;
   }
 
-  public async getFullUserData({
-    userId,
-    t,
-  }: {
-    userId: string;
-    t: TFunction;
-  }) {
+  public async getFullUserData({ userId }: { userId: string }) {
     const user = await this._userProfileRepository.getFullUserData({ userId });
     if (!user) {
       throw new ProfileError({
         status: HttpStatusCode.BAD_REQUEST,
-        message: t(UserPersonalInfoValidationMessage.USER_NOT_EXISTS),
+        message: lang(UserPersonalInfoValidationMessage.USER_NOT_EXISTS),
       });
     }
 
@@ -96,6 +90,29 @@ export class UserProfileService {
     return this._userProfileRepository.updateUserProfile({ userId, data });
   }
 
+  public cancelPhoneVerified({ userId }: { userId: string }) {
+    return this._userProfileRepository.cancelPhoneVerified({ userId });
+  }
+
+  public async checkIsPhoneExists({
+    userId,
+    phone,
+  }: {
+    userId: string;
+    phone: string;
+  }) {
+    const userPhone = await this._userProfileRepository.checkIsPhoneExists({
+      userId,
+      phone,
+    });
+    if (userPhone) {
+      throw new ProfileError({
+        status: HttpStatusCode.BAD_REQUEST,
+        message: lang(UserPersonalInfoValidationMessage.PHONE_EXISTS),
+      });
+    }
+  }
+
   public async updateAvatar({
     userId,
     req,
@@ -126,25 +143,42 @@ export class UserProfileService {
     });
   }
 
-  public updateUserSocialMedia({
+  public updateUserAddress({
+    userId,
+    userAddress,
+  }: {
+    userId: string;
+    userAddress: UserAddressDto;
+  }) {
+    if (!userAddress) {
+      return null;
+    }
+
+    return this._userProfileRepository.updateAddress({
+      userId,
+      data: userAddress,
+    });
+  }
+
+  public async updateUserSocialMedia({
     userId,
     socialMedia,
   }: {
     userId: string;
-    socialMedia: UserSocialMediaDto[];
+    socialMedia: SocialMedia[];
   }) {
-    return this._userProfileRepository.updateUserSocialMedia({
+    await this._userProfileRepository.updateUserSocialMedia({
       userId,
       socialMedia,
     });
+
+    return {};
   }
 
   public async changePassword({
-    t,
     userId,
     data,
   }: {
-    t: TFunction;
     userId: string;
     data: UpdatePasswordDto;
   }) {
@@ -155,7 +189,7 @@ export class UserProfileService {
     if (!passwordHash) {
       throw new ProfileError({
         status: HttpStatusCode.BAD_REQUEST,
-        message: t(UserPersonalInfoValidationMessage.USER_NOT_EXISTS),
+        message: lang(UserPersonalInfoValidationMessage.USER_NOT_EXISTS),
       });
     }
 
@@ -167,13 +201,12 @@ export class UserProfileService {
     if (!isCurrentPassword) {
       throw new ProfileError({
         status: HttpStatusCode.BAD_REQUEST,
-        message: t(UserPersonalInfoValidationMessage.WRONG_PASSWORD),
+        message: lang(UserPersonalInfoValidationMessage.WRONG_PASSWORD),
       });
     }
 
     const newPasswordHash = this._hashService.generateHash(newPassword);
-
-    this._userProfileRepository.changePassword({
+    await this._userProfileRepository.changePassword({
       userId,
       passwordHash: newPasswordHash,
     });

@@ -15,8 +15,13 @@
     "ok": "OK",
     "cancel": "Cancel"
   },
+  "avatar": {
+    "change": "Change the Photo",
+    "upload": "Upload the Photo",
+    "delete": "Delete the Photo"
+  },
   "label": {
-    "novaPoshta": "# Nova Poshta",
+    "deliveryData": "Delivery data",
     "firstName": "First name",
     "lastName": "Last name",
     "email": "Email",
@@ -36,7 +41,7 @@
     "firstName": "Enter your first name",
     "lastName": "Enter your last name",
     "email": "Enter your email",
-    "phone": "+380999999999",
+    "phone": "()",
     "country": "Choose your country",
     "region": "Choose your region",
     "city": "Choose your settlement",
@@ -47,7 +52,7 @@
     "password": "Enter password",
     "newPassword": "Enter password",
     "repeatPassword": "Enter password",
-    "novaPoshtaRef": "Enter office of Nova Poshta"
+    "deliveryData": "Enter delivery address"
   },
   "validation": {
     "personal": {
@@ -61,24 +66,32 @@
       "lastnameMax": "Last name should have a maximum of 40 symbols",
       "emailRequired": "Fill the email please!",
       "emailPattern": "Check your email please. Example: my-email@example.com",
-      "phoneRequired": "Fill the mobile phone number please!",
       "phonePattern": "Check your mobile phone number please. Example: +380999999999"
     },
-    "address": {},
+    "address": {
+      "placeName": "Should consist of letters: А-Я or A-Z",
+      "country": "The country name should contain no more than 60 characters",
+      "region": "The name of the region should contain no more than 30 characters",
+      "city": "The name of the settlement should contain no more than 30 characters",
+      "zip": "Zip code should consist of 5 digits",
+      "deliveryData": "Delivery details should contain no more than 256 characters"
+    },
     "socialNetworks": {
       "uri": "Example of link to your profile in the network: https://some-net/me-id-1234",
-      "maxSymbols": "The link cannot exceed 150 characters"
+      "maxSymbols": "The link can't exceed 150 characters"
     },
     "password": {
       "minSymbols": "Password length must be at least 8 characters",
       "maxSymbols": "Password length must not exceed 16 characters",
-      "cyrillic": "You can use only Latin letters",
       "wrongPassword": "Please enter correct password",
       "samePassword": "The new password should not match the current one!",
       "emptyPassword": "Fill the password please!",
       "newPasswordPattern": "Password should include at least one uppercase, one lowercase and one number",
-      "spacesInPassword": "Spaces are not allowed",
       "differentPasswords": "Passwords are not same"
+    },
+    "avatar": {
+      "maxSize": "The file size should not exceed 10MB",
+      "fileType": "The file type should be .jpg or .png"
     }
   }
 }

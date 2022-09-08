@@ -1,4 +1,5 @@
 import type { Category, Product, User } from '@prisma/client';
+import { Condition } from '@prisma/client';
 import { ProductStatus, ProductType } from '@prisma/client';
 import { faker } from '@faker-js/faker';
 import { Decimal } from '@prisma/client/runtime';
@@ -37,10 +38,14 @@ export const fakeProducts = async (
       recommendedPrice: new Decimal(faker.commerce.price(500, 50000)),
       minimalBid: new Decimal(faker.commerce.price(10, 1000)),
       imageLinks: images,
+      country: faker.address.country(),
       city: faker.address.city(),
+      phone: faker.phone.number('+380 ## ### ####'),
       type: ProductType.AUCTION,
       status: ProductStatus.ACTIVE,
+      condition: Condition.NEW,
       endDate: faker.date.future(),
+      postDate: faker.date.recent(),
       cancelReason: faker.random.word(),
       authorId: userId,
       categoryId: categoryId,

@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 
 import { RootNavigationProps } from '~/common/types/types';
 import { RootScreenName } from '~/common/enums/enums';
+import { auth as authActions } from '~/store/actions';
 import {
   View,
   ScreenWrapper,
@@ -13,17 +14,28 @@ import {
   LogOutIcon,
   Logo,
   TouchableOpacity,
+  PlusIcon,
 } from '~/components/components';
-import { useCustomTheme, useNavigation, useTranslation } from '~/hooks/hooks';
+import {
+  useAppDispatch,
+  useCustomTheme,
+  useNavigation,
+  useTranslation,
+  useMemo,
+} from '~/hooks/hooks';
 import { createStyles } from './styles';
 
 const Account: FC = () => {
+  const dispatch = useAppDispatch();
   const navigation = useNavigation<RootNavigationProps>();
   const { t } = useTranslation();
   const { dark, colors } = useCustomTheme();
 
-  const styles = React.useMemo(() => createStyles(colors), [dark, colors]);
+  const styles = useMemo(() => createStyles(colors), [dark, colors]);
 
+  const handleCreateNewItemPress = () => {
+    navigation.navigate(RootScreenName.TYPE_OF_NEW_POST);
+  };
   const handlePersonalInfoPress = () => {
     navigation.navigate(RootScreenName.PERSONAL_INFO);
   };
@@ -37,7 +49,7 @@ const Account: FC = () => {
     navigation.navigate(RootScreenName.SUPPORT);
   };
   const handleLogOut = () => {
-    //TODO
+    dispatch(authActions.logOut());
   };
 
   return (
@@ -46,6 +58,10 @@ const Account: FC = () => {
         <Logo width={120} height={30} />
       </View>
       <View style={styles.btnWrapper}>
+        <TouchableOpacity onPress={handleCreateNewItemPress} style={styles.row}>
+          <PlusIcon size={30} style={styles.icon} />
+          <Text style={styles.btnText}>{t('type_of_post.TITLE')}</Text>
+        </TouchableOpacity>
         <TouchableOpacity onPress={handlePersonalInfoPress} style={styles.row}>
           <UserIcon size={30} style={styles.icon} />
           <Text style={styles.btnText}>{t('account.PERSONAL_INFO')}</Text>

@@ -7,6 +7,10 @@ export const form = ({ spaces }: Theme) => css`
   width: 100%;
   padding-bottom: ${spaces.xl11};
 `;
+export const formWrapper = () => css`
+  max-width: 670px;
+  width: 100%;
+`;
 
 export const sections = css`
   max-width: 670px;
@@ -24,6 +28,10 @@ export const groupInputs = ({ spaces }: Theme) => css`
 export const inputRow = ({ spaces }: Theme) => css`
   margin-bottom: ${spaces.md};
   flex-grow: 1;
+`;
+
+export const selectRow = ({ spaces }: Theme) => css`
+  margin-bottom: ${spaces.md};
 `;
 
 export const pageHeader = ({

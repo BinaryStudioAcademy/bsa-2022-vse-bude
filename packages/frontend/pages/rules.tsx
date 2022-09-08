@@ -1,8 +1,9 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { Layout, RulesPageInner } from '@components';
 import { wrapper } from 'store';
 import { withPublic } from '@hocs';
 import { useTranslation } from 'next-i18next';
+import { Layout } from '@components/layout';
+import { RulesPageInner } from '@components/rules';
 
 export const getStaticProps = withPublic(
   wrapper.getServerSideProps(() => async (ctx) => {

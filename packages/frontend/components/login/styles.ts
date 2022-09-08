@@ -7,8 +7,7 @@ export const contentWrapper = ({ mq, spaces }: Theme) => css`
   height: 100%;
   width: 100%;
   padding: ${spaces.lg} 0;
-  ${mq[1]} {
-    height: 100vh;
+  ${mq[2]} {
     padding: ${spaces.xl6} 0;
   }
 `;
@@ -22,7 +21,7 @@ export const formWrapper = css`
 export const form = ({ mq }: Theme) => css`
   width: 100%;
   max-width: 342px;
-  ${mq[1]} {
+  ${mq[2]} {
     max-width: 327px;
   }
 `;
@@ -60,7 +59,12 @@ export const headline = ({
   font-weight: ${fontWeights.h4};
   color: ${colors.secondaryDark};
   font-size: ${fontSizes.h3};
-  ${mq[1]} {
+  ${mq[2]} {
     font-size: ${fontSizes.h4};
   }
+`;
+
+export const error = ({ colors }: Theme) => css`
+  color: ${colors.danger};
+  text-align: center;
 `;

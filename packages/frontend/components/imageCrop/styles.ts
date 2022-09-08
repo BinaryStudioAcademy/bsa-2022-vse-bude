@@ -1,18 +1,23 @@
+import type { Theme } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { Theme } from 'theme';
 
 export const buttonRow = ({ breakpoints, spaces }: Theme) => css`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  flex: 1;
+  flex-wrap: wrap;
   margin-top: ${spaces.md};
   gap: ${spaces.md};
 
-  @media (max-width: ${breakpoints.sm}px) {
-    justify-content: space-between;
-    & > button {
-      width: 100%;
-    }
+  & button {
+    flex: 1 1 auto;
+    width: 0;
+    min-width: 130px;
+  }
+
+  @media (max-width: ${breakpoints.xs}px) {
+    justify-content: center;
   }
 `;
 

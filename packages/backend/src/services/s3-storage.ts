@@ -5,14 +5,19 @@ import {
   NoFileProvidedError,
   FileSizeTooLargeError,
 } from '@errors';
-import type { UploadFileRequest } from '@types';
+import type {
+  IFileUpload,
+  UploadFileRequest,
+  UploadFilesRequest,
+} from '@types';
 import { getEnv, logger } from '@helpers';
+import { MAX_IMAGE_SIZE } from '@vse-bude/shared';
 import { randomBytes } from 'crypto';
 
 export class S3StorageService {
   private _client: S3;
 
-  private _maxImageSizeBytes = 5242880; // 5MB
+  private _maxImageSizeBytes = MAX_IMAGE_SIZE;
 
   private _bucketName: string;
 
@@ -28,20 +33,45 @@ export class S3StorageService {
     });
   }
 
-  async uploadImage(req: UploadFileRequest): Promise<string> {
-    const { file } = req;
+  async deleteImage(filename: string) {
+    console.log(filename);
+    const params = this.createDeleteParams(filename, S3FolderPath.IMAGES);
 
+    const result = await this._client
+      .deleteObject(params, (err, _data) => {
+        err && logger.error(err);
+      })
+      .promise();
+
+    return result;
+  }
+
+  async uploadImage(req: UploadFileRequest): Promise<string> {
+    return await this.validateAndUploadImage(req.file);
+  }
+
+  async uploadProductImages(req: UploadFilesRequest): Promise<string[]> {
+    const { files } = req;
+
+    const imagePromises = files.map((file) =>
+      this.validateAndUploadImage(file),
+    );
+
+    return await Promise.all(imagePromises);
+  }
+
+  private async validateAndUploadImage(file: IFileUpload) {
     if (!file) {
-      throw new NoFileProvidedError(req);
+      throw new NoFileProvidedError();
     }
 
     const extension = file.mimetype.split('/')[1];
     if (!this.isFileExtensionValid(extension)) {
-      throw new UnsupportedFileExtensionError(req);
+      throw new UnsupportedFileExtensionError();
     }
 
-    if (!this.isFileSizeValid(req.file.size)) {
-      throw new FileSizeTooLargeError(req);
+    if (!this.isFileSizeValid(file.size)) {
+      throw new FileSizeTooLargeError();
     }
 
     const filename = this.generateFilename(extension);
@@ -53,18 +83,6 @@ export class S3StorageService {
     const uploadImage = await this._client.upload(params).promise();
 
     return uploadImage.Location;
-  }
-
-  async deleteImage(filename: string) {
-    const params = this.createDeleteParams(filename, S3FolderPath.IMAGES);
-
-    const result = await this._client
-      .deleteObject(params, (err, _data) => {
-        err && logger.error(err);
-      })
-      .promise();
-
-    return result;
   }
 
   private generateFilename(extension: string) {

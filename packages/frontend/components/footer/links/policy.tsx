@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { useTranslation } from 'next-i18next';
 import { IconName } from '@enums';
 import { Icon, InternalLink } from '@primitives';
-import { IconColorProps } from '@enums';
+import { IconColor } from '@enums';
 import { ColumnHeader } from '../common/column-header';
 import * as styles from './styles';
 import type { PolicyProps } from './types';
@@ -17,7 +17,7 @@ export const Policy: FC<PolicyProps> = ({ path }) => {
       <div css={styles.footerLinksRow}>
         <Icon
           cssExtend={styles.shield}
-          color={IconColorProps.YELLOW}
+          color={IconColor.YELLOW}
           icon={IconName.PRIVACY_POLICY}
         />
         <span css={styles.primaryUnderline}>

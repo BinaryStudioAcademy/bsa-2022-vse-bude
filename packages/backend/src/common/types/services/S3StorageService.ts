@@ -3,6 +3,9 @@
 export interface UploadFileRequest extends Request {
   file: IFileUpload;
 }
+export interface UploadFilesRequest extends Request {
+  files: IFileUpload[];
+}
 
 export interface IFileUpload {
   originalname: string;

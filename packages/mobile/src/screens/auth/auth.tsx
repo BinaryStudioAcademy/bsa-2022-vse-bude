@@ -1,10 +1,11 @@
 import React, { FC, ReactElement } from 'react';
-import { ColorPalette, UserSignInDto, UserSignUpDto } from '@vse-bude/shared';
 import {
-  DataStatus,
-  MainScreenName,
-  RootScreenName,
-} from '~/common/enums/enums';
+  ColorPalette,
+  ResetPasswordLink,
+  UserSignInDto,
+  UserSignUpDto,
+} from '@vse-bude/shared';
+import { RootScreenName } from '~/common/enums/enums';
 import { auth as authActions } from '~/store/actions';
 import {
   useAppDispatch,
@@ -12,49 +13,65 @@ import {
   useRoute,
   useTranslation,
   useNavigation,
-  useAppSelector,
 } from '~/hooks/hooks';
 import {
   Text,
   ScrollView,
-  Divider,
   ScreenWrapper,
   StatusBar,
-  Spinner,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { NavigationProp } from '@react-navigation/native';
-import { MainNavigationParamList } from '~/common/types/navigation/navigation';
-import { selectUserActionDataStatus } from '~/store/selectors';
+import { RootNavigationProps } from '~/common/types/types';
 import {
-  GoogleButton,
+  ResetPasswordHeader,
+  SignInUpHeader,
   SignInForm,
   SignUpForm,
   Header,
+  ResetPassword,
 } from './components/components';
 import { styles } from './styles';
 
 const Auth: FC = () => {
   const { name } = useRoute();
-  const dataStatus = useAppSelector(selectUserActionDataStatus);
   const dispatch = useAppDispatch();
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
-  const navigation: NavigationProp<MainNavigationParamList> = useNavigation();
-  const screenLabel =
-    name === RootScreenName.SIGN_IN
-      ? t('verification.SING_IN')
-      : t('verification.CREATE_ACCOUNT');
 
-  const handleSignIn = (payload: UserSignInDto): void => {
-    dispatch(authActions.signIn(payload));
-    if (dataStatus == DataStatus.FULFILLED) {
-      navigation.navigate(MainScreenName.HOME);
+  const navigation = useNavigation<RootNavigationProps>();
+  const isResetPassword = name === RootScreenName.FORGOT_PASSWORD;
+
+  const getScreenLabel = (screenName: string): string => {
+    switch (screenName) {
+      case RootScreenName.SIGN_IN:
+        return t('verification.SING_IN');
+      case RootScreenName.SIGN_UP:
+        return t('verification.CREATE_ACCOUNT');
+      case RootScreenName.FORGOT_PASSWORD:
+        return t('verification.FORGOT_PASSWORD');
+      default:
+        return '';
     }
   };
 
+  const handleSignIn = (payload: UserSignInDto): void => {
+    dispatch(authActions.signIn(payload));
+  };
+
   const handleSignUp = (payload: UserSignUpDto): void => {
-    dispatch(authActions.signUp(payload));
+    dispatch(authActions.signUp(payload))
+      .unwrap()
+      .then(() => {
+        navigation.navigate(RootScreenName.VERIFY_PHONE);
+      })
+      .catch((err) => {
+        // eslint-disable-next-line
+        console.warn(err);
+      });
+  };
+
+  const handleResetPassword = (payload: ResetPasswordLink): void => {
+    dispatch(authActions.resetPassword(payload));
   };
 
   const handleGoBack = (): void => {
@@ -69,13 +86,13 @@ const Auth: FC = () => {
       case RootScreenName.SIGN_UP: {
         return <SignUpForm onSubmit={handleSignUp} />;
       }
+      case RootScreenName.FORGOT_PASSWORD: {
+        return <ResetPassword onSubmit={handleResetPassword} />;
+      }
     }
 
     return null;
   };
-  if (dataStatus == DataStatus.PENDING) {
-    return <Spinner isOverflow={true} />;
-  }
 
   return (
     <ScreenWrapper>
@@ -103,10 +120,9 @@ const Auth: FC = () => {
             globalStyles.fontWeightExtraBold,
           ]}
         >
-          {screenLabel}
+          {getScreenLabel(name)}
         </Text>
-        <GoogleButton />
-        <Divider text={t('common:text.OR')} />
+        {isResetPassword ? <ResetPasswordHeader /> : <SignInUpHeader />}
         {getScreen(name)}
       </ScrollView>
     </ScreenWrapper>

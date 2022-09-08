@@ -1,0 +1,69 @@
+import { IconName } from '@enums';
+import { useAppDispatch } from '@hooks';
+import { Button, IconButton, Input } from '@primitives';
+import { LinkButton } from 'components/primitives/link-button';
+import { useTranslation } from 'next-i18next';
+import Image from 'next/image';
+import hand from 'public/images/mocup_hand1.png';
+import type { ChangeEvent } from 'react';
+import { nextVerifyModal, hideVerifyModal } from 'store/modals/actions';
+import * as styles from '../styles';
+
+interface ModalProps {
+  phone: string;
+  setPhone: (phone: string) => void;
+}
+
+const EnterPhoneModal = ({ phone, setPhone }: ModalProps) => {
+  const dispatch = useAppDispatch();
+
+  const { t } = useTranslation();
+
+  const closeModal = () => {
+    dispatch(hideVerifyModal());
+  };
+
+  const changeModal = (e) => {
+    e.preventDefault();
+    dispatch(nextVerifyModal());
+  };
+
+  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPhone(e.target.value);
+  };
+
+  return (
+    <div css={styles.innerWrapper}>
+      <h3 css={styles.headline}>{t('common:verify.enterPhone.headline')}</h3>
+      <span>{t('common:verify.enterPhone.description')}</span>
+      <IconButton
+        cssExtend={styles.xmark}
+        icon={IconName.XMARK}
+        onClick={closeModal}
+        ariaLabel={t('common:components.modal.closeLabel')}
+      />
+      <div css={styles.imgWrapper}>
+        <Image width={255} height={255} src={hand.src} alt="MARK" />
+      </div>
+      <div css={styles.inputsWrappper}>
+        <Input
+          label={t('common:verify.enterPhone.input')}
+          variant="primary"
+          type="text"
+          name="phone"
+          value={phone}
+          onChange={handleOnChange}
+        />
+        <Button onClick={changeModal}>
+          {t('common:verify.enterPhone.button.verify')}
+        </Button>
+      </div>
+
+      <LinkButton size={'small'} onClickHook={closeModal}>
+        {t('common:verify.enterPhone.link.later')}
+      </LinkButton>
+    </div>
+  );
+};
+
+export { EnterPhoneModal };

@@ -1,14 +1,24 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import ReactDOM from 'react-dom';
+import { createPortal } from 'react-dom';
 import { resetButton } from 'theme';
 import { useOutsideClick } from '@hooks';
-import * as styles from './styles';
 import type { PopoverProps } from './types';
+import * as styles from './styles';
 
-export const Popover = ({ trigger, children }: PopoverProps) => {
+export const Popover = ({
+  trigger,
+  children,
+  placement = 'bottom-right',
+  position = 'fixed',
+  bodyWrapperCssExtend,
+  triggerWrapperCssExtend,
+}: PopoverProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const triggerWrapperRef = useRef<HTMLButtonElement>();
-  const handleClickOutside = useCallback(() => setIsVisible(false), []);
+  const handleClickOutside = useCallback(() => {
+    event.stopPropagation();
+    setIsVisible(false);
+  }, []);
   const bodyRef = useOutsideClick(handleClickOutside);
 
   const getBodyRectParams = useCallback(
@@ -17,18 +27,23 @@ export const Popover = ({ trigger, children }: PopoverProps) => {
   );
 
   const getTriggerRectParams = () =>
-    triggerWrapperRef.current.parentElement.getBoundingClientRect();
+    triggerWrapperRef.current.getBoundingClientRect();
 
   const calcBodyCoords = useCallback(() => {
     const triggerRectParams = getTriggerRectParams();
     const bodyRectParams = getBodyRectParams();
 
-    const bodyTop = triggerRectParams.bottom;
-    const bodyRight =
-      triggerRectParams.left + triggerRectParams.width - bodyRectParams.width;
+    let bodyTop = triggerRectParams.top + triggerRectParams.height;
+    bodyTop += position === 'absolute' ? window.scrollY : 0;
+
+    let bodyRight = triggerRectParams.left;
+    bodyRight +=
+      placement === 'bottom-right'
+        ? triggerRectParams.width - bodyRectParams.width
+        : 0;
 
     return [bodyTop, bodyRight];
-  }, [getBodyRectParams]);
+  }, [getBodyRectParams, placement, position]);
 
   const setPopoverPosition = useCallback(() => {
     if (bodyRef.current) {
@@ -58,31 +73,37 @@ export const Popover = ({ trigger, children }: PopoverProps) => {
   ]);
 
   const handleMouseClick = () => {
-    setIsVisible(true);
+    setIsVisible(!isVisible);
   };
 
   const handleClose = useCallback(() => setIsVisible(false), []);
 
   const renderPortalBody = () => (
-    <div ref={bodyRef} css={styles.popover}>
+    <div
+      ref={bodyRef}
+      css={[
+        styles.popover,
+        position === 'absolute' && styles.absolute,
+        bodyWrapperCssExtend,
+      ]}
+    >
       {children(handleClose)}
     </div>
   );
 
   const renderPortal = () =>
-    ReactDOM.createPortal(
-      renderPortalBody(),
-      document.querySelector('#popover'),
-    );
+    createPortal(renderPortalBody(), document.querySelector('#popover'));
 
   return (
     <React.Fragment>
       <button
         onClick={handleMouseClick}
-        css={resetButton}
+        css={[resetButton, triggerWrapperCssExtend]}
         ref={triggerWrapperRef}
       >
-        {trigger}
+        {typeof trigger === 'function'
+          ? trigger({ isOpen: isVisible })
+          : trigger}
       </button>
       {isVisible && renderPortal()}
     </React.Fragment>

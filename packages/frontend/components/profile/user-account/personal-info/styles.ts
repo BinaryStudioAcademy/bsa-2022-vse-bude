@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
 import type { Theme } from '@emotion/react';
+import { resetButton } from 'theme';
+import { ColorPalette } from '@vse-bude/shared';
 
 export const form = () => css`
   display: flex;
@@ -19,12 +21,18 @@ export const headerWrapper = ({ spaces }: Theme) => css`
 
 export const flagWrapper = ({ radiuses }: Theme) => css`
   border-radius: ${radiuses.md};
+  overflow: hidden;
 `;
 
 export const flag = ({ heights, radiuses }: Theme) => css`
   display: block;
   height: ${heights.flag};
   width: 100%;
+  background: linear-gradient(
+    ${ColorPalette.BLUE} 50%,
+    ${ColorPalette.YELLOW} 50%
+  );
+  filter: blur(20px);
   border-radius: ${radiuses.md};
 `;
 
@@ -51,21 +59,29 @@ export const actionWrapper = ({ mq, spaces }: Theme) => css`
 `;
 
 export const buttons = ({ spaces }: Theme) => css`
+  margin-top: ${spaces.xl};
   gap: ${spaces.sm};
+`;
+
+export const marginBottom = ({ spaces }: Theme) => css`
+  margin-bottom: ${spaces.xl11};
 `;
 
 export const sections = ({ mq }: Theme) => css`
   width: 450px;
-  ${mq[0]} {
+  ${mq[1]} {
     width: 500px;
   }
-  ${mq[3]} {
+  ${mq[4]} {
     width: 700px;
   }
 `;
 
 export const sectionRow = ({ spaces }: Theme) => css`
   margin-bottom: ${spaces.xl1};
+  &:first-of-type {
+    margin-bottom: 0;
+  }
 `;
 
 export const groupeInputs = ({ spaces }: Theme) => css`
@@ -79,15 +95,84 @@ export const inputRow = ({ spaces }: Theme) => css`
 
 export const groupePhone = ({ spaces }: Theme) => css`
   gap: ${spaces.md};
-  align-items: flex-end;
 `;
 
-export const phoneRow = () => css`
+export const phoneRow = css`
   flex-grow: 2;
 `;
 
-export const avatarUpdateButton = css`
+export const verifyButtonWrapper = ({ spaces }: Theme) => css`
+  padding: 18px 0 ${spaces.xl1} 0;
+`;
+export const avatarPopoverTrigger = css`
   position: absolute;
   bottom: 0;
   right: 0;
+`;
+
+export const bodyWrapper = ({ spaces }: Theme) => css`
+  margin-top: ${spaces.xs};
+  z-index: 0;
+`;
+
+export const avatarUpdateButton = ({ colors, spaces, radiuses }: Theme) => css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${colors.backgroundLight};
+  width: ${spaces.xl2};
+  height: ${spaces.xl2};
+  border-radius: ${radiuses.circle};
+  cursor: pointer;
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: ${colors.backgroundDark};
+  }
+`;
+
+export const popoverContentItem = ({
+  spaces,
+  fontSizes,
+  lineHeights,
+  fontWeights,
+  colors,
+}: Theme) => css`
+  ${resetButton}
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+  padding: ${spaces.xs} ${spaces.lg};
+  cursor: pointer;
+  font-size: ${fontSizes.body1};
+  line-height: ${lineHeights.body1};
+  font-weight: ${fontWeights.body1};
+  color: ${colors.text};
+
+  :hover {
+    background-color: ${colors.backgroundLight};
+  }
+
+  & span {
+    float: left;
+  }
+
+  &[data-variant='icon'] {
+    padding: ${spaces.xs} ${spaces.md};
+    & > i {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      float: left;
+      width: ${spaces.sm};
+      margin-right: ${spaces.md};
+      color: ${colors.primaryLight};
+    }
+  }
+`;
+
+export const popoverContentWrapper = ({ spaces, shadows }: Theme) => css`
+  display: flex;
+  flex-direction: column;
+  padding: ${spaces.sm} 0;
+  box-shadow: ${shadows.bottom};
 `;

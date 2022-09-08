@@ -1,18 +1,26 @@
 import React, { FC } from 'react';
-import { useAppSelector } from '~/hooks/hooks';
+import { t } from 'i18next';
 import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
 import { RootScreenName } from '~/common/enums/enums';
 import { RootNavigationParamList } from '~/common/types/types';
+import { useAppSelector } from '~/hooks/hooks';
+import { selectCurrentUser } from '~/store/selectors';
 import {
   MessagesScreen,
   PersonalInfoScreen,
+  ProductInfo,
   SettingsScreen,
   SupportScreen,
+  NewItemScreen,
+  VerifyPhoneScreen,
+  VerifyCodeScreen,
+  VerifiedScreen,
+  TypeOfPostScreen,
 } from '~/screens/screens';
-import { selectCurrentUser } from '~/store/selectors';
+import { HeaderLeft } from '~/components/components';
 import { MainNavigation } from './tabs/tabs.navigation';
 
 const NativeStack = createNativeStackNavigator<RootNavigationParamList>();
@@ -22,9 +30,15 @@ const mainScreenOptions: NativeStackNavigationOptions = {
   headerShown: false,
 };
 
-const accountScreenOptions: NativeStackNavigationOptions = {
+const baseScreenOptions: NativeStackNavigationOptions = {
   headerShown: true,
   headerTitleAlign: 'center',
+  headerTitleStyle: { fontSize: 16 },
+  headerLeft: HeaderLeft,
+};
+
+const verifyScreenOptions: NativeStackNavigationOptions = {
+  headerShown: false,
 };
 
 const Navigation: FC = () => {
@@ -36,11 +50,17 @@ const Navigation: FC = () => {
         name={RootScreenName.MAIN}
         component={MainNavigation}
       />
+      <NativeStack.Group screenOptions={baseScreenOptions}>
+        <Stack.Screen name={RootScreenName.ITEM_INFO} component={ProductInfo} />
+      </NativeStack.Group>
       {user && (
-        <NativeStack.Group screenOptions={accountScreenOptions}>
+        <NativeStack.Group screenOptions={baseScreenOptions}>
           <Stack.Screen
             name={RootScreenName.PERSONAL_INFO}
             component={PersonalInfoScreen}
+            options={{
+              title: t('personal_info.PERSONAL_INFO'),
+            }}
           />
           <Stack.Screen
             name={RootScreenName.SETTINGS}
@@ -53,6 +73,44 @@ const Navigation: FC = () => {
           <Stack.Screen
             name={RootScreenName.SUPPORT}
             component={SupportScreen}
+          />
+          <NativeStack.Group screenOptions={verifyScreenOptions}>
+            <Stack.Screen
+              name={RootScreenName.VERIFY_PHONE}
+              component={VerifyPhoneScreen}
+            />
+            <Stack.Screen
+              name={RootScreenName.VERIFY_CODE}
+              component={VerifyCodeScreen}
+            />
+            <Stack.Screen
+              name={RootScreenName.VERIFIED}
+              component={VerifiedScreen}
+            />
+          </NativeStack.Group>
+          <Stack.Screen
+            name={RootScreenName.NEW_ITEM}
+            component={NewItemScreen}
+            options={{
+              title: t('make_a_post.TITLE'),
+              headerLeft: HeaderLeft,
+            }}
+          />
+          <Stack.Screen
+            name={RootScreenName.NEW_AUCTION}
+            component={NewItemScreen}
+            options={{
+              title: t('make_a_post.AUCTION_TITLE'),
+              headerLeft: HeaderLeft,
+            }}
+          />
+          <Stack.Screen
+            name={RootScreenName.TYPE_OF_NEW_POST}
+            component={TypeOfPostScreen}
+            options={{
+              title: t('make_a_post.TITLE'),
+              headerLeft: HeaderLeft,
+            }}
           />
         </NativeStack.Group>
       )}

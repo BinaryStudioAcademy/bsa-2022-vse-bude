@@ -1,3 +1,4 @@
+import WithBundleAnalyzer from '@next/bundle-analyzer';
 import i18nConfig from './next-i18next.config.js';
 
 const { i18n } = i18nConfig;
@@ -17,6 +18,19 @@ const nextConfig = {
   compiler: {
     emotion: true,
   },
+  webpack: (config) => {
+    config.module.rules = [
+      ...config.module.rules,
+      {
+        test: /libs\/.*src\/index.ts/i,
+        sideEffects: false,
+      },
+    ];
+
+    return config;
+  },
 };
 
-export default nextConfig;
+export default WithBundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+})(nextConfig);

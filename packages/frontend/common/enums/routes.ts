@@ -14,6 +14,9 @@ export enum Routes {
   ABOUT = '/about',
   CATEGORIES = '/categories',
   NOT_FOUND = '/404',
+  RULES = '/rules',
+  ORDERS = '/orders',
+  CHECKOUT = '/orders/checkout',
 }
 
 export enum ProfileRoutes {
@@ -25,6 +28,7 @@ export enum ProfileRoutes {
 }
 
 export enum ItemRoutes {
+  CREATE = '/create',
   CREATE_AUCTION = '/create-auction',
   CREATE_DIRECT_SALE = '/create-product',
 }

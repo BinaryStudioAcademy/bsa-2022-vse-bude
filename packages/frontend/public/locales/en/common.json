@@ -3,13 +3,17 @@
     "nav": {
       "home": "Home",
       "category": "Category",
+      "item": "Items",
       "search": "Search",
       "news": "News",
-      "about_us": "About us"
+      "about_us": "About us",
+      "profile": "Profile"
     },
     "buttons": {
       "create_account": "Create Account",
-      "sign_in": "Sign In"
+      "sign_in": "Sign In",
+      "openMenu": "Open menu",
+      "closeMenu": "Close menu"
     },
     "popover": {
       "personalInfo": "Personal Info",
@@ -56,23 +60,92 @@
   },
   "components": {
     "product": {
-      "placeBidBtn": "Place a Bid",
+      "placeBidBtn": "Place Bid",
+      "buyBtn": "Buy",
       "time": {
         "hours": "h",
         "days": "d",
         "minutes": "min",
         "seconds": "s"
-      }
+      },
+      "addToFavorites": "Add to favorites",
+      "removeFromFavorites": "Remove from favorites"
+    },
+    "slider": {
+      "prevStep": "Go to previous step",
+      "nextStep": "Go to next step"
     },
     "input": {
       "searchProductsPlaceholder": "Search the products"
+    },
+    "modal": {
+      "closeLabel": "Close modal"
     },
     "typeOfPost": {
       "headline": "What type a post do you create?",
       "btn": {
         "auction": "Auction",
         "or": "or",
-        "directSale": "Direct Sale"
+        "directSale": "Direct Sale",
+        "tooltip": {
+          "auction": "You need to verify you phone number to choose \"Auction\"",
+          "directSale": "You need to verify you phone number to choose \"Direct Sale\""
+        }
+      }
+    },
+    "badge": {
+      "removeLabel": "Remove filter {{param}}"
+    }
+  },
+  "notifications": {
+    "defaultSuccessTitle": "Success",
+    "defaultInfoTitle": "Info",
+    "defaultWarningTitle": "Warning",
+    "defaultErrorTitle": "Error",
+    "avatarUpdated": "Avatar updated",
+    "profileUpdated": "Profile updated",
+    "signUpSuccess": "You have successfully registered",
+    "phoneVerifySuccess": "Your phone number has been successfully verified",
+    "emailVerifySuccess": "Your email has been successfully verified",
+    "phoneCodeResendSuccess": "Phone code successfully resend",
+    "emailCodeResendSuccess": "Email code successfully resend",
+    "resetPasswordLinkSent": "Reset password link sent",
+    "passwordUpdated": "Password updated",
+    "productAddedToFavorites": "Product added to favorite",
+    "productRemovedFromFavorites": "Product removed from favorite",
+    "bidPlaced": "Bid placed",
+    "leftAuction": "You left the auction",
+    "newBidPlaced": "New bid was placed to current product"
+  },
+  "verify": {
+    "enterPhone": {
+      "headline": "Verify",
+      "description": "For further verification of account, please enter your phone here or verify it on your Personal Info page",
+      "input": "Phone",
+      "button": {
+        "verify": "Verify"
+      },
+      "link": {
+        "later": "Verify later"
+      },
+      "prevPageLabel": "Go to previous step"
+    },
+    "enterCode": {
+      "headline": "Verify",
+      "description": "We just sent a code to",
+      "input": "Enter the verification code we just sent to you",
+      "resend": "Resend code",
+      "button": {
+        "continue": "Continue"
+      },
+      "link": {
+        "sendAgain": "Click here"
+      }
+    },
+    "success": {
+      "headline": "Your account has fully been verified",
+      "button": {
+        "continue": "Continue"
       }
     }
   },
@@ -104,5 +177,18 @@
     "November",
     "December"
   ],
-  "days": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
+  "days": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+  "modal": {
+    "confirm": {
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "header": "Confirm your action"
+    }
+  },
+  "resendBtn": {
+    "codeTimeLeft": "Time left to resend code again",
+    "resendCode": "Resend verification code",
+    "seconds": "s",
+    "text": "Send reset link"
+  }
 }

@@ -1,6 +1,4 @@
-import { RootState } from '~/common/types/types';
-
-export const selectCurrentUser = (state: RootState) => state.auth.user;
-
-export const selectUserActionDataStatus = (state: RootState) =>
-  state.auth.dataStatus;
+export * from './auth/selectors';
+export * from './products/selectors';
+export * from './categories/selectors';
+export * from './verify-phone/selectors';

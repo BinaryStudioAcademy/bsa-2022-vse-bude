@@ -18,7 +18,7 @@ export const wrap =
     handler(req)
       .then((result) => {
         if (!result) {
-          return res.status(HttpStatusCode.NO_CONTENT).json({
+          return res.status(HttpStatusCode.OK).json({
             success: true,
           });
         }

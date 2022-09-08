@@ -1,0 +1,26 @@
+{
+  "USER_NOT_FOUND": "Користувач не знайдений!",
+  "USER_ALREADY_EXISTS": "Користувач уже існує!",
+  "UNAUTHORIZED": "Не авторизовано!",
+  "WRONG_REFRESH_TOKEN": "Неправильний Refresh Token!",
+  "EXPIRED_REFRESH_TOKEN": "Прострочений Refresh Token!",
+  "WRONG_PASSWORD": "Неправильний пароль!",
+  "INTERNAL_ERROR": "Внутрішня помилка!",
+  "UNSUPPORTED_FILE_EXTENSION": "Непідтримуване розширення файлу!",
+  "FILE_SIZE_TOO_LARGE": "Розмір файлу занадто великий!",
+  "NO_FILE_ERROR": "Файл не надано!",
+  "INVALID_RESET_PASSWORD_LINK": "Термін дії посилання минув!",
+  "AUCTION_IS_ALREADY_ENDED": "Аукціон вже закінчено!",
+  "BID_PRICE_IS_TOO_LOW": "Ставка занадто мала!",
+  "CODE_NOT_FOUND": "Код не знайдено!",
+  "PRODUCT_NOT_FOUND": "Продукт не знайдений!",
+  "mailing": {
+    "verification": {
+      "subject": "Підтвердження електронної пошти",
+      "body": "Будь ласка, завершіть процес підтвердження електронної пошти за допомогою цього коду: "
+    }
+  },
+  "userValidation": {
+    "notVerified": "Користувач не верифікований!"
+  }
+}

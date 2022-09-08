@@ -7,12 +7,19 @@ export function InternalLink({
   disabled = undefined,
   label,
   passHref = true,
+  children,
+  cssExtend,
+  prefetch = false,
   ...props
 }: InternalLinkProps) {
   return (
-    <Link passHref={passHref} {...props}>
-      <a data-variant={variant} aria-disabled={disabled} css={linkStyles}>
-        {label}
+    <Link prefetch={prefetch} passHref={passHref} {...props}>
+      <a
+        data-variant={variant}
+        aria-disabled={disabled}
+        css={[linkStyles, cssExtend]}
+      >
+        {label || children}
       </a>
     </Link>
   );

@@ -1,18 +1,30 @@
-import { useOutsideClick } from '@hooks';
+import { useOutsideClick, useWindowSize } from '@hooks';
 import { useCallback, useState } from 'react';
 import { Icon } from '@primitives';
 import * as styles from './styles';
 import type { DropdownProps } from './types';
 
-export const Dropdown = ({ options, ...props }: DropdownProps) => {
+export const Dropdown = ({
+  options,
+  cssExtend,
+  onChildrenClick,
+  ...props
+}: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const size = useWindowSize();
 
-  const handleClickOutside = useCallback(() => setIsOpen(false), []);
+  const handleClickOutside = useCallback(() => {
+    event.stopPropagation();
+    setIsOpen(false);
+    onChildrenClick?.();
+  }, [onChildrenClick]);
 
   const ref = useOutsideClick(handleClickOutside);
 
-  const handleClick = async () => {
+  const handleClick = async (event) => {
+    event.preventDefault();
     setIsOpen(!isOpen);
+    onChildrenClick?.();
   };
 
   return (
@@ -22,19 +34,34 @@ export const Dropdown = ({ options, ...props }: DropdownProps) => {
       </button>
 
       {isOpen && (
-        <div ref={ref} css={styles.dropdownContent}>
+        <div
+          ref={ref}
+          css={[styles.dropdownContent, cssExtend]}
+          style={
+            size.height < 600
+              ? { paddingTop: '180px', maxHeight: '400px', overflowY: 'scroll' }
+              : {}
+          }
+        >
           {options.map((item) => {
-            const { value, key, onClick: callbackFn, disabled, icon } = item;
+            const {
+              value,
+              key,
+              onClick: callbackFn,
+              disabled,
+              icon,
+              cssExtend: optionCss,
+            } = item;
 
-            const onClick = () => {
+            const onClick = (e) => {
               callbackFn();
-              handleClick();
+              handleClick(e);
             };
 
             return (
               <button
                 key={key || value}
-                css={styles.dropdownItem}
+                css={[styles.dropdownItem, optionCss]}
                 onClick={onClick}
                 disabled={disabled}
                 data-variant={icon && 'icon'}

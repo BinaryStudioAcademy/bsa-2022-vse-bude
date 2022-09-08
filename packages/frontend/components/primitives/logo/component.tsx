@@ -4,6 +4,6 @@ import * as styles from './styles';
 
 export const Logo = () => (
   <div css={styles.logo}>
-    <Image src={logo.src} layout="fill" alt="logo" />
+    <Image src={logo.src} priority layout="fill" alt="logo" />
   </div>
 );

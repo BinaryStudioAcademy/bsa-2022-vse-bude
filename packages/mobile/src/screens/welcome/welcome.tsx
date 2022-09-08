@@ -14,7 +14,7 @@ import {
   SecondaryButton,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { Product } from './components/components';
+import { Stamp } from './components/components';
 import { styles } from './styles';
 
 type Props = NativeStackScreenProps<
@@ -33,6 +33,8 @@ const Welcome: FC<Props> = ({ navigation }) => {
         barStyle="light-content"
       />
       <FlagBackgroundView
+        start={{ x: 0, y: 0.45 }}
+        end={{ x: 0, y: 0.55 }}
         style={[
           globalStyles.flex1,
           globalStyles.alignItemsCenter,
@@ -40,8 +42,8 @@ const Welcome: FC<Props> = ({ navigation }) => {
         ]}
       >
         <LogoWhite style={styles.logo} />
-        <View style={globalStyles.py7}>
-          <Product />
+        <View style={styles.stampWrapper}>
+          <Stamp />
         </View>
         <View style={styles.buttonsWrapper}>
           <SecondaryButton

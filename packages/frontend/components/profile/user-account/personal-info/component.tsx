@@ -1,47 +1,31 @@
 import { useTranslation } from 'next-i18next';
-import { useAuth, useTypedSelector } from '@hooks';
+import { useAuth, useTypedSelector, useAppDispatch } from '@hooks';
 import { shallowEqual } from 'react-redux';
 import { Flex } from 'grapefruit-ui';
-import { useRef, useState } from 'react';
-import { Button, IconButton } from '@primitives';
 import dynamic from 'next/dynamic';
-import { Avatar } from '@primitives';
-import { IconName } from '@enums';
-import { ColorPalette } from '@vse-bude/shared';
-import flag from '../../../../public/images/flagBg.png';
+import { Button, Avatar } from '@primitives';
+import { fetchFullUserProfile } from '@store';
+import { setIsEditing } from '@store';
 import { NestedLayout } from '../common';
 import * as styles from './styles';
 import { ProfileData } from './primitives';
 
 const EditForm = dynamic(() => import('./edit-form'));
-const ImageCropModal = dynamic(() => import('../../../imageCrop/component'));
+const ChangeAvatar = dynamic(() => import('./change-avatar'));
 
 export const PersonalInfo = () => {
   const { t } = useTranslation();
-  const [isEditing, setIsEditing] = useState(false);
-  const [avatar, setAvatar] = useState(null);
-  const [croppedAvatar, setCroppedAvatar] = useState(null);
   const { user: authUser } = useAuth();
-  const user = useTypedSelector((state) => state.profile.user, shallowEqual);
-  const inputFile = useRef(null);
 
-  const handleUpdateAvatar = () => {
-    inputFile.current.click();
-  };
+  const { user, loading, isEditing } = useTypedSelector(
+    (state) => state.profile,
+    shallowEqual,
+  );
 
-  const onSelectFile = (e) => {
-    const file = e.target.files[0];
-    setAvatar(file);
-  };
+  const dispatch = useAppDispatch();
+  const onGetFullProfile = () => dispatch(fetchFullUserProfile());
 
-  const handleCloseCropModal = () => {
-    setAvatar(null);
-  };
-
-  const onCrop = (croppedImage) => {
-    setCroppedAvatar(croppedImage);
-    setAvatar(null);
-  };
+  const isAuthUser = authUser?.id === user?.id;
 
   if (!user) {
     return null;
@@ -49,61 +33,40 @@ export const PersonalInfo = () => {
 
   return (
     <NestedLayout>
-      {avatar && (
-        <ImageCropModal
-          file={avatar}
-          onSave={onCrop}
-          onClose={handleCloseCropModal}
-          okLabel={t('personal-info:button.ok')}
-          dismissLabel={t('personal-info:button.cancel')}
-          circle
-        />
-      )}
       <div css={styles.personalHeader}>
-        <div css={styles.headerWrapper}>
+        <div css={[styles.headerWrapper, !isAuthUser && styles.marginBottom]}>
           <div css={styles.flagWrapper}>
-            <img css={styles.flag} src={flag.src} alt="flag" />
+            <div css={styles.flag}></div>
           </div>
 
           <div css={styles.avatarWrapper}>
-            <input
-              type="file"
-              id="file"
-              ref={inputFile}
-              style={{ display: 'none' }}
-              onChange={onSelectFile}
-              accept="image/*"
+            <Avatar
+              image={user.avatar}
+              firstName={user.firstName}
+              lastName={user.lastName}
+              isLarge={true}
+              loading={loading}
             />
-            <div>
-              <Avatar
-                image={croppedAvatar && URL.createObjectURL(croppedAvatar)}
-                firstName={user.firstName}
-                lastName={user.lastName}
-                isLarge={true}
-              />
-              <IconButton
-                icon={IconName.CAMERA}
-                onClick={handleUpdateAvatar}
-                backgroundColor="lightgray"
-                color={ColorPalette.GRAY_300}
-                cssExtend={styles.avatarUpdateButton}
-              />
-            </div>
+            {isAuthUser && <ChangeAvatar isAvatarExist={user.avatar} />}
           </div>
         </div>
-
-        <Flex justify={'flex-end'} css={styles.buttons}>
-          {!isEditing && authUser?.id === user.id && (
+        {!isEditing && isAuthUser && (
+          <Flex justify={'flex-end'} css={styles.buttons}>
             <Button
               type="button"
               variant="outlined"
-              onClick={() => setIsEditing(true)}
+              disabled={loading}
+              onClick={() => {
+                onGetFullProfile();
+                dispatch(setIsEditing());
+              }}
             >
               {t('personal-info:action.edit')}
             </Button>
-          )}
-        </Flex>
-        {isEditing && <EditForm />}
+          </Flex>
+        )}
+
+        {isEditing && !loading && <EditForm user={user} />}
         {!isEditing && <ProfileData user={user} />}
       </div>
     </NestedLayout>

@@ -30,12 +30,15 @@ export const productDescription = ({
   colors,
   fontSizes,
   fontWeights,
+  lineHeights,
 }: Theme) => css`
   margin-bottom: 15px;
   color: ${colors.text};
   font-size: ${fontSizes.body2};
   font-weight: ${fontWeights.body2};
+  line-height: ${lineHeights.body2};
   word-break: break-all;
+  min-height: ${2 * Number(/\d+/.exec(lineHeights.body2))}px;
 `;
 
 export const divider = ({ colors }: Theme) => css`
@@ -48,10 +51,20 @@ export const productTimer = css`
   left: 16%;
 `;
 
-export const productCard = ({ spaces, colors, radiuses }: Theme) => css`
+export const productCard = ({
+  spaces,
+  colors,
+  radiuses,
+  breakpoints,
+}: Theme) => css`
   border: 1px solid transparent;
   padding: ${spaces.lg} ${spaces.xl};
   border-radius: ${radiuses.xs};
+  box-sizing: border-box;
+
+  @media (max-width: ${breakpoints.md}px) {
+    padding: ${spaces.sm} ${spaces.md};
+  }
 
   &:hover {
     border: 1px solid ${colors.accent};

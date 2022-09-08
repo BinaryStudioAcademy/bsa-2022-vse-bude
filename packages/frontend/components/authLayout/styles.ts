@@ -1,11 +1,12 @@
 import type { Theme } from '@emotion/react';
 import { css } from '@emotion/react';
+import { ColorPalette } from '@vse-bude/shared';
 
 export const authSection = ({ mq }: Theme) => css`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  ${mq[1]} {
+  ${mq[2]} {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -17,7 +18,7 @@ export const bgWrapper = ({ mq }: Theme) => css`
   height: 100px;
   width: 100%;
 
-  ${mq[1]} {
+  ${mq[2]} {
     max-width: 56%;
     min-height: 100vh;
     overflow: hidden;
@@ -37,7 +38,7 @@ export const formWrapper = ({ mq, colors, radiuses }: Theme) => css`
   width: 100%;
   border-radius: ${radiuses.md} ${radiuses.md} 0 0;
   background-color: ${colors.background};
-  ${mq[1]} {
+  ${mq[2]} {
     position: static;
     width: 44%;
     border-radius: 0;
@@ -57,7 +58,7 @@ export const productImgWrapper = ({ mq }: Theme) => css`
   padding-top: 75%;
   width: 100%;
   display: none;
-  ${mq[1]} {
+  ${mq[2]} {
     display: block;
   }
 `;
@@ -88,7 +89,7 @@ export const controlsWrapper = css`
 `;
 export const logo = ({ mq, spaces }: Theme) => css`
   text-align: center;
-  ${mq[1]} {
+  ${mq[2]} {
     text-align: left;
     margin-bottom: ${spaces.xl4};
   }
@@ -132,4 +133,32 @@ export const price = ({ colors, fontSizes, fontWeights }: Theme) => css`
   font-size: ${fontSizes.h4};
   font-weight: ${fontWeights.h4};
   color: ${colors.primaryLight};
+`;
+export const flagBg = ({ breakpoints }: Theme) => css`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    ${ColorPalette.BLUE} 50%,
+    ${ColorPalette.YELLOW} 50%
+  );
+  filter: blur(100px);
+  transition: filter 0.3s ease-in-out;
+  @media (max-width: ${breakpoints.xxl}px) {
+    filter: blur(80px);
+  }
+
+  @media (max-width: ${breakpoints.xl}px) {
+    filter: blur(60px);
+  }
+
+  @media (max-width: ${breakpoints.lg}px) {
+    filter: blur(40px);
+  }
+
+  @media (max-width: ${breakpoints.md}px) {
+    filter: blur(20px);
+  }
 `;
