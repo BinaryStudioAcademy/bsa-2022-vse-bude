@@ -1,12 +1,8 @@
 name: Release
 
 on:
-  workflow_run:
-    workflows: ['Lint and build']
-    types:
-      - completed
-    branches:
-      - main
+  push:
+    branches: ['main']
 
 jobs:
   release:
@@ -18,13 +14,25 @@ jobs:
       name: Release
       url: http://vse-bude.com.ua
     steps:
-      - uses: actions/checkout@v2
-      - name: Set status
-        if: always()
-        uses: ouzi-dev/commit-status-updater@v1.1.0
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
         with:
-          name: 'Release'
-          status: pending
+          node-version: 16
+
+      - name: Install dependencies
+        run: npm run install:all
+
+      - name: Check code quality
+        run: |
+          npm run prettier:check:all
+          npm run lint:all
+
+      - name: Build
+        run: npm run build:all
+
       - name: Deploy frontend and backend. Migrate DB.
         uses: appleboy/ssh-action@master
         with:
@@ -44,15 +52,10 @@ jobs:
             git pull -f
             git status
             ./scripts/deploy.sh
+
       - name: Check app deployed successfully
         uses: jtalk/url-health-check-action@v2
         with:
           url: https://vse-bude.com.ua|https://vse-bude.com.ua/api/health/
           max-attempts: 5
           retry-delay: 10s
-      - name: Set status
-        if: always()
-        uses: ouzi-dev/commit-status-updater@v1.1.0
-        with:
-          name: 'Release'
-          status: '${{ job.status }}'

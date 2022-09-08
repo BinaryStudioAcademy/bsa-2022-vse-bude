@@ -3,8 +3,6 @@ name: Lint and build
 on:
   pull_request:
     branches: ['main', 'release']
-  push:
-    branches: ['main']
 
 jobs:
   build:
