@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { ColorPalette, IPostForms } from '@vse-bude/shared';
+import { ColorPalette } from '@vse-bude/shared';
 import {
   DropDown,
   Input,
@@ -18,6 +18,26 @@ import { DateTimeType } from '~/common/enums/ui/ui';
 import { AddPhotos } from '../add-photos/add-photos';
 
 import { useStyles } from './styles';
+
+export interface IPostForms {
+  category: string;
+  condition: string;
+  title: string;
+  description: string;
+  price: number;
+  recommendedPrice: number;
+  minimalBid: number;
+  endDate: string;
+  endTime: string;
+  currency: string;
+  country: string;
+  city: string;
+  phone: string;
+  callingCode: string;
+  instagram: string;
+  facebook: string;
+  site: string;
+}
 
 const NewAuctionForm: FC = () => {
   const { t } = useTranslation();
