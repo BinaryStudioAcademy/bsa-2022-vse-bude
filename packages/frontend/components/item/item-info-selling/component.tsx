@@ -1,4 +1,4 @@
-﻿import type { ItemDto } from '@vse-bude/shared';
+﻿import type { ProductDto } from '@vse-bude/shared';
 import { Button } from '@primitives';
 import { FavoriteButton } from 'components/product/favorite-button/component';
 import { useTranslation } from 'next-i18next';
@@ -8,7 +8,7 @@ import { ItemTitle, ItemInfo, ItemPrice } from '../item-info';
 import * as styles from './styles';
 
 interface ItemInfoSellingProps {
-  item: ItemDto;
+  item: ProductDto;
   isInFavorite: boolean;
   onBuy: () => void;
   onChangeIsFavorite: () => void;

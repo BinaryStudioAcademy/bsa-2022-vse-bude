@@ -1,15 +1,15 @@
 import type { Decimal } from '@prisma/client/runtime';
 import type { Bid } from '@vse-bude/shared';
 
+const convertDecimal = (value: any) => (value ? Number(value) : null);
+
 export const productMapper = (productData: any, currentPrice?: Decimal) => ({
   ...productData,
   price: Number(productData.price),
-  recommendedPrice: productData.recommendedPrice
-    ? Number(productData.recommendedPrice)
-    : null,
-  minimalBid: productData.minimalBid ? Number(productData.minimalBid) : null,
-  currentPrice: Number(currentPrice),
-  bids: productData?.bids.map(bidMapper),
+  recommendedPrice: convertDecimal(productData.recommendedPrice),
+  minimalBid: convertDecimal(productData.minimalBid),
+  currentPrice: convertDecimal(currentPrice),
+  bids: productData?.bids?.map(bidMapper),
 });
 
 export const bidMapper = (bid: Bid) => ({

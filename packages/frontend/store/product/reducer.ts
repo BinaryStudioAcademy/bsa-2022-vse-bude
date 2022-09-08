@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { HydrateAction } from '@types';
-import type { ItemDto, ProductDto } from '@vse-bude/shared';
+import type { ProductDto } from '@vse-bude/shared';
 import { HYDRATE } from 'next-redux-wrapper';
 import {
   auctionLeaveAction,
@@ -16,7 +16,7 @@ import {
 
 interface ProductState {
   list: ProductDto[];
-  currentItem?: ItemDto;
+  currentItem?: ProductDto;
   similarProducts: ProductDto[];
   loading: boolean;
   currentProduct: ProductDto;

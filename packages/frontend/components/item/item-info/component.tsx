@@ -1,4 +1,4 @@
-﻿import type { ItemDto } from '@vse-bude/shared';
+﻿import type { ProductDto } from '@vse-bude/shared';
 import { ProductType } from '@vse-bude/shared';
 import React from 'react';
 import { useTranslation } from 'next-i18next';
@@ -6,7 +6,7 @@ import { SellerInfo } from './seller-info/component';
 import * as styles from './styles';
 
 interface ItemInfoProps {
-  item: ItemDto;
+  item: ProductDto;
 }
 
 export const ItemInfo = ({ item }: ItemInfoProps) => {

@@ -1,5 +1,5 @@
 ﻿import React, { useEffect } from 'react';
-import type { ItemDto } from '@vse-bude/shared';
+import type { ProductDto } from '@vse-bude/shared';
 import { ProductType } from '@vse-bude/shared';
 import { Container } from '@primitives';
 import {
@@ -16,7 +16,7 @@ import { ItemImageSlider } from './image-slider/component';
 import * as styles from './styles';
 
 interface ItemProps {
-  item: ItemDto;
+  item: ProductDto;
 }
 
 export const Item = ({ item }: ItemProps) => {

@@ -1,11 +1,18 @@
 import type { ProductType } from '../../enums';
 
-interface Author {
+interface SocialMedia {
+  id: string;
+  socialMedia: string;
+  link: string;
+}
+
+export interface Author {
   id: string;
   firstName: string;
   lastName: string;
   phone: string;
   avatar: string;
+  socialMedia: SocialMedia[];
 }
 
 interface Category {
