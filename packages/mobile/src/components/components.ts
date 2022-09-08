@@ -11,6 +11,7 @@ export {
 } from 'react-native';
 export { SafeAreaView } from 'react-native-safe-area-context';
 export { default as Popover } from 'react-native-popover-view';
+export { default as DateTimePicker } from '@react-native-community/datetimepicker';
 
 export * from './icons/icons';
 export * from './svg/svg';
