@@ -1,8 +1,15 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { RouteProp } from '@react-navigation/native';
 import { RootNavigationParamList } from '~/common/types/types';
-import { useAppSelector, useCustomTheme, useRoute } from '~/hooks/hooks';
-import { selectProductById } from '~/store/products/selectors';
+import { ProductType } from '@vse-bude/shared';
+import { product as productActions } from '~/store/actions';
+import { selectProduct } from '~/store/product/selectors';
+import {
+  useAppDispatch,
+  useAppSelector,
+  useCustomTheme,
+  useRoute,
+} from '~/hooks/hooks';
 import {
   ScreenWrapper,
   View,
@@ -10,9 +17,9 @@ import {
   EyeIcon,
   ScrollView,
   Spinner,
+  Countdown,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { ProductType } from '@vse-bude/shared';
 import {
   Description,
   ImageCarousel,
@@ -22,36 +29,53 @@ import {
 } from './components/components';
 
 const ProductInfo: FC = () => {
-  const route = useRoute<RouteProp<RootNavigationParamList>>();
   const { colors } = useCustomTheme();
+  const dispatch = useAppDispatch();
+  const product = useAppSelector(selectProduct);
+  const route = useRoute<RouteProp<RootNavigationParamList>>();
+  const id = route.params?.itemId;
 
-  if (route.params?.itemId) {
-    const id = route.params?.itemId;
-    const product = useAppSelector((state) => selectProductById(state, id));
-    const { title, price, minimalBid, type, imageLinks, views, currentPrice } =
-      product;
+  useEffect(() => {
+    if (id) {
+      dispatch(productActions.loadProductInfo(id));
+    }
+  }, []);
+
+  if (product) {
+    const {
+      title,
+      currentPrice,
+      price,
+      minimalBid,
+      type,
+      imageLinks,
+      views,
+      author,
+    } = product;
+    const auction = type == ProductType.AUCTION;
 
     return (
       <ScreenWrapper>
-        {/** TODO: add countdown for auction item component */}
         <ScrollView
           showsVerticalScrollIndicator={false}
           style={[globalStyles.px5, globalStyles.mb5]}
         >
+          {auction && <Countdown endDate={product.endDate} />}
           <Text
             style={[
+              auction && globalStyles.mt6,
               globalStyles.fs36,
               globalStyles.fontWeightExtraBold,
-              globalStyles.py6,
               { color: colors.text },
             ]}
           >
-            {title ?? ''}
+            {title}
           </Text>
           <View
             style={[
               globalStyles.flexDirectionRow,
               globalStyles.alignItemsCenter,
+              globalStyles.mt2,
             ]}
           >
             <EyeIcon size={15} color={colors.icon} />
@@ -62,14 +86,14 @@ const ProductInfo: FC = () => {
                 { color: colors.icon },
               ]}
             >
-              {views ?? ''}
+              {views}
             </Text>
           </View>
           {imageLinks && <ImageCarousel imageLinks={imageLinks} />}
-          <Description product={product} />
-          <SellerInfo />
+          <Description product={product} auction={auction} />
+          <SellerInfo author={author} />
         </ScrollView>
-        {type == ProductType.AUCTION ? (
+        {auction ? (
           <LotPriceBlock currentPrice={currentPrice} minimalBid={minimalBid} />
         ) : (
           <ProductPriceBlock price={price} />

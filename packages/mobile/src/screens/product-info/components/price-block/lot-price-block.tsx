@@ -1,4 +1,6 @@
 import React, { FC } from 'react';
+import { ColorPalette, ItemDto } from '@vse-bude/shared';
+import { useAppForm, useCustomTheme, useTranslation } from '~/hooks/hooks';
 import {
   PrimaryButton,
   StarIcon,
@@ -7,15 +9,13 @@ import {
   PlusSvg,
   Input,
 } from '~/components/components';
-import { useAppForm, useCustomTheme, useTranslation } from '~/hooks/hooks';
-import { ColorPalette, ProductDto } from '@vse-bude/shared';
-import { globalStyles } from '~/styles/styles';
 import { getBidValidationSchema } from '~/validation-schemas/bid/make-bid';
+import { globalStyles } from '~/styles/styles';
 import { DEFAULT_BID_VALUE } from '../../common/constants';
 import { PriceWrapper } from './price-wrapper';
 import { styles } from './styles';
 
-type LotPriceBlockProps = Pick<ProductDto, 'currentPrice' | 'minimalBid'>;
+type LotPriceBlockProps = Pick<ItemDto, 'currentPrice' | 'minimalBid'>;
 
 const LotPriceBlock: FC<LotPriceBlockProps> = ({
   currentPrice,
@@ -25,7 +25,7 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
   const { t } = useTranslation();
   const { control, errors } = useAppForm({
     defaultValues: DEFAULT_BID_VALUE,
-    validationSchema: getBidValidationSchema(minimalBid),
+    validationSchema: getBidValidationSchema(Number(minimalBid)),
   });
 
   return (
@@ -56,7 +56,7 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
             { color: colors.titleSecondary },
           ]}
         >
-          {`${t('screens:welcome.UAH')} ${currentPrice || 0}`}
+          {`${t('screens:welcome.UAH')} ${currentPrice}`}
         </Text>
       </View>
       <PriceWrapper>
@@ -67,7 +67,6 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
             errors={errors}
             placeholder={`${t('screens:product_info.MIN_UAH')} ${minimalBid}`}
           />
-
           <View
             style={[
               globalStyles.flexDirectionRow,

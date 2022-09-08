@@ -1,10 +1,24 @@
 import React, { FC } from 'react';
-import { useTranslation, useAppSelector, useCustomTheme } from '~/hooks/hooks';
-import { selectProductById } from '~/store/selectors';
-import { Button, Image, Text, View } from '~/components/components';
-import { globalStyles } from '~/styles/styles';
+import { NavigationProp } from '@react-navigation/native';
 import { ProductType } from '@vse-bude/shared';
+import { RootNavigationParamList } from '~/common/types/types';
+import { RootScreenName } from '~/common/enums/enums';
+import { selectProductById } from '~/store/selectors';
+import {
+  useTranslation,
+  useAppSelector,
+  useCustomTheme,
+  useNavigation,
+} from '~/hooks/hooks';
 import { formatPrice, getTimeToEvent } from '~/helpers/helpers';
+import {
+  Button,
+  Image,
+  Text,
+  TouchableOpacity,
+  View,
+} from '~/components/components';
+import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 import { TimeWindow } from './components/components';
 
@@ -19,9 +33,17 @@ const Product: FC<Props> = ({ productId }) => {
   const isAuction = type === ProductType.AUCTION;
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
+  const navigation = useNavigation<NavigationProp<RootNavigationParamList>>();
+
+  const handleOpenProductInfo = () => {
+    navigation.navigate(RootScreenName.ITEM_INFO, { itemId: productId });
+  };
 
   return (
-    <View style={[styles.container, globalStyles.boxShadow]}>
+    <TouchableOpacity
+      onPress={handleOpenProductInfo}
+      style={[styles.container, globalStyles.boxShadow]}
+    >
       <View style={[styles.imgWrapper, { backgroundColor: colors.card }]}>
         <Image source={{ uri: imageLinks[0] }} style={styles.img} />
 
@@ -80,7 +102,7 @@ const Product: FC<Props> = ({ productId }) => {
           }}
         ></Button>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

@@ -6,7 +6,7 @@ import { styles } from './styles';
 
 type DescriptionInfoProps = {
   title: string;
-  description: string;
+  description: string | number;
 };
 
 const RenderDescriptionInfo: FC<DescriptionInfoProps> = ({

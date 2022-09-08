@@ -8,7 +8,6 @@ export {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Modal,
-  FlatList,
 } from 'react-native';
 export { SafeAreaView } from 'react-native-safe-area-context';
 export { default as Popover } from 'react-native-popover-view';

@@ -1,36 +1,46 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { ItemDto } from '@vse-bude/shared';
 import { useTranslation } from '~/hooks/hooks';
-import { formatToDateTime } from '~/helpers/helpers';
+import { formatToDateTime, getTimezoneOffset } from '~/helpers/helpers';
 import { View } from '~/components/components';
-import { ProductDto } from '@vse-bude/shared';
 import { RenderDescriptionInfo } from './render-description-info';
 
-const Description = ({ product }: { product: ProductDto }) => {
+type DescriptionProps = {
+  product: ItemDto;
+  auction: boolean;
+};
+
+const Description: FC<DescriptionProps> = ({ product, auction }) => {
   const { t } = useTranslation();
-  const { endDate, status, city, description } = product;
+  const { endDate, condition, city, country, description } = product;
   const date = formatToDateTime(endDate);
+  const timeZone = getTimezoneOffset(endDate);
 
   return (
     <View>
-      <RenderDescriptionInfo
-        title={t('screens:product_info.ENDING_ON')}
-        description={date || ''}
-      />
-      <RenderDescriptionInfo
-        title={t('screens:product_info.TIME_ZONE')}
-        description="GMT +0"
-      />
+      {auction && (
+        <RenderDescriptionInfo
+          title={t('screens:product_info.ENDING_ON')}
+          description={date}
+        />
+      )}
+      {auction && (
+        <RenderDescriptionInfo
+          title={t('screens:product_info.TIME_ZONE')}
+          description={`GMT ${timeZone}`}
+        />
+      )}
       <RenderDescriptionInfo
         title={t('screens:product_info.STATUS')}
-        description={status || ''}
+        description={condition}
       />
       <RenderDescriptionInfo
         title={t('screens:product_info.LOCATION')}
-        description={city ?? ''}
+        description={`${country}, ${city ?? ''}`}
       />
       <RenderDescriptionInfo
         title={t('screens:product_info.DESCRIPTION')}
-        description={description || ''}
+        description={description}
       />
     </View>
   );

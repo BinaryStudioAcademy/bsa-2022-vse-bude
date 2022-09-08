@@ -1,6 +1,6 @@
-import { FontSize } from '~/common/enums/enums';
-import { ColorPalette } from '@vse-bude/shared';
 import { StyleSheet, Dimensions } from 'react-native';
+import { ColorPalette } from '@vse-bude/shared';
+import { FontSize } from '~/common/enums/enums';
 
 const styles = StyleSheet.create({
   imgContainer: {

@@ -36,7 +36,7 @@ const accountScreenOptions: NativeStackNavigationOptions = {
 const productScreenOptions: NativeStackNavigationOptions = {
   headerShown: true,
   headerTitleAlign: 'center',
-  headerLeft: () => <HeaderLeft />,
+  headerLeft: HeaderLeft,
 };
 
 const Navigation: FC = () => {

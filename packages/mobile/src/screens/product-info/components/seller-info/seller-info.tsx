@@ -1,17 +1,14 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { AuthorDto, ColorPalette, SocialMedia } from '@vse-bude/shared';
+import { AuthorDto, ColorPalette } from '@vse-bude/shared';
 import { Text, View, Image, PhoneIcon } from '~/components/components';
-import { MOCK_SELLER } from '~/mock/mock-seller-info';
 import { globalStyles } from '~/styles/styles';
 import { SocialButton } from './social-button';
 import { styles } from './styles';
 
-type SellerInfoProps = Partial<AuthorDto & SocialMedia>;
-
-const SellerInfo: FC<SellerInfoProps> = () => {
+const SellerInfo = ({ author }: { author: AuthorDto }) => {
   const { t } = useTranslation();
-  const { firstName, avatar, phone, socialMedia } = MOCK_SELLER;
+  const { firstName, avatar, phone, socialMedia } = author;
 
   return (
     <View
@@ -45,9 +42,7 @@ const SellerInfo: FC<SellerInfoProps> = () => {
               <Image style={styles.avatar} source={{ uri: avatar }} />
             ) : (
               <View style={styles.noAvatar}>
-                <Text style={[styles.noAvatarText]}>
-                  {firstName[0] ?? 'VB'}
-                </Text>
+                <Text style={[styles.noAvatarText]}>{firstName[0]}</Text>
               </View>
             )}
             <Text
@@ -57,7 +52,7 @@ const SellerInfo: FC<SellerInfoProps> = () => {
                 globalStyles.fs14,
               ]}
             >
-              {firstName ?? ''}
+              {firstName}
             </Text>
           </View>
         </View>
@@ -87,7 +82,7 @@ const SellerInfo: FC<SellerInfoProps> = () => {
                 globalStyles.fontWeightMedium,
               ]}
             >
-              {phone ?? ''}
+              {phone}
             </Text>
           </View>
           {socialMedia.map((media) => (
