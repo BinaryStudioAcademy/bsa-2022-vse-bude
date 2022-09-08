@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { NavigationProp } from '@react-navigation/native';
 import { ProductType } from '@vse-bude/shared';
 import { RootNavigationParamList } from '~/common/types/types';
-import { RootScreenName , ProductStatus } from '~/common/enums/enums';
+import { RootScreenName, ProductStatus } from '~/common/enums/enums';
 import { selectProductById } from '~/store/selectors';
 import {
   useTranslation,
