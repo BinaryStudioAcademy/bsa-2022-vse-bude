@@ -28,7 +28,7 @@ export const ImageModal = ({
             backgroundColor={'lightgray'}
             size="md"
             onClick={() => setModalVisible(false)}
-          ></IconButton>
+          />
         </div>
       </div>
     </Modal>

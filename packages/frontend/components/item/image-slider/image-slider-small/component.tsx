@@ -1,17 +1,24 @@
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import Image from 'next/image';
-import { useState } from 'react';
-import { ImageModal } from '../image-modal/component';
 
 import * as styles from './styles';
 
-interface ImageSliderSplideProps {
+interface ItemImageSliderSmallProps {
   imageLinks: string[];
+  setCurrentImage: (value: number) => void;
+  setOpenModal: (value: boolean) => void;
 }
 
-const ImageSliderSplide = ({ imageLinks }: ImageSliderSplideProps) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentImage, setCurrentImage] = useState(0);
+const ItemImageSliderSmall = ({
+  imageLinks,
+  setCurrentImage,
+  setOpenModal,
+}: ItemImageSliderSmallProps) => {
+  const handleKeyCodes = ['Spaces', 'Enter'];
+
+  const handleKeyDownShowModal = (e) => {
+    handleKeyCodes.includes(e.code) && setOpenModal(true);
+  };
 
   return (
     <div css={styles.wrapper}>
@@ -26,8 +33,10 @@ const ImageSliderSplide = ({ imageLinks }: ImageSliderSplideProps) => {
           <SplideSlide key={link + index}>
             <div
               css={styles.imageWrapper}
-              onClick={() => setIsModalOpen(true)}
-              aria-hidden="true"
+              onClick={() => setOpenModal(true)}
+              tabIndex={0}
+              role="button"
+              onKeyDown={(e) => handleKeyDownShowModal(e)}
             >
               <Image
                 src={link}
@@ -46,13 +55,8 @@ const ImageSliderSplide = ({ imageLinks }: ImageSliderSplideProps) => {
           </SplideSlide>
         ))}
       </Splide>
-      <ImageModal
-        isOpen={isModalOpen}
-        setModalVisible={setIsModalOpen}
-        image={imageLinks[currentImage]}
-      />
     </div>
   );
 };
 
-export { ImageSliderSplide };
+export { ItemImageSliderSmall };
