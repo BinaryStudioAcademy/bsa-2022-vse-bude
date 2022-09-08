@@ -12,8 +12,8 @@ interface ItemInfoProps {
 export const ItemInfo = ({ item }: ItemInfoProps) => {
   const { t } = useTranslation('item');
 
-  const getDate = (date) => new Date(date).toISOString().substring(0, 10);
-  const getTime = (date) => new Date(date).toISOString().substring(11, 19);
+  const getDate = (date) => new Date(date).toLocaleDateString().replaceAll('/', '.');
+  const getTime = (date) => new Date(date).toLocaleTimeString();
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   const handleContactSeller = () => {};
