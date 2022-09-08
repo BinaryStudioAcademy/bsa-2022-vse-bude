@@ -198,7 +198,9 @@ export const ItemInfoAuction = ({
               error={errors.price?.message}
             />
             <span>{t('item:bidInputCaption')} </span>
-            <span>{t('public:uah')} {minBidAmount}</span>
+            <span>
+              {t('public:uah')} {minBidAmount}
+            </span>
           </div>
         )}
 

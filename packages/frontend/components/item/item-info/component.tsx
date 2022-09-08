@@ -17,7 +17,6 @@ export const ItemInfo = ({ item }: ItemInfoProps) => {
 
   const getDate = (date) => new Date(date).toISOString().substring(0, 10);
   const getTime = (date) => new Date(date).toISOString().substring(11, 19);
-  const getTimezone = (date) => new Date(date).toISOString().substring(11, 19);
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   const handleContactSeller = () => {};
@@ -30,11 +29,13 @@ export const ItemInfo = ({ item }: ItemInfoProps) => {
             <React.Fragment>
               <tr>
                 <td>{t('endingCaption')}</td>
-                <td>{getDate(item.endDate)} {getTime(item.endDate)}</td>
+                <td>
+                  {getDate(item.endDate)} {getTime(item.endDate)}
+                </td>
               </tr>
               <tr>
                 <td>{t('timezoneCaption')}</td>
-                <td>{new Date(item.endDate).toString()}</td>
+                <td>{'GMT +3'}</td>
               </tr>
             </React.Fragment>
           )}
