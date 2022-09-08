@@ -3,11 +3,7 @@ export interface IPostForms {
   condition: string;
   title: string;
   description: string;
-  price: number;
-  recommendedPrice?: number;
-  minimalBid?: number;
-  endDate?: string;
-  endTime?: string;
+  price: string;
   currency: string;
   country: string;
   city: string;
