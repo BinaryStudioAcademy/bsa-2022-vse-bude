@@ -5,6 +5,7 @@ import { Button, Image, Text, View } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { ProductType } from '@vse-bude/shared';
 import { formatPrice, getTimeToEvent } from '~/helpers/helpers';
+import { ProductStatus } from '~/common/enums/enums';
 import { styles } from './styles';
 import { TimeWindow } from './components/components';
 
@@ -13,21 +14,31 @@ type Props = {
 };
 
 const Product: FC<Props> = ({ productId }) => {
-  const { imageLinks, title, description, price, type, endDate } =
-    useAppSelector((state) => selectProductById(state, productId));
-  const duration = getTimeToEvent(endDate);
+  const {
+    imageLinks,
+    title,
+    description,
+    price,
+    type,
+    endDate,
+    createdAt,
+    status,
+  } = useAppSelector((state) => selectProductById(state, productId));
+  const timeToAuctionEnd = getTimeToEvent(endDate);
+  const createdAtDate = getTimeToEvent(createdAt);
   const isAuction = type === ProductType.AUCTION;
+  const isActive = status === ProductStatus.ACTIVE;
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
 
   return (
     <View style={[styles.container, globalStyles.boxShadow]}>
-      <View style={[styles.imgWrapper, { backgroundColor: colors.card }]}>
+      <View style={styles.imgWrapper}>
         <Image source={{ uri: imageLinks[0] }} style={styles.img} />
 
-        {isAuction && (
+        {isAuction && isActive && (
           <TimeWindow
-            duration={duration}
+            duration={timeToAuctionEnd}
             style={{ position: 'absolute', bottom: -10, alignSelf: 'center' }}
           />
         )}
@@ -50,8 +61,10 @@ const Product: FC<Props> = ({ productId }) => {
         >
           {description}
         </Text>
-        {type === ProductType.SELLING && (
-          <Text style={[globalStyles.fs12, globalStyles.mt2]}>{duration}</Text>
+        {!isAuction && (
+          <Text style={[globalStyles.fs12, globalStyles.mt2]}>
+            {createdAtDate}
+          </Text>
         )}
       </View>
       <View style={[styles.divider, { backgroundColor: colors.line }]} />
@@ -60,6 +73,7 @@ const Product: FC<Props> = ({ productId }) => {
           globalStyles.flexDirectionRow,
           globalStyles.alignItemsCenter,
           globalStyles.justifyContentSpaceBetween,
+          globalStyles.flex1,
         ]}
       >
         <Text
@@ -69,16 +83,18 @@ const Product: FC<Props> = ({ productId }) => {
             { color: colors.titleSecondary },
           ]}
         >{`${formatPrice(price)} ${t('common:currency.UAH')}`}</Text>
-        <Button
-          label={
-            isAuction
-              ? t('common:components.BUTTON_BID')
-              : t('common:components.BUTTON_BUY')
-          }
-          onPress={() => {
-            //TODO
-          }}
-        ></Button>
+        {isActive && (
+          <Button
+            label={
+              isAuction
+                ? t('common:components.BUTTON_BID')
+                : t('common:components.BUTTON_BUY')
+            }
+            onPress={() => {
+              //TODO
+            }}
+          ></Button>
+        )}
       </View>
     </View>
   );

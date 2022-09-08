@@ -32,6 +32,7 @@ type ProductDto = {
   currentPrice: number;
   author: Author;
   category: Category;
+  createdAt: Date;
 };
 
 export type { ProductDto };
