@@ -22,7 +22,17 @@ export const button = ({
   cursor: pointer;
   flex: 1;
 
-  &[data-variant='filled'] {
+  height: ${heights.controlSm};
+  border-radius: ${radiuses.sm};
+  padding: 0 ${spaces.md};
+  font-size: ${fontSizes.smallButton};
+  ${mq[0]} {
+    height: ${heights.controlBg};
+    border-radius: ${radiuses.md};
+    padding: 0 ${spaces.xl2};
+  }
+
+  &[data-selected='selected'] {
     background: ${colors.primaryLight};
     color: white;
 
@@ -37,7 +47,7 @@ export const button = ({
     }
   }
 
-  &[data-variant='outlined'] {
+  &[data-selected='default'] {
     border: 1px solid ${colors.secondaryLight};
     background: white;
     color: ${colors.secondaryLight};
@@ -52,31 +62,6 @@ export const button = ({
       border: 1px solid ${colors.disabled};
       color: ${colors.disabled};
       pointer-events: none;
-    }
-  }
-
-  &[data-size='big'] {
-    height: ${heights.controlBg};
-    border-radius: ${radiuses.md};
-    padding: 0 ${spaces.xl2};
-  }
-
-  &[data-size='small'] {
-    height: ${heights.controlSm};
-    border-radius: ${radiuses.sm};
-    padding: 0 ${spaces.md};
-    font-size: ${fontSizes.smallButton};
-  }
-
-  &[data-size='flexible'] {
-    height: ${heights.controlSm};
-    border-radius: ${radiuses.sm};
-    padding: 0 ${spaces.md};
-    font-size: ${fontSizes.smallButton};
-    ${mq[0]} {
-      height: ${heights.controlBg};
-      border-radius: ${radiuses.md};
-      padding: 0 ${spaces.xl2};
     }
   }
 `;
