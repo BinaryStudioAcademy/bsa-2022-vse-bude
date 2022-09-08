@@ -5,9 +5,11 @@ import {
   AuthApiRoutes,
   UserSignInDto,
   UserSignUpDto,
+  ResetPasswordLink,
   AuthResponse,
+  UserResponseDto,
 } from '@vse-bude/shared';
-import { Http } from '~/services/http/http.service';
+import { Http } from '../http/http.service';
 
 type Constructor = {
   http: Http;
@@ -39,6 +41,29 @@ class AuthApi {
   signUp(_payload: UserSignUpDto): Promise<AuthResponse> {
     return this.#http.load(
       `${this.#apiPrefix}${ApiRoutes.AUTH}${AuthApiRoutes.SIGN_UP}`,
+      {
+        method: HttpMethod.POST,
+        contentType: HttpContentType.APPLICATION_JSON,
+        payload: JSON.stringify(_payload),
+        hasAuth: false,
+      },
+    );
+  }
+
+  getCurrentUser(): Promise<UserResponseDto> {
+    return this.#http.load(
+      `${this.#apiPrefix}${ApiRoutes.AUTH}${AuthApiRoutes.USER}`,
+      {
+        method: HttpMethod.GET,
+        contentType: HttpContentType.APPLICATION_JSON,
+        hasAuth: true,
+      },
+    );
+  }
+
+  resetPassword(_payload: ResetPasswordLink): Promise<unknown> {
+    return this.#http.load(
+      `${this.#apiPrefix}${ApiRoutes.AUTH}${AuthApiRoutes.RESET_PASSWORD_LINK}`,
       {
         method: HttpMethod.POST,
         contentType: HttpContentType.APPLICATION_JSON,

@@ -1,6 +1,6 @@
 import { initRoutes } from '@routes';
 import cors from 'cors';
-import express, { json } from 'express';
+import express, { json, urlencoded } from 'express';
 import { initRepositories } from '@repositories';
 import { getEnv, logger } from '@helpers';
 import { initServices } from '@services';
@@ -37,6 +37,7 @@ app
   .use(cors())
   .use(loggerMiddleware)
   .use(json())
+  .use(urlencoded({ extended: true }))
   .use(langMiddleware)
   .use(routes)
   .use(errorHandler)

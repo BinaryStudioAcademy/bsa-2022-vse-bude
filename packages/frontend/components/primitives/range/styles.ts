@@ -40,8 +40,8 @@ export const globalSliderStyles = ({ colors }: Theme) =>
             transition: all 0.5s ease-in-out;
             transform: scale(1.5);
           }
-        } 
-        
+        }
+
         &:active {
           cursor: grabbing;
         }

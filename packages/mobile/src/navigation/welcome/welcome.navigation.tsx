@@ -18,6 +18,10 @@ const WelcomeNavigation: FC = () => {
       <NativeStack.Screen name={RootScreenName.WELCOME} component={Welcome} />
       <NativeStack.Screen name={RootScreenName.SIGN_UP} component={Auth} />
       <NativeStack.Screen name={RootScreenName.SIGN_IN} component={Auth} />
+      <NativeStack.Screen
+        name={RootScreenName.FORGOT_PASSWORD}
+        component={Auth}
+      />
     </NativeStack.Navigator>
   );
 };
