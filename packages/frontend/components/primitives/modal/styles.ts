@@ -32,4 +32,6 @@ export const modalContent = ({
   height: fit-content;
   padding: ${spaces.md};
   background-color: ${colors.background};
+  box-sizing: border-box;
+  max-width: 100vw;
 `;
