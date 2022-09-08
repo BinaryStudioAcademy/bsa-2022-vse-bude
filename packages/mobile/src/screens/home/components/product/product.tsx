@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { useTranslation, useAppSelector, useCustomTheme } from '~/hooks/hooks';
-import { selectProductById } from '~/store/products/selectors';
+import { selectProductById } from '~/store/selectors';
 import { Button, Image, Text, View } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { ProductType } from '@vse-bude/shared';

@@ -36,6 +36,7 @@ const ImageSliderSplide = ({ imageLinks }: ImageSliderSplideProps) => {
                 layout="fill"
                 objectFit="contain"
                 css={styles.image}
+                priority={index === 0}
               />
             </div>
             <span css={styles.numberSlide}>

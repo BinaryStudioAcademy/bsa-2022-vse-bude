@@ -48,6 +48,7 @@ export const ItemImageSlider = ({ imageLinks }: ItemImageSliderProps) => {
               src={link}
               alt="item"
               css={styles.image}
+              priority={index < 4}
               layout="fill"
               objectFit="contain"
             />

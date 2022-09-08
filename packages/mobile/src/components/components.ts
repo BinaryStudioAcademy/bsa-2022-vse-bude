@@ -3,6 +3,8 @@ export {
   View,
   StatusBar,
   Pressable,
+  FlatList,
+  TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
   Modal,
@@ -18,6 +20,8 @@ export { Text } from './text/text';
 export { Spinner } from './spinner/spinner';
 export { Logo } from './logo/logo';
 export { LogoWhite } from './logo/logo-white';
+export { SearchInput } from './search-input/search-input';
+export { ButtonText } from './button-text/button-text';
 export { HeaderLeft } from './header-left/header-left';
 export { HeaderSave } from './header-save/header-save';
 export { DropDown } from './dropdown/dropdown';
@@ -30,4 +34,5 @@ export { PrimaryButton } from './primary-button/primary-button';
 export { SecondaryButton } from './secondary-button/secondary-button';
 export { BuildInfo } from './build-info/build-info';
 export { ScrollView } from './scroll-view/scroll-view';
+export { default as CheckBox } from '@react-native-community/checkbox';
 export { Countdown } from './countdown/countdown';
