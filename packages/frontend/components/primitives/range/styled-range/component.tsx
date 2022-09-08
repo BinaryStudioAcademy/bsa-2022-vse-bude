@@ -4,7 +4,6 @@ import * as styles from '../styles';
 
 export const StyledRange = ({
   allowCross,
-  handle,
   value,
   handleChange,
   ref,
@@ -18,6 +17,5 @@ export const StyledRange = ({
     defaultValue={value}
     min={0}
     max={50000}
-//     handle={handle}
   />
 );

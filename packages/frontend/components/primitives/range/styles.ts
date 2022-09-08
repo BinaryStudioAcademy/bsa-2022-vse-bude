@@ -45,13 +45,9 @@ export const globalStyles = ({ colors }: Theme) =>
             background-color: ${colors.backgroundLight};
             content: '';
         }
-        
+
         &:active {
           cursor: grabbing;
-          &::after {
-                transition: all 0.5s ease-in-out;
-                transform: scale(2);
-            }
         }
         
         &:hover {
