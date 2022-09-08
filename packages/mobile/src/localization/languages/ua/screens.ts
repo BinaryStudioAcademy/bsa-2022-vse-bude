@@ -40,6 +40,7 @@ export const screens = {
     ENTER_EMAIL: 'Введіть електронну пошту, щоб отримати пароль',
     HIDE_EMAIL: 'Приховати електронну адресу',
     RESET_PASSWORD: 'Скинути пароль',
+    RESET_PASSWORD_SUCCESS: 'Запит на скидання пароля успішно надіслано',
   },
   personal_info: {
     PERSONAL_INFO: 'Особиста інформація',
@@ -87,6 +88,7 @@ export const screens = {
     LAST_NAME_INVALID: 'Неправильний формат прізвища',
     WRONG_FORMAT: 'Невірний формат',
     MAX_IMAGE_SIZE: `Максимальний розмір файлу ${MAX_IMAGE_SIZE / 1000000} МБ`,
+    RESET_PASSWORD_ERROR: 'Виникла помилка, спробуйте пізніше...',
   },
   verificationPhone: {
     VERIFY: 'Підтвердити',

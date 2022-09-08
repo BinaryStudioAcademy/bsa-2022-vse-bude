@@ -41,6 +41,7 @@ export const screens = {
     ENTER_EMAIL: 'Enter your email to retrieve your password',
     HIDE_EMAIL: 'Hide Email',
     RESET_PASSWORD: 'Reset Password',
+    RESET_PASSWORD_SUCCESS: 'Password reset request successfully submitted',
   },
   personal_info: {
     PERSONAL_INFO: 'Personal Info',
@@ -88,6 +89,7 @@ export const screens = {
     LAST_NAME_INVALID: 'The invalid last name format',
     WRONG_FORMAT: 'Wrong format',
     MAX_IMAGE_SIZE: `Maximum file size is ${MAX_IMAGE_SIZE / 1000000} Mb`,
+    RESET_PASSWORD_ERROR: 'An error occurred, please try again later...',
   },
   verificationPhone: {
     VERIFY: 'Verify',

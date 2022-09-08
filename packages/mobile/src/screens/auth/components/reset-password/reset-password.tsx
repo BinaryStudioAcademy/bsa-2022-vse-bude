@@ -1,5 +1,11 @@
 import React, { FC } from 'react';
-import { useAppForm, useTranslation, useState } from '~/hooks/hooks';
+import {
+  useAppForm,
+  useTranslation,
+  useState,
+  useAppSelector,
+  useEffect,
+} from '~/hooks/hooks';
 import { resetPassword } from '~/validation-schemas/validation-schemas';
 import { ResetPasswordLink, ColorPalette } from '@vse-bude/shared';
 import {
@@ -10,18 +16,34 @@ import {
   CheckBox,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
+import { selectAuthDataStatus } from '~/store/selectors';
+import { notification } from '~/services/services';
+import { DataStatus } from '~/common/enums/enums';
 import { DEFAULT_RESET_PASSWORD_PAYLOAD } from './common/constants';
 
 type Props = {
   onSubmit: (payload: ResetPasswordLink) => void;
 };
 const ResetPassword: FC<Props> = ({ onSubmit }) => {
+  const resetPasswordStatus = useAppSelector(selectAuthDataStatus);
+
   const [hiddenEmail, setHiddenEmail] = useState(false);
+
   const { t } = useTranslation();
   const { control, errors, handleSubmit } = useAppForm<ResetPasswordLink>({
     defaultValues: DEFAULT_RESET_PASSWORD_PAYLOAD,
     validationSchema: resetPassword,
   });
+  useEffect(() => {
+    switch (resetPasswordStatus) {
+      case DataStatus.FULFILLED:
+        notification.success(t('screens:verification.RESET_PASSWORD_SUCCESS'));
+        break;
+      case DataStatus.REJECTED:
+        notification.error(t('screens:errors.RESET_PASSWORD_ERROR'));
+        break;
+    }
+  }, [resetPasswordStatus]);
 
   return (
     <View style={globalStyles.py5}>
