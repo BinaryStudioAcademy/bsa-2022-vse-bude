@@ -12,7 +12,7 @@ export const StyledRange = ({
     range
     ref={ref}
     allowCross={allowCross}
-    css={styles.globalStyles}
+    css={styles.globalSliderStyles}
     onChange={handleChange}
     defaultValue={value}
     min={0}

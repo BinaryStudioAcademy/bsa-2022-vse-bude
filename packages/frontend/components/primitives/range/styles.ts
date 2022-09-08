@@ -1,12 +1,11 @@
 import { css, type Theme } from '@emotion/react';
 
-export const globalStyles = ({ colors }: Theme) =>
+export const globalSliderStyles = ({ colors }: Theme) =>
   css`
     position: relative;
-    touch-action: none;
     width: 100%;
-    max-width: 260px;
     height: 2px;
+    max-width: 260px;
     touch-action: none;
     .rc-slider {
       &-rail {
@@ -27,34 +26,35 @@ export const globalStyles = ({ colors }: Theme) =>
       }
       &-handle {
         position: absolute;
+        top: -7.5px;
+        border-radius: 50%;
         width: 15px;
         height: 15px;
-        background-color: ${colors.backgroundLight}; 
+        background-color: ${colors.backgroundLight};
         cursor: pointer;
         touch-action: pan-x;
-        border-radius: 50%;
-        top: -7.5px;
         outline: none;
 
-        &::after{
-            position: absolute;
-            opacity: 0.8;
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            background-color: ${colors.backgroundLight};
-            content: '';
-        }
-
+        &:hover {
+          &::after {
+            transition: all 0.5s ease-in-out;
+            transform: scale(1.5);
+          }
+        } 
+        
         &:active {
           cursor: grabbing;
         }
-        
-        &:hover {
-            &::after {
-                transition: all 0.5s ease-in-out;
-                transform: scale(1.5);
-            }
+
+        &::after {
+          content: '';
+          position: absolute;
+          border-radius: 50%;
+          width: 15px;
+          height: 15px;
+          background-color: ${colors.backgroundLight};
+          opacity: 0.8;
         }
       }
-    }`;
+    }
+  `;
