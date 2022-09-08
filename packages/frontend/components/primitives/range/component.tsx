@@ -1,8 +1,8 @@
-import Range from 'rc-slider';
+import Slider from 'rc-slider';
 import type { StyledRangeProps } from './types';
 import * as styles from './styles';
 
-export const PriceRange = ({
+export const Range = ({
   min,
   max,
   value,
@@ -10,7 +10,7 @@ export const PriceRange = ({
   ref,
 }: StyledRangeProps) => (
   <div css={styles.wrapperStyles}>
-    <Range
+    <Slider
       range
       ref={ref}
       allowCross={false}
