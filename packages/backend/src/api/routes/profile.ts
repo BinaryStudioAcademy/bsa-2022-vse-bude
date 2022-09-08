@@ -89,8 +89,8 @@ export const initProfileRoutes = (
       const drafted = await myListService.getDraftedItems({ userId });
       const posted = await myListService.getPostedItems({ userId });
       console.log(posted);
-      
-return {
+
+      return {
         purchased,
         sold,
         posted,

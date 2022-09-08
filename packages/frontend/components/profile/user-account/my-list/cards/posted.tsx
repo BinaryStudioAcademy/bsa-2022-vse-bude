@@ -17,9 +17,7 @@ export const Posted = ({ data }: { data: PostedItems }) => {
   const { title, imageLinks, price, status, description, views, postDate } =
     data;
 
-  const onHandleClick = () => {
-    return 'click';
-  };
+  const onHandleClick = () => 'click';
 
   return (
     <div css={styles.card}>

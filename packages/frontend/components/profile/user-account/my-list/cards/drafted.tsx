@@ -17,9 +17,7 @@ export const Drafted = ({ data }: { data: DraftedItems }) => {
   const { title, imageLinks, price, status, description, updatedAt } = data;
   const { t } = useTranslation();
 
-  const onHandleClick = () => {
-    return 'click'
-  }
+  const onHandleClick = () => 'click';
 
   return (
     <div css={styles.card}>

@@ -17,46 +17,44 @@ export const Cancelled = ({ data }: { data: CancelledItems }) => {
   const { title, imageLinks, price, status, description, postDate } = data;
   const { t } = useTranslation();
 
-  const onHandleClick = () => {
-    return 'click'
-  }
+  const onHandleClick = () => 'click';
 
   return (
     <div css={styles.card}>
-    <div css={styles.cardContent}>
-      <div css={styles.leftContent}>
-        <ItemImage src={randomSrc({ array: imageLinks })} title={title} />
-      </div>
-
-      <div css={styles.rightContent}>
-        <div css={styles.details}>
-          <ItemHeader title={title} />
-          <ItemDescription description={description} />
-          <div css={styles.saleDetails}>
-            <Price price={price} />
-            <ItemStatus status={status} />
-          </div>
+      <div css={styles.cardContent}>
+        <div css={styles.leftContent}>
+          <ItemImage src={randomSrc({ array: imageLinks })} title={title} />
         </div>
 
-        <div css={styles.postedFooter}>
-          <div>
-            <span css={styles.editDate}>{t('my-list:card.edit')}</span>
-            <Date time={postDate} />
+        <div css={styles.rightContent}>
+          <div css={styles.details}>
+            <ItemHeader title={title} />
+            <ItemDescription description={description} />
+            <div css={styles.saleDetails}>
+              <Price price={price} />
+              <ItemStatus status={status} />
+            </div>
           </div>
-          <div css={styles.publishButtonWrapper}>
-            <Button size="small">{t('my-list:card.publish')}</Button>
+
+          <div css={styles.postedFooter}>
+            <div>
+              <span css={styles.editDate}>{t('my-list:card.edit')}</span>
+              <Date time={postDate} />
+            </div>
+            <div css={styles.publishButtonWrapper}>
+              <Button size="small">{t('my-list:card.publish')}</Button>
+            </div>
+            <IconButton
+              ariaLabel="edit"
+              backgroundColor="lightgray"
+              color={IconColor.GRAY}
+              icon={IconName.XMARK}
+              size="sm"
+              onClick={onHandleClick}
+            />
           </div>
-          <IconButton
-            ariaLabel="edit"
-            backgroundColor="lightgray"
-            color={IconColor.GRAY}
-            icon={IconName.XMARK}
-            size="sm"
-            onClick={onHandleClick}
-          />
         </div>
       </div>
     </div>
-  </div>
   );
 };

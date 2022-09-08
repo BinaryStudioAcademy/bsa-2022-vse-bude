@@ -3,8 +3,8 @@ import * as styles from './styles';
 
 export const Price = ({ price }: { price: string }): JSX.Element => {
   const { t } = useTranslation();
-  
-return (
+
+  return (
     <div css={styles.priceWrapper}>
       <h6 css={styles.price}>{price}</h6>
       <h6 css={styles.price}>{t('my-list:card.currency_uah')}</h6>

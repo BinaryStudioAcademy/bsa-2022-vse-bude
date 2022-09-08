@@ -1,7 +1,7 @@
+import type { SocialMedia } from '../social-media';
 import type { StatusesItems } from './statuses-items';
 import type { TypesItems } from './types-items';
 import type { Author, Winner } from './related-user';
-import type { SocialMedia } from '../social-media';
 import type { ItemCategory } from './item-category';
 
 export interface PurchasedItems {

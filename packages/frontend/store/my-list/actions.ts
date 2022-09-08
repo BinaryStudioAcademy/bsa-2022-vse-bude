@@ -14,7 +14,7 @@ export const fetchMyListSSR = createAsyncThunk(
           description: e.message,
         }),
       );
-      
-return rejectWithValue(e.message);
+
+      return rejectWithValue(e.message);
     }),
 );
