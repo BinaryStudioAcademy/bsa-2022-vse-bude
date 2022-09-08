@@ -38,7 +38,7 @@ export const common = {
   },
   tab_navigation: {
     HOME: 'Головна',
-    FAVORITE: 'Улюблені',
+    FAVORITE: 'Вибране',
     MY_LIST: 'Мій список',
     ACCOUNT: 'Акаунт',
     LOG_IN: 'Увійти',
