@@ -48,7 +48,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
     const resetPhone = !user.phone ? null : user.phone;
     setUpdatedPhone(resetPhone);
     reset({
-      'phone': user.phone,
+      'phone': !user.phone ? '' : user.phone,
       'password': '',
       'repeatPassword': '',
       'newPassword': '',
