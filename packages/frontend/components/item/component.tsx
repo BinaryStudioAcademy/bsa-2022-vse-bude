@@ -10,10 +10,9 @@ import { useAppDispatch, useInFavorite, useTypedSelector } from '@hooks';
 import { fetchCreateOrder } from 'store/checkout';
 import { useRouter } from 'next/router';
 import { Routes } from '@enums';
-import { ItemImageSlider } from './image-slider/component';
 import { ItemInfoSelling } from './item-info-selling/component';
 import { ItemInfoAuction } from './item-info-auction/component';
-import { ImageSliderSplide } from './image-slider-splide/component';
+import { ItemImageSlider } from './image-slider/component';
 import * as styles from './styles';
 
 interface ItemProps {
@@ -49,12 +48,7 @@ export const Item = ({ item }: ItemProps) => {
   return (
     <React.Fragment>
       <Container cssExtend={styles.itemWrapper}>
-        <div className="desktop-gallery-wrapper">
-          <ItemImageSlider imageLinks={item.imageLinks} />
-        </div>
-        <div className="mobile-gallery-wrapper">
-          <ImageSliderSplide imageLinks={item.imageLinks} />
-        </div>
+        <ItemImageSlider imageLinks={item.imageLinks} />
         {item.type === ProductType.SELLING ? (
           <ItemInfoSelling
             item={item}
