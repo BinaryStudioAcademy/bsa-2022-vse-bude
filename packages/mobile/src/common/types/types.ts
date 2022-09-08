@@ -9,6 +9,7 @@ export type { HttpOptions, GetHeadersParams } from './http/http';
 export type {
   RootNavigationParamList,
   RootNavigationProps,
+  MainNavigationParamList,
 } from './navigation/navigation';
 export type { ValidationSchema } from './validation/validation';
 export type {
