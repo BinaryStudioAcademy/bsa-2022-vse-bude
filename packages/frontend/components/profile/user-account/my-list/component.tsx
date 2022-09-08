@@ -1,1 +1,15 @@
-export const MyListInfo = () => <div>{'My-List'}</div>;
+import { useTypedSelector } from '@hooks';
+import type { RootState } from '@types';
+// import { Posted, Drafted, Purchased, Sold } from './cards';
+
+export const MyListInfo = () => {
+  const myList = useTypedSelector((state: RootState) => state.myList.itemsList);
+  console.log(myList);
+  
+return (
+    <div>
+      {'My-List'}
+      <div></div>
+    </div>
+  );
+};
