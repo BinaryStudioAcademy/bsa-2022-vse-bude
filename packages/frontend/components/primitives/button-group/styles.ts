@@ -20,6 +20,7 @@ export const button = ({
   line-height: ${lineHeights.button};
   font-weight: ${fontWeights.button};
   cursor: pointer;
+  flex: 1;
 
   &[data-variant='filled'] {
     background: ${colors.primaryLight};
@@ -34,11 +35,6 @@ export const button = ({
       background: ${colors.disabled};
       pointer-events: none;
     }
-  }
-
-  &[data-variant='danger'] {
-    background: ${colors.danger};
-    color: ${colors.white};
   }
 
   &[data-variant='outlined'] {
@@ -83,4 +79,8 @@ export const button = ({
       padding: 0 ${spaces.xl2};
     }
   }
+`;
+
+export const wrapper = css`
+  display: flex;
 `;

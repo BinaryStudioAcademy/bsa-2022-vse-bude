@@ -14,7 +14,7 @@ export const ButtonGroup = ({
   );
 
   return (
-    <Container>
+    <Container css={styles.wrapper}>
       {buttons.map((button) => (
         <button
           css={styles.button}
