@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ImageModal } from '../image-modal/component';
-import { ItemImageSliderSmall } from './image-slider-splide/component';
-import { ItemImageSliderLarge } from './image-slider-small/component';
+import { ItemImageSliderSmall } from './image-slider-small/component';
+import { ItemImageSliderLarge } from './image-slider-large/component';
 
 import * as styles from './styles';
 
