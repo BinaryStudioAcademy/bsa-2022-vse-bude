@@ -41,7 +41,7 @@ export const ItemInfoAuction = ({
   onChangeIsFavorite,
 }: ItemInfoAuctionProps) => {
   const [confirmModalVisible, setModalVisible] = useState(false);
-  const { push } = useRouter();
+  // const { push } = useRouter();
   const { t } = useTranslation();
   const { user } = useTypedSelector((state) => state.auth);
 
