@@ -10,6 +10,7 @@ import {
   useCustomTheme,
   useRoute,
 } from '~/hooks/hooks';
+import { RootScreenName } from '~/common/enums/enums';
 import {
   ScreenWrapper,
   View,
@@ -32,8 +33,11 @@ const ProductInfo: FC = () => {
   const { colors } = useCustomTheme();
   const dispatch = useAppDispatch();
   const product = useAppSelector(selectProduct);
-  const route = useRoute<RouteProp<RootNavigationParamList>>();
-  const id = route.params?.itemId as string;
+  const route =
+    useRoute<
+      RouteProp<Pick<RootNavigationParamList, RootScreenName.ITEM_INFO>>
+    >();
+  const id = route.params?.itemId;
 
   useEffect(() => {
     dispatch(productActions.loadProductInfo(id));
