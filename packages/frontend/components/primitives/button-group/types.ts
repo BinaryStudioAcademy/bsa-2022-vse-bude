@@ -10,6 +10,7 @@ export interface ButtonGroupProps
   tooltip?: string;
   buttons: {
     name: string;
+    onClick: () => void;
   }[];
 
   activeDefault?: string;

@@ -7,9 +7,7 @@ export const ButtonGroup = ({
   activeDefault,
   ...props
 }: ButtonGroupProps) => {
-  const [activeId, setActiveId] = useState(
-    activeDefault ? activeDefault : buttons.at(0).name,
-  );
+  const [activeId, setActiveId] = useState(activeDefault ?? buttons.at(0).name);
 
   return (
     <div css={styles.wrapper}>
@@ -19,7 +17,10 @@ export const ButtonGroup = ({
           style={{ width: props.width }}
           key={button.name}
           data-selected={activeId === button.name ? 'selected' : 'default'}
-          onClick={() => setActiveId(button.name)}
+          onClick={() => {
+            setActiveId(button.name);
+            button.onClick();
+          }}
           {...props}
         >
           {button.name}
