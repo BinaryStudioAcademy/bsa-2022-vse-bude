@@ -7,10 +7,9 @@ import { styles } from './styles';
 type Props = {
   label: string;
   onPress: () => void;
-  buttonColor?: string;
 };
 
-const HeaderButton: FC<Props> = ({ label, onPress, buttonColor }) => {
+const HeaderButton: FC<Props> = ({ label, onPress }) => {
   return (
     <Pressable
       onPress={onPress}
@@ -20,16 +19,13 @@ const HeaderButton: FC<Props> = ({ label, onPress, buttonColor }) => {
         globalStyles.justifyContentStart,
       ]}
     >
-      <BackIcon
-        size={35}
-        style={{ color: buttonColor ?? ColorPalette.WHITE_100 }}
-      />
+      <BackIcon size={35} style={{ color: ColorPalette.WHITE_100 }} />
       <Text
         style={[
           styles.buttonText,
           globalStyles.fs17,
           globalStyles.fontWeightMedium,
-          { color: buttonColor ?? ColorPalette.WHITE_100, textAlign: 'left' },
+          { color: ColorPalette.WHITE_100, textAlign: 'left' },
         ]}
       >
         {label}
