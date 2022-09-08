@@ -1,3 +1,4 @@
+import { MAX_IMAGE_SIZE } from '@vse-bude/shared';
 import {
   MAX_NAME_LENGTH,
   MAX_PASSWORD_LENGTH,
@@ -40,6 +41,10 @@ export const screens = {
     PHONE_NUMBER: 'Телефонний номер',
     PHONE_NUMBER_HINT: 'Введіть свій номер телефону',
     GOOGLE_BUTTON: 'Увійти за допомогою Google',
+    FORGOT_PASSWORD: 'Забули Пароль',
+    ENTER_EMAIL: 'Введіть електронну пошту, щоб отримати пароль',
+    HIDE_EMAIL: 'Приховати електронну адресу',
+    RESET_PASSWORD: 'Скинути пароль',
   },
   personal_info: {
     PERSONAL_INFO: 'Особиста інформація',
@@ -70,10 +75,12 @@ export const screens = {
     SIGN_OUT: 'Вийти',
   },
   errors: {
+    UNKNOWN_ERROR: 'Щось трапилось :(',
     EMPTY_EMAIL: 'Будь-ласка, введіть email',
     EMPTY_FIRST_NAME: 'Будь-ласка, введіть ім`я',
     EMPTY_LAST_NAME: 'Будь-ласка, введіть прізвище',
     EMPTY_PHONE: 'Будь-ласка, введіть номер телефону',
+    EMPTY_CODE: 'Будь-ласка, введіть код',
     EMPTY_PASSWORD: 'Будь-ласка, введіть пароль',
     LATIN: 'Дозволено введення лише латинських літер',
     INVALID_EMAIL: 'Неправильний формат електронної пошти',
@@ -98,6 +105,25 @@ export const screens = {
     INVALID_URI:
       'Приклад посилання на Ваш профіль у мережі: https://some-net/me-id-1234',
     MAX_SOCIAL_NETWORK_LENGTH: `Посилання не може перевищувати ${MAX_SOCIAL_NETWORK_LENGTH} символів`,
+    MAX_IMAGE_SIZE: `Максимальний розмір файлу ${MAX_IMAGE_SIZE / 1000000} МБ`,
+  },
+  verificationPhone: {
+    VERIFY: 'Підтвердити',
+    VERIFY_PHONE: 'Підтвердити телефон',
+    ENTER_NUMBER: 'Введіть свій номер телефону',
+    PLEASE_ENTER:
+      'Для подальшої верифікації облікового запису, будь ласка, введіть свій телефон тут або підтвердьте його на сторінці особистої інформації.',
+    INPUT_LABEL_PHONE: 'Телефон',
+    VERIFY_LATER: 'Пізніше',
+    BACK_HOME: 'Головна',
+    BACK_BUTTON: 'Назад',
+    ENTER_CODE: 'Введіть код',
+    JUST_SENT: 'Ми щойно надіслали код на номер',
+    INPUT_LABEL_CODE: 'Введіть код підтвердження, який ми щойно надіслали вам',
+    RESEND_CODE: 'Надіслати повторно',
+    CONTINUE: 'Продовжити',
+    VERIFIED_TITLE: 'Ваш обліковий запис повністю підтверджено',
+    CODE_SENT: 'Код надіслано',
   },
   make_a_post: {
     TITLE: 'Створити публікацію',
@@ -124,5 +150,33 @@ export const screens = {
     FACEBOOK: 'Facebook',
     FACEBOOK_PLACEHOLDER: 'Введіть нікнейм',
     SITE: 'Сайт',
+  },
+  home: {
+    HELP_UKRAINE: 'Допоможи Україні',
+    SEARCH_PLACEHOLDER: 'Знайти товари',
+    ARTS: 'Мистецтво',
+    TOYS: 'Іграшки',
+    HOME_DECORS: 'Домашній Декор',
+    APPLIANCES: 'Побутова Техніка',
+    POPULAR_LOTS: 'Популярні Лоти',
+    SEE_ALL_LOTS: 'Переглягути Усі Лоти',
+    SEE_ALL_ITEMS: 'Переглягути Усі Товари',
+    CHARITY_ORGANIZATIONS: 'Благодійні Організації',
+    POPULAR_ITEMS: 'Популярні Товари',
+  },
+  type_of_post: {
+    TITLE: 'Створити публікацію',
+    HEADER: 'Якого типу ви бажаєте створити публікацію?',
+    AUCTION: 'Аукціон',
+    DIRECT_SALE: 'Прямий продаж',
+  },
+  product_info: {
+    ENDING_ON: 'Закінчується',
+    TIME_ZONE: 'Часовий пояс',
+    STATUS: 'Стан',
+    LOCATION: 'Місцезнаходження',
+    DESCRIPTION: 'Опис',
+    CURRENT_BID: 'Поточна ставка',
+    MIN_UAH: 'Мін ГРН',
   },
 };

@@ -1,9 +1,9 @@
 import type { VerifyEmailDto, VerifyPhoneDto } from '@vse-bude/shared';
 import { VerificationTypes } from '@vse-bude/shared';
 import type { UserRepository } from '@repositories';
-import { t } from 'i18next';
 import { EmailFrom } from '@enums';
 import { isProduction } from '@helpers';
+import { lang } from '@lang';
 import { CodeNotFoundError } from '../error/verify/code-not-found-error';
 import { WrongCodeError } from '../error/verify/wrong-code-error';
 import type { SaveVerifyCode } from '../common/types/verification-code';
@@ -107,8 +107,8 @@ export class VerifyService {
     return await this._emailService.send({
       from: { email: EmailFrom.NO_REPLY_EMAIL, name: EmailFrom.NO_REPLY_NAME },
       to: [{ email: user.email }],
-      subject: t('mailing.verification.subject'),
-      text: `${t('mailing.verification.body')}${code}`,
+      subject: lang('translation:mailing.verification.subject'),
+      text: `${lang('translation:mailing.verification.body')}${code}`,
     });
   }
 
@@ -152,7 +152,9 @@ export class VerifyService {
     return `verification_code:user_id:${userId}:type:${type}`;
   }
 
-  public isUserVerified(userId: string) {
-    return this._userRepository.getVerified({ userId });
+  public async isUserVerified(userId: string) {
+    const verifyData = await this._userRepository.getVerified({ userId });
+
+    return verifyData.emailVerified && verifyData.phoneVerified;
   }
 }

@@ -1,2 +1,4 @@
-export { signUp, signIn } from './user/user';
+export { signUp, signIn, resetPassword } from './user/user';
 export { personalInfoSchema } from './personal-info/personal-info';
+export { phone } from './phone/phone';
+export { codeSchema } from './code/code';

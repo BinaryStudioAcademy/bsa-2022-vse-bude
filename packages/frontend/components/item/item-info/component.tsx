@@ -32,11 +32,13 @@ export const ItemInfo = ({ item }: ItemInfoProps) => {
           )}
           <tr>
             <td>{t('statusCaption')}</td>
-            <td>used</td>
+            <td>{item.condition}</td>
           </tr>
           <tr>
             <td>{t('locationCaption')}</td>
-            <td>Ukraine, {item.city}</td>
+            <td>
+              {item.country}, {item.city}
+            </td>
           </tr>
           <tr>
             <td>{t('descriptionCaption')}</td>

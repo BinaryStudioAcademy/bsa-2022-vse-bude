@@ -5,15 +5,24 @@ import {
   useAppForm,
   useAppSelector,
   useTranslation,
+  useNavigation,
 } from '~/hooks/hooks';
 import { View, Input, PrimaryButton } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { ButtonAppearance, DataStatus } from '~/common/enums/enums';
+import {
+  ButtonAppearance,
+  DataStatus,
+  RootScreenName,
+} from '~/common/enums/enums';
+import { RootNavigationProps } from '~/common/types/types';
+import {
+  selectPhoneVerified,
+  selectDataStatusPersonalInfo,
+} from '~/store/selectors';
 import { personalInfo as personalInfoActions } from '~/store/actions';
 import { personalInfoSchema } from '~/validation-schemas/validation-schemas';
-import { selectDataStatusPersonalInfo } from '~/store/selectors';
 import { notification } from '~/services/services';
-import { Title } from '../components';
+import { Title, VerifyPhoneField } from '../components';
 
 type Props = {
   personalInfo: SaveUserProfileDto;
@@ -22,6 +31,8 @@ type Props = {
 const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const navigation = useNavigation<RootNavigationProps>();
+  const isPhoneVerified = useAppSelector(selectPhoneVerified);
   const dataStatus = useAppSelector(selectDataStatusPersonalInfo);
   const isLoading = dataStatus === DataStatus.PENDING;
   const DEFAULT_VALUES = {
@@ -60,6 +71,10 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
     notification.success(t('personal_info.CHANGES_CANCELED'));
   };
 
+  const handleVerifyPhonePress = () => {
+    navigation.navigate(RootScreenName.VERIFY_PHONE);
+  };
+
   return (
     <View>
       <Title label={t('personal_info.PERSONAL_INFO')} />
@@ -95,6 +110,9 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
       />
+      {!isPhoneVerified && (
+        <VerifyPhoneField onPress={handleVerifyPhonePress} />
+      )}
       <Title label={t('personal_info.ADDRESS')} />
       <Input
         label={t('personal_info.COUNTRY')}

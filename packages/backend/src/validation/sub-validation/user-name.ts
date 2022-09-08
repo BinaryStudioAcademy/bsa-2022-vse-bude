@@ -3,6 +3,7 @@ import {
   HttpStatusCode,
   UserPersonalInfoValidationMessage,
   ValidationRanges,
+  NAME,
 } from '@vse-bude/shared';
 import { ProfileError } from '@errors';
 import { lang } from '@lang';
@@ -38,9 +39,7 @@ export const userNameValidation = ({ req }: { req: Request }) => {
     });
   }
 
-  const isFirstName = /^[^-](([a-zA-Z]+)|([а-яёіїґєА-ЯЁIЇҐЄ]+))$/.test(
-    firstName,
-  );
+  const isFirstName = NAME.test(firstName);
 
   if (!isFirstName) {
     throw new ProfileError({
@@ -49,9 +48,7 @@ export const userNameValidation = ({ req }: { req: Request }) => {
     });
   }
 
-  const isLastName = /^[^-](([a-zA-Z]+)|([а-яёіїґєА-ЯЁIЇҐЄ'-]+))[^-]$$/.test(
-    lastName,
-  );
+  const isLastName = NAME.test(lastName);
 
   if (!isLastName) {
     throw new ProfileError({

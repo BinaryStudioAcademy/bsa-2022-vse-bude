@@ -4,6 +4,7 @@ import type { SellerFieldsType } from './types';
 
 export const initialProductFormState: IPostForms = {
   category: '',
+  condition: '',
   title: '',
   description: '',
   price: '',
@@ -19,6 +20,7 @@ export const initialProductFormState: IPostForms = {
 
 export const initialAuctionFormState: ICreateAuction = {
   category: '',
+  condition: '',
   title: '',
   description: '',
   recommendedPrice: '',

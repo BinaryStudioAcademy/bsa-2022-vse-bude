@@ -26,6 +26,8 @@ export interface DescriptionBlockProps {
   register: registerFieldType;
   category: SelectOption;
   setCategories: (arg0: SelectOption) => void;
+  condition: SelectOption;
+  setCondition: (arg0: SelectOption) => void;
 }
 
 export interface ContactBlockProps {
@@ -40,6 +42,6 @@ export type SellerFieldsType = {
 };
 
 export const PostStatuses = {
-  CREATE: ProductStatus[0],
+  CREATE: ProductStatus[1],
   DRAFT: ProductStatus[5],
 };
