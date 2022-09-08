@@ -95,6 +95,7 @@ export const inputRow = ({ spaces }: Theme) => css`
 
 export const groupePhone = ({ spaces }: Theme) => css`
   gap: ${spaces.md};
+  padding: 0 0 ${spaces.xl1} 0;
 `;
 
 export const phoneRow = css`
