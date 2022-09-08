@@ -1,6 +1,6 @@
 ﻿import type { ItemDto } from '@vse-bude/shared';
 import { ProductType } from '@vse-bude/shared';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useTranslation } from 'next-i18next';
 import { SellerInfo } from './seller-info/component';
 import * as styles from './styles';
