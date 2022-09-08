@@ -84,7 +84,7 @@ export const sectionRow = ({ spaces }: Theme) => css`
   }
 `;
 
-export const groupeInputs = ({ spaces }: Theme) => css`
+export const groupInputs = ({ spaces }: Theme) => css`
   gap: ${spaces.md};
 `;
 
@@ -93,7 +93,7 @@ export const inputRow = ({ spaces }: Theme) => css`
   flex-grow: 1;
 `;
 
-export const groupePhone = ({ spaces }: Theme) => css`
+export const groupPhone = ({ spaces }: Theme) => css`
   gap: ${spaces.md};
   padding: 0 0 ${spaces.xl1} 0;
 `;
