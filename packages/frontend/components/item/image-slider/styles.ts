@@ -41,6 +41,7 @@ export const imageWrapper = ({ spaces, breakpoints }: Theme) => css`
   max-width: 120px;
   min-width: 100px;
   max-height: 80px;
+  height: 80px;
   &:last-child {
     margin-bottom: 0;
   }

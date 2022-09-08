@@ -1,5 +1,6 @@
 ﻿import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
+import Image from 'next/image';
 import { ImageModal } from '../image-modal/component';
 import * as styles from './styles';
 
@@ -42,7 +43,14 @@ export const ItemImageSlider = ({ imageLinks }: ItemImageSliderProps) => {
             onKeyDown={(e) => handleKeyDownPreview(e, index)}
             onClick={() => handleClick(index)}
           >
-            <img key={index} src={link} alt="item" css={styles.image} />
+            <Image
+              key={index}
+              src={link}
+              alt="item"
+              css={styles.image}
+              layout="fill"
+              objectFit="contain"
+            />
           </div>
         ))}
       </div>
@@ -51,7 +59,13 @@ export const ItemImageSlider = ({ imageLinks }: ItemImageSliderProps) => {
         onClick={() => setIsModalOpen(true)}
         aria-hidden="true"
       >
-        <img src={imageLinks[focusedImage]} alt="item" css={styles.image} />
+        <Image
+          src={imageLinks[focusedImage]}
+          alt="item"
+          css={styles.image}
+          layout="fill"
+          objectFit="contain"
+        />
         <div
           css={styles.seeImageCaption}
           onClick={() => setIsModalOpen(true)}
