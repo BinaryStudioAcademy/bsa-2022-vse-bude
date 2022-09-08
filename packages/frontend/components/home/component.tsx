@@ -1,4 +1,3 @@
-import { Range } from '@components/primitives/range';
 import { Routes } from '@enums';
 import { ProductType } from '@vse-bude/shared';
 import { useTranslation } from 'next-i18next';
@@ -34,7 +33,6 @@ const Home = ({ auctionProducts, sellingProducts }: HomeProps) => {
         loadMoreTitle={t('home:popularItems.link')}
         loadMoreHref={redirectToFilterByType(ProductType.SELLING)}
       />
-      <Range />
     </React.Fragment>
   );
 };
