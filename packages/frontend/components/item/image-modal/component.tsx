@@ -1,7 +1,6 @@
 import { Modal, IconButton } from '@primitives';
 import { IconName, IconColor } from '@enums';
 import { useTranslation } from 'next-i18next';
-
 import * as styles from './styles';
 
 interface ImageModalProps {
@@ -20,23 +19,17 @@ export const ImageModal = ({
   return (
     <Modal visible={isOpen}>
       <div css={styles.modalImageWrapper}>
-        {loading ? (
-          <div>Loader</div>
-        ) : (
-          <>
-            <img src={image} alt="item" css={styles.modalImage} ref={ref} />
-            <div css={styles.modalClose}>
-              <IconButton
-                ariaLabel={t('item:buttons.closeImageModal')}
-                icon={IconName.XMARK}
-                color={IconColor.ORANGE}
-                backgroundColor={'lightgray'}
-                size="md"
-                onClick={() => setModalVisible(false)}
-              />
-            </div>
-          </>
-        )}
+        <img src={image} alt="item" css={styles.modalImage} ref={ref} />
+        <div css={styles.modalClose}>
+          <IconButton
+            ariaLabel={t('item:buttons.closeImageModal')}
+            icon={IconName.XMARK}
+            color={IconColor.ORANGE}
+            backgroundColor={'lightgray'}
+            size="md"
+            onClick={() => setModalVisible(false)}
+          />
+        </div>
       </div>
     </Modal>
   );
