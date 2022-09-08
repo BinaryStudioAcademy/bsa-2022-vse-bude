@@ -30,6 +30,7 @@ import { FieldError } from 'error/product/field-error';
 import { createPostSchema, updatePostSchema } from 'validation/product/schemas';
 import { NotVerifiedError } from 'error/user/not-verified';
 import { lang } from '@lang';
+import { createAuctionJob, updateAuctionJob } from '@scheduler';
 
 export class ProductService {
   private _productRepository: ProductRepository;
@@ -194,7 +195,15 @@ export class ProductService {
     };
     const product = await this._productRepository.create(data);
 
+    if (this.isAuctionProduct(product.type)) {
+      createAuctionJob(product);
+    }
+
     return product;
+  }
+
+  private isAuctionProduct(type: string) {
+    return type === ProductType.AUCTION;
   }
 
   public async updateProduct({
@@ -241,6 +250,10 @@ export class ProductService {
       productId,
       data,
     );
+
+    if (this.isAuctionProduct(updatedProduct.type)) {
+      updateAuctionJob(updatedProduct);
+    }
 
     return updatedProduct;
   }

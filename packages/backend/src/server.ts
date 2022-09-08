@@ -8,12 +8,12 @@ import { loggerMiddleware } from '@middlewares';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import { Server } from 'socket.io';
+import { clearAllJobs, initAuctionJobs } from '@scheduler';
 import { prismaClient as database } from './data/db';
 import { errorHandler } from './error/error-handler';
 import { langMiddleware } from './api/middlewares/lang';
 import { appEventsListener } from './events';
 import { socketCors } from './config';
-import { clearAllJobs, initAuctionJobs } from './scheduler';
 
 const app = express();
 const repositories = initRepositories(database);

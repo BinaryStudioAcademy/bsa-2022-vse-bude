@@ -6,3 +6,6 @@ export const translateCondition = (condition: Condition) =>
     NEW: lang('product:condition.NEW'),
     USED: lang('product:condition.USED'),
   }[condition]);
+
+export const auctionJobName = (productUuid: string) =>
+  `auction-cronjob-${productUuid}`;
