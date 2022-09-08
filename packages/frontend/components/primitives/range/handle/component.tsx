@@ -1,3 +1,1 @@
-export const Handle = ({value}) => (
-        <div>`value: {value}`</div>
-    );
+export const Handle = ({ value }) => <div>`value: {value}`</div>;
