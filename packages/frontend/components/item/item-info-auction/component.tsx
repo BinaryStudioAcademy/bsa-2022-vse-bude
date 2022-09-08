@@ -114,7 +114,9 @@ export const ItemInfoAuction = ({
   };
 
   const renderEditButton = () => (
-    <Button onClick={() => push(`/items/edit/${item.id}`)}> {t('item:buttons.editBtn')} </Button>
+    <Button onClick={() => push(`/items/edit/${item.id}`)}>
+      {t('item:buttons.editBtn')}
+    </Button>
   );
 
   const renderBidButtons = () => (
