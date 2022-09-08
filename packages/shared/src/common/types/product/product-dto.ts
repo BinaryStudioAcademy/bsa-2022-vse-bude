@@ -13,13 +13,15 @@ interface Category {
   title: string;
 }
 
-interface Bid {
+export interface Bid {
   id: string;
   bidderId: string;
-  price: string;
+  price: number;
   createdAt: string;
   updatedAt: string;
 }
+
+type ProductCondition = 'NEW' | 'USED';
 
 type ProductDto = {
   id: string;
@@ -33,7 +35,7 @@ type ProductDto = {
   phone?: string;
   type: ProductType;
   status: string;
-  condition: string;
+  condition: ProductCondition;
   endDate: string;
   imageLinks: string[];
   views: number;
