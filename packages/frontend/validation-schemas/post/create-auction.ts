@@ -13,7 +13,7 @@ export const createAuctionSchema = (t: TFunction) =>
     condition: Joi.string()
       .required()
       .messages({
-        'string.empty': t('create-post:validation.wear.empty'),
+        'string.empty': t('create-post:validation.condition.empty'),
       }),
     currency: Joi.any().allow(''),
     recommendedPriceCurrency: Joi.any().allow(''),

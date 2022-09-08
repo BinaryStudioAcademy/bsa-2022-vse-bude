@@ -36,4 +36,11 @@ export const common = {
     MINUTES_SHORT: 'хв',
     SECONDS_SHORT: 'сек',
   },
+  tab_navigation: {
+    HOME: 'Головна',
+    FAVORITE: 'Вибране',
+    MY_LIST: 'Мій список',
+    ACCOUNT: 'Акаунт',
+    LOG_IN: 'Увійти',
+  },
 };
