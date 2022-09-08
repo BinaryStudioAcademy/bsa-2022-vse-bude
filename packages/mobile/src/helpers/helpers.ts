@@ -7,6 +7,4 @@ export {
   formatToDateTime,
   getTimezoneOffset,
 } from './date/date';
-export {
-  categoryForDropdown,
-} from './category/format-category-for-dropdown';
+export { categoryForDropdown } from './category/format-category-for-dropdown';
