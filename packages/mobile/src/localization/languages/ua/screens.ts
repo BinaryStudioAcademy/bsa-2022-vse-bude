@@ -65,6 +65,7 @@ export const screens = {
     SIGN_OUT: 'Вийти',
   },
   errors: {
+    UNKNOWN_ERROR: 'Щось трапилось :(',
     EMPTY_EMAIL: 'Будь-ласка, введіть email',
     EMPTY_FIRST_NAME: 'Будь-ласка, введіть ім`я',
     EMPTY_LAST_NAME: 'Будь-ласка, введіть прізвище',
