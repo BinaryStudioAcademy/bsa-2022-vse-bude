@@ -9,9 +9,8 @@ import dynamic from 'next/dynamic';
 import { Modals } from '@components/modals/component';
 import { useRouter } from 'next/router';
 import { http } from '@helpers';
-import { Range } from '@components/primitives';
 
-// const PageLoaderDynamic = dynamic(() => import('@components/pages-loader'));
+const PageLoaderDynamic = dynamic(() => import('@components/pages-loader'));
 const ToastStackDynamic = dynamic(() => import('@components/toasts/stack'));
 
 export type NextPageWithLayout = NextPage & {
@@ -32,8 +31,7 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
     <ThemeProvider>
       <UserProvider>{getLayout(<Component {...pageProps} />)}</UserProvider>
       <Modals />
-      <Range />
-      {/* <PageLoaderDynamic /> */}
+      <PageLoaderDynamic />
       <ToastStackDynamic />
     </ThemeProvider>
   );

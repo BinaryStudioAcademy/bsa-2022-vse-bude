@@ -1,13 +1,9 @@
-import type { Component, ReactNode } from "react";
-
-export interface RangeProps {
-    value: number;
-    offset: number;
-    ref: ReactNode;
-}
+import type { ReactNode } from "react";
 
 export interface StyledRangeProps {
     allowCross: boolean; 
-    handle: Component;
-    value: number;
+    handle: ReactNode;
+    value: number[];
+    handleChange: (value: number) => void;
+    ref?: ReactNode;
 }
