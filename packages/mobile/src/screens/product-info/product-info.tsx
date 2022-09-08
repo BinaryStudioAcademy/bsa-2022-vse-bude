@@ -10,6 +10,7 @@ import {
   useCustomTheme,
   useRoute,
 } from '~/hooks/hooks';
+import { RootScreenName } from '~/common/enums/enums';
 import {
   ScreenWrapper,
   View,
@@ -20,7 +21,6 @@ import {
   Countdown,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { RootScreenName } from '~/common/enums/enums';
 import {
   Description,
   ImageCarousel,
@@ -37,7 +37,7 @@ const ProductInfo: FC = () => {
     useRoute<
       RouteProp<Pick<RootNavigationParamList, RootScreenName.ITEM_INFO>>
     >();
-  const id = route.params?.itemId as string;
+  const id = route.params?.itemId;
 
   useEffect(() => {
     dispatch(productActions.loadProductInfo(id));
