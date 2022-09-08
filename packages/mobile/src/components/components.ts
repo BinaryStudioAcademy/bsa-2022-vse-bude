@@ -13,6 +13,7 @@ export { SafeAreaView } from 'react-native-safe-area-context';
 export { default as Popover } from 'react-native-popover-view';
 
 export * from './icons/icons';
+export * from './svg/svg';
 export { ScreenWrapper } from './screen-wrapper/screen-wrapper';
 export { Button } from './button/button';
 export { Input } from './input/input';
