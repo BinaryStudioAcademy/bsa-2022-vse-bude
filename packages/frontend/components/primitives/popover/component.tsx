@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import ReactDOM from 'react-dom';
+import { createPortal } from 'react-dom';
 import { resetButton } from 'theme';
 import { useOutsideClick } from '@hooks';
 import type { PopoverProps } from './types';
@@ -92,10 +92,7 @@ export const Popover = ({
   );
 
   const renderPortal = () =>
-    ReactDOM.createPortal(
-      renderPortalBody(),
-      document.querySelector('#popover'),
-    );
+    createPortal(renderPortalBody(), document.querySelector('#popover'));
 
   return (
     <React.Fragment>

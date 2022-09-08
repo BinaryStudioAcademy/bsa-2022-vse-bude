@@ -25,6 +25,7 @@ export const ItemImageSlider = ({ imageLinks }: ItemImageSliderProps) => {
               key={index}
               onClick={() => handleClick(index)}
               src={link}
+              priority={index === 0}
               alt="item image"
               layout="fill"
               objectFit="cover"
