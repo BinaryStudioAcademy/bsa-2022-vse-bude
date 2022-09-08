@@ -1,4 +1,4 @@
-﻿import React, { useEffect } from 'react';
+﻿import React from 'react';
 import type { ItemDto } from '@vse-bude/shared';
 import { ProductType } from '@vse-bude/shared';
 import { Container } from '@primitives';
@@ -7,15 +7,8 @@ import {
   deleteProductFromFavorites,
   addProductToFavorites,
 } from 'store/favorite-product';
-import {
-  useAppDispatch,
-  useWindowSize,
-  useInFavorite,
-  useTypedSelector,
-} from '@hooks';
-import { fetchCreateOrder } from 'store/checkout';
-import { useRouter } from 'next/router';
-import { Routes } from '@enums';
+import { useAppDispatch, useWindowSize, useInFavorite } from '@hooks';
+import { createOrderAction } from 'store/checkout';
 import { ItemImageSlider } from './image-slider/component';
 import { ItemInfoSelling } from './item-info-selling/component';
 import { ItemInfoAuction } from './item-info-auction/component';
@@ -31,12 +24,8 @@ export const Item = ({ item }: ItemProps) => {
 
   const dispatch = useAppDispatch();
 
-  const router = useRouter();
-
-  const order = useTypedSelector((state) => state.checkout.order);
-
   const handleBuy = () => {
-    dispatch(fetchCreateOrder(item.id));
+    dispatch(createOrderAction(item.id));
   };
 
   const isInFavorite = useInFavorite(item.id);
@@ -47,12 +36,6 @@ export const Item = ({ item }: ItemProps) => {
       : addProductToFavorites;
     dispatch(favAction(item.id));
   };
-
-  useEffect(() => {
-    if (order?.id) {
-      router.push(`${Routes.CHECKOUT}?id=${order?.id}`);
-    }
-  }, [order?.id, router]);
 
   return (
     <React.Fragment>
