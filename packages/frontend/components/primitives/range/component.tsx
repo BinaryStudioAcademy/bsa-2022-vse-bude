@@ -3,7 +3,7 @@ import type { StyledRangeProps } from './types';
 import * as styles from './styles';
 
 export const PriceRange = ({
-  min, 
+  min,
   max,
   value,
   handleChange,
@@ -19,7 +19,6 @@ export const PriceRange = ({
       defaultValue={value}
       min={min}
       max={max}
-      />
+    />
   </div>
-  
 );
