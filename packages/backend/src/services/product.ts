@@ -28,6 +28,7 @@ import type { BidRepository } from '@repositories';
 import { productMapper, auctionPermissionsMapper } from '@mappers';
 import { FieldError } from 'error/product/field-error';
 import { createPostSchema, updatePostSchema } from 'validation/product/schemas';
+import type { ProductDto } from '@vse-bude/shared';
 import { NotVerifiedError } from 'error/user/not-verified';
 import { lang } from '@lang';
 
@@ -56,7 +57,7 @@ export class ProductService {
     return this._productRepository.getAll(query);
   }
 
-  public async getById(productId: string) {
+  public async getById(productId: string): Promise<ProductDto> {
     const product = await this._productRepository.getById(productId);
     if (!product) {
       throw new ProductNotFoundError();
@@ -74,7 +75,7 @@ export class ProductService {
       product.id,
     );
 
-    return productMapper(product, +currentPrice);
+    return productMapper(product, currentPrice);
   }
 
   public async incrementViews(id: string, req: Request) {
@@ -88,7 +89,7 @@ export class ProductService {
       }
     }
 
-    return this._productRepository.incrementViews(id);
+    return productMapper(await this._productRepository.incrementViews(id));
   }
 
   public async getFavoriteIds(userId: string) {
@@ -98,7 +99,9 @@ export class ProductService {
   }
 
   public async getFavoriteProducts(userId: string) {
-    return this._productRepository.getFavorite(userId);
+    const favProducts = await this._productRepository.getFavorite(userId);
+
+    return favProducts.map((product) => productMapper(product));
   }
 
   public async getAuctionPermissions(
@@ -194,7 +197,7 @@ export class ProductService {
     };
     const product = await this._productRepository.create(data);
 
-    return product;
+    return productMapper(product);
   }
 
   public async updateProduct({
@@ -242,7 +245,7 @@ export class ProductService {
       data,
     );
 
-    return updatedProduct;
+    return productMapper(updatedProduct);
   }
 
   public async buy({ userId, productId }: BuyProduct) {
@@ -268,21 +271,30 @@ export class ProductService {
 
   public async getSimilar(productId: string) {
     const product = await this._productRepository.getById(productId);
-
-    return this._productRepository.findSimilar(
+    const similarProducts = await this._productRepository.findSimilar(
       product.city,
       product.categoryId,
       product.type,
       product.id,
     );
+
+    return similarProducts.map((product) => productMapper(product));
   }
 
   public async getMostPopularLots(limit: string) {
-    return this._productRepository.getMostPopularLots(+limit);
+    const mostPopular = await this._productRepository.getMostPopularLots(
+      +limit,
+    );
+
+    return mostPopular.map((product) => productMapper(product));
   }
 
   public async getMostPopularProducts(limit: string) {
-    return this._productRepository.getMostPopularProducts(+limit);
+    const mostPopular = await this._productRepository.getMostPopularProducts(
+      +limit,
+    );
+
+    return mostPopular.map((product) => productMapper(product));
   }
 
   public async getEditProductById({ userId, productId }) {
@@ -291,7 +303,7 @@ export class ProductService {
     if (!product) {
       throw new ProductNotFoundError();
     }
-    if (product.authorId !== userId) {
+    if (product.author.id !== userId) {
       throw new UnauthorizedError();
     }
 

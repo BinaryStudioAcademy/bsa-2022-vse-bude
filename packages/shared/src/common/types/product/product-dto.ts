@@ -13,6 +13,14 @@ interface Category {
   title: string;
 }
 
+interface Bid {
+  id: string;
+  bidderId: string;
+  price: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 type ProductDto = {
   id: string;
   title: string;
@@ -32,6 +40,11 @@ type ProductDto = {
   currentPrice: number;
   author: Author;
   category: Category;
+  cancelReason: string;
+  winnerId?: string;
+  createdAt: Date;
+  updatedAt: Date;
+  bids?: Bid[];
 };
 
 export type { ProductDto };
