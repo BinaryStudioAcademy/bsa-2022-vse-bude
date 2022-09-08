@@ -19,7 +19,7 @@ export const ImageModal = ({
   return (
     <Modal visible={isOpen}>
       <div css={styles.modalImageWrapper}>
-        <img src={image} alt="item" css={styles.modalImage} ref={ref} />
+        <img src={image} alt="item" css={styles.modalImage} />
         <div css={styles.modalClose}>
           <IconButton
             ariaLabel={t('item:buttons.closeImageModal')}
