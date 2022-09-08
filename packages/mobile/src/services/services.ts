@@ -8,6 +8,7 @@ import { NotificationService } from './notification/notification.service';
 import { ProductService } from './product/product.service';
 import { PushController } from './push-notifications/push-notifications';
 import { AppService } from './app/app.service';
+import { PhoneVerificationApi } from './phone-verification-api/phone-verification-api.service';
 import { CategoryService } from './categories/categories';
 
 const storage = new Storage({
@@ -33,6 +34,11 @@ const productApi = new ProductService({
   apiPrefix: ENV.APP.API_ORIGIN_URL,
 });
 
+const phoneVerificationApi = new PhoneVerificationApi({
+  http,
+  apiPrefix: ENV.APP.API_ORIGIN_URL,
+});
+
 const categoryApi = new CategoryService({
   http,
   apiPrefix: ENV.APP.API_ORIGIN_URL,
@@ -50,6 +56,7 @@ export {
   image,
   notification,
   productApi,
+  phoneVerificationApi,
   appService,
   categoryApi,
   pushApi,

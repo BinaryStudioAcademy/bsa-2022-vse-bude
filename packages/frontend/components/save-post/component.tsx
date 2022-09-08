@@ -25,11 +25,13 @@ export const SavePost = ({ type, edit }: SavePostProps) => {
   return (
     <NestedLayout>
       <Container>
-        <h3 css={styles.pageHeader}>{title}</h3>
         <div css={styles.form}>
-          <div css={styles.sections}>
-            {type === ProductType.AUCTION && <AuctionForm edit={edit} />}
-            {type === ProductType.SELLING && <ProductForm edit={edit} />}
+          <div css={styles.formWrapper}>
+            <h3 css={styles.pageHeader}>{title}</h3>
+            <div css={styles.sections}>
+              {type === ProductType.AUCTION && <AuctionForm edit={edit} />}
+              {type === ProductType.SELLING && <ProductForm edit={edit} />}
+            </div>
           </div>
         </div>
       </Container>

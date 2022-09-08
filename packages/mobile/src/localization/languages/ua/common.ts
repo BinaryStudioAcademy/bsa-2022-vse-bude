@@ -23,6 +23,8 @@ export const common = {
   },
   errors: {
     DID_CANCEL: 'Скасовано користувачем',
+    LOW_BID: 'Не може бути нижче за мінімальну ставку',
+    INVALID_BID: 'Введіть число',
   },
   currency: {
     UAH: 'ГРН',

@@ -1,5 +1,5 @@
 import { IconName } from '@enums';
-import { useAppDispatch, useAuth } from '@hooks';
+import { useAppDispatch } from '@hooks';
 import { IconButton } from '@primitives';
 import { PhoneVerification } from 'components/auth/verification/phone-verification';
 import { useTranslation } from 'next-i18next';
@@ -10,11 +10,13 @@ import { useEffect } from 'react';
 import * as styles from '../styles';
 import { phoneCodeResend } from '../../../store/auth';
 
-const EnterCodeModal = () => {
+interface ModalProps {
+  phone: string;
+}
+
+const EnterCodeModal = ({ phone }: ModalProps) => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
-
-  const { user } = useAuth();
 
   useEffect(() => {
     dispatch(phoneCodeResend());
@@ -29,7 +31,7 @@ const EnterCodeModal = () => {
     <div css={styles.innerWrapper}>
       <h3 css={styles.headline}>{t('common:verify.enterCode.headline')}</h3>
       <span>
-        {t('common:verify.enterCode.description')} {user.phone}
+        {t('common:verify.enterCode.description')} {phone}
       </span>
       <IconButton
         cssExtend={styles.arrow}

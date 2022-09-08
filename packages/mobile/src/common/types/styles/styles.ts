@@ -23,6 +23,7 @@ export type FlexBoxStyles = {
   alignItemsCenter: FlexStyle;
   justifyContentCenter: FlexStyle;
   justifyContentStart: FlexStyle;
+  justifyContentEnd: FlexStyle;
   justifyContentSpaceBetween: FlexStyle;
 };
 
