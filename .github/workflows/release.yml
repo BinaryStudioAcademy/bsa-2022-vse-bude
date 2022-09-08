@@ -14,6 +14,25 @@ jobs:
       name: Release
       url: http://vse-bude.com.ua
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: npm run install:all
+
+      - name: Check code quality
+        run: |
+          npm run prettier:check:all
+          npm run lint:all
+
+      - name: Build
+        run: npm run build:all
+
       - name: Deploy frontend and backend. Migrate DB.
         uses: appleboy/ssh-action@master
         with:
@@ -33,6 +52,7 @@ jobs:
             git pull -f
             git status
             ./scripts/deploy.sh
+
       - name: Check app deployed successfully
         uses: jtalk/url-health-check-action@v2
         with:

@@ -6,7 +6,12 @@ import {
   AuctionEndedError,
 } from '@errors';
 import type { Request } from 'express';
-import { getFilenameFromUrl, getUserIdFromRequest, toUtc } from '@helpers';
+import {
+  getFilenameFromUrl,
+  getUserIdFromRequest,
+  toUtc,
+  translateCondition,
+} from '@helpers';
 import type {
   AddProductToFavorites,
   AuctionPermissionsResponse,
@@ -16,17 +21,15 @@ import type {
   UpdateProduct,
 } from '@vse-bude/shared';
 import { ProductType } from '@vse-bude/shared';
-import type { Product } from '@prisma/client';
-import type { Bid } from '@prisma/client';
 import { ProductStatus } from '@prisma/client';
-import type { VerifyService } from '@services';
+import type { Product, Bid } from '@prisma/client';
+import type { VerifyService, S3StorageService } from '@services';
 import type { BidRepository } from '@repositories';
-import { productMapper } from '@mappers';
+import { productMapper, auctionPermissionsMapper } from '@mappers';
 import { FieldError } from 'error/product/field-error';
 import { createPostSchema, updatePostSchema } from 'validation/product/schemas';
-import { auctionPermissionsMapper } from '@mappers';
-import { lang } from '../lang';
-import type { S3StorageService } from './s3-storage';
+import { NotVerifiedError } from 'error/user/not-verified';
+import { lang } from '@lang';
 
 export class ProductService {
   private _productRepository: ProductRepository;
@@ -61,6 +64,10 @@ export class ProductService {
 
     if (product.category) {
       product.category.title = lang(`categories:${product.category.title}`);
+    }
+
+    if (product.condition) {
+      product.condition = translateCondition(product.condition);
     }
 
     const currentPrice = await this._productRepository.getCurrentPrice(
@@ -125,7 +132,11 @@ export class ProductService {
       throw new AuctionEndedError();
     }
 
-    await this._bidRepository.deleteAllByProductAndUser(userId, productId);
+    await this._bidRepository.retrieve(
+      userId,
+      productId,
+      new Date(Date.now()).toISOString(),
+    );
 
     return this.getById(productId);
   }
@@ -164,6 +175,11 @@ export class ProductService {
     if (error) {
       throw new FieldError(error.message);
     }
+    const isUserVerified = await this._verifyService.isUserVerified(userId);
+
+    if (!isUserVerified) {
+      throw new NotVerifiedError();
+    }
     const imageLinks = await this._s3StorageService.uploadProductImages(req);
     if (fieldsData.type === ProductType.AUCTION) {
       fieldsData.price = fieldsData.recommendedPrice;
@@ -191,6 +207,7 @@ export class ProductService {
     if (error) {
       throw new FieldError(error.message);
     }
+
     const product = (await this._productRepository.getById(
       productId,
     )) as Product;
@@ -238,7 +255,7 @@ export class ProductService {
     }
     const isUserVerified = await this._verifyService.isUserVerified(userId);
     if (!isUserVerified) {
-      return undefined;
+      throw new NotVerifiedError();
     }
     await this._productRepository.buy(
       productId,
@@ -247,5 +264,37 @@ export class ProductService {
     );
 
     return productId;
+  }
+
+  public async getSimilar(productId: string) {
+    const product = await this._productRepository.getById(productId);
+
+    return this._productRepository.findSimilar(
+      product.city,
+      product.categoryId,
+      product.type,
+      product.id,
+    );
+  }
+
+  public async getMostPopularLots(limit: string) {
+    return this._productRepository.getMostPopularLots(+limit);
+  }
+
+  public async getMostPopularProducts(limit: string) {
+    return this._productRepository.getMostPopularProducts(+limit);
+  }
+
+  public async getEditProductById({ userId, productId }) {
+    const product = await this.getById(productId);
+
+    if (!product) {
+      throw new ProductNotFoundError();
+    }
+    if (product.authorId !== userId) {
+      throw new UnauthorizedError();
+    }
+
+    return product;
   }
 }

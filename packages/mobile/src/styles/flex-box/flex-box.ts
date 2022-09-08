@@ -19,6 +19,9 @@ const FLEX_BOX_STYLES: FlexBoxStyles = {
   justifyContentStart: {
     justifyContent: 'flex-start',
   },
+  justifyContentEnd: {
+    justifyContent: 'flex-end',
+  },
   justifyContentSpaceBetween: {
     justifyContent: 'space-between',
   },

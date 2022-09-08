@@ -1,10 +1,11 @@
-import { ProductStatus } from '@prisma/client';
+import { ProductStatus, Condition } from '@prisma/client';
 import { ProductType } from '@vse-bude/shared';
 import Joi from 'joi';
 import { lang } from '../../lang';
 
 export const createPostSchema = Joi.object({
   category: Joi.string().allow(''),
+  condition: Joi.string().valid(Condition.NEW, Condition.USED),
   type: Joi.string()
     .valid(ProductType.AUCTION, ProductType.SELLING)
     .required()
@@ -90,6 +91,7 @@ export const createPostSchema = Joi.object({
 export const updatePostSchema = Joi.object({
   images: Joi.array().items(Joi.string()),
   category: Joi.string().allow(''),
+  condition: Joi.string().valid(Condition.NEW, Condition.USED),
   type: Joi.string().valid(ProductType.AUCTION, ProductType.SELLING),
   status: Joi.string().valid(
     ProductStatus.CREATED,

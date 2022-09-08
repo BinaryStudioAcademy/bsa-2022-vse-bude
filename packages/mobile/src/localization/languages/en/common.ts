@@ -23,12 +23,24 @@ export const common = {
   },
   errors: {
     didCancel: 'Cancelled by user',
+    LOW_BID: 'Must not be lower then minimal bid',
+    INVALID_BID: 'Please enter number',
   },
   currency: {
     UAH: 'UAH',
   },
   time: {
+    DAYS: 'days',
+    HOURS: 'hours',
     HOURS_SHORT: 'h',
     MINUTES_SHORT: 'min',
+    SECONDS_SHORT: 'sec',
+  },
+  tab_navigation: {
+    HOME: 'Home',
+    FAVORITE: 'Favourite',
+    MY_LIST: 'My list',
+    ACCOUNT: 'Account',
+    LOG_IN: 'Log in',
   },
 };

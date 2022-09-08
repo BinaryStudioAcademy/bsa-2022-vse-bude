@@ -61,6 +61,7 @@
   "components": {
     "product": {
       "placeBidBtn": "Place Bid",
+      "buyBtn": "Buy",
       "time": {
         "hours": "h",
         "days": "d",
@@ -91,6 +92,9 @@
           "directSale": "You need to verify you phone number to choose \"Direct Sale\""
         }
       }
+    },
+    "badge": {
+      "removeLabel": "Remove filter {{param}}"
     }
   },
   "notifications": {
@@ -110,7 +114,8 @@
     "productAddedToFavorites": "Product added to favorite",
     "productRemovedFromFavorites": "Product removed from favorite",
     "bidPlaced": "Bid placed",
-    "leftAuction": "You left the auction"
+    "leftAuction": "You left the auction",
+    "newBidPlaced": "New bid was placed to current product"
   },
   "verify": {
     "enterPhone": {

@@ -41,7 +41,8 @@
     "recommendedPrice": "Recommended price",
     "endDate": "End date",
     "username": "Name",
-    "seller": "Seller"
+    "seller": "Seller",
+    "condition": "Condition"
   },
   "placeholder": {
     "category": "Select the category",
@@ -59,7 +60,8 @@
     "site": "Enter site address",
     "minimalBid": "Enter minimal bid",
     "recommendedPrice": "Enter recommended price",
-    "username": "Enter user`s name"
+    "username": "Enter user`s name",
+    "condition": "Select condition of item"
   },
   "validation": {
     "link": {
@@ -94,6 +96,9 @@
     "category": {
       "empty": "Category cannot be empty"
     },
+    "condition": {
+      "empty": "condition cannot be empty"
+    },
     "date": {
       "base": "Enter a date after today"
     }
@@ -101,5 +106,13 @@
   "sellerSelect": {
     "currentUser": "Current user",
     "otherUser": "Other user"
+  },
+  "conditionSelect": {
+    "used": "used",
+    "new": "new"
+  },
+  "notVerified": {
+    "text": "Please confirm your phone and email address first",
+    "btn": "Go to verify"
   }
 }

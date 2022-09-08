@@ -23,12 +23,24 @@ export const common = {
   },
   errors: {
     DID_CANCEL: 'Скасовано користувачем',
+    LOW_BID: 'Не може бути нижче за мінімальну ставку',
+    INVALID_BID: 'Введіть число',
   },
   currency: {
     UAH: 'ГРН',
   },
   time: {
+    DAYS: 'дні',
+    HOURS: 'години',
     HOURS_SHORT: 'г',
     MINUTES_SHORT: 'хв',
+    SECONDS_SHORT: 'сек',
+  },
+  tab_navigation: {
+    HOME: 'Головна',
+    FAVORITE: 'Вибране',
+    MY_LIST: 'Мій список',
+    ACCOUNT: 'Акаунт',
+    LOG_IN: 'Увійти',
   },
 };

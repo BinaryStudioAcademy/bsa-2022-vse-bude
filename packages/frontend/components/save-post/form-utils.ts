@@ -4,9 +4,10 @@ import type { SellerFieldsType } from './types';
 
 export const initialProductFormState: IPostForms = {
   category: '',
+  condition: '',
   title: '',
   description: '',
-  price: '',
+  price: 0,
   currency: 'UAH',
   country: '',
   city: '',
@@ -19,10 +20,11 @@ export const initialProductFormState: IPostForms = {
 
 export const initialAuctionFormState: ICreateAuction = {
   category: '',
+  condition: '',
   title: '',
   description: '',
-  recommendedPrice: '',
-  minimalBid: '',
+  recommendedPrice: 0,
+  minimalBid: 0,
   minimalBidCurrency: 'UAH',
   recommendedPriceCurrency: 'UAH',
   currency: 'UAH',
