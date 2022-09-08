@@ -1,16 +1,18 @@
 import React, { FC } from 'react';
 import { ColorPalette } from '@vse-bude/shared';
-import { RootNavigationProps } from '~/common/types/navigation/navigation-props';
-import { useNavigation, useTranslation } from '~/hooks/hooks';
+import { useTranslation } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
 import { Text, TouchableWithoutFeedback, View } from '../components';
 
-const HeaderSave: FC = () => {
-  const navigation = useNavigation<RootNavigationProps>();
+type ButtonProps = {
+  onPress: () => void;
+};
+
+const HeaderSave: FC<ButtonProps> = ({ onPress }) => {
   const { t } = useTranslation();
 
   return (
-    <TouchableWithoutFeedback onPress={navigation.goBack}>
+    <TouchableWithoutFeedback onPress={onPress}>
       <View
         style={[globalStyles.flexDirectionRow, globalStyles.alignItemsCenter]}
       >

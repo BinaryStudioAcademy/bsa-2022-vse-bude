@@ -273,6 +273,7 @@ export class ProductService {
       product.city,
       product.categoryId,
       product.type,
+      product.id,
     );
   }
 
