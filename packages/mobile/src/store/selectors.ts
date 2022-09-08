@@ -1,3 +1,3 @@
-import { RootState } from '~/common/types/types';
-
-export const selectCurrentUser = (state: RootState) => state.auth.user;
+export * from './auth/selectors';
+export * from './products/selectors';
+export * from './categories/selectors';

@@ -110,6 +110,10 @@ const LinkedinIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="linkedin" {...iconProps} />
 );
 
+const SearchIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="search" {...iconProps} />
+);
+
 const CalendarIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="calendar" {...iconProps} />
 );
@@ -142,5 +146,6 @@ export {
   PhoneIcon,
   GlobeIcon,
   LinkedinIcon,
+  SearchIcon,
   CalendarIcon,
 };

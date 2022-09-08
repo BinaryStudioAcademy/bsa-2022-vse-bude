@@ -30,12 +30,15 @@ export const productDescription = ({
   colors,
   fontSizes,
   fontWeights,
+  lineHeights,
 }: Theme) => css`
   margin-bottom: 15px;
   color: ${colors.text};
   font-size: ${fontSizes.body2};
   font-weight: ${fontWeights.body2};
+  line-height: ${lineHeights.body2};
   word-break: break-all;
+  min-height: ${2 * Number(/\d+/.exec(lineHeights.body2))}px;
 `;
 
 export const divider = ({ colors }: Theme) => css`

@@ -5,3 +5,5 @@ export * from './refresh-token';
 export * from './user';
 export * from './email';
 export * from './bid';
+export * from './order';
+export * from '../../../../shared/src/common/types/payment';

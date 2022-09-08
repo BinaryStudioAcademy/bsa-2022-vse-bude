@@ -15,6 +15,8 @@ export enum Routes {
   CATEGORIES = '/categories',
   NOT_FOUND = '/404',
   RULES = '/rules',
+  ORDERS = '/orders',
+  CHECKOUT = '/orders/checkout',
 }
 
 export enum ProfileRoutes {
