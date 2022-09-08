@@ -26,13 +26,13 @@ type ProductDto = {
   type: ProductType;
   status: string;
   condition: string;
-  endDate: Date;
+  endDate: string;
   imageLinks: string[];
   views: number;
   currentPrice: number;
   author: Author;
   category: Category;
-  createdAt: Date;
+  createdAt: string;
 };
 
 export type { ProductDto };
