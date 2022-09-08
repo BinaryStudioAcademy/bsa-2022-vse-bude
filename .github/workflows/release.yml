@@ -18,6 +18,13 @@ jobs:
       name: Release
       url: http://vse-bude.com.ua
     steps:
+      - uses: actions/checkout@v2
+      - name: Set status
+        if: always()
+        uses: ouzi-dev/commit-status-updater@v1.1.0
+        with:
+          name: 'Release'
+          status: pending
       - name: Deploy frontend and backend. Migrate DB.
         uses: appleboy/ssh-action@master
         with:
@@ -43,3 +50,9 @@ jobs:
           url: https://vse-bude.com.ua|https://vse-bude.com.ua/api/health/
           max-attempts: 5
           retry-delay: 10s
+      - name: Set status
+        if: always()
+        uses: ouzi-dev/commit-status-updater@v1.1.0
+        with:
+          name: 'Release'
+          status: '${{ job.status }}'
