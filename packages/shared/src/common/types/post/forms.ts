@@ -3,7 +3,7 @@ export interface IPostForms {
   condition: string;
   title: string;
   description: string;
-  price: string;
+  price: number;
   currency: string;
   country: string;
   city: string;
