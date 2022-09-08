@@ -4,6 +4,10 @@ export interface IPostForms {
   title: string;
   description: string;
   price: string;
+  recommendedPrice?: number;
+  minimalBid?: number;
+  endDate?: string;
+  endTime?: string;
   currency: string;
   country: string;
   city: string;
@@ -20,8 +24,8 @@ export interface ICreatePost extends IPostForms {
 
 export interface ICreateAuction extends Omit<IPostForms, 'price'> {
   endDate: string;
-  recommendedPrice: string;
-  minimalBid: string;
-  minimalBidCurrency: string;
+  recommendedPrice: number;
+  minimalBid: number;
+  minimalBidCurrency: number;
   recommendedPriceCurrency: string;
 }
