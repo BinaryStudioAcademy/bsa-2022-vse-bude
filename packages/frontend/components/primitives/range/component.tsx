@@ -13,6 +13,8 @@ export const Range = React.forwardRef((ref) => {
     <StyledRange
       ref={ref}
       allowCross={false}
+      min={0}
+      max={50000}
       value={value}
       handleChange={handleChange}
     />

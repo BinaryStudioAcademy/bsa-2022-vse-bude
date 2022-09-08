@@ -4,6 +4,8 @@ import * as styles from '../styles';
 
 export const StyledRange = ({
   allowCross,
+  min, 
+  max,
   value,
   handleChange,
   ref,
@@ -15,7 +17,7 @@ export const StyledRange = ({
     css={styles.globalSliderStyles}
     onChange={handleChange}
     defaultValue={value}
-    min={0}
-    max={50000}
+    min={min}
+    max={max}
   />
 );

@@ -5,7 +5,6 @@ export const globalSliderStyles = ({ colors }: Theme) =>
     position: relative;
     width: 100%;
     height: 2px;
-    max-width: 260px;
     touch-action: none;
     .rc-slider {
       &-rail {
