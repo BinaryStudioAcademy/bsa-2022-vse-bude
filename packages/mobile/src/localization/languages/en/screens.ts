@@ -68,7 +68,7 @@ export const screens = {
   errors: {
     UNKNOWN_ERROR: 'Something went wrong',
     EMPTY_EMAIL: 'Fill the email please',
-    WRONG_EMAIL: 'Email is wrong!',
+    WRONG_EMAIL: 'Email is wrong',
     EMPTY_FIRST_NAME: 'Fill the first name please!',
     EMPTY_LAST_NAME: 'Fill the last name please!”',
     EMPTY_PHONE: 'Fill the phone number please!',
