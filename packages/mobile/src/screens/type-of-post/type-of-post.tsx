@@ -23,8 +23,7 @@ const TypeOfPostScreen: FC = () => {
   };
 
   const handleMakeAuction = () => {
-    // TODO: change to RootScreenName.NEW_AUCTION after merge
-    navigation.navigate(RootScreenName.NEW_ITEM);
+    navigation.navigate(RootScreenName.NEW_AUCTION);
   };
 
   return (
@@ -44,7 +43,7 @@ const TypeOfPostScreen: FC = () => {
       <View style={globalStyles.mt5}>
         <PrimaryButton
           label={t('type_of_post.AUCTION')}
-          onPress={handleMakePost}
+          onPress={handleMakeAuction}
         />
       </View>
       <View style={[globalStyles.mt5, globalStyles.alignItemsCenter]}>
@@ -53,7 +52,7 @@ const TypeOfPostScreen: FC = () => {
       <View style={globalStyles.mt5}>
         <PrimaryButton
           label={t('type_of_post.DIRECT_SALE')}
-          onPress={handleMakeAuction}
+          onPress={handleMakePost}
         />
       </View>
     </ScreenWrapper>

@@ -1,3 +1,4 @@
+import i18next from 'i18next';
 import { HttpHeader, HttpMethod, HttpError } from '@vse-bude/shared';
 import { StorageKey } from '~/common/enums/enums';
 import { GetHeadersParams, HttpOptions } from '~/common/types/types';
@@ -64,9 +65,14 @@ class Http {
 
   private async checkStatus(response: Response): Promise<Response> {
     if (!response.ok) {
-      const parsedException = await response.json().catch(() => ({
-        message: response.statusText,
-      }));
+      const parsedException = await response
+        .json()
+        .then((resp) => ({
+          message: resp?.error || i18next.t('errors.UNKNOWN_ERROR'),
+        }))
+        .catch(() => ({
+          message: response.statusText,
+        }));
 
       throw new HttpError({
         status: response.status,

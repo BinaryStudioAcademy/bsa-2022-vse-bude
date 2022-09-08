@@ -44,10 +44,10 @@ class CustomDocument extends Document {
         </Head>
         <body>
           <Main />
+          <div id="portal" />
+          <div id="popover" />
+          <div id="modal" />
           <NextScript />
-          <div id="portal"></div>
-          <div id="popover"></div>
-          <div id="modal"></div>
         </body>
       </Html>
     );
