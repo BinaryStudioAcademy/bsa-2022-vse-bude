@@ -50,15 +50,12 @@ class AuthApi {
     );
   }
 
-  getCurrentUser(_userId: string): Promise<UserResponseDto> {
+  getCurrentUser(): Promise<UserResponseDto> {
     return this.#http.load(
       `${this.#apiPrefix}${ApiRoutes.AUTH}${AuthApiRoutes.USER}`,
       {
         method: HttpMethod.GET,
         contentType: HttpContentType.APPLICATION_JSON,
-        params: {
-          userId: _userId,
-        },
         hasAuth: true,
       },
     );

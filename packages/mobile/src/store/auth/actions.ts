@@ -35,16 +35,22 @@ const signIn = createAsyncThunk<UserDto, UserSignInDto, AsyncThunkConfig>(
   },
 );
 
-const getCurrentUser = createAsyncThunk<UserDto, undefined, AsyncThunkConfig>(
-  ActionType.CURRENT_USER,
-  async (_, { extra, getState }) => {
-    const { authApi } = extra;
-    const userId = getState().auth.user?.id;
-    const response = await authApi.getCurrentUser(userId as string);
+const getCurrentUser = createAsyncThunk<
+  UserDto | null,
+  undefined,
+  AsyncThunkConfig
+>(ActionType.CURRENT_USER, async (_, { extra }) => {
+  const { authApi, storage } = extra;
+  const token = storage.getItem(StorageKey.ACCESS_TOKEN);
+
+  if (token) {
+    const response = await authApi.getCurrentUser();
 
     return response;
-  },
-);
+  }
+
+  return null;
+});
 
 const logOut = createAsyncThunk<null, undefined, AsyncThunkConfig>(
   ActionType.LOG_OUT,
