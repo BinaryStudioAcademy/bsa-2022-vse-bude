@@ -1,5 +1,4 @@
 import React, { FC, ReactElement } from 'react';
-import { NavigationProp } from '@react-navigation/native';
 import {
   ColorPalette,
   ResetPasswordLink,
@@ -7,23 +6,14 @@ import {
   UserSignUpDto,
 } from '@vse-bude/shared';
 import { auth as authActions } from '~/store/actions';
-import { selectAuthDataStatus } from '~/store/selectors';
-import {
-  DataStatus,
-  MainScreenName,
-  RootScreenName,
-} from '~/common/enums/enums';
-import {
-  RootNavigationProps,
-  MainNavigationParamList,
-} from '~/common/types/types';
+import { MainScreenName, RootScreenName } from '~/common/enums/enums';
+import { RootNavigationProps, MainNavigationProps } from '~/common/types/types';
 import {
   useAppDispatch,
   useCustomTheme,
   useRoute,
   useTranslation,
   useNavigation,
-  useAppSelector,
 } from '~/hooks/hooks';
 import {
   Text,
@@ -32,6 +22,7 @@ import {
   StatusBar,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
+import { notification } from '~/services/services';
 import {
   ResetPasswordHeader,
   SignInUpHeader,
@@ -45,17 +36,11 @@ import { styles } from './styles';
 const Auth: FC = () => {
   const { name } = useRoute();
   const dispatch = useAppDispatch();
-  const dataStatus = useAppSelector(selectAuthDataStatus);
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
 
-  const navigation = useNavigation<RootNavigationProps>();
-  const redirect =
-    useNavigation<
-      NavigationProp<Pick<MainNavigationParamList, MainScreenName.HOME>>
-    >();
+  const navigation = useNavigation<RootNavigationProps & MainNavigationProps>();
   const isResetPassword = name === RootScreenName.FORGOT_PASSWORD;
-  const isLoginSuccess = dataStatus == DataStatus.FULFILLED;
 
   const getScreenLabel = (screenName: string): string => {
     switch (screenName) {
@@ -71,10 +56,14 @@ const Auth: FC = () => {
   };
 
   const handleSignIn = (payload: UserSignInDto): void => {
-    dispatch(authActions.signIn(payload));
-    if (isLoginSuccess) {
-      redirect.navigate(MainScreenName.HOME);
-    }
+    dispatch(authActions.signIn(payload))
+      .unwrap()
+      .then(() => {
+        navigation.navigate(MainScreenName.HOME);
+      })
+      .catch((err) => {
+        notification.error(JSON.stringify(err.message));
+      });
   };
 
   const handleSignUp = (payload: UserSignUpDto): void => {
