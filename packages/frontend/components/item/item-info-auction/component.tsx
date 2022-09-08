@@ -17,7 +17,7 @@ import {
 } from 'store/product';
 import { UPDATE_PRODUCT_PRICE } from '@vse-bude/shared';
 import { getAuctionItemIo } from '@helpers';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { CountDownTimer } from '../countdown-timer/component';
 import { ItemTitle, ItemInfo, ItemPrice } from '../item-info';
