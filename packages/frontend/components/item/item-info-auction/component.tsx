@@ -17,8 +17,7 @@ import {
 } from 'store/product';
 import { UPDATE_PRODUCT_PRICE } from '@vse-bude/shared';
 import { getAuctionItemIo } from '@helpers';
-// import { useRouter } from 'next/router';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { CountDownTimer } from '../countdown-timer/component';
 import { ItemTitle, ItemInfo, ItemPrice } from '../item-info';
 import { minBidValidation } from '../validation';
@@ -41,7 +40,7 @@ export const ItemInfoAuction = ({
   onChangeIsFavorite,
 }: ItemInfoAuctionProps) => {
   const [confirmModalVisible, setModalVisible] = useState(false);
-  // const { push } = useRouter();
+  const { push } = useRouter();
   const { t } = useTranslation();
   const { user } = useTypedSelector((state) => state.auth);
 
@@ -115,11 +114,7 @@ export const ItemInfoAuction = ({
   };
 
   const renderEditButton = () => (
-    <Link href={`/items/edit/${item.id}`}>
-      <a style={{ textDecoration: 'none' }}>
-        <Button>{t('item:buttons.editBtn')}</Button>
-      </a>
-    </Link>
+    <Button onClick={() => push(`/items/edit/${item.id}`)}>{t('item:buttons.editBtn')}</Button>
   );
 
   const renderBidButtons = () => (

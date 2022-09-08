@@ -11,9 +11,6 @@ interface ItemInfoProps {
 
 export const ItemInfo = ({ item }: ItemInfoProps) => {
   const { t } = useTranslation('item');
-  useEffect(() => {
-    console.log(item);
-  }, [item]);
 
   const getDate = (date) => new Date(date).toISOString().substring(0, 10);
   const getTime = (date) => new Date(date).toISOString().substring(11, 19);
