@@ -1,10 +1,9 @@
 import type { Request } from 'express';
-import type {
-  SocialMedia} from '@vse-bude/shared';
+import type { SocialMedia } from '@vse-bude/shared';
 import {
   HttpStatusCode,
   UserPersonalInfoValidationMessage,
-  ValidationRanges
+  ValidationRanges,
 } from '@vse-bude/shared';
 import { ProfileError } from '@errors';
 import { lang } from '@lang';
