@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { useEffect, useState } from 'react';
-import { IconColor } from '@enums';
+import { IconColor, ItemRoutes, Routes } from '@enums';
 import {
   auctionLeaveAction,
   auctionPermissions,
@@ -114,7 +114,7 @@ export const ItemInfoAuction = ({
   };
 
   const renderEditButton = () => (
-    <Button onClick={() => push(`/items/edit/${item.id}`)}>
+    <Button onClick={() => push(`${Routes.ITEMS}${ItemRoutes.EDIT}/${item.id}`)}>
       {t('item:buttons.editBtn')}
     </Button>
   );

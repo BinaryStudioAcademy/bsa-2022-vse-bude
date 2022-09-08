@@ -12,7 +12,8 @@ interface ItemInfoProps {
 export const ItemInfo = ({ item }: ItemInfoProps) => {
   const { t } = useTranslation('item');
 
-  const getDate = (date) => new Date(date).toLocaleDateString().replaceAll('/', '.');
+  const getDate = (date) =>
+    new Date(date).toLocaleDateString().replaceAll('/', '.');
   const getTime = (date) => new Date(date).toLocaleTimeString();
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
