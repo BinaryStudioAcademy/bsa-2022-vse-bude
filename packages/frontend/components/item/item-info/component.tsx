@@ -1,6 +1,6 @@
 ﻿import type { ItemDto } from '@vse-bude/shared';
 import { ProductType } from '@vse-bude/shared';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'next-i18next';
 import { SellerInfo } from './seller-info/component';
 import * as styles from './styles';
@@ -11,6 +11,14 @@ interface ItemInfoProps {
 
 export const ItemInfo = ({ item }: ItemInfoProps) => {
   const { t } = useTranslation('item');
+  useEffect(() => {
+    console.log(item);
+  }, [item]);
+
+  const getDate = (date) => new Date(date).toISOString().substring(0, 10);
+  const getTime = (date) => new Date(date).toISOString().substring(11, 19);
+  const getTimezone = (date) => new Date(date).toISOString().substring(11, 19);
+
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   const handleContactSeller = () => {};
 
@@ -22,11 +30,11 @@ export const ItemInfo = ({ item }: ItemInfoProps) => {
             <React.Fragment>
               <tr>
                 <td>{t('endingCaption')}</td>
-                <td>28.09.2022, 12:00 pm</td>
+                <td>{getDate(item.endDate)} {getTime(item.endDate)}</td>
               </tr>
               <tr>
                 <td>{t('timezoneCaption')}</td>
-                <td>GMT +3</td>
+                <td>{new Date(item.endDate).toString()}</td>
               </tr>
             </React.Fragment>
           )}
