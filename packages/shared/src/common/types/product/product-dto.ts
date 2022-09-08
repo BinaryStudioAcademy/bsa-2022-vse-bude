@@ -13,6 +13,8 @@ interface Category {
   title: string;
 }
 
+export type Condition = 'NEW' | 'USED';
+
 type ProductDto = {
   id: string;
   title: string;

@@ -6,6 +6,8 @@ import type { CategoryDto } from '@vse-bude/shared';
 import { Textarea } from 'components/primitives/textarea';
 import { useTranslation } from 'next-i18next';
 import type { DescriptionBlockProps } from './types';
+import { ConditionFields } from './form-utils';
+
 import * as styles from './styles';
 
 export default function DescriptionBlock({
@@ -19,6 +21,8 @@ export default function DescriptionBlock({
   const categories = useTypedSelector((state) => state.category.list);
 
   const { t } = useTranslation();
+
+  ConditionFields(t);
 
   return (
     <>
@@ -70,16 +74,7 @@ export default function DescriptionBlock({
         <Select
           labelRequiredMark
           required
-          options={[
-            {
-              title: t('create-post:conditionSelect.used'),
-              value: 'USED',
-            },
-            {
-              title: t('create-post:conditionSelect.new'),
-              value: 'NEW',
-            },
-          ]}
+          options={Object.values(ConditionFields(t))}
           value={condition?.title}
           setValue={setCondition}
           id="post-condition"

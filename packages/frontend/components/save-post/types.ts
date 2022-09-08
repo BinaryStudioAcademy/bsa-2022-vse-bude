@@ -41,6 +41,11 @@ export type SellerFieldsType = {
   OTHER: SelectOption;
 };
 
+export type ConditionFieldsType = {
+  NEW: SelectOption;
+  USED: SelectOption;
+};
+
 export const PostStatuses = {
   CREATE: ProductStatus[1],
   DRAFT: ProductStatus[5],

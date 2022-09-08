@@ -47,5 +47,9 @@
       }
     },
     "closeImageModal": "Close modal"
+  },
+  "condition": {
+    "NEW": "new",
+    "USED": "used"
   }
 }

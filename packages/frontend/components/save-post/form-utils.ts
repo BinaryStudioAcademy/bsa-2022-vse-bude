@@ -1,6 +1,7 @@
 import type { IPostForms, ICreateAuction } from '@vse-bude/shared';
 import type { TFunction } from 'next-i18next';
-import type { SellerFieldsType } from './types';
+import { translateCondition } from 'helpers/translate-condition';
+import type { SellerFieldsType, ConditionFieldsType } from './types';
 
 export const initialProductFormState: IPostForms = {
   category: '',
@@ -46,5 +47,16 @@ export const SellerFields = (t: TFunction): SellerFieldsType => ({
   OTHER: {
     value: 'OTHER',
     title: t('create-post:sellerSelect.otherUser'),
+  },
+});
+
+export const ConditionFields = (t: TFunction): ConditionFieldsType => ({
+  NEW: {
+    value: 'NEW',
+    title: translateCondition(t, 'NEW'),
+  },
+  USED: {
+    value: 'USED',
+    title: translateCondition(t, 'USED'),
   },
 });
