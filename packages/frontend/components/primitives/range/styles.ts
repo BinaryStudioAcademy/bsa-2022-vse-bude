@@ -29,7 +29,7 @@ export const globalSliderStyles = ({ colors }: Theme) =>
         border-radius: 50%;
         width: 15px;
         height: 15px;
-        background-color: ${colors.backgroundLight};
+        background-color: ${colors.primaryLightHover};
         cursor: pointer;
         touch-action: pan-x;
         outline: none;
@@ -43,6 +43,10 @@ export const globalSliderStyles = ({ colors }: Theme) =>
 
         &:active {
           cursor: grabbing;
+          &::after {
+            transition: all 0.5s ease-in-out;
+            transform: scale(1.8);
+          }
         }
 
         &::after {
@@ -51,9 +55,14 @@ export const globalSliderStyles = ({ colors }: Theme) =>
           border-radius: 50%;
           width: 15px;
           height: 15px;
-          background-color: ${colors.backgroundLight};
-          opacity: 0.8;
+          background-color: ${colors.primaryLightHover};
+          opacity: 0.3;
         }
       }
     }
+  `;
+
+export const wrapperStyles = ({ spaces }: Theme) =>
+  css`
+    margin: ${spaces.sm} 0;
   `;

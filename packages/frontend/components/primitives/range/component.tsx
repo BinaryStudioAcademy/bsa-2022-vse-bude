@@ -1,22 +1,25 @@
-/* eslint-disable react/display-name */
-import React, { useState } from 'react';
-import { StyledRange } from './styled-range/component';
+import Range from 'rc-slider';
+import type { StyledRangeProps } from './types';
+import * as styles from './styles';
 
-export const Range = React.forwardRef((ref) => {
-  const [value, setValue] = useState([0, 50000]);
-
-  const handleChange = (sliderValues) => {
-    setValue(sliderValues);
-  };
-
-  return (
-    <StyledRange
+export const PriceRange = ({
+  min, 
+  max,
+  value,
+  handleChange,
+  ref,
+}: StyledRangeProps) => (
+  <div css={styles.wrapperStyles}>
+    <Range
+      range
       ref={ref}
       allowCross={false}
-      min={0}
-      max={50000}
-      value={value}
-      handleChange={handleChange}
-    />
-  );
-});
+      css={styles.globalSliderStyles}
+      onChange={handleChange}
+      defaultValue={value}
+      min={min}
+      max={max}
+      />
+  </div>
+  
+);
