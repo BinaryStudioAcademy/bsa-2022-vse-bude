@@ -11,9 +11,13 @@ import { selectCurrentUser } from '~/store/selectors';
 import {
   MessagesScreen,
   PersonalInfoScreen,
+  ProductInfo,
   SettingsScreen,
   SupportScreen,
   NewItemScreen,
+  VerifyPhoneScreen,
+  VerifyCodeScreen,
+  VerifiedScreen,
   TypeOfPostScreen,
 } from '~/screens/screens';
 import { HeaderLeft, HeaderSave } from '~/components/components';
@@ -26,10 +30,15 @@ const mainScreenOptions: NativeStackNavigationOptions = {
   headerShown: false,
 };
 
-const accountScreenOptions: NativeStackNavigationOptions = {
+const baseScreenOptions: NativeStackNavigationOptions = {
   headerShown: true,
   headerTitleAlign: 'center',
   headerTitleStyle: { fontSize: 16 },
+  headerLeft: HeaderLeft,
+};
+
+const verifyScreenOptions: NativeStackNavigationOptions = {
+  headerShown: false,
 };
 
 const Navigation: FC = () => {
@@ -41,8 +50,11 @@ const Navigation: FC = () => {
         name={RootScreenName.MAIN}
         component={MainNavigation}
       />
+      <NativeStack.Group screenOptions={baseScreenOptions}>
+        <Stack.Screen name={RootScreenName.ITEM_INFO} component={ProductInfo} />
+      </NativeStack.Group>
       {user && (
-        <NativeStack.Group screenOptions={accountScreenOptions}>
+        <NativeStack.Group screenOptions={baseScreenOptions}>
           <Stack.Screen
             name={RootScreenName.PERSONAL_INFO}
             component={PersonalInfoScreen}
@@ -62,12 +74,25 @@ const Navigation: FC = () => {
             name={RootScreenName.SUPPORT}
             component={SupportScreen}
           />
+          <NativeStack.Group screenOptions={verifyScreenOptions}>
+            <Stack.Screen
+              name={RootScreenName.VERIFY_PHONE}
+              component={VerifyPhoneScreen}
+            />
+            <Stack.Screen
+              name={RootScreenName.VERIFY_CODE}
+              component={VerifyCodeScreen}
+            />
+            <Stack.Screen
+              name={RootScreenName.VERIFIED}
+              component={VerifiedScreen}
+            />
+          </NativeStack.Group>
           <Stack.Screen
             name={RootScreenName.NEW_ITEM}
             component={NewItemScreen}
             options={{
               title: t('make_a_post.TITLE'),
-              headerLeft: HeaderLeft,
               headerRight: HeaderSave,
             }}
           />
@@ -76,7 +101,6 @@ const Navigation: FC = () => {
             component={TypeOfPostScreen}
             options={{
               title: t('make_a_post.TITLE'),
-              headerLeft: HeaderLeft,
             }}
           />
         </NativeStack.Group>
