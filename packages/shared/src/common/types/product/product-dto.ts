@@ -17,8 +17,8 @@ interface Bid {
   id: string;
   bidderId: string;
   price: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }
 
 type ProductDto = {
@@ -34,7 +34,7 @@ type ProductDto = {
   type: ProductType;
   status: string;
   condition: string;
-  endDate: Date;
+  endDate: string;
   imageLinks: string[];
   views: number;
   currentPrice: number;
@@ -42,8 +42,8 @@ type ProductDto = {
   category: Category;
   cancelReason: string;
   winnerId?: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
   bids?: Bid[];
 };
 
