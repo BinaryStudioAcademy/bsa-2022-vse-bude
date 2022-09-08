@@ -1,4 +1,5 @@
 import { Splide, SplideSlide } from '@splidejs/react-splide';
+import Image from 'next/image';
 import { useState } from 'react';
 import { ImageModal } from '../image-modal/component';
 
@@ -28,10 +29,12 @@ const ImageSliderSplide = ({ imageLinks }: ImageSliderSplideProps) => {
               onClick={() => setIsModalOpen(true)}
               aria-hidden="true"
             >
-              <img
+              <Image
                 src={link}
                 alt="item"
                 key={link + index}
+                layout="fill"
+                objectFit="contain"
                 css={styles.image}
               />
             </div>
