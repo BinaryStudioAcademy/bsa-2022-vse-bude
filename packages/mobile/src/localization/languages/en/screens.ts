@@ -46,6 +46,7 @@ export const screens = {
     ENTER_EMAIL: 'Enter your email to retrieve your password',
     HIDE_EMAIL: 'Hide Email',
     RESET_PASSWORD: 'Reset Password',
+    VERIFY_EMAIL: 'Verify email',
   },
   personal_info: {
     PERSONAL_INFO: 'Personal Info',
@@ -107,6 +108,7 @@ export const screens = {
       'Example of link to your profile in the network: https://some-net/me-id-1234',
     MAX_SOCIAL_NETWORK_LENGTH: `The link length must not exceed ${MAX_SOCIAL_NETWORK_LENGTH} characters`,
     MAX_IMAGE_SIZE: `Maximum file size is ${MAX_IMAGE_SIZE / 1000000} Mb`,
+    CORRECTLY_FILLED: 'Please check fields to correctly filled',
   },
   verificationPhone: {
     VERIFY: 'Verify',

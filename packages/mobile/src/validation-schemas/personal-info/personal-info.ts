@@ -108,6 +108,7 @@ const personalInfoSchema = Joi.object<SaveUserProfileDto>({
   password: Joi.string().empty(''),
   newPassword: Joi.string().empty('').custom(passwordValidator).trim(),
   repeatPassword: Joi.string()
+    .empty('')
     .valid(Joi.ref('newPassword'))
     .messages({
       'any.only': i18next.t('errors.REPEAT_PASSWORD_INVALID'),

@@ -97,11 +97,11 @@ const updatePersonalInfoParser: UpdatePersonalInfoParser = (data) => {
   ];
 
   const userAddress = {
-    country,
-    region,
-    city,
-    zip,
-    deliveryData,
+    country: country || '',
+    region: region || '',
+    city: city || '',
+    zip: zip || '',
+    deliveryData: deliveryData || '',
   };
 
   return {

@@ -6,6 +6,7 @@ import {
   useAppSelector,
   useTranslation,
   useNavigation,
+  useEffect,
 } from '~/hooks/hooks';
 import { View, Input, PrimaryButton } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
@@ -18,11 +19,13 @@ import { RootNavigationProps } from '~/common/types/types';
 import {
   selectPhoneVerified,
   selectDataStatusPersonalInfo,
+  selectAuthDataStatus,
+  selectEmailVerified,
 } from '~/store/selectors';
-import { personalInfo as personalInfoActions } from '~/store/actions';
+import { personalInfoActions, auth as authActions } from '~/store/actions';
 import { personalInfoSchema } from '~/validation-schemas/validation-schemas';
 import { notification } from '~/services/services';
-import { Title, VerifyPhoneField } from '../components';
+import { Title, VerifyField } from '../components';
 
 type Props = {
   personalInfo: SaveUserProfileDto;
@@ -33,8 +36,12 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
   const dispatch = useAppDispatch();
   const navigation = useNavigation<RootNavigationProps>();
   const isPhoneVerified = useAppSelector(selectPhoneVerified);
-  const dataStatus = useAppSelector(selectDataStatusPersonalInfo);
-  const isLoading = dataStatus === DataStatus.PENDING;
+  const isEmailVerified = useAppSelector(selectEmailVerified);
+  const dataStatusPersonalInfo = useAppSelector(selectDataStatusPersonalInfo);
+  const dataStatusAuth = useAppSelector(selectAuthDataStatus);
+  const isLoading = [dataStatusPersonalInfo, dataStatusAuth].includes(
+    DataStatus.PENDING,
+  );
   const DEFAULT_VALUES = {
     firstName: personalInfo.firstName,
     lastName: personalInfo.lastName,
@@ -57,12 +64,22 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
       defaultValues: DEFAULT_VALUES,
       validationSchema: personalInfoSchema,
     });
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      notification.error(t('errors.CORRECTLY_FILLED'));
+    }
+  }, [errors]);
 
   const onSubmit = (payload: SaveUserProfileDto): void => {
     dispatch(personalInfoActions.updatePersonalInfo(payload))
       .unwrap()
       .then(() => {
+        dispatch(authActions.getCurrentUser());
         notification.success(t('personal_info.CHANGES_SAVED'));
+      })
+      .catch((err) => {
+        // eslint-disable-next-line
+        console.warn(err);
       });
   };
 
@@ -73,6 +90,10 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
 
   const handleVerifyPhonePress = () => {
     navigation.navigate(RootScreenName.VERIFY_PHONE);
+  };
+
+  const handleVerifyEmailPress = () => {
+    //TODO add navigation
   };
 
   return (
@@ -102,6 +123,12 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
       />
+      {!isEmailVerified && (
+        <VerifyField
+          title={t('verification.VERIFY_EMAIL')}
+          onPress={handleVerifyEmailPress}
+        />
+      )}
       <Input
         label={t('verification.PHONE_NUMBER')}
         placeholder={t('verification.PHONE_NUMBER_HINT')}
@@ -111,7 +138,10 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
         contentContainerStyle={globalStyles.mt5}
       />
       {!isPhoneVerified && (
-        <VerifyPhoneField onPress={handleVerifyPhonePress} />
+        <VerifyField
+          title={t('verificationPhone.VERIFY_PHONE')}
+          onPress={handleVerifyPhonePress}
+        />
       )}
       <Title label={t('personal_info.ADDRESS')} />
       <Input

@@ -45,6 +45,7 @@ export const screens = {
     ENTER_EMAIL: 'Введіть електронну пошту, щоб отримати пароль',
     HIDE_EMAIL: 'Приховати електронну адресу',
     RESET_PASSWORD: 'Скинути пароль',
+    VERIFY_EMAIL: 'Підтвердити електронну адресу',
   },
   personal_info: {
     PERSONAL_INFO: 'Особиста інформація',
@@ -106,6 +107,7 @@ export const screens = {
       'Приклад посилання на Ваш профіль у мережі: https://some-net/me-id-1234',
     MAX_SOCIAL_NETWORK_LENGTH: `Посилання не може перевищувати ${MAX_SOCIAL_NETWORK_LENGTH} символів`,
     MAX_IMAGE_SIZE: `Максимальний розмір файлу ${MAX_IMAGE_SIZE / 1000000} МБ`,
+    CORRECTLY_FILLED: 'Будь ласка, перевірте, чи правильно заповнені поля',
   },
   verificationPhone: {
     VERIFY: 'Підтвердити',

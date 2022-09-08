@@ -1,19 +1,18 @@
 import React, { FC } from 'react';
 import { useAppDispatch, useAppSelector, useFocusEffect } from '~/hooks/hooks';
-import { selectPersonalInfo, selectUserId } from '~/store/selectors';
+import { selectPersonalInfo } from '~/store/selectors';
 import { ScreenWrapper, ScrollView, Spinner } from '~/components/components';
-import { personalInfo as personalInfoActions } from '~/store/actions';
+import { personalInfoActions } from '~/store/actions';
 import { globalStyles } from '~/styles/styles';
 import { ProfileImage, PersonalInfoForm } from './components/components';
 
 const PersonalInfoScreen: FC = () => {
   const dispatch = useAppDispatch();
-  const userId = useAppSelector(selectUserId);
   const personalInfo = useAppSelector(selectPersonalInfo);
 
   useFocusEffect(
     React.useCallback(() => {
-      dispatch(personalInfoActions.getPersonalInfo(userId as string));
+      dispatch(personalInfoActions.getPersonalInfo());
     }, [dispatch]),
   );
 

@@ -9,6 +9,9 @@ const selectUserPhone = (state: RootState) => state.auth.user?.phone;
 const selectPhoneVerified = (state: RootState) =>
   state.auth.user?.phoneVerified;
 
+const selectEmailVerified = (state: RootState) =>
+  state.auth.user?.emailVerified;
+
 const selectAuthDataStatus = (state: RootState) => state.auth.dataStatus;
 
 export {
@@ -16,5 +19,6 @@ export {
   selectUserId,
   selectUserPhone,
   selectPhoneVerified,
+  selectEmailVerified,
   selectAuthDataStatus,
 };

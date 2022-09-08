@@ -24,7 +24,7 @@ class PersonalInfoApi {
     this.#apiPrefix = apiPrefix;
   }
 
-  getPersonalInfo(_id: string): Promise<FullUserProfileDto> {
+  getPersonalInfo(): Promise<FullUserProfileDto> {
     return this.#http.load(
       `${this.#apiPrefix}${ApiRoutes.PROFILE}${
         ProfileApiRoutes.GET_FULL_USER_DATA

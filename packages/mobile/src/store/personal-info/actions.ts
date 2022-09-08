@@ -9,11 +9,11 @@ import { ActionType } from './common';
 
 const getPersonalInfo = createAsyncThunk<
   SaveUserProfileDto,
-  string,
+  undefined,
   AsyncThunkConfig
->(ActionType.GET_USER_BY_ID, async (id, { extra }) => {
+>(ActionType.GET_USER_BY_ID, async (_, { extra }) => {
   const { personalInfoApi } = extra;
-  const response = await personalInfoApi.getPersonalInfo(id);
+  const response = await personalInfoApi.getPersonalInfo();
   const personalInfo = personalInfoParser(response);
 
   return personalInfo;
