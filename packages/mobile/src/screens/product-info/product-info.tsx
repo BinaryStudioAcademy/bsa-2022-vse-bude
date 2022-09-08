@@ -33,76 +33,73 @@ const ProductInfo: FC = () => {
   const dispatch = useAppDispatch();
   const product = useAppSelector(selectProduct);
   const route = useRoute<RouteProp<RootNavigationParamList>>();
-  const id = route.params?.itemId;
+  const id = route.params?.itemId as string;
 
   useEffect(() => {
-    if (id) {
-      dispatch(productActions.loadProductInfo(id));
-    }
+    dispatch(productActions.loadProductInfo(id));
   }, []);
 
-  if (product) {
-    const {
-      title,
-      currentPrice,
-      price,
-      minimalBid,
-      type,
-      imageLinks,
-      views,
-      author,
-    } = product;
-    const isAuction = type == ProductType.AUCTION;
+  if (!product) {
+    return <Spinner />;
+  }
+  const {
+    title,
+    currentPrice,
+    price,
+    minimalBid,
+    type,
+    imageLinks,
+    views,
+    author,
+  } = product;
+  const isAuction = type == ProductType.AUCTION;
 
-    return (
-      <ScreenWrapper>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          style={[globalStyles.px5, globalStyles.mb5]}
+  return (
+    <ScreenWrapper>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={[globalStyles.px5, globalStyles.mb5]}
+      >
+        {isAuction && <Countdown endDate={product.endDate} />}
+        <Text
+          style={[
+            isAuction && globalStyles.mt6,
+            globalStyles.fs36,
+            globalStyles.fontWeightExtraBold,
+            { color: colors.text },
+          ]}
         >
-          {isAuction && <Countdown endDate={product.endDate} />}
+          {title}
+        </Text>
+        <View
+          style={[
+            globalStyles.flexDirectionRow,
+            globalStyles.alignItemsCenter,
+            globalStyles.mt2,
+          ]}
+        >
+          <EyeIcon size={15} color={colors.icon} />
           <Text
             style={[
-              isAuction && globalStyles.mt6,
-              globalStyles.fs36,
-              globalStyles.fontWeightExtraBold,
-              { color: colors.text },
+              globalStyles.px3,
+              globalStyles.fs12,
+              { color: colors.icon },
             ]}
           >
-            {title}
+            {views}
           </Text>
-          <View
-            style={[
-              globalStyles.flexDirectionRow,
-              globalStyles.alignItemsCenter,
-              globalStyles.mt2,
-            ]}
-          >
-            <EyeIcon size={15} color={colors.icon} />
-            <Text
-              style={[
-                globalStyles.px3,
-                globalStyles.fs12,
-                { color: colors.icon },
-              ]}
-            >
-              {views}
-            </Text>
-          </View>
-          {imageLinks && <ImageCarousel imageLinks={imageLinks} />}
-          <Description product={product} />
-          <SellerInfo author={author} />
-        </ScrollView>
-        {isAuction ? (
-          <LotPriceBlock currentPrice={currentPrice} minimalBid={minimalBid} />
-        ) : (
-          <ProductPriceBlock price={price} />
-        )}
-      </ScreenWrapper>
-    );
-  }
-
-  return <Spinner />;
+        </View>
+        {imageLinks && <ImageCarousel imageLinks={imageLinks} />}
+        <Description product={product} />
+        <SellerInfo author={author} />
+      </ScrollView>
+      {isAuction ? (
+        <LotPriceBlock currentPrice={currentPrice} minimalBid={minimalBid} />
+      ) : (
+        <ProductPriceBlock price={price} />
+      )}
+    </ScreenWrapper>
+  );
 };
 
 export { ProductInfo };

@@ -7,7 +7,7 @@ const loadProductInfo = createAsyncThunk<ItemDto, string, AsyncThunkConfig>(
   ActionType.PRODUCT_FETCH_INFO,
   async (productId, { extra }) => {
     const { productApi } = extra;
-    const response = productApi.getProductById(productId);
+    const response = await productApi.getProductById(productId);
 
     return response;
   },
