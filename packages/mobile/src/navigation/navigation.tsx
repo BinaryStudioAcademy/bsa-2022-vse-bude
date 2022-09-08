@@ -14,6 +14,9 @@ import {
   SettingsScreen,
   SupportScreen,
   NewItemScreen,
+  VerifyPhoneScreen,
+  VerifyCodeScreen,
+  VerifiedScreen,
   TypeOfPostScreen,
 } from '~/screens/screens';
 import { HeaderLeft, HeaderSave } from '~/components/components';
@@ -30,6 +33,10 @@ const accountScreenOptions: NativeStackNavigationOptions = {
   headerShown: true,
   headerTitleAlign: 'center',
   headerTitleStyle: { fontSize: 16 },
+};
+
+const verifyScreenOptions: NativeStackNavigationOptions = {
+  headerShown: false,
 };
 
 const Navigation: FC = () => {
@@ -62,6 +69,20 @@ const Navigation: FC = () => {
             name={RootScreenName.SUPPORT}
             component={SupportScreen}
           />
+          <NativeStack.Group screenOptions={verifyScreenOptions}>
+            <Stack.Screen
+              name={RootScreenName.VERIFY_PHONE}
+              component={VerifyPhoneScreen}
+            />
+            <Stack.Screen
+              name={RootScreenName.VERIFY_CODE}
+              component={VerifyCodeScreen}
+            />
+            <Stack.Screen
+              name={RootScreenName.VERIFIED}
+              component={VerifiedScreen}
+            />
+          </NativeStack.Group>
           <Stack.Screen
             name={RootScreenName.NEW_ITEM}
             component={NewItemScreen}
