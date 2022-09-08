@@ -56,7 +56,7 @@
     "nodemon": "2.0.19",
     "prettier": "^2.7.1",
     "prisma": "^4.1.1",
-    "prisma-erd-generator": "^1.0.2",
+    "prisma-erd-generator": "github:Vitalii4as/prisma-erd-generator",
     "ts-node": "^10.1.0",
     "tsc-alias": "^1.7.0",
     "tsconfig-paths": "^4.0.0"
