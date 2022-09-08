@@ -80,7 +80,7 @@ export const Header = () => {
       <header css={styles.header}>
         <Container cssExtend={styles.headerInner}>
           <Flex align="center">
-            <Link href={Routes.DEFAULT}>
+            <Link prefetch={false} href={Routes.DEFAULT}>
               <a>
                 <Logo />
               </a>

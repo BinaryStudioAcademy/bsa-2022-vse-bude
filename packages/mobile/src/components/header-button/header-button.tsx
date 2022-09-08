@@ -1,15 +1,16 @@
-import { ColorPalette } from '@vse-bude/shared';
 import React, { FC } from 'react';
 import { BackIcon, Pressable, Text } from '~/components/components';
+import { ColorPalette } from '@vse-bude/shared';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 
 type Props = {
   label: string;
   onPress: () => void;
+  color?: string;
 };
 
-const HeaderButton: FC<Props> = ({ label, onPress }) => {
+const HeaderButton: FC<Props> = ({ label, onPress, color }) => {
   return (
     <Pressable
       onPress={onPress}
@@ -19,13 +20,13 @@ const HeaderButton: FC<Props> = ({ label, onPress }) => {
         globalStyles.justifyContentStart,
       ]}
     >
-      <BackIcon size={35} style={{ color: ColorPalette.WHITE_100 }} />
+      <BackIcon size={35} style={{ color: color || ColorPalette.WHITE_100 }} />
       <Text
         style={[
           styles.buttonText,
           globalStyles.fs17,
           globalStyles.fontWeightMedium,
-          { color: ColorPalette.WHITE_100, textAlign: 'left' },
+          { color: color || ColorPalette.WHITE_100, textAlign: 'left' },
         ]}
       >
         {label}

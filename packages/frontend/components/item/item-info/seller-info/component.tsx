@@ -37,7 +37,7 @@ export const SellerInfo = ({ seller, onContactSeller }: SellerInfoProps) => {
           image={seller.avatar}
           handleClick={handleAvatarClick}
         />
-        <Link href={`${Routes.PROFILE}/${seller.id}`} passHref>
+        <Link prefetch={false} href={`${Routes.PROFILE}/${seller.id}`} passHref>
           <span>{seller.firstName + ' ' + seller.lastName}</span>
         </Link>
       </div>

@@ -21,6 +21,7 @@ import {
   StatusBar,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
+import { RootNavigationProps } from '~/common/types/types';
 import {
   ResetPasswordHeader,
   SignInUpHeader,
@@ -36,7 +37,8 @@ const Auth: FC = () => {
   const dispatch = useAppDispatch();
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
-  const navigation = useNavigation();
+
+  const navigation = useNavigation<RootNavigationProps>();
   const isResetPassword = name === RootScreenName.FORGOT_PASSWORD;
 
   const getScreenLabel = (screenName: string): string => {
@@ -57,7 +59,15 @@ const Auth: FC = () => {
   };
 
   const handleSignUp = (payload: UserSignUpDto): void => {
-    dispatch(authActions.signUp(payload));
+    dispatch(authActions.signUp(payload))
+      .unwrap()
+      .then(() => {
+        navigation.navigate(RootScreenName.VERIFY_PHONE);
+      })
+      .catch((err) => {
+        // eslint-disable-next-line
+        console.warn(err);
+      });
   };
 
   const handleResetPassword = (payload: ResetPasswordLink): void => {
