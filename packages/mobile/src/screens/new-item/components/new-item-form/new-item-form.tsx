@@ -209,6 +209,14 @@ const NewItemForm: FC = () => {
         name="facebook"
         control={control}
         errors={errors}
+        contentContainerStyle={[globalStyles.mt5]}
+      />
+      <Input
+        label={t('make_a_post.SITE')}
+        placeholder={t('make_a_post.SITE')}
+        name="site"
+        control={control}
+        errors={errors}
         contentContainerStyle={[globalStyles.mt5, globalStyles.mb5]}
       />
     </View>
