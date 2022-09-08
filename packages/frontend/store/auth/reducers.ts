@@ -35,6 +35,14 @@ const user = createReducer<UserDto>(null, {
   [updateUserAvatar.pending.type]: (state, { _payload }) => {
     state.avatar = null;
   },
+  [updateUserProfile.fulfilled.type]: (state, { payload }) => {
+    state.lastName = payload.lastName;
+    state.firstName = payload.firstName;
+    state.phone = payload.phone;
+    state.email = payload.email;
+    state.phoneVerified = payload.phoneVerified;
+    state.emailVerified = payload.emailVerified;
+  },
 });
 
 const loading = createReducer(false, {
