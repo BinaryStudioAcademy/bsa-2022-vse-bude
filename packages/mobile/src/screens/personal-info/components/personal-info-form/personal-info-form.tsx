@@ -40,6 +40,7 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
   const navigation = useNavigation<RootNavigationProps>();
   const user = useAppSelector(selectCurrentUser);
   const isPhoneVerified = useAppSelector(selectPhoneVerified);
+  const isVerifyPhoneFieldVisible = !isPhoneVerified && user?.phone;
   const { control, errors, handleSubmit } = useAppForm<UserPersonalInfo>({
     defaultValues: {
       firstName: user?.firstName || '',
@@ -102,7 +103,7 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
       />
-      {!isPhoneVerified && (
+      {isVerifyPhoneFieldVisible && (
         <VerifyPhoneField onPress={handleVerifyPhonePress} />
       )}
       <Title label={t('personal_info.ADDRESS')} />

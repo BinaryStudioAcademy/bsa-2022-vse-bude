@@ -26,6 +26,7 @@ type Props<T extends FormControlValues> = {
   placeholder?: string;
   contentContainerStyle?: StyleProp<ViewStyle>;
   isSecure?: boolean;
+  editable?: boolean;
   textInputProps?: TextInputProps;
 };
 
@@ -37,6 +38,7 @@ const Input = <T extends FormControlValues>({
   placeholder,
   contentContainerStyle,
   isSecure,
+  editable,
   textInputProps,
 }: Props<T>): ReactElement => {
   const { field } = useFormControl({ name, control });
@@ -72,6 +74,7 @@ const Input = <T extends FormControlValues>({
           placeholderTextColor={colors.placeholder}
           secureTextEntry={secured}
           selectTextOnFocus={isSecure}
+          editable={editable}
           style={[
             styles.input,
             {
