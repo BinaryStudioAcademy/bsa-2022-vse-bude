@@ -20,7 +20,7 @@ import {
   VerifiedScreen,
   TypeOfPostScreen,
 } from '~/screens/screens';
-import { HeaderLeft, HeaderSave } from '~/components/components';
+import { HeaderLeft } from '~/components/components';
 import { MainNavigation } from './tabs/tabs.navigation';
 
 const NativeStack = createNativeStackNavigator<RootNavigationParamList>();
@@ -93,7 +93,15 @@ const Navigation: FC = () => {
             component={NewItemScreen}
             options={{
               title: t('make_a_post.TITLE'),
-              headerRight: HeaderSave,
+              headerLeft: HeaderLeft,
+            }}
+          />
+          <Stack.Screen
+            name={RootScreenName.NEW_AUCTION}
+            component={NewItemScreen}
+            options={{
+              title: t('make_a_post.AUCTION_TITLE'),
+              headerLeft: HeaderLeft,
             }}
           />
           <Stack.Screen
@@ -101,6 +109,7 @@ const Navigation: FC = () => {
             component={TypeOfPostScreen}
             options={{
               title: t('make_a_post.TITLE'),
+              headerLeft: HeaderLeft,
             }}
           />
         </NativeStack.Group>

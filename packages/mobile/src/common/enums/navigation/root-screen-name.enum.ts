@@ -14,6 +14,7 @@ enum RootScreenName {
   NEW_ITEM = 'Make a post',
   ITEM_INFO = 'Product Info',
   TYPE_OF_NEW_POST = 'Type of post',
+  NEW_AUCTION = 'Make an Auction Post',
 }
 
 export { RootScreenName };
