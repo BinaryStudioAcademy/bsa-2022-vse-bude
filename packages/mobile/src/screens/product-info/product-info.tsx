@@ -52,7 +52,7 @@ const ProductInfo: FC = () => {
       views,
       author,
     } = product;
-    const auction = type == ProductType.AUCTION;
+    const isAuction = type == ProductType.AUCTION;
 
     return (
       <ScreenWrapper>
@@ -60,10 +60,10 @@ const ProductInfo: FC = () => {
           showsVerticalScrollIndicator={false}
           style={[globalStyles.px5, globalStyles.mb5]}
         >
-          {auction && <Countdown endDate={product.endDate} />}
+          {isAuction && <Countdown endDate={product.endDate} />}
           <Text
             style={[
-              auction && globalStyles.mt6,
+              isAuction && globalStyles.mt6,
               globalStyles.fs36,
               globalStyles.fontWeightExtraBold,
               { color: colors.text },
@@ -90,10 +90,10 @@ const ProductInfo: FC = () => {
             </Text>
           </View>
           {imageLinks && <ImageCarousel imageLinks={imageLinks} />}
-          <Description product={product} auction={auction} />
+          <Description product={product} />
           <SellerInfo author={author} />
         </ScrollView>
-        {auction ? (
+        {isAuction ? (
           <LotPriceBlock currentPrice={currentPrice} minimalBid={minimalBid} />
         ) : (
           <ProductPriceBlock price={price} />

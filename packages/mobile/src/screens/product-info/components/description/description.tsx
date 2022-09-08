@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { ItemDto } from '@vse-bude/shared';
+import { ItemDto, ProductType } from '@vse-bude/shared';
 import { useTranslation } from '~/hooks/hooks';
 import { formatToDateTime, getTimezoneOffset } from '~/helpers/helpers';
 import { View } from '~/components/components';
@@ -7,24 +7,24 @@ import { RenderDescriptionInfo } from './render-description-info';
 
 type DescriptionProps = {
   product: ItemDto;
-  auction: boolean;
 };
 
-const Description: FC<DescriptionProps> = ({ product, auction }) => {
+const Description: FC<DescriptionProps> = ({ product }) => {
   const { t } = useTranslation();
-  const { endDate, condition, city, country, description } = product;
+  const { endDate, condition, city, country, description, type } = product;
   const date = formatToDateTime(endDate);
   const timeZone = getTimezoneOffset(endDate);
+  const isAuction = type == ProductType.AUCTION;
 
   return (
     <View>
-      {auction && (
+      {isAuction && (
         <RenderDescriptionInfo
           title={t('screens:product_info.ENDING_ON')}
           description={date}
         />
       )}
-      {auction && (
+      {isAuction && (
         <RenderDescriptionInfo
           title={t('screens:product_info.TIME_ZONE')}
           description={`GMT ${timeZone}`}

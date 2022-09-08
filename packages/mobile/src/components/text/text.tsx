@@ -3,9 +3,7 @@ import { Text as NativeText, TextProps as RNTextProps } from 'react-native';
 import { useCustomTheme } from '~/hooks/hooks';
 import { styles } from './styles';
 
-type TextProps = RNTextProps & {
-  children: string | number;
-};
+type TextProps = RNTextProps;
 
 const Text: FC<TextProps> = ({
   style,
