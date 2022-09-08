@@ -27,15 +27,10 @@ const mainScreenOptions: NativeStackNavigationOptions = {
   headerShown: false,
 };
 
-const accountScreenOptions: NativeStackNavigationOptions = {
+const baseScreenOptions: NativeStackNavigationOptions = {
   headerShown: true,
   headerTitleAlign: 'center',
   headerTitleStyle: { fontSize: 16 },
-};
-
-const productScreenOptions: NativeStackNavigationOptions = {
-  headerShown: true,
-  headerTitleAlign: 'center',
   headerLeft: HeaderLeft,
 };
 
@@ -48,11 +43,11 @@ const Navigation: FC = () => {
         name={RootScreenName.MAIN}
         component={MainNavigation}
       />
-      <NativeStack.Group screenOptions={productScreenOptions}>
+      <NativeStack.Group screenOptions={baseScreenOptions}>
         <Stack.Screen name={RootScreenName.ITEM_INFO} component={ProductInfo} />
       </NativeStack.Group>
       {user && (
-        <NativeStack.Group screenOptions={accountScreenOptions}>
+        <NativeStack.Group screenOptions={baseScreenOptions}>
           <Stack.Screen
             name={RootScreenName.PERSONAL_INFO}
             component={PersonalInfoScreen}
@@ -77,7 +72,6 @@ const Navigation: FC = () => {
             component={NewItemScreen}
             options={{
               title: t('make_a_post.TITLE'),
-              headerLeft: HeaderLeft,
               headerRight: HeaderSave,
             }}
           />
@@ -86,7 +80,6 @@ const Navigation: FC = () => {
             component={TypeOfPostScreen}
             options={{
               title: t('make_a_post.TITLE'),
-              headerLeft: HeaderLeft,
             }}
           />
         </NativeStack.Group>
