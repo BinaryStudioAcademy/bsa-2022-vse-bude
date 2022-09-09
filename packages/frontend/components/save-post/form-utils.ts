@@ -54,10 +54,10 @@ export const SellerFields = (t: TFunction): SellerFieldsType => ({
 export const ConditionFields = (t: TFunction): ConditionFieldsType => ({
   [Condition.NEW]: {
     value: 'NEW',
-    title: translateCondition(t, 'NEW'),
+    title: translateCondition(t, Condition.NEW),
   },
   [Condition.USED]: {
     value: 'USED',
-    title: translateCondition(t, 'USED'),
+    title: translateCondition(t, Condition.USED),
   },
 });
