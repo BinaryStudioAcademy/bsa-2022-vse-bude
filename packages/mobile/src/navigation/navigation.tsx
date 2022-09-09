@@ -21,7 +21,7 @@ import {
   TypeOfPostScreen,
 } from '~/screens/screens';
 import { HeaderLeft } from '~/components/components';
-import { MainNavigation } from './tabs/tabs.navigation';
+import { HomeWithMenuNavigation } from './drawer/drawer.navigation';
 
 const NativeStack = createNativeStackNavigator<RootNavigationParamList>();
 const Stack = createNativeStackNavigator<RootNavigationParamList>();
@@ -47,11 +47,17 @@ const Navigation: FC = () => {
   return (
     <NativeStack.Navigator screenOptions={mainScreenOptions}>
       <NativeStack.Screen
-        name={RootScreenName.MAIN}
-        component={MainNavigation}
+        name={RootScreenName.MAIN_WITH_MENU}
+        component={HomeWithMenuNavigation}
       />
       <NativeStack.Group screenOptions={baseScreenOptions}>
-        <Stack.Screen name={RootScreenName.ITEM_INFO} component={ProductInfo} />
+        <Stack.Screen
+          name={RootScreenName.ITEM_INFO}
+          component={ProductInfo}
+          options={{
+            title: t('product_info.TITLE'),
+          }}
+        />
       </NativeStack.Group>
       {user && (
         <NativeStack.Group screenOptions={baseScreenOptions}>
