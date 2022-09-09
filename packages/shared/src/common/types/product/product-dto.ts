@@ -14,7 +14,10 @@ interface Category {
   title: string;
 }
 
-export type Condition = 'NEW' | 'USED';
+export enum Condition {
+  NEW = 'NEW',
+  USED = 'USED',
+}
 
 type ProductDto = {
   id: string;

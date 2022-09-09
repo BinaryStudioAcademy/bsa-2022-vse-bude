@@ -1,4 +1,5 @@
 import type { IPostForms, ICreateAuction } from '@vse-bude/shared';
+import { Condition } from '@vse-bude/shared';
 import type { TFunction } from 'next-i18next';
 import { translateCondition } from 'helpers/translate-condition';
 import type { SellerFieldsType, ConditionFieldsType } from './types';
@@ -51,11 +52,11 @@ export const SellerFields = (t: TFunction): SellerFieldsType => ({
 });
 
 export const ConditionFields = (t: TFunction): ConditionFieldsType => ({
-  NEW: {
+  [Condition.NEW]: {
     value: 'NEW',
     title: translateCondition(t, 'NEW'),
   },
-  USED: {
+  [Condition.USED]: {
     value: 'USED',
     title: translateCondition(t, 'USED'),
   },
