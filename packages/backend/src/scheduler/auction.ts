@@ -31,7 +31,7 @@ export class AuctionScheduler {
 
   initAuctionJobs() {
     this._productRepository
-      .getAllActiveLots()
+      .getActiveAuctionsLots()
       .then((activeAuctions: Product[]) => {
         for (const activeLot of activeAuctions) {
           this.createAuctionJob(activeLot);

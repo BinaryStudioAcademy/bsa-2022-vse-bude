@@ -290,25 +290,10 @@ export class ProductRepository {
     });
   }
 
-  public async getAllActiveLots() {
-    const result = [];
-    let offset = 0;
-    let lots = await this.getActiveAuctionsLots(this._limit, offset);
-    do {
-      lots = await this.getFinishedLots(this._limit, offset);
-      result.push(...lots);
-      offset += this._limit;
-    } while (lots.length === this._limit);
-
-    return result;
-  }
-
-  private async getActiveAuctionsLots(limit: number, offset: number) {
+  public async getActiveAuctionsLots() {
     const nowUtc: Date = toUtc().toDate();
 
     return await this._dbClient.product.findMany({
-      take: limit,
-      skip: offset,
       where: {
         type: ProductType.AUCTION,
         endDate: {
