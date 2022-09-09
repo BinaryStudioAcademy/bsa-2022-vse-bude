@@ -22,10 +22,7 @@ import { ProductActions } from './action-types';
 
 export const fetchProducts = createAsyncThunk(
   ProductActions.FETCH_PRODUCTS,
-  async (
-    query: ProductQuery,
-    { rejectWithValue, dispatch },
-  ) =>
+  async (query: ProductQuery, { rejectWithValue, dispatch }) =>
     getProducts(query).catch((e) => {
       dispatch(
         addToast({

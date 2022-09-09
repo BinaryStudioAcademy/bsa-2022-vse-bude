@@ -260,6 +260,7 @@ export class ProductRepository {
     city: string,
     categoryId: string,
     type: ProductType,
+    productId: string,
   ) {
     return await this._dbClient.product.findMany({
       where: {
@@ -267,6 +268,9 @@ export class ProductRepository {
         categoryId,
         type,
         status: ProductStatus.ACTIVE,
+        NOT: {
+          id: productId,
+        },
       },
     });
   }

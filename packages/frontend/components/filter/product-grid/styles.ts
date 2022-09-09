@@ -32,5 +32,5 @@ export const headline = ({
   font-weight: ${fontWeights.h4};
   line-height: ${lineHeights.h4};
   color: ${colors.secondaryDark};
-  text-align:center;
+  text-align: center;
 `;

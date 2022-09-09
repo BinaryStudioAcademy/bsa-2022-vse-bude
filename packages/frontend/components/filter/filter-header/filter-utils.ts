@@ -4,7 +4,7 @@ import type { TFunction } from 'next-i18next';
 
 export const MIN_PRICE_NAME = 'min-price';
 export const MAX_PRICE_NAME = 'max-price';
-export const ALL_PRODUCTS = "ALL";
+export const ALL_PRODUCTS = 'ALL';
 export const sortByOptions = (t: TFunction) => [
   {
     title: t('items-page:sortBy.priceAsc'),

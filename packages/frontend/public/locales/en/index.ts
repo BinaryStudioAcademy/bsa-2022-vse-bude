@@ -9,6 +9,7 @@ import createPost from './create-post.json';
 import item from './item.json';
 import itemsPage from './items-page.json';
 import rules from './rules.json';
+import checkout from './checkout.json';
 
 export const en = {
   home,
@@ -21,4 +22,5 @@ export const en = {
   auth,
   item,
   rules,
+  checkout,
 };

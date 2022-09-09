@@ -34,7 +34,7 @@ export const headline = ({
   color: ${colors.secondaryDark};
 `;
 export const controllersWrapper = css`
-position: relative;
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -87,7 +87,7 @@ export const popover = ({ spaces }: Theme) => css`
   z-index: 1;
 `;
 export const popoverDivider = ({ colors, spaces }: Theme) => css`
-margin: ${spaces.lg} 0;
+  margin: ${spaces.lg} 0;
   height: 2px;
   background-color: ${colors.backgroundDark};
 `;

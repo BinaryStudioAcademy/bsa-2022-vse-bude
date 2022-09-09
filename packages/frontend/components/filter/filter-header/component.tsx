@@ -32,20 +32,20 @@ export function FilterHeader() {
 
     filter &&
       setBadges(
-        Object.keys(filter).map((item) => {
-          if (item === Order.ASC || item === Order.DESC) return;
+        Object.keys(filter)
+          .map((item) => {
+            if (item === Order.ASC || item === Order.DESC) return;
 
-          return filter[item];
-        }).filter((item) => item)
+            return filter[item];
+          })
+          .filter((item) => item),
       );
   }, [query]);
 
   const addTypeToQuery = (type) => {
     const filter: ProductQuery =
-      query.filter && JSON.parse(query.filter as string) || {};
-    type !== ALL_PRODUCTS
-      ? filter.type = type
-      : delete filter?.type;
+      (query.filter && JSON.parse(query.filter as string)) || {};
+    type !== ALL_PRODUCTS ? (filter.type = type) : delete filter?.type;
     push({
       pathname: Routes.ITEMS,
       query: {
@@ -102,7 +102,6 @@ export function FilterHeader() {
                   }}
                 >
                   {t('items-page:typeBtn.SELLING')}
-
                 </button>
                 <button
                   onClick={() => {

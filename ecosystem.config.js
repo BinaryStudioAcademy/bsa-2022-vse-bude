@@ -8,6 +8,7 @@ module.exports = {
       env_production: {
         NODE_ENV: 'production',
         PORT: '3001',
+        SOCKETS_PORT: '3002',
       },
     },
     {
@@ -17,7 +18,7 @@ module.exports = {
       watch: true,
       env_production: {
         NODE_ENV: 'production',
-        PORT: '8080',
+        PORT: '3000',
       },
     },
   ],

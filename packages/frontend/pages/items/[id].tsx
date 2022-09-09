@@ -39,7 +39,7 @@ export const getServerSideProps = withPublic(
 
     return {
       props: {
-        ...(await serverSideTranslations(locale, ['common', 'item'])),
+        ...(await serverSideTranslations(locale, ['common', 'item', 'public'])),
       },
     };
   }),

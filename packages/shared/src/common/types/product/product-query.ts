@@ -1,4 +1,4 @@
-import type { Order, ProductType, SortBy } from "../../enums";
+import type { Order, ProductType, SortBy } from '../../enums';
 
 export interface ProductQuery {
   type?: ProductType;

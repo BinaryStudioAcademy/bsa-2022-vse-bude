@@ -11,7 +11,9 @@ export function Pagination() {
 
   const filter: ProductQuery =
     query.filter && JSON.parse(query.filter as string);
-  const limit = filter?.limit ? filter.limit : ITEM_FILTER.PRODUCT_LIMIT_DEFAULT;
+  const limit = filter?.limit
+    ? filter.limit
+    : ITEM_FILTER.PRODUCT_LIMIT_DEFAULT;
   const currentPage = filter?.from ? Math.ceil(filter.from / limit) + 1 : 1;
 
   const onClickHandler = (page) => {
@@ -30,17 +32,18 @@ export function Pagination() {
 
   return (
     <div css={styles.btnWrapper}>
-      {count > 0 && [...Array(Math.ceil(count / limit)).keys()].map((page) => (
-        <button
-          data-variant={currentPage === page + 1 && 'active'}
-          type="button"
-          css={styles.btn}
-          onClick={() => onClickHandler(page)}
-          key={page}
-        >
-          {page + 1}
-        </button>
-      ))}
+      {count > 0 &&
+        [...Array(Math.ceil(count / limit)).keys()].map((page) => (
+          <button
+            data-variant={currentPage === page + 1 && 'active'}
+            type="button"
+            css={styles.btn}
+            onClick={() => onClickHandler(page)}
+            key={page}
+          >
+            {page + 1}
+          </button>
+        ))}
     </div>
   );
 }

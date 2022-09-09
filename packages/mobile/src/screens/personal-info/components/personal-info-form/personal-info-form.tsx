@@ -1,11 +1,17 @@
 import React from 'react';
-import { useAppForm, useTranslation, useAppSelector } from '~/hooks/hooks';
+import {
+  useAppForm,
+  useTranslation,
+  useAppSelector,
+  useNavigation,
+} from '~/hooks/hooks';
 import { View, Input, DropDown, PrimaryButton } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { ButtonAppearance } from '~/common/enums/enums';
-import { selectCurrentUser } from '~/store/selectors';
+import { ButtonAppearance, RootScreenName } from '~/common/enums/enums';
+import { RootNavigationProps } from '~/common/types/types';
+import { selectCurrentUser, selectPhoneVerified } from '~/store/selectors';
 import { CITIES, COUNTRIES, REGIONS } from '~/mock/mock-personal-info';
-import { Title } from '../components';
+import { Title, VerifyPhoneField } from '../components';
 
 type UserPersonalInfo = {
   firstName: string;
@@ -31,7 +37,10 @@ type Props = {
 
 const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
   const { t } = useTranslation();
+  const navigation = useNavigation<RootNavigationProps>();
   const user = useAppSelector(selectCurrentUser);
+  const isPhoneVerified = useAppSelector(selectPhoneVerified);
+  const isVerifyPhoneFieldVisible = !isPhoneVerified && user?.phone;
   const { control, errors, handleSubmit } = useAppForm<UserPersonalInfo>({
     defaultValues: {
       firstName: user?.firstName || '',
@@ -53,6 +62,10 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
 
   const handleCancelPress = (): void => {
     //TODO add Cancel handler
+  };
+
+  const handleVerifyPhonePress = () => {
+    navigation.navigate(RootScreenName.VERIFY_PHONE);
   };
 
   return (
@@ -90,6 +103,9 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
       />
+      {isVerifyPhoneFieldVisible && (
+        <VerifyPhoneField onPress={handleVerifyPhonePress} />
+      )}
       <Title label={t('personal_info.ADDRESS')} />
       <DropDown
         label={t('personal_info.COUNTRY')}
