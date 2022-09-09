@@ -26,9 +26,8 @@ export default function Login() {
   const isLoading = useTypedSelector((state) => state.auth.loading);
 
   useEffect(() => {
-    console.log('authError', authError);
     dispatch(clearAuthError());
-  });
+  }, [dispatch]);
 
   const {
     register,

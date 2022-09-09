@@ -1,4 +1,4 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import {
   getUser,
   login,
@@ -291,7 +291,7 @@ const updatePassword = createAsyncThunk(
   },
 );
 
-const clearAuthError = createAsyncThunk(AuthActions.CLEAR_ERRORS, () => false);
+const clearAuthError = createAction(AuthActions.CLEAR_ERRORS);
 
 export {
   getCurrentUserSSR,

@@ -70,7 +70,7 @@ const error = createReducer('', {
   [phoneVerification.rejected.type]: (_, { payload }) => payload,
   [emailVerification.rejected.type]: (_, { payload }) => payload,
   [loginUser.pending.type]: () => '',
-  [clearAuthError.fulfilled.type]: () => '',
+  [clearAuthError.type]: () => '',
 });
 
 export const authReducer = combineReducers({

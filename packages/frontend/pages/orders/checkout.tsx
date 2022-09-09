@@ -6,12 +6,7 @@ import { useTranslation } from 'next-i18next';
 
 export const getServerSideProps = withProtected(async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale, [
-      'auth',
-      'public',
-      'common',
-      'checkout',
-    ])),
+    ...(await serverSideTranslations(locale, ['public', 'common', 'checkout'])),
   },
 }));
 
