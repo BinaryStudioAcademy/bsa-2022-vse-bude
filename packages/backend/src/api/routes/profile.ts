@@ -84,7 +84,6 @@ export const initProfileRoutes = (
       await profileService.getUser({
         userId,
       });
-
       const requests = [
         myListService.getPurchasedItems({ userId }),
         myListService.getSoldItems({ userId }),

@@ -3,5 +3,6 @@ export enum ProductStatuses {
   ACTIVE = 'ACTIVE',
   CANCELLED = 'CANCELLED',
   FINISHED = 'FINISHED',
+  CLOSED = 'CLOSED',
   DRAFT = 'DRAFT',
 }

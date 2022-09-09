@@ -12,7 +12,7 @@ import { createPost } from 'services/post';
 import { ProductType } from '@vse-bude/shared';
 import { Routes } from '@enums';
 import type { SelectOption } from '@components/primitives/select/types';
-import { initialProductFormState } from './form-utils';
+import { initialProductFormState, ConditionFields } from './form-utils';
 import ImageInput from './image-input';
 import DescriptionBlock from './description';
 import * as styles from './styles';
@@ -111,10 +111,7 @@ export default function ProductForm({ edit }: { edit: boolean }) {
           }
           case 'condition': {
             setValue('condition', currentProduct?.condition);
-            setCondition({
-              value: currentProduct?.condition.toUpperCase(),
-              title: currentProduct?.condition,
-            });
+            setCondition(ConditionFields(t)[currentProduct?.condition]);
             break;
           }
           case 'phone':
@@ -129,7 +126,7 @@ export default function ProductForm({ edit }: { edit: boolean }) {
       });
       setImages(currentProduct.imageLinks);
     }
-  }, [currentProduct, setValue, edit, categories, isLoading]);
+  }, [currentProduct, setValue, edit, categories, isLoading, t]);
 
   const setCategoryWrapper = (category: SelectOption) => {
     setCategory(category);

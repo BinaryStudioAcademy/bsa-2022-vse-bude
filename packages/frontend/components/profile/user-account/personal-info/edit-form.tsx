@@ -120,7 +120,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
             <SectionHeader>
               {t('personal-info:headline.personalInfo')}
             </SectionHeader>
-            <Flex css={styles.groupeInputs}>
+            <Flex css={styles.groupInputs}>
               <div css={styles.inputRow}>
                 <Input
                   id="firstName-profile"
@@ -156,7 +156,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
               />
             </div>
 
-            <Flex css={styles.groupePhone}>
+            <Flex css={styles.groupPhone}>
               <div css={styles.phoneRow}>
                 <Input
                   id="phone-profile"
@@ -187,7 +187,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
           <Column css={styles.sectionRow}>
             <SectionHeader>{t('personal-info:headline.address')}</SectionHeader>
 
-            <Flex css={styles.groupeInputs}>
+            <Flex css={styles.groupInputs}>
               <div css={styles.inputRow}>
                 <Input
                   id="country-profile"
@@ -213,7 +213,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
               </div>
             </Flex>
 
-            <Flex css={styles.groupeInputs}>
+            <Flex css={styles.groupInputs}>
               <div css={styles.inputRow}>
                 <Input
                   id="city-profile"

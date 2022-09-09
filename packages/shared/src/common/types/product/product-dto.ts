@@ -4,6 +4,11 @@ import type { AuthorDto } from './author-dto';
 import type { WinnerDto } from './winner-dto';
 import type { CategoryDto } from './category-dto';
 
+export enum Condition {
+  NEW = 'NEW',
+  USED = 'USED',
+}
+
 type ProductDto = {
   id: string;
   title: string;
@@ -25,7 +30,9 @@ type ProductDto = {
   winner: WinnerDto;
   updatedAt: Date;
   postDate: Date;
-  endDate: Date;
+  createdAt: string;
+  endDate: string;
+  currentPrice: number;
 };
 
 export type { ProductDto };
