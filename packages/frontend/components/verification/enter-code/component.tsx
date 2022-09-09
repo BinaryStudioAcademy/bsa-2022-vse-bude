@@ -3,7 +3,7 @@ import { useAppDispatch } from '@hooks';
 import { IconButton } from '@primitives';
 import { PhoneVerification } from 'components/auth/verification/phone-verification';
 import { useTranslation } from 'next-i18next';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import hand from 'public/images/mocup_hand2.png';
 import { previousVerifyModal } from 'store/modals/actions';
 import { useEffect } from 'react';
