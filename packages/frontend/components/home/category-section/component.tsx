@@ -42,6 +42,7 @@ const CategorySection = () => {
             pagination: false,
             arrows: false,
             autoWidth: true,
+            lazyLoad: false,
             gap: 20,
             breakpoints: {
               1200: {
