@@ -23,9 +23,10 @@ export const ImageSlider = ({ priority, images }: ImageSliderProps) => {
   return (
     <div css={imageSliderBlock}>
       <Image
-        priority={priority && slide === 1}
+        priority={priority}
         src={images[slide]}
-        fill
+        width={260}
+        height={300}
         alt={`${slide}`}
       />
       <SliderControls
