@@ -37,4 +37,3 @@ export { ScrollView } from './scroll-view/scroll-view';
 export { default as CheckBox } from '@react-native-community/checkbox';
 export { Countdown } from './countdown/countdown';
 export { HeaderCustom } from './header-custom/header-custom';
-export { HeaderSave } from './header-save/header-save';

@@ -1,5 +1,10 @@
 import React, { FC, ReactElement } from 'react';
-import { HeaderSave, ScreenWrapper, ScrollView } from '~/components/components';
+import { t } from 'i18next';
+import {
+  HeaderCustom,
+  ScreenWrapper,
+  ScrollView,
+} from '~/components/components';
 import { useNavigation, useRoute, useLayoutEffect } from '~/hooks/hooks';
 import { RootScreenName } from '~/common/enums/enums';
 import { globalStyles } from '~/styles/styles';
@@ -18,7 +23,12 @@ const NewItemScreen: FC = () => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => <HeaderSave onPress={handleSaveForm} />,
+      headerRight: () => (
+        <HeaderCustom
+          onPress={handleSaveForm}
+          label={t('common:components.BUTTON_SAVE')}
+        />
+      ),
     });
   }, [navigation]);
 

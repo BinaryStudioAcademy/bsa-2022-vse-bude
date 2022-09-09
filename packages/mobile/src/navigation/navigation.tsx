@@ -26,7 +26,7 @@ import { HomeWithMenuNavigation } from './drawer/drawer.navigation';
 const NativeStack = createNativeStackNavigator<RootNavigationParamList>();
 const Stack = createNativeStackNavigator<RootNavigationParamList>();
 
-const mainScreenOptions: NativeStackNavigationOptions = {
+const optionsWithoutHeader: NativeStackNavigationOptions = {
   headerShown: false,
 };
 
@@ -34,18 +34,14 @@ const baseScreenOptions: NativeStackNavigationOptions = {
   headerShown: true,
   headerTitleAlign: 'center',
   headerTitleStyle: { fontSize: 16 },
-  headerLeft: HeaderCustom,
-};
-
-const verifyScreenOptions: NativeStackNavigationOptions = {
-  headerShown: false,
+  headerLeft: () => <HeaderCustom hasIcon={true} />,
 };
 
 const Navigation: FC = () => {
   const user = useAppSelector(selectCurrentUser);
 
   return (
-    <NativeStack.Navigator screenOptions={mainScreenOptions}>
+    <NativeStack.Navigator screenOptions={optionsWithoutHeader}>
       <NativeStack.Screen
         name={RootScreenName.MAIN_WITH_MENU}
         component={HomeWithMenuNavigation}
@@ -80,7 +76,7 @@ const Navigation: FC = () => {
             name={RootScreenName.SUPPORT}
             component={SupportScreen}
           />
-          <NativeStack.Group screenOptions={verifyScreenOptions}>
+          <NativeStack.Group screenOptions={optionsWithoutHeader}>
             <Stack.Screen
               name={RootScreenName.VERIFY_PHONE}
               component={VerifyPhoneScreen}
@@ -99,7 +95,6 @@ const Navigation: FC = () => {
             component={NewItemScreen}
             options={{
               title: t('make_a_post.TITLE'),
-              headerLeft: HeaderCustom,
             }}
           />
           <Stack.Screen
@@ -107,7 +102,6 @@ const Navigation: FC = () => {
             component={NewItemScreen}
             options={{
               title: t('make_a_post.AUCTION_TITLE'),
-              headerLeft: HeaderCustom,
             }}
           />
           <Stack.Screen
@@ -115,7 +109,6 @@ const Navigation: FC = () => {
             component={TypeOfPostScreen}
             options={{
               title: t('make_a_post.TITLE'),
-              headerLeft: HeaderCustom,
             }}
           />
         </NativeStack.Group>
