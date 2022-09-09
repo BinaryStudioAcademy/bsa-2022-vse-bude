@@ -108,6 +108,9 @@ export const imgWrapper = ({ radiuses, colors }: Theme) => css`
   border-radius: ${radiuses.md};
   background-color: ${colors.backgroundLight};
   overflow: hidden;
+  img {
+    object-fit: cover;
+  }
 `;
 
 export const deleteImageBtn = ({ spaces }: Theme) => css`

@@ -236,7 +236,7 @@ export class AuthService {
     }
 
     const newPassHash = this._hashService.generateHash(updateDto.password);
-    this._userRepository.updatePassword(updateDto.email, newPassHash);
+    await this._userRepository.updatePassword(updateDto.email, newPassHash);
   }
 
   private getResetPasswordEmailLink(hash: string, email: string): string {
