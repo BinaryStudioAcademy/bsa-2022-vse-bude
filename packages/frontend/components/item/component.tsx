@@ -1,4 +1,4 @@
-﻿import React, { useEffect } from 'react';
+﻿import React from 'react';
 import type { ProductDto } from '@vse-bude/shared';
 import { ProductType } from '@vse-bude/shared';
 import { Container } from '@primitives';
