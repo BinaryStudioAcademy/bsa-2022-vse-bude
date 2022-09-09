@@ -162,6 +162,7 @@ export const screens = {
     DIRECT_SALE: 'Продаж',
   },
   product_info: {
+    TITLE: 'Деталі продукту',
     ENDING_ON: 'Закінчується',
     TIME_ZONE: 'Часовий пояс',
     STATUS: 'Стан',

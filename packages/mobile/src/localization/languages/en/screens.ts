@@ -163,6 +163,7 @@ export const screens = {
     DIRECT_SALE: 'Direct Sale',
   },
   product_info: {
+    TITLE: 'Product details',
     ENDING_ON: 'Ending on',
     TIME_ZONE: 'Time zone',
     STATUS: 'Status',
