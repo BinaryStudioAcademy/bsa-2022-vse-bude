@@ -20,7 +20,7 @@ export const ItemInfoSelling = ({
   onBuy,
   onChangeIsFavorite,
 }: ItemInfoSellingProps) => {
-  const { t } = useTranslation('item');
+  const { t } = useTranslation();
   const { push } = useRouter();
   const { user } = useTypedSelector((state) => state.auth);
   const isAuthor = user?.id === item.author.id;
@@ -30,7 +30,7 @@ export const ItemInfoSelling = ({
       <ItemTitle title={item.title} views={item.views} />
       <ItemPrice
         amount={item.price}
-        currency="UAH"
+        currency={t('public:uah')}
         cssExtended={styles.price}
       />
       <ItemInfo item={item} />
@@ -47,7 +47,7 @@ export const ItemInfoSelling = ({
               size="md"
               disabled={!user}
             />
-            <Button onClick={onBuy}>{t('buttons.buyBtn')}</Button>
+            <Button onClick={onBuy}>{t('item:buttons.buyBtn')}</Button>
           </>
         )}
       </div>

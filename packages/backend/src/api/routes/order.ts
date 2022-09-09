@@ -1,7 +1,7 @@
 import type { Services } from '@services';
-import { type ApiRoutes, OrderApiRoutes } from '@vse-bude/shared';
+import { ApiRoutes, OrderApiRoutes } from '@vse-bude/shared';
 import { type Request, Router } from 'express';
-import { wrap, apiPath } from '@helpers';
+import { wrap, apiPath, getEnv } from '@helpers';
 import { authMiddleware } from '@middlewares';
 
 export const initOrderRoutes = (
@@ -22,6 +22,12 @@ export const initOrderRoutes = (
     apiPath(path, OrderApiRoutes.STATUS),
     wrap(async (req: Request) => paymentService.setStatus(req.body)),
   );
+
+  router.post(apiPath(path, OrderApiRoutes.SUCCESS), (req, res) => {
+    res.redirect(
+      `${getEnv('APP_URL')}${ApiRoutes.ORDERS}${OrderApiRoutes.SUCCESS}`,
+    );
+  });
 
   router.post(
     apiPath(path, OrderApiRoutes.CREATE_PAYMENT),

@@ -31,4 +31,5 @@ export enum ItemRoutes {
   CREATE = '/create',
   CREATE_AUCTION = '/create-auction',
   CREATE_DIRECT_SALE = '/create-product',
+  EDIT = '/edit',
 }
