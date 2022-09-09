@@ -21,9 +21,7 @@ export default function DescriptionBlock({
   const categories = useTypedSelector((state) => state.category.list);
 
   const { t } = useTranslation();
-
-  ConditionFields(t);
-
+  
   return (
     <>
       <SectionHeader>{t('create-post:headline.description')}</SectionHeader>
