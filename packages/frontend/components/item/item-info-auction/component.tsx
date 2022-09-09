@@ -123,7 +123,6 @@ export const ItemInfoAuction = ({
 
   const renderBidButtons = () => (
     <>
-      
       {!!isAbleToLeaveAuction && user && (
         <Button
           onClick={confirmLeave}
