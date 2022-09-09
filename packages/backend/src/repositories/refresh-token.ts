@@ -1,4 +1,4 @@
-import type { PrismaClient } from '@prisma/client';
+import type { Prisma, PrismaClient, PrismaPromise, RefreshToken } from '@prisma/client';
 import type { CreateRefreshToken } from '@types';
 
 export class RefreshTokenRepository {
@@ -8,7 +8,7 @@ export class RefreshTokenRepository {
     this._dbClient = prismaClient;
   }
 
-  create(tokenData: CreateRefreshToken) {
+  create(tokenData: CreateRefreshToken): Promise<RefreshToken> {
     return this._dbClient.refreshToken.create({
       data: {
         userId: tokenData.userId,
@@ -18,7 +18,7 @@ export class RefreshTokenRepository {
     });
   }
 
-  deleteByUserId(userId: string) {
+  deleteByUserId(userId: string): PrismaPromise<Prisma.BatchPayload> {
     return this._dbClient.refreshToken.deleteMany({
       where: {
         userId: userId,
@@ -26,7 +26,7 @@ export class RefreshTokenRepository {
     });
   }
 
-  updateTokenById(tokenId: string, tokenValue: string, expiresAt: Date) {
+  updateTokenById(tokenId: string, tokenValue: string, expiresAt: Date): Promise<RefreshToken> {
     return this._dbClient.refreshToken.update({
       where: {
         id: tokenId,
@@ -38,7 +38,7 @@ export class RefreshTokenRepository {
     });
   }
 
-  getTokenByValue(tokenValue: string) {
+  getTokenByValue(tokenValue: string): Promise<RefreshToken> {
     return this._dbClient.refreshToken.findFirst({
       where: {
         token: tokenValue,

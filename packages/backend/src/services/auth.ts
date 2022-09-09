@@ -70,7 +70,7 @@ export class AuthService {
     this._emailService = emailService;
   }
 
-  async signOut(signOutDto: SignOut) {
+  async signOut(signOutDto: SignOut): Promise<void> {
     await this._refreshTokenRepository.deleteByUserId(signOutDto.userId);
   }
 
@@ -139,7 +139,7 @@ export class AuthService {
     return authResponseMap(tokenData, user);
   }
 
-  async getCurrentUser(userId: string) {
+  async getCurrentUser(userId: string): Promise<object> {
     const user = await this._userRepository.getById(userId);
 
     return userMap(user);
@@ -156,7 +156,7 @@ export class AuthService {
     );
   }
 
-  async refreshToken(updateDto: UpdateRefreshToken) {
+  async refreshToken(updateDto: UpdateRefreshToken): Promise<AuthTokenData> {
     if (!updateDto.tokenValue) {
       throw new WrongRefreshTokenError();
     }
@@ -181,7 +181,7 @@ export class AuthService {
     return newTokenData;
   }
 
-  private async saveLink(email: string, hashValue: string) {
+  private async saveLink(email: string, hashValue: string): Promise<void> {
     await this._cache.set(
       this.getResetPasswordCacheKey(email),
       hashValue,
@@ -189,11 +189,11 @@ export class AuthService {
     );
   }
 
-  private async deleteLinksByEmail(email: string) {
+  private async deleteLinksByEmail(email: string): Promise<void> {
     await this._cache.del(this.getResetPasswordCacheKey(email));
   }
 
-  async resetPasswordLink(email: string) {
+  async resetPasswordLink(email: string): Promise<void> {
     const hashValue = this._hashService.generateHash(
       `${email}${this._hashService.getRandomHash()}`,
     );
@@ -208,7 +208,7 @@ export class AuthService {
     await resetMail.send();
   }
 
-  async updatePassword(updateDto: UpdatePassword) {
+  async updatePassword(updateDto: UpdatePassword): Promise<void> {
     const resetHash = await this._cache.get<string>(
       this.getResetPasswordCacheKey(updateDto.email),
     );

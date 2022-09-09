@@ -1,7 +1,7 @@
 import { clearData } from './clearData';
 import { prismaClient } from './config/prismaClient';
 
-(async () => {
+(async (): Promise<void> => {
   await clearData(prismaClient);
 })()
   .then(() => prismaClient.$disconnect())

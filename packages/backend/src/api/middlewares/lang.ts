@@ -6,7 +6,7 @@ export const langMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction,
-) => {
+): void => {
   const locale = req.headers[HttpHeader.ACCEPT_LANGUAGE] ?? DEFAULT_LOCALE;
   langService.setLocale(<string>locale);
 

@@ -14,7 +14,7 @@ export const wrap =
     req: Request<P, ResBody, ReqBody, ReqQuery>,
     res: Response,
     next: NextFunction,
-  ) =>
+  ): Promise<void | Response<any, Record<string, any>>> =>
     handler(req)
       .then((result) => {
         if (!result) {

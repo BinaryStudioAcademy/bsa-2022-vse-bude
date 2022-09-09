@@ -6,7 +6,7 @@ import { CHAT_FILE_NAME } from './../../config/config';
 export const seedChat = async (
   prismaClient: PrismaClient,
   existingProducts: Product[],
-) => {
+): Promise<void> => {
   const existingChats = await prismaClient.chat.findMany();
   const howManyToCreate = existingProducts.length - existingChats.length;
 

@@ -15,7 +15,7 @@ export class SendInBlueEmailProvider implements IEmailProvider {
     );
   }
 
-  public async send(options: EmailOptions) {
+  public async send(options: EmailOptions): Promise<void> {
     await this._apiInstance.sendTransacEmail({
       subject: options.subject,
       sender: options.from,

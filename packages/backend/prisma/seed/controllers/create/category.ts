@@ -4,7 +4,7 @@ import { fakeCategory } from '../../data/category';
 import { CATEGORY_FILE_NAME } from './../../config/config';
 import { writeFile } from './../../helpers/wtireFile';
 
-export const seedCategory = async (prismaClient: PrismaClient) => {
+export const seedCategory = async (prismaClient: PrismaClient): Promise<void> => {
   const existingCategories = await prismaClient.category.findMany();
 
   if (existingCategories.length >= categoriesFromJSON.length) {

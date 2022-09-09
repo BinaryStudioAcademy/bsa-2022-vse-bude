@@ -6,7 +6,7 @@ export const fakeUserSettings = async (
   amountOfRecords: number,
   existingUsers: User[],
   existingUsersSettings: UserSettings[],
-) => {
+): Promise<UserSettings[]> => {
   const records: UserSettings[] = [];
 
   overal: for (let i = 0; i < amountOfRecords; i++) {

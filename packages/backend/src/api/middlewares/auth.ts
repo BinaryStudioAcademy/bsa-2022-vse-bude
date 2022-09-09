@@ -9,7 +9,7 @@ export const authMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction,
-) => {
+): Response<any, Record<string, any>> => {
   const authHeader = req.header(HttpHeader.AUTHORIZATION);
 
   if (!authHeader) {

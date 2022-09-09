@@ -1,5 +1,6 @@
 import { ApiRoutes } from '@vse-bude/shared';
 import type { Services } from '@services';
+import type { Router } from 'express';
 import { initCategoryRoutes } from './category';
 import { initAuthRoutes } from './auth';
 import { initUploadImageRoutes } from './upload-image';
@@ -11,7 +12,7 @@ import { initProfileRoutes } from './profile';
 import { initPostRoutes } from './post';
 import { initBidRoutes } from './bid';
 
-export const initRoutes = (services: Services) => [
+export const initRoutes = (services: Services): Router[] => [
   initCategoryRoutes(services, ApiRoutes.CATEGORIES),
   initProductRoutes(services, ApiRoutes.PRODUCTS),
   initAuthRoutes(services, ApiRoutes.AUTH),

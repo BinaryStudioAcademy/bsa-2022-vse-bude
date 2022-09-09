@@ -1,3 +1,4 @@
+import type { Category } from '@prisma/client';
 import type { CategoryRepository } from '@repositories';
 import type { Request } from 'express';
 import { lang } from '../lang';
@@ -9,7 +10,7 @@ export class CategoryService {
     this._categoryRepository = categoryRepository;
   }
 
-  public async getAll(req: Request) {
+  public async getAll(req: Request): Promise<Category[]> {
     try {
       const result = await this._categoryRepository.getAll(req.query);
 

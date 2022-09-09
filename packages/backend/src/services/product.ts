@@ -16,7 +16,7 @@ import type {
   UpdateProduct,
 } from '@vse-bude/shared';
 import { ProductType } from '@vse-bude/shared';
-import type { Product } from '@prisma/client';
+import type { FavoriteProducts, Product } from '@prisma/client';
 import type { Bid } from '@prisma/client';
 import { ProductStatus } from '@prisma/client';
 import type { VerifyService } from '@services';
@@ -49,11 +49,11 @@ export class ProductService {
     this._bidRepository = bidRepository;
   }
 
-  public getAll(query: ProductQuery) {
+  public getAll(query: ProductQuery): Promise<Product[]> {
     return this._productRepository.getAll(query);
   }
 
-  public async getById(productId: string) {
+  public async getById(productId: string): Promise<object> {
     const product = await this._productRepository.getById(productId);
     if (!product) {
       throw new ProductNotFoundError();
@@ -70,7 +70,7 @@ export class ProductService {
     return productMapper(product, +currentPrice);
   }
 
-  public async incrementViews(id: string, req: Request) {
+  public async incrementViews(id: string, req: Request): Promise<Product> {
     const userId = getUserIdFromRequest(req);
 
     if (userId) {
@@ -84,13 +84,13 @@ export class ProductService {
     return this._productRepository.incrementViews(id);
   }
 
-  public async getFavoriteIds(userId: string) {
+  public async getFavoriteIds(userId: string): Promise<string[]> {
     const favProducts = await this._productRepository.favoriteIds(userId);
 
     return favProducts.map((favProd) => favProd.productId);
   }
 
-  public async getFavoriteProducts(userId: string) {
+  public async getFavoriteProducts(userId: string): Promise<FavoriteProducts[]> {
     return this._productRepository.getFavorite(userId);
   }
 
@@ -115,7 +115,7 @@ export class ProductService {
     return auctionPermissionsMapper(!!bids.length);
   }
 
-  public async leaveAuction(userId: string, productId: string) {
+  public async leaveAuction(userId: string, productId: string): Promise<object> {
     const product = await this._productRepository.getById(productId);
     if (!product) {
       throw new ProductNotFoundError();
@@ -130,7 +130,7 @@ export class ProductService {
     return this.getById(productId);
   }
 
-  public async addToFavorites({ userId, productId }: AddProductToFavorites) {
+  public async addToFavorites({ userId, productId }: AddProductToFavorites): Promise<string> {
     const isInFavorite = await this._productRepository.isInFavorite(
       userId,
       productId,
@@ -146,7 +146,7 @@ export class ProductService {
   public async deleteFromFavorites({
     userId,
     productId,
-  }: DeleteProductFromFavorites) {
+  }: DeleteProductFromFavorites): Promise<string> {
     const isInFavorite = await this._productRepository.isInFavorite(
       userId,
       productId,
@@ -159,7 +159,7 @@ export class ProductService {
     return productId;
   }
 
-  public async createProduct({ req, userId, fieldsData }: CreateProduct) {
+  public async createProduct({ req, userId, fieldsData }: CreateProduct): Promise<Product> {
     const { error } = createPostSchema.validate(req.body);
     if (error) {
       throw new FieldError(error.message);
@@ -186,7 +186,7 @@ export class ProductService {
     productId,
     userId,
     fieldsData,
-  }: UpdateProduct) {
+  }: UpdateProduct): Promise<Product> {
     const { error } = updatePostSchema.validate(req.body);
     if (error) {
       throw new FieldError(error.message);
@@ -228,7 +228,7 @@ export class ProductService {
     return updatedProduct;
   }
 
-  public async buy({ userId, productId }: BuyProduct) {
+  public async buy({ userId, productId }: BuyProduct): Promise<string | undefined> {
     const isActive = await this._productRepository.checkStatus(
       productId,
       ProductStatus.ACTIVE,

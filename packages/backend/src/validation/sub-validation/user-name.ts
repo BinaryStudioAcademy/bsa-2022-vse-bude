@@ -7,7 +7,7 @@ import {
 import { ProfileError } from '@errors';
 import { lang } from '@lang';
 
-export const userNameValidation = ({ req }: { req: Request }) => {
+export const userNameValidation = ({ req }: { req: Request }): void => {
   const { firstName, lastName } = req.body;
 
   if (firstName.trim().length < ValidationRanges.MIN_NAME_SYMBOLS) {

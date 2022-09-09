@@ -1,4 +1,5 @@
-﻿import S3 from 'aws-sdk/clients/s3';
+﻿import type { DeleteObjectOutput, DeleteObjectRequest, PutObjectRequest } from 'aws-sdk/clients/s3';
+import S3 from 'aws-sdk/clients/s3';
 import { S3FolderPath } from '@enums';
 import {
   UnsupportedFileExtensionError,
@@ -12,6 +13,8 @@ import type {
 } from '@types';
 import { getEnv, logger } from '@helpers';
 import { MAX_IMAGE_SIZE } from '@vse-bude/shared';
+import type { AWSError } from 'aws-sdk';
+import type { PromiseResult } from 'aws-sdk/lib/request';
 import { randomBytes } from 'crypto';
 
 export class S3StorageService {
@@ -33,7 +36,7 @@ export class S3StorageService {
     });
   }
 
-  async deleteImage(filename: string) {
+  async deleteImage(filename: string): Promise<PromiseResult<DeleteObjectOutput, AWSError>> {
     console.log(filename);
     const params = this.createDeleteParams(filename, S3FolderPath.IMAGES);
 
@@ -60,7 +63,7 @@ export class S3StorageService {
     return await Promise.all(imagePromises);
   }
 
-  private async validateAndUploadImage(file: IFileUpload) {
+  private async validateAndUploadImage(file: IFileUpload): Promise<string> {
     if (!file) {
       throw new NoFileProvidedError();
     }
@@ -85,11 +88,11 @@ export class S3StorageService {
     return uploadImage.Location;
   }
 
-  private generateFilename(extension: string) {
+  private generateFilename(extension: string): string {
     return randomBytes(16).toString('hex') + `.${extension}`;
   }
 
-  private createUploadParams(filename: string, folder: string, body: Buffer) {
+  private createUploadParams(filename: string, folder: string, body: Buffer): PutObjectRequest {
     return {
       Bucket: this._bucketName,
       Key: `${folder}/${filename}`,
@@ -98,18 +101,18 @@ export class S3StorageService {
     };
   }
 
-  private createDeleteParams(filename: string, folder: string) {
+  private createDeleteParams(filename: string, folder: string): DeleteObjectRequest {
     return {
       Bucket: this._bucketName,
       Key: `${folder}/${filename}`,
     };
   }
 
-  private isFileExtensionValid(extension: string) {
+  private isFileExtensionValid(extension: string): boolean {
     return extension === 'png' || extension === 'jpg' || extension === 'jpeg';
   }
 
-  private isFileSizeValid(size: number) {
+  private isFileSizeValid(size: number): boolean {
     return size <= this._maxImageSizeBytes;
   }
 }

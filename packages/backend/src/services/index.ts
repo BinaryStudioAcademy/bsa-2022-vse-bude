@@ -20,7 +20,7 @@ import { UserProfileService } from './profile';
 import { BidService } from './bid';
 import { MyListService } from './my-list';
 
-export const initServices = (repositories: Repositories) => {
+export const initServices = (repositories: Repositories): any => {
   const hashService: HashService = new HashService();
   const redisService: RedisStorageService = new RedisStorageService(
     isProduction,

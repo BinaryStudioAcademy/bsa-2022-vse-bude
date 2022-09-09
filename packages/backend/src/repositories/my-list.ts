@@ -1,4 +1,4 @@
-import type { PrismaClient } from '@prisma/client';
+import type { PrismaClient, PrismaPromise, Product } from '@prisma/client';
 import { ProductStatus } from '@prisma/client';
 import { Order } from '@vse-bude/shared';
 
@@ -9,7 +9,7 @@ export class MyListRepository {
     this._dbClient = prismaClient;
   }
 
-  public getAllUserItems({ userId }: { userId: string }) {
+  public getAllUserItems({ userId }: { userId: string }): PrismaPromise<Product[]> {
     return this._dbClient.product.findMany({
       where: {
         OR: [

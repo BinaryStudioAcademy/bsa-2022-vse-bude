@@ -9,7 +9,7 @@ import { UserProfileRepository } from './profile';
 import { BidRepository } from './bid';
 import { MyListRepository } from './my-list';
 
-export const initRepositories = (prismaClient: PrismaClient) => ({
+export const initRepositories = (prismaClient: PrismaClient): any => ({
   userRepository: new UserRepository(prismaClient),
   categoryRepository: new CategoryRepository(prismaClient),
   productRepository: new ProductRepository(prismaClient),
