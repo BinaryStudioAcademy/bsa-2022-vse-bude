@@ -6,12 +6,7 @@ import {
   AuctionEndedError,
 } from '@errors';
 import type { Request } from 'express';
-import {
-  getFilenameFromUrl,
-  getUserIdFromRequest,
-  toUtc,
-  translateCondition,
-} from '@helpers';
+import { getFilenameFromUrl, getUserIdFromRequest, toUtc } from '@helpers';
 import type {
   AddProductToFavorites,
   AuctionPermissionsResponse,
@@ -64,10 +59,6 @@ export class ProductService {
 
     if (product.category) {
       product.category.title = lang(`categories:${product.category.title}`);
-    }
-
-    if (product.condition) {
-      product.condition = translateCondition(product.condition);
     }
 
     const currentPrice = await this._productRepository.getCurrentPrice(
