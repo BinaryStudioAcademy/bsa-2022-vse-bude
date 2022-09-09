@@ -150,6 +150,10 @@
   content: '\f2ed';
 }
 
+.fa-circle-check::before {
+  content: '\f058';
+}
+
 :root,
 :host {
   --fa-font-brands: normal 400 1em/1 'Font Awesome 6 Brands';

@@ -45,6 +45,8 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
     DataStatus.PENDING,
   );
   const parsedPersonalInfo = personalInfoParser(personalInfo);
+  const isVerifyPhoneFieldVisible =
+    !isPhoneVerified && parsedPersonalInfo?.phone;
   const DEFAULT_VALUES = {
     firstName: parsedPersonalInfo.firstName,
     lastName: parsedPersonalInfo.lastName,
@@ -145,7 +147,7 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
       />
-      {!isPhoneVerified && (
+      {isVerifyPhoneFieldVisible && (
         <VerifyField
           title={t('verificationPhone.VERIFY_PHONE')}
           onPress={handleVerifyPhonePress}

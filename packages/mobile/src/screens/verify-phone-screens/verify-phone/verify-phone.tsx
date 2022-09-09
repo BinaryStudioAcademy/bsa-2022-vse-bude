@@ -107,6 +107,7 @@ const VerifyPhoneScreen: FC = () => {
             control={control}
             errors={errors}
             contentContainerStyle={globalStyles.mt6}
+            editable={false}
           />
           <ButtonsContainer>
             <View style={styles.buttonContainer}>
