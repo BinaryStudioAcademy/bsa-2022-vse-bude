@@ -47,7 +47,7 @@ export const ItemInfo = ({ item }: ItemInfoProps) => {
         </tbody>
       </table>
       <SellerInfo
-        seller={item.author}
+        seller={{ ...item.author, phone: item.phone }}
         onContactSeller={() => handleContactSeller()}
       />
     </div>
