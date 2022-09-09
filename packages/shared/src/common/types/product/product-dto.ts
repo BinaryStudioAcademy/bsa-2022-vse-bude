@@ -1,4 +1,5 @@
 import type { ProductType } from '../../enums';
+import type { ProductStatus } from '../../enums';
 
 interface SocialMedia {
   id: string;
@@ -41,8 +42,8 @@ type ProductDto = {
   city?: string;
   phone?: string;
   type: ProductType;
-  status: string;
   condition: ProductCondition;
+  status: ProductStatus;
   endDate: string;
   imageLinks: string[];
   views: number;
