@@ -6,7 +6,7 @@ import { AuthApi } from './auth-api/auth-api.service';
 import { Image } from './image/image.service';
 import { NotificationService } from './notification/notification.service';
 import { ProductService } from './product/product.service';
-import { PushController } from './push-notifications/push-notifications';
+import { PushNotificationService } from './push-notifications/push-notifications';
 import { AppService } from './app/app.service';
 import { PhoneVerificationApi } from './phone-verification-api/phone-verification-api.service';
 import { CategoryService } from './categories/categories';
@@ -48,7 +48,8 @@ const notification = new NotificationService();
 
 const appService = new AppService();
 
-const pushApi = new PushController();
+const pushNotification = new PushNotificationService();
+pushNotification.init();
 
 export {
   storage,
@@ -59,5 +60,5 @@ export {
   phoneVerificationApi,
   appService,
   categoryApi,
-  pushApi,
+  pushNotification,
 };

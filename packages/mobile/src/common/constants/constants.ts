@@ -11,4 +11,8 @@ export {
   MILLISECOND_IN_MINUTE,
   UPDATE_END_DATE_INTERVAL_MILLISECONDS,
 } from './time';
-export { PUSH_CHANNEL, PUSH_ICON } from './push';
+export {
+  ANDROID_PN_ICON_NAME,
+  ANDROID_PN_DEFAULT_CHANNEL_ID,
+  CHANEL_NAME,
+} from './push';
