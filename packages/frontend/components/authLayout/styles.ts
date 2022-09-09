@@ -89,6 +89,11 @@ export const controlsWrapper = css`
 `;
 export const logo = ({ mq, spaces }: Theme) => css`
   text-align: center;
+
+  img {
+    object-fit: cover;
+  }
+
   ${mq[2]} {
     text-align: left;
     margin-bottom: ${spaces.xl4};

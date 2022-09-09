@@ -6,6 +6,10 @@ export const imageSliderBlock = css`
   &:hover .sliderControls {
     visibility: visible;
   }
+
+  img {
+    object-fit: cover;
+  }
 `;
 
 export const sliderControls = css`
