@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import i18next from 'i18next';
-import { TouchableOpacity, Text, View } from '~/components/components';
 import { notification } from '~/services/services';
+import { TouchableOpacity, Text, View } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 
