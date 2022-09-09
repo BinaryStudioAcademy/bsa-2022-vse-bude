@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { ColorPalette, IPostForms } from '@vse-bude/shared';
+import { ColorPalette, ICreateAuction } from '@vse-bude/shared';
 import {
   DropDown,
   Input,
@@ -9,12 +9,14 @@ import {
   View,
   Popover,
 } from '~/components/components';
-import { useAppForm, useTranslation } from '~/hooks/hooks';
+import { useAppForm, useAppSelector, useTranslation } from '~/hooks/hooks';
 import { CALLING_CODE, CITIES, COUNTRIES } from '~/mock/new-item';
 import { globalStyles } from '~/styles/styles';
 
 import { DatePicker } from '~/components/date-time-picker/date-time-picker';
 import { DateTimeType } from '~/common/enums/ui/ui';
+import { selectCategories } from '~/store/categories/selectors';
+import { categoryForDropdown } from '~/helpers/category/format-category-for-dropdown';
 import { AddPhotos } from '../add-photos/add-photos';
 
 import { useStyles } from './styles';
@@ -22,8 +24,11 @@ import { useStyles } from './styles';
 const NewAuctionForm: FC = () => {
   const { t } = useTranslation();
   const styles = useStyles();
+  const categories = useAppSelector(selectCategories);
+  const formattedCategories =
+    categories && categories.length ? categoryForDropdown(categories) : null;
 
-  const { control, errors } = useAppForm<IPostForms>({
+  const { control, errors } = useAppForm<ICreateAuction>({
     defaultValues: {
       country: 'Ukraine',
       callingCode: 'UA',
@@ -39,14 +44,15 @@ const NewAuctionForm: FC = () => {
       <Text style={[globalStyles.fs14, globalStyles.mt5, styles.title]}>
         {t('make_a_post.DESCRIPTION')}
       </Text>
-      <Input
-        label={t('make_a_post.CATEGORY')}
-        placeholder={t('make_a_post.CATEGORY_PLACEHOLDER')}
-        name="category"
-        control={control}
-        errors={errors}
-        contentContainerStyle={globalStyles.mt5}
-      />
+      {formattedCategories && (
+        <DropDown
+          label={t('make_a_post.CATEGORY')}
+          name="category"
+          control={control}
+          items={formattedCategories}
+          zIndex={19}
+        />
+      )}
 
       <Input
         label={t('make_a_post.TITLE_NAME')}
@@ -69,7 +75,7 @@ const NewAuctionForm: FC = () => {
 
       <DatePicker
         label={t('make_a_post.ENDING_TIME')}
-        name="endTime"
+        name="endDate"
         control={control}
         errors={errors}
         placeholder={'-:-'}
@@ -114,7 +120,7 @@ const NewAuctionForm: FC = () => {
 
       <Input
         placeholder={t('make_a_post.STARTING_PRICE_PLACEHOLDER')}
-        name="price"
+        name="recommendedPrice"
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt2}

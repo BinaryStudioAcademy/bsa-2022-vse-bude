@@ -1,25 +1,23 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { wrapper } from 'store';
-import { withPublic } from '@hocs';
+import { withProtected } from '@hocs';
 import { Layout } from '@components/layout';
 import { CheckoutPageInner } from '@components/order';
+import { useTranslation } from 'next-i18next';
 
-export const getStaticProps = withPublic(
-  wrapper.getServerSideProps(() => async (ctx) => {
-    const { locale } = ctx;
+export const getServerSideProps = withProtected(async ({ locale }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ['public', 'common', 'checkout'])),
+  },
+}));
 
-    return {
-      props: {
-        ...(await serverSideTranslations(locale, ['common'])),
-      },
-    };
-  }),
-);
+const CheckoutPage = () => {
+  const { t } = useTranslation('checkout');
 
-const CheckoutPage = () => (
-  <Layout title={'Checkout'}>
-    <CheckoutPageInner />
-  </Layout>
-);
+  return (
+    <Layout title={t('TITLE')}>
+      <CheckoutPageInner />
+    </Layout>
+  );
+};
 
 export default CheckoutPage;

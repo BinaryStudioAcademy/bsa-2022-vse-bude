@@ -1,18 +1,16 @@
-import { SaveUserProfileDto, UserAddressDto } from '@vse-bude/shared';
+import { FullUserProfileDto } from '@vse-bude/shared';
 import { createReducer, isAnyOf } from '@reduxjs/toolkit';
 import { DataStatus } from '~/common/enums/enums';
 import { getPersonalInfo, updatePersonalInfo } from './actions';
 
 type State = {
   dataStatus: DataStatus;
-  user: SaveUserProfileDto | null;
-  address: UserAddressDto | null;
+  user: FullUserProfileDto | null;
 };
 
 const initialState: State = {
   dataStatus: DataStatus.IDLE,
   user: null,
-  address: null,
 };
 
 const reducer = createReducer(initialState, (builder) => {

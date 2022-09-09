@@ -1,5 +1,10 @@
 import React, { FC } from 'react';
-import { useAppDispatch, useAppSelector, useFocusEffect } from '~/hooks/hooks';
+import {
+  useAppDispatch,
+  useAppSelector,
+  useFocusEffect,
+  useCallback,
+} from '~/hooks/hooks';
 import { selectPersonalInfo } from '~/store/selectors';
 import { ScreenWrapper, ScrollView, Spinner } from '~/components/components';
 import { personalInfoActions } from '~/store/actions';
@@ -11,7 +16,7 @@ const PersonalInfoScreen: FC = () => {
   const personalInfo = useAppSelector(selectPersonalInfo);
 
   useFocusEffect(
-    React.useCallback(() => {
+    useCallback(() => {
       dispatch(personalInfoActions.getPersonalInfo());
     }, [dispatch]),
   );

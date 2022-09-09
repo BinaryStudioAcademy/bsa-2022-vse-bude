@@ -1,35 +1,28 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { SaveUserProfileDto } from '@vse-bude/shared';
+import { FullUserProfileDto, UpdateFullUserProfileDto } from '@vse-bude/shared';
 import { AsyncThunkConfig } from '~/common/types/types';
-import {
-  personalInfoParser,
-  updatePersonalInfoParser,
-} from '~/helpers/helpers';
 import { ActionType } from './common';
 
 const getPersonalInfo = createAsyncThunk<
-  SaveUserProfileDto,
+  FullUserProfileDto,
   undefined,
   AsyncThunkConfig
->(ActionType.GET_USER_BY_ID, async (_, { extra }) => {
+>(ActionType.GET_PERSONAL_INFO, async (_, { extra }) => {
   const { personalInfoApi } = extra;
   const response = await personalInfoApi.getPersonalInfo();
-  const personalInfo = personalInfoParser(response);
 
-  return personalInfo;
+  return response;
 });
 
 const updatePersonalInfo = createAsyncThunk<
-  SaveUserProfileDto,
-  SaveUserProfileDto,
+  FullUserProfileDto,
+  UpdateFullUserProfileDto,
   AsyncThunkConfig
 >(ActionType.UPDATE_PERSONAL_INFO, async (payload, { extra }) => {
   const { personalInfoApi } = extra;
-  const parsedPayload = updatePersonalInfoParser(payload);
-  const response = await personalInfoApi.updatePersonalInfo(parsedPayload);
-  const personalInfo = personalInfoParser(response);
+  const response = await personalInfoApi.updatePersonalInfo(payload);
 
-  return personalInfo;
+  return response;
 });
 
 export { getPersonalInfo, updatePersonalInfo };

@@ -2,24 +2,16 @@ import {
   FullUserProfileDto,
   UpdateFullUserProfileDto,
   SaveUserProfileDto,
-  UserAddressDto,
   MappedLinks,
-  DefaultInpValue,
   SocialMediaType,
+  SocialMedia,
 } from '@vse-bude/shared';
 
 type PersonalInfoParser = (user: FullUserProfileDto) => SaveUserProfileDto;
 type UpdatePersonalInfoParser = (
   data: SaveUserProfileDto,
+  currentSocialMedia: SocialMedia[],
 ) => UpdateFullUserProfileDto;
-
-const DEFAULT_ADDRESS_PAYLOAD: UserAddressDto = {
-  country: '',
-  region: '',
-  city: '',
-  zip: '',
-  deliveryData: '',
-};
 
 const DEFAULT_SOCIAL_PAYLOAD: MappedLinks = {
   facebook: '',
@@ -30,14 +22,13 @@ const DEFAULT_SOCIAL_PAYLOAD: MappedLinks = {
 const personalInfoParser: PersonalInfoParser = (user) => {
   const { firstName, lastName, email, phone, socialMedia, userAddress } = user;
 
-  const parsedAddress = DEFAULT_ADDRESS_PAYLOAD;
-
-  if (userAddress && Object.keys(userAddress).length > 0) {
-    Object.keys(userAddress).forEach((key) => {
-      parsedAddress[key as keyof UserAddressDto] =
-        userAddress[key as keyof UserAddressDto];
-    });
-  }
+  const parsedAddress = {
+    country: userAddress?.country || '',
+    region: userAddress?.region || '',
+    city: userAddress?.city || '',
+    zip: userAddress?.zip || '',
+    deliveryData: userAddress?.deliveryData || '',
+  };
 
   const parsedSocial = socialMedia.reduce((prev, item) => {
     const key = item.socialMedia?.toLowerCase();
@@ -53,7 +44,7 @@ const personalInfoParser: PersonalInfoParser = (user) => {
     firstName,
     lastName,
     email,
-    phone: phone || DefaultInpValue.PHONE,
+    phone: phone || '',
     ...parsedAddress,
     ...parsedSocial,
     password: '',
@@ -62,7 +53,19 @@ const personalInfoParser: PersonalInfoParser = (user) => {
   };
 };
 
-const updatePersonalInfoParser: UpdatePersonalInfoParser = (data) => {
+const findSocialId = (
+  arr: SocialMedia[],
+  type: SocialMediaType,
+): string | undefined => {
+  const mediaItem = arr.find((item) => item.socialMedia === type);
+
+  return mediaItem?.id;
+};
+
+const updatePersonalInfoParser: UpdatePersonalInfoParser = (
+  data,
+  currentSocialMedia,
+) => {
   const {
     firstName,
     lastName,
@@ -83,14 +86,17 @@ const updatePersonalInfoParser: UpdatePersonalInfoParser = (data) => {
 
   const socialMedia = [
     {
+      id: findSocialId(currentSocialMedia, SocialMediaType.FACEBOOK) || '',
       link: facebook || '',
       socialMedia: SocialMediaType.FACEBOOK,
     },
     {
+      id: findSocialId(currentSocialMedia, SocialMediaType.INSTAGRAM) || '',
       link: instagram || '',
       socialMedia: SocialMediaType.INSTAGRAM,
     },
     {
+      id: findSocialId(currentSocialMedia, SocialMediaType.LINKEDIN) || '',
       link: linkedin || '',
       socialMedia: SocialMediaType.LINKEDIN,
     },
@@ -108,7 +114,7 @@ const updatePersonalInfoParser: UpdatePersonalInfoParser = (data) => {
     firstName,
     lastName,
     email,
-    phone: phone === DefaultInpValue.PHONE ? '' : phone,
+    phone: phone || null,
     userAddress,
     socialMedia,
     password,

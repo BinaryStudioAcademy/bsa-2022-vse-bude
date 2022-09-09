@@ -20,6 +20,15 @@ const PasswordInputInner = (
         </label>
       )}
       <div css={styles.buttonWrapper}>
+        <input
+          ref={ref}
+          css={[styles.input, styles.passwordPadding]}
+          data-variant={variant}
+          data-status={error ? 'error' : 'successfully'}
+          type={passwordVisible ? 'text' : 'password'}
+          id={id}
+          {...props}
+        />
         <button
           css={styles.showBtn}
           type="button"
@@ -31,15 +40,6 @@ const PasswordInputInner = (
             color={IconColor.YELLOW}
           />
         </button>
-        <input
-          ref={ref}
-          css={[styles.input, styles.passwordPadding]}
-          data-variant={variant}
-          data-status={error ? 'error' : 'successfully'}
-          type={passwordVisible ? 'text' : 'password'}
-          id={id}
-          {...props}
-        />
       </div>
       {error && <p css={styles.errorMessage}>{error}</p>}
     </div>

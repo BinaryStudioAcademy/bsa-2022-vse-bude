@@ -9,6 +9,7 @@
   "descriptionCaption": "Description",
   "sellerCaption": "Seller",
   "contactSellerBtn": "Contact Seller",
+  "showImageCaption": "Open full image",
   "time": {
     "hours": "hours",
     "days": "day",
@@ -30,6 +31,7 @@
     "confirmText": "Are you sure to leave the auction? All bids will be deleted!"
   },
   "buttons": {
+    "editBtn": "Edit",
     "placeBid": "Place Bid",
     "buyBtn": "Buy",
     "tooltips": {
@@ -44,6 +46,7 @@
         "buyBtn": "You are not authorized to buy",
         "favBtn": "You are not authorized to add product to favorites"
       }
-    }
+    },
+    "closeImageModal": "Close modal"
   }
 }

@@ -1,5 +1,5 @@
 enum ActionType {
-  GET_USER_BY_ID = 'personal-info/get-user-by-id',
+  GET_PERSONAL_INFO = 'personal-info/get-personal-info',
   UPDATE_PERSONAL_INFO = 'personal-info/update',
 }
 
