@@ -162,7 +162,7 @@ export const ItemInfoAuction = ({
           variant="danger"
           tooltip={t('item:leave.tooltip')}
         >
-          {t('leave.btnText')}
+          {t('item:leave.btnText')}
         </Button>
       )}
     </>
