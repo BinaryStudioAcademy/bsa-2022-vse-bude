@@ -1,4 +1,5 @@
 import type { ProductType } from '../../enums';
+import type { ProductStatus } from '../../enums';
 
 interface Author {
   id: string;
@@ -13,6 +14,11 @@ interface Category {
   title: string;
 }
 
+export enum Condition {
+  NEW = 'NEW',
+  USED = 'USED',
+}
+
 type ProductDto = {
   id: string;
   title: string;
@@ -24,14 +30,15 @@ type ProductDto = {
   city?: string;
   phone?: string;
   type: ProductType;
-  status: string;
-  condition: string;
-  endDate: Date;
+  condition: Condition;
+  status: ProductStatus;
+  endDate: string;
   imageLinks: string[];
   views: number;
   currentPrice: number;
   author: Author;
   category: Category;
+  createdAt: string;
 };
 
 export type { ProductDto };

@@ -4,6 +4,7 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import { MainScreenName } from '~/common/enums/enums';
+import { AppIcon, MainNavigationParamList } from '~/common/types/types';
 import { Home, Favorite, MyList, Account } from '~/screens/screens';
 import { useAppSelector, useCustomTheme, useTranslation } from '~/hooks/hooks';
 import {
@@ -14,11 +15,10 @@ import {
   Text,
   UserIcon,
 } from '~/components/components';
-import { AppIcon } from '~/common/types/types';
 import { selectCurrentUser } from '~/store/selectors';
 import { WelcomeNavigation } from '../welcome/welcome.navigation';
 
-const Tabs = createBottomTabNavigator();
+const Tabs = createBottomTabNavigator<MainNavigationParamList>();
 
 const MainNavigation: FC = () => {
   const { dark, colors } = useCustomTheme();
