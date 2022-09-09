@@ -8,7 +8,7 @@ import { loggerMiddleware } from '@middlewares';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import { Server } from 'socket.io';
-import { clearAllJobs, initAuctionJobs } from '@scheduler';
+import { clearAllJobs } from '@scheduler';
 import { prismaClient as database } from './data/db';
 import { errorHandler } from './error/error-handler';
 import { langMiddleware } from './api/middlewares/lang';
@@ -36,7 +36,7 @@ const swaggerSpecification = swaggerJsdoc(options);
 
 if (isProduction) {
   clearAllJobs();
-  initAuctionJobs(repositories.productRepository);
+  services.auctionScheduler.initAuctionJobs();
 }
 
 app

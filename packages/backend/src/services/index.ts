@@ -5,6 +5,7 @@ import {
   SendInBlueEmailProvider,
 } from '@providers';
 import { isProduction } from '@helpers';
+import { AuctionScheduler } from '@scheduler';
 import { CategoryService } from './category';
 import { ProductService } from './product';
 import { AuthService } from './auth';
@@ -45,6 +46,8 @@ export const initServices = (repositories: Repositories) => {
     emailService,
   );
 
+  const auctionScheduler = new AuctionScheduler(repositories.productRepository);
+
   return {
     categoryService: new CategoryService(repositories.categoryRepository),
     productService: new ProductService(
@@ -52,6 +55,7 @@ export const initServices = (repositories: Repositories) => {
       verifyService,
       s3StorageService,
       repositories.bidRepository,
+      auctionScheduler,
     ),
     newsService: new NewsService(repositories.newsRepository),
     healthService: new HealthService(repositories.healthRepository),
@@ -88,6 +92,7 @@ export const initServices = (repositories: Repositories) => {
       repositories.orderRepository,
       repositories.productRepository,
     ),
+    auctionScheduler: auctionScheduler,
   };
 };
 
@@ -108,4 +113,5 @@ export {
   type MyListService,
   type OrderService,
   type PaymentService,
+  type AuctionScheduler,
 };

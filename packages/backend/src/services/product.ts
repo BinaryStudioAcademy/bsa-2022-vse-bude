@@ -30,7 +30,7 @@ import { FieldError } from 'error/product/field-error';
 import { createPostSchema, updatePostSchema } from 'validation/product/schemas';
 import { NotVerifiedError } from 'error/user/not-verified';
 import { lang } from '@lang';
-import { createAuctionJob, updateAuctionJob } from '@scheduler';
+import type { AuctionScheduler } from '@services';
 
 export class ProductService {
   private _productRepository: ProductRepository;
@@ -41,16 +41,20 @@ export class ProductService {
 
   private _s3StorageService: S3StorageService;
 
+  private _auctionScheduler: AuctionScheduler;
+
   constructor(
     productRepository: ProductRepository,
     verifyService: VerifyService,
     s3StorageService: S3StorageService,
     bidRepository: BidRepository,
+    auctionScheduler: AuctionScheduler,
   ) {
     this._productRepository = productRepository;
     this._verifyService = verifyService;
     this._s3StorageService = s3StorageService;
     this._bidRepository = bidRepository;
+    this._auctionScheduler = auctionScheduler;
   }
 
   public getAll(query: ProductQuery) {
@@ -196,7 +200,7 @@ export class ProductService {
     const product = await this._productRepository.create(data);
 
     if (this.isAuctionProduct(product.type)) {
-      createAuctionJob(product);
+      this._auctionScheduler.createAuctionJob(product);
     }
 
     return product;
@@ -252,7 +256,7 @@ export class ProductService {
     );
 
     if (this.isAuctionProduct(updatedProduct.type)) {
-      updateAuctionJob(updatedProduct);
+      this._auctionScheduler.updateAuctionJob(updatedProduct);
     }
 
     return updatedProduct;

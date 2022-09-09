@@ -4,28 +4,38 @@ import { auctionJobName } from '@helpers';
 import schedule from 'node-schedule';
 import { AuctionNotificationsCommand } from '../commands/auction-notifications';
 
-export const initAuctionJobs = (productRepository: ProductRepository) => {
-  productRepository.getAllActiveLots().then((activeAuctions: Product[]) => {
-    for (const activeLot of activeAuctions) {
-      createAuctionJob(activeLot);
-    }
-  });
-};
+export class AuctionScheduler {
+  private _productRepository: ProductRepository;
 
-export const createAuctionJob = (product: Product) => {
-  const auctionNotifications = new AuctionNotificationsCommand(product);
-  schedule.scheduleJob(
-    auctionJobName(product.id),
-    product.endDate,
-    auctionNotifications.execute,
-  );
-};
+  constructor(productRepository: ProductRepository) {
+    this._productRepository = productRepository;
+  }
 
-export const updateAuctionJob = (product: Product) => {
-  deleteAuctionJob(product.id);
-  createAuctionJob(product);
-};
+  deleteAuctionJob(prodUuid: string) {
+    schedule.cancelJob(auctionJobName(prodUuid));
+  }
 
-export const deleteAuctionJob = (prodUuid: string) => {
-  schedule.cancelJob(auctionJobName(prodUuid));
-};
+  updateAuctionJob(product: Product) {
+    this.deleteAuctionJob(product.id);
+    this.createAuctionJob(product);
+  }
+
+  createAuctionJob(product: Product) {
+    const auctionNotifications = new AuctionNotificationsCommand(product);
+    schedule.scheduleJob(
+      auctionJobName(product.id),
+      product.endDate,
+      auctionNotifications.execute,
+    );
+  }
+
+  initAuctionJobs() {
+    this._productRepository
+      .getAllActiveLots()
+      .then((activeAuctions: Product[]) => {
+        for (const activeLot of activeAuctions) {
+          this.createAuctionJob(activeLot);
+        }
+      });
+  }
+}
