@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { DateTimeFormat } from '~/common/enums/enums';
 
-const getStrictTimeToEvent = (date: Date) => {
+const getStrictTimeToEvent = (date: string) => {
   const duration = dayjs.duration(dayjs(date).diff(new Date()));
   const totalMs = duration.asMilliseconds();
   const [days, hours, minutes, seconds] = duration

@@ -67,6 +67,7 @@ export const screens = {
   errors: {
     UNKNOWN_ERROR: 'Щось трапилось :(',
     EMPTY_EMAIL: 'Будь-ласка, введіть email',
+    WRONG_EMAIL: 'Неправильна електронна адреса',
     EMPTY_FIRST_NAME: 'Будь-ласка, введіть ім`я',
     EMPTY_LAST_NAME: 'Будь-ласка, введіть прізвище',
     EMPTY_PHONE: 'Будь-ласка, введіть номер телефону',
@@ -161,6 +162,7 @@ export const screens = {
     DIRECT_SALE: 'Продаж',
   },
   product_info: {
+    TITLE: 'Деталі продукту',
     ENDING_ON: 'Закінчується',
     TIME_ZONE: 'Часовий пояс',
     STATUS: 'Стан',
