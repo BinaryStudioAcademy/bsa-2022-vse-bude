@@ -9,6 +9,7 @@ export * from './category';
 export * from './social-media';
 export * from './profile';
 export * from './bid';
+export * from './my-list';
 export * from './event';
 export * from './order';
 export * from './payment';

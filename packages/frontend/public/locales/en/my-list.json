@@ -1,0 +1,13 @@
+{
+  "card": {
+    "currency_uah": "UAH",
+    "seller": "Seller",
+    "buyer": "Buyer",
+    "posted": "Posted",
+    "drafted": "Draft",
+    "purchased": "Purchased",
+    "sold": "Sold",
+    "edit": "edited",
+    "publish": "Publish"
+  }
+}
