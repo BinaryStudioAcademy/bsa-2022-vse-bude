@@ -4,6 +4,6 @@ export { ItemHeader } from './item-title';
 export { Price } from './price';
 export { ItemStatus } from './item-status';
 export { ProfileLink } from './profile-link';
-export { Date } from './date';
+export { ItemDate } from './date';
 export { ItemDescription } from './item-description';
 export { Views } from './views';

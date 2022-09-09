@@ -5,7 +5,7 @@ import {
   Price,
   ItemStatus,
   ProfileLink,
-  Date,
+  ItemDate,
 } from '../primitives';
 import { Charity } from '../tmp-element-charity';
 import type { SoldItems } from './types';
@@ -28,7 +28,7 @@ export const Sold = ({ data }: { data: SoldItems }) => {
       <div css={styles.cardContent}>
         <div css={styles.leftContent}>
           <ItemImage src={randomSrc({ array: imageLinks })} title={title} />
-          <Date size="lg" time={endDate} />
+          <ItemDate size="lg" time={endDate} />
         </div>
 
         <div css={styles.rightContent}>

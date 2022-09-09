@@ -7,7 +7,7 @@ import {
   Price,
   ItemStatus,
   ItemDescription,
-  Date,
+  ItemDate,
 } from '../primitives';
 import type { CancelledItems } from './types';
 import { randomSrc } from './utils';
@@ -39,7 +39,7 @@ export const Cancelled = ({ data }: { data: CancelledItems }) => {
           <div css={styles.postedFooter}>
             <div>
               <span css={styles.editDate}>{t('my-list:card.edit')}</span>
-              <Date time={postDate} />
+              <ItemDate time={postDate} />
             </div>
             <div css={styles.publishButtonWrapper}>
               <Button size="small">{t('my-list:card.publish')}</Button>

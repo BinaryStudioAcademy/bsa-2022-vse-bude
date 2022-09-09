@@ -6,7 +6,7 @@ import {
   Price,
   ItemStatus,
   ItemDescription,
-  Date,
+  ItemDate,
   Views,
 } from '../primitives';
 import type { PostedItems } from './types';
@@ -37,7 +37,7 @@ export const Posted = ({ data }: { data: PostedItems }) => {
           </div>
 
           <div css={styles.postedFooter}>
-            <Date time={postDate} />
+            <ItemDate time={postDate} />
             <Views views={views} />
             <IconButton
               ariaLabel="edit"
