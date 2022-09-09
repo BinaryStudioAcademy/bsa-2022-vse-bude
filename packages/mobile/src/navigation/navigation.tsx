@@ -1,6 +1,9 @@
 import React, { FC } from 'react';
 import { t } from 'i18next';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  createNativeStackNavigator,
+  NativeStackNavigationOptions,
+} from '@react-navigation/native-stack';
 import { RootScreenName } from '~/common/enums/enums';
 import { RootNavigationParamList } from '~/common/types/types';
 import { useAppSelector } from '~/hooks/hooks';
@@ -8,21 +11,35 @@ import { selectCurrentUser } from '~/store/selectors';
 import {
   MessagesScreen,
   PersonalInfoScreen,
+  ProductInfo,
   SettingsScreen,
   SupportScreen,
   NewItemScreen,
+  VerifyPhoneScreen,
+  VerifyCodeScreen,
+  VerifiedScreen,
   TypeOfPostScreen,
 } from '~/screens/screens';
-import { MainNavigation } from './tabs/tabs.navigation';
-import {
-  mainScreenOptions,
-  accountScreenOptions,
-  newItemScreenOptions,
-  typeOfPostScreenOptions,
-} from './common/screen-options';
+import { HeaderCustom } from '~/components/components';
+import { HomeWithMenuNavigation } from './drawer/drawer.navigation';
 
 const NativeStack = createNativeStackNavigator<RootNavigationParamList>();
 const Stack = createNativeStackNavigator<RootNavigationParamList>();
+
+const mainScreenOptions: NativeStackNavigationOptions = {
+  headerShown: false,
+};
+
+const baseScreenOptions: NativeStackNavigationOptions = {
+  headerShown: true,
+  headerTitleAlign: 'center',
+  headerTitleStyle: { fontSize: 16 },
+  headerLeft: HeaderCustom,
+};
+
+const verifyScreenOptions: NativeStackNavigationOptions = {
+  headerShown: false,
+};
 
 const Navigation: FC = () => {
   const user = useAppSelector(selectCurrentUser);
@@ -30,12 +47,20 @@ const Navigation: FC = () => {
   return (
     <NativeStack.Navigator screenOptions={mainScreenOptions}>
       <NativeStack.Screen
-        name={RootScreenName.MAIN}
-        component={MainNavigation}
-        options={newItemScreenOptions}
+        name={RootScreenName.MAIN_WITH_MENU}
+        component={HomeWithMenuNavigation}
       />
+      <NativeStack.Group screenOptions={baseScreenOptions}>
+        <Stack.Screen
+          name={RootScreenName.ITEM_INFO}
+          component={ProductInfo}
+          options={{
+            title: t('product_info.TITLE'),
+          }}
+        />
+      </NativeStack.Group>
       {user && (
-        <NativeStack.Group screenOptions={accountScreenOptions}>
+        <NativeStack.Group screenOptions={baseScreenOptions}>
           <Stack.Screen
             name={RootScreenName.PERSONAL_INFO}
             component={PersonalInfoScreen}
@@ -55,15 +80,43 @@ const Navigation: FC = () => {
             name={RootScreenName.SUPPORT}
             component={SupportScreen}
           />
+          <NativeStack.Group screenOptions={verifyScreenOptions}>
+            <Stack.Screen
+              name={RootScreenName.VERIFY_PHONE}
+              component={VerifyPhoneScreen}
+            />
+            <Stack.Screen
+              name={RootScreenName.VERIFY_CODE}
+              component={VerifyCodeScreen}
+            />
+            <Stack.Screen
+              name={RootScreenName.VERIFIED}
+              component={VerifiedScreen}
+            />
+          </NativeStack.Group>
           <Stack.Screen
             name={RootScreenName.NEW_ITEM}
             component={NewItemScreen}
-            options={newItemScreenOptions}
+            options={{
+              title: t('make_a_post.TITLE'),
+              headerLeft: HeaderCustom,
+            }}
+          />
+          <Stack.Screen
+            name={RootScreenName.NEW_AUCTION}
+            component={NewItemScreen}
+            options={{
+              title: t('make_a_post.AUCTION_TITLE'),
+              headerLeft: HeaderCustom,
+            }}
           />
           <Stack.Screen
             name={RootScreenName.TYPE_OF_NEW_POST}
             component={TypeOfPostScreen}
-            options={typeOfPostScreenOptions}
+            options={{
+              title: t('make_a_post.TITLE'),
+              headerLeft: HeaderCustom,
+            }}
           />
         </NativeStack.Group>
       )}

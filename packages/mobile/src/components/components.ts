@@ -11,8 +11,10 @@ export {
 } from 'react-native';
 export { SafeAreaView } from 'react-native-safe-area-context';
 export { default as Popover } from 'react-native-popover-view';
+export { default as DateTimePicker } from '@react-native-community/datetimepicker';
 
 export * from './icons/icons';
+export * from './svg/svg';
 export { ScreenWrapper } from './screen-wrapper/screen-wrapper';
 export { Button } from './button/button';
 export { Input } from './input/input';
@@ -35,3 +37,4 @@ export { ScrollView } from './scroll-view/scroll-view';
 export { default as CheckBox } from '@react-native-community/checkbox';
 export { Countdown } from './countdown/countdown';
 export { HeaderCustom } from './header-custom/header-custom';
+export { HeaderSave } from './header-save/header-save';

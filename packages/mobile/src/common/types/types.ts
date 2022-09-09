@@ -9,6 +9,8 @@ export type { HttpOptions, GetHeadersParams } from './http/http';
 export type {
   RootNavigationParamList,
   RootNavigationProps,
+  MainNavigationProps,
+  MainNavigationParamList,
 } from './navigation/navigation';
 export type { ValidationSchema } from './validation/validation';
 export type {
@@ -26,4 +28,5 @@ export type {
 export type { ShowNotificationParams } from './notification/notification';
 export type { AppIcon, IconProps, CustomIconProps } from './ui/ui';
 export type { Theme, ThemeColors } from './theme/theme.type';
+export type { VerifyPhoneRequestDto } from './verify/verify';
 export type { ProductRequestDto } from './product/product';

@@ -2,24 +2,17 @@
 import type { ItemDto } from '@vse-bude/shared';
 import { ProductType } from '@vse-bude/shared';
 import { Container } from '@primitives';
-import { lightTheme } from 'theme';
 import {
   deleteProductFromFavorites,
   addProductToFavorites,
 } from 'store/favorite-product';
-import {
-  useAppDispatch,
-  useWindowSize,
-  useInFavorite,
-  useTypedSelector,
-} from '@hooks';
+import { useAppDispatch, useInFavorite, useTypedSelector } from '@hooks';
 import { fetchCreateOrder } from 'store/checkout';
 import { useRouter } from 'next/router';
 import { Routes } from '@enums';
-import { ItemImageSlider } from './image-slider/component';
 import { ItemInfoSelling } from './item-info-selling/component';
 import { ItemInfoAuction } from './item-info-auction/component';
-import { ImageSliderSplide } from './image-slider-splide/component';
+import { ItemImageSlider } from './image-slider/component';
 import * as styles from './styles';
 
 interface ItemProps {
@@ -27,8 +20,6 @@ interface ItemProps {
 }
 
 export const Item = ({ item }: ItemProps) => {
-  const windowSize = useWindowSize();
-
   const dispatch = useAppDispatch();
 
   const router = useRouter();
@@ -57,11 +48,7 @@ export const Item = ({ item }: ItemProps) => {
   return (
     <React.Fragment>
       <Container cssExtend={styles.itemWrapper}>
-        {windowSize.width > lightTheme.breakpoints.sm ? (
-          <ItemImageSlider imageLinks={item.imageLinks} />
-        ) : (
-          <ImageSliderSplide imageLinks={item.imageLinks} />
-        )}
+        <ItemImageSlider imageLinks={item.imageLinks} />
         {item.type === ProductType.SELLING ? (
           <ItemInfoSelling
             item={item}

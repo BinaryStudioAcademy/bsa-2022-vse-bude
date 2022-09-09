@@ -1,45 +1,42 @@
-﻿import { useState } from 'react';
-import Image from 'next/image';
+import { useState } from 'react';
+import { ImageModal } from '../image-modal/component';
+import { ItemImageSliderSmall } from './image-slider-small/component';
+import { ItemImageSliderLarge } from './image-slider-large/component';
+
 import * as styles from './styles';
 
 interface ItemImageSliderProps {
   imageLinks: string[];
 }
 
-export const ItemImageSlider = ({ imageLinks }: ItemImageSliderProps) => {
-  const [focusedImage, setFocusedImage] = useState(0);
-
-  const handleClick = (imageLink) => {
-    setFocusedImage(imageLink);
-  };
+const ItemImageSlider = ({ imageLinks }: ItemImageSliderProps) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentImage, setCurrentImage] = useState(0);
 
   return (
-    <div css={styles.sliderWrapper}>
-      <div css={styles.imagesWrapper}>
-        {imageLinks.map((link, index) => (
-          <div
-            key={link + index}
-            css={[styles.image, index === focusedImage && styles.pickedImage]}
-          >
-            <Image
-              key={index}
-              onClick={() => handleClick(index)}
-              src={link}
-              alt="item image"
-              layout="fill"
-              objectFit="cover"
-            />
-          </div>
-        ))}
-      </div>
-      <div css={styles.focusedImage}>
-        <Image
-          src={imageLinks[focusedImage]}
-          alt="item image"
-          layout="fill"
-          objectFit="cover"
+    <>
+      <div css={styles.desktopWrapper}>
+        <ItemImageSliderLarge
+          imageLinks={imageLinks}
+          currentImage={currentImage}
+          setCurrentImage={setCurrentImage}
+          setOpenModal={setIsModalOpen}
         />
       </div>
-    </div>
+      <div css={styles.mobileWrapper}>
+        <ItemImageSliderSmall
+          imageLinks={imageLinks}
+          setCurrentImage={setCurrentImage}
+          setOpenModal={setIsModalOpen}
+        />
+      </div>
+      <ImageModal
+        isOpen={isModalOpen}
+        setModalVisible={setIsModalOpen}
+        image={imageLinks[currentImage]}
+      />
+    </>
   );
 };
+
+export { ItemImageSlider };
