@@ -274,22 +274,6 @@ export class ProductRepository {
     });
   }
 
-  public async getFinishedLots(limit: number, offset: number) {
-    const nowUtc: Date = toUtc().toDate();
-
-    return await this._dbClient.product.findMany({
-      take: limit,
-      skip: offset,
-      where: {
-        type: ProductType.AUCTION,
-        endDate: {
-          lt: nowUtc,
-        },
-        participantsNotified: false,
-      },
-    });
-  }
-
   public async getActiveAuctionsLots() {
     const nowUtc: Date = toUtc().toDate();
 
