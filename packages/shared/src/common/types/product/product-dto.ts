@@ -23,7 +23,7 @@ type ProductDto = {
   socialMedia: SocialMedia[];
   type: ProductType;
   status: ProductStatuses;
-  condition: string;
+  condition: Condition;
   category: CategoryDto;
   views: number;
   author: AuthorDto;
