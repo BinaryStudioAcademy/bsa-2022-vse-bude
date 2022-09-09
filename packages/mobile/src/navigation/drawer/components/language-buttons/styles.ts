@@ -1,16 +1,16 @@
-import { ColorPalette } from '@vse-bude/shared';
 import { StyleSheet } from 'react-native';
+import { ColorPalette } from '@vse-bude/shared';
 
 const styles = StyleSheet.create({
-  langBtn: {
+  buttonWrapper: {
     alignItems: 'center',
+    justifyContent: 'center',
     margin: 4,
-    width: 30,
-    height: 30,
+    width: 35,
+    height: 35,
     borderWidth: 1,
-    borderRadius: 15,
+    borderRadius: 17.5,
     borderColor: ColorPalette.YELLOW_200,
-    backgroundColor: ColorPalette.GRAY_100,
   },
 });
 
