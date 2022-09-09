@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import i18next from 'i18next';
-import { ColorPalette } from '@vse-bude/shared';
+import { ColorPalette, DEFAULT_LOCALE } from '@vse-bude/shared';
 import { notification } from '~/services/services';
 import { TouchableOpacity, Text, View } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
@@ -16,12 +16,11 @@ const LanguageButtons: FC = () => {
       }
     });
   };
-  const isUa = currentLang == 'ua';
+  const isUa = currentLang == DEFAULT_LOCALE;
 
   return (
     <View
       style={[
-        globalStyles.mt7,
         globalStyles.mr4,
         globalStyles.flexDirectionRow,
         globalStyles.justifyContentEnd,
@@ -37,15 +36,13 @@ const LanguageButtons: FC = () => {
         ]}
         onPress={() => handleChangeLanguage('en')}
       >
-        <View>
-          <Text
-            style={{
-              color: isUa ? ColorPalette.GREEN_200 : ColorPalette.WHITE_100,
-            }}
-          >
-            En
-          </Text>
-        </View>
+        <Text
+          style={{
+            color: isUa ? ColorPalette.GREEN_200 : ColorPalette.WHITE_100,
+          }}
+        >
+          En
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={[
