@@ -1,0 +1,10 @@
+{
+  "TITLE": "Checkout",
+  "PRODUCT_NAME": "Product",
+  "PRODUCT_COUNT": "Quantity",
+  "ORDER_ID": "Order ID",
+  "ORDER_TOTAL": "Order Total",
+  "PAY_BTN": "Pay",
+  "PAYMENT_SUCCESSFUL": "Payment Successful",
+  "GO_TO_PRODUCTS": "Continue Shopping"
+}

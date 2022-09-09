@@ -25,6 +25,11 @@ const styles = StyleSheet.create({
     height: 2,
     marginVertical: 13,
   },
+  timeWindow: {
+    position: 'absolute',
+    bottom: -10,
+    alignSelf: 'center',
+  },
 });
 
 export { styles };
