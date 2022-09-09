@@ -6,8 +6,6 @@ import { Container } from '@primitives';
 import {} from 'theme';
 import { wrapper, title, sliderWrapper } from './styles';
 
-import '@splidejs/react-splide/css';
-
 const CharitySection = () => {
   const { t } = useTranslation();
   const { breakpoints } = useTheme();
