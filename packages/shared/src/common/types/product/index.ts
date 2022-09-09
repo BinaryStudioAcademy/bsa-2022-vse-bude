@@ -9,3 +9,5 @@ export * from './auction-permissions-request';
 export * from './auction-permissions-response';
 export * from './product-id-request';
 export * from './product-my-list';
+export * from './product-query';
+export * from './all-products-dto';

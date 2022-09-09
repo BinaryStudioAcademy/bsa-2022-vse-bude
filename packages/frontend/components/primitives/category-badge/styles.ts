@@ -7,20 +7,35 @@ export const wrapper = css`
   list-style: none;
 `;
 
-export const badge = (theme: Theme) => css`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: ${theme.spaces.sm};
-  padding: ${theme.spaces.sm} ${theme.spaces.md};
-  background-color: ${theme.colors.backgroundLight};
-  font-size: ${theme.fontSizes.body2};
-  font-weight: ${theme.fontWeights.cell};
-  border-radius: ${theme.radiuses.lg};
+export const badge = ({
+  spaces,
+  fontSizes,
+  fontWeights,
+  lineHeights,
+  radiuses,
+  colors,
+}: Theme) => css`
+  padding: ${spaces.xs} ${spaces.md};
+  margin: 0 ${spaces.md} 0 0;
+  border: none;
+  background-color: ${colors.backgroundLight};
+  border-radius: ${radiuses.md};
+  cursor: pointer;
+  font-size: ${fontSizes.body2};
+  font-family: inherit;
+  font-weight: ${fontWeights.body2};
+  line-height: ${lineHeights.body2};
+  color: ${colors.textLight};
+  & span {
+    margin-right: ${spaces.xs};
+  }
 `;
 
 export const cross = (theme: Theme) => css`
+  display: inline-block;
   & > i {
+    position: relative;
+    left: 3px;
     font-size: ${theme.fontSizes.body2} !important;
   }
 `;

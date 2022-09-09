@@ -1,7 +1,8 @@
 import type { PrismaClient } from '@prisma/client';
 import { ProductStatus, ProductType } from '@prisma/client';
-import type { ProductQuery } from '@types';
+import type { ProductQuery } from '@vse-bude/shared';
 import { Order } from '@vse-bude/shared';
+import { ITEM_FILTER } from '@vse-bude/shared';
 
 export class ProductRepository {
   private _dbClient: PrismaClient;
@@ -12,12 +13,14 @@ export class ProductRepository {
 
   public getAll(query: ProductQuery) {
     const {
-      limit = 10,
-      from = 0,
+      limit = ITEM_FILTER.PRODUCT_LIMIT_DEFAULT,
+      from = ITEM_FILTER.PRODUCT_FROM_DEFAULT,
       type,
       categoryId,
-      sortBy = 'createdAt',
-      order = Order.ASC,
+      priceGt = ITEM_FILTER.PRICE_GT_DEFAULT,
+      priceLt = ITEM_FILTER.PRICE_LT_DEFAULT,
+      sortBy = ITEM_FILTER.SORT_BY_DEFAULT,
+      order = ITEM_FILTER.ORDER_DEFAULT,
     } = query;
 
     return this._dbClient.product.findMany({
@@ -29,8 +32,35 @@ export class ProductRepository {
       where: {
         type,
         categoryId,
+        status: ProductStatus.ACTIVE,
+        price: {
+          gt: +priceGt,
+          lte: +priceLt,
+        },
       },
     });
+  }
+
+  public async getAllItemsLength(query: ProductQuery) {
+    const {
+      type,
+      categoryId,
+      priceGt = ITEM_FILTER.PRICE_GT_DEFAULT,
+      priceLt = ITEM_FILTER.PRICE_LT_DEFAULT,
+    } = query;
+    const items = await this._dbClient.product.findMany({
+      where: {
+        type,
+        categoryId,
+        status: ProductStatus.ACTIVE,
+        price: {
+          gt: +priceGt,
+          lte: +priceLt,
+        },
+      },
+    });
+
+    return items.length;
   }
 
   public getById(id: string) {

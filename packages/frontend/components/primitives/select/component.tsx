@@ -5,13 +5,13 @@ import { Dropdown } from '../menu-dropdown';
 import type { SelectProps } from './types';
 import * as styles from './styles';
 
-export const Select = ({
+export function Select<T>({
   options,
   error,
   value = '',
   setValue,
   ...props
-}: SelectProps) => {
+}: SelectProps<T>) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -45,4 +45,4 @@ export const Select = ({
       </div>
     </Dropdown>
   );
-};
+}

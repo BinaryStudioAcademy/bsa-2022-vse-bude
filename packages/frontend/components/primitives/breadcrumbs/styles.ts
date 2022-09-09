@@ -2,7 +2,7 @@
 import { css } from '@emotion/react';
 
 export const wrapper = ({ spaces, breakpoints, fontSizes }: Theme) => css`
-  padding: ${spaces.md} 0;
+  padding: ${spaces.lg} 0;
   margin-top: ${spaces.xl7};
   a {
     margin-right: ${spaces.lg};

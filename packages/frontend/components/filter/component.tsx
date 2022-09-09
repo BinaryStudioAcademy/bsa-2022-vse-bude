@@ -1,55 +1,50 @@
-import type { ProductType } from '@vse-bude/shared';
+import type { ProductQuery } from '@vse-bude/shared';
 import { useRouter } from 'next/router';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { fetchProducts } from 'store/product';
-import { useEffect, useState } from 'react';
-import { css } from '@emotion/react';
-import { Button } from '@primitives';
-import { PostTypeModal } from '@components/make-a-post/type-of-post';
-import { ProductGrid } from './product-grid/component';
-
-interface RequestOptions {
-  limit?: number;
-  type?: ProductType;
-  category?: string;
-}
+import { useEffect } from 'react';
+import { Routes } from '@enums';
+import { Container } from '@components/primitives';
+import { ProductGrid } from './product-grid';
+import { FilterHeader } from './filter-header';
+import { Pagination } from './pagination';
+import { ProductsLoader } from './products-loader';
 
 export const Filter = () => {
-  const [isOpenTypeOfPost, setIsOpenTypeOfPost] = useState(false);
-  const { query } = useRouter();
-  const { list } = useTypedSelector((store) => store.product);
+  const { query, push } = useRouter();
+  const { list, loading } = useTypedSelector((store) => store.product);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const filter: RequestOptions =
-      query.filter && JSON.parse(query.filter as string);
+    if (!query?.filter) {
+      dispatch(fetchProducts({}));
 
-    dispatch(
-      fetchProducts({
-        limit: filter?.limit,
-        type: filter?.type,
-        categoryId: filter?.category,
-      }),
-    );
-  }, [dispatch, query]);
+      return;
+    }
+    try {
+      const filter: ProductQuery =
+        query.filter && JSON.parse(query.filter as string);
+      dispatch(fetchProducts(filter));
+    } catch (_) {
+      push({
+        pathname: Routes.ITEMS,
+      });
+    }
+  }, [dispatch, query, push]);
 
   return (
-    <div>
-      <PostTypeModal
-        isOpen={isOpenTypeOfPost}
-        setIsOpen={setIsOpenTypeOfPost}
-      />
-      <div
-        css={css`
-          margin: 20px auto 0;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        `}
-      >
-        <Button onClick={() => setIsOpenTypeOfPost(true)}>Create a Post</Button>
-      </div>
-      <ProductGrid lots={list}></ProductGrid>
-    </div>
+    <>
+      <FilterHeader />
+      <Container>
+        {loading ? (
+          <ProductsLoader />
+        ) : (
+          <>
+            <ProductGrid lots={list} />
+            <Pagination />
+          </>
+        )}
+      </Container>
+    </>
   );
 };

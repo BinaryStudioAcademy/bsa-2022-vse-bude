@@ -1,0 +1,28 @@
+{
+  "headline": {
+    "header": "Find Your Special Lots",
+    "notFound": "Таких товарів ще немає"
+  },
+  "typeBtn": {
+    "AUCTION": "Аукціон",
+    "SELLING": "Фіксована ціна",
+    "ALL": "Усі"
+  },
+  "label": {
+    "category": "Категорія",
+    "price": "Ціна",
+    "sortBy": "Сортувати за"
+  },
+  "placeholder": {
+    "category": "Категорія",
+    "sortBy": "Сортувати за"
+  },
+  "sortBy": {
+    "priceAsc": "Від дешевих до дорогих",
+    "priceDesc": "Від дорогих до дешевих",
+    "dateAsc": "Від нових до старих",
+    "dateDesc": "Від старих до нових",
+    "viewsDesc": "Найбільше переглядів",
+    "viewsAsc": "Найменше переглядів"
+  }
+}

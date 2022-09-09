@@ -4,8 +4,8 @@ import type {
   CreateBidRequest,
   Http,
   ProductIdRequest,
+  ProductQuery,
 } from '@vse-bude/shared';
-import type { ProductType } from '@vse-bude/shared';
 import {
   getProductById,
   fetchAuctionPermissions,
@@ -20,27 +20,13 @@ import {
 import { addToast } from 'store/toast/actions';
 import { ProductActions } from './action-types';
 
-interface RequestOptions {
-  limit?: number;
-  type?: ProductType;
-  categoryId?: string;
-}
-
-// interface RequestOptionsSSR extends RequestOptions {
-//   httpSSR: Http;
-// }
-
 export const fetchProducts = createAsyncThunk(
   ProductActions.FETCH_PRODUCTS,
   async (
-    { limit, type, categoryId }: RequestOptions,
+    query: ProductQuery,
     { rejectWithValue, dispatch },
   ) =>
-    getProducts({
-      limit,
-      type,
-      categoryId,
-    }).catch((e) => {
+    getProducts(query).catch((e) => {
       dispatch(
         addToast({
           level: 'error',
@@ -64,12 +50,6 @@ export const fetchSimilarProducts = createAsyncThunk(
       rejectWithValue(e.message);
     }),
 );
-
-// export const fetchProductsSSR = createAsyncThunk(
-//   ProductActions.FETCH_PRODUCTS,
-//   async ({ httpSSR, limit, type }: RequestOptionsSSR, { rejectWithValue }) =>
-//     getProductsSSR({ httpSSR, limit, type }).catch(() => rejectWithValue([])),
-// );
 
 export const fetchProductSSR = createAsyncThunk(
   ProductActions.FETCH_PRODUCT,

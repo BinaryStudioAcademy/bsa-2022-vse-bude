@@ -1,14 +1,13 @@
-import type { ApiRoutes } from '@vse-bude/shared';
+import type { ApiRoutes, ProductQuery } from '@vse-bude/shared';
 import type { Request } from 'express';
 import { Router } from 'express';
 import { wrap } from '@helpers';
 import type { Services } from '@services';
 import { apiPath } from '@helpers';
-import type { Product } from '@prisma/client';
-import type { ProductQuery } from '@types';
 import { ProductApiRoutes } from '@vse-bude/shared';
 import { authMiddleware } from '@middlewares';
 import multer from 'multer';
+import type { AllProductsResponse } from '@types';
 
 export const initProductRoutes = (
   { productService }: Services,
@@ -77,7 +76,7 @@ export const initProductRoutes = (
 
   router.get(
     apiPath(path),
-    wrap<Empty, Product[], Empty, ProductQuery>((req) =>
+    wrap<Empty, AllProductsResponse, Empty, ProductQuery>((req) =>
       productService.getAll(req.query),
     ),
   );
