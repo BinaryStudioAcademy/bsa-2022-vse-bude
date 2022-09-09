@@ -8,6 +8,7 @@ import auth from './auth.json';
 import createPost from './create-post.json';
 import item from './item.json';
 import rules from './rules.json';
+import myList from './my-list.json';
 
 export const ua = {
   home,
@@ -15,6 +16,7 @@ export const ua = {
   'public': publicCommon,
   'personal-info': personalInfo,
   'create-post': createPost,
+  'my-list': myList,
   common,
   auth,
   item,

@@ -9,27 +9,69 @@ export class MyListRepository {
     this._dbClient = prismaClient;
   }
 
-  public getAllUserItems({ userId }: { userId: string }) {
+  public getPurchasedItems({ userId }: { userId: string }) {
     return this._dbClient.product.findMany({
       where: {
-        OR: [
-          {
-            authorId: userId,
-            status: ProductStatus.DRAFT,
+        winnerId: userId,
+        status: ProductStatus.FINISHED,
+      },
+      select: {
+        id: true,
+        title: true,
+        imageLinks: true,
+        price: true,
+        type: true,
+        status: true,
+        author: {
+          select: {
+            id: true,
+            avatar: true,
+            firstName: true,
+            lastName: true,
           },
-          {
-            authorId: userId,
-            status: ProductStatus.ACTIVE,
+        },
+        endDate: true,
+      },
+      orderBy: {
+        endDate: Order.DESC,
+      },
+    });
+  }
+
+  public getSoldItems({ userId }: { userId: string }) {
+    return this._dbClient.product.findMany({
+      where: {
+        authorId: userId,
+        status: ProductStatus.FINISHED,
+      },
+      select: {
+        id: true,
+        title: true,
+        imageLinks: true,
+        price: true,
+        type: true,
+        status: true,
+        winner: {
+          select: {
+            id: true,
+            avatar: true,
+            firstName: true,
+            lastName: true,
           },
-          {
-            authorId: userId,
-            status: ProductStatus.FINISHED,
-          },
-          {
-            winnerId: userId,
-            status: ProductStatus.FINISHED,
-          },
-        ],
+        },
+        endDate: true,
+      },
+      orderBy: {
+        endDate: Order.DESC,
+      },
+    });
+  }
+
+  public getPostedItems({ userId }: { userId: string }) {
+    return this._dbClient.product.findMany({
+      where: {
+        authorId: userId,
+        status: ProductStatus.ACTIVE,
       },
       select: {
         id: true,
@@ -38,18 +80,105 @@ export class MyListRepository {
         price: true,
         recommendedPrice: true,
         minimalBid: true,
+        imageLinks: true,
         country: true,
         city: true,
         phone: true,
+        socialMedia: {
+          select: {
+            id: true,
+            socialMedia: true,
+            link: true,
+          },
+        },
         type: true,
         status: true,
-        imageLinks: true,
+        category: {
+          select: {
+            title: true,
+          },
+        },
         views: true,
-        authorId: true,
-        winnerId: true,
-        categoryId: true,
         postDate: true,
+      },
+      orderBy: {
+        createdAt: Order.DESC,
+      },
+    });
+  }
+
+  public getDraftedItems({ userId }: { userId: string }) {
+    return this._dbClient.product.findMany({
+      where: {
+        authorId: userId,
+        status: ProductStatus.DRAFT,
+      },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        price: true,
+        recommendedPrice: true,
+        minimalBid: true,
+        imageLinks: true,
+        country: true,
+        city: true,
+        phone: true,
+        socialMedia: {
+          select: {
+            id: true,
+            socialMedia: true,
+            link: true,
+          },
+        },
+        type: true,
+        status: true,
+        category: {
+          select: {
+            title: true,
+          },
+        },
         updatedAt: true,
+      },
+      orderBy: {
+        createdAt: Order.DESC,
+      },
+    });
+  }
+
+  public getCancelled({ userId }: { userId: string }) {
+    return this._dbClient.product.findMany({
+      where: {
+        authorId: userId,
+        status: ProductStatus.CANCELLED,
+      },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        price: true,
+        recommendedPrice: true,
+        minimalBid: true,
+        imageLinks: true,
+        country: true,
+        city: true,
+        phone: true,
+        socialMedia: {
+          select: {
+            id: true,
+            socialMedia: true,
+            link: true,
+          },
+        },
+        type: true,
+        status: true,
+        category: {
+          select: {
+            title: true,
+          },
+        },
+        views: true,
+        postDate: true,
       },
       orderBy: {
         createdAt: Order.DESC,
