@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { NavigationProp } from '@react-navigation/native';
-import { ProductType, ProductStatuses } from '@vse-bude/shared';
+import { ProductType, ProductStatus } from '@vse-bude/shared';
 import { RootNavigationParamList } from '~/common/types/types';
 import { RootScreenName } from '~/common/enums/enums';
 import { selectProductById } from '~/store/selectors';
@@ -40,7 +40,7 @@ const Product: FC<Props> = ({ productId }) => {
   const timeToAuctionEnd = getTimeToEvent(endDate);
   const createdAtDate = getTimeToEvent(createdAt);
   const isAuction = type === ProductType.AUCTION;
-  const isActive = status === ProductStatuses.ACTIVE;
+  const isActive = status === ProductStatus.ACTIVE;
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
   const navigation = useNavigation<NavigationProp<RootNavigationParamList>>();

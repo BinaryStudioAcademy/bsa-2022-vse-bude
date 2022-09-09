@@ -1,4 +1,4 @@
-import type { ProductType, ProductStatuses } from '../../enums';
+import type { ProductType, ProductStatus } from '../../enums';
 import type { SocialMedia } from '../social-media';
 import type { AuthorDto } from './author-dto';
 import type { WinnerDto } from './winner-dto';
@@ -22,7 +22,7 @@ type ProductDto = {
   phone: string;
   socialMedia: SocialMedia[];
   type: ProductType;
-  status: ProductStatuses;
+  status: ProductStatus;
   condition: Condition;
   category: CategoryDto;
   views: number;
