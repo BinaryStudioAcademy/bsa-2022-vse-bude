@@ -42,12 +42,14 @@ export const SellerInfo = ({ seller, onContactSeller }: SellerInfoProps) => {
         </Link>
       </div>
       <div css={styles.contacts}>
-        <div css={styles.phone}>
-          <Icon size="md" icon={IconName.PHONE} color={IconColor.YELLOW} />
-          <a css={styles.sellerSocialLink} href={`tel:${seller.phone}`}>
-            {seller.phone}
-          </a>
-        </div>
+        {seller.phone && (
+          <div css={styles.phone}>
+            <Icon size="md" icon={IconName.PHONE} color={IconColor.YELLOW} />
+            <a css={styles.sellerSocialLink} href={`tel:${seller.phone}`}>
+              {seller.phone}
+            </a>
+          </div>
+        )}
         {seller.socialMedia.map((social) => (
           <div key={social.id}>
             <Anchor href={social.link}>

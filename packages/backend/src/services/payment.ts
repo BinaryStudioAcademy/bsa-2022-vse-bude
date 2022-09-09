@@ -109,7 +109,7 @@ export class PaymentService {
       productPrice: Number(order.product.price),
       merchantTransactionSecureType: 'AUTO',
       merchantSignature,
-      returnUrl: `${this.merchantDomainName}${ApiRoutes.ORDERS}${OrderApiRoutes.SUCCESS}`,
+      returnUrl: `${this.apiUrl}${ApiRoutes.ORDERS}${OrderApiRoutes.SUCCESS}`,
       serviceUrl: `${this.apiUrl}${ApiRoutes.ORDERS}${OrderApiRoutes.STATUS}`,
       clientFirstName: order.buyer.firstName,
       clientLastName: order.buyer.lastName,

@@ -31,6 +31,7 @@
     "confirmText": "Are you sure to leave the auction? All bids will be deleted!"
   },
   "buttons": {
+    "editBtn": "Edit",
     "placeBid": "Place Bid",
     "buyBtn": "Buy",
     "tooltips": {

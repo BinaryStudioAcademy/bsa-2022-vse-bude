@@ -10,4 +10,5 @@ export enum AuthActions {
   EMAIL_RESEND_CODE = 'user/email-resend-code',
   SEND_RESET_PASSWORD_LINK = 'user/send-reset-password-link',
   UPDATE_PASSWORD = 'user/update-password',
+  CLEAR_ERRORS = 'user/clear-errors',
 }

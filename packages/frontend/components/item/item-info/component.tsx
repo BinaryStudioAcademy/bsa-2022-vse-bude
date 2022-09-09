@@ -12,6 +12,10 @@ interface ItemInfoProps {
 
 export const ItemInfo = ({ item }: ItemInfoProps) => {
   const { t } = useTranslation();
+
+  const getDate = (date) =>
+    new Date(date).toLocaleDateString().replaceAll('/', '.');
+  const getTime = (date) => new Date(date).toLocaleTimeString();
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   const handleContactSeller = () => {};
 
@@ -23,11 +27,13 @@ export const ItemInfo = ({ item }: ItemInfoProps) => {
             <React.Fragment>
               <tr>
                 <td>{t('item:endingCaption')}</td>
-                <td>28.09.2022, 12:00 pm</td>
+                <td>
+                  {getDate(item.endDate)} {getTime(item.endDate)}
+                </td>
               </tr>
               <tr>
                 <td>{t('item:timezoneCaption')}</td>
-                <td>GMT +3</td>
+                <td>{'GMT +3'}</td>
               </tr>
             </React.Fragment>
           )}
@@ -48,7 +54,7 @@ export const ItemInfo = ({ item }: ItemInfoProps) => {
         </tbody>
       </table>
       <SellerInfo
-        seller={item.author}
+        seller={{ ...item.author, phone: item.phone }}
         onContactSeller={() => handleContactSeller()}
       />
     </div>
