@@ -22,9 +22,8 @@ const NewItemForm: FC = () => {
   const { t } = useTranslation();
   const styles = useStyles();
   const categories = useAppSelector(selectCategories);
-  const formattedCategories = categories
-    ? categoryForDropdown(categories)
-    : null;
+  const formattedCategories =
+    categories && categories.length ? categoryForDropdown(categories) : null;
 
   const { control, errors } = useAppForm<IPostForms>({
     defaultValues: {
