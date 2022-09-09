@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getStrictTimeToEvent } from '~/helpers/date/date';
 import { UPDATE_END_DATE_INTERVAL_MILLISECONDS } from '~/common/constants/constants';
 
-const useCountdownInterval = (endDate: Date) => {
+const useCountdownInterval = (endDate: string) => {
   const [duration, setDuration] = useState({
     days: '00',
     hours: '00',
