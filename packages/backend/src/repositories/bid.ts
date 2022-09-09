@@ -24,6 +24,18 @@ export class BidRepository {
     ]);
   }
 
+  async lastProductBid(productId: string) {
+    return await this._dbClient.bid.findFirst({
+      take: 1,
+      where: {
+        productId: productId,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+  }
+
   async getByUserAndProduct(userId: string, productId: string) {
     return this._dbClient.bid.findMany({
       where: {
