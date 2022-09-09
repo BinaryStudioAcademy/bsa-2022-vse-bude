@@ -1,5 +1,4 @@
-import type { ProductStatus } from './product-status-dto';
-import type { ProductType } from './product-type-dto';
+import type { ProductStatus, ProductType } from '../../enums';
 
 export interface MyListItem {
   id: string;

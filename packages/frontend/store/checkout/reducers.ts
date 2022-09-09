@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { OrderDto, PurchaseRequestData } from '@vse-bude/shared';
-import { fetchCreateOrder, fetchPurchaseRequestData } from './actions';
+import { createOrderAction, fetchPurchaseRequestData } from './actions';
 
 interface CheckoutState {
   purchaseRequestData: PurchaseRequestData | null;
@@ -30,14 +30,14 @@ const checkoutSlice = createSlice({
       state.loading = false;
     },
 
-    [fetchCreateOrder.pending.type](state) {
+    [createOrderAction.pending.type](state) {
       state.loading = true;
     },
-    [fetchCreateOrder.fulfilled.type](state, { payload }) {
+    [createOrderAction.fulfilled.type](state, { payload }) {
       state.order = payload;
       state.loading = false;
     },
-    [fetchCreateOrder.rejected.type](state) {
+    [createOrderAction.rejected.type](state) {
       state.loading = false;
     },
   },

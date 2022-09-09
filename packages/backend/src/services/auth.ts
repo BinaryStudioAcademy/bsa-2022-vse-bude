@@ -80,16 +80,14 @@ export class AuthService {
   }
 
   async signUp(signUpDto: UserSignUpDto): Promise<AuthResponse> {
-    const userByEmail = await this._userRepository.getNewByEmail(
-      signUpDto.email,
-    );
+    const userByEmail = await this._userRepository.getByEmail(signUpDto.email);
 
     if (userByEmail) {
       throw new UserExistsError();
     }
 
     if (signUpDto.phone) {
-      const userByPhone = await this._userRepository.getNewByPhone({
+      const userByPhone = await this._userRepository.getByPhone({
         phone: signUpDto.phone,
       });
       if (userByPhone) {
@@ -202,6 +200,12 @@ export class AuthService {
   }
 
   async resetPasswordLink(email: string) {
+    const userByEmail = await this._userRepository.getByEmail(email);
+
+    if (!userByEmail) {
+      throw new UserNotFoundError();
+    }
+
     const hashValue = this._hashService.generateHash(
       `${email}${this._hashService.getRandomHash()}`,
     );
