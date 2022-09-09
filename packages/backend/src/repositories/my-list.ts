@@ -18,7 +18,6 @@ export class MyListRepository {
       select: {
         id: true,
         title: true,
-        description: true,
         imageLinks: true,
         price: true,
         type: true,
@@ -48,7 +47,6 @@ export class MyListRepository {
       select: {
         id: true,
         title: true,
-        description: true,
         imageLinks: true,
         price: true,
         type: true,

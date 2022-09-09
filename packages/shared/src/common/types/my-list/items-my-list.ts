@@ -62,7 +62,7 @@ export interface DraftedItems {
   type: TypesItems;
   status: StatusesItems;
   category?: ItemCategory;
-  updatedAt: true;
+  updatedAt: string;
 }
 
 export interface CancelledItems {

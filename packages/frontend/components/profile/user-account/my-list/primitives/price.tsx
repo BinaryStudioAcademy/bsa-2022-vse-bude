@@ -1,7 +1,7 @@
 import { useTranslation } from 'next-i18next';
 import * as styles from './styles';
 
-export const Price = ({ price }: { price: string }): JSX.Element => {
+export const Price = ({ price }: { price: number }): JSX.Element => {
   const { t } = useTranslation();
 
   return (

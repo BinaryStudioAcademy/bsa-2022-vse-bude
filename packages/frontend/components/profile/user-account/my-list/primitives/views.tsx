@@ -2,7 +2,7 @@ import { Icon } from '@primitives';
 import { IconColor, IconName } from '@enums';
 import * as styles from './styles';
 
-export const Views = ({ views }: { views: string }) => (
+export const Views = ({ views }: { views: number }) => (
   <div css={styles.viewsWrapper}>
     <Icon
       icon={IconName.EYE}
