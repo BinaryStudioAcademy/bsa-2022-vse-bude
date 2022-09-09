@@ -48,5 +48,9 @@
       }
     },
     "closeImageModal": "Закрити вікно"
+  },
+  "condition": {
+    "NEW": "новий",
+    "USED": "уживаний"
   }
 }
