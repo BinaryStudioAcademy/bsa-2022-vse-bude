@@ -1,4 +1,4 @@
-import { Column, Icon } from '@primitives';
+import { Column, Icon, IconButton } from '@primitives';
 import Image from 'next/image';
 import { IconColor, IconName } from '@enums';
 import { useTranslation } from 'next-i18next';
@@ -78,6 +78,11 @@ function ImageInput({ images, setImages }: ImageInputProps) {
     setCurrentImage(undefined);
   };
 
+  const onImageDelete = (img: string) => {
+    setImagePreviews(imagePreviews.filter((item) => item !== img));
+    setImages(images.filter((item) => item !== img));
+  };
+
   useEffect(() => {
     if (
       images.filter((item) => typeof item === 'string').length === images.length
@@ -112,6 +117,15 @@ function ImageInput({ images, setImages }: ImageInputProps) {
           imagePreviews.map((item, indx) => (
             <div key={indx} css={styles.imgWrapper}>
               <Image objectFit="cover" layout="fill" src={item} />
+              <IconButton
+                cssExtend={styles.deleteImageBtn}
+                ariaLabel="close"
+                icon={IconName.XMARK}
+                color={IconColor.ORANGE}
+                backgroundColor={'lightgray'}
+                size="sm"
+                onClick={() => onImageDelete(item)}
+              ></IconButton>
             </div>
           ))}
         {imagePreviews.length < MAX_IMAGE_COUNT && (

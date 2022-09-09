@@ -109,6 +109,12 @@ export const imgWrapper = ({ radiuses, colors }: Theme) => css`
   background-color: ${colors.backgroundLight};
   overflow: hidden;
 `;
+
+export const deleteImageBtn = ({ spaces }: Theme) => css`
+  position: absolute;
+  right: ${spaces.sm};
+  top: ${spaces.sm};
+`;
 export const photosLabelWrapper = ({ radiuses, colors, spaces }: Theme) => css`
   position: relative;
   display: flex;
