@@ -1,5 +1,5 @@
 import React from 'react';
-import { SaveUserProfileDto } from '@vse-bude/shared';
+import { FullUserProfileDto, SaveUserProfileDto } from '@vse-bude/shared';
 import {
   useAppDispatch,
   useAppForm,
@@ -17,53 +17,57 @@ import {
 } from '~/common/enums/enums';
 import { RootNavigationProps } from '~/common/types/types';
 import {
-  selectPhoneVerified,
   selectDataStatusPersonalInfo,
   selectAuthDataStatus,
-  selectEmailVerified,
 } from '~/store/selectors';
 import { personalInfoActions, auth as authActions } from '~/store/actions';
 import { personalInfoSchema } from '~/validation-schemas/validation-schemas';
 import { notification } from '~/services/services';
+import {
+  personalInfoParser,
+  updatePersonalInfoParser,
+} from '~/helpers/helpers';
 import { Title, VerifyField } from '../components';
 
 type Props = {
-  personalInfo: SaveUserProfileDto;
+  personalInfo: FullUserProfileDto;
 };
 
 const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const navigation = useNavigation<RootNavigationProps>();
-  const isPhoneVerified = useAppSelector(selectPhoneVerified);
-  const isEmailVerified = useAppSelector(selectEmailVerified);
+  const isPhoneVerified = personalInfo.phoneVerified;
+  const isEmailVerified = personalInfo.emailVerified;
   const dataStatusPersonalInfo = useAppSelector(selectDataStatusPersonalInfo);
   const dataStatusAuth = useAppSelector(selectAuthDataStatus);
   const isLoading = [dataStatusPersonalInfo, dataStatusAuth].includes(
     DataStatus.PENDING,
   );
+  const parsedPersonalInfo = personalInfoParser(personalInfo);
   const DEFAULT_VALUES = {
-    firstName: personalInfo.firstName,
-    lastName: personalInfo.lastName,
-    email: personalInfo.email,
-    phone: personalInfo.phone,
-    country: personalInfo.country,
-    region: personalInfo.region,
-    city: personalInfo.city,
-    zip: personalInfo.zip,
-    deliveryData: personalInfo.deliveryData,
-    instagram: personalInfo.instagram,
-    linkedin: personalInfo.linkedin,
-    facebook: personalInfo.facebook,
-    password: personalInfo.password,
-    newPassword: personalInfo.newPassword,
-    repeatPassword: personalInfo.repeatPassword,
+    firstName: parsedPersonalInfo.firstName,
+    lastName: parsedPersonalInfo.lastName,
+    email: parsedPersonalInfo.email,
+    phone: parsedPersonalInfo.phone,
+    country: parsedPersonalInfo.country,
+    region: parsedPersonalInfo.region,
+    city: parsedPersonalInfo.city,
+    zip: parsedPersonalInfo.zip,
+    deliveryData: parsedPersonalInfo.deliveryData,
+    instagram: parsedPersonalInfo.instagram,
+    linkedin: parsedPersonalInfo.linkedin,
+    facebook: parsedPersonalInfo.facebook,
+    password: parsedPersonalInfo.password,
+    newPassword: parsedPersonalInfo.newPassword,
+    repeatPassword: parsedPersonalInfo.repeatPassword,
   };
   const { control, errors, handleSubmit, reset } =
     useAppForm<SaveUserProfileDto>({
       defaultValues: DEFAULT_VALUES,
       validationSchema: personalInfoSchema,
     });
+
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
       notification.error(t('errors.CORRECTLY_FILLED'));
@@ -71,7 +75,11 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
   }, [errors]);
 
   const onSubmit = (payload: SaveUserProfileDto): void => {
-    dispatch(personalInfoActions.updatePersonalInfo(payload))
+    dispatch(
+      personalInfoActions.updatePersonalInfo(
+        updatePersonalInfoParser(payload, personalInfo.socialMedia),
+      ),
+    )
       .unwrap()
       .then(() => {
         dispatch(authActions.getCurrentUser());

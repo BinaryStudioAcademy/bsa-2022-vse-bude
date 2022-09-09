@@ -1,5 +1,11 @@
 export { useColorScheme } from 'react-native';
-export { useState, useEffect, useMemo, useLayoutEffect } from 'react';
+export {
+  useState,
+  useEffect,
+  useMemo,
+  useLayoutEffect,
+  useCallback,
+} from 'react';
 export {
   useNavigation,
   useRoute,
