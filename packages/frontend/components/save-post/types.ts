@@ -1,6 +1,11 @@
 import type { SelectOption } from '@components/primitives/select/types';
 import { ProductStatus } from '@vse-bude/shared';
-import type { ICreateAuction, IPostForms, ProductType , Condition } from '@vse-bude/shared';
+import type {
+  ICreateAuction,
+  IPostForms,
+  ProductType,
+  Condition,
+} from '@vse-bude/shared';
 import type {
   FieldErrorsImpl,
   UseFormRegister,
@@ -47,6 +52,6 @@ export type ConditionFieldsType = {
 };
 
 export const PostStatuses = {
-  CREATE: ProductStatus[1],
-  DRAFT: ProductStatus[5],
+  CREATE: ProductStatus.ACTIVE,
+  DRAFT: ProductStatus.DRAFT,
 };
