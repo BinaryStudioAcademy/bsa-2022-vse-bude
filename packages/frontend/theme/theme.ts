@@ -112,6 +112,7 @@ const heights = {
   textarea: '96px',
   checkbox: '20px',
   controlSm: '35px',
+  buttonXs: '30px',
   controlBg: '45px',
   download: '40px',
   logo: '32px',

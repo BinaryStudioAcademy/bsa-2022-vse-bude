@@ -24,5 +24,8 @@
     "dateDesc": "Old to New",
     "viewsDesc": "Most views",
     "viewsAsc": "Least Views"
+  },
+  "btn":{
+    "save":"Save"
   }
 }

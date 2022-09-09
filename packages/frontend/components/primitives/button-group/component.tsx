@@ -23,7 +23,7 @@ export const ButtonGroup = ({
           }}
           {...props}
         >
-          {button.name}
+          {button.text}
         </button>
       ))}
     </div>

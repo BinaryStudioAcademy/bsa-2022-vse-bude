@@ -37,7 +37,7 @@ export const controllersWrapper = css`
   position: relative;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
 `;
 export const iconWrapper = css`
   display: flex;
@@ -55,29 +55,6 @@ export const crossIcon = css`
   left: 3px;
 `;
 
-export const btn = ({
-  spaces,
-  fontSizes,
-  fontWeights,
-  lineHeights,
-  radiuses,
-  colors,
-}: Theme) => css`
-  padding: ${spaces.xs} ${spaces.md};
-  margin: 0 ${spaces.md} ${spaces.md} 0;
-  border: none;
-  background-color: ${colors.backgroundLight};
-  border-radius: ${radiuses.md};
-  cursor: pointer;
-  font-size: ${fontSizes.body2};
-  font-family: inherit;
-  font-weight: ${fontWeights.body2};
-  line-height: ${lineHeights.body2};
-  color: ${colors.textLight};
-  & span {
-    margin-right: ${spaces.xs};
-  }
-`;
 export const popoverWrapper = css`
   z-index: 10;
 `;

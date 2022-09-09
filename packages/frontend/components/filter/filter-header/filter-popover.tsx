@@ -101,7 +101,10 @@ export function FilterPopover() {
     >
       {() => (
         <div css={styles.popover}>
-          <h5 css={styles.popoverHeadline}>Category</h5>
+          <h5 css={styles.popoverHeadline}>
+            {' '}
+            {t('items-page:label.category')}
+          </h5>
           <Select
             options={categories.map((item: CategoryDto) => ({
               title: item.title,
@@ -111,10 +114,10 @@ export function FilterPopover() {
             setValue={setCategory}
             id="post-category"
             name="category"
-            placeholder={t('create-post:placeholder.category')}
+            placeholder={t('items-page:placeholder.category')}
           />
           <div css={styles.popoverDivider}></div>
-          <h5 css={styles.popoverHeadline}>Price</h5>
+          <h5 css={styles.popoverHeadline}> {t('items-page:label.price')}</h5>
           <Flex css={styles.price}>
             <Input
               name={MIN_PRICE_NAME}
@@ -136,17 +139,18 @@ export function FilterPopover() {
             />
           </Flex>
           <div css={styles.popoverDivider}></div>
-          <h5 css={styles.popoverHeadline}>Sort by</h5>
+          <h5 css={styles.popoverHeadline}> {t('items-page:label.sortBy')}</h5>
           <div css={styles.sortBySelect}>
             <Select
               value={sortBy?.title}
               setValue={setSortBy}
               options={sortByOptions(t)}
+              placeholder={t('items-page:placeholder.sortBy')}
             />
           </div>
           <Flex justify={'flex-end'}>
             <Button onClick={onSaveHandler} size="small">
-              Save
+              {t('items-page:btn.save')}
             </Button>
           </Flex>
         </div>

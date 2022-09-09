@@ -8,6 +8,7 @@ import { ProductType } from '@vse-bude/shared';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { ButtonGroup } from '@components/primitives/button-group';
 import { FilterPopover } from './filter-popover';
 import { ALL_PRODUCTS, filterBreadcrumbsPath } from './filter-utils';
 import type { AllProductType } from './types';
@@ -87,31 +88,35 @@ export function FilterHeader() {
             </div>
             <Flex justify={'space-between'}>
               <Flex css={styles.categoryWrapper} justify={'space-between'}>
-                <button
-                  onClick={() => {
-                    setProductType(ALL_PRODUCTS);
-                    addTypeToQuery(ALL_PRODUCTS);
-                  }}
-                >
-                  {t('items-page:typeBtn.ALL')}
-                </button>
-                <button
-                  onClick={() => {
-                    setProductType(ProductType.SELLING);
-                    addTypeToQuery(ProductType.SELLING);
-                  }}
-                >
-                  {t('items-page:typeBtn.SELLING')}
-                </button>
-                <button
-                  onClick={() => {
-                    setProductType(ProductType.AUCTION);
-                    addTypeToQuery(ProductType.AUCTION);
-                  }}
-                >
-                  {t('items-page:typeBtn.AUCTION')}
-                </button>
-                {productType}
+                <ButtonGroup
+                  buttons={[
+                    {
+                      name: ALL_PRODUCTS,
+                      text: t('items-page:typeBtn.ALL'),
+                      onClick: () => {
+                        setProductType(ALL_PRODUCTS);
+                        addTypeToQuery(ALL_PRODUCTS);
+                      },
+                    },
+                    {
+                      name: ProductType.SELLING,
+                      text: t('items-page:typeBtn.SELLING'),
+                      onClick: () => {
+                        setProductType(ProductType.SELLING);
+                        addTypeToQuery(ProductType.SELLING);
+                      },
+                    },
+                    {
+                      name: ProductType.AUCTION,
+                      text: t('items-page:typeBtn.AUCTION'),
+                      onClick: () => {
+                        setProductType(ProductType.AUCTION);
+                        addTypeToQuery(ProductType.AUCTION);
+                      },
+                    },
+                  ]}
+                  activeDefault={productType}
+                />
               </Flex>
               <div css={styles.controllersWrapper}>
                 <FilterPopover />
