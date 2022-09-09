@@ -23,7 +23,7 @@ export class MyListService {
     return this._myListRepository.getPostedItems({ userId });
   }
 
-  public getCancelled({ userId }: { userId: string }) {
-    return this._myListRepository.getCancelled({ userId });
+  public getArchived({ userId }: { userId: string }) {
+    return this._myListRepository.getArchived({ userId });
   }
 }

@@ -1,4 +1,4 @@
-export enum StatusesItems {
+export enum ProductStatuses {
   CREATED = 'CREATED',
   ACTIVE = 'ACTIVE',
   CANCELLED = 'CANCELLED',

@@ -22,8 +22,8 @@ export const itemImageWrapper = ({ spaces, radiuses }: Theme) => css`
 export const itemImage = ({ radiuses }: Theme) => css`
   display: block;
   border-radius: ${radiuses.xs};
-  width: 102px;
-  height: 102px;
+  width: 100px;
+  height: 100px;
 `;
 
 export const itemTitle = ({
@@ -91,7 +91,7 @@ export const descriptionWrapper = ({
   color: ${colors.text};
 `;
 
-export const buyerWrapper = () => css`
+export const buyerWrapper = css`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -144,7 +144,7 @@ export const avatar = ({ radiuses }: Theme) => css`
   border-radius: ${radiuses.circle};
 `;
 
-export const nameWrapper = () => css`
+export const nameWrapper = css`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -174,7 +174,7 @@ export const dateWrapper = ({ spaces }: Theme) => css`
   align-items: center;
   margin-right: ${spaces.md};
   &[data-size='lg'] {
-    width: 102px;
+    width: 100px;
   }
 `;
 

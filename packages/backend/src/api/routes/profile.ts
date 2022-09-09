@@ -84,18 +84,17 @@ export const initProfileRoutes = (
       await profileService.getUser({
         userId,
       });
-      const purchased = await myListService.getPurchasedItems({ userId });
-      const sold = await myListService.getSoldItems({ userId });
-      const drafted = await myListService.getDraftedItems({ userId });
-      const posted = await myListService.getPostedItems({ userId });
-      console.log(posted);
 
-      return {
-        purchased,
-        sold,
-        posted,
-        drafted,
-      };
+      const requests = [
+        myListService.getPurchasedItems({ userId }),
+        myListService.getSoldItems({ userId }),
+        myListService.getDraftedItems({ userId }),
+        myListService.getPostedItems({ userId }),
+        myListService.getArchived({ userId }),
+      ];
+      const items = requests.map((dbreq) => dbreq);
+
+      return await Promise.all(items).then((items) => items.flat());
     }),
   );
 

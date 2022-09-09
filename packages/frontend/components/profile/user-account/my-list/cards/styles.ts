@@ -16,14 +16,14 @@ export const cardContent = ({ spaces }: Theme) => css`
   padding: ${spaces.lg} ${spaces.xl};
 `;
 
-export const leftContent = () => css`
+export const leftContent = css`
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: center;
 `;
 
-export const rightContent = () => css`
+export const rightContent = css`
   display: flex;
   flex-direction: column;
   width: 215px;
@@ -34,7 +34,7 @@ export const details = ({ colors, spaces }: Theme) => css`
   flex-direction: column;
   margin-bottom: ${spaces.md};
   border-bottom: 2px solid ${colors.backgroundDark};
-  height: 102px;
+  height: 100px;
 `;
 
 export const saleDetails = ({ spaces }: Theme) => css`
@@ -45,7 +45,7 @@ export const saleDetails = ({ spaces }: Theme) => css`
   margin-bottom: ${spaces.sm};
 `;
 
-export const postedFooter = () => css`
+export const postedFooter = css`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;

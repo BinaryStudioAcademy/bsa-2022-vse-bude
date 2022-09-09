@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { HydrateAction } from '@types';
-import type { MyList } from '@vse-bude/shared';
+import type { ProductDto } from '@vse-bude/shared';
 import { HYDRATE } from 'next-redux-wrapper';
 import { fetchMyListSSR } from './actions';
 
 interface MyListState {
-  itemsList: MyList;
+  itemsList: ProductDto[];
   loading: boolean;
   error: string;
 }

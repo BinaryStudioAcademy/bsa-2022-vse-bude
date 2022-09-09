@@ -5,7 +5,6 @@
 export const MyListInfo = () => (
   // const myList = useTypedSelector((state: RootState) => state.myList.itemsList);
   // console.log(myList);
-
   <div>
     {'My-List'}
     <div></div>
