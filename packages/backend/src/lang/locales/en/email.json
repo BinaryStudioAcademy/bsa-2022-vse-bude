@@ -1,0 +1,14 @@
+{
+  "subject": {
+    "auction": "Auction"
+  },
+  "text": {
+    "unsuccessAuctionAuthor": "Unfortunately, your product wasn't sold!",
+    "successAuctionAuthor": "Congratulations, your product was sold!",
+    "successAuctionWinner": "Congratulations, you are the winner in the auction!"
+  },
+  "words": {
+    "link": "Link",
+    "hello": "Hello"
+  }
+}
