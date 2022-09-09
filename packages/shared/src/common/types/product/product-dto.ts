@@ -14,6 +14,11 @@ interface Category {
   title: string;
 }
 
+export enum Condition {
+  NEW = 'NEW',
+  USED = 'USED',
+}
+
 type ProductDto = {
   id: string;
   title: string;
@@ -25,8 +30,8 @@ type ProductDto = {
   city?: string;
   phone?: string;
   type: ProductType;
+  condition: Condition;
   status: ProductStatus;
-  condition: string;
   endDate: string;
   imageLinks: string[];
   views: number;
