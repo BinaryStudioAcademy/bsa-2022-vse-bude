@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import React, { FC } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider as StoreProvider } from 'react-redux';

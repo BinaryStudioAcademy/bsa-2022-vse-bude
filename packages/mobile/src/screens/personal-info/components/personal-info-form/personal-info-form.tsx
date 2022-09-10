@@ -1,58 +1,109 @@
 import React from 'react';
-import { useAppForm, useTranslation, useAppSelector } from '~/hooks/hooks';
-import { View, Input, DropDown, PrimaryButton } from '~/components/components';
+import { FullUserProfileDto, SaveUserProfileDto } from '@vse-bude/shared';
+import {
+  useAppDispatch,
+  useAppForm,
+  useAppSelector,
+  useTranslation,
+  useNavigation,
+  useEffect,
+} from '~/hooks/hooks';
+import { View, Input, PrimaryButton } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { ButtonAppearance } from '~/common/enums/enums';
-import { selectCurrentUser } from '~/store/selectors';
-import { CITIES, COUNTRIES, REGIONS } from '~/mock/mock-personal-info';
-import { Title } from '../components';
-
-type UserPersonalInfo = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  country: string;
-  region: string;
-  city: string;
-  zipCode: string;
-  novaPoshta: string;
-  instagram?: string;
-  linkedin?: string;
-  facebook?: string;
-  password: string;
-  newPassword: string;
-  repeatNewPassword: string;
-};
+import {
+  ButtonAppearance,
+  DataStatus,
+  RootScreenName,
+} from '~/common/enums/enums';
+import { RootNavigationProps } from '~/common/types/types';
+import {
+  selectDataStatusPersonalInfo,
+  selectAuthDataStatus,
+} from '~/store/selectors';
+import { personalInfoActions, auth as authActions } from '~/store/actions';
+import { personalInfoSchema } from '~/validation-schemas/validation-schemas';
+import { notification } from '~/services/services';
+import {
+  personalInfoParser,
+  updatePersonalInfoParser,
+} from '~/helpers/helpers';
+import { Title, VerifyField } from '../components';
 
 type Props = {
-  onSubmit: () => void;
+  personalInfo: FullUserProfileDto;
 };
 
-const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
+const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
   const { t } = useTranslation();
-  const user = useAppSelector(selectCurrentUser);
-  const { control, errors, handleSubmit } = useAppForm<UserPersonalInfo>({
-    defaultValues: {
-      firstName: user?.firstName || '',
-      lastName: user?.lastName || '',
-      email: user?.email || '',
-      phone: user?.phone || '',
-      country: '',
-      region: '',
-      city: '',
-      zipCode: '',
-      novaPoshta: '',
-      instagram: '',
-      linkedin: '',
-      facebook: '',
-      password: '',
-    },
-    //TODO need add validationSchema: personalInfo,
-  });
+  const dispatch = useAppDispatch();
+  const navigation = useNavigation<RootNavigationProps>();
+  const isPhoneVerified = personalInfo.phoneVerified;
+  const isEmailVerified = personalInfo.emailVerified;
+  const dataStatusPersonalInfo = useAppSelector(selectDataStatusPersonalInfo);
+  const dataStatusAuth = useAppSelector(selectAuthDataStatus);
+  const isLoading = [dataStatusPersonalInfo, dataStatusAuth].includes(
+    DataStatus.PENDING,
+  );
+  const parsedPersonalInfo = personalInfoParser(personalInfo);
+  const isVerifyPhoneFieldVisible =
+    !isPhoneVerified && parsedPersonalInfo?.phone;
+  const DEFAULT_VALUES = {
+    firstName: parsedPersonalInfo.firstName,
+    lastName: parsedPersonalInfo.lastName,
+    email: parsedPersonalInfo.email,
+    phone: parsedPersonalInfo.phone,
+    country: parsedPersonalInfo.country,
+    region: parsedPersonalInfo.region,
+    city: parsedPersonalInfo.city,
+    zip: parsedPersonalInfo.zip,
+    deliveryData: parsedPersonalInfo.deliveryData,
+    instagram: parsedPersonalInfo.instagram,
+    linkedin: parsedPersonalInfo.linkedin,
+    facebook: parsedPersonalInfo.facebook,
+    password: parsedPersonalInfo.password,
+    newPassword: parsedPersonalInfo.newPassword,
+    repeatPassword: parsedPersonalInfo.repeatPassword,
+  };
+  const { control, errors, handleSubmit, reset } =
+    useAppForm<SaveUserProfileDto>({
+      defaultValues: DEFAULT_VALUES,
+      validationSchema: personalInfoSchema,
+    });
+
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      notification.error(t('errors.CORRECTLY_FILLED'));
+    }
+  }, [errors]);
+
+  const onSubmit = (payload: SaveUserProfileDto): void => {
+    dispatch(
+      personalInfoActions.updatePersonalInfo(
+        updatePersonalInfoParser(payload, personalInfo.socialMedia),
+      ),
+    )
+      .unwrap()
+      .then(() => {
+        dispatch(authActions.getCurrentUser());
+        notification.success(t('personal_info.CHANGES_SAVED'));
+      })
+      .catch((err) => {
+        // eslint-disable-next-line
+        console.warn(err);
+      });
+  };
 
   const handleCancelPress = (): void => {
-    //TODO add Cancel handler
+    reset({ ...DEFAULT_VALUES });
+    notification.success(t('personal_info.CHANGES_CANCELED'));
+  };
+
+  const handleVerifyPhonePress = () => {
+    navigation.navigate(RootScreenName.VERIFY_PHONE);
+  };
+
+  const handleVerifyEmailPress = () => {
+    //TODO add navigation
   };
 
   return (
@@ -82,6 +133,12 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
       />
+      {!isEmailVerified && (
+        <VerifyField
+          title={t('verification.VERIFY_EMAIL')}
+          onPress={handleVerifyEmailPress}
+        />
+      )}
       <Input
         label={t('verification.PHONE_NUMBER')}
         placeholder={t('verification.PHONE_NUMBER_HINT')}
@@ -90,32 +147,41 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
       />
+      {isVerifyPhoneFieldVisible && (
+        <VerifyField
+          title={t('verificationPhone.VERIFY_PHONE')}
+          onPress={handleVerifyPhonePress}
+        />
+      )}
       <Title label={t('personal_info.ADDRESS')} />
-      <DropDown
+      <Input
         label={t('personal_info.COUNTRY')}
+        placeholder={t('personal_info.COUNTRY_HINT')}
         name="country"
         control={control}
-        items={COUNTRIES}
-        zIndex={15}
+        errors={errors}
+        contentContainerStyle={globalStyles.mt5}
       />
-      <DropDown
+      <Input
         label={t('personal_info.REGION')}
+        placeholder={t('personal_info.REGION_HINT')}
         name="region"
         control={control}
-        items={REGIONS}
-        zIndex={10}
+        errors={errors}
+        contentContainerStyle={globalStyles.mt5}
       />
-      <DropDown
+      <Input
         label={t('personal_info.CITY')}
+        placeholder={t('personal_info.CITY_HINT')}
         name="city"
         control={control}
-        items={CITIES}
-        zIndex={5}
+        errors={errors}
+        contentContainerStyle={globalStyles.mt5}
       />
       <Input
         label={t('personal_info.ZIP_CODE')}
         placeholder={t('personal_info.ZIP_CODE_HINT')}
-        name="zipCode"
+        name="zip"
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
@@ -123,7 +189,7 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
       <Input
         label={t('personal_info.DELIVERY_DATA')}
         placeholder={t('personal_info.DELIVERY_DATA_HINT')}
-        name="novaPoshta"
+        name="deliveryData"
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
@@ -175,7 +241,7 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
       <Input
         label={t('verification.PASSWORD_REPEAT')}
         placeholder={t('verification.PASSWORD_HINT')}
-        name="repeatNewPassword"
+        name="repeatPassword"
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
@@ -185,6 +251,7 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
         <PrimaryButton
           label={t('common:components.BUTTON_SAVE')}
           onPress={handleSubmit(onSubmit)}
+          disabled={isLoading}
         />
       </View>
       <View style={[globalStyles.mt3, globalStyles.mb5]}>
@@ -192,6 +259,7 @@ const PersonalInfoForm: React.FC<Props> = ({ onSubmit }) => {
           label={t('common:components.BUTTON_CANCEL')}
           appearance={ButtonAppearance.TRANSPARENT}
           onPress={handleCancelPress}
+          disabled={isLoading}
         />
       </View>
     </View>

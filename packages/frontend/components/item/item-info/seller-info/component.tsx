@@ -37,17 +37,19 @@ export const SellerInfo = ({ seller, onContactSeller }: SellerInfoProps) => {
           image={seller.avatar}
           handleClick={handleAvatarClick}
         />
-        <Link href={`${Routes.PROFILE}/${seller.id}`} passHref>
+        <Link prefetch={false} href={`${Routes.PROFILE}/${seller.id}`} passHref>
           <span>{seller.firstName + ' ' + seller.lastName}</span>
         </Link>
       </div>
       <div css={styles.contacts}>
-        <div css={styles.phone}>
-          <Icon size="md" icon={IconName.PHONE} color={IconColor.YELLOW} />
-          <a css={styles.sellerSocialLink} href={`tel:${seller.phone}`}>
-            {seller.phone}
-          </a>
-        </div>
+        {seller.phone && (
+          <div css={styles.phone}>
+            <Icon size="md" icon={IconName.PHONE} color={IconColor.YELLOW} />
+            <a css={styles.sellerSocialLink} href={`tel:${seller.phone}`}>
+              {seller.phone}
+            </a>
+          </div>
+        )}
         {seller.socialMedia.map((social) => (
           <div key={social.id}>
             <Anchor href={social.link}>

@@ -5,7 +5,7 @@ import type { TimerTranslations } from '../common/types/timer';
 dayjs.extend(Duration);
 
 export const timeToEventString = (
-  date: Date,
+  date: string,
   { hoursText, daysText, minsText, secsText }: TimerTranslations,
 ): string => {
   let timeString = '';
@@ -26,7 +26,7 @@ export const timeToEventString = (
   return timeString;
 };
 
-export const timeToEventObj = (date: Date) => {
+export const timeToEventObj = (date: string) => {
   const now = dayjs();
   const endDate = dayjs(date);
 

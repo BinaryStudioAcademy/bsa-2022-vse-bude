@@ -1,25 +1,16 @@
-﻿import React, { useEffect } from 'react';
+﻿import React from 'react';
 import type { ItemDto } from '@vse-bude/shared';
 import { ProductType } from '@vse-bude/shared';
 import { Container } from '@primitives';
-import { lightTheme } from 'theme';
 import {
   deleteProductFromFavorites,
   addProductToFavorites,
 } from 'store/favorite-product';
-import {
-  useAppDispatch,
-  useWindowSize,
-  useInFavorite,
-  useTypedSelector,
-} from '@hooks';
-import { fetchCreateOrder } from 'store/checkout';
-import { useRouter } from 'next/router';
-import { Routes } from '@enums';
+import { useAppDispatch, useInFavorite } from '@hooks';
+import { createOrderAction } from 'store/checkout';
 import { ItemImageSlider } from './image-slider/component';
 import { ItemInfoSelling } from './item-info-selling/component';
 import { ItemInfoAuction } from './item-info-auction/component';
-import { ImageSliderSplide } from './image-slider-splide/component';
 import * as styles from './styles';
 
 interface ItemProps {
@@ -27,16 +18,10 @@ interface ItemProps {
 }
 
 export const Item = ({ item }: ItemProps) => {
-  const windowSize = useWindowSize();
-
   const dispatch = useAppDispatch();
 
-  const router = useRouter();
-
-  const order = useTypedSelector((state) => state.checkout.order);
-
   const handleBuy = () => {
-    dispatch(fetchCreateOrder(item.id));
+    dispatch(createOrderAction(item.id));
   };
 
   const isInFavorite = useInFavorite(item.id);
@@ -48,20 +33,10 @@ export const Item = ({ item }: ItemProps) => {
     dispatch(favAction(item.id));
   };
 
-  useEffect(() => {
-    if (order?.id) {
-      router.push(`${Routes.CHECKOUT}?id=${order?.id}`);
-    }
-  }, [order?.id, router]);
-
   return (
     <React.Fragment>
       <Container cssExtend={styles.itemWrapper}>
-        {windowSize.width > lightTheme.breakpoints.sm ? (
-          <ItemImageSlider imageLinks={item.imageLinks} />
-        ) : (
-          <ImageSliderSplide imageLinks={item.imageLinks} />
-        )}
+        <ItemImageSlider imageLinks={item.imageLinks} />
         {item.type === ProductType.SELLING ? (
           <ItemInfoSelling
             item={item}

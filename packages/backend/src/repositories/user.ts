@@ -74,18 +74,10 @@ export class UserRepository {
     });
   }
 
-  public getNewByPhone({ phone }: { phone: string }) {
+  public getByPhone({ phone }: { phone: string }) {
     return this._dbClient.user.findFirst({
       where: {
         phone: phone,
-      },
-    });
-  }
-
-  public getNewByEmail(email: string) {
-    return this._dbClient.user.findFirst({
-      where: {
-        email: email,
       },
     });
   }

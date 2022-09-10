@@ -4,9 +4,15 @@ enum RootScreenName {
   SETTINGS = 'Settings',
   MESSAGES = 'Messages',
   SUPPORT = 'Support',
+  WELCOME = 'Welcome',
+  VERIFY_PHONE = 'Verify phone',
+  VERIFY_CODE = 'Verify code',
+  VERIFIED = 'Verified',
   NEW_ITEM = 'Make a post',
+  ITEM_INFO = 'Product Info',
   TYPE_OF_NEW_POST = 'Type of post',
-  ITEM_INFO = 'Item info',
+  NEW_AUCTION = 'Make an Auction Post',
+  MAIN_WITH_MENU = 'Menu',
 }
 
 export { RootScreenName };

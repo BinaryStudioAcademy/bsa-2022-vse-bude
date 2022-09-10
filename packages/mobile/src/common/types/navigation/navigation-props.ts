@@ -5,7 +5,7 @@ import {
   RootNavigationParamList,
   MainNavigationParamList,
   WelcomeRootNavigationParamList,
-} from '~/common/types/navigation/navigation';
+} from './navigation';
 
 type RootNavigationProps = NativeStackNavigationProp<RootNavigationParamList>;
 type MainNavigationProps = BottomTabScreenProps<MainNavigationParamList>;

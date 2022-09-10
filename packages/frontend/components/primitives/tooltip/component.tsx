@@ -1,5 +1,5 @@
 ﻿import { Fragment, useRef, useEffect, useState, useCallback } from 'react';
-import * as ReactDOM from 'react-dom';
+import { createPortal } from 'react-dom';
 import * as styles from './styles';
 import type { TooltipProps } from './types';
 
@@ -103,10 +103,7 @@ export const Tooltip = ({
   );
 
   const renderPortal = () =>
-    ReactDOM.createPortal(
-      renderPortalBody(),
-      document.querySelector('#portal'),
-    );
+    createPortal(renderPortalBody(), document.querySelector('#portal'));
 
   return (
     <Fragment>

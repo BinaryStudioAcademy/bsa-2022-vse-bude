@@ -3,7 +3,7 @@ import { Button } from '@primitives';
 import { FavoriteButton } from 'components/product/favorite-button/component';
 import { useTranslation } from 'next-i18next';
 import { useTypedSelector } from '@hooks';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { ItemTitle, ItemInfo, ItemPrice } from '../item-info';
 import * as styles from './styles';
 
@@ -20,7 +20,8 @@ export const ItemInfoSelling = ({
   onBuy,
   onChangeIsFavorite,
 }: ItemInfoSellingProps) => {
-  const { t } = useTranslation('item');
+  const { t } = useTranslation();
+  const { push } = useRouter();
   const { user } = useTypedSelector((state) => state.auth);
   const isAuthor = user?.id === item.author.id;
 
@@ -29,17 +30,13 @@ export const ItemInfoSelling = ({
       <ItemTitle title={item.title} views={item.views} />
       <ItemPrice
         amount={item.price}
-        currency="UAH"
+        currency={t('public:uah')}
         cssExtended={styles.price}
       />
       <ItemInfo item={item} />
       <div css={styles.controls}>
         {isAuthor ? (
-          <Link href={`/items/edit/${item.id}`}>
-            <a style={{ textDecoration: 'none' }}>
-              <Button>Edit</Button>
-            </a>
-          </Link>
+          <Button onClick={() => push(`/items/edit/${item.id}`)}>Edit</Button>
         ) : (
           <>
             <FavoriteButton
@@ -50,7 +47,7 @@ export const ItemInfoSelling = ({
               size="md"
               disabled={!user}
             />
-            <Button onClick={onBuy}>{t('buttons.buyBtn')}</Button>
+            <Button onClick={onBuy}>{t('item:buttons.buyBtn')}</Button>
           </>
         )}
       </div>

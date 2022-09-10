@@ -3,9 +3,10 @@ import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-import { MainScreenName, WelcomeRootScreenName } from '~/common/enums/enums';
+import { MainScreenName } from '~/common/enums/enums';
+import { AppIcon, MainNavigationParamList } from '~/common/types/types';
 import { Home, Favorite, MyList, Account } from '~/screens/screens';
-import { useAppSelector, useCustomTheme } from '~/hooks/hooks';
+import { useAppSelector, useCustomTheme, useTranslation } from '~/hooks/hooks';
 import {
   HomeIcon,
   ListIcon,
@@ -14,7 +15,6 @@ import {
   Text,
   UserIcon,
 } from '~/components/components';
-import { AppIcon, MainNavigationParamList } from '~/common/types/types';
 import { selectCurrentUser } from '~/store/selectors';
 import { WelcomeNavigation } from '../welcome/welcome.navigation';
 
@@ -23,6 +23,7 @@ const Tabs = createBottomTabNavigator<MainNavigationParamList>();
 const MainNavigation: FC = () => {
   const { dark, colors } = useCustomTheme();
   const user = useAppSelector(selectCurrentUser);
+  const { t } = useTranslation();
 
   const screenOptions: BottomTabNavigationOptions = {
     headerShown: false,
@@ -52,29 +53,29 @@ const MainNavigation: FC = () => {
       <Tabs.Screen
         name={MainScreenName.HOME}
         component={Home}
-        options={getTabOptions(MainScreenName.HOME, HomeIcon)}
+        options={getTabOptions(t('common:tab_navigation.HOME'), HomeIcon)}
       />
       <Tabs.Screen
         name={MainScreenName.FAVORITE}
         component={Favorite}
-        options={getTabOptions(MainScreenName.FAVORITE, StarIcon)}
+        options={getTabOptions(t('common:tab_navigation.FAVORITE'), StarIcon)}
       />
       <Tabs.Screen
         name={MainScreenName.MY_LIST}
         component={MyList}
-        options={getTabOptions(MainScreenName.MY_LIST, ListIcon)}
+        options={getTabOptions(t('common:tab_navigation.MY_LIST'), ListIcon)}
       />
       {user ? (
         <Tabs.Screen
           name={MainScreenName.ACCOUNT_ROOT}
           component={Account}
-          options={getTabOptions(MainScreenName.ACCOUNT_ROOT, UserIcon)}
+          options={getTabOptions(t('common:tab_navigation.ACCOUNT'), UserIcon)}
         />
       ) : (
         <Tabs.Screen
           name={MainScreenName.WELCOME_ROOT}
           component={WelcomeNavigation}
-          options={getTabOptions(WelcomeRootScreenName.LOG_IN, LogInIcon)}
+          options={getTabOptions(t('common:tab_navigation.LOG_IN'), LogInIcon)}
         />
       )}
     </Tabs.Navigator>
