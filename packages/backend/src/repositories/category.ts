@@ -1,4 +1,6 @@
-import type { PrismaClient, Category } from '@prisma/client';
+import type { PrismaClient } from '@prisma/client';
+import type { CategoryResponseDto } from '@vse-bude/shared';
+import { ProductStatus } from '@vse-bude/shared';
 
 export class CategoryRepository {
   private _dbClient: PrismaClient;
@@ -7,9 +9,23 @@ export class CategoryRepository {
     this._dbClient = prismaClient;
   }
 
-  public getAll(query: Query): Promise<Category[]> {
-    return this._dbClient.category.findMany({
-      take: query.limit ? +query.limit : undefined,
-    });
+  public async getAll(query: Query): Promise<CategoryResponseDto[]> {
+    const [result, count] = await this._dbClient.$transaction([
+      this._dbClient.category.findMany({
+        take: query.limit ? +query.limit : undefined,
+      }),
+      this._dbClient.product.groupBy({
+        by: ['categoryId'],
+        _count: true,
+        where: {
+          status: ProductStatus.ACTIVE,
+        },
+      }),
+    ]);
+
+    return result.map((item) => ({
+      ...item,
+      productsCount: count.find((c) => c.categoryId === item.id)?._count ?? 0,
+    }));
   }
 }
