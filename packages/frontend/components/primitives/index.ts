@@ -16,3 +16,4 @@ export { Error } from './error';
 export * from './input';
 export { Breadcrumbs } from './breadcrumbs';
 export { Modal } from './modal';
+export { Range } from './range';

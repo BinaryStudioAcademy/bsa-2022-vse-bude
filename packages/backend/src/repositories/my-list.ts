@@ -95,6 +95,7 @@ export class MyListRepository {
         status: true,
         category: {
           select: {
+            id: true,
             title: true,
           },
         },
@@ -102,7 +103,7 @@ export class MyListRepository {
         postDate: true,
       },
       orderBy: {
-        createdAt: Order.DESC,
+        postDate: Order.DESC,
       },
     });
   }
@@ -135,18 +136,19 @@ export class MyListRepository {
         status: true,
         category: {
           select: {
+            id: true,
             title: true,
           },
         },
         updatedAt: true,
       },
       orderBy: {
-        createdAt: Order.DESC,
+        updatedAt: Order.DESC,
       },
     });
   }
 
-  public getCancelled({ userId }: { userId: string }) {
+  public getArchived({ userId }: { userId: string }) {
     return this._dbClient.product.findMany({
       where: {
         authorId: userId,
@@ -174,14 +176,15 @@ export class MyListRepository {
         status: true,
         category: {
           select: {
+            id: true,
             title: true,
           },
         },
         views: true,
-        postDate: true,
+        endDate: true,
       },
       orderBy: {
-        createdAt: Order.DESC,
+        endDate: Order.DESC,
       },
     });
   }

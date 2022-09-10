@@ -1,21 +1,21 @@
-import { useTypedSelector } from '@hooks';
-import { useTranslation } from 'next-i18next';
-import type { RootState } from '@types';
-import type { MyList } from '@vse-bude/shared';
-import { Posted, Drafted, Purchased, Sold } from './cards';
-import { ItemSectionHeader } from './primitives';
-import * as styles from './styles';
+// import { useTypedSelector } from '@hooks';
+// import { useTranslation } from 'next-i18next';
+// import type { RootState } from '@types';
+// import type { ProductDto } from '@vse-bude/shared';
+// import { Posted, Drafted, Purchased, Sold } from './cards';
+// import { ItemSectionHeader } from './primitives';
+// import * as styles from './styles';
 
-export const MyListInfo = () => {
-  const { t } = useTranslation();
-  const myList: MyList = useTypedSelector(
-    (state: RootState) => state.myList.itemsList,
-  );
-  console.log(myList);
+export const MyListInfo = () =>
+  // const { t } = useTranslation();
+  // const myList: ProductDto = useTypedSelector(
+  //   (state: RootState) => state.myList.itemsList,
+  // );
+  // console.log(myList);
 
-  return (
+   (
     <div>
-      {!!myList.purchased.length && (
+      {/* {!!myList.purchased.length && (
         <div css={styles.section}>
           <div css={styles.header}>
             <ItemSectionHeader itemHeader={t('my-list:card.purchased')} />
@@ -65,7 +65,7 @@ export const MyListInfo = () => {
             ))}
           </div>
         </div>
-      )}
+      )} */}
     </div>
-  );
-};
+  )
+;

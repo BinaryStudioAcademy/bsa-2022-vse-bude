@@ -1,11 +1,11 @@
-import type { Winner, Author } from '@vse-bude/shared';
+import type { WinnerDto, AuthorDto } from '@vse-bude/shared';
 
 export interface PurchasedItems {
   title: string;
   imageLinks: string[];
   price: number;
   status: string;
-  author: Author;
+  author: AuthorDto;
   endDate: string;
 }
 
@@ -14,7 +14,7 @@ export interface SoldItems {
   imageLinks: string[];
   price: number;
   status: string;
-  winner: Winner;
+  winner: WinnerDto;
   endDate: string;
 }
 
