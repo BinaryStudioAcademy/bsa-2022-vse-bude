@@ -1,2 +1,2 @@
 export * from './navigation-theme.config';
-export { linking } from './linking/linking';
+export { Linking } from './linking/linking';

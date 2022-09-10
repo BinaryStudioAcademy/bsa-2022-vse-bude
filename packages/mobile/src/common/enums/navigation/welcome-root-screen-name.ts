@@ -3,7 +3,6 @@ enum WelcomeRootScreenName {
   SIGN_IN = 'Sign In',
   WELCOME = 'Welcome',
   FORGOT_PASSWORD = 'Forgot Password',
-  LOG_IN = 'Log in',
 }
 
 export { WelcomeRootScreenName };

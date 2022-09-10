@@ -3,9 +3,9 @@ import { RootNavigationParamList } from '~/common/types/types';
 import { config } from './config';
 import { prefixes } from './prefixes';
 
-const linking: LinkingOptions<RootNavigationParamList> = {
+const Linking: LinkingOptions<RootNavigationParamList> = {
   prefixes,
   config,
 };
 
-export { linking };
+export { Linking };
