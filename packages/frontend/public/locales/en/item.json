@@ -9,6 +9,7 @@
   "descriptionCaption": "Description",
   "sellerCaption": "Seller",
   "contactSellerBtn": "Contact Seller",
+  "showImageCaption": "Open full image",
   "time": {
     "hours": "hours",
     "days": "day",
@@ -44,6 +45,7 @@
         "buyBtn": "You are not authorized to buy",
         "favBtn": "You are not authorized to add product to favorites"
       }
-    }
+    },
+    "closeImageModal": "Close modal"
   }
 }

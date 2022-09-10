@@ -9,6 +9,7 @@
   "descriptionCaption": "Опис",
   "sellerCaption": "Продавець",
   "contactSellerBtn": "Написати продавцю",
+  "showImageCaption": "Переглянути повне зображення",
   "time": {
     "hours": "год",
     "days": "днів",
@@ -44,6 +45,7 @@
         "buyBtn": "Ви не авторизовані, щоб купити",
         "favBtn": "Ви не авторизовані, щоб додати товар в улюблені"
       }
-    }
+    },
+    "closeImageModal": "Закрити вікно"
   }
 }
