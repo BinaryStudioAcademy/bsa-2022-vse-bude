@@ -7,9 +7,10 @@ import { apiPath } from '@helpers';
 import { authMiddleware, uploadImage } from '@middlewares';
 import { profileValidation } from '@validation';
 import type { UploadFileRequest } from '@types';
+import { UserExistsError } from '@errors';
 
 export const initProfileRoutes = (
-  { profileService, myListService }: Services,
+  { profileService, myListService, authService }: Services,
   path: ApiRoutes,
 ): Router => {
   const router = Router();
@@ -134,6 +135,16 @@ export const initProfileRoutes = (
         password,
         newPassword,
       } = req.body;
+
+      const userFromDb = await profileService.getUser({
+        userId,
+      });
+
+      const userByEmail = await authService.getByEmail(email);
+
+      if (userByEmail && userByEmail.id !== userFromDb.id) {
+        throw new UserExistsError();
+      }
 
       if (phone) {
         await profileService.checkIsPhoneExists({
