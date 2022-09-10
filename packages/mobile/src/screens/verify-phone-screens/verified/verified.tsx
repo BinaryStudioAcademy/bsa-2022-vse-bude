@@ -9,7 +9,11 @@ import {
 import { images } from '~/assets/images/images';
 import { globalStyles } from '~/styles/styles';
 import { RootNavigationProps } from '~/common/types/types';
-import { MainScreenName, RootScreenName } from '~/common/enums/enums';
+import {
+  MainScreenName,
+  RootScreenName,
+  DrawerScreenName,
+} from '~/common/enums/enums';
 import { Header, Title, VerifyImage, Wrapper } from '../components/components';
 import { styles } from './styles';
 
@@ -19,8 +23,11 @@ const VerifiedScreen: FC = () => {
   const { colors } = useCustomTheme();
 
   const handleContinuePress = (): void => {
-    navigation.navigate(RootScreenName.MAIN, {
-      screen: MainScreenName.ACCOUNT_ROOT,
+    navigation.navigate(RootScreenName.MAIN_WITH_MENU, {
+      screen: DrawerScreenName.MAIN,
+      params: {
+        screen: MainScreenName.ACCOUNT_ROOT,
+      },
     });
   };
 

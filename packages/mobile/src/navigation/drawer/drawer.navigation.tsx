@@ -3,11 +3,12 @@ import {
   createDrawerNavigator,
   DrawerNavigationOptions,
 } from '@react-navigation/drawer';
-import { RootScreenName } from '~/common/enums/enums';
+import { DrawerNavigationParamList } from '~/common/types/navigation/drawer-navigation-param-list';
+import { DrawerScreenName } from '~/common/enums/enums';
 import { MainNavigation } from '../tabs/tabs.navigation';
 
 const HomeWithMenuNavigation: FC = () => {
-  const Drawer = createDrawerNavigator();
+  const Drawer = createDrawerNavigator<DrawerNavigationParamList>();
 
   const options: DrawerNavigationOptions = {
     headerShown: false,
@@ -16,7 +17,7 @@ const HomeWithMenuNavigation: FC = () => {
 
   return (
     <Drawer.Navigator screenOptions={options}>
-      <Drawer.Screen name={RootScreenName.MAIN} component={MainNavigation} />
+      <Drawer.Screen name={DrawerScreenName.MAIN} component={MainNavigation} />
     </Drawer.Navigator>
   );
 };

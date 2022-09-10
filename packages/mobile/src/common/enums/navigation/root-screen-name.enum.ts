@@ -1,5 +1,5 @@
 enum RootScreenName {
-  MAIN = 'Main',
+  MAIN_WITH_MENU = 'Menu',
   PERSONAL_INFO = 'Personal Info',
   SETTINGS = 'Settings',
   MESSAGES = 'Messages',
@@ -12,7 +12,6 @@ enum RootScreenName {
   ITEM_INFO = 'Product Info',
   TYPE_OF_NEW_POST = 'Type of post',
   NEW_AUCTION = 'Make an Auction Post',
-  MAIN_WITH_MENU = 'Menu',
 }
 
 export { RootScreenName };

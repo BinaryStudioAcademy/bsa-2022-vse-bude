@@ -10,6 +10,7 @@ import {
 import {
   ButtonAppearance,
   DataStatus,
+  DrawerScreenName,
   MainScreenName,
   RootScreenName,
 } from '~/common/enums/enums';
@@ -58,12 +59,20 @@ const VerifyPhoneScreen: FC = () => {
   });
 
   const handleBackButtonPress = (): void => {
-    navigation.navigate(RootScreenName.MAIN, { screen: MainScreenName.HOME });
+    navigation.navigate(RootScreenName.MAIN_WITH_MENU, {
+      screen: DrawerScreenName.MAIN,
+      params: {
+        screen: MainScreenName.HOME,
+      },
+    });
   };
 
   const handleLaterPress = (): void => {
-    navigation.navigate(RootScreenName.MAIN, {
-      screen: MainScreenName.ACCOUNT_ROOT,
+    navigation.navigate(RootScreenName.MAIN_WITH_MENU, {
+      screen: DrawerScreenName.MAIN,
+      params: {
+        screen: MainScreenName.ACCOUNT_ROOT,
+      },
     });
   };
 

@@ -3,6 +3,7 @@ export {
   RootScreenName,
   MainScreenName,
   WelcomeRootScreenName,
+  DrawerScreenName,
 } from './navigation/navigation';
 export { NotificationType } from './notification/notification.enum';
 export { ButtonType, ButtonAppearance } from './ui/ui';
