@@ -24,8 +24,14 @@ export default function ContactBlock({
   });
 
   const setShowPhoneWrapper = (value) => {
-    setValue('phone', '');
-    setShowPhone(value);
+    if (!value) {
+      setShowPhone(value);
+      setValue('phone', currentProduct?.phone.replace('+380', ''));
+    }
+    if (value) {
+      setShowPhone(value);
+      setValue('phone', '');
+    }
   };
 
   return (
