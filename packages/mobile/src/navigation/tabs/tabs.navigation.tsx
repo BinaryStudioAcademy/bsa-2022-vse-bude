@@ -14,11 +14,11 @@ import {
   Text,
   UserIcon,
 } from '~/components/components';
-import { AppIcon } from '~/common/types/types';
+import { AppIcon, MainNavigationParamList } from '~/common/types/types';
 import { selectCurrentUser } from '~/store/selectors';
 import { WelcomeNavigation } from '../welcome/welcome.navigation';
 
-const Tabs = createBottomTabNavigator();
+const Tabs = createBottomTabNavigator<MainNavigationParamList>();
 
 const MainNavigation: FC = () => {
   const { dark, colors } = useCustomTheme();
@@ -72,7 +72,7 @@ const MainNavigation: FC = () => {
         />
       ) : (
         <Tabs.Screen
-          name={MainScreenName.ACCOUNT_ROOT}
+          name={MainScreenName.ACCOUNT_REGISTRATION}
           component={WelcomeNavigation}
           options={getTabOptions(MainScreenName.LOG_IN, LogInIcon)}
         />

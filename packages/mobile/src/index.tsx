@@ -6,7 +6,7 @@ import RNBootSplash from 'react-native-bootsplash';
 import Toast from 'react-native-toast-message';
 import { Navigation } from '~/navigation/navigation';
 import { store } from '~/store/store';
-import { NavigationDarkTheme, NavigationTheme } from '~/config/config';
+import { NavigationDarkTheme, NavigationTheme, linking } from '~/config/config';
 import { useColorScheme } from '~/hooks/hooks';
 import { appService } from '~/services/services';
 import { i18 } from './localization/localization';
@@ -21,6 +21,7 @@ const App: FC = () => {
   return (
     <StoreProvider store={store}>
       <NavigationContainer
+        linking={linking}
         theme={theme}
         onReady={() => {
           RNBootSplash.hide({ fade: true });

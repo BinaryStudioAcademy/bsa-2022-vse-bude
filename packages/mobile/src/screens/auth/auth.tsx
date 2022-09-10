@@ -5,7 +5,7 @@ import {
   UserSignInDto,
   UserSignUpDto,
 } from '@vse-bude/shared';
-import { RootScreenName } from '~/common/enums/enums';
+import { RegistrationScreenName } from '~/common/enums/enums';
 import { auth as authActions } from '~/store/actions';
 import {
   useAppDispatch,
@@ -21,6 +21,7 @@ import {
   StatusBar,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
+import { RegistrationNavigationProps } from '~/common/types/navigation/navigation-props';
 import {
   ResetPasswordHeader,
   SignInUpHeader,
@@ -36,16 +37,16 @@ const Auth: FC = () => {
   const dispatch = useAppDispatch();
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
-  const navigation = useNavigation();
-  const isResetPassword = name === RootScreenName.FORGOT_PASSWORD;
+  const navigation = useNavigation<RegistrationNavigationProps>();
+  const isResetPassword = name === RegistrationScreenName.FORGOT_PASSWORD;
 
   const getScreenLabel = (screenName: string): string => {
     switch (screenName) {
-      case RootScreenName.SIGN_IN:
+      case RegistrationScreenName.SIGN_IN:
         return t('verification.SING_IN');
-      case RootScreenName.SIGN_UP:
+      case RegistrationScreenName.SIGN_UP:
         return t('verification.CREATE_ACCOUNT');
-      case RootScreenName.FORGOT_PASSWORD:
+      case RegistrationScreenName.FORGOT_PASSWORD:
         return t('verification.FORGOT_PASSWORD');
       default:
         return '';
@@ -70,13 +71,13 @@ const Auth: FC = () => {
 
   const getScreen = (screen: string): ReactElement | null => {
     switch (screen) {
-      case RootScreenName.SIGN_IN: {
+      case RegistrationScreenName.SIGN_IN: {
         return <SignInForm onSubmit={handleSignIn} />;
       }
-      case RootScreenName.SIGN_UP: {
+      case RegistrationScreenName.SIGN_UP: {
         return <SignUpForm onSubmit={handleSignUp} />;
       }
-      case RootScreenName.FORGOT_PASSWORD: {
+      case RegistrationScreenName.FORGOT_PASSWORD: {
         return <ResetPassword onSubmit={handleResetPassword} />;
       }
     }

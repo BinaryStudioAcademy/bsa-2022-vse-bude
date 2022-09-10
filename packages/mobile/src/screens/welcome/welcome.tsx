@@ -1,10 +1,8 @@
 import React, { FC } from 'react';
-import { useTranslation } from '~/hooks/hooks';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-
+import { useTranslation, useNavigation } from '~/hooks/hooks';
 import { ColorPalette } from '@vse-bude/shared';
-import { ButtonAppearance, RootScreenName } from '~/common/enums/enums';
-import { RootNavigationParamList } from '~/common/types/types';
+import { ButtonAppearance, RegistrationScreenName } from '~/common/enums/enums';
+import { RegistrationNavigationProps } from '~/common/types/types';
 import {
   View,
   FlagBackgroundView,
@@ -17,13 +15,9 @@ import { globalStyles } from '~/styles/styles';
 import { Stamp } from './components/components';
 import { styles } from './styles';
 
-type Props = NativeStackScreenProps<
-  RootNavigationParamList,
-  RootScreenName.MAIN
->;
-
-const Welcome: FC<Props> = ({ navigation }) => {
+const Welcome: FC = () => {
   const { t } = useTranslation();
+  const navigation = useNavigation<RegistrationNavigationProps>();
 
   return (
     <ScreenWrapper>
@@ -49,14 +43,14 @@ const Welcome: FC<Props> = ({ navigation }) => {
           <SecondaryButton
             label={t('verification.CREATE_ACCOUNT')}
             onPress={() => {
-              navigation.navigate(RootScreenName.SIGN_UP);
+              navigation.navigate(RegistrationScreenName.SIGN_UP);
             }}
           />
           <SecondaryButton
             appearance={ButtonAppearance.OUTLINED}
             label={t('verification.SING_IN')}
             onPress={() => {
-              navigation.navigate(RootScreenName.SIGN_IN);
+              navigation.navigate(RegistrationScreenName.SIGN_IN);
             }}
           />
         </View>
