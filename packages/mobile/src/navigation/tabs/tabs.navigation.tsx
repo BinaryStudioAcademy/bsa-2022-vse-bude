@@ -3,7 +3,7 @@ import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-import { MainScreenName } from '~/common/enums/enums';
+import { MainScreenName, WelcomeRootScreenName } from '~/common/enums/enums';
 import { Home, Favorite, MyList, Account } from '~/screens/screens';
 import { useAppSelector, useCustomTheme } from '~/hooks/hooks';
 import {
@@ -72,9 +72,9 @@ const MainNavigation: FC = () => {
         />
       ) : (
         <Tabs.Screen
-          name={MainScreenName.ACCOUNT_REGISTRATION}
+          name={MainScreenName.WELCOME_ROOT}
           component={WelcomeNavigation}
-          options={getTabOptions(MainScreenName.LOG_IN, LogInIcon)}
+          options={getTabOptions(WelcomeRootScreenName.LOG_IN, LogInIcon)}
         />
       )}
     </Tabs.Navigator>

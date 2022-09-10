@@ -9,8 +9,8 @@ import { UserSignInDto } from '@vse-bude/shared';
 import { useAppForm, useTranslation, useNavigation } from '~/hooks/hooks';
 import { signIn } from '~/validation-schemas/validation-schemas';
 import { globalStyles } from '~/styles/styles';
-import { RegistrationScreenName } from '~/common/enums/enums';
-import { RegistrationNavigationProps } from '~/common/types/types';
+import { WelcomeRootScreenName } from '~/common/enums/enums';
+import { WelcomeRootNavigationProps } from '~/common/types/types';
 import { DEFAULT_SIGN_IN_PAYLOAD } from './common/constants';
 
 type Props = {
@@ -23,10 +23,10 @@ const SignInForm: FC<Props> = ({ onSubmit }) => {
     validationSchema: signIn,
   });
   const { t } = useTranslation();
-  const { navigate } = useNavigation<RegistrationNavigationProps>();
+  const { navigate } = useNavigation<WelcomeRootNavigationProps>();
 
   const navigateResetPassword = () => {
-    navigate(RegistrationScreenName.FORGOT_PASSWORD);
+    navigate(WelcomeRootScreenName.FORGOT_PASSWORD);
   };
 
   return (

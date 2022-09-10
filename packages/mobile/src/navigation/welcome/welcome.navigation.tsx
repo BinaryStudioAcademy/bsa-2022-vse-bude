@@ -3,13 +3,13 @@ import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
-import { RegistrationScreenName } from '~/common/enums/enums';
-import { RegistrationNavigationParamList } from '~/common/types/types';
+import { WelcomeRootScreenName } from '~/common/enums/enums';
+import { WelcomeRootNavigationParamList } from '~/common/types/types';
 import { Auth, Welcome } from '~/screens/screens';
 
 const WelcomeNavigation: FC = () => {
   const NativeStack =
-    createNativeStackNavigator<RegistrationNavigationParamList>();
+    createNativeStackNavigator<WelcomeRootNavigationParamList>();
   const welcomeScreenOptions: NativeStackNavigationOptions = {
     headerShown: false,
   };
@@ -17,19 +17,19 @@ const WelcomeNavigation: FC = () => {
   return (
     <NativeStack.Navigator screenOptions={welcomeScreenOptions}>
       <NativeStack.Screen
-        name={RegistrationScreenName.WELCOME}
+        name={WelcomeRootScreenName.WELCOME}
         component={Welcome}
       />
       <NativeStack.Screen
-        name={RegistrationScreenName.SIGN_UP}
+        name={WelcomeRootScreenName.SIGN_UP}
         component={Auth}
       />
       <NativeStack.Screen
-        name={RegistrationScreenName.SIGN_IN}
+        name={WelcomeRootScreenName.SIGN_IN}
         component={Auth}
       />
       <NativeStack.Screen
-        name={RegistrationScreenName.FORGOT_PASSWORD}
+        name={WelcomeRootScreenName.FORGOT_PASSWORD}
         component={Auth}
       />
     </NativeStack.Navigator>

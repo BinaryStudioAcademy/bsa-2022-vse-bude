@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { useTranslation, useNavigation } from '~/hooks/hooks';
 import { ColorPalette } from '@vse-bude/shared';
-import { ButtonAppearance, RegistrationScreenName } from '~/common/enums/enums';
-import { RegistrationNavigationProps } from '~/common/types/types';
+import { ButtonAppearance, WelcomeRootScreenName } from '~/common/enums/enums';
+import { WelcomeRootNavigationProps } from '~/common/types/types';
 import {
   View,
   FlagBackgroundView,
@@ -17,7 +17,7 @@ import { styles } from './styles';
 
 const Welcome: FC = () => {
   const { t } = useTranslation();
-  const navigation = useNavigation<RegistrationNavigationProps>();
+  const navigation = useNavigation<WelcomeRootNavigationProps>();
 
   return (
     <ScreenWrapper>
@@ -43,14 +43,14 @@ const Welcome: FC = () => {
           <SecondaryButton
             label={t('verification.CREATE_ACCOUNT')}
             onPress={() => {
-              navigation.navigate(RegistrationScreenName.SIGN_UP);
+              navigation.navigate(WelcomeRootScreenName.SIGN_UP);
             }}
           />
           <SecondaryButton
             appearance={ButtonAppearance.OUTLINED}
             label={t('verification.SING_IN')}
             onPress={() => {
-              navigation.navigate(RegistrationScreenName.SIGN_IN);
+              navigation.navigate(WelcomeRootScreenName.SIGN_IN);
             }}
           />
         </View>

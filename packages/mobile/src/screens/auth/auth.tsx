@@ -5,7 +5,7 @@ import {
   UserSignInDto,
   UserSignUpDto,
 } from '@vse-bude/shared';
-import { RegistrationScreenName } from '~/common/enums/enums';
+import { WelcomeRootScreenName } from '~/common/enums/enums';
 import { auth as authActions } from '~/store/actions';
 import {
   useAppDispatch,
@@ -21,7 +21,7 @@ import {
   StatusBar,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { RegistrationNavigationProps } from '~/common/types/navigation/navigation-props';
+import { WelcomeRootNavigationProps } from '~/common/types/navigation/navigation-props';
 import {
   ResetPasswordHeader,
   SignInUpHeader,
@@ -37,16 +37,16 @@ const Auth: FC = () => {
   const dispatch = useAppDispatch();
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
-  const navigation = useNavigation<RegistrationNavigationProps>();
-  const isResetPassword = name === RegistrationScreenName.FORGOT_PASSWORD;
+  const navigation = useNavigation<WelcomeRootNavigationProps>();
+  const isResetPassword = name === WelcomeRootScreenName.FORGOT_PASSWORD;
 
   const getScreenLabel = (screenName: string): string => {
     switch (screenName) {
-      case RegistrationScreenName.SIGN_IN:
+      case WelcomeRootScreenName.SIGN_IN:
         return t('verification.SING_IN');
-      case RegistrationScreenName.SIGN_UP:
+      case WelcomeRootScreenName.SIGN_UP:
         return t('verification.CREATE_ACCOUNT');
-      case RegistrationScreenName.FORGOT_PASSWORD:
+      case WelcomeRootScreenName.FORGOT_PASSWORD:
         return t('verification.FORGOT_PASSWORD');
       default:
         return '';
@@ -71,13 +71,13 @@ const Auth: FC = () => {
 
   const getScreen = (screen: string): ReactElement | null => {
     switch (screen) {
-      case RegistrationScreenName.SIGN_IN: {
+      case WelcomeRootScreenName.SIGN_IN: {
         return <SignInForm onSubmit={handleSignIn} />;
       }
-      case RegistrationScreenName.SIGN_UP: {
+      case WelcomeRootScreenName.SIGN_UP: {
         return <SignUpForm onSubmit={handleSignUp} />;
       }
-      case RegistrationScreenName.FORGOT_PASSWORD: {
+      case WelcomeRootScreenName.FORGOT_PASSWORD: {
         return <ResetPassword onSubmit={handleResetPassword} />;
       }
     }

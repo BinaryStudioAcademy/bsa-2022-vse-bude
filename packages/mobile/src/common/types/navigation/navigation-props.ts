@@ -4,16 +4,16 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import {
   RootNavigationParamList,
   MainNavigationParamList,
-  RegistrationNavigationParamList,
+  WelcomeRootNavigationParamList,
 } from '~/common/types/navigation/navigation';
 
 type RootNavigationProps = NativeStackNavigationProp<RootNavigationParamList>;
 type MainNavigationProps = BottomTabScreenProps<MainNavigationParamList>;
-type RegistrationNavigationProps =
-  NativeStackNavigationProp<RegistrationNavigationParamList>;
+type WelcomeRootNavigationProps =
+  NativeStackNavigationProp<WelcomeRootNavigationParamList>;
 
 export type {
   RootNavigationProps,
   MainNavigationProps,
-  RegistrationNavigationProps,
+  WelcomeRootNavigationProps,
 };
