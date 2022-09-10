@@ -136,7 +136,7 @@ export const initProfileRoutes = (
         newPassword,
       } = req.body;
 
-      const userFromDb = await profileService.getUser({
+      const userFromDb = await profileService.getFullUserData({
         userId,
       });
 
@@ -144,6 +144,12 @@ export const initProfileRoutes = (
 
       if (userByEmail && userByEmail.id !== userFromDb.id) {
         throw new UserExistsError();
+      }
+      if (
+        !userByEmail &&
+        userFromDb.email.toLowerCase() !== email.toLowerCase()
+      ) {
+        await profileService.cancelEmailVerified({ userId });
       }
 
       if (phone) {
@@ -153,7 +159,7 @@ export const initProfileRoutes = (
         });
       }
 
-      if (!phone) {
+      if (phone !== userFromDb.phone) {
         await profileService.cancelPhoneVerified({ userId });
       }
 
