@@ -1,19 +1,24 @@
-import PushNotification from 'react-native-push-notification';
+import PushNotification, {
+  ReceivedNotification,
+} from 'react-native-push-notification';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
-import { PUSH_CHANNEL, PUSH_ICON } from '~/common/constants/constants';
+import {
+  ANDROID_PN_ICON_NAME,
+  ANDROID_PN_DEFAULT_CHANNEL_ID,
+  CHANEL_NAME,
+  IS_IOS,
+} from '~/common/constants/constants';
 
-type PushNotificationProps = {
+interface FirebaseNotification extends Omit<ReceivedNotification, 'userInfo'> {
   title?: string;
-  body: string;
-};
-
-class PushController {
-  public showNotification({ title, body }: PushNotificationProps) {
+}
+class PushNotificationService {
+  public showNotification({ title, body }: { title: string; body: string }) {
     PushNotification.localNotification({
       title,
       message: body,
-      smallIcon: PUSH_ICON,
-      channelId: PUSH_CHANNEL,
+      smallIcon: ANDROID_PN_ICON_NAME,
+      channelId: ANDROID_PN_DEFAULT_CHANNEL_ID,
     });
   }
 
@@ -26,8 +31,8 @@ class PushController {
     return new Promise((resolve) => {
       PushNotification.createChannel(
         {
-          channelId: PUSH_CHANNEL,
-          channelName: PUSH_CHANNEL,
+          channelId: ANDROID_PN_DEFAULT_CHANNEL_ID,
+          channelName: CHANEL_NAME,
         },
         () => resolve(),
       );
@@ -36,13 +41,15 @@ class PushController {
 
   private configureNotifications() {
     PushNotification.configure({
-      onNotification: (notification) => {
+      onNotification: (notification: FirebaseNotification) => {
         this.showNotification({
+          title: notification.title ?? '',
           body: notification.message.toString(),
         });
 
-        // required on iOS only
-        notification.finish(PushNotificationIOS.FetchResult.NoData);
+        if (IS_IOS) {
+          notification.finish(PushNotificationIOS.FetchResult.NoData);
+        }
       },
       permissions: {
         alert: true,
@@ -55,4 +62,4 @@ class PushController {
   }
 }
 
-export { PushController };
+export { PushNotificationService };
