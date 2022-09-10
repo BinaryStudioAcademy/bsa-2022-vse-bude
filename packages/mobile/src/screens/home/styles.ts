@@ -23,6 +23,10 @@ const styles = StyleSheet.create({
     backgroundColor: ColorPalette.GREEN_200,
     paddingHorizontal: 16,
   },
+  organizationIcon: {
+    width: '30%',
+    height: 50,
+  },
   imgWrapper: {
     flexWrap: 'wrap',
   },

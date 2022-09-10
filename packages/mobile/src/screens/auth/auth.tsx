@@ -5,8 +5,9 @@ import {
   UserSignInDto,
   UserSignUpDto,
 } from '@vse-bude/shared';
-import { RootScreenName } from '~/common/enums/enums';
 import { auth as authActions } from '~/store/actions';
+import { MainScreenName, RootScreenName } from '~/common/enums/enums';
+import { RootNavigationProps, MainNavigationProps } from '~/common/types/types';
 import {
   useAppDispatch,
   useCustomTheme,
@@ -21,7 +22,7 @@ import {
   StatusBar,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { RootNavigationProps } from '~/common/types/types';
+import { notification } from '~/services/services';
 import {
   ResetPasswordHeader,
   SignInUpHeader,
@@ -38,7 +39,7 @@ const Auth: FC = () => {
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
 
-  const navigation = useNavigation<RootNavigationProps>();
+  const navigation = useNavigation<RootNavigationProps & MainNavigationProps>();
   const isResetPassword = name === RootScreenName.FORGOT_PASSWORD;
 
   const getScreenLabel = (screenName: string): string => {
@@ -55,14 +56,23 @@ const Auth: FC = () => {
   };
 
   const handleSignIn = (payload: UserSignInDto): void => {
-    dispatch(authActions.signIn(payload));
+    dispatch(authActions.signIn(payload))
+      .unwrap()
+      .then(() => {
+        navigation.navigate(MainScreenName.HOME);
+      })
+      .catch((err) => {
+        notification.error(JSON.stringify(err.message));
+      });
   };
 
   const handleSignUp = (payload: UserSignUpDto): void => {
     dispatch(authActions.signUp(payload))
       .unwrap()
-      .then(() => {
-        navigation.navigate(RootScreenName.VERIFY_PHONE);
+      .then((resp) => {
+        if (resp.phone) {
+          navigation.navigate(RootScreenName.VERIFY_PHONE);
+        }
       })
       .catch((err) => {
         // eslint-disable-next-line

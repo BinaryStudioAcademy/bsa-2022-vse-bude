@@ -1,5 +1,6 @@
 import * as Joi from 'joi';
-import { UserValidationMessage, UserSignInDto } from '@vse-bude/shared';
+import { UserSignInDto } from '@vse-bude/shared';
+import i18next from 'i18next';
 
 const signIn = Joi.object<UserSignInDto>({
   email: Joi.string()
@@ -7,12 +8,15 @@ const signIn = Joi.object<UserSignInDto>({
     .email({ tlds: { allow: false } })
     .required()
     .messages({
-      'string.email': UserValidationMessage.EMAIL_WRONG,
-      'string.empty': UserValidationMessage.EMAIL_REQUIRED,
+      'string.email': i18next.t('errors.WRONG_EMAIL'),
+      'string.empty': i18next.t('errors.EMPTY_EMAIL'),
     }),
-  password: Joi.string().trim().required().messages({
-    'string.empty': UserValidationMessage.PASSWORD_REQUIRED,
-  }),
+  password: Joi.string()
+    .trim()
+    .required()
+    .messages({
+      'string.empty': i18next.t('errors.EMPTY_PASSWORD'),
+    }),
 });
 
 export { signIn };

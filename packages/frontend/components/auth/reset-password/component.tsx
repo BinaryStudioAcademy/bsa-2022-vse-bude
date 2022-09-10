@@ -52,7 +52,7 @@ export const ResetPassword = () => {
         />
       </div>
       <Button type="submit" width={'100%'}>
-        {t('resendBtn.text')}
+        {t('resendBtn.updatePassword')}
       </Button>
       <Divider />
       <div css={linkText}>

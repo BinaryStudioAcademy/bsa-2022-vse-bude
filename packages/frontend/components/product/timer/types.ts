@@ -1,3 +1,3 @@
 export interface TimerProps {
-  date: Date;
+  date: string;
 }

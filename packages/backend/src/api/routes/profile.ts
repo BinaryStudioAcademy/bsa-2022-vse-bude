@@ -146,10 +146,14 @@ export const initProfileRoutes = (
         await profileService.cancelPhoneVerified({ userId });
       }
 
+      const reqMappedPhone = phone === '' ? null : phone;
+
       const user = await profileService.updateUserProfile({
         userId,
-        data: { firstName, lastName, email, phone },
+        data: { firstName, lastName, email, phone: reqMappedPhone },
       });
+
+      const resMappedPhone = !user.phone ? '' : user.phone;
 
       const address = await profileService.updateUserAddress({
         userId,
@@ -170,7 +174,12 @@ export const initProfileRoutes = (
         });
       }
 
-      return { ...user, userAddress: address, socialMedia: links };
+      return {
+        ...user,
+        phone: resMappedPhone,
+        userAddress: address,
+        socialMedia: links,
+      };
     }),
   );
 

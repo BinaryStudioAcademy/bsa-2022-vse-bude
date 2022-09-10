@@ -6,12 +6,7 @@ import {
   AuctionEndedError,
 } from '@errors';
 import type { Request } from 'express';
-import {
-  getFilenameFromUrl,
-  getUserIdFromRequest,
-  toUtc,
-  translateCondition,
-} from '@helpers';
+import { getFilenameFromUrl, getUserIdFromRequest, toUtc } from '@helpers';
 import type {
   AddProductToFavorites,
   AuctionPermissionsResponse,
@@ -30,6 +25,7 @@ import { FieldError } from 'error/product/field-error';
 import { createPostSchema, updatePostSchema } from 'validation/product/schemas';
 import { NotVerifiedError } from 'error/user/not-verified';
 import { lang } from '@lang';
+import type { AuctionScheduler } from '@services';
 
 export class ProductService {
   private _productRepository: ProductRepository;
@@ -40,16 +36,20 @@ export class ProductService {
 
   private _s3StorageService: S3StorageService;
 
+  private _auctionScheduler: AuctionScheduler;
+
   constructor(
     productRepository: ProductRepository,
     verifyService: VerifyService,
     s3StorageService: S3StorageService,
     bidRepository: BidRepository,
+    auctionScheduler: AuctionScheduler,
   ) {
     this._productRepository = productRepository;
     this._verifyService = verifyService;
     this._s3StorageService = s3StorageService;
     this._bidRepository = bidRepository;
+    this._auctionScheduler = auctionScheduler;
   }
 
   public getAll(query: ProductQuery) {
@@ -64,10 +64,6 @@ export class ProductService {
 
     if (product.category) {
       product.category.title = lang(`categories:${product.category.title}`);
-    }
-
-    if (product.condition) {
-      product.condition = translateCondition(product.condition);
     }
 
     const currentPrice = await this._productRepository.getCurrentPrice(
@@ -194,7 +190,15 @@ export class ProductService {
     };
     const product = await this._productRepository.create(data);
 
+    if (this.isAuctionProduct(product.type)) {
+      this._auctionScheduler.createAuctionJob(product);
+    }
+
     return product;
+  }
+
+  private isAuctionProduct(type: string) {
+    return type === ProductType.AUCTION;
   }
 
   public async updateProduct({
@@ -241,6 +245,10 @@ export class ProductService {
       productId,
       data,
     );
+
+    if (this.isAuctionProduct(updatedProduct.type)) {
+      this._auctionScheduler.updateAuctionJob(updatedProduct);
+    }
 
     return updatedProduct;
   }
