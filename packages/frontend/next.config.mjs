@@ -18,6 +18,7 @@ const nextConfig = {
   compiler: {
     emotion: true,
   },
+  swcMinify: true,
   webpack: (config) => {
     config.module.rules = [
       ...config.module.rules,

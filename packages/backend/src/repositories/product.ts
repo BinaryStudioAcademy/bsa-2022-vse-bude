@@ -2,9 +2,12 @@ import type { PrismaClient } from '@prisma/client';
 import { ProductStatus, ProductType } from '@prisma/client';
 import type { ProductQuery } from '@types';
 import { Order } from '@vse-bude/shared';
+import { toUtc } from '@helpers';
 
 export class ProductRepository {
   private _dbClient: PrismaClient;
+
+  private _limit = 20;
 
   constructor(prismaClient: PrismaClient) {
     this._dbClient = prismaClient;
@@ -267,6 +270,31 @@ export class ProductRepository {
       },
       orderBy: {
         views: Order.DESC,
+      },
+    });
+  }
+
+  public async getActiveAuctionsLots() {
+    const nowUtc: Date = toUtc().toDate();
+
+    return await this._dbClient.product.findMany({
+      where: {
+        type: ProductType.AUCTION,
+        endDate: {
+          gt: nowUtc,
+        },
+        participantsNotified: false,
+      },
+    });
+  }
+
+  public async markProductNotified(productId: string) {
+    return await this._dbClient.product.update({
+      where: {
+        id: productId,
+      },
+      data: {
+        participantsNotified: true,
       },
     });
   }
