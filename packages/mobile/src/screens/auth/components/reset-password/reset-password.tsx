@@ -35,13 +35,8 @@ const ResetPassword: FC<Props> = ({ onSubmit }) => {
     validationSchema: resetPassword,
   });
   useEffect(() => {
-    switch (resetPasswordStatus) {
-      case DataStatus.FULFILLED:
-        notification.success(t('screens:verification.RESET_PASSWORD_SUCCESS'));
-        break;
-      case DataStatus.REJECTED:
-        notification.error(t('screens:errors.RESET_PASSWORD_ERROR'));
-        break;
+    if (resetPasswordStatus === DataStatus.FULFILLED) {
+      notification.success(t('screens:verification.RESET_PASSWORD_SUCCESS'));
     }
   }, [resetPasswordStatus]);
 

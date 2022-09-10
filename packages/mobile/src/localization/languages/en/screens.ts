@@ -90,7 +90,6 @@ export const screens = {
     LAST_NAME_INVALID: 'The invalid last name format',
     WRONG_FORMAT: 'Wrong format',
     MAX_IMAGE_SIZE: `Maximum file size is ${MAX_IMAGE_SIZE / 1000000} Mb`,
-    RESET_PASSWORD_ERROR: 'An error occurred, please try again later...',
   },
   verificationPhone: {
     VERIFY: 'Verify',

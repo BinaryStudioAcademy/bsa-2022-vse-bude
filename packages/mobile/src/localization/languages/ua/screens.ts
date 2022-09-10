@@ -89,7 +89,6 @@ export const screens = {
     LAST_NAME_INVALID: 'Неправильний формат прізвища',
     WRONG_FORMAT: 'Невірний формат',
     MAX_IMAGE_SIZE: `Максимальний розмір файлу ${MAX_IMAGE_SIZE / 1000000} МБ`,
-    RESET_PASSWORD_ERROR: 'Виникла помилка, спробуйте пізніше...',
   },
   verificationPhone: {
     VERIFY: 'Підтвердити',
