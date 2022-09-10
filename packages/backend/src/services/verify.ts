@@ -1,8 +1,7 @@
 import type { VerifyEmailDto, VerifyPhoneDto } from '@vse-bude/shared';
 import { VerificationTypes } from '@vse-bude/shared';
 import type { UserRepository } from '@repositories';
-import { EmailFrom } from '@enums';
-import { isProduction } from '@helpers';
+import { getEnv, isProduction } from '@helpers';
 import { lang } from '@lang';
 import { CodeNotFoundError } from '../error/verify/code-not-found-error';
 import { WrongCodeError } from '../error/verify/wrong-code-error';
@@ -105,7 +104,7 @@ export class VerifyService {
     }
 
     return await this._emailService.send({
-      from: { email: EmailFrom.NO_REPLY_EMAIL, name: EmailFrom.NO_REPLY_NAME },
+      from: { email: getEnv('APP_EMAIL_FROM'), name: getEnv('APP_NAME') },
       to: [{ email: user.email }],
       subject: lang('translation:mailing.verification.subject'),
       text: `${lang('translation:mailing.verification.body')}${code}`,
