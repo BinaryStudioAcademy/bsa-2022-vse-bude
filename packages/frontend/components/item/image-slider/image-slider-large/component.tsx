@@ -1,5 +1,5 @@
 ﻿import { useTranslation } from 'next-i18next';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import * as styles from './styles';
 
 interface ItemImageSliderLargeProps {
@@ -52,8 +52,7 @@ export const ItemImageSliderLarge = ({
               alt="item"
               css={styles.image}
               priority={index < 4}
-              layout="fill"
-              objectFit="contain"
+              fill
             />
           </div>
         ))}
@@ -67,8 +66,7 @@ export const ItemImageSliderLarge = ({
           src={imageLinks[currentImage]}
           alt="item"
           css={styles.image}
-          layout="fill"
-          objectFit="contain"
+          fill
         />
         <div
           css={styles.seeImageCaption}

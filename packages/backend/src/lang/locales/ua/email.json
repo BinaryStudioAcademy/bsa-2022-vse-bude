@@ -1,0 +1,14 @@
+{
+  "subject": {
+    "auction": "Аукціон"
+  },
+  "text": {
+    "unsuccessAuctionAuthor": "На жаль, ваш продукт не було продано!",
+    "successAuctionAuthor": "Вітаємо, ваш продукт продано!",
+    "successAuctionWinner": "Вітаємо, ви переможець в аукціоні!"
+  },
+  "words": {
+    "link": "Посилання",
+    "hello": "Вітаємо"
+  }
+}

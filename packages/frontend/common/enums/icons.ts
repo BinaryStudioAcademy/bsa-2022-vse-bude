@@ -30,6 +30,7 @@ export enum IconName {
   XMARK = 'xmark',
   CALENDAR = 'calendar',
   TRASH = 'trash',
+  SUCCESS = 'circle-check',
 }
 
 export const IconNameToClassName = {
@@ -64,4 +65,5 @@ export const IconNameToClassName = {
   [IconName.XMARK]: 'fa-solid fa-xmark',
   [IconName.CALENDAR]: 'fa-solid fa-calendar-days',
   [IconName.TRASH]: 'fa-regular fa-trash-can',
+  [IconName.SUCCESS]: 'fa-regular fa-circle-check',
 };
