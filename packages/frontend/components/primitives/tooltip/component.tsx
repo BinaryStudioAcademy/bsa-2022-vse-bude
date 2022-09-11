@@ -9,6 +9,7 @@ const tooltipOffset = 10;
 export const Tooltip = ({
   trigger,
   children,
+  refNode = 'current',
   hideTimeoutMs = 100,
 }: TooltipProps) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -18,16 +19,16 @@ export const Tooltip = ({
   const triggerWrapperRef = useRef<HTMLSpanElement>();
   const timerRef = useRef(null);
 
-  const calcBodyCoords = useCallback(() => {
-    const triggerRectParams = getTriggerRectParams();
-    const bodyRectParams = getBodyRectParams();
+  const getTriggerRectParams = useCallback(() => {
+    const element =
+      refNode === 'current'
+        ? triggerWrapperRef.current
+        : triggerWrapperRef.current.parentElement;
 
-    const bodyTop = getBodyTopCoords(triggerRectParams, bodyRectParams);
+    return element.getBoundingClientRect();
+  }, [refNode]);
 
-    const bodyLeft = getBodyLeftCoords(triggerRectParams, bodyRectParams);
-
-    return [bodyTop, bodyLeft];
-  }, []);
+  const getBodyRectParams = () => bodyRef.current.getBoundingClientRect();
 
   const getBodyTopCoords = (triggerRectParams, bodyRectParams) => {
     let bodyTop = window.scrollY + triggerRectParams.top;
@@ -60,6 +61,16 @@ export const Tooltip = ({
     return bodyLeft;
   };
 
+  const calcBodyCoords = useCallback(() => {
+    const triggerRectParams = getTriggerRectParams();
+    const bodyRectParams = getBodyRectParams();
+
+    const bodyTop = getBodyTopCoords(triggerRectParams, bodyRectParams);
+    const bodyLeft = getBodyLeftCoords(triggerRectParams, bodyRectParams);
+
+    return [bodyTop, bodyLeft];
+  }, [getTriggerRectParams]);
+
   useEffect(() => {
     if (bodyRef.current) {
       const [bodyTop, bodyLeft] = calcBodyCoords();
@@ -68,11 +79,6 @@ export const Tooltip = ({
       bodyRef.current.style.left = `${bodyLeft}px`;
     }
   }, [isVisible, calcBodyCoords]);
-
-  const getTriggerRectParams = () =>
-    triggerWrapperRef.current.getBoundingClientRect();
-
-  const getBodyRectParams = () => bodyRef.current.getBoundingClientRect();
 
   const handleMouseEnter = () => {
     setIsVisible(true);
@@ -103,7 +109,7 @@ export const Tooltip = ({
   );
 
   const renderPortal = () =>
-    createPortal(renderPortalBody(), document.querySelector('#portal'));
+    createPortal(renderPortalBody(), document.querySelector('#tooltip'));
 
   return (
     <Fragment>
