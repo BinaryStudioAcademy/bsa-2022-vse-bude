@@ -185,6 +185,7 @@ export default function ProductForm({ edit }: { edit: boolean }) {
               variant="primary"
               label={t('create-post:label.recommendedPrice')}
               placeholder={t('create-post:placeholder.recommendedPrice')}
+              tooltip={t('create-post:tooltip.recommendedPrice')}
               {...register('recommendedPrice')}
             />
           </div>
@@ -213,6 +214,7 @@ export default function ProductForm({ edit }: { edit: boolean }) {
               variant="primary"
               label={t('create-post:label.minimalBid')}
               placeholder={t('create-post:placeholder.minimalBid')}
+              tooltip={t('create-post:tooltip.minimalBid')}
               {...register('minimalBid')}
             />
           </div>
