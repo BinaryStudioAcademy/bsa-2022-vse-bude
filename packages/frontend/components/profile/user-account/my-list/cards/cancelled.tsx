@@ -13,7 +13,7 @@ import type { ItemCard } from './types';
 import * as styles from './styles';
 
 export const Cancelled = ({ data }: { data: ItemCard }) => {
-  const { title, imageLinks, price, status, description, postDate } = data;
+  const { title, imageLinks, price, description, postDate } = data;
   const { t } = useTranslation();
 
   const onHandleClick = () => 'click';
@@ -31,7 +31,7 @@ export const Cancelled = ({ data }: { data: ItemCard }) => {
             <ItemDescription description={description} />
             <div css={styles.saleDetails}>
               <Price price={price} />
-              <ItemStatus status={status} />
+              <ItemStatus status={'Archived'} />
             </div>
           </div>
 
