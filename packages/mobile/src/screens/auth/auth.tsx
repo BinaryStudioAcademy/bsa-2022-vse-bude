@@ -42,7 +42,7 @@ const Auth: FC = () => {
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
   const navigation = useNavigation<
-    WelcomeRootNavigationProps & RootNavigationProps
+    RootNavigationProps & WelcomeRootNavigationProps
   >();
   const isResetPassword = name === WelcomeRootScreenName.FORGOT_PASSWORD;
 
@@ -63,7 +63,7 @@ const Auth: FC = () => {
     dispatch(authActions.signIn(payload))
       .unwrap()
       .then(() => {
-        // navigation.navigate(MainScreenName.HOME);
+        navigation.navigate(RootScreenName.MAIN);
       })
       .catch((err) => {
         notification.error(JSON.stringify(err.message));

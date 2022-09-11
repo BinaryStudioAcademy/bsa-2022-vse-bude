@@ -12,6 +12,14 @@ enum RootScreenName {
   ITEM_INFO = 'Product Info',
   TYPE_OF_NEW_POST = 'Type of post',
   NEW_AUCTION = 'Make an Auction Post',
+  SIGN_UP = 'Sign Up',
+  SIGN_IN = 'Sign In',
+  FORGOT_PASSWORD = 'Forgot Password',
+  MAIN = 'Main',
+  FAVORITE = 'Favorite',
+  MY_LIST = 'My list',
+  ACCOUNT_ROOT = 'Account',
+  WELCOME_ROOT = 'Welcome root',
 }
 
 export { RootScreenName };

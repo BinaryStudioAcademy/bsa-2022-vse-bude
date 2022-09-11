@@ -15,6 +15,14 @@ type RootNavigationParamList = {
   [RootScreenName.NEW_AUCTION]: undefined;
   [RootScreenName.ITEM_INFO]: { itemId: string };
   [RootScreenName.TYPE_OF_NEW_POST]: undefined;
+  [RootScreenName.SIGN_UP]: undefined;
+  [RootScreenName.SIGN_IN]: undefined;
+  [RootScreenName.FORGOT_PASSWORD]: undefined;
+  [RootScreenName.MAIN]: undefined;
+  [RootScreenName.FAVORITE]: undefined;
+  [RootScreenName.MY_LIST]: undefined;
+  [RootScreenName.ACCOUNT_ROOT]: undefined;
+  [RootScreenName.WELCOME_ROOT]: undefined;
 };
 
 export type { RootNavigationParamList };
