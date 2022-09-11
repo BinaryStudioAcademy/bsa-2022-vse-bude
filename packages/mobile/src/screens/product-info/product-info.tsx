@@ -2,7 +2,11 @@ import React, { FC, useEffect } from 'react';
 import { RouteProp } from '@react-navigation/native';
 import { RootNavigationParamList } from '~/common/types/types';
 import { ProductType } from '@vse-bude/shared';
-import { product as productActions } from '~/store/actions';
+import {
+  product as productActions,
+  products as productsActions,
+} from '~/store/actions';
+import { selectCurrentUser } from '~/store/selectors';
 import { selectProduct } from '~/store/product/selectors';
 import {
   useAppDispatch,
@@ -21,6 +25,7 @@ import {
   Countdown,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
+import { notification, productApi } from '~/services/services';
 import {
   Description,
   ImageCarousel,
@@ -33,6 +38,7 @@ const ProductInfo: FC = () => {
   const { colors } = useCustomTheme();
   const dispatch = useAppDispatch();
   const product = useAppSelector(selectProduct);
+  const user = useAppSelector(selectCurrentUser);
   const route =
     useRoute<
       RouteProp<Pick<RootNavigationParamList, RootScreenName.ITEM_INFO>>
@@ -41,22 +47,40 @@ const ProductInfo: FC = () => {
 
   useEffect(() => {
     dispatch(productActions.loadProductInfo(id));
-  }, []);
+    if (user) {
+      dispatch(productsActions.fetchFavoritesIds());
+    }
+  }, [dispatch]);
 
   if (!product) {
     return <Spinner />;
   }
-  const {
-    title,
-    currentPrice,
-    price,
-    minimalBid,
-    type,
-    imageLinks,
-    views,
-    author,
-  } = product;
+  const { title, type, imageLinks, views, author } = product;
   const isAuction = type == ProductType.AUCTION;
+
+  const handleToggleFavorite = async (
+    productId: string,
+    favoritesIds: string[],
+  ) => {
+    if (!user) {
+      return notification.info('You should authorize first');
+    }
+    try {
+      if (favoritesIds.length) {
+        const isFavorite = favoritesIds.includes(productId);
+        if (isFavorite) {
+          return await productApi.deleteFromFavorites({ productId });
+        }
+
+        return await productApi.uploadToFavorites({ productId });
+      }
+
+      return await productApi.uploadToFavorites({ productId });
+    } catch {
+      (err: Record<string, unknown>) =>
+        notification.error(JSON.stringify(err.message));
+    }
+  };
 
   return (
     <ScreenWrapper>
@@ -98,9 +122,15 @@ const ProductInfo: FC = () => {
         <SellerInfo author={author} />
       </ScrollView>
       {isAuction ? (
-        <LotPriceBlock currentPrice={currentPrice} minimalBid={minimalBid} />
+        <LotPriceBlock
+          product={product}
+          onFavoritePress={handleToggleFavorite}
+        />
       ) : (
-        <ProductPriceBlock price={price} />
+        <ProductPriceBlock
+          product={product}
+          onFavoritePress={handleToggleFavorite}
+        />
       )}
     </ScreenWrapper>
   );

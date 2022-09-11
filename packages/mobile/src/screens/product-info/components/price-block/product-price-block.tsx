@@ -1,16 +1,40 @@
 import React, { FC } from 'react';
-import { PrimaryButton, StarIcon, Text, View } from '~/components/components';
-import { useCustomTheme, useTranslation } from '~/hooks/hooks';
-import { ColorPalette, ProductDto } from '@vse-bude/shared';
+import {
+  AddProductToFavorites,
+  ColorPalette,
+  DeleteProductFromFavorites,
+  ProductDto,
+} from '@vse-bude/shared';
+import { selectFavoritesIds } from '~/store/selectors';
+import { useAppSelector, useCustomTheme, useTranslation } from '~/hooks/hooks';
+import {
+  Pressable,
+  PrimaryButton,
+  StarIcon,
+  Text,
+  View,
+} from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { PriceWrapper } from './price-wrapper';
 import { styles } from './styles';
 
-type ProductPriceBlockProps = Pick<ProductDto, 'price'>;
+type ProductPriceBlockProps = {
+  product: Pick<ProductDto, 'price' | 'id'>;
+  onFavoritePress: (
+    id: string,
+    array: string[] | [],
+  ) => Promise<void | AddProductToFavorites | DeleteProductFromFavorites>;
+};
 
-const ProductPriceBlock: FC<ProductPriceBlockProps> = ({ price }) => {
+const ProductPriceBlock: FC<ProductPriceBlockProps> = ({
+  product,
+  onFavoritePress,
+}) => {
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
+  const favoritesIds = useAppSelector(selectFavoritesIds);
+
+  const { price, id } = product;
 
   return (
     <PriceWrapper>
@@ -30,13 +54,16 @@ const ProductPriceBlock: FC<ProductPriceBlockProps> = ({ price }) => {
           <View style={styles.btnWidth}>
             <PrimaryButton label={t('common:components.BUTTON_BUY')} />
           </View>
-          <View style={[globalStyles.ml5, styles.iconBorder]}>
+          <Pressable
+            onPress={() => onFavoritePress(id, favoritesIds)}
+            style={[globalStyles.ml5, styles.iconBorder]}
+          >
             <StarIcon
               size={25}
               color={ColorPalette.YELLOW_200}
               style={styles.icon}
             />
-          </View>
+          </Pressable>
         </View>
       </>
     </PriceWrapper>

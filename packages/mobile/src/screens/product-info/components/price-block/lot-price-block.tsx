@@ -1,6 +1,17 @@
 import React, { FC } from 'react';
-import { ColorPalette, ItemDto } from '@vse-bude/shared';
-import { useAppForm, useCustomTheme, useTranslation } from '~/hooks/hooks';
+import {
+  AddProductToFavorites,
+  ColorPalette,
+  DeleteProductFromFavorites,
+  ItemDto,
+} from '@vse-bude/shared';
+import { selectFavoritesIds } from '~/store/selectors';
+import {
+  useAppForm,
+  useAppSelector,
+  useCustomTheme,
+  useTranslation,
+} from '~/hooks/hooks';
 import {
   PrimaryButton,
   StarIcon,
@@ -8,6 +19,7 @@ import {
   View,
   PlusSvg,
   Input,
+  Pressable,
 } from '~/components/components';
 import { getBidValidationSchema } from '~/validation-schemas/bid/make-bid';
 import { globalStyles } from '~/styles/styles';
@@ -15,14 +27,25 @@ import { DEFAULT_BID_VALUE } from '../../common/constants';
 import { PriceWrapper } from './price-wrapper';
 import { styles } from './styles';
 
-type LotPriceBlockProps = Pick<ItemDto, 'currentPrice' | 'minimalBid'>;
+type LotPriceBlockProps = {
+  product: Pick<ItemDto, 'currentPrice' | 'minimalBid' | 'id'>;
+  onFavoritePress: (
+    id: string,
+    array: string[] | [],
+  ) => Promise<void | AddProductToFavorites | DeleteProductFromFavorites>;
+};
 
 const LotPriceBlock: FC<LotPriceBlockProps> = ({
-  currentPrice,
-  minimalBid,
+  product,
+  onFavoritePress,
 }) => {
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
+  const favoritesIds = useAppSelector(selectFavoritesIds);
+
+  const { minimalBid, currentPrice, id } = product;
+  //const isFavorite = favoritesIds.length && favoritesIds.includes(id);
+
   const { control, errors } = useAppForm({
     defaultValues: DEFAULT_BID_VALUE,
     validationSchema: getBidValidationSchema(Number(minimalBid)),
@@ -77,13 +100,16 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
               <PlusSvg style={styles.btnIcon} />
               <PrimaryButton label={`${t('common:components.BUTTON_BID')}`} />
             </View>
-            <View style={[globalStyles.ml5, styles.iconBorder]}>
+            <Pressable
+              onPress={() => onFavoritePress(id, favoritesIds)}
+              style={[globalStyles.ml5, styles.iconBorder]}
+            >
               <StarIcon
                 size={25}
                 color={ColorPalette.YELLOW_200}
-                style={styles.icon}
+                style={[styles.icon]}
               />
-            </View>
+            </Pressable>
           </View>
         </>
       </PriceWrapper>

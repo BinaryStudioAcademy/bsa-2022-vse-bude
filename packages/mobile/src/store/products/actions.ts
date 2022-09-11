@@ -13,4 +13,24 @@ const loadProducts = createAsyncThunk<
   return productApi.getProducts(requestParams);
 });
 
-export { loadProducts };
+const fetchFavorites = createAsyncThunk<
+  ProductDto[],
+  ProductRequestDto,
+  AsyncThunkConfig
+>(ActionType.FETCH_FAVORITES, async (requestParams, { extra }) => {
+  const { productApi } = extra;
+
+  return await productApi.getFavorites(requestParams);
+});
+
+const fetchFavoritesIds = createAsyncThunk<
+  Array<string> | [],
+  undefined,
+  AsyncThunkConfig
+>(ActionType.FETCH_FAVORITES_IDS, async (_, { extra }) => {
+  const { productApi } = extra;
+
+  return await productApi.getFavoritesIds();
+});
+
+export { loadProducts, fetchFavorites, fetchFavoritesIds };

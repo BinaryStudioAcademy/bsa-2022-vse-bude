@@ -21,4 +21,13 @@ const selectProductsByType = createSelector(
   (products, type) => products.filter((item) => item.type === type),
 );
 
-export { selectProductById, selectProducts, selectProductsByType };
+const selectFavoritesIds = (state: RootState) => {
+  return state.products.favoritesIds;
+};
+
+export {
+  selectProductById,
+  selectProducts,
+  selectProductsByType,
+  selectFavoritesIds,
+};
