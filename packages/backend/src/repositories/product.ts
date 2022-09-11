@@ -23,44 +23,35 @@ export class ProductRepository {
       order = ITEM_FILTER.ORDER_DEFAULT,
     } = query;
 
-    return this._dbClient.product.findMany({
-      take: +limit,
-      skip: +from,
-      orderBy: {
-        [sortBy]: order,
-      },
-      where: {
-        type,
-        categoryId,
-        status: ProductStatus.ACTIVE,
-        price: {
-          gt: +priceGt,
-          lte: +priceLt,
+    return this._dbClient.$transaction([
+      this._dbClient.product.findMany({
+        take: +limit,
+        skip: +from,
+        orderBy: {
+          [sortBy]: order,
         },
-      },
-    });
-  }
-
-  public async getAllItemsLength(query: ProductQuery) {
-    const {
-      type,
-      categoryId,
-      priceGt = ITEM_FILTER.PRICE_GT_DEFAULT,
-      priceLt = ITEM_FILTER.PRICE_LT_DEFAULT,
-    } = query;
-    const items = await this._dbClient.product.findMany({
-      where: {
-        type,
-        categoryId,
-        status: ProductStatus.ACTIVE,
-        price: {
-          gt: +priceGt,
-          lte: +priceLt,
+        where: {
+          type,
+          categoryId,
+          status: ProductStatus.ACTIVE,
+          price: {
+            gt: +priceGt,
+            lte: +priceLt,
+          },
         },
-      },
-    });
-
-    return items.length;
+      }),
+      this._dbClient.product.count({
+        where: {
+          type,
+          categoryId,
+          status: ProductStatus.ACTIVE,
+          price: {
+            gt: +priceGt,
+            lte: +priceLt,
+          },
+        },
+      }),
+    ]);
   }
 
   public getById(id: string) {

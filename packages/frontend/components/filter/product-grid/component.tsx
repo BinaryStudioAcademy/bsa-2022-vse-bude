@@ -1,22 +1,22 @@
-import { SplideSlide } from '@splidejs/react-splide';
+import { useTypedSelector } from '@hooks';
 import { ProductCard } from 'components/product/card/component';
 import { useTranslation } from 'next-i18next';
 import * as styles from './styles';
-import type { ProductGridProps } from './types';
 
-export const ProductGrid = ({ lots }: ProductGridProps) => {
+export const ProductGrid = () => {
   const { t } = useTranslation();
+  const { list } = useTypedSelector((store) => store.product);
 
   return (
     <>
-      {lots?.length === 0 && (
+      {list?.length === 0 && (
         <h3 css={styles.headline}>{t('items-page:headline.notFound')}</h3>
       )}
       <div css={styles.productGridWrapper}>
         <div css={styles.productGrid}>
-          {lots?.length > 0 &&
-            lots.map((item) => (
-              <SplideSlide key={item.id}>
+          {list?.length > 0 &&
+            list.map((item) => (
+              <div key={item.id}>
                 <ProductCard
                   data={item}
                   name={item.title}
@@ -27,7 +27,7 @@ export const ProductGrid = ({ lots }: ProductGridProps) => {
                   currency="UAH"
                   auctionDate={item.endDate}
                 />
-              </SplideSlide>
+              </div>
             ))}
         </div>
       </div>

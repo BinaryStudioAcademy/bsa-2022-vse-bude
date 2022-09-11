@@ -4,6 +4,10 @@ import type { Theme } from '@emotion/react';
 export const btnWrapper = ({ spaces }: Theme) => css`
   width: fit-content;
   margin: 0 auto ${spaces.xl11};
+  list-style: none;
+  & li {
+    display: inline-block;
+  }
 `;
 
 export const btn = ({

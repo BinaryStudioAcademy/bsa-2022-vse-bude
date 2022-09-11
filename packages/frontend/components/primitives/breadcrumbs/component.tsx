@@ -12,7 +12,7 @@ export const Breadcrumbs = ({ paths }: PagePathProps) => (
   <Container>
     <div css={wrapper}>
       {paths.map((path, index) => {
-        if (path.name)
+        if (path.name) {
           return (
             <InternalLink
               key={path.name + index}
@@ -21,6 +21,7 @@ export const Breadcrumbs = ({ paths }: PagePathProps) => (
               href={path.route}
             />
           );
+        }
       })}
     </div>
   </Container>

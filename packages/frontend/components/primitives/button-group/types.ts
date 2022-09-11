@@ -11,6 +11,6 @@ export interface ButtonGroupProps
     onClick: () => void;
     text: string;
   }[];
-
-  activeDefault?: string;
+  setActive: (arg0: string) => void;
+  active: string;
 }

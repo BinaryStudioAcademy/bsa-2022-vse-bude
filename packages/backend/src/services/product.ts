@@ -49,14 +49,7 @@ export class ProductService {
   }
 
   public async getAll(query: ProductQuery): Promise<AllProductsResponse> {
-    const { categoryId, type, priceGt, priceLt } = query;
-    const items = await this._productRepository.getAll(query);
-    const totalCount = await this._productRepository.getAllItemsLength({
-      categoryId,
-      type,
-      priceGt,
-      priceLt,
-    });
+    const [items, totalCount] = await this._productRepository.getAll(query);
 
     return { items, count: totalCount };
   }

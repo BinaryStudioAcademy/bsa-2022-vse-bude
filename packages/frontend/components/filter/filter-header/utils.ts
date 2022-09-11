@@ -1,6 +1,9 @@
 import { Routes } from '@enums';
+import type { CategoryDto } from '@vse-bude/shared';
+import { ProductType } from '@vse-bude/shared';
 import { Order, SortBy } from '@vse-bude/shared';
 import type { TFunction } from 'next-i18next';
+import type { AllProductType } from './types';
 
 export const MIN_PRICE_NAME = 'min-price';
 export const MAX_PRICE_NAME = 'max-price';
@@ -50,7 +53,11 @@ export const sortByOptions = (t: TFunction) => [
   },
 ];
 
-export const filterBreadcrumbsPath = (t: TFunction, category, type) => [
+export const filterBreadcrumbsPath = (
+  t: TFunction,
+  category: CategoryDto,
+  type: AllProductType,
+) => [
   {
     name: t('common:header.nav.home'),
     route: Routes.DEFAULT,
@@ -68,11 +75,26 @@ export const filterBreadcrumbsPath = (t: TFunction, category, type) => [
     ),
   },
   {
-    name: t(`items-page:typeBtn.${type}`),
+    name: type && t(`items-page:typeBtn.${type}`),
     route: encodeURI(
       `${Routes.ITEMS}?filter=${JSON.stringify({
         type: type,
       })}`,
     ),
+  },
+];
+
+export const productTypeBtnArray = (t: TFunction) => [
+  {
+    name: ALL_PRODUCTS,
+    text: t('items-page:typeBtn.ALL'),
+  },
+  {
+    name: ProductType.SELLING,
+    text: t('items-page:typeBtn.SELLING'),
+  },
+  {
+    name: ProductType.AUCTION,
+    text: t('items-page:typeBtn.AUCTION'),
   },
 ];

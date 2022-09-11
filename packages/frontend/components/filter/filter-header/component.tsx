@@ -1,34 +1,29 @@
 import { CategoryBadges } from '@components/primitives/category-badge';
-import { Routes } from '@enums';
 import { useTypedSelector } from '@hooks';
 import { Breadcrumbs, Container, Flex } from '@primitives';
-import type { ProductQuery } from '@vse-bude/shared';
 import { Order } from '@vse-bude/shared';
-import { ProductType } from '@vse-bude/shared';
 import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { ButtonGroup } from '@components/primitives/button-group';
+import { removeFilterFields } from '../helpers';
 import { FilterPopover } from './filter-popover';
-import { ALL_PRODUCTS, filterBreadcrumbsPath } from './filter-utils';
-import type { AllProductType } from './types';
+import {
+  ALL_PRODUCTS,
+  filterBreadcrumbsPath,
+  productTypeBtnArray,
+} from './utils';
+import type { FilterHeaderProps } from './types';
 import * as styles from './styles';
 
-export function FilterHeader() {
+export function FilterHeader({ filter, setFilter }: FilterHeaderProps) {
   const { t } = useTranslation();
-  const { query, push } = useRouter();
   const [badges, setBadges] = useState([]);
   const categories = useTypedSelector((state) => state.category.list);
-  const [productType, setProductType] = useState<AllProductType>(null);
-
-  const filter: ProductQuery =
-    query.filter && JSON.parse(query.filter as string);
+  const [productType, setProductType] = useState<string>(null);
   const currentCategory = categories.find(
     (item) => item.id === filter?.categoryId,
   );
   useEffect(() => {
-    const filter: ProductQuery =
-      query.filter && JSON.parse(query.filter as string);
     setProductType(filter?.type || ALL_PRODUCTS);
 
     filter &&
@@ -41,18 +36,20 @@ export function FilterHeader() {
           })
           .filter((item) => item),
       );
-  }, [query]);
+  }, [filter]);
 
   const addTypeToQuery = (type) => {
-    const filter: ProductQuery =
-      (query.filter && JSON.parse(query.filter as string)) || {};
-    type !== ALL_PRODUCTS ? (filter.type = type) : delete filter?.type;
-    push({
-      pathname: Routes.ITEMS,
-      query: {
-        filter: JSON.stringify(filter),
-      },
-    });
+    const updatedFilter = { ...filter };
+    type !== ALL_PRODUCTS
+      ? (updatedFilter.type = type)
+      : delete updatedFilter?.type;
+    setFilter(removeFilterFields(updatedFilter, ['from', 'limit']));
+  };
+
+  const removeBadge = (item) => {
+    setBadges([...badges.filter((badge) => badge !== item)]);
+    const deletedKey = Object.keys(filter).find((key) => filter[key] === item);
+    setFilter(removeFilterFields(filter, ['from', 'limit', deletedKey]));
   };
 
   return (
@@ -69,19 +66,7 @@ export function FilterHeader() {
                 <CategoryBadges
                   badges={badges.map((item) => ({
                     name: item,
-                    onClick: () => {
-                      setBadges([...badges.filter((badg) => badg !== item)]);
-                      const deletedKey = Object.keys(filter).find(
-                        (key) => filter[key] === item,
-                      );
-                      deletedKey && delete filter[deletedKey];
-                      push({
-                        pathname: Routes.ITEMS,
-                        query: {
-                          filter: JSON.stringify(filter),
-                        },
-                      });
-                    },
+                    onClick: () => removeBadge(item),
                   }))}
                 />
               )}
@@ -89,37 +74,20 @@ export function FilterHeader() {
             <Flex justify={'space-between'}>
               <Flex css={styles.categoryWrapper} justify={'space-between'}>
                 <ButtonGroup
-                  buttons={[
-                    {
-                      name: ALL_PRODUCTS,
-                      text: t('items-page:typeBtn.ALL'),
-                      onClick: () => {
-                        setProductType(ALL_PRODUCTS);
-                        addTypeToQuery(ALL_PRODUCTS);
-                      },
+                  buttons={productTypeBtnArray(t).map((item) => ({
+                    name: item.name,
+                    text: item.text,
+                    onClick: () => {
+                      setProductType(item.name);
+                      addTypeToQuery(item.name);
                     },
-                    {
-                      name: ProductType.SELLING,
-                      text: t('items-page:typeBtn.SELLING'),
-                      onClick: () => {
-                        setProductType(ProductType.SELLING);
-                        addTypeToQuery(ProductType.SELLING);
-                      },
-                    },
-                    {
-                      name: ProductType.AUCTION,
-                      text: t('items-page:typeBtn.AUCTION'),
-                      onClick: () => {
-                        setProductType(ProductType.AUCTION);
-                        addTypeToQuery(ProductType.AUCTION);
-                      },
-                    },
-                  ]}
-                  activeDefault={productType}
+                  }))}
+                  active={productType}
+                  setActive={setProductType}
                 />
               </Flex>
               <div css={styles.controllersWrapper}>
-                <FilterPopover />
+                <FilterPopover filter={filter} setFilter={setFilter} />
               </div>
             </Flex>
           </div>

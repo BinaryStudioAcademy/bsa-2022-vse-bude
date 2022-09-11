@@ -1,19 +1,18 @@
 import { Button, Flex, Icon, Input, Popover } from '@components/primitives';
 import { Select } from '@components/primitives/select';
 import type { SelectOption } from '@components/primitives/select/types';
-import { IconColor, IconName, Routes } from '@enums';
+import { IconColor, IconName } from '@enums';
 import { useTypedSelector } from '@hooks';
 import type { CategoryDto, ProductQuery } from '@vse-bude/shared';
 import { ITEM_FILTER } from '@vse-bude/shared';
 import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
+import { removeFilterFields } from '../helpers';
 import * as styles from './styles';
-import { MAX_PRICE_NAME, MIN_PRICE_NAME, sortByOptions } from './filter-utils';
-import type { PriceOption, SortByOption } from './types';
+import { MAX_PRICE_NAME, MIN_PRICE_NAME, sortByOptions } from './utils';
+import type { FilterPopoverProps, PriceOption, SortByOption } from './types';
 
-export function FilterPopover() {
-  const { push, query } = useRouter();
+export function FilterPopover({ filter, setFilter }: FilterPopoverProps) {
   const { t } = useTranslation();
 
   const categories = useTypedSelector((state) => state.category.list);
@@ -25,29 +24,28 @@ export function FilterPopover() {
   const triggerRef = useRef<HTMLDivElement>();
 
   useEffect(() => {
-    const filter: ProductQuery =
-      query.filter && JSON.parse(query.filter as string);
     const sortBuyCurrent = sortByOptions(t).find(
       (item: SortByOption) =>
         item.value.order === filter?.order &&
         item.value.sortBy === filter?.sortBy,
     );
-    sortBuyCurrent && setSortBy(sortBuyCurrent);
+    sortBuyCurrent ? setSortBy(sortBuyCurrent) : setSortBy(null);
     setPrice({
       [MIN_PRICE_NAME]: filter?.priceGt || ITEM_FILTER.PRICE_GT_DEFAULT,
       [MAX_PRICE_NAME]: filter?.priceLt || ITEM_FILTER.PRICE_LT_DEFAULT,
     });
-    if (filter?.categoryId) {
-      const currentCategory = categories.find(
-        (item) => item.id === filter.categoryId,
-      );
-      currentCategory &&
-        setCategory({
+
+    const currentCategory = categories.find(
+      (item) => item.id === filter?.categoryId,
+    );
+
+    currentCategory
+      ? setCategory({
           title: currentCategory.title,
           value: currentCategory.id,
-        });
-    }
-  }, [query, categories, t]);
+        })
+      : setCategory(null);
+  }, [categories, t, filter]);
 
   const priceHandler = ({ target }) => {
     const { value, name } = target;
@@ -65,8 +63,6 @@ export function FilterPopover() {
 
   const onSaveHandler = () => {
     triggerRef.current.click();
-    const filter: ProductQuery =
-      query.filter && JSON.parse(query.filter as string);
     const filters: ProductQuery = {
       ...filter,
       categoryId: category?.value as string,
@@ -75,12 +71,7 @@ export function FilterPopover() {
       priceGt: price[MIN_PRICE_NAME],
       priceLt: price[MAX_PRICE_NAME],
     };
-    push({
-      pathname: Routes.ITEMS,
-      query: {
-        filter: JSON.stringify(filters),
-      },
-    });
+    setFilter(removeFilterFields(filters, ['from', 'limit']));
   };
 
   return (
@@ -101,10 +92,7 @@ export function FilterPopover() {
     >
       {() => (
         <div css={styles.popover}>
-          <h5 css={styles.popoverHeadline}>
-            {' '}
-            {t('items-page:label.category')}
-          </h5>
+          <h5 css={styles.popoverHeadline}>{t('items-page:label.category')}</h5>
           <Select
             options={categories.map((item: CategoryDto) => ({
               title: item.title,
