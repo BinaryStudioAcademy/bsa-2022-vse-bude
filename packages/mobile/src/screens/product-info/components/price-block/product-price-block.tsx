@@ -10,7 +10,7 @@ import { useAppSelector, useCustomTheme, useTranslation } from '~/hooks/hooks';
 import {
   Pressable,
   PrimaryButton,
-  StarIcon,
+  StarSvg,
   Text,
   View,
 } from '~/components/components';
@@ -35,6 +35,7 @@ const ProductPriceBlock: FC<ProductPriceBlockProps> = ({
   const favoritesIds = useAppSelector(selectFavoritesIds);
 
   const { price, id } = product;
+  const isFavorite = favoritesIds && favoritesIds.includes(id);
 
   return (
     <PriceWrapper>
@@ -58,9 +59,9 @@ const ProductPriceBlock: FC<ProductPriceBlockProps> = ({
             onPress={() => onFavoritePress(id, favoritesIds)}
             style={[globalStyles.ml5, styles.iconBorder]}
           >
-            <StarIcon
-              size={25}
+            <StarSvg
               color={ColorPalette.YELLOW_200}
+              fill={isFavorite ? ColorPalette.YELLOW_200 : ''}
               style={styles.icon}
             />
           </Pressable>

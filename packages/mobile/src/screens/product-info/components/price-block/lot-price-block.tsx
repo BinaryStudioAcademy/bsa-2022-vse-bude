@@ -14,12 +14,12 @@ import {
 } from '~/hooks/hooks';
 import {
   PrimaryButton,
-  StarIcon,
   Text,
   View,
   PlusSvg,
   Input,
   Pressable,
+  StarSvg,
 } from '~/components/components';
 import { getBidValidationSchema } from '~/validation-schemas/bid/make-bid';
 import { globalStyles } from '~/styles/styles';
@@ -44,7 +44,7 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
   const favoritesIds = useAppSelector(selectFavoritesIds);
 
   const { minimalBid, currentPrice, id } = product;
-  //const isFavorite = favoritesIds.length && favoritesIds.includes(id);
+  const isFavorite = favoritesIds.length && favoritesIds.includes(id);
 
   const { control, errors } = useAppForm({
     defaultValues: DEFAULT_BID_VALUE,
@@ -104,10 +104,10 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
               onPress={() => onFavoritePress(id, favoritesIds)}
               style={[globalStyles.ml5, styles.iconBorder]}
             >
-              <StarIcon
-                size={25}
+              <StarSvg
                 color={ColorPalette.YELLOW_200}
-                style={[styles.icon]}
+                fill={isFavorite ? ColorPalette.YELLOW_200 : ''}
+                style={styles.icon}
               />
             </Pressable>
           </View>
