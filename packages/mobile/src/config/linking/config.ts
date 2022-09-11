@@ -3,7 +3,6 @@ import {
   MainScreenName,
   WelcomeRootScreenName,
   DrawerScreenName,
-  DeepLinkingPaths,
 } from '~/common/enums/enums';
 
 const config = {
@@ -12,11 +11,11 @@ const config = {
       screens: {
         [DrawerScreenName.MAIN]: {
           screens: {
-            [MainScreenName.HOME]: DeepLinkingPaths.HOME,
+            [MainScreenName.HOME]: 'home',
             [MainScreenName.WELCOME_ROOT]: {
               screens: {
-                [WelcomeRootScreenName.SIGN_IN]: DeepLinkingPaths.SIGN_IN,
-                [WelcomeRootScreenName.SIGN_UP]: DeepLinkingPaths.SIGN_UP,
+                [WelcomeRootScreenName.SIGN_IN]: 'sign-in',
+                [WelcomeRootScreenName.SIGN_UP]: 'sign-up',
               },
             },
           },
@@ -24,9 +23,9 @@ const config = {
       },
     },
     [RootScreenName.ITEM_INFO]: {
-      path: DeepLinkingPaths.ITEM,
+      path: 'items/:itemId?',
       parse: {
-        itemId: (itemId: string): string => itemId,
+        itemId: (itemId: string) => itemId,
       },
     },
   },
