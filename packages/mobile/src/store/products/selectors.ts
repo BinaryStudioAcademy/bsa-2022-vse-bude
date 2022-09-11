@@ -29,10 +29,15 @@ const selectFavoritesIds = (state: RootState) => {
   return state.products.favoritesIds;
 };
 
+const selectFavorites = (state: RootState) => {
+  return state.products.favorites;
+};
+
 export {
   selectProductById,
   selectProducts,
   selectProductsByType,
   selectCurrentProduct,
   selectFavoritesIds,
+  selectFavorites,
 };

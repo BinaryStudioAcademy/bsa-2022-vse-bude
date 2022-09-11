@@ -1,11 +1,7 @@
 import React, { FC } from 'react';
-import {
-  AddProductToFavorites,
-  ColorPalette,
-  DeleteProductFromFavorites,
-  ItemDto,
-} from '@vse-bude/shared';
+import { ColorPalette, ItemDto, ProductIdRequest } from '@vse-bude/shared';
 import { selectFavoritesIds } from '~/store/selectors';
+import { getBidValidationSchema } from '~/validation-schemas/bid/make-bid';
 import {
   useAppForm,
   useAppSelector,
@@ -21,7 +17,6 @@ import {
   Pressable,
   StarSvg,
 } from '~/components/components';
-import { getBidValidationSchema } from '~/validation-schemas/bid/make-bid';
 import { globalStyles } from '~/styles/styles';
 import { DEFAULT_BID_VALUE } from '../../common/constants';
 import { PriceWrapper } from './price-wrapper';
@@ -29,22 +24,23 @@ import { styles } from './styles';
 
 type LotPriceBlockProps = {
   product: Pick<ItemDto, 'currentPrice' | 'minimalBid' | 'id'>;
+  isLoading: boolean;
   onFavoritePress: (
     id: string,
-    array: string[] | [],
-  ) => Promise<void | AddProductToFavorites | DeleteProductFromFavorites>;
+    isFavorite: boolean,
+  ) => Promise<void | ProductIdRequest>;
 };
 
 const LotPriceBlock: FC<LotPriceBlockProps> = ({
   product,
+  isLoading,
   onFavoritePress,
 }) => {
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
   const favoritesIds = useAppSelector(selectFavoritesIds);
-
   const { minimalBid, currentPrice, id } = product;
-  const isFavorite = favoritesIds.length && favoritesIds.includes(id);
+  const isFavorite = favoritesIds.includes(id);
 
   const { control, errors } = useAppForm({
     defaultValues: DEFAULT_BID_VALUE,
@@ -101,12 +97,15 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
               <PrimaryButton label={`${t('common:components.BUTTON_BID')}`} />
             </View>
             <Pressable
-              onPress={() => onFavoritePress(id, favoritesIds)}
+              onPress={() => onFavoritePress(id, isFavorite)}
               style={[globalStyles.ml5, styles.iconBorder]}
+              disabled={isLoading}
             >
               <StarSvg
                 color={ColorPalette.YELLOW_200}
-                fill={isFavorite ? ColorPalette.YELLOW_200 : ''}
+                width={30}
+                height={30}
+                fill={isFavorite ? ColorPalette.YELLOW_200 : 'none'}
                 style={styles.icon}
               />
             </Pressable>

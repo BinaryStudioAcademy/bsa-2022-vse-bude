@@ -1,16 +1,17 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { RouteProp } from '@react-navigation/native';
+import { HttpError, ProductType } from '@vse-bude/shared';
 import { RootNavigationParamList } from '~/common/types/types';
-import { ProductType } from '@vse-bude/shared';
+import { RootScreenName } from '~/common/enums/enums';
 import { products as productsActions } from '~/store/actions';
 import { selectCurrentProduct, selectCurrentUser } from '~/store/selectors';
+import { notification, productApi } from '~/services/services';
 import {
   useAppDispatch,
   useAppSelector,
   useCustomTheme,
   useRoute,
 } from '~/hooks/hooks';
-import { RootScreenName } from '~/common/enums/enums';
 import {
   ScreenWrapper,
   View,
@@ -21,7 +22,6 @@ import {
   Countdown,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { notification, productApi } from '~/services/services';
 import {
   Description,
   ImageCarousel,
@@ -32,6 +32,7 @@ import {
 
 const ProductInfo: FC = () => {
   const { colors } = useCustomTheme();
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
   const product = useAppSelector(selectCurrentProduct);
   const user = useAppSelector(selectCurrentUser);
@@ -46,7 +47,7 @@ const ProductInfo: FC = () => {
     if (user) {
       dispatch(productsActions.fetchFavoritesIds());
     }
-  }, [dispatch]);
+  }, []);
 
   if (!product) {
     return <Spinner />;
@@ -56,25 +57,25 @@ const ProductInfo: FC = () => {
 
   const handleToggleFavorite = async (
     productId: string,
-    favoritesIds: string[],
+    isFavorite: boolean,
   ) => {
+    setIsLoading(true);
     if (!user) {
       return notification.info('You should authorize first');
     }
     try {
-      if (favoritesIds.length) {
-        const isFavorite = favoritesIds.includes(productId);
-        if (isFavorite) {
-          return await productApi.deleteFromFavorites({ productId });
-        }
-
-        return await productApi.uploadToFavorites({ productId });
+      if (isFavorite) {
+        return await productApi.deleteFromFavorites({ productId });
       }
 
       return await productApi.uploadToFavorites({ productId });
-    } catch {
-      (err: Record<string, unknown>) =>
+    } catch (err) {
+      if (err instanceof HttpError) {
         notification.error(JSON.stringify(err.message));
+      }
+    } finally {
+      dispatch(productsActions.fetchFavoritesIds());
+      setIsLoading(false);
     }
   };
 
@@ -120,11 +121,13 @@ const ProductInfo: FC = () => {
       {isAuction ? (
         <LotPriceBlock
           product={product}
+          isLoading={isLoading}
           onFavoritePress={handleToggleFavorite}
         />
       ) : (
         <ProductPriceBlock
           product={product}
+          isLoading={isLoading}
           onFavoritePress={handleToggleFavorite}
         />
       )}

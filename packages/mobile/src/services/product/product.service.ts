@@ -5,8 +5,6 @@ import {
   ProductApiRoutes,
   HttpMethod,
   HttpContentType,
-  AddProductToFavorites,
-  DeleteProductFromFavorites,
   ProductIdRequest,
 } from '@vse-bude/shared';
 import { ProductRequestDto } from '~/common/types/types';
@@ -53,7 +51,7 @@ class ProductService {
     );
   }
 
-  uploadToFavorites(payload: ProductIdRequest): Promise<AddProductToFavorites> {
+  uploadToFavorites(payload: ProductIdRequest): Promise<ProductIdRequest> {
     return this.#http.load(
       `${this.#apiPrefix}${ApiRoutes.PRODUCTS}${ProductApiRoutes.FAVORITE}`,
       {
@@ -67,7 +65,7 @@ class ProductService {
 
   deleteFromFavorites(
     payload: Record<string, unknown>,
-  ): Promise<DeleteProductFromFavorites> {
+  ): Promise<ProductIdRequest> {
     return this.#http.load(
       `${this.#apiPrefix}${ApiRoutes.PRODUCTS}${ProductApiRoutes.FAVORITE}`,
       {

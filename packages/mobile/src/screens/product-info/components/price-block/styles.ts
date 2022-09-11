@@ -33,8 +33,8 @@ const styles = StyleSheet.create({
     borderRadius: 22,
   },
   icon: {
-    marginTop: 9,
-    marginLeft: 9.3,
+    marginTop: 7,
+    marginLeft: 7.5,
   },
 });
 
