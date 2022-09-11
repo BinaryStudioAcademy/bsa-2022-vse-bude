@@ -7,7 +7,6 @@ import type { CategoryDto, ProductQuery } from '@vse-bude/shared';
 import { ITEM_FILTER } from '@vse-bude/shared';
 import { useTranslation } from 'next-i18next';
 import { useEffect, useRef, useState } from 'react';
-import { removeFilterFields } from '../helpers';
 import * as styles from './styles';
 import { MAX_PRICE_NAME, MIN_PRICE_NAME, sortByOptions } from './utils';
 import type { FilterPopoverProps, PriceOption, SortByOption } from './types';
@@ -71,7 +70,7 @@ export function FilterPopover({ filter, setFilter }: FilterPopoverProps) {
       priceGt: price[MIN_PRICE_NAME],
       priceLt: price[MAX_PRICE_NAME],
     };
-    setFilter(removeFilterFields(filters, ['from', 'limit']));
+    setFilter(filters);
   };
 
   return (

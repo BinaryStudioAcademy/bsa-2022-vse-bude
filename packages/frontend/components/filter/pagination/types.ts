@@ -1,6 +1,6 @@
-import type { ProductQuery } from '@vse-bude/shared';
+import type { PaginationFilter } from '../types';
 
 export interface PaginationProps {
-  filter: ProductQuery;
-  setFilter: (arg0: ProductQuery) => void;
+  filter: PaginationFilter;
+  setFilter: (arg0: PaginationFilter) => void;
 }

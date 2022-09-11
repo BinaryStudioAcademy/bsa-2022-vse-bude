@@ -1,6 +1,7 @@
 import { CategoryBadges } from '@components/primitives/category-badge';
 import { useTypedSelector } from '@hooks';
 import { Breadcrumbs, Container, Flex } from '@primitives';
+import type { ProductQuery } from '@vse-bude/shared';
 import { Order } from '@vse-bude/shared';
 import { useTranslation } from 'next-i18next';
 import { useEffect, useState } from 'react';
@@ -43,13 +44,15 @@ export function FilterHeader({ filter, setFilter }: FilterHeaderProps) {
     type !== ALL_PRODUCTS
       ? (updatedFilter.type = type)
       : delete updatedFilter?.type;
-    setFilter(removeFilterFields(updatedFilter, ['from', 'limit']));
+    setFilter(updatedFilter);
   };
 
   const removeBadge = (item) => {
     setBadges([...badges.filter((badge) => badge !== item)]);
-    const deletedKey = Object.keys(filter).find((key) => filter[key] === item);
-    setFilter(removeFilterFields(filter, ['from', 'limit', deletedKey]));
+    const deletedKey = Object.keys(filter).find(
+      (key) => filter[key] === item,
+    ) as keyof ProductQuery;
+    setFilter(removeFilterFields(filter, [deletedKey]));
   };
 
   return (

@@ -1,6 +1,7 @@
 import type { SelectOption } from '@components/primitives/select/types';
-import type { Order, ProductQuery, SortBy } from '@vse-bude/shared';
+import type { Order, SortBy } from '@vse-bude/shared';
 import type { ProductType } from '@vse-bude/shared';
+import type { HeaderFilter } from '../types';
 import type { MAX_PRICE_NAME, MIN_PRICE_NAME, ALL_PRODUCTS } from './utils';
 
 export type SortByOption = SelectOption<{
@@ -14,8 +15,8 @@ export type PriceOption = {
 export type AllProductType = ProductType | typeof ALL_PRODUCTS;
 
 export interface FilterHeaderProps {
-  filter: ProductQuery;
-  setFilter: (arg0: ProductQuery) => void;
+  filter: HeaderFilter;
+  setFilter: (arg0: HeaderFilter) => void;
 }
 
 export type FilterPopoverProps = FilterHeaderProps;

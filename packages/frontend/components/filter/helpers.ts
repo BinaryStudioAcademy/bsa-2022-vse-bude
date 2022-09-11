@@ -23,7 +23,7 @@ export const deepEquals = (firstObj, secondObj): boolean => {
 
 export const removeFilterFields = (
   filter: ProductQuery,
-  fieldsToRemove: string[],
+  fieldsToRemove: (keyof ProductQuery)[],
 ) => {
   const newFilter = { ...filter };
   fieldsToRemove.forEach((field) => delete newFilter[field]);

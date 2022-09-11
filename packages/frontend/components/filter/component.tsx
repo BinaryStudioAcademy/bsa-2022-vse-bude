@@ -9,12 +9,14 @@ import { ProductGrid } from './product-grid';
 import { FilterHeader } from './filter-header';
 import { Pagination } from './pagination';
 import { ProductsLoader } from './products-loader';
-import { deepEquals, getFilterFromQuery } from './helpers';
+import { deepEquals, getFilterFromQuery, removeFilterFields } from './helpers';
 
 export const Filter = () => {
   const { query, push } = useRouter();
   const { loading } = useTypedSelector((store) => store.product);
-  const [filter, setFilter] = useState<ProductQuery>(null);
+  const [filter, setFilter] = useState<ProductQuery>(
+    getFilterFromQuery(query, push),
+  );
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -26,7 +28,6 @@ export const Filter = () => {
     }
     const filter = getFilterFromQuery(query, push);
     dispatch(fetchProducts(filter));
-    setFilter(filter);
   }, [dispatch, query, push]);
 
   useEffect(() => {
@@ -44,14 +45,17 @@ export const Filter = () => {
 
   return (
     <>
-      <FilterHeader filter={filter} setFilter={setFilter} />
+      <FilterHeader
+        filter={removeFilterFields(filter, ['from', 'limit'])}
+        setFilter={setFilter}
+      />
       <Container>
         {loading ? (
           <ProductsLoader />
         ) : (
           <>
             <ProductGrid />
-              <Pagination filter={filter} setFilter={setFilter} />
+            <Pagination filter={filter} setFilter={setFilter} />
           </>
         )}
       </Container>
