@@ -2,12 +2,8 @@ import React, { FC, useEffect } from 'react';
 import { RouteProp } from '@react-navigation/native';
 import { RootNavigationParamList } from '~/common/types/types';
 import { ProductType } from '@vse-bude/shared';
-import {
-  product as productActions,
-  products as productsActions,
-} from '~/store/actions';
-import { selectCurrentUser } from '~/store/selectors';
-import { selectProduct } from '~/store/product/selectors';
+import { products as productsActions } from '~/store/actions';
+import { selectCurrentProduct, selectCurrentUser } from '~/store/selectors';
 import {
   useAppDispatch,
   useAppSelector,
@@ -37,7 +33,7 @@ import {
 const ProductInfo: FC = () => {
   const { colors } = useCustomTheme();
   const dispatch = useAppDispatch();
-  const product = useAppSelector(selectProduct);
+  const product = useAppSelector(selectCurrentProduct);
   const user = useAppSelector(selectCurrentUser);
   const route =
     useRoute<
@@ -46,7 +42,7 @@ const ProductInfo: FC = () => {
   const id = route.params?.itemId;
 
   useEffect(() => {
-    dispatch(productActions.loadProductInfo(id));
+    dispatch(productsActions.loadProductInfo(id));
     if (user) {
       dispatch(productsActions.fetchFavoritesIds());
     }

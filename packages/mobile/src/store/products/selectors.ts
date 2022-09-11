@@ -21,6 +21,10 @@ const selectProductsByType = createSelector(
   (products, type) => products.filter((item) => item.type === type),
 );
 
+const selectCurrentProduct = (state: RootState) => {
+  return state.products.current;
+};
+
 const selectFavoritesIds = (state: RootState) => {
   return state.products.favoritesIds;
 };
@@ -29,5 +33,6 @@ export {
   selectProductById,
   selectProducts,
   selectProductsByType,
+  selectCurrentProduct,
   selectFavoritesIds,
 };

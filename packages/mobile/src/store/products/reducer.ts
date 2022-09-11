@@ -1,11 +1,17 @@
 import { createReducer, isAnyOf } from '@reduxjs/toolkit';
-import { ProductDto } from '@vse-bude/shared';
+import { ProductDto, ItemDto } from '@vse-bude/shared';
 import { DataStatus } from '~/common/enums/enums';
-import { loadProducts, fetchFavorites, fetchFavoritesIds } from './actions';
+import {
+  loadProducts,
+  fetchFavorites,
+  fetchFavoritesIds,
+  loadProductInfo,
+} from './actions';
 
 type InitialState = {
   dataStatus: DataStatus;
   products: ProductDto[] | [];
+  current: ItemDto | undefined;
   favorites: ProductDto[] | [];
   favoritesIds: Array<string>;
 };
@@ -13,6 +19,7 @@ type InitialState = {
 const initialState: InitialState = {
   dataStatus: DataStatus.IDLE,
   products: [],
+  current: undefined,
   favorites: [],
   favoritesIds: [],
 };
@@ -22,6 +29,10 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadProducts.fulfilled, (state, action) => {
       state.dataStatus = DataStatus.FULFILLED;
       state.products = [...state.products, ...action.payload];
+    })
+    .addCase(loadProductInfo.fulfilled, (state, action) => {
+      state.dataStatus = DataStatus.FULFILLED;
+      state.current = action.payload;
     })
     .addCase(fetchFavorites.fulfilled, (state, action) => {
       state.dataStatus = DataStatus.FULFILLED;
@@ -34,6 +45,7 @@ const reducer = createReducer(initialState, (builder) => {
     .addMatcher(
       isAnyOf(
         loadProducts.pending,
+        loadProductInfo.pending,
         fetchFavorites.pending,
         fetchFavoritesIds.pending,
       ),
@@ -44,6 +56,7 @@ const reducer = createReducer(initialState, (builder) => {
     .addMatcher(
       isAnyOf(
         loadProducts.rejected,
+        loadProductInfo.pending,
         fetchFavorites.rejected,
         fetchFavoritesIds.rejected,
       ),
