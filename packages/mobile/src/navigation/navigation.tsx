@@ -51,7 +51,13 @@ const Navigation: FC = () => {
         component={HomeWithMenuNavigation}
       />
       <NativeStack.Group screenOptions={baseScreenOptions}>
-        <Stack.Screen name={RootScreenName.ITEM_INFO} component={ProductInfo} />
+        <Stack.Screen
+          name={RootScreenName.ITEM_INFO}
+          component={ProductInfo}
+          options={{
+            title: t('product_info.TITLE'),
+          }}
+        />
       </NativeStack.Group>
       {user && (
         <NativeStack.Group screenOptions={baseScreenOptions}>
