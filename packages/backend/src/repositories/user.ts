@@ -36,7 +36,7 @@ export class UserRepository {
   public getByEmail(email: string) {
     return this._dbClient.user.findFirst({
       where: {
-        email: email,
+        email: { mode: 'insensitive', equals: email },
       },
     });
   }
