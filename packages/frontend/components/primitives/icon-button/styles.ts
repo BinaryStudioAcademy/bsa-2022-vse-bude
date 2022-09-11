@@ -72,7 +72,10 @@ export const iconButton = ({ colors, radiuses }: Theme) => css`
   }
 
   :disabled {
-    color: ${colors.disabled};
-    cursor: not-allowed;
+    pointer-events: none;
+
+    i {
+      color: ${colors.disabled}!important;
+    }
   }
 `;
