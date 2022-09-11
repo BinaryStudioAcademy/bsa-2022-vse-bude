@@ -91,9 +91,8 @@ export const initProfileRoutes = (
         myListService.getPostedItems({ userId }),
         myListService.getArchived({ userId }),
       ];
-      const items = requests.map((dbreq) => dbreq);
 
-      return await Promise.all(items).then((items) => items.flat());
+      return await Promise.all(requests).then((items) => items.flat());
     }),
   );
 

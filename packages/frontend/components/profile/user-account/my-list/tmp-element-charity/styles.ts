@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import type { Theme } from '@emotion/react';
 
-export const charityWrapper = () => css`
+export const charityWrapper = css`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -11,13 +11,13 @@ export const logoWrapper = ({ spaces }: Theme) => css`
   margin-right: ${spaces.xs};
 `;
 
-export const logo = () => css`
+export const logo = css`
   display: block;
   width: 29px;
   height: 25px;
 `;
 
-export const nameWrapper = () => css``;
+export const nameWrapper = css``;
 
 export const name = ({
   fontSizes,

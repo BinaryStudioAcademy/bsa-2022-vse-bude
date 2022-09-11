@@ -1,56 +1,17 @@
 import type { WinnerDto, AuthorDto } from '@vse-bude/shared';
 
-export interface PurchasedItems {
+export interface ItemCard {
+  id: string;
   title: string;
+  description: string;
   imageLinks: string[];
   price: number;
-  status: string;
+  recommendedPrice?: number;
+  minimalBid?: number;
   author: AuthorDto;
-  endDate: string;
-}
-
-export interface SoldItems {
-  title: string;
-  imageLinks: string[];
-  price: number;
-  status: string;
   winner: WinnerDto;
-  endDate: string;
-}
-
-export interface PostedItems {
-  id: string;
-  title: string;
-  description: string;
-  price: number;
-  recommendedPrice?: number;
-  minimalBid?: number;
-  imageLinks: string[];
-  status: string;
   views: number;
+  endDate: string;
   postDate: string;
-}
-
-export interface DraftedItems {
-  id: string;
-  title: string;
-  description: string;
-  price: number;
-  recommendedPrice?: number;
-  minimalBid?: number;
-  imageLinks: string[];
-  status: string;
   updatedAt: string;
-}
-
-export interface CancelledItems {
-  id: string;
-  title: string;
-  description: string;
-  price: number;
-  recommendedPrice?: number;
-  minimalBid?: number;
-  imageLinks: string[];
-  status: string;
-  postDate: string;
 }

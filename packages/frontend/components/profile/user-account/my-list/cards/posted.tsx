@@ -1,5 +1,6 @@
 import { IconButton } from '@primitives';
 import { IconColor, IconName } from '@enums';
+import { useTranslation } from 'next-i18next';
 import {
   ItemImage,
   ItemHeader,
@@ -9,13 +10,12 @@ import {
   Date,
   Views,
 } from '../primitives';
-import type { PostedItems } from './types';
-import { randomSrc } from './utils';
+import type { ItemCard } from './types';
 import * as styles from './styles';
 
-export const Posted = ({ data }: { data: PostedItems }) => {
-  const { title, imageLinks, price, status, description, views, postDate } =
-    data;
+export const Posted = ({ data }: { data: ItemCard }) => {
+  const { t } = useTranslation();
+  const { title, imageLinks, price, description, views, postDate } = data;
 
   const onHandleClick = () => 'click';
 
@@ -23,7 +23,7 @@ export const Posted = ({ data }: { data: PostedItems }) => {
     <div css={styles.card}>
       <div css={styles.cardContent}>
         <div css={styles.leftContent}>
-          <ItemImage src={randomSrc({ array: imageLinks })} title={title} />
+          <ItemImage src={imageLinks[0]} title={title} />
         </div>
 
         <div css={styles.rightContent}>
@@ -32,7 +32,7 @@ export const Posted = ({ data }: { data: PostedItems }) => {
             <ItemDescription description={description} />
             <div css={styles.saleDetails}>
               <Price price={price} />
-              <ItemStatus status={status} />
+              <ItemStatus status={t('my-list:card.posted')} />
             </div>
           </div>
 

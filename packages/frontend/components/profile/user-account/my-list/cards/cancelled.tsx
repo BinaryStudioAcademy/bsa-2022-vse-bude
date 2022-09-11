@@ -9,11 +9,10 @@ import {
   ItemDescription,
   Date,
 } from '../primitives';
-import type { CancelledItems } from './types';
-import { randomSrc } from './utils';
+import type { ItemCard } from './types';
 import * as styles from './styles';
 
-export const Cancelled = ({ data }: { data: CancelledItems }) => {
+export const Cancelled = ({ data }: { data: ItemCard }) => {
   const { title, imageLinks, price, status, description, postDate } = data;
   const { t } = useTranslation();
 
@@ -23,7 +22,7 @@ export const Cancelled = ({ data }: { data: CancelledItems }) => {
     <div css={styles.card}>
       <div css={styles.cardContent}>
         <div css={styles.leftContent}>
-          <ItemImage src={randomSrc({ array: imageLinks })} title={title} />
+          <ItemImage src={imageLinks[0]} title={title} />
         </div>
 
         <div css={styles.rightContent}>
