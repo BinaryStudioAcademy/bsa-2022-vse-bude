@@ -11,27 +11,17 @@ interface CategoryOptionsSSR extends CategoryOptions {
   httpSSR: Http;
 }
 
-export const getAllCategories = ({ limit, locale }: CategoryOptions) =>
+export const getAllCategories = ({ locale }: CategoryOptions) =>
   http.get({
     url: `${ApiRoutes.CATEGORIES}`,
-    payload: {
-      limit,
-    },
     options: {
       acceptLanguage: locale,
     },
   });
 
-export const getAllCategoriesSSR = ({
-  httpSSR,
-  limit,
-  locale,
-}: CategoryOptionsSSR) =>
+export const getAllCategoriesSSR = ({ httpSSR, locale }: CategoryOptionsSSR) =>
   httpSSR.get({
     url: `${ApiRoutes.CATEGORIES}`,
-    payload: {
-      limit,
-    },
     options: {
       acceptLanguage: locale,
     },
