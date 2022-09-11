@@ -9,12 +9,11 @@ import {
   ItemDescription,
   ItemDate,
 } from '../primitives';
-import type { DraftedItems } from './types';
-import { randomSrc } from './utils';
+import type { ItemCard } from './types';
 import * as styles from './styles';
 
-export const Drafted = ({ data }: { data: DraftedItems }) => {
-  const { title, imageLinks, price, status, description, updatedAt } = data;
+export const Drafted = ({ data }: { data: ItemCard }) => {
+  const { title, imageLinks, price, description, updatedAt } = data;
   const { t } = useTranslation();
 
   const onHandleClick = () => 'click';
@@ -23,7 +22,7 @@ export const Drafted = ({ data }: { data: DraftedItems }) => {
     <div css={styles.card}>
       <div css={styles.cardContent}>
         <div css={styles.leftContent}>
-          <ItemImage src={randomSrc({ array: imageLinks })} title={title} />
+          <ItemImage src={imageLinks[0]} title={title} />
         </div>
 
         <div css={styles.rightContent}>
@@ -32,7 +31,7 @@ export const Drafted = ({ data }: { data: DraftedItems }) => {
             <ItemDescription description={description} />
             <div css={styles.saleDetails}>
               <Price price={price} />
-              <ItemStatus status={status} />
+              <ItemStatus status={t('my-list:card.drafted')} />
             </div>
           </div>
 

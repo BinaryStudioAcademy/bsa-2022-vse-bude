@@ -3,7 +3,7 @@ import { useAppDispatch } from '@hooks';
 import { Button, IconButton, Input } from '@primitives';
 import { LinkButton } from 'components/primitives/link-button';
 import { useTranslation } from 'next-i18next';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import hand from 'public/images/mocup_hand1.png';
 import type { ChangeEvent } from 'react';
 import { nextVerifyModal, hideVerifyModal } from 'store/modals/actions';

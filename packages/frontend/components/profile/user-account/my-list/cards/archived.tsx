@@ -1,7 +1,6 @@
 import { useTranslation } from 'next-i18next';
 import { IconButton, Button } from '@primitives';
 import { IconColor, IconName } from '@enums';
-import type { ProductDto } from '@vse-bude/shared';
 import {
   ItemImage,
   ItemHeader,
@@ -10,12 +9,12 @@ import {
   ItemDescription,
   ItemDate,
 } from '../primitives';
-import { randomSrc } from './utils';
+import type { ItemCard } from './types';
 import * as styles from './styles';
 
-export const Archived = ({ data }: { data: ProductDto }) => {
-  const { title, imageLinks, price, status, description, postDate } = data;
+export const Archived = ({ data }: { data: ItemCard }) => {
   const { t } = useTranslation();
+  const { title, imageLinks, price, description, postDate } = data;
 
   const onHandleClick = () => 'click';
 
@@ -23,7 +22,7 @@ export const Archived = ({ data }: { data: ProductDto }) => {
     <div css={styles.card}>
       <div css={styles.cardContent}>
         <div css={styles.leftContent}>
-          <ItemImage src={randomSrc({ array: imageLinks })} title={title} />
+          <ItemImage src={imageLinks[0]} title={title} />
         </div>
 
         <div css={styles.rightContent}>
@@ -32,7 +31,7 @@ export const Archived = ({ data }: { data: ProductDto }) => {
             <ItemDescription description={description} />
             <div css={styles.saleDetails}>
               <Price price={price} />
-              <ItemStatus status={status} />
+              <ItemStatus status={'Archived'} />
             </div>
           </div>
 

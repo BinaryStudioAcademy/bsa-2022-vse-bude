@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useTranslation } from 'next-i18next';
 import {
   ItemImage,
   ItemHeader,
@@ -8,26 +8,19 @@ import {
   ItemDate,
 } from '../primitives';
 import { Charity } from '../tmp-element-charity';
-import type { PurchasedItems } from './types';
-import { randomSrc } from './utils';
+import type { ItemCard } from './types';
 import * as styles from './styles';
 
-export const Purchased = ({ data }: { data: PurchasedItems }) => {
-  const [isAuthor, setIsAuthor] = useState(false);
-  const { title, imageLinks, price, status, author, endDate } = data;
+export const Purchased = ({ data }: { data: ItemCard }) => {
+  const { t } = useTranslation();
+  const { title, imageLinks, price, author, endDate } = data;
   const { id, avatar, firstName, lastName } = author;
-
-  useEffect(() => {
-    if (Object.hasOwn(data, 'author')) {
-      setIsAuthor(true);
-    }
-  }, [data, isAuthor]);
 
   return (
     <div css={styles.card}>
       <div css={styles.cardContent}>
         <div css={styles.leftContent}>
-          <ItemImage src={randomSrc({ array: imageLinks })} title={title} />
+          <ItemImage src={imageLinks[0]} title={title} />
           <ItemDate size="lg" time={endDate} />
         </div>
 
@@ -36,10 +29,10 @@ export const Purchased = ({ data }: { data: PurchasedItems }) => {
             <ItemHeader title={title} />
             <div css={styles.saleDetails}>
               <Price price={price} />
-              <ItemStatus isAuthor={isAuthor} status={status} />
+              <ItemStatus status={t('my-list:card.purchased')} />
             </div>
             <ProfileLink
-              isAuthor={isAuthor}
+              userStatus={t('my-list:card.seller')}
               id={id}
               avatar={avatar}
               firstName={firstName}

@@ -1,5 +1,5 @@
 export type ProfileLinkProps = {
-  isAuthor: boolean;
+  userStatus: string;
   id: string;
   avatar: string;
   firstName: string;
