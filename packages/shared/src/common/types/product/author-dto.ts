@@ -2,9 +2,9 @@
 
 export type AuthorDto = {
   id: string;
-  phone: string;
+  phone?: string;
   firstName: string;
   lastName: string;
-  avatar: string;
+  avatar?: string;
   socialMedia: SocialMediaDto[];
 };

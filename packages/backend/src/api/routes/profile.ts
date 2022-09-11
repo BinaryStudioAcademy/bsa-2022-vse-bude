@@ -85,8 +85,15 @@ export const initProfileRoutes = (
       await profileService.getUser({
         userId,
       });
+      const requests = [
+        myListService.getPurchasedItems({ userId }),
+        myListService.getSoldItems({ userId }),
+        myListService.getDraftedItems({ userId }),
+        myListService.getPostedItems({ userId }),
+        myListService.getArchived({ userId }),
+      ];
 
-      return await myListService.getAllUserItems({ userId });
+      return await Promise.all(requests).then((items) => items.flat());
     }),
   );
 
