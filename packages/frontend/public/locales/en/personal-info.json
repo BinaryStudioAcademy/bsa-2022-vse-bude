@@ -57,13 +57,13 @@
   "validation": {
     "personal": {
       "firstNamePattern": "First name should consist of letters: А-Я or A-Z",
-      "firstnameRequired": "Enter your name please!",
-      "firstnameMin": "First name should have a minimum of 1 symbol",
-      "firstnameMax": "First name should have a maximum of 40 symbols",
+      "firstNameRequired": "Enter your name please!",
+      "firstNameMin": "First name should have a minimum of 1 symbol",
+      "firstNameMax": "First name should have a maximum of 40 symbols",
       "lastNamePattern": "Last name should consist of letters: А-Я or A-Z",
-      "lastnameRequired": "Enter your last name please!",
-      "lastnameMin": "Last name name should have a minimum of 1 symbol",
-      "lastnameMax": "Last name should have a maximum of 40 symbols",
+      "lastNameRequired": "Enter your last name please!",
+      "lastNameMin": "Last name name should have a minimum of 1 symbol",
+      "lastNameMax": "Last name should have a maximum of 40 symbols",
       "emailRequired": "Fill the email please!",
       "emailPattern": "Check your email please. Example: my-email@example.com",
       "phonePattern": "Check your mobile phone number please. Example: +380999999999"
