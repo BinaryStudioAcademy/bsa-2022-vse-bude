@@ -1,4 +1,11 @@
-import { Button, Flex, Icon, Input, Popover } from '@components/primitives';
+import {
+  Button,
+  Flex,
+  Icon,
+  Input,
+  Popover,
+  Range,
+} from '@components/primitives';
 import { Select } from '@components/primitives/select';
 import type { SelectOption } from '@components/primitives/select/types';
 import { IconColor, IconName } from '@enums';
@@ -73,6 +80,12 @@ export function FilterPopover({ filter, setFilter }: FilterPopoverProps) {
     setFilter(filters);
   };
 
+  const handleRange = (ranges) =>
+    setPrice({
+      [MIN_PRICE_NAME]: ranges[0],
+      [MAX_PRICE_NAME]: ranges[1],
+    });
+
   return (
     <Popover
       position="absolute"
@@ -125,6 +138,12 @@ export function FilterPopover({ filter, setFilter }: FilterPopoverProps) {
               type="number"
             />
           </Flex>
+          <Range
+            handleChange={handleRange}
+            value={[price[MIN_PRICE_NAME], price[MAX_PRICE_NAME]]}
+            max={ITEM_FILTER.PRICE_LT_DEFAULT}
+            min={ITEM_FILTER.PRICE_GT_DEFAULT}
+          />
           <div css={styles.popoverDivider}></div>
           <h5 css={styles.popoverHeadline}> {t('items-page:label.sortBy')}</h5>
           <div css={styles.sortBySelect}>

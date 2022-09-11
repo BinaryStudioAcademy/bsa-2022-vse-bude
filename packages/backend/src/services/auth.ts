@@ -119,6 +119,10 @@ export class AuthService {
     return authResponseMap(tokenData, newUser);
   }
 
+  async getByEmail(email: string) {
+    return this._userRepository.getByEmail(email);
+  }
+
   async signIn(signInDto: UserSignInDto): Promise<AuthResponse> {
     const user = await this._userRepository.getByEmail(signInDto.email);
     if (!user) {
@@ -236,7 +240,7 @@ export class AuthService {
     }
 
     const newPassHash = this._hashService.generateHash(updateDto.password);
-    this._userRepository.updatePassword(updateDto.email, newPassHash);
+    await this._userRepository.updatePassword(updateDto.email, newPassHash);
   }
 
   private getResetPasswordEmailLink(hash: string, email: string): string {

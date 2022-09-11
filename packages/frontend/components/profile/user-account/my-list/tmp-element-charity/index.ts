@@ -1,0 +1,1 @@
+export { Charity } from './component';

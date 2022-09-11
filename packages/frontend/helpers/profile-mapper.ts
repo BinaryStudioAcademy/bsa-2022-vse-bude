@@ -55,11 +55,23 @@ export const profileMapper = ({
     mappedSocialMedia[key] = social[key] ? social[key] : '';
   });
 
+  console.log({
+    firstName,
+    lastName,
+    email,
+    phone: !phone ? '' : phone,
+    ...mappedAddress,
+    ...mappedSocialMedia,
+    password: '',
+    newPassword: '',
+    repeatPassword: '',
+  });
+
   return {
     firstName,
     lastName,
     email,
-    phone,
+    phone: !phone ? '' : phone,
     ...mappedAddress,
     ...mappedSocialMedia,
     password: '',

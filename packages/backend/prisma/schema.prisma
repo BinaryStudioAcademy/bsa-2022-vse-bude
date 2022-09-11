@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["interactiveTransactions"]
 }
 
 generator erd {
@@ -118,7 +119,8 @@ model Product {
   views           Int           @default(0)
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
-  inFavorites  FavoriteProducts[]
+  inFavorites     FavoriteProducts[]
+  participantsNotified  Boolean @default(false)
 }
 
 model Bid {

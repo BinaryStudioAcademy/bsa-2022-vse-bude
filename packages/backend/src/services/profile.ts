@@ -94,6 +94,10 @@ export class UserProfileService {
     return this._userProfileRepository.cancelPhoneVerified({ userId });
   }
 
+  public cancelEmailVerified({ userId }: { userId: string }) {
+    return this._userProfileRepository.cancelEmailVerified({ userId });
+  }
+
   public async checkIsPhoneExists({
     userId,
     phone,

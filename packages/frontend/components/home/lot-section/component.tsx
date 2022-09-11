@@ -31,6 +31,7 @@ const LotSection = ({
             focus: 0,
             pagination: false,
             trimSpace: true,
+            lazyLoad: !loadImageHighPriority,
             updateOnMove: true,
             wheel: true,
             releaseWheel: true,
@@ -52,6 +53,7 @@ const LotSection = ({
           {lots.map((item, index) => (
             <SplideSlide key={item.id + item.title}>
               <ProductCard
+                key={item.id + item.title}
                 data={item}
                 name={item.title}
                 description={item.description}

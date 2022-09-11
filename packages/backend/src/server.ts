@@ -2,12 +2,13 @@ import { initRoutes } from '@routes';
 import cors from 'cors';
 import express, { json, urlencoded } from 'express';
 import { initRepositories } from '@repositories';
-import { getEnv, logger } from '@helpers';
+import { getEnv, isProduction, logger } from '@helpers';
 import { initServices } from '@services';
 import { loggerMiddleware } from '@middlewares';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import { Server } from 'socket.io';
+import { clearAllJobs } from '@scheduler';
 import { prismaClient as database } from './data/db';
 import { errorHandler } from './error/error-handler';
 import { langMiddleware } from './api/middlewares/lang';
@@ -33,6 +34,11 @@ const options = {
 };
 const swaggerSpecification = swaggerJsdoc(options);
 
+if (isProduction) {
+  clearAllJobs();
+  services.auctionScheduler.initAuctionJobs();
+}
+
 app
   .use(cors())
   .use(loggerMiddleware)
@@ -52,3 +58,5 @@ const io = new Server(socketsPort, {
 });
 
 appEventsListener(io);
+
+export { repositories };

@@ -84,6 +84,7 @@ export const popoverHeadline = ({
 `;
 export const price = ({ spaces }: Theme) => css`
   gap: ${spaces.md};
+  margin-bottom: ${spaces.lg};
 `;
 export const sortBySelect = ({ spaces }: Theme) => css`
   margin-bottom: ${spaces.md};
