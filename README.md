@@ -63,7 +63,7 @@ There are also other npm scripts, they are used for code style checks and lintin
 ### Frontend
 
 - [Next](https://nextjs.org/) - React framework
-- [NextUI](https://nextui.org/) - React UI library
+- [Emotion](https://emotion.sh/docs/introduction) - styling
 - [Redux](https://redux.js.org/) - state container for JS apps
 - [Redux/Toolkit](https://redux-toolkit.js.org/) - toolset for efficient Redux development
 

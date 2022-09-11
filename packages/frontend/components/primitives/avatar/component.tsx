@@ -31,10 +31,11 @@ export const Avatar = ({
       {image ? (
         <Image
           css={styles.avatar}
+          style={{ width: size, height: size }}
           src={image}
           alt={'avatar image'}
-          height={size}
-          width={size}
+          height={128}
+          width={128}
         />
       ) : (
         <div css={styles.initials} style={{ fontSize: isLarge && '52px' }}>

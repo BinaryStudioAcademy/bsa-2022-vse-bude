@@ -43,7 +43,7 @@ const fontSizes = {
   buttonSmall: '12px',
   caption: '12px',
   smallButton: '15px',
-  tooltip: '13px',
+  tooltip: '15px',
   cell: '18px',
 };
 
