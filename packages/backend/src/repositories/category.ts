@@ -9,8 +9,8 @@ export class CategoryRepository {
     this._dbClient = prismaClient;
   }
 
-  public async getAll(): Promise<CategoryResponseDto[]> {
-    const result = await this._dbClient.$queryRaw`
+  public getAll(): Promise<CategoryResponseDto[]> {
+    return this._dbClient.$queryRaw`
       SELECT
         "Category"."id",
         "Category"."title",
@@ -37,7 +37,5 @@ export class CategoryRepository {
         "Category"."createdAt",
         "Category"."updatedAt"
       `;
-
-    return result as CategoryResponseDto[];
   }
 }

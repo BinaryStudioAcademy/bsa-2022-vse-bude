@@ -7,9 +7,9 @@ type CategoryDto = {
 type CategoryResponseDto = {
   id: string;
   title: string;
-  createdAt: Date;
+  createdAt: string;
   image: string | null;
-  updatedAt: Date;
+  updatedAt: string;
   productsCount: number | null;
 };
 
