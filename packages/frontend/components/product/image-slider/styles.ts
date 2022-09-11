@@ -2,9 +2,13 @@ import { css } from '@emotion/react';
 
 export const imageSliderBlock = css`
   position: relative;
-  height: 300px;
+
   &:hover .sliderControls {
     visibility: visible;
+  }
+
+  img {
+    object-fit: cover;
   }
 `;
 
