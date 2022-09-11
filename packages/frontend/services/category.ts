@@ -19,10 +19,7 @@ export const getAllCategories = ({ locale }: CategoryOptions) =>
     },
   });
 
-export const getAllCategoriesSSR = ({
-  httpSSR,
-  locale,
-}: CategoryOptionsSSR) =>
+export const getAllCategoriesSSR = ({ httpSSR, locale }: CategoryOptionsSSR) =>
   httpSSR.get({
     url: `${ApiRoutes.CATEGORIES}`,
     options: {
