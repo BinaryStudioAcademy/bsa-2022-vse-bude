@@ -23,7 +23,7 @@ export const ItemDate = ({ time, size }: DateProps) => {
 
   return (
     <div data-siza={size} css={styles.dateWrapper}>
-      <time css={styles.date} dateTime={time}>
+      <time css={styles.date} dateTime={time.toString()}>
         {`${date} ${months[month]} ${year}`}
       </time>
     </div>

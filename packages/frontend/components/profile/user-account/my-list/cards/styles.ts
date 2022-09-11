@@ -67,3 +67,7 @@ export const editDate = ({
 export const publishButtonWrapper = ({ spaces }: Theme) => css`
   margin-right: ${spaces.sm};
 `;
+
+export const iconButton = ({ spaces }: Theme) => css`
+  margin-right: ${spaces.sm};
+`;

@@ -1,71 +1,126 @@
-// import { useTypedSelector } from '@hooks';
-// import { useTranslation } from 'next-i18next';
-// import type { RootState } from '@types';
-// import type { ProductDto } from '@vse-bude/shared';
-// import { Posted, Drafted, Purchased, Sold } from './cards';
-// import { ItemSectionHeader } from './primitives';
-// import * as styles from './styles';
+import { useAuth, useTypedSelector } from '@hooks';
+import { useTranslation } from 'next-i18next';
+import type { RootState } from '@types';
+import { ProductStatus } from '@vse-bude/shared';
+import { Icon, Popover, Breadcrumbs } from '@components/primitives';
+import { IconColor, IconName } from '@enums';
+import { SubPageName, SectionHeader } from '../common';
+import { Posted, Drafted, Purchased, Sold, Archived } from './cards';
+import { FilterArrow } from './primitives';
+import { Filter } from './filter/filter';
+import * as styles from './styles';
+import { breadcrumbsPaths } from './components-data';
+import { typedItems } from './utils';
 
-export const MyListInfo = () =>
-  // const { t } = useTranslation();
-  // const myList: ProductDto = useTypedSelector(
-  //   (state: RootState) => state.myList.itemsList,
-  // );
-  // console.log(myList);
+export const MyListInfo = () => {
+  const { t } = useTranslation();
+  const myList = useTypedSelector((state: RootState) => {
+    const items = [...state.myList.itemsList];
 
-   (
+    return items;
+  });
+
+  const { user: authUser } = useAuth();
+
+  return (
     <div>
-      {/* {!!myList.purchased.length && (
-        <div css={styles.section}>
-          <div css={styles.header}>
-            <ItemSectionHeader itemHeader={t('my-list:card.purchased')} />
-          </div>
-          <div css={styles.container}>
-            {myList.purchased.map((item) => (
-              <Purchased key={item.id} data={item} />
-            ))}
+      <div>
+        <Breadcrumbs
+          paths={breadcrumbsPaths({ t, id: authUser.id })}
+          containerCssExtend={styles.breadcrumbsContainer}
+          cssExtend={styles.breadcrumbs}
+        />
+
+        <div css={styles.pageNameWrapper}>
+          <SubPageName>{t('my-list:pageName')}</SubPageName>
+        </div>
+
+        <div css={styles.filterContainer}>
+          <div css={styles.filtered}></div>
+
+          <div css={styles.filterMenu}>
+            <div css={styles.filterIconWrapper}>
+              <Icon icon={IconName.FILTER} color={IconColor.GRAY} />
+            </div>
+            <Popover
+              position="absolute"
+              bodyWrapperCssExtend={styles.customPopover}
+              trigger={({ isOpen }) => <FilterArrow isOpen={isOpen} />}
+            >
+              {() => <Filter />}
+            </Popover>
           </div>
         </div>
-      )}
+      </div>
 
-      {!!myList.sold.length && (
-        <div css={styles.section}>
-          <div css={styles.header}>
-            <ItemSectionHeader itemHeader={t('my-list:card.sold')} />
-          </div>
-          <div css={styles.container}>
-            {myList.sold.map((item) => (
-              <Sold key={item.id} data={item} />
-            ))}
-          </div>
+      <div css={styles.section}>
+        <div css={styles.header}>
+          <SectionHeader>{t('my-list:card.purchased')}</SectionHeader>
         </div>
-      )}
+        <div css={styles.container}>
+          {typedItems({
+            items: myList,
+            byStatus: ProductStatus.FINISHED,
+            byKey: 'author',
+          }).map((item) => (
+            <Purchased key={item.id} data={item} />
+          ))}
+        </div>
+      </div>
 
-      {!!myList.posted.length && (
-        <div css={styles.section}>
-          <div css={styles.header}>
-            <ItemSectionHeader itemHeader={t('my-list:card.posted')} />
-          </div>
-          <div css={styles.container}>
-            {myList.posted.map((item) => (
+      <div css={styles.section}>
+        <div css={styles.header}>
+          <SectionHeader>{t('my-list:card.sold')}</SectionHeader>
+        </div>
+        <div css={styles.container}>
+          {typedItems({
+            items: myList,
+            byStatus: ProductStatus.FINISHED,
+            byKey: 'winner',
+          }).map((item) => (
+            <Sold key={item.id} data={item} />
+          ))}
+        </div>
+      </div>
+
+      <div css={styles.section}>
+        <div css={styles.header}>
+          <SectionHeader>{t('my-list:card.posted')}</SectionHeader>
+        </div>
+        <div css={styles.container}>
+          {typedItems({ items: myList, byStatus: ProductStatus.ACTIVE }).map(
+            (item) => (
               <Posted key={item.id} data={item} />
-            ))}
-          </div>
+            ),
+          )}
         </div>
-      )}
+      </div>
 
-      {!!myList.drafted.length && (
-        <div css={styles.section}>
-          <div css={styles.header}>
-            <ItemSectionHeader itemHeader={t('my-list:card.drafted')} />
-          </div>
-          <div css={styles.container}>
-            {myList.drafted.map((item) => (
-              <Drafted key={item.id} data={item} />
-            ))}
-          </div>
+      <div css={styles.section}>
+        <div css={styles.header}>
+          <SectionHeader>{t('my-list:card.drafted')}</SectionHeader>
         </div>
-      )} */}
+        <div css={styles.container}>
+          {typedItems({ items: myList, byStatus: ProductStatus.DRAFT }).map(
+            (item) => (
+              <Drafted key={item.id} data={item} />
+            ),
+          )}
+        </div>
+      </div>
+
+      <div css={styles.section}>
+        <div css={styles.header}>
+          <SectionHeader>{t('my-list:card.archived')}</SectionHeader>
+        </div>
+        <div css={styles.container}>
+          {typedItems({ items: myList, byStatus: ProductStatus.CANCELLED }).map(
+            (item) => (
+              <Archived key={item.id} data={item} />
+            ),
+          )}
+        </div>
+      </div>
     </div>
-  )
-;
+  );
+};

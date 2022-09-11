@@ -21,7 +21,6 @@ export const button = ({
   font-weight: ${fontWeights.button};
   cursor: pointer;
   flex: 1;
-
   height: ${heights.controlSm};
   border-radius: ${radiuses.sm};
   padding: 0 ${spaces.md};
@@ -32,9 +31,21 @@ export const button = ({
     padding: 0 ${spaces.xl2};
   }
 
+  &[data-size='small'] {
+    height: ${heights.filterBtnSm};
+    padding: 0 ${spaces.xs};
+    font-size: ${fontSizes.body2};
+    line-height: ${lineHeights.body2};
+    font-weight: ${fontWeights.tub};
+  }
+
+  &[data-variant='rectangle'] {
+    border-radius: ${radiuses.xxs};
+  }
+
   &[data-selected='selected'] {
     background: ${colors.primaryLight};
-    color: white;
+    color: ${colors.background};
 
     :hover,
     :active {
@@ -49,7 +60,7 @@ export const button = ({
 
   &[data-selected='default'] {
     border: 1px solid ${colors.secondaryLight};
-    background: white;
+    background: ${colors.background};
     color: ${colors.secondaryLight};
 
     :hover,

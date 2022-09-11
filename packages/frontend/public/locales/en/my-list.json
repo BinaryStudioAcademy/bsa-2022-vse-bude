@@ -1,4 +1,10 @@
 {
+  "breadcrumbs": {
+    "home": "Home",
+    "profile": "Account",
+    "myList": "My List"
+  },
+  "pageName": "My List",
   "card": {
     "currency_uah": "UAH",
     "seller": "Seller",
@@ -6,8 +12,25 @@
     "posted": "Posted",
     "drafted": "Draft",
     "purchased": "Purchased",
+    "archived": "Archived",
     "sold": "Sold",
     "edit": "edited",
-    "publish": "Publish"
+    "publish": "Publish",
+    "unarchive":"Unarchive"
+  },
+  "filter": {
+    "button": {
+      "all": "All",
+      "fixedPrice": "Fixed Price",
+      "auction": "Auction"
+    },
+    "checkbox": {
+      "all": "All",
+      "purchased": "Purchased",
+      "sold": "Sold",
+      "posted": "Posted",
+      "drafts": "Drafts",
+      "archived": "Archived"
+    }
   }
 }

@@ -5,13 +5,17 @@ import { HYDRATE } from 'next-redux-wrapper';
 import { fetchMyListSSR } from './actions';
 
 interface MyListState {
-  itemsList: ProductDto[];
+  itemsList: ProductDto[] | null;
+  sortType: null | string;
+  sortStatus: null | string;
   loading: boolean;
   error: string;
 }
 
 const initialState: MyListState = {
   itemsList: null,
+  sortType: null,
+  sortStatus: null,
   loading: false,
   error: null,
 };

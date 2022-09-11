@@ -25,28 +25,25 @@ export const ProfileDropdown = ({ user }: ProfileDropdownProps) => {
     {
       value: t('common:header.popover.myList'),
       key: 'My list',
-      onClick: () => push(`${Routes.PROFILE}/${user.id}${ProfileRoutes.LIST}`),
+      onClick: () => push(`${Routes.PROFILE}${ProfileRoutes.LIST}`),
       cssExtend: styles.option,
     },
     {
       value: t('common:header.popover.settings'),
       key: 'Settings',
-      onClick: () =>
-        push(`${Routes.PROFILE}/${user.id}${ProfileRoutes.ACCOUNT_SETTINGS}`),
+      onClick: () => push(`${Routes.PROFILE}${ProfileRoutes.ACCOUNT_SETTINGS}`),
       cssExtend: styles.option,
     },
     {
       value: t('common:header.popover.messages'),
       key: 'Messages',
-      onClick: () =>
-        push(`${Routes.PROFILE}/${user.id}${ProfileRoutes.MESSAGES}`),
+      onClick: () => push(`${Routes.PROFILE}${ProfileRoutes.MESSAGES}`),
       cssExtend: styles.option,
     },
     {
       value: t('common:header.popover.support'),
       key: 'Support',
-      onClick: () =>
-        push(`${Routes.PROFILE}/${user.id}${ProfileRoutes.SUPPORT}`),
+      onClick: () => push(`${Routes.PROFILE}${ProfileRoutes.SUPPORT}`),
       cssExtend: styles.option,
     },
   ];

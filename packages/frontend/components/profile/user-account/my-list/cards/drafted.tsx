@@ -48,7 +48,7 @@ export const Drafted = ({ data }: { data: DraftedItems }) => {
               ariaLabel="edit"
               backgroundColor="lightgray"
               color={IconColor.GRAY}
-              icon={IconName.XMARK}
+              icon={IconName.PENCIL}
               size="sm"
               onClick={onHandleClick}
             />

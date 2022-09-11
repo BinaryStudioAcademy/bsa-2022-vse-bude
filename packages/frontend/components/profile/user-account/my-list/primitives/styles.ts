@@ -1,18 +1,6 @@
 import { css } from '@emotion/react';
 import type { Theme } from '@emotion/react';
 
-export const itemSectionHeader = ({
-  fontSizes,
-  fontWeights,
-  lineHeights,
-  colors,
-}: Theme) => css`
-  font-size: ${fontSizes.h4};
-  line-height: ${lineHeights.h4};
-  font-weight: ${fontWeights.h4};
-  color: ${colors.text};
-`;
-
 export const itemImageWrapper = ({ spaces, radiuses }: Theme) => css`
   margin-right: ${spaces.md};
   margin-bottom: ${spaces.md};
@@ -209,3 +197,25 @@ export const views = ({ fontSizes, lineHeights, fontWeights, colors }: Theme) =>
     font-weight: ${fontWeights.caption};
     color: ${colors.textLight};
   `;
+
+export const arrow = ({
+  colors,
+  widths,
+  heights,
+  radiuses,
+  spaces,
+}: Theme) => css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  border-radius: ${radiuses.circle};
+  width: ${widths.checkbox};
+  height: ${heights.checkbox};
+  padding: ${spaces.xs};
+  background-color: ${colors.backgroundLight};
+  cursor: pointer;
+  :hover {
+    background-color: ${colors.backgroundDark};
+  }
+`;

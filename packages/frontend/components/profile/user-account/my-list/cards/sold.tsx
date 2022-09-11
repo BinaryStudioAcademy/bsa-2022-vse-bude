@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import type { ProductDto } from '@vse-bude/shared';
 import {
   ItemImage,
   ItemHeader,
@@ -8,11 +9,10 @@ import {
   ItemDate,
 } from '../primitives';
 import { Charity } from '../tmp-element-charity';
-import type { SoldItems } from './types';
 import { randomSrc } from './utils';
 import * as styles from './styles';
 
-export const Sold = ({ data }: { data: SoldItems }) => {
+export const Sold = ({ data }: { data: ProductDto }) => {
   const [isAuthor, setIsAuthor] = useState(false);
   const { title, imageLinks, price, status, winner, endDate } = data;
   const { id, avatar, firstName, lastName } = winner;
@@ -39,7 +39,7 @@ export const Sold = ({ data }: { data: SoldItems }) => {
               <ItemStatus isAuthor={!isAuthor} status={status} />
             </div>
             <ProfileLink
-              isAuthor={isAuthor}
+              isAuthor={false}
               id={id}
               avatar={avatar}
               firstName={firstName}

@@ -1,6 +1,7 @@
 import { useTranslation } from 'next-i18next';
 import { IconButton, Button } from '@primitives';
 import { IconColor, IconName } from '@enums';
+import type { ProductDto } from '@vse-bude/shared';
 import {
   ItemImage,
   ItemHeader,
@@ -9,11 +10,10 @@ import {
   ItemDescription,
   ItemDate,
 } from '../primitives';
-import type { CancelledItems } from './types';
 import { randomSrc } from './utils';
 import * as styles from './styles';
 
-export const Cancelled = ({ data }: { data: CancelledItems }) => {
+export const Archived = ({ data }: { data: ProductDto }) => {
   const { title, imageLinks, price, status, description, postDate } = data;
   const { t } = useTranslation();
 
@@ -42,13 +42,13 @@ export const Cancelled = ({ data }: { data: CancelledItems }) => {
               <ItemDate time={postDate} />
             </div>
             <div css={styles.publishButtonWrapper}>
-              <Button size="small">{t('my-list:card.publish')}</Button>
+              <Button size="small">{t('my-list:card.unarchive')}</Button>
             </div>
             <IconButton
               ariaLabel="edit"
               backgroundColor="lightgray"
               color={IconColor.GRAY}
-              icon={IconName.XMARK}
+              icon={IconName.PENCIL}
               size="sm"
               onClick={onHandleClick}
             />

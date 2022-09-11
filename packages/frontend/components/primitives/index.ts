@@ -17,3 +17,4 @@ export * from './input';
 export { Breadcrumbs } from './breadcrumbs';
 export { Modal } from './modal';
 export { Range } from './range';
+export { ButtonGroup } from './button-group';

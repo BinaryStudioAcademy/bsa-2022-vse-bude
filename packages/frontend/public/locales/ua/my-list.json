@@ -1,13 +1,36 @@
 {
+  "breadcrumbs": {
+    "home": "Головна",
+    "profile": "Профіль",
+    "myList": "Мій Список"
+  },
+  "pageName": "Мій список",
   "card": {
     "currency_uah": "ГРН",
     "seller": "Продавець",
     "buyer": "Покупець",
-    "posted": "Розміщено",
-    "drafted": "",
-    "purchased": "Продбано",
-    "sold": "Придбано",
+    "posted": "Розміщені",
+    "drafted": "Проекти",
+    "purchased": "Придбані",
+    "sold": "Продані",
+    "archived": "Архівні",
     "edit": "змінено",
-    "publish": "Публікувати"
+    "publish": "Публікувати",
+    "unarchive":"Публікувати"
+  },
+  "filter": {
+    "button": {
+      "all": "Всі",
+      "fixedPrice": "Фіксована Ціна",
+      "auction": "Аукціон"
+    },
+    "checkbox": {
+      "all": "Всі",
+      "purchased": "Придбані",
+      "sold": "Продані",
+      "posted": "Розміщені",
+      "drafts": "Проекти",
+      "archived": "Архівні"
+    }
   }
 }

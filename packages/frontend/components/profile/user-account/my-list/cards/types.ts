@@ -28,7 +28,7 @@ export interface PostedItems {
   imageLinks: string[];
   status: string;
   views: number;
-  postDate: string;
+  postDate: Date;
 }
 
 export interface DraftedItems {
@@ -40,10 +40,10 @@ export interface DraftedItems {
   minimalBid?: number;
   imageLinks: string[];
   status: string;
-  updatedAt: string;
+  updatedAt: Date;
 }
 
-export interface CancelledItems {
+export interface ArchivedItems {
   id: string;
   title: string;
   description: string;
@@ -52,5 +52,5 @@ export interface CancelledItems {
   minimalBid?: number;
   imageLinks: string[];
   status: string;
-  postDate: string;
+  postDate: Date;
 }

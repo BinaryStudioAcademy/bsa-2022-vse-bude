@@ -1,4 +1,3 @@
-export { ItemSectionHeader } from './item-section-header';
 export { ItemImage } from './item-image';
 export { ItemHeader } from './item-title';
 export { Price } from './price';
@@ -7,3 +6,4 @@ export { ProfileLink } from './profile-link';
 export { ItemDate } from './date';
 export { ItemDescription } from './item-description';
 export { Views } from './views';
+export { FilterArrow } from './filter-arrow';

@@ -43,6 +43,16 @@ export const Posted = ({ data }: { data: PostedItems }) => {
               ariaLabel="edit"
               backgroundColor="lightgray"
               color={IconColor.GRAY}
+              icon={IconName.PENCIL}
+              size="sm"
+              cssExtend={styles.iconButton}
+              onClick={onHandleClick}
+            />
+
+            <IconButton
+              ariaLabel="cancel"
+              backgroundColor="darkgray"
+              color={IconColor.ORANGE}
               icon={IconName.XMARK}
               size="sm"
               onClick={onHandleClick}
