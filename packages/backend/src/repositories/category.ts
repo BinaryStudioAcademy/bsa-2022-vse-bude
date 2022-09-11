@@ -1,6 +1,6 @@
 import type { PrismaClient } from '@prisma/client';
+import { ProductStatus } from '@prisma/client';
 import type { CategoryResponseDto } from '@vse-bude/shared';
-import { ProductStatus } from '@vse-bude/shared';
 
 export class CategoryRepository {
   private _dbClient: PrismaClient;
@@ -9,23 +9,35 @@ export class CategoryRepository {
     this._dbClient = prismaClient;
   }
 
-  public async getAll(query: Query): Promise<CategoryResponseDto[]> {
-    const [result, count] = await this._dbClient.$transaction([
-      this._dbClient.category.findMany({
-        take: query.limit ? +query.limit : undefined,
-      }),
-      this._dbClient.product.groupBy({
-        by: ['categoryId'],
-        _count: true,
-        where: {
-          status: ProductStatus.ACTIVE,
-        },
-      }),
-    ]);
+  public async getAll(): Promise<CategoryResponseDto[]> {
+    const result = await this._dbClient.$queryRaw`
+      SELECT
+        "Category"."id",
+        "Category"."title",
+        "Category"."image",
+        "Category"."createdAt",
+        "Category"."updatedAt",
+        CAST (
+          SUM (
+            CASE "Product"."status" 
+              WHEN CAST(${ProductStatus.ACTIVE} AS "ProductStatus")
+              THEN 1
+              ELSE 0
+            END ) AS INTEGER) AS "productsCount"
+      FROM
+        "Category"
+      LEFT JOIN
+        "Product"
+      ON
+        "Product"."categoryId" = "Category"."id"     
+      GROUP BY
+        "Category"."id",
+        "Category"."title",
+        "Category"."image",
+        "Category"."createdAt",
+        "Category"."updatedAt"
+      `;
 
-    return result.map((item) => ({
-      ...item,
-      productsCount: count.find((c) => c.categoryId === item.id)?._count ?? 0,
-    }));
+    return result as CategoryResponseDto[];
   }
 }
