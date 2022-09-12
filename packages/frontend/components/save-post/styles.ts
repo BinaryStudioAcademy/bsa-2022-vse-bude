@@ -117,6 +117,7 @@ export const deleteImageBtn = ({ spaces }: Theme) => css`
   position: absolute;
   right: ${spaces.sm};
   top: ${spaces.sm};
+  z-index: 1;
 `;
 export const photosLabelWrapper = ({ radiuses, colors, spaces }: Theme) => css`
   position: relative;
