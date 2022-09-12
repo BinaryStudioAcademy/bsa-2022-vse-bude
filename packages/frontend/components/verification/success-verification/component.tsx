@@ -1,7 +1,7 @@
 import { useAppDispatch } from '@hooks';
 import { Button } from '@primitives';
 import { useTranslation } from 'next-i18next';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import hand from 'public/images/mocup_hand3.png';
 import { nextVerifyModal } from 'store/modals/actions';
 import * as styles from '../styles';
