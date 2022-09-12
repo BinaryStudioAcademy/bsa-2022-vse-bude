@@ -20,7 +20,7 @@ export type ProductById = {
   status: ProductStatus;
   condition: Condition;
   endDate: Date | null;
-  postDate: Date | null | string;
+  postDate: Date | null;
   cancelReason: string | null;
   authorId: string;
   categoryId: string | null;
