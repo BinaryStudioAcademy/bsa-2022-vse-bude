@@ -1,9 +1,10 @@
 ﻿import type { ProductDto } from '@vse-bude/shared';
-import { Button, Loader } from '@primitives';
+import { Button, Loader, Tooltip } from '@primitives';
 import { FavoriteButton } from 'components/product/favorite-button/component';
 import { useTranslation } from 'next-i18next';
 import { useTypedSelector } from '@hooks';
 import { useRouter } from 'next/router';
+import { IconColor } from '@enums';
 import { ItemTitle, ItemInfo, ItemPrice } from '../item-info';
 import * as styles from './styles';
 
@@ -40,21 +41,13 @@ export const ItemInfoSelling = ({
           <Button onClick={() => push(`/items/edit/${item.id}`)}>Edit</Button>
         ) : (
           <>
-            <FavoriteButton
-              cssExtended={styles.favouriteButton}
-              onChangeIsFavorite={onChangeIsFavorite}
-              isFavorite={isInFavorite}
-              backgroundColor="transparent"
-              size="md"
-              disabled={!user}
-            />
             <Button
               onClick={onBuy}
               disabled={!user || !user.phoneVerified || loading}
               tooltip={
                 user
                   ? user.phoneVerified
-                    ? t('item:buttons.placeBid')
+                    ? t('item:buttons.buyBtn')
                     : t('item:buttons.tooltips.notVerified.buyBtn')
                   : t('item:buttons.tooltips.notAuthorized.buyBtn')
               }
@@ -65,6 +58,26 @@ export const ItemInfoSelling = ({
                 t('item:buttons.buyBtn')
               )}
             </Button>
+            <Tooltip
+              trigger={
+                <FavoriteButton
+                  cssExtended={styles.favouriteButton}
+                  onChangeIsFavorite={onChangeIsFavorite}
+                  isFavorite={isInFavorite}
+                  backgroundColor="transparent"
+                  inFavouriteColor={IconColor.YELLOW}
+                  notInFavouriteColor={IconColor.YELLOW}
+                  size="md"
+                  disabled={!user}
+                />
+              }
+            >
+              {user
+                ? isInFavorite
+                  ? t('item:buttons.tooltips.favBtnRemove')
+                  : t('item:buttons.tooltips.favBtn')
+                : t('item:buttons.tooltips.notAuthorized.favBtn')}
+            </Tooltip>
           </>
         )}
       </div>
