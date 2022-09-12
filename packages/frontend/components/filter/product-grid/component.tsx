@@ -24,7 +24,7 @@ export const ProductGrid = () => {
                   price={item.price}
                   images={item.imageLinks}
                   type={item.type}
-                  currency="UAH"
+                  currency={t('items-page:currency.UAH')}
                   auctionDate={item.endDate}
                 />
               </div>

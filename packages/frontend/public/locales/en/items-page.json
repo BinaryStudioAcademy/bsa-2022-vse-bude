@@ -25,12 +25,22 @@
     "viewsDesc": "Most views",
     "viewsAsc": "Least Views"
   },
-  "btn":{
-    "save":"Save"
+  "btn": {
+    "save": "Save"
   },
-  "budges":{
-    "minPrice":"Min price: ",
+  "budges": {
+    "minPrice": "Min price: ",
     "maxPrice": "Max price: ",
-    "sortBy":"Sort by: "
+    "sortBy": "Sort by: "
+  },
+  "ariaLabel": {
+    "navigation": "Pagination Navigation",
+    "prevPage": "Goto Previous Page",
+    "nextPage": "Goto Next Page",
+    "currentPage": "Current Page, Page ",
+    "goToPage": "Goto Page "
+  },
+  "currency": {
+    "UAH": "UAH"
   }
 }

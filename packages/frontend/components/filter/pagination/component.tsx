@@ -3,11 +3,13 @@ import { IconColor, IconName } from '@enums';
 import { useTypedSelector } from '@hooks';
 import type { ProductQuery } from '@vse-bude/shared';
 import { ITEM_FILTER } from '@vse-bude/shared';
+import { useTranslation } from 'next-i18next';
 import * as styles from './styles';
 import type { PaginationProps } from './types';
 
 export function Pagination({ filter, setFilter }: PaginationProps) {
   const { count } = useTypedSelector((store) => store.product);
+  const { t } = useTranslation();
 
   const limit = filter?.limit
     ? filter.limit
@@ -27,7 +29,7 @@ export function Pagination({ filter, setFilter }: PaginationProps) {
   return count > 0 ? (
     <nav
       css={styles.btnWrapper}
-      aria-label="Pagination Navigation"
+      aria-label={t('items-page:ariaLabel.navigation')}
       role="navigation"
     >
       {currentPage !== 1 && (
@@ -36,7 +38,7 @@ export function Pagination({ filter, setFilter }: PaginationProps) {
           icon={IconName.ANGLE_LEFT}
           size={'sm'}
           cssExtend={styles.arrowBtnLeft}
-          ariaLabel="Goto Previous Page"
+          ariaLabel={t('items-page:ariaLabel.prevPage')}
           onClick={() => onClickHandler(currentPage - 2)}
         />
       )}
@@ -54,8 +56,8 @@ export function Pagination({ filter, setFilter }: PaginationProps) {
                 aria-current={isCurrent}
                 aria-label={
                   isCurrent
-                    ? `Current Page, Page ${currentPage}`
-                    : `Goto Page ${page + 1}`
+                    ? t('items-page:ariaLabel.currentPage') + currentPage
+                    : t('items-page:ariaLabel.goToPage') + page + 1
                 }
               >
                 {page + 1}
@@ -70,7 +72,7 @@ export function Pagination({ filter, setFilter }: PaginationProps) {
           icon={IconName.ANGLE_RIGHT}
           size={'sm'}
           cssExtend={styles.arrowBtnRight}
-          ariaLabel="Goto Next Page"
+          ariaLabel={t('items-page:ariaLabel.nextPage')}
           onClick={() => onClickHandler(currentPage)}
         />
       )}

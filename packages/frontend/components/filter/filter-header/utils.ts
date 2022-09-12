@@ -133,7 +133,7 @@ export const getBudgesFromFilter = (
         ...acc,
         {
           name: currentCategory?.title,
-          value: currentCategory?.id,
+          value: filter[item],
         },
       ];
     }

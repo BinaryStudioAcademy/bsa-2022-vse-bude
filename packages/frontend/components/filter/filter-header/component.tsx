@@ -20,13 +20,10 @@ export function FilterHeader({ filter, setFilter }: FilterHeaderProps) {
   const { t } = useTranslation();
   const [badges, setBadges] = useState<BadgeOption[]>([]);
   const categories = useTypedSelector((state) => state.category.list);
-  const [productType, setProductType] = useState<string>(null);
   const currentCategory = categories.find(
     (item) => item.id === filter?.categoryId,
   );
   useEffect(() => {
-    setProductType(filter?.type || ALL_PRODUCTS);
-
     setBadges(getBudgesFromFilter(filter, t, currentCategory));
   }, [filter, t, currentCategory]);
 
@@ -73,13 +70,10 @@ export function FilterHeader({ filter, setFilter }: FilterHeaderProps) {
                   buttons={productTypeBtnArray(t).map((item) => ({
                     name: item.name,
                     text: item.text,
-                    onClick: () => {
-                      setProductType(item.name);
-                      addTypeToQuery(item.name);
-                    },
+                    onClick: () => addTypeToQuery(item.name),
                   }))}
-                  active={productType}
-                  setActive={setProductType}
+                  active={filter?.type || ALL_PRODUCTS}
+                  setActive={addTypeToQuery}
                 />
               </Flex>
               <div css={styles.controllersWrapper}>

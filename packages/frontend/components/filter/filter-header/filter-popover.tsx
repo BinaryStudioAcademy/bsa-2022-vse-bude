@@ -67,8 +67,8 @@ export function FilterPopover({ filter, setFilter }: FilterPopoverProps) {
     }
   };
 
-  const onSaveHandler = () => {
-    triggerRef.current.click();
+  const onSaveHandler = (handleClose) => {
+    handleClose();
     const filters: ProductQuery = {
       ...filter,
       categoryId: category?.value as string,
@@ -102,7 +102,7 @@ export function FilterPopover({ filter, setFilter }: FilterPopoverProps) {
         </div>
       }
     >
-      {() => (
+      {(handleClose) => (
         <div css={styles.popover}>
           <h5 css={styles.popoverHeadline}>{t('items-page:label.category')}</h5>
           <Select
@@ -155,7 +155,7 @@ export function FilterPopover({ filter, setFilter }: FilterPopoverProps) {
             />
           </div>
           <Flex justify={'flex-end'}>
-            <Button onClick={onSaveHandler} size="small">
+            <Button onClick={() => onSaveHandler(handleClose)} size="small">
               {t('items-page:btn.save')}
             </Button>
           </Flex>
