@@ -7,7 +7,7 @@ import {
 import { ProfileError } from '@errors';
 import { lang } from '@lang';
 
-export const emailValidation = ({ req }: { req: Request }) => {
+export const emailValidation = ({ req }: { req: Request }): void => {
   const { email } = req.body;
 
   if (!email) {

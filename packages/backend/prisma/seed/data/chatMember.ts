@@ -5,7 +5,7 @@ export const fakeChatMember = async (
   amountOfRecords: number,
   existingUsers: User[],
   existingChats: Chat[],
-) => {
+): Promise<ChatMember[]> => {
   const records: ChatMember[] = [];
 
   for (let i = 0; i < amountOfRecords; i++) {

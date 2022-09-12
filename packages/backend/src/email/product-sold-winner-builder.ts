@@ -5,7 +5,7 @@ import type { Product, User } from '@prisma/client';
 import { MailBuilder } from './mail-builder';
 
 export class ProductSoldWinnerBuilder extends MailBuilder {
-  protected setOptions() {
+  protected setOptions(): void {
     this._options = {
       ...this._options,
       ...defaultEmailOptions,

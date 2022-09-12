@@ -1,11 +1,12 @@
 import type { ApiRoutes } from '@vse-bude/shared';
+import type { IRouter } from 'express';
 import { Router } from 'express';
 import type { Services } from '@services';
 
 function initHealthRoutes(
   { redisStorageService, healthService }: Services,
   path: ApiRoutes,
-) {
+): IRouter {
   const router = Router();
 
   return router.get(path, async (req, res) => {

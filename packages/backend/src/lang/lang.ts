@@ -10,7 +10,7 @@ export class LangService {
     this._locale = DEFAULT_LOCALE;
   }
 
-  public setLocale(locale: string) {
+  public setLocale(locale: string): void {
     this._locale = locale;
   }
 
@@ -18,13 +18,13 @@ export class LangService {
     return this._locale;
   }
 
-  private getPath(key: string) {
+  private getPath(key: string): string {
     const namespace = key.split(':')[0];
 
     return path.resolve(`${localesDir}/${this._locale}/${namespace}.json`);
   }
 
-  private readTranslations(localePath: string) {
+  private readTranslations(localePath: string): string {
     const t = fs.readFileSync(path.resolve(localePath), 'utf8');
 
     return JSON.parse(t);
@@ -37,7 +37,7 @@ export class LangService {
     return parts[0] ?? '';
   }
 
-  public translate(key: string) {
+  public translate(key: string): null | string {
     const langPath = this.getPath(key);
 
     if (!fs.existsSync(langPath)) {
@@ -54,7 +54,7 @@ export class LangService {
     return this.getValue(translations, resultKey.split('.'), 0) ?? null;
   }
 
-  private getValue(obj: any, keys: string[], currentKey: number) {
+  private getValue(obj: any, keys: string[], currentKey: number): string {
     if (keys[currentKey + 1]) {
       return this.getValue(obj[keys[currentKey]], keys, currentKey + 1);
     }

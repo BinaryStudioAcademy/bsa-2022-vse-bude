@@ -8,7 +8,7 @@ export class EmailService {
     this._emailProvider = emailProvider;
   }
 
-  public async send(options: EmailOptions) {
+  public async send(options: EmailOptions): Promise<void> {
     try {
       await this._emailProvider.send(options);
     } catch (error) {

@@ -7,7 +7,7 @@ export class HealthService {
     this._healthRepository = healthRepository;
   }
 
-  select() {
+  select(): Promise<unknown> {
     return this._healthRepository.select();
   }
 }

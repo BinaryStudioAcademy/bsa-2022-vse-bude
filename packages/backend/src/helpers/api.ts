@@ -1,2 +1,2 @@
-export const apiPath = (mainPath: string, subPath = '') =>
+export const apiPath = (mainPath: string, subPath = ''): string =>
   `${mainPath}${subPath}`;

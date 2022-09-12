@@ -14,23 +14,23 @@ export class MailBuilder implements IMailBuilder {
     this.setOptions();
   }
 
-  async send() {
+  async send(): Promise<void> {
     await this._mailService.send(this._options);
   }
 
-  setTo(emailTo: string, name?: string) {
+  setTo(emailTo: string, name?: string): this {
     this._options.to = [{ email: emailTo, name }];
 
     return this;
   }
 
-  setText(text: string) {
+  setText(text: string): this {
     this._options.text = text;
 
     return this;
   }
 
-  setHtml(htmlTemplate: string) {
+  setHtml(htmlTemplate: string): this {
     this._options.html = htmlTemplate;
 
     return this;

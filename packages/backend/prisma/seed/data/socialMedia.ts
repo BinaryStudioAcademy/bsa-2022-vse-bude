@@ -6,7 +6,7 @@ export const fakeSocialMedia = async (
   amountOfRecords: number,
   existingUsers: User[],
   existingProducts: Product[],
-) => {
+): Promise<SocialMedia[]> => {
   const records: SocialMedia[] = [];
 
   for (let i = 0; i < amountOfRecords; i++) {

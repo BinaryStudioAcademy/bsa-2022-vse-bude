@@ -3,7 +3,7 @@ import { fakeUsers } from '../../data/user';
 import { USERS_NUMBER, USER_FILE_NAME } from '../../config/config';
 import { writeFile } from './../../helpers/wtireFile';
 
-export const seedUsers = async (prismaClient: PrismaClient) => {
+export const seedUsers = async (prismaClient: PrismaClient): Promise<void> => {
   const existingUsers = await prismaClient.user.findMany();
   const howManyToCreate = USERS_NUMBER - existingUsers.length;
 

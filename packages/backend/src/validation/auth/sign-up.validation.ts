@@ -6,7 +6,7 @@ import {
   userNameValidation,
 } from '../sub-validation';
 
-export const signupValidation = ({ req }: { req: Request }) => {
+export const signupValidation = ({ req }: { req: Request }): void => {
   userNameValidation({ req });
   emailValidation({ req });
   signupPasswordValidation({ req });

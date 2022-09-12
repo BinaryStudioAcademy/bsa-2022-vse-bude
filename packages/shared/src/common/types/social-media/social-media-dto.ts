@@ -2,8 +2,8 @@ import type { SocialMediaType } from '../../enums';
 
 type SocialMedia = {
   id?: string;
-  link?: string;
-  socialMedia?: SocialMediaType;
+  link: string;
+  socialMedia: SocialMediaType;
 };
 
 type MappedLinks = {
