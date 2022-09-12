@@ -90,7 +90,9 @@ export class ProductService {
     return favProducts.map((favProd) => favProd.productId);
   }
 
-  public async getFavoriteProducts(userId: string): Promise<FavoriteProducts[]> {
+  public async getFavoriteProducts(
+    userId: string,
+  ): Promise<FavoriteProducts[]> {
     return this._productRepository.getFavorite(userId);
   }
 
@@ -115,7 +117,10 @@ export class ProductService {
     return auctionPermissionsMapper(!!bids.length);
   }
 
-  public async leaveAuction(userId: string, productId: string): Promise<object> {
+  public async leaveAuction(
+    userId: string,
+    productId: string,
+  ): Promise<object> {
     const product = await this._productRepository.getById(productId);
     if (!product) {
       throw new ProductNotFoundError();
@@ -130,7 +135,10 @@ export class ProductService {
     return this.getById(productId);
   }
 
-  public async addToFavorites({ userId, productId }: AddProductToFavorites): Promise<string> {
+  public async addToFavorites({
+    userId,
+    productId,
+  }: AddProductToFavorites): Promise<string> {
     const isInFavorite = await this._productRepository.isInFavorite(
       userId,
       productId,
@@ -159,7 +167,11 @@ export class ProductService {
     return productId;
   }
 
-  public async createProduct({ req, userId, fieldsData }: CreateProduct): Promise<Product> {
+  public async createProduct({
+    req,
+    userId,
+    fieldsData,
+  }: CreateProduct): Promise<Product> {
     const { error } = createPostSchema.validate(req.body);
     if (error) {
       throw new FieldError(error.message);
@@ -228,7 +240,10 @@ export class ProductService {
     return updatedProduct;
   }
 
-  public async buy({ userId, productId }: BuyProduct): Promise<string | undefined> {
+  public async buy({
+    userId,
+    productId,
+  }: BuyProduct): Promise<string | undefined> {
     const isActive = await this._productRepository.checkStatus(
       productId,
       ProductStatus.ACTIVE,

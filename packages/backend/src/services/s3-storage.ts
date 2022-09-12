@@ -1,4 +1,8 @@
-﻿import type { DeleteObjectOutput, DeleteObjectRequest, PutObjectRequest } from 'aws-sdk/clients/s3';
+﻿import type {
+  DeleteObjectOutput,
+  DeleteObjectRequest,
+  PutObjectRequest,
+} from 'aws-sdk/clients/s3';
 import S3 from 'aws-sdk/clients/s3';
 import { S3FolderPath } from '@enums';
 import {
@@ -36,7 +40,9 @@ export class S3StorageService {
     });
   }
 
-  async deleteImage(filename: string): Promise<PromiseResult<DeleteObjectOutput, AWSError>> {
+  async deleteImage(
+    filename: string,
+  ): Promise<PromiseResult<DeleteObjectOutput, AWSError>> {
     console.log(filename);
     const params = this.createDeleteParams(filename, S3FolderPath.IMAGES);
 
@@ -92,7 +98,11 @@ export class S3StorageService {
     return randomBytes(16).toString('hex') + `.${extension}`;
   }
 
-  private createUploadParams(filename: string, folder: string, body: Buffer): PutObjectRequest {
+  private createUploadParams(
+    filename: string,
+    folder: string,
+    body: Buffer,
+  ): PutObjectRequest {
     return {
       Bucket: this._bucketName,
       Key: `${folder}/${filename}`,
@@ -101,7 +111,10 @@ export class S3StorageService {
     };
   }
 
-  private createDeleteParams(filename: string, folder: string): DeleteObjectRequest {
+  private createDeleteParams(
+    filename: string,
+    folder: string,
+  ): DeleteObjectRequest {
     return {
       Bucket: this._bucketName,
       Key: `${folder}/${filename}`,

@@ -2,7 +2,9 @@ import type { PrismaClient, SocialMedia } from '@prisma/client';
 import { readFileSync } from 'fs';
 import { SOCIAL_MEDIA_FILE_NAME } from './../../config/config';
 
-export const updateSocialMedia = async (prismaClient: PrismaClient): Promise<void> => {
+export const updateSocialMedia = async (
+  prismaClient: PrismaClient,
+): Promise<void> => {
   const path = `./prisma/seed/mockData/${SOCIAL_MEDIA_FILE_NAME}.json`;
   const file = readFileSync(path, 'utf-8');
 

@@ -1,4 +1,9 @@
-import type { Prisma, PrismaClient, PrismaPromise, RefreshToken } from '@prisma/client';
+import type {
+  Prisma,
+  PrismaClient,
+  PrismaPromise,
+  RefreshToken,
+} from '@prisma/client';
 import type { CreateRefreshToken } from '@types';
 
 export class RefreshTokenRepository {
@@ -26,7 +31,11 @@ export class RefreshTokenRepository {
     });
   }
 
-  updateTokenById(tokenId: string, tokenValue: string, expiresAt: Date): Promise<RefreshToken> {
+  updateTokenById(
+    tokenId: string,
+    tokenValue: string,
+    expiresAt: Date,
+  ): Promise<RefreshToken> {
     return this._dbClient.refreshToken.update({
       where: {
         id: tokenId,

@@ -1,6 +1,9 @@
 import winston from 'winston';
 import { getEnv } from '@helpers';
-import type { ConsoleTransportInstance, FileTransportInstance } from 'winston/lib/winston/transports';
+import type {
+  ConsoleTransportInstance,
+  FileTransportInstance,
+} from 'winston/lib/winston/transports';
 import fs from 'fs';
 import path from 'path';
 
@@ -86,7 +89,9 @@ class Logger {
     checkFileSize(this._errorFileSize, this._errorFilename);
   }
 
-  private createTransports(env: string): (ConsoleTransportInstance | FileTransportInstance)[] {
+  private createTransports(
+    env: string,
+  ): (ConsoleTransportInstance | FileTransportInstance)[] {
     const formats = this.getFormats();
     const transports: (
       | winston.transports.ConsoleTransportInstance
@@ -114,7 +119,10 @@ class Logger {
     return transports;
   }
 
-  private getFormats(): { consoleFormat: winston.Logform.Format; fileFormat: winston.Logform.Format; } {
+  private getFormats(): {
+    consoleFormat: winston.Logform.Format;
+    fileFormat: winston.Logform.Format;
+  } {
     return {
       consoleFormat: winston.format.combine(
         winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
@@ -143,7 +151,9 @@ class Logger {
     };
   }
 
-  private levelFormat = (info: winston.Logform.TransformableInfo): winston.Logform.TransformableInfo => {
+  private levelFormat = (
+    info: winston.Logform.TransformableInfo,
+  ): winston.Logform.TransformableInfo => {
     info.level = info.level.toUpperCase();
 
     return info;

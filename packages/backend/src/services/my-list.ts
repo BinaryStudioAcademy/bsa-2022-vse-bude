@@ -7,7 +7,11 @@ export class MyListService {
     this._myListRepository = myListRepository;
   }
 
-  public async getAllUserItems({ userId }: { userId: string }): Promise<object[]> {
+  public async getAllUserItems({
+    userId,
+  }: {
+    userId: string;
+  }): Promise<object[]> {
     return this._myListRepository.getAllUserItems({ userId });
   }
 }

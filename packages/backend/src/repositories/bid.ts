@@ -8,7 +8,11 @@ export class BidRepository {
     this._dbClient = dbClient;
   }
 
-  create({ bidderId, price, productId }: CreateBidDto): Promise<[Bid, Product]> {
+  create({
+    bidderId,
+    price,
+    productId,
+  }: CreateBidDto): Promise<[Bid, Product]> {
     return this._dbClient.$transaction([
       this._dbClient.bid.create({
         data: {
@@ -33,7 +37,10 @@ export class BidRepository {
     });
   }
 
-  async deleteAllByProductAndUser(userId: string, productId: string): Promise<Prisma.BatchPayload> {
+  async deleteAllByProductAndUser(
+    userId: string,
+    productId: string,
+  ): Promise<Prisma.BatchPayload> {
     return this._dbClient.bid.deleteMany({
       where: {
         bidderId: userId,

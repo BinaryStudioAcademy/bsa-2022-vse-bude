@@ -25,7 +25,7 @@ export class UserRepository {
     });
   }
 
-  public getById(id: string): Promise<User>  {
+  public getById(id: string): Promise<User> {
     return this._dbClient.user.findFirst({
       where: {
         id,

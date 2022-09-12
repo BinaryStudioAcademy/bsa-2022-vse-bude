@@ -1,14 +1,28 @@
-import type { Prisma, PrismaClient, PrismaPromise, User, SocialMedia, SocialMediaType } from '@prisma/client';
+import type {
+  Prisma,
+  PrismaClient,
+  PrismaPromise,
+  User,
+  SocialMedia,
+  SocialMediaType,
+} from '@prisma/client';
 import type { AddressDto } from '@types';
-import type { 
-  UpdateUserProfileDto,
-  UserAddressDto,
-} from '@vse-bude/shared';
+import type { UpdateUserProfileDto, UserAddressDto } from '@vse-bude/shared';
 
 export class UserProfileRepository {
   private _dbClient: PrismaClient;
 
-  private _updateSocialMediaLinks({ id, link }: { id: string; link: string }): Prisma.Prisma__SocialMediaClient<{ id: string; link: string; socialMedia: SocialMediaType; }> {
+  private _updateSocialMediaLinks({
+    id,
+    link,
+  }: {
+    id: string;
+    link: string;
+  }): Prisma.Prisma__SocialMediaClient<{
+    id: string;
+    link: string;
+    socialMedia: SocialMediaType;
+  }> {
     return this._dbClient.socialMedia.update({
       where: {
         id,
@@ -32,7 +46,11 @@ export class UserProfileRepository {
     link: string;
     socialMedia: SocialMediaType;
     userId: string;
-  }): Prisma.Prisma__SocialMediaClient<{ id: string; link: string; socialMedia: SocialMediaType; }> {
+  }): Prisma.Prisma__SocialMediaClient<{
+    id: string;
+    link: string;
+    socialMedia: SocialMediaType;
+  }> {
     return this._dbClient.socialMedia.create({
       data: {
         socialMedia,
@@ -47,7 +65,11 @@ export class UserProfileRepository {
     });
   }
 
-  private _deleteSocialMediaLinks({ id }: { id: string }): Prisma.Prisma__SocialMediaClient<SocialMedia> {
+  private _deleteSocialMediaLinks({
+    id,
+  }: {
+    id: string;
+  }): Prisma.Prisma__SocialMediaClient<SocialMedia> {
     return this._dbClient.socialMedia.delete({
       where: {
         id,
@@ -75,7 +97,17 @@ export class UserProfileRepository {
     });
   }
 
-  public getAddress({ userId }: { userId: string }): Prisma.Prisma__AddressClient<{ country: string; region: string; city: string; zip: string; deliveryData: string; }>  {
+  public getAddress({
+    userId,
+  }: {
+    userId: string;
+  }): Prisma.Prisma__AddressClient<{
+    country: string;
+    region: string;
+    city: string;
+    zip: string;
+    deliveryData: string;
+  }> {
     return this._dbClient.address.findUnique({
       where: {
         userId,
@@ -90,11 +122,13 @@ export class UserProfileRepository {
     });
   }
 
-  public getSocialMedia({ userId }: { userId: string }): PrismaPromise<{
-    id: string;
-    link: string;
-    socialMedia: SocialMediaType;
-}[]> {
+  public getSocialMedia({ userId }: { userId: string }): PrismaPromise<
+    {
+      id: string;
+      link: string;
+      socialMedia: SocialMediaType;
+    }[]
+  > {
     return this._dbClient.socialMedia.findMany({
       where: {
         ownedByUserId: userId,
@@ -172,7 +206,7 @@ export class UserProfileRepository {
   }: {
     userId: string;
     socialMedia: SocialMedia[];
-  }): Promise<{ id: string; link: string; socialMedia: SocialMediaType; }[]> {
+  }): Promise<{ id: string; link: string; socialMedia: SocialMediaType }[]> {
     return this._dbClient.$transaction(
       socialMedia.map((userLink) => {
         const { id, link, socialMedia } = userLink;
@@ -194,7 +228,7 @@ export class UserProfileRepository {
   }: {
     userId: string;
     avatar: string | null;
-  }): Promise<{ avatar: string; }> {
+  }): Promise<{ avatar: string }> {
     return this._dbClient.user.update({
       where: {
         id: userId,
@@ -208,7 +242,11 @@ export class UserProfileRepository {
     });
   }
 
-  public cancelPhoneVerified({ userId }: { userId: string }): Promise<{ phoneVerified: boolean; }> {
+  public cancelPhoneVerified({
+    userId,
+  }: {
+    userId: string;
+  }): Promise<{ phoneVerified: boolean }> {
     return this._dbClient.user.update({
       where: {
         id: userId,
@@ -222,7 +260,11 @@ export class UserProfileRepository {
     });
   }
 
-  public getPasswordHash({ userId }: { userId: string }): Promise<{ passwordHash: string; }> {
+  public getPasswordHash({
+    userId,
+  }: {
+    userId: string;
+  }): Promise<{ passwordHash: string }> {
     return this._dbClient.user.findUnique({
       where: {
         id: userId,

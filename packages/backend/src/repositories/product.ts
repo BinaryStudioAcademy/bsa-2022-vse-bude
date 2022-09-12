@@ -1,4 +1,11 @@
-import type { Bid, FavoriteProducts, Prisma, PrismaClient, Product, SocialMedia } from '@prisma/client';
+import type {
+  Bid,
+  FavoriteProducts,
+  Prisma,
+  PrismaClient,
+  Product,
+  SocialMedia,
+} from '@prisma/client';
 import { ProductStatus } from '@prisma/client';
 import type { Decimal } from '@prisma/client/runtime';
 import type { ProductQuery } from '@types';
@@ -34,7 +41,22 @@ export class ProductRepository {
     });
   }
 
-  public getById(id: string): Prisma.Prisma__ProductClient<Product & { author: { id: string; phone: string; socialMedia: SocialMedia[]; firstName: string; lastName: string; avatar: string; }; category: { id: string; title: string; }; bids: Bid[]; }> {
+  public getById(
+    id: string,
+  ): Prisma.Prisma__ProductClient<
+    Product & {
+      author: {
+        id: string;
+        phone: string;
+        socialMedia: SocialMedia[];
+        firstName: string;
+        lastName: string;
+        avatar: string;
+      };
+      category: { id: string; title: string };
+      bids: Bid[];
+    }
+  > {
     return this._dbClient.product.findUnique({
       where: {
         id,
@@ -88,7 +110,10 @@ export class ProductRepository {
     });
   }
 
-  public async isInFavorite(userId: string, productId: string): Promise<FavoriteProducts> {
+  public async isInFavorite(
+    userId: string,
+    productId: string,
+  ): Promise<FavoriteProducts> {
     return await this._dbClient.favoriteProducts.findFirst({
       where: {
         userId: userId,
@@ -97,7 +122,10 @@ export class ProductRepository {
     });
   }
 
-  public async addToFavorites(userId: string, productId: string):  Promise<FavoriteProducts> {
+  public async addToFavorites(
+    userId: string,
+    productId: string,
+  ): Promise<FavoriteProducts> {
     return await this._dbClient.favoriteProducts.create({
       data: {
         userId: userId,
@@ -106,7 +134,10 @@ export class ProductRepository {
     });
   }
 
-  public async deleteFromFavorites(userId: string, productId: string):  Promise<FavoriteProducts> {
+  public async deleteFromFavorites(
+    userId: string,
+    productId: string,
+  ): Promise<FavoriteProducts> {
     return await this._dbClient.favoriteProducts.delete({
       where: {
         userId_productId: {
@@ -204,7 +235,10 @@ export class ProductRepository {
     return product.price;
   }
 
-  public async checkStatus(id: string, status: ProductStatus): Promise<Product> {
+  public async checkStatus(
+    id: string,
+    status: ProductStatus,
+  ): Promise<Product> {
     return this._dbClient.product.findFirst({
       where: {
         id,
@@ -213,7 +247,11 @@ export class ProductRepository {
     });
   }
 
-  public async buy(id: string, userId: string, status: ProductStatus): Promise<Prisma.BatchPayload> {
+  public async buy(
+    id: string,
+    userId: string,
+    status: ProductStatus,
+  ): Promise<Prisma.BatchPayload> {
     return await this._dbClient.product.updateMany({
       where: {
         id,

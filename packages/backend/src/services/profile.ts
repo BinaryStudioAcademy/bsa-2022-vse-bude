@@ -13,7 +13,13 @@ import type { HashService, S3StorageService } from '@services';
 import { ProfileError } from '@errors';
 import { getFilenameFromUrl } from '@helpers';
 import { userMap } from '@mappers';
-import type { User, SocialMedia, SocialMediaType, PrismaPromise, Prisma } from '@prisma/client';
+import type {
+  User,
+  SocialMedia,
+  SocialMediaType,
+  PrismaPromise,
+  Prisma,
+} from '@prisma/client';
 import { lang } from '../lang';
 
 export class UserProfileService {
@@ -49,11 +55,14 @@ export class UserProfileService {
     return user;
   }
 
-  public async getFullUserData({ userId }: { userId: string }): Promise<{ userAddress: AddressDto; socialMedia: {
-    id: string;
-    link: string;
-    socialMedia: SocialMediaType;
-}[]}> {
+  public async getFullUserData({ userId }: { userId: string }): Promise<{
+    userAddress: AddressDto;
+    socialMedia: {
+      id: string;
+      link: string;
+      socialMedia: SocialMediaType;
+    }[];
+  }> {
     const user = await this._userProfileRepository.getFullUserData({ userId });
     if (!user) {
       throw new ProfileError({
@@ -77,15 +86,27 @@ export class UserProfileService {
     };
   }
 
-  public getAddress({ userId }: { userId: string }): Prisma.Prisma__AddressClient<{ country: string; region: string; city: string; zip: string; deliveryData: string; }> {
+  public getAddress({
+    userId,
+  }: {
+    userId: string;
+  }): Prisma.Prisma__AddressClient<{
+    country: string;
+    region: string;
+    city: string;
+    zip: string;
+    deliveryData: string;
+  }> {
     return this._userProfileRepository.getAddress({ userId });
   }
 
-  public getSocialMedia({ userId }: { userId: string }): PrismaPromise<{
-    id: string;
-    link: string;
-    socialMedia: SocialMediaType;
-}[]> {
+  public getSocialMedia({ userId }: { userId: string }): PrismaPromise<
+    {
+      id: string;
+      link: string;
+      socialMedia: SocialMediaType;
+    }[]
+  > {
     return this._userProfileRepository.getSocialMedia({ userId });
   }
 
@@ -99,7 +120,11 @@ export class UserProfileService {
     return this._userProfileRepository.updateUserProfile({ userId, data });
   }
 
-  public cancelPhoneVerified({ userId }: { userId: string }): Promise<{ phoneVerified: boolean; }> {
+  public cancelPhoneVerified({
+    userId,
+  }: {
+    userId: string;
+  }): Promise<{ phoneVerified: boolean }> {
     return this._userProfileRepository.cancelPhoneVerified({ userId });
   }
 
@@ -109,7 +134,7 @@ export class UserProfileService {
   }: {
     userId: string;
     req: UploadFileRequest;
-  }): Promise<{ avatar: string; }> {
+  }): Promise<{ avatar: string }> {
     const { avatar } = await this._userProfileRepository.getUser({ userId });
     if (avatar) {
       const filename = getFilenameFromUrl(avatar);

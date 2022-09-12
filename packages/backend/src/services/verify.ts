@@ -50,7 +50,10 @@ export class VerifyService {
     await this.deleteCodeByType(dto.userId, dto.type);
   }
 
-  async initPhoneVerification(userId: string, type = VerificationTypes.PHONE): Promise<void> {
+  async initPhoneVerification(
+    userId: string,
+    type = VerificationTypes.PHONE,
+  ): Promise<void> {
     await this.resendPhoneCode(userId, type);
   }
 
@@ -67,7 +70,10 @@ export class VerifyService {
     await this.deleteCodeByType(dto.userId, dto.type);
   }
 
-  async initEmailVerification(userId: string, type = VerificationTypes.EMAIL): Promise<void> {
+  async initEmailVerification(
+    userId: string,
+    type = VerificationTypes.EMAIL,
+  ): Promise<void> {
     await this.resendEmailCode(userId, type);
   }
 
@@ -85,7 +91,10 @@ export class VerifyService {
     return code;
   }
 
-  async resendPhoneCode(userId: string, type: VerificationTypes): Promise<boolean> {
+  async resendPhoneCode(
+    userId: string,
+    type: VerificationTypes,
+  ): Promise<boolean> {
     const user = await this._userRepository.getById(userId);
     await this.deleteCodeByType(userId, type);
     const code = await this.createVerificationCode(userId, type);
@@ -97,7 +106,10 @@ export class VerifyService {
     return await this._smsService.send(user.phone, code);
   }
 
-  async resendEmailCode(userId: string, type: VerificationTypes): Promise<void> {
+  async resendEmailCode(
+    userId: string,
+    type: VerificationTypes,
+  ): Promise<void> {
     const user = await this._userRepository.getById(userId);
     await this.deleteCodeByType(userId, type);
     const code = await this.createVerificationCode(userId, type);
@@ -121,11 +133,17 @@ export class VerifyService {
     return Math.floor(Math.random() * diff + minLimit);
   }
 
-  private getUserCodeByTypeAndCode(userId: string, type: VerificationTypes): Promise<string> {
+  private getUserCodeByTypeAndCode(
+    userId: string,
+    type: VerificationTypes,
+  ): Promise<string> {
     return this._cache.get(this.getVerificationCodeCacheKey(userId, type));
   }
 
-  private deleteCodeByType(userId: string, type: VerificationTypes): Promise<number>  {
+  private deleteCodeByType(
+    userId: string,
+    type: VerificationTypes,
+  ): Promise<number> {
     return this._cache.del(this.getVerificationCodeCacheKey(userId, type));
   }
 

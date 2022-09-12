@@ -1,5 +1,5 @@
 import type { ApiRoutes } from '@vse-bude/shared';
-import type { IRouter} from 'express';
+import type { IRouter } from 'express';
 import { Router } from 'express';
 import type { Services } from '@services';
 

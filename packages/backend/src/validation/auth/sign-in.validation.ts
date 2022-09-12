@@ -1,6 +1,10 @@
 import type { NextFunction, Request, Response } from 'express';
 
-export const validation = (req: Request, res: Response, next: NextFunction): void => {
+export const validation = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): void => {
   // const userSignInDto: UserSignInDto = {
   //   email: req.body.email,
   //   password: req.body.password,
