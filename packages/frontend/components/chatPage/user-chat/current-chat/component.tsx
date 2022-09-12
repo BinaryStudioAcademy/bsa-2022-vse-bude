@@ -1,8 +1,10 @@
-import React from 'react'
+import { ChatHeader } from "./header";
 
-const CurrentChat = () => {
-  return (
-    <div>component</div>
-  )
-}
+const CurrentChat = () => (
+  
+    <div style={{width: '100%', height: '100%', borderRadius: '0 10px 0 0'}}>
+      <ChatHeader />
+    </div>
+  );
+  
 export {CurrentChat};
