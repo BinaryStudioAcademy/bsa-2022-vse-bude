@@ -306,6 +306,20 @@ export class UserProfileRepository {
     });
   }
 
+  public cancelEmailVerified({ userId }: { userId: string }) {
+    return this._dbClient.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        emailVerified: false,
+      },
+      select: {
+        emailVerified: true,
+      },
+    });
+  }
+
   public getPasswordHash({ userId }: { userId: string }) {
     return this._dbClient.user.findUnique({
       where: {

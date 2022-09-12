@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import type { ItemDto } from '@vse-bude/shared';
+import type { ProductDto } from '@vse-bude/shared';
 import { ProductType } from '@vse-bude/shared';
 import { Container } from '@primitives';
 import {
@@ -14,7 +14,7 @@ import { ItemInfoAuction } from './item-info-auction/component';
 import * as styles from './styles';
 
 interface ItemProps {
-  item: ItemDto;
+  item: ProductDto;
 }
 
 export const Item = ({ item }: ItemProps) => {

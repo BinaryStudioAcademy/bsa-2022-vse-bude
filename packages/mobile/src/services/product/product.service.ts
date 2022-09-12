@@ -1,7 +1,6 @@
 import {
   ApiRoutes,
   HttpMethod,
-  ItemDto,
   ProductApiRoutes,
   ProductDto,
 } from '@vse-bude/shared';
@@ -30,7 +29,7 @@ class ProductService {
     });
   }
 
-  getProductById(productId: string): Promise<ItemDto> {
+  getProductById(productId: string): Promise<ProductDto> {
     return this.#http.load(
       `${this.#apiPrefix}${ApiRoutes.PRODUCTS}/${productId}`,
     );

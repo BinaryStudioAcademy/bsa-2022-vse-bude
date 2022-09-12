@@ -7,9 +7,10 @@ import { apiPath } from '@helpers';
 import { authMiddleware, uploadImage } from '@middlewares';
 import { profileValidation } from '@validation';
 import type { UploadFileRequest } from '@types';
+import { UserExistsError } from '@errors';
 
 export const initProfileRoutes = (
-  { profileService, myListService }: Services,
+  { profileService, myListService, authService }: Services,
   path: ApiRoutes,
 ): Router => {
   const router = Router();
@@ -84,8 +85,15 @@ export const initProfileRoutes = (
       await profileService.getUser({
         userId,
       });
+      const requests = [
+        myListService.getPurchasedItems({ userId }),
+        myListService.getSoldItems({ userId }),
+        myListService.getDraftedItems({ userId }),
+        myListService.getPostedItems({ userId }),
+        myListService.getArchived({ userId }),
+      ];
 
-      return await myListService.getAllUserItems({ userId });
+      return await Promise.all(requests).then((items) => items.flat());
     }),
   );
 
@@ -135,6 +143,22 @@ export const initProfileRoutes = (
         newPassword,
       } = req.body;
 
+      const userFromDb = await profileService.getFullUserData({
+        userId,
+      });
+
+      const userByEmail = await authService.getByEmail(email);
+
+      if (userByEmail && userByEmail.id !== userFromDb.id) {
+        throw new UserExistsError();
+      }
+      if (
+        !userByEmail &&
+        userFromDb.email.toLowerCase() !== email.toLowerCase()
+      ) {
+        await profileService.cancelEmailVerified({ userId });
+      }
+
       if (phone) {
         await profileService.checkIsPhoneExists({
           userId,
@@ -142,7 +166,7 @@ export const initProfileRoutes = (
         });
       }
 
-      if (!phone) {
+      if (phone !== userFromDb.phone) {
         await profileService.cancelPhoneVerified({ userId });
       }
 

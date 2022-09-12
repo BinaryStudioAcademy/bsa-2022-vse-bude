@@ -4,4 +4,13 @@ type CategoryDto = {
   image: string;
 };
 
-export type { CategoryDto };
+type CategoryResponseDto = {
+  id: string;
+  title: string;
+  createdAt: string;
+  image: string | null;
+  updatedAt: string;
+  productsCount: number | null;
+};
+
+export type { CategoryDto, CategoryResponseDto };

@@ -28,7 +28,13 @@ const StringCutter: FC<StringCutterProps> = ({ children, lines = 1 }) => {
       css={[isMultiLine ? styles.multiline(lines) : styles.singleline]}
       onMouseEnter={checkIsCut}
     >
-      {isCut ? <Tooltip trigger={children}>{children}</Tooltip> : children}
+      {isCut ? (
+        <Tooltip refNode="parent" trigger={children}>
+          {children}
+        </Tooltip>
+      ) : (
+        <span>{children}</span>
+      )}
     </div>
   );
 };

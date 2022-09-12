@@ -1,10 +1,10 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { DataStatus } from '~/common/enums/enums';
-import { ItemDto } from '@vse-bude/shared';
+import { ProductDto } from '@vse-bude/shared';
 import { loadProductInfo, updateProductViews } from './actions';
 
 type InitialState = {
-  product: ItemDto | undefined;
+  product: ProductDto | undefined;
   dataStatus: DataStatus;
 };
 

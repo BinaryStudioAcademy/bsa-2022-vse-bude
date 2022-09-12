@@ -1,3 +1,3 @@
 export enum MyListActions {
-  FETCH_MY_LIST = 'profile/fetch-my-list',
+  FETCH_MY_LIST = 'mylist/fetch-my-list',
 }
