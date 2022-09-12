@@ -44,8 +44,15 @@ export const common = {
     LOG_IN: 'Log in',
   },
   drawer_menu: {
-    SEARCH: 'Search',
-    NEWS: 'News',
-    ABOUT_US: 'About Us',
+    CATEGORIES: 'Categories',
+    ITEMS: 'Items',
+    SERVICES: 'Services',
+    CLOTHING: 'Clothing',
+    ART: 'Art/Decorations',
+    HOME_APPLIANCE: 'Home Appliance',
+    TOYS: 'Toys',
+    MANICURE: 'Manicure',
+    HAIR_CUT: 'Hair Cut',
+    CAR_WASH: 'Car Wash',
   },
 };

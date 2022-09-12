@@ -38,6 +38,14 @@ const LogOutIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="log-out" {...iconProps} />
 );
 
+const ArrowUpIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="chevron-up" {...iconProps} />
+);
+
+const ArrowDownIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="chevron-down" {...iconProps} />
+);
+
 const ArrowLeftIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="chevron-left" {...iconProps} />
 );
@@ -122,10 +130,6 @@ const CalendarIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="calendar" {...iconProps} />
 );
 
-const NewsIcon: AppIcon = (iconProps) => (
-  <FeatherIcon name="file-text" {...iconProps} />
-);
-
 export {
   HomeIcon,
   StarIcon,
@@ -157,5 +161,6 @@ export {
   CheckCircleIcon,
   SearchIcon,
   CalendarIcon,
-  NewsIcon,
+  ArrowUpIcon,
+  ArrowDownIcon,
 };
