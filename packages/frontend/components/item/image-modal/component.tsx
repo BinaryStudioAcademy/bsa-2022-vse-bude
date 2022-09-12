@@ -18,7 +18,6 @@ export const ImageModal = ({
 }: ImageModalProps) => {
   const { t } = useTranslation();
   const [isLoaded, setIsLoaded] = useState(false);
-  console.log(isLoaded);
 
   return (
     <Modal visible={isOpen}>
