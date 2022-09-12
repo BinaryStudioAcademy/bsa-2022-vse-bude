@@ -18,7 +18,7 @@ export class UserProfileRepository {
   }: {
     userId: string;
     socialMedia: SocialMediaType;
-  }): Prisma.Prisma__SocialMediaClient<{ socialMedia: SocialMediaType; }> {
+  }): Prisma.Prisma__SocialMediaClient<{ socialMedia: SocialMediaType }> {
     return this._dbClient.socialMedia.findFirst({
       where: {
         ownedByUserId: userId,
@@ -115,7 +115,12 @@ export class UserProfileRepository {
     this._dbClient = prismaClient;
   }
 
-  public getUser({ userId }: { userId: string }): Prisma.Prisma__UserClient<{ id: string; firstName: string; lastName: string; avatar: string; }> {
+  public getUser({ userId }: { userId: string }): Prisma.Prisma__UserClient<{
+    id: string;
+    firstName: string;
+    lastName: string;
+    avatar: string;
+  }> {
     return this._dbClient.user.findUnique({
       where: {
         id: userId,
@@ -129,7 +134,20 @@ export class UserProfileRepository {
     });
   }
 
-  public getFullUserData({ userId }: { userId: string }): Prisma.Prisma__UserClient<{ id: string; email: string; phone: string; firstName: string; lastName: string; avatar: string; phoneVerified: boolean; emailVerified: boolean; }> {
+  public getFullUserData({
+    userId,
+  }: {
+    userId: string;
+  }): Prisma.Prisma__UserClient<{
+    id: string;
+    email: string;
+    phone: string;
+    firstName: string;
+    lastName: string;
+    avatar: string;
+    phoneVerified: boolean;
+    emailVerified: boolean;
+  }> {
     return this._dbClient.user.findUnique({
       where: {
         id: userId,
@@ -197,7 +215,16 @@ export class UserProfileRepository {
   }: {
     userId: string;
     data: UpdateUserProfileDto;
-  }): Prisma.Prisma__UserClient<{ id: string; avatar: string; email: string; phone: string; firstName: string; lastName: string; phoneVerified: boolean; emailVerified: boolean; }> {
+  }): Prisma.Prisma__UserClient<{
+    id: string;
+    avatar: string;
+    email: string;
+    phone: string;
+    firstName: string;
+    lastName: string;
+    phoneVerified: boolean;
+    emailVerified: boolean;
+  }> {
     const { firstName, lastName, email, phone } = data;
     this._updatePhoneVerifiedStatus({ userId, phone });
 
@@ -267,7 +294,9 @@ export class UserProfileRepository {
   }: {
     userId: string;
     socialMedia: SocialMedia[];
-  }): Promise<Promise<{ id: string; link: string; socialMedia: SocialMediaType; }>[]> {
+  }): Promise<
+    Promise<{ id: string; link: string; socialMedia: SocialMediaType }>[]
+  > {
     return await this._dbClient.$transaction(async () =>
       socialMedia.map(async (userLink) => {
         const { id, link, socialMedia } = userLink;
@@ -315,7 +344,7 @@ export class UserProfileRepository {
   }: {
     userId: string;
     phone: string;
-  }): Prisma.Prisma__UserClient<{ phone: string; }> {
+  }): Prisma.Prisma__UserClient<{ phone: string }> {
     return this._dbClient.user.findFirst({
       where: {
         id: {
@@ -347,7 +376,11 @@ export class UserProfileRepository {
     });
   }
 
-  public cancelEmailVerified({ userId }: { userId: string }): Promise<{ emailVerified: boolean; }> {
+  public cancelEmailVerified({
+    userId,
+  }: {
+    userId: string;
+  }): Promise<{ emailVerified: boolean }> {
     return this._dbClient.user.update({
       where: {
         id: userId,

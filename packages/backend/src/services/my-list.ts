@@ -14,7 +14,11 @@ export class MyListService {
     return this._myListRepository.getPurchasedItems({ userId });
   }
 
-  public getSoldItems({ userId }: { userId: string }): PrismaPromise<SoldItems[]> {
+  public getSoldItems({
+    userId,
+  }: {
+    userId: string;
+  }): PrismaPromise<SoldItems[]> {
     return this._myListRepository.getSoldItems({ userId });
   }
 

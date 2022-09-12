@@ -3,7 +3,6 @@ import { VerificationTypes } from '@vse-bude/shared';
 import type { UserRepository } from '@repositories';
 import { getEnv, isProduction } from '@helpers';
 import { lang } from '@lang';
-import type { GetUserVerifiedDto } from '@types';
 import { CodeNotFoundError } from '../error/verify/code-not-found-error';
 import { WrongCodeError } from '../error/verify/wrong-code-error';
 import type { SaveVerifyCode } from '../common/types/verification-code';

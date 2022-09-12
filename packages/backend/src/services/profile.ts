@@ -41,7 +41,12 @@ export class UserProfileService {
     this._storageService = storageService;
   }
 
-  public async getUser({ userId }: { userId: string }): Promise<{ id: string; firstName: string; lastName: string; avatar: string; }> {
+  public async getUser({ userId }: { userId: string }): Promise<{
+    id: string;
+    firstName: string;
+    lastName: string;
+    avatar: string;
+  }> {
     const user = await this._userProfileRepository.getUser({ userId });
     if (!user) {
       throw new ProfileError({
@@ -114,7 +119,16 @@ export class UserProfileService {
   }: {
     userId: string;
     data: UpdateUserProfileDto;
-  }): Prisma.Prisma__UserClient<{ id: string; avatar: string; email: string; phone: string; firstName: string; lastName: string; phoneVerified: boolean; emailVerified: boolean; }> {
+  }): Prisma.Prisma__UserClient<{
+    id: string;
+    avatar: string;
+    email: string;
+    phone: string;
+    firstName: string;
+    lastName: string;
+    phoneVerified: boolean;
+    emailVerified: boolean;
+  }> {
     return this._userProfileRepository.updateUserProfile({ userId, data });
   }
 
@@ -126,7 +140,11 @@ export class UserProfileService {
     return this._userProfileRepository.cancelPhoneVerified({ userId });
   }
 
-  public cancelEmailVerified({ userId }: { userId: string }): Promise<{ emailVerified: boolean; }> {
+  public cancelEmailVerified({
+    userId,
+  }: {
+    userId: string;
+  }): Promise<{ emailVerified: boolean }> {
     return this._userProfileRepository.cancelEmailVerified({ userId });
   }
 

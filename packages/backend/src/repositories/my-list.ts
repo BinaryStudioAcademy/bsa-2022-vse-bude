@@ -40,7 +40,11 @@ export class MyListRepository {
     });
   }
 
-  public getSoldItems({ userId }: { userId: string }): PrismaPromise<SoldItems[]> {
+  public getSoldItems({
+    userId,
+  }: {
+    userId: string;
+  }): PrismaPromise<SoldItems[]> {
     return this._dbClient.product.findMany({
       where: {
         authorId: userId,
@@ -69,7 +73,11 @@ export class MyListRepository {
     });
   }
 
-  public getPostedItems({ userId }: { userId: string }): PrismaPromise<Items[]> {
+  public getPostedItems({
+    userId,
+  }: {
+    userId: string;
+  }): PrismaPromise<Items[]> {
     return this._dbClient.product.findMany({
       where: {
         authorId: userId,
