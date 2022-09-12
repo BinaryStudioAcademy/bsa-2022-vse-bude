@@ -16,10 +16,7 @@ const HomeWithMenuNavigation: FC = () => {
   };
 
   return (
-    <Drawer.Navigator
-      screenOptions={options}
-      drawerContent={() => <DrawerContent />}
-    >
+    <Drawer.Navigator screenOptions={options} drawerContent={DrawerContent}>
       <Drawer.Screen name={RootScreenName.MAIN} component={MainNavigation} />
     </Drawer.Navigator>
   );

@@ -1,22 +1,24 @@
-import React, { FC, useState } from 'react';
-import i18next from 'i18next';
-import { ColorPalette, DEFAULT_LOCALE } from '@vse-bude/shared';
+import React, { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import { notification } from '~/services/services';
 import { TouchableOpacity, Text, View } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 
 const LanguageButtons: FC = () => {
-  const [currentLang, setCurrentLang] = useState(i18next.language);
+  const { i18n } = useTranslation();
   const handleChangeLanguage = (lang: string) => {
-    i18next.changeLanguage(lang, (err) => {
-      setCurrentLang(lang);
+    i18n.changeLanguage(lang, (err) => {
       if (err) {
         notification.error(err);
       }
     });
   };
-  const isUa = currentLang == DEFAULT_LOCALE;
+
+  const buttons: Record<string, string> = {
+    en: 'En',
+    ua: 'Ua',
+  };
 
   return (
     <View
@@ -26,42 +28,22 @@ const LanguageButtons: FC = () => {
         globalStyles.justifyContentEnd,
       ]}
     >
-      <TouchableOpacity
-        style={[
-          isUa
-            ? { backgroundColor: ColorPalette.GRAY_100 }
-            : { backgroundColor: ColorPalette.YELLOW_200 },
-          globalStyles.py2,
-          styles.buttonWrapper,
-        ]}
-        onPress={() => handleChangeLanguage('en')}
-      >
-        <Text
-          style={{
-            color: isUa ? ColorPalette.GREEN_200 : ColorPalette.WHITE_100,
-          }}
-        >
-          En
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={[
-          isUa
-            ? { backgroundColor: ColorPalette.YELLOW_200 }
-            : { backgroundColor: ColorPalette.GRAY_100 },
-          globalStyles.py2,
-          styles.buttonWrapper,
-        ]}
-        onPress={() => handleChangeLanguage('ua')}
-      >
-        <Text
-          style={{
-            color: isUa ? ColorPalette.WHITE_100 : ColorPalette.GREEN_200,
-          }}
-        >
-          Ua
-        </Text>
-      </TouchableOpacity>
+      {Object.keys(buttons).map((btnLang) => {
+        const isCurrent = i18n.resolvedLanguage === btnLang;
+
+        return (
+          <TouchableOpacity
+            onPress={() => handleChangeLanguage(btnLang)}
+            style={[
+              globalStyles.py2,
+              styles.buttonWrapper,
+              isCurrent && styles.current,
+            ]}
+          >
+            <Text style={isCurrent && styles.current}>{buttons[btnLang]}</Text>
+          </TouchableOpacity>
+        );
+      })}
     </View>
   );
 };

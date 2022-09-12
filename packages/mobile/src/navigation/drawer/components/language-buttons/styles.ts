@@ -12,6 +12,10 @@ const styles = StyleSheet.create({
     borderRadius: 17.5,
     borderColor: ColorPalette.YELLOW_200,
   },
+  current: {
+    backgroundColor: ColorPalette.YELLOW_200,
+    color: ColorPalette.WHITE_100,
+  },
 });
 
 export { styles };
