@@ -10,8 +10,8 @@ export const itemImageWrapper = ({ spaces, radiuses }: Theme) => css`
 export const itemImage = ({ radiuses }: Theme) => css`
   display: block;
   border-radius: ${radiuses.xs};
-  width: 100px;
-  height: 100px;
+  width: 110px;
+  height: 110px;
 `;
 
 export const itemTitle = ({
@@ -87,7 +87,7 @@ export const buyerWrapper = css`
   align-items: center;
 `;
 
-export const profileButton = ({ colors }: Theme) => css`
+export const profileButton = ({ colors, radiuses }: Theme) => css`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -98,10 +98,10 @@ export const profileButton = ({ colors }: Theme) => css`
   background: none;
   cursor: pointer;
   &:hover {
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-top-left-radius: ${radiuses.cardTub};
+    border-bottom-left-radius: ${radiuses.cardTub};
+    border-top-right-radius: ${radiuses.xs};
+    border-bottom-right-radius: ${radiuses.xs};
     background: ${colors.backgroundLight};
   }
 `;
@@ -125,10 +125,10 @@ export const avatarWrapper = ({ spaces }: Theme) => css`
   margin-right: ${spaces.xs};
 `;
 
-export const avatar = ({ radiuses }: Theme) => css`
+export const avatar = ({ radiuses, spaces }: Theme) => css`
   display: block;
-  width: 26px;
-  height: 26px;
+  width: ${spaces.xl};
+  height: ${spaces.xl};
   border-radius: ${radiuses.circle};
 `;
 
@@ -162,7 +162,7 @@ export const dateWrapper = ({ spaces }: Theme) => css`
   align-items: center;
   margin-right: ${spaces.md};
   &[data-size='lg'] {
-    width: 100px;
+    width: 110px;
   }
 `;
 
@@ -208,7 +208,7 @@ export const arrow = ({
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 5px;
+  padding: ${spaces.xs};
   border-radius: ${radiuses.circle};
   width: ${widths.checkbox};
   height: ${heights.checkbox};

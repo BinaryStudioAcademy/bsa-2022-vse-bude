@@ -1,4 +1,5 @@
 import { useAuth, useTypedSelector } from '@hooks';
+import { useMemo } from 'react';
 import { useTranslation } from 'next-i18next';
 import type { RootState } from '@types';
 import { ProductStatus } from '@vse-bude/shared';
@@ -10,23 +11,26 @@ import { FilterArrow } from './primitives';
 import { Filter } from './filter/filter';
 import * as styles from './styles';
 import { breadcrumbsPaths } from './components-data';
-import { typedItems } from './utils';
+import { typedItems, filterCallback } from './utils';
 
 export const MyListInfo = () => {
   const { t } = useTranslation();
-  const myList = useTypedSelector((state: RootState) => {
-    const items = [...state.myList.itemsList];
+  const { user } = useAuth();
+  const { itemsList, filterType, filterStatus } = useTypedSelector(
+    (state: RootState) => state.myList,
+  );
 
-    return items;
-  });
-
-  const { user: authUser } = useAuth();
+  const filteredItems = useMemo(
+    () =>
+      filterCallback({ itemsList, filterType, userId: user.id, filterStatus }),
+    [itemsList, filterType, filterStatus, user.id],
+  );
 
   return (
-    <div>
+    <div css={styles.listWrapper}>
       <div>
         <Breadcrumbs
-          paths={breadcrumbsPaths({ t, id: authUser.id })}
+          paths={breadcrumbsPaths({ t, id: user?.id })}
           containerCssExtend={styles.breadcrumbsContainer}
           cssExtend={styles.breadcrumbs}
         />
@@ -53,74 +57,104 @@ export const MyListInfo = () => {
         </div>
       </div>
 
-      <div css={styles.section}>
-        <div css={styles.header}>
-          <SectionHeader>{t('my-list:card.purchased')}</SectionHeader>
+      {typedItems({
+        items: filteredItems,
+        byStatus: ProductStatus.FINISHED,
+        byKey: 'author',
+      }).length ? (
+        <div css={styles.section}>
+          <div css={styles.header}>
+            <SectionHeader>{t('my-list:card.purchased')}</SectionHeader>
+          </div>
+          <div css={styles.container}>
+            {typedItems({
+              items: filteredItems,
+              byStatus: ProductStatus.FINISHED,
+              byKey: 'author',
+            }).map((item) => (
+              <Purchased key={item.id} data={item} />
+            ))}
+          </div>
         </div>
-        <div css={styles.container}>
-          {typedItems({
-            items: myList,
-            byStatus: ProductStatus.FINISHED,
-            byKey: 'author',
-          }).map((item) => (
-            <Purchased key={item.id} data={item} />
-          ))}
-        </div>
-      </div>
+      ) : null}
 
-      <div css={styles.section}>
-        <div css={styles.header}>
-          <SectionHeader>{t('my-list:card.sold')}</SectionHeader>
+      {typedItems({
+        items: filteredItems,
+        byStatus: ProductStatus.FINISHED,
+        byKey: 'winner',
+      }).length ? (
+        <div css={styles.section}>
+          <div css={styles.header}>
+            <SectionHeader>{t('my-list:card.sold')}</SectionHeader>
+          </div>
+          <div css={styles.container}>
+            {typedItems({
+              items: filteredItems,
+              byStatus: ProductStatus.FINISHED,
+              byKey: 'winner',
+            }).map((item) => (
+              <Sold key={item.id} data={item} />
+            ))}
+          </div>
         </div>
-        <div css={styles.container}>
-          {typedItems({
-            items: myList,
-            byStatus: ProductStatus.FINISHED,
-            byKey: 'winner',
-          }).map((item) => (
-            <Sold key={item.id} data={item} />
-          ))}
-        </div>
-      </div>
+      ) : null}
 
-      <div css={styles.section}>
-        <div css={styles.header}>
-          <SectionHeader>{t('my-list:card.posted')}</SectionHeader>
-        </div>
-        <div css={styles.container}>
-          {typedItems({ items: myList, byStatus: ProductStatus.ACTIVE }).map(
-            (item) => (
+      {typedItems({
+        items: filteredItems,
+        byStatus: ProductStatus.ACTIVE,
+      }).length ? (
+        <div css={styles.section}>
+          <div css={styles.header}>
+            <SectionHeader>{t('my-list:card.posted')}</SectionHeader>
+          </div>
+          <div css={styles.container}>
+            {typedItems({
+              items: filteredItems,
+              byStatus: ProductStatus.ACTIVE,
+            }).map((item) => (
               <Posted key={item.id} data={item} />
-            ),
-          )}
+            ))}
+          </div>
         </div>
-      </div>
+      ) : null}
 
-      <div css={styles.section}>
-        <div css={styles.header}>
-          <SectionHeader>{t('my-list:card.drafted')}</SectionHeader>
-        </div>
-        <div css={styles.container}>
-          {typedItems({ items: myList, byStatus: ProductStatus.DRAFT }).map(
-            (item) => (
+      {typedItems({
+        items: filteredItems,
+        byStatus: ProductStatus.DRAFT,
+      }).length ? (
+        <div css={styles.section}>
+          <div css={styles.header}>
+            <SectionHeader>{t('my-list:card.drafted')}</SectionHeader>
+          </div>
+          <div css={styles.container}>
+            {typedItems({
+              items: filteredItems,
+              byStatus: ProductStatus.DRAFT,
+            }).map((item) => (
               <Drafted key={item.id} data={item} />
-            ),
-          )}
+            ))}
+          </div>
         </div>
-      </div>
+      ) : null}
 
-      <div css={styles.section}>
-        <div css={styles.header}>
-          <SectionHeader>{t('my-list:card.archived')}</SectionHeader>
-        </div>
-        <div css={styles.container}>
-          {typedItems({ items: myList, byStatus: ProductStatus.CANCELLED }).map(
-            (item) => (
+      {typedItems({
+        items: filteredItems,
+        byStatus: ProductStatus.CANCELLED,
+      }).length ? (
+        <div css={styles.section}>
+          <div css={styles.header}>
+            <SectionHeader>{t('my-list:card.archived')}</SectionHeader>
+          </div>
+          <div css={styles.container}>
+            {typedItems({
+              items: filteredItems,
+              byStatus: ProductStatus.CANCELLED,
+            }).map((item) => (
               <Archived key={item.id} data={item} />
-            ),
-          )}
+            ))}
+          </div>
         </div>
-      </div>
+      ) : null}
     </div>
   );
 };

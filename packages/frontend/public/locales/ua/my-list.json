@@ -16,7 +16,21 @@
     "archived": "Архівні",
     "edit": "змінено",
     "publish": "Публікувати",
-    "unarchive":"Публікувати"
+    "unarchive": "Публікувати"
+  },
+  "months": {
+    "january": "Січня",
+    "february": "Лютого",
+    "march": "Березня",
+    "april": "Квітня",
+    "may": "Травня",
+    "june": "Червня",
+    "july": "Липня",
+    "august": "Серпня",
+    "september": "Вересня",
+    "october": "Жовтня",
+    "november": "Листопада",
+    "december": "Грудня"
   },
   "filter": {
     "button": {

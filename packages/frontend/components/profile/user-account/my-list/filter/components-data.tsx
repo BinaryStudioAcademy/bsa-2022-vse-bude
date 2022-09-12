@@ -1,68 +1,79 @@
 import type { TFunction } from 'next-i18next';
-import type { FilterButtonProps, CheckboxProps } from './types';
+import { ProductType } from '@vse-bude/shared';
+import type { Dispatch } from '@reduxjs/toolkit';
+import { filterByType, resetStatuses, filterByStatus } from '@store';
+import type { FilterButtonProps, CheckboxProps, FilterStatuses } from './types';
 
-export const filterButtons = ({ t }: { t: TFunction }): FilterButtonProps[] => [
+export const filterButtons = ({
+  t,
+  dispatch,
+}: {
+  t: TFunction;
+  dispatch: Dispatch;
+}): FilterButtonProps[] => [
   {
     name: t('my-list:filter.button.all'),
-    onClick: () => {
-      console.log('event');
-    },
+    onClick: () => dispatch(filterByType('')),
   },
   {
     name: t('my-list:filter.button.fixedPrice'),
-    onClick: () => {
-      console.log('event');
-    },
+    onClick: () => dispatch(filterByType(ProductType.SELLING)),
   },
   {
     name: t('my-list:filter.button.auction'),
-    onClick: () => {
-      console.log('event');
-    },
+    onClick: () => dispatch(filterByType(ProductType.AUCTION)),
   },
 ];
 
-export const checkboxes = ({ t }: { t: TFunction }): CheckboxProps[] => [
+export const checkboxes = ({
+  t,
+  dispatch,
+  statusesValue,
+}: {
+  t: TFunction;
+  dispatch: Dispatch;
+  statusesValue: FilterStatuses;
+}): CheckboxProps[] => [
   {
     label: t('my-list:filter.checkbox.all'),
-    value: true,
+    value: statusesValue.all,
     onChange: () => {
-      console.log('event');
+      dispatch(resetStatuses());
     },
   },
   {
     label: t('my-list:filter.checkbox.purchased'),
-    value: false,
+    value: statusesValue.purchased,
     onChange: () => {
-      console.log('event');
+      dispatch(filterByStatus('purchased'));
     },
   },
   {
     label: t('my-list:filter.checkbox.sold'),
-    value: false,
+    value: statusesValue.sold,
     onChange: () => {
-      console.log('event');
+      dispatch(filterByStatus('sold'));
     },
   },
   {
     label: t('my-list:filter.checkbox.posted'),
-    value: false,
+    value: statusesValue.posted,
     onChange: () => {
-      console.log('event');
+      dispatch(filterByStatus('posted'));
     },
   },
   {
     label: t('my-list:filter.checkbox.drafts'),
-    value: false,
+    value: statusesValue.draft,
     onChange: () => {
-      console.log('event');
+      dispatch(filterByStatus('draft'));
     },
   },
   {
     label: t('my-list:filter.checkbox.archived'),
-    value: false,
+    value: statusesValue.archived,
     onChange: () => {
-      console.log('event');
+      dispatch(filterByStatus('archived'));
     },
   },
 ];

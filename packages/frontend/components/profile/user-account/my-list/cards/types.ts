@@ -12,6 +12,6 @@ export interface ItemCard {
   winner: WinnerDto;
   views: number;
   endDate: string;
-  postDate: string;
-  updatedAt: string;
+  postDate: Date;
+  updatedAt: Date;
 }

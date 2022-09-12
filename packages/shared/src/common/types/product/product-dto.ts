@@ -26,7 +26,9 @@ type ProductDto = {
   condition: Condition;
   category: CategoryDto;
   views: number;
+  authorId: string;
   author: AuthorDto;
+  winnerId: string;
   winner: WinnerDto;
   updatedAt: Date;
   postDate: Date;

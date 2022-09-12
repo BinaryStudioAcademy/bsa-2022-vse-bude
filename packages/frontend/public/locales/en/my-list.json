@@ -16,7 +16,21 @@
     "sold": "Sold",
     "edit": "edited",
     "publish": "Publish",
-    "unarchive":"Unarchive"
+    "unarchive": "Unarchive"
+  },
+  "months": {
+    "january": "January",
+    "february": "February",
+    "march": "March",
+    "april": "April",
+    "may": "May",
+    "june": "June",
+    "july": "July",
+    "august": "August",
+    "september": "September",
+    "october": "October",
+    "november": "November",
+    "december": "December"
   },
   "filter": {
     "button": {

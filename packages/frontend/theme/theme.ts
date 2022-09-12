@@ -107,6 +107,7 @@ const radiuses = {
   md: '10px',
   lg: '50px',
   circle: '50%',
+  cardTub: '15px',
 };
 
 const heights = {

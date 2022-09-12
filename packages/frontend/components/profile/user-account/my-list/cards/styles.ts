@@ -9,11 +9,14 @@ export const card = ({ colors, radiuses }: Theme) => css`
   }
 `;
 
-export const cardContent = ({ spaces }: Theme) => css`
+export const cardContent = ({ spaces, maxMq }: Theme) => css`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   padding: ${spaces.lg} ${spaces.xl};
+  ${maxMq[4]} {
+    padding: ${spaces.md} ${spaces.md};
+  }
 `;
 
 export const leftContent = css`
@@ -34,7 +37,7 @@ export const details = ({ colors, spaces }: Theme) => css`
   flex-direction: column;
   margin-bottom: ${spaces.md};
   border-bottom: 2px solid ${colors.backgroundDark};
-  height: 100px;
+  height: 110px;
 `;
 
 export const saleDetails = ({ spaces }: Theme) => css`

@@ -1,3 +1,4 @@
+import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type { HydrateAction } from '@types';
 import type { ProductDto } from '@vse-bude/shared';
@@ -6,16 +7,30 @@ import { fetchMyListSSR } from './actions';
 
 interface MyListState {
   itemsList: ProductDto[] | null;
-  sortType: null | string;
-  sortStatus: null | string;
+  filterType: null | string;
+  filterStatus: {
+    all: boolean;
+    purchased: boolean;
+    sold: boolean;
+    posted: boolean;
+    draft: boolean;
+    archived: boolean;
+  };
   loading: boolean;
   error: string;
 }
 
 const initialState: MyListState = {
   itemsList: null,
-  sortType: null,
-  sortStatus: null,
+  filterType: null,
+  filterStatus: {
+    all: true,
+    purchased: false,
+    sold: false,
+    posted: false,
+    draft: false,
+    archived: false,
+  },
   loading: false,
   error: null,
 };
@@ -23,7 +38,27 @@ const initialState: MyListState = {
 const myListSlice = createSlice({
   name: 'mylist',
   initialState,
-  reducers: {},
+  reducers: {
+    filterByType: (state, action: PayloadAction<string>) => {
+      state.filterType = action.payload;
+    },
+    filterByStatus: (state, action: PayloadAction<string>) => {
+      for (const key in state.filterStatus) {
+        if (key !== action.payload) {
+          state.filterStatus[key] = false;
+        }
+      }
+      state.filterStatus[action.payload] = !state.filterStatus[action.payload];
+    },
+    resetStatuses: (state) => {
+      for (const key in state.filterStatus) {
+        if (key !== 'all') {
+          state.filterStatus[key] = false;
+        }
+      }
+      state.filterStatus.all = true;
+    },
+  },
   extraReducers: {
     [fetchMyListSSR.pending.type]: (state) => {
       state.loading = true;
@@ -47,5 +82,8 @@ const myListSlice = createSlice({
 });
 
 export const myListReducer = myListSlice.reducer;
+
+export const { filterByType, filterByStatus, resetStatuses } =
+  myListSlice.actions;
 
 export type { MyListState };

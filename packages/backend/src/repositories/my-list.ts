@@ -22,6 +22,7 @@ export class MyListRepository {
         price: true,
         type: true,
         status: true,
+        winnerId: true,
         author: {
           select: {
             id: true,
@@ -51,6 +52,7 @@ export class MyListRepository {
         price: true,
         type: true,
         status: true,
+        authorId: true,
         winner: {
           select: {
             id: true,

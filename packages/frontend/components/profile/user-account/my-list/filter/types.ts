@@ -8,3 +8,12 @@ export type CheckboxProps = {
   value: boolean;
   onChange(): void;
 };
+
+export type FilterStatuses = {
+  all: boolean;
+  purchased: boolean;
+  sold: boolean;
+  posted: boolean;
+  draft: boolean;
+  archived: boolean;
+};

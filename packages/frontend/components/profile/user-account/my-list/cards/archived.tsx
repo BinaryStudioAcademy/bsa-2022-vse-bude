@@ -14,7 +14,7 @@ import * as styles from './styles';
 
 export const Archived = ({ data }: { data: ItemCard }) => {
   const { t } = useTranslation();
-  const { title, imageLinks, price, description, postDate } = data;
+  const { title, imageLinks, price, description, endDate } = data;
 
   const onHandleClick = () => 'click';
 
@@ -23,6 +23,7 @@ export const Archived = ({ data }: { data: ItemCard }) => {
       <div css={styles.cardContent}>
         <div css={styles.leftContent}>
           <ItemImage src={imageLinks[0]} title={title} />
+          <ItemDate time={endDate} />
         </div>
 
         <div css={styles.rightContent}>
@@ -36,10 +37,6 @@ export const Archived = ({ data }: { data: ItemCard }) => {
           </div>
 
           <div css={styles.postedFooter}>
-            <div>
-              <span css={styles.editDate}>{t('my-list:card.edit')}</span>
-              <ItemDate time={postDate} />
-            </div>
             <div css={styles.publishButtonWrapper}>
               <Button size="small">{t('my-list:card.unarchive')}</Button>
             </div>
