@@ -13,7 +13,7 @@ import { MainScreenName, RootScreenName } from '~/common/enums/enums';
 import { Header, Title, VerifyImage, Wrapper } from '../components/components';
 import { styles } from './styles';
 
-const VerifiedPhoneScreen: FC = () => {
+const VerifiedEmailScreen: FC = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<RootNavigationProps>();
   const { colors } = useCustomTheme();
@@ -34,7 +34,7 @@ const VerifiedPhoneScreen: FC = () => {
             contentContainerStyle={globalStyles.mt6}
           />
           <Title
-            label={t('verify.VERIFIED_TITLE_PHONE')}
+            label={t('verify.VERIFIED_TITLE_EMAIL')}
             contentContainerStyle={[globalStyles.mt6, { marginTop: 75 }]}
             textStyle={{ textAlign: 'center' }}
           />
@@ -51,4 +51,4 @@ const VerifiedPhoneScreen: FC = () => {
   );
 };
 
-export { VerifiedPhoneScreen };
+export { VerifiedEmailScreen };

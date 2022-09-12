@@ -4,6 +4,7 @@ import {
   ApiRoutes,
   VerifyApiRoutes,
   PhoneVerifyDto,
+  EmailVerifyDto,
 } from '@vse-bude/shared';
 import { Http } from '../http/http.service';
 
@@ -35,9 +36,34 @@ class VerificationApi {
     );
   }
 
+  getVerificationCodeEmail(): Promise<unknown> {
+    return this.#http.load(
+      `${this.#apiPrefix}${ApiRoutes.VERIFY}${
+        VerifyApiRoutes.EMAIL_RESEND_CODE
+      }`,
+      {
+        method: HttpMethod.POST,
+        contentType: HttpContentType.APPLICATION_JSON,
+        hasAuth: true,
+      },
+    );
+  }
+
   verifyPhone(_payload: PhoneVerifyDto): Promise<unknown> {
     return this.#http.load(
       `${this.#apiPrefix}${ApiRoutes.VERIFY}${VerifyApiRoutes.VERIFY_PHONE}`,
+      {
+        method: HttpMethod.POST,
+        contentType: HttpContentType.APPLICATION_JSON,
+        payload: JSON.stringify(_payload),
+        hasAuth: true,
+      },
+    );
+  }
+
+  verifyEmail(_payload: EmailVerifyDto): Promise<unknown> {
+    return this.#http.load(
+      `${this.#apiPrefix}${ApiRoutes.VERIFY}${VerifyApiRoutes.VERIFY_EMAIL}`,
       {
         method: HttpMethod.POST,
         contentType: HttpContentType.APPLICATION_JSON,

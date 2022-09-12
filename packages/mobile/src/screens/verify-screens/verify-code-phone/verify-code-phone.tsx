@@ -25,7 +25,7 @@ import { globalStyles } from '~/styles/styles';
 import { RootNavigationProps } from '~/common/types/types';
 import {
   selectAuthDataStatus,
-  selectVerifyPhoneDataStatus,
+  selectVerifyDataStatus,
   selectUserPhone,
 } from '~/store/selectors';
 import { notification } from '~/services/services';
@@ -46,7 +46,7 @@ const VerifyCodePhoneScreen: FC = () => {
   const navigation = useNavigation<RootNavigationProps>();
   const { colors } = useCustomTheme();
   const userPhone = useAppSelector(selectUserPhone);
-  const dataStatusVerify = useAppSelector(selectVerifyPhoneDataStatus);
+  const dataStatusVerify = useAppSelector(selectVerifyDataStatus);
   const dataStatusAuth = useAppSelector(selectAuthDataStatus);
   const isLoading = [dataStatusVerify, dataStatusAuth].includes(
     DataStatus.PENDING,
@@ -66,7 +66,7 @@ const VerifyCodePhoneScreen: FC = () => {
     dispatch(verifyActions.getVerificationCodePhone())
       .unwrap()
       .then(() => {
-        notification.success(t('verificationPhone.CODE_SENT'));
+        notification.success(t('verify.CODE_SENT'));
       })
       .catch((err) => {
         // eslint-disable-next-line
@@ -89,7 +89,7 @@ const VerifyCodePhoneScreen: FC = () => {
   return (
     <Wrapper>
       <Header
-        labelButton={t('verificationPhone.BACK_BUTTON')}
+        labelButton={t('verify.BACK_BUTTON')}
         onPress={handleBackButtonPress}
       />
       <KeyboardAvoiding>
@@ -99,17 +99,17 @@ const VerifyCodePhoneScreen: FC = () => {
             contentContainerStyle={globalStyles.mt6}
           />
           <Title
-            label={t('verificationPhone.ENTER_CODE')}
+            label={t('verify.ENTER_CODE')}
             contentContainerStyle={globalStyles.mt6}
           />
           <CustomText
-            label={`${t('verificationPhone.JUST_SENT')} ${userPhone}`}
+            label={`${t('verify.JUST_SENT')} ${userPhone}`}
             contentContainerStyle={globalStyles.mt3}
           />
           <View>
             <Input
-              label={t('verificationPhone.INPUT_LABEL_CODE')}
-              placeholder={t('verificationPhone.ENTER_CODE')}
+              label={t('verify.INPUT_LABEL_CODE')}
+              placeholder={t('verify.ENTER_CODE')}
               name="code"
               control={control}
               errors={errors}
@@ -126,7 +126,7 @@ const VerifyCodePhoneScreen: FC = () => {
           <ButtonsContainer>
             <View style={styles.buttonContainer}>
               <PrimaryButton
-                label={t('verificationPhone.RESEND_CODE')}
+                label={t('verify.RESEND_CODE')}
                 appearance={ButtonAppearance.TRANSPARENT}
                 textColor={colors.text}
                 onPress={handleResendPress}
@@ -135,7 +135,7 @@ const VerifyCodePhoneScreen: FC = () => {
             </View>
             <View style={styles.buttonContainer}>
               <PrimaryButton
-                label={t('verificationPhone.CONTINUE')}
+                label={t('verify.CONTINUE')}
                 onPress={handleSubmit(onSubmit)}
                 disabled={isLoading}
               />

@@ -17,7 +17,9 @@ import {
   NewItemScreen,
   VerifyPhoneScreen,
   VerifyCodePhoneScreen,
+  VerifyCodeEmailScreen,
   VerifiedPhoneScreen,
+  VerifiedEmailScreen,
   TypeOfPostScreen,
 } from '~/screens/screens';
 import { HeaderLeft } from '~/components/components';
@@ -92,6 +94,14 @@ const Navigation: FC = () => {
             <Stack.Screen
               name={RootScreenName.VERIFIED_PHONE}
               component={VerifiedPhoneScreen}
+            />
+            <Stack.Screen
+              name={RootScreenName.VERIFY_CODE_EMAIL}
+              component={VerifyCodeEmailScreen}
+            />
+            <Stack.Screen
+              name={RootScreenName.VERIFIED_EMAIL}
+              component={VerifiedEmailScreen}
             />
           </NativeStack.Group>
           <Stack.Screen
