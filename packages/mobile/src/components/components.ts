@@ -39,3 +39,4 @@ export { ScrollView } from './scroll-view/scroll-view';
 export { default as CheckBox } from '@react-native-community/checkbox';
 export { Countdown } from './countdown/countdown';
 export { Product } from './product/product';
+export { BurgerMenu } from './burger-menu/burger-menu';

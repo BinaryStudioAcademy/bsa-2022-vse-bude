@@ -196,4 +196,7 @@ export const screens = {
     CURRENT_BID: 'Current bid',
     MIN_UAH: 'Min UAH',
   },
+  items_and_services: {
+    TITLE: 'Items & Services',
+  },
 };

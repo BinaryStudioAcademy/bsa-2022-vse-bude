@@ -19,14 +19,16 @@ import {
   View,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
+import { StyleProp, ViewStyle } from 'react-native';
 import { styles } from './styles';
 import { TimeWindow } from './components/components';
 
 type Props = {
   productId: string;
+  contentContainerStyle?: StyleProp<ViewStyle>;
 };
 
-const Product: FC<Props> = ({ productId }) => {
+const Product: FC<Props> = ({ productId, contentContainerStyle }) => {
   const {
     imageLinks,
     title,
@@ -54,7 +56,11 @@ const Product: FC<Props> = ({ productId }) => {
       {isActive && (
         <TouchableOpacity
           onPress={handleOpenProductInfo}
-          style={[styles.container, globalStyles.boxShadow]}
+          style={[
+            styles.container,
+            globalStyles.boxShadow,
+            contentContainerStyle,
+          ]}
         >
           <View style={styles.imgWrapper}>
             <Image source={{ uri: imageLinks[0] }} style={styles.img} />

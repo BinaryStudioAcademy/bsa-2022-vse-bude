@@ -195,4 +195,7 @@ export const screens = {
     CURRENT_BID: 'Поточна ставка',
     MIN_UAH: 'Мін ГРН',
   },
+  items_and_services: {
+    TITLE: 'Товари & Послуги',
+  },
 };
