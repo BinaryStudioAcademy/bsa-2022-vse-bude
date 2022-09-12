@@ -100,6 +100,38 @@ export const initProductRoutes = (
 
   /**
    * @openapi
+   * /products/:id:
+   *   get:
+   *     tags: [Product]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - in: path
+   *         name: id
+   *         required: true
+   *         type: string
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/GetProductByIdResponse"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
+
+  router.get(
+    apiPath(path, ProductApiRoutes.ID),
+    wrap((req: Request) => productService.getById(req.params.id)),
+  );
+
+  /**
+   * @openapi
    * /products/favorite:
    *   get:
    *     description: Get list of favorite products
@@ -419,56 +451,11 @@ export const initProductRoutes = (
    * @openapi
    * /products:
    *   post:
-   *     description: Create product
-   *     tags: [Product]
-   *     produces:
-   *       - application/json
-   *     parameters:
-   *       - in: query
-   *         name: productId
-   *         type: string
-   *         format: uuid
-   *         required: true
-   *     requestBody:
-   *       required: true
-   *       content:
-   *         application/json:
-   *           schema:
-   *             $ref: "#/definitions/CreateProductBody"
-   *     responses:
-   *       200:
-   *         description: Ok
-   *         content:
-   *           application/json:
-   *             schema:
-   *               $ref: "#/definitions/DeleteProductToFavorites"
-   *       4**:
-   *         description: Something went wrong
-   *         content:
-   *           application/json:
-   *             schema:
-   *               $ref: "#/definitions/Response400"
-   */
-  router.post(
-    apiPath(path),
-    authMiddleware,
-    multer().any(),
-    wrap((req: Request) =>
-      productService.createProduct({
-        req,
-        userId: req.userId,
-        fieldsData: req.body,
-      }),
-    ),
-  );
-
-  /**
-   * @openapi
-   * /products/update/:id:
-   *   post:
-   *     summary: Uploads a file.
+   *     summary: Create post.
    *     consumes:
    *       - multipart/form-data
+   *     security:
+   *       - Bearer: []
    *     parameters:
    *       - in: formData
    *         name: images
@@ -484,6 +471,10 @@ export const initProductRoutes = (
    *       - in: formData
    *         name: status
    *         required: true
+   *         type: string
+   *       - in: formData
+   *         name: condition
+   *         description: oneOf [USED, NEW]
    *         type: string
    *       - in: formData
    *         name: description
@@ -524,14 +515,14 @@ export const initProductRoutes = (
    *                 contribution:
    *                   $ref: "#/definitions/Product"
    */
-  router.put(
-    apiPath(path, ProductApiRoutes.UPDATE),
+
+  router.post(
+    apiPath(path),
     authMiddleware,
     multer().any(),
     wrap((req: Request) =>
-      productService.updateProduct({
+      productService.createProduct({
         req,
-        productId: req.params.id,
         userId: req.userId,
         fieldsData: req.body,
       }),
@@ -540,12 +531,19 @@ export const initProductRoutes = (
 
   /**
    * @openapi
-   * /products/buy/:id:
+   * /products/update/:id:
    *   put:
    *     tags: [Product]
+   *     summary: Edit post.
+   *     security:
+   *       - Bearer: []
    *     consumes:
    *       - multipart/form-data
    *     parameters:
+   *       - in: path
+   *         name: id
+   *         required: true
+   *         type: string
    *       - in: formData
    *         name: images
    *         type: file
@@ -569,6 +567,10 @@ export const initProductRoutes = (
    *         name: type
    *         type: string
    *       - in: formData
+   *         name: condition
+   *         description: oneOf [USED, NEW]
+   *         type: string
+   *       - in: formData
    *         name: price
    *         type: number
    *       - in: formData
@@ -594,21 +596,29 @@ export const initProductRoutes = (
    *                 contribution:
    *                   $ref: "#/definitions/Product"
    */
-  router.post(
-    apiPath(path, ProductApiRoutes.BUY),
+
+  router.put(
+    apiPath(path, ProductApiRoutes.UPDATE),
     authMiddleware,
+    multer().any(),
     wrap((req: Request) =>
-      productService.buy({
+      productService.updateProduct({
+        req,
+        productId: req.params.id,
         userId: req.userId,
-        productId: req.body.productId,
+        fieldsData: req.body,
       }),
     ),
   );
+
   /**
    * @openapi
    * /products/edit/:id:
    *   get:
    *     tags: [Product]
+   *     summary: Get edit post info.
+   *     security:
+   *       - Bearer: []
    *     produces:
    *       - application/json
    *     parameters:
@@ -640,12 +650,13 @@ export const initProductRoutes = (
       }),
     ),
   );
-
   /**
    * @openapi
-   * /products/:id:
-   *   get:
+   * /products/buy/:id:
+   *   post:
    *     tags: [Product]
+   *     security:
+   *       - Bearer: []
    *     produces:
    *       - application/json
    *     parameters:
@@ -659,7 +670,11 @@ export const initProductRoutes = (
    *         content:
    *           application/json:
    *             schema:
-   *               $ref: "#/definitions/GetProductByIdResponse"
+   *               type: object
+   *               properties:
+   *                 success:
+   *                   type: boolean
+   *                   example: true
    *       4**:
    *         description: Something went wrong
    *         content:
@@ -668,9 +683,15 @@ export const initProductRoutes = (
    *               $ref: "#/definitions/Response400"
    */
 
-  router.get(
-    apiPath(path, ProductApiRoutes.ID),
-    wrap((req: Request) => productService.getById(req.params.id)),
+  router.post(
+    apiPath(path, ProductApiRoutes.BUY),
+    authMiddleware,
+    wrap((req: Request) =>
+      productService.buy({
+        userId: req.userId,
+        productId: req.params.id,
+      }),
+    ),
   );
 
   router.put(
