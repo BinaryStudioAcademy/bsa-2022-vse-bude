@@ -9,6 +9,7 @@ import item from './item.json';
 import rules from './rules.json';
 import myList from './my-list.json';
 import checkout from './checkout.json';
+import chat from './chat.json';
 
 export const ua = {
   home,
@@ -22,4 +23,5 @@ export const ua = {
   item,
   rules,
   checkout,
+  chat,
 };
