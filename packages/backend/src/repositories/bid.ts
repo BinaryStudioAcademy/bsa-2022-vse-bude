@@ -28,7 +28,7 @@ export class BidRepository {
     ]);
   }
 
-  async lastProductBid(productId: string) {
+  async lastProductBid(productId: string): Promise<Bid> {
     return await this._dbClient.bid.findFirst({
       take: 1,
       where: {
@@ -61,7 +61,7 @@ export class BidRepository {
     });
   }
 
-  async retrieve(userId: string, productId: string, time: string) {
+  async retrieve(userId: string, productId: string, time: string): Promise<Bid | Product> {
     return this._dbClient.$transaction([
       this._dbClient.bid.updateMany({
         data: {
@@ -93,7 +93,7 @@ export class BidRepository {
     ]);
   }
 
-  async getAll(productId: string) {
+  async getAll(productId: string): Promise<Bid[]> {
     return this._dbClient.bid.findMany({
       where: {
         productId,

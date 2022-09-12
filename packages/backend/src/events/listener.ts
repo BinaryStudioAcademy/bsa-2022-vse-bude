@@ -5,7 +5,7 @@ import EventEmitter from 'eventemitter3';
 
 export const eventListener = new EventEmitter();
 
-export const appEventsListener = (io: Server) => {
+export const appEventsListener = (io: Server): any => {
   io.on('connection', (socket) =>
     socket.join(socket.handshake.query.auctionRoom),
   );

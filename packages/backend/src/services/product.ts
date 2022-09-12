@@ -17,7 +17,7 @@ import type {
 } from '@vse-bude/shared';
 import { ProductType } from '@vse-bude/shared';
 import { ProductStatus } from '@prisma/client';
-import type { Product, Bid } from '@prisma/client';
+import type { Product, Bid , FavoriteProducts } from '@prisma/client';
 import type { VerifyService, S3StorageService } from '@services';
 import type { BidRepository } from '@repositories';
 import { productMapper, auctionPermissionsMapper } from '@mappers';
@@ -209,7 +209,7 @@ export class ProductService {
     return product;
   }
 
-  private isAuctionProduct(type: string) {
+  private isAuctionProduct(type: string) : boolean {
     return type === ProductType.AUCTION;
   }
 
@@ -218,7 +218,7 @@ export class ProductService {
     productId,
     userId,
     fieldsData,
-  }: UpdateProduct) {
+  }: UpdateProduct) : Promise<Product> {
     fieldsData.images = fieldsData.images
       ? [].concat(fieldsData.images)
       : undefined;
@@ -295,7 +295,7 @@ export class ProductService {
     return productId;
   }
 
-  public async getSimilar(productId: string) {
+  public async getSimilar(productId: string) : Promise<Product[]> {
     const product = await this._productRepository.getById(productId);
 
     return this._productRepository.findSimilar(
@@ -306,15 +306,15 @@ export class ProductService {
     );
   }
 
-  public async getMostPopularLots(limit: string) {
+  public async getMostPopularLots(limit: string) : Promise<Product[]> {
     return this._productRepository.getMostPopularLots(+limit);
   }
 
-  public async getMostPopularProducts(limit: string) {
+  public async getMostPopularProducts(limit: string) : Promise<Product[]> {
     return this._productRepository.getMostPopularProducts(+limit);
   }
 
-  public async getEditProductById({ userId, productId }) {
+  public async getEditProductById({ userId, productId }) : Promise<Product> {
     const product = await this.getById(productId);
 
     if (!product) {

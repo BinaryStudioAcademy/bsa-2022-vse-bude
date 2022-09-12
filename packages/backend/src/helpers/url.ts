@@ -6,5 +6,5 @@ export const getFilenameFromUrl = (url: string): string | null => {
   return filename ? filename : null;
 };
 
-export const productUrl = (productId: string) =>
+export const productUrl = (productId: string): string =>
   `${getEnv('APP_URL')}/item/${productId}`;

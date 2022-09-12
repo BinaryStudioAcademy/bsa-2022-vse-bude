@@ -10,12 +10,14 @@ import type { AddressDto } from '@types';
 import type { UpdateUserProfileDto, UserAddressDto } from '@vse-bude/shared';
 
 export class UserProfileRepository {
-  cancelEmailVerified(arg0: { userId: string; }) {
+  cancelEmailVerified(arg0: { userId: string }) : void {
     throw new Error('Method not implemented.');
   }
-  checkIsPhoneExists(arg0: { userId: string; phone: string; }) {
+
+  checkIsPhoneExists(arg0: { userId: string; phone: string }) : void {
     throw new Error('Method not implemented.');
   }
+
   private _dbClient: PrismaClient;
 
   private _isSocialNetTypeExists({
@@ -24,7 +26,7 @@ export class UserProfileRepository {
   }: {
     userId: string;
     socialMedia: SocialMediaType;
-  }) {
+  }) : Promise<SocialMedia> {
     return this._dbClient.socialMedia.findFirst({
       where: {
         ownedByUserId: userId,
@@ -107,7 +109,7 @@ export class UserProfileRepository {
   }: {
     userId: string;
     phone: string;
-  }) {
+  }) : Promise<User> {
     const dbPhone = await this._dbClient.user.findUnique({
       where: { id: userId },
       select: { phone: true },
@@ -321,7 +323,7 @@ export class UserProfileRepository {
   }: {
     userId: string;
     phone: string;
-  }) {
+  }) : Promise<User> {
     return this._dbClient.user.findFirst({
       where: {
         id: {
@@ -353,7 +355,7 @@ export class UserProfileRepository {
     });
   }
 
-  public cancelEmailVerified({ userId }: { userId: string }) {
+  public cancelEmailVerified({ userId }: { userId: string }) : Promise<User> {
     return this._dbClient.user.update({
       where: {
         id: userId,

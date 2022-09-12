@@ -82,7 +82,7 @@ export class UserRepository {
     });
   }
 
-  public getNewByEmail(email: string) {
+  public getNewByEmail(email: string) : Promise<User> {
     return this._dbClient.user.findFirst({
       where: {
         email: email,

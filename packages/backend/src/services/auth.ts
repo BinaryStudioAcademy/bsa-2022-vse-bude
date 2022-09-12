@@ -40,6 +40,7 @@ import {
 import { authResponseMap, userMap } from '@mappers';
 import { AuthApiRoutes } from '@vse-bude/shared';
 import { lang } from '@lang';
+import type { User } from '@prisma/client';
 import { ResetPasswordMailBuilder } from '../email/reset-password-mail-builder';
 import { ResetPassLinkInvalid } from '../error/reset-password/reset-pass-link-invalid';
 import type { RedisStorageService } from './redis-storage';
@@ -119,7 +120,7 @@ export class AuthService {
     return authResponseMap(tokenData, newUser);
   }
 
-  async getByEmail(email: string) {
+  async getByEmail(email: string) : Promise<User> {
     return this._userRepository.getByEmail(email);
   }
 

@@ -1,4 +1,3 @@
-import type { Category } from '@prisma/client';
 import type { CategoryRepository } from '@repositories';
 import type { CategoryResponseDto } from '@vse-bude/shared';
 import { lang } from '../lang';

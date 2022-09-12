@@ -44,9 +44,7 @@ export class ProductRepository {
     });
   }
 
-  public getById(
-    id: string,
-  ): Prisma.Prisma__ProductClient<
+  public getById(id: string): Prisma.Prisma__ProductClient<
     Product & {
       author: {
         id: string;
@@ -273,7 +271,7 @@ export class ProductRepository {
     categoryId: string,
     type: ProductType,
     productId: string,
-  ) {
+  ) : Promise<Product[]> {
     return await this._dbClient.product.findMany({
       where: {
         city,
@@ -287,7 +285,7 @@ export class ProductRepository {
     });
   }
 
-  public async getMostPopularLots(limit: number) {
+  public async getMostPopularLots(limit: number) : Promise<Product[]> {
     return await this._dbClient.product.findMany({
       take: limit,
       where: {
@@ -300,7 +298,7 @@ export class ProductRepository {
     });
   }
 
-  public async getMostPopularProducts(limit: number) {
+  public async getMostPopularProducts(limit: number) : Promise<Product[]> {
     return await this._dbClient.product.findMany({
       take: limit,
       where: {
@@ -313,7 +311,7 @@ export class ProductRepository {
     });
   }
 
-  public async getActiveAuctionsLots() {
+  public async getActiveAuctionsLots() : Promise<Product[]> {
     const nowUtc: Date = toUtc().toDate();
 
     return await this._dbClient.product.findMany({
@@ -327,7 +325,7 @@ export class ProductRepository {
     });
   }
 
-  public async markProductNotified(productId: string) {
+  public async markProductNotified(productId: string) : Promise<Product[]> {
     return await this._dbClient.product.update({
       where: {
         id: productId,
