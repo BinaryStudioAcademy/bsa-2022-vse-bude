@@ -195,7 +195,7 @@ export class ProductService {
     }
     if (fieldsData.status !== ProductStatus.DRAFT) {
       fieldsData.postDate = new Date().toISOString();
-    } 
+    }
     const data = {
       imageLinks,
       authorId: userId,
