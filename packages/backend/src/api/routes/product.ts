@@ -448,11 +448,13 @@ export const initProductRoutes = (
 
   /**
    * @openapi
-   * /products/update/:id:
+   * /products/:id:
    *   post:
-   *     summary: Uploads a file.
+   *     summary: Create post.
    *     consumes:
    *       - multipart/form-data
+   *     security:
+   *       - Bearer: []
    *     parameters:
    *       - in: formData
    *         name: images
@@ -468,6 +470,10 @@ export const initProductRoutes = (
    *       - in: formData
    *         name: status
    *         required: true
+   *         type: string
+   *       - in: formData
+   *         name: condition
+   *         description: oneOf [USED, NEW]
    *         type: string
    *       - in: formData
    *         name: description
@@ -524,9 +530,12 @@ export const initProductRoutes = (
 
   /**
    * @openapi
-   * /products/buy/:id:
+   * /products/edit/:id:
    *   put:
    *     tags: [Product]
+   *     summary: Edit post.
+   *     security:
+   *       - Bearer: []
    *     consumes:
    *       - multipart/form-data
    *     parameters:
@@ -551,6 +560,10 @@ export const initProductRoutes = (
    *         type: string
    *       - in: formData
    *         name: type
+   *         type: string
+   *       - in: formData
+   *         name: condition
+   *         description: oneOf [USED, NEW]
    *         type: string
    *       - in: formData
    *         name: price
@@ -584,15 +597,52 @@ export const initProductRoutes = (
     wrap((req: Request) =>
       productService.buy({
         userId: req.userId,
-        productId: req.body.productId,
+        productId: req.params.id,
       }),
     ),
   );
   /**
    * @openapi
+   * /products/buy/:id:
+   *   post:
+   *     tags: [Product]
+   *     security:
+   *       - Bearer: []
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - in: path
+   *         name: id
+   *         required: true
+   *         type: string
+   *       - in: query
+   *         name: productId
+   *         required: true
+   *         type: string
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 success:
+   *                   type: boolean
+   *                   example: true
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
+  /**
+   * @openapi
    * /products/edit/:id:
    *   get:
    *     tags: [Product]
+   *     summary: Get edit post info.
    *     produces:
    *       - application/json
    *     parameters:
