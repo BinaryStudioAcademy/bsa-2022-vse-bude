@@ -1,4 +1,4 @@
-﻿import type { CreateBidRequest, ItemDto } from '@vse-bude/shared';
+﻿import type { CreateBidRequest, ProductDto } from '@vse-bude/shared';
 import { Button, Input, Loader, Tooltip } from '@primitives';
 import dynamic from 'next/dynamic';
 import { FavoriteButton } from 'components/product/favorite-button/component';
@@ -29,7 +29,7 @@ const ConfirmationModal = dynamic(
 );
 
 interface ItemInfoAuctionProps {
-  item: ItemDto;
+  item: ProductDto;
   isInFavorite: boolean;
   onChangeIsFavorite: () => void;
 }
