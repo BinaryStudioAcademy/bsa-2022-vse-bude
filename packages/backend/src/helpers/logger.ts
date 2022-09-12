@@ -125,6 +125,7 @@ class Logger {
   } {
     return {
       consoleFormat: winston.format.combine(
+        winston.format.errors({ stack: true }),
         winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
         winston.format.label({
           label: '[LOGGER]',
@@ -137,15 +138,13 @@ class Logger {
         winston.format.colorize({ all: true }),
       ),
       fileFormat: winston.format.combine(
+        winston.format.errors({ stack: true }),
         winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
         winston.format.printf(
           (info) =>
-            `${JSON.stringify({
-              timestamp: info.timestamp,
-              level: info.level,
-              message: info.message,
-              ...info,
-            })}`,
+            `[${info.timestamp}] [${info.level}] : ${
+              info.message
+            }\n${JSON.stringify(info, null, 4)}\n\n`,
         ),
       ),
     };

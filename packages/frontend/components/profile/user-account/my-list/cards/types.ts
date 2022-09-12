@@ -1,4 +1,4 @@
-import type { WinnerDto, AuthorDto } from '@vse-bude/shared';
+import type { UserProfileDto } from '@vse-bude/shared';
 
 export interface ItemCard {
   id: string;
@@ -8,8 +8,8 @@ export interface ItemCard {
   price: number;
   recommendedPrice?: number;
   minimalBid?: number;
-  author: AuthorDto;
-  winner: WinnerDto;
+  author: UserProfileDto;
+  winner: UserProfileDto;
   views: number;
   endDate: string;
   postDate: string;

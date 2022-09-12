@@ -17,7 +17,7 @@ import type {
 } from '@vse-bude/shared';
 import { ProductType } from '@vse-bude/shared';
 import { ProductStatus } from '@prisma/client';
-import type { Product, Bid, FavoriteProducts } from '@prisma/client';
+import type { Product, Bid } from '@prisma/client';
 import type { VerifyService, S3StorageService } from '@services';
 import type { BidRepository } from '@repositories';
 import { productMapper, auctionPermissionsMapper } from '@mappers';
@@ -57,7 +57,7 @@ export class ProductService {
     return this._productRepository.getAll(query);
   }
 
-  public async getById(productId: string): Promise<ProductById> {
+  public async getById(productId: string): Promise<Product> {
     const product = await this._productRepository.getById(productId);
     if (!product) {
       throw new ProductNotFoundError();
@@ -71,7 +71,7 @@ export class ProductService {
       product.id,
     );
 
-    return productMapper(product, +currentPrice);
+    return productMapper(product, currentPrice);
   }
 
   public async incrementViews(id: string, req: Request): Promise<Product> {
@@ -85,7 +85,7 @@ export class ProductService {
       }
     }
 
-    return this._productRepository.incrementViews(id);
+    return productMapper(await this._productRepository.incrementViews(id));
   }
 
   public async getFavoriteIds(userId: string): Promise<string[]> {
@@ -96,8 +96,10 @@ export class ProductService {
 
   public async getFavoriteProducts(
     userId: string,
-  ): Promise<FavoriteProducts[]> {
-    return this._productRepository.getFavorite(userId);
+  ): Promise<ProductById[]> {
+    const favProducts = await this._productRepository.getFavorite(userId);
+
+    return favProducts.map((product) => productMapper(product));
   }
 
   public async getAuctionPermissions(
@@ -207,7 +209,7 @@ export class ProductService {
       this._auctionScheduler.createAuctionJob(product);
     }
 
-    return product;
+    return productMapper(product);
   }
 
   private isAuctionProduct(type: string): boolean {
@@ -269,7 +271,7 @@ export class ProductService {
       this._auctionScheduler.updateAuctionJob(updatedProduct);
     }
 
-    return updatedProduct;
+    return productMapper(updatedProduct);
   }
 
   public async buy({
@@ -298,21 +300,30 @@ export class ProductService {
 
   public async getSimilar(productId: string): Promise<Product[]> {
     const product = await this._productRepository.getById(productId);
-
-    return this._productRepository.findSimilar(
+    const similarProducts = await this._productRepository.findSimilar(
       product.city,
       product.categoryId,
       product.type,
       product.id,
     );
+
+    return similarProducts.map((product) => productMapper(product));
   }
 
   public async getMostPopularLots(limit: string): Promise<Product[]> {
-    return this._productRepository.getMostPopularLots(+limit);
+    const mostPopular = await this._productRepository.getMostPopularLots(
+      +limit,
+    );
+
+    return mostPopular.map((product) => productMapper(product));
   }
 
   public async getMostPopularProducts(limit: string): Promise<Product[]> {
-    return this._productRepository.getMostPopularProducts(+limit);
+    const mostPopular = await this._productRepository.getMostPopularProducts(
+      +limit,
+    );
+
+    return mostPopular.map((product) => productMapper(product));
   }
 
   public async getEditProductById({ userId, productId }): Promise<Product> {
