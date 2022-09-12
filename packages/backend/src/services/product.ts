@@ -207,7 +207,9 @@ export class ProductService {
     userId,
     fieldsData,
   }: UpdateProduct) {
-    fieldsData.images = fieldsData.images && [].concat(fieldsData.images);
+    fieldsData.images = fieldsData.images
+      ? [].concat(fieldsData.images)
+      : undefined;
 
     const { error } = updatePostSchema.validate(fieldsData);
     if (error) {
