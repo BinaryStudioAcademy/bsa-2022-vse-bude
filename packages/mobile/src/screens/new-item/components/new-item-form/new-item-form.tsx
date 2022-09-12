@@ -45,6 +45,7 @@ const NewItemForm: FC = () => {
       {formattedCategories && (
         <DropDown
           label={t('make_a_post.CATEGORY')}
+          placeholder={t('make_a_post.CATEGORY_PLACEHOLDER')}
           name="category"
           control={control}
           items={formattedCategories}
@@ -135,6 +136,7 @@ const NewItemForm: FC = () => {
         items={COUNTRIES}
         zIndex={20}
         disabled={true}
+        placeholder={t('make_a_post.COUNTRY_PLACEHOLDER')}
       />
       <DropDown
         label={t('make_a_post.CITY')}
@@ -142,6 +144,7 @@ const NewItemForm: FC = () => {
         control={control}
         items={CITIES}
         zIndex={15}
+        placeholder={t('make_a_post.CITY_PLACEHOLDER')}
       />
       <View
         style={[
