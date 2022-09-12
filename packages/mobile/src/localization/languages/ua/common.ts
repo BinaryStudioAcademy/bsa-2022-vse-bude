@@ -43,4 +43,9 @@ export const common = {
     ACCOUNT: 'Акаунт',
     LOG_IN: 'Увійти',
   },
+  drawer_menu: {
+    SEARCH: 'Пошук',
+    NEWS: 'Новини',
+    ABOUT_US: 'Про Нас',
+  },
 };

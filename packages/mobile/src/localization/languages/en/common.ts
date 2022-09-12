@@ -43,4 +43,9 @@ export const common = {
     ACCOUNT: 'Account',
     LOG_IN: 'Log in',
   },
+  drawer_menu: {
+    SEARCH: 'Search',
+    NEWS: 'News',
+    ABOUT_US: 'About Us',
+  },
 };
