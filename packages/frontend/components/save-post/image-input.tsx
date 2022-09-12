@@ -118,7 +118,7 @@ function ImageInput({ images, setImages }: ImageInputProps) {
             <div key={indx} css={styles.imgWrapper}>
               <IconButton
                 cssExtend={styles.deleteImageBtn}
-                ariaLabel="close"
+                ariaLabel={t('create-post:button.deleteImage')}
                 icon={IconName.XMARK}
                 color={IconColor.ORANGE}
                 backgroundColor={'lightgray'}
