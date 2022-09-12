@@ -1,10 +1,15 @@
 import React, { FC } from 'react';
-import { View, Text, FlatList, ButtonText } from '~/components/components';
+import {
+  View,
+  Text,
+  FlatList,
+  ButtonText,
+  Product,
+} from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { ProductDto } from '@vse-bude/shared';
 import { StyleProp, ViewStyle } from 'react-native';
 import { useCustomTheme } from '~/hooks/hooks';
-import { Product } from '../components';
 
 type Props = {
   sectionTitle: string;
