@@ -122,6 +122,10 @@ const CalendarIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="calendar" {...iconProps} />
 );
 
+const NewsIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="file-text" {...iconProps} />
+);
+
 export {
   HomeIcon,
   StarIcon,
@@ -153,4 +157,5 @@ export {
   CheckCircleIcon,
   SearchIcon,
   CalendarIcon,
+  NewsIcon,
 };

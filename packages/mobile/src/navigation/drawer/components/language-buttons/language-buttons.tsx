@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import dayjs from 'dayjs';
 import { notification } from '~/services/services';
 import { TouchableOpacity, Text, View } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
@@ -11,6 +12,14 @@ const LanguageButtons: FC = () => {
     i18n.changeLanguage(lang, (err) => {
       if (err) {
         notification.error(err);
+      }
+      switch (lang) {
+        case 'en':
+          dayjs.locale('en');
+          break;
+        case 'ua':
+          dayjs.locale('uk');
+          break;
       }
     });
   };

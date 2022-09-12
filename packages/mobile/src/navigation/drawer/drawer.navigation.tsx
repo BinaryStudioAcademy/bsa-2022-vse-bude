@@ -5,7 +5,7 @@ import {
 } from '@react-navigation/drawer';
 import { RootScreenName } from '~/common/enums/enums';
 import { MainNavigation } from '../tabs/tabs.navigation';
-import { DrawerContent } from './components/drawer-content';
+import { DrawerContent } from './components/components';
 
 const HomeWithMenuNavigation: FC = () => {
   const Drawer = createDrawerNavigator();
