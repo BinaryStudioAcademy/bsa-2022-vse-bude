@@ -10,7 +10,7 @@ import {
 import { ProfileError } from '@errors';
 import { lang } from '@lang';
 
-export const addressValidation = ({ req }: { req: Request }) => {
+export const addressValidation = ({ req }: { req: Request }): void => {
   const { userAddress } = req.body;
 
   if (userAddress) {
@@ -72,7 +72,7 @@ export const addressValidation = ({ req }: { req: Request }) => {
       if (deliveryData.length > ValidationRanges.MAX_DELIVERY_DATA) {
         throw new ProfileError({
           status: HttpStatusCode.BAD_REQUEST,
-          message: lang(UserPersonalInfoValidationMessage.CITY),
+          message: lang(UserPersonalInfoValidationMessage.DELIVERY_DATA),
         });
       }
     }

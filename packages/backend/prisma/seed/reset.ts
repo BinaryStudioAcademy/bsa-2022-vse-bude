@@ -2,7 +2,7 @@ import { prismaClient } from './config/prismaClient';
 import { clearData } from './clearData';
 import { createData } from './createData';
 
-(async () => {
+(async (): Promise<void> => {
   await clearData(prismaClient);
   await createData(prismaClient);
 })()

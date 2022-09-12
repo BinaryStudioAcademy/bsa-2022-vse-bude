@@ -1,0 +1,10 @@
+{
+  "TITLE": "Оформлення замовлення",
+  "PRODUCT_NAME": "Товар",
+  "PRODUCT_COUNT": "Кількість",
+  "ORDER_ID": "ID замовлення",
+  "ORDER_TOTAL": "Сума замовлення",
+  "PAY_BTN": "Сплатити",
+  "PAYMENT_SUCCESSFUL": "Оплата успішна",
+  "GO_TO_PRODUCTS": "Продовжити покупки"
+}

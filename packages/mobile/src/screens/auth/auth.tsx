@@ -69,8 +69,10 @@ const Auth: FC = () => {
   const handleSignUp = (payload: UserSignUpDto): void => {
     dispatch(authActions.signUp(payload))
       .unwrap()
-      .then(() => {
-        navigation.navigate(RootScreenName.VERIFY_PHONE);
+      .then((resp) => {
+        if (resp.phone) {
+          navigation.navigate(RootScreenName.VERIFY_PHONE);
+        }
       })
       .catch((err) => {
         // eslint-disable-next-line

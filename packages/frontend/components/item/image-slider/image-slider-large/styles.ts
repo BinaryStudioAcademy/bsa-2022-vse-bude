@@ -58,6 +58,10 @@ export const imageWrapper = ({ spaces, breakpoints }: Theme) => css`
       margin-right: 0;
     }
   }
+
+  img {
+    object-fit: contain;
+  }
 `;
 
 export const image = css`
@@ -89,6 +93,10 @@ export const focusedImageWrapper = ({ spaces, breakpoints }: Theme) => css`
     > div {
       visibility: visible;
     }
+  }
+
+  img {
+    object-fit: cover;
   }
 `;
 

@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from 'next/future/image';
 import { ProfileRoutes, Routes, ColorsAvatar } from '@enums';
 import { Loader } from '../loader';
 import * as styles from './styles';
@@ -14,7 +14,7 @@ export const Avatar = ({
 }: AvatarProps) => {
   const colors = Object.values(ColorsAvatar);
   const colorByName = colors[firstName.charCodeAt(0) % colors.length ?? 0];
-  const size = isLarge ? '128px' : '35px';
+  const size = isLarge ? 128 : 35;
 
   return (
     <button
@@ -34,8 +34,8 @@ export const Avatar = ({
           style={{ width: size, height: size }}
           src={image}
           alt={'avatar image'}
-          height={size}
-          width={size}
+          height={128}
+          width={128}
         />
       ) : (
         <div css={styles.initials} style={{ fontSize: isLarge && '52px' }}>

@@ -1,6 +1,5 @@
 import {
   ApiRoutes,
-  ItemDto,
   ProductDto,
   ProductApiRoutes,
   HttpMethod,
@@ -32,7 +31,7 @@ class ProductService {
     });
   }
 
-  getProductById(productId: string): Promise<ItemDto> {
+  getProductById(productId: string): Promise<ProductDto> {
     return this.#http.load(
       `${this.#apiPrefix}${ApiRoutes.PRODUCTS}/${productId}`,
     );

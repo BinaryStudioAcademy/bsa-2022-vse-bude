@@ -1,7 +1,7 @@
 import { prismaClient } from './config/prismaClient';
 import { createData } from './createData';
 
-(async () => {
+(async (): Promise<void> => {
   await createData(prismaClient);
 })()
   .then(() => prismaClient.$disconnect())

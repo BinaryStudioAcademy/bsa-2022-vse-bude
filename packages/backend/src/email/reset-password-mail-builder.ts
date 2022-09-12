@@ -3,7 +3,7 @@ import { defaultEmailOptions } from '@types';
 import { MailBuilder } from './mail-builder';
 
 export class ResetPasswordMailBuilder extends MailBuilder {
-  protected setOptions() {
+  protected setOptions(): void {
     this._options = {
       ...this._options,
       ...defaultEmailOptions,

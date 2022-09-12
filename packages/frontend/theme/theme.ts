@@ -43,7 +43,7 @@ const fontSizes = {
   buttonSmall: '12px',
   caption: '12px',
   smallButton: '15px',
-  tooltip: '13px',
+  tooltip: '15px',
   cell: '18px',
 };
 
@@ -77,6 +77,8 @@ const lineHeights = {
   button: '19px',
   caption: '14px',
   cell: '21px',
+  itemTitle: '19px',
+  price: '19px',
 };
 
 const spaces = {
@@ -162,6 +164,10 @@ const mq = Object.keys(breakpoints).map(
   (bp) => `@media (min-width: ${breakpoints[bp]}px)`,
 );
 
+const maxMq = Object.keys(breakpoints).map(
+  (bp) => `@media (max-width: ${breakpoints[bp]}px)`,
+);
+
 const lightTheme = {
   colors,
   fontSizes,
@@ -177,6 +183,7 @@ const lightTheme = {
   opacities,
   breakpoints,
   mq,
+  maxMq,
 };
 
 const darkTheme = {
@@ -194,6 +201,7 @@ const darkTheme = {
   opacities,
   breakpoints,
   mq,
+  maxMq,
 };
 
 export { lightTheme, darkTheme };

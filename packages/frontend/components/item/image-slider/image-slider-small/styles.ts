@@ -20,6 +20,10 @@ export const imageWrapper = css`
   align-items: center;
   justify-content: center;
   position: relative;
+
+  img {
+    object-fit: contain;
+  }
 `;
 
 export const image = css`

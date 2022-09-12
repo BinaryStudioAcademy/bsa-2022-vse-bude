@@ -13,6 +13,12 @@ const FLEX_BOX_STYLES: FlexBoxStyles = {
   alignItemsCenter: {
     alignItems: 'center',
   },
+  alignItemsStart: {
+    alignItems: 'flex-start',
+  },
+  alignItemsEnd: {
+    alignItems: 'flex-end',
+  },
   justifyContentCenter: {
     justifyContent: 'center',
   },

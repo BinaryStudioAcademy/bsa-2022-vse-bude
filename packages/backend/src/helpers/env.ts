@@ -39,7 +39,7 @@ type EnvKeys =
   | AppEnvKeys
   | WayForPayEnvKeys;
 
-export const getEnv = (key: EnvKeys) => process.env[key];
+export const getEnv = (key: EnvKeys): string => process.env[key];
 
 export const isProduction = getEnv('NODE_ENV') === Environment.PRODUCTION;
 

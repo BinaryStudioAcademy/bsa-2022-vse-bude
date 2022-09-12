@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Vse bude</string>
+    <string name="notification_channel_id">vsebude_push_notifications</string>
 </resources>

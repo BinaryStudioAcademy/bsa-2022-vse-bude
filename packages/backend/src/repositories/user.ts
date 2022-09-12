@@ -13,7 +13,7 @@ export class UserRepository {
     return this._dbClient.user.findMany();
   }
 
-  public create(signUpData: CreateUser) {
+  public create(signUpData: CreateUser): Promise<User> {
     return this._dbClient.user.create({
       data: {
         firstName: signUpData.firstName,
@@ -25,7 +25,7 @@ export class UserRepository {
     });
   }
 
-  public getById(id: string) {
+  public getById(id: string): Promise<User> {
     return this._dbClient.user.findFirst({
       where: {
         id,
@@ -33,15 +33,15 @@ export class UserRepository {
     });
   }
 
-  public getByEmail(email: string) {
+  public getByEmail(email: string): Promise<User> {
     return this._dbClient.user.findFirst({
       where: {
-        email: email,
+        email: { mode: 'insensitive', equals: email },
       },
     });
   }
 
-  public verifyPhone(userId: string) {
+  public verifyPhone(userId: string): Promise<User> {
     return this._dbClient.user.update({
       where: {
         id: userId,
@@ -52,7 +52,7 @@ export class UserRepository {
     });
   }
 
-  public updatePassword(email: string, passwordValue: string) {
+  public updatePassword(email: string, passwordValue: string): Promise<User> {
     return this._dbClient.user.update({
       where: {
         email: email,
@@ -63,7 +63,7 @@ export class UserRepository {
     });
   }
 
-  public verifyEmail(userId: string) {
+  public verifyEmail(userId: string): Promise<User> {
     return this._dbClient.user.update({
       where: {
         id: userId,
@@ -74,7 +74,7 @@ export class UserRepository {
     });
   }
 
-  public getNewByPhone({ phone }: { phone: string }) {
+  public getByPhone({ phone }: { phone: string }): Promise<User> {
     return this._dbClient.user.findFirst({
       where: {
         phone: phone,
@@ -82,7 +82,7 @@ export class UserRepository {
     });
   }
 
-  public getNewByEmail(email: string) {
+  public getNewByEmail(email: string): Promise<User> {
     return this._dbClient.user.findFirst({
       where: {
         email: email,

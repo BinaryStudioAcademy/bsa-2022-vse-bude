@@ -40,6 +40,7 @@ import {
 import { authResponseMap, userMap } from '@mappers';
 import { AuthApiRoutes } from '@vse-bude/shared';
 import { lang } from '@lang';
+import type { User } from '@prisma/client';
 import { ResetPasswordMailBuilder } from '../email/reset-password-mail-builder';
 import { ResetPassLinkInvalid } from '../error/reset-password/reset-pass-link-invalid';
 import type { RedisStorageService } from './redis-storage';
@@ -75,21 +76,19 @@ export class AuthService {
     this._emailService = emailService;
   }
 
-  async signOut(signOutDto: SignOut) {
+  async signOut(signOutDto: SignOut): Promise<void> {
     await this._refreshTokenRepository.deleteByUserId(signOutDto.userId);
   }
 
   async signUp(signUpDto: UserSignUpDto): Promise<AuthResponse> {
-    const userByEmail = await this._userRepository.getNewByEmail(
-      signUpDto.email,
-    );
+    const userByEmail = await this._userRepository.getByEmail(signUpDto.email);
 
     if (userByEmail) {
       throw new UserExistsError();
     }
 
     if (signUpDto.phone) {
-      const userByPhone = await this._userRepository.getNewByPhone({
+      const userByPhone = await this._userRepository.getByPhone({
         phone: signUpDto.phone,
       });
       if (userByPhone) {
@@ -121,6 +120,10 @@ export class AuthService {
     return authResponseMap(tokenData, newUser);
   }
 
+  async getByEmail(email: string): Promise<User> {
+    return this._userRepository.getByEmail(email);
+  }
+
   async signIn(signInDto: UserSignInDto): Promise<AuthResponse> {
     const user = await this._userRepository.getByEmail(signInDto.email);
     if (!user) {
@@ -147,7 +150,7 @@ export class AuthService {
     return authResponseMap(tokenData, user);
   }
 
-  async getCurrentUser(userId: string) {
+  async getCurrentUser(userId: string): Promise<object> {
     const user = await this._userRepository.getById(userId);
 
     return userMap(user);
@@ -164,7 +167,7 @@ export class AuthService {
     );
   }
 
-  async refreshToken(updateDto: UpdateRefreshToken) {
+  async refreshToken(updateDto: UpdateRefreshToken): Promise<AuthTokenData> {
     if (!updateDto.tokenValue) {
       throw new WrongRefreshTokenError();
     }
@@ -189,7 +192,7 @@ export class AuthService {
     return newTokenData;
   }
 
-  private async saveLink(email: string, hashValue: string) {
+  private async saveLink(email: string, hashValue: string): Promise<void> {
     await this._cache.set(
       this.getResetPasswordCacheKey(email),
       hashValue,
@@ -197,11 +200,17 @@ export class AuthService {
     );
   }
 
-  private async deleteLinksByEmail(email: string) {
+  private async deleteLinksByEmail(email: string): Promise<void> {
     await this._cache.del(this.getResetPasswordCacheKey(email));
   }
 
-  async resetPasswordLink(email: string) {
+  async resetPasswordLink(email: string): Promise<void> {
+    const userByEmail = await this._userRepository.getByEmail(email);
+
+    if (!userByEmail) {
+      throw new UserNotFoundError();
+    }
+
     const hashValue = this._hashService.generateHash(
       `${email}${this._hashService.getRandomHash()}`,
     );
@@ -216,7 +225,7 @@ export class AuthService {
     await resetMail.send();
   }
 
-  async updatePassword(updateDto: UpdatePassword) {
+  async updatePassword(updateDto: UpdatePassword): Promise<void> {
     const resetHash = await this._cache.get<string>(
       this.getResetPasswordCacheKey(updateDto.email),
     );
@@ -232,7 +241,7 @@ export class AuthService {
     }
 
     const newPassHash = this._hashService.generateHash(updateDto.password);
-    this._userRepository.updatePassword(updateDto.email, newPassHash);
+    await this._userRepository.updatePassword(updateDto.email, newPassHash);
   }
 
   private getResetPasswordEmailLink(hash: string, email: string): string {

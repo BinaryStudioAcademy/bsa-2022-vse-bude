@@ -5,7 +5,7 @@ export const loggerMiddleware = (
   req: Request,
   _res: Response,
   next: NextFunction,
-) => {
+): void => {
   const headers = req.headers ?? {};
   const query = req.query ?? {};
   const body = req.body ?? {};

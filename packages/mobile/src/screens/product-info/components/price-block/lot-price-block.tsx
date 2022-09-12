@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { ColorPalette, ItemDto, ProductIdRequest } from '@vse-bude/shared';
+import { ColorPalette, ProductDto, ProductIdRequest } from '@vse-bude/shared';
 import { selectFavoritesIds } from '~/store/selectors';
 import { getBidValidationSchema } from '~/validation-schemas/bid/make-bid';
 import {
@@ -23,7 +23,7 @@ import { PriceWrapper } from './price-wrapper';
 import { styles } from './styles';
 
 type LotPriceBlockProps = {
-  product: Pick<ItemDto, 'currentPrice' | 'minimalBid' | 'id'>;
+  product: Pick<ProductDto, 'currentPrice' | 'minimalBid' | 'id'>;
   isLoading: boolean;
   onFavoritePress: (
     id: string,

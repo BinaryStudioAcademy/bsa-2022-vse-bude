@@ -2,13 +2,11 @@ import { css } from '@emotion/react';
 import type { Theme } from '@emotion/react';
 import { resetButton } from 'theme';
 
-export const avatar = ({ spaces, radiuses }: Theme) => css`
+export const avatar = ({ radiuses }: Theme) => css`
   display: flex;
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  width: ${spaces.xl2};
-  height: ${spaces.xl2};
   border-radius: ${radiuses.circle};
   object-fit: cover;
 `;
@@ -24,14 +22,12 @@ export const initials = ({ fontSizes, fontWeights, lineHeights }: Theme) => css`
   text-transform: uppercase;
 `;
 
-export const wrapper = ({ spaces, radiuses, colors }: Theme) => css`
+export const wrapper = ({ radiuses, colors }: Theme) => css`
   ${resetButton};
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: ${spaces.xl2};
-  height: ${spaces.xl2};
   border-radius: ${radiuses.circle};
   background-color: ${colors.primary};
   cursor: pointer;

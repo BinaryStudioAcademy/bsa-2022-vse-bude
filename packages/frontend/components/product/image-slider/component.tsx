@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import type { ImageSliderProps } from './types';
 import { imageSliderBlock } from './styles';
 import { SliderControls } from './controls';
@@ -23,10 +23,11 @@ export const ImageSlider = ({ priority, images }: ImageSliderProps) => {
   return (
     <div css={imageSliderBlock}>
       <Image
-        priority={priority && slide < 2}
+        priority={priority}
         src={images[slide]}
-        objectFit="cover"
-        layout="fill"
+        width={260}
+        height={300}
+        alt={`${slide}`}
       />
       <SliderControls
         onPrev={onPrevImage}

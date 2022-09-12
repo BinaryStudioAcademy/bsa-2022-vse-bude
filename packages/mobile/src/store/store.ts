@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import {
   storage,
   authApi,
+  personalInfoApi,
   productApi,
   phoneVerificationApi,
   categoryApi,
@@ -12,6 +13,7 @@ import { errorHandler } from './middlewares/middlewares';
 const extraArgument = {
   storage,
   authApi,
+  personalInfoApi,
   productApi,
   phoneVerificationApi,
   categoryApi,

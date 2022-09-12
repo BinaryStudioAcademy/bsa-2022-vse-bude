@@ -1,8 +1,7 @@
 import type { VerifyEmailDto, VerifyPhoneDto } from '@vse-bude/shared';
 import { VerificationTypes } from '@vse-bude/shared';
 import type { UserRepository } from '@repositories';
-import { EmailFrom } from '@enums';
-import { isProduction } from '@helpers';
+import { getEnv, isProduction } from '@helpers';
 import { lang } from '@lang';
 import { CodeNotFoundError } from '../error/verify/code-not-found-error';
 import { WrongCodeError } from '../error/verify/wrong-code-error';
@@ -36,7 +35,7 @@ export class VerifyService {
     this._emailService = emailService;
   }
 
-  async verifyPhone(dto: VerifyPhoneDto) {
+  async verifyPhone(dto: VerifyPhoneDto): Promise<void> {
     const code = await this.getUserCodeByTypeAndCode(dto.userId, dto.type);
     if (!code) {
       throw new CodeNotFoundError();
@@ -49,11 +48,14 @@ export class VerifyService {
     await this.deleteCodeByType(dto.userId, dto.type);
   }
 
-  async initPhoneVerification(userId: string, type = VerificationTypes.PHONE) {
+  async initPhoneVerification(
+    userId: string,
+    type = VerificationTypes.PHONE,
+  ): Promise<void> {
     await this.resendPhoneCode(userId, type);
   }
 
-  async verifyEmail(dto: VerifyEmailDto) {
+  async verifyEmail(dto: VerifyEmailDto): Promise<void> {
     const code = await this.getUserCodeByTypeAndCode(dto.userId, dto.type);
     if (!code) {
       throw new CodeNotFoundError();
@@ -66,7 +68,10 @@ export class VerifyService {
     await this.deleteCodeByType(dto.userId, dto.type);
   }
 
-  async initEmailVerification(userId: string, type = VerificationTypes.EMAIL) {
+  async initEmailVerification(
+    userId: string,
+    type = VerificationTypes.EMAIL,
+  ): Promise<void> {
     await this.resendEmailCode(userId, type);
   }
 
@@ -84,7 +89,10 @@ export class VerifyService {
     return code;
   }
 
-  async resendPhoneCode(userId: string, type: VerificationTypes) {
+  async resendPhoneCode(
+    userId: string,
+    type: VerificationTypes,
+  ): Promise<boolean> {
     const user = await this._userRepository.getById(userId);
     await this.deleteCodeByType(userId, type);
     const code = await this.createVerificationCode(userId, type);
@@ -96,7 +104,10 @@ export class VerifyService {
     return await this._smsService.send(user.phone, code);
   }
 
-  async resendEmailCode(userId: string, type: VerificationTypes) {
+  async resendEmailCode(
+    userId: string,
+    type: VerificationTypes,
+  ): Promise<void> {
     const user = await this._userRepository.getById(userId);
     await this.deleteCodeByType(userId, type);
     const code = await this.createVerificationCode(userId, type);
@@ -105,7 +116,7 @@ export class VerifyService {
     }
 
     return await this._emailService.send({
-      from: { email: EmailFrom.NO_REPLY_EMAIL, name: EmailFrom.NO_REPLY_NAME },
+      from: { email: getEnv('APP_EMAIL_FROM'), name: getEnv('APP_NAME') },
       to: [{ email: user.email }],
       subject: lang('translation:mailing.verification.subject'),
       text: `${lang('translation:mailing.verification.body')}${code}`,
@@ -120,15 +131,21 @@ export class VerifyService {
     return Math.floor(Math.random() * diff + minLimit);
   }
 
-  private getUserCodeByTypeAndCode(userId: string, type: VerificationTypes) {
+  private getUserCodeByTypeAndCode(
+    userId: string,
+    type: VerificationTypes,
+  ): Promise<string> {
     return this._cache.get(this.getVerificationCodeCacheKey(userId, type));
   }
 
-  private deleteCodeByType(userId: string, type: VerificationTypes) {
+  private deleteCodeByType(
+    userId: string,
+    type: VerificationTypes,
+  ): Promise<number> {
     return this._cache.del(this.getVerificationCodeCacheKey(userId, type));
   }
 
-  private async saveCode(data: SaveVerifyCode) {
+  private async saveCode(data: SaveVerifyCode): Promise<string> {
     return this._cache.set(
       this.getVerificationCodeCacheKey(data.userId, data.type),
       data.code,
@@ -136,7 +153,7 @@ export class VerifyService {
     );
   }
 
-  private getLifeTime(type: VerificationTypes) {
+  private getLifeTime(type: VerificationTypes): number {
     const lifeTimes = {
       [VerificationTypes.PHONE]: this.phoneCodeLifeTime,
       [VerificationTypes.EMAIL]: this.emailCodeLifeTime,
@@ -152,7 +169,7 @@ export class VerifyService {
     return `verification_code:user_id:${userId}:type:${type}`;
   }
 
-  public async isUserVerified(userId: string) {
+  public async isUserVerified(userId: string): Promise<boolean> {
     const verifyData = await this._userRepository.getVerified({ userId });
 
     return verifyData.emailVerified && verifyData.phoneVerified;
