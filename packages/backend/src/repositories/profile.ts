@@ -10,14 +10,6 @@ import type { AddressDto } from '@types';
 import type { UpdateUserProfileDto, UserAddressDto } from '@vse-bude/shared';
 
 export class UserProfileRepository {
-  cancelEmailVerified(arg0: { userId: string }): void {
-    throw new Error('Method not implemented.');
-  }
-
-  checkIsPhoneExists(arg0: { userId: string; phone: string }): void {
-    throw new Error('Method not implemented.');
-  }
-
   private _dbClient: PrismaClient;
 
   private _isSocialNetTypeExists({
