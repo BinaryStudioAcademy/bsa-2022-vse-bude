@@ -1,6 +1,6 @@
 module.exports = {
   extends: ['../../.eslintrc.js'],
-  rules:{
+  rules: {
     '@typescript-eslint/explicit-function-return-type': 'error',
-  }
+  },
 };
