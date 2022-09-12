@@ -9,29 +9,28 @@ import { ProductGrid } from './product-grid';
 import { FilterHeader } from './filter-header';
 import { Pagination } from './pagination';
 import { ProductsLoader } from './products-loader';
-import { deepEquals, getFilterFromQuery, removeFilterFields } from './helpers';
+import { deepEquals, getFilterDefinition, removeFilterFields } from './helpers';
 
 export const Filter = () => {
   const { query, push } = useRouter();
   const { loading } = useTypedSelector((store) => store.product);
   const [filter, setFilter] = useState<ProductQuery>(
-    getFilterFromQuery(query, push),
+    getFilterDefinition(query),
   );
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (!query?.filter) {
-      dispatch(fetchProducts({}));
       setFilter(null);
 
       return;
     }
-    const filter = getFilterFromQuery(query, push);
+    const filter = getFilterDefinition(query);
     dispatch(fetchProducts(filter));
-  }, [dispatch, query, push]);
+  }, [dispatch, query]);
 
   useEffect(() => {
-    const queryFilter = getFilterFromQuery(query, push);
+    const queryFilter = getFilterDefinition(query);
     if (!filter || deepEquals(filter, queryFilter)) {
       return;
     }

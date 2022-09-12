@@ -2,12 +2,24 @@ import { css } from '@emotion/react';
 import type { Theme } from '@emotion/react';
 
 export const btnWrapper = ({ spaces }: Theme) => css`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: fit-content;
   margin: 0 auto ${spaces.xl11};
-  list-style: none;
   & li {
     display: inline-block;
   }
+`;
+export const arrowBtnLeft = ({ spaces }: Theme) => css`
+  position: relative;
+  top: 3px;
+  left: ${spaces.xs};
+`;
+export const arrowBtnRight = ({ spaces }: Theme) => css`
+  position: relative;
+  top: 3px;
+  right: ${spaces.xs};
 `;
 
 export const btn = ({

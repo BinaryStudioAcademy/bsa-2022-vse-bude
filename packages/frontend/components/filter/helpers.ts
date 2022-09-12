@@ -1,16 +1,13 @@
-import { Routes } from '@enums';
 import type { ProductQuery } from '@vse-bude/shared';
 
-export const getFilterFromQuery = (query, push): ProductQuery => {
+export const getFilterDefinition = (query): ProductQuery => {
   try {
     const filter: ProductQuery =
       query.filter && JSON.parse(query.filter as string);
 
     return filter;
   } catch (_) {
-    push({
-      pathname: Routes.ITEMS,
-    });
+    return null;
   }
 };
 

@@ -28,7 +28,7 @@ export const CategoryBadges = ({ badges }: CategoryBadgesProps) => {
     >
       {badges.map((badge) => (
         <SplideSlide key={badge.name}>
-          <div css={styles.badge} key={badge.name}>
+          <div css={styles.badge}>
             {badge.name}
             <IconButton
               icon={IconName.XMARK}

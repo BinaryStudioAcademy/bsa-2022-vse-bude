@@ -1,13 +1,14 @@
 import { Routes } from '@enums';
-import type { CategoryDto } from '@vse-bude/shared';
+import type { CategoryDto, ProductQuery } from '@vse-bude/shared';
 import { ProductType } from '@vse-bude/shared';
 import { Order, SortBy } from '@vse-bude/shared';
 import type { TFunction } from 'next-i18next';
-import type { AllProductType } from './types';
+import type { AllProductType, SortByOption } from './types';
 
 export const MIN_PRICE_NAME = 'min-price';
 export const MAX_PRICE_NAME = 'max-price';
 export const ALL_PRODUCTS = 'ALL';
+
 export const sortByOptions = (t: TFunction) => [
   {
     title: t('items-page:sortBy.priceAsc'),
@@ -98,3 +99,70 @@ export const productTypeBtnArray = (t: TFunction) => [
     text: t('items-page:typeBtn.AUCTION'),
   },
 ];
+
+export const getBudgesFromFilter = (
+  filter: ProductQuery,
+  t: TFunction,
+  currentCategory: CategoryDto,
+) => {
+  if (!filter || !Object.keys(filter).length) return [];
+
+  return Object.keys(filter).reduce((acc, item) => {
+    if (item === 'priceLt') {
+      return [
+        ...acc,
+        {
+          name: t('items-page:budges.maxPrice') + filter[item],
+          value: filter[item],
+        },
+      ];
+    }
+    if (item === 'priceGt') {
+      return [
+        ...acc,
+        {
+          name: t('items-page:budges.minPrice') + filter[item],
+          value: filter[item],
+        },
+      ];
+    }
+    if (item === 'categoryId') {
+      if (!currentCategory) return acc;
+
+      return [
+        ...acc,
+        {
+          name: currentCategory?.title,
+          value: currentCategory?.id,
+        },
+      ];
+    }
+    if (item === 'type') {
+      return [
+        ...acc,
+        {
+          name: t(`items-page:typeBtn.${filter[item]}`),
+          value: filter[item],
+        },
+      ];
+    }
+    if (item === 'sortBy') {
+      const sortOption: SortByOption = sortByOptions(t).find(
+        (option: SortByOption) =>
+          option.value.order === filter?.order &&
+          option.value.sortBy === filter?.sortBy,
+      );
+      if (!sortOption) return acc;
+
+      return [
+        ...acc,
+        {
+          name: sortOption.title,
+          value: filter[item],
+        },
+      ];
+    }
+
+    return acc;
+  }, []);
+};

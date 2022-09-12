@@ -20,3 +20,8 @@ export interface FilterHeaderProps {
 }
 
 export type FilterPopoverProps = FilterHeaderProps;
+
+export type BadgeOption = {
+  value: string;
+  name: string;
+};

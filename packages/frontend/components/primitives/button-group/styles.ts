@@ -24,6 +24,7 @@ export const button = ({
   width: fit-content;
   border-radius: ${radiuses.xxs};
   font-size: ${fontSizes.smallButton};
+  transition: 200ms linear;
 
   &[data-selected='selected'] {
     border: 1px solid ${colors.primaryLight};
@@ -42,7 +43,7 @@ export const button = ({
   }
 
   &[data-selected='default'] {
-    border: 1px solid ${colors.secondaryLight};
+    border: 1px solid ${colors.backgroundDark};
     background: white;
     color: ${colors.secondaryLight};
 

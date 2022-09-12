@@ -1,6 +1,6 @@
 {
   "headline": {
-    "header": "Find Your Special Lots",
+    "header": "Знайдіть найцікавіші для Вас лоти",
     "notFound": "Таких товарів ще немає"
   },
   "typeBtn": {
@@ -27,5 +27,9 @@
   },
   "btn": {
     "save": "Зберегти"
+  },
+  "budges": {
+    "minPrice": "Мінімальна ціна: ",
+    "maxPrice": "Максимальна ціна: "
   }
 }

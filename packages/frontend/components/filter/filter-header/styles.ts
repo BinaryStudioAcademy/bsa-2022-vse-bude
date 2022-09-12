@@ -4,19 +4,28 @@ import type { Theme } from '@emotion/react';
 export const header = ({ spaces }: Theme) => css`
   padding: 0 0 ${spaces.xl5};
 `;
-export const controlsWrapper = css`
+export const controlsWrapper = ({ mq }: Theme) => css`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
+  flex-direction: column;
+  ${mq[3]} {
+    flex-wrap: nowrap;
+    flex-direction: row;
+  }
 `;
-export const categoryWrapper = css`
-  margin-right: 20px;
+export const categoryWrapper = ({ spaces }: Theme) => css`
+  margin-right: ${spaces.lg};
 `;
-export const badgesWrapper = ({ spaces }: Theme) => css`
+export const badgesWrapper = ({ spaces, mq }: Theme) => css`
   flex: 1;
   overflow: hidden;
-  margin-right: ${spaces.xl};
+  margin: 0 0 ${spaces.xl};
+  width: 95%;
+  ${mq[3]} {
+    width: 100%;
+    margin: 0 ${spaces.xl} 0 0;
+  }
 `;
 
 export const headline = ({
@@ -25,13 +34,19 @@ export const headline = ({
   fontWeights,
   lineHeights,
   colors,
+  mq,
 }: Theme) => css`
-  font-size: ${fontSizes.h3};
+  font-size: ${fontSizes.h4};
   margin-bottom: ${spaces.md};
   font-family: inherit;
   font-weight: ${fontWeights.h3};
   line-height: ${lineHeights.h3};
   color: ${colors.secondaryDark};
+  text-align: center;
+  ${mq[4]} {
+    text-align: left;
+    font-size: ${fontSizes.h3};
+  }
 `;
 export const controllersWrapper = css`
   position: relative;

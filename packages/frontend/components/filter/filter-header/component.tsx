@@ -2,7 +2,6 @@ import { CategoryBadges } from '@components/primitives/category-badge';
 import { useTypedSelector } from '@hooks';
 import { Breadcrumbs, Container, Flex } from '@primitives';
 import type { ProductQuery } from '@vse-bude/shared';
-import { Order } from '@vse-bude/shared';
 import { useTranslation } from 'next-i18next';
 import { useEffect, useState } from 'react';
 import { ButtonGroup } from '@components/primitives/button-group';
@@ -11,14 +10,15 @@ import { FilterPopover } from './filter-popover';
 import {
   ALL_PRODUCTS,
   filterBreadcrumbsPath,
+  getBudgesFromFilter,
   productTypeBtnArray,
 } from './utils';
-import type { FilterHeaderProps } from './types';
+import type { BadgeOption, FilterHeaderProps } from './types';
 import * as styles from './styles';
 
 export function FilterHeader({ filter, setFilter }: FilterHeaderProps) {
   const { t } = useTranslation();
-  const [badges, setBadges] = useState([]);
+  const [badges, setBadges] = useState<BadgeOption[]>([]);
   const categories = useTypedSelector((state) => state.category.list);
   const [productType, setProductType] = useState<string>(null);
   const currentCategory = categories.find(
@@ -27,17 +27,8 @@ export function FilterHeader({ filter, setFilter }: FilterHeaderProps) {
   useEffect(() => {
     setProductType(filter?.type || ALL_PRODUCTS);
 
-    filter &&
-      setBadges(
-        Object.keys(filter)
-          .map((item) => {
-            if (item === Order.ASC || item === Order.DESC) return;
-
-            return filter[item];
-          })
-          .filter((item) => item),
-      );
-  }, [filter]);
+    setBadges(getBudgesFromFilter(filter, t, currentCategory));
+  }, [filter, t, currentCategory]);
 
   const addTypeToQuery = (type) => {
     const updatedFilter = { ...filter };
@@ -47,12 +38,14 @@ export function FilterHeader({ filter, setFilter }: FilterHeaderProps) {
     setFilter(updatedFilter);
   };
 
-  const removeBadge = (item) => {
-    setBadges([...badges.filter((badge) => badge !== item)]);
+  const removeBadge = (value) => {
+    setBadges([...badges.filter((badge) => badge.value !== value)]);
     const deletedKey = Object.keys(filter).find(
-      (key) => filter[key] === item,
+      (key) => filter[key] === value,
     ) as keyof ProductQuery;
-    setFilter(removeFilterFields(filter, [deletedKey]));
+    deletedKey === 'sortBy'
+      ? setFilter(removeFilterFields(filter, ['sortBy', 'order']))
+      : setFilter(removeFilterFields(filter, [deletedKey]));
   };
 
   return (
@@ -62,14 +55,14 @@ export function FilterHeader({ filter, setFilter }: FilterHeaderProps) {
       />
       <Container>
         <header css={styles.header}>
-          <h3 css={styles.headline}>Find Your Special Lots</h3>
+          <h3 css={styles.headline}>{t('items-page:headline.header')}</h3>
           <div css={styles.controlsWrapper}>
             <div css={styles.badgesWrapper}>
-              {badges.length > 0 && (
+              {badges?.length > 0 && (
                 <CategoryBadges
-                  badges={badges.map((item) => ({
-                    name: item,
-                    onClick: () => removeBadge(item),
+                  badges={badges.map(({ name, value }) => ({
+                    name,
+                    onClick: () => removeBadge(value),
                   }))}
                 />
               )}

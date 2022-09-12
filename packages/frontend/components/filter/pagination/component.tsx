@@ -1,3 +1,5 @@
+import { IconButton } from '@components/primitives';
+import { IconColor, IconName } from '@enums';
 import { useTypedSelector } from '@hooks';
 import type { ProductQuery } from '@vse-bude/shared';
 import { ITEM_FILTER } from '@vse-bude/shared';
@@ -22,33 +24,58 @@ export function Pagination({ filter, setFilter }: PaginationProps) {
     setFilter(filters);
   };
 
-  return (
-    <nav aria-label="Pagination Navigation" role="navigation">
-      <ul css={styles.btnWrapper}>
-        {count > 0 &&
-          [...Array(Math.ceil(count / limit)).keys()].map((page) => {
-            const isCurrent = currentPage === page + 1;
+  return count > 0 ? (
+    <nav
+      css={styles.btnWrapper}
+      aria-label="Pagination Navigation"
+      role="navigation"
+    >
+      {currentPage !== 1 && (
+        <IconButton
+          color={IconColor.BLACK}
+          icon={IconName.ANGLE_LEFT}
+          size={'sm'}
+          cssExtend={styles.arrowBtnLeft}
+          ariaLabel="Goto Previous Page"
+          onClick={() => onClickHandler(currentPage - 2)}
+        />
+      )}
+      <ul>
+        {[...Array(Math.ceil(count / limit)).keys()].map((page) => {
+          const isCurrent = currentPage === page + 1;
 
-            return (
-              <li key={page}>
-                <button
-                  data-variant={isCurrent && 'active'}
-                  type="button"
-                  css={styles.btn}
-                  onClick={() => onClickHandler(page)}
-                  aria-current={isCurrent}
-                  aria-label={
-                    isCurrent
-                      ? `Current Page, Page ${currentPage}`
-                      : `Goto Page ${page + 1}`
-                  }
-                >
-                  {page + 1}
-                </button>
-              </li>
-            );
-          })}
+          return (
+            <li key={page}>
+              <button
+                data-variant={isCurrent && 'active'}
+                type="button"
+                css={styles.btn}
+                onClick={() => onClickHandler(page)}
+                aria-current={isCurrent}
+                aria-label={
+                  isCurrent
+                    ? `Current Page, Page ${currentPage}`
+                    : `Goto Page ${page + 1}`
+                }
+              >
+                {page + 1}
+              </button>
+            </li>
+          );
+        })}
       </ul>
+      {currentPage !== Math.ceil(count / limit) && (
+        <IconButton
+          color={IconColor.BLACK}
+          icon={IconName.ANGLE_RIGHT}
+          size={'sm'}
+          cssExtend={styles.arrowBtnRight}
+          ariaLabel="Goto Next Page"
+          onClick={() => onClickHandler(currentPage)}
+        />
+      )}
     </nav>
+  ) : (
+    <></>
   );
 }
