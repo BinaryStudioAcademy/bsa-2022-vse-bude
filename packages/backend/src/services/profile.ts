@@ -12,7 +12,6 @@ import {
 import type { HashService, S3StorageService } from '@services';
 import { ProfileError } from '@errors';
 import { getFilenameFromUrl } from '@helpers';
-import { userMap } from '@mappers';
 import type {
   User,
   SocialMedia,
@@ -20,7 +19,7 @@ import type {
   PrismaPromise,
   Prisma,
 } from '@prisma/client';
-import { lang } from '../lang';
+import { lang } from '@lang';
 
 export class UserProfileService {
   private _userProfileRepository: UserProfileRepository;
@@ -80,7 +79,7 @@ export class UserProfileService {
     });
 
     return {
-      ...userMap(user),
+      ...user,
       userAddress,
       socialMedia,
     };
@@ -126,6 +125,29 @@ export class UserProfileService {
     userId: string;
   }): Promise<{ phoneVerified: boolean }> {
     return this._userProfileRepository.cancelPhoneVerified({ userId });
+  }
+
+  public cancelEmailVerified({ userId }: { userId: string }) {
+    return this._userProfileRepository.cancelEmailVerified({ userId });
+  }
+
+  public async checkIsPhoneExists({
+    userId,
+    phone,
+  }: {
+    userId: string;
+    phone: string;
+  }) {
+    const userPhone = await this._userProfileRepository.checkIsPhoneExists({
+      userId,
+      phone,
+    });
+    if (userPhone) {
+      throw new ProfileError({
+        status: HttpStatusCode.BAD_REQUEST,
+        message: lang(UserPersonalInfoValidationMessage.PHONE_EXISTS),
+      });
+    }
   }
 
   public async updateAvatar({

@@ -7,6 +7,10 @@ export const form = ({ spaces }: Theme) => css`
   width: 100%;
   padding-bottom: ${spaces.xl11};
 `;
+export const formWrapper = () => css`
+  max-width: 670px;
+  width: 100%;
+`;
 
 export const sections = css`
   max-width: 670px;
@@ -104,6 +108,15 @@ export const imgWrapper = ({ radiuses, colors }: Theme) => css`
   border-radius: ${radiuses.md};
   background-color: ${colors.backgroundLight};
   overflow: hidden;
+  img {
+    object-fit: cover;
+  }
+`;
+
+export const deleteImageBtn = ({ spaces }: Theme) => css`
+  position: absolute;
+  right: ${spaces.sm};
+  top: ${spaces.sm};
 `;
 export const photosLabelWrapper = ({ radiuses, colors, spaces }: Theme) => css`
   position: relative;

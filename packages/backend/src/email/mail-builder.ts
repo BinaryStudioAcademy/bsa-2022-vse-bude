@@ -19,10 +19,7 @@ export class MailBuilder implements IMailBuilder {
   }
 
   setTo(emailTo: string, name?: string): this {
-    this._options.to.push({
-      email: emailTo,
-      name,
-    });
+    this._options.to = [{ email: emailTo, name }];
 
     return this;
   }

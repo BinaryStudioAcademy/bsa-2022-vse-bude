@@ -16,17 +16,16 @@ import type {
   UpdateProduct,
 } from '@vse-bude/shared';
 import { ProductType } from '@vse-bude/shared';
-import type { FavoriteProducts, Product } from '@prisma/client';
-import type { Bid } from '@prisma/client';
 import { ProductStatus } from '@prisma/client';
-import type { VerifyService } from '@services';
+import type { Product, Bid } from '@prisma/client';
+import type { VerifyService, S3StorageService } from '@services';
 import type { BidRepository } from '@repositories';
-import { productMapper } from '@mappers';
+import { productMapper, auctionPermissionsMapper } from '@mappers';
 import { FieldError } from 'error/product/field-error';
 import { createPostSchema, updatePostSchema } from 'validation/product/schemas';
-import { auctionPermissionsMapper } from '@mappers';
-import { lang } from '../lang';
-import type { S3StorageService } from './s3-storage';
+import { NotVerifiedError } from 'error/user/not-verified';
+import { lang } from '@lang';
+import type { AuctionScheduler } from '@services';
 
 export class ProductService {
   private _productRepository: ProductRepository;
@@ -37,16 +36,20 @@ export class ProductService {
 
   private _s3StorageService: S3StorageService;
 
+  private _auctionScheduler: AuctionScheduler;
+
   constructor(
     productRepository: ProductRepository,
     verifyService: VerifyService,
     s3StorageService: S3StorageService,
     bidRepository: BidRepository,
+    auctionScheduler: AuctionScheduler,
   ) {
     this._productRepository = productRepository;
     this._verifyService = verifyService;
     this._s3StorageService = s3StorageService;
     this._bidRepository = bidRepository;
+    this._auctionScheduler = auctionScheduler;
   }
 
   public getAll(query: ProductQuery): Promise<Product[]> {
@@ -130,7 +133,11 @@ export class ProductService {
       throw new AuctionEndedError();
     }
 
-    await this._bidRepository.deleteAllByProductAndUser(userId, productId);
+    await this._bidRepository.retrieve(
+      userId,
+      productId,
+      new Date(Date.now()).toISOString(),
+    );
 
     return this.getById(productId);
   }
@@ -176,6 +183,11 @@ export class ProductService {
     if (error) {
       throw new FieldError(error.message);
     }
+    const isUserVerified = await this._verifyService.isUserVerified(userId);
+
+    if (!isUserVerified) {
+      throw new NotVerifiedError();
+    }
     const imageLinks = await this._s3StorageService.uploadProductImages(req);
     if (fieldsData.type === ProductType.AUCTION) {
       fieldsData.price = fieldsData.recommendedPrice;
@@ -190,7 +202,15 @@ export class ProductService {
     };
     const product = await this._productRepository.create(data);
 
+    if (this.isAuctionProduct(product.type)) {
+      this._auctionScheduler.createAuctionJob(product);
+    }
+
     return product;
+  }
+
+  private isAuctionProduct(type: string) {
+    return type === ProductType.AUCTION;
   }
 
   public async updateProduct({
@@ -198,17 +218,24 @@ export class ProductService {
     productId,
     userId,
     fieldsData,
-  }: UpdateProduct): Promise<Product> {
-    const { error } = updatePostSchema.validate(req.body);
+  }: UpdateProduct) {
+    fieldsData.images = fieldsData.images
+      ? [].concat(fieldsData.images)
+      : undefined;
+
+    const { error } = updatePostSchema.validate(fieldsData);
     if (error) {
       throw new FieldError(error.message);
     }
+
     const product = (await this._productRepository.getById(
       productId,
     )) as Product;
     if (product.authorId !== userId) throw new UnauthorizedError();
     const newImageLinks = await this._s3StorageService.uploadProductImages(req);
-    const oldImages = fieldsData?.images ? [...fieldsData.images] : [];
+
+    const oldImages = fieldsData?.images || [];
+
     const deletedImages = product.imageLinks.reduce(
       (acc, item) => (oldImages.includes(item) ? acc : [item, ...acc]),
       [],
@@ -237,6 +264,10 @@ export class ProductService {
       data,
     );
 
+    if (this.isAuctionProduct(updatedProduct.type)) {
+      this._auctionScheduler.updateAuctionJob(updatedProduct);
+    }
+
     return updatedProduct;
   }
 
@@ -253,7 +284,7 @@ export class ProductService {
     }
     const isUserVerified = await this._verifyService.isUserVerified(userId);
     if (!isUserVerified) {
-      return undefined;
+      throw new NotVerifiedError();
     }
     await this._productRepository.buy(
       productId,
@@ -262,5 +293,37 @@ export class ProductService {
     );
 
     return productId;
+  }
+
+  public async getSimilar(productId: string) {
+    const product = await this._productRepository.getById(productId);
+
+    return this._productRepository.findSimilar(
+      product.city,
+      product.categoryId,
+      product.type,
+      product.id,
+    );
+  }
+
+  public async getMostPopularLots(limit: string) {
+    return this._productRepository.getMostPopularLots(+limit);
+  }
+
+  public async getMostPopularProducts(limit: string) {
+    return this._productRepository.getMostPopularProducts(+limit);
+  }
+
+  public async getEditProductById({ userId, productId }) {
+    const product = await this.getById(productId);
+
+    if (!product) {
+      throw new ProductNotFoundError();
+    }
+    if (product.authorId !== userId) {
+      throw new UnauthorizedError();
+    }
+
+    return product;
   }
 }

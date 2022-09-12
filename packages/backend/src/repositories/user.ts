@@ -36,7 +36,7 @@ export class UserRepository {
   public getByEmail(email: string): Promise<User> {
     return this._dbClient.user.findFirst({
       where: {
-        email: email,
+        email: { mode: 'insensitive', equals: email },
       },
     });
   }
@@ -74,7 +74,7 @@ export class UserRepository {
     });
   }
 
-  public getNewByPhone({ phone }: { phone: string }): Promise<User> {
+  public getByPhone({ phone }: { phone: string }): Promise<User> {
     return this._dbClient.user.findFirst({
       where: {
         phone: phone,
@@ -82,7 +82,7 @@ export class UserRepository {
     });
   }
 
-  public getNewByEmail(email: string): Promise<User> {
+  public getNewByEmail(email: string) {
     return this._dbClient.user.findFirst({
       where: {
         email: email,

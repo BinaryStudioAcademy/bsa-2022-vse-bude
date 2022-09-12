@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { StyleProp, ViewStyle } from 'react-native';
 import { Text, View } from '~/components/components';
 import { useCustomTheme } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
@@ -6,15 +7,16 @@ import { styles } from './styles';
 
 type Props = {
   text?: string;
+  contentContainerStyle?: StyleProp<ViewStyle>;
 };
 
-const Divider: FC<Props> = ({ text }) => {
+const Divider: FC<Props> = ({ text, contentContainerStyle }) => {
   const { colors } = useCustomTheme();
 
   return (
     <View
       style={[
-        styles.container,
+        contentContainerStyle,
         globalStyles.flexDirectionRow,
         globalStyles.alignItemsCenter,
       ]}

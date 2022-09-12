@@ -9,9 +9,11 @@ import {
   View,
   Popover,
 } from '~/components/components';
-import { useAppForm, useTranslation } from '~/hooks/hooks';
+import { useAppForm, useAppSelector, useTranslation } from '~/hooks/hooks';
 import { CALLING_CODE, CITIES, COUNTRIES, CURRENCY } from '~/mock/new-item';
 import { globalStyles } from '~/styles/styles';
+import { selectCategories } from '~/store/categories/selectors';
+import { categoryForDropdown } from '~/helpers/category/format-category-for-dropdown';
 import { AddPhotos } from '../add-photos/add-photos';
 
 import { useStyles } from './styles';
@@ -19,6 +21,9 @@ import { useStyles } from './styles';
 const NewItemForm: FC = () => {
   const { t } = useTranslation();
   const styles = useStyles();
+  const categories = useAppSelector(selectCategories);
+  const formattedCategories =
+    categories && categories.length ? categoryForDropdown(categories) : null;
 
   const { control, errors } = useAppForm<IPostForms>({
     defaultValues: {
@@ -37,14 +42,16 @@ const NewItemForm: FC = () => {
       <Text style={[globalStyles.fs14, globalStyles.mt5, styles.title]}>
         {t('make_a_post.DESCRIPTION')}
       </Text>
-      <Input
-        label={t('make_a_post.CATEGORY')}
-        placeholder={t('make_a_post.CATEGORY_PLACEHOLDER')}
-        name="category"
-        control={control}
-        errors={errors}
-        contentContainerStyle={globalStyles.mt5}
-      />
+      {formattedCategories && (
+        <DropDown
+          label={t('make_a_post.CATEGORY')}
+          placeholder={t('make_a_post.CATEGORY_PLACEHOLDER')}
+          name="category"
+          control={control}
+          items={formattedCategories}
+          zIndex={19}
+        />
+      )}
       <Input
         label={t('make_a_post.TITLE_NAME')}
         placeholder={t('make_a_post.TITLE_NAME_PLACEHOLDER')}
@@ -129,6 +136,7 @@ const NewItemForm: FC = () => {
         items={COUNTRIES}
         zIndex={20}
         disabled={true}
+        placeholder={t('make_a_post.COUNTRY_PLACEHOLDER')}
       />
       <DropDown
         label={t('make_a_post.CITY')}
@@ -136,6 +144,7 @@ const NewItemForm: FC = () => {
         control={control}
         items={CITIES}
         zIndex={15}
+        placeholder={t('make_a_post.CITY_PLACEHOLDER')}
       />
       <View
         style={[
@@ -207,6 +216,14 @@ const NewItemForm: FC = () => {
         label={t('make_a_post.FACEBOOK')}
         placeholder={t('make_a_post.FACEBOOK_PLACEHOLDER')}
         name="facebook"
+        control={control}
+        errors={errors}
+        contentContainerStyle={[globalStyles.mt5]}
+      />
+      <Input
+        label={t('make_a_post.SITE')}
+        placeholder={t('make_a_post.SITE')}
+        name="site"
         control={control}
         errors={errors}
         contentContainerStyle={[globalStyles.mt5, globalStyles.mb5]}

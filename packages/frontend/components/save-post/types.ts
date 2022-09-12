@@ -1,6 +1,11 @@
 import type { SelectOption } from '@components/primitives/select/types';
 import { ProductStatus } from '@vse-bude/shared';
-import type { ICreateAuction, IPostForms, ProductType } from '@vse-bude/shared';
+import type {
+  ICreateAuction,
+  IPostForms,
+  ProductType,
+  Condition,
+} from '@vse-bude/shared';
 import type {
   FieldErrorsImpl,
   UseFormRegister,
@@ -26,6 +31,8 @@ export interface DescriptionBlockProps {
   register: registerFieldType;
   category: SelectOption;
   setCategories: (arg0: SelectOption) => void;
+  condition: SelectOption;
+  setCondition: (arg0: SelectOption) => void;
 }
 
 export interface ContactBlockProps {
@@ -39,7 +46,12 @@ export type SellerFieldsType = {
   OTHER: SelectOption;
 };
 
+export type ConditionFieldsType = {
+  [Condition.NEW]: SelectOption;
+  [Condition.USED]: SelectOption;
+};
+
 export const PostStatuses = {
-  CREATE: ProductStatus[0],
-  DRAFT: ProductStatus[5],
+  CREATE: ProductStatus.ACTIVE,
+  DRAFT: ProductStatus.DRAFT,
 };

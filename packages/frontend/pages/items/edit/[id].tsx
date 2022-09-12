@@ -4,20 +4,25 @@ import { wrapper } from 'store';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Routes } from '@enums';
 import { Http } from '@vse-bude/shared';
-import { fetchProductSSR } from 'store/product';
+import { fetchEditProductSSR } from 'store/product';
 import { withPublic } from '@hocs';
 import { useTypedSelector } from '@hooks';
+import { AuthHelper, CookieStorage } from '@helpers';
 
 export const getServerSideProps = withPublic(
   wrapper.getServerSideProps((store) => async (ctx) => {
     const { locale, query } = ctx;
-
-    const http = new Http(process.env.NEXT_PUBLIC_API_ROUTE, locale);
     const id = query.id as string;
 
-    const { payload } = await store.dispatch(fetchProductSSR({ id, http }));
+    const cookieStorage = new CookieStorage(ctx);
+    const auth = new AuthHelper(cookieStorage);
+    const http = new Http(process.env.NEXT_PUBLIC_API_ROUTE, locale, auth);
 
-    if (!payload) {
+    const { payload: productPayload } = await store.dispatch(
+      fetchEditProductSSR({ id, http }),
+    );
+
+    if (!productPayload) {
       return {
         redirect: {
           destination: Routes.NOT_FOUND,
@@ -32,6 +37,7 @@ export const getServerSideProps = withPublic(
           'common',
           'create-post',
           'rules',
+          'item',
         ])),
       },
     };

@@ -1,4 +1,4 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import {
   getUser,
   login,
@@ -9,9 +9,11 @@ import {
   resendEmailCode,
   resetPasswordLink,
   updatePassword as updatePasswordRequest,
+  getUserSSR,
 } from 'services/auth';
 import type {
   EmailVerifyDto,
+  Http,
   PhoneVerifyDto,
   ResetPasswordLink,
   UpdatePassword,
@@ -32,6 +34,22 @@ const getCurrentUser = createAsyncThunk(
   async (_request, { rejectWithValue }) => {
     try {
       return await getUser();
+    } catch (e) {
+      if (e instanceof HttpError) {
+        if (e.status === HttpStatusCode.UNAUTHORIZED) {
+          auth.logOut();
+        }
+      }
+
+      return rejectWithValue(e.message);
+    }
+  },
+);
+const getCurrentUserSSR = createAsyncThunk(
+  AuthActions.FETCH_USER,
+  async (httpSSR: Http, { rejectWithValue }) => {
+    try {
+      return await getUserSSR(httpSSR);
     } catch (e) {
       if (e instanceof HttpError) {
         if (e.status === HttpStatusCode.UNAUTHORIZED) {
@@ -273,7 +291,10 @@ const updatePassword = createAsyncThunk(
   },
 );
 
+const clearAuthError = createAction(AuthActions.CLEAR_ERRORS);
+
 export {
+  getCurrentUserSSR,
   loginUser,
   logoutUser,
   signUpUser,
@@ -284,4 +305,5 @@ export {
   emailCodeResend,
   sendPasswordResetLink,
   updatePassword,
+  clearAuthError,
 };

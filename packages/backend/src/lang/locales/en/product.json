@@ -29,5 +29,9 @@
     "status": {
       "empty": "Field status cannot be empty"
     }
+  },
+  "condition": {
+    "NEW": "new",
+    "USED": "used"
   }
 }

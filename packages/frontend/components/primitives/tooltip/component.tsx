@@ -1,5 +1,5 @@
 ﻿import { Fragment, useRef, useEffect, useState, useCallback } from 'react';
-import * as ReactDOM from 'react-dom';
+import { createPortal } from 'react-dom';
 import * as styles from './styles';
 import type { TooltipProps } from './types';
 
@@ -9,27 +9,32 @@ const tooltipOffset = 10;
 export const Tooltip = ({
   trigger,
   children,
+  refNode = 'current',
   hideTimeoutMs = 100,
 }: TooltipProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
 
   const bodyRef = useRef<HTMLDivElement>();
+  const arrowRef = useRef<HTMLDivElement>();
   const triggerWrapperRef = useRef<HTMLSpanElement>();
   const timerRef = useRef(null);
 
-  const calcBodyCoords = useCallback(() => {
-    const triggerRectParams = getTriggerRectParams();
-    const bodyRectParams = getBodyRectParams();
+  const getTriggerRectParams = useCallback(() => {
+    const element =
+      refNode === 'current'
+        ? triggerWrapperRef.current
+        : triggerWrapperRef.current.parentElement;
 
-    const bodyTop = getBodyTopCoords(triggerRectParams, bodyRectParams);
+    return element.getBoundingClientRect();
+  }, [refNode]);
 
-    const bodyLeft = getBodyLeftCoords(triggerRectParams, bodyRectParams);
+  const getBodyRectParams = () => bodyRef.current.getBoundingClientRect();
 
-    return [bodyTop, bodyLeft];
-  }, []);
-
-  const getBodyTopCoords = (triggerRectParams, bodyRectParams) => {
+  const getBodyTopCoords = (
+    triggerRectParams: DOMRect,
+    bodyRectParams: DOMRect,
+  ) => {
     let bodyTop = window.scrollY + triggerRectParams.top;
 
     // check overflow screen top and bottom sides
@@ -42,7 +47,10 @@ export const Tooltip = ({
     return bodyTop;
   };
 
-  const getBodyLeftCoords = (triggerRectParams, bodyRectParams) => {
+  const getBodyLeftCoords = (
+    triggerRectParams: DOMRect,
+    bodyRectParams: DOMRect,
+  ) => {
     let bodyLeft =
       triggerRectParams.left +
       triggerRectParams.width / 2 -
@@ -60,19 +68,30 @@ export const Tooltip = ({
     return bodyLeft;
   };
 
+  const getArrowLeftCoords = (triggerRectParams: DOMRect, bodyLeft: number) =>
+    triggerRectParams.left + triggerRectParams.width / 2 - bodyLeft;
+
+  const calcBodyCoords = useCallback(() => {
+    const triggerRectParams = getTriggerRectParams();
+    const bodyRectParams = getBodyRectParams();
+
+    const bodyTop = getBodyTopCoords(triggerRectParams, bodyRectParams);
+    const bodyLeft = getBodyLeftCoords(triggerRectParams, bodyRectParams);
+    const arrowLeft = getArrowLeftCoords(triggerRectParams, bodyLeft);
+
+    return [bodyTop, bodyLeft, arrowLeft];
+  }, [getTriggerRectParams]);
+
   useEffect(() => {
     if (bodyRef.current) {
-      const [bodyTop, bodyLeft] = calcBodyCoords();
+      const [bodyTop, bodyLeft, arrowLeft] = calcBodyCoords();
 
       bodyRef.current.style.top = `${bodyTop - tooltipOffset}px`;
       bodyRef.current.style.left = `${bodyLeft}px`;
+
+      arrowRef.current.style.left = `${arrowLeft}px`;
     }
   }, [isVisible, calcBodyCoords]);
-
-  const getTriggerRectParams = () =>
-    triggerWrapperRef.current.getBoundingClientRect();
-
-  const getBodyRectParams = () => bodyRef.current.getBoundingClientRect();
 
   const handleMouseEnter = () => {
     setIsVisible(true);
@@ -99,14 +118,12 @@ export const Tooltip = ({
       css={[styles.body, fadeOut && styles.fadeOut]}
     >
       {children}
+      <div ref={arrowRef} css={styles.arrow} />
     </div>
   );
 
   const renderPortal = () =>
-    ReactDOM.createPortal(
-      renderPortalBody(),
-      document.querySelector('#portal'),
-    );
+    createPortal(renderPortalBody(), document.querySelector('#tooltip'));
 
   return (
     <Fragment>

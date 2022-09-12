@@ -6,6 +6,8 @@ import type { CategoryDto } from '@vse-bude/shared';
 import { Textarea } from 'components/primitives/textarea';
 import { useTranslation } from 'next-i18next';
 import type { DescriptionBlockProps } from './types';
+import { ConditionFields } from './form-utils';
+
 import * as styles from './styles';
 
 export default function DescriptionBlock({
@@ -13,6 +15,8 @@ export default function DescriptionBlock({
   register,
   category,
   setCategories,
+  condition,
+  setCondition,
 }: DescriptionBlockProps) {
   const categories = useTypedSelector((state) => state.category.list);
 
@@ -62,6 +66,20 @@ export default function DescriptionBlock({
           label={t('create-post:label.description')}
           placeholder={t('create-post:placeholder.description')}
           {...register('description')}
+        />
+      </div>
+      <div css={styles.inputRow}>
+        <Select
+          labelRequiredMark
+          required
+          options={Object.values(ConditionFields(t))}
+          value={condition?.title}
+          setValue={setCondition}
+          id="post-condition"
+          name="condition"
+          label={t('create-post:label.condition')}
+          placeholder={t('create-post:placeholder.condition')}
+          error={errors.condition?.message}
         />
       </div>
     </>

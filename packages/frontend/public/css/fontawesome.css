@@ -150,8 +150,8 @@
   content: '\f2ed';
 }
 
-.fa-filter::before {
-  content: '\f0b0';
+.fa-circle-check::before {
+  content: '\f058';
 }
 
 :root,

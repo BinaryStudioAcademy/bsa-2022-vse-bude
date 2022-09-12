@@ -12,7 +12,7 @@ import { createPost } from 'services/post';
 import { ProductType } from '@vse-bude/shared';
 import { Routes } from '@enums';
 import type { SelectOption } from '@components/primitives/select/types';
-import { initialProductFormState } from './form-utils';
+import { initialProductFormState, ConditionFields } from './form-utils';
 import ImageInput from './image-input';
 import DescriptionBlock from './description';
 import * as styles from './styles';
@@ -26,6 +26,7 @@ export default function ProductForm({ edit }: { edit: boolean }) {
   const currentProduct = useTypedSelector((state) => state.product.currentItem);
   const categories = useTypedSelector((state) => state.category.list);
   const [category, setCategory] = useState<SelectOption>(null);
+  const [condition, setCondition] = useState<SelectOption>(null);
   const [images, setImages] = useState<(File | string)[]>([]);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -63,6 +64,9 @@ export default function ProductForm({ edit }: { edit: boolean }) {
         switch (key) {
           case 'category':
             formData.append(key, category.value);
+            break;
+          case 'condition':
+            formData.append(key, condition.value);
             break;
           case 'phone':
             formData.append(key, data[key] ? `+380${data[key]}` : '');
@@ -105,6 +109,11 @@ export default function ProductForm({ edit }: { edit: boolean }) {
             });
             break;
           }
+          case 'condition': {
+            setValue('condition', currentProduct?.condition);
+            setCondition(ConditionFields(t)[currentProduct?.condition]);
+            break;
+          }
           case 'phone':
             setValue('phone', currentProduct.phone.replace('+380', ''));
             break;
@@ -117,11 +126,16 @@ export default function ProductForm({ edit }: { edit: boolean }) {
       });
       setImages(currentProduct.imageLinks);
     }
-  }, [currentProduct, setValue, edit, categories, isLoading]);
+  }, [currentProduct, setValue, edit, categories, isLoading, t]);
 
   const setCategoryWrapper = (category: SelectOption) => {
     setCategory(category);
     setValue('category', category.value);
+  };
+
+  const setConditionWrapper = (condition: SelectOption) => {
+    setCondition(condition);
+    setValue('condition', condition.value);
   };
 
   return (
@@ -129,6 +143,8 @@ export default function ProductForm({ edit }: { edit: boolean }) {
       <ImageInput images={images} setImages={setImages} />
       <Column css={styles.sectionRow}>
         <DescriptionBlock
+          condition={condition}
+          setCondition={setConditionWrapper}
           category={category}
           register={register as registerFieldType}
           setCategories={setCategoryWrapper}

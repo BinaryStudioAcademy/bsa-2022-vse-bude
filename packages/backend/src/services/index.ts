@@ -5,6 +5,7 @@ import {
   SendInBlueEmailProvider,
 } from '@providers';
 import { isProduction } from '@helpers';
+import { AuctionScheduler } from '@scheduler';
 import { CategoryService } from './category';
 import { ProductService } from './product';
 import { AuthService } from './auth';
@@ -19,6 +20,11 @@ import { EmailService } from './email';
 import { UserProfileService } from './profile';
 import { BidService } from './bid';
 import { MyListService } from './my-list';
+import { OrderService } from './order';
+import { PaymentService } from './payment';
+
+const emailProvider = new SendInBlueEmailProvider();
+export const emailService = new EmailService(emailProvider);
 
 export const initServices = (repositories: Repositories): any => {
   const hashService: HashService = new HashService();
@@ -29,11 +35,8 @@ export const initServices = (repositories: Repositories): any => {
   const smsProvider = isProduction
     ? new TwilioSMSProvider()
     : new BarSMSProvider();
+
   const smsService = new SMSSenderService(smsProvider);
-
-  const emailProvider = new SendInBlueEmailProvider();
-  const emailService = new EmailService(emailProvider);
-
   const s3StorageService = new S3StorageService();
 
   const verifyService: VerifyService = new VerifyService(
@@ -43,6 +46,8 @@ export const initServices = (repositories: Repositories): any => {
     emailService,
   );
 
+  const auctionScheduler = new AuctionScheduler(repositories.productRepository);
+
   return {
     categoryService: new CategoryService(repositories.categoryRepository),
     productService: new ProductService(
@@ -50,6 +55,7 @@ export const initServices = (repositories: Repositories): any => {
       verifyService,
       s3StorageService,
       repositories.bidRepository,
+      auctionScheduler,
     ),
     newsService: new NewsService(repositories.newsRepository),
     healthService: new HealthService(repositories.healthRepository),
@@ -78,6 +84,15 @@ export const initServices = (repositories: Repositories): any => {
     myListService: new MyListService({
       myListRepository: repositories.myListRepository,
     }),
+    orderService: new OrderService(
+      repositories.orderRepository,
+      repositories.productRepository,
+    ),
+    paymentService: new PaymentService(
+      repositories.orderRepository,
+      repositories.productRepository,
+    ),
+    auctionScheduler: auctionScheduler,
   };
 };
 
@@ -96,4 +111,7 @@ export {
   type BidService,
   type S3StorageService,
   type MyListService,
+  type OrderService,
+  type PaymentService,
+  type AuctionScheduler,
 };

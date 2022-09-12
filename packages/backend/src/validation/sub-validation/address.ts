@@ -72,7 +72,7 @@ export const addressValidation = ({ req }: { req: Request }): void => {
       if (deliveryData.length > ValidationRanges.MAX_DELIVERY_DATA) {
         throw new ProfileError({
           status: HttpStatusCode.BAD_REQUEST,
-          message: lang(UserPersonalInfoValidationMessage.CITY),
+          message: lang(UserPersonalInfoValidationMessage.DELIVERY_DATA),
         });
       }
     }

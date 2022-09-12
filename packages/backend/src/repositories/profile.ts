@@ -10,7 +10,31 @@ import type { AddressDto } from '@types';
 import type { UpdateUserProfileDto, UserAddressDto } from '@vse-bude/shared';
 
 export class UserProfileRepository {
+  cancelEmailVerified(arg0: { userId: string; }) {
+    throw new Error('Method not implemented.');
+  }
+  checkIsPhoneExists(arg0: { userId: string; phone: string; }) {
+    throw new Error('Method not implemented.');
+  }
   private _dbClient: PrismaClient;
+
+  private _isSocialNetTypeExists({
+    userId,
+    socialMedia,
+  }: {
+    userId: string;
+    socialMedia: SocialMediaType;
+  }) {
+    return this._dbClient.socialMedia.findFirst({
+      where: {
+        ownedByUserId: userId,
+        socialMedia,
+      },
+      select: {
+        socialMedia: true,
+      },
+    });
+  }
 
   private _updateSocialMediaLinks({
     id,
@@ -77,6 +101,22 @@ export class UserProfileRepository {
     });
   }
 
+  private async _updatePhoneVerifiedStatus({
+    userId,
+    phone,
+  }: {
+    userId: string;
+    phone: string;
+  }) {
+    const dbPhone = await this._dbClient.user.findUnique({
+      where: { id: userId },
+      select: { phone: true },
+    });
+    if (dbPhone.phone !== phone) {
+      await this.cancelPhoneVerified({ userId });
+    }
+  }
+
   constructor(prismaClient: PrismaClient) {
     this._dbClient = prismaClient;
   }
@@ -86,6 +126,12 @@ export class UserProfileRepository {
       where: {
         id: userId,
       },
+      select: {
+        id: true,
+        avatar: true,
+        firstName: true,
+        lastName: true,
+      },
     });
   }
 
@@ -93,6 +139,16 @@ export class UserProfileRepository {
     return this._dbClient.user.findUnique({
       where: {
         id: userId,
+      },
+      select: {
+        id: true,
+        avatar: true,
+        firstName: true,
+        lastName: true,
+        phone: true,
+        email: true,
+        emailVerified: true,
+        phoneVerified: true,
       },
     });
   }
@@ -149,6 +205,7 @@ export class UserProfileRepository {
     data: UpdateUserProfileDto;
   }): Promise<User> {
     const { firstName, lastName, email, phone } = data;
+    this._updatePhoneVerifiedStatus({ userId, phone });
 
     return this._dbClient.user.update({
       where: {
@@ -159,6 +216,16 @@ export class UserProfileRepository {
         lastName,
         email,
         phone,
+      },
+      select: {
+        id: true,
+        avatar: true,
+        firstName: true,
+        lastName: true,
+        phone: true,
+        email: true,
+        emailVerified: true,
+        phoneVerified: true,
       },
     });
   }
@@ -207,14 +274,20 @@ export class UserProfileRepository {
     userId: string;
     socialMedia: SocialMedia[];
   }): Promise<{ id: string; link: string; socialMedia: SocialMediaType }[]> {
-    return this._dbClient.$transaction(
-      socialMedia.map((userLink) => {
+    return await this._dbClient.$transaction(async () =>
+      socialMedia.map(async (userLink) => {
         const { id, link, socialMedia } = userLink;
 
         if (id && link) {
           return this._updateSocialMediaLinks({ id, link });
-        } else if (link) {
-          return this._createSocialMediaLinks({ link, socialMedia, userId });
+        } else if (!id && link) {
+          const netType = await this._isSocialNetTypeExists({
+            userId,
+            socialMedia: userLink.socialMedia,
+          });
+          if (!netType) {
+            return this._createSocialMediaLinks({ link, socialMedia, userId });
+          }
         } else if (id && !link) {
           return this._deleteSocialMediaLinks({ id });
         }
@@ -242,6 +315,26 @@ export class UserProfileRepository {
     });
   }
 
+  public checkIsPhoneExists({
+    userId,
+    phone,
+  }: {
+    userId: string;
+    phone: string;
+  }) {
+    return this._dbClient.user.findFirst({
+      where: {
+        id: {
+          not: userId,
+        },
+        phone,
+      },
+      select: {
+        phone: true,
+      },
+    });
+  }
+
   public cancelPhoneVerified({
     userId,
   }: {
@@ -256,6 +349,20 @@ export class UserProfileRepository {
       },
       select: {
         phoneVerified: true,
+      },
+    });
+  }
+
+  public cancelEmailVerified({ userId }: { userId: string }) {
+    return this._dbClient.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        emailVerified: false,
+      },
+      select: {
+        emailVerified: true,
       },
     });
   }

@@ -2,14 +2,13 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { LotSection } from '@components/home/lot-section';
 import { Routes } from '@enums';
-import { Breadcrumbs, Button, Container } from '@primitives';
+import { Breadcrumbs } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import { Http } from '@vse-bude/shared';
-import type { ProductType } from '@vse-bude/shared';
+import type { ProductType, ItemDto } from '@vse-bude/shared';
 import { withPublic } from '@hocs';
 import { Layout } from '@components/layout';
 import { Item } from '@components/item';
-import Link from 'next/link';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import {
   auctionPermissions,
@@ -40,7 +39,7 @@ export const getServerSideProps = withPublic(
 
     return {
       props: {
-        ...(await serverSideTranslations(locale, ['common', 'item'])),
+        ...(await serverSideTranslations(locale, ['common', 'item', 'public'])),
       },
     };
   }),
@@ -49,7 +48,7 @@ export const getServerSideProps = withPublic(
 const ItemPage = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const item = useTypedSelector(
+  const item: ItemDto = useTypedSelector(
     (state) => state.product.currentItem,
     shallowEqual,
   );
@@ -100,13 +99,6 @@ const ItemPage = () => {
           },
         ]}
       />
-      <Container style={{ marginBottom: '20px' }}>
-        <Link href={`/items/edit/${item.id}`}>
-          <a style={{ textDecoration: 'none' }}>
-            <Button>Edit</Button>
-          </a>
-        </Link>
-      </Container>
       <Item item={item} />
       <LotSection
         title={t('item:similarItems')}

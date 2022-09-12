@@ -25,7 +25,7 @@ export const Header = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
-  const categories = useTypedSelector((state) => state.category.list);
+  const categories = useTypedSelector((state) => state.category.listInUse);
 
   useEffect(() => {
     if (!categories.length) {
@@ -80,7 +80,7 @@ export const Header = () => {
       <header css={styles.header}>
         <Container cssExtend={styles.headerInner}>
           <Flex align="center">
-            <Link href={Routes.DEFAULT}>
+            <Link prefetch={false} href={Routes.DEFAULT}>
               <a>
                 <Logo />
               </a>

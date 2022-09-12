@@ -1,12 +1,12 @@
 export enum UserPersonalInfoValidationMessage {
   FIRSTNAME_PATTERN = 'personal-info:validation.personal.firstNamePattern',
-  FIRSTNAME_REQUIRED = 'personal-info:validation.personal.firstnameRequired',
-  FIRSTNAME_MIN = 'personal-info:validation.personal.firstnameMin',
-  FIRSTNAME_MAX = 'personal-info:validation.personal.firstnameMax',
-  LASTNAME_PATTERN = 'personal-info:validation.personal.firstNamePattern',
-  LASTNAME_REQUIRED = 'personal-info:validation.personal.lastnameRequired',
-  LASTNAME_MIN = 'personal-info:validation.personal.lastnameMin',
-  LASTNAME_MAX = 'personal-info:validation.personal.lastnameMax',
+  FIRSTNAME_REQUIRED = 'personal-info:validation.personal.firstNameRequired',
+  FIRSTNAME_MIN = 'personal-info:validation.personal.firstNameMin',
+  FIRSTNAME_MAX = 'personal-info:validation.personal.firstNameMax',
+  LASTNAME_PATTERN = 'personal-info:validation.personal.lastNamePattern',
+  LASTNAME_REQUIRED = 'personal-info:validation.personal.lastNameRequired',
+  LASTNAME_MIN = 'personal-info:validation.personal.lastNameMin',
+  LASTNAME_MAX = 'personal-info:validation.personal.lastNameMax',
 
   EMAIL_REQUIRED = 'personal-info:validation.personal.emailRequired',
   EMAIL_PATTERN = 'personal-info:validation.personal.emailPattern',
@@ -22,6 +22,7 @@ export enum UserPersonalInfoValidationMessage {
 
   IS_URI = 'personal-info:validation.socialNetworks.uri',
   URI_MAX_SYMBOLS = 'personal-info:validation.socialNetworks.maxSymbols',
+  URI_BAD_REQUEST = 'personal-info:validation.socialNetworks.netType',
 
   MIN_SYMBOLS = 'personal-info:validation.password.minSymbols',
   MAX_SYMBOLS = 'personal-info:validation.password.maxSymbols',
@@ -32,4 +33,5 @@ export enum UserPersonalInfoValidationMessage {
   SAME_PASSWORD = 'personal-info:validation.password.samePassword',
 
   USER_NOT_EXISTS = 'personal-info:validation.notExists.user',
+  PHONE_EXISTS = 'personal-info:validation.exists.phone',
 }

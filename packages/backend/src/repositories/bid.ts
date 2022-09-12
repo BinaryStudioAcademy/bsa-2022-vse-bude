@@ -28,6 +28,18 @@ export class BidRepository {
     ]);
   }
 
+  async lastProductBid(productId: string) {
+    return await this._dbClient.bid.findFirst({
+      take: 1,
+      where: {
+        productId: productId,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+  }
+
   async getByUserAndProduct(userId: string, productId: string): Promise<Bid[]> {
     return this._dbClient.bid.findMany({
       where: {
@@ -45,6 +57,46 @@ export class BidRepository {
       where: {
         bidderId: userId,
         productId: productId,
+      },
+    });
+  }
+
+  async retrieve(userId: string, productId: string, time: string) {
+    return this._dbClient.$transaction([
+      this._dbClient.bid.updateMany({
+        data: {
+          deletedAt: time,
+        },
+        where: {
+          bidderId: userId,
+          productId: productId,
+        },
+      }),
+      this._dbClient.bid.deleteMany({
+        where: {
+          productId,
+          NOT: [{ deletedAt: null }],
+        },
+      }),
+      this._dbClient.product.update({
+        data: {
+          price: (
+            await this._dbClient.bid.findFirst({
+              where: {
+                productId,
+              },
+            })
+          ).price,
+        },
+        where: { id: productId },
+      }),
+    ]);
+  }
+
+  async getAll(productId: string) {
+    return this._dbClient.bid.findMany({
+      where: {
+        productId,
       },
     });
   }

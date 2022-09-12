@@ -61,6 +61,7 @@
   "components": {
     "product": {
       "placeBidBtn": "Зробити ставку",
+      "buyBtn": "Купити",
       "time": {
         "hours": "г",
         "days": "д",
@@ -91,6 +92,9 @@
           "directSale": "Вам потрібно підтвердити свій номер телефону, щоб вибрати \"Продаж\""
         }
       }
+    },
+    "badge": {
+      "removeLabel": "Видалити фільтр {{param}}"
     }
   },
   "verify": {
@@ -142,7 +146,8 @@
     "productAddedToFavorites": "Продукт додано до обраних",
     "productRemovedFromFavorites": "Продукт видалено з обраних",
     "bidPlaced": "Ставка зроблена",
-    "leftAuction": "Ви вийшли з аукціону"
+    "leftAuction": "Ви вийшли з аукціону",
+    "newBidPlaced": "Зроблена нова ставка на поточний товар"
   },
   "months": [
     "Січень",

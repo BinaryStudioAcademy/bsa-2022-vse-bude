@@ -21,8 +21,11 @@ export type FlexBoxStyles = {
   flexDirectionRow: FlexStyle;
   flexDirectionColumn: FlexStyle;
   alignItemsCenter: FlexStyle;
+  alignItemsStart: FlexStyle;
+  alignItemsEnd: FlexStyle;
   justifyContentCenter: FlexStyle;
   justifyContentStart: FlexStyle;
+  justifyContentEnd: FlexStyle;
   justifyContentSpaceBetween: FlexStyle;
 };
 

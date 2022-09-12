@@ -7,12 +7,21 @@ import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useAppDispatch, useTypedSelector } from '@hooks';
-import { useState } from 'react';
-import { IconColor } from '@enums';
-import { auctionLeaveAction, auctionPermissions, makeBid } from 'store/product';
+import { useEffect, useState } from 'react';
+import { IconColor, ItemRoutes, Routes } from '@enums';
+import {
+  auctionLeaveAction,
+  auctionPermissions,
+  makeBid,
+  updateCurrentItemPrice,
+} from 'store/product';
+import { UPDATE_PRODUCT_PRICE } from '@vse-bude/shared';
+import { getAuctionItemIo } from '@helpers';
+import { useRouter } from 'next/router';
 import { CountDownTimer } from '../countdown-timer/component';
 import { ItemTitle, ItemInfo, ItemPrice } from '../item-info';
 import { minBidValidation } from '../validation';
+import { addToast } from '../../../store/toast/actions';
 import * as styles from './styles';
 
 const ConfirmationModal = dynamic(
@@ -31,10 +40,30 @@ export const ItemInfoAuction = ({
   onChangeIsFavorite,
 }: ItemInfoAuctionProps) => {
   const [confirmModalVisible, setModalVisible] = useState(false);
-
-  const { t } = useTranslation('item');
+  const { push } = useRouter();
+  const { t } = useTranslation();
+  const { user } = useTypedSelector((state) => state.auth);
 
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const socket = getAuctionItemIo(item.id);
+    socket.on(UPDATE_PRODUCT_PRICE, (data) => {
+      dispatch(updateCurrentItemPrice(+data.price));
+      if (data.bidderId !== user?.id || !user) {
+        dispatch(
+          addToast({
+            level: 'success',
+            description: (t) => t('common:notifications.newBidPlaced'),
+          }),
+        );
+      }
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, [item.id, user, dispatch]);
 
   const targetDate = new Date(item.endDate);
   const minBidAmount = +item.currentPrice + +item.minimalBid + 1;
@@ -42,9 +71,8 @@ export const ItemInfoAuction = ({
   const {
     permissions: { isAbleToLeaveAuction },
   } = useTypedSelector((state) => state.product);
-  const { user } = useTypedSelector((state) => state.auth);
   const { loading } = useTypedSelector((state) => state.product);
-
+  const isAuthor = user?.id === item.author.id;
   const {
     register,
     handleSubmit,
@@ -79,10 +107,66 @@ export const ItemInfoAuction = ({
     const reqData = {
       productId: item.id,
     };
+
     await dispatch(auctionLeaveAction(reqData));
     await dispatch(auctionPermissions(reqData));
     onCancel();
   };
+
+  const renderEditButton = () => (
+    <Button
+      onClick={() => push(`${Routes.ITEMS}${ItemRoutes.EDIT}/${item.id}`)}
+    >
+      {t('item:buttons.editBtn')}
+    </Button>
+  );
+
+  const renderBidButtons = () => (
+    <>
+      {!!isAbleToLeaveAuction && user && (
+        <Button
+          onClick={confirmLeave}
+          variant="danger"
+          tooltip={t('item:leave.tooltip')}
+        >
+          {t('leave.btnText')}
+        </Button>
+      )}
+      <Button
+        type="submit"
+        disabled={!user || !user.phoneVerified || loading}
+        tooltip={
+          user
+            ? user.phoneVerified
+              ? t('item:buttons.placeBid')
+              : t('item:buttons.tooltips.notVerified.placeBid')
+            : t('item:buttons.tooltips.notAuthorized.placeBid')
+        }
+      >
+        {loading ? <Loader size="extraSmall" /> : t('item:buttons.placeBid')}
+      </Button>
+      <Tooltip
+        trigger={
+          <FavoriteButton
+            cssExtended={styles.favouriteButton}
+            onChangeIsFavorite={onChangeIsFavorite}
+            isFavorite={isInFavorite}
+            backgroundColor="transparent"
+            inFavouriteColor={IconColor.YELLOW}
+            notInFavouriteColor={IconColor.YELLOW}
+            size="md"
+            disabled={!user}
+          />
+        }
+      >
+        {user
+          ? isInFavorite
+            ? t('item:buttons.tooltips.favBtnRemove')
+            : t('item:buttons.tooltips.favBtn')
+          : t('item:buttons.tooltips.notAuthorized.favBtn')}
+      </Tooltip>
+    </>
+  );
 
   return (
     <div css={styles.wrapper}>
@@ -90,71 +174,37 @@ export const ItemInfoAuction = ({
         <CountDownTimer targetDate={targetDate} />
         <div css={styles.priceWrapper}>
           <ItemPrice
-            currency="UAH"
+            currency={t('public:uah')}
             amount={item.currentPrice}
             cssExtended={styles.price}
           />
-          <span>{t('currentBid')}</span>
+          <span>{t('item:currentBid')}</span>
         </div>
       </div>
       <ItemTitle title={item.title} views={item.views} />
       <ItemInfo item={item} />
-      <form onSubmit={handleSubmit(onMakeBid)} css={styles.controls}>
-        <div css={styles.inputWrapper}>
-          <Input
-            {...register('price')}
-            variant="primary"
-            type="text"
-            placeholder={t('bidInput')}
-            error={errors.price?.message}
-          />
-          <span>{t('bidInputCaption')} </span>
-          <span>UAH {minBidAmount}</span>
-        </div>
+      <form
+        onSubmit={handleSubmit(onMakeBid)}
+        css={[styles.controls, isAuthor && styles.editButton]}
+      >
+        {!isAuthor && (
+          <div css={styles.inputWrapper}>
+            <Input
+              {...register('price')}
+              variant="primary"
+              type="text"
+              placeholder={t('item:bidInput')}
+              error={errors.price?.message}
+            />
+            <span>{t('item:bidInputCaption')} </span>
+            <span>
+              {t('public:uah')} {minBidAmount}
+            </span>
+          </div>
+        )}
 
         <div css={styles.buttons}>
-          <Tooltip
-            trigger={
-              <FavoriteButton
-                cssExtended={styles.favouriteButton}
-                onChangeIsFavorite={onChangeIsFavorite}
-                isFavorite={isInFavorite}
-                backgroundColor="transparent"
-                inFavouriteColor={IconColor.YELLOW}
-                notInFavouriteColor={IconColor.YELLOW}
-                size="md"
-                disabled={!user}
-              />
-            }
-          >
-            {user
-              ? isInFavorite
-                ? t('buttons.tooltips.favBtnRemove')
-                : t('buttons.tooltips.favBtn')
-              : t('buttons.tooltips.notAuthorized.favBtn')}
-          </Tooltip>
-          <Button
-            type="submit"
-            disabled={!user || !user.phoneVerified || loading}
-            tooltip={
-              user
-                ? user.phoneVerified
-                  ? t('buttons.placeBid')
-                  : t('buttons.tooltips.notVerified.placeBid')
-                : t('buttons.tooltips.notAuthorized.placeBid')
-            }
-          >
-            {loading ? <Loader size="extraSmall" /> : t('buttons.placeBid')}
-          </Button>
-          {!!isAbleToLeaveAuction && user && (
-            <Button
-              onClick={confirmLeave}
-              variant="danger"
-              tooltip={t('leave.tooltip')}
-            >
-              {t('leave.btnText')}
-            </Button>
-          )}
+          {isAuthor ? renderEditButton() : renderBidButtons()}
         </div>
       </form>
 
@@ -162,7 +212,7 @@ export const ItemInfoAuction = ({
         <ConfirmationModal
           onClose={onCancel}
           onConfirm={onLeaveAuction}
-          text={t('leave.confirmText')}
+          text={t('item:leave.confirmText')}
         />
       )}
     </div>

@@ -2,6 +2,7 @@
 import { ProductType } from '@vse-bude/shared';
 import React from 'react';
 import { useTranslation } from 'next-i18next';
+import { translateCondition } from 'helpers/translate-condition';
 import { SellerInfo } from './seller-info/component';
 import * as styles from './styles';
 
@@ -10,7 +11,11 @@ interface ItemInfoProps {
 }
 
 export const ItemInfo = ({ item }: ItemInfoProps) => {
-  const { t } = useTranslation('item');
+  const { t } = useTranslation();
+
+  const getDate = (date) =>
+    new Date(date).toLocaleDateString().replaceAll('/', '.');
+  const getTime = (date) => new Date(date).toLocaleTimeString();
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   const handleContactSeller = () => {};
 
@@ -21,31 +26,35 @@ export const ItemInfo = ({ item }: ItemInfoProps) => {
           {item.type === ProductType.AUCTION && (
             <React.Fragment>
               <tr>
-                <td>{t('endingCaption')}</td>
-                <td>28.09.2022, 12:00 pm</td>
+                <td>{t('item:endingCaption')}</td>
+                <td>
+                  {getDate(item.endDate)} {getTime(item.endDate)}
+                </td>
               </tr>
               <tr>
-                <td>{t('timezoneCaption')}</td>
-                <td>GMT +3</td>
+                <td>{t('item:timezoneCaption')}</td>
+                <td>{'GMT +3'}</td>
               </tr>
             </React.Fragment>
           )}
           <tr>
-            <td>{t('statusCaption')}</td>
-            <td>used</td>
+            <td>{t('item:statusCaption')}</td>
+            <td>{translateCondition(t, item.condition)}</td>
           </tr>
           <tr>
-            <td>{t('locationCaption')}</td>
-            <td>Ukraine, {item.city}</td>
+            <td>{t('item:locationCaption')}</td>
+            <td>
+              {item.country}, {item.city}
+            </td>
           </tr>
           <tr>
-            <td>{t('descriptionCaption')}</td>
+            <td>{t('item:descriptionCaption')}</td>
             <td>{item.description}</td>
           </tr>
         </tbody>
       </table>
       <SellerInfo
-        seller={item.author}
+        seller={{ ...item.author, phone: item.phone }}
         onContactSeller={() => handleContactSeller()}
       />
     </div>

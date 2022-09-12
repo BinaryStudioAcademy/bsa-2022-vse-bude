@@ -5,6 +5,10 @@ import type {
   AuthResponse,
   UpdatePassword,
 } from '@vse-bude/shared';
+import {
+  HttpStatusCode,
+  UserPersonalInfoValidationMessage,
+} from '@vse-bude/shared';
 import { sign as jwtSign, type UserSessionJwtPayload } from 'jsonwebtoken';
 import { getEnv } from '@helpers';
 import {
@@ -15,7 +19,7 @@ import {
 import {
   UserNotFoundError,
   UserExistsError,
-  UserPhoneExistsError,
+  ProfileError,
   WrongPasswordError,
   UnauthorizedError,
   WrongRefreshTokenError,
@@ -35,6 +39,7 @@ import {
 } from '@services';
 import { authResponseMap, userMap } from '@mappers';
 import { AuthApiRoutes } from '@vse-bude/shared';
+import { lang } from '@lang';
 import { ResetPasswordMailBuilder } from '../email/reset-password-mail-builder';
 import { ResetPassLinkInvalid } from '../error/reset-password/reset-pass-link-invalid';
 import type { RedisStorageService } from './redis-storage';
@@ -75,20 +80,21 @@ export class AuthService {
   }
 
   async signUp(signUpDto: UserSignUpDto): Promise<AuthResponse> {
-    const userByEmail = await this._userRepository.getNewByEmail(
-      signUpDto.email,
-    );
+    const userByEmail = await this._userRepository.getByEmail(signUpDto.email);
 
     if (userByEmail) {
       throw new UserExistsError();
     }
 
     if (signUpDto.phone) {
-      const userByPhone = await this._userRepository.getNewByPhone({
+      const userByPhone = await this._userRepository.getByPhone({
         phone: signUpDto.phone,
       });
       if (userByPhone) {
-        throw new UserPhoneExistsError();
+        throw new ProfileError({
+          status: HttpStatusCode.BAD_REQUEST,
+          message: lang(UserPersonalInfoValidationMessage.PHONE_EXISTS),
+        });
       }
     }
     const phone = signUpDto.phone ? signUpDto.phone : null;
@@ -111,6 +117,10 @@ export class AuthService {
     await this._refreshTokenRepository.create(refreshToken);
 
     return authResponseMap(tokenData, newUser);
+  }
+
+  async getByEmail(email: string) {
+    return this._userRepository.getByEmail(email);
   }
 
   async signIn(signInDto: UserSignInDto): Promise<AuthResponse> {
@@ -194,6 +204,12 @@ export class AuthService {
   }
 
   async resetPasswordLink(email: string): Promise<void> {
+    const userByEmail = await this._userRepository.getByEmail(email);
+
+    if (!userByEmail) {
+      throw new UserNotFoundError();
+    }
+
     const hashValue = this._hashService.generateHash(
       `${email}${this._hashService.getRandomHash()}`,
     );
@@ -224,7 +240,7 @@ export class AuthService {
     }
 
     const newPassHash = this._hashService.generateHash(updateDto.password);
-    this._userRepository.updatePassword(updateDto.email, newPassHash);
+    await this._userRepository.updatePassword(updateDto.email, newPassHash);
   }
 
   private getResetPasswordEmailLink(hash: string, email: string): string {

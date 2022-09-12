@@ -6,13 +6,16 @@ import type {
   Product,
   SocialMedia,
 } from '@prisma/client';
-import { ProductStatus } from '@prisma/client';
+import { ProductStatus, ProductType } from '@prisma/client';
 import type { Decimal } from '@prisma/client/runtime';
 import type { ProductQuery } from '@types';
 import { Order } from '@vse-bude/shared';
+import { toUtc } from '@helpers';
 
 export class ProductRepository {
   private _dbClient: PrismaClient;
+
+  private _limit = 20;
 
   constructor(prismaClient: PrismaClient) {
     this._dbClient = prismaClient;
@@ -191,6 +194,7 @@ export class ProductRepository {
       data: {
         imageLinks: data.imageLinks,
         status: data.status,
+        condition: data.condition,
         country: data.country,
         city: data.city,
         phone: data.phone,
@@ -260,6 +264,76 @@ export class ProductRepository {
       data: {
         winnerId: userId,
         status,
+      },
+    });
+  }
+
+  public async findSimilar(
+    city: string,
+    categoryId: string,
+    type: ProductType,
+    productId: string,
+  ) {
+    return await this._dbClient.product.findMany({
+      where: {
+        city,
+        categoryId,
+        type,
+        status: ProductStatus.ACTIVE,
+        NOT: {
+          id: productId,
+        },
+      },
+    });
+  }
+
+  public async getMostPopularLots(limit: number) {
+    return await this._dbClient.product.findMany({
+      take: limit,
+      where: {
+        status: ProductStatus.ACTIVE,
+        type: ProductType.AUCTION,
+      },
+      orderBy: {
+        views: Order.DESC,
+      },
+    });
+  }
+
+  public async getMostPopularProducts(limit: number) {
+    return await this._dbClient.product.findMany({
+      take: limit,
+      where: {
+        status: ProductStatus.ACTIVE,
+        type: ProductType.SELLING,
+      },
+      orderBy: {
+        views: Order.DESC,
+      },
+    });
+  }
+
+  public async getActiveAuctionsLots() {
+    const nowUtc: Date = toUtc().toDate();
+
+    return await this._dbClient.product.findMany({
+      where: {
+        type: ProductType.AUCTION,
+        endDate: {
+          gt: nowUtc,
+        },
+        participantsNotified: false,
+      },
+    });
+  }
+
+  public async markProductNotified(productId: string) {
+    return await this._dbClient.product.update({
+      where: {
+        id: productId,
+      },
+      data: {
+        participantsNotified: true,
       },
     });
   }
