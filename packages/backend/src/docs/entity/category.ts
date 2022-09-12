@@ -22,6 +22,9 @@
  *       updatedAt:
  *         type: string
  *         format: date-time
+ *       productsCount:
+ *         type: number
+ *         format: integer
  */
 
 export {};

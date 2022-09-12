@@ -1,5 +1,5 @@
 import { Column, Icon } from '@primitives';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import { IconColor, IconName } from '@enums';
 import { useTranslation } from 'next-i18next';
 import dynamic from 'next/dynamic';
@@ -111,7 +111,7 @@ function ImageInput({ images, setImages }: ImageInputProps) {
         {imagePreviews.length > 0 &&
           imagePreviews.map((item, indx) => (
             <div key={indx} css={styles.imgWrapper}>
-              <Image objectFit="cover" layout="fill" src={item} />
+              <Image fill src={item} alt="image preview" />
             </div>
           ))}
         {imagePreviews.length < MAX_IMAGE_COUNT && (

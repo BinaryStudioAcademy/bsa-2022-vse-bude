@@ -18,6 +18,8 @@
   },
   "tooltip": {
     "price": "Make sure that you enter the correct price in digits!",
+    "recommendedPrice": "The minimum price at which the auction starts.",
+    "minimalBid": "Minimal bid. This is the minimum amount by which the lot price can be increased.",
     "phone": "Your phone number must be filled according to Ukrainian format. Sample: +XXX XX XXX XX XX. Make sure that the phone number is correct!"
   },
   "label": {

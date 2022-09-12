@@ -1,7 +1,7 @@
 export interface ProductCardProps {
   loadImageHighPriority?: boolean;
   images: string[];
-  auctionDate: Date;
+  auctionDate: string;
   name: string;
   description: string;
   type: string;

@@ -5,6 +5,7 @@ import type { ProductDto } from './product-dto';
 
 export type ItemDto = ProductDto & {
   cancelReason: string;
+  currentPrice: number;
   category: CategoryDto;
   winnerId: string | null;
   createdAt: Date;

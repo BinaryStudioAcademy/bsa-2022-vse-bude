@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import { t } from 'i18next';
 import { MILLISECOND_IN_MINUTE } from '~/common/constants/time';
 
-const getTimeToEvent = (date: Date) => {
+const getTimeToEvent = (date: string) => {
   const duration = dayjs.duration(dayjs(date).diff(dayjs()));
   if (duration.asMilliseconds() > MILLISECOND_IN_MINUTE) {
     const days =

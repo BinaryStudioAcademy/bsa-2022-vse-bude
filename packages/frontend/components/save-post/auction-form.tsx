@@ -11,7 +11,7 @@ import { ProductType } from '@vse-bude/shared';
 import { Routes } from '@enums';
 import type { SelectOption } from '@components/primitives/select/types';
 import { createAuctionSchema } from 'validation-schemas/post';
-import { initialAuctionFormState } from './form-utils';
+import { initialAuctionFormState, ConditionFields } from './form-utils';
 import ImageInput from './image-input';
 import DescriptionBlock from './description';
 import * as styles from './styles';
@@ -113,10 +113,7 @@ export default function ProductForm({ edit }: { edit: boolean }) {
           }
           case 'condition': {
             setValue('condition', currentProduct?.condition);
-            setCondition({
-              value: currentProduct?.condition.toUpperCase(),
-              title: currentProduct?.condition,
-            });
+            setCondition(ConditionFields(t)[currentProduct?.condition]);
             break;
           }
           case 'endDate':
@@ -135,7 +132,7 @@ export default function ProductForm({ edit }: { edit: boolean }) {
       });
       setImages(currentProduct.imageLinks);
     }
-  }, [currentProduct, setValue, edit, categories, isLoading]);
+  }, [currentProduct, setValue, edit, categories, isLoading, t]);
 
   const setCategoryWrapper = (category: SelectOption) => {
     setCategory(category);
@@ -188,6 +185,7 @@ export default function ProductForm({ edit }: { edit: boolean }) {
               variant="primary"
               label={t('create-post:label.recommendedPrice')}
               placeholder={t('create-post:placeholder.recommendedPrice')}
+              tooltip={t('create-post:tooltip.recommendedPrice')}
               {...register('recommendedPrice')}
             />
           </div>
@@ -216,6 +214,7 @@ export default function ProductForm({ edit }: { edit: boolean }) {
               variant="primary"
               label={t('create-post:label.minimalBid')}
               placeholder={t('create-post:placeholder.minimalBid')}
+              tooltip={t('create-post:tooltip.minimalBid')}
               {...register('minimalBid')}
             />
           </div>

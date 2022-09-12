@@ -1,16 +1,12 @@
-import type { ProductType } from '../../enums';
+import type { ProductType, ProductStatus } from '../../enums';
+import type { SocialMedia } from '../social-media';
+import type { AuthorDto } from './author-dto';
+import type { WinnerDto } from './winner-dto';
+import type { CategoryDto } from './category-dto';
 
-interface Author {
-  id: string;
-  firstName: string;
-  lastName: string;
-  phone: string;
-  avatar: string;
-}
-
-interface Category {
-  id: string;
-  title: string;
+export enum Condition {
+  NEW = 'NEW',
+  USED = 'USED',
 }
 
 type ProductDto = {
@@ -20,18 +16,23 @@ type ProductDto = {
   price: number;
   recommendedPrice: number;
   minimalBid: number;
-  country: string;
-  city?: string;
-  phone?: string;
-  type: ProductType;
-  status: string;
-  condition: string;
-  endDate: Date;
   imageLinks: string[];
+  country: string;
+  city: string;
+  phone: string;
+  socialMedia: SocialMedia[];
+  type: ProductType;
+  status: ProductStatus;
+  condition: Condition;
+  category: CategoryDto;
   views: number;
+  author: AuthorDto;
+  winner: WinnerDto;
+  updatedAt: Date;
+  postDate: Date;
+  createdAt: string;
+  endDate: string;
   currentPrice: number;
-  author: Author;
-  category: Category;
 };
 
 export type { ProductDto };

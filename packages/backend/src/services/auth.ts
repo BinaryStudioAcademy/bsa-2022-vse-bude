@@ -80,16 +80,14 @@ export class AuthService {
   }
 
   async signUp(signUpDto: UserSignUpDto): Promise<AuthResponse> {
-    const userByEmail = await this._userRepository.getNewByEmail(
-      signUpDto.email,
-    );
+    const userByEmail = await this._userRepository.getByEmail(signUpDto.email);
 
     if (userByEmail) {
       throw new UserExistsError();
     }
 
     if (signUpDto.phone) {
-      const userByPhone = await this._userRepository.getNewByPhone({
+      const userByPhone = await this._userRepository.getByPhone({
         phone: signUpDto.phone,
       });
       if (userByPhone) {
@@ -119,6 +117,10 @@ export class AuthService {
     await this._refreshTokenRepository.create(refreshToken);
 
     return authResponseMap(tokenData, newUser);
+  }
+
+  async getByEmail(email: string) {
+    return this._userRepository.getByEmail(email);
   }
 
   async signIn(signInDto: UserSignInDto): Promise<AuthResponse> {
@@ -202,6 +204,12 @@ export class AuthService {
   }
 
   async resetPasswordLink(email: string) {
+    const userByEmail = await this._userRepository.getByEmail(email);
+
+    if (!userByEmail) {
+      throw new UserNotFoundError();
+    }
+
     const hashValue = this._hashService.generateHash(
       `${email}${this._hashService.getRandomHash()}`,
     );
@@ -232,7 +240,7 @@ export class AuthService {
     }
 
     const newPassHash = this._hashService.generateHash(updateDto.password);
-    this._userRepository.updatePassword(updateDto.email, newPassHash);
+    await this._userRepository.updatePassword(updateDto.email, newPassHash);
   }
 
   private getResetPasswordEmailLink(hash: string, email: string): string {
