@@ -7,7 +7,7 @@ import {
 import { ProfileError } from '@errors';
 import { lang } from '@lang';
 
-export const phoneValidation = ({ req }: { req: Request }) => {
+export const phoneValidation = ({ req }: { req: Request }): void => {
   const { phone } = req.body;
 
   if (phone) {

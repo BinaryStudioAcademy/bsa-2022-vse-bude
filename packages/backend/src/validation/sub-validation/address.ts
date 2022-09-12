@@ -10,7 +10,7 @@ import {
 import { ProfileError } from '@errors';
 import { lang } from '@lang';
 
-export const addressValidation = ({ req }: { req: Request }) => {
+export const addressValidation = ({ req }: { req: Request }): void => {
   const { userAddress } = req.body;
 
   if (userAddress) {

@@ -1,6 +1,14 @@
-import type { PrismaClient } from '@prisma/client';
+import type {
+  Bid,
+  FavoriteProducts,
+  Prisma,
+  PrismaClient,
+  Product,
+  SocialMedia,
+} from '@prisma/client';
 import { ProductStatus, ProductType } from '@prisma/client';
 import type { ProductQuery } from '@vse-bude/shared';
+import type { Decimal } from '@prisma/client/runtime';
 import { Order } from '@vse-bude/shared';
 import { ITEM_FILTER } from '@vse-bude/shared';
 import { toUtc } from '@helpers';
@@ -14,7 +22,7 @@ export class ProductRepository {
     this._dbClient = prismaClient;
   }
 
-  public getAll(query: ProductQuery) {
+  public getAll(query: ProductQuery): Promise<[Product[], number]> {
     const {
       limit = ITEM_FILTER.PRODUCT_LIMIT_DEFAULT,
       from = ITEM_FILTER.PRODUCT_FROM_DEFAULT,
@@ -57,7 +65,20 @@ export class ProductRepository {
     ]);
   }
 
-  public getById(id: string) {
+  public getById(id: string): Prisma.Prisma__ProductClient<
+    Product & {
+      author: {
+        id: string;
+        phone: string;
+        socialMedia: SocialMedia[];
+        firstName: string;
+        lastName: string;
+        avatar: string;
+      };
+      category: { id: string; title: string };
+      bids: Bid[];
+    }
+  > {
     return this._dbClient.product.findUnique({
       where: {
         id,
@@ -84,7 +105,7 @@ export class ProductRepository {
     });
   }
 
-  public async favoriteIds(userId: string) {
+  public async favoriteIds(userId: string): Promise<FavoriteProducts[]> {
     return await this._dbClient.favoriteProducts.findMany({
       where: {
         userId,
@@ -92,7 +113,7 @@ export class ProductRepository {
     });
   }
 
-  public async getFavorite(userId: string) {
+  public async getFavorite(userId: string): Promise<FavoriteProducts[]> {
     return await this._dbClient.favoriteProducts.findMany({
       where: {
         userId,
@@ -111,7 +132,10 @@ export class ProductRepository {
     });
   }
 
-  public async isInFavorite(userId: string, productId: string) {
+  public async isInFavorite(
+    userId: string,
+    productId: string,
+  ): Promise<FavoriteProducts> {
     return await this._dbClient.favoriteProducts.findFirst({
       where: {
         userId: userId,
@@ -120,7 +144,10 @@ export class ProductRepository {
     });
   }
 
-  public async addToFavorites(userId: string, productId: string) {
+  public async addToFavorites(
+    userId: string,
+    productId: string,
+  ): Promise<FavoriteProducts> {
     return await this._dbClient.favoriteProducts.create({
       data: {
         userId: userId,
@@ -129,7 +156,10 @@ export class ProductRepository {
     });
   }
 
-  public async deleteFromFavorites(userId: string, productId: string) {
+  public async deleteFromFavorites(
+    userId: string,
+    productId: string,
+  ): Promise<FavoriteProducts> {
     return await this._dbClient.favoriteProducts.delete({
       where: {
         userId_productId: {
@@ -140,7 +170,7 @@ export class ProductRepository {
     });
   }
 
-  public incrementViews(id: string) {
+  public incrementViews(id: string): Promise<Product> {
     return this._dbClient.product.update({
       where: {
         id,
@@ -153,7 +183,7 @@ export class ProductRepository {
     });
   }
 
-  public create(data) {
+  public create(data): Promise<Product> {
     return this._dbClient.product.create({
       data: {
         imageLinks: data.imageLinks,
@@ -175,7 +205,7 @@ export class ProductRepository {
     });
   }
 
-  public async update(id: string, data) {
+  public async update(id: string, data): Promise<Product> {
     return await this._dbClient.product.update({
       where: {
         id,
@@ -200,7 +230,7 @@ export class ProductRepository {
     });
   }
 
-  public async getCurrentPrice(productId: string) {
+  public async getCurrentPrice(productId: string): Promise<Decimal> {
     const lastBid = await this._dbClient.bid.findFirst({
       where: {
         productId: productId,
@@ -228,7 +258,10 @@ export class ProductRepository {
     return product.price;
   }
 
-  public async checkStatus(id: string, status: ProductStatus) {
+  public async checkStatus(
+    id: string,
+    status: ProductStatus,
+  ): Promise<Product> {
     return this._dbClient.product.findFirst({
       where: {
         id,
@@ -237,7 +270,11 @@ export class ProductRepository {
     });
   }
 
-  public async buy(id: string, userId: string, status: ProductStatus) {
+  public async buy(
+    id: string,
+    userId: string,
+    status: ProductStatus,
+  ): Promise<Prisma.BatchPayload> {
     return await this._dbClient.product.updateMany({
       where: {
         id,
@@ -255,7 +292,7 @@ export class ProductRepository {
     categoryId: string,
     type: ProductType,
     productId: string,
-  ) {
+  ): Promise<Product[]> {
     return await this._dbClient.product.findMany({
       where: {
         city,
@@ -269,7 +306,7 @@ export class ProductRepository {
     });
   }
 
-  public async getMostPopularLots(limit: number) {
+  public async getMostPopularLots(limit: number): Promise<Product[]> {
     return await this._dbClient.product.findMany({
       take: limit,
       where: {
@@ -282,7 +319,7 @@ export class ProductRepository {
     });
   }
 
-  public async getMostPopularProducts(limit: number) {
+  public async getMostPopularProducts(limit: number): Promise<Product[]> {
     return await this._dbClient.product.findMany({
       take: limit,
       where: {
@@ -295,7 +332,7 @@ export class ProductRepository {
     });
   }
 
-  public async getActiveAuctionsLots() {
+  public async getActiveAuctionsLots(): Promise<Product[]> {
     const nowUtc: Date = toUtc().toDate();
 
     return await this._dbClient.product.findMany({
@@ -309,7 +346,7 @@ export class ProductRepository {
     });
   }
 
-  public async markProductNotified(productId: string) {
+  public async markProductNotified(productId: string): Promise<Product> {
     return await this._dbClient.product.update({
       where: {
         id: productId,

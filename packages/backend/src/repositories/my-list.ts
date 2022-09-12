@@ -1,6 +1,8 @@
-import type { PrismaClient } from '@prisma/client';
+import type { PrismaClient, PrismaPromise } from '@prisma/client';
 import { ProductStatus } from '@prisma/client';
 import { Order } from '@vse-bude/shared';
+import type { Items } from 'common/types/items';
+import type { SoldItems } from 'common/types/items/getItems';
 
 export class MyListRepository {
   private _dbClient: PrismaClient;
@@ -9,7 +11,7 @@ export class MyListRepository {
     this._dbClient = prismaClient;
   }
 
-  public getPurchasedItems({ userId }: { userId: string }) {
+  public getPurchasedItems({ userId }: { userId: string }): Promise<object[]> {
     return this._dbClient.product.findMany({
       where: {
         winnerId: userId,
@@ -38,7 +40,11 @@ export class MyListRepository {
     });
   }
 
-  public getSoldItems({ userId }: { userId: string }) {
+  public getSoldItems({
+    userId,
+  }: {
+    userId: string;
+  }): PrismaPromise<SoldItems[]> {
     return this._dbClient.product.findMany({
       where: {
         authorId: userId,
@@ -67,7 +73,11 @@ export class MyListRepository {
     });
   }
 
-  public getPostedItems({ userId }: { userId: string }) {
+  public getPostedItems({
+    userId,
+  }: {
+    userId: string;
+  }): PrismaPromise<Items[]> {
     return this._dbClient.product.findMany({
       where: {
         authorId: userId,
@@ -108,7 +118,7 @@ export class MyListRepository {
     });
   }
 
-  public getDraftedItems({ userId }: { userId: string }) {
+  public getDraftedItems({ userId }: { userId: string }): Promise<Items[]> {
     return this._dbClient.product.findMany({
       where: {
         authorId: userId,
@@ -148,7 +158,7 @@ export class MyListRepository {
     });
   }
 
-  public getArchived({ userId }: { userId: string }) {
+  public getArchived({ userId }: { userId: string }): Promise<Items[]> {
     return this._dbClient.product.findMany({
       where: {
         authorId: userId,

@@ -20,13 +20,8 @@ export const Filter = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!query?.filter) {
-      setFilter(null);
-
-      return;
-    }
     const filter = getFilterDefinition(query);
-    dispatch(fetchProducts(filter));
+    dispatch(fetchProducts(filter || {}));
   }, [dispatch, query]);
 
   useEffect(() => {

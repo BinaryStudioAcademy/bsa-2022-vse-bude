@@ -7,7 +7,7 @@ export const seedSocialMedia = async (
   prismaClient: PrismaClient,
   existingUsers: User[],
   existingProducts: Product[],
-) => {
+): Promise<void> => {
   const existingSocialMedia = await prismaClient.socialMedia.findMany();
 
   if (existingSocialMedia.length >= existingUsers.length) {

@@ -1,7 +1,7 @@
 import type { News } from '@prisma/client';
 import { faker } from '@faker-js/faker';
 
-export const fakeNews = async (amountOfRecords: number) => {
+export const fakeNews = async (amountOfRecords: number): Promise<News[]> => {
   const records: News[] = [];
 
   for (let i = 0; i < amountOfRecords; i++) {

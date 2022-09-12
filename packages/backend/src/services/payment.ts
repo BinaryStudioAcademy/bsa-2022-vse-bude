@@ -51,7 +51,7 @@ export class PaymentService {
     this.ORDER_LIFETIME_IN_SECONDS = 600;
   }
 
-  public async setStatus(body: string) {
+  public async setStatus(body: string): Promise<PaymentServiceStatusResponse> {
     const data = Object.keys(body)[0];
 
     const {

@@ -17,6 +17,7 @@ type Props = {
 };
 const ResetPassword: FC<Props> = ({ onSubmit }) => {
   const [hiddenEmail, setHiddenEmail] = useState(false);
+
   const { t } = useTranslation();
   const { control, errors, handleSubmit } = useAppForm<ResetPasswordLink>({
     defaultValues: DEFAULT_RESET_PASSWORD_PAYLOAD,

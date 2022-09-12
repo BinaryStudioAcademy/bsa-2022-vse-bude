@@ -8,6 +8,7 @@ import {
   ResetPasswordLink,
   AuthResponse,
   UserResponseDto,
+  ResetPasswordResponse,
 } from '@vse-bude/shared';
 import { Http } from '../http/http.service';
 
@@ -61,7 +62,7 @@ class AuthApi {
     );
   }
 
-  resetPassword(_payload: ResetPasswordLink): Promise<unknown> {
+  resetPassword(_payload: ResetPasswordLink): Promise<ResetPasswordResponse> {
     return this.#http.load(
       `${this.#apiPrefix}${ApiRoutes.AUTH}${AuthApiRoutes.RESET_PASSWORD_LINK}`,
       {

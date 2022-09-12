@@ -1,9 +1,13 @@
 import winston from 'winston';
 import { getEnv } from '@helpers';
+import type {
+  ConsoleTransportInstance,
+  FileTransportInstance,
+} from 'winston/lib/winston/transports';
 import fs from 'fs';
 import path from 'path';
 
-function checkFileSize(fileSizeBytes: number, filename: string) {
+function checkFileSize(fileSizeBytes: number, filename: string): void {
   const filepathAbsolute = path.resolve(filename);
 
   try {
@@ -61,31 +65,33 @@ class Logger {
     this.createLogFiles();
   }
 
-  log(message: string | Record<string, unknown>) {
+  log(message: string | Record<string, unknown>): void {
     this._logger.info(message);
     this.checkLogFileSize();
   }
 
-  warn(message: string | Record<string, unknown>) {
+  warn(message: string | Record<string, unknown>): void {
     this._logger.warn(message);
     this.checkLogFileSize();
   }
 
-  error(message: string | Record<string, unknown> | Error) {
+  error(message: string | Record<string, unknown> | Error): void {
     this._logger.error(message);
     this.checkLogFileSize();
     this.checkErrorFileSize();
   }
 
-  private checkLogFileSize() {
+  private checkLogFileSize(): void {
     checkFileSize(this._logFileSize, this._logFilename);
   }
 
-  private checkErrorFileSize() {
+  private checkErrorFileSize(): void {
     checkFileSize(this._errorFileSize, this._errorFilename);
   }
 
-  private createTransports(env: string) {
+  private createTransports(
+    env: string,
+  ): (ConsoleTransportInstance | FileTransportInstance)[] {
     const formats = this.getFormats();
     const transports: (
       | winston.transports.ConsoleTransportInstance
@@ -113,7 +119,10 @@ class Logger {
     return transports;
   }
 
-  private getFormats() {
+  private getFormats(): {
+    consoleFormat: winston.Logform.Format;
+    fileFormat: winston.Logform.Format;
+  } {
     return {
       consoleFormat: winston.format.combine(
         winston.format.errors({ stack: true }),
@@ -141,13 +150,15 @@ class Logger {
     };
   }
 
-  private levelFormat = (info: winston.Logform.TransformableInfo) => {
+  private levelFormat = (
+    info: winston.Logform.TransformableInfo,
+  ): winston.Logform.TransformableInfo => {
     info.level = info.level.toUpperCase();
 
     return info;
   };
 
-  private createLogFiles() {
+  private createLogFiles(): void {
     const errorFilePath = path.resolve(this._errorFilename);
     const logFilePath = path.resolve(this._logFilename);
 
