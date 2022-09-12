@@ -5,7 +5,7 @@ import { LinkButton } from 'components/primitives/link-button';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/future/image';
 import hand from 'public/images/mocup_hand1.png';
-import type { ChangeEvent} from 'react';
+import type { ChangeEvent } from 'react';
 import { useState } from 'react';
 import { nextVerifyModal, hideVerifyModal } from 'store/modals/actions';
 import * as styles from '../styles';
@@ -33,11 +33,10 @@ const EnterPhoneModal = ({ phone }: ModalProps) => {
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     setphoneInput(e.target.value);
-    if(e.target.value != phone) {
+    if (e.target.value != phone) {
       setDisabled(true);
       setTooltipText(t('common:verify.enterPhone.tooltip'));
-    }
-    else{
+    } else {
       setDisabled(false);
       setTooltipText('');
     }
