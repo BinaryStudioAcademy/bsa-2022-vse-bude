@@ -146,9 +146,7 @@ function ImageInput({ images, setImages }: ImageInputProps) {
 
                 <p css={styles.photosLabel}>
                   {t('create-post:label.photosMain')}
-                  <label htmlFor="post-photo">
-                    {t('create-post:label.photosCaption')}
-                  </label>
+                  <span>{t('create-post:label.photosCaption')}</span>
                 </p>
               </div>
             </div>

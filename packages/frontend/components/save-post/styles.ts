@@ -158,8 +158,8 @@ export const photosLabel = ({
   font-weight: ${fontWeights.label};
   line-height: ${lineHeights.label};
   color: ${colors.backgroundDark};
-  & label {
-    cursor: pointer;
+  cursor: pointer;
+  & span {
     color: ${colors.primaryLight};
     &:hover {
       color: ${colors.primaryLightHover};
