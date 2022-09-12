@@ -615,10 +615,6 @@ export const initProductRoutes = (
    *         name: id
    *         required: true
    *         type: string
-   *       - in: query
-   *         name: productId
-   *         required: true
-   *         type: string
    *     responses:
    *       200:
    *         description: Ok
