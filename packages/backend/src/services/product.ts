@@ -194,7 +194,9 @@ export class ProductService {
     userId,
     fieldsData,
   }: UpdateProduct) {
-    const { error } = updatePostSchema.validate(req.body);
+    fieldsData.images = fieldsData.images && [].concat(fieldsData.images);
+
+    const { error } = updatePostSchema.validate(fieldsData);
     if (error) {
       throw new FieldError(error.message);
     }
@@ -204,7 +206,9 @@ export class ProductService {
     )) as Product;
     if (product.authorId !== userId) throw new UnauthorizedError();
     const newImageLinks = await this._s3StorageService.uploadProductImages(req);
-    const oldImages = fieldsData?.images ? [...fieldsData.images] : [];
+
+    const oldImages = fieldsData?.images || [];
+
     const deletedImages = product.imageLinks.reduce(
       (acc, item) => (oldImages.includes(item) ? acc : [item, ...acc]),
       [],
