@@ -45,6 +45,7 @@ export const screens = {
     ENTER_EMAIL: 'Введіть електронну пошту, щоб отримати пароль',
     HIDE_EMAIL: 'Приховати електронну адресу',
     RESET_PASSWORD: 'Скинути пароль',
+    RESET_PASSWORD_SUCCESS: 'Запит на скидання пароля успішно надіслано',
     VERIFY_EMAIL: 'Підтвердити електронну адресу',
   },
   personal_info: {

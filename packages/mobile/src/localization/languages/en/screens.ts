@@ -46,6 +46,7 @@ export const screens = {
     ENTER_EMAIL: 'Enter your email to retrieve your password',
     HIDE_EMAIL: 'Hide Email',
     RESET_PASSWORD: 'Reset Password',
+    RESET_PASSWORD_SUCCESS: 'Password reset request successfully submitted',
     VERIFY_EMAIL: 'Verify email',
   },
   personal_info: {
