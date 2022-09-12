@@ -10,7 +10,7 @@ export class OrderRepository {
     this._dbClient = dbClient;
   }
 
-  public getAll({ buyerId, productId }: OrderQuery) : Promise<Order[]>  {
+  public getAll({ buyerId, productId }: OrderQuery): Promise<Order[]> {
     return this._dbClient.order.findMany({
       where: {
         buyerId,
@@ -19,7 +19,7 @@ export class OrderRepository {
     });
   }
 
-  public getById(id: string) : Promise<Order> {
+  public getById(id: string): Promise<Order> {
     return this._dbClient.order.findUnique({
       where: { id },
       include: {
@@ -37,7 +37,10 @@ export class OrderRepository {
     });
   }
 
-  public async create({ productId, buyerId }: CreateOrderDto) : Promise<Order[]| null>  {
+  public async create({
+    productId,
+    buyerId,
+  }: CreateOrderDto): Promise<Order[] | null> {
     const product: Product = await this._dbClient.product.findUnique({
       where: { id: productId },
     });
@@ -68,7 +71,7 @@ export class OrderRepository {
     return null;
   }
 
-  public updateStatus(id: string, status: OrderStatus) : Promise<Order> {
+  public updateStatus(id: string, status: OrderStatus): Promise<Order> {
     return this._dbClient.order.update({
       where: { id },
       data: { status },

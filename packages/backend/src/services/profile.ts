@@ -127,7 +127,7 @@ export class UserProfileService {
     return this._userProfileRepository.cancelPhoneVerified({ userId });
   }
 
-  public cancelEmailVerified({ userId }: { userId: string }) : void {
+  public cancelEmailVerified({ userId }: { userId: string }): void {
     return this._userProfileRepository.cancelEmailVerified({ userId });
   }
 
@@ -137,7 +137,7 @@ export class UserProfileService {
   }: {
     userId: string;
     phone: string;
-  }) : Promise<void> {
+  }): Promise<void> {
     const userPhone = await this._userProfileRepository.checkIsPhoneExists({
       userId,
       phone,

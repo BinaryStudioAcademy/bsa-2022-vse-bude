@@ -61,7 +61,11 @@ export class BidRepository {
     });
   }
 
-  async retrieve(userId: string, productId: string, time: string): Promise<Bid | Product> {
+  async retrieve(
+    userId: string,
+    productId: string,
+    time: string,
+  ): Promise<Bid | Product> {
     return this._dbClient.$transaction([
       this._dbClient.bid.updateMany({
         data: {

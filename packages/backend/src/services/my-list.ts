@@ -8,23 +8,23 @@ export class MyListService {
     this._myListRepository = myListRepository;
   }
 
-  public getPurchasedItems({ userId }: { userId: string }) : Promise<object[]> {
+  public getPurchasedItems({ userId }: { userId: string }): Promise<object[]> {
     return this._myListRepository.getPurchasedItems({ userId });
   }
 
-  public getSoldItems({ userId }: { userId: string }) : Promise<Product[]> {
+  public getSoldItems({ userId }: { userId: string }): Promise<Product[]> {
     return this._myListRepository.getSoldItems({ userId });
   }
 
-  public getDraftedItems({ userId }: { userId: string }) : Promise<Product[]> {
+  public getDraftedItems({ userId }: { userId: string }): Promise<Product[]> {
     return this._myListRepository.getDraftedItems({ userId });
   }
 
-  public getPostedItems({ userId }: { userId: string }) : Promise<Product[]> {
+  public getPostedItems({ userId }: { userId: string }): Promise<Product[]> {
     return this._myListRepository.getPostedItems({ userId });
   }
 
-  public getArchived({ userId }: { userId: string }) : Promise<Product[]> {
+  public getArchived({ userId }: { userId: string }): Promise<Product[]> {
     return this._myListRepository.getArchived({ userId });
   }
 }

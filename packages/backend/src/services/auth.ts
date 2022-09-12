@@ -120,7 +120,7 @@ export class AuthService {
     return authResponseMap(tokenData, newUser);
   }
 
-  async getByEmail(email: string) : Promise<User> {
+  async getByEmail(email: string): Promise<User> {
     return this._userRepository.getByEmail(email);
   }
 

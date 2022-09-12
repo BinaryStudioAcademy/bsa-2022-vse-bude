@@ -11,16 +11,16 @@ export class AuctionScheduler {
     this._productRepository = productRepository;
   }
 
-  deleteAuctionJob(prodUuid: string) : void {
+  deleteAuctionJob(prodUuid: string): void {
     schedule.cancelJob(auctionJobName(prodUuid));
   }
 
-  updateAuctionJob(product: Product) : void {
+  updateAuctionJob(product: Product): void {
     this.deleteAuctionJob(product.id);
     this.createAuctionJob(product);
   }
 
-  createAuctionJob(product: Product) : void {
+  createAuctionJob(product: Product): void {
     const auctionNotifications = new AuctionNotificationsCommand(product);
     schedule.scheduleJob(
       auctionJobName(product.id),
@@ -29,7 +29,7 @@ export class AuctionScheduler {
     );
   }
 
-  initAuctionJobs() : void {
+  initAuctionJobs(): void {
     this._productRepository
       .getActiveAuctionsLots()
       .then((activeAuctions: Product[]) => {

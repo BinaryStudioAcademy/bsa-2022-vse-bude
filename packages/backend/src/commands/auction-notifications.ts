@@ -35,7 +35,7 @@ export class AuctionNotificationsCommand extends BaseCommand {
     this._bidRepository = new BidRepository(database);
   }
 
-  async execute() : Promise<void> {
+  async execute(): Promise<void> {
     logger.log(`Command ${this.commandAlias} started!`);
     try {
       await this.handleParticipants(this._product);

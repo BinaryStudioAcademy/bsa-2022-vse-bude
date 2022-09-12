@@ -271,7 +271,7 @@ export class ProductRepository {
     categoryId: string,
     type: ProductType,
     productId: string,
-  ) : Promise<Product[]> {
+  ): Promise<Product[]> {
     return await this._dbClient.product.findMany({
       where: {
         city,
@@ -285,7 +285,7 @@ export class ProductRepository {
     });
   }
 
-  public async getMostPopularLots(limit: number) : Promise<Product[]> {
+  public async getMostPopularLots(limit: number): Promise<Product[]> {
     return await this._dbClient.product.findMany({
       take: limit,
       where: {
@@ -298,7 +298,7 @@ export class ProductRepository {
     });
   }
 
-  public async getMostPopularProducts(limit: number) : Promise<Product[]> {
+  public async getMostPopularProducts(limit: number): Promise<Product[]> {
     return await this._dbClient.product.findMany({
       take: limit,
       where: {
@@ -311,7 +311,7 @@ export class ProductRepository {
     });
   }
 
-  public async getActiveAuctionsLots() : Promise<Product[]> {
+  public async getActiveAuctionsLots(): Promise<Product[]> {
     const nowUtc: Date = toUtc().toDate();
 
     return await this._dbClient.product.findMany({
@@ -325,7 +325,7 @@ export class ProductRepository {
     });
   }
 
-  public async markProductNotified(productId: string) : Promise<Product[]> {
+  public async markProductNotified(productId: string): Promise<Product[]> {
     return await this._dbClient.product.update({
       where: {
         id: productId,
