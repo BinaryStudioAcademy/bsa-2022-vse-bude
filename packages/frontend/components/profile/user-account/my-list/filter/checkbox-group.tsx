@@ -7,15 +7,15 @@ export const CheckboxGroup = ({
 }: {
   checkboxes: CheckboxProps[];
 }) => (
-    <div>
-      {checkboxes.map((elemProp, idx) => {
-        const { label, value, onChange } = elemProp;
-        
-return (
-          <div key={idx + elemProp.label + idx} css={styles.checkboxContainer}>
-            <Checkbox value={value} label={label} onChange={onChange} />
-          </div>
-        );
-      })}
-    </div>
-  );
+  <div>
+    {checkboxes.map((elemProp, idx) => {
+      const { label, value, onChange } = elemProp;
+
+      return (
+        <div key={idx + elemProp.label + idx} css={styles.checkboxContainer}>
+          <Checkbox value={value} label={label} onChange={onChange} />
+        </div>
+      );
+    })}
+  </div>
+);
