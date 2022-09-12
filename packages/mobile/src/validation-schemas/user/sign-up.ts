@@ -36,7 +36,7 @@ const signUp = Joi.object<UserSignUpDto>({
     .trim()
     .required()
     .messages({
-      'string.pattern.base': i18next.t('errors.WRONG_FORMAT'),
+      'string.pattern.base': i18next.t('errors.WRONG_FORMAT_PHONE'),
       'string.empty': i18next.t('errors.EMPTY_PHONE'),
     }),
   password: Joi.string()

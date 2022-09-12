@@ -99,6 +99,8 @@ export const screens = {
     FIRST_NAME_INVALID: 'The invalid first name format',
     LAST_NAME_INVALID: 'The invalid last name format',
     WRONG_FORMAT: 'Wrong format',
+    WRONG_FORMAT_PHONE:
+      'Please enter phone number in an international format, e.g.: +380123456789',
     PLACE_NAME: 'Should consist of letters: А-Я or A-Z',
     MAX_COUNTRY_LENGTH: `The country name length must not exceed ${MAX_COUNTRY_LENGTH} characters`,
     MAX_REGION_LENGTH: `The region name length must not exceed ${MAX_REGION_LENGTH} characters`,
