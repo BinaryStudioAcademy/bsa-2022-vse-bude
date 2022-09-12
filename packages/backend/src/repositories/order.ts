@@ -2,6 +2,7 @@ import type { PrismaClient, Product, Order, Prisma } from '@prisma/client';
 import { ProductStatus } from '@prisma/client';
 import { type CreateOrderDto, OrderStatus } from '@vse-bude/shared';
 import type { OrderById, OrderQuery } from '@types';
+import { ProductUnavailableError } from '@errors';
 
 export class OrderRepository {
   private _dbClient: PrismaClient;
@@ -56,30 +57,30 @@ export class OrderRepository {
       where: { id: productId },
     });
 
-    if (product.status === ProductStatus.ACTIVE) {
-      return this._dbClient.order.create({
-        data: {
-          productId,
-          buyerId,
-          cost: product.price,
-          status: OrderStatus.CREATED,
-        },
-        include: {
-          product: true,
-          buyer: {
-            select: {
-              id: true,
-              email: true,
-              firstName: true,
-              lastName: true,
-              phone: true,
-            },
-          },
-        },
-      });
+    if (product.status !== ProductStatus.ACTIVE) {
+      throw new ProductUnavailableError();
     }
 
-    return null;
+    return this._dbClient.order.create({
+      data: {
+        productId,
+        buyerId,
+        cost: product.price,
+        status: OrderStatus.CREATED,
+      },
+      include: {
+        product: true,
+        buyer: {
+          select: {
+            id: true,
+            email: true,
+            firstName: true,
+            lastName: true,
+            phone: true,
+          },
+        },
+      },
+    });
   }
 
   public updateStatus(id: string, status: OrderStatus): Promise<Order> {

@@ -1,26 +1,40 @@
-import { UnauthorizedError } from '@errors';
+import { ProductNotFoundError, UnauthorizedError } from '@errors';
 import type { ProductRepository, OrderRepository } from '@repositories';
 import type { OrderById, OrderQuery } from '@types';
 import type { CreateOrderDto } from '@vse-bude/shared';
 import type { Order } from '@prisma/client';
+import { NotVerifiedError } from 'error/user/not-verified';
+import type { VerifyService } from './verify';
 
 export class OrderService {
   private _orderRepository: OrderRepository;
 
   private _productRepository: ProductRepository;
 
+  private _verifyService: VerifyService;
+
   constructor(
     orderRepository: OrderRepository,
     productRepository: ProductRepository,
+    verifyService: VerifyService,
   ) {
     this._orderRepository = orderRepository;
     this._productRepository = productRepository;
+    this._verifyService = verifyService;
   }
 
   public async create(data: CreateOrderDto): Promise<Order & OrderById> {
+    const isUserVerified = await this._verifyService.isUserVerified(
+      data.buyerId,
+    );
+
+    if (!isUserVerified) {
+      throw new NotVerifiedError();
+    }
+
     const product = await this._productRepository.getById(data.productId);
     if (!product) {
-      throw new Error('Product not found');
+      throw new ProductNotFoundError();
     }
 
     const order = this._orderRepository.create(data);
