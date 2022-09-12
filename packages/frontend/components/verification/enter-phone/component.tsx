@@ -5,16 +5,19 @@ import { LinkButton } from 'components/primitives/link-button';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/future/image';
 import hand from 'public/images/mocup_hand1.png';
-import type { ChangeEvent } from 'react';
+import type { ChangeEvent} from 'react';
+import { useState } from 'react';
 import { nextVerifyModal, hideVerifyModal } from 'store/modals/actions';
 import * as styles from '../styles';
 
 interface ModalProps {
   phone: string;
-  setPhone: (phone: string) => void;
 }
 
-const EnterPhoneModal = ({ phone, setPhone }: ModalProps) => {
+const EnterPhoneModal = ({ phone }: ModalProps) => {
+  const [tooltipText, setTooltipText] = useState('');
+  const [disabled, setDisabled] = useState(false);
+  const [phoneInput, setphoneInput] = useState(phone);
   const dispatch = useAppDispatch();
 
   const { t } = useTranslation();
@@ -29,7 +32,15 @@ const EnterPhoneModal = ({ phone, setPhone }: ModalProps) => {
   };
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPhone(e.target.value);
+    setphoneInput(e.target.value);
+    if(e.target.value != phone) {
+      setDisabled(true);
+      setTooltipText(t('common:verify.enterPhone.tooltip'));
+    }
+    else{
+      setDisabled(false);
+      setTooltipText('');
+    }
   };
 
   return (
@@ -51,10 +62,10 @@ const EnterPhoneModal = ({ phone, setPhone }: ModalProps) => {
           variant="primary"
           type="text"
           name="phone"
-          value={phone}
+          value={phoneInput}
           onChange={handleOnChange}
         />
-        <Button onClick={changeModal}>
+        <Button onClick={changeModal} disabled={disabled} tooltip={tooltipText}>
           {t('common:verify.enterPhone.button.verify')}
         </Button>
       </div>
