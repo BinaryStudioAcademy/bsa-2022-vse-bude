@@ -13,7 +13,7 @@ import { useTypedSelector } from '@hooks';
 import type { CategoryDto, ProductQuery } from '@vse-bude/shared';
 import { ITEM_FILTER } from '@vse-bude/shared';
 import { useTranslation } from 'next-i18next';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as styles from './styles';
 import { MAX_PRICE_NAME, MIN_PRICE_NAME, sortByOptions } from './utils';
 import type { FilterPopoverProps, PriceOption, SortByOption } from './types';
@@ -26,8 +26,6 @@ export function FilterPopover({ filter, setFilter }: FilterPopoverProps) {
   const [category, setCategory] = useState<SelectOption>(null);
   const [sortBy, setSortBy] = useState<SortByOption>(null);
   const [price, setPrice] = useState<PriceOption>(null);
-
-  const triggerRef = useRef<HTMLDivElement>();
 
   useEffect(() => {
     const sortBuyCurrent = sortByOptions(t).find(
@@ -91,7 +89,7 @@ export function FilterPopover({ filter, setFilter }: FilterPopoverProps) {
       position="absolute"
       bodyWrapperCssExtend={styles.popoverWrapper}
       trigger={
-        <div ref={triggerRef} css={styles.iconWrapper}>
+        <div css={styles.iconWrapper}>
           <Icon color={IconColor.BLACK} icon={IconName.FILTER} size={'md'} />
           <Icon
             color={IconColor.BLACK}
