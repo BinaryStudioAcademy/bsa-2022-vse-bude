@@ -61,7 +61,11 @@ const EnterPhoneModal = ({ phone }: ModalProps) => {
           value={phoneInput}
           onChange={handleOnChange}
         />
-        <Button onClick={changeModal} disabled={!!tooltipText} tooltip={tooltipText}>
+        <Button
+          onClick={changeModal}
+          disabled={!!tooltipText}
+          tooltip={tooltipText}
+        >
           {t('common:verify.enterPhone.button.verify')}
         </Button>
       </div>
