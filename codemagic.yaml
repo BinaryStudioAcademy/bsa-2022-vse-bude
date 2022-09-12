@@ -28,6 +28,11 @@ scripts:
       storeFile=$KEYSTORE_STORE_PATH
       EOF
 
+  - &android_google_services_set
+    name: Set google services
+    script: |
+      echo $GOOGLE_SERVICES_JSON_BASE64 | base64 --decode > ./android/app/google-services.json
+
   - &android_build_apk
     name: Build Android release
     script: |
@@ -65,6 +70,7 @@ workflows:
       - *environment_set
       - *android_sdk_set
       - *android_keystore_set
+      - *android_google_services_set
       - *android_build_apk
 
     artifacts:
@@ -111,6 +117,7 @@ workflows:
       - *environment_set
       - *android_sdk_set
       - *android_keystore_set
+      - *android_google_services_set
       - *android_build_aab
 
     artifacts:
