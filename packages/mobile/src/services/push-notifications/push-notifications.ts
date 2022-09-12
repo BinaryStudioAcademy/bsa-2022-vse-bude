@@ -27,16 +27,16 @@ class PushNotificationService {
     this.configureNotifications();
   }
 
-  private createChannel(): Promise<void> {
-    return new Promise((resolve) => {
-      PushNotification.createChannel(
-        {
-          channelId: ANDROID_PN_DEFAULT_CHANNEL_ID,
-          channelName: CHANEL_NAME,
-        },
-        () => resolve(),
-      );
-    });
+  private createChannel(): void {
+    PushNotification.createChannel(
+      {
+        channelId: ANDROID_PN_DEFAULT_CHANNEL_ID,
+        channelName: CHANEL_NAME,
+      },
+      () => {
+        return;
+      },
+    );
   }
 
   private configureNotifications() {
