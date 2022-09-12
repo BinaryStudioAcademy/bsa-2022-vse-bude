@@ -1,12 +1,12 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Author, ColorPalette } from '@vse-bude/shared';
+import { UserProfileDto, ColorPalette } from '@vse-bude/shared';
 import { Text, View, Image, PhoneIcon } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { SocialButton } from './social-button';
 import { styles } from './styles';
 
-const SellerInfo = ({ author }: { author: Author }) => {
+const SellerInfo = ({ author }: { author: UserProfileDto }) => {
   const { t } = useTranslation();
   const { firstName, avatar, phone, socialMedia } = author;
 

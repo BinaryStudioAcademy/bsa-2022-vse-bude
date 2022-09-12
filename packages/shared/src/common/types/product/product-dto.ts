@@ -1,33 +1,8 @@
+import type { CategoryDto } from '../category';
+import type { SocialMedia } from '../social-media';
+import type { UserProfileDto } from '../profile';
 import type { ProductType, ProductStatus } from '../../enums';
-import type { WinnerDto } from './winner-dto';
-
-interface SocialMedia {
-  id: string;
-  socialMedia: string;
-  link: string;
-}
-
-export interface Author {
-  id: string;
-  firstName: string;
-  lastName: string;
-  phone: string;
-  avatar: string;
-  socialMedia: SocialMedia[];
-}
-
-interface Category {
-  id: string;
-  title: string;
-}
-
-export interface Bid {
-  id: string;
-  bidderId: string;
-  price: number;
-  createdAt: string;
-  updatedAt: string;
-}
+import type { Bid } from '../bid';
 
 export enum Condition {
   NEW = 'NEW',
@@ -40,7 +15,7 @@ interface ProductDto {
   description: string;
   price: number;
   recommendedPrice: number;
-  minimalBid: number;
+  minimalBid?: number;
   imageLinks: string[];
   country: string;
   city: string;
@@ -51,10 +26,10 @@ interface ProductDto {
   cancelReason: string;
   bids?: Bid[];
   condition: Condition;
-  category: Category;
+  category: CategoryDto;
   views: number;
-  author: Author;
-  winner: WinnerDto;
+  author: UserProfileDto;
+  winner: UserProfileDto;
   updatedAt: string;
   postDate: string;
   createdAt: string;

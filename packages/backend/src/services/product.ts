@@ -184,7 +184,7 @@ export class ProductService {
       fieldsData.price = fieldsData.recommendedPrice;
     }
     if (fieldsData.status !== ProductStatus.DRAFT) {
-      fieldsData.postDate = new Date();
+      fieldsData.postDate = new Date().toISOString();
     }
     const data = {
       imageLinks,
@@ -243,7 +243,7 @@ export class ProductService {
       product.status === ProductStatus.DRAFT &&
       fieldsData.status !== ProductStatus.DRAFT
     ) {
-      fieldsData.postDate = new Date();
+      fieldsData.postDate = new Date().toISOString();
     }
     const data = {
       imageLinks,
