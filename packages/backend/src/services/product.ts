@@ -94,9 +94,7 @@ export class ProductService {
     return favProducts.map((favProd) => favProd.productId);
   }
 
-  public async getFavoriteProducts(
-    userId: string,
-  ): Promise<ProductById[]> {
+  public async getFavoriteProducts(userId: string): Promise<ProductById[]> {
     const favProducts = await this._productRepository.getFavorite(userId);
 
     return favProducts.map((product) => productMapper(product));
