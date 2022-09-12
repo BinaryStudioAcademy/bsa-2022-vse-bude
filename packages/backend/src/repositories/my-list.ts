@@ -1,5 +1,6 @@
-import type { PrismaClient, Product } from '@prisma/client';
+import type { PrismaClient, PrismaPromise, Product, ProductType } from '@prisma/client';
 import { ProductStatus } from '@prisma/client';
+import { Decimal } from '@prisma/client/runtime';
 import { Order } from '@vse-bude/shared';
 
 export class MyListRepository {
@@ -38,7 +39,7 @@ export class MyListRepository {
     });
   }
 
-  public getSoldItems({ userId }: { userId: string }): Promise<Product[]> {
+  public getSoldItems({ userId }: { userId: string }): PrismaPromise<{ endDate: Date; id: string; title: string; price: Decimal; imageLinks: string[]; type: ProductType; status: ProductStatus; winner: { id: string; avatar: string; firstName: string; lastName: string; }; }[]> {
     return this._dbClient.product.findMany({
       where: {
         authorId: userId,

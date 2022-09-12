@@ -325,7 +325,7 @@ export class ProductRepository {
     });
   }
 
-  public async markProductNotified(productId: string): Promise<Product[]> {
+  public async markProductNotified(productId: string): Promise<Product> {
     return await this._dbClient.product.update({
       where: {
         id: productId,

@@ -314,7 +314,7 @@ export class ProductService {
     return this._productRepository.getMostPopularProducts(+limit);
   }
 
-  public async getEditProductById({ userId, productId }): Promise<Product> {
+  public async getEditProductById({ userId, productId }): Promise<object> {
     const product = await this.getById(productId);
 
     if (!product) {

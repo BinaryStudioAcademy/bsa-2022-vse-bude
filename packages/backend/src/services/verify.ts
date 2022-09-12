@@ -170,7 +170,7 @@ export class VerifyService {
     return `verification_code:user_id:${userId}:type:${type}`;
   }
 
-  public async isUserVerified(userId: string): Promise<GetUserVerifiedDto> {
+  public async isUserVerified(userId: string): Promise<boolean> {
     const verifyData = await this._userRepository.getVerified({ userId });
 
     return verifyData.emailVerified && verifyData.phoneVerified;

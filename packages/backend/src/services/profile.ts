@@ -13,7 +13,6 @@ import type { HashService, S3StorageService } from '@services';
 import { ProfileError } from '@errors';
 import { getFilenameFromUrl } from '@helpers';
 import type {
-  User,
   SocialMedia,
   SocialMediaType,
   PrismaPromise,
@@ -42,7 +41,7 @@ export class UserProfileService {
     this._storageService = storageService;
   }
 
-  public async getUser({ userId }: { userId: string }): Promise<User> {
+  public async getUser({ userId }: { userId: string }): Promise<{ id: string; firstName: string; lastName: string; avatar: string; }> {
     const user = await this._userProfileRepository.getUser({ userId });
     if (!user) {
       throw new ProfileError({
@@ -115,7 +114,7 @@ export class UserProfileService {
   }: {
     userId: string;
     data: UpdateUserProfileDto;
-  }): Promise<User> {
+  }): Prisma.Prisma__UserClient<{ id: string; avatar: string; email: string; phone: string; firstName: string; lastName: string; phoneVerified: boolean; emailVerified: boolean; }> {
     return this._userProfileRepository.updateUserProfile({ userId, data });
   }
 
@@ -127,7 +126,7 @@ export class UserProfileService {
     return this._userProfileRepository.cancelPhoneVerified({ userId });
   }
 
-  public cancelEmailVerified({ userId }: { userId: string }): void {
+  public cancelEmailVerified({ userId }: { userId: string }): Promise<{ emailVerified: boolean; }> {
     return this._userProfileRepository.cancelEmailVerified({ userId });
   }
 

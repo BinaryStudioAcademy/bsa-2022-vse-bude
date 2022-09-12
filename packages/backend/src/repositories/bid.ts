@@ -65,7 +65,7 @@ export class BidRepository {
     userId: string,
     productId: string,
     time: string,
-  ): Promise<Bid | Product> {
+  ): Promise<[Prisma.BatchPayload, Prisma.BatchPayload, Product]> {
     return this._dbClient.$transaction([
       this._dbClient.bid.updateMany({
         data: {
