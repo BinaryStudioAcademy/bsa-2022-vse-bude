@@ -55,7 +55,6 @@ const personalInfoApi = new PersonalInfoApi({
 const appService = new AppService();
 
 const pushNotification = new PushNotificationService();
-pushNotification.init();
 
 export {
   storage,
