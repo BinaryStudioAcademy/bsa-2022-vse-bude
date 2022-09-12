@@ -1,7 +1,7 @@
-import type { PrismaClient, Product, Order } from '@prisma/client';
+import type { PrismaClient, Product, Order, Prisma } from '@prisma/client';
 import { ProductStatus } from '@prisma/client';
-import { type CreateOrderDto, type OrderDto, OrderStatus } from '@vse-bude/shared';
-import type { OrderQuery } from '@types';
+import { type CreateOrderDto, OrderStatus } from '@vse-bude/shared';
+import type { OrderById, OrderQuery } from '@types';
 
 export class OrderRepository {
   private _dbClient: PrismaClient;
@@ -19,7 +19,7 @@ export class OrderRepository {
     });
   }
 
-  public getById(id: string): Promise<OrderDto> {
+  public getById(id: string): Prisma.Prisma__OrderClient<Order & { product: Product; buyer: { id: string; email: string; firstName: string; lastName: string; phone: string; }; }> {
     return this._dbClient.order.findUnique({
       where: { id },
       include: {
@@ -40,7 +40,7 @@ export class OrderRepository {
   public async create({
     productId,
     buyerId,
-  }: CreateOrderDto): Promise<Order & { product: Product; buyer: { id: string; email: string; firstName: string; lastName: string; phone: string; }; }> {
+  }: CreateOrderDto): Promise<Order & OrderById> {
     const product: Product = await this._dbClient.product.findUnique({
       where: { id: productId },
     });

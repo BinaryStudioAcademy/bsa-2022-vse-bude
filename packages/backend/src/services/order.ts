@@ -1,8 +1,8 @@
 import { UnauthorizedError } from '@errors';
 import type { ProductRepository, OrderRepository } from '@repositories';
-import type { OrderQuery } from '@types';
-import type { CreateOrderDto, OrderDto } from '@vse-bude/shared';
-import type { Order, Product } from '@prisma/client';
+import type { OrderById, OrderQuery } from '@types';
+import type { CreateOrderDto } from '@vse-bude/shared';
+import type { Order } from '@prisma/client';
 
 export class OrderService {
   private _orderRepository: OrderRepository;
@@ -17,7 +17,7 @@ export class OrderService {
     this._productRepository = productRepository;
   }
 
-  public async create(data: CreateOrderDto): Promise<Order & { product: Product; buyer: { id: string; email: string; firstName: string; lastName: string; phone: string; }; }> {
+  public async create(data: CreateOrderDto): Promise<Order & OrderById> {
     const product = await this._productRepository.getById(data.productId);
     if (!product) {
       throw new Error('Product not found');
@@ -40,7 +40,7 @@ export class OrderService {
     throw new UnauthorizedError();
   }
 
-  public async getById(id: string): Promise<OrderDto> {
+  public async getById(id: string): Promise<Order & OrderById> {
     return this._orderRepository.getById(id);
   }
 }

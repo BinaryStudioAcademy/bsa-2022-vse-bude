@@ -1,9 +1,10 @@
 import type { Product } from '@prisma/client';
+import type { ProductById } from 'common/types/product';
 
 export const productMapper = (
   productData: Product,
   currentPrice: number,
-): object => ({
+): ProductById => ({
   ...productData,
   currentPrice,
 });

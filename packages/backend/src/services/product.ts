@@ -26,6 +26,7 @@ import { createPostSchema, updatePostSchema } from 'validation/product/schemas';
 import { NotVerifiedError } from 'error/user/not-verified';
 import { lang } from '@lang';
 import type { AuctionScheduler } from '@services';
+import type { ProductById } from 'common/types/product';
 
 export class ProductService {
   private _productRepository: ProductRepository;
@@ -56,7 +57,7 @@ export class ProductService {
     return this._productRepository.getAll(query);
   }
 
-  public async getById(productId: string): Promise<object> {
+  public async getById(productId: string): Promise<ProductById> {
     const product = await this._productRepository.getById(productId);
     if (!product) {
       throw new ProductNotFoundError();
@@ -314,7 +315,7 @@ export class ProductService {
     return this._productRepository.getMostPopularProducts(+limit);
   }
 
-  public async getEditProductById({ userId, productId }): Promise<object> {
+  public async getEditProductById({ userId, productId }): Promise<Product> {
     const product = await this.getById(productId);
 
     if (!product) {
