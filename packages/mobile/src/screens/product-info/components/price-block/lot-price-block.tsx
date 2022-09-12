@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { ColorPalette, ItemDto } from '@vse-bude/shared';
+import { ColorPalette, ProductDto } from '@vse-bude/shared';
 import { useAppForm, useCustomTheme, useTranslation } from '~/hooks/hooks';
 import {
   PrimaryButton,
@@ -15,7 +15,7 @@ import { DEFAULT_BID_VALUE } from '../../common/constants';
 import { PriceWrapper } from './price-wrapper';
 import { styles } from './styles';
 
-type LotPriceBlockProps = Pick<ItemDto, 'currentPrice' | 'minimalBid'>;
+type LotPriceBlockProps = Pick<ProductDto, 'currentPrice' | 'minimalBid'>;
 
 const LotPriceBlock: FC<LotPriceBlockProps> = ({
   currentPrice,

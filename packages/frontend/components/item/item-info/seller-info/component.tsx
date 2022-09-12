@@ -1,13 +1,13 @@
 ﻿import { Button, Avatar, Icon, Anchor } from '@primitives';
 import { IconColor, IconName, Routes } from '@enums';
-import type { AuthorDto } from '@vse-bude/shared';
+import type { UserProfileDto } from '@vse-bude/shared';
 import Router from 'next/router';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import * as styles from './styles';
 
 interface SellerInfoProps {
-  seller: AuthorDto;
+  seller: UserProfileDto;
   onContactSeller: () => void;
 }
 
