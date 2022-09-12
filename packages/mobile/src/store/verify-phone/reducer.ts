@@ -1,6 +1,6 @@
 import { createReducer, isAnyOf } from '@reduxjs/toolkit';
 import { DataStatus } from '~/common/enums/enums';
-import { verifyPhone, getVerificationCode } from './actions';
+import { verifyPhone, getVerificationCodePhone } from './actions';
 
 type State = {
   dataStatus: DataStatus;
@@ -13,19 +13,19 @@ const initialState: State = {
 const reducer = createReducer(initialState, (builder) => {
   builder
     .addMatcher(
-      isAnyOf(verifyPhone.fulfilled, getVerificationCode.fulfilled),
+      isAnyOf(verifyPhone.fulfilled, getVerificationCodePhone.fulfilled),
       (state) => {
         state.dataStatus = DataStatus.FULFILLED;
       },
     )
     .addMatcher(
-      isAnyOf(verifyPhone.rejected, getVerificationCode.rejected),
+      isAnyOf(verifyPhone.rejected, getVerificationCodePhone.rejected),
       (state) => {
         state.dataStatus = DataStatus.REJECTED;
       },
     )
     .addMatcher(
-      isAnyOf(verifyPhone.pending, getVerificationCode.pending),
+      isAnyOf(verifyPhone.pending, getVerificationCodePhone.pending),
       (state) => {
         state.dataStatus = DataStatus.PENDING;
       },

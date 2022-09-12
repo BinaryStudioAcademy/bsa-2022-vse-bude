@@ -12,7 +12,7 @@ type Constructor = {
   apiPrefix: string;
 };
 
-class PhoneVerificationApi {
+class VerificationApi {
   #http: Http;
 
   #apiPrefix: string;
@@ -22,7 +22,7 @@ class PhoneVerificationApi {
     this.#apiPrefix = apiPrefix;
   }
 
-  getVerificationCode(): Promise<unknown> {
+  getVerificationCodePhone(): Promise<unknown> {
     return this.#http.load(
       `${this.#apiPrefix}${ApiRoutes.VERIFY}${
         VerifyApiRoutes.PHONE_RESEND_CODE
@@ -48,4 +48,4 @@ class PhoneVerificationApi {
   }
 }
 
-export { PhoneVerificationApi };
+export { VerificationApi };

@@ -16,8 +16,8 @@ import {
   SupportScreen,
   NewItemScreen,
   VerifyPhoneScreen,
-  VerifyCodeScreen,
-  VerifiedScreen,
+  VerifyCodePhoneScreen,
+  VerifiedPhoneScreen,
   TypeOfPostScreen,
 } from '~/screens/screens';
 import { HeaderLeft } from '~/components/components';
@@ -86,12 +86,12 @@ const Navigation: FC = () => {
               component={VerifyPhoneScreen}
             />
             <Stack.Screen
-              name={RootScreenName.VERIFY_CODE}
-              component={VerifyCodeScreen}
+              name={RootScreenName.VERIFY_CODE_PHONE}
+              component={VerifyCodePhoneScreen}
             />
             <Stack.Screen
-              name={RootScreenName.VERIFIED}
-              component={VerifiedScreen}
+              name={RootScreenName.VERIFIED_PHONE}
+              component={VerifiedPhoneScreen}
             />
           </NativeStack.Group>
           <Stack.Screen

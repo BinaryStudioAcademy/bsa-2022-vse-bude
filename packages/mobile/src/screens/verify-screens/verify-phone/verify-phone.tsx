@@ -23,7 +23,7 @@ import {
   PrimaryButton,
   View,
 } from '~/components/components';
-import { verifyPhoneActions } from '~/store/actions';
+import { verifyActions } from '~/store/actions';
 import { images } from '~/assets/images/images';
 import { phone } from '~/validation-schemas/validation-schemas';
 import { globalStyles } from '~/styles/styles';
@@ -68,11 +68,11 @@ const VerifyPhoneScreen: FC = () => {
   };
 
   const onSubmit = (): void => {
-    dispatch(verifyPhoneActions.getVerificationCode())
+    dispatch(verifyActions.getVerificationCodePhone())
       .unwrap()
       .then(() => {
         notification.success(t('verificationPhone.CODE_SENT'));
-        navigation.navigate(RootScreenName.VERIFY_CODE);
+        navigation.navigate(RootScreenName.VERIFY_CODE_PHONE);
       })
       .catch((err) => {
         // eslint-disable-next-line

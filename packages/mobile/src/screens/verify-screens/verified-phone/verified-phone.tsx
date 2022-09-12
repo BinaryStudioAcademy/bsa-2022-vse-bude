@@ -13,7 +13,7 @@ import { MainScreenName, RootScreenName } from '~/common/enums/enums';
 import { Header, Title, VerifyImage, Wrapper } from '../components/components';
 import { styles } from './styles';
 
-const VerifiedScreen: FC = () => {
+const VerifiedPhoneScreen: FC = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<RootNavigationProps>();
   const { colors } = useCustomTheme();
@@ -51,4 +51,4 @@ const VerifiedScreen: FC = () => {
   );
 };
 
-export { VerifiedScreen };
+export { VerifiedPhoneScreen };

@@ -19,7 +19,7 @@ import {
   PrimaryButton,
   View,
 } from '~/components/components';
-import { verifyPhoneActions } from '~/store/actions';
+import { verifyActions } from '~/store/actions';
 import { images } from '~/assets/images/images';
 import { globalStyles } from '~/styles/styles';
 import { RootNavigationProps } from '~/common/types/types';
@@ -40,7 +40,7 @@ import {
 } from '../components/components';
 import { styles } from './styles';
 
-const VerifyCodeScreen: FC = () => {
+const VerifyCodePhoneScreen: FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const navigation = useNavigation<RootNavigationProps>();
@@ -63,7 +63,7 @@ const VerifyCodeScreen: FC = () => {
   };
 
   const handleResendPress = (): void => {
-    dispatch(verifyPhoneActions.getVerificationCode())
+    dispatch(verifyActions.getVerificationCodePhone())
       .unwrap()
       .then(() => {
         notification.success(t('verificationPhone.CODE_SENT'));
@@ -75,10 +75,10 @@ const VerifyCodeScreen: FC = () => {
   };
 
   const onSubmit = (payload: PhoneVerifyDto): void => {
-    dispatch(verifyPhoneActions.verifyPhone(payload))
+    dispatch(verifyActions.verifyPhone(payload))
       .unwrap()
       .then(() => {
-        navigation.navigate(RootScreenName.VERIFIED);
+        navigation.navigate(RootScreenName.VERIFIED_PHONE);
       })
       .catch((err) => {
         // eslint-disable-next-line
@@ -147,4 +147,4 @@ const VerifyCodeScreen: FC = () => {
   );
 };
 
-export { VerifyCodeScreen };
+export { VerifyCodePhoneScreen };
