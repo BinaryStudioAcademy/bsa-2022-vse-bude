@@ -1,55 +1,58 @@
-import type { ProductType } from '@vse-bude/shared';
+import type { ProductQuery } from '@vse-bude/shared';
 import { useRouter } from 'next/router';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { fetchProducts } from 'store/product';
 import { useEffect, useState } from 'react';
-import { css } from '@emotion/react';
-import { Button } from '@primitives';
-import { PostTypeModal } from '@components/make-a-post/type-of-post';
-import { ProductGrid } from './product-grid/component';
-
-interface RequestOptions {
-  limit?: number;
-  type?: ProductType;
-  category?: string;
-}
+import { Routes } from '@enums';
+import { Container } from '@components/primitives';
+import { ProductGrid } from './product-grid';
+import { FilterHeader } from './filter-header';
+import { Pagination } from './pagination';
+import { ProductsLoader } from './products-loader';
+import { deepEquals, getFilterDefinition, removeFilterFields } from './helpers';
 
 export const Filter = () => {
-  const [isOpenTypeOfPost, setIsOpenTypeOfPost] = useState(false);
-  const { query } = useRouter();
-  const { list } = useTypedSelector((store) => store.product);
+  const { query, push } = useRouter();
+  const { loading } = useTypedSelector((store) => store.product);
+  const [filter, setFilter] = useState<ProductQuery>(
+    getFilterDefinition(query),
+  );
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const filter: RequestOptions =
-      query.filter && JSON.parse(query.filter as string);
-
-    dispatch(
-      fetchProducts({
-        limit: filter?.limit,
-        type: filter?.type,
-        categoryId: filter?.category,
-      }),
-    );
+    const filter = getFilterDefinition(query);
+    dispatch(fetchProducts(filter || {}));
   }, [dispatch, query]);
 
+  useEffect(() => {
+    const queryFilter = getFilterDefinition(query);
+    if (!filter || deepEquals(filter, queryFilter)) {
+      return;
+    }
+    push({
+      pathname: Routes.ITEMS,
+      query: {
+        filter: JSON.stringify(filter),
+      },
+    });
+  }, [filter, push, query]);
+
   return (
-    <div>
-      <PostTypeModal
-        isOpen={isOpenTypeOfPost}
-        setIsOpen={setIsOpenTypeOfPost}
+    <>
+      <FilterHeader
+        filter={removeFilterFields(filter, ['from', 'limit'])}
+        setFilter={setFilter}
       />
-      <div
-        css={css`
-          margin: 20px auto 0;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        `}
-      >
-        <Button onClick={() => setIsOpenTypeOfPost(true)}>Create a Post</Button>
-      </div>
-      <ProductGrid lots={list}></ProductGrid>
-    </div>
+      <Container>
+        {loading ? (
+          <ProductsLoader />
+        ) : (
+          <>
+            <ProductGrid />
+            <Pagination filter={filter} setFilter={setFilter} />
+          </>
+        )}
+      </Container>
+    </>
   );
 };

@@ -1,5 +1,4 @@
 import type { ProductRepository } from '@repositories';
-import type { ProductQuery } from '@types';
 import {
   ProductNotFoundError,
   UnauthorizedError,
@@ -14,6 +13,7 @@ import type {
   DeleteProductFromFavorites,
   CreateProduct,
   UpdateProduct,
+  ProductQuery,
 } from '@vse-bude/shared';
 import { ProductType } from '@vse-bude/shared';
 import { ProductStatus } from '@prisma/client';
@@ -25,6 +25,7 @@ import { FieldError } from 'error/product/field-error';
 import { createPostSchema, updatePostSchema } from 'validation/product/schemas';
 import { NotVerifiedError } from 'error/user/not-verified';
 import { lang } from '@lang';
+import type { AllProductsResponse } from '@types';
 import type { AuctionScheduler } from '@services';
 import type { ProductById } from 'common/types/product';
 
@@ -53,8 +54,10 @@ export class ProductService {
     this._auctionScheduler = auctionScheduler;
   }
 
-  public getAll(query: ProductQuery): Promise<Product[]> {
-    return this._productRepository.getAll(query);
+  public async getAll(query: ProductQuery): Promise<AllProductsResponse> {
+    const [items, count] = await this._productRepository.getAll(query);
+
+    return { items, count };
   }
 
   public async getById(productId: string): Promise<Product> {

@@ -5,6 +5,7 @@ import type { AppProps } from 'next/app';
 import { wrapper } from 'store';
 import { UserProvider, ThemeProvider } from '@providers';
 import '../public/css/fontawesome.css';
+import '@splidejs/react-splide/css';
 import dynamic from 'next/dynamic';
 import { Modals } from '@components/modals/component';
 import { useRouter } from 'next/router';

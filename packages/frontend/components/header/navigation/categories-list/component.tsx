@@ -16,7 +16,7 @@ export const CategoriesList = ({ categories }: CategoriesListProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const redirectToCategory = (categoryId: string) => {
     const filters = {
-      category: categoryId,
+      categoryId,
     };
     push({
       pathname: Routes.ITEMS,
