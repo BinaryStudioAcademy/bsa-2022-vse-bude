@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { Text, ScreenWrapper } from '~/components/components';
 import { useCustomTheme, useMemo } from '~/hooks/hooks';
+import { ListItem } from './components/components';
 import { createStyles } from './styles';
 
 const MyList: FC = () => {
@@ -10,6 +11,7 @@ const MyList: FC = () => {
   return (
     <ScreenWrapper style={styles.screen}>
       <Text>My list screen</Text>
+      <ListItem />
     </ScreenWrapper>
   );
 };

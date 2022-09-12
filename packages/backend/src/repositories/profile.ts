@@ -9,6 +9,24 @@ import type {
 export class UserProfileRepository {
   private _dbClient: PrismaClient;
 
+  private _isSocialNetTypeExists({
+    userId,
+    socialMedia,
+  }: {
+    userId: string;
+    socialMedia: SocialMediaType;
+  }) {
+    return this._dbClient.socialMedia.findFirst({
+      where: {
+        ownedByUserId: userId,
+        socialMedia,
+      },
+      select: {
+        socialMedia: true,
+      },
+    });
+  }
+
   private _updateSocialMediaLinks({ id, link }: { id: string; link: string }) {
     return this._dbClient.socialMedia.update({
       where: {
@@ -68,7 +86,7 @@ export class UserProfileRepository {
       select: { phone: true },
     });
     if (dbPhone.phone !== phone) {
-      this.cancelPhoneVerified({ userId });
+      await this.cancelPhoneVerified({ userId });
     }
   }
 
@@ -213,14 +231,20 @@ export class UserProfileRepository {
     userId: string;
     socialMedia: SocialMedia[];
   }) {
-    return this._dbClient.$transaction(
-      socialMedia.map((userLink) => {
+    return await this._dbClient.$transaction(async () =>
+      socialMedia.map(async (userLink) => {
         const { id, link, socialMedia } = userLink;
 
         if (id && link) {
           return this._updateSocialMediaLinks({ id, link });
-        } else if (link) {
-          return this._createSocialMediaLinks({ link, socialMedia, userId });
+        } else if (!id && link) {
+          const netType = await this._isSocialNetTypeExists({
+            userId,
+            socialMedia: userLink.socialMedia,
+          });
+          if (!netType) {
+            return this._createSocialMediaLinks({ link, socialMedia, userId });
+          }
         } else if (id && !link) {
           return this._deleteSocialMediaLinks({ id });
         }
@@ -278,6 +302,20 @@ export class UserProfileRepository {
       },
       select: {
         phoneVerified: true,
+      },
+    });
+  }
+
+  public cancelEmailVerified({ userId }: { userId: string }) {
+    return this._dbClient.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        emailVerified: false,
+      },
+      select: {
+        emailVerified: true,
       },
     });
   }

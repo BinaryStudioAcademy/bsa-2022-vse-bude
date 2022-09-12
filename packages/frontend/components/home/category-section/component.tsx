@@ -1,7 +1,7 @@
 import { Splide } from '@splidejs/react-splide';
 import { useTypedSelector } from '@hooks';
 import { StringCutter } from '@primitives';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { Routes } from '@enums';
@@ -42,6 +42,7 @@ const CategorySection = () => {
             pagination: false,
             arrows: false,
             autoWidth: true,
+            lazyLoad: false,
             gap: 20,
             breakpoints: {
               1200: {
@@ -65,8 +66,7 @@ const CategorySection = () => {
                     <Image
                       src={categoryImageById[item.id] || DEFAULT_IMAGE}
                       alt={item.title}
-                      layout="fill"
-                      objectFit="contain"
+                      fill
                       priority
                     />
                   </div>

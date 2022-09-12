@@ -5,27 +5,27 @@ export const getLinksData = (userId: string): LinkData[] => [
   {
     iconPath: IconName.USER,
     label: 'account:personalInfo',
-    path: `${Routes.PROFILE}/${userId}${ProfileRoutes.PERSONAL_INFO}`,
+    path: `${Routes.PROFILE}/${userId}`,
   },
   {
     iconPath: IconName.LIST,
     label: 'account:myList',
-    path: `${Routes.PROFILE}/${userId}${ProfileRoutes.LIST}`,
+    path: `${Routes.PROFILE}/${ProfileRoutes.LIST}`,
   },
   {
     iconPath: IconName.SETTINGS,
     label: 'account:settings',
-    path: `${Routes.PROFILE}/${userId}${ProfileRoutes.ACCOUNT_SETTINGS}`,
+    path: `${Routes.PROFILE}/${ProfileRoutes.ACCOUNT_SETTINGS}`,
   },
   {
     iconPath: IconName.MESSAGE,
     label: 'account:messages',
-    path: `${Routes.PROFILE}/${userId}${ProfileRoutes.MESSAGES}`,
+    path: `${Routes.PROFILE}/${ProfileRoutes.MESSAGES}`,
   },
   {
     iconPath: IconName.SUPPORT,
     label: 'account:support',
-    path: `${Routes.PROFILE}/${userId}${ProfileRoutes.SUPPORT}`,
+    path: `${Routes.PROFILE}/${ProfileRoutes.SUPPORT}`,
   },
   {
     iconPath: IconName.SIGN_OUT,

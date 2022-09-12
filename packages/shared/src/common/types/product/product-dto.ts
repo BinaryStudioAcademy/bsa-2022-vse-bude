@@ -1,5 +1,5 @@
-import type { ProductType } from '../../enums';
-import type { ProductStatus } from '../../enums';
+import type { ProductType, ProductStatus } from '../../enums';
+import type { WinnerDto } from './winner-dto';
 
 interface SocialMedia {
   id: string;
@@ -29,32 +29,37 @@ export interface Bid {
   updatedAt: string;
 }
 
-type ProductCondition = 'NEW' | 'USED';
+export enum Condition {
+  NEW = 'NEW',
+  USED = 'USED',
+}
 
-type ProductDto = {
+interface ProductDto {
   id: string;
   title: string;
   description: string;
   price: number;
   recommendedPrice: number;
   minimalBid: number;
-  country: string;
-  city?: string;
-  phone?: string;
-  type: ProductType;
-  condition: ProductCondition;
-  status: ProductStatus;
-  endDate: string;
   imageLinks: string[];
-  views: number;
-  currentPrice: number;
-  author: Author;
-  category: Category;
+  country: string;
+  city: string;
+  phone: string;
+  socialMedia: SocialMedia[];
+  type: ProductType;
+  status: ProductStatus;
   cancelReason: string;
-  winnerId?: string;
-  createdAt: string;
-  updatedAt: string;
   bids?: Bid[];
-};
+  condition: Condition;
+  category: Category;
+  views: number;
+  author: Author;
+  winner: WinnerDto;
+  updatedAt: string;
+  postDate: string;
+  createdAt: string;
+  endDate: string;
+  currentPrice: number;
+}
 
 export type { ProductDto };
