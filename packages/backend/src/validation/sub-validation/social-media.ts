@@ -8,7 +8,7 @@ import {
 import { ProfileError } from '@errors';
 import { lang } from '@lang';
 
-export const socialMediaValidation = ({ req }: { req: Request }) => {
+export const socialMediaValidation = ({ req }: { req: Request }): void => {
   const socialMedia: SocialMedia[] = req.body.socialMedia;
   if (socialMedia.length) {
     socialMedia.forEach((net) => {

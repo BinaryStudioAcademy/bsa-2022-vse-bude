@@ -11,7 +11,7 @@ import { updateAddress } from './controllers/update/address';
 import { updateUsers } from './controllers/update/user';
 import { updateNews } from './controllers/update/news';
 
-(async () => {
+(async (): Promise<void> => {
   await updateUsers(prismaClient);
   await updateUserSettings(prismaClient);
   await updateAddress(prismaClient);

@@ -23,10 +23,10 @@ import type { BidRepository } from '@repositories';
 import { productMapper, auctionPermissionsMapper } from '@mappers';
 import { FieldError } from 'error/product/field-error';
 import { createPostSchema, updatePostSchema } from 'validation/product/schemas';
-import type { ProductDto } from '@vse-bude/shared';
 import { NotVerifiedError } from 'error/user/not-verified';
 import { lang } from '@lang';
 import type { AuctionScheduler } from '@services';
+import type { ProductById } from 'common/types/product';
 
 export class ProductService {
   private _productRepository: ProductRepository;
@@ -53,11 +53,11 @@ export class ProductService {
     this._auctionScheduler = auctionScheduler;
   }
 
-  public getAll(query: ProductQuery) {
+  public getAll(query: ProductQuery): Promise<Product[]> {
     return this._productRepository.getAll(query);
   }
 
-  public async getById(productId: string): Promise<ProductDto> {
+  public async getById(productId: string): Promise<Product> {
     const product = await this._productRepository.getById(productId);
     if (!product) {
       throw new ProductNotFoundError();
@@ -74,7 +74,7 @@ export class ProductService {
     return productMapper(product, currentPrice);
   }
 
-  public async incrementViews(id: string, req: Request) {
+  public async incrementViews(id: string, req: Request): Promise<Product> {
     const userId = getUserIdFromRequest(req);
 
     if (userId) {
@@ -88,13 +88,13 @@ export class ProductService {
     return productMapper(await this._productRepository.incrementViews(id));
   }
 
-  public async getFavoriteIds(userId: string) {
+  public async getFavoriteIds(userId: string): Promise<string[]> {
     const favProducts = await this._productRepository.favoriteIds(userId);
 
     return favProducts.map((favProd) => favProd.productId);
   }
 
-  public async getFavoriteProducts(userId: string) {
+  public async getFavoriteProducts(userId: string): Promise<ProductById[]> {
     const favProducts = await this._productRepository.getFavorite(userId);
 
     return favProducts.map((product) => productMapper(product));
@@ -121,7 +121,10 @@ export class ProductService {
     return auctionPermissionsMapper(!!bids.length);
   }
 
-  public async leaveAuction(userId: string, productId: string) {
+  public async leaveAuction(
+    userId: string,
+    productId: string,
+  ): Promise<object> {
     const product = await this._productRepository.getById(productId);
     if (!product) {
       throw new ProductNotFoundError();
@@ -140,7 +143,10 @@ export class ProductService {
     return this.getById(productId);
   }
 
-  public async addToFavorites({ userId, productId }: AddProductToFavorites) {
+  public async addToFavorites({
+    userId,
+    productId,
+  }: AddProductToFavorites): Promise<string> {
     const isInFavorite = await this._productRepository.isInFavorite(
       userId,
       productId,
@@ -156,7 +162,7 @@ export class ProductService {
   public async deleteFromFavorites({
     userId,
     productId,
-  }: DeleteProductFromFavorites) {
+  }: DeleteProductFromFavorites): Promise<string> {
     const isInFavorite = await this._productRepository.isInFavorite(
       userId,
       productId,
@@ -169,7 +175,11 @@ export class ProductService {
     return productId;
   }
 
-  public async createProduct({ req, userId, fieldsData }: CreateProduct) {
+  public async createProduct({
+    req,
+    userId,
+    fieldsData,
+  }: CreateProduct): Promise<Product> {
     const { error } = createPostSchema.validate(req.body);
     if (error) {
       throw new FieldError(error.message);
@@ -200,7 +210,7 @@ export class ProductService {
     return productMapper(product);
   }
 
-  private isAuctionProduct(type: string) {
+  private isAuctionProduct(type: string): boolean {
     return type === ProductType.AUCTION;
   }
 
@@ -209,7 +219,7 @@ export class ProductService {
     productId,
     userId,
     fieldsData,
-  }: UpdateProduct) {
+  }: UpdateProduct): Promise<Product> {
     fieldsData.images = fieldsData.images
       ? [].concat(fieldsData.images)
       : undefined;
@@ -262,7 +272,10 @@ export class ProductService {
     return productMapper(updatedProduct);
   }
 
-  public async buy({ userId, productId }: BuyProduct) {
+  public async buy({
+    userId,
+    productId,
+  }: BuyProduct): Promise<string | undefined> {
     const isActive = await this._productRepository.checkStatus(
       productId,
       ProductStatus.ACTIVE,
@@ -283,7 +296,7 @@ export class ProductService {
     return productId;
   }
 
-  public async getSimilar(productId: string) {
+  public async getSimilar(productId: string): Promise<Product[]> {
     const product = await this._productRepository.getById(productId);
     const similarProducts = await this._productRepository.findSimilar(
       product.city,
@@ -295,7 +308,7 @@ export class ProductService {
     return similarProducts.map((product) => productMapper(product));
   }
 
-  public async getMostPopularLots(limit: string) {
+  public async getMostPopularLots(limit: string): Promise<Product[]> {
     const mostPopular = await this._productRepository.getMostPopularLots(
       +limit,
     );
@@ -303,7 +316,7 @@ export class ProductService {
     return mostPopular.map((product) => productMapper(product));
   }
 
-  public async getMostPopularProducts(limit: string) {
+  public async getMostPopularProducts(limit: string): Promise<Product[]> {
     const mostPopular = await this._productRepository.getMostPopularProducts(
       +limit,
     );
@@ -311,13 +324,13 @@ export class ProductService {
     return mostPopular.map((product) => productMapper(product));
   }
 
-  public async getEditProductById({ userId, productId }) {
+  public async getEditProductById({ userId, productId }): Promise<Product> {
     const product = await this.getById(productId);
 
     if (!product) {
       throw new ProductNotFoundError();
     }
-    if (product.author.id !== userId) {
+    if (product.authorId !== userId) {
       throw new UnauthorizedError();
     }
 

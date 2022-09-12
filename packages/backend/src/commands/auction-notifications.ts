@@ -35,7 +35,7 @@ export class AuctionNotificationsCommand extends BaseCommand {
     this._bidRepository = new BidRepository(database);
   }
 
-  async execute() {
+  async execute(): Promise<void> {
     logger.log(`Command ${this.commandAlias} started!`);
     try {
       await this.handleParticipants(this._product);
@@ -46,7 +46,7 @@ export class AuctionNotificationsCommand extends BaseCommand {
     }
   }
 
-  private async handleParticipants(productItem: Product) {
+  private async handleParticipants(productItem: Product): Promise<void> {
     const author = await this._userRepository.getById(productItem.authorId);
     const lastBid = await this._bidRepository.lastProductBid(productItem.id);
     if (!lastBid) {
@@ -74,7 +74,7 @@ export class AuctionNotificationsCommand extends BaseCommand {
     author: User;
     winner: User;
     product: Product;
-  }) {
+  }): Promise<void> {
     const authorMail = new ProductSoldAuthorBuilder(emailService);
     const authorText = authorMail.buildText(author, product);
 
@@ -97,7 +97,7 @@ export class AuctionNotificationsCommand extends BaseCommand {
   }: {
     user: User;
     product: Product;
-  }) {
+  }): Promise<void> {
     const mail = new ProductNotSoldBuilder(emailService);
     const mailText = mail.buildText(user, product);
     await mail.setText(mailText).send();

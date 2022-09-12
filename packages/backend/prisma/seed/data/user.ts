@@ -3,7 +3,7 @@ import { Role } from '@prisma/client';
 import { faker } from '@faker-js/faker';
 import { HashService } from './../../../src/services/hash';
 
-export const fakeUsers = async (amountOfRecords: number) => {
+export const fakeUsers = async (amountOfRecords: number): Promise<User[]> => {
   const hashService = new HashService();
   const records: User[] = [];
 

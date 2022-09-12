@@ -5,7 +5,7 @@ export const fakeChat = async (
   amountOfRecords: number,
   existingProducts: Product[],
   existingChats: Chat[],
-) => {
+): Promise<Chat[]> => {
   const records: Chat[] = [];
 
   overal: for (let i = 0; i < amountOfRecords; i++) {

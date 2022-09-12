@@ -8,7 +8,7 @@ export const seedBids = async (
   prismaClient: PrismaClient,
   existingUsers: User[],
   existingProducts: Product[],
-) => {
+): Promise<void> => {
   const existingBids = await prismaClient.bid.findMany();
   const howManyToCreate = BIDS_NUMBER - existingBids.length;
 

@@ -11,7 +11,7 @@ import { seedChatMember } from './controllers/create/chatMember';
 import { seedMessage } from './controllers/create/message';
 import { seedNews } from './controllers/create/news';
 
-export const createData = async (prismaClient: PrismaClient) => {
+export const createData = async (prismaClient: PrismaClient): Promise<void> => {
   await seedUsers(prismaClient);
 
   const existingUsers = await prismaClient.user.findMany();

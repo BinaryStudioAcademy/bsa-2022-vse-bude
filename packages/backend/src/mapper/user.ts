@@ -1,6 +1,7 @@
 import type { User } from '@prisma/client';
+import type { UserResponseDto } from '@vse-bude/shared';
 
-export const userMap = (user: User) => ({
+export const userMap = (user: User): UserResponseDto => ({
   id: user.id,
   firstName: user.firstName,
   lastName: user.lastName,

@@ -4,6 +4,7 @@ import type { ProductRepository } from '@repositories';
 import { AuctionEndedError, ProductNotFoundError } from '@errors';
 import { toUtc } from '@helpers';
 import { UPDATE_PRODUCT_PRICE } from '@vse-bude/shared';
+import type { Bid } from '@prisma/client';
 import { LowBidPriceError } from '../error/product/low-bid-price-error';
 import { eventListener } from '../events';
 
@@ -20,7 +21,7 @@ export class BidService {
     this._productRepository = productRepository;
   }
 
-  public async createBid(dto: CreateBidDto) {
+  public async createBid(dto: CreateBidDto): Promise<Bid> {
     const product = await this._productRepository.getById(dto.productId);
 
     if (!product) {
