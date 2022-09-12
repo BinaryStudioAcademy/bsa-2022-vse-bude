@@ -4,9 +4,12 @@ import {
   UserSignInDto,
   UserDto,
   ResetPasswordLink,
+  ResetPasswordResponse,
 } from '@vse-bude/shared';
 import { StorageKey } from '~/common/enums/enums';
 import { AsyncThunkConfig } from '~/common/types/types';
+import { notification } from '~/services/services';
+import { t } from 'i18next';
 import { ActionType } from './common';
 
 const signUp = createAsyncThunk<UserDto, UserSignUpDto, AsyncThunkConfig>(
@@ -58,12 +61,15 @@ const logOut = createAsyncThunk<null, undefined, AsyncThunkConfig>(
 );
 
 const resetPassword = createAsyncThunk<
-  unknown,
+  ResetPasswordResponse,
   ResetPasswordLink,
   AsyncThunkConfig
 >(ActionType.UPDATE_PASSWORD, async (payload, { extra }) => {
   const { authApi } = extra;
   const response = await authApi.resetPassword(payload);
+  if (response.success) {
+    notification.success(t('screens:verification.RESET_PASSWORD_SUCCESS'));
+  }
 
   return response;
 });

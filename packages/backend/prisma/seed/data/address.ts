@@ -5,7 +5,7 @@ export const fakeAddress = async (
   amountOfRecords: number,
   existingUsers: User[],
   existingAddress: Address[],
-) => {
+): Promise<Address[]> => {
   const records: Address[] = [];
 
   overal: for (let i = 0; i < amountOfRecords; i++) {

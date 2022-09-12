@@ -14,24 +14,25 @@ export const getServerSideProps = wrapper.getServerSideProps(
     let auctionProducts: ProductDto[] = [];
     let sellingProducts: ProductDto[] = [];
 
-    const httpClient = new Http(process.env.NEXT_PUBLIC_API_ROUTE, locale);
+    const httpSSR = new Http(process.env.NEXT_PUBLIC_API_ROUTE, locale);
 
     await store.dispatch(
       fetchCategoriesSSR({
-        httpSSR: httpClient,
+        httpSSR,
       }),
     );
 
     try {
-      auctionProducts = await getPopularLots({
-        httpSSR: httpClient,
-        limit: 4,
-      });
-
-      sellingProducts = await getPopularProducts({
-        httpSSR: httpClient,
-        limit: 4,
-      });
+      [auctionProducts, sellingProducts] = await Promise.all([
+        getPopularLots({
+          httpSSR,
+          limit: 4,
+        }),
+        getPopularProducts({
+          httpSSR,
+          limit: 4,
+        }),
+      ]);
     } catch (err) {
       console.log(err);
     }

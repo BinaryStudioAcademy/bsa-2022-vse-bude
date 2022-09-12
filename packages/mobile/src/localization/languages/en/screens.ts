@@ -46,6 +46,7 @@ export const screens = {
     ENTER_EMAIL: 'Enter your email to retrieve your password',
     HIDE_EMAIL: 'Hide Email',
     RESET_PASSWORD: 'Reset Password',
+    RESET_PASSWORD_SUCCESS: 'Password reset request successfully submitted',
     VERIFY_EMAIL: 'Verify email',
   },
   personal_info: {
@@ -154,7 +155,9 @@ export const screens = {
     CURRENCY: 'Currency',
     CONTACT: 'Contact',
     COUNTRY: 'Country',
+    COUNTRY_PLACEHOLDER: 'Choose Country',
     CITY: 'City',
+    CITY_PLACEHOLDER: 'Choose City',
     MOBILE_PHONE: 'Mobile Phone',
     PHONE_TOOLTIP: 'Info about phone',
     CALLING_CODE: 'Calling Code',

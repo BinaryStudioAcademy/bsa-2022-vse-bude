@@ -1,14 +1,18 @@
-import type { PrismaClient } from '@prisma/client';
+import type { Bid, Prisma, PrismaClient, Product } from '@prisma/client';
 import type { CreateBidDto } from '@types';
 
 export class BidRepository {
-  private _dbClient: PrismaClient;
+  private readonly _dbClient: PrismaClient;
 
   constructor(dbClient: PrismaClient) {
     this._dbClient = dbClient;
   }
 
-  create({ bidderId, price, productId }: CreateBidDto) {
+  create({
+    bidderId,
+    price,
+    productId,
+  }: CreateBidDto): Promise<[Bid, Product]> {
     return this._dbClient.$transaction([
       this._dbClient.bid.create({
         data: {
@@ -24,7 +28,7 @@ export class BidRepository {
     ]);
   }
 
-  async lastProductBid(productId: string) {
+  async lastProductBid(productId: string): Promise<Bid> {
     return await this._dbClient.bid.findFirst({
       take: 1,
       where: {
@@ -36,7 +40,7 @@ export class BidRepository {
     });
   }
 
-  async getByUserAndProduct(userId: string, productId: string) {
+  async getByUserAndProduct(userId: string, productId: string): Promise<Bid[]> {
     return this._dbClient.bid.findMany({
       where: {
         bidderId: userId,
@@ -45,7 +49,10 @@ export class BidRepository {
     });
   }
 
-  async deleteAllByProductAndUser(userId: string, productId: string) {
+  async deleteAllByProductAndUser(
+    userId: string,
+    productId: string,
+  ): Promise<Prisma.BatchPayload> {
     return this._dbClient.bid.deleteMany({
       where: {
         bidderId: userId,
@@ -54,7 +61,11 @@ export class BidRepository {
     });
   }
 
-  async retrieve(userId: string, productId: string, time: string) {
+  async retrieve(
+    userId: string,
+    productId: string,
+    time: string,
+  ): Promise<[Prisma.BatchPayload, Prisma.BatchPayload, Product]> {
     return this._dbClient.$transaction([
       this._dbClient.bid.updateMany({
         data: {
@@ -86,7 +97,7 @@ export class BidRepository {
     ]);
   }
 
-  async getAll(productId: string) {
+  async getAll(productId: string): Promise<Bid[]> {
     return this._dbClient.bid.findMany({
       where: {
         productId,

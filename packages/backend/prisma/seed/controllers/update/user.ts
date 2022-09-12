@@ -2,7 +2,9 @@ import type { PrismaClient, User } from '@prisma/client';
 import { readFileSync } from 'fs';
 import { USER_FILE_NAME } from '../../config/config';
 
-export const updateUsers = async (prismaClient: PrismaClient) => {
+export const updateUsers = async (
+  prismaClient: PrismaClient,
+): Promise<void> => {
   const path = `./prisma/seed/mockData/${USER_FILE_NAME}.json`;
   const file = readFileSync(path, 'utf-8');
 

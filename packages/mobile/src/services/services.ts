@@ -7,6 +7,7 @@ import { Image } from './image/image.service';
 import { NotificationService } from './notification/notification.service';
 import { PersonalInfoApi } from './personal-info-api/personal-info-api.service';
 import { ProductService } from './product/product.service';
+import { PushNotificationService } from './push-notifications/push-notifications';
 import { AppService } from './app/app.service';
 import { PhoneVerificationApi } from './phone-verification-api/phone-verification-api.service';
 import { CategoryService } from './categories/categories';
@@ -53,6 +54,8 @@ const personalInfoApi = new PersonalInfoApi({
 
 const appService = new AppService();
 
+const pushNotification = new PushNotificationService();
+
 export {
   storage,
   authApi,
@@ -63,4 +66,5 @@ export {
   phoneVerificationApi,
   appService,
   categoryApi,
+  pushNotification,
 };

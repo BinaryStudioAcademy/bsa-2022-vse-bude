@@ -6,6 +6,7 @@ type UserProfileDto = {
   firstName: string;
   lastName: string;
   socialMedia: SocialMedia[];
+  phone?: string;
 };
 
 type FullUserProfileDto = {

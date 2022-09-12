@@ -43,7 +43,7 @@ const fontSizes = {
   buttonSmall: '12px',
   caption: '12px',
   smallButton: '15px',
-  tooltip: '13px',
+  tooltip: '15px',
   cell: '18px',
 };
 
@@ -116,6 +116,7 @@ const heights = {
   checkbox: '20px',
   filterBtnSm: '30px',
   controlSm: '35px',
+  buttonXs: '30px',
   controlBg: '45px',
   download: '40px',
   logo: '32px',

@@ -7,7 +7,7 @@ export class BaseCommand implements CommandInterface {
     this.commandAlias = 'default';
   }
 
-  execute() {
+  execute(): void {
     return;
   }
 

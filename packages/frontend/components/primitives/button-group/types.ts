@@ -1,17 +1,16 @@
 export interface ButtonGroupProps
   extends Omit<
     React.HTMLProps<HTMLButtonElement>,
-    'size' | 'className' | 'style' | 'type'
+    'className' | 'style' | 'type'
   > {
   type?: 'button' | 'submit' | 'reset';
-  variant?: 'filled' | 'outlined' | 'danger' | 'rectangle';
-  size?: 'big' | 'small' | 'flexible';
   width?: string;
   tooltip?: string;
   buttons: {
     name: string;
     onClick: () => void;
+    text: string;
   }[];
-
-  activeDefault?: string;
+  setActive: (arg0: string) => void;
+  active: string;
 }

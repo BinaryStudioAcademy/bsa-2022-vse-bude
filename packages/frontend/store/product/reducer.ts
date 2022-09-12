@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { HydrateAction } from '@types';
-import type { ItemDto, ProductDto } from '@vse-bude/shared';
+import type { ProductDto } from '@vse-bude/shared';
 import { HYDRATE } from 'next-redux-wrapper';
 import {
   auctionLeaveAction,
@@ -16,7 +16,8 @@ import {
 
 interface ProductState {
   list: ProductDto[];
-  currentItem?: ItemDto;
+  count: number;
+  currentItem?: ProductDto;
   similarProducts: ProductDto[];
   loading: boolean;
   currentProduct: ProductDto;
@@ -27,6 +28,7 @@ interface ProductState {
 
 const initialState: ProductState = {
   list: [],
+  count: null,
   similarProducts: [],
   loading: false,
   currentProduct: null,
@@ -87,7 +89,8 @@ const productSlice = createSlice({
       state.loading = true;
     },
     [fetchProducts.fulfilled.type](state, { payload }) {
-      state.list = payload;
+      state.list = payload?.items;
+      state.count = payload?.count;
       state.loading = false;
     },
     [fetchProducts.rejected.type](state) {

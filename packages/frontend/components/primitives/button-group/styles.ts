@@ -8,28 +8,24 @@ export const button = ({
   lineHeights,
   fontWeights,
   radiuses,
-  spaces,
   heights,
-  mq,
+  spaces
 }: Theme) => css`
   ${resetButton};
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: ${fontSizes.button};
-  line-height: ${lineHeights.button};
+  font-size: ${fontSizes.body2};
+  line-height: ${lineHeights.body2};
   font-weight: ${fontWeights.button};
   cursor: pointer;
   flex: 1;
-  height: ${heights.controlSm};
-  border-radius: ${radiuses.sm};
-  padding: 0 ${spaces.md};
+  height: ${heights.buttonXs};
+  min-width: 100px;
+  width: fit-content;
+  border-radius: ${radiuses.xxs};
   font-size: ${fontSizes.smallButton};
-  ${mq[0]} {
-    height: ${heights.controlBg};
-    border-radius: ${radiuses.md};
-    padding: 0 ${spaces.xl2};
-  }
+  transition: 200ms linear;
 
   &[data-size='small'] {
     height: ${heights.filterBtnSm};
@@ -44,6 +40,7 @@ export const button = ({
   }
 
   &[data-selected='selected'] {
+    border: 1px solid ${colors.primaryLight};
     background: ${colors.primaryLight};
     color: ${colors.background};
 
@@ -59,7 +56,7 @@ export const button = ({
   }
 
   &[data-selected='default'] {
-    border: 1px solid ${colors.secondaryLight};
+    border: 1px solid ${colors.backgroundDark};
     background: ${colors.background};
     color: ${colors.secondaryLight};
 

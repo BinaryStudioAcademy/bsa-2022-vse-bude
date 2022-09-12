@@ -6,6 +6,7 @@ import account from './account.json';
 import auth from './auth.json';
 import createPost from './create-post.json';
 import item from './item.json';
+import itemsPage from './items-page.json';
 import rules from './rules.json';
 import myList from './my-list.json';
 import checkout from './checkout.json';
@@ -16,6 +17,7 @@ export const ua = {
   'public': publicCommon,
   'personal-info': personalInfo,
   'create-post': createPost,
+  'items-page': itemsPage,
   'my-list': myList,
   common,
   auth,

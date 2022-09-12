@@ -6,7 +6,7 @@ import { writeFile } from './../../helpers/wtireFile';
 export const seedUserSettings = async (
   prismaClient: PrismaClient,
   existingUsers: User[],
-) => {
+): Promise<void> => {
   const existingUsersSettings = await prismaClient.userSettings.findMany();
 
   if (existingUsersSettings.length >= existingUsers.length) {

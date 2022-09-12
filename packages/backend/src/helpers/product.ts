@@ -1,2 +1,2 @@
-export const auctionJobName = (productUuid: string) =>
+export const auctionJobName = (productUuid: string): string =>
   `auction-cronjob-${productUuid}`;

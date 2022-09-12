@@ -1,5 +1,4 @@
 import type { ApiRoutes } from '@vse-bude/shared';
-import type { Request } from 'express';
 import { Router } from 'express';
 import { wrap } from '@helpers';
 import type { Services } from '@services';
@@ -19,12 +18,11 @@ export const initCategoryRoutes = (
    *     produces:
    *       - application/json
    *     parameters:
-   *       - in: query
-   *         required: false
-   *         name: limit
+   *       - in: header
+   *         name: accept-language
    *         schema:
-   *            type: number
-   *            format: integer
+   *            type: string
+   *            enum: [en, ua]
    *     responses:
    *       200:
    *         description: Ok
@@ -43,7 +41,7 @@ export const initCategoryRoutes = (
 
   router.get(
     apiPath(path),
-    wrap((req: Request) => categoryService.getAll(req)),
+    wrap(() => categoryService.getAll()),
   );
 
   return router;

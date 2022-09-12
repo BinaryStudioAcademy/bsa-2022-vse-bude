@@ -1,5 +1,5 @@
 import type { CategoryRepository } from '@repositories';
-import type { Request } from 'express';
+import type { CategoryResponseDto } from '@vse-bude/shared';
 import { lang } from '../lang';
 
 export class CategoryService {
@@ -9,9 +9,9 @@ export class CategoryService {
     this._categoryRepository = categoryRepository;
   }
 
-  public async getAll(req: Request) {
+  public async getAll(): Promise<CategoryResponseDto[]> {
     try {
-      const result = await this._categoryRepository.getAll(req.query);
+      const result = await this._categoryRepository.getAll();
 
       return result.map((item) => ({
         ...item,
