@@ -27,7 +27,7 @@ const PersonalInfoScreen: FC = () => {
 
   return (
     <ScreenWrapper>
-      <ProfileImage />
+      <ProfileImage avatar={personalInfo?.avatar} />
       <ScrollView style={[globalStyles.flex1, globalStyles.px5]}>
         {personalInfo && <PersonalInfoForm personalInfo={personalInfo} />}
       </ScrollView>

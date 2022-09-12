@@ -1,3 +1,4 @@
+import { Asset } from 'react-native-image-picker';
 import {
   HttpContentType,
   HttpMethod,
@@ -8,6 +9,7 @@ import {
 } from '@vse-bude/shared';
 
 import { Http } from '~/services/http/http.service';
+import { UpdateAvatarResponseDto } from '~/common/types/types';
 
 type Constructor = {
   http: Http;
@@ -46,6 +48,27 @@ class PersonalInfoApi {
         method: HttpMethod.PUT,
         contentType: HttpContentType.APPLICATION_JSON,
         payload: JSON.stringify(_payload),
+        hasAuth: true,
+      },
+    );
+  }
+
+  updateAvatar(avatar: Asset | null): Promise<UpdateAvatarResponseDto> {
+    const formData = new FormData();
+
+    if (avatar) {
+      const { uri, type, fileName: name } = avatar;
+      formData.append('file', { uri, type, name });
+    } else {
+      formData.append('file', null);
+    }
+
+    return this.#http.load(
+      `${this.#apiPrefix}${ApiRoutes.PROFILE}${ProfileApiRoutes.UPDATE_AVATAR}`,
+      {
+        method: HttpMethod.PUT,
+        contentType: HttpContentType.FORM_DATA,
+        payload: formData,
         hasAuth: true,
       },
     );
