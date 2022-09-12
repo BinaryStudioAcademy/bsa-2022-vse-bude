@@ -1,14 +1,13 @@
-import type { ApiRoutes } from '@vse-bude/shared';
+import type { ApiRoutes, ProductQuery } from '@vse-bude/shared';
 import type { Request } from 'express';
 import { Router } from 'express';
 import { wrap } from '@helpers';
 import type { Services } from '@services';
 import { apiPath } from '@helpers';
-import type { Product } from '@prisma/client';
-import type { ProductQuery } from '@types';
 import { ProductApiRoutes } from '@vse-bude/shared';
 import { authMiddleware } from '@middlewares';
 import multer from 'multer';
+import type { AllProductsResponse } from '@types';
 
 export const initProductRoutes = (
   { productService }: Services,
@@ -59,6 +58,16 @@ export const initProductRoutes = (
    *         name: order
    *         required: false
    *         type: string
+   *       - in: query
+   *         name: priceGt
+   *         required: false
+   *         type: number
+   *         description: filters greater than the passed value
+   *       - in: query
+   *         name: priceLt
+   *         required: false
+   *         type: number
+   *         description: filters less than the passed value
    *     responses:
    *       200:
    *         description: Ok
@@ -66,7 +75,14 @@ export const initProductRoutes = (
    *           application/json:
    *             schema:
    *               type: object
-   *               $ref: "#/definitions/GetAllProductsResponse"
+   *               properties:
+   *                  items:
+   *                      type: array
+   *                      items:
+   *                         $ref: "#/definitions/Product"
+   *                  count:
+   *                      type: integer
+   *
    *       4**:
    *         description: Something went wrong
    *         content:
@@ -77,7 +93,7 @@ export const initProductRoutes = (
 
   router.get(
     apiPath(path),
-    wrap<Empty, Product[], Empty, ProductQuery>((req) =>
+    wrap<Empty, AllProductsResponse, Empty, ProductQuery>((req) =>
       productService.getAll(req.query),
     ),
   );
