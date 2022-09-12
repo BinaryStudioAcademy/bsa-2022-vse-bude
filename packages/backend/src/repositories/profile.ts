@@ -1,4 +1,5 @@
 import type { Prisma, PrismaClient, PrismaPromise, User, SocialMedia, SocialMediaType } from '@prisma/client';
+import type { AddressDto } from '@types';
 import type { 
   UpdateUserProfileDto,
   UserAddressDto,
@@ -134,7 +135,7 @@ export class UserProfileRepository {
   }: {
     userId: string;
     data: UserAddressDto;
-  }): Promise<{ country: string; region: string; city: string; zip: string; deliveryData: string; }> {
+  }): Promise<AddressDto> {
     const { country, region, city, zip, deliveryData } = data;
 
     return this._dbClient.address.upsert({

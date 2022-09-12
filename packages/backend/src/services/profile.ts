@@ -4,7 +4,7 @@ import type {
   UpdatePasswordDto,
   UserAddressDto,
 } from '@vse-bude/shared';
-import type { UploadFileRequest } from '@types';
+import type { AddressDto, UploadFileRequest } from '@types';
 import {
   HttpStatusCode,
   UserPersonalInfoValidationMessage,
@@ -49,7 +49,7 @@ export class UserProfileService {
     return user;
   }
 
-  public async getFullUserData({ userId }: { userId: string }): Promise<{ userAddress: {country: string; region: string; city: string; zip: string; deliveryData: string;}; socialMedia: {
+  public async getFullUserData({ userId }: { userId: string }): Promise<{ userAddress: AddressDto; socialMedia: {
     id: string;
     link: string;
     socialMedia: SocialMediaType;
@@ -139,7 +139,7 @@ export class UserProfileService {
   }: {
     userId: string;
     userAddress: UserAddressDto;
-  }): Promise<{ country: string; region: string; city: string; zip: string; deliveryData: string; }> {
+  }): Promise<AddressDto> {
     if (!userAddress) {
       return null;
     }

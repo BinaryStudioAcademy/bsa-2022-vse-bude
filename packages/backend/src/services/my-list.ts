@@ -1,5 +1,4 @@
 import type { MyListRepository } from '@repositories';
-import type { MyListItem } from '@vse-bude/shared';
 
 export class MyListService {
   private _myListRepository: MyListRepository;
@@ -8,7 +7,7 @@ export class MyListService {
     this._myListRepository = myListRepository;
   }
 
-  public async getAllUserItems({ userId }: { userId: string }): Promise<MyListItem> {
+  public async getAllUserItems({ userId }: { userId: string }): Promise<object[]> {
     return this._myListRepository.getAllUserItems({ userId });
   }
 }
