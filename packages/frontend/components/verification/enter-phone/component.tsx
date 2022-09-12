@@ -16,7 +16,6 @@ interface ModalProps {
 
 const EnterPhoneModal = ({ phone }: ModalProps) => {
   const [tooltipText, setTooltipText] = useState('');
-  const [disabled, setDisabled] = useState(false);
   const [phoneInput, setphoneInput] = useState(phone);
   const dispatch = useAppDispatch();
 
@@ -34,10 +33,8 @@ const EnterPhoneModal = ({ phone }: ModalProps) => {
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     setphoneInput(e.target.value);
     if (e.target.value != phone) {
-      setDisabled(true);
       setTooltipText(t('common:verify.enterPhone.tooltip'));
     } else {
-      setDisabled(false);
       setTooltipText('');
     }
   };
@@ -64,7 +61,7 @@ const EnterPhoneModal = ({ phone }: ModalProps) => {
           value={phoneInput}
           onChange={handleOnChange}
         />
-        <Button onClick={changeModal} disabled={disabled} tooltip={tooltipText}>
+        <Button onClick={changeModal} disabled={!!tooltipText} tooltip={tooltipText}>
           {t('common:verify.enterPhone.button.verify')}
         </Button>
       </div>
