@@ -33,9 +33,8 @@ class PushNotificationService {
         channelId: ANDROID_PN_DEFAULT_CHANNEL_ID,
         channelName: CHANEL_NAME,
       },
-      () => {
-        return;
-      },
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      () => {},
     );
   }
 
