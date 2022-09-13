@@ -11,22 +11,21 @@ import type { SearchProps } from './types';
 const Search = ({ value, setValue, ...props }: SearchProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useAppDispatch();
-  const { searchedProducts } = useTypedSelector(state => state.product);
+  const { searchedProducts } = useTypedSelector((state) => state.product);
   const { push } = useRouter();
-  
-  const callback = async({ target }) => {  
+
+  const callback = async ({ target }) => {
     setValue(target.value);
     await dispatch(actionSearch(target.value.toString()));
   };
- 
+
   useEffect(() => {
-    if(searchedProducts.length){
+    if (searchedProducts.length) {
       setIsOpen(true);
-    }
-    else{
+    } else {
       setIsOpen(false);
     }
-  }, [searchedProducts]); 
+  }, [searchedProducts]);
 
   const redirectToItem = async (productId: string) => {
     await dispatch(actionSearch(''));
@@ -39,23 +38,26 @@ const Search = ({ value, setValue, ...props }: SearchProps) => {
     });
   };
 
-  return(
+  return (
     <Dropdown
-        options={searchedProducts.map((item) => ({
-            value: item.title,
-            key: item.id,
-            cssExtend: styles.option,
-            onClick: () => {
-            redirectToItem(item.id);
-            },
-        }))}
-        onChildrenClick={() => setIsOpen(!isOpen)}
-        cssExtend={styles.wrapper}
-        >
-      
-      <SearchInput value={value} setValue={setValue} onChange={callback} placeholder={props.placeholder}></SearchInput>
+      options={searchedProducts.map((item) => ({
+        value: item.title,
+        key: item.id,
+        cssExtend: styles.option,
+        onClick: () => {
+          redirectToItem(item.id);
+        },
+      }))}
+      onChildrenClick={() => setIsOpen(!isOpen)}
+      cssExtend={styles.wrapper}
+    >
+      <SearchInput
+        value={value}
+        setValue={setValue}
+        onChange={callback}
+        placeholder={props.placeholder}
+      ></SearchInput>
     </Dropdown>
-  
-    );
+  );
 };
 export { Search };

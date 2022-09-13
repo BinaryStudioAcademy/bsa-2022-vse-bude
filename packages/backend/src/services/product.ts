@@ -5,7 +5,12 @@ import {
   AuctionEndedError,
 } from '@errors';
 import type { Request } from 'express';
-import { getFilenameFromUrl, getUserIdFromRequest, toUtc } from '@helpers';
+import {
+  getFilenameFromUrl,
+  getUserIdFromRequest,
+  logger,
+  toUtc,
+} from '@helpers';
 import type {
   AddProductToFavorites,
   AuctionPermissionsResponse,
@@ -66,6 +71,8 @@ export class ProductService {
   }
 
   public search(query: ProductSearchQuery): Promise<ProductSearchResponse[]> {
+    console.log(query.q);
+
     return this._productRepository.search(query);
   }
 

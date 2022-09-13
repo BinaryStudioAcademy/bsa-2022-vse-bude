@@ -1,4 +1,4 @@
-import { Button, Container, Flex, IconButton, Loader, SearchInput } from '@primitives';
+import { Button, Container, Flex, IconButton, Loader } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { Fragment, useState, useEffect } from 'react';
@@ -8,6 +8,7 @@ import { useAppDispatch, useAuth, useMounted, useTypedSelector } from '@hooks';
 import { useRouter } from 'next/router';
 import { fetchCategories } from 'store/category';
 import type { HttpAcceptLanguage } from '@vse-bude/shared';
+import { Search } from '@components/primitives/search/component';
 import { ProfileInfo } from './profile-info';
 import { Navigation } from './navigation/component';
 import { BurgerMenu } from './burger-menu/component';
@@ -91,7 +92,7 @@ export const Header = () => {
             </div>
           </Flex>
           <Flex align="center">
-            <SearchInput
+            <Search
               value={searchQuery}
               setValue={setSearchQuery}
               placeholder={t(
@@ -109,7 +110,6 @@ export const Header = () => {
             )}
             <div className="burger-menu-button">{renderBurgerButton()}</div>
           </Flex>
-          
         </Container>
       </header>
       {show && (
