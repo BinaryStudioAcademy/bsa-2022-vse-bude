@@ -1,5 +1,5 @@
 ﻿import type { ProductDto } from '@vse-bude/shared';
-import { Button } from '@primitives';
+import { Button, Loader } from '@primitives';
 import { FavoriteButton } from 'components/product/favorite-button/component';
 import { useTranslation } from 'next-i18next';
 import { useTypedSelector } from '@hooks';
@@ -23,6 +23,7 @@ export const ItemInfoSelling = ({
   const { t } = useTranslation();
   const { push } = useRouter();
   const { user } = useTypedSelector((state) => state.auth);
+  const { loading } = useTypedSelector((state) => state.product);
   const isAuthor = user?.id === item.author.id;
 
   return (
@@ -47,7 +48,23 @@ export const ItemInfoSelling = ({
               size="md"
               disabled={!user}
             />
-            <Button onClick={onBuy}>{t('item:buttons.buyBtn')}</Button>
+            <Button
+              onClick={onBuy}
+              disabled={!user || !user.phoneVerified || loading}
+              tooltip={
+                user
+                  ? user.phoneVerified
+                    ? t('item:buttons.placeBid')
+                    : t('item:buttons.tooltips.notVerified.buyBtn')
+                  : t('item:buttons.tooltips.notAuthorized.buyBtn')
+              }
+            >
+              {loading ? (
+                <Loader size="extraSmall" />
+              ) : (
+                t('item:buttons.buyBtn')
+              )}
+            </Button>
           </>
         )}
       </div>

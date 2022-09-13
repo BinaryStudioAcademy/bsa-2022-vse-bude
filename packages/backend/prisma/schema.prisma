@@ -8,6 +8,7 @@ generator client {
 
 generator erd {
   provider = "prisma-erd-generator"
+  includeRelationFromFields = true
 }
 
 datasource db {

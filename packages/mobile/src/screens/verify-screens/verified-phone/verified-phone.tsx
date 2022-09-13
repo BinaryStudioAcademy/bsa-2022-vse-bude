@@ -13,7 +13,7 @@ import { MainScreenName, RootScreenName } from '~/common/enums/enums';
 import { Header, Title, VerifyImage, Wrapper } from '../components/components';
 import { styles } from './styles';
 
-const VerifiedScreen: FC = () => {
+const VerifiedPhoneScreen: FC = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<RootNavigationProps>();
   const { colors } = useCustomTheme();
@@ -34,13 +34,13 @@ const VerifiedScreen: FC = () => {
             contentContainerStyle={globalStyles.mt6}
           />
           <Title
-            label={t('verificationPhone.VERIFIED_TITLE')}
+            label={t('verify.VERIFIED_TITLE_PHONE')}
             contentContainerStyle={[globalStyles.mt6, { marginTop: 75 }]}
             textStyle={{ textAlign: 'center' }}
           />
           <View style={styles.buttonContainer}>
             <PrimaryButton
-              label={t('verificationPhone.CONTINUE')}
+              label={t('verify.CONTINUE')}
               onPress={handleContinuePress}
               iconRight={<ArrowRightIcon size={24} color={colors.whiteColor} />}
             />
@@ -51,4 +51,4 @@ const VerifiedScreen: FC = () => {
   );
 };
 
-export { VerifiedScreen };
+export { VerifiedPhoneScreen };

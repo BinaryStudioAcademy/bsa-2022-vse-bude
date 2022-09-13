@@ -25,7 +25,7 @@ export class AuctionScheduler {
     schedule.scheduleJob(
       auctionJobName(product.id),
       product.endDate,
-      auctionNotifications.execute,
+      async () => await auctionNotifications.execute(),
     );
   }
 

@@ -7,7 +7,11 @@ import type {
   SocialMedia,
 } from '@prisma/client';
 import { ProductStatus, ProductType } from '@prisma/client';
-import type { ProductQuery } from '@vse-bude/shared';
+import type {
+  ProductQuery,
+  ProductSearchQuery,
+  ProductSearchResponse,
+} from '@vse-bude/shared';
 import type { Decimal } from '@prisma/client/runtime';
 import { Order } from '@vse-bude/shared';
 import { ITEM_FILTER } from '@vse-bude/shared';
@@ -63,6 +67,27 @@ export class ProductRepository {
         },
       }),
     ]);
+  }
+
+  public search({ q }: ProductSearchQuery): Promise<ProductSearchResponse[]> {
+    return this._dbClient.$queryRaw`
+      SELECT
+        "Product"."id",
+        "Product"."title"
+      FROM
+        "Product"
+      WHERE 
+        (SIMILARITY("Product"."title", ${q}) > 0.2
+      OR 
+        "Product"."title" ILIKE ${q + '%'}
+      OR 
+        "Product"."title" ILIKE ${'%' + q + '%'})
+      AND
+        "Product"."status" = CAST(${ProductStatus.ACTIVE} AS "ProductStatus")
+      ORDER BY 
+        SIMILARITY("Product"."title", ${q}) DESC
+      LIMIT 10;
+    `;
   }
 
   public getById(id: string): Prisma.Prisma__ProductClient<
