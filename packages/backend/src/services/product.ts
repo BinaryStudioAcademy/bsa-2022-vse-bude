@@ -8,7 +8,7 @@ import type { Request } from 'express';
 import {
   getFilenameFromUrl,
   getUserIdFromRequest,
-  logger,
+  // logger,
   toUtc,
 } from '@helpers';
 import type {
