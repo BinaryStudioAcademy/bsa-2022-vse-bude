@@ -17,6 +17,7 @@ const InputDate = ({
   error,
   id,
   label,
+  ...props
 }: InputDateProps) => {
   const { locale } = useRouter();
   const { t } = useTranslation('common');
@@ -49,8 +50,9 @@ const InputDate = ({
           placeholderText="-/-/-"
           id={id}
           locale={customLocale}
-          minDate={MIN_DATE}
+          minDate={Date.now() + 86400000}
           calendarStartDay={locale === 'ua' ? 1 : 0}
+          {...props}
         />
         <div css={styles.iconWrapper}>
           <Icon icon={IconName.CALENDAR} color={IconColor.GRAY} />
