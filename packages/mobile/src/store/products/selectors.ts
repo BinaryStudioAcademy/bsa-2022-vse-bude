@@ -21,4 +21,28 @@ const selectProductsByType = createSelector(
   (products, type) => products.filter((item) => item.type === type),
 );
 
-export { selectProductById, selectProducts, selectProductsByType };
+const selectPopularProducts = (state: RootState) => {
+  return state.products.popularProducts;
+};
+
+const selectPopularLots = (state: RootState) => {
+  return state.products.popularLots;
+};
+
+const selectProduct = (state: RootState) => {
+  return state.products.currentProduct;
+};
+
+const selectPermission = (state: RootState) => {
+  return state.products.permissions;
+};
+
+export {
+  selectProductById,
+  selectProducts,
+  selectProductsByType,
+  selectProduct,
+  selectPermission,
+  selectPopularProducts,
+  selectPopularLots,
+};
