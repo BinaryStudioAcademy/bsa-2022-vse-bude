@@ -8,5 +8,6 @@ export const FilterArrow = ({ isOpen }: FilterArrowProps) => (
     icon={isOpen ? IconName.ANGLE_UP : IconName.ANGLE_DOWN}
     color={IconColor.GREEN}
     cssExtend={styles.arrow}
+    size="xs"
   />
 );

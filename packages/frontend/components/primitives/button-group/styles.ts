@@ -9,7 +9,6 @@ export const button = ({
   fontWeights,
   radiuses,
   heights,
-  spaces
 }: Theme) => css`
   ${resetButton};
   display: flex;
@@ -26,18 +25,6 @@ export const button = ({
   border-radius: ${radiuses.xxs};
   font-size: ${fontSizes.smallButton};
   transition: 200ms linear;
-
-  &[data-size='small'] {
-    height: ${heights.filterBtnSm};
-    padding: 0 ${spaces.xs};
-    font-size: ${fontSizes.body2};
-    line-height: ${lineHeights.body2};
-    font-weight: ${fontWeights.tub};
-  }
-
-  &[data-variant='rectangle'] {
-    border-radius: ${radiuses.xxs};
-  }
 
   &[data-selected='selected'] {
     border: 1px solid ${colors.primaryLight};

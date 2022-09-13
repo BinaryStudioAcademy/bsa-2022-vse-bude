@@ -4,7 +4,6 @@ import type { Theme } from '@emotion/react';
 export const filterWrapper = css`
   box-shadow: -3px 0px 9px rgba(222, 222, 222, 0.25),
     2px 2px 8px rgba(222, 222, 222, 0.25);
-  width: 300px;
 `;
 
 export const filterComponents = ({ spaces }: Theme) => css`

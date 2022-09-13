@@ -114,7 +114,6 @@ const heights = {
   header: '80px',
   textarea: '96px',
   checkbox: '20px',
-  filterBtnSm: '30px',
   controlSm: '35px',
   buttonXs: '30px',
   controlBg: '45px',

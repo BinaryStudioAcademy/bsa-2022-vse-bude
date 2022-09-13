@@ -52,6 +52,8 @@ export enum ProfileApiRoutes {
   GET_FULL_USER_DATA = '/full-data',
   UPDATE_DATA = '/save',
   UPDATE_AVATAR = '/update-avatar',
+  ADD_TO_ARCHIVE = '/add-to-archive',
+  ADD_TO_POSTED = '/add-to-posted',
 }
 
 export enum AccountApiRoutes {

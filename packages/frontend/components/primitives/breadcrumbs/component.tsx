@@ -11,9 +11,13 @@ interface PagePathProps {
   cssExtend?: Interpolation<Theme>;
 }
 
-export const Breadcrumbs = ({ paths }: PagePathProps) => (
-  <Container>
-    <div css={wrapper}>
+export const Breadcrumbs = ({
+  paths,
+  cssExtend,
+  containerCssExtend,
+}: PagePathProps) => (
+  <Container cssExtend={containerCssExtend}>
+    <div css={[wrapper, cssExtend]}>
       {paths.map((path, index) => {
         if (path.name) {
           return (

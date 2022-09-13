@@ -200,8 +200,6 @@ export const views = ({ fontSizes, lineHeights, fontWeights, colors }: Theme) =>
 
 export const arrow = ({
   colors,
-  widths,
-  heights,
   radiuses,
   spaces,
 }: Theme) => css`
@@ -210,10 +208,9 @@ export const arrow = ({
   align-items: center;
   padding: ${spaces.xs};
   border-radius: ${radiuses.circle};
-  width: ${widths.checkbox};
-  height: ${heights.checkbox};
+  width: 15px;
+  height: 15px;
   padding: ${spaces.xs};
-  background-color: ${colors.backgroundLight};
   cursor: pointer;
   :hover {
     background-color: ${colors.backgroundDark};

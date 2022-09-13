@@ -1,6 +1,8 @@
 import { IconButton } from '@primitives';
 import { IconColor, IconName } from '@enums';
 import { useTranslation } from 'next-i18next';
+import { setVisabilityCancelModal, setItemId } from '@store';
+import { useAppDispatch } from '@hooks';
 import {
   ItemImage,
   ItemHeader,
@@ -15,9 +17,17 @@ import * as styles from './styles';
 
 export const Posted = ({ data }: { data: ItemCard }) => {
   const { t } = useTranslation();
-  const { title, imageLinks, price, description, views, postDate } = data;
+  const dispatch = useAppDispatch();
+  const { id, title, imageLinks, price, description, views, postDate } = data;
 
-  const onHandleClick = () => 'click';
+  const onOpenCancelModal = () => {
+    dispatch(setVisabilityCancelModal());
+    dispatch(setItemId(id));
+  };
+
+  const onEditHandle = () => {
+    console.log('edit');
+  };
 
   return (
     <div css={styles.card}>
@@ -46,7 +56,7 @@ export const Posted = ({ data }: { data: ItemCard }) => {
               icon={IconName.PENCIL}
               size="sm"
               cssExtend={styles.iconButton}
-              onClick={onHandleClick}
+              onClick={onEditHandle}
             />
 
             <IconButton
@@ -55,7 +65,7 @@ export const Posted = ({ data }: { data: ItemCard }) => {
               color={IconColor.ORANGE}
               icon={IconName.XMARK}
               size="sm"
-              onClick={onHandleClick}
+              onClick={onOpenCancelModal}
             />
           </div>
         </div>

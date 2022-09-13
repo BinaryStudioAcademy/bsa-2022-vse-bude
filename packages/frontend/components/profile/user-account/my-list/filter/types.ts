@@ -1,11 +1,14 @@
 export type FilterButtonProps = {
   name: string;
+  type: 'type';
+  text: string;
   onClick(): void;
 };
 
 export type CheckboxProps = {
   label: string;
   value: boolean;
+  type: 'status';
   onChange(): void;
 };
 

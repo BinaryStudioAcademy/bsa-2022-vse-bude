@@ -45,6 +45,18 @@
       "posted": "Розміщені",
       "drafts": "Проекти",
       "archived": "Архівні"
+    },
+    "badges": {
+      "allTypes": "Всі типи"
+    }
+  },
+  "modal": {
+    "buttons": {
+      "clear": "Очистити",
+      "add": "Архівувати"
+    },
+    "placeholders": {
+      "reason": "Ви можете додати причину"
     }
   }
 }

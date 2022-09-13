@@ -45,6 +45,18 @@
       "posted": "Posted",
       "drafts": "Drafts",
       "archived": "Archived"
+    },
+    "badges": {
+      "allTypes": "All Type"
+    }
+  },
+  "modal": {
+    "buttons": {
+      "clear": "Clear",
+      "add": "Archive"
+    },
+    "placeholders": {
+      "reason": "You can add a reason"
     }
   }
 }

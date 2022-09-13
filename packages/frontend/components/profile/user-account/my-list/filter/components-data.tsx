@@ -4,6 +4,8 @@ import type { Dispatch } from '@reduxjs/toolkit';
 import { filterByType, resetStatuses, filterByStatus } from '@store';
 import type { FilterButtonProps, CheckboxProps, FilterStatuses } from './types';
 
+export const ALL = 'all';
+
 export const filterButtons = ({
   t,
   dispatch,
@@ -12,16 +14,40 @@ export const filterButtons = ({
   dispatch: Dispatch;
 }): FilterButtonProps[] => [
   {
-    name: t('my-list:filter.button.all'),
-    onClick: () => dispatch(filterByType('')),
+    name: 'all',
+    type: 'type',
+    text: t('my-list:filter.button.all'),
+    onClick: () =>
+      dispatch(
+        filterByType({
+          typeName: '',
+          typeValue: t('my-list:filter.button.all'),
+        }),
+      ),
   },
   {
-    name: t('my-list:filter.button.fixedPrice'),
-    onClick: () => dispatch(filterByType(ProductType.SELLING)),
+    name: 'fixedPrice',
+    type: 'type',
+    text: t('my-list:filter.button.fixedPrice'),
+    onClick: () =>
+      dispatch(
+        filterByType({
+          typeName: ProductType.SELLING,
+          typeValue: t('my-list:filter.button.fixedPrice'),
+        }),
+      ),
   },
   {
-    name: t('my-list:filter.button.auction'),
-    onClick: () => dispatch(filterByType(ProductType.AUCTION)),
+    name: 'auction',
+    type: 'type',
+    text: t('my-list:filter.button.auction'),
+    onClick: () =>
+      dispatch(
+        filterByType({
+          typeName: ProductType.AUCTION,
+          typeValue: t('my-list:filter.button.auction'),
+        }),
+      ),
   },
 ];
 
@@ -37,43 +63,74 @@ export const checkboxes = ({
   {
     label: t('my-list:filter.checkbox.all'),
     value: statusesValue.all,
+    type: 'status',
     onChange: () => {
-      dispatch(resetStatuses());
+      dispatch(resetStatuses(t('my-list:filter.badges.allTypes')));
     },
   },
   {
     label: t('my-list:filter.checkbox.purchased'),
     value: statusesValue.purchased,
+    type: 'status',
     onChange: () => {
-      dispatch(filterByStatus('purchased'));
+      dispatch(
+        filterByStatus({
+          statusName: 'purchased',
+          statusValue: t('my-list:filter.checkbox.purchased'),
+        }),
+      );
     },
   },
   {
     label: t('my-list:filter.checkbox.sold'),
     value: statusesValue.sold,
+    type: 'status',
     onChange: () => {
-      dispatch(filterByStatus('sold'));
+      dispatch(
+        filterByStatus({
+          statusName: 'sold',
+          statusValue: t('my-list:filter.checkbox.posted'),
+        }),
+      );
     },
   },
   {
     label: t('my-list:filter.checkbox.posted'),
     value: statusesValue.posted,
+    type: 'status',
     onChange: () => {
-      dispatch(filterByStatus('posted'));
+      dispatch(
+        filterByStatus({
+          statusName: 'posted',
+          statusValue: t('my-list:filter.checkbox.posted'),
+        }),
+      );
     },
   },
   {
     label: t('my-list:filter.checkbox.drafts'),
     value: statusesValue.draft,
+    type: 'status',
     onChange: () => {
-      dispatch(filterByStatus('draft'));
+      dispatch(
+        filterByStatus({
+          statusName: 'draft',
+          statusValue: t('my-list:filter.checkbox.drafts'),
+        }),
+      );
     },
   },
   {
     label: t('my-list:filter.checkbox.archived'),
     value: statusesValue.archived,
+    type: 'status',
     onChange: () => {
-      dispatch(filterByStatus('archived'));
+      dispatch(
+        filterByStatus({
+          statusName: 'archived',
+          statusValue: t('my-list:filter.checkbox.archived'),
+        }),
+      );
     },
   },
 ];

@@ -50,7 +50,7 @@ export const filterContainer = ({ spaces }: Theme) => css`
   flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: ${spaces.xl5};
+  margin-bottom: ${spaces.xl};
 `;
 
 export const customPopover = css`

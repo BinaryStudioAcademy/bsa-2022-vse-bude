@@ -1,21 +1,34 @@
-import { useAuth, useTypedSelector } from '@hooks';
+import { useAppDispatch, useAuth, useTypedSelector } from '@hooks';
 import { useMemo } from 'react';
 import { useTranslation } from 'next-i18next';
 import type { RootState } from '@types';
 import { ProductStatus } from '@vse-bude/shared';
-import { Icon, Popover, Breadcrumbs } from '@components/primitives';
+import {
+  Icon,
+  Popover,
+  Breadcrumbs,
+  CategoryBadges,
+  Modal,
+} from '@components/primitives';
 import { IconColor, IconName } from '@enums';
+import { resetBadges } from '@store';
 import { SubPageName, SectionHeader } from '../common';
 import { Posted, Drafted, Purchased, Sold, Archived } from './cards';
 import { FilterArrow } from './primitives';
 import { Filter } from './filter/filter';
+import { CancelModal } from './cancel-modal';
 import * as styles from './styles';
 import { breadcrumbsPaths } from './components-data';
 import { typedItems, filterCallback } from './utils';
 
 export const MyListInfo = () => {
   const { t } = useTranslation();
+  const { badges, showCancelModal } = useTypedSelector(
+    (state: RootState) => state.myList,
+  );
+  const dispatch = useAppDispatch();
   const { user } = useAuth();
+
   const { itemsList, filterType, filterStatus } = useTypedSelector(
     (state: RootState) => state.myList,
   );
@@ -25,6 +38,16 @@ export const MyListInfo = () => {
       filterCallback({ itemsList, filterType, userId: user.id, filterStatus }),
     [itemsList, filterType, filterStatus, user.id],
   );
+
+  const onRemoveBadge = ({
+    value,
+    type,
+  }: {
+    value: string;
+    type: 'status' | 'type';
+  }) => {
+    dispatch(resetBadges({ type, value }));
+  };
 
   return (
     <div css={styles.listWrapper}>
@@ -40,7 +63,16 @@ export const MyListInfo = () => {
         </div>
 
         <div css={styles.filterContainer}>
-          <div css={styles.filtered}></div>
+          <div css={styles.filtered}>
+            <CategoryBadges
+              badges={badges
+                .filter((item) => !!item)
+                .map(({ value, type }) => ({
+                  name: value,
+                  onClick: () => onRemoveBadge({ value, type }),
+                }))}
+            />
+          </div>
 
           <div css={styles.filterMenu}>
             <div css={styles.filterIconWrapper}>
@@ -155,6 +187,10 @@ export const MyListInfo = () => {
           </div>
         </div>
       ) : null}
+
+      <Modal visible={showCancelModal}>
+        <CancelModal />
+      </Modal>
     </div>
   );
 };

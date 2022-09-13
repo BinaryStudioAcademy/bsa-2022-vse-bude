@@ -1,6 +1,9 @@
 import { useTranslation } from 'next-i18next';
 import { IconButton, Button } from '@primitives';
 import { IconColor, IconName } from '@enums';
+import type { ProductPost } from '@vse-bude/shared';
+import { useAppDispatch } from '@hooks';
+import { addItemToPosted } from '@store';
 import {
   ItemImage,
   ItemHeader,
@@ -14,9 +17,20 @@ import * as styles from './styles';
 
 export const Archived = ({ data }: { data: ItemCard }) => {
   const { t } = useTranslation();
-  const { title, imageLinks, price, description, endDate } = data;
+  const { id, title, imageLinks, price, description, endDate } = data;
+  const dispatch = useAppDispatch();
 
-  const onHandleClick = () => 'click';
+  const onPostClick = () => {
+    const reqDto: ProductPost = {
+      itemId: id,
+      postDate: new Date().toISOString(),
+    };
+    dispatch(addItemToPosted({ data: reqDto }));
+  };
+
+  const onEditClick = () => {
+    console.log('edit');
+  };
 
   return (
     <div css={styles.card}>
@@ -38,7 +52,9 @@ export const Archived = ({ data }: { data: ItemCard }) => {
 
           <div css={styles.postedFooter}>
             <div css={styles.publishButtonWrapper}>
-              <Button size="small">{t('my-list:card.unarchive')}</Button>
+              <Button onClick={onPostClick} size="small">
+                {t('my-list:card.unarchive')}
+              </Button>
             </div>
             <IconButton
               ariaLabel="edit"
@@ -46,7 +62,7 @@ export const Archived = ({ data }: { data: ItemCard }) => {
               color={IconColor.GRAY}
               icon={IconName.PENCIL}
               size="sm"
-              onClick={onHandleClick}
+              onClick={onEditClick}
             />
           </div>
         </div>

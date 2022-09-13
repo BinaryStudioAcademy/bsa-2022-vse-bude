@@ -18,3 +18,4 @@ export { Breadcrumbs } from './breadcrumbs';
 export { Modal } from './modal';
 export { Range } from './range';
 export { ButtonGroup } from './button-group';
+export { CategoryBadges } from './category-badge';
