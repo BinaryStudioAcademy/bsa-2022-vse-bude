@@ -44,7 +44,7 @@ const Header: FC<Props> = ({ labelButton, onPress, hideButton }) => {
               { color: colors.text },
             ]}
           >
-            {t('verificationPhone.VERIFY')}
+            {t('verify.VERIFY')}
           </Text>
         </View>
         <View style={styles.section} />

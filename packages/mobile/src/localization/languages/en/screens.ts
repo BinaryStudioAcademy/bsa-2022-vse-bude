@@ -114,7 +114,7 @@ export const screens = {
     MAX_IMAGE_SIZE: `Maximum file size is ${MAX_IMAGE_SIZE / 1000000} Mb`,
     CORRECTLY_FILLED: 'Please check fields to correctly filled',
   },
-  verificationPhone: {
+  verify: {
     VERIFY: 'Verify',
     VERIFY_PHONE: 'Verify phone',
     ENTER_NUMBER: 'Enter Your Phone Number',
@@ -129,7 +129,8 @@ export const screens = {
     INPUT_LABEL_CODE: 'Enter the verification code we just sent to you',
     RESEND_CODE: 'Resend code',
     CONTINUE: 'Continue',
-    VERIFIED_TITLE: 'Your account has been fully verified',
+    VERIFIED_TITLE_PHONE: 'Your phone has been fully verified',
+    VERIFIED_TITLE_EMAIL: 'Your email has been fully verified',
     CODE_SENT: 'Code sent',
   },
   make_a_post: {

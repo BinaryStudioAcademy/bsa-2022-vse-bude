@@ -113,7 +113,7 @@ export const screens = {
     MAX_IMAGE_SIZE: `Максимальний розмір файлу ${MAX_IMAGE_SIZE / 1000000} МБ`,
     CORRECTLY_FILLED: 'Будь ласка, перевірте, чи правильно заповнені поля',
   },
-  verificationPhone: {
+  verify: {
     VERIFY: 'Підтвердити',
     VERIFY_PHONE: 'Підтвердити телефон',
     ENTER_NUMBER: 'Введіть свій номер телефону',
@@ -124,11 +124,12 @@ export const screens = {
     BACK_HOME: 'Головна',
     BACK_BUTTON: 'Назад',
     ENTER_CODE: 'Введіть код',
-    JUST_SENT: 'Ми щойно надіслали код на номер',
+    JUST_SENT: 'Ми щойно надіслали код на ',
     INPUT_LABEL_CODE: 'Введіть код підтвердження, який ми щойно надіслали вам',
     RESEND_CODE: 'Надіслати повторно',
     CONTINUE: 'Продовжити',
-    VERIFIED_TITLE: 'Ваш обліковий запис повністю підтверджено',
+    VERIFIED_TITLE_PHONE: 'Ваш телефон повністю підтверджено',
+    VERIFIED_TITLE_EMAIL: 'Вашу електронну адресу повністю підтверджено',
     CODE_SENT: 'Код надіслано',
   },
   make_a_post: {
