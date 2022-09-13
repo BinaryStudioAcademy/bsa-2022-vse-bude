@@ -109,7 +109,7 @@ export const burgerOverlay = (theme: Theme) => css`
   }
 `;
 
-export const searchButton = ({ spaces } : Theme) => css`
+export const searchButton = ({ spaces }: Theme) => css`
   ${resetButton};
   margin-left: ${spaces.xs};
   cursor: pointer;

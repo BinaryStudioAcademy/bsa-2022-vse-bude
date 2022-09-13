@@ -96,17 +96,22 @@ export const Header = () => {
             </div>
           </Flex>
           <Flex align="center">
-            {searchOpen && 
-            <Search
-              value={searchQuery}
-              setValue={setSearchQuery}
-              placeholder={t(
-                'common:components.input.searchProductsPlaceholder',
-              )}
-            />
-            }
-            <button css={styles.searchButton} onClick={() => setSearchOpen(!searchOpen)}><Icon icon={IconName.SEARCH} color={IconColor.BLACK} /></button>
-            
+            {searchOpen && (
+              <Search
+                value={searchQuery}
+                setValue={setSearchQuery}
+                placeholder={t(
+                  'common:components.input.searchProductsPlaceholder',
+                )}
+              />
+            )}
+            <button
+              css={styles.searchButton}
+              onClick={() => setSearchOpen(!searchOpen)}
+            >
+              <Icon icon={IconName.SEARCH} color={IconColor.BLACK} />
+            </button>
+
             {isMounted && (
               <>
                 {user || loading ? (
