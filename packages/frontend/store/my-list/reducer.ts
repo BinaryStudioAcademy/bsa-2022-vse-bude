@@ -158,8 +158,8 @@ const myListSlice = createSlice({
         if (itemB.endDate < itemA.endDate) {
           return -1;
         }
-        
-return 0;
+
+        return 0;
       });
     },
     [addItemToArchive.rejected.type]: (state, { payload }) => {
@@ -188,8 +188,8 @@ return 0;
         if (itemB.postDate < itemA.postDate) {
           return -1;
         }
-        
-return 0;
+
+        return 0;
       });
     },
     [addItemToPosted.rejected.type]: (state, { payload }) => {

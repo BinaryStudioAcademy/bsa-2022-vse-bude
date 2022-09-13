@@ -12,6 +12,7 @@ export enum ApiRoutes {
   CREATE_POST = '/post',
   BIDS = '/bids',
   ORDERS = '/orders',
+  ITEMS = '/items',
 }
 
 export enum AuthApiRoutes {
@@ -35,6 +36,7 @@ export enum VerifyApiRoutes {
 export enum ProductApiRoutes {
   ID = '/:id',
   EDIT_ID = '/edit/:id',
+  EDIT = 'edit',
   VIEWS = '/views',
   FAVORITE = '/favorite',
   FAVORITE_IDS = '/favorite-ids',

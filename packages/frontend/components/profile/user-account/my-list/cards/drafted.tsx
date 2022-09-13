@@ -2,6 +2,8 @@ import { useTranslation } from 'next-i18next';
 import { IconButton, Button } from '@primitives';
 import { IconColor, IconName } from '@enums';
 import type { ProductPost } from '@vse-bude/shared';
+import { ApiRoutes, ProductApiRoutes } from '@vse-bude/shared';
+import { useRouter } from 'next/router';
 import { useAppDispatch } from '@hooks';
 import { addItemToPosted } from '@store';
 import {
@@ -19,7 +21,8 @@ export const Drafted = ({ data }: { data: ItemCard }) => {
   const { id, title, imageLinks, price, description, updatedAt } = data;
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-
+  const router = useRouter();
+  
   const onPostClick = () => {
     const reqDto: ProductPost = {
       itemId: id,
@@ -29,7 +32,7 @@ export const Drafted = ({ data }: { data: ItemCard }) => {
   };
 
   const onEditClick = () => {
-    console.log('edit');
+    router.push(`${ApiRoutes.ITEMS}/${ProductApiRoutes.EDIT}/${id}`);
   };
 
   return (

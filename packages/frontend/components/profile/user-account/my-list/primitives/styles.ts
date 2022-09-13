@@ -198,11 +198,7 @@ export const views = ({ fontSizes, lineHeights, fontWeights, colors }: Theme) =>
     color: ${colors.textLight};
   `;
 
-export const arrow = ({
-  colors,
-  radiuses,
-  spaces,
-}: Theme) => css`
+export const arrow = ({ colors, radiuses, spaces }: Theme) => css`
   display: flex;
   justify-content: center;
   align-items: center;

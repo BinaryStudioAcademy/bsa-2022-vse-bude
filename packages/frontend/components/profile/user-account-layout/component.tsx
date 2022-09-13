@@ -15,7 +15,6 @@ export const AccountLayout: FC<AccountPageProps> = ({ children }) => {
   const { query, asPath } = useRouter();
   const { t } = useTranslation();
   const { user: authUser } = useAuth();
-
   const dispatch = useAppDispatch();
 
   return (
@@ -27,7 +26,7 @@ export const AccountLayout: FC<AccountPageProps> = ({ children }) => {
             {(authUser?.id === query.id ||
               isInAccount({ id: authUser?.id, path: asPath })) && (
               <div css={styles.linksContainer}>
-                {getLinksData(query.id as string).map((link, idx) => {
+                {getLinksData(authUser.id as string).map((link, idx) => {
                   const { iconPath, label, path } = link;
                   const location = asPath === link.path;
                   const tLabel = t(label);

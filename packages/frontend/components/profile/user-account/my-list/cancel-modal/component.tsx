@@ -47,8 +47,8 @@ export const CancelModal = () => {
       },
     );
   };
-  
-return (
+
+  return (
     <div css={styles.modalWrapper}>
       <IconButton
         ariaLabel="close-modal"
