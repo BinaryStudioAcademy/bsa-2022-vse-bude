@@ -1,4 +1,4 @@
-import { Button, Container, Flex, IconButton, Loader } from '@primitives';
+import { Button, Container, Flex, Icon, IconButton, Loader } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { Fragment, useState, useEffect } from 'react';
@@ -9,10 +9,13 @@ import { useRouter } from 'next/router';
 import { fetchCategories } from 'store/category';
 import type { HttpAcceptLanguage } from '@vse-bude/shared';
 import { Search } from '@components/primitives/search/component';
+// import dynamic from 'next/dynamic';
 import { ProfileInfo } from './profile-info';
 import { Navigation } from './navigation/component';
 import { BurgerMenu } from './burger-menu/component';
 import * as styles from './styles';
+
+// const Search = dynamic(() => import('@components/primitives/search'));
 
 interface RequestOptions {
   locale?: HttpAcceptLanguage;
@@ -26,6 +29,7 @@ export const Header = () => {
   const { push, locale } = useRouter();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const [searchOpen, setSearchOpen] = useState(false);
 
   const categories = useTypedSelector((state) => state.category.listInUse);
 
@@ -92,6 +96,7 @@ export const Header = () => {
             </div>
           </Flex>
           <Flex align="center">
+            {searchOpen && 
             <Search
               value={searchQuery}
               setValue={setSearchQuery}
@@ -99,6 +104,9 @@ export const Header = () => {
                 'common:components.input.searchProductsPlaceholder',
               )}
             />
+            }
+            <button css={styles.searchButton} onClick={() => setSearchOpen(!searchOpen)}><Icon icon={IconName.SEARCH} color={IconColor.BLACK} /></button>
+            
             {isMounted && (
               <>
                 {user || loading ? (
