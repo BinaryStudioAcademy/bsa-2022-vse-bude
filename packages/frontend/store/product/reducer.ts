@@ -16,6 +16,7 @@ import {
 
 interface ProductState {
   list: ProductDto[];
+  count: number;
   currentItem?: ProductDto;
   similarProducts: ProductDto[];
   loading: boolean;
@@ -27,6 +28,7 @@ interface ProductState {
 
 const initialState: ProductState = {
   list: [],
+  count: null,
   similarProducts: [],
   loading: false,
   currentProduct: null,
@@ -87,7 +89,8 @@ const productSlice = createSlice({
       state.loading = true;
     },
     [fetchProducts.fulfilled.type](state, { payload }) {
-      state.list = payload;
+      state.list = payload?.items;
+      state.count = payload?.count;
       state.loading = false;
     },
     [fetchProducts.rejected.type](state) {

@@ -1,13 +1,13 @@
 import type { InputProps } from '../input/types';
 
-export interface SelectProps
+export interface SelectProps<T>
   extends Omit<InputProps, 'type' | 'variant' | 'ref'> {
   error?: string;
-  options: SelectOption[];
+  options: SelectOption<T>[];
   value: string;
-  setValue: (arg0: SelectOption) => void;
+  setValue: (arg0: SelectOption<T>) => void;
 }
-export type SelectOption = {
-  value: string;
+export type SelectOption<T = string> = {
+  value: T;
   title: string;
 };

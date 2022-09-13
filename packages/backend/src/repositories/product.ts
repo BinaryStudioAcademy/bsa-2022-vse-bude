@@ -7,9 +7,10 @@ import type {
   SocialMedia,
 } from '@prisma/client';
 import { ProductStatus, ProductType } from '@prisma/client';
+import type { ProductQuery } from '@vse-bude/shared';
 import type { Decimal } from '@prisma/client/runtime';
-import type { ProductQuery } from '@types';
 import { Order } from '@vse-bude/shared';
+import { ITEM_FILTER } from '@vse-bude/shared';
 import { toUtc } from '@helpers';
 
 export class ProductRepository {
@@ -21,27 +22,47 @@ export class ProductRepository {
     this._dbClient = prismaClient;
   }
 
-  public getAll(query: ProductQuery): Promise<Product[]> {
+  public getAll(query: ProductQuery): Promise<[Product[], number]> {
     const {
-      limit = 10,
-      from = 0,
+      limit = ITEM_FILTER.PRODUCT_LIMIT_DEFAULT,
+      from = ITEM_FILTER.PRODUCT_FROM_DEFAULT,
       type,
       categoryId,
-      sortBy = 'createdAt',
-      order = Order.ASC,
+      priceGt = ITEM_FILTER.PRICE_GT_DEFAULT,
+      priceLt = ITEM_FILTER.PRICE_LT_DEFAULT,
+      sortBy = ITEM_FILTER.SORT_BY_DEFAULT,
+      order = ITEM_FILTER.ORDER_DEFAULT,
     } = query;
 
-    return this._dbClient.product.findMany({
-      take: +limit,
-      skip: +from,
-      orderBy: {
-        [sortBy]: order,
-      },
-      where: {
-        type,
-        categoryId,
-      },
-    });
+    return this._dbClient.$transaction([
+      this._dbClient.product.findMany({
+        take: +limit,
+        skip: +from,
+        orderBy: {
+          [sortBy]: order,
+        },
+        where: {
+          type,
+          categoryId,
+          status: ProductStatus.ACTIVE,
+          price: {
+            gt: +priceGt,
+            lte: +priceLt,
+          },
+        },
+      }),
+      this._dbClient.product.count({
+        where: {
+          type,
+          categoryId,
+          status: ProductStatus.ACTIVE,
+          price: {
+            gt: +priceGt,
+            lte: +priceLt,
+          },
+        },
+      }),
+    ]);
   }
 
   public getById(id: string): Prisma.Prisma__ProductClient<

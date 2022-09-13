@@ -3,8 +3,11 @@ import { RouteProp } from '@react-navigation/native';
 import { HttpError, ProductType } from '@vse-bude/shared';
 import { RootNavigationParamList } from '~/common/types/types';
 import { RootScreenName } from '~/common/enums/enums';
-import { products as productsActions } from '~/store/actions';
-import { selectCurrentProduct, selectCurrentUser } from '~/store/selectors';
+import {
+  products as productsActions,
+  product as productActions,
+} from '~/store/actions';
+import { selectProduct, selectCurrentUser } from '~/store/selectors';
 import { notification, productApi } from '~/services/services';
 import {
   useAppDispatch,
@@ -34,7 +37,7 @@ const ProductInfo: FC = () => {
   const { colors } = useCustomTheme();
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
-  const product = useAppSelector(selectCurrentProduct);
+  const product = useAppSelector(selectProduct);
   const user = useAppSelector(selectCurrentUser);
   const route =
     useRoute<
@@ -43,7 +46,8 @@ const ProductInfo: FC = () => {
   const id = route.params?.itemId;
 
   useEffect(() => {
-    dispatch(productsActions.loadProductInfo(id));
+    dispatch(productActions.loadProductInfo(id));
+    dispatch(productActions.updateProductViews(id));
     if (user) {
       dispatch(productsActions.fetchFavoritesIds());
     }

@@ -37,6 +37,18 @@ class ProductService {
     );
   }
 
+  incrementProductViews = (productId: string): Promise<ProductDto> => {
+    return this.#http.load(
+      `${this.#apiPrefix}${ApiRoutes.PRODUCTS}/${productId}${
+        ProductApiRoutes.VIEWS
+      }`,
+      {
+        method: HttpMethod.PUT,
+        payload: JSON.stringify({ productId }),
+      },
+    );
+  };
+
   getFavorites(requestParams: ProductRequestDto = {}): Promise<ProductDto[]> {
     return this.#http.load(
       `${this.#apiPrefix}${ApiRoutes.PRODUCTS}${ProductApiRoutes.FAVORITE}`,
