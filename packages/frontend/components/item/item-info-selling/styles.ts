@@ -15,18 +15,18 @@ export const wrapper = ({ spaces, breakpoints }: Theme) => css`
   }
 `;
 
-export const controls = ({ spaces }: Theme) => css`
+export const controls = css`
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: ${spaces.md};
 `;
 
 export const favouriteButton = ({ spaces, colors }: Theme) => css`
-  color: ${colors.primary};
-  width: ${spaces.xl4};
-  height: ${spaces.xl4};
+  color: ${colors.accent};
+  margin-left: ${spaces.md};
+  width: 45px;
+  height: 45px;
 `;
 
 export const price = ({ spaces, breakpoints }: Theme) => css`
