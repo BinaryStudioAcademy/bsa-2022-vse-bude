@@ -111,7 +111,4 @@ export const burgerOverlay = (theme: Theme) => css`
 
 export const searchButton = ({ spaces }: Theme) => css`
   margin-left: ${spaces.xs};
-  /* &:hover {
-    background-color: rgba(0, 0, 0, 0.5);
-  } */
 `;

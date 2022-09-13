@@ -142,13 +142,12 @@ export const searchInput = ({
   lineHeights,
   radiuses,
   shadows,
-  heights,
   spaces,
 }: Theme) => css`
   transition: 200ms linear;
   box-shadow: ${shadows.bottom};
   width: 100%;
-  height: ${heights.controlSm};
+  height: 30px;
   border: ${colors.backgroundDark} 1px solid;
   border-radius: ${radiuses.lg};
   box-sizing: border-box;
