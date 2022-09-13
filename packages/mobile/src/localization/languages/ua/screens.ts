@@ -99,6 +99,8 @@ export const screens = {
     FIRST_NAME_INVALID: 'Неправильний формат імені',
     LAST_NAME_INVALID: 'Неправильний формат прізвища',
     WRONG_FORMAT: 'Невірний формат',
+    WRONG_FORMAT_PHONE:
+      'Будь ласка, введіть телефон у міжнародному форматі: +380123456789',
     PLACE_NAME: 'Має складатися з літер: А-Я або A-Z',
     MAX_COUNTRY_LENGTH: `Назва країни має містити не більше ${MAX_COUNTRY_LENGTH} символів`,
     MAX_REGION_LENGTH: `Назва області має містити не більше ${MAX_REGION_LENGTH} символів`,

@@ -43,7 +43,7 @@ const personalInfoSchema = Joi.object<SaveUserProfileDto>({
     .trim()
     .empty('')
     .messages({
-      'string.pattern.base': i18next.t('errors.WRONG_FORMAT'),
+      'string.pattern.base': i18next.t('errors.WRONG_FORMAT_PHONE'),
     }),
   country: Joi.string()
     .empty('')
