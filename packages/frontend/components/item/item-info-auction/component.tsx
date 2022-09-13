@@ -66,7 +66,7 @@ export const ItemInfoAuction = ({
   }, [item.id, user, dispatch]);
 
   const targetDate = new Date(item.endDate);
-  const minBidAmount = +item.currentPrice + +item.minimalBid + 1;
+  const minBidAmount = +item.currentPrice + +item.minimalBid;
 
   const {
     permissions: { isAbleToLeaveAuction },
