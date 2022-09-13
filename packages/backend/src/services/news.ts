@@ -1,3 +1,4 @@
+import type { News } from '@prisma/client';
 import type { NewsRepository } from '@repositories';
 
 export class NewsService {
@@ -7,7 +8,7 @@ export class NewsService {
     this._newsRepository = newsRepository;
   }
 
-  public getAll(query: Query) {
+  public getAll(query: Query): Promise<News[]> {
     const take = query.limit ? +query.limit : 10;
 
     return this._newsRepository.getAll(take);

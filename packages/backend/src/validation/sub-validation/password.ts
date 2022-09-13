@@ -7,7 +7,7 @@ import {
 import { ProfileError } from '@errors';
 import { lang } from '@lang';
 
-export const passwordValidation = ({ req }: { req: Request }) => {
+export const passwordValidation = ({ req }: { req: Request }): void => {
   const { password, newPassword, repeatPassword } = req.body;
 
   if (password || newPassword) {

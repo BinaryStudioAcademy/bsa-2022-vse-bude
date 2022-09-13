@@ -7,7 +7,7 @@ import { writeFile } from './../../helpers/wtireFile';
 export const seedProducts = async (
   prismaClient: PrismaClient,
   existingUsers: User[],
-) => {
+): Promise<void> => {
   const existingCategories = await prismaClient.category.findMany();
 
   const productsNumber =

@@ -1,9 +1,15 @@
+import type { Bid } from '@prisma/client';
 import type { Decimal } from '@prisma/client/runtime';
-import type { Bid } from '@vse-bude/shared';
+import type { MappedBid } from '@types';
+import type { ProductById } from 'common/types/product';
 
-const convertDecimal = (value: any) => (value ? Number(value) : null);
+const convertDecimal = (value: any): number | null =>
+  value ? Number(value) : null;
 
-export const productMapper = (productData: any, currentPrice?: Decimal) => ({
+export const productMapper = (
+  productData: any,
+  currentPrice?: Decimal,
+): ProductById => ({
   ...productData,
   price: Number(productData.price),
   recommendedPrice: convertDecimal(productData.recommendedPrice),
@@ -12,7 +18,7 @@ export const productMapper = (productData: any, currentPrice?: Decimal) => ({
   bids: productData?.bids?.map(bidMapper),
 });
 
-export const bidMapper = (bid: Bid) => ({
+export const bidMapper = (bid: Bid): MappedBid => ({
   ...bid,
   price: Number(bid.price),
 });

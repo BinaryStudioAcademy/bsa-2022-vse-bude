@@ -41,6 +41,7 @@ const ProductInfo: FC = () => {
 
   useEffect(() => {
     dispatch(productActions.loadProductInfo(id));
+    dispatch(productActions.updateProductViews(id));
   }, []);
 
   if (!product) {

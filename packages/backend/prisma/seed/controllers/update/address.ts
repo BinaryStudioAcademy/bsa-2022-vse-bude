@@ -2,7 +2,9 @@ import type { Address, PrismaClient } from '@prisma/client';
 import { readFileSync } from 'fs';
 import { ADDRESS_FILE_NAME } from './../../config/config';
 
-export const updateAddress = async (prismaClient: PrismaClient) => {
+export const updateAddress = async (
+  prismaClient: PrismaClient,
+): Promise<void> => {
   const path = `./prisma/seed/mockData/${ADDRESS_FILE_NAME}.json`;
   const file = readFileSync(path, 'utf-8');
 

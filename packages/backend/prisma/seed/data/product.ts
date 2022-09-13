@@ -8,7 +8,7 @@ export const fakeProducts = async (
   amountOfRecords: number,
   existingUsers: User[],
   existingCategories: Category[],
-) => {
+): Promise<Product[]> => {
   const records: Product[] = [];
 
   for (let i = 0; i < amountOfRecords; i++) {

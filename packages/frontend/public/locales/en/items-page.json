@@ -1,0 +1,46 @@
+{
+  "headline": {
+    "header": "Find Your Special Lots",
+    "notFound": "There are no such products yet"
+  },
+  "typeBtn": {
+    "AUCTION": "Auction",
+    "SELLING": "Fixed price",
+    "ALL": "All"
+  },
+  "label": {
+    "category": "Category",
+    "price": "Price",
+    "sortBy": "Sort by"
+  },
+  "placeholder": {
+    "category": "Category",
+    "sortBy": "Sort by"
+  },
+  "sortBy": {
+    "priceAsc": "From cheap to expensive",
+    "priceDesc": "From expensive to cheap",
+    "dateAsc": "New to Old",
+    "dateDesc": "Old to New",
+    "viewsDesc": "Most views",
+    "viewsAsc": "Least Views"
+  },
+  "btn": {
+    "save": "Save"
+  },
+  "budges": {
+    "minPrice": "Min price: ",
+    "maxPrice": "Max price: ",
+    "sortBy": "Sort by: "
+  },
+  "ariaLabel": {
+    "navigation": "Pagination Navigation",
+    "prevPage": "Goto Previous Page",
+    "nextPage": "Goto Next Page",
+    "currentPage": "Current Page, Page ",
+    "goToPage": "Goto Page "
+  },
+  "currency": {
+    "UAH": "UAH"
+  }
+}

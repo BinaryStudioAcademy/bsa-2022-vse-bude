@@ -9,7 +9,28 @@ export const initOrderRoutes = (
   path: ApiRoutes,
 ): Router => {
   const router = Router();
-
+  /**
+   * @openapi
+   * /orders:
+   *   post:
+   *     description: Create order
+   *     tags: [Order]
+   *     produces:
+   *       - application/json
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             $ref: "#/definitions/CreateOrderBody"
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/CreateOrderResponse"
+   */
   router.post(
     apiPath(path),
     authMiddleware,
@@ -29,6 +50,31 @@ export const initOrderRoutes = (
     );
   });
 
+  /**
+   * @openapi
+   * /orders/create-payment:
+   *   post:
+   *     description: Create payment data
+   *     tags: [Order]
+   *     produces:
+   *       - application/json
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             properties:
+   *               orderId:
+   *                 type: string
+   *                 format: uuid
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/CreatePaymentResponse"
+   */
   router.post(
     apiPath(path, OrderApiRoutes.CREATE_PAYMENT),
     authMiddleware,

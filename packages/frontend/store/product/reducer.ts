@@ -16,6 +16,7 @@ import {
 
 interface ProductState {
   list: ProductDto[];
+  count: number;
   currentItem?: ProductDto;
   similarProducts: ProductDto[];
   loading: boolean;
@@ -27,6 +28,7 @@ interface ProductState {
 
 const initialState: ProductState = {
   list: [],
+  count: null,
   similarProducts: [],
   loading: false,
   currentProduct: null,
@@ -80,14 +82,15 @@ const productSlice = createSlice({
     },
 
     [auctionLeaveAction.fulfilled.type](state, { payload }) {
-      state.currentItem.currentPrice = payload.price;
+      state.currentItem.currentPrice = payload.currentPrice;
     },
 
     [fetchProducts.pending.type](state) {
       state.loading = true;
     },
     [fetchProducts.fulfilled.type](state, { payload }) {
-      state.list = payload;
+      state.list = payload?.items;
+      state.count = payload?.count;
       state.loading = false;
     },
     [fetchProducts.rejected.type](state) {

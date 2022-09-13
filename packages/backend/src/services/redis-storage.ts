@@ -41,11 +41,11 @@ export class RedisStorageService {
     return this.client.del(key);
   }
 
-  async isKeyExists(key: string) {
+  async isKeyExists(key: string): Promise<number> {
     return this.client.exists(key);
   }
 
-  async checkPing() {
+  async checkPing(): Promise<boolean> {
     return (await this.client.ping()) === 'PONG';
   }
 }

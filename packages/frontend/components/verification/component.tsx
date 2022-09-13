@@ -13,7 +13,6 @@ const VerificationModal = () => {
   const { hasToken } = useAuth();
   const isMounted = useMounted();
   const { user } = useAuth();
-  const [phone, setPhone] = useState(user.phone);
 
   useEffect(() => {
     setIsVisible(true);
@@ -26,9 +25,9 @@ const VerificationModal = () => {
   const renderContent = (param) => {
     switch (param) {
       case 0:
-        return <EnterPhoneModal phone={phone} setPhone={setPhone} />;
+        return <EnterPhoneModal phone={user.phone} />;
       case 1:
-        return <EnterCodeModal phone={phone} />;
+        return <EnterCodeModal phone={user.phone} />;
       case 2:
         return <SuccessModal />;
       default:

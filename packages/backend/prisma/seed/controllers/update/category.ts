@@ -2,7 +2,9 @@ import type { Category, PrismaClient } from '@prisma/client';
 import { readFileSync } from 'fs';
 import { CATEGORY_FILE_NAME } from './../../config/config';
 
-export const updateCategory = async (prismaClient: PrismaClient) => {
+export const updateCategory = async (
+  prismaClient: PrismaClient,
+): Promise<void> => {
   const path = `./prisma/seed/mockData/${CATEGORY_FILE_NAME}.json`;
   const file = readFileSync(path, 'utf-8');
 
