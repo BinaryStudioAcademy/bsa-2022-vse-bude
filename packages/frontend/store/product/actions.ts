@@ -16,6 +16,7 @@ import {
   placeBidRequest,
   getSilimar,
   getProductEditByIdSSR,
+  search,
 } from 'services/product';
 import { addToast } from 'store/toast/actions';
 import { ProductActions } from './action-types';
@@ -139,6 +140,19 @@ export const auctionLeaveAction = createAsyncThunk(
         }),
       );
 
+      return rejectWithValue(e.message);
+    }
+  },
+);
+
+export const actionSearch = createAsyncThunk(
+  ProductActions.SEARCH,
+  async (data: string, { rejectWithValue }) => {
+    try {
+      const result = await search(data);
+
+      return result;
+    } catch (e) {
       return rejectWithValue(e.message);
     }
   },

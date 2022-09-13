@@ -12,6 +12,7 @@ import {
   fetchSimilarProducts,
   fetchCurrentProduct,
   updateCurrentItemPrice,
+  actionSearch,
 } from './actions';
 
 interface ProductState {
@@ -21,6 +22,7 @@ interface ProductState {
   similarProducts: ProductDto[];
   loading: boolean;
   currentProduct: ProductDto;
+  searchedProducts: ProductDto[];
   permissions: {
     isAbleToLeaveAuction: boolean;
   };
@@ -33,6 +35,7 @@ const initialState: ProductState = {
   loading: false,
   currentProduct: null,
   currentItem: null,
+  searchedProducts: [],
   permissions: {
     isAbleToLeaveAuction: false,
   },
@@ -109,6 +112,17 @@ const productSlice = createSlice({
 
     [fetchSimilarProducts.fulfilled.type](state, { payload }) {
       state.similarProducts = payload;
+    },
+
+    [actionSearch.pending.type](state) {
+      state.loading = true;
+    },
+    [actionSearch.fulfilled.type](state, { payload }) {
+      state.searchedProducts = payload;
+      state.loading = false;
+    },
+    [actionSearch.rejected.type](state) {
+      state.loading = false;
     },
 
     [HYDRATE](state, { payload }: HydrateAction) {
