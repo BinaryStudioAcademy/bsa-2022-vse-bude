@@ -13,17 +13,17 @@ const Search = ({ value, setValue, ...props }: SearchProps) => {
   const dispatch = useAppDispatch();
   const { searchedProducts } = useTypedSelector((state) => state.product);
   const { push } = useRouter();
-  
-  const debounce = (cb, delay=100) => (...args) => {
-      setTimeout (() => {
+
+  const debounce =
+    (cb, delay = 100) =>
+    (...args) => {
+      setTimeout(() => {
         cb(...args);
       }, delay);
     };
 
   const callback = async ({ target }) => {
     setValue(target.value);
-    console.log(target.value);
-    
     debounce(dispatch(actionSearch(target.value)));
   };
 

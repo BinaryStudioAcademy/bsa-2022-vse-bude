@@ -5,11 +5,7 @@ import {
   AuctionEndedError,
 } from '@errors';
 import type { Request } from 'express';
-import {
-  getFilenameFromUrl,
-  getUserIdFromRequest,
-  toUtc,
-} from '@helpers';
+import { getFilenameFromUrl, getUserIdFromRequest, toUtc } from '@helpers';
 import type {
   AddProductToFavorites,
   AuctionPermissionsResponse,

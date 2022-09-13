@@ -149,9 +149,7 @@ export const actionSearch = createAsyncThunk(
   ProductActions.SEARCH,
   async (data: string, { rejectWithValue }) => {
     try {
-      const result = await search(data);
-
-      return result;
+      return await search(data);
     } catch (e) {
       return rejectWithValue(e.message);
     }
