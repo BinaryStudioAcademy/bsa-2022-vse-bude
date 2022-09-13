@@ -117,6 +117,6 @@ export const searchButton = ({ spaces, radiuses }: Theme) => css`
   cursor: pointer;
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
-    transition: background-color 0.5s ease-in-out;
+    transition: background-color 0.2s ease-in-out;
   }
 `;

@@ -1,7 +1,7 @@
 import { Routes } from '@enums';
-import { useAppDispatch, useTypedSelector } from '@hooks';
+import { useAppDispatch, useOutsideClick, useTypedSelector } from '@hooks';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { actionSearch, clearSearch } from 'store/product';
 import { SearchInput } from '../input';
 import { Dropdown } from '../menu-dropdown';
