@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
-import { ColorPalette, ProductDto, ProductIdRequest } from '@vse-bude/shared';
-import { selectFavoritesIds } from '~/store/selectors';
-import { useAppSelector, useCustomTheme, useTranslation } from '~/hooks/hooks';
+import { ColorPalette, ProductDto } from '@vse-bude/shared';
+import { useCustomTheme, useTranslation } from '~/hooks/hooks';
 import {
   Pressable,
   PrimaryButton,
@@ -16,22 +15,19 @@ import { styles } from './styles';
 type ProductPriceBlockProps = {
   product: Pick<ProductDto, 'price' | 'id'>;
   isLoading: boolean;
-  onFavoritePress: (
-    id: string,
-    isFavorite: boolean,
-  ) => Promise<void | ProductIdRequest>;
+  isFavorite: boolean;
+  onFavoritePress: (id: string) => Promise<void>;
 };
 
 const ProductPriceBlock: FC<ProductPriceBlockProps> = ({
   product,
   isLoading,
+  isFavorite,
   onFavoritePress,
 }) => {
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
-  const favoritesIds = useAppSelector(selectFavoritesIds);
   const { price, id } = product;
-  const isFavorite = favoritesIds.includes(id);
 
   return (
     <PriceWrapper>
@@ -52,7 +48,7 @@ const ProductPriceBlock: FC<ProductPriceBlockProps> = ({
             <PrimaryButton label={t('common:components.BUTTON_BUY')} />
           </View>
           <Pressable
-            onPress={() => onFavoritePress(id, isFavorite)}
+            onPress={() => onFavoritePress(id)}
             style={[globalStyles.ml5, styles.iconBorder]}
             disabled={isLoading}
           >

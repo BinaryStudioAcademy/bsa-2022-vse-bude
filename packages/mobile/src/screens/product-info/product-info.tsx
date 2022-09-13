@@ -1,14 +1,19 @@
 import React, { FC, useEffect, useState } from 'react';
 import { RouteProp } from '@react-navigation/native';
-import { HttpError, ProductType } from '@vse-bude/shared';
+import { ProductType } from '@vse-bude/shared';
 import { RootNavigationParamList } from '~/common/types/types';
 import { RootScreenName } from '~/common/enums/enums';
 import {
   products as productsActions,
   product as productActions,
 } from '~/store/actions';
-import { selectProduct, selectCurrentUser } from '~/store/selectors';
-import { notification, productApi } from '~/services/services';
+import {
+  selectProduct,
+  selectCurrentUser,
+  selectFavoritesIds,
+  selectTempFavoritesIds,
+} from '~/store/selectors';
+import { notification } from '~/services/services';
 import {
   useAppDispatch,
   useAppSelector,
@@ -39,16 +44,32 @@ const ProductInfo: FC = () => {
   const dispatch = useAppDispatch();
   const product = useAppSelector(selectProduct);
   const user = useAppSelector(selectCurrentUser);
+  const favoritesIds = useAppSelector(selectFavoritesIds);
+  const tempFavoritesIds = useAppSelector(selectTempFavoritesIds);
   const route =
     useRoute<
       RouteProp<Pick<RootNavigationParamList, RootScreenName.ITEM_INFO>>
     >();
   const id = route.params?.itemId;
 
+  const isFavorite = (() => {
+    if (user) {
+      return favoritesIds.includes(id);
+    }
+
+    return tempFavoritesIds.includes(id);
+  })();
+
   useEffect(() => {
     dispatch(productActions.loadProductInfo(id));
     dispatch(productActions.updateProductViews(id));
     if (user) {
+      if (tempFavoritesIds) {
+        tempFavoritesIds.map((id) =>
+          dispatch(productsActions.addToFavorite(id)),
+        );
+        dispatch(productsActions.cleanTemporaryFavorites());
+      }
       dispatch(productsActions.fetchFavoritesIds());
     }
   }, []);
@@ -59,27 +80,37 @@ const ProductInfo: FC = () => {
   const { title, type, imageLinks, views, author } = product;
   const isAuction = type == ProductType.AUCTION;
 
-  const handleToggleFavorite = async (
-    productId: string,
-    isFavorite: boolean,
-  ) => {
+  const handleToggleFavorite = async (productId: string) => {
     setIsLoading(true);
-    if (!user) {
-      return notification.info('You should authorize first');
-    }
-    try {
-      if (isFavorite) {
-        return await productApi.deleteFromFavorites({ productId });
-      }
-
-      return await productApi.uploadToFavorites({ productId });
-    } catch (err) {
-      if (err instanceof HttpError) {
-        notification.error(JSON.stringify(err.message));
-      }
-    } finally {
-      dispatch(productsActions.fetchFavoritesIds());
-      setIsLoading(false);
+    switch (Boolean(user)) {
+      case true:
+        if (isFavorite) {
+          dispatch(productsActions.deleteFromFavorite(productId))
+            .unwrap()
+            .catch((err) => notification.error(JSON.stringify(err.message)))
+            .finally(() => {
+              dispatch(productsActions.fetchFavoritesIds());
+              setIsLoading(false);
+            });
+          break;
+        }
+        dispatch(productsActions.addToFavorite(productId))
+          .unwrap()
+          .catch((err) => notification.error(JSON.stringify(err.message)))
+          .finally(() => {
+            dispatch(productsActions.fetchFavoritesIds());
+            setIsLoading(false);
+          });
+        break;
+      case false:
+        if (isFavorite) {
+          dispatch(productsActions.deleteFromTemporaryFavorites(productId));
+          setIsLoading(false);
+          break;
+        }
+        dispatch(productsActions.addToTemporaryFavorites(productId));
+        setIsLoading(false);
+        break;
     }
   };
 
@@ -126,12 +157,14 @@ const ProductInfo: FC = () => {
         <LotPriceBlock
           product={product}
           isLoading={isLoading}
+          isFavorite={isFavorite}
           onFavoritePress={handleToggleFavorite}
         />
       ) : (
         <ProductPriceBlock
           product={product}
           isLoading={isLoading}
+          isFavorite={isFavorite}
           onFavoritePress={handleToggleFavorite}
         />
       )}

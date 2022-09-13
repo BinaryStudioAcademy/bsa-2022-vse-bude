@@ -1,13 +1,7 @@
 import React, { FC } from 'react';
-import { ColorPalette, ProductDto, ProductIdRequest } from '@vse-bude/shared';
-import { selectFavoritesIds } from '~/store/selectors';
+import { ColorPalette, ProductDto } from '@vse-bude/shared';
 import { getBidValidationSchema } from '~/validation-schemas/bid/make-bid';
-import {
-  useAppForm,
-  useAppSelector,
-  useCustomTheme,
-  useTranslation,
-} from '~/hooks/hooks';
+import { useAppForm, useCustomTheme, useTranslation } from '~/hooks/hooks';
 import {
   PrimaryButton,
   Text,
@@ -25,22 +19,19 @@ import { styles } from './styles';
 type LotPriceBlockProps = {
   product: Pick<ProductDto, 'currentPrice' | 'minimalBid' | 'id'>;
   isLoading: boolean;
-  onFavoritePress: (
-    id: string,
-    isFavorite: boolean,
-  ) => Promise<void | ProductIdRequest>;
+  isFavorite: boolean;
+  onFavoritePress: (id: string) => Promise<void>;
 };
 
 const LotPriceBlock: FC<LotPriceBlockProps> = ({
   product,
   isLoading,
+  isFavorite,
   onFavoritePress,
 }) => {
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
-  const favoritesIds = useAppSelector(selectFavoritesIds);
   const { minimalBid, currentPrice, id } = product;
-  const isFavorite = favoritesIds.includes(id);
 
   const { control, errors } = useAppForm({
     defaultValues: DEFAULT_BID_VALUE,
@@ -97,7 +88,7 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
               <PrimaryButton label={`${t('common:components.BUTTON_BID')}`} />
             </View>
             <Pressable
-              onPress={() => onFavoritePress(id, isFavorite)}
+              onPress={() => onFavoritePress(id)}
               style={[globalStyles.ml5, styles.iconBorder]}
               disabled={isLoading}
             >

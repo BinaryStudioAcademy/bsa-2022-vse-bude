@@ -4,12 +4,12 @@ import { ProductDto } from '@vse-bude/shared';
 import { loadProductInfo, updateProductViews } from './actions';
 
 type InitialState = {
-  product: ProductDto | undefined;
+  product: ProductDto | null;
   dataStatus: DataStatus;
 };
 
 const initialState: InitialState = {
-  product: undefined,
+  product: null,
   dataStatus: DataStatus.IDLE,
 };
 

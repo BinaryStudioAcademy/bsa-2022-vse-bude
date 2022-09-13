@@ -25,6 +25,10 @@ const selectFavoritesIds = (state: RootState) => {
   return state.products.favoritesIds;
 };
 
+const selectTempFavoritesIds = (state: RootState) => {
+  return state.products.tempFavoritesIds;
+};
+
 const selectFavorites = (state: RootState) => {
   return state.products.favorites;
 };
@@ -34,5 +38,6 @@ export {
   selectProducts,
   selectProductsByType,
   selectFavoritesIds,
+  selectTempFavoritesIds,
   selectFavorites,
 };

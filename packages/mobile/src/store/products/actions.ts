@@ -1,6 +1,10 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import {
+  createAsyncThunk,
+  createAction,
+  PrepareAction,
+} from '@reduxjs/toolkit';
+import { AllProductsDto, ProductDto, ProductIdRequest } from '@vse-bude/shared';
 import { AsyncThunkConfig, ProductRequestDto } from '~/common/types/types';
-import { AllProductsDto, ProductDto } from '@vse-bude/shared';
 import { ActionType } from './common';
 
 const loadProducts = createAsyncThunk<
@@ -24,7 +28,7 @@ const fetchFavorites = createAsyncThunk<
 });
 
 const fetchFavoritesIds = createAsyncThunk<
-  Array<string> | [],
+  string[],
   undefined,
   AsyncThunkConfig
 >(ActionType.FETCH_FAVORITES_IDS, async (_, { extra }) => {
@@ -33,4 +37,54 @@ const fetchFavoritesIds = createAsyncThunk<
   return await productApi.getFavoritesIds();
 });
 
-export { loadProducts, fetchFavorites, fetchFavoritesIds };
+const addToFavorite = createAsyncThunk<
+  ProductIdRequest,
+  string,
+  AsyncThunkConfig
+>(ActionType.ADD_TO_FAVORITE, async (productId, { extra }) => {
+  const { productApi } = extra;
+
+  return await productApi.uploadToFavorites({ productId });
+});
+
+const deleteFromFavorite = createAsyncThunk<
+  ProductIdRequest,
+  string,
+  AsyncThunkConfig
+>(ActionType.DELETE_FROM_FAVORITE, async (productId, { extra }) => {
+  const { productApi } = extra;
+
+  return await productApi.deleteFromFavorites({ productId });
+});
+
+const addToTemporaryFavorites = createAction<PrepareAction<string>, string>(
+  ActionType.ADD_TO_FAVORITE,
+  (productId) => {
+    return { payload: productId };
+  },
+);
+
+const deleteFromTemporaryFavorites = createAction<
+  PrepareAction<string>,
+  string
+>(ActionType.DELETE_FROM_FAVORITE, (productId) => {
+  return { payload: productId };
+});
+
+const cleanTemporaryFavorites = createAction<PrepareAction<[]>, string>(
+  ActionType.CLEAN_TEMP,
+  () => {
+    return { payload: [] };
+  },
+);
+
+export {
+  loadProducts,
+  fetchFavorites,
+  fetchFavoritesIds,
+  addToFavorite,
+  deleteFromFavorite,
+  addToTemporaryFavorites,
+  deleteFromTemporaryFavorites,
+  cleanTemporaryFavorites,
+};

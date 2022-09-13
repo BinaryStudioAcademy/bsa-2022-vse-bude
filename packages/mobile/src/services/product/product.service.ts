@@ -56,7 +56,7 @@ class ProductService {
     );
   }
 
-  getFavoritesIds(): Promise<Array<string> | []> {
+  getFavoritesIds(): Promise<string[]> {
     return this.#http.load(
       `${this.#apiPrefix}${ApiRoutes.PRODUCTS}${ProductApiRoutes.FAVORITE_IDS}`,
     );
@@ -75,7 +75,7 @@ class ProductService {
   }
 
   deleteFromFavorites(
-    payload: Record<string, unknown>,
+    payload: Record<string, string>,
   ): Promise<ProductIdRequest> {
     return this.#http.load(
       `${this.#apiPrefix}${ApiRoutes.PRODUCTS}${ProductApiRoutes.FAVORITE}`,
