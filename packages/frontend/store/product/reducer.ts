@@ -13,6 +13,7 @@ import {
   fetchCurrentProduct,
   updateCurrentItemPrice,
   actionSearch,
+  clearSearch,
 } from './actions';
 
 interface ProductState {
@@ -124,6 +125,11 @@ const productSlice = createSlice({
     [actionSearch.rejected.type](state) {
       state.loading = false;
     },
+
+    [clearSearch.type]: (state) => ({
+      ...state,
+      searchedProducts: [],
+    }),
 
     [HYDRATE](state, { payload }: HydrateAction) {
       if (payload.product.list) {

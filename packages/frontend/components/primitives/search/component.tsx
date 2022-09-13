@@ -2,7 +2,7 @@ import { Routes } from '@enums';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { actionSearch } from 'store/product';
+import { actionSearch, clearSearch } from 'store/product';
 import { SearchInput } from '../input';
 import { Dropdown } from '../menu-dropdown';
 import * as styles from './styles';
@@ -47,6 +47,7 @@ const Search = ({ value, setValue, ...props }: SearchProps) => {
       pathname: `${Routes.ITEMS}/${productId}`,
       query: { filter: JSON.stringify(filters) },
     });
+    dispatch(clearSearch());
   };
 
   return (
