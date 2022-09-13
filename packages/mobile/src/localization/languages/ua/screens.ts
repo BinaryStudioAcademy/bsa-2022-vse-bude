@@ -42,6 +42,7 @@ export const screens = {
     PHONE_NUMBER_HINT: 'Введіть свій номер телефону',
     GOOGLE_BUTTON: 'Увійти за допомогою Google',
     FORGOT_PASSWORD: 'Забули Пароль',
+    FORGOT_PASSWORD_BUTTON: 'Відновити',
     ENTER_EMAIL: 'Введіть електронну пошту, щоб отримати пароль',
     HIDE_EMAIL: 'Приховати електронну адресу',
     RESET_PASSWORD: 'Скинути пароль',

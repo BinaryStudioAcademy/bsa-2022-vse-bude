@@ -4,6 +4,8 @@ import {
   Input,
   PrimaryButton,
   ButtonText,
+  Divider,
+  Text,
 } from '~/components/components';
 import { UserSignInDto } from '@vse-bude/shared';
 import { useAppForm, useTranslation, useNavigation } from '~/hooks/hooks';
@@ -48,18 +50,26 @@ const SignInForm: FC<Props> = ({ onSubmit }) => {
         isSecure={true}
       />
       <View style={globalStyles.mt5}>
-        <ButtonText
-          onPress={navigateResetPassword}
-          contentContainerStyle={{ alignSelf: 'flex-end' }}
-        >
-          {t('verification.FORGOT_PASSWORD')}
-        </ButtonText>
-      </View>
-      <View style={globalStyles.mt5}>
         <PrimaryButton
           label={t('verification.SING_IN')}
           onPress={handleSubmit(onSubmit)}
         />
+      </View>
+      <Divider contentContainerStyle={{ marginVertical: 20 }} />
+      <View
+        style={[
+          globalStyles.flexDirectionRow,
+          globalStyles.justifyContentCenter,
+        ]}
+      >
+        <Text>{t('verification.FORGOT_PASSWORD')}?</Text>
+        <ButtonText
+          onPress={navigateResetPassword}
+          contentContainerStyle={{ alignSelf: 'flex-end', marginLeft: 10 }}
+          textStyle={globalStyles.fs16}
+        >
+          {t('verification.FORGOT_PASSWORD_BUTTON')}
+        </ButtonText>
       </View>
     </View>
   );
