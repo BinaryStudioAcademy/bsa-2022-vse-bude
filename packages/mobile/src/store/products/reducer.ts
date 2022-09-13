@@ -21,9 +21,12 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadProducts.rejected, (state) => {
       state.dataStatus = DataStatus.REJECTED;
     })
-    .addCase(loadProducts.fulfilled, (state, action) => {
+    .addCase(loadProducts.fulfilled, (state, { payload }) => {
       state.dataStatus = DataStatus.FULFILLED;
-      state.products = { ...state.products, ...action.payload };
+      state.products = {
+        items: [...state.products.items, ...payload.items],
+        count: payload.count,
+      };
     });
 });
 
