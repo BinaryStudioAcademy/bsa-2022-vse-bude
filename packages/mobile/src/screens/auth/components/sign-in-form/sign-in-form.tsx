@@ -57,7 +57,7 @@ const SignInForm: FC<Props> = ({ onSubmit }) => {
       </View>
       <View style={globalStyles.mt5}>
         <PrimaryButton
-          label={t('verification.SING_IN')}
+          label={t('verification.SIGN_IN')}
           onPress={handleSubmit(onSubmit)}
         />
       </View>

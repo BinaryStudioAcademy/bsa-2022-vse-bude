@@ -26,7 +26,7 @@ export const screens = {
     UAH: 'UAH',
   },
   verification: {
-    SING_IN: 'Sing in',
+    SIGN_IN: 'Sign in',
     EMAIL: 'Email',
     EMAIL_HINT: 'Enter your email',
     PASSWORD: 'Password',
