@@ -1,51 +1,59 @@
 import { http } from '@helpers';
 import type {
+  AllProductsDto,
   AuctionPermissionsRequest,
   CreateBidRequest,
   Http,
   ProductDto,
   ProductIdRequest,
-  ProductType,
+  ProductQuery,
 } from '@vse-bude/shared';
 import { HttpContentType } from '@vse-bude/shared';
 import { ProductApiRoutes } from '@vse-bude/shared';
 import { ApiRoutes } from '@vse-bude/shared';
 
-interface ProductOptions {
-  limit?: number;
-  type?: ProductType;
-  categoryId?: string;
-  city?: string;
-}
-
-interface ProductOptionsSSR extends ProductOptions {
+interface ProductOptionsSSR extends ProductQuery {
   httpSSR: Http;
 }
 
 export const getProducts = ({
-  limit,
   type,
   categoryId,
-}: ProductOptions): Promise<ProductDto[]> =>
+  sortBy,
+  from,
+  order,
+  limit,
+  priceGt,
+  priceLt,
+}: ProductQuery): Promise<AllProductsDto> =>
   http.get({
     url: `${ApiRoutes.PRODUCTS}`,
     payload: {
-      limit,
       type,
       categoryId,
+      sortBy,
+      from,
+      order,
+      limit,
+      priceGt,
+      priceLt,
     },
   });
 
 export const getProductsSSR = ({
   httpSSR,
-  limit,
   type,
+  categoryId,
+  sortBy,
+  from,
 }: ProductOptionsSSR): Promise<ProductDto[]> =>
   httpSSR.get({
     url: `${ApiRoutes.PRODUCTS}`,
     payload: {
-      limit,
       type,
+      categoryId,
+      sortBy,
+      from,
     },
   });
 

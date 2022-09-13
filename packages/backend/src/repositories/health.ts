@@ -7,7 +7,7 @@ export class HealthRepository {
     this._dbClient = prismaClient;
   }
 
-  async select() {
+  async select(): Promise<unknown> {
     return await this._dbClient.$queryRaw`SELECT 1`;
   }
 }

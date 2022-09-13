@@ -6,7 +6,7 @@ export const fakeBid = async (
   amountOfRecords: number,
   existingUsers: User[],
   existingProducts: Product[],
-) => {
+): Promise<Bid[]> => {
   const records: Bid[] = [];
 
   for (let i = 0; i < amountOfRecords; i++) {

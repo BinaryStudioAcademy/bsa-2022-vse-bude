@@ -26,7 +26,7 @@ import { PaymentService } from './payment';
 const emailProvider = new SendInBlueEmailProvider();
 export const emailService = new EmailService(emailProvider);
 
-export const initServices = (repositories: Repositories) => {
+export const initServices = (repositories: Repositories): any => {
   const hashService: HashService = new HashService();
   const redisService: RedisStorageService = new RedisStorageService(
     isProduction,
@@ -87,6 +87,7 @@ export const initServices = (repositories: Repositories) => {
     orderService: new OrderService(
       repositories.orderRepository,
       repositories.productRepository,
+      verifyService,
     ),
     paymentService: new PaymentService(
       repositories.orderRepository,

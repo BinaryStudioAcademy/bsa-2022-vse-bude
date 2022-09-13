@@ -1,6 +1,8 @@
-import { Modal, IconButton } from '@primitives';
+import { Modal, IconButton, Loader } from '@primitives';
 import { IconName, IconColor } from '@enums';
 import { useTranslation } from 'next-i18next';
+import Image from 'next/future/image';
+import { useState } from 'react';
 import * as styles from './styles';
 
 interface ImageModalProps {
@@ -15,11 +17,20 @@ export const ImageModal = ({
   setModalVisible,
 }: ImageModalProps) => {
   const { t } = useTranslation();
+  const [isLoaded, setIsLoaded] = useState(false);
 
   return (
     <Modal visible={isOpen}>
       <div css={styles.modalImageWrapper}>
-        <img src={image} alt="item" css={styles.modalImage} />
+        {!isLoaded && <Loader />}
+        <Image
+          src={image}
+          css={[styles.modalImage, !isLoaded && styles.hideImage]}
+          alt="item"
+          fill
+          quality={'100'}
+          onLoad={() => setIsLoaded(true)}
+        />
         <div css={styles.modalClose}>
           <IconButton
             ariaLabel={t('item:buttons.closeImageModal')}

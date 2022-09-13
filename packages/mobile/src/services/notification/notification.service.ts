@@ -32,6 +32,7 @@ class NotificationService {
       type: props.type,
       text1: props.title,
       text2: props.message,
+      topOffset: 70,
     });
   }
 }

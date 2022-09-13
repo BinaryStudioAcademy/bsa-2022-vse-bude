@@ -36,7 +36,7 @@ const signUp = Joi.object<UserSignUpDto>({
     .empty('')
     .pattern(PHONE_NUMBER_REGEX)
     .messages({
-      'string.pattern.base': i18next.t('errors.WRONG_FORMAT'),
+      'string.pattern.base': i18next.t('errors.WRONG_FORMAT_PHONE'),
     }),
   password: Joi.string()
     .custom(passwordValidator)

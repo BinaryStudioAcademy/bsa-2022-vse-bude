@@ -32,6 +32,7 @@ keystore.properties
 *.iml
 *.hprof
 *.jks
+google-services.json
 
 # node.js
 #

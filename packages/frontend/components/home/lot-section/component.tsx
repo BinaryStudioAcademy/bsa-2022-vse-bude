@@ -1,6 +1,5 @@
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { ProductCard } from 'components/product/card/component';
-import '@splidejs/react-splide/css';
 import { lightTheme } from 'theme';
 import { SectionLayout } from '../section-layout';
 import { lotContainer } from './styles';

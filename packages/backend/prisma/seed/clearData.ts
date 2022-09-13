@@ -1,6 +1,6 @@
 import type { PrismaClient } from '@prisma/client';
 
-export const clearData = async (prismaClient: PrismaClient) => {
+export const clearData = async (prismaClient: PrismaClient): Promise<void> => {
   await prismaClient.address.deleteMany({});
   await prismaClient.userSettings.deleteMany({});
   await prismaClient.category.deleteMany({});
