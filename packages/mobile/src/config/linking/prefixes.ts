@@ -1,9 +1,9 @@
-import { AppLinkingPrefixes } from '~/common/enums/enums';
+import { AppLinkingPrefix } from '~/common/enums/enums';
 
 const prefixes = [
-  AppLinkingPrefixes.VSEBUDE,
-  AppLinkingPrefixes.HTTPS_VSEBUDE,
-  AppLinkingPrefixes.HTTP_VSEBUDE,
+  AppLinkingPrefix.VSEBUDE,
+  AppLinkingPrefix.HTTPS_VSEBUDE,
+  AppLinkingPrefix.HTTP_VSEBUDE,
 ];
 
 export { prefixes };

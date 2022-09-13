@@ -1,1 +1,1 @@
-export { AppLinkingPrefixes } from './app-linking-prefixes';
+export { AppLinkingPrefix } from './app-linking-prefix';
