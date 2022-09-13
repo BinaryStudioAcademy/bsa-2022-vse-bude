@@ -30,7 +30,6 @@ export enum IconName {
   XMARK = 'xmark',
   CALENDAR = 'calendar',
   TRASH = 'trash',
-  FILTER = 'filter',
   SUCCESS = 'circle-check',
   FILTER = 'filter',
   PENCIL = 'pencil',

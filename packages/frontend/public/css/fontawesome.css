@@ -157,10 +157,6 @@
   content: '\f058';
 }
 
-.fa-filter::before {
-  content: '\f0b0';
-}
-
 .fa-pencil::before {
   content: '\f303';
 }
