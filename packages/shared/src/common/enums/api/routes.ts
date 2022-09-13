@@ -45,6 +45,7 @@ export enum ProductApiRoutes {
   SIMILAR = '/similar',
   POPULAR_LOTS = '/popular-lots',
   POPULAR_PRODUCTS = '/popular-products',
+  SEARCH = '/search',
 }
 
 export enum ProfileApiRoutes {

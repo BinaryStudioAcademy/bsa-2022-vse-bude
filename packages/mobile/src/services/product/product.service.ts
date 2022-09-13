@@ -1,13 +1,13 @@
 import {
   ApiRoutes,
-  ProductDto,
-  ProductApiRoutes,
   HttpMethod,
+  ProductApiRoutes,
   HttpContentType,
   ProductIdRequest,
+  AllProductsDto,
+  ProductDto,
 } from '@vse-bude/shared';
 import { ProductRequestDto } from '~/common/types/types';
-
 import { Http } from '~/services/http/http.service';
 
 type Constructor = {
@@ -25,7 +25,7 @@ class ProductService {
     this.#apiPrefix = apiPrefix;
   }
 
-  getProducts(requestParams: ProductRequestDto = {}): Promise<ProductDto[]> {
+  getProducts(requestParams: ProductRequestDto = {}): Promise<AllProductsDto> {
     return this.#http.load(`${this.#apiPrefix}${ApiRoutes.PRODUCTS}`, {
       params: requestParams,
     });

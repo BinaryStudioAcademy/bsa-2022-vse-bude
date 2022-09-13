@@ -43,4 +43,16 @@ export const common = {
     ACCOUNT: 'Account',
     LOG_IN: 'Log in',
   },
+  drawer_menu: {
+    CATEGORIES: 'Categories',
+    ITEMS: 'Items',
+    SERVICES: 'Services',
+    CLOTHING: 'Clothing',
+    ART: 'Art/Decorations',
+    HOME_APPLIANCE: 'Home Appliance',
+    TOYS: 'Toys',
+    MANICURE: 'Manicure',
+    HAIR_CUT: 'Hair Cut',
+    CAR_WASH: 'Car Wash',
+  },
 };

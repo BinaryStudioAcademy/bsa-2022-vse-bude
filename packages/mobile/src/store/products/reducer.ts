@@ -1,27 +1,30 @@
 import { createReducer, isAnyOf } from '@reduxjs/toolkit';
-import { ProductDto } from '@vse-bude/shared';
+import { ProductDto, AllProductsDto } from '@vse-bude/shared';
 import { DataStatus } from '~/common/enums/enums';
 import { loadProducts, fetchFavorites, fetchFavoritesIds } from './actions';
 
 type InitialState = {
   dataStatus: DataStatus;
-  products: ProductDto[] | [];
+  products: AllProductsDto;
   favorites: ProductDto[] | [];
   favoritesIds: Array<string>;
 };
 
 const initialState: InitialState = {
+  products: { items: [], count: 0 },
   dataStatus: DataStatus.IDLE,
-  products: [],
   favorites: [],
   favoritesIds: [],
 };
 
 const reducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(loadProducts.fulfilled, (state, action) => {
+    .addCase(loadProducts.fulfilled, (state, { payload }) => {
       state.dataStatus = DataStatus.FULFILLED;
-      state.products = [...state.products, ...action.payload];
+      state.products = {
+        items: [...state.products.items, ...payload.items],
+        count: payload.count,
+      };
     })
     .addCase(fetchFavorites.fulfilled, (state, action) => {
       state.dataStatus = DataStatus.FULFILLED;
