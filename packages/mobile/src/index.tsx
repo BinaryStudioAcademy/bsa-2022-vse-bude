@@ -11,6 +11,7 @@ import { NavigationDarkTheme, NavigationTheme } from '~/config/config';
 import { useColorScheme } from '~/hooks/hooks';
 import { appService } from '~/services/services';
 import { i18 } from './localization/localization';
+import { Linking } from './config/config';
 
 i18();
 appService.init();
@@ -22,6 +23,7 @@ const App: FC = () => {
   return (
     <StoreProvider store={store}>
       <NavigationContainer
+        linking={Linking}
         theme={theme}
         onReady={() => {
           RNBootSplash.hide({ fade: true });
