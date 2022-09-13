@@ -13,10 +13,18 @@ const Search = ({ value, setValue, ...props }: SearchProps) => {
   const dispatch = useAppDispatch();
   const { searchedProducts } = useTypedSelector((state) => state.product);
   const { push } = useRouter();
+  
+  const debounce = (cb, delay=100) => (...args) => {
+      setTimeout (() => {
+        cb(...args);
+      }, delay);
+    };
 
   const callback = async ({ target }) => {
     setValue(target.value);
-    await dispatch(actionSearch(target.value.toString()));
+    console.log(target.value);
+    
+    debounce(dispatch(actionSearch(target.value)));
   };
 
   useEffect(() => {
@@ -28,7 +36,6 @@ const Search = ({ value, setValue, ...props }: SearchProps) => {
   }, [searchedProducts]);
 
   const redirectToItem = async (productId: string) => {
-    await dispatch(actionSearch(''));
     const filters = {
       productId,
     };

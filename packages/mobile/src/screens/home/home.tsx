@@ -79,12 +79,12 @@ const Home: FC = () => {
             </Text>
             <Flag />
           </View>
-          {/* <SearchInput
+          <SearchInput
             placeHolder={t('home.SEARCH_PLACEHOLDER')}
             onValueChange={() => {
               //TODO
             }}
-          /> */}
+          />
           <FlatList
             style={styles.categories}
             horizontal={true}

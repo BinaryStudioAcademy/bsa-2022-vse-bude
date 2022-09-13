@@ -8,7 +8,6 @@ import type { Request } from 'express';
 import {
   getFilenameFromUrl,
   getUserIdFromRequest,
-  // logger,
   toUtc,
 } from '@helpers';
 import type {
@@ -71,8 +70,6 @@ export class ProductService {
   }
 
   public search(query: ProductSearchQuery): Promise<ProductSearchResponse[]> {
-    console.log(query.q);
-
     return this._productRepository.search(query);
   }
 
