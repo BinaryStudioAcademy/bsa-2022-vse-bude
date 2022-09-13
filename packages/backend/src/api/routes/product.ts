@@ -100,34 +100,46 @@ export const initProductRoutes = (
 
   /**
    * @openapi
-   * /products/:id:
+   * /products/search:
    *   get:
+   *     summary: Search by product title.
+   *     description: |
+   *       # Search by product title
+   *       Returns products with title containing the search query.
+   *       The search is **case insensitive**.
+   *       **Fuzzy search** is used.
+   *       Max **10** results are returned.
    *     tags: [Product]
    *     produces:
-   *       - application/json
+   *      - application/json
    *     parameters:
-   *       - in: path
-   *         name: id
-   *         required: true
-   *         type: string
+   *      - in: query
+   *        name: q
+   *        type: string
+   *        required: true
+   *        example: "car"
    *     responses:
    *       200:
    *         description: Ok
    *         content:
    *           application/json:
    *             schema:
-   *               $ref: "#/definitions/GetProductByIdResponse"
-   *       4**:
-   *         description: Something went wrong
-   *         content:
-   *           application/json:
-   *             schema:
-   *               $ref: "#/definitions/Response400"
+   *               type: array
+   *               minItems: 0
+   *               maxItems: 10
+   *               items:
+   *                 type: object
+   *                 properties:
+   *                   id:
+   *                     type: string
+   *                     format: uuid
+   *                   title:
+   *                     type: string
+   *                     example: "Ride on car"
    */
-
   router.get(
-    apiPath(path, ProductApiRoutes.ID),
-    wrap((req: Request) => productService.getById(req.params.id)),
+    apiPath(path, ProductApiRoutes.SEARCH),
+    wrap((req) => productService.search(req.query)),
   );
 
   /**
@@ -692,6 +704,38 @@ export const initProductRoutes = (
         productId: req.params.id,
       }),
     ),
+  );
+
+  /**
+   * @openapi
+   * /products/:id:
+   *   get:
+   *     tags: [Product]
+   *     produces:
+   *       - application/json
+   *     parameters:
+   *       - in: path
+   *         name: id
+   *         required: true
+   *         type: string
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/GetProductByIdResponse"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
+
+  router.get(
+    apiPath(path, ProductApiRoutes.ID),
+    wrap((req: Request) => productService.getById(req.params.id)),
   );
 
   router.put(

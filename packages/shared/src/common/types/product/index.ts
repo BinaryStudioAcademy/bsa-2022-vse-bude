@@ -7,3 +7,4 @@ export * from './auction-permissions-response';
 export * from './product-id-request';
 export * from './product-query';
 export * from './all-products-dto';
+export * from './product-search';
