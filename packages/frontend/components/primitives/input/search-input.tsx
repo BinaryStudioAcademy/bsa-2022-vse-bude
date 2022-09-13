@@ -15,22 +15,22 @@ const SearchInputInner = (
     dispatch(clearSearch());
   };
 
-  return(
-  <div css={styles.searchWrapper}>
-    {value && (
-      <button css={styles.showBtn} onClick={clearInput} type="button">
-        X
-      </button>
-    )}
-    <input
-      ref={ref}
-      value={value}
-      onChange={onChange}
-      css={styles.searchInput}
-      type={'text'}
-      {...props}
-    />
-  </div>
-    );
+  return (
+    <div css={styles.searchWrapper}>
+      {value && (
+        <button css={styles.showBtn} onClick={clearInput} type="button">
+          X
+        </button>
+      )}
+      <input
+        ref={ref}
+        value={value}
+        onChange={onChange}
+        css={styles.searchInput}
+        type={'text'}
+        {...props}
+      />
+    </div>
+  );
 };
 export const SearchInput = React.forwardRef(SearchInputInner);
