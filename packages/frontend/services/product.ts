@@ -154,3 +154,11 @@ export const getSilimar = (productId: string): Promise<ProductDto[]> =>
       productId,
     },
   });
+
+export const search = (q: string): Promise<ProductDto[]> =>
+  http.get({
+    url: `${ApiRoutes.PRODUCTS}${ProductApiRoutes.SEARCH}/?q=${q}`,
+    payload: {
+      q,
+    },
+  });
