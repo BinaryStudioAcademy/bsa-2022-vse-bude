@@ -156,6 +156,4 @@ export const actionSearch = createAsyncThunk(
   },
 );
 
-export const clearSearch = createAction<string>(
-  ProductActions.CLEAR_SEARCH,
-);
+export const clearSearch = createAction<string>(ProductActions.CLEAR_SEARCH);

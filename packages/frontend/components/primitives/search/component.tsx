@@ -22,9 +22,9 @@ const Search = ({ value, setValue, ...props }: SearchProps) => {
       }, delay);
     };
 
-    const handleSearch = debounce((value) => {
-      dispatch(actionSearch(value));
-    });
+  const handleSearch = debounce((value) => {
+    dispatch(actionSearch(value));
+  });
 
   const callback = async ({ target }) => {
     setValue(target.value);
