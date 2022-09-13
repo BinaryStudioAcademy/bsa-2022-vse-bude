@@ -9,13 +9,10 @@ import { useRouter } from 'next/router';
 import { fetchCategories } from 'store/category';
 import type { HttpAcceptLanguage } from '@vse-bude/shared';
 import { Search } from '@components/primitives/search/component';
-// import dynamic from 'next/dynamic';
 import { ProfileInfo } from './profile-info';
 import { Navigation } from './navigation/component';
 import { BurgerMenu } from './burger-menu/component';
 import * as styles from './styles';
-
-// const Search = dynamic(() => import('@components/primitives/search'));
 
 interface RequestOptions {
   locale?: HttpAcceptLanguage;

@@ -15,9 +15,11 @@ const Search = ({ value, setValue, setSearchOpen, ...props }: SearchProps) => {
   const { push } = useRouter();
 
   const handleClickOutside = useCallback(() => {
-    event.stopPropagation();
-    setSearchOpen(false);
-  }, [setSearchOpen]);
+    setTimeout(() => {
+      setSearchOpen(false);
+      dispatch(clearSearch());
+    }, 10);
+  }, [setSearchOpen, dispatch]);
   const ref = useOutsideClick(handleClickOutside);
 
   const debounce =
