@@ -1,8 +1,6 @@
 import type { PrismaClient, Product, Order, Prisma } from '@prisma/client';
-import { ProductStatus } from '@prisma/client';
 import { type CreateOrderDto, OrderStatus } from '@vse-bude/shared';
 import type { OrderById, OrderQuery } from '@types';
-import { ProductUnavailableError } from '@errors';
 
 export class OrderRepository {
   private _dbClient: PrismaClient;
@@ -52,20 +50,13 @@ export class OrderRepository {
   public async create({
     productId,
     buyerId,
+    cost,
   }: CreateOrderDto): Promise<Order & OrderById> {
-    const product: Product = await this._dbClient.product.findUnique({
-      where: { id: productId },
-    });
-
-    if (product.status !== ProductStatus.ACTIVE) {
-      throw new ProductUnavailableError();
-    }
-
     return this._dbClient.order.create({
       data: {
         productId,
         buyerId,
-        cost: product.price,
+        cost,
         status: OrderStatus.CREATED,
       },
       include: {

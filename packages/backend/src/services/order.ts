@@ -1,7 +1,12 @@
-import { ProductNotFoundError, UnauthorizedError } from '@errors';
+import {
+  ProductNotFoundError,
+  ProductUnavailableError,
+  UnauthorizedError,
+} from '@errors';
 import type { ProductRepository, OrderRepository } from '@repositories';
 import type { OrderById, OrderQuery } from '@types';
 import type { CreateOrderDto } from '@vse-bude/shared';
+import { ProductStatus } from '@vse-bude/shared';
 import type { Order } from '@prisma/client';
 import { NotVerifiedError } from 'error/user/not-verified';
 import type { VerifyService } from './verify';
@@ -37,7 +42,14 @@ export class OrderService {
       throw new ProductNotFoundError();
     }
 
-    const order = this._orderRepository.create(data);
+    if (product.status !== ProductStatus.ACTIVE) {
+      throw new ProductUnavailableError();
+    }
+
+    const order = await this._orderRepository.create({
+      ...data,
+      cost: product.price as unknown as number,
+    });
 
     return order;
   }
