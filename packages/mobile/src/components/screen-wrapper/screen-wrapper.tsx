@@ -1,24 +1,16 @@
-import React, { FC, ReactNode } from 'react';
-import { StatusBar, StatusBarProps, StyleProp, ViewStyle } from 'react-native';
+import React, { FC } from 'react';
+import { StatusBar } from 'react-native';
 import {
   SafeAreaView,
-  SafeAreaViewProps,
+  NativeSafeAreaViewProps,
 } from 'react-native-safe-area-context';
 import { useCustomTheme } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
 
-type Props = {
-  style?: StyleProp<ViewStyle>;
-  children: ReactNode;
-  statusBarProps?: StatusBarProps;
-  containerProps?: SafeAreaViewProps;
-};
-
-const ScreenWrapper: FC<Props> = ({
+const ScreenWrapper: FC<NativeSafeAreaViewProps> = ({
   style,
   children,
-  containerProps,
-  statusBarProps,
+  ...restProps
 }) => {
   const { colors, dark } = useCustomTheme();
 
@@ -29,12 +21,11 @@ const ScreenWrapper: FC<Props> = ({
         { backgroundColor: colors.background },
         style,
       ]}
-      {...containerProps}
+      {...restProps}
     >
       <StatusBar
         barStyle={dark ? 'light-content' : 'dark-content'}
         backgroundColor={colors.background}
-        {...statusBarProps}
       />
       {children}
     </SafeAreaView>

@@ -1,8 +1,12 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  productWrapper: {
-    width: '100%',
+  filterWrapper: {
+    flexWrap: 'wrap',
+  },
+  filterContainer: {
+    marginTop: 10,
+    marginRight: 10,
   },
 });
 

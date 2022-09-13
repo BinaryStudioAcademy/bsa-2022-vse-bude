@@ -1,46 +1,27 @@
 import React from 'react';
 import {
-  View,
   ScreenWrapper,
   Product,
   FlatList,
+  StatusBar,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { useAppSelector, useCustomTheme, useMemo } from '~/hooks/hooks';
+import { useAppSelector, useCustomTheme } from '~/hooks/hooks';
 import { selectProducts } from '~/store/selectors';
-import { filters } from '~/mock/filters';
-import { Filter } from './components/components';
-import { createStyles } from './styles';
+import { styles } from './styles';
+import { ListHeader } from './components/components';
 
 const ItemsAndServices = () => {
-  const { dark, colors } = useCustomTheme();
-  const styles = useMemo(() => createStyles(colors), [dark, colors]);
+  const { colors } = useCustomTheme();
   const products = useAppSelector(selectProducts);
 
   return (
-    <ScreenWrapper statusBarProps={styles.statusBar}>
-      <View style={globalStyles.px4}>
-        <View
-          style={[
-            globalStyles.flexDirectionRow,
-            globalStyles.py3,
-            styles.filterWrapper,
-          ]}
-        >
-          {filters.map((item) => {
-            return (
-              <Filter
-                key={item.id}
-                onFilterClose={() => {
-                  //TODO
-                }}
-                title={item.title}
-                contentContainerStyle={styles.filterContainer}
-              />
-            );
-          })}
-        </View>
-      </View>
+    <ScreenWrapper>
+      <StatusBar
+        backgroundColor={colors.backgroundSecondary}
+        barStyle="dark-content"
+      />
+      <ListHeader contentContainerStyles={globalStyles.px4} />
       <FlatList
         style={globalStyles.px4}
         data={products}

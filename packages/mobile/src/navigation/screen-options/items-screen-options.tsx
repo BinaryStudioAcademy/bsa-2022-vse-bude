@@ -13,9 +13,8 @@ type Props = {
 
 const itemsScreenOptions = ({ route }: Props): NativeStackNavigationOptions => {
   const getTitle = (screenName: RootScreenName) => {
-    switch (screenName) {
-      case RootScreenName.ITEMS_AND_SERVICES:
-        return t('items_and_services.TITLE');
+    if (screenName === RootScreenName.ITEMS_AND_SERVICES) {
+      return t('items_and_services.TITLE');
     }
   };
 
