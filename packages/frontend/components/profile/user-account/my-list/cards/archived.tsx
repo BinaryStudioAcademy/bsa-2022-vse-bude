@@ -22,7 +22,7 @@ export const Archived = ({ data }: { data: ItemCard }) => {
   const { id, title, imageLinks, price, description, endDate } = data;
   const dispatch = useAppDispatch();
   const router = useRouter();
-  
+
   const onPostClick = () => {
     const reqDto: ProductPost = {
       itemId: id,

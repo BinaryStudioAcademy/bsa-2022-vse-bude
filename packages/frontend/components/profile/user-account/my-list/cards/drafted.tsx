@@ -22,7 +22,7 @@ export const Drafted = ({ data }: { data: ItemCard }) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const router = useRouter();
-  
+
   const onPostClick = () => {
     const reqDto: ProductPost = {
       itemId: id,
