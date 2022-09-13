@@ -1,4 +1,4 @@
-import { Button, Container, Flex, Icon, IconButton, Loader } from '@primitives';
+import { Button, Container, Flex, IconButton, Loader } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { Fragment, useState, useEffect } from 'react';
@@ -96,8 +96,7 @@ export const Header = () => {
             </div>
           </Flex>
           <Flex align="center">
-            {searchOpen 
-            ?  (
+            {searchOpen ? (
               <Search
                 value={searchQuery}
                 setValue={setSearchQuery}
@@ -106,18 +105,17 @@ export const Header = () => {
                   'common:components.input.searchProductsPlaceholder',
                 )}
               />
-            )
-          :
-          <IconButton
-              cssExtend={styles.searchButton}
-              icon={IconName.SEARCH}
-              size="md"
-              onClick={() => setSearchOpen(!searchOpen)}
-              color={IconColor.BLACK}
-              ariaLabel={t('common:header.buttons.openMenu')}
-            />
-          }
-            
+            ) : (
+              <IconButton
+                cssExtend={styles.searchButton}
+                icon={IconName.SEARCH}
+                size="md"
+                onClick={() => setSearchOpen(!searchOpen)}
+                color={IconColor.BLACK}
+                ariaLabel={t('common:header.buttons.openMenu')}
+              />
+            )}
+
             {isMounted && (
               <>
                 {user || loading ? (
