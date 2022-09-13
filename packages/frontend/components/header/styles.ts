@@ -109,14 +109,9 @@ export const burgerOverlay = (theme: Theme) => css`
   }
 `;
 
-export const searchButton = ({ spaces, radiuses }: Theme) => css`
-  ${resetButton};
+export const searchButton = ({ spaces }: Theme) => css`
   margin-left: ${spaces.xs};
-  padding: ${spaces.xs};
-  border-radius: ${radiuses.circle};
-  cursor: pointer;
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-    transition: background-color 0.2s ease-in-out;
-  }
+  /* &:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+  } */
 `;

@@ -96,22 +96,28 @@ export const Header = () => {
             </div>
           </Flex>
           <Flex align="center">
-            {searchOpen && (
+            {searchOpen 
+            ?  (
               <Search
                 value={searchQuery}
                 setValue={setSearchQuery}
+                setSearchOpen={setSearchOpen}
                 placeholder={t(
                   'common:components.input.searchProductsPlaceholder',
                 )}
               />
-            )}
-            <button
-              css={styles.searchButton}
+            )
+          :
+          <IconButton
+              cssExtend={styles.searchButton}
+              icon={IconName.SEARCH}
+              size="md"
               onClick={() => setSearchOpen(!searchOpen)}
-            >
-              <Icon icon={IconName.SEARCH} color={IconColor.BLACK} />
-            </button>
-
+              color={IconColor.BLACK}
+              ariaLabel={t('common:header.buttons.openMenu')}
+            />
+          }
+            
             {isMounted && (
               <>
                 {user || loading ? (

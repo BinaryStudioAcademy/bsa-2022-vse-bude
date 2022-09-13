@@ -8,11 +8,17 @@ import { Dropdown } from '../menu-dropdown';
 import * as styles from './styles';
 import type { SearchProps } from './types';
 
-const Search = ({ value, setValue, ...props }: SearchProps) => {
+const Search = ({ value, setValue, setSearchOpen, ...props }: SearchProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useAppDispatch();
   const { searchedProducts } = useTypedSelector((state) => state.product);
   const { push } = useRouter();
+
+  const handleClickOutside = useCallback(() => {
+    event.stopPropagation();
+    setSearchOpen(false);
+  }, [setSearchOpen]);
+  const ref = useOutsideClick(handleClickOutside);
 
   const debounce =
     (cb, delay = 100) =>
@@ -64,6 +70,7 @@ const Search = ({ value, setValue, ...props }: SearchProps) => {
       cssExtend={styles.wrapper}
     >
       <SearchInput
+        ref={ref}
         value={value}
         setValue={setValue}
         onChange={callback}
