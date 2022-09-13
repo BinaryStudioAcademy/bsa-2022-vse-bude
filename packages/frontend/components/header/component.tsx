@@ -1,4 +1,4 @@
-import { Button, Container, Flex, IconButton, Loader } from '@primitives';
+import { Button, Container, Flex, IconButton, Loader, SearchInput } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { Fragment, useState, useEffect } from 'react';
@@ -18,6 +18,7 @@ interface RequestOptions {
 }
 
 export const Header = () => {
+  const [searchQuery, setSearchQuery] = useState('');
   const [show, setShow] = useState(false);
   const { user, loading } = useAuth();
   const isMounted = useMounted();
@@ -89,16 +90,26 @@ export const Header = () => {
               <Navigation categories={categories || []} />
             </div>
           </Flex>
-          {isMounted && (
-            <>
-              {user || loading ? (
-                <div className="header-content">{renderProfileInfo()}</div>
-              ) : (
-                <div className="header-content">{renderAuthButtons()}</div>
+          <Flex align="center">
+            <SearchInput
+              value={searchQuery}
+              setValue={setSearchQuery}
+              placeholder={t(
+                'common:components.input.searchProductsPlaceholder',
               )}
-            </>
-          )}
-          <div className="burger-menu-button">{renderBurgerButton()}</div>
+            />
+            {isMounted && (
+              <>
+                {user || loading ? (
+                  <div className="header-content">{renderProfileInfo()}</div>
+                ) : (
+                  <div className="header-content">{renderAuthButtons()}</div>
+                )}
+              </>
+            )}
+            <div className="burger-menu-button">{renderBurgerButton()}</div>
+          </Flex>
+          
         </Container>
       </header>
       {show && (
