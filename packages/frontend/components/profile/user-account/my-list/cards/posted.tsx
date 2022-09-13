@@ -3,6 +3,8 @@ import { IconColor, IconName } from '@enums';
 import { useTranslation } from 'next-i18next';
 import { setVisabilityCancelModal, setItemId } from '@store';
 import { useAppDispatch } from '@hooks';
+import { ApiRoutes, ProductApiRoutes } from '@vse-bude/shared';
+import { useRouter } from 'next/router';
 import {
   ItemImage,
   ItemHeader,
@@ -19,14 +21,15 @@ export const Posted = ({ data }: { data: ItemCard }) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { id, title, imageLinks, price, description, views, postDate } = data;
+  const router = useRouter();
 
   const onOpenCancelModal = () => {
     dispatch(setVisabilityCancelModal());
     dispatch(setItemId(id));
   };
 
-  const onEditHandle = () => {
-    console.log('edit');
+  const onEditClick = () => {
+    router.push(`${ApiRoutes.ITEMS}/${ProductApiRoutes.EDIT}/${id}`);
   };
 
   return (
@@ -56,7 +59,7 @@ export const Posted = ({ data }: { data: ItemCard }) => {
               icon={IconName.PENCIL}
               size="sm"
               cssExtend={styles.iconButton}
-              onClick={onEditHandle}
+              onClick={onEditClick}
             />
 
             <IconButton
