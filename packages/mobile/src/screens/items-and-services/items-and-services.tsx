@@ -29,7 +29,7 @@ const ItemsAndServices = () => {
         renderItem={({ item }) => (
           <Product
             contentContainerStyle={[styles.productWrapper, globalStyles.mt4]}
-            productId={item.id}
+            product={item}
           />
         )}
       />
