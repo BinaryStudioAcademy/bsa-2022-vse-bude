@@ -1,24 +1,20 @@
 import { Routes } from '@enums';
 import { useAppDispatch, useOutsideClick, useTypedSelector } from '@hooks';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
 import { actionSearch, clearSearch } from 'store/product';
 import { SearchInput } from '../input';
-import { Dropdown } from '../menu-dropdown';
 import * as styles from './styles';
 import type { SearchProps } from './types';
 
 const Search = ({ value, setValue, setSearchOpen, ...props }: SearchProps) => {
-  const [isOpen, setIsOpen] = useState(false);
   const dispatch = useAppDispatch();
   const { searchedProducts } = useTypedSelector((state) => state.product);
   const { push } = useRouter();
 
   const handleClickOutside = useCallback(() => {
-    setTimeout(() => {
-      setSearchOpen(false);
-      dispatch(clearSearch());
-    }, 10);
+    setSearchOpen(false);
+    dispatch(clearSearch());
   }, [setSearchOpen, dispatch]);
   const ref = useOutsideClick(handleClickOutside);
 
@@ -39,14 +35,6 @@ const Search = ({ value, setValue, setSearchOpen, ...props }: SearchProps) => {
     handleSearch(target.value);
   };
 
-  useEffect(() => {
-    if (searchedProducts.length) {
-      setIsOpen(true);
-    } else {
-      setIsOpen(false);
-    }
-  }, [searchedProducts]);
-
   const redirectToItem = async (productId: string) => {
     const filters = {
       productId,
@@ -59,26 +47,26 @@ const Search = ({ value, setValue, setSearchOpen, ...props }: SearchProps) => {
   };
 
   return (
-    <Dropdown
-      options={searchedProducts.map((item) => ({
-        value: item.title,
-        key: item.id,
-        cssExtend: styles.option,
-        onClick: () => {
-          redirectToItem(item.id);
-        },
-      }))}
-      onChildrenClick={() => setIsOpen(!isOpen)}
-      cssExtend={styles.wrapper}
-    >
+    <div ref={ref} css={styles.searchWrapper}>
       <SearchInput
-        ref={ref}
         value={value}
         setValue={setValue}
         onChange={callback}
         placeholder={props.placeholder}
       ></SearchInput>
-    </Dropdown>
+      <div css={styles.searchContent}>
+        {searchedProducts.length > 0 &&
+          searchedProducts.map((product, key) => (
+            <button
+              css={styles.searchItem}
+              onClick={() => redirectToItem(product.id)}
+              key={key}
+            >
+              {product.title}
+            </button>
+          ))}
+      </div>
+    </div>
   );
 };
 export { Search };

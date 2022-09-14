@@ -1,6 +1,10 @@
+import { IconColor, IconName } from '@enums';
 import { useAppDispatch } from '@hooks';
+import { ref } from 'joi';
 import React from 'react';
 import { clearSearch } from 'store/product';
+import { IconButton } from '../icon-button';
+import { icon } from '../menu-dropdown/styles';
 import * as styles from './styles';
 import type { SearchProps } from './types';
 
@@ -18,9 +22,14 @@ const SearchInputInner = (
   return (
     <div css={styles.searchWrapper}>
       {value && (
-        <button css={styles.showBtn} onClick={clearInput} type="button">
-          X
-        </button>
+        <IconButton
+          color={IconColor.BLACK}
+          icon={IconName.XMARK}
+          size={'sm'}
+          cssExtend={styles.showBtn}
+          onClick={clearInput}
+          ariaLabel=""
+        ></IconButton>
       )}
       <input
         ref={ref}

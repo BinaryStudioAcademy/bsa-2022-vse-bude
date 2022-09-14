@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Fragment, useState, useEffect } from 'react';
 import { Routes, IconName, IconColor } from '@enums';
 import { Logo } from 'components/primitives/logo';
-import { useAppDispatch, useAuth, useMounted, useTypedSelector } from '@hooks';
+import { useAppDispatch, useAuth, useMounted, useTypedSelector, useWindowSize } from '@hooks';
 import { useRouter } from 'next/router';
 import { fetchCategories } from 'store/category';
 import type { HttpAcceptLanguage } from '@vse-bude/shared';
@@ -29,7 +29,8 @@ export const Header = () => {
   const [searchOpen, setSearchOpen] = useState(false);
 
   const categories = useTypedSelector((state) => state.category.listInUse);
-
+  const size = useWindowSize();
+  
   useEffect(() => {
     if (!categories.length) {
       const category: RequestOptions = {
@@ -93,8 +94,7 @@ export const Header = () => {
             </div>
           </Flex>
           <Flex align="center">
-            {searchOpen ? (
-              <Search
+            <Search
                 value={searchQuery}
                 setValue={setSearchQuery}
                 setSearchOpen={setSearchOpen}
@@ -102,6 +102,8 @@ export const Header = () => {
                   'common:components.input.searchProductsPlaceholder',
                 )}
               />
+            {/* {searchOpen ? (
+              
             ) : (
               <IconButton
                 cssExtend={styles.searchButton}
@@ -111,7 +113,7 @@ export const Header = () => {
                 color={IconColor.BLACK}
                 ariaLabel={t('common:header.buttons.openMenu')}
               />
-            )}
+            )} */}
 
             {isMounted && (
               <>
