@@ -1,5 +1,5 @@
-import { Column, Icon } from '@primitives';
-import Image from 'next/image';
+import { Column, Icon, IconButton } from '@primitives';
+import Image from 'next/future/image';
 import { IconColor, IconName } from '@enums';
 import { useTranslation } from 'next-i18next';
 import dynamic from 'next/dynamic';
@@ -78,6 +78,11 @@ function ImageInput({ images, setImages }: ImageInputProps) {
     setCurrentImage(undefined);
   };
 
+  const onImageDelete = (img: string) => {
+    setImagePreviews(imagePreviews.filter((item) => item !== img));
+    setImages(images.filter((item) => item !== img));
+  };
+
   useEffect(() => {
     if (
       images.filter((item) => typeof item === 'string').length === images.length
@@ -111,7 +116,16 @@ function ImageInput({ images, setImages }: ImageInputProps) {
         {imagePreviews.length > 0 &&
           imagePreviews.map((item, indx) => (
             <div key={indx} css={styles.imgWrapper}>
-              <Image objectFit="cover" layout="fill" src={item} />
+              <IconButton
+                cssExtend={styles.deleteImageBtn}
+                ariaLabel={t('create-post:button.deleteImage')}
+                icon={IconName.XMARK}
+                color={IconColor.ORANGE}
+                backgroundColor={'lightgray'}
+                size="sm"
+                onClick={() => onImageDelete(item)}
+              />
+              <Image fill src={item} alt="image preview" />
             </div>
           ))}
         {imagePreviews.length < MAX_IMAGE_COUNT && (
@@ -132,9 +146,7 @@ function ImageInput({ images, setImages }: ImageInputProps) {
 
                 <p css={styles.photosLabel}>
                   {t('create-post:label.photosMain')}
-                  <label htmlFor="post-photo">
-                    {t('create-post:label.photosCaption')}
-                  </label>
+                  <span>{t('create-post:label.photosCaption')}</span>
                 </p>
               </div>
             </div>

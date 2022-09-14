@@ -7,7 +7,7 @@ export const seedMessage = async (
   prismaClient: PrismaClient,
   existingUsers: User[],
   existingChats: Chat[],
-) => {
+): Promise<void> => {
   const existingMessages = await prismaClient.message.findMany();
   const howManyToCreate = MESSAGES_NUMBER - existingMessages.length;
 

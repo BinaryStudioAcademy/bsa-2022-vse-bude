@@ -1,12 +1,9 @@
 import { useTranslation } from 'next-i18next';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { useTheme } from '@emotion/react';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import { Container } from '@primitives';
-import {} from 'theme';
 import { wrapper, title, sliderWrapper } from './styles';
-
-import '@splidejs/react-splide/css';
 
 const CharitySection = () => {
   const { t } = useTranslation();

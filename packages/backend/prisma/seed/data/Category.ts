@@ -4,7 +4,7 @@ import { faker } from '@faker-js/faker';
 export const fakeCategory = async (
   existingCategories: Category[],
   Categories: string[],
-) => {
+): Promise<Category[]> => {
   const records: Category[] = [];
 
   overal: for (let i = 0; i < Categories.length; i++) {

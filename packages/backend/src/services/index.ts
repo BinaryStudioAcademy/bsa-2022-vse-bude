@@ -5,6 +5,7 @@ import {
   SendInBlueEmailProvider,
 } from '@providers';
 import { isProduction } from '@helpers';
+import { AuctionScheduler } from '@scheduler';
 import { CategoryService } from './category';
 import { ProductService } from './product';
 import { AuthService } from './auth';
@@ -22,7 +23,10 @@ import { MyListService } from './my-list';
 import { OrderService } from './order';
 import { PaymentService } from './payment';
 
-export const initServices = (repositories: Repositories) => {
+const emailProvider = new SendInBlueEmailProvider();
+export const emailService = new EmailService(emailProvider);
+
+export const initServices = (repositories: Repositories): any => {
   const hashService: HashService = new HashService();
   const redisService: RedisStorageService = new RedisStorageService(
     isProduction,
@@ -31,11 +35,8 @@ export const initServices = (repositories: Repositories) => {
   const smsProvider = isProduction
     ? new TwilioSMSProvider()
     : new BarSMSProvider();
+
   const smsService = new SMSSenderService(smsProvider);
-
-  const emailProvider = new SendInBlueEmailProvider();
-  const emailService = new EmailService(emailProvider);
-
   const s3StorageService = new S3StorageService();
 
   const verifyService: VerifyService = new VerifyService(
@@ -45,6 +46,8 @@ export const initServices = (repositories: Repositories) => {
     emailService,
   );
 
+  const auctionScheduler = new AuctionScheduler(repositories.productRepository);
+
   return {
     categoryService: new CategoryService(repositories.categoryRepository),
     productService: new ProductService(
@@ -52,6 +55,7 @@ export const initServices = (repositories: Repositories) => {
       verifyService,
       s3StorageService,
       repositories.bidRepository,
+      auctionScheduler,
     ),
     newsService: new NewsService(repositories.newsRepository),
     healthService: new HealthService(repositories.healthRepository),
@@ -83,11 +87,13 @@ export const initServices = (repositories: Repositories) => {
     orderService: new OrderService(
       repositories.orderRepository,
       repositories.productRepository,
+      verifyService,
     ),
     paymentService: new PaymentService(
       repositories.orderRepository,
       repositories.productRepository,
     ),
+    auctionScheduler: auctionScheduler,
   };
 };
 
@@ -108,4 +114,5 @@ export {
   type MyListService,
   type OrderService,
   type PaymentService,
+  type AuctionScheduler,
 };

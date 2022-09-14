@@ -13,7 +13,7 @@
   "time": {
     "hours": "год",
     "days": "днів",
-    "minutes": "мін",
+    "minutes": "хв",
     "seconds": "сек"
   },
   "similarItems": "Схожі товари",
@@ -48,5 +48,9 @@
       }
     },
     "closeImageModal": "Закрити вікно"
+  },
+  "condition": {
+    "NEW": "новий",
+    "USED": "уживаний"
   }
 }

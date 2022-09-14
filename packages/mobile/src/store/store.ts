@@ -2,8 +2,9 @@ import { configureStore } from '@reduxjs/toolkit';
 import {
   storage,
   authApi,
+  personalInfoApi,
   productApi,
-  phoneVerificationApi,
+  verificationApi,
   categoryApi,
 } from '~/services/services';
 import { rootReducer } from './root-reducer';
@@ -12,8 +13,9 @@ import { errorHandler } from './middlewares/middlewares';
 const extraArgument = {
   storage,
   authApi,
+  personalInfoApi,
   productApi,
-  phoneVerificationApi,
+  verificationApi,
   categoryApi,
 };
 

@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from 'next/future/image';
 import { Button } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import postStamp from '../../public/images/postStamp.png';
@@ -17,15 +17,16 @@ export const AuthLayout = ({ children }: LayoutProps) => {
         <div css={styles.flagBg}></div>
         <div css={styles.productWrapper}>
           <div css={styles.logo}>
-            <Image width="185px" priority height="46px" src={logoImg.src} />
+            <Image
+              width={185}
+              priority
+              height={46}
+              src={logoImg.src}
+              alt="logo"
+            />
           </div>
           <div css={styles.productImgWrapper}>
-            <Image
-              layout="fill"
-              priority
-              objectFit="cover"
-              src={postStamp.src}
-            />
+            <Image fill priority src={postStamp.src} alt="post mark" />
             <div css={styles.popup}>
               <h6 css={styles.headline}>{t('auth:layout.title')}</h6>
               <p css={styles.text}>{t('auth:layout.description')}</p>

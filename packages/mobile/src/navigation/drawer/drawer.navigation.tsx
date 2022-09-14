@@ -5,6 +5,7 @@ import {
 } from '@react-navigation/drawer';
 import { RootScreenName } from '~/common/enums/enums';
 import { MainNavigation } from '../tabs/tabs.navigation';
+import { DrawerContent } from './components/components';
 
 const HomeWithMenuNavigation: FC = () => {
   const Drawer = createDrawerNavigator();
@@ -15,7 +16,7 @@ const HomeWithMenuNavigation: FC = () => {
   };
 
   return (
-    <Drawer.Navigator screenOptions={options}>
+    <Drawer.Navigator screenOptions={options} drawerContent={DrawerContent}>
       <Drawer.Screen name={RootScreenName.MAIN} component={MainNavigation} />
     </Drawer.Navigator>
   );

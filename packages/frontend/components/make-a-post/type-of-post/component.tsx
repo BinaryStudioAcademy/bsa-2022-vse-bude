@@ -2,7 +2,7 @@ import { IconName, ItemRoutes, Routes } from '@enums';
 import { Button, IconButton, Modal } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import legoImg from 'public/images/postType/lego.png';
 import { useTypedSelector } from '@hooks';
 import type { PostTypeProps } from './types';

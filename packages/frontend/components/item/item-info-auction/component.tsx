@@ -1,4 +1,4 @@
-﻿import type { CreateBidRequest, ItemDto } from '@vse-bude/shared';
+﻿import type { CreateBidRequest, ProductDto } from '@vse-bude/shared';
 import { Button, Input, Loader, Tooltip } from '@primitives';
 import dynamic from 'next/dynamic';
 import { FavoriteButton } from 'components/product/favorite-button/component';
@@ -29,7 +29,7 @@ const ConfirmationModal = dynamic(
 );
 
 interface ItemInfoAuctionProps {
-  item: ItemDto;
+  item: ProductDto;
   isInFavorite: boolean;
   onChangeIsFavorite: () => void;
 }
@@ -66,7 +66,7 @@ export const ItemInfoAuction = ({
   }, [item.id, user, dispatch]);
 
   const targetDate = new Date(item.endDate);
-  const minBidAmount = +item.currentPrice + +item.minimalBid + 1;
+  const minBidAmount = +item.currentPrice + +item.minimalBid;
 
   const {
     permissions: { isAbleToLeaveAuction },
@@ -123,6 +123,28 @@ export const ItemInfoAuction = ({
 
   const renderBidButtons = () => (
     <>
+      {!!isAbleToLeaveAuction && user && (
+        <Button
+          onClick={confirmLeave}
+          variant="danger"
+          tooltip={t('item:leave.tooltip')}
+        >
+          {t('item:leave.btnText')}
+        </Button>
+      )}
+      <Button
+        type="submit"
+        disabled={!user || !user.phoneVerified || loading}
+        tooltip={
+          user
+            ? user.phoneVerified
+              ? t('item:buttons.placeBid')
+              : t('item:buttons.tooltips.notVerified.placeBid')
+            : t('item:buttons.tooltips.notAuthorized.placeBid')
+        }
+      >
+        {loading ? <Loader size="extraSmall" /> : t('item:buttons.placeBid')}
+      </Button>
       <Tooltip
         trigger={
           <FavoriteButton
@@ -143,28 +165,6 @@ export const ItemInfoAuction = ({
             : t('item:buttons.tooltips.favBtn')
           : t('item:buttons.tooltips.notAuthorized.favBtn')}
       </Tooltip>
-      <Button
-        type="submit"
-        disabled={!user || !user.phoneVerified || loading}
-        tooltip={
-          user
-            ? user.phoneVerified
-              ? t('item:buttons.placeBid')
-              : t('item:buttons.tooltips.notVerified.placeBid')
-            : t('item:buttons.tooltips.notAuthorized.placeBid')
-        }
-      >
-        {loading ? <Loader size="extraSmall" /> : t('item:buttons.placeBid')}
-      </Button>
-      {!!isAbleToLeaveAuction && user && (
-        <Button
-          onClick={confirmLeave}
-          variant="danger"
-          tooltip={t('item:leave.tooltip')}
-        >
-          {t('leave.btnText')}
-        </Button>
-      )}
     </>
   );
 

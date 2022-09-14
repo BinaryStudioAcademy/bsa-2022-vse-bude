@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import { ItemDto, ProductType } from '@vse-bude/shared';
+import { ProductDto, ProductType } from '@vse-bude/shared';
 import { useTranslation } from '~/hooks/hooks';
 import { formatToDateTime, getTimezoneOffset } from '~/helpers/helpers';
 import { View } from '~/components/components';
 import { RenderDescriptionInfo } from './render-description-info';
 
 type DescriptionProps = {
-  product: ItemDto;
+  product: ProductDto;
 };
 
 const Description: FC<DescriptionProps> = ({ product }) => {

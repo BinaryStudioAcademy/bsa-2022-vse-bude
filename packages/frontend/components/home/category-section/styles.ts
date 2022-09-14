@@ -84,6 +84,10 @@ export const categoryItemTitle = ({
 export const imageWrapper = () => css`
   position: relative;
   height: 100%;
+
+  img {
+    object-fit: contain;
+  }
 `;
 
 export const SplideSlideStyled = styled(SplideSlide)`

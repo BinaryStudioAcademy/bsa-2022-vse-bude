@@ -1,6 +1,14 @@
 ﻿import type { Theme } from '@emotion/react';
 import { css } from '@emotion/react';
 
+export const arrow = ({ colors }: Theme) => css`
+  position: absolute;
+  transform: translateX(-50%) rotate(45deg);
+  width: 10px;
+  height: 10px;
+  background-color: ${colors.background};
+`;
+
 export const body = ({
   colors,
   spaces,
@@ -17,17 +25,6 @@ export const body = ({
   background-color: ${colors.background};
   font-size: ${fontSizes.tooltip};
   filter: drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.25));
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: ${colors.background} transparent transparent transparent;
-  }
 
   @media (max-width: ${breakpoints.md}px) {
     max-width: 50%;

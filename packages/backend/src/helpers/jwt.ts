@@ -4,10 +4,10 @@ import type { UserSessionJwtPayload } from 'jsonwebtoken';
 import { verify as jwtVerify } from 'jsonwebtoken';
 import { getEnv } from '@helpers';
 
-export const getBearerValue = (token: string) =>
+export const getBearerValue = (token: string): string =>
   token.replace('Bearer', '').trim();
 
-export const getUserIdFromRequest = (req: Request) => {
+export const getUserIdFromRequest = (req: Request): null | string => {
   const authHeader = req.header(HttpHeader.AUTHORIZATION);
   if (authHeader) {
     try {

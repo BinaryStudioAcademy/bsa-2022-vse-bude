@@ -1,5 +1,5 @@
 import { Splide, SplideSlide } from '@splidejs/react-splide';
-import Image from 'next/image';
+import Image from 'next/future/image';
 
 import * as styles from './styles';
 
@@ -42,8 +42,7 @@ const ItemImageSliderSmall = ({
                 src={link}
                 alt="item"
                 key={link + index}
-                layout="fill"
-                objectFit="contain"
+                fill
                 css={styles.image}
                 priority={index === 0}
               />

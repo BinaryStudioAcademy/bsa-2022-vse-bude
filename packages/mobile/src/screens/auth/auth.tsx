@@ -25,7 +25,6 @@ import { globalStyles } from '~/styles/styles';
 import { notification } from '~/services/services';
 import {
   ResetPasswordHeader,
-  SignInUpHeader,
   SignInForm,
   SignUpForm,
   Header,
@@ -132,7 +131,7 @@ const Auth: FC = () => {
         >
           {getScreenLabel(name)}
         </Text>
-        {isResetPassword ? <ResetPasswordHeader /> : <SignInUpHeader />}
+        {isResetPassword && <ResetPasswordHeader />}
         {getScreen(name)}
       </ScrollView>
     </ScreenWrapper>

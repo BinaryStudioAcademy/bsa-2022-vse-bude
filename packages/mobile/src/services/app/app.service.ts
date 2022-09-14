@@ -4,6 +4,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import updateLocale from 'dayjs/plugin/updateLocale';
 import 'dayjs/locale/uk';
 import { ENGLISH_LOCALE } from '~/common/constants/constants';
+import { pushNotification } from '../services';
 
 class AppService {
   private dayJsInit = () => {
@@ -16,8 +17,13 @@ class AppService {
     dayjs.locale('uk');
   };
 
+  private notificationInit = () => {
+    pushNotification.init();
+  };
+
   public init = () => {
     this.dayJsInit();
+    this.notificationInit();
   };
 }
 
