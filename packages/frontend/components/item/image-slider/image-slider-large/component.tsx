@@ -1,5 +1,6 @@
-﻿import { useTranslation } from 'next-i18next';
-import Image from 'next/future/image';
+﻿import { ImageWithFallback } from '@components/primitives';
+import { useTranslation } from 'next-i18next';
+import no_image from '../../../../public/images/no_image.png';
 import * as styles from './styles';
 
 interface ItemImageSliderLargeProps {
@@ -46,13 +47,14 @@ export const ItemImageSliderLarge = ({
             onKeyDown={(e) => handleKeyDownPreview(e, index)}
             onClick={() => handleClick(index)}
           >
-            <Image
+            <ImageWithFallback
               key={index}
-              src={link}
               alt="item"
               css={styles.image}
               priority={index < 4}
-              fill
+              layout="fill"
+              src={link}
+              fallbackSrc={no_image}
             />
           </div>
         ))}
@@ -62,11 +64,12 @@ export const ItemImageSliderLarge = ({
         onClick={() => setOpenModal(true)}
         aria-hidden="true"
       >
-        <Image
-          src={imageLinks[currentImage]}
+        <ImageWithFallback
           alt="item"
           css={styles.image}
-          fill
+          layout="fill"
+          src={imageLinks[currentImage]}
+          fallbackSrc={no_image}
         />
         <div
           css={styles.seeImageCaption}
