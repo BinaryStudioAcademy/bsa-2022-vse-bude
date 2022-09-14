@@ -27,7 +27,6 @@ export const profileMapper = ({
 }: {
   user: FullUserProfileDto;
 }): SaveUserProfileDto => {
-  console.log(user);
   const { firstName, lastName, email, phone, socialMedia, userAddress } = user;
 
   const mappedAddress = <UserAddressDto>{};
@@ -54,18 +53,6 @@ export const profileMapper = ({
   const mappedSocialMedia = <MappedLinks>{};
   socialMediaKeys.forEach((key) => {
     mappedSocialMedia[key] = social[key] ? social[key] : '';
-  });
-
-  console.log({
-    firstName,
-    lastName,
-    email,
-    phone: !phone ? '' : phone,
-    ...mappedAddress,
-    ...mappedSocialMedia,
-    password: '',
-    newPassword: '',
-    repeatPassword: '',
   });
 
   return {

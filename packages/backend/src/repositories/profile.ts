@@ -9,9 +9,10 @@ import type {
 import type { AddressDto } from '@types';
 import { ProfileError } from '@errors';
 import { lang } from '@lang';
-import {
+import type {
   UpdateUserProfileDto,
-  UserAddressDto,
+  UserAddressDto} from '@vse-bude/shared';
+import {
   UserPersonalInfoValidationMessage,
 } from '@vse-bude/shared';
 import { HttpStatusCode } from '@vse-bude/shared';
@@ -314,7 +315,7 @@ export class UserProfileRepository {
     id: string;
     link: string;
     socialMedia: SocialMediaType;
-}>[] {
+  }>[] {
     return socialMedia.map((net) => {
       const { id, link, socialMedia } = net;
       if (id && link) {
@@ -324,7 +325,8 @@ export class UserProfileRepository {
           userId,
           socialMedia,
         });
-        return this._createSocialMediaLinks({ link, socialMedia, userId });
+        
+return this._createSocialMediaLinks({ link, socialMedia, userId });
       } else if (id && !link) {
         return this._deleteSocialMediaLinks({ id });
       }
