@@ -181,7 +181,12 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
               <PrimaryButton
                 onPress={handleSubmit(handleOnMakeBid)}
                 label={`${t('common:components.BUTTON_BID')}`}
-                disabled={!user || !user.phoneVerified || isLoading}
+                disabled={
+                  !user ||
+                  !user.phoneVerified ||
+                  !user.emailVerified ||
+                  isLoading
+                }
               />
             </View>
             <View style={[globalStyles.ml5, styles.iconBorder]}>
