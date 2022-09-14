@@ -224,6 +224,12 @@ export const initProfileRoutes = (
     wrap((req: Request) => notificationService.getAll(req.userId, req.query)),
   );
 
+  router.patch(
+    apiPath(path, ProfileApiRoutes.PATCH_NOTIFICATION),
+    authMiddleware,
+    wrap((req: Request) => notificationService.setNotificationAsViewed(req)),
+  );
+
   /**
    * @openapi
    * /profile/:userId:

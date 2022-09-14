@@ -49,4 +49,25 @@ export class NotificationRepository {
       },
     });
   }
+
+  public async setNotificationAsViewed(
+    id: string,
+    userId: string,
+  ): Promise<Notification> {
+    await this._dbClient.notification.updateMany({
+      where: {
+        id,
+        userId,
+      },
+      data: {
+        viewed: true,
+      },
+    });
+
+    return this._dbClient.notification.findUnique({
+      where: {
+        id,
+      },
+    });
+  }
 }

@@ -1,9 +1,12 @@
-import type { BidRepository } from '@repositories';
+import type {
+  BidRepository,
+  NotificationRepository,
+  ProductRepository,
+} from '@repositories';
 import type { CreateBidDto } from '@types';
-import type { ProductRepository } from '@repositories';
 import { AuctionEndedError, ProductNotFoundError } from '@errors';
 import { toUtc } from '@helpers';
-import { UPDATE_PRODUCT_PRICE } from '@vse-bude/shared';
+import { UPDATE_PRODUCT_PRICE, NotificationType } from '@vse-bude/shared';
 import type { Bid } from '@prisma/client';
 import { LowBidPriceError } from '../error/product/low-bid-price-error';
 import { eventListener } from '../events';
@@ -13,12 +16,16 @@ export class BidService {
 
   private _productRepository: ProductRepository;
 
+  private _notificationRepository: NotificationRepository;
+
   constructor(
     bidRepository: BidRepository,
     productRepository: ProductRepository,
+    notificationRepository: NotificationRepository,
   ) {
     this._bidRepository = bidRepository;
     this._productRepository = productRepository;
+    this._notificationRepository = notificationRepository;
   }
 
   public async createBid(dto: CreateBidDto): Promise<Bid> {
@@ -46,6 +53,14 @@ export class BidService {
       productId: product.id,
       price: bid.price,
       bidderId: bid.bidderId,
+    });
+
+    await this._notificationRepository.createNotification({
+      type: NotificationType.BID_PLACED,
+      userId: product.authorId,
+      title: 'New bid!',
+      description: `Bid was placed on your lot! Bid size: ${bid.price}UAH`,
+      productId: product.id,
     });
 
     return bid;

@@ -1,4 +1,8 @@
-import type { ProductRepository } from '@repositories';
+import type {
+  ProductRepository,
+  NotificationRepository,
+  BidRepository,
+} from '@repositories';
 import {
   ProductNotFoundError,
   UnauthorizedError,
@@ -25,7 +29,6 @@ import type {
   VerifyService,
   S3StorageService,
 } from '@services';
-import type { BidRepository } from '@repositories';
 import { productMapper, auctionPermissionsMapper } from '@mappers';
 import { FieldError } from 'error/product/field-error';
 import { createPostSchema, updatePostSchema } from 'validation/product/schemas';
@@ -45,18 +48,22 @@ export class ProductService {
 
   private _auctionScheduler: AuctionScheduler;
 
+  private _notificationRepository: NotificationRepository;
+
   constructor(
     productRepository: ProductRepository,
     verifyService: VerifyService,
     s3StorageService: S3StorageService,
     bidRepository: BidRepository,
     auctionScheduler: AuctionScheduler,
+    notificationRepository: NotificationRepository,
   ) {
     this._productRepository = productRepository;
     this._verifyService = verifyService;
     this._s3StorageService = s3StorageService;
     this._bidRepository = bidRepository;
     this._auctionScheduler = auctionScheduler;
+    this._notificationRepository = notificationRepository;
   }
 
   public async getAll(query: ProductQuery): Promise<AllProductsResponse> {

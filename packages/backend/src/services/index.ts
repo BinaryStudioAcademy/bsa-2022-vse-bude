@@ -57,6 +57,7 @@ export const initServices = (repositories: Repositories): any => {
       s3StorageService,
       repositories.bidRepository,
       auctionScheduler,
+      repositories.notificationRepository,
     ),
     newsService: new NewsService(repositories.newsRepository),
     healthService: new HealthService(repositories.healthRepository),
@@ -81,6 +82,7 @@ export const initServices = (repositories: Repositories): any => {
     bidService: new BidService(
       repositories.bidRepository,
       repositories.productRepository,
+      repositories.notificationRepository,
     ),
     myListService: new MyListService({
       myListRepository: repositories.myListRepository,

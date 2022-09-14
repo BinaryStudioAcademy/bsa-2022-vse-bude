@@ -54,6 +54,7 @@ export enum ProfileApiRoutes {
   UPDATE_DATA = '/save',
   UPDATE_AVATAR = '/update-avatar',
   GET_NOTIFICATIONS = '/notifications',
+  PATCH_NOTIFICATION = '/notifications/:id',
 }
 
 export enum AccountApiRoutes {
