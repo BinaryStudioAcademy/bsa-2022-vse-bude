@@ -21,8 +21,8 @@ const ItemsAndServices = () => {
         backgroundColor={colors.backgroundSecondary}
         barStyle="dark-content"
       />
-      <ListHeader contentContainerStyles={globalStyles.px4} />
       <FlatList
+        ListHeaderComponent={ListHeader}
         style={globalStyles.px4}
         data={products}
         keyExtractor={(item) => item.id}

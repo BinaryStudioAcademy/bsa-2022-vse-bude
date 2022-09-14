@@ -1,17 +1,19 @@
 import React from 'react';
+import { RouteProp } from '@react-navigation/native';
+import { RootNavigationParamList } from '~/common/types/types';
 import { NativeStackNavigationOptions } from '@react-navigation/native-stack';
+import { RootScreenName } from '~/common/enums/enums';
+import { t } from 'i18next';
 import { BurgerMenu, ButtonText } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { t } from 'i18next';
-import { RootNavigationParamList } from '~/common/types/types';
-import { RouteProp } from '@react-navigation/native';
-import { RootScreenName } from '~/common/enums/enums';
 
 type Props = {
   route: RouteProp<RootNavigationParamList>;
 };
 
-const itemsScreenOptions = ({ route }: Props): NativeStackNavigationOptions => {
+const getItemsScreenOptions = ({
+  route,
+}: Props): NativeStackNavigationOptions => {
   const getTitle = (screenName: RootScreenName) => {
     if (screenName === RootScreenName.ITEMS_AND_SERVICES) {
       return t('items_and_services.TITLE');
@@ -43,4 +45,4 @@ const itemsScreenOptions = ({ route }: Props): NativeStackNavigationOptions => {
   };
 };
 
-export { itemsScreenOptions };
+export { getItemsScreenOptions };
