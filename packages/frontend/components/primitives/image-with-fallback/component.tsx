@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import type { ImageWithFallbackProps } from './types';
 
 export const ImageWithFallback = ({
+  alt,
   src,
   fallbackSrc,
   ...props
@@ -16,6 +17,7 @@ export const ImageWithFallback = ({
   return (
     <Image
       {...props}
+      alt={alt}
       src={imgSrc}
       onError={() => {
         setImgSrc(fallbackSrc);
