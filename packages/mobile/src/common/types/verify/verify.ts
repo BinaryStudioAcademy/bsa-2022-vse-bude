@@ -2,4 +2,20 @@ type VerifyPhoneRequestDto = {
   phone: string;
 };
 
-export type { VerifyPhoneRequestDto };
+type VerifyEmailRequestDto = {
+  email: string;
+};
+
+type PropsVerifyScreens = {
+  route: {
+    params: {
+      fromSignUp?: boolean;
+    };
+  };
+};
+
+export type {
+  VerifyPhoneRequestDto,
+  VerifyEmailRequestDto,
+  PropsVerifyScreens,
+};

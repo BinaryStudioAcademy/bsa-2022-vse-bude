@@ -7,11 +7,12 @@ type RootNavigationParamList = {
   [RootScreenName.PERSONAL_INFO]: undefined;
   [RootScreenName.SETTINGS]: undefined;
   [RootScreenName.MESSAGES]: undefined;
-  [RootScreenName.VERIFY_PHONE]: undefined;
-  [RootScreenName.VERIFY_CODE_PHONE]: undefined;
-  [RootScreenName.VERIFIED_PHONE]: undefined;
-  [RootScreenName.VERIFY_CODE_EMAIL]: undefined;
-  [RootScreenName.VERIFIED_EMAIL]: undefined;
+  [RootScreenName.VERIFY_PHONE]: { fromSignUp: boolean } | undefined;
+  [RootScreenName.VERIFY_EMAIL]: { fromSignUp: boolean } | undefined;
+  [RootScreenName.VERIFY_CODE_PHONE]: { fromSignUp: boolean } | undefined;
+  [RootScreenName.VERIFIED_PHONE]: { fromSignUp: boolean } | undefined;
+  [RootScreenName.VERIFY_CODE_EMAIL]: { fromSignUp: boolean } | undefined;
+  [RootScreenName.VERIFIED_EMAIL]: { fromSignUp: boolean } | undefined;
   [RootScreenName.SUPPORT]: undefined;
   [RootScreenName.WELCOME]: undefined;
   [RootScreenName.FORGOT_PASSWORD]: undefined;

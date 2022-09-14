@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import {
-  useAppDispatch,
   useAppForm,
   useAppSelector,
   useCustomTheme,
@@ -16,7 +15,7 @@ import {
 import {
   PropsVerifyScreens,
   RootNavigationProps,
-  VerifyPhoneRequestDto,
+  VerifyEmailRequestDto,
 } from '~/common/types/types';
 import {
   Input,
@@ -24,12 +23,9 @@ import {
   PrimaryButton,
   View,
 } from '~/components/components';
-import { verifyActions } from '~/store/actions';
 import { images } from '~/assets/images/images';
-import { phone } from '~/validation-schemas/validation-schemas';
 import { globalStyles } from '~/styles/styles';
-import { selectVerifyDataStatus, selectUserPhone } from '~/store/selectors';
-import { notification } from '~/services/services';
+import { selectVerifyDataStatus, selectUserEmail } from '~/store/selectors';
 import {
   ButtonsContainer,
   CustomText,
@@ -40,20 +36,18 @@ import {
 } from '../components/components';
 import { styles } from './styles';
 
-const VerifyPhoneScreen: FC<PropsVerifyScreens> = ({ route }) => {
+const VerifyEmailScreen: FC<PropsVerifyScreens> = ({ route }) => {
   const fromSignUp = route.params?.fromSignUp;
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
   const navigation = useNavigation<RootNavigationProps>();
   const { colors } = useCustomTheme();
-  const userPhone = useAppSelector(selectUserPhone);
+  const userEmail = useAppSelector(selectUserEmail);
   const dataStatus = useAppSelector(selectVerifyDataStatus);
   const isLoading = dataStatus === DataStatus.PENDING;
-  const { control, errors, handleSubmit } = useAppForm<VerifyPhoneRequestDto>({
+  const { control, errors, handleSubmit } = useAppForm<VerifyEmailRequestDto>({
     defaultValues: {
-      phone: userPhone,
+      email: userEmail,
     },
-    validationSchema: phone,
   });
 
   const handleBackButtonPress = (): void => {
@@ -61,30 +55,15 @@ const VerifyPhoneScreen: FC<PropsVerifyScreens> = ({ route }) => {
   };
 
   const handleLaterPress = (): void => {
-    if (fromSignUp) {
-      navigation.navigate(RootScreenName.VERIFY_EMAIL, {
-        fromSignUp,
-      });
-    } else {
-      navigation.navigate(RootScreenName.MAIN, {
-        screen: MainScreenName.ACCOUNT_ROOT,
-      });
-    }
+    navigation.navigate(RootScreenName.MAIN, {
+      screen: MainScreenName.ACCOUNT_ROOT,
+    });
   };
 
   const onSubmit = (): void => {
-    dispatch(verifyActions.getVerificationCodePhone())
-      .unwrap()
-      .then(() => {
-        notification.success(t('verify.CODE_SENT'));
-        navigation.navigate(RootScreenName.VERIFY_CODE_PHONE, {
-          fromSignUp: fromSignUp || false,
-        });
-      })
-      .catch((err) => {
-        // eslint-disable-next-line
-        console.warn(err);
-      });
+    navigation.navigate(RootScreenName.VERIFY_CODE_EMAIL, {
+      fromSignUp: fromSignUp || false,
+    });
   };
 
   return (
@@ -100,17 +79,16 @@ const VerifyPhoneScreen: FC<PropsVerifyScreens> = ({ route }) => {
             contentContainerStyle={globalStyles.mt6}
           />
           <Title
-            label={t('verify.VERIFY_PHONE')}
+            label={t('verify.VERIFY_EMAIL')}
             contentContainerStyle={globalStyles.mt6}
           />
           <CustomText
-            label={t('verify.VERIFY_PHONE_TEXT')}
+            label={t('verify.VERIFY_EMAIL_TEXT')}
             contentContainerStyle={globalStyles.mt3}
           />
           <Input
-            label={t('verify.INPUT_LABEL_PHONE')}
-            placeholder="+380"
-            name="phone"
+            label={t('verify.INPUT_LABEL_EMAIL')}
+            name="email"
             control={control}
             errors={errors}
             contentContainerStyle={globalStyles.mt6}
@@ -140,4 +118,4 @@ const VerifyPhoneScreen: FC<PropsVerifyScreens> = ({ route }) => {
   );
 };
 
-export { VerifyPhoneScreen };
+export { VerifyEmailScreen };
