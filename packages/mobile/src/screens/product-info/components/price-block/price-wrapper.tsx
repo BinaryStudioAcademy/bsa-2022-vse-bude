@@ -14,7 +14,7 @@ const PriceWrapper: FC<PriceWrapperProps> = ({ children }): ReactElement => {
         globalStyles.flexDirectionRow,
         globalStyles.justifyContentSpaceBetween,
         globalStyles.alignItemsCenter,
-        globalStyles.px6,
+        globalStyles.px5,
         globalStyles.py4,
         styles.footer,
       ]}

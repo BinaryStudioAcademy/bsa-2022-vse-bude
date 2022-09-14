@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   input: {
-    maxWidth: 160,
+    maxWidth: 140,
     marginRight: 5,
   },
   buttonsBlock: {
