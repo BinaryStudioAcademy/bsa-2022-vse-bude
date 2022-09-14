@@ -1,1 +1,1 @@
-export const PHONE_VERIFICATION_CODE_REGEX = /^[0-9]{6}$/;
+export const VERIFICATION_CODE_REGEX = /^[0-9]{6}$/;

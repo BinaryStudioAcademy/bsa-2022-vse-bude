@@ -103,7 +103,7 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
   };
 
   const handleVerifyEmailPress = () => {
-    //TODO add navigation
+    navigation.navigate(RootScreenName.VERIFY_CODE_EMAIL);
   };
 
   return (
@@ -149,7 +149,7 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
       />
       {isVerifyPhoneFieldVisible && (
         <VerifyField
-          title={t('verificationPhone.VERIFY_PHONE')}
+          title={t('verify.VERIFY_PHONE')}
           onPress={handleVerifyPhonePress}
         />
       )}

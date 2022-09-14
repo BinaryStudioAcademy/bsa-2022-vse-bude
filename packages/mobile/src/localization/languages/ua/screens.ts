@@ -42,6 +42,7 @@ export const screens = {
     PHONE_NUMBER_HINT: 'Введіть свій номер телефону',
     GOOGLE_BUTTON: 'Увійти за допомогою Google',
     FORGOT_PASSWORD: 'Забули Пароль',
+    FORGOT_PASSWORD_BUTTON: 'Відновити',
     ENTER_EMAIL: 'Введіть електронну пошту, щоб отримати пароль',
     HIDE_EMAIL: 'Приховати електронну адресу',
     RESET_PASSWORD: 'Скинути пароль',
@@ -99,6 +100,8 @@ export const screens = {
     FIRST_NAME_INVALID: 'Неправильний формат імені',
     LAST_NAME_INVALID: 'Неправильний формат прізвища',
     WRONG_FORMAT: 'Невірний формат',
+    WRONG_FORMAT_PHONE:
+      'Будь ласка, введіть телефон у міжнародному форматі: +380123456789',
     PLACE_NAME: 'Має складатися з літер: А-Я або A-Z',
     MAX_COUNTRY_LENGTH: `Назва країни має містити не більше ${MAX_COUNTRY_LENGTH} символів`,
     MAX_REGION_LENGTH: `Назва області має містити не більше ${MAX_REGION_LENGTH} символів`,
@@ -111,7 +114,7 @@ export const screens = {
     MAX_IMAGE_SIZE: `Максимальний розмір файлу ${MAX_IMAGE_SIZE / 1000000} МБ`,
     CORRECTLY_FILLED: 'Будь ласка, перевірте, чи правильно заповнені поля',
   },
-  verificationPhone: {
+  verify: {
     VERIFY: 'Підтвердити',
     VERIFY_PHONE: 'Підтвердити телефон',
     ENTER_NUMBER: 'Введіть свій номер телефону',
@@ -122,11 +125,12 @@ export const screens = {
     BACK_HOME: 'Головна',
     BACK_BUTTON: 'Назад',
     ENTER_CODE: 'Введіть код',
-    JUST_SENT: 'Ми щойно надіслали код на номер',
+    JUST_SENT: 'Ми щойно надіслали код на ',
     INPUT_LABEL_CODE: 'Введіть код підтвердження, який ми щойно надіслали вам',
     RESEND_CODE: 'Надіслати повторно',
     CONTINUE: 'Продовжити',
-    VERIFIED_TITLE: 'Ваш обліковий запис повністю підтверджено',
+    VERIFIED_TITLE_PHONE: 'Ваш телефон повністю підтверджено',
+    VERIFIED_TITLE_EMAIL: 'Вашу електронну адресу повністю підтверджено',
     CODE_SENT: 'Код надіслано',
   },
   make_a_post: {

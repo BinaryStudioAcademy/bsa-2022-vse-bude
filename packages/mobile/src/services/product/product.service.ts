@@ -93,6 +93,18 @@ class ProductService {
       method: HttpMethod.POST,
     });
   }
+
+  incrementProductViews = (productId: string): Promise<ProductDto> => {
+    return this.#http.load(
+      `${this.#apiPrefix}${ApiRoutes.PRODUCTS}/${productId}${
+        ProductApiRoutes.VIEWS
+      }`,
+      {
+        method: HttpMethod.PUT,
+        payload: JSON.stringify({ productId }),
+      },
+    );
+  };
 }
 
 export { ProductService };

@@ -128,6 +128,7 @@
       "link": {
         "later": "Verify later"
       },
+      "tooltip": "Please firstly save new profile data for verify phone",
       "prevPageLabel": "Go to previous step"
     },
     "enterCode": {

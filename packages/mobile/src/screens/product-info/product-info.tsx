@@ -50,6 +50,7 @@ const ProductInfo: FC = () => {
 
   useEffect(() => {
     dispatch(productsActions.loadProductInfo(id));
+    dispatch(productsActions.updateProductViews(id));
 
     const socket = socketApi.getAuctionItemIo(id);
     socket.on(UPDATE_PRODUCT_PRICE, (data: UpdateProductPriceEvent) => {
