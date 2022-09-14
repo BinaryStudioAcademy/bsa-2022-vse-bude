@@ -10,6 +10,8 @@
   "sellerCaption": "Seller",
   "contactSellerBtn": "Contact Seller",
   "showImageCaption": "Open full image",
+  "soldCaption": "Product was sold",
+  "finishedCaption": "Auction was finished",
   "time": {
     "hours": "hours",
     "days": "day",
