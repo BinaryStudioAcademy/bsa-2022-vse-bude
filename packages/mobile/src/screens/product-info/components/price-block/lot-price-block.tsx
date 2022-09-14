@@ -30,13 +30,18 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
   onFavoritePress,
 }) => {
   const { colors } = useCustomTheme();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { minimalBid, currentPrice, id } = product;
 
   const { control, errors } = useAppForm({
     defaultValues: DEFAULT_BID_VALUE,
     validationSchema: getBidValidationSchema(Number(minimalBid)),
   });
+
+  const priceText =
+    i18n.language === 'ua'
+      ? `${currentPrice} ${t('screens:welcome.UAH')}`
+      : `${t('screens:welcome.UAH')} ${currentPrice}`;
 
   return (
     <>
@@ -66,7 +71,7 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
             { color: colors.titleSecondary },
           ]}
         >
-          {`${t('screens:welcome.UAH')} ${currentPrice}`}
+          {priceText}
         </Text>
       </View>
       <PriceWrapper>

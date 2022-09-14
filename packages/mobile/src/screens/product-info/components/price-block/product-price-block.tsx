@@ -26,8 +26,13 @@ const ProductPriceBlock: FC<ProductPriceBlockProps> = ({
   onFavoritePress,
 }) => {
   const { colors } = useCustomTheme();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { price, id } = product;
+
+  const priceText =
+    i18n.language === 'ua'
+      ? `${price} ${t('screens:welcome.UAH')}`
+      : `${t('screens:welcome.UAH')} ${price}`;
 
   return (
     <PriceWrapper>
@@ -39,7 +44,7 @@ const ProductPriceBlock: FC<ProductPriceBlockProps> = ({
             { color: colors.text },
           ]}
         >
-          {`${t('screens:welcome.UAH')} ${price}`}
+          {priceText}
         </Text>
         <View
           style={[globalStyles.flexDirectionRow, globalStyles.alignItemsCenter]}

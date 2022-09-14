@@ -43,6 +43,7 @@ const LanguageButtons: FC = () => {
         return (
           <TouchableOpacity
             onPress={() => handleChangeLanguage(btnLang)}
+            key={buttons[btnLang]}
             style={[
               globalStyles.py2,
               styles.buttonWrapper,
