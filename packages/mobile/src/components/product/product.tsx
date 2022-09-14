@@ -1,14 +1,13 @@
 import React, { FC } from 'react';
 import { NavigationProp } from '@react-navigation/native';
-import { ProductType, ProductStatus } from '@vse-bude/shared';
+import { ProductType, ProductStatus, ProductDto } from '@vse-bude/shared';
 import { RootNavigationParamList } from '~/common/types/types';
 import { RootScreenName } from '~/common/enums/enums';
-import { selectProductById } from '~/store/selectors';
 import {
   useTranslation,
-  useAppSelector,
   useCustomTheme,
   useNavigation,
+  useAppDispatch,
 } from '~/hooks/hooks';
 import { formatPrice, getTimeToEvent } from '~/helpers/helpers';
 import {
@@ -20,16 +19,18 @@ import {
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { StyleProp, ViewStyle } from 'react-native';
+import { products } from '~/store/actions';
 import { styles } from './styles';
 import { TimeWindow } from './components/components';
 
 type Props = {
-  productId: string;
+  product: ProductDto;
   contentContainerStyle?: StyleProp<ViewStyle>;
 };
 
-const Product: FC<Props> = ({ productId, contentContainerStyle }) => {
+const Product: FC<Props> = ({ product, contentContainerStyle }) => {
   const {
+    id,
     imageLinks,
     title,
     description,
@@ -38,17 +39,19 @@ const Product: FC<Props> = ({ productId, contentContainerStyle }) => {
     endDate,
     createdAt,
     status,
-  } = useAppSelector((state) => selectProductById(state, productId));
+  } = product;
   const timeToAuctionEnd = getTimeToEvent(endDate);
   const createdAtDate = getTimeToEvent(createdAt);
   const isAuction = type === ProductType.AUCTION;
   const isActive = status === ProductStatus.ACTIVE;
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
   const navigation = useNavigation<NavigationProp<RootNavigationParamList>>();
 
   const handleOpenProductInfo = () => {
-    navigation.navigate(RootScreenName.ITEM_INFO, { itemId: productId });
+    dispatch(products.loadProductInfo(id));
+    navigation.navigate(RootScreenName.ITEM_INFO, { itemId: id });
   };
 
   return (
@@ -118,9 +121,7 @@ const Product: FC<Props> = ({ productId, contentContainerStyle }) => {
                   ? t('common:components.BUTTON_BID')
                   : t('common:components.BUTTON_BUY')
               }
-              onPress={() => {
-                //TODO
-              }}
+              onPress={handleOpenProductInfo}
             ></Button>
           </View>
         </TouchableOpacity>

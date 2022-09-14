@@ -54,7 +54,7 @@ const ProductsSection: FC<Props> = ({
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         data={data}
-        renderItem={({ item }) => <Product productId={item.id} />}
+        renderItem={({ item }) => <Product product={item} />}
       />
     </View>
   );
