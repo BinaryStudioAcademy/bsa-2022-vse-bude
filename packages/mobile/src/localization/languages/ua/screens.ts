@@ -205,4 +205,7 @@ export const screens = {
     LEAVE_SUCCESS: 'Ви успішно покинули аукціон',
     NEW_BID: 'Аукціон оновився',
   },
+  items_and_services: {
+    TITLE: 'Товари & Послуги',
+  },
 };

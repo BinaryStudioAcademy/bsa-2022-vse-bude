@@ -206,4 +206,7 @@ export const screens = {
     LEAVE_SUCCESS: 'You have successfully leave the auction',
     NEW_BID: 'New bid placed',
   },
+  items_and_services: {
+    TITLE: 'Items & Services',
+  },
 };
