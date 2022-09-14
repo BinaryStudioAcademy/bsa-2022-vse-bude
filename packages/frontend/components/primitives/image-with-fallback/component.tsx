@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import type { ImageWithFallbackProps } from './types';
 
@@ -8,6 +8,10 @@ export const ImageWithFallback = ({
   ...props
 }: ImageWithFallbackProps) => {
   const [imgSrc, setImgSrc] = useState(src);
+
+  useEffect(() => {
+    setImgSrc(src);
+  }, [src]);
 
   return (
     <Image
