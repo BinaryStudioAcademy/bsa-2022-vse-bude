@@ -1,10 +1,8 @@
 import { IconColor, IconName } from '@enums';
 import { useAppDispatch } from '@hooks';
-import { ref } from 'joi';
 import React from 'react';
 import { clearSearch } from 'store/product';
 import { IconButton } from '../icon-button';
-import { icon } from '../menu-dropdown/styles';
 import * as styles from './styles';
 import type { SearchProps } from './types';
 
