@@ -43,9 +43,9 @@ const ItemImageSliderSmall = ({
                 key={link + index}
                 css={styles.image}
                 priority={index === 0}
-                layout="fill"
                 src={link}
                 fallbackSrc={no_image}
+                fill
               />
             </div>
             <span css={styles.numberSlide}>

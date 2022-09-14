@@ -3,6 +3,9 @@ import Image from 'next/future/image';
 import type { ImageWithFallbackProps } from './types';
 
 export const ImageWithFallback = ({
+  width,
+  height,
+  fill,
   alt,
   src,
   fallbackSrc,
@@ -17,6 +20,9 @@ export const ImageWithFallback = ({
   return (
     <Image
       {...props}
+      fill={fill}
+      width={width}
+      height={height}
       alt={alt}
       src={imgSrc}
       onError={() => {

@@ -52,9 +52,9 @@ export const ItemImageSliderLarge = ({
               alt="item"
               css={styles.image}
               priority={index < 4}
-              layout="fill"
               src={link}
               fallbackSrc={no_image}
+              fill
             />
           </div>
         ))}
@@ -67,9 +67,9 @@ export const ItemImageSliderLarge = ({
         <ImageWithFallback
           alt="item"
           css={styles.image}
-          layout="fill"
           src={imageLinks[currentImage]}
           fallbackSrc={no_image}
+          fill
         />
         <div
           css={styles.seeImageCaption}
