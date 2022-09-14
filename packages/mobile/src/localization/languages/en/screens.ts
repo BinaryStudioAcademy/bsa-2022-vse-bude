@@ -199,5 +199,11 @@ export const screens = {
     DESCRIPTION: 'Description',
     CURRENT_BID: 'Current bid',
     MIN_UAH: 'Min UAH',
+    BID_SAVED: 'Bid successfully placed',
+    LEAVE_TEXT: 'Leave Auction',
+    LEAVE_MODAL_TEXT:
+      'Are you sure to leave the auction? All bids will be deleted!',
+    LEAVE_SUCCESS: 'You have successfully leave the auction',
+    NEW_BID: 'New bid placed',
   },
 };
