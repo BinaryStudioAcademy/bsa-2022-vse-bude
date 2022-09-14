@@ -53,7 +53,7 @@ export enum ProfileApiRoutes {
   GET_FULL_USER_DATA = '/full-data',
   UPDATE_DATA = '/save',
   UPDATE_AVATAR = '/update-avatar',
-  GET_NOTIFICATIONS = '/:userId/notifications',
+  GET_NOTIFICATIONS = '/notifications',
 }
 
 export enum AccountApiRoutes {

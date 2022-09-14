@@ -1,6 +1,6 @@
 import type { NotificationDto } from './notification';
 
-export interface AllNotificationsDto {
+export interface AllNotificationsResponse {
   notifications: NotificationDto[];
   count: number;
 }
