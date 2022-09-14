@@ -1,10 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AsyncThunkConfig, ProductRequestDto } from '~/common/types/types';
-import { ProductDto } from '@vse-bude/shared';
+import { AllProductsDto } from '@vse-bude/shared';
 import { ActionType } from './common';
 
 const loadProducts = createAsyncThunk<
-  ProductDto[],
+  AllProductsDto,
   ProductRequestDto,
   AsyncThunkConfig
 >(ActionType.PRODUCTS_FETCH, async (requestParams, { extra }) => {

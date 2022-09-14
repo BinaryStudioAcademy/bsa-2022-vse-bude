@@ -12,7 +12,7 @@ export {
   useTheme,
   useFocusEffect,
 } from '@react-navigation/native';
-export { useController as useFormControl } from 'react-hook-form';
+export { useController as useFormControl, useFormState } from 'react-hook-form';
 export { useTranslation } from 'react-i18next';
 export { useAppDispatch } from './use-app-dispatch/use-app-dispatch.hook';
 export { useAppSelector } from './use-app-selector/use-app-selector.hook';
