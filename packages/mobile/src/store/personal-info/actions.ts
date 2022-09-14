@@ -1,6 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { Asset } from 'react-native-image-picker';
 import { FullUserProfileDto, UpdateFullUserProfileDto } from '@vse-bude/shared';
-import { AsyncThunkConfig } from '~/common/types/types';
+import {
+  AsyncThunkConfig,
+  UpdateAvatarResponseDto,
+} from '~/common/types/types';
 import { ActionType } from './common';
 
 const getPersonalInfo = createAsyncThunk<
@@ -25,4 +29,15 @@ const updatePersonalInfo = createAsyncThunk<
   return response;
 });
 
-export { getPersonalInfo, updatePersonalInfo };
+const updateAvatar = createAsyncThunk<
+  UpdateAvatarResponseDto,
+  Asset | null,
+  AsyncThunkConfig
+>(ActionType.UPDATE_AVATAR, async (payload, { extra }) => {
+  const { personalInfoApi } = extra;
+  const response = await personalInfoApi.updateAvatar(payload);
+
+  return response;
+});
+
+export { getPersonalInfo, updatePersonalInfo, updateAvatar };

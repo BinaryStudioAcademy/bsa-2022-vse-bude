@@ -1,5 +1,5 @@
 import React, { FC, useState, useCallback } from 'react';
-import { image as imageService, notification } from '~/services/services';
+import { notification } from '~/services/services';
 import {
   View,
   Pressable,
@@ -13,20 +13,34 @@ import {
   pickImageCamera,
   pickImageLibrary,
 } from '~/helpers/helpers';
-import { useTranslation } from '~/hooks/hooks';
+import { useAppDispatch, useTranslation, useEffect } from '~/hooks/hooks';
+import { personalInfoActions } from '~/store/actions';
 import { UserAvatar } from '../avatar/avatar';
 import { styles } from './styles';
 
-const ProfileImage: FC = () => {
+type Props = {
+  avatar?: string;
+};
+
+const ProfileImage: FC<Props> = ({ avatar }) => {
   const [showModal, setShowModal] = useState(false);
   const [photoUri, setPhotoUri] = useState('');
   const [isUploading, setIsUploading] = useState(false);
 
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
 
   const toggleModal = () => {
     return setShowModal((currentModal) => !currentModal);
   };
+
+  useEffect(() => {
+    if (avatar) {
+      return setPhotoUri(avatar);
+    }
+
+    return setPhotoUri('');
+  }, [avatar]);
 
   const onCameraOpen = useCallback(async () => {
     const isPermissionGranted = await requestExternalStoragePermission();
@@ -39,11 +53,21 @@ const ProfileImage: FC = () => {
 
         return;
       }
-      const link = await imageService.uploadImage(file);
-
-      setPhotoUri(link);
-      setIsUploading(false);
-      setShowModal(false);
+      dispatch(personalInfoActions.updateAvatar(file))
+        .unwrap()
+        .then(({ avatar }) => {
+          if (avatar) {
+            setPhotoUri(avatar);
+          }
+        })
+        .catch((err) => {
+          // eslint-disable-next-line
+          console.warn(err);
+        })
+        .finally(() => {
+          setIsUploading(false);
+          setShowModal(false);
+        });
     } else {
       notification.error(t('permission.STORAGE_DENIED'));
     }
@@ -57,16 +81,38 @@ const ProfileImage: FC = () => {
 
       return;
     }
-    const link = await imageService.uploadImage(file);
 
-    setPhotoUri(link);
-    setIsUploading(false);
-    setShowModal(false);
+    dispatch(personalInfoActions.updateAvatar(file))
+      .unwrap()
+      .then(({ avatar }) => {
+        if (avatar) {
+          setPhotoUri(avatar);
+        }
+      })
+      .catch((err) => {
+        // eslint-disable-next-line
+        console.warn(err);
+      })
+      .finally(() => {
+        setIsUploading(false);
+        setShowModal(false);
+      });
   }, []);
 
   const handleRemovePhoto = () => {
-    setPhotoUri('');
-    setIsUploading(false);
+    dispatch(personalInfoActions.updateAvatar(null))
+      .unwrap()
+      .then(() => {
+        setPhotoUri('');
+      })
+      .catch((err) => {
+        // eslint-disable-next-line
+        console.warn(err);
+      })
+      .finally(() => {
+        setIsUploading(false);
+        setShowModal(false);
+      });
   };
 
   return (

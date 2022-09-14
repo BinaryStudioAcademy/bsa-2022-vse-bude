@@ -19,13 +19,13 @@ import {
   PrimaryButton,
   View,
 } from '~/components/components';
-import { verifyPhoneActions } from '~/store/actions';
+import { verifyActions } from '~/store/actions';
 import { images } from '~/assets/images/images';
 import { globalStyles } from '~/styles/styles';
 import { RootNavigationProps } from '~/common/types/types';
 import {
   selectAuthDataStatus,
-  selectVerifyPhoneDataStatus,
+  selectVerifyDataStatus,
   selectUserPhone,
 } from '~/store/selectors';
 import { notification } from '~/services/services';
@@ -40,13 +40,13 @@ import {
 } from '../components/components';
 import { styles } from './styles';
 
-const VerifyCodeScreen: FC = () => {
+const VerifyCodePhoneScreen: FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const navigation = useNavigation<RootNavigationProps>();
   const { colors } = useCustomTheme();
   const userPhone = useAppSelector(selectUserPhone);
-  const dataStatusVerify = useAppSelector(selectVerifyPhoneDataStatus);
+  const dataStatusVerify = useAppSelector(selectVerifyDataStatus);
   const dataStatusAuth = useAppSelector(selectAuthDataStatus);
   const isLoading = [dataStatusVerify, dataStatusAuth].includes(
     DataStatus.PENDING,
@@ -63,10 +63,10 @@ const VerifyCodeScreen: FC = () => {
   };
 
   const handleResendPress = (): void => {
-    dispatch(verifyPhoneActions.getVerificationCode())
+    dispatch(verifyActions.getVerificationCodePhone())
       .unwrap()
       .then(() => {
-        notification.success(t('verificationPhone.CODE_SENT'));
+        notification.success(t('verify.CODE_SENT'));
       })
       .catch((err) => {
         // eslint-disable-next-line
@@ -75,10 +75,10 @@ const VerifyCodeScreen: FC = () => {
   };
 
   const onSubmit = (payload: PhoneVerifyDto): void => {
-    dispatch(verifyPhoneActions.verifyPhone(payload))
+    dispatch(verifyActions.verifyPhone(payload))
       .unwrap()
       .then(() => {
-        navigation.navigate(RootScreenName.VERIFIED);
+        navigation.navigate(RootScreenName.VERIFIED_PHONE);
       })
       .catch((err) => {
         // eslint-disable-next-line
@@ -89,7 +89,7 @@ const VerifyCodeScreen: FC = () => {
   return (
     <Wrapper>
       <Header
-        labelButton={t('verificationPhone.BACK_BUTTON')}
+        labelButton={t('verify.BACK_BUTTON')}
         onPress={handleBackButtonPress}
       />
       <KeyboardAvoiding>
@@ -99,17 +99,17 @@ const VerifyCodeScreen: FC = () => {
             contentContainerStyle={globalStyles.mt6}
           />
           <Title
-            label={t('verificationPhone.ENTER_CODE')}
+            label={t('verify.ENTER_CODE')}
             contentContainerStyle={globalStyles.mt6}
           />
           <CustomText
-            label={`${t('verificationPhone.JUST_SENT')} ${userPhone}`}
+            label={`${t('verify.JUST_SENT')} ${userPhone}`}
             contentContainerStyle={globalStyles.mt3}
           />
           <View>
             <Input
-              label={t('verificationPhone.INPUT_LABEL_CODE')}
-              placeholder={t('verificationPhone.ENTER_CODE')}
+              label={t('verify.INPUT_LABEL_CODE')}
+              placeholder={t('verify.ENTER_CODE')}
               name="code"
               control={control}
               errors={errors}
@@ -126,7 +126,7 @@ const VerifyCodeScreen: FC = () => {
           <ButtonsContainer>
             <View style={styles.buttonContainer}>
               <PrimaryButton
-                label={t('verificationPhone.RESEND_CODE')}
+                label={t('verify.RESEND_CODE')}
                 appearance={ButtonAppearance.TRANSPARENT}
                 textColor={colors.text}
                 onPress={handleResendPress}
@@ -135,7 +135,7 @@ const VerifyCodeScreen: FC = () => {
             </View>
             <View style={styles.buttonContainer}>
               <PrimaryButton
-                label={t('verificationPhone.CONTINUE')}
+                label={t('verify.CONTINUE')}
                 onPress={handleSubmit(onSubmit)}
                 disabled={isLoading}
               />
@@ -147,4 +147,4 @@ const VerifyCodeScreen: FC = () => {
   );
 };
 
-export { VerifyCodeScreen };
+export { VerifyCodePhoneScreen };

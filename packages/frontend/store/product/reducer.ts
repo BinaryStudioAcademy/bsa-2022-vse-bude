@@ -82,7 +82,7 @@ const productSlice = createSlice({
     },
 
     [auctionLeaveAction.fulfilled.type](state, { payload }) {
-      state.currentItem.currentPrice = payload.price;
+      state.currentItem.currentPrice = payload.currentPrice;
     },
 
     [fetchProducts.pending.type](state) {

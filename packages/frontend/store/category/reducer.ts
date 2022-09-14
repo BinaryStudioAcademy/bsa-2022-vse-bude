@@ -35,9 +35,7 @@ const categorySlice = createSlice({
     [HYDRATE](state, { payload }: HydrateAction) {
       if (payload.category.list.length) {
         state.list = payload.category.list;
-        state.listInUse = payload.category.list.filter(
-          (item) => item.productsCount > 0,
-        );
+        state.listInUse = payload.category.listInUse;
       }
     },
   },
