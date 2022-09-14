@@ -8,7 +8,12 @@ import {
   UPDATE_PRODUCT_PRICE,
 } from '@vse-bude/shared';
 import { products as productsActions } from '~/store/actions';
-import { selectCurrentProduct } from '~/store/products/selectors';
+import {
+  selectCurrentUser,
+  selectFavoriteIds,
+  selectCurrentProduct,
+} from '~/store/selectors';
+import { notification, socketApi } from '~/services/services';
 import {
   useAppDispatch,
   useAppSelector,
@@ -26,8 +31,6 @@ import {
   Countdown,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { selectCurrentUser, selectFavoriteIds } from '~/store/selectors';
-import { notification, socketApi } from '~/services/services';
 import {
   Description,
   ImageCarousel,

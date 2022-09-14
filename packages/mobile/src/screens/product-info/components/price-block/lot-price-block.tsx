@@ -29,8 +29,8 @@ import { globalStyles } from '~/styles/styles';
 import { products as productsActions } from '~/store/actions';
 import { selectCurrentUser } from '~/store/selectors';
 import {
-  auctionMakeBidStatus,
   selectPermission,
+  selectProductsDataStatus,
 } from '~/store/products/selectors';
 import { TouchableHighlight } from 'react-native';
 import { notification, socketApi } from '~/services/services';
@@ -62,7 +62,7 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
   const { isAbleToLeaveAuction } = useAppSelector(selectPermission);
   const user = useAppSelector(selectCurrentUser);
   const [confirmModalVisible, setModalVisible] = useState(false);
-  const dataAuctionMakeBidStatus = useAppSelector(auctionMakeBidStatus);
+  const dataAuctionMakeBidStatus = useAppSelector(selectProductsDataStatus);
   const isLoading = [dataAuctionMakeBidStatus].includes(DataStatus.PENDING);
   const canUserMakeBid = Boolean(
     user && user?.phoneVerified && user?.emailVerified && !isLoading,
@@ -172,6 +172,7 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
             errors={errors}
             placeholder={placeholderText}
             editable={canUserMakeBid}
+            contentContainerStyle={styles.input}
           />
           <View
             style={[

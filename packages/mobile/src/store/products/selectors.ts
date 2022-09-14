@@ -37,8 +37,6 @@ const selectPermission = (state: RootState) => {
   return state.products.permissions;
 };
 
-const auctionMakeBidStatus = (state: RootState) => state.products.dataStatus;
-
 const selectFavoriteIds = (state: RootState) => {
   return state.products.favoriteIds;
 };
@@ -59,7 +57,6 @@ export {
   selectPermission,
   selectPopularProducts,
   selectPopularLots,
-  auctionMakeBidStatus,
   selectFavoriteIds,
   selectFavorites,
   selectProductsDataStatus,

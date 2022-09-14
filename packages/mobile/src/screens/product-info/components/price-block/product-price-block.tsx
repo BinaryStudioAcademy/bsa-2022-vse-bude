@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import { ColorPalette, ProductDto } from '@vse-bude/shared';
-import { useCustomTheme, useTranslation } from '~/hooks/hooks';
+import { DataStatus } from '~/common/enums/enums';
+import { selectProductsDataStatus } from '~/store/selectors';
+import { useAppSelector, useCustomTheme, useTranslation } from '~/hooks/hooks';
 import {
   Pressable,
   PrimaryButton,
@@ -14,20 +16,20 @@ import { styles } from './styles';
 
 type ProductPriceBlockProps = {
   product: Pick<ProductDto, 'price' | 'id'>;
-  isLoading: boolean;
   isFavorite: boolean;
   onFavoritePress: (id: string) => void;
 };
 
 const ProductPriceBlock: FC<ProductPriceBlockProps> = ({
   product,
-  isLoading,
   isFavorite,
   onFavoritePress,
 }) => {
   const { colors } = useCustomTheme();
   const { t, i18n } = useTranslation();
   const { price, id } = product;
+  const dataStatus = useAppSelector(selectProductsDataStatus);
+  const isLoading = dataStatus == DataStatus.PENDING;
 
   const priceText =
     i18n.language === 'ua'

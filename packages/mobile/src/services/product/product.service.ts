@@ -6,7 +6,6 @@ import {
   HttpContentType,
   HttpMethod,
   ProductApiRoutes,
-  HttpContentType,
   ProductIdRequest,
   AllProductsDto,
   ProductDto,
