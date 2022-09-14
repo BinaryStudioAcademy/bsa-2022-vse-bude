@@ -10,8 +10,7 @@ import {
 import {
   selectProduct,
   selectCurrentUser,
-  selectFavoritesIds,
-  selectTempFavoritesIds,
+  selectFavoriteIds,
 } from '~/store/selectors';
 import { notification } from '~/services/services';
 import {
@@ -44,33 +43,23 @@ const ProductInfo: FC = () => {
   const dispatch = useAppDispatch();
   const product = useAppSelector(selectProduct);
   const user = useAppSelector(selectCurrentUser);
-  const favoritesIds = useAppSelector(selectFavoritesIds);
-  const tempFavoritesIds = useAppSelector(selectTempFavoritesIds);
+  const favoriteIds = useAppSelector(selectFavoriteIds);
   const route =
     useRoute<
       RouteProp<Pick<RootNavigationParamList, RootScreenName.ITEM_INFO>>
     >();
   const id = route.params?.itemId;
-
-  const isFavorite = (() => {
-    if (user) {
-      return favoritesIds.includes(id);
-    }
-
-    return tempFavoritesIds.includes(id);
-  })();
+  const isFavorite = favoriteIds.includes(id);
 
   useEffect(() => {
     dispatch(productActions.loadProductInfo(id));
     dispatch(productActions.updateProductViews(id));
     if (user) {
-      if (tempFavoritesIds) {
-        tempFavoritesIds.map((id) =>
-          dispatch(productsActions.addToFavorite(id)),
-        );
-        dispatch(productsActions.cleanTemporaryFavorites());
+      if (favoriteIds) {
+        favoriteIds.map((id) => dispatch(productsActions.addToFavorite(id)));
+        dispatch(productsActions.cleanFavoriteIds());
       }
-      dispatch(productsActions.fetchFavoritesIds());
+      dispatch(productsActions.fetchFavoriteIds());
     }
   }, []);
 
@@ -89,7 +78,7 @@ const ProductInfo: FC = () => {
             .unwrap()
             .catch((err) => notification.error(JSON.stringify(err.message)))
             .finally(() => {
-              dispatch(productsActions.fetchFavoritesIds());
+              dispatch(productsActions.fetchFavoriteIds());
               setIsLoading(false);
             });
           break;
@@ -98,17 +87,17 @@ const ProductInfo: FC = () => {
           .unwrap()
           .catch((err) => notification.error(JSON.stringify(err.message)))
           .finally(() => {
-            dispatch(productsActions.fetchFavoritesIds());
+            dispatch(productsActions.fetchFavoriteIds());
             setIsLoading(false);
           });
         break;
       case false:
         if (isFavorite) {
-          dispatch(productsActions.deleteFromTemporaryFavorites(productId));
+          dispatch(productsActions.deleteFromFavoriteGuestUser(productId));
           setIsLoading(false);
           break;
         }
-        dispatch(productsActions.addToTemporaryFavorites(productId));
+        dispatch(productsActions.addToFavoriteGuestUser(productId));
         setIsLoading(false);
         break;
     }

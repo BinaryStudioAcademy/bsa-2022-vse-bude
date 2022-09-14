@@ -4,28 +4,26 @@ import { DataStatus } from '~/common/enums/enums';
 import {
   loadProducts,
   fetchFavorites,
-  fetchFavoritesIds,
+  fetchFavoriteIds,
   addToFavorite,
   deleteFromFavorite,
-  addToTemporaryFavorites,
-  deleteFromTemporaryFavorites,
-  cleanTemporaryFavorites,
+  addToFavoriteGuestUser,
+  deleteFromFavoriteGuestUser,
+  cleanFavoriteIds,
 } from './actions';
 
 type InitialState = {
   dataStatus: DataStatus;
   products: AllProductsDto;
   favorites: ProductDto[] | [];
-  favoritesIds: Array<string>;
-  tempFavoritesIds: Array<string>;
+  favoriteIds: Array<string>;
 };
 
 const initialState: InitialState = {
   products: { items: [], count: 0 },
   dataStatus: DataStatus.IDLE,
   favorites: [],
-  favoritesIds: [],
-  tempFavoritesIds: [],
+  favoriteIds: [],
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -41,9 +39,9 @@ const reducer = createReducer(initialState, (builder) => {
       state.dataStatus = DataStatus.FULFILLED;
       state.favorites = [...action.payload];
     })
-    .addCase(fetchFavoritesIds.fulfilled, (state, action) => {
+    .addCase(fetchFavoriteIds.fulfilled, (state, action) => {
       state.dataStatus = DataStatus.FULFILLED;
-      state.favoritesIds = [...action.payload];
+      state.favoriteIds = [...action.payload];
     })
     .addCase(addToFavorite.fulfilled, (state) => {
       state.dataStatus = DataStatus.FULFILLED;
@@ -51,24 +49,25 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(deleteFromFavorite.fulfilled, (state) => {
       state.dataStatus = DataStatus.FULFILLED;
     })
-    .addCase(addToTemporaryFavorites, (state, action) => {
-      state.tempFavoritesIds = [...state.tempFavoritesIds, action.payload];
+    .addCase(addToFavoriteGuestUser, (state, action) => {
+      state.favoriteIds = [...state.favoriteIds, action.payload];
     })
-    .addCase(deleteFromTemporaryFavorites, (state, action) => {
-      state.tempFavoritesIds = state.tempFavoritesIds.filter(
+    .addCase(deleteFromFavoriteGuestUser, (state, action) => {
+      state.favoriteIds = state.favoriteIds.filter(
         (id) => id !== action.payload,
       );
     })
-    .addCase(cleanTemporaryFavorites, (state, action) => {
-      state.tempFavoritesIds = action.payload;
+    .addCase(cleanFavoriteIds, (state, action) => {
+      state.favoriteIds = action.payload;
     })
 
     .addMatcher(
       isAnyOf(
         loadProducts.pending,
         fetchFavorites.pending,
-        fetchFavoritesIds.pending,
+        fetchFavoriteIds.pending,
         addToFavorite.pending,
+        deleteFromFavorite.pending,
       ),
       (state) => {
         state.dataStatus = DataStatus.PENDING;
@@ -78,8 +77,9 @@ const reducer = createReducer(initialState, (builder) => {
       isAnyOf(
         loadProducts.rejected,
         fetchFavorites.rejected,
-        fetchFavoritesIds.rejected,
+        fetchFavoriteIds.rejected,
         addToFavorite.rejected,
+        deleteFromFavorite.rejected,
       ),
       (state) => {
         state.dataStatus = DataStatus.REJECTED;

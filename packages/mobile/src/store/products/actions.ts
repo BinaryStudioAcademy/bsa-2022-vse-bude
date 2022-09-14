@@ -27,7 +27,7 @@ const fetchFavorites = createAsyncThunk<
   return await productApi.getFavorites(requestParams);
 });
 
-const fetchFavoritesIds = createAsyncThunk<
+const fetchFavoriteIds = createAsyncThunk<
   string[],
   undefined,
   AsyncThunkConfig
@@ -57,22 +57,22 @@ const deleteFromFavorite = createAsyncThunk<
   return await productApi.deleteFromFavorites({ productId });
 });
 
-const addToTemporaryFavorites = createAction<PrepareAction<string>, string>(
+const addToFavoriteGuestUser = createAction<PrepareAction<string>, string>(
   ActionType.ADD_TO_FAVORITE,
   (productId) => {
     return { payload: productId };
   },
 );
 
-const deleteFromTemporaryFavorites = createAction<
-  PrepareAction<string>,
-  string
->(ActionType.DELETE_FROM_FAVORITE, (productId) => {
-  return { payload: productId };
-});
+const deleteFromFavoriteGuestUser = createAction<PrepareAction<string>, string>(
+  ActionType.DELETE_FROM_FAVORITE,
+  (productId) => {
+    return { payload: productId };
+  },
+);
 
-const cleanTemporaryFavorites = createAction<PrepareAction<[]>, string>(
-  ActionType.CLEAN_TEMP,
+const cleanFavoriteIds = createAction<PrepareAction<[]>, string>(
+  ActionType.CLEAN_FAVORITES_IDS,
   () => {
     return { payload: [] };
   },
@@ -81,10 +81,10 @@ const cleanTemporaryFavorites = createAction<PrepareAction<[]>, string>(
 export {
   loadProducts,
   fetchFavorites,
-  fetchFavoritesIds,
+  fetchFavoriteIds,
   addToFavorite,
   deleteFromFavorite,
-  addToTemporaryFavorites,
-  deleteFromTemporaryFavorites,
-  cleanTemporaryFavorites,
+  addToFavoriteGuestUser,
+  deleteFromFavoriteGuestUser,
+  cleanFavoriteIds,
 };

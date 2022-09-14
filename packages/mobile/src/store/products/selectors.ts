@@ -21,12 +21,12 @@ const selectProductsByType = createSelector(
   (products, type) => products.items.filter((item) => item.type === type),
 );
 
-const selectFavoritesIds = (state: RootState) => {
-  return state.products.favoritesIds;
+const selectFavoriteIds = (state: RootState) => {
+  return state.products.favoriteIds;
 };
 
-const selectTempFavoritesIds = (state: RootState) => {
-  return state.products.tempFavoritesIds;
+const selectFavoriteIdsGuestUser = (state: RootState) => {
+  return state.products.favoriteIds;
 };
 
 const selectFavorites = (state: RootState) => {
@@ -37,7 +37,7 @@ export {
   selectProductById,
   selectProducts,
   selectProductsByType,
-  selectFavoritesIds,
-  selectTempFavoritesIds,
+  selectFavoriteIds,
+  selectFavoriteIdsGuestUser,
   selectFavorites,
 };
