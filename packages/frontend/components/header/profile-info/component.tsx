@@ -6,14 +6,14 @@ import * as styles from './styles';
 import { DownArrow } from './sub-components/dropdown';
 import { PopoverContent } from './sub-components/popover-content';
 
-interface ProfileInfoProps{
+interface ProfileInfoProps {
   load: boolean;
 }
 
-export const ProfileInfo = ({ load } : ProfileInfoProps) => {
+export const ProfileInfo = ({ load }: ProfileInfoProps) => {
   const router = useRouter();
   const { user, loading } = useAuth();
-  
+
   const handleClick = (e) => {
     e.preventDefault();
     router.push(`${Routes.PROFILE}/${user.id}`);
