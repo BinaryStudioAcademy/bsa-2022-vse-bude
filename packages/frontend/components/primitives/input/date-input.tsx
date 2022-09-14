@@ -8,7 +8,7 @@ import * as styles from './styles';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
-export const MIN_DATE = Date.now() + 86400000; // +1 day
+export const SECONDS_IN_ONE_DAY = 86400000; // +1 day
 
 const InputDate = ({
   value,
@@ -50,7 +50,7 @@ const InputDate = ({
           placeholderText="-/-/-"
           id={id}
           locale={customLocale}
-          minDate={Date.now() + 86400000}
+          minDate={Date.now() + SECONDS_IN_ONE_DAY}
           calendarStartDay={locale === 'ua' ? 1 : 0}
           {...props}
         />

@@ -1,4 +1,5 @@
 import { ValidationRanges } from '@vse-bude/shared';
+import { SECONDS_IN_ONE_DAY } from '@components/primitives/input/date-input';
 import Joi from 'joi';
 import type { TFunction } from 'next-i18next';
 
@@ -89,7 +90,7 @@ export const createAuctionSchema = (t: TFunction) =>
         'number.empty': t('create-post:validation.price.empty'),
       }),
     endDate: Joi.date()
-      .min(Date.now() + 1000 * 60 * 60 * 24)
+      .min(Date.now() + SECONDS_IN_ONE_DAY)
       .required()
       .messages({
         'date.min': t('create-post:validation.date.base'),

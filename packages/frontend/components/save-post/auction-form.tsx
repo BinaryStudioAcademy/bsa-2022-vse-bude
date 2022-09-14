@@ -30,6 +30,7 @@ export default function ProductForm({ edit }: { edit: boolean }) {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState(PostStatuses.CREATE);
+  const [endDate, setEndDate] = useState(null);
   const {
     register,
     handleSubmit,
@@ -118,7 +119,8 @@ export default function ProductForm({ edit }: { edit: boolean }) {
             break;
           }
           case 'endDate':
-            setValue(item, new Date(currentProduct?.endDate));
+            setValue(item, new Date(currentProduct?.endDate).toISOString());
+            setEndDate(new Date(currentProduct?.endDate));
             break;
           case 'phone':
             setValue('phone', currentProduct.phone.replace('+380', ''));
@@ -224,10 +226,12 @@ export default function ProductForm({ edit }: { edit: boolean }) {
               label={t('create-post:label.endDate')}
               id="post-end-date"
               error={errors.endDate?.message}
+              selected={endDate}
+              value={endDate}
               onChange={(date) => {
+                setEndDate(date);
                 field.onChange(date);
               }}
-              selected={field.value}
             />
           )}
         />
