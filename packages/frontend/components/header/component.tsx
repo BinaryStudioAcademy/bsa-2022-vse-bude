@@ -28,7 +28,7 @@ export const Header = () => {
   const Search = dynamic(
     () => import('@components/primitives/search/component'),
   );
-  
+
   const [searchQuery, setSearchQuery] = useState('');
   const [show, setShow] = useState(false);
   const { user, loading } = useAuth();
