@@ -6,14 +6,14 @@ import { styles } from './styles';
 
 type PhotoPickerModalProps = {
   isVisible: boolean;
-  handleCancel: () => void;
-  handleConfirm: () => void;
+  onCancel: () => void;
+  onConfirm: () => void;
 };
 
 const AuctionLeaveModal: FC<PhotoPickerModalProps> = ({
   isVisible,
-  handleCancel,
-  handleConfirm,
+  onCancel,
+  onConfirm,
 }): ReactElement => {
   const { t } = useTranslation();
 
@@ -33,12 +33,12 @@ const AuctionLeaveModal: FC<PhotoPickerModalProps> = ({
             </Text>
           </View>
           <View style={styles.buttonsBlock}>
-            <Pressable onPress={handleCancel} style={styles.btn}>
+            <Pressable onPress={onCancel} style={styles.btn}>
               <Text style={styles.btnText}>
                 {t('common:components.BUTTON_CANCEL')}
               </Text>
             </Pressable>
-            <Pressable onPress={handleConfirm} style={[styles.btn]}>
+            <Pressable onPress={onConfirm} style={[styles.btn]}>
               <Text style={[styles.btnText, styles.confirmBtn]}>
                 {t('screens:product_info.LEAVE_TEXT')}
               </Text>

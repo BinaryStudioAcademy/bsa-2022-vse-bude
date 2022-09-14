@@ -14,7 +14,7 @@ import {
 } from './actions';
 
 type InitialState = {
-  currentProduct: ProductDto | undefined;
+  currentProduct: ProductDto | null;
   products: AllProductsDto;
   popularProducts: ProductDto[] | [];
   popularLots: ProductDto[] | [];
@@ -28,7 +28,7 @@ const initialState: InitialState = {
   products: { items: [], count: 0 },
   popularProducts: [],
   popularLots: [],
-  currentProduct: undefined,
+  currentProduct: null,
   dataStatus: DataStatus.IDLE,
   permissions: {
     isAbleToLeaveAuction: false,

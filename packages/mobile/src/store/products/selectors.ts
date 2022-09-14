@@ -29,7 +29,7 @@ const selectPopularLots = (state: RootState) => {
   return state.products.popularLots;
 };
 
-const selectProduct = (state: RootState) => {
+const selectCurrentProduct = (state: RootState) => {
   return state.products.currentProduct;
 };
 
@@ -37,12 +37,15 @@ const selectPermission = (state: RootState) => {
   return state.products.permissions;
 };
 
+const auctionMakeBidStatus = (state: RootState) => state.products.dataStatus;
+
 export {
   selectProductById,
   selectProducts,
   selectProductsByType,
-  selectProduct,
+  selectCurrentProduct,
   selectPermission,
   selectPopularProducts,
   selectPopularLots,
+  auctionMakeBidStatus,
 };

@@ -7,7 +7,7 @@ import {
   UPDATE_PRODUCT_PRICE,
 } from '@vse-bude/shared';
 import { products as productsActions } from '~/store/actions';
-import { selectProduct } from '~/store/products/selectors';
+import { selectCurrentProduct } from '~/store/products/selectors';
 import {
   useAppDispatch,
   useAppSelector,
@@ -40,7 +40,7 @@ const ProductInfo: FC = () => {
   const { colors } = useCustomTheme();
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
-  const product = useAppSelector(selectProduct);
+  const product = useAppSelector(selectCurrentProduct);
   const user = useAppSelector(selectCurrentUser);
   const route =
     useRoute<

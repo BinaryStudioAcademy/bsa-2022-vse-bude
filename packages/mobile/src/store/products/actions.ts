@@ -71,7 +71,7 @@ const auctionMakeBid = createAsyncThunk<
   AsyncThunkConfig
 >(ActionType.PLACE_BID, async (data, { extra }) => {
   const { productApi } = extra;
-  const result = await productApi.placeBidRequest(data);
+  const result = await productApi.placeBid(data);
 
   return result;
 });
@@ -82,7 +82,7 @@ const auctionLeaveAction = createAsyncThunk<
   AsyncThunkConfig
 >(ActionType.AUCTION_LEAVE, async (productId, { extra }) => {
   const { productApi } = extra;
-  const result = await productApi.leaveAuctionRequest(productId);
+  const result = await productApi.leaveAuction(productId);
 
   return result;
 });

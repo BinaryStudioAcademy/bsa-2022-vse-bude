@@ -27,9 +27,13 @@ import { getBidValidationSchema } from '~/validation-schemas/bid/make-bid';
 import { globalStyles } from '~/styles/styles';
 import { products as productsActions } from '~/store/actions';
 import { selectCurrentUser } from '~/store/selectors';
-import { selectPermission } from '~/store/products/selectors';
+import {
+  auctionMakeBidStatus,
+  selectPermission,
+} from '~/store/products/selectors';
 import { TouchableHighlight } from 'react-native';
 import { notification, socketApi } from '~/services/services';
+import { DataStatus } from '~/common/enums/app/data-status.enum';
 import { DEFAULT_BID_VALUE } from '../../common/constants';
 import { PriceWrapper } from './price-wrapper';
 import { styles } from './styles';
@@ -55,7 +59,14 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
   const { isAbleToLeaveAuction } = useAppSelector(selectPermission);
   const user = useAppSelector(selectCurrentUser);
   const [confirmModalVisible, setModalVisible] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const dataAuctionMakeBidStatus = useAppSelector(auctionMakeBidStatus);
+  const isLoading = [dataAuctionMakeBidStatus].includes(DataStatus.PENDING);
+  const canUserMakeBid = Boolean(
+    user && user?.phoneVerified && user?.emailVerified && !isLoading,
+  );
+  const showModalLeaveAuction = Boolean(
+    !!isAbleToLeaveAuction && confirmModalVisible,
+  );
 
   useEffect(() => {
     const socket = socketApi.getAuctionItemIo(id);
@@ -72,8 +83,7 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
     };
   }, [id, dispatch]);
 
-  const handleOnMakeBid = (payload: { bid: number }) => {
-    setIsLoading(true);
+  const handleMakeBidPress = (payload: { bid: number }) => {
     dispatch(
       productsActions.auctionMakeBid({
         price: Number(payload.bid),
@@ -86,14 +96,12 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
         await dispatch(productsActions.auctionPermissions(id));
       });
     setValue('bid', 0);
-    setIsLoading(false);
   };
-  const onCloseModal = () => {
+  const closeModal = () => {
     setModalVisible(false);
   };
 
   const handleOnLeaveAuction = async () => {
-    setIsLoading(true);
     dispatch(productsActions.auctionLeaveAction(id))
       .unwrap()
       .then(() => {
@@ -101,8 +109,7 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
         dispatch(productsActions.loadProductInfo(id));
         dispatch(productsActions.auctionPermissions(id));
       });
-    onCloseModal();
-    setIsLoading(false);
+    closeModal();
   };
 
   const openModal = () => {
@@ -113,6 +120,15 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
     i18n.language === 'ua'
       ? `${currentPrice} ${t('screens:welcome.UAH')}`
       : `${t('screens:welcome.UAH')} ${currentPrice}`;
+
+  const placeholderText =
+    i18n.language === 'ua'
+      ? `${Number(minimalBid) + Number(currentPrice)} ${t(
+          'screens:product_info.MIN_UAH',
+        )}`
+      : `${t('screens:product_info.MIN_UAH')} ${
+          Number(minimalBid) + Number(currentPrice)
+        }`;
 
   return (
     <>
@@ -151,12 +167,8 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
             name="bid"
             control={control}
             errors={errors}
-            placeholder={`${t('screens:product_info.MIN_UAH')} ${
-              minimalBid
-                ? Number(minimalBid) + Number(currentPrice)
-                : currentPrice
-            }`}
-            editable={!!user && !!user.phoneVerified}
+            placeholder={placeholderText}
+            editable={canUserMakeBid}
           />
           <View
             style={[
@@ -184,14 +196,9 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
             <View style={styles.btnWidth}>
               <PlusSvg style={styles.btnIcon} />
               <PrimaryButton
-                onPress={handleSubmit(handleOnMakeBid)}
+                onPress={handleSubmit(handleMakeBidPress)}
                 label={`${t('common:components.BUTTON_BID')}`}
-                disabled={
-                  !user ||
-                  !user.phoneVerified ||
-                  !user.emailVerified ||
-                  isLoading
-                }
+                disabled={!canUserMakeBid}
               />
             </View>
             <View style={[globalStyles.ml5, styles.iconBorder]}>
@@ -205,10 +212,10 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
         </>
       </PriceWrapper>
 
-      {!!isAbleToLeaveAuction && confirmModalVisible && (
+      {showModalLeaveAuction && (
         <AuctionLeaveModal
-          handleCancel={onCloseModal}
-          handleConfirm={handleOnLeaveAuction}
+          onCancel={closeModal}
+          onConfirm={handleOnLeaveAuction}
           isVisible={confirmModalVisible}
         />
       )}

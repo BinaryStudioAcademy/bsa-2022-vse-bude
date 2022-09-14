@@ -76,7 +76,7 @@ class ProductService {
     );
   }
 
-  leaveAuctionRequest(productId: string): Promise<ProductDto> {
+  leaveAuction(productId: string): Promise<ProductDto> {
     return this.#http.load(
       `${this.#apiPrefix}${ApiRoutes.PRODUCTS}${
         ProductApiRoutes.AUCTION_LEAVE
@@ -87,7 +87,7 @@ class ProductService {
     );
   }
 
-  placeBidRequest(requestParams: CreateBidRequest): Promise<Bid> {
+  placeBid(requestParams: CreateBidRequest): Promise<Bid> {
     return this.#http.load(`${this.#apiPrefix}${ApiRoutes.BIDS}`, {
       contentType: HttpContentType.APPLICATION_JSON,
       payload: JSON.stringify(requestParams),
