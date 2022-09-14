@@ -5,7 +5,13 @@ import { lang } from '../../lang';
 
 export const createPostSchema = Joi.object({
   category: Joi.string().allow(''),
-  condition: Joi.string().valid(Condition.NEW, Condition.USED),
+  condition: Joi.string()
+    .required()
+    .valid(Condition.NEW, Condition.USED)
+    .messages({
+      'string.empty': lang('product:validation.condition.empty'),
+      'any.required': lang('product:validation.condition.empty'),
+    }),
   type: Joi.string()
     .valid(ProductType.AUCTION, ProductType.SELLING)
     .required()
