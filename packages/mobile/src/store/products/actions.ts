@@ -92,6 +92,17 @@ const updateCurrentItemPrice = createAction<
   return { payload };
 });
 
+const updateProductViews = createAsyncThunk<
+  ProductDto,
+  string,
+  AsyncThunkConfig
+>(ActionType.INCREMENT_PRODUCT_VIEWS, async (productId, { extra }) => {
+  const { productApi } = extra;
+  const response = await productApi.incrementProductViews(productId);
+
+  return response;
+});
+
 export {
   loadProducts,
   loadPopularProducts,
@@ -101,4 +112,5 @@ export {
   auctionMakeBid,
   auctionLeaveAction,
   updateCurrentItemPrice,
+  updateProductViews,
 };

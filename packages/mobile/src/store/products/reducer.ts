@@ -10,6 +10,7 @@ import {
   loadProductInfo,
   loadProducts,
   updateCurrentItemPrice,
+  updateProductViews,
 } from './actions';
 
 type InitialState = {
@@ -135,6 +136,18 @@ const reducer = createReducer(initialState, (builder) => {
           ? (product.price = action.payload.price)
           : product.price,
       );
+    })
+    .addCase(updateProductViews.pending, (state) => {
+      state.dataStatus = DataStatus.PENDING;
+    })
+    .addCase(updateProductViews.rejected, (state) => {
+      state.dataStatus = DataStatus.REJECTED;
+    })
+    .addCase(updateProductViews.fulfilled, (state, action) => {
+      state.dataStatus = DataStatus.FULFILLED;
+      state.currentProduct
+        ? (state.currentProduct.views = action.payload.views)
+        : undefined;
     });
 });
 
