@@ -21,8 +21,8 @@
   },
   "dependencies": {
     "@hookform/resolvers": "2.9.5",
-    "@react-native-community/datetimepicker": "6.3.2",
     "@react-native-community/checkbox": "0.5.12",
+    "@react-native-community/datetimepicker": "6.3.2",
     "@react-native-community/push-notification-ios": "1.10.1",
     "@react-navigation/bottom-tabs": "6.3.2",
     "@react-navigation/drawer": "6.4.4",
@@ -49,14 +49,15 @@
     "react-native-mmkv": "2.4.3",
     "react-native-permissions": "3.6.1",
     "react-native-popover-view": "5.1.2",
-    "react-native-reanimated": "2.10.0",
     "react-native-push-notification": "8.1.1",
+    "react-native-reanimated": "2.10.0",
     "react-native-safe-area-context": "4.3.1",
     "react-native-screens": "3.15.0",
     "react-native-svg": "12.4.4",
     "react-native-toast-message": "2.1.5",
     "react-native-vector-icons": "9.2.0",
-    "react-redux": "8.0.2"
+    "react-redux": "8.0.2",
+    "socket.io-client": "4.5.2"
   },
   "devDependencies": {
     "@babel/core": "7.18.6",
