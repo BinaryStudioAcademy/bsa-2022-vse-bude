@@ -13,7 +13,7 @@ import { ListHeader } from './components/components';
 
 const ItemsAndServices = () => {
   const { colors } = useCustomTheme();
-  const products = useAppSelector(selectProducts);
+  const { items } = useAppSelector(selectProducts);
 
   return (
     <ScreenWrapper>
@@ -24,7 +24,7 @@ const ItemsAndServices = () => {
       <FlatList
         ListHeaderComponent={ListHeader}
         style={globalStyles.px4}
-        data={products}
+        data={items}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <Product
