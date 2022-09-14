@@ -21,4 +21,31 @@ const selectProductsByType = createSelector(
   (products, type) => products.items.filter((item) => item.type === type),
 );
 
-export { selectProductById, selectProducts, selectProductsByType };
+const selectPopularProducts = (state: RootState) => {
+  return state.products.popularProducts;
+};
+
+const selectPopularLots = (state: RootState) => {
+  return state.products.popularLots;
+};
+
+const selectCurrentProduct = (state: RootState) => {
+  return state.products.currentProduct;
+};
+
+const selectPermission = (state: RootState) => {
+  return state.products.permissions;
+};
+
+const auctionMakeBidStatus = (state: RootState) => state.products.dataStatus;
+
+export {
+  selectProductById,
+  selectProducts,
+  selectProductsByType,
+  selectCurrentProduct,
+  selectPermission,
+  selectPopularProducts,
+  selectPopularLots,
+  auctionMakeBidStatus,
+};

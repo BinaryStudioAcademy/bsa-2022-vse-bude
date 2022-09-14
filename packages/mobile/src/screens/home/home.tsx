@@ -21,7 +21,11 @@ import {
   products as productsActions,
   categories as categoriesActions,
 } from '~/store/actions';
-import { selectCategories, selectProductsByType } from '~/store/selectors';
+import {
+  selectCategories,
+  selectPopularProducts,
+  selectPopularLots,
+} from '~/store/selectors';
 import {
   Category,
   Flag,
@@ -34,20 +38,22 @@ import { styles } from './styles';
 const Home: FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const auctionProducts = useAppSelector((state) =>
-    selectProductsByType(state, ProductType.AUCTION),
-  );
-  const sellingProducts = useAppSelector((state) =>
-    selectProductsByType(state, ProductType.SELLING),
-  );
+  const auctionProducts = useAppSelector(selectPopularLots);
+  const sellingProducts = useAppSelector(selectPopularProducts);
   const categories = useAppSelector(selectCategories);
 
   useEffect(() => {
     dispatch(
-      productsActions.loadProducts({ limit: 10, type: ProductType.AUCTION }),
+      productsActions.loadPopularProducts({
+        limit: 10,
+        type: ProductType.AUCTION,
+      }),
     );
     dispatch(
-      productsActions.loadProducts({ limit: 10, type: ProductType.SELLING }),
+      productsActions.loadPopularLots({
+        limit: 10,
+        type: ProductType.SELLING,
+      }),
     );
     dispatch(categoriesActions.loadAllCategories());
   }, []);

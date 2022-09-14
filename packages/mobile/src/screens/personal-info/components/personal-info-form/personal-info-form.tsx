@@ -7,6 +7,7 @@ import {
   useTranslation,
   useNavigation,
   useEffect,
+  useFormState,
 } from '~/hooks/hooks';
 import { View, Input, PrimaryButton } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
@@ -69,6 +70,8 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
       defaultValues: DEFAULT_VALUES,
       validationSchema: personalInfoSchema,
     });
+
+  const { isDirty } = useFormState({ control });
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
@@ -251,7 +254,7 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
         <PrimaryButton
           label={t('common:components.BUTTON_SAVE')}
           onPress={handleSubmit(onSubmit)}
-          disabled={isLoading}
+          disabled={isLoading || !isDirty}
         />
       </View>
       <View style={[globalStyles.mt3, globalStyles.mb5]}>
