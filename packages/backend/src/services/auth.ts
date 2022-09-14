@@ -20,10 +20,10 @@ import {
   UserNotFoundError,
   UserExistsError,
   ProfileError,
-  WrongPasswordError,
   UnauthorizedError,
   WrongRefreshTokenError,
   ExpiredRefreshTokenError,
+  WrongPasswordOrUserError,
 } from '@errors';
 import type {
   CreateRefreshToken,
@@ -127,7 +127,7 @@ export class AuthService {
   async signIn(signInDto: UserSignInDto): Promise<AuthResponse> {
     const user = await this._userRepository.getByEmail(signInDto.email);
     if (!user) {
-      throw new UserNotFoundError();
+      throw new WrongPasswordOrUserError();
     }
 
     if (
@@ -136,7 +136,7 @@ export class AuthService {
         signInDto.password,
       )
     ) {
-      throw new WrongPasswordError();
+      throw new WrongPasswordOrUserError();
     }
 
     const tokenData = this.getTokenData(user.id);

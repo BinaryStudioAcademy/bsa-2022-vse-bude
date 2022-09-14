@@ -1,13 +1,13 @@
 import { HttpError, HttpStatusCode } from '@vse-bude/shared';
 import { lang } from '../../lang';
 
-class WrongPasswordError extends HttpError {
+class WrongPasswordOrUserError extends HttpError {
   constructor() {
     super({
       status: HttpStatusCode.BAD_REQUEST,
-      message: lang('personal-info:validation.password.wrongPassword'),
+      message: lang('personal-info:validation.password.wrongUserOrEmail'),
     });
   }
 }
 
-export { WrongPasswordError };
+export { WrongPasswordOrUserError };
