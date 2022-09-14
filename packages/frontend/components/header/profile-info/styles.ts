@@ -7,6 +7,9 @@ export const profileInfo = ({ spaces }: Theme) => css`
   align-items: center;
   width: max-content;
   padding: ${spaces.xs} 0;
+  &[profile-load="true"] {
+    pointer-events: none;
+  }
 `;
 
 export const dropdownArrow = ({

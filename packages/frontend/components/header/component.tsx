@@ -1,7 +1,7 @@
 import { Button, Container, Flex, IconButton, Loader } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
-import { Fragment, useState, useEffect } from 'react';
+import { Fragment, useState, useEffect, Suspense } from 'react';
 import { Routes, IconName, IconColor } from '@enums';
 import { Logo } from 'components/primitives/logo';
 import {
@@ -23,12 +23,9 @@ import * as styles from './styles';
 interface RequestOptions {
   locale?: HttpAcceptLanguage;
 }
+const Search = dynamic(() => import('@components/primitives/search/component'));
 
 export const Header = () => {
-  const Search = dynamic(
-    () => import('@components/primitives/search/component'),
-  );
-
   const [searchQuery, setSearchQuery] = useState('');
   const [show, setShow] = useState(false);
   const { user, loading } = useAuth();
@@ -81,13 +78,7 @@ export const Header = () => {
     />
   );
 
-  const renderProfileInfo = () => {
-    if (loading) {
-      return <Loader size="extraSmall" />;
-    }
-
-    return <ProfileInfo />;
-  };
+  const renderProfileInfo = () => <ProfileInfo load={loading}/>;
 
   return (
     <Fragment>
@@ -103,19 +94,11 @@ export const Header = () => {
               <Navigation categories={categories || []} />
             </div>
           </Flex>
+
           <Flex align="center">
-            {size.width > 600 ? (
-              <Search
-                value={searchQuery}
-                setValue={setSearchQuery}
-                setSearchOpen={setSearchOpen}
-                placeholder={t(
-                  'common:components.input.searchProductsPlaceholder',
-                )}
-              />
-            ) : (
+            {/* {!loading && (
               <>
-                {searchOpen ? (
+                {size.width > 600 ? (
                   <Search
                     value={searchQuery}
                     setValue={setSearchQuery}
@@ -125,25 +108,71 @@ export const Header = () => {
                     )}
                   />
                 ) : (
-                  <IconButton
-                    cssExtend={styles.searchButton}
-                    icon={IconName.SEARCH}
-                    size="md"
-                    onClick={() => setSearchOpen(!searchOpen)}
-                    color={IconColor.BLACK}
-                    ariaLabel={t('common:header.buttons.openMenu')}
-                  />
+                  <>
+                    {searchOpen ? (
+                      <Search
+                        value={searchQuery}
+                        setValue={setSearchQuery}
+                        setSearchOpen={setSearchOpen}
+                        placeholder={t(
+                          'common:components.input.searchProductsPlaceholder',
+                        )}
+                      />
+                    ) : (
+                      <IconButton
+                        cssExtend={styles.searchButton}
+                        icon={IconName.SEARCH}
+                        size="md"
+                        onClick={() => setSearchOpen(!searchOpen)}
+                        color={IconColor.BLACK}
+                        ariaLabel={t('common:header.buttons.openMenu')}
+                      />
+                    )}
+                  </>
                 )}
               </>
-            )}
-
+            )} */}
             {isMounted && (
               <>
+                <Suspense fallback={<Loader size="extraSmall" />}>
+                  {size.width > 600 ? (
+                      <Search
+                        value={searchQuery}
+                        setValue={setSearchQuery}
+                        setSearchOpen={setSearchOpen}
+                        placeholder={t(
+                          'common:components.input.searchProductsPlaceholder',
+                        )}
+                      />
+                    ) : (
+                      <>
+                        {searchOpen ? (
+                          <Search
+                            value={searchQuery}
+                            setValue={setSearchQuery}
+                            setSearchOpen={setSearchOpen}
+                            placeholder={t(
+                              'common:components.input.searchProductsPlaceholder',
+                            )}
+                          />
+                        ) : (
+                          <IconButton
+                            cssExtend={styles.searchButton}
+                            icon={IconName.SEARCH}
+                            size="md"
+                            onClick={() => setSearchOpen(!searchOpen)}
+                            color={IconColor.BLACK}
+                            ariaLabel={t('common:header.buttons.openMenu')}
+                          />
+                        )}
+                      </>
+                    )}
                 {user || loading ? (
                   <div className="header-content">{renderProfileInfo()}</div>
                 ) : (
                   <div className="header-content">{renderAuthButtons()}</div>
                 )}
+                </Suspense>
               </>
             )}
             <div className="burger-menu-button">{renderBurgerButton()}</div>
