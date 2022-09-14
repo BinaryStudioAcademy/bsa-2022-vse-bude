@@ -26,7 +26,7 @@ export const screens = {
     UAH: 'UAH',
   },
   verification: {
-    SING_IN: 'Sing in',
+    SIGN_IN: 'Sign in',
     EMAIL: 'Email',
     EMAIL_HINT: 'Enter your email',
     PASSWORD: 'Password',
@@ -43,6 +43,7 @@ export const screens = {
     PHONE_NUMBER_HINT: 'Enter your phone',
     GOOGLE_BUTTON: 'Sign in with Google',
     FORGOT_PASSWORD: 'Forgot Password',
+    FORGOT_PASSWORD_BUTTON: 'Restore',
     ENTER_EMAIL: 'Enter your email to retrieve your password',
     HIDE_EMAIL: 'Hide Email',
     RESET_PASSWORD: 'Reset Password',

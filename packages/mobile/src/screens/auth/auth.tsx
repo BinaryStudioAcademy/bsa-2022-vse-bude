@@ -44,7 +44,7 @@ const Auth: FC = () => {
   const getScreenLabel = (screenName: string): string => {
     switch (screenName) {
       case RootScreenName.SIGN_IN:
-        return t('verification.SING_IN');
+        return t('verification.SIGN_IN');
       case RootScreenName.SIGN_UP:
         return t('verification.CREATE_ACCOUNT');
       case RootScreenName.FORGOT_PASSWORD:
