@@ -32,7 +32,7 @@
       "emptyPassword": "Fill the password please!",
       "newPasswordPattern": "Password should include at least one uppercase, one lowercase and one number",
       "differentPasswords": "Passwords are not same",
-      "wrongUserOrEmail": "Incorrect password or e-mail"
+      "wrongPasswordOrEmail": "Incorrect password or e-mail"
     },
     "notExists": {
       "user": "User not found!"
