@@ -108,7 +108,7 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(auctionMakeBid.fulfilled, (state, action) => {
       state.dataStatus = DataStatus.FULFILLED;
-      state.products.map((product) =>
+      state.products.items.map((product) =>
         product.id === action.payload.productId
           ? (product.price = action.payload.price)
           : product.price,
