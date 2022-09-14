@@ -73,7 +73,7 @@ class AuthApi {
       },
     );
   }
-  
+
   refreshToken(_payload: { tokenValue: string }): Promise<AuthResponse> {
     return this.#http.load(
       `${this.#apiPrefix}${ApiRoutes.AUTH}${AuthApiRoutes.REFRESH_TOKEN}`,
