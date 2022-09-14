@@ -1,47 +1,137 @@
-import React, { FC } from 'react';
-import { ColorPalette, ProductDto } from '@vse-bude/shared';
-import { getBidValidationSchema } from '~/validation-schemas/bid/make-bid';
-import { useAppForm, useCustomTheme, useTranslation } from '~/hooks/hooks';
+import React, { FC, useEffect } from 'react';
+import {
+  ColorPalette,
+  ProductDto,
+  UpdateProductPriceEvent,
+  UPDATE_PRODUCT_PRICE,
+} from '@vse-bude/shared';
+import {
+  useAppForm,
+  useAppSelector,
+  useCustomTheme,
+  useTranslation,
+  useState,
+  useAppDispatch,
+} from '~/hooks/hooks';
 import {
   PrimaryButton,
   Text,
   View,
   PlusSvg,
   Input,
+  CrossIcon,
+  Spinner,
   Pressable,
   StarSvg,
 } from '~/components/components';
+import { getBidValidationSchema } from '~/validation-schemas/bid/make-bid';
 import { globalStyles } from '~/styles/styles';
+import { products as productsActions } from '~/store/actions';
+import { selectCurrentUser } from '~/store/selectors';
+import {
+  auctionMakeBidStatus,
+  selectPermission,
+} from '~/store/products/selectors';
+import { TouchableHighlight } from 'react-native';
+import { notification, socketApi } from '~/services/services';
+import { DataStatus } from '~/common/enums/app/data-status.enum';
 import { DEFAULT_BID_VALUE } from '../../common/constants';
 import { PriceWrapper } from './price-wrapper';
 import { styles } from './styles';
+import { AuctionLeaveModal } from './auction-leave-modal';
 
 type LotPriceBlockProps = {
   product: Pick<ProductDto, 'currentPrice' | 'minimalBid' | 'id'>;
-  isLoading: boolean;
   isFavorite: boolean;
   onFavoritePress: (id: string) => void;
 };
 
 const LotPriceBlock: FC<LotPriceBlockProps> = ({
   product,
-  isLoading,
   isFavorite,
   onFavoritePress,
 }) => {
   const { colors } = useCustomTheme();
   const { t, i18n } = useTranslation();
+  const dispatch = useAppDispatch();
   const { minimalBid, currentPrice, id } = product;
-
-  const { control, errors } = useAppForm({
+  const { control, errors, handleSubmit, setValue } = useAppForm({
     defaultValues: DEFAULT_BID_VALUE,
     validationSchema: getBidValidationSchema(Number(minimalBid)),
   });
+  const { isAbleToLeaveAuction } = useAppSelector(selectPermission);
+  const user = useAppSelector(selectCurrentUser);
+  const [confirmModalVisible, setModalVisible] = useState(false);
+  const dataAuctionMakeBidStatus = useAppSelector(auctionMakeBidStatus);
+  const isLoading = [dataAuctionMakeBidStatus].includes(DataStatus.PENDING);
+  const canUserMakeBid = Boolean(
+    user && user?.phoneVerified && user?.emailVerified && !isLoading,
+  );
+  const showModalLeaveAuction = Boolean(
+    !!isAbleToLeaveAuction && confirmModalVisible,
+  );
+
+  useEffect(() => {
+    const socket = socketApi.getAuctionItemIo(id);
+    socket.on(UPDATE_PRODUCT_PRICE, (data: UpdateProductPriceEvent) => {
+      dispatch(productsActions.updateCurrentItemPrice(data));
+      dispatch(productsActions.auctionPermissions(id));
+      if (data.bidderId !== user?.id || !user) {
+        notification.info(t('screens:product_info.NEW_BID'));
+      }
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, [id, dispatch]);
+
+  const handleMakeBidPress = (payload: { bid: number }) => {
+    dispatch(
+      productsActions.auctionMakeBid({
+        price: Number(payload.bid),
+        productId: id,
+      }),
+    )
+      .unwrap()
+      .then(async () => {
+        notification.success(t('screens:product_info.BID_SAVED'));
+        await dispatch(productsActions.auctionPermissions(id));
+      });
+    setValue('bid', 0);
+  };
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
+  const handleOnLeaveAuction = async () => {
+    dispatch(productsActions.auctionLeaveAction(id))
+      .unwrap()
+      .then(() => {
+        notification.success(t('screens:product_info.LEAVE_SUCCESS'));
+        dispatch(productsActions.loadProductInfo(id));
+        dispatch(productsActions.auctionPermissions(id));
+      });
+    closeModal();
+  };
+
+  const openModal = () => {
+    setModalVisible(true);
+  };
 
   const priceText =
     i18n.language === 'ua'
       ? `${currentPrice} ${t('screens:welcome.UAH')}`
       : `${t('screens:welcome.UAH')} ${currentPrice}`;
+
+  const placeholderText =
+    i18n.language === 'ua'
+      ? `${Number(minimalBid) + Number(currentPrice)} ${t(
+          'screens:product_info.MIN_UAH',
+        )}`
+      : `${t('screens:product_info.MIN_UAH')} ${
+          Number(minimalBid) + Number(currentPrice)
+        }`;
 
   return (
     <>
@@ -80,7 +170,8 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
             name="bid"
             control={control}
             errors={errors}
-            placeholder={`${t('screens:product_info.MIN_UAH')} ${minimalBid}`}
+            placeholder={placeholderText}
+            editable={canUserMakeBid}
           />
           <View
             style={[
@@ -88,9 +179,30 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
               globalStyles.alignItemsCenter,
             ]}
           >
+            {isLoading && <Spinner />}
+            {!!isAbleToLeaveAuction && user && (
+              <TouchableHighlight
+                onPress={openModal}
+                style={[
+                  globalStyles.justifyContentCenter,
+                  globalStyles.alignItemsCenter,
+                  globalStyles.flexDirectionRow,
+                  globalStyles.mr3,
+                  globalStyles.ml3,
+                  styles.iconBorder,
+                  styles.leaveBtn,
+                ]}
+              >
+                <CrossIcon color={ColorPalette.WHITE_100} size={25} />
+              </TouchableHighlight>
+            )}
             <View style={styles.btnWidth}>
               <PlusSvg style={styles.btnIcon} />
-              <PrimaryButton label={`${t('common:components.BUTTON_BID')}`} />
+              <PrimaryButton
+                onPress={handleSubmit(handleMakeBidPress)}
+                label={`${t('common:components.BUTTON_BID')}`}
+                disabled={!canUserMakeBid}
+              />
             </View>
             <Pressable
               onPress={() => onFavoritePress(id)}
@@ -108,6 +220,14 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
           </View>
         </>
       </PriceWrapper>
+
+      {showModalLeaveAuction && (
+        <AuctionLeaveModal
+          onCancel={closeModal}
+          onConfirm={handleOnLeaveAuction}
+          isVisible={confirmModalVisible}
+        />
+      )}
     </>
   );
 };

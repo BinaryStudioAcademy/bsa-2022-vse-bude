@@ -1,23 +1,20 @@
 import React, { FC, useEffect } from 'react';
 import { RouteProp } from '@react-navigation/native';
-import { ProductType } from '@vse-bude/shared';
 import { RootNavigationParamList } from '~/common/types/types';
-import { DataStatus, RootScreenName } from '~/common/enums/enums';
+import { RootScreenName } from '~/common/enums/enums';
 import {
-  products as productsActions,
-  product as productActions,
-} from '~/store/actions';
-import {
-  selectProduct,
-  selectCurrentUser,
-  selectFavoriteIds,
-  selectProductsDataStatus,
-} from '~/store/selectors';
+  ProductType,
+  UpdateProductPriceEvent,
+  UPDATE_PRODUCT_PRICE,
+} from '@vse-bude/shared';
+import { products as productsActions } from '~/store/actions';
+import { selectCurrentProduct } from '~/store/products/selectors';
 import {
   useAppDispatch,
   useAppSelector,
   useCustomTheme,
   useRoute,
+  useTranslation,
 } from '~/hooks/hooks';
 import {
   ScreenWrapper,
@@ -29,6 +26,8 @@ import {
   Countdown,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
+import { selectCurrentUser, selectFavoriteIds } from '~/store/selectors';
+import { notification, socketApi } from '~/services/services';
 import {
   Description,
   ImageCarousel,
@@ -40,25 +39,34 @@ import {
 const ProductInfo: FC = () => {
   const { colors } = useCustomTheme();
   const dispatch = useAppDispatch();
-  const product = useAppSelector(selectProduct);
+  const { t } = useTranslation();
+  const product = useAppSelector(selectCurrentProduct);
   const user = useAppSelector(selectCurrentUser);
   const favoriteIds = useAppSelector(selectFavoriteIds);
-  const dataStatus = useAppSelector(selectProductsDataStatus);
   const route =
     useRoute<
       RouteProp<Pick<RootNavigationParamList, RootScreenName.ITEM_INFO>>
     >();
   const id = route.params?.itemId;
   const isFavorite = favoriteIds.includes(id);
-  const isLoading = dataStatus == DataStatus.PENDING;
 
   useEffect(() => {
-    dispatch(productActions.loadProductInfo(id));
-    dispatch(productActions.updateProductViews(id));
+    dispatch(productsActions.loadProductInfo(id));
+    dispatch(productsActions.updateProductViews(id));
+
+    const socket = socketApi.getAuctionItemIo(id);
+    socket.on(UPDATE_PRODUCT_PRICE, (data: UpdateProductPriceEvent) => {
+      dispatch(productsActions.updateCurrentItemPrice(data));
+      if (data.bidderId !== user?.id || !user) {
+        notification.info(t('screens:product_info.NEW_BID'));
+      }
+    });
+
     if (user) {
+      dispatch(productsActions.auctionPermissions(id));
       dispatch(productsActions.fetchFavoriteIds());
     }
-  }, []);
+  }, [id, user, dispatch]);
 
   if (!product) {
     return <Spinner />;
@@ -116,14 +124,12 @@ const ProductInfo: FC = () => {
       {isAuction ? (
         <LotPriceBlock
           product={product}
-          isLoading={isLoading}
           isFavorite={isFavorite}
           onFavoritePress={handleToggleFavorite}
         />
       ) : (
         <ProductPriceBlock
           product={product}
-          isLoading={isLoading}
           isFavorite={isFavorite}
           onFavoritePress={handleToggleFavorite}
         />
