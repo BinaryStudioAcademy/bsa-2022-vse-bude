@@ -5,7 +5,11 @@ import {
   UserSignInDto,
   UserSignUpDto,
 } from '@vse-bude/shared';
-import { auth as authActions } from '~/store/actions';
+import {
+  auth as authActions,
+  products as productsActions,
+} from '~/store/actions';
+import { selectFavoriteIds } from '~/store/selectors';
 import { MainScreenName, RootScreenName } from '~/common/enums/enums';
 import { RootNavigationProps, MainNavigationProps } from '~/common/types/types';
 import {
@@ -14,6 +18,7 @@ import {
   useRoute,
   useTranslation,
   useNavigation,
+  useAppSelector,
 } from '~/hooks/hooks';
 import {
   Text,
@@ -37,6 +42,7 @@ const Auth: FC = () => {
   const dispatch = useAppDispatch();
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
+  const favoriteIds = useAppSelector(selectFavoriteIds);
 
   const navigation = useNavigation<RootNavigationProps & MainNavigationProps>();
   const isResetPassword = name === RootScreenName.FORGOT_PASSWORD;
@@ -59,6 +65,8 @@ const Auth: FC = () => {
       .unwrap()
       .then(() => {
         navigation.navigate(MainScreenName.HOME);
+        favoriteIds.map((id) => dispatch(productsActions.addToFavorite(id)));
+        dispatch(productsActions.cleanFavoriteIds());
       })
       .catch((err) => {
         notification.error(JSON.stringify(err.message));

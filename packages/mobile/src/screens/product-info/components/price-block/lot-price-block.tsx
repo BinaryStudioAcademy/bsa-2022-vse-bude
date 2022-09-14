@@ -20,7 +20,7 @@ type LotPriceBlockProps = {
   product: Pick<ProductDto, 'currentPrice' | 'minimalBid' | 'id'>;
   isLoading: boolean;
   isFavorite: boolean;
-  onFavoritePress: (id: string) => Promise<void>;
+  onFavoritePress: (id: string) => void;
 };
 
 const LotPriceBlock: FC<LotPriceBlockProps> = ({

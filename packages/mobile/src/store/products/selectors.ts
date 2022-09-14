@@ -25,12 +25,12 @@ const selectFavoriteIds = (state: RootState) => {
   return state.products.favoriteIds;
 };
 
-const selectFavoriteIdsGuestUser = (state: RootState) => {
-  return state.products.favoriteIds;
-};
-
 const selectFavorites = (state: RootState) => {
   return state.products.favorites;
+};
+
+const selectProductsDataStatus = (state: RootState) => {
+  return state.products.dataStatus;
 };
 
 export {
@@ -38,6 +38,6 @@ export {
   selectProducts,
   selectProductsByType,
   selectFavoriteIds,
-  selectFavoriteIdsGuestUser,
   selectFavorites,
+  selectProductsDataStatus,
 };

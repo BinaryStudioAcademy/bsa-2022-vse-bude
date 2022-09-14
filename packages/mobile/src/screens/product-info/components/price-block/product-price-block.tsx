@@ -16,7 +16,7 @@ type ProductPriceBlockProps = {
   product: Pick<ProductDto, 'price' | 'id'>;
   isLoading: boolean;
   isFavorite: boolean;
-  onFavoritePress: (id: string) => Promise<void>;
+  onFavoritePress: (id: string) => void;
 };
 
 const ProductPriceBlock: FC<ProductPriceBlockProps> = ({

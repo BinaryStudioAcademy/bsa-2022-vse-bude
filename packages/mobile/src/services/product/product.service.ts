@@ -62,7 +62,7 @@ class ProductService {
     );
   }
 
-  uploadToFavorites(payload: ProductIdRequest): Promise<ProductIdRequest> {
+  addToFavorites(payload: ProductIdRequest): Promise<ProductIdRequest> {
     return this.#http.load(
       `${this.#apiPrefix}${ApiRoutes.PRODUCTS}${ProductApiRoutes.FAVORITE}`,
       {

@@ -7,8 +7,6 @@ import {
   fetchFavoriteIds,
   addToFavorite,
   deleteFromFavorite,
-  addToFavoriteGuestUser,
-  deleteFromFavoriteGuestUser,
   cleanFavoriteIds,
 } from './actions';
 
@@ -43,22 +41,23 @@ const reducer = createReducer(initialState, (builder) => {
       state.dataStatus = DataStatus.FULFILLED;
       state.favoriteIds = [...action.payload];
     })
-    .addCase(addToFavorite.fulfilled, (state) => {
+    .addCase(addToFavorite.fulfilled, (state, { payload }) => {
       state.dataStatus = DataStatus.FULFILLED;
+      const isAlreadyFavorite = state.favoriteIds.includes(payload.productId);
+      if (!isAlreadyFavorite && payload.productId) {
+        state.favoriteIds = [...state.favoriteIds, payload.productId];
+      }
     })
-    .addCase(deleteFromFavorite.fulfilled, (state) => {
+    .addCase(deleteFromFavorite.fulfilled, (state, { payload }) => {
       state.dataStatus = DataStatus.FULFILLED;
+      if (payload.productId) {
+        state.favoriteIds = state.favoriteIds.filter(
+          (id) => id !== payload.productId,
+        );
+      }
     })
-    .addCase(addToFavoriteGuestUser, (state, action) => {
-      state.favoriteIds = [...state.favoriteIds, action.payload];
-    })
-    .addCase(deleteFromFavoriteGuestUser, (state, action) => {
-      state.favoriteIds = state.favoriteIds.filter(
-        (id) => id !== action.payload,
-      );
-    })
-    .addCase(cleanFavoriteIds, (state, action) => {
-      state.favoriteIds = action.payload;
+    .addCase(cleanFavoriteIds, (state) => {
+      state.favoriteIds = [];
     })
 
     .addMatcher(

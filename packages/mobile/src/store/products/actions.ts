@@ -1,8 +1,4 @@
-import {
-  createAsyncThunk,
-  createAction,
-  PrepareAction,
-} from '@reduxjs/toolkit';
+import { createAsyncThunk, createAction } from '@reduxjs/toolkit';
 import { AllProductsDto, ProductDto, ProductIdRequest } from '@vse-bude/shared';
 import { AsyncThunkConfig, ProductRequestDto } from '~/common/types/types';
 import { ActionType } from './common';
@@ -41,42 +37,43 @@ const addToFavorite = createAsyncThunk<
   ProductIdRequest,
   string,
   AsyncThunkConfig
->(ActionType.ADD_TO_FAVORITE, async (productId, { extra }) => {
-  const { productApi } = extra;
+>(
+  ActionType.ADD_TO_FAVORITE,
+  async (productId, { extra, getState, dispatch }) => {
+    const { productApi } = extra;
+    const user = getState().auth.user;
+    if (user) {
+      const response = await productApi.addToFavorites({ productId });
+      await dispatch(fetchFavoriteIds());
 
-  return await productApi.uploadToFavorites({ productId });
-});
+      return response;
+    }
+
+    return { productId };
+  },
+);
 
 const deleteFromFavorite = createAsyncThunk<
   ProductIdRequest,
   string,
   AsyncThunkConfig
->(ActionType.DELETE_FROM_FAVORITE, async (productId, { extra }) => {
-  const { productApi } = extra;
-
-  return await productApi.deleteFromFavorites({ productId });
-});
-
-const addToFavoriteGuestUser = createAction<PrepareAction<string>, string>(
-  ActionType.ADD_TO_FAVORITE,
-  (productId) => {
-    return { payload: productId };
-  },
-);
-
-const deleteFromFavoriteGuestUser = createAction<PrepareAction<string>, string>(
+>(
   ActionType.DELETE_FROM_FAVORITE,
-  (productId) => {
-    return { payload: productId };
+  async (productId, { extra, getState, dispatch }) => {
+    const { productApi } = extra;
+    const user = getState().auth.user;
+    if (user) {
+      const response = await productApi.deleteFromFavorites({ productId });
+      await dispatch(fetchFavoriteIds());
+
+      return response;
+    }
+
+    return { productId };
   },
 );
 
-const cleanFavoriteIds = createAction<PrepareAction<[]>, string>(
-  ActionType.CLEAN_FAVORITES_IDS,
-  () => {
-    return { payload: [] };
-  },
-);
+const cleanFavoriteIds = createAction(ActionType.CLEAN_FAVORITES_IDS);
 
 export {
   loadProducts,
@@ -84,7 +81,5 @@ export {
   fetchFavoriteIds,
   addToFavorite,
   deleteFromFavorite,
-  addToFavoriteGuestUser,
-  deleteFromFavoriteGuestUser,
   cleanFavoriteIds,
 };

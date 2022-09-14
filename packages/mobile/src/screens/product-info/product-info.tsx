@@ -1,8 +1,8 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 import { RouteProp } from '@react-navigation/native';
 import { ProductType } from '@vse-bude/shared';
 import { RootNavigationParamList } from '~/common/types/types';
-import { RootScreenName } from '~/common/enums/enums';
+import { DataStatus, RootScreenName } from '~/common/enums/enums';
 import {
   products as productsActions,
   product as productActions,
@@ -11,8 +11,8 @@ import {
   selectProduct,
   selectCurrentUser,
   selectFavoriteIds,
+  selectProductsDataStatus,
 } from '~/store/selectors';
-import { notification } from '~/services/services';
 import {
   useAppDispatch,
   useAppSelector,
@@ -39,26 +39,23 @@ import {
 
 const ProductInfo: FC = () => {
   const { colors } = useCustomTheme();
-  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
   const product = useAppSelector(selectProduct);
   const user = useAppSelector(selectCurrentUser);
   const favoriteIds = useAppSelector(selectFavoriteIds);
+  const dataStatus = useAppSelector(selectProductsDataStatus);
   const route =
     useRoute<
       RouteProp<Pick<RootNavigationParamList, RootScreenName.ITEM_INFO>>
     >();
   const id = route.params?.itemId;
   const isFavorite = favoriteIds.includes(id);
+  const isLoading = dataStatus == DataStatus.PENDING;
 
   useEffect(() => {
     dispatch(productActions.loadProductInfo(id));
     dispatch(productActions.updateProductViews(id));
     if (user) {
-      if (favoriteIds) {
-        favoriteIds.map((id) => dispatch(productsActions.addToFavorite(id)));
-        dispatch(productsActions.cleanFavoriteIds());
-      }
       dispatch(productsActions.fetchFavoriteIds());
     }
   }, []);
@@ -69,38 +66,12 @@ const ProductInfo: FC = () => {
   const { title, type, imageLinks, views, author } = product;
   const isAuction = type == ProductType.AUCTION;
 
-  const handleToggleFavorite = async (productId: string) => {
-    setIsLoading(true);
-    switch (Boolean(user)) {
-      case true:
-        if (isFavorite) {
-          dispatch(productsActions.deleteFromFavorite(productId))
-            .unwrap()
-            .catch((err) => notification.error(JSON.stringify(err.message)))
-            .finally(() => {
-              dispatch(productsActions.fetchFavoriteIds());
-              setIsLoading(false);
-            });
-          break;
-        }
-        dispatch(productsActions.addToFavorite(productId))
-          .unwrap()
-          .catch((err) => notification.error(JSON.stringify(err.message)))
-          .finally(() => {
-            dispatch(productsActions.fetchFavoriteIds());
-            setIsLoading(false);
-          });
-        break;
-      case false:
-        if (isFavorite) {
-          dispatch(productsActions.deleteFromFavoriteGuestUser(productId));
-          setIsLoading(false);
-          break;
-        }
-        dispatch(productsActions.addToFavoriteGuestUser(productId));
-        setIsLoading(false);
-        break;
+  const handleToggleFavorite = (productId: string) => {
+    if (isFavorite) {
+      return dispatch(productsActions.deleteFromFavorite(productId));
     }
+
+    return dispatch(productsActions.addToFavorite(productId));
   };
 
   return (
