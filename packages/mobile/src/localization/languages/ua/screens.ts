@@ -25,7 +25,7 @@ export const screens = {
     UAH: 'ГРН',
   },
   verification: {
-    SING_IN: 'Увійти',
+    SIGN_IN: 'Увійти',
     EMAIL: 'Адреса електронної пошти',
     EMAIL_HINT: 'Введіть електронну адресу',
     PASSWORD: 'Пароль',

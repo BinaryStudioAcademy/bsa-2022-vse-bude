@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
+import { AllProductsDto, ProductDto } from '@vse-bude/shared';
 import { DataStatus } from '~/common/enums/enums';
-import { ProductDto } from '@vse-bude/shared';
 import {
   auctionLeaveAction,
   auctionMakeBid,
@@ -15,7 +15,7 @@ import {
 
 type InitialState = {
   currentProduct: ProductDto | undefined;
-  products: ProductDto[] | [];
+  products: AllProductsDto;
   popularProducts: ProductDto[] | [];
   popularLots: ProductDto[] | [];
   dataStatus: DataStatus;
@@ -25,7 +25,7 @@ type InitialState = {
 };
 
 const initialState: InitialState = {
-  products: [],
+  products: { items: [], count: 0 },
   popularProducts: [],
   popularLots: [],
   currentProduct: undefined,
@@ -43,9 +43,12 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadProducts.rejected, (state) => {
       state.dataStatus = DataStatus.REJECTED;
     })
-    .addCase(loadProducts.fulfilled, (state, action) => {
+    .addCase(loadProducts.fulfilled, (state, { payload }) => {
       state.dataStatus = DataStatus.FULFILLED;
-      state.products = [...state.products, ...action.payload];
+      state.products = {
+        items: [...state.products.items, ...payload.items],
+        count: payload.count,
+      };
     })
     .addCase(loadPopularProducts.pending, (state) => {
       state.dataStatus = DataStatus.PENDING;

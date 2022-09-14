@@ -8,13 +8,14 @@ import {
   AuctionPermissionsResponse,
   Bid,
   CreateBidRequest,
-  ProductDto,
+  AllProductsDto,
   UpdateProductPriceEvent,
+  ProductDto,
 } from '@vse-bude/shared';
 import { ActionType } from './common';
 
 const loadProducts = createAsyncThunk<
-  ProductDto[],
+  AllProductsDto,
   ProductRequestDto,
   AsyncThunkConfig
 >(ActionType.PRODUCTS_FETCH, async (requestParams, { extra }) => {
