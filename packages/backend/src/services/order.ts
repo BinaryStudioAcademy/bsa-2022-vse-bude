@@ -70,7 +70,7 @@ export class OrderService {
     return this._orderRepository.getById(id);
   }
 
-  public isPossibleToCreateOrder(product: Product): boolean {
+  private isPossibleToCreateOrder(product: Product): boolean {
     if (
       product.type === ProductType.SELLING &&
       product.status === ProductStatus.ACTIVE
