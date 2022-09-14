@@ -69,4 +69,4 @@ const Search = ({ value, setValue, setSearchOpen, ...props }: SearchProps) => {
     </div>
   );
 };
-export { Search };
+export default Search;
