@@ -7,19 +7,26 @@ import type {
   SocialMediaType,
 } from '@prisma/client';
 import type { AddressDto } from '@types';
-import type { UpdateUserProfileDto, UserAddressDto } from '@vse-bude/shared';
+import { ProfileError } from '@errors';
+import { lang } from '@lang';
+import {
+  UpdateUserProfileDto,
+  UserAddressDto,
+  UserPersonalInfoValidationMessage,
+} from '@vse-bude/shared';
+import { HttpStatusCode } from '@vse-bude/shared';
 
 export class UserProfileRepository {
   private _dbClient: PrismaClient;
 
-  private _isSocialNetTypeExists({
+  private async _isSocialNetTypeExists({
     userId,
     socialMedia,
   }: {
     userId: string;
     socialMedia: SocialMediaType;
-  }): Prisma.Prisma__SocialMediaClient<{ socialMedia: SocialMediaType }> {
-    return this._dbClient.socialMedia.findFirst({
+  }): Promise<null> {
+    const isNet = await this._dbClient.socialMedia.findFirst({
       where: {
         ownedByUserId: userId,
         socialMedia,
@@ -28,6 +35,15 @@ export class UserProfileRepository {
         socialMedia: true,
       },
     });
+
+    if (isNet) {
+      throw new ProfileError({
+        status: HttpStatusCode.BAD_REQUEST,
+        message: lang(UserPersonalInfoValidationMessage.NET_TYPE_IS_EXISTS),
+      });
+    }
+
+    return null;
   }
 
   private _updateSocialMediaLinks({
@@ -288,34 +304,31 @@ export class UserProfileRepository {
     });
   }
 
-  public async updateUserSocialMedia({
+  public updateUserSocialMedia({
     userId,
     socialMedia,
   }: {
     userId: string;
     socialMedia: SocialMedia[];
-  }): Promise<
-    Promise<{ id: string; link: string; socialMedia: SocialMediaType }>[]
-  > {
-    return await this._dbClient.$transaction(async () =>
-      socialMedia.map(async (userLink) => {
-        const { id, link, socialMedia } = userLink;
-
-        if (id && link) {
-          return this._updateSocialMediaLinks({ id, link });
-        } else if (!id && link) {
-          const netType = await this._isSocialNetTypeExists({
-            userId,
-            socialMedia: userLink.socialMedia,
-          });
-          if (!netType) {
-            return this._createSocialMediaLinks({ link, socialMedia, userId });
-          }
-        } else if (id && !link) {
-          return this._deleteSocialMediaLinks({ id });
-        }
-      }),
-    );
+  }): Prisma.Prisma__SocialMediaClient<{
+    id: string;
+    link: string;
+    socialMedia: SocialMediaType;
+}>[] {
+    return socialMedia.map((net) => {
+      const { id, link, socialMedia } = net;
+      if (id && link) {
+        return this._updateSocialMediaLinks({ id, link });
+      } else if (!id && link) {
+        this._isSocialNetTypeExists({
+          userId,
+          socialMedia,
+        });
+        return this._createSocialMediaLinks({ link, socialMedia, userId });
+      } else if (id && !link) {
+        return this._deleteSocialMediaLinks({ id });
+      }
+    });
   }
 
   public async updateAvatar({

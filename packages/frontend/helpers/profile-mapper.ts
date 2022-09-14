@@ -27,6 +27,7 @@ export const profileMapper = ({
 }: {
   user: FullUserProfileDto;
 }): SaveUserProfileDto => {
+  console.log(user);
   const { firstName, lastName, email, phone, socialMedia, userAddress } = user;
 
   const mappedAddress = <UserAddressDto>{};
