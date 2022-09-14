@@ -7,9 +7,14 @@ import type {
   SocialMedia,
 } from '@prisma/client';
 import { ProductStatus, ProductType } from '@prisma/client';
+import type {
+  ProductQuery,
+  ProductSearchQuery,
+  ProductSearchResponse,
+} from '@vse-bude/shared';
 import type { Decimal } from '@prisma/client/runtime';
-import type { ProductQuery } from '@types';
 import { Order } from '@vse-bude/shared';
+import { ITEM_FILTER } from '@vse-bude/shared';
 import { toUtc } from '@helpers';
 
 export class ProductRepository {
@@ -21,27 +26,68 @@ export class ProductRepository {
     this._dbClient = prismaClient;
   }
 
-  public getAll(query: ProductQuery): Promise<Product[]> {
+  public getAll(query: ProductQuery): Promise<[Product[], number]> {
     const {
-      limit = 10,
-      from = 0,
+      limit = ITEM_FILTER.PRODUCT_LIMIT_DEFAULT,
+      from = ITEM_FILTER.PRODUCT_FROM_DEFAULT,
       type,
       categoryId,
-      sortBy = 'createdAt',
-      order = Order.ASC,
+      priceGt = ITEM_FILTER.PRICE_GT_DEFAULT,
+      priceLt = ITEM_FILTER.PRICE_LT_DEFAULT,
+      sortBy = ITEM_FILTER.SORT_BY_DEFAULT,
+      order = ITEM_FILTER.ORDER_DEFAULT,
     } = query;
 
-    return this._dbClient.product.findMany({
-      take: +limit,
-      skip: +from,
-      orderBy: {
-        [sortBy]: order,
-      },
-      where: {
-        type,
-        categoryId,
-      },
-    });
+    return this._dbClient.$transaction([
+      this._dbClient.product.findMany({
+        take: +limit,
+        skip: +from,
+        orderBy: {
+          [sortBy]: order,
+        },
+        where: {
+          type,
+          categoryId,
+          status: ProductStatus.ACTIVE,
+          price: {
+            gt: +priceGt,
+            lte: +priceLt,
+          },
+        },
+      }),
+      this._dbClient.product.count({
+        where: {
+          type,
+          categoryId,
+          status: ProductStatus.ACTIVE,
+          price: {
+            gt: +priceGt,
+            lte: +priceLt,
+          },
+        },
+      }),
+    ]);
+  }
+
+  public search({ q }: ProductSearchQuery): Promise<ProductSearchResponse[]> {
+    return this._dbClient.$queryRaw`
+      SELECT
+        "Product"."id",
+        "Product"."title"
+      FROM
+        "Product"
+      WHERE 
+        (SIMILARITY("Product"."title", ${q}) > 0.2
+      OR 
+        "Product"."title" ILIKE ${q + '%'}
+      OR 
+        "Product"."title" ILIKE ${'%' + q + '%'})
+      AND
+        "Product"."status" = CAST(${ProductStatus.ACTIVE} AS "ProductStatus")
+      ORDER BY 
+        SIMILARITY("Product"."title", ${q}) DESC
+      LIMIT 10;
+    `;
   }
 
   public getById(id: string): Prisma.Prisma__ProductClient<

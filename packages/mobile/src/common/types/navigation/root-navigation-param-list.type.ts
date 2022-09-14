@@ -8,8 +8,10 @@ type RootNavigationParamList = {
   [RootScreenName.SETTINGS]: undefined;
   [RootScreenName.MESSAGES]: undefined;
   [RootScreenName.VERIFY_PHONE]: undefined;
-  [RootScreenName.VERIFY_CODE]: undefined;
-  [RootScreenName.VERIFIED]: undefined;
+  [RootScreenName.VERIFY_CODE_PHONE]: undefined;
+  [RootScreenName.VERIFIED_PHONE]: undefined;
+  [RootScreenName.VERIFY_CODE_EMAIL]: undefined;
+  [RootScreenName.VERIFIED_EMAIL]: undefined;
   [RootScreenName.SUPPORT]: undefined;
   [RootScreenName.WELCOME]: undefined;
   [RootScreenName.FORGOT_PASSWORD]: undefined;

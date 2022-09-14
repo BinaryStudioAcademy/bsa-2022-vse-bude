@@ -13,4 +13,15 @@ const loadProductInfo = createAsyncThunk<ProductDto, string, AsyncThunkConfig>(
   },
 );
 
-export { loadProductInfo };
+const updateProductViews = createAsyncThunk<
+  ProductDto,
+  string,
+  AsyncThunkConfig
+>(ActionType.INCREMENT_PRODUCT_VIEWS, async (productId, { extra }) => {
+  const { productApi } = extra;
+  const response = await productApi.incrementProductViews(productId);
+
+  return response;
+});
+
+export { loadProductInfo, updateProductViews };

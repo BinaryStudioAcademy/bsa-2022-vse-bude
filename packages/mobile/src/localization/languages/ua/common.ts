@@ -44,4 +44,16 @@ export const common = {
     ACCOUNT: 'Акаунт',
     LOG_IN: 'Увійти',
   },
+  drawer_menu: {
+    CATEGORIES: 'Категорії',
+    ITEMS: 'Продукти',
+    SERVICES: 'Послуги',
+    CLOTHING: 'Одяг',
+    ART: 'Арт та Декор',
+    HOME_APPLIANCE: 'Все для Дому',
+    TOYS: 'Іграшки',
+    MANICURE: 'Манікюр',
+    HAIR_CUT: 'Зачіска',
+    CAR_WASH: 'Мийка Машини',
+  },
 };

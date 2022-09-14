@@ -1,11 +1,6 @@
-﻿import type { ProductType } from '@prisma/client';
-import type { Order } from '@vse-bude/shared';
+﻿import type { Product } from '@prisma/client';
 
-export interface ProductQuery {
-  limit?: number;
-  from?: number;
-  type?: ProductType;
-  categoryId?: string;
-  sortBy?: string;
-  order?: Order;
+export interface AllProductsResponse {
+  items: Product[];
+  count: number;
 }

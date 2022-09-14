@@ -38,6 +38,14 @@ const LogOutIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="log-out" {...iconProps} />
 );
 
+const ArrowUpIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="chevron-up" {...iconProps} />
+);
+
+const ArrowDownIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="chevron-down" {...iconProps} />
+);
+
 const ArrowLeftIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="chevron-left" {...iconProps} />
 );
@@ -153,4 +161,6 @@ export {
   CheckCircleIcon,
   SearchIcon,
   CalendarIcon,
+  ArrowUpIcon,
+  ArrowDownIcon,
 };

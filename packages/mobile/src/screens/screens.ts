@@ -10,9 +10,11 @@ export { Auth } from '~/screens/auth/auth';
 export { Home } from '~/screens/home/home';
 export {
   VerifyPhoneScreen,
-  VerifyCodeScreen,
-  VerifiedScreen,
-} from './verify-phone-screens/verify-phone-screens';
+  VerifyCodePhoneScreen,
+  VerifyCodeEmailScreen,
+  VerifiedPhoneScreen,
+  VerifiedEmailScreen,
+} from './verify-screens/verify-screens';
 export { NewItemScreen } from '~/screens/new-item/new-item';
 export { TypeOfPostScreen } from '~/screens/type-of-post/type-of-post';
 export { ProductInfo } from '~/screens/product-info/product-info';
