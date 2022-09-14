@@ -31,7 +31,8 @@
       "samePassword": "The new password should not match the current one!",
       "emptyPassword": "Fill the password please!",
       "newPasswordPattern": "Password should include at least one uppercase, one lowercase and one number",
-      "differentPasswords": "Passwords are not same"
+      "differentPasswords": "Passwords are not same",
+      "wrongPasswordOrEmail": "Incorrect password or e-mail"
     },
     "notExists": {
       "user": "User not found!"
