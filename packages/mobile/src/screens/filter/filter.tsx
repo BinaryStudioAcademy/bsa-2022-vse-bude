@@ -22,7 +22,10 @@ const Filter: FC = () => {
     <ScreenWrapper>
       <StatusBar backgroundColor={colors.backgroundSecondary} />
 
-      <ScrollView style={{ backgroundColor: colors.backgroundSecondary }}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={{ backgroundColor: colors.backgroundSecondary }}
+      >
         <View style={[globalStyles.py6, globalStyles.px5]}>
           <ProductTypeSection />
           <Divider contentContainerStyle={globalStyles.mt5} />

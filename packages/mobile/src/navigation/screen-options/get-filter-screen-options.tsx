@@ -3,14 +3,14 @@ import { NativeStackNavigationOptions } from '@react-navigation/native-stack';
 import { ButtonText, HeaderLeft } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { t } from 'i18next';
-// import { useAppSelector , useAppDispatch } from '~/hooks/hooks';
-// import { selectFilters,selectProducts } from '~/store/selectors';
-// import { products as productsApi } from '~/store/actions';
+import { useAppSelector, useAppDispatch } from '~/hooks/hooks';
+import { selectFilters } from '~/store/selectors';
+import { products as productsApi } from '~/store/actions';
 
 const getFilterScreenOptions = (): NativeStackNavigationOptions => {
-  // const filters = useAppSelector(selectFilters);
-  // const products = useAppSelector(selectProducts);
-  // const dispatch = useAppDispatch();
+  const { priceGt, priceLt, categoryId, order, sortBy } =
+    useAppSelector(selectFilters);
+  const dispatch = useAppDispatch();
 
   return {
     headerShown: true,
@@ -22,7 +22,15 @@ const getFilterScreenOptions = (): NativeStackNavigationOptions => {
       <ButtonText
         textStyle={globalStyles.fs16}
         onPress={() => {
-          // dispatch(productsApi.loadProducts({ limit:10, ...filters }));
+          dispatch(
+            productsApi.loadProducts({
+              priceGt,
+              priceLt,
+              categoryId,
+              order,
+              sortBy,
+            }),
+          );
         }}
       >
         {t('common:components.BUTTON_SAVE')}

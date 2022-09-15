@@ -40,11 +40,6 @@ const Navigation: FC = () => {
   return (
     <NativeStack.Navigator screenOptions={mainScreenOptions}>
       <NativeStack.Screen
-        name={RootScreenName.FILTER}
-        component={Filter}
-        options={getFilterScreenOptions}
-      />
-      <NativeStack.Screen
         name={RootScreenName.MAIN_WITH_MENU}
         component={HomeWithMenuNavigation}
       />
@@ -61,6 +56,11 @@ const Navigation: FC = () => {
         <NativeStack.Screen
           name={RootScreenName.ITEMS_AND_SERVICES}
           component={ItemsAndServices}
+        />
+        <NativeStack.Screen
+          name={RootScreenName.FILTER}
+          component={Filter}
+          options={getFilterScreenOptions}
         />
       </NativeStack.Group>
       {user && (

@@ -24,7 +24,7 @@ type InitialState = {
 
 const initialState: InitialState = {
   type: FilterLotType.ALL,
-  categoryId: '',
+  categoryId: undefined,
   priceGt: MINIMUM_SLIDER_PRICE,
   priceLt: MAXIMUM_SLIDER_PRICE,
   sortBy: SortBy.DATE,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, RadioButton } from '~/components/components';
+import { View, RadioButton, Spinner } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { selectCategories, selectFilters } from '~/store/selectors';
 import {
@@ -29,7 +29,7 @@ const CategorySection = () => {
   return (
     <View>
       <SectionTitle title={t('filter.CATEGORY')} style={globalStyles.mt5} />
-      {categories && (
+      {categories ? (
         <View style={globalStyles.mt5}>
           {categories.map((item) => {
             const { title, id } = item;
@@ -46,6 +46,8 @@ const CategorySection = () => {
             );
           })}
         </View>
+      ) : (
+        <Spinner />
       )}
     </View>
   );
