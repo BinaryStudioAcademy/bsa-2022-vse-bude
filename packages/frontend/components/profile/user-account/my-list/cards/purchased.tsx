@@ -5,13 +5,13 @@ import {
   Price,
   ItemStatus,
   ProfileLink,
-  Date,
+  ItemDate,
 } from '../primitives';
 import { Charity } from '../tmp-element-charity';
-import type { ItemCard } from './types';
+import type { CardProps } from './types';
 import * as styles from './styles';
 
-export const Purchased = ({ data }: { data: ItemCard }) => {
+export const Purchased = ({ data }: CardProps) => {
   const { t } = useTranslation();
   const { title, imageLinks, price, author, endDate } = data;
   const { id, avatar, firstName, lastName } = author;
@@ -21,7 +21,7 @@ export const Purchased = ({ data }: { data: ItemCard }) => {
       <div css={styles.cardContent}>
         <div css={styles.leftContent}>
           <ItemImage src={imageLinks[0]} title={title} />
-          <Date size="lg" time={endDate} />
+          <ItemDate size="lg" time={endDate} />
         </div>
 
         <div css={styles.rightContent}>

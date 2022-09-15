@@ -30,7 +30,7 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
       <button
         css={styles.popoverContentItem}
         onClick={handleClick}
-        path-label={`${Routes.PROFILE}/${userId}${ProfileRoutes.PERSONAL_INFO}`}
+        path-label={`${Routes.PROFILE}/${userId}`}
         data-variant="icon"
       >
         <Icon icon={IconName.USER} color={IconColor.YELLOW} />
@@ -39,7 +39,7 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
       <button
         css={styles.popoverContentItem}
         onClick={handleClick}
-        path-label={`${Routes.PROFILE}/${userId}${ProfileRoutes.LIST}`}
+        path-label={`${Routes.PROFILE}${ProfileRoutes.LIST}`}
         data-variant="icon"
       >
         <Icon icon={IconName.LIST} color={IconColor.YELLOW} />
@@ -48,7 +48,7 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
       <button
         css={styles.popoverContentItem}
         onClick={handleClick}
-        path-label={`${Routes.PROFILE}/${userId}${ProfileRoutes.ACCOUNT_SETTINGS}`}
+        path-label={`${Routes.PROFILE}${ProfileRoutes.ACCOUNT_SETTINGS}`}
         data-variant="icon"
       >
         <Icon icon={IconName.SETTINGS} color={IconColor.YELLOW} />
@@ -57,7 +57,7 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
       <button
         css={styles.popoverContentItem}
         onClick={handleClick}
-        path-label={`${Routes.PROFILE}/${userId}${ProfileRoutes.MESSAGES}`}
+        path-label={`${Routes.PROFILE}${ProfileRoutes.MESSAGES}`}
         data-variant="icon"
       >
         <Icon icon={IconName.MESSAGE} color={IconColor.YELLOW} />
@@ -66,7 +66,7 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
       <button
         css={styles.popoverContentItem}
         onClick={handleClick}
-        path-label={`${Routes.PROFILE}/${userId}${ProfileRoutes.SUPPORT}`}
+        path-label={`${Routes.PROFILE}${ProfileRoutes.SUPPORT}`}
         data-variant="icon"
       >
         <Icon icon={IconName.SUPPORT} color={IconColor.YELLOW} />

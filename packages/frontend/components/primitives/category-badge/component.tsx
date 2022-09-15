@@ -7,6 +7,7 @@ import * as styles from './styles';
 interface CategoryBadgesProps {
   badges: {
     name: string;
+    type?: string;
     onClick: () => void;
   }[];
 }
@@ -29,7 +30,7 @@ export const CategoryBadges = ({ badges }: CategoryBadgesProps) => {
       {badges.map((badge) => (
         <SplideSlide key={badge.name}>
           <div css={styles.badge}>
-            {badge.name}
+            <span>{badge.name}</span>
             <IconButton
               icon={IconName.XMARK}
               size="xs"
