@@ -23,7 +23,7 @@ export const SavePost = ({ type, edit }: SavePostProps) => {
   if (!emailVerified) {
     return <EmailNotVerificatedWarning />;
   }
-  
+
   if (!phoneVerified) {
     return <PhoneNotVerificatedWarning />;
   }
