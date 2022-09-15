@@ -4,18 +4,35 @@ import { useRouter } from 'next/router';
 import { Routes, IconColor, IconName, ProfileRoutes } from '@enums';
 import { useState } from 'react';
 import { useTranslation } from 'next-i18next';
-
+import { useAppDispatch } from '@hooks';
+import { showMakePostModal } from 'store/modals/actions';
 import * as styles from './styles';
 
 interface ProfileDropdownProps {
   user: UserDto;
+  onCloseParent: () => void;
 }
-export const ProfileDropdown = ({ user }: ProfileDropdownProps) => {
+export const ProfileDropdown = ({
+  user,
+  onCloseParent,
+}: ProfileDropdownProps) => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const { push } = useRouter();
+  const dispatch = useAppDispatch();
+
+  const handleMakePostClick = () => {
+    dispatch(showMakePostModal());
+    onCloseParent();
+  };
 
   const options = [
+    {
+      value: t('common:header.popover.makePost'),
+      key: 'Make a post',
+      onClick: () => handleMakePostClick(),
+      cssExtend: styles.option,
+    },
     {
       value: t('common:header.popover.personalInfo'),
       key: 'Personal info',

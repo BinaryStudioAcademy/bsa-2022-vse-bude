@@ -1,14 +1,19 @@
 import React, { FC, useEffect } from 'react';
 import { RouteProp } from '@react-navigation/native';
 import { RootNavigationParamList } from '~/common/types/types';
-import { ProductType } from '@vse-bude/shared';
-import { product as productActions } from '~/store/actions';
-import { selectProduct } from '~/store/product/selectors';
+import {
+  ProductType,
+  UpdateProductPriceEvent,
+  UPDATE_PRODUCT_PRICE,
+} from '@vse-bude/shared';
+import { products as productsActions } from '~/store/actions';
+import { selectCurrentProduct } from '~/store/products/selectors';
 import {
   useAppDispatch,
   useAppSelector,
   useCustomTheme,
   useRoute,
+  useTranslation,
 } from '~/hooks/hooks';
 import { RootScreenName } from '~/common/enums/enums';
 import {
@@ -21,6 +26,8 @@ import {
   Countdown,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
+import { selectCurrentUser } from '~/store/selectors';
+import { notification, socketApi } from '~/services/services';
 import {
   Description,
   ImageCarousel,
@@ -32,7 +39,9 @@ import {
 const ProductInfo: FC = () => {
   const { colors } = useCustomTheme();
   const dispatch = useAppDispatch();
-  const product = useAppSelector(selectProduct);
+  const { t } = useTranslation();
+  const product = useAppSelector(selectCurrentProduct);
+  const user = useAppSelector(selectCurrentUser);
   const route =
     useRoute<
       RouteProp<Pick<RootNavigationParamList, RootScreenName.ITEM_INFO>>
@@ -40,9 +49,21 @@ const ProductInfo: FC = () => {
   const id = route.params?.itemId;
 
   useEffect(() => {
-    dispatch(productActions.loadProductInfo(id));
-    dispatch(productActions.updateProductViews(id));
-  }, []);
+    dispatch(productsActions.loadProductInfo(id));
+    dispatch(productsActions.updateProductViews(id));
+
+    const socket = socketApi.getAuctionItemIo(id);
+    socket.on(UPDATE_PRODUCT_PRICE, (data: UpdateProductPriceEvent) => {
+      dispatch(productsActions.updateCurrentItemPrice(data));
+      if (data.bidderId !== user?.id || !user) {
+        notification.info(t('screens:product_info.NEW_BID'));
+      }
+    });
+
+    if (user) {
+      dispatch(productsActions.auctionPermissions(id));
+    }
+  }, [id, user, dispatch]);
 
   if (!product) {
     return <Spinner />;
@@ -99,7 +120,11 @@ const ProductInfo: FC = () => {
         <SellerInfo author={author} />
       </ScrollView>
       {isAuction ? (
-        <LotPriceBlock currentPrice={currentPrice} minimalBid={minimalBid} />
+        <LotPriceBlock
+          id={id}
+          currentPrice={currentPrice}
+          minimalBid={minimalBid}
+        />
       ) : (
         <ProductPriceBlock price={price} />
       )}

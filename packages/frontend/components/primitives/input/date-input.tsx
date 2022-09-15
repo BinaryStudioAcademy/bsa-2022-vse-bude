@@ -8,7 +8,7 @@ import * as styles from './styles';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
-export const MIN_DATE = Date.now() + 86400000; // +1 day
+export const SECONDS_IN_ONE_DAY = 86400000; // +1 day
 
 const InputDate = ({
   value,
@@ -17,6 +17,7 @@ const InputDate = ({
   error,
   id,
   label,
+  ...props
 }: InputDateProps) => {
   const { locale } = useRouter();
   const { t } = useTranslation('common');
@@ -49,8 +50,9 @@ const InputDate = ({
           placeholderText="-/-/-"
           id={id}
           locale={customLocale}
-          minDate={MIN_DATE}
+          minDate={Date.now() + SECONDS_IN_ONE_DAY}
           calendarStartDay={locale === 'ua' ? 1 : 0}
+          {...props}
         />
         <div css={styles.iconWrapper}>
           <Icon icon={IconName.CALENDAR} color={IconColor.GRAY} />

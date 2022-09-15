@@ -33,6 +33,7 @@ export enum IconName {
   SUCCESS = 'circle-check',
   FILTER = 'filter',
   PENCIL = 'pencil',
+  SEARCH = 'search',
 }
 
 export const IconNameToClassName = {
@@ -71,4 +72,5 @@ export const IconNameToClassName = {
   [IconName.SUCCESS]: 'fa-regular fa-circle-check',
   [IconName.FILTER]: 'fa-solid fa-filter',
   [IconName.PENCIL]: 'fa-solid fa-pencil',
+  [IconName.SEARCH]: 'fa-solid fa-search',
 };

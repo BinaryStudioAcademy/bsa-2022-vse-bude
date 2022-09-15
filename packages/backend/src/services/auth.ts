@@ -20,7 +20,6 @@ import {
   UserNotFoundError,
   UserExistsError,
   ProfileError,
-  WrongPasswordError,
   UnauthorizedError,
   WrongRefreshTokenError,
   ExpiredRefreshTokenError,
@@ -41,6 +40,7 @@ import { authResponseMap, userMap } from '@mappers';
 import { AuthApiRoutes } from '@vse-bude/shared';
 import { lang } from '@lang';
 import type { User } from '@prisma/client';
+import { WrongPasswordOrEmailError } from 'error/user/wrong-password-error';
 import { ResetPasswordMailBuilder } from '../email/reset-password-mail-builder';
 import { ResetPassLinkInvalid } from '../error/reset-password/reset-pass-link-invalid';
 import type { RedisStorageService } from './redis-storage';
@@ -127,7 +127,7 @@ export class AuthService {
   async signIn(signInDto: UserSignInDto): Promise<AuthResponse> {
     const user = await this._userRepository.getByEmail(signInDto.email);
     if (!user) {
-      throw new UserNotFoundError();
+      throw new WrongPasswordOrEmailError();
     }
 
     if (
@@ -136,7 +136,7 @@ export class AuthService {
         signInDto.password,
       )
     ) {
-      throw new WrongPasswordError();
+      throw new WrongPasswordOrEmailError();
     }
 
     const tokenData = this.getTokenData(user.id);

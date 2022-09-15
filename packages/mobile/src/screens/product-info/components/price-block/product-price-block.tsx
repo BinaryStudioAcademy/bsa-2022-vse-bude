@@ -10,7 +10,12 @@ type ProductPriceBlockProps = Pick<ProductDto, 'price'>;
 
 const ProductPriceBlock: FC<ProductPriceBlockProps> = ({ price }) => {
   const { colors } = useCustomTheme();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  const priceText =
+    i18n.language === 'ua'
+      ? `${price} ${t('screens:welcome.UAH')}`
+      : `${t('screens:welcome.UAH')} ${price}`;
 
   return (
     <PriceWrapper>
@@ -22,7 +27,7 @@ const ProductPriceBlock: FC<ProductPriceBlockProps> = ({ price }) => {
             { color: colors.text },
           ]}
         >
-          {`${t('screens:welcome.UAH')} ${price}`}
+          {priceText}
         </Text>
         <View
           style={[globalStyles.flexDirectionRow, globalStyles.alignItemsCenter]}

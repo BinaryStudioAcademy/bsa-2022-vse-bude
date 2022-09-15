@@ -21,7 +21,8 @@
       "settings": "Settings",
       "messages": "Messages",
       "support": "Support",
-      "signOut": "Sign Out"
+      "signOut": "Sign Out",
+      "makePost": "Make a Post"
     }
   },
   "footer": {
@@ -180,7 +181,15 @@
     "November",
     "December"
   ],
-  "days": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+  "days": [
+    "Su",
+    "Mo",
+    "Tu",
+    "We",
+    "Th",
+    "Fr",
+    "Sa"
+  ],
   "modal": {
     "confirm": {
       "confirm": "Confirm",
