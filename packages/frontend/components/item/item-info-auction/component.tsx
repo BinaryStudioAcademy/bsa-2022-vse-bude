@@ -86,7 +86,6 @@ export const ItemInfoAuction = ({
   } = useForm<CreateBidRequest>({
     resolver: joiResolver(minBidValidation(+minBidAmount, t)),
   });
-
   const onMakeBid: SubmitHandler<CreateBidRequest> = (data) => {
     dispatch(
       makeBid({
@@ -117,7 +116,6 @@ export const ItemInfoAuction = ({
     await dispatch(auctionPermissions(reqData));
     onCancel();
   };
-
   const renderEditButton = () => (
     <Button
       onClick={() => push(`${Routes.ITEMS}${ItemRoutes.EDIT}/${item.id}`)}

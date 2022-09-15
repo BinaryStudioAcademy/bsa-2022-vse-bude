@@ -12,5 +12,6 @@ export const minBidValidation = (minBidAmount: number, t: TFunction) =>
         'number.required': t('item:bid.validation.required'),
         'number.base': t('item:bid.validation.numeric'),
         'number.empty': t('item:bid.validation.required'),
+        'number.unsafe': t('item:bid.validation.safe'),
       }),
   });
