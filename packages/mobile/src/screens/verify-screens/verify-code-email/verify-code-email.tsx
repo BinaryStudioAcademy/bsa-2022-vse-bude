@@ -30,10 +30,9 @@ import {
 } from '~/store/selectors';
 import { notification } from '~/services/services';
 import { codeSchema } from '~/validation-schemas/validation-schemas';
+import { ButtonsContainer, Header } from '~/screens/components/components';
 import {
-  ButtonsContainer,
   CustomText,
-  Header,
   Title,
   VerifyImage,
   Wrapper,
@@ -89,6 +88,7 @@ const VerifyCodeEmailScreen: FC = () => {
   return (
     <Wrapper>
       <Header
+        title={t('verify.VERIFY')}
         labelButton={t('verify.BACK_BUTTON')}
         onPress={handleBackButtonPress}
       />

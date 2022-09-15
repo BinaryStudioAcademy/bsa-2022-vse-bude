@@ -4,7 +4,7 @@ import { IS_IOS } from '~/common/constants/constants';
 import { styles } from './styles';
 
 type KeyboardAvoidingProps = {
-  children: ReactElement;
+  children: ReactElement | null;
   style?: Record<string, unknown>;
 };
 

@@ -21,6 +21,7 @@ type Props<T extends FormControlValues> = {
   zIndex: number;
   disabled?: boolean;
   placeholder?: string;
+  requiredMark?: boolean;
 };
 
 const DropDown = <T extends FormControlValues>({
@@ -31,6 +32,7 @@ const DropDown = <T extends FormControlValues>({
   zIndex,
   disabled,
   placeholder,
+  requiredMark,
 }: Props<T>): ReactElement => {
   const { field } = useFormControl({ name, control });
   const { colors } = useCustomTheme();
@@ -39,16 +41,32 @@ const DropDown = <T extends FormControlValues>({
   return (
     <View style={styles.container}>
       {!!label && (
-        <Text
-          style={[
-            styles.label,
-            globalStyles.mb2,
-            globalStyles.fs12,
-            { color: colors.titlePrimary },
-          ]}
-        >
-          {label}
-        </Text>
+        <View style={globalStyles.flexDirectionRow}>
+          <Text
+            style={[
+              styles.label,
+              globalStyles.mb2,
+              globalStyles.fs12,
+              { color: colors.titlePrimary },
+            ]}
+          >
+            {label}
+          </Text>
+          {requiredMark && (
+            <Text
+              style={[
+                styles.required,
+                globalStyles.ml1,
+                globalStyles.fs22,
+                {
+                  color: colors.accent,
+                },
+              ]}
+            >
+              *
+            </Text>
+          )}
+        </View>
       )}
       <DropDownPicker
         listMode="SCROLLVIEW"

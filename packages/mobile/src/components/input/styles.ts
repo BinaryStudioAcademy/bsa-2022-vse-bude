@@ -12,6 +12,15 @@ const styles = StyleSheet.create({
   label: {
     lineHeight: 14,
   },
+  required: {
+    marginTop: -4,
+  },
+  popover: {
+    padding: 10,
+  },
+  popoverIcon: {
+    marginLeft: 5,
+  },
   eyeIconWrapper: {
     position: 'absolute',
     right: 5,

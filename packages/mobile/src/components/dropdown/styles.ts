@@ -7,6 +7,9 @@ const styles = StyleSheet.create({
   label: {
     lineHeight: 14,
   },
+  required: {
+    marginTop: -4,
+  },
   dropDown: {
     borderWidth: 0,
     paddingHorizontal: 15,

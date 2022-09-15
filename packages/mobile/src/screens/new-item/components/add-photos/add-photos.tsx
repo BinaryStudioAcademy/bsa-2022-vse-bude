@@ -36,6 +36,7 @@ const AddPhotos: FC = () => {
   const renderImage = (image: string, index: number) => {
     return (
       <View
+        key={index}
         style={[
           styles.btnWrapper,
           globalStyles.px3,
@@ -53,7 +54,6 @@ const AddPhotos: FC = () => {
             globalStyles.justifyContentCenter,
           ]}
           onPress={() => deleteImage(index)}
-          key={index}
         >
           <CrossIcon size={20} color={ColorPalette.RED_100} />
         </TouchableOpacity>

@@ -10,7 +10,8 @@ import { images } from '~/assets/images/images';
 import { globalStyles } from '~/styles/styles';
 import { RootNavigationProps } from '~/common/types/types';
 import { MainScreenName, RootScreenName } from '~/common/enums/enums';
-import { Header, Title, VerifyImage, Wrapper } from '../components/components';
+import { Header } from '~/screens/components/components';
+import { Title, VerifyImage, Wrapper } from '../components/components';
 import { styles } from './styles';
 
 const VerifiedEmailScreen: FC = () => {
@@ -26,7 +27,7 @@ const VerifiedEmailScreen: FC = () => {
 
   return (
     <Wrapper>
-      <Header hideButton={true} />
+      <Header title={t('verify.VERIFY')} hideButton={true} />
       <KeyboardAvoiding>
         <View style={globalStyles.px5}>
           <VerifyImage
