@@ -26,11 +26,13 @@ class Http {
       contentType,
       hasAuth = true,
       params,
+      locale,
     } = options;
 
     const headers = this.getHeaders({
       contentType,
       hasAuth,
+      locale,
     });
 
     return fetch(this.getUrl(url, params), {
@@ -47,11 +49,19 @@ class Http {
     return `${url}${params ? `${getQueryString(params)}` : ''}`;
   }
 
-  private getHeaders({ contentType, hasAuth }: GetHeadersParams): Headers {
+  private getHeaders({
+    contentType,
+    hasAuth,
+    locale,
+  }: GetHeadersParams): Headers {
     const headers = new Headers();
 
     if (contentType) {
       headers.append(HttpHeader.CONTENT_TYPE, contentType);
+    }
+
+    if (locale) {
+      headers.append(HttpHeader.ACCEPT_LANGUAGE, locale);
     }
 
     if (hasAuth) {
