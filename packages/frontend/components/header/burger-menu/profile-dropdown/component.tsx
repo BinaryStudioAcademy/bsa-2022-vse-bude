@@ -28,7 +28,7 @@ export const ProfileDropdown = ({
 
   const options = [
     {
-      value: t('account:makePost'),
+      value: t('common:header.popover.makePost'),
       key: 'Make a post',
       onClick: () => handleMakePostClick(),
       cssExtend: styles.option,
