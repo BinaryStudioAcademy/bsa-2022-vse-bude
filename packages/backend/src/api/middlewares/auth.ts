@@ -29,7 +29,5 @@ export const authMiddleware = (
     });
   }
 
-  console.log(req.userId);
-
   next();
 };
