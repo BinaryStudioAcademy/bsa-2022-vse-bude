@@ -221,6 +221,7 @@ model Notification {
   description String
   link        String?
   viewed      Boolean          @default(false)
+  createdAt                DateTime   @default(now())
 }
 
 enum Role {

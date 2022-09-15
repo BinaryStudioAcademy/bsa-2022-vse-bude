@@ -1,0 +1,14 @@
+{
+  "title": {
+    "BID_PLACED": "Bid was placed.",
+    "PRODUCT_SOLD": "Product sold.",
+    "AUCTION_ENDED": "Auction ended.",
+    "OUTBID": "Bid outbided!"
+  },
+  "description": {
+    "BID_PLACED": "Bid was placed on your lot.",
+    "PRODUCT_SOLD": "Your product was sold!",
+    "AUCTION_ENDED": "The auction you were tracking ended.",
+    "OUTBID": "You bid was outbided!"
+  }
+}

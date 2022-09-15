@@ -8,6 +8,7 @@ import { AuctionEndedError, ProductNotFoundError } from '@errors';
 import { toUtc } from '@helpers';
 import { UPDATE_PRODUCT_PRICE, NotificationType } from '@vse-bude/shared';
 import type { Bid } from '@prisma/client';
+import { lang } from '@lang';
 import { LowBidPriceError } from '../error/product/low-bid-price-error';
 import { eventListener } from '../events';
 
@@ -58,8 +59,8 @@ export class BidService {
     await this._notificationRepository.createNotification({
       type: NotificationType.BID_PLACED,
       userId: product.authorId,
-      title: 'New bid!',
-      description: `Bid was placed on your lot! Bid size: ${bid.price}UAH`,
+      title: lang('notifications:title.BID_PLACED', {}, 'en'),
+      description: lang('notifications:description.BID_PLACED', {}, 'en'),
       productId: product.id,
     });
 

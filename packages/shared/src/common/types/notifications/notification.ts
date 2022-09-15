@@ -15,4 +15,5 @@ export interface NotificationDto {
   description: string;
   link?: string;
   viewed: boolean;
+  createdAt: string;
 }

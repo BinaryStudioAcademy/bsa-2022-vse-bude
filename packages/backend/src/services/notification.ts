@@ -3,8 +3,10 @@ import type {
   NotificationQuery,
   CreateNotificationDto,
 } from '@vse-bude/shared';
+import { NotificationType } from '@vse-bude/shared';
 import type { AllNotificationsResponse } from '@types';
 import type { Notification } from '@prisma/client';
+import { lang } from '@lang';
 import type { Request } from 'express';
 
 export class NotificationService {
@@ -22,6 +24,17 @@ export class NotificationService {
       userId,
       query,
     );
+
+    notifications.forEach((notification) => {
+      if (notification.type !== NotificationType.INFO) {
+        notification.title =
+          lang(`notifications:title.${notification.type}`) ||
+          notification.title;
+        notification.description =
+          lang(`notifications:description.${notification.type}`) ||
+          notification.description;
+      }
+    });
 
     return { notifications, count };
   }

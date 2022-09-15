@@ -2,6 +2,7 @@ import type {
   NotificationQuery,
   CreateNotificationDto,
 } from '@vse-bude/shared';
+import { Order } from '@vse-bude/shared';
 import { NOTIFICATIONS_FILTER } from '@vse-bude/shared';
 import type { PrismaClient, Notification } from '@prisma/client';
 
@@ -30,6 +31,9 @@ export class NotificationRepository {
         skip: +from,
         where: {
           viewed: viewedValue,
+        },
+        orderBy: {
+          createdAt: Order.DESC,
         },
       }),
       this._dbClient.notification.count({
