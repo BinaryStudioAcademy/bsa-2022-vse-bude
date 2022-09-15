@@ -3,6 +3,7 @@ enum ActionType {
   SET_PRICE_RANGE = 'filter/set-price-range',
   SET_SORT_BY = 'filter/set-sort-by',
   SET_CATEGORY = 'filter/set-category',
+  SET_ORDER = 'filter/set-order',
 }
 
 export { ActionType };

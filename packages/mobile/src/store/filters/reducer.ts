@@ -4,20 +4,22 @@ import {
   MINIMUM_SLIDER_PRICE,
   MAXIMUM_SLIDER_PRICE,
 } from '~/common/constants/constants';
-import { SortBy } from '@vse-bude/shared';
+import { SortBy, ProductQuery, Order } from '@vse-bude/shared';
 import {
   setLotTypeFilter,
   setPriceRange,
   setSortBy,
   setCategory,
+  setOrder,
 } from './auction';
 
 type InitialState = {
   type: FilterLotType;
-  categoryId: string;
-  priceGt: number;
-  priceLt: number;
-  sortBy: string;
+  categoryId: ProductQuery['categoryId'];
+  priceGt: ProductQuery['priceGt'];
+  priceLt: ProductQuery['priceLt'];
+  sortBy: ProductQuery['sortBy'];
+  order: ProductQuery['order'];
 };
 
 const initialState: InitialState = {
@@ -26,6 +28,7 @@ const initialState: InitialState = {
   priceGt: MINIMUM_SLIDER_PRICE,
   priceLt: MAXIMUM_SLIDER_PRICE,
   sortBy: SortBy.DATE,
+  order: Order.ASC,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -42,6 +45,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setCategory, (state, action) => {
       state.categoryId = action.payload;
+    })
+    .addCase(setOrder, (state, action) => {
+      state.order = action.payload;
     });
 });
 
