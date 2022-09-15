@@ -4,6 +4,7 @@ import {
   DeepPartial,
   UseFormReset,
   UseFormSetValue,
+  UseFormWatch,
 } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import {
@@ -24,6 +25,7 @@ type UseAppFormResult<T extends FormControlValues = FormControlValues> = {
   handleSubmit: UseFormHandleSubmit<T>;
   reset: UseFormReset<T>;
   setValue: UseFormSetValue<T>;
+  watch: UseFormWatch<T>;
 };
 
 const useAppForm = <T extends FormControlValues = FormControlValues>({
@@ -36,6 +38,7 @@ const useAppForm = <T extends FormControlValues = FormControlValues>({
     formState: { errors },
     reset,
     setValue,
+    watch,
   } = useForm<T>({
     defaultValues,
     resolver: validationSchema ? joiResolver(validationSchema) : undefined,
@@ -47,6 +50,7 @@ const useAppForm = <T extends FormControlValues = FormControlValues>({
     handleSubmit: handleSubmit as UseFormHandleSubmit<T>,
     reset,
     setValue,
+    watch,
   };
 };
 

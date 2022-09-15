@@ -85,8 +85,12 @@ const SellerInfo = ({ author }: { author: UserProfileDto }) => {
               {phone}
             </Text>
           </View>
-          {socialMedia.map((media) => (
-            <SocialButton type={media.socialMedia} link={media.link} />
+          {socialMedia.map((media, index) => (
+            <SocialButton
+              key={index}
+              type={media.socialMedia}
+              link={media.link}
+            />
           ))}
         </View>
       </View>
