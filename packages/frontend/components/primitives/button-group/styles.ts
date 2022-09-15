@@ -29,7 +29,7 @@ export const button = ({
   &[data-selected='selected'] {
     border: 1px solid ${colors.primaryLight};
     background: ${colors.primaryLight};
-    color: white;
+    color: ${colors.background};
 
     :hover,
     :active {
@@ -44,7 +44,7 @@ export const button = ({
 
   &[data-selected='default'] {
     border: 1px solid ${colors.backgroundDark};
-    background: white;
+    background: ${colors.background};
     color: ${colors.secondaryLight};
 
     :hover,

@@ -1,0 +1,1 @@
+export { ProductSection } from './component';
