@@ -65,36 +65,44 @@ export class BidRepository {
     userId: string,
     productId: string,
     time: string,
-  ): Promise<[Prisma.BatchPayload, Prisma.BatchPayload, Product]> {
-    return this._dbClient.$transaction([
-      this._dbClient.bid.updateMany({
-        data: {
-          deletedAt: time,
-        },
-        where: {
-          bidderId: userId,
-          productId: productId,
-        },
-      }),
-      this._dbClient.bid.deleteMany({
-        where: {
-          productId,
-          NOT: [{ deletedAt: null }],
-        },
-      }),
-      this._dbClient.product.update({
-        data: {
-          price: (
+  ): Promise<Product> {
+    await this._dbClient.bid.updateMany({
+      data: {
+        deletedAt: time,
+      },
+      where: {
+        bidderId: userId,
+        productId: productId,
+      },
+    });
+
+    await this._dbClient.bid.deleteMany({
+      where: {
+        productId,
+        NOT: [{ deletedAt: null }],
+      },
+    });
+
+    return this._dbClient.product.update({
+      data: {
+        price:
+          (
             await this._dbClient.bid.findFirst({
               where: {
                 productId,
               },
             })
-          ).price,
-        },
-        where: { id: productId },
-      }),
-    ]);
+          )?.price ||
+          (
+            await this._dbClient.product.findUnique({
+              where: {
+                id: productId,
+              },
+            })
+          ).recommendedPrice,
+      },
+      where: { id: productId },
+    });
   }
 
   async getAll(productId: string): Promise<Bid[]> {
