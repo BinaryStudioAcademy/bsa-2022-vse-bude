@@ -22,7 +22,8 @@
     "socialNetworks": {
       "uri": "Example of link to your profile in the network: https://some-net/me-id-1234",
       "maxSymbols": "The link cannot exceed 200 characters",
-      "netType": "Network name is absent!"
+      "netType": "Network name is absent!",
+      "netTypeExists": "Duplication of the type of social network"
     },
     "password": {
       "minSymbols": "Password length must be at least 8 characters",
