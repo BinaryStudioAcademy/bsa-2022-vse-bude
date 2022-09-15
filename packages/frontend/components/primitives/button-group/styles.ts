@@ -61,6 +61,8 @@ export const button = ({
   }
 `;
 
-export const wrapper = css`
+export const wrapper = ({ colors, radiuses }: Theme) => css`
   display: flex;
+  background-color: ${colors.backgroundDark};
+  border-radius: ${radiuses.xxs};
 `;

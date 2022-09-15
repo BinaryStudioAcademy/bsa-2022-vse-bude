@@ -8,7 +8,6 @@ export const searchWrapper = () => css`
 
 export const searchContent = ({
   spaces,
-  shadows,
   borders,
   radiuses,
   colors,
@@ -20,7 +19,6 @@ export const searchContent = ({
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  box-shadow: ${shadows.dropdown};
   border: ${borders.dropdown};
   border-radius: ${radiuses.xs};
   background-color: ${colors.background};
