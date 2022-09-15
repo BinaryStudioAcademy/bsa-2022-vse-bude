@@ -21,7 +21,8 @@
       "settings": "Налаштування",
       "messages": "Повідомлення",
       "support": "Підтримка",
-      "signOut": "Вийти"
+      "signOut": "Вийти",
+      "makePost": "Створити пост"
     }
   },
   "footer": {
