@@ -1,6 +1,6 @@
 import type { ProductDto } from '@vse-bude/shared';
 import type React from 'react';
-import type {CardProps} from '../cards/types'
+import type { CardProps } from '../cards/types';
 
 export type ProductSectionProps = {
   headerText: string;
