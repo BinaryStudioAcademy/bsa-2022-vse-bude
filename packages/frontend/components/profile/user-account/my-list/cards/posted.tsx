@@ -17,7 +17,7 @@ import {
 import type { CardProps } from './types';
 import * as styles from './styles';
 
-export const Posted = ({ data } : CardProps) => {
+export const Posted = ({ data }: CardProps) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { id, title, imageLinks, price, description, views, postDate } = data;
