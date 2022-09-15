@@ -3,7 +3,7 @@ import { Button } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/future/image';
 import hand from 'public/images/mocup_hand3.png';
-import { nextVerifyPhoneModal } from 'store/modals/actions';
+import { nextVerifyEmailModal } from 'store/modals/actions';
 import * as styles from '../styles';
 
 const SuccessModal = () => {
@@ -12,7 +12,7 @@ const SuccessModal = () => {
 
   const changeModal = (e) => {
     e.preventDefault();
-    dispatch(nextVerifyPhoneModal());
+    dispatch(nextVerifyEmailModal());
   };
 
   return (

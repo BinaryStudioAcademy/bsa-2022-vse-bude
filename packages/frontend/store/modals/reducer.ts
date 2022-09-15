@@ -1,4 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
+import { emailVerification, phoneVerification } from 'store/auth';
 import {
   hideMakePostModal,
   hideVerifyEmailModal,
@@ -63,6 +64,21 @@ export const modalsReducer = createReducer(initialState, {
     verifyPhoneModal: {
       isModalOpen: state.verifyPhoneModal.isModalOpen,
       step: state.verifyPhoneModal.step - 1,
+    },
+  }),
+
+  [phoneVerification.fulfilled.type]: (state) => ({
+    ...state,
+    verifyPhoneModal: {
+      isModalOpen: state.verifyPhoneModal.isModalOpen,
+      step: state.verifyPhoneModal.step + 1,
+    },
+  }),
+  [emailVerification.fulfilled.type]: (state) => ({
+    ...state,
+    verifyEmailModal: {
+      isModalOpen: state.verifyEmailModal.isModalOpen,
+      step: state.verifyEmailModal.step + 1,
     },
   }),
 
