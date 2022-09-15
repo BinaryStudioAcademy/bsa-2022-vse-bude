@@ -39,30 +39,7 @@ export const line = ({ spaces, colors }: Theme) => css`
   }
 `;
 
-export const wrapper = ({ colors, spaces }: Theme) => css`
-  border: 1px solid ${colors.accent};
-  width: 100%;
-  display: flex;
-  align-items: center;
-  padding: ${spaces.md};
-  margin: ${spaces.lg} 0;
-  &:nth-child(2n) {
-    flex-direction: row-reverse;
-  }
-`;
-
 export const itemsWrapper = ({ spaces }: Theme) => css`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  padding: ${spaces.md};
-  margin: ${spaces.lg} 0;
-  &:nth-child(2n) {
-    flex-direction: row-reverse;
-  }
-`;
-
-export const itemsWrapper1 = ({ spaces }: Theme) => css`
   display: flex;
   align-items: center;
   flex-direction: column;

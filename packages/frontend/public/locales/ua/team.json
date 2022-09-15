@@ -2,49 +2,42 @@
     {
         "name": "Євгеній Бєляєв",
         "photo": "/images/team/Eugene.png",
-        "role": "frontend/backend developer",
-        "description": "hi"
+        "role": "frontend/backend developer"
       },
       {
         "name": "Данило Стрелець",
         "photo":
           "/images/team/Danya.jpg",
-        "role": "frontend",
-        "description": "hi"
+        "role": "frontend"
       },
       {
         "name": "Михайло Бенедюк",
         "photo":
           "/images/team/Misha.jpg",
-        "role": "full meow stack",
-        "description": "hi"
+        "role": "full meow stack"
       },
       {
         "name": "Надія Прохорчук",
         "photo":
           "/images/team/Nadiia.jpg",
-        "role": "frontend",
-        "description": "hi"
+        "role": "frontend"
       },
       {
         "name": "Ольга Яротська",
         "photo":
           "/images/team/Olga.jpg",
-        "role": "QA",
-        "description": "hi"
+        "role": "QA"
       },
       {
         "name": "Євгеній Морозюк",
         "photo":
           "/images/team/Yevhenii.jpg",
-        "role": "JS Coach",
-        "description": "hi"
+        "role": "JS Coach"
       },
       {
         "name": "Віталій Ярмус",
         "photo":
           "/images/team/Vitalii.jpg",
-        "role": "JS Coach, Lecturer",
-        "description": "hi"
+        "role": "JS Coach, Lecturer"
       }
 ]
