@@ -6,9 +6,14 @@ import * as styles from './styles';
 import { DownArrow } from './sub-components/dropdown';
 import { PopoverContent } from './sub-components/popover-content';
 
-export const ProfileInfo = () => {
+interface ProfileInfoProps {
+  load: boolean;
+}
+
+export const ProfileInfo = ({ load }: ProfileInfoProps) => {
   const router = useRouter();
   const { user, loading } = useAuth();
+
   const handleClick = (e) => {
     e.preventDefault();
     router.push(`${Routes.PROFILE}/${user.id}`);
@@ -19,7 +24,7 @@ export const ProfileInfo = () => {
   const renderNotifications = () => <div>Notifications!</div>;
 
   return (
-    <div css={styles.profileInfo}>
+    <div css={styles.profileInfo} profile-load={load.toString()}>
       <div css={styles.iconsWrapper}>
         {/* change link */}
         <InternalLink href={Routes.DEFAULT} cssExtend={styles.icons}>
