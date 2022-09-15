@@ -13,7 +13,7 @@ export const cardContent = ({ spaces, maxMq }: Theme) => css`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  padding: ${spaces.lg} ${spaces.xl};
+  padding: ${spaces.md} ${spaces.lg};
   ${maxMq[4]} {
     padding: ${spaces.md} ${spaces.md};
   }
@@ -29,7 +29,7 @@ export const leftContent = css`
 export const rightContent = css`
   display: flex;
   flex-direction: column;
-  width: 245px;
+  width: 230px;
 `;
 
 export const details = ({ colors, spaces }: Theme) => css`

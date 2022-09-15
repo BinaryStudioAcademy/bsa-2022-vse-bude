@@ -32,7 +32,6 @@ interface ProductDto {
   author: UserProfileDto;
   winnerId: string;
   winner: UserProfileDto;
-  winnerId: string;
   updatedAt: string;
   postDate: string;
   createdAt: string;

@@ -35,7 +35,7 @@ export const linksContainer = ({ mq, spaces }: Theme) => css`
     display: flex;
     flex-direction: column;
     margin-right: ${spaces.xl3};
-    min-width: 190px;
+    min-width: 200px;
   }
 `;
 

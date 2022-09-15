@@ -34,25 +34,30 @@ export const filterCallback = ({
     items = items.filter((item) => item.type === filterType);
   }
 
-  let filteredItemsitems: FilteredProducts = {
-    purchased: items.filter(
-      (item) =>
-        item.status === ProductStatus.FINISHED && item?.winnerId === userId,
-    ),
-    sold: items.filter(
-      (item) =>
-        item.status === ProductStatus.FINISHED && item?.authorId === userId,
-    ),
-    posted: items.filter((item) => item.status === ProductStatus.ACTIVE),
-    drafts: items.filter((item) => item.status === ProductStatus.DRAFT),
-    archive: items.filter((item) => item.status === ProductStatus.CANCELLED),
-  };
+  let filteredItems: FilteredProducts = items.reduce(
+    (prev, item) => {
+      if (item.status === ProductStatus.FINISHED && item?.winnerId === userId)
+        prev.purchased.push(item);
+
+      if (item.status === ProductStatus.FINISHED && item?.authorId === userId)
+        prev.sold.push(item);
+
+      if (item.status === ProductStatus.ACTIVE) prev.posted.push(item);
+
+      if (item.status === ProductStatus.DRAFT) prev.drafts.push(item);
+
+      if (item.status === ProductStatus.CANCELLED) prev.archive.push(item);
+
+      return prev;
+    },
+    { purchased: [], sold: [], posted: [], drafts: [], archive: [] },
+  );
 
   const { purchased, sold, posted, draft, archived } = filterStatus;
 
   if (purchased) {
-    filteredItemsitems = {
-      ...filteredItemsitems,
+    filteredItems = {
+      ...filteredItems,
       sold: null,
       posted: null,
       drafts: null,
@@ -61,8 +66,8 @@ export const filterCallback = ({
   }
 
   if (sold) {
-    filteredItemsitems = {
-      ...filteredItemsitems,
+    filteredItems = {
+      ...filteredItems,
       purchased: null,
       posted: null,
       drafts: null,
@@ -71,8 +76,8 @@ export const filterCallback = ({
   }
 
   if (posted) {
-    filteredItemsitems = {
-      ...filteredItemsitems,
+    filteredItems = {
+      ...filteredItems,
       sold: null,
       purchased: null,
       drafts: null,
@@ -81,8 +86,8 @@ export const filterCallback = ({
   }
 
   if (draft) {
-    filteredItemsitems = {
-      ...filteredItemsitems,
+    filteredItems = {
+      ...filteredItems,
       sold: null,
       posted: null,
       purchased: null,
@@ -91,8 +96,8 @@ export const filterCallback = ({
   }
 
   if (archived) {
-    filteredItemsitems = {
-      ...filteredItemsitems,
+    filteredItems = {
+      ...filteredItems,
       sold: null,
       posted: null,
       drafts: null,
@@ -100,5 +105,5 @@ export const filterCallback = ({
     };
   }
 
-  return filteredItemsitems;
+  return filteredItems;
 };

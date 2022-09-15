@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import type { Theme } from '@emotion/react';
 
 export const itemImageWrapper = ({ spaces, radiuses }: Theme) => css`
-  margin-right: ${spaces.md};
+  margin-right: ${spaces.sm};
   margin-bottom: ${spaces.md};
   border-radius: ${radiuses.xs};
 `;
@@ -160,7 +160,7 @@ export const dateWrapper = ({ spaces }: Theme) => css`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: ${spaces.md};
+  margin-right: ${spaces.xs};
   &[data-size='lg'] {
     width: 110px;
   }
