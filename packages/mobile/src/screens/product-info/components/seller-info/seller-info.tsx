@@ -15,6 +15,7 @@ const SellerInfo = ({ author }: { author: UserProfileDto }) => {
       style={[
         styles.wrapper,
         globalStyles.mt5,
+        globalStyles.mb6,
         globalStyles.px6,
         globalStyles.py6,
       ]}

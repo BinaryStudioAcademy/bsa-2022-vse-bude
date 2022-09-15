@@ -81,10 +81,10 @@ const ProductInfo: FC = () => {
   const isAuction = type == ProductType.AUCTION;
 
   return (
-    <ScreenWrapper>
+    <ScreenWrapper style={{ marginTop: -25 }}>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={[globalStyles.px5, globalStyles.mb5]}
+        style={[globalStyles.px5, globalStyles.mb5, globalStyles.py6]}
       >
         {isAuction && <Countdown endDate={product.endDate} />}
         <Text
