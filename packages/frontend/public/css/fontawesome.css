@@ -157,6 +157,10 @@
   content: '\f058';
 }
 
+.fa-pencil::before {
+  content: '\f303';
+}
+
 .fa-search::before {
   content: '\f002';
 }

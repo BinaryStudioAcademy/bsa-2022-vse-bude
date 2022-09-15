@@ -21,7 +21,7 @@ import type { FilterPopoverProps, PriceOption, SortByOption } from './types';
 export function FilterPopover({ filter, setFilter }: FilterPopoverProps) {
   const { t } = useTranslation();
 
-  const categories = useTypedSelector((state) => state.category.list);
+  const categories = useTypedSelector((state) => state.category.listInUse);
 
   const [category, setCategory] = useState<SelectOption>(null);
   const [sortBy, setSortBy] = useState<SortByOption>(null);
@@ -104,6 +104,7 @@ export function FilterPopover({ filter, setFilter }: FilterPopoverProps) {
         <div css={styles.popover}>
           <h5 css={styles.popoverHeadline}>{t('items-page:label.category')}</h5>
           <Select
+            cssDropdownExtend={styles.dropdown}
             options={categories.map((item: CategoryDto) => ({
               title: item.title,
               value: item.id,

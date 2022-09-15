@@ -27,7 +27,7 @@ export const checkbox = ({
 }: Theme) => css`
   position: relative;
   appearance: none;
-  margin-right: ${spaces.sm};
+  margin-right: ${spaces.md};
   height: ${heights.checkbox};
   width: ${widths.checkbox};
   border: 1px solid ${colors.primaryLight};

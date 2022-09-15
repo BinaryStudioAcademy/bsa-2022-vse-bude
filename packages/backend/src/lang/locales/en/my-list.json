@@ -1,0 +1,6 @@
+{
+  "errors": {
+    "cancelledExists": "The product has already added to the archive",
+    "postedExistes": "The product has already posted"
+  }
+}
