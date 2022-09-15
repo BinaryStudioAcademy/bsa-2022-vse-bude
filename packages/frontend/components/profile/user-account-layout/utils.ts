@@ -13,4 +13,4 @@ export const isInAccount = ({
 }: {
   id: string;
   path: string;
-}): boolean => id && userPaths.some((it) => it === path);
+}): boolean => id && userPaths.includes(path);

@@ -8,10 +8,10 @@ import {
   ItemDate,
 } from '../primitives';
 import { Charity } from '../tmp-element-charity';
-import type { ItemCard } from './types';
+import type { CardProps } from './types';
 import * as styles from './styles';
 
-export const Sold = ({ data }: { data: ItemCard }) => {
+export const Sold = ({ data }: CardProps) => {
   const { t } = useTranslation();
   const { title, imageLinks, price, winner, endDate } = data;
   const { id, avatar, firstName, lastName } = winner;

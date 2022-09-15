@@ -1,12 +1,6 @@
 import type { ProductDto } from '@vse-bude/shared';
 import { ProductStatus } from '@vse-bude/shared';
 
-type TypedItemsProps = {
-  items: ProductDto[];
-  byStatus: string;
-  byKey?: string;
-};
-
 type FilterStatuses = {
   purchased: boolean;
   sold: boolean;
@@ -15,14 +9,12 @@ type FilterStatuses = {
   archived: boolean;
 };
 
-export const typedItems = ({ items, byStatus, byKey }: TypedItemsProps) => {
-  if (byKey) {
-    return items.filter(
-      (item) => item.status === byStatus && Object.hasOwn(item, byKey),
-    );
-  }
-
-  return items.filter((item) => item.status === byStatus);
+type FilteredProducts = {
+  purchased: ProductDto[] | null;
+  sold: ProductDto[] | null;
+  posted: ProductDto[] | null;
+  drafts: ProductDto[] | null;
+  archive: ProductDto[] | null;
 };
 
 export const filterCallback = ({
@@ -35,39 +27,78 @@ export const filterCallback = ({
   filterStatus: FilterStatuses;
   filterType: string;
   userId: string;
-}) => {
+}): FilteredProducts => {
   let items = [...itemsList];
-  const { purchased, sold, posted, draft, archived } = filterStatus;
 
   if (filterType) {
     items = items.filter((item) => item.type === filterType);
   }
 
-  if (purchased) {
-    items = items.filter(
+  let filteredItemsitems: FilteredProducts = {
+    purchased: items.filter(
       (item) =>
         item.status === ProductStatus.FINISHED && item?.winnerId === userId,
-    );
+    ),
+    sold: items.filter(
+      (item) =>
+        item.status === ProductStatus.FINISHED && item?.authorId === userId,
+    ),
+    posted: items.filter((item) => item.status === ProductStatus.ACTIVE),
+    drafts: items.filter((item) => item.status === ProductStatus.DRAFT),
+    archive: items.filter((item) => item.status === ProductStatus.CANCELLED),
+  };
+
+  const { purchased, sold, posted, draft, archived } = filterStatus;
+
+  if (purchased) {
+    filteredItemsitems = {
+      ...filteredItemsitems,
+      sold: null,
+      posted: null,
+      drafts: null,
+      archive: null,
+    };
   }
 
   if (sold) {
-    items = items.filter(
-      (item) =>
-        item.status === ProductStatus.FINISHED && item?.authorId === userId,
-    );
+    filteredItemsitems = {
+      ...filteredItemsitems,
+      purchased: null,
+      posted: null,
+      drafts: null,
+      archive: null,
+    };
   }
 
   if (posted) {
-    items = items.filter((item) => item.status === ProductStatus.ACTIVE);
+    filteredItemsitems = {
+      ...filteredItemsitems,
+      sold: null,
+      purchased: null,
+      drafts: null,
+      archive: null,
+    };
   }
 
   if (draft) {
-    items = items.filter((item) => item.status === ProductStatus.DRAFT);
+    filteredItemsitems = {
+      ...filteredItemsitems,
+      sold: null,
+      posted: null,
+      purchased: null,
+      archive: null,
+    };
   }
 
   if (archived) {
-    items = items.filter((item) => item.status === ProductStatus.CANCELLED);
+    filteredItemsitems = {
+      ...filteredItemsitems,
+      sold: null,
+      posted: null,
+      drafts: null,
+      purchased: null,
+    };
   }
 
-  return items;
+  return filteredItemsitems;
 };

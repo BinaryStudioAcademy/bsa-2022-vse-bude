@@ -51,6 +51,7 @@
     }
   },
   "modal": {
+    "header": "Move the product to the archive?",
     "buttons": {
       "clear": "Clear",
       "add": "Archive"

@@ -29,7 +29,7 @@ export const leftContent = css`
 export const rightContent = css`
   display: flex;
   flex-direction: column;
-  width: 215px;
+  width: 245px;
 `;
 
 export const details = ({ colors, spaces }: Theme) => css`

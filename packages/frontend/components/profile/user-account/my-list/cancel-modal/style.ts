@@ -6,6 +6,24 @@ export const modalWrapper = css`
   width: 350px;
 `;
 
+export const modalHeader = ({ spaces }: Theme) => css`
+  display: flex;
+  justify-content: center;
+  margin-bottom: ${spaces.xs};
+`;
+
+export const header = ({
+  fontSizes,
+  fontWeights,
+  lineHeights,
+  colors,
+}: Theme) => css`
+  font-size: ${fontSizes.body1};
+  line-height: ${lineHeights.body1};
+  font-weight: ${fontWeights.modal};
+  color: ${colors.text};
+`;
+
 export const closeButton = css`
   position: absolute;
   z-index: 2;

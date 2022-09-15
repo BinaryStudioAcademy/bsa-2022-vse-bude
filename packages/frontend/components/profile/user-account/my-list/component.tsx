@@ -2,7 +2,6 @@ import { useAppDispatch, useAuth, useTypedSelector } from '@hooks';
 import { useMemo } from 'react';
 import { useTranslation } from 'next-i18next';
 import type { RootState } from '@types';
-import { ProductStatus } from '@vse-bude/shared';
 import {
   Icon,
   Popover,
@@ -12,14 +11,15 @@ import {
 } from '@components/primitives';
 import { IconColor, IconName } from '@enums';
 import { resetBadges } from '@store';
-import { SubPageName, SectionHeader } from '../common';
+import { SubPageName } from '../common';
 import { Posted, Drafted, Purchased, Sold, Archived } from './cards';
 import { FilterArrow } from './primitives';
-import { Filter } from './filter/filter';
+import { Filter } from './filter';
 import { CancelModal } from './cancel-modal';
+import { ProductSection } from './product-section';
 import * as styles from './styles';
 import { breadcrumbsPaths } from './components-data';
-import { typedItems, filterCallback } from './utils';
+import { filterCallback } from './utils';
 
 export const MyListInfo = () => {
   const { t } = useTranslation();
@@ -89,103 +89,44 @@ export const MyListInfo = () => {
         </div>
       </div>
 
-      {typedItems({
-        items: filteredItems,
-        byStatus: ProductStatus.FINISHED,
-        byKey: 'author',
-      }).length ? (
-        <div css={styles.section}>
-          <div css={styles.header}>
-            <SectionHeader>{t('my-list:card.purchased')}</SectionHeader>
-          </div>
-          <div css={styles.container}>
-            {typedItems({
-              items: filteredItems,
-              byStatus: ProductStatus.FINISHED,
-              byKey: 'author',
-            }).map((item) => (
-              <Purchased key={item.id} data={item} />
-            ))}
-          </div>
-        </div>
+      {filteredItems.purchased && filteredItems.purchased.length ? (
+        <ProductSection
+          headerText={t('my-list:card.purchased')}
+          items={filteredItems.purchased}
+          Card={Purchased}
+        />
       ) : null}
 
-      {typedItems({
-        items: filteredItems,
-        byStatus: ProductStatus.FINISHED,
-        byKey: 'winner',
-      }).length ? (
-        <div css={styles.section}>
-          <div css={styles.header}>
-            <SectionHeader>{t('my-list:card.sold')}</SectionHeader>
-          </div>
-          <div css={styles.container}>
-            {typedItems({
-              items: filteredItems,
-              byStatus: ProductStatus.FINISHED,
-              byKey: 'winner',
-            }).map((item) => (
-              <Sold key={item.id} data={item} />
-            ))}
-          </div>
-        </div>
+      {filteredItems.sold && filteredItems.sold.length ? (
+        <ProductSection
+          headerText={t('my-list:card.sold')}
+          items={filteredItems.sold}
+          Card={Sold}
+        />
       ) : null}
 
-      {typedItems({
-        items: filteredItems,
-        byStatus: ProductStatus.ACTIVE,
-      }).length ? (
-        <div css={styles.section}>
-          <div css={styles.header}>
-            <SectionHeader>{t('my-list:card.posted')}</SectionHeader>
-          </div>
-          <div css={styles.container}>
-            {typedItems({
-              items: filteredItems,
-              byStatus: ProductStatus.ACTIVE,
-            }).map((item) => (
-              <Posted key={item.id} data={item} />
-            ))}
-          </div>
-        </div>
+      {filteredItems.posted && filteredItems.posted.length ? (
+        <ProductSection
+          headerText={t('my-list:card.posted')}
+          items={filteredItems.posted}
+          Card={Posted}
+        />
       ) : null}
 
-      {typedItems({
-        items: filteredItems,
-        byStatus: ProductStatus.DRAFT,
-      }).length ? (
-        <div css={styles.section}>
-          <div css={styles.header}>
-            <SectionHeader>{t('my-list:card.drafted')}</SectionHeader>
-          </div>
-          <div css={styles.container}>
-            {typedItems({
-              items: filteredItems,
-              byStatus: ProductStatus.DRAFT,
-            }).map((item) => (
-              <Drafted key={item.id} data={item} />
-            ))}
-          </div>
-        </div>
+      {filteredItems.drafts && filteredItems.drafts.length ? (
+        <ProductSection
+          headerText={t('my-list:card.drafted')}
+          items={filteredItems.drafts}
+          Card={Drafted}
+        />
       ) : null}
 
-      {typedItems({
-        items: filteredItems,
-        byStatus: ProductStatus.CANCELLED,
-      }).length ? (
-        <div css={styles.section}>
-          <div css={styles.header}>
-            <SectionHeader>{t('my-list:card.archived')}</SectionHeader>
-          </div>
-          <div css={styles.container}>
-            {typedItems({
-              items: filteredItems,
-              byStatus: ProductStatus.CANCELLED,
-            }).map((item) => (
-              <Archived key={item.id} data={item} />
-            ))}
-          </div>
-        </div>
+      {filteredItems.archive && filteredItems.archive.length ? (
+        <ProductSection
+          headerText={t('my-list:card.archived')}
+          items={filteredItems.archive}
+          Card={Archived}
+        />
       ) : null}
 
       <Modal visible={showCancelModal}>

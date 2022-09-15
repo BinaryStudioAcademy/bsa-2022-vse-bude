@@ -61,6 +61,7 @@ const fontWeights = {
   button: '700',
   caption: '400',
   cell: '600',
+  modal: '600',
 };
 
 const lineHeights = {

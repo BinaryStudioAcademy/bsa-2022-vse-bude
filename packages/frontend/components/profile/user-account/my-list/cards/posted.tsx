@@ -14,10 +14,10 @@ import {
   ItemDate,
   Views,
 } from '../primitives';
-import type { ItemCard } from './types';
+import type { CardProps } from './types';
 import * as styles from './styles';
 
-export const Posted = ({ data }: { data: ItemCard }) => {
+export const Posted = ({ data } : CardProps) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { id, title, imageLinks, price, description, views, postDate } = data;

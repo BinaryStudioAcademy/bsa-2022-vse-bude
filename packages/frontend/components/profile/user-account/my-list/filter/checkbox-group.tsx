@@ -8,11 +8,11 @@ export const CheckboxGroup = ({
   checkboxes: CheckboxProps[];
 }) => (
   <div>
-    {checkboxes.map((elemProp, idx) => {
+    {checkboxes.map((elemProp) => {
       const { label, value, onChange } = elemProp;
 
       return (
-        <div key={idx + elemProp.label + idx} css={styles.checkboxContainer}>
+        <div key={label} css={styles.checkboxContainer}>
           <Checkbox value={value} label={label} onChange={onChange} />
         </div>
       );

@@ -18,7 +18,7 @@ export const CancelModal = () => {
   const dispatch = useAppDispatch();
   const itemId = useTypedSelector((state: RootState) => state.myList.itemId);
 
-  const { register, reset, handleSubmit } = useForm({
+  const { register, handleSubmit } = useForm({
     defaultValues: {
       cancelReason: '',
     },
@@ -39,15 +39,6 @@ export const CancelModal = () => {
     dispatch(setItemId(null));
   };
 
-  const onReset = () => {
-    reset(
-      { cancelReason: '' },
-      {
-        keepDefaultValues: true,
-      },
-    );
-  };
-
   return (
     <div css={styles.modalWrapper}>
       <IconButton
@@ -60,6 +51,10 @@ export const CancelModal = () => {
         backgroundColor="darkgray"
       />
       <form onSubmit={handleSubmit(onAddToArchive)}>
+        <div css={styles.modalHeader}>
+          <span css={styles.header}>{t('my-list:modal.header')}</span>
+        </div>
+
         <div css={styles.inputRow}>
           <Input
             placeholder={t('my-list:modal.placeholders.reason')}
@@ -73,7 +68,7 @@ export const CancelModal = () => {
           <Button size="small" type="submit">
             {t('my-list:modal.buttons.add')}
           </Button>
-          <Button onClick={onReset} size="small">
+          <Button type="reset" size="small">
             {t('my-list:modal.buttons.clear')}
           </Button>
         </div>
