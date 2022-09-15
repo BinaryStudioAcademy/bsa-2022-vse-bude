@@ -17,6 +17,12 @@ const useStyles = () => {
           resizeMode: 'contain',
           alignSelf: 'center',
         },
+        verifyMessage: {
+          flexWrap: 'wrap',
+        },
+        link: {
+          color: colors.accent,
+        },
       }),
     [dark, colors],
   );
