@@ -29,7 +29,7 @@ export const AccountLayout: FC<AccountPageProps> = ({ children }) => {
         <div css={styles.wrapper}>
           <h3 css={styles.pageHeader}>{t('account:accountPage')}</h3>
           <Flex css={styles.pageContent}>
-            {(authUser?.id === query.id ||
+            {(authUser?.id === query?.id ||
               isInAccount({ id: authUser?.id, path: asPath })) && (
               <div css={styles.linksContainer}>
                 <button
@@ -45,7 +45,7 @@ export const AccountLayout: FC<AccountPageProps> = ({ children }) => {
                     </div>
                   </Flex>
                 </button>
-                {getLinksData(authUser.id as string).map((link, idx) => {
+                {getLinksData(authUser?.id as string).map((link, idx) => {
                   const { iconPath, label, path } = link;
                   const location = asPath === link.path;
                   const tLabel = t(label);
