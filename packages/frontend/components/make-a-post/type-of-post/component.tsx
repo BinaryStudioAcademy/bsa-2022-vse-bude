@@ -40,9 +40,10 @@ const PostTypeModal = () => {
         </div>
         <div css={styles.btnWrapper}>
           <Button
-            onClick={() =>
-              router.push(`${Routes.ITEMS}${ItemRoutes.CREATE_AUCTION}`)
-            }
+            onClick={() => {
+              router.push(`${Routes.ITEMS}${ItemRoutes.CREATE_AUCTION}`);
+              onClose();
+            }}
             disabled={!isConfirmed}
             tooltip={
               isConfirmed
@@ -54,9 +55,10 @@ const PostTypeModal = () => {
           </Button>
           <span>{t('common:components.typeOfPost.btn.or')}</span>
           <Button
-            onClick={() =>
-              router.push(`${Routes.ITEMS}${ItemRoutes.CREATE_DIRECT_SALE}`)
-            }
+            onClick={() => {
+              router.push(`${Routes.ITEMS}${ItemRoutes.CREATE_DIRECT_SALE}`);
+              onClose();
+            }}
             disabled={!isConfirmed}
             tooltip={
               isConfirmed
