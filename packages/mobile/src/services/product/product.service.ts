@@ -3,8 +3,8 @@ import {
   HttpMethod,
   ProductApiRoutes,
   ProductDto,
+  ProductQuery,
 } from '@vse-bude/shared';
-import { ProductRequestDto } from '~/common/types/types';
 
 import { Http } from '~/services/http/http.service';
 
@@ -23,7 +23,9 @@ class ProductService {
     this.#apiPrefix = apiPrefix;
   }
 
-  getProducts(requestParams: ProductRequestDto = {}): Promise<ProductDto[]> {
+  getProducts(
+    requestParams: ProductQuery & Record<string, unknown> = {},
+  ): Promise<ProductDto[]> {
     return this.#http.load(`${this.#apiPrefix}${ApiRoutes.PRODUCTS}`, {
       params: requestParams,
     });

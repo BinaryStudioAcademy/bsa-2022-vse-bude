@@ -8,6 +8,7 @@ import {
 import { useState, useCustomTheme, useFormControl } from '~/hooks/hooks';
 import { Text, View } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
+import { ColorValue } from 'react-native';
 import { styles } from './styles';
 
 type Props<T extends FormControlValues> = {
@@ -21,6 +22,9 @@ type Props<T extends FormControlValues> = {
   zIndex: number;
   disabled?: boolean;
   placeholder?: string;
+  backgroundColor?: ColorValue;
+  dropDownDirection?: 'DEFAULT' | 'TOP' | 'BOTTOM' | 'AUTO';
+  onChange?: (value: string) => void;
 };
 
 const DropDown = <T extends FormControlValues>({
@@ -31,6 +35,9 @@ const DropDown = <T extends FormControlValues>({
   zIndex,
   disabled,
   placeholder,
+  backgroundColor,
+  dropDownDirection,
+  onChange,
 }: Props<T>): ReactElement => {
   const { field } = useFormControl({ name, control });
   const { colors } = useCustomTheme();
@@ -64,11 +71,18 @@ const DropDown = <T extends FormControlValues>({
         placeholderStyle={[{ color: colors.placeholder }, globalStyles.fs14]}
         style={[
           styles.dropDown,
-          { backgroundColor: colors.backgroundElements },
+          { backgroundColor: backgroundColor || colors.backgroundElements },
         ]}
+        dropDownContainerStyle={[
+          { backgroundColor: backgroundColor || colors.backgroundElements },
+        ]}
+        dropDownDirection={dropDownDirection || 'AUTO'}
         zIndex={zIndex}
         disabled={disabled}
         placeholder={placeholder}
+        onChangeValue={
+          onChange ? (value) => onChange(value as string) : undefined
+        }
       />
     </View>
   );

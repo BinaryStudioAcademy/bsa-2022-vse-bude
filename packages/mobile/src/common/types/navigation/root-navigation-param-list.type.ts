@@ -20,6 +20,7 @@ type RootNavigationParamList = {
   [RootScreenName.ITEM_INFO]: { itemId: string };
   [RootScreenName.TYPE_OF_NEW_POST]: undefined;
   [RootScreenName.MAIN_WITH_MENU]: undefined;
+  [RootScreenName.FILTER]: undefined;
 };
 
 export type { RootNavigationParamList };

@@ -21,9 +21,11 @@ import {
   VerifiedPhoneScreen,
   VerifiedEmailScreen,
   TypeOfPostScreen,
+  Filter,
 } from '~/screens/screens';
 import { HeaderLeft } from '~/components/components';
 import { HomeWithMenuNavigation } from './drawer/drawer.navigation';
+import { getFilterScreenOptions } from './screen-options/get-filter-screen-options';
 
 const NativeStack = createNativeStackNavigator<RootNavigationParamList>();
 const Stack = createNativeStackNavigator<RootNavigationParamList>();
@@ -48,6 +50,11 @@ const Navigation: FC = () => {
 
   return (
     <NativeStack.Navigator screenOptions={mainScreenOptions}>
+      <NativeStack.Screen
+        name={RootScreenName.FILTER}
+        component={Filter}
+        options={getFilterScreenOptions}
+      />
       <NativeStack.Screen
         name={RootScreenName.MAIN_WITH_MENU}
         component={HomeWithMenuNavigation}

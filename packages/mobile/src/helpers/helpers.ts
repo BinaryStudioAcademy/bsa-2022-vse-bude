@@ -12,3 +12,4 @@ export {
   updatePersonalInfoParser,
 } from './personal-info-parse/personal-info-parse';
 export { categoryForDropdown } from './category/format-category-for-dropdown';
+export { checkSliderPriceValidity } from './price/check-slider-price-validity';

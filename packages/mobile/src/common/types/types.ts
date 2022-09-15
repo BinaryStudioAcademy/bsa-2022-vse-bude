@@ -29,5 +29,4 @@ export type { ShowNotificationParams } from './notification/notification';
 export type { AppIcon, IconProps, CustomIconProps } from './ui/ui';
 export type { Theme, ThemeColors } from './theme/theme.type';
 export type { VerifyPhoneRequestDto } from './verify/verify';
-export type { ProductRequestDto } from './product/product';
 export type { UpdateAvatarResponseDto } from './personal-info/personal-info';

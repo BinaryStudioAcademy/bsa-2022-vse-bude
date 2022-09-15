@@ -199,4 +199,16 @@ export const screens = {
     CURRENT_BID: 'Current bid',
     MIN_UAH: 'Min UAH',
   },
+  filter: {
+    TITLE: 'Filter',
+    ALL: 'All',
+    FIXED_PRICE: 'Fixed price',
+    AUCTION: 'Auction',
+    CATEGORY: 'Category',
+    PRICE: 'Price',
+    SORT_BY: 'Sort by',
+    BY_DATE: 'By data',
+    BY_PRICE: 'By price',
+    BY_VIEWS: 'By views',
+  },
 };

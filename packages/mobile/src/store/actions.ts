@@ -4,3 +4,4 @@ export * as products from './products/actions';
 export * as verifyActions from './verify/actions';
 export * as categories from './categories/action';
 export * as product from './product/actions';
+export * as filters from './filters/auction';

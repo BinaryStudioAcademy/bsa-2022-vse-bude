@@ -6,3 +6,4 @@ export { FontFamily, FontSize } from './fonts/fonts';
 export { DateTimeFormat } from './date-time-format/date-time-format';
 export { DateFormat } from './date/date-format';
 export { AppLinkingPrefixes } from './app-linking/app-linking-prefixes';
+export { FilterLotType } from './filter/filter';

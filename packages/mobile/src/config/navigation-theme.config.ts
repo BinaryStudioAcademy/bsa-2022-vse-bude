@@ -12,6 +12,7 @@ const COMMON_COLORS = {
   backgroundElements: ColorPalette.GRAY_100,
   line: ColorPalette.GRAY_200,
   placeholder: ColorPalette.GRAY_300,
+  placeholderLight: ColorPalette.GRAY_200,
   error: ColorPalette.RED_100,
   flagTop: ColorPalette.BLUE_100,
   flagBottom: ColorPalette.YELLOW_50,

@@ -198,4 +198,16 @@ export const screens = {
     CURRENT_BID: 'Поточна ставка',
     MIN_UAH: 'Мін ГРН',
   },
+  filter: {
+    TITLE: 'Фільтр',
+    ALL: 'Усі',
+    FIXED_PRICE: 'Фіксована ціна',
+    AUCTION: 'Аукціон',
+    CATEGORY: 'Категорія',
+    PRICE: 'Ціна',
+    SORT_BY: 'Сортувати за',
+    BY_DATE: 'За датою',
+    BY_PRICE: 'За  ціною',
+    BY_VIEWS: 'За переглядами',
+  },
 };

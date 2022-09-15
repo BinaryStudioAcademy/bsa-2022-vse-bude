@@ -18,6 +18,7 @@ enum RootScreenName {
   TYPE_OF_NEW_POST = 'Type of post',
   NEW_AUCTION = 'Make an Auction Post',
   MAIN_WITH_MENU = 'Menu',
+  FILTER = 'Filter',
 }
 
 export { RootScreenName };
