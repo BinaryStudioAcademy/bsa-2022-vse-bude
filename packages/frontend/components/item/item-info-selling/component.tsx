@@ -1,10 +1,6 @@
 ﻿import type { ProductDto } from '@vse-bude/shared';
-<<<<<<< HEAD
-import { Button, Tooltip } from '@primitives';
-=======
 import { ProductStatus } from '@vse-bude/shared';
-import { Button, Icon, Loader } from '@primitives';
->>>>>>> main
+import { Button, Icon, Loader, Tooltip } from '@primitives';
 import { FavoriteButton } from 'components/product/favorite-button/component';
 import { useTranslation } from 'next-i18next';
 import { useTypedSelector } from '@hooks';
@@ -12,7 +8,6 @@ import { useRouter } from 'next/router';
 import { IconColor, IconName } from '@enums';
 import { ItemTitle, ItemInfo, ItemPrice } from '../item-info';
 import * as styles from './styles';
-import { IconColor } from '@enums';
 
 interface ItemInfoSellingProps {
   item: ProductDto;
@@ -55,8 +50,23 @@ export const ItemInfoSelling = ({
           </div>
         ) : (
           <>
-<<<<<<< HEAD
-            <Button onClick={onBuy}>{t('item:buttons.buyBtn')}</Button>
+            <Button
+              onClick={onBuy}
+              disabled={!user || !user.phoneVerified || loading}
+              tooltip={
+                user
+                  ? user.phoneVerified
+                    ? t('item:buttons.buyBtn')
+                    : t('item:buttons.tooltips.notVerified.buyBtn')
+                  : t('item:buttons.tooltips.notAuthorized.buyBtn')
+              }
+            >
+              {loading ? (
+                <Loader size="extraSmall" />
+              ) : (
+                t('item:buttons.buyBtn')
+              )}
+            </Button>
             <Tooltip
               trigger={
                 <FavoriteButton
@@ -77,33 +87,6 @@ export const ItemInfoSelling = ({
                   : t('item:buttons.tooltips.favBtn')
                 : t('item:buttons.tooltips.notAuthorized.favBtn')}
             </Tooltip>
-=======
-            <FavoriteButton
-              cssExtended={styles.favouriteButton}
-              onChangeIsFavorite={onChangeIsFavorite}
-              isFavorite={isInFavorite}
-              backgroundColor="transparent"
-              size="md"
-              disabled={!user}
-            />
-            <Button
-              onClick={onBuy}
-              disabled={!user || !user.phoneVerified || loading}
-              tooltip={
-                user
-                  ? user.phoneVerified
-                    ? t('item:buttons.buyBtn')
-                    : t('item:buttons.tooltips.notVerified.buyBtn')
-                  : t('item:buttons.tooltips.notAuthorized.buyBtn')
-              }
-            >
-              {loading ? (
-                <Loader size="extraSmall" />
-              ) : (
-                t('item:buttons.buyBtn')
-              )}
-            </Button>
->>>>>>> main
           </>
         )}
       </div>
