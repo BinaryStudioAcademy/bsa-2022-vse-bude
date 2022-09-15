@@ -40,3 +40,5 @@ export { default as CheckBox } from '@react-native-community/checkbox';
 export { Countdown } from './countdown/countdown';
 export { RadioButton } from './radio-button/radio-button';
 export { default as Slider } from '@ptomasroos/react-native-multi-slider';
+export { Product } from './product/product';
+export { BurgerMenu } from './burger-menu/burger-menu';

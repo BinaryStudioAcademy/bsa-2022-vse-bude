@@ -1,12 +1,8 @@
 import React, { FC } from 'react';
-import { t } from 'i18next';
-import {
-  createNativeStackNavigator,
-  NativeStackNavigationOptions,
-} from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { RootScreenName } from '~/common/enums/enums';
 import { RootNavigationParamList } from '~/common/types/types';
-import { useAppSelector } from '~/hooks/hooks';
+import { useAppSelector, useTranslation } from '~/hooks/hooks';
 import { selectCurrentUser } from '~/store/selectors';
 import {
   MessagesScreen,
@@ -21,40 +17,26 @@ import {
   VerifiedPhoneScreen,
   VerifiedEmailScreen,
   TypeOfPostScreen,
-  Filter,
+  ItemsAndServices,
 } from '~/screens/screens';
 import { HeaderLeft } from '~/components/components';
 import { HomeWithMenuNavigation } from './drawer/drawer.navigation';
-import { getFilterScreenOptions } from './screen-options/get-filter-screen-options';
+import {
+  mainScreenOptions,
+  baseScreenOptions,
+  verifyScreenOptions,
+  getItemsScreenOptions,
+} from './screen-options/screen-options';
 
 const NativeStack = createNativeStackNavigator<RootNavigationParamList>();
 const Stack = createNativeStackNavigator<RootNavigationParamList>();
 
-const mainScreenOptions: NativeStackNavigationOptions = {
-  headerShown: false,
-};
-
-const baseScreenOptions: NativeStackNavigationOptions = {
-  headerShown: true,
-  headerTitleAlign: 'center',
-  headerTitleStyle: { fontSize: 16 },
-  headerLeft: HeaderLeft,
-};
-
-const verifyScreenOptions: NativeStackNavigationOptions = {
-  headerShown: false,
-};
-
 const Navigation: FC = () => {
   const user = useAppSelector(selectCurrentUser);
+  const { t } = useTranslation();
 
   return (
     <NativeStack.Navigator screenOptions={mainScreenOptions}>
-      <NativeStack.Screen
-        name={RootScreenName.FILTER}
-        component={Filter}
-        options={getFilterScreenOptions}
-      />
       <NativeStack.Screen
         name={RootScreenName.MAIN_WITH_MENU}
         component={HomeWithMenuNavigation}
@@ -66,6 +48,12 @@ const Navigation: FC = () => {
           options={{
             title: t('product_info.TITLE'),
           }}
+        />
+      </NativeStack.Group>
+      <NativeStack.Group screenOptions={getItemsScreenOptions}>
+        <NativeStack.Screen
+          name={RootScreenName.ITEMS_AND_SERVICES}
+          component={ItemsAndServices}
         />
       </NativeStack.Group>
       {user && (

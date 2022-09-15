@@ -30,6 +30,7 @@ interface ProductDto {
   views: number;
   author: UserProfileDto;
   winner: UserProfileDto;
+  winnerId: string;
   updatedAt: string;
   postDate: string;
   createdAt: string;

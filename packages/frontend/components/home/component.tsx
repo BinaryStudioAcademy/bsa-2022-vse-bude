@@ -1,7 +1,7 @@
 import { Routes } from '@enums';
 import { ProductType } from '@vse-bude/shared';
 import { useTranslation } from 'next-i18next';
-import React, { useState } from 'react';
+import React from 'react';
 import { CategorySection } from './category-section';
 import { CharitySection } from './charity-section';
 import { LotSection } from './lot-section';
@@ -9,7 +9,6 @@ import { PromoSection } from './promo-section';
 import type { HomeProps } from './types';
 
 const Home = ({ auctionProducts, sellingProducts }: HomeProps) => {
-  const [searchQuery, setSearchQuery] = useState('');
   const { t } = useTranslation();
 
   const redirectToFilterByType = (type: ProductType) =>
@@ -17,7 +16,7 @@ const Home = ({ auctionProducts, sellingProducts }: HomeProps) => {
 
   return (
     <React.Fragment>
-      <PromoSection searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <PromoSection />
       <CategorySection />
       <LotSection
         title={t('home:popularLots.title')}

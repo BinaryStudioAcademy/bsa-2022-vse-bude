@@ -26,7 +26,7 @@ export const screens = {
     UAH: 'UAH',
   },
   verification: {
-    SING_IN: 'Sing in',
+    SIGN_IN: 'Sign in',
     EMAIL: 'Email',
     EMAIL_HINT: 'Enter your email',
     PASSWORD: 'Password',
@@ -43,6 +43,7 @@ export const screens = {
     PHONE_NUMBER_HINT: 'Enter your phone',
     GOOGLE_BUTTON: 'Sign in with Google',
     FORGOT_PASSWORD: 'Forgot Password',
+    FORGOT_PASSWORD_BUTTON: 'Restore',
     ENTER_EMAIL: 'Enter your email to retrieve your password',
     HIDE_EMAIL: 'Hide Email',
     RESET_PASSWORD: 'Reset Password',
@@ -198,6 +199,15 @@ export const screens = {
     DESCRIPTION: 'Description',
     CURRENT_BID: 'Current bid',
     MIN_UAH: 'Min UAH',
+    BID_SAVED: 'Bid successfully placed',
+    LEAVE_TEXT: 'Leave Auction',
+    LEAVE_MODAL_TEXT:
+      'Are you sure to leave the auction? All bids will be deleted!',
+    LEAVE_SUCCESS: 'You have successfully leave the auction',
+    NEW_BID: 'New bid placed',
+  },
+  items_and_services: {
+    TITLE: 'Items & Services',
   },
   filter: {
     TITLE: 'Filter',

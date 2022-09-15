@@ -1,7 +1,7 @@
 import { useAppDispatch, useAuth, useMounted, useTypedSelector } from '@hooks';
 import { Modal } from '@primitives';
 import { useEffect, useState } from 'react';
-import { hideVerifyModal } from 'store/modals/actions';
+import { hideVerifyPhoneModal } from 'store/modals/actions';
 import { EnterCodeModal } from './enter-code/component';
 import { EnterPhoneModal } from './enter-phone/component';
 import { SuccessModal } from './success-verification/component';
@@ -19,7 +19,7 @@ const VerificationModal = () => {
   }, []);
 
   const closeModal = () => {
-    dispatch(hideVerifyModal());
+    dispatch(hideVerifyPhoneModal());
   };
 
   const renderContent = (param) => {

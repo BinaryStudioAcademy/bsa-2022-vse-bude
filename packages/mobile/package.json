@@ -57,7 +57,8 @@
     "react-native-svg": "12.4.4",
     "react-native-toast-message": "2.1.5",
     "react-native-vector-icons": "9.2.0",
-    "react-redux": "8.0.2"
+    "react-redux": "8.0.2",
+    "socket.io-client": "4.5.2"
   },
   "devDependencies": {
     "@babel/core": "7.18.6",

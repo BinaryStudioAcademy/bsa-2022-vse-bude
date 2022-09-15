@@ -39,9 +39,9 @@ const personalInfoSchema = Joi.object<SaveUserProfileDto>({
       'string.empty': i18next.t('errors.EMPTY_LAST_NAME'),
     }),
   phone: Joi.string()
-    .pattern(PHONE_NUMBER_REGEX)
     .trim()
     .empty('')
+    .pattern(PHONE_NUMBER_REGEX)
     .messages({
       'string.pattern.base': i18next.t('errors.WRONG_FORMAT_PHONE'),
     }),

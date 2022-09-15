@@ -13,6 +13,7 @@ export const common = {
     CHOOSE_FROM_GALLERY: 'Обрати з галереї',
     OPEN_CAMERA: 'Відкрити камеру',
     REMOVE_PHOTO: 'Видалити фото',
+    BUTTON_FILTER: 'Фільтр',
   },
   common: {
     HOME: 'Головна',

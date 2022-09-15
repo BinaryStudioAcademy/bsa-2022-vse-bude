@@ -1,13 +1,20 @@
 import { Button, Container, Flex, IconButton, Loader } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
-import { Fragment, useState, useEffect } from 'react';
+import { Fragment, useState, useEffect, Suspense } from 'react';
 import { Routes, IconName, IconColor } from '@enums';
 import { Logo } from 'components/primitives/logo';
-import { useAppDispatch, useAuth, useMounted, useTypedSelector } from '@hooks';
+import {
+  useAppDispatch,
+  useAuth,
+  useMounted,
+  useTypedSelector,
+  useWindowSize,
+} from '@hooks';
 import { useRouter } from 'next/router';
 import { fetchCategories } from 'store/category';
 import type { HttpAcceptLanguage } from '@vse-bude/shared';
+import dynamic from 'next/dynamic';
 import { ProfileInfo } from './profile-info';
 import { Navigation } from './navigation/component';
 import { BurgerMenu } from './burger-menu/component';
@@ -16,16 +23,20 @@ import * as styles from './styles';
 interface RequestOptions {
   locale?: HttpAcceptLanguage;
 }
+const Search = dynamic(() => import('@components/primitives/search/component'));
 
 export const Header = () => {
+  const [searchQuery, setSearchQuery] = useState('');
   const [show, setShow] = useState(false);
   const { user, loading } = useAuth();
   const isMounted = useMounted();
   const { push, locale } = useRouter();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const [searchOpen, setSearchOpen] = useState(false);
 
   const categories = useTypedSelector((state) => state.category.listInUse);
+  const size = useWindowSize();
 
   useEffect(() => {
     if (!categories.length) {
@@ -67,13 +78,7 @@ export const Header = () => {
     />
   );
 
-  const renderProfileInfo = () => {
-    if (loading) {
-      return <Loader size="extraSmall" />;
-    }
-
-    return <ProfileInfo />;
-  };
+  const renderProfileInfo = () => <ProfileInfo load={loading} />;
 
   return (
     <Fragment>
@@ -89,16 +94,53 @@ export const Header = () => {
               <Navigation categories={categories || []} />
             </div>
           </Flex>
-          {isMounted && (
-            <>
-              {user || loading ? (
-                <div className="header-content">{renderProfileInfo()}</div>
-              ) : (
-                <div className="header-content">{renderAuthButtons()}</div>
-              )}
-            </>
-          )}
-          <div className="burger-menu-button">{renderBurgerButton()}</div>
+
+          <Flex align="center">
+            {isMounted && (
+              <>
+                <Suspense fallback={<Loader size="extraSmall" />}>
+                  {size.width > 600 ? (
+                    <Search
+                      value={searchQuery}
+                      setValue={setSearchQuery}
+                      setSearchOpen={setSearchOpen}
+                      placeholder={t(
+                        'common:components.input.searchProductsPlaceholder',
+                      )}
+                    />
+                  ) : (
+                    <>
+                      {searchOpen ? (
+                        <Search
+                          value={searchQuery}
+                          setValue={setSearchQuery}
+                          setSearchOpen={setSearchOpen}
+                          placeholder={t(
+                            'common:components.input.searchProductsPlaceholder',
+                          )}
+                        />
+                      ) : (
+                        <IconButton
+                          cssExtend={styles.searchButton}
+                          icon={IconName.SEARCH}
+                          size="md"
+                          onClick={() => setSearchOpen(!searchOpen)}
+                          color={IconColor.BLACK}
+                          ariaLabel={t('common:header.buttons.openMenu')}
+                        />
+                      )}
+                    </>
+                  )}
+                  {user || loading ? (
+                    <div className="header-content">{renderProfileInfo()}</div>
+                  ) : (
+                    <div className="header-content">{renderAuthButtons()}</div>
+                  )}
+                </Suspense>
+              </>
+            )}
+            <div className="burger-menu-button">{renderBurgerButton()}</div>
+          </Flex>
         </Container>
       </header>
       {show && (

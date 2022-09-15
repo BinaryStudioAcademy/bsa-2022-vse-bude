@@ -10,18 +10,19 @@
       "profile": "Профіль"
     },
     "buttons": {
-      "create_account": "Створити Аккаунт",
-      "sign_in": "Увійти в Аккаунт",
+      "create_account": "Створити Акаунт",
+      "sign_in": "Увійти в Акаунт",
       "openMenu": "Відкрити меню",
       "closeMenu": "Закрити меню"
     },
     "popover": {
-      "personalInfo": "Мій аккаунт",
-      "myList": "Мій спсиок",
+      "personalInfo": "Мій акаунт",
+      "myList": "Мій список",
       "settings": "Налаштування",
       "messages": "Повідомлення",
       "support": "Підтримка",
-      "signOut": "Вийти"
+      "signOut": "Вийти",
+      "makePost": "Створити пост"
     }
   },
   "footer": {

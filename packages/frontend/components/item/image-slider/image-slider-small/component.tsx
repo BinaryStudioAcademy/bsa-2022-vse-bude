@@ -1,6 +1,6 @@
+import { ImageWithFallback } from '@components/primitives';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
-import Image from 'next/future/image';
-
+import no_image from '../../../../public/images/no_image.png';
 import * as styles from './styles';
 
 interface ItemImageSliderSmallProps {
@@ -38,13 +38,14 @@ const ItemImageSliderSmall = ({
               role="button"
               onKeyDown={(e) => handleKeyDownShowModal(e)}
             >
-              <Image
-                src={link}
+              <ImageWithFallback
                 alt="item"
                 key={link + index}
-                fill
                 css={styles.image}
                 priority={index === 0}
+                src={link}
+                fallbackSrc={no_image}
+                fill
               />
             </div>
             <span css={styles.numberSlide}>

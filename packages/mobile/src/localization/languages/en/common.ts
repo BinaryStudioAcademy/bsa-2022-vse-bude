@@ -13,6 +13,7 @@ export const common = {
     CHOOSE_FROM_GALLERY: 'Choose from device',
     OPEN_CAMERA: 'Open camera',
     REMOVE_PHOTO: 'Remove existing photo',
+    BUTTON_FILTER: 'Filter',
   },
   common: {
     HOME: 'Home',

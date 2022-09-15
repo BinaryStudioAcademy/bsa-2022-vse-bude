@@ -25,7 +25,7 @@ export const screens = {
     UAH: 'ГРН',
   },
   verification: {
-    SING_IN: 'Увійти',
+    SIGN_IN: 'Увійти',
     EMAIL: 'Адреса електронної пошти',
     EMAIL_HINT: 'Введіть електронну адресу',
     PASSWORD: 'Пароль',
@@ -42,6 +42,7 @@ export const screens = {
     PHONE_NUMBER_HINT: 'Введіть свій номер телефону',
     GOOGLE_BUTTON: 'Увійти за допомогою Google',
     FORGOT_PASSWORD: 'Забули Пароль',
+    FORGOT_PASSWORD_BUTTON: 'Відновити',
     ENTER_EMAIL: 'Введіть електронну пошту, щоб отримати пароль',
     HIDE_EMAIL: 'Приховати електронну адресу',
     RESET_PASSWORD: 'Скинути пароль',
@@ -197,6 +198,15 @@ export const screens = {
     DESCRIPTION: 'Опис',
     CURRENT_BID: 'Поточна ставка',
     MIN_UAH: 'Мін ГРН',
+    BID_SAVED: 'Ставка успішно розміщена',
+    LEAVE_TEXT: 'Вийти з аукціону',
+    LEAVE_MODAL_TEXT:
+      'Ви впевнені, що покидаєте аукціон? Усі ставки будуть видалені!',
+    LEAVE_SUCCESS: 'Ви успішно покинули аукціон',
+    NEW_BID: 'Аукціон оновився',
+  },
+  items_and_services: {
+    TITLE: 'Товари & Послуги',
   },
   filter: {
     TITLE: 'Фільтр',

@@ -3,7 +3,6 @@ import { reducer as personalInfo } from './personal-info/reducer';
 import { reducer as products } from './products/reducer';
 import { reducer as verify } from './verify/reducer';
 import { reducer as categories } from './categories/reducer';
-import { reducer as product } from './product/reducer';
 import { reducer as filters } from './filters/reducer';
 
 const rootReducer = {
@@ -12,7 +11,6 @@ const rootReducer = {
   products,
   verify,
   categories,
-  product,
   filters,
 };
 
