@@ -1,4 +1,9 @@
-import { ApiRoutes, OrderApiRoutes, OrderStatus } from '@vse-bude/shared';
+import {
+  ApiRoutes,
+  OrderApiRoutes,
+  OrderStatus,
+  ProductType,
+} from '@vse-bude/shared';
 import type {
   OrderDto,
   MerchantSignatureData,
@@ -63,15 +68,48 @@ export class PaymentService {
 
     logger.log({ orderReference, transactionStatus, reason, reasonCode });
 
-    const { productId, createdAt } = await this._orderRepository.updateStatus(
-      orderReference,
-      OrderStatus.PAID,
-    );
+    const { productId, createdAt, product } =
+      await this._orderRepository.getById(orderReference);
 
     if (transactionStatus === TransactionStatus.APPROVED) {
       await this._productRepository.update(productId, {
-        status: ProductStatus.FINISHED,
+        status: ProductStatus.SOLD,
       });
+
+      await this._orderRepository.updateStatus(
+        orderReference,
+        OrderStatus.PAID,
+      );
+
+      return {
+        ...this.generateResponseData(orderReference, createdAt),
+      };
+    }
+
+    const isTransactionDeclined = [
+      TransactionStatus.DECLINED,
+      TransactionStatus.REFUNDED_VOIDED,
+      TransactionStatus.REFUND_IN_PROCESSING,
+      TransactionStatus.EXPIRED,
+    ].includes(transactionStatus as TransactionStatus);
+
+    if (isTransactionDeclined) {
+      if (product.type === ProductType.SELLING) {
+        await this._productRepository.update(productId, {
+          status: ProductStatus.ACTIVE,
+        });
+      }
+
+      if (product.type === ProductType.AUCTION) {
+        await this._productRepository.update(productId, {
+          status: ProductStatus.FINISHED,
+        });
+      }
+
+      await this._orderRepository.updateStatus(
+        orderReference,
+        OrderStatus.CREATED,
+      );
 
       return {
         ...this.generateResponseData(orderReference, createdAt),

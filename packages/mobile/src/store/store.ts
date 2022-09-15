@@ -4,7 +4,7 @@ import {
   authApi,
   personalInfoApi,
   productApi,
-  phoneVerificationApi,
+  verificationApi,
   categoryApi,
 } from '~/services/services';
 import { rootReducer } from './root-reducer';
@@ -15,7 +15,7 @@ const extraArgument = {
   authApi,
   personalInfoApi,
   productApi,
-  phoneVerificationApi,
+  verificationApi,
   categoryApi,
 };
 

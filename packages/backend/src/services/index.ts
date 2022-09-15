@@ -87,6 +87,7 @@ export const initServices = (repositories: Repositories): any => {
     orderService: new OrderService(
       repositories.orderRepository,
       repositories.productRepository,
+      verifyService,
     ),
     paymentService: new PaymentService(
       repositories.orderRepository,

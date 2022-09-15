@@ -26,7 +26,7 @@ export const screens = {
     UAH: 'UAH',
   },
   verification: {
-    SING_IN: 'Sing in',
+    SIGN_IN: 'Sign in',
     EMAIL: 'Email',
     EMAIL_HINT: 'Enter your email',
     PASSWORD: 'Password',
@@ -43,6 +43,7 @@ export const screens = {
     PHONE_NUMBER_HINT: 'Enter your phone',
     GOOGLE_BUTTON: 'Sign in with Google',
     FORGOT_PASSWORD: 'Forgot Password',
+    FORGOT_PASSWORD_BUTTON: 'Restore',
     ENTER_EMAIL: 'Enter your email to retrieve your password',
     HIDE_EMAIL: 'Hide Email',
     RESET_PASSWORD: 'Reset Password',
@@ -100,6 +101,8 @@ export const screens = {
     FIRST_NAME_INVALID: 'The invalid first name format',
     LAST_NAME_INVALID: 'The invalid last name format',
     WRONG_FORMAT: 'Wrong format',
+    WRONG_FORMAT_PHONE:
+      'Please enter phone number in an international format, e.g.: +380123456789',
     PLACE_NAME: 'Should consist of letters: А-Я or A-Z',
     MAX_COUNTRY_LENGTH: `The country name length must not exceed ${MAX_COUNTRY_LENGTH} characters`,
     MAX_REGION_LENGTH: `The region name length must not exceed ${MAX_REGION_LENGTH} characters`,
@@ -112,7 +115,7 @@ export const screens = {
     MAX_IMAGE_SIZE: `Maximum file size is ${MAX_IMAGE_SIZE / 1000000} Mb`,
     CORRECTLY_FILLED: 'Please check fields to correctly filled',
   },
-  verificationPhone: {
+  verify: {
     VERIFY: 'Verify',
     VERIFY_PHONE: 'Verify phone',
     ENTER_NUMBER: 'Enter Your Phone Number',
@@ -127,7 +130,8 @@ export const screens = {
     INPUT_LABEL_CODE: 'Enter the verification code we just sent to you',
     RESEND_CODE: 'Resend code',
     CONTINUE: 'Continue',
-    VERIFIED_TITLE: 'Your account has been fully verified',
+    VERIFIED_TITLE_PHONE: 'Your phone has been fully verified',
+    VERIFIED_TITLE_EMAIL: 'Your email has been fully verified',
     CODE_SENT: 'Code sent',
   },
   make_a_post: {
@@ -195,5 +199,14 @@ export const screens = {
     DESCRIPTION: 'Description',
     CURRENT_BID: 'Current bid',
     MIN_UAH: 'Min UAH',
+    BID_SAVED: 'Bid successfully placed',
+    LEAVE_TEXT: 'Leave Auction',
+    LEAVE_MODAL_TEXT:
+      'Are you sure to leave the auction? All bids will be deleted!',
+    LEAVE_SUCCESS: 'You have successfully leave the auction',
+    NEW_BID: 'New bid placed',
+  },
+  items_and_services: {
+    TITLE: 'Items & Services',
   },
 };

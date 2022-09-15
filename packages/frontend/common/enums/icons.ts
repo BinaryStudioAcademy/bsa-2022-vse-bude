@@ -32,6 +32,7 @@ export enum IconName {
   TRASH = 'trash',
   FILTER = 'filter',
   SUCCESS = 'circle-check',
+  SEARCH = 'search',
 }
 
 export const IconNameToClassName = {
@@ -68,4 +69,5 @@ export const IconNameToClassName = {
   [IconName.TRASH]: 'fa-regular fa-trash-can',
   [IconName.FILTER]: 'fa-solid fa-filter',
   [IconName.SUCCESS]: 'fa-regular fa-circle-check',
+  [IconName.SEARCH]: 'fa-solid fa-search',
 };

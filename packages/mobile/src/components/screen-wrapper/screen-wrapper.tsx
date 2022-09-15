@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { StatusBar } from 'react-native';
 import {
-  NativeSafeAreaViewProps,
   SafeAreaView,
+  NativeSafeAreaViewProps,
 } from 'react-native-safe-area-context';
 import { useCustomTheme } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';

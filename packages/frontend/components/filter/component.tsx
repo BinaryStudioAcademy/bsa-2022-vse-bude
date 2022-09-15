@@ -21,6 +21,7 @@ export const Filter = () => {
 
   useEffect(() => {
     const filter = getFilterDefinition(query);
+    setFilter(filter);
     dispatch(fetchProducts(filter || {}));
   }, [dispatch, query]);
 
@@ -35,7 +36,8 @@ export const Filter = () => {
         filter: JSON.stringify(filter),
       },
     });
-  }, [filter, push, query]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filter]);
 
   return (
     <>

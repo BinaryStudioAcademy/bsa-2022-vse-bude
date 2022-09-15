@@ -48,6 +48,7 @@ export const Item = ({ item }: ItemProps) => {
           <ItemInfoAuction
             item={item}
             isInFavorite={isInFavorite}
+            onBuy={handleBuy}
             onChangeIsFavorite={onChangeIsFavorite}
           />
         )}

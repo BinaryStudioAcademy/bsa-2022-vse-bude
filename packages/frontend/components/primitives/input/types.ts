@@ -1,6 +1,7 @@
 export interface SearchProps extends React.HTMLProps<HTMLButtonElement> {
   value: string;
   setValue: (string) => void;
+  onChange: ({ target }: { target: any }) => Promise<void>;
 }
 
 export interface PasswordProps extends React.HTMLProps<HTMLButtonElement> {
@@ -17,6 +18,6 @@ export interface InputProps extends PasswordProps {
 }
 
 export interface InputDateProps extends Omit<InputProps, 'value' | 'type'> {
-  value: Date;
-  setValue: (string) => void;
+  value?: Date;
+  setValue?: (string) => void;
 }

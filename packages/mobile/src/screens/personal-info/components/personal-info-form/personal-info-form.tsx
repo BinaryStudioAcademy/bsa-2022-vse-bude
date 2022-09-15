@@ -7,6 +7,7 @@ import {
   useTranslation,
   useNavigation,
   useEffect,
+  useFormState,
 } from '~/hooks/hooks';
 import { View, Input, PrimaryButton } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
@@ -70,6 +71,8 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
       validationSchema: personalInfoSchema,
     });
 
+  const { isDirty } = useFormState({ control });
+
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
       notification.error(t('errors.CORRECTLY_FILLED'));
@@ -103,7 +106,7 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
   };
 
   const handleVerifyEmailPress = () => {
-    //TODO add navigation
+    navigation.navigate(RootScreenName.VERIFY_CODE_EMAIL);
   };
 
   return (
@@ -149,7 +152,7 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
       />
       {isVerifyPhoneFieldVisible && (
         <VerifyField
-          title={t('verificationPhone.VERIFY_PHONE')}
+          title={t('verify.VERIFY_PHONE')}
           onPress={handleVerifyPhonePress}
         />
       )}
@@ -251,7 +254,7 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
         <PrimaryButton
           label={t('common:components.BUTTON_SAVE')}
           onPress={handleSubmit(onSubmit)}
-          disabled={isLoading}
+          disabled={isLoading || !isDirty}
         />
       </View>
       <View style={[globalStyles.mt3, globalStyles.mb5]}>

@@ -35,3 +35,15 @@ export const price = ({ spaces, breakpoints }: Theme) => css`
     text-align: center;
   }
 `;
+
+export const sold = ({ colors, fontSizes, fontWeights, spaces }: Theme) => css`
+  display: flex;
+  align-items: center;
+  color: ${colors.accent};
+  font-size: ${fontSizes.h6};
+  font-weight: ${fontWeights.h6};
+
+  i {
+    margin-right: ${spaces.xs};
+  }
+`;

@@ -3,11 +3,11 @@
 
 generator client {
   provider = "prisma-client-js"
-  previewFeatures = ["interactiveTransactions"]
 }
 
 generator erd {
   provider = "prisma-erd-generator"
+  includeRelationFromFields = true
 }
 
 datasource db {
@@ -234,6 +234,7 @@ enum ProductStatus {
   FINISHED
   CLOSED
   DRAFT
+  SOLD
 }
 
 enum SocialMediaType {
