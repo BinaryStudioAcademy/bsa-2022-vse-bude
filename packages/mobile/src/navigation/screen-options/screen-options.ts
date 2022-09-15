@@ -1,4 +1,3 @@
-
 export { getFilterScreenOptions } from './get-filter-screen-options';
 export { baseScreenOptions } from './base-screen-options';
 export { getItemsScreenOptions } from './items-screen-options';

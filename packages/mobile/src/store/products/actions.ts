@@ -17,6 +17,7 @@ import { ActionType } from './common';
 
 const loadProducts = createAsyncThunk<
   AllProductsDto,
+  ProductQuery & Record<string, unknown>,
   AsyncThunkConfig
 >(ActionType.PRODUCTS_FETCH, async (requestParams, { extra }) => {
   const { productApi } = extra;

@@ -28,7 +28,9 @@ class ProductService {
     this.#apiPrefix = apiPrefix;
   }
 
-  getProducts(requestParams: ProductQuery & Record<string, unknown> = {}): Promise<AllProductsDto> {
+  getProducts(
+    requestParams: ProductQuery & Record<string, unknown> = {},
+  ): Promise<AllProductsDto> {
     return this.#http.load(`${this.#apiPrefix}${ApiRoutes.PRODUCTS}`, {
       params: requestParams,
     });
@@ -47,7 +49,9 @@ class ProductService {
     );
   }
 
-  getPopularLots(requestParams: ProductQuery & Record<string, unknown> = {}): Promise<ProductDto[]> {
+  getPopularLots(
+    requestParams: ProductQuery & Record<string, unknown> = {},
+  ): Promise<ProductDto[]> {
     return this.#http.load(
       `${this.#apiPrefix}${ApiRoutes.PRODUCTS}${ProductApiRoutes.POPULAR_LOTS}`,
       {
