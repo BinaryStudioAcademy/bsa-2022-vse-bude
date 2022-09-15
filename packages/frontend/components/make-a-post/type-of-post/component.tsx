@@ -8,7 +8,7 @@ import { useTypedSelector } from '@hooks';
 import type { PostTypeProps } from './types';
 import * as styles from './styles';
 
-export const PostTypeModal = ({ isOpen, setIsOpen }: PostTypeProps) => {
+const PostTypeModal = ({ isOpen, setIsOpen }: PostTypeProps) => {
   const { t } = useTranslation();
   const isConfirmed = useTypedSelector(
     (state) => state.auth.user?.phoneVerified,
@@ -63,3 +63,5 @@ export const PostTypeModal = ({ isOpen, setIsOpen }: PostTypeProps) => {
     </Modal>
   );
 };
+
+export default PostTypeModal;

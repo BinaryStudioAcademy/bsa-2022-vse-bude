@@ -23,6 +23,7 @@ export const linkContent = () => css`
 
 export const icon = ({ spaces }: Theme) => css`
   margin-right: ${spaces.md};
+  width: 20px;
 `;
 
 export const activeLink = ({ colors }: Theme) => css`
