@@ -40,6 +40,8 @@ export class BidService {
       throw new AuctionEndedError();
     }
 
+    const lastBid = product.bids[product.bids.length - 1];
+
     const currentPrice = await this._productRepository.getCurrentPrice(
       dto.productId,
     );
@@ -63,6 +65,16 @@ export class BidService {
       description: lang('notifications:description.BID_PLACED', {}, 'en'),
       productId: product.id,
     });
+
+    if (lastBid && lastBid.bidderId !== bid.bidderId) {
+      await this._notificationRepository.createNotification({
+        type: NotificationType.OUTBID,
+        userId: lastBid.bidderId,
+        title: lang('notifications:title.OUTBID', {}, 'en'),
+        description: lang('notifications:description.OUTBID', {}, 'en'),
+        productId: product.id,
+      });
+    }
 
     return bid;
   }

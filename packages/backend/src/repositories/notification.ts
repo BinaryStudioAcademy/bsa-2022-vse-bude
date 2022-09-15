@@ -31,6 +31,7 @@ export class NotificationRepository {
         skip: +from,
         where: {
           viewed: viewedValue,
+          userId,
         },
         orderBy: {
           createdAt: Order.DESC,
@@ -39,6 +40,7 @@ export class NotificationRepository {
       this._dbClient.notification.count({
         where: {
           viewed: viewedValue,
+          userId,
         },
       }),
     ]);
