@@ -53,31 +53,13 @@ const reducer = createReducer(initialState, (builder) => {
         count: payload.count,
       };
     })
-    .addCase(loadPopularProducts.pending, (state) => {
-      state.dataStatus = DataStatus.PENDING;
-    })
-    .addCase(loadPopularProducts.rejected, (state) => {
-      state.dataStatus = DataStatus.REJECTED;
-    })
     .addCase(loadPopularProducts.fulfilled, (state, action) => {
       state.dataStatus = DataStatus.FULFILLED;
       state.popularProducts = [...state.popularProducts, ...action.payload];
     })
-    .addCase(loadPopularLots.pending, (state) => {
-      state.dataStatus = DataStatus.PENDING;
-    })
-    .addCase(loadPopularLots.rejected, (state) => {
-      state.dataStatus = DataStatus.REJECTED;
-    })
     .addCase(loadPopularLots.fulfilled, (state, action) => {
       state.dataStatus = DataStatus.FULFILLED;
       state.popularLots = [...state.popularLots, ...action.payload];
-    })
-    .addCase(loadProductInfo.pending, (state) => {
-      state.dataStatus = DataStatus.PENDING;
-    })
-    .addCase(loadProductInfo.rejected, (state) => {
-      state.dataStatus = DataStatus.REJECTED;
     })
     .addCase(loadProductInfo.fulfilled, (state, action) => {
       state.dataStatus = DataStatus.FULFILLED;
@@ -106,9 +88,6 @@ const reducer = createReducer(initialState, (builder) => {
           : product.price,
       );
     })
-    .addCase(auctionLeaveAction.rejected, (state) => {
-      state.dataStatus = DataStatus.REJECTED;
-    })
     .addCase(auctionMakeBid.fulfilled, (state, action) => {
       state.dataStatus = DataStatus.FULFILLED;
       state.products.items.map((product) =>
@@ -129,9 +108,6 @@ const reducer = createReducer(initialState, (builder) => {
         isAbleToLeaveAuction: true,
       };
     })
-    .addCase(auctionMakeBid.rejected, (state) => {
-      state.dataStatus = DataStatus.REJECTED;
-    })
     .addCase(updateCurrentItemPrice, (state, action) => {
       state.dataStatus = DataStatus.FULFILLED;
       if (state.currentProduct) {
@@ -142,12 +118,6 @@ const reducer = createReducer(initialState, (builder) => {
           ? (product.price = action.payload.price)
           : product.price,
       );
-    })
-    .addCase(updateProductViews.pending, (state) => {
-      state.dataStatus = DataStatus.PENDING;
-    })
-    .addCase(updateProductViews.rejected, (state) => {
-      state.dataStatus = DataStatus.REJECTED;
     })
     .addCase(updateProductViews.fulfilled, (state, action) => {
       state.dataStatus = DataStatus.FULFILLED;
@@ -184,6 +154,10 @@ const reducer = createReducer(initialState, (builder) => {
     .addMatcher(
       isAnyOf(
         loadProducts.pending,
+        loadPopularProducts.pending,
+        loadPopularLots.pending,
+        loadProductInfo.pending,
+        updateProductViews.pending,
         fetchFavorites.pending,
         fetchFavoriteIds.pending,
         addToFavorite.pending,
@@ -196,6 +170,12 @@ const reducer = createReducer(initialState, (builder) => {
     .addMatcher(
       isAnyOf(
         loadProducts.rejected,
+        loadPopularProducts.rejected,
+        loadPopularLots.rejected,
+        loadProductInfo.rejected,
+        auctionLeaveAction.rejected,
+        auctionMakeBid.rejected,
+        updateProductViews.rejected,
         fetchFavorites.rejected,
         fetchFavoriteIds.rejected,
         addToFavorite.rejected,
