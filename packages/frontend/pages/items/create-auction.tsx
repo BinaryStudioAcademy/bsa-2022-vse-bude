@@ -37,6 +37,7 @@ export const getServerSideProps = withPublic(
           'create-post',
           'rules',
           'item',
+          'public'
         ])),
       },
     };
