@@ -14,13 +14,19 @@
         "name": "Михайло Бенедюк",
         "photo":
           "/images/team/Misha.jpg",
-        "role": "full meow stack"
+        "role": "developer"
+      },
+      {
+        "name": "Дмитро Колісник",
+        "photo":
+          "/images/team/Dmytro.png",
+        "role": "Developer"
       },
       {
         "name": "Надія Прохорчук",
         "photo":
           "/images/team/Nadiia.jpg",
-        "role": "frontend"
+        "role": "Frontend"
       },
       {
         "name": "Ольга Яротська",
