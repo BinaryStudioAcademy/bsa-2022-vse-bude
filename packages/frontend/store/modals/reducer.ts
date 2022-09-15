@@ -1,10 +1,14 @@
 import { createReducer } from '@reduxjs/toolkit';
 import {
   hideMakePostModal,
+  hideVerifyEmailModal,
   hideVerifyPhoneModal,
-  nextVerifyModal,
-  previousVerifyModal,
+  nextVerifyEmailModal,
+  nextVerifyPhoneModal,
+  previousVerifyEmailModal,
+  previousVerifyPhoneModal,
   showMakePostModal,
+  showVerifyEmailModal,
   showVerifyPhoneModal,
 } from './actions';
 
@@ -13,11 +17,19 @@ interface ModalsState {
     isModalOpen: boolean;
     step: number;
   };
+  verifyEmailModal: {
+    isModalOpen: boolean;
+    step: number;
+  };
   isCreatePostModalOpen: boolean;
 }
 
 const initialState: ModalsState = {
   verifyPhoneModal: {
+    isModalOpen: false,
+    step: 0,
+  },
+  verifyEmailModal: {
     isModalOpen: false,
     step: 0,
   },
@@ -39,6 +51,50 @@ export const modalsReducer = createReducer(initialState, {
       step: state.verifyPhoneModal.step,
     },
   }),
+  [nextVerifyPhoneModal.type]: (state) => ({
+    ...state,
+    verifyPhoneModal: {
+      isModalOpen: state.verifyPhoneModal.isModalOpen,
+      step: state.verifyPhoneModal.step + 1,
+    },
+  }),
+  [previousVerifyPhoneModal.type]: (state) => ({
+    ...state,
+    verifyPhoneModal: {
+      isModalOpen: state.verifyPhoneModal.isModalOpen,
+      step: state.verifyPhoneModal.step - 1,
+    },
+  }),
+
+  [showVerifyEmailModal.type]: (state) => ({
+    ...state,
+    verifyEmailModal: {
+      isModalOpen: true,
+      step: state.verifyEmailModal.step,
+    },
+  }),
+  [hideVerifyEmailModal.type]: (state) => ({
+    ...state,
+    verifyEmailModal: {
+      isModalOpen: false,
+      step: state.verifyEmailModal.step,
+    },
+  }),
+  [nextVerifyEmailModal.type]: (state) => ({
+    ...state,
+    verifyEmailModal: {
+      isModalOpen: state.verifyEmailModal.isModalOpen,
+      step: state.verifyEmailModal.step + 1,
+    },
+  }),
+  [previousVerifyEmailModal.type]: (state) => ({
+    ...state,
+    verifyEmailModal: {
+      isModalOpen: state.verifyEmailModal.isModalOpen,
+      step: state.verifyEmailModal.step - 1,
+    },
+  }),
+
   [showMakePostModal.type]: (state) => ({
     ...state,
     isCreatePostModalOpen: true,
@@ -46,20 +102,6 @@ export const modalsReducer = createReducer(initialState, {
   [hideMakePostModal.type]: (state) => ({
     ...state,
     isCreatePostModalOpen: false,
-  }),
-  [nextVerifyModal.type]: (state) => ({
-    ...state,
-    verifyPhoneModal: {
-      isModalOpen: state.verifyPhoneModal.isModalOpen,
-      step: state.verifyPhoneModal.step + 1,
-    },
-  }),
-  [previousVerifyModal.type]: (state) => ({
-    ...state,
-    verifyPhoneModal: {
-      isModalOpen: state.verifyPhoneModal.isModalOpen,
-      step: state.verifyPhoneModal.step - 1,
-    },
   }),
 });
 

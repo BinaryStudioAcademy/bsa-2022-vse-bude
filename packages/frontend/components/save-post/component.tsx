@@ -2,7 +2,7 @@ import { useTranslation } from 'next-i18next';
 import { Container } from '@primitives';
 import { ProductType } from '@vse-bude/shared';
 import { useTypedSelector } from '@hooks';
-import NotVerificatedWarning from '@components/verification/not-verificated-warning/component';
+import NotVerificatedWarning from '@components/phone-verification/not-verificated-warning/component';
 import { IsVerificatedSelector } from 'store/auth';
 import { NestedLayout } from '../profile/user-account/common';
 import type { SavePostProps } from './types';
