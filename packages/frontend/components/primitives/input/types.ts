@@ -18,6 +18,6 @@ export interface InputProps extends PasswordProps {
 }
 
 export interface InputDateProps extends Omit<InputProps, 'value' | 'type'> {
-  value: Date;
-  setValue: (string) => void;
+  value?: Date;
+  setValue?: (string) => void;
 }
