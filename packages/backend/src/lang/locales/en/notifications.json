@@ -3,12 +3,14 @@
     "BID_PLACED": "Bid was placed.",
     "PRODUCT_SOLD": "Product sold.",
     "AUCTION_ENDED": "Auction ended.",
-    "OUTBID": "Bid outbided!"
+    "OUTBID": "Bid outbided!",
+    "AUCTION_LEFT": "Left auction!"
   },
   "description": {
     "BID_PLACED": "Bid was placed on your lot.",
     "PRODUCT_SOLD": "Your product was sold!",
     "AUCTION_ENDED": "The auction you were tracking ended.",
-    "OUTBID": "You bid was outbided!"
+    "OUTBID": "You bid was outbided!",
+    "AUCTION_LEFT": "Last bidder left the auction!"
   }
 }

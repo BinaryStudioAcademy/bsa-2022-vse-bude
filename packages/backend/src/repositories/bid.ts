@@ -104,4 +104,18 @@ export class BidRepository {
       },
     });
   }
+
+  public async getBidders(productId: string): Promise<string[]> {
+    const biddersObject = await this._dbClient.bid.findMany({
+      where: {
+        productId,
+      },
+      select: {
+        bidderId: true,
+      },
+      distinct: ['bidderId'],
+    });
+
+    return biddersObject.map((bidder) => bidder.bidderId);
+  }
 }

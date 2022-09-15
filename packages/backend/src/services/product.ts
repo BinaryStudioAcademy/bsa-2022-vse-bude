@@ -21,7 +21,7 @@ import type {
   ProductSearchResponse,
   ProductSearchQuery,
 } from '@vse-bude/shared';
-import { ProductType } from '@vse-bude/shared';
+import { ProductType, NotificationType } from '@vse-bude/shared';
 import { ProductStatus } from '@prisma/client';
 import type { Product, Bid } from '@prisma/client';
 import type {
@@ -153,11 +153,23 @@ export class ProductService {
       throw new AuctionEndedError();
     }
 
+    const lastBid = product.bids[product.bids.length - 1];
+
     await this._bidRepository.retrieve(
       userId,
       productId,
       new Date(Date.now()).toISOString(),
     );
+
+    if (lastBid && lastBid.bidderId === userId) {
+      await this._notificationRepository.createNotification({
+        type: NotificationType.AUCTION_LEFT,
+        userId: product.authorId,
+        title: lang('notifications:title.AUCTION_LEFT', {}, 'en'),
+        description: lang('notifications:description.AUCTION_LEFT', {}, 'en'),
+        productId: productId,
+      });
+    }
 
     return this.getById(productId);
   }
@@ -295,11 +307,11 @@ export class ProductService {
     userId,
     productId,
   }: BuyProduct): Promise<string | undefined> {
-    const isActive = await this._productRepository.checkStatus(
+    const product = await this._productRepository.checkStatus(
       productId,
       ProductStatus.ACTIVE,
     );
-    if (!isActive) {
+    if (!product) {
       return undefined;
     }
     const isUserVerified = await this._verifyService.isUserVerified(userId);
@@ -311,6 +323,14 @@ export class ProductService {
       userId,
       ProductStatus.FINISHED,
     );
+
+    await this._notificationRepository.createNotification({
+      type: NotificationType.PRODUCT_SOLD,
+      userId: product.authorId,
+      title: lang('notifications:title.PRODUCT_SOLD', {}, 'en'),
+      description: lang('notifications:description.PRODUCT_SOLD', {}, 'en'),
+      productId: productId,
+    });
 
     return productId;
   }

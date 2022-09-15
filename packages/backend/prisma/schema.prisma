@@ -277,5 +277,6 @@ enum NotificationType {
   AUCTION_ENDED
   OUTBID
   BID_PLACED
+  AUCTION_LEFT
   INFO
 }

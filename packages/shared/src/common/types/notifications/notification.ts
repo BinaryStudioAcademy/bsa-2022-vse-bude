@@ -3,6 +3,7 @@ export enum NotificationType {
   AUCTION_ENDED = 'AUCTION_ENDED',
   OUTBID = 'OUTBID',
   BID_PLACED = 'BID_PLACED',
+  AUCTION_LEFT = 'AUCTION_LEFT',
   INFO = 'INFO',
 }
 
