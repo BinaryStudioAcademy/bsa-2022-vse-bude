@@ -1,0 +1,43 @@
+[
+    {
+        "name": "Євгеній Бєляєв",
+        "photo": "/images/team/Eugene.png",
+        "role": "frontend/backend developer",
+        "description": "hi"
+      },
+      {
+        "name": "Данило Стрелець",
+        "photo":
+          "/images/team/Danya.jpg",
+        "role": "frontend",
+        "description": "hi"
+      },
+      {
+        "name": "Михайло Бенедюк",
+        "photo":
+          "/images/team/Misha.jpg",
+        "role": "full meow stack",
+        "description": "hi"
+      },
+      {
+        "name": "Надія Прохорчук",
+        "photo":
+          "/images/team/Nadiia.jpg",
+        "role": "frontend",
+        "description": "hi"
+      },
+      {
+        "name": "Ольга Яротська",
+        "photo":
+          "/images/team/Olga.jpg",
+        "role": "QA",
+        "description": "hi"
+      },
+      {
+        "name": "Євгеній Морозюк",
+        "photo":
+          "/images/team/Eugene_Moroziuk.jpg",
+        "role": "JS Coach",
+        "description": "hi"
+      }
+]

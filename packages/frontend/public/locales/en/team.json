@@ -1,0 +1,43 @@
+[
+    {
+        "name": "Yevhenii Bieliaiev",
+        "photo": "/images/team/Eugene.png",
+        "role": "frontend/backend developer",
+        "description": "hi"
+      },
+      {
+        "name": "Danylo Strelets",
+        "photo":
+          "/images/team/Danya.jpg",
+        "role": "frontend",
+        "description": "hi"
+      },
+      {
+        "name": "Mykhailo Benedyk",
+        "photo":
+          "/images/team/Misha.jpg",
+        "role": "full meow stack",
+        "description": "hi"
+      },
+      {
+        "name": "Nadiia Prokhorchuk",
+        "photo":
+          "/images/team/Nadiia.jpg",
+        "role": "frontend",
+        "description": "hi"
+      },
+      {
+        "name": "Olda Yarotska",
+        "photo":
+          "/images/team/Olga.jpg",
+        "role": "QA",
+        "description": "hi"
+      },
+      {
+        "name": "Yevhenii Moroziuk",
+        "photo":
+          "/images/team/Eugene_Moroziuk.jpg",
+        "role": "JS Coach",
+        "description": "hi"
+      }
+]
