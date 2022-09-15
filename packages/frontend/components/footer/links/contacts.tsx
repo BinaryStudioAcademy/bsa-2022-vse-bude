@@ -13,19 +13,21 @@ export const Contacts: FC<ContactsProps> = ({ email, phone }) => {
     <div css={styles.footerLinksWrapper}>
       <ColumnHeader>{t('common:footer.contacts')}</ColumnHeader>
 
-      {phone && <div css={styles.footerLinksRow}>
-        <Icon
-          cssExtend={styles.phone}
-          color={IconColor.YELLOW}
-          icon={IconName.PHONE}
-        />
-        <Anchor
-          variant="secondary"
-          href={`tel:${phone}`}
-          label={phone}
-          target="_self"
-        />
-      </div>}
+      {phone && (
+        <div css={styles.footerLinksRow}>
+          <Icon
+            cssExtend={styles.phone}
+            color={IconColor.YELLOW}
+            icon={IconName.PHONE}
+          />
+          <Anchor
+            variant="secondary"
+            href={`tel:${phone}`}
+            label={phone}
+            target="_self"
+          />
+        </div>
+      )}
 
       <div css={styles.footerLinksRow}>
         <Icon
