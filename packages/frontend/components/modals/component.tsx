@@ -5,10 +5,22 @@ const VerificationModal = dynamic(
   () => import('@components/verification/component'),
 );
 
+const PostTypeModal = dynamic(
+  () => import('@components/make-a-post/type-of-post/component'),
+);
+
 export const Modals = () => {
-  const { isModalOpen } = useTypedSelector(
-    (state) => state.modals.verifyPhoneModal,
+  const isPhoneVerificationModalOpen = useTypedSelector(
+    (state) => state.modals.verifyPhoneModal.isModalOpen,
+  );
+  const isCreatePostModalOpen = useTypedSelector(
+    (state) => state.modals.isCreatePostModalOpen,
   );
 
-  return <>{isModalOpen && <VerificationModal />}</>;
+  return (
+    <>
+      {isPhoneVerificationModalOpen && <VerificationModal />}
+      {isCreatePostModalOpen && <PostTypeModal />}
+    </>
+  );
 };

@@ -4,16 +4,24 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import Image from 'next/future/image';
 import legoImg from 'public/images/postType/lego.png';
-import { useTypedSelector } from '@hooks';
-import type { PostTypeProps } from './types';
+import { useAppDispatch, useTypedSelector } from '@hooks';
+import { hideMakePostModal } from 'store/modals/actions';
 import * as styles from './styles';
 
-const PostTypeModal = ({ isOpen, setIsOpen }: PostTypeProps) => {
+const PostTypeModal = () => {
   const { t } = useTranslation();
   const isConfirmed = useTypedSelector(
     (state) => state.auth.user?.phoneVerified,
   );
+  const isOpen = useTypedSelector(
+    (state) => state.modals.isCreatePostModalOpen,
+  );
   const router = useRouter();
+  const dispatch = useAppDispatch();
+
+  const onClose = () => {
+    dispatch(hideMakePostModal());
+  };
 
   return (
     <Modal visible={isOpen}>
@@ -24,7 +32,7 @@ const PostTypeModal = ({ isOpen, setIsOpen }: PostTypeProps) => {
         <IconButton
           cssExtend={styles.xmark}
           icon={IconName.XMARK}
-          onClick={() => setIsOpen(false)}
+          onClick={() => onClose()}
           ariaLabel={t('common:components.modal.closeLabel')}
         />
         <div css={styles.imgWrapper}>
