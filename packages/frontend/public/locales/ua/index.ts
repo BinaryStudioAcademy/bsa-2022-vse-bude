@@ -25,5 +25,5 @@ export const ua = {
   item,
   rules,
   checkout,
-  about
+  about,
 };

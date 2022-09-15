@@ -36,8 +36,15 @@
       {
         "name": "Євгеній Морозюк",
         "photo":
-          "/images/team/Eugene_Moroziuk.jpg",
+          "/images/team/Yevhenii.jpg",
         "role": "JS Coach",
+        "description": "hi"
+      },
+      {
+        "name": "Віталій Ярмус",
+        "photo":
+          "/images/team/Vitalii.jpg",
+        "role": "JS Coach, Lecturer",
         "description": "hi"
       }
 ]

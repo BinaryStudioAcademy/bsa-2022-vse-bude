@@ -13,7 +13,7 @@ export const avatar = ({ radiuses }: Theme) => css`
 `;
 
 export const descriptionWrapper = ({ spaces }: Theme) => css`
-text-align: center;
+  text-align: center;
   margin: 0 ${spaces.md};
   height: 100%;
 `;
@@ -34,7 +34,7 @@ export const line = ({ spaces, colors }: Theme) => css`
   height: 3px;
   margin: ${spaces.lg} 0;
   background-color: ${colors.accent};
-  &:last-child{
+  &:last-child {
     height: 0;
   }
 `;
@@ -69,6 +69,4 @@ export const itemsWrapper1 = ({ spaces }: Theme) => css`
 
   padding: ${spaces.md};
   margin: ${spaces.lg} 0;
-
 `;
-
