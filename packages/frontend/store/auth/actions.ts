@@ -26,7 +26,7 @@ import { auth } from '@helpers';
 import { Routes } from '@enums';
 import type { IAuth } from '@types';
 import { addToast } from 'store/toast/actions';
-import { hideVerifyModal } from '../modals/actions';
+import { hideVerifyPhoneModal } from '../modals/actions';
 import { AuthActions } from './action-types';
 
 const getCurrentUser = createAsyncThunk(
@@ -134,7 +134,7 @@ const phoneVerification = createAsyncThunk(
           description: (t) => t('common:notifications.phoneVerifySuccess'),
         }),
       );
-      dispatch(hideVerifyModal());
+      dispatch(hideVerifyPhoneModal());
     } catch (e) {
       dispatch(
         addToast({

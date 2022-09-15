@@ -1,5 +1,5 @@
 import { useTranslation } from 'next-i18next';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { Input, Column, Flex, Button, Loader, InputDate } from '@primitives';
 import { useState, useEffect } from 'react';
 import { joiResolver } from '@hookform/resolvers/joi';
@@ -29,13 +29,14 @@ export default function ProductForm({ edit }: { edit: boolean }) {
   const [images, setImages] = useState<(File | string)[]>([]);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [endDate, setEndDate] = useState<Date>(null);
   const [status, setStatus] = useState(PostStatuses.CREATE);
+  const [endDate, setEndDate] = useState(null);
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
+    control,
   } = useForm({
     defaultValues: initialAuctionFormState,
     resolver: joiResolver(createAuctionSchema(t)),
@@ -61,6 +62,7 @@ export default function ProductForm({ edit }: { edit: boolean }) {
       images.forEach((file) => formData.append('images', file));
       formData.append('type', ProductType.AUCTION);
       formData.append('status', status);
+
       Object.keys(data).forEach((key) => {
         switch (key) {
           case 'category':
@@ -76,7 +78,7 @@ export default function ProductForm({ edit }: { edit: boolean }) {
             formData.append(key, data[key] ?? '');
         }
       });
-      formData.set('endDate', new Date(endDate).toISOString());
+      formData.set('endDate', data.endDate.toISOString());
 
       if (edit) {
         const editInfo = await updateProduct(query.id as string, formData);
@@ -117,7 +119,7 @@ export default function ProductForm({ edit }: { edit: boolean }) {
             break;
           }
           case 'endDate':
-            setValue(item, new Date(currentProduct?.endDate).toString());
+            setValue(item, new Date(currentProduct?.endDate).toISOString());
             setEndDate(new Date(currentProduct?.endDate));
             break;
           case 'phone':
@@ -142,11 +144,6 @@ export default function ProductForm({ edit }: { edit: boolean }) {
   const setConditionWrapper = (condition: SelectOption) => {
     setCondition(condition);
     setValue('condition', condition.value);
-  };
-
-  const setEndDateWrapper = (date) => {
-    setEndDate(date);
-    setValue('endDate', date);
   };
 
   return (
@@ -219,16 +216,25 @@ export default function ProductForm({ edit }: { edit: boolean }) {
             />
           </div>
         </Flex>
-
-        <InputDate
-          required
-          setValue={setEndDateWrapper}
-          value={endDate}
-          variant="primary"
-          label={t('create-post:label.endDate')}
-          id="post-end-date"
-          error={errors.endDate?.message}
-        ></InputDate>
+        <Controller
+          control={control}
+          name="endDate"
+          render={({ field }) => (
+            <InputDate
+              required
+              variant="primary"
+              label={t('create-post:label.endDate')}
+              id="post-end-date"
+              error={errors.endDate?.message}
+              selected={endDate}
+              value={endDate}
+              onChange={(date) => {
+                setEndDate(date);
+                field.onChange(date);
+              }}
+            />
+          )}
+        />
       </Column>
       <Column>
         <ContactBlock

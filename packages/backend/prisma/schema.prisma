@@ -251,6 +251,7 @@ enum ProductStatus {
   FINISHED
   CLOSED
   DRAFT
+  SOLD
 }
 
 enum SocialMediaType {

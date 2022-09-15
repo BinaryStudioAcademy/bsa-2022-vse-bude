@@ -486,6 +486,7 @@ export const initProductRoutes = (
    *         type: string
    *       - in: formData
    *         name: condition
+   *         required: true
    *         description: oneOf [USED, NEW]
    *         type: string
    *       - in: formData

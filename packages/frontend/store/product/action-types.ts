@@ -11,4 +11,6 @@ export enum ProductActions {
   AUCTION_PERMISSIONS = 'product/auction-permissions',
   AUCTION_LEAVE = 'product/auction-leave',
   GET_CURRENT_PRODUCT = 'product/fetch-current-product',
+  SEARCH = 'product/search',
+  CLEAR_SEARCH = 'product/clear-search',
 }

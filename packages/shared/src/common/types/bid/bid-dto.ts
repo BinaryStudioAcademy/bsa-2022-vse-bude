@@ -4,4 +4,5 @@ export interface Bid {
   price: number;
   createdAt: string;
   updatedAt: string;
+  productId: string;
 }
