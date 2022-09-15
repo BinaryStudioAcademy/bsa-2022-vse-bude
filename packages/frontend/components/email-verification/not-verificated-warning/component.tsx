@@ -1,20 +1,18 @@
 import { Button } from '@components/primitives';
-import { ApiRoutes, VerifyApiRoutes } from '@vse-bude/shared';
+import { useAppDispatch } from '@hooks';
 import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
+import { showVerifyEmailModal } from 'store/modals/actions';
 import * as styles from './styles';
 
-export default function NotVerificatedWarning() {
+export default function PhoneNotVerificatedWarning() {
   const { t } = useTranslation();
-  const { push } = useRouter();
+  const dispatch = useAppDispatch();
 
   return (
     <div css={styles.textWrapper}>
       <p css={styles.text}>{t('create-post:notVerified.text')}</p>
       <div css={styles.btnWrapper}>
-        <Button
-          onClick={() => push(ApiRoutes.AUTH + VerifyApiRoutes.VERIFY_PHONE)}
-        >
+        <Button onClick={() => dispatch(showVerifyEmailModal())}>
           {t('create-post:notVerified.btn')}
         </Button>
       </div>
