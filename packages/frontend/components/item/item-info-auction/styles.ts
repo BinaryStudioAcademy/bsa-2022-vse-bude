@@ -130,3 +130,20 @@ export const buttons = ({ spaces, breakpoints }: Theme) => css`
     margin-left: 0;
   }
 `;
+
+export const sold = ({ colors, fontSizes, fontWeights, spaces }: Theme) => css`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  color: ${colors.accent};
+  font-size: ${fontSizes.h6};
+  font-weight: ${fontWeights.h6};
+
+  i {
+    margin-right: ${spaces.xs};
+  }
+`;
+
+export const buyBtnWrapper = css`
+  margin-left: auto;
+`;

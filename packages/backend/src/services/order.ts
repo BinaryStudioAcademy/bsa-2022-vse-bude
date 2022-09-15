@@ -6,8 +6,8 @@ import {
 import type { ProductRepository, OrderRepository } from '@repositories';
 import type { OrderById, OrderQuery } from '@types';
 import type { CreateOrderDto } from '@vse-bude/shared';
-import { ProductStatus } from '@vse-bude/shared';
-import type { Order } from '@prisma/client';
+import { ProductStatus, ProductType } from '@vse-bude/shared';
+import type { Order, Product } from '@prisma/client';
 import { NotVerifiedError } from 'error/user/not-verified';
 import type { VerifyService } from './verify';
 
@@ -42,7 +42,7 @@ export class OrderService {
       throw new ProductNotFoundError();
     }
 
-    if (product.status !== ProductStatus.ACTIVE) {
+    if (!this.isPossibleToCreateOrder(product)) {
       throw new ProductUnavailableError();
     }
 
@@ -68,5 +68,23 @@ export class OrderService {
 
   public async getById(id: string): Promise<Order & OrderById> {
     return this._orderRepository.getById(id);
+  }
+
+  private isPossibleToCreateOrder(product: Product): boolean {
+    if (
+      product.type === ProductType.SELLING &&
+      product.status === ProductStatus.ACTIVE
+    ) {
+      return true;
+    }
+
+    if (
+      product.type === ProductType.AUCTION &&
+      product.status === ProductStatus.FINISHED
+    ) {
+      return true;
+    }
+
+    return false;
   }
 }

@@ -10,6 +10,7 @@
  *     - FINISHED
  *     - CLOSED
  *     - DRAFT
+ *     - SOLD
  */
 
 export {};

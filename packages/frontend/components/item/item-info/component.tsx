@@ -14,8 +14,8 @@ export const ItemInfo = ({ item }: ItemInfoProps) => {
   const { t } = useTranslation();
 
   const getDate = (date) =>
-    new Date(date).toLocaleDateString().replaceAll('/', '.');
-  const getTime = (date) => new Date(date).toLocaleTimeString();
+    new Date(date).toLocaleDateString('uk-UA').replaceAll('/', '.');
+  const getTime = (date) => new Date(date).toLocaleTimeString('uk-UA');
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   const handleContactSeller = () => {};
 
