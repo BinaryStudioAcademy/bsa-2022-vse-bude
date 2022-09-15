@@ -104,4 +104,12 @@ export class BidRepository {
       where: { id: productId },
     });
   }
+
+  async getAll(productId: string): Promise<Bid[]> {
+    return this._dbClient.bid.findMany({
+      where: {
+        productId,
+      },
+    });
+  }
 }
