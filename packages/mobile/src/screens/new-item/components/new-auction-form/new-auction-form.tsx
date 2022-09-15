@@ -22,6 +22,7 @@ import { categoryForDropdown } from '~/helpers/category/format-category-for-drop
 import { ButtonsContainer } from '~/screens/components/components';
 import { selectCategories, selectDataStatusProducts } from '~/store/selectors';
 import { DataStatus } from '~/common/enums/enums';
+import { productsAuctionSchema } from '~/validation-schemas/validation-schemas';
 import { AddPhotos } from '../add-photos/add-photos';
 
 import { useStyles } from './styles';
@@ -38,11 +39,20 @@ const NewAuctionForm: FC = () => {
 
   const { control, errors, handleSubmit } = useAppForm<ICreateAuction>({
     defaultValues: {
-      country: 'Ukraine',
-      callingCode: 'UA',
+      category: '',
+      title: '',
+      description: '',
+      condition: '',
       recommendedPriceCurrency: t('common:currency.UAH'),
+      recommendedPrice: 0,
       minimalBidCurrency: t('common:currency.UAH'),
+      minimalBid: 0,
+      endDate: '',
+      country: '',
+      city: '',
+      phone: '+380',
     },
+    validationSchema: productsAuctionSchema,
   });
 
   const handleSaveAsDraftPress = (): void => {
@@ -70,10 +80,8 @@ const NewAuctionForm: FC = () => {
           control={control}
           items={formattedCategories}
           zIndex={19}
-          requiredMark={true}
         />
       )}
-
       <Input
         label={t('make_a_post.TITLE_NAME')}
         placeholder={t('make_a_post.TITLE_NAME_PLACEHOLDER')}
@@ -102,7 +110,6 @@ const NewAuctionForm: FC = () => {
         control={control}
         items={CONDITION}
         zIndex={19}
-        requiredMark={true}
       />
       <View
         style={[
@@ -120,7 +127,7 @@ const NewAuctionForm: FC = () => {
         />
         <Input
           label={t('make_a_post.RECOMMENDED_PRICE')}
-          placeholder={t('make_a_post.RECOMMENDED_PRICE_PLACEHOLDER')}
+          placeholder="0"
           name="recommendedPrice"
           control={control}
           errors={errors}
@@ -146,7 +153,7 @@ const NewAuctionForm: FC = () => {
         />
         <Input
           label={t('make_a_post.MINIMAL_BID')}
-          placeholder={t('make_a_post.MINIMAL_BID_PLACEHOLDER')}
+          placeholder="0"
           name="minimalBid"
           control={control}
           errors={errors}

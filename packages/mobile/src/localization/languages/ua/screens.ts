@@ -9,6 +9,10 @@ import {
   MAX_CITY_LENGTH,
   MAX_DELIVERY_DATA_LENGTH,
   MAX_SOCIAL_NETWORK_LENGTH,
+  MAX_TITLE_POST_LENGTH,
+  MAX_DESCRIPTION_POST_LENGTH,
+  MIN_PRICE,
+  MIN_BID,
 } from '~/common/constants/constants';
 
 export const screens = {
@@ -103,8 +107,10 @@ export const screens = {
     WRONG_FORMAT_PHONE:
       'Будь ласка, введіть телефон у міжнародному форматі: +380123456789',
     PLACE_NAME: 'Має складатися з літер: А-Я або A-Z',
+    EMPTY_COUNTRY: 'Будь-ласка, введіть назву країни',
     MAX_COUNTRY_LENGTH: `Назва країни має містити не більше ${MAX_COUNTRY_LENGTH} символів`,
     MAX_REGION_LENGTH: `Назва області має містити не більше ${MAX_REGION_LENGTH} символів`,
+    EMPTY_CITY: 'Будь-ласка, введіть назву населеного пункту',
     MAX_CITY_LENGTH: `Назва населеного пункту має містити не більше ${MAX_CITY_LENGTH} символів`,
     INVALID_ZIP: 'Поштовий індекс має складатися із 5 цифр',
     MAX_DELIVERY_DATA_LENGTH: `Деталі доставки мають містити не більше ${MAX_DELIVERY_DATA_LENGTH} символів`,
@@ -113,6 +119,16 @@ export const screens = {
     MAX_SOCIAL_NETWORK_LENGTH: `Посилання не може перевищувати ${MAX_SOCIAL_NETWORK_LENGTH} символів`,
     MAX_IMAGE_SIZE: `Максимальний розмір файлу ${MAX_IMAGE_SIZE / 1000000} МБ`,
     CORRECTLY_FILLED: 'Будь ласка, перевірте, чи правильно заповнені поля',
+    MAX_TITLE_POST_LENGTH: `Назва отвару має містити не більше ${MAX_TITLE_POST_LENGTH} символів`,
+    MAX_DESCRIPTION_POST_LENGTH: `Опис отвару має містити не більше ${MAX_DESCRIPTION_POST_LENGTH} символів`,
+    EMPTY_PRODUCT: 'Будь ласка, введіть назву товару!',
+    EMPTY_DESCRIPTION: 'Будь ласка, введіть опис товару!',
+    EMPTY_RECOMMENDED_PRICE: 'Будь ласка, введіть рекомендовану ціну!',
+    EMPTY_BID: 'Будь ласка, введіть мінімальну ставку!',
+    MIN_PRICE: `Ціна не може бути нижча за ${MIN_PRICE}`,
+    MIN_BID: `Ставка не може бути нижча за ${MIN_BID}`,
+    NUMBER_PRICE: 'Ціна має бути числом',
+    NUMBER_BID: 'Ставка має бути числом',
   },
   verify: {
     VERIFY: 'Підтвердити',

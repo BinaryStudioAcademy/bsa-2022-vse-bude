@@ -9,6 +9,10 @@ import {
   MAX_CITY_LENGTH,
   MAX_DELIVERY_DATA_LENGTH,
   MAX_SOCIAL_NETWORK_LENGTH,
+  MAX_TITLE_POST_LENGTH,
+  MAX_DESCRIPTION_POST_LENGTH,
+  MIN_PRICE,
+  MIN_BID,
 } from '~/common/constants/constants';
 
 export const screens = {
@@ -104,8 +108,10 @@ export const screens = {
     WRONG_FORMAT_PHONE:
       'Please enter phone number in an international format, e.g.: +380123456789',
     PLACE_NAME: 'Should consist of letters: А-Я or A-Z',
+    EMPTY_COUNTRY: 'Fill the country please',
     MAX_COUNTRY_LENGTH: `The country name length must not exceed ${MAX_COUNTRY_LENGTH} characters`,
     MAX_REGION_LENGTH: `The region name length must not exceed ${MAX_REGION_LENGTH} characters`,
+    EMPTY_CITY: 'Fill the city please',
     MAX_CITY_LENGTH: `The city name length must not exceed ${MAX_CITY_LENGTH} characters`,
     INVALID_ZIP: 'Zip code should consist of 5 digits',
     MAX_DELIVERY_DATA_LENGTH: `Delivery details length must not exceed ${MAX_DELIVERY_DATA_LENGTH} characters`,
@@ -114,6 +120,14 @@ export const screens = {
     MAX_SOCIAL_NETWORK_LENGTH: `The link length must not exceed ${MAX_SOCIAL_NETWORK_LENGTH} characters`,
     MAX_IMAGE_SIZE: `Maximum file size is ${MAX_IMAGE_SIZE / 1000000} Mb`,
     CORRECTLY_FILLED: 'Please check fields to correctly filled',
+    MAX_TITLE_POST_LENGTH: `The product name length must not exceed ${MAX_TITLE_POST_LENGTH} characters`,
+    MAX_DESCRIPTION_POST_LENGTH: `The description length must not exceed ${MAX_DESCRIPTION_POST_LENGTH} characters`,
+    EMPTY_PRODUCT: 'Fill the title please!',
+    EMPTY_DESCRIPTION: 'Fill the description please!',
+    MIN_PRICE: `The price cannot be lower than ${MIN_PRICE}`,
+    MIN_BID: `The bid cannot be lower than ${MIN_BID}`,
+    NUMBER_PRICE: 'The price must be a number',
+    NUMBER_BID: 'The bid must be a number',
   },
   verify: {
     VERIFY: 'Verify',

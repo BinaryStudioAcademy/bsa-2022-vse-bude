@@ -20,6 +20,7 @@ import { categoryForDropdown } from '~/helpers/category/format-category-for-drop
 import { ButtonsContainer } from '~/screens/components/components';
 import { ButtonAppearance, DataStatus } from '~/common/enums/enums';
 import { selectCategories, selectDataStatusProducts } from '~/store/selectors';
+import { productsPostSchema } from '~/validation-schemas/validation-schemas';
 import { AddPhotos } from '../add-photos/add-photos';
 
 import { useStyles } from './styles';
@@ -36,9 +37,17 @@ const NewItemForm: FC = () => {
 
   const { control, errors, handleSubmit } = useAppForm<IPostForms>({
     defaultValues: {
+      category: '',
+      title: '',
+      description: '',
+      condition: '',
       currency: t('common:currency.UAH'),
-      country: 'Ukraine',
+      price: 0,
+      country: '',
+      city: '',
+      phone: '+380',
     },
+    validationSchema: productsPostSchema,
   });
 
   const handleSaveAsDraftPress = (): void => {
@@ -66,7 +75,6 @@ const NewItemForm: FC = () => {
           control={control}
           items={formattedCategories}
           zIndex={19}
-          requiredMark={true}
         />
       )}
       <Input
@@ -97,7 +105,6 @@ const NewItemForm: FC = () => {
         control={control}
         items={CONDITION}
         zIndex={19}
-        requiredMark={true}
       />
       <View
         style={[
@@ -115,7 +122,7 @@ const NewItemForm: FC = () => {
         />
         <Input
           label={t('make_a_post.PRICE')}
-          placeholder={t('make_a_post.PRICE_PLACEHOLDER')}
+          placeholder="0"
           name="price"
           control={control}
           errors={errors}

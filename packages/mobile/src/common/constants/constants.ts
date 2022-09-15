@@ -9,6 +9,10 @@ export {
   MAX_CITY_LENGTH,
   MAX_DELIVERY_DATA_LENGTH,
   MAX_SOCIAL_NETWORK_LENGTH,
+  MAX_TITLE_POST_LENGTH,
+  MAX_DESCRIPTION_POST_LENGTH,
+  MIN_PRICE,
+  MIN_BID,
 } from './validation';
 export * from './images';
 export { ENGLISH_LOCALE } from './day-js';
