@@ -1,6 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import type { Http } from '@vse-bude/shared';
-import { getMyListSSR } from '@services';
+import type { Http, ProductToArchive, ProductPost } from '@vse-bude/shared';
+import {
+  getMyListSSR,
+  addProductToArchive,
+  addProductToPosted,
+} from '@services';
 import { addToast } from 'store/toast/actions';
 import { MyListActions } from './action-types';
 
@@ -17,4 +21,56 @@ export const fetchMyListSSR = createAsyncThunk(
 
       return rejectWithValue(e.message);
     }),
+);
+
+export const addItemToArchive = createAsyncThunk(
+  MyListActions.ADD_PRODUCT_TO_ARCHIVE,
+  async ({ data }: { data: ProductToArchive }, { rejectWithValue, dispatch }) =>
+    addProductToArchive({ data })
+      .then((data) => {
+        dispatch(
+          addToast({
+            level: 'success',
+            description: (t) => t('common:notifications.itemToArchive'),
+          }),
+        );
+
+        return data;
+      })
+      .catch((e) => {
+        dispatch(
+          addToast({
+            level: 'error',
+            description: e.message,
+          }),
+        );
+
+        return rejectWithValue(e.message);
+      }),
+);
+
+export const addItemToPosted = createAsyncThunk(
+  MyListActions.POST_PRODUCT,
+  async ({ data }: { data: ProductPost }, { rejectWithValue, dispatch }) =>
+    addProductToPosted({ data })
+      .then((data) => {
+        dispatch(
+          addToast({
+            level: 'success',
+            description: (t) => t('common:notifications.itemToPosted'),
+          }),
+        );
+
+        return data;
+      })
+      .catch((e) => {
+        dispatch(
+          addToast({
+            level: 'error',
+            description: e.message,
+          }),
+        );
+
+        return rejectWithValue(e.message);
+      }),
 );
