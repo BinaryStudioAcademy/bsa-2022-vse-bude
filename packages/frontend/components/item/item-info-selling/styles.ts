@@ -23,7 +23,7 @@ export const controls = css`
 `;
 
 export const favouriteButton = ({ spaces, colors }: Theme) => css`
-  color: ${colors.accent};
+  color: ${colors.primary};
   margin-left: ${spaces.md};
   width: 45px;
   height: 45px;
