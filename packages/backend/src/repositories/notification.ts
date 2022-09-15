@@ -46,9 +46,7 @@ export class NotificationRepository {
     ]);
   }
 
-  public createNotification(
-    notification: CreateNotificationDto,
-  ): Promise<Notification> {
+  public create(notification: CreateNotificationDto): Promise<Notification> {
     return this._dbClient.notification.create({
       data: {
         ...notification,
@@ -56,10 +54,7 @@ export class NotificationRepository {
     });
   }
 
-  public async setNotificationAsViewed(
-    id: string,
-    userId: string,
-  ): Promise<Notification> {
+  public async setAsViewed(id: string, userId: string): Promise<Notification> {
     await this._dbClient.notification.updateMany({
       where: {
         id,

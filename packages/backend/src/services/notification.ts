@@ -39,18 +39,16 @@ export class NotificationService {
     return { notifications, count };
   }
 
-  public createNotification(
-    notification: CreateNotificationDto,
-  ): Promise<Notification> {
-    return this._notificationRepository.createNotification(notification);
+  public create(notification: CreateNotificationDto): Promise<Notification> {
+    return this._notificationRepository.create(notification);
   }
 
-  public setNotificationAsViewed(req: Request): Promise<Notification> {
+  public setAsViewed(req: Request): Promise<Notification> {
     const {
       userId,
       params: { id },
     } = req;
 
-    return this._notificationRepository.setNotificationAsViewed(id, userId);
+    return this._notificationRepository.setAsViewed(id, userId);
   }
 }

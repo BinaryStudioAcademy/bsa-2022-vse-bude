@@ -227,7 +227,7 @@ export const initProfileRoutes = (
   router.patch(
     apiPath(path, ProfileApiRoutes.PATCH_NOTIFICATION),
     authMiddleware,
-    wrap((req: Request) => notificationService.setNotificationAsViewed(req)),
+    wrap((req: Request) => notificationService.setAsViewed(req)),
   );
 
   /**

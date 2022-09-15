@@ -58,7 +58,7 @@ export class BidService {
       bidderId: bid.bidderId,
     });
 
-    await this._notificationRepository.createNotification({
+    await this._notificationRepository.create({
       type: NotificationType.BID_PLACED,
       userId: product.authorId,
       title: lang('notifications:title.BID_PLACED', {}, 'en'),
@@ -67,7 +67,7 @@ export class BidService {
     });
 
     if (lastBid && lastBid.bidderId !== bid.bidderId) {
-      await this._notificationRepository.createNotification({
+      await this._notificationRepository.create({
         type: NotificationType.OUTBID,
         userId: lastBid.bidderId,
         title: lang('notifications:title.OUTBID', {}, 'en'),

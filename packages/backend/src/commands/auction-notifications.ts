@@ -51,7 +51,7 @@ export class AuctionNotificationsCommand extends BaseCommand {
       const bidders = await this._bidRepository.getBidders(this._product.id);
 
       bidders.forEach(async (bidder) => {
-        await this._notificationRepository.createNotification({
+        await this._notificationRepository.create({
           type: NotificationType.AUCTION_ENDED,
           userId: bidder,
           title: lang('notifications:title.AUCTION_ENDED', {}, 'en'),
@@ -64,7 +64,7 @@ export class AuctionNotificationsCommand extends BaseCommand {
         });
       });
 
-      await this._notificationRepository.createNotification({
+      await this._notificationRepository.create({
         type: NotificationType.AUCTION_ENDED,
         userId: this._product.authorId,
         title: lang('notifications:title.AUCTION_ENDED', {}, 'en'),

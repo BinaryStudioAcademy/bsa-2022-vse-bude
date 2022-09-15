@@ -162,7 +162,7 @@ export class ProductService {
     );
 
     if (lastBid && lastBid.bidderId === userId) {
-      await this._notificationRepository.createNotification({
+      await this._notificationRepository.create({
         type: NotificationType.AUCTION_LEFT,
         userId: product.authorId,
         title: lang('notifications:title.AUCTION_LEFT', {}, 'en'),
@@ -324,7 +324,7 @@ export class ProductService {
       ProductStatus.FINISHED,
     );
 
-    await this._notificationRepository.createNotification({
+    await this._notificationRepository.create({
       type: NotificationType.PRODUCT_SOLD,
       userId: product.authorId,
       title: lang('notifications:title.PRODUCT_SOLD', {}, 'en'),
