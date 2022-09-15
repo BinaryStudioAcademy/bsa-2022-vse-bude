@@ -27,7 +27,7 @@ const LotSection = ({
           aria-label="items-carousel"
           options={{
             role: 'region',
-            fixedWidth: 360,
+            fixedWidth: 300,
             focus: 0,
             pagination: false,
             trimSpace: true,
@@ -39,13 +39,13 @@ const LotSection = ({
             mediaQuery: 'max',
             breakpoints: {
               [lightTheme.breakpoints.sm]: {
-                fixedWidth: 300,
+                fixedWidth: 250,
               },
               [lightTheme.breakpoints.md]: {
                 arrows: false,
               },
               [lightTheme.breakpoints.xl]: {
-                fixedWidth: 340,
+                fixedWidth: 275,
               },
             },
           }}

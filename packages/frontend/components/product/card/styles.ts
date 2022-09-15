@@ -45,10 +45,14 @@ export const divider = ({ colors }: Theme) => css`
   border: 1px solid ${colors.disabled};
 `;
 
-export const productTimer = css`
+export const productTimer = ({ spaces }: Theme) => css`
   position: absolute;
-  bottom: -15px;
-  left: 16%;
+  bottom: -${spaces.md};
+
+  width: 170px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 `;
 
 export const productCard = ({

@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import Image from 'next/future/image';
+import { ImageWithFallback } from '@primitives';
+import no_image from '../../../public/images/no_image.png';
 import type { ImageSliderProps } from './types';
 import { imageSliderBlock } from './styles';
 import { SliderControls } from './controls';
@@ -22,12 +23,13 @@ export const ImageSlider = ({ priority, images }: ImageSliderProps) => {
 
   return (
     <div css={imageSliderBlock}>
-      <Image
+      <ImageWithFallback
         priority={priority}
-        src={images[slide]}
         width={260}
         height={300}
         alt={`${slide}`}
+        src={images[slide]}
+        fallbackSrc={no_image}
       />
       <SliderControls
         onPrev={onPrevImage}

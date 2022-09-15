@@ -60,7 +60,7 @@ export const imageWrapper = ({ spaces, breakpoints }: Theme) => css`
   }
 
   img {
-    object-fit: contain;
+    object-fit: cover;
   }
 `;
 
