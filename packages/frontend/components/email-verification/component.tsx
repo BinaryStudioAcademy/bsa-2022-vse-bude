@@ -16,7 +16,10 @@ const EmailVerificationModal = () => {
 
   useEffect(() => {
     setIsVisible(true);
-  }, []);
+    window.onpopstate = () => {
+      dispatch(hideVerifyEmailModal());
+    };
+  }, [dispatch]);
 
   const closeModal = () => {
     dispatch(hideVerifyEmailModal());

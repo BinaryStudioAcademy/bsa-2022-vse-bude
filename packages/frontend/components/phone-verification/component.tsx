@@ -16,7 +16,10 @@ const PhoneVerificationModal = () => {
 
   useEffect(() => {
     setIsVisible(true);
-  }, []);
+    window.onpopstate = () => {
+      dispatch(hideVerifyPhoneModal());
+    };
+  }, [dispatch]);
 
   const closeModal = () => {
     dispatch(hideVerifyPhoneModal());

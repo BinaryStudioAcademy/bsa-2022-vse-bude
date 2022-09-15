@@ -4,7 +4,7 @@ import { useTranslation } from 'next-i18next';
 import { showVerifyEmailModal } from 'store/modals/actions';
 import * as styles from './styles';
 
-export default function PhoneNotVerificatedWarning() {
+export default function EmailNotVerificatedWarning() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
