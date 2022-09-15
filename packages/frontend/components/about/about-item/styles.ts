@@ -2,20 +2,19 @@ import type { Theme } from '@emotion/react';
 import { css } from '@emotion/react';
 
 export const avatar = ({ radiuses }: Theme) => css`
+  position: relative;
   display: flex;
-  flex-shrink: 0;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
   border-radius: ${radiuses.circle};
   object-fit: cover;
-  position: relative;
-  left: 0;
 `;
 
 export const descriptionWrapper = ({ spaces }: Theme) => css`
-  text-align: center;
   margin: 0 ${spaces.md};
   height: 100%;
+  text-align: center;
 `;
 
 export const nameStyle = ({ lineHeights, fontWeights }: Theme) => css`
@@ -30,9 +29,9 @@ export const roleStyle = ({ lineHeights, fontWeights, colors }: Theme) => css`
 `;
 
 export const line = ({ spaces, colors }: Theme) => css`
+  margin: ${spaces.lg} 0;
   width: 100%;
   height: 3px;
-  margin: ${spaces.lg} 0;
   background-color: ${colors.accent};
   &:last-child {
     height: 0;
@@ -43,7 +42,8 @@ export const itemsWrapper = ({ spaces }: Theme) => css`
   display: flex;
   align-items: center;
   flex-direction: column;
-
-  padding: ${spaces.md};
+  flex-grow: 1;
   margin: ${spaces.lg} 0;
+  max-width: 250px;
+  padding: ${spaces.md};
 `;
