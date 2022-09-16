@@ -17,7 +17,7 @@ import { globalStyles } from '~/styles/styles';
 import { getFilterScreenOptions } from '~/navigation/screen-options/get-filter-screen-options';
 import { selectFilters } from '~/store/selectors';
 import { products as productsApi } from '~/store/actions';
-import { validateObjectForQuery } from '~/helpers/helpers';
+import { removeObjectFalsyFields } from '~/helpers/helpers';
 import { ProductQuery } from '@vse-bude/shared';
 import { RootNavigationProps, RootState } from '~/common/types/types';
 import {
@@ -34,7 +34,7 @@ const Filter: FC = () => {
   const onSavePress = useCallback(() => {
     dispatch(
       productsApi.loadProducts(
-        validateObjectForQuery<RootState['filters'], ProductQuery>(filters),
+        removeObjectFalsyFields<RootState['filters'], ProductQuery>(filters),
       ),
     );
   }, [filters]);

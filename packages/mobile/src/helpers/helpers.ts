@@ -13,4 +13,4 @@ export {
 } from './personal-info-parse/personal-info-parse';
 export { categoryForDropdown } from './category/format-category-for-dropdown';
 export { checkSliderPriceValidity } from './price/check-slider-price-validity';
-export { validateObjectForQuery } from './validate-object-for-query/validate-object-for-query';
+export { removeObjectFalsyFields } from './remove-object-falsy-fields/remove-object-falsy-fields';

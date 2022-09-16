@@ -21,6 +21,7 @@ import { organizations } from '~/mock/mock';
 import {
   products as productsActions,
   categories as categoriesActions,
+  filters as filtersActions,
 } from '~/store/actions';
 import {
   selectCategories,
@@ -28,7 +29,7 @@ import {
   selectPopularLots,
 } from '~/store/selectors';
 import { RootNavigationProps } from '~/common/types/types';
-import { RootScreenName } from '~/common/enums/enums';
+import { FilterLotType, RootScreenName } from '~/common/enums/enums';
 import {
   Category,
   Flag,
@@ -62,7 +63,12 @@ const Home: FC = () => {
     dispatch(categoriesActions.loadAllCategories());
   }, []);
 
-  const onSeeAllPress = () => {
+  const onSeeAllLotsPress = () => {
+    dispatch(filtersActions.setLotType(FilterLotType.AUCTION));
+    navigation.navigate(RootScreenName.ITEMS_AND_SERVICES);
+  };
+  const onSeeAllItemsPress = () => {
+    dispatch(filtersActions.setLotType(FilterLotType.SELLING));
     navigation.navigate(RootScreenName.ITEMS_AND_SERVICES);
   };
 
@@ -118,7 +124,7 @@ const Home: FC = () => {
             sectionTitle={t('home.POPULAR_LOTS')}
             seeAllTitle={t('home.SEE_ALL_LOTS')}
             data={auctionProducts}
-            onSeeAllPress={onSeeAllPress}
+            onSeeAllPress={onSeeAllLotsPress}
             contentContainerStyle={[globalStyles.mt6]}
           />
         </HomeScreenWrapper>
@@ -164,7 +170,7 @@ const Home: FC = () => {
             sectionTitle={t('home.POPULAR_ITEMS')}
             seeAllTitle={t('home.SEE_ALL_ITEMS')}
             data={sellingProducts}
-            onSeeAllPress={onSeeAllPress}
+            onSeeAllPress={onSeeAllItemsPress}
             contentContainerStyle={globalStyles.mt6}
           />
         </HomeScreenWrapper>

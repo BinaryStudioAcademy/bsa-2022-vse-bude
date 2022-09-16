@@ -25,11 +25,14 @@ const CategorySection = () => {
   const onFilterSelect = (id: string) => {
     dispatch(filtersApi.setCategory(id));
   };
+  const isLoading = categories.length < 1;
 
   return (
     <View>
       <SectionTitle title={t('filter.CATEGORY')} style={globalStyles.mt5} />
-      {categories ? (
+      {isLoading ? (
+        <Spinner />
+      ) : (
         <View style={globalStyles.mt5}>
           {categories.map((item) => {
             const { title, id } = item;
@@ -46,8 +49,6 @@ const CategorySection = () => {
             );
           })}
         </View>
-      ) : (
-        <Spinner />
       )}
     </View>
   );

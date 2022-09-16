@@ -18,7 +18,7 @@ const ProductTypeSection: FC<Props> = ({ contentContainerStyle }) => {
   const dispatch = useAppDispatch();
 
   const onPress = (filterName: FilterLotType) => {
-    dispatch(filtersApi.setLotTypeFilter(filterName));
+    dispatch(filtersApi.setLotType(filterName));
   };
 
   return (

@@ -3,9 +3,7 @@ import { FilterLotType } from '~/common/enums/enums';
 import { ProductQuery } from '@vse-bude/shared';
 import { ActionType } from './common';
 
-const setLotTypeFilter = createAction<FilterLotType>(
-  ActionType.SET_LOT_TYPE_FILTER,
-);
+const setLotType = createAction<FilterLotType>(ActionType.SET_LOT_TYPE_FILTER);
 const setPriceRange = createAction<ProductQuery['priceGt'][]>(
   ActionType.SET_PRICE_RANGE,
 );
@@ -15,4 +13,4 @@ const setCategory = createAction<ProductQuery['categoryId']>(
 );
 const setOrder = createAction<ProductQuery['order']>(ActionType.SET_ORDER);
 
-export { setLotTypeFilter, setPriceRange, setSortBy, setCategory, setOrder };
+export { setLotType, setPriceRange, setSortBy, setCategory, setOrder };

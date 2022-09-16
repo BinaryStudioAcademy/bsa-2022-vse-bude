@@ -6,7 +6,7 @@ import {
 } from '~/common/constants/constants';
 import { SortBy, ProductQuery, Order } from '@vse-bude/shared';
 import {
-  setLotTypeFilter,
+  setLotType,
   setPriceRange,
   setSortBy,
   setCategory,
@@ -33,7 +33,7 @@ const initialState: InitialState = {
 
 const reducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(setLotTypeFilter, (state, action) => {
+    .addCase(setLotType, (state, action) => {
       state.type = action.payload;
     })
     .addCase(setPriceRange, (state, action) => {
