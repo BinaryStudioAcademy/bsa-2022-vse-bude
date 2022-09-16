@@ -17,12 +17,13 @@ export const link = ({ radiuses, colors }: Theme) => css`
 `;
 
 export const linkContent = () => css`
-  padding: 13px 18px;
+  padding: 13px 15px;
   align-items: center;
 `;
 
 export const icon = ({ spaces }: Theme) => css`
   margin-right: ${spaces.md};
+  width: 20px;
 `;
 
 export const activeLink = ({ colors }: Theme) => css`

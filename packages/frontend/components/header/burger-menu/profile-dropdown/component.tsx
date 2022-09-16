@@ -4,18 +4,35 @@ import { useRouter } from 'next/router';
 import { Routes, IconColor, IconName, ProfileRoutes } from '@enums';
 import { useState } from 'react';
 import { useTranslation } from 'next-i18next';
-
+import { useAppDispatch } from '@hooks';
+import { showMakePostModal } from 'store/modals/actions';
 import * as styles from './styles';
 
 interface ProfileDropdownProps {
   user: UserDto;
+  onCloseParent: () => void;
 }
-export const ProfileDropdown = ({ user }: ProfileDropdownProps) => {
+export const ProfileDropdown = ({
+  user,
+  onCloseParent,
+}: ProfileDropdownProps) => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const { push } = useRouter();
+  const dispatch = useAppDispatch();
+
+  const handleMakePostClick = () => {
+    dispatch(showMakePostModal());
+    onCloseParent();
+  };
 
   const options = [
+    {
+      value: t('common:header.popover.makePost'),
+      key: 'Make a post',
+      onClick: () => handleMakePostClick(),
+      cssExtend: styles.option,
+    },
     {
       value: t('common:header.popover.personalInfo'),
       key: 'Personal info',
@@ -25,28 +42,25 @@ export const ProfileDropdown = ({ user }: ProfileDropdownProps) => {
     {
       value: t('common:header.popover.myList'),
       key: 'My list',
-      onClick: () => push(`${Routes.PROFILE}/${user.id}${ProfileRoutes.LIST}`),
+      onClick: () => push(`${Routes.PROFILE}${ProfileRoutes.LIST}`),
       cssExtend: styles.option,
     },
     {
       value: t('common:header.popover.settings'),
       key: 'Settings',
-      onClick: () =>
-        push(`${Routes.PROFILE}/${user.id}${ProfileRoutes.ACCOUNT_SETTINGS}`),
+      onClick: () => push(`${Routes.PROFILE}${ProfileRoutes.ACCOUNT_SETTINGS}`),
       cssExtend: styles.option,
     },
     {
       value: t('common:header.popover.messages'),
       key: 'Messages',
-      onClick: () =>
-        push(`${Routes.PROFILE}/${user.id}${ProfileRoutes.MESSAGES}`),
+      onClick: () => push(`${Routes.PROFILE}${ProfileRoutes.MESSAGES}`),
       cssExtend: styles.option,
     },
     {
       value: t('common:header.popover.support'),
       key: 'Support',
-      onClick: () =>
-        push(`${Routes.PROFILE}/${user.id}${ProfileRoutes.SUPPORT}`),
+      onClick: () => push(`${Routes.PROFILE}${ProfileRoutes.SUPPORT}`),
       cssExtend: styles.option,
     },
   ];

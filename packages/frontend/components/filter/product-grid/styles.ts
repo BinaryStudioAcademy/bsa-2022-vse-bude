@@ -3,16 +3,20 @@ import type { Theme } from '@emotion/react';
 
 export const productGridWrapper = ({ spaces }: Theme) => css`
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   margin-bottom: ${spaces.xl3};
 `;
 
-export const productGrid = ({ spaces }: Theme) => css`
+export const productGrid = ({ spaces, mq }: Theme) => css`
   flex: 1;
   display: grid;
   grid-gap: ${spaces.sm};
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, 292px);
+  ${mq[2]} {
+    grid-template-columns: repeat(auto-fit, 312px);
+  }
 
   & li {
     list-style: none;

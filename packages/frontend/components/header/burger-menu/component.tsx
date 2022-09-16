@@ -35,7 +35,7 @@ export const BurgerMenu = ({ user, categories, onClose }: BurgerMenuProps) => {
   return (
     <div css={styles.burgerOverlay}>
       <nav className="burger-navigation">
-        {user && <ProfileDropdown user={user} />}
+        {user && <ProfileDropdown user={user} onCloseParent={onClose} />}
         <CategoriesList categories={categories} />
         <InternalLink
           href={Routes.DEFAULT}

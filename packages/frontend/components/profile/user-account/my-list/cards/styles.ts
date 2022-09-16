@@ -9,11 +9,14 @@ export const card = ({ colors, radiuses }: Theme) => css`
   }
 `;
 
-export const cardContent = ({ spaces }: Theme) => css`
+export const cardContent = ({ spaces, maxMq }: Theme) => css`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  padding: ${spaces.lg} ${spaces.xl};
+  padding: ${spaces.md} ${spaces.lg};
+  ${maxMq[4]} {
+    padding: ${spaces.md} ${spaces.md};
+  }
 `;
 
 export const leftContent = css`
@@ -26,7 +29,7 @@ export const leftContent = css`
 export const rightContent = css`
   display: flex;
   flex-direction: column;
-  width: 215px;
+  width: 230px;
 `;
 
 export const details = ({ colors, spaces }: Theme) => css`
@@ -34,7 +37,7 @@ export const details = ({ colors, spaces }: Theme) => css`
   flex-direction: column;
   margin-bottom: ${spaces.md};
   border-bottom: 2px solid ${colors.backgroundDark};
-  height: 100px;
+  height: 110px;
 `;
 
 export const saleDetails = ({ spaces }: Theme) => css`
@@ -65,5 +68,9 @@ export const editDate = ({
 `;
 
 export const publishButtonWrapper = ({ spaces }: Theme) => css`
+  margin-right: ${spaces.sm};
+`;
+
+export const iconButton = ({ spaces }: Theme) => css`
   margin-right: ${spaces.sm};
 `;

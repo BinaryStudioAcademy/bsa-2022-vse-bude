@@ -104,3 +104,8 @@ export const price = ({ spaces }: Theme) => css`
 export const sortBySelect = ({ spaces }: Theme) => css`
   margin-bottom: ${spaces.md};
 `;
+export const dropdown = css`
+  top: 100%;
+  z-index: 2;
+  width: fit-content;
+`;

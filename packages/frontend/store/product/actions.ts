@@ -16,6 +16,7 @@ import {
   placeBidRequest,
   getSilimar,
   getProductEditByIdSSR,
+  search,
 } from 'services/product';
 import { addToast } from 'store/toast/actions';
 import { ProductActions } from './action-types';
@@ -143,3 +144,16 @@ export const auctionLeaveAction = createAsyncThunk(
     }
   },
 );
+
+export const actionSearch = createAsyncThunk(
+  ProductActions.SEARCH,
+  async (data: string, { rejectWithValue }) => {
+    try {
+      return await search(data);
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  },
+);
+
+export const clearSearch = createAction<string>(ProductActions.CLEAR_SEARCH);

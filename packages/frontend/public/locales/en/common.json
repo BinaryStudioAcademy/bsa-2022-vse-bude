@@ -21,7 +21,8 @@
       "settings": "Settings",
       "messages": "Messages",
       "support": "Support",
-      "signOut": "Sign Out"
+      "signOut": "Sign Out",
+      "makePost": "Make a Post"
     }
   },
   "footer": {
@@ -115,7 +116,9 @@
     "productRemovedFromFavorites": "Product removed from favorite",
     "bidPlaced": "Bid placed",
     "leftAuction": "You left the auction",
-    "newBidPlaced": "New bid was placed to current product"
+    "newBidPlaced": "New bid was placed to current product",
+    "itemToArchive": "Product was added to archive",
+    "itemToPosted": "Product has been posted"
   },
   "verify": {
     "enterPhone": {
@@ -129,6 +132,19 @@
         "later": "Verify later"
       },
       "tooltip": "Please firstly save new profile data for verify phone",
+      "prevPageLabel": "Go to previous step"
+    },
+    "enterEmail": {
+      "headline": "Verify",
+      "description": "For further verification of account, please enter your email here or verify it on your Personal Info page",
+      "input": "Email",
+      "button": {
+        "verify": "Verify"
+      },
+      "link": {
+        "later": "Verify later"
+      },
+      "tooltip": "Please firstly save new profile data for verify email",
       "prevPageLabel": "Go to previous step"
     },
     "enterCode": {
@@ -178,7 +194,15 @@
     "November",
     "December"
   ],
-  "days": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+  "days": [
+    "Su",
+    "Mo",
+    "Tu",
+    "We",
+    "Th",
+    "Fr",
+    "Sa"
+  ],
   "modal": {
     "confirm": {
       "confirm": "Confirm",
