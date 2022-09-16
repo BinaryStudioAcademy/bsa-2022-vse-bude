@@ -10,7 +10,7 @@ import type { UploadFileRequest } from '@types';
 import { UserExistsError } from '@errors';
 
 export const initProfileRoutes = (
-  { profileService, myListService, authService }: Services,
+  { profileService, myListService, authService, productService }: Services,
   path: ApiRoutes,
 ): Router => {
   const router = Router();
@@ -215,6 +215,99 @@ export const initProfileRoutes = (
       const { userId } = req;
 
       return await profileService.updateAvatar({ userId, req });
+    }),
+  );
+
+  /**
+   * @openapi
+   * /profile/add-to-archive:
+   *   put:
+   *     description: Adds item to archive
+   *     security:
+   *       - Bearer: []
+   *     tags: [Profile]
+   *     produces:
+   *       - application/json
+   *     requestBody:
+   *        schema:
+   *          $ref: "#/definitions/ProductToArchive"
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               $ref: "#/definitions/ProductDto"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
+  router.put(
+    apiPath(path, ProfileApiRoutes.ADD_TO_ARCHIVE),
+    authMiddleware,
+    wrap(async (req: Request) => {
+      const { userId } = req;
+      const { itemId, cancelReason, endDate } = req.body;
+      await profileService.getUser({
+        userId,
+      });
+      await productService.getById(itemId);
+
+      return await myListService.addItemToArchive({
+        itemId,
+        cancelReason,
+        endDate,
+      });
+    }),
+  );
+
+  /**
+   * @openapi
+   * /profile/add-to-posted:
+   *   put:
+   *     description: Adds item to posted
+   *     security:
+   *       - Bearer: []
+   *     tags: [Profile]
+   *     produces:
+   *       - application/json
+   *     requestBody:
+   *        schema:
+   *          $ref: "#/definitions/ProductPost"
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               $ref: "#/definitions/ProductDto"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
+  router.put(
+    apiPath(path, ProfileApiRoutes.ADD_TO_POSTED),
+    authMiddleware,
+    wrap(async (req: Request) => {
+      const { userId } = req;
+      const { itemId, postDate } = req.body;
+      await profileService.getUser({
+        userId,
+      });
+      await productService.getById(itemId);
+
+      return await myListService.addItemToPosted({
+        itemId,
+        postDate,
+      });
     }),
   );
 

@@ -14,7 +14,11 @@ import { verifyCodeSchema } from './validation';
 import { ResendCodeButton } from './resend-code';
 import { resendButton } from './styles';
 
-export const EmailVerification = () => {
+interface Props {
+  showDescription?: boolean;
+}
+
+export const EmailVerification = ({ showDescription }: Props) => {
   const { error, user } = useTypedSelector((state) => state.auth);
 
   const dispatch = useAppDispatch();
@@ -39,17 +43,19 @@ export const EmailVerification = () => {
   return (
     <form css={verifyForm} onSubmit={handleSubmit(onSubmit)}>
       <div css={inputWrapper}>
-        <div css={verifyText}>
-          <span>
-            {t('auth:emailText')}
-            {user && <span css={verifyEntity}> {user.email}</span>}!
-          </span>
-          <span>{t('auth:enterCode')}!</span>
-        </div>
+        {showDescription && (
+          <div css={verifyText}>
+            <span>
+              {t('auth:emailText')}
+              {user && <span css={verifyEntity}> {user.email}</span>}!
+            </span>
+            <span>{t('auth:enterCode')}!</span>
+          </div>
+        )}
         <Input
           {...register('code')}
           css={verifyInput}
-          label={t('auth:code')}
+          label={t('common:verify.enterCode.input')}
           variant="primary"
           type="text"
           name="code"
@@ -58,7 +64,7 @@ export const EmailVerification = () => {
         <Error text={error} />
       </div>
       <Button type="submit" width={'100%'}>
-        {t('auth:text')}
+        {t('common:verify.enterCode.button.continue')}
       </Button>
       <div css={resendButton}>
         <ResendCodeButton

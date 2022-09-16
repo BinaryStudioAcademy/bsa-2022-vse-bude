@@ -18,7 +18,7 @@ function EmailVerificationPage() {
     <AuthLayout>
       <div css={contentWrapper}>
         <div css={formWrapper}>
-          <EmailVerification />
+          <EmailVerification showDescription />
         </div>
       </div>
     </AuthLayout>

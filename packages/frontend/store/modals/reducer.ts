@@ -1,9 +1,16 @@
 import { createReducer } from '@reduxjs/toolkit';
+import { emailVerification, phoneVerification } from 'store/auth';
 import {
-  hideVerifyModal,
-  nextVerifyModal,
-  previousVerifyModal,
-  showVerifyModal,
+  hideMakePostModal,
+  hideVerifyEmailModal,
+  hideVerifyPhoneModal,
+  nextVerifyEmailModal,
+  nextVerifyPhoneModal,
+  previousVerifyEmailModal,
+  previousVerifyPhoneModal,
+  showMakePostModal,
+  showVerifyEmailModal,
+  showVerifyPhoneModal,
 } from './actions';
 
 interface ModalsState {
@@ -11,7 +18,11 @@ interface ModalsState {
     isModalOpen: boolean;
     step: number;
   };
-  isCreatePostModalShown: boolean;
+  verifyEmailModal: {
+    isModalOpen: boolean;
+    step: number;
+  };
+  isCreatePostModalOpen: boolean;
 }
 
 const initialState: ModalsState = {
@@ -19,37 +30,94 @@ const initialState: ModalsState = {
     isModalOpen: false,
     step: 0,
   },
-  isCreatePostModalShown: false,
+  verifyEmailModal: {
+    isModalOpen: false,
+    step: 0,
+  },
+  isCreatePostModalOpen: false,
 };
 
 export const modalsReducer = createReducer(initialState, {
-  [showVerifyModal.type]: (state) => ({
+  [showVerifyPhoneModal.type]: (state) => ({
     ...state,
     verifyPhoneModal: {
       isModalOpen: true,
       step: state.verifyPhoneModal.step,
     },
   }),
-  [hideVerifyModal.type]: (state) => ({
+  [hideVerifyPhoneModal.type]: (state) => ({
     ...state,
     verifyPhoneModal: {
       isModalOpen: false,
       step: state.verifyPhoneModal.step,
     },
   }),
-  [nextVerifyModal.type]: (state) => ({
+  [nextVerifyPhoneModal.type]: (state) => ({
     ...state,
     verifyPhoneModal: {
       isModalOpen: state.verifyPhoneModal.isModalOpen,
       step: state.verifyPhoneModal.step + 1,
     },
   }),
-  [previousVerifyModal.type]: (state) => ({
+  [previousVerifyPhoneModal.type]: (state) => ({
     ...state,
     verifyPhoneModal: {
       isModalOpen: state.verifyPhoneModal.isModalOpen,
       step: state.verifyPhoneModal.step - 1,
     },
+  }),
+
+  [phoneVerification.fulfilled.type]: (state) => ({
+    ...state,
+    verifyPhoneModal: {
+      isModalOpen: state.verifyPhoneModal.isModalOpen,
+      step: state.verifyPhoneModal.step + 1,
+    },
+  }),
+  [emailVerification.fulfilled.type]: (state) => ({
+    ...state,
+    verifyEmailModal: {
+      isModalOpen: state.verifyEmailModal.isModalOpen,
+      step: state.verifyEmailModal.step + 1,
+    },
+  }),
+
+  [showVerifyEmailModal.type]: (state) => ({
+    ...state,
+    verifyEmailModal: {
+      isModalOpen: true,
+      step: state.verifyEmailModal.step,
+    },
+  }),
+  [hideVerifyEmailModal.type]: (state) => ({
+    ...state,
+    verifyEmailModal: {
+      isModalOpen: false,
+      step: state.verifyEmailModal.step,
+    },
+  }),
+  [nextVerifyEmailModal.type]: (state) => ({
+    ...state,
+    verifyEmailModal: {
+      isModalOpen: state.verifyEmailModal.isModalOpen,
+      step: state.verifyEmailModal.step + 1,
+    },
+  }),
+  [previousVerifyEmailModal.type]: (state) => ({
+    ...state,
+    verifyEmailModal: {
+      isModalOpen: state.verifyEmailModal.isModalOpen,
+      step: state.verifyEmailModal.step - 1,
+    },
+  }),
+
+  [showMakePostModal.type]: (state) => ({
+    ...state,
+    isCreatePostModalOpen: true,
+  }),
+  [hideMakePostModal.type]: (state) => ({
+    ...state,
+    isCreatePostModalOpen: false,
   }),
 });
 

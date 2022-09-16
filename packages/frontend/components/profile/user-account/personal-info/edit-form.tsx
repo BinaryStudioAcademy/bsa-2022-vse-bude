@@ -19,7 +19,10 @@ import { profileMapper, updateDtoMapper } from '@helpers';
 import { updateUserProfile, setIsEditing } from '@store';
 import { useEffect, useState } from 'react';
 import type { RootState } from '@types';
-import { showVerifyModal } from 'store/modals/actions';
+import {
+  showVerifyEmailModal,
+  showVerifyPhoneModal,
+} from 'store/modals/actions';
 import { SectionHeader, NestedLayout } from '../common';
 import * as styles from './styles';
 
@@ -37,7 +40,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
     register,
     reset,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, dirtyFields },
   } = useForm({
     mode: 'onChange',
     defaultValues: profileMapper({ user }),
@@ -49,11 +52,12 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
     setUpdatedPhone(resetPhone);
     reset({
       'phone': !user.phone ? '' : user.phone,
+      'email': !user.email ? '' : user.email,
       'password': '',
       'repeatPassword': '',
       'newPassword': '',
     });
-  }, [isSubmit, reset, user.phone]);
+  }, [isSubmit, reset, user.phone, user.email]);
 
   const onResetHandler = () => {
     reset(profileMapper({ user }), {
@@ -88,7 +92,11 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
   };
 
   const onVerifyPhone = () => {
-    dispatch(showVerifyModal());
+    dispatch(showVerifyPhoneModal());
+  };
+
+  const onVerifyEmail = () => {
+    dispatch(showVerifyEmailModal());
   };
 
   return (
@@ -144,17 +152,36 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
                 />
               </div>
             </Flex>
-            <div css={styles.inputRow}>
-              <Input
-                id="email-profile"
-                type="email"
-                variant="primary"
-                label={t('personal-info:label.email')}
-                placeholder={t('personal-info:placeholder.email')}
-                {...register('email')}
-                error={errors.email?.message}
-              />
-            </div>
+
+            <Flex css={styles.groupEmail}>
+              <div css={styles.phoneRow}>
+                <Input
+                  id="email-profile"
+                  type="email"
+                  variant="primary"
+                  label={t('personal-info:label.email')}
+                  placeholder={t('personal-info:placeholder.email')}
+                  {...register('email')}
+                  error={errors.email?.message}
+                />
+              </div>
+              {!user.emailVerified && (
+                <div css={styles.verifyEmailButtonWrapper}>
+                  <Button
+                    type="button"
+                    size="big"
+                    variant="outlined"
+                    onClick={onVerifyEmail}
+                    disabled={dirtyFields.email}
+                    tooltip={
+                      dirtyFields.email && t('personal-info:tooltip.verify')
+                    }
+                  >
+                    {t('personal-info:action.verify')}
+                  </Button>
+                </div>
+              )}
+            </Flex>
 
             <Flex css={styles.groupPhone}>
               <div css={styles.phoneRow}>
@@ -176,6 +203,12 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
                     size="big"
                     variant="outlined"
                     onClick={onVerifyPhone}
+                    disabled={dirtyFields.phone || !user.phone}
+                    tooltip={
+                      dirtyFields.phone || !user.phone
+                        ? t('personal-info:tooltip.verify')
+                        : ''
+                    }
                   >
                     {t('personal-info:action.verify')}
                   </Button>

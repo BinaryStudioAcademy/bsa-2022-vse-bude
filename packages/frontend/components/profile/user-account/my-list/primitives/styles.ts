@@ -1,20 +1,8 @@
 import { css } from '@emotion/react';
 import type { Theme } from '@emotion/react';
 
-export const itemSectionHeader = ({
-  fontSizes,
-  fontWeights,
-  lineHeights,
-  colors,
-}: Theme) => css`
-  font-size: ${fontSizes.h4};
-  line-height: ${lineHeights.h4};
-  font-weight: ${fontWeights.h4};
-  color: ${colors.text};
-`;
-
 export const itemImageWrapper = ({ spaces, radiuses }: Theme) => css`
-  margin-right: ${spaces.md};
+  margin-right: ${spaces.sm};
   margin-bottom: ${spaces.md};
   border-radius: ${radiuses.xs};
 `;
@@ -22,8 +10,8 @@ export const itemImageWrapper = ({ spaces, radiuses }: Theme) => css`
 export const itemImage = ({ radiuses }: Theme) => css`
   display: block;
   border-radius: ${radiuses.xs};
-  width: 100px;
-  height: 100px;
+  width: 110px;
+  height: 110px;
 `;
 
 export const itemTitle = ({
@@ -99,7 +87,7 @@ export const buyerWrapper = css`
   align-items: center;
 `;
 
-export const profileButton = ({ colors }: Theme) => css`
+export const profileButton = ({ colors, radiuses }: Theme) => css`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -110,10 +98,10 @@ export const profileButton = ({ colors }: Theme) => css`
   background: none;
   cursor: pointer;
   &:hover {
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-top-left-radius: ${radiuses.cardTub};
+    border-bottom-left-radius: ${radiuses.cardTub};
+    border-top-right-radius: ${radiuses.xs};
+    border-bottom-right-radius: ${radiuses.xs};
     background: ${colors.backgroundLight};
   }
 `;
@@ -137,10 +125,10 @@ export const avatarWrapper = ({ spaces }: Theme) => css`
   margin-right: ${spaces.xs};
 `;
 
-export const avatar = ({ radiuses }: Theme) => css`
+export const avatar = ({ radiuses, spaces }: Theme) => css`
   display: block;
-  width: 26px;
-  height: 26px;
+  width: ${spaces.xl};
+  height: ${spaces.xl};
   border-radius: ${radiuses.circle};
 `;
 
@@ -172,9 +160,9 @@ export const dateWrapper = ({ spaces }: Theme) => css`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: ${spaces.md};
+  margin-right: ${spaces.xs};
   &[data-size='lg'] {
-    width: 100px;
+    width: 110px;
   }
 `;
 
@@ -209,3 +197,18 @@ export const views = ({ fontSizes, lineHeights, fontWeights, colors }: Theme) =>
     font-weight: ${fontWeights.caption};
     color: ${colors.textLight};
   `;
+
+export const arrow = ({ colors, radiuses, spaces }: Theme) => css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: ${spaces.xs};
+  border-radius: ${radiuses.circle};
+  width: 15px;
+  height: 15px;
+  padding: ${spaces.xs};
+  cursor: pointer;
+  :hover {
+    background-color: ${colors.backgroundDark};
+  }
+`;

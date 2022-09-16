@@ -7,7 +7,10 @@ import Image from 'next/future/image';
 import hand from 'public/images/mocup_hand1.png';
 import type { ChangeEvent } from 'react';
 import { useState } from 'react';
-import { nextVerifyModal, hideVerifyModal } from 'store/modals/actions';
+import {
+  nextVerifyPhoneModal,
+  hideVerifyPhoneModal,
+} from 'store/modals/actions';
 import * as styles from '../styles';
 
 interface ModalProps {
@@ -22,12 +25,12 @@ const EnterPhoneModal = ({ phone }: ModalProps) => {
   const { t } = useTranslation();
 
   const closeModal = () => {
-    dispatch(hideVerifyModal());
+    dispatch(hideVerifyPhoneModal());
   };
 
   const changeModal = (e) => {
     e.preventDefault();
-    dispatch(nextVerifyModal());
+    dispatch(nextVerifyPhoneModal());
   };
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
