@@ -1,11 +1,15 @@
 import React from 'react';
 import { RouteProp } from '@react-navigation/native';
-import { RootNavigationParamList } from '~/common/types/types';
+import {
+  RootNavigationParamList,
+  RootNavigationProps,
+} from '~/common/types/types';
 import { NativeStackNavigationOptions } from '@react-navigation/native-stack';
 import { RootScreenName } from '~/common/enums/enums';
 import { t } from 'i18next';
 import { BurgerMenu, ButtonText } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
+import { useNavigation } from '~/hooks/hooks';
 
 type Props = {
   route: RouteProp<RootNavigationParamList>;
@@ -19,6 +23,7 @@ const getItemsScreenOptions = ({
       return t('items_and_services.TITLE');
     }
   };
+  const navigation = useNavigation<RootNavigationProps>();
 
   return {
     headerShown: true,
@@ -36,7 +41,7 @@ const getItemsScreenOptions = ({
       <ButtonText
         textStyle={globalStyles.fs16}
         onPress={() => {
-          //TODO
+          navigation.navigate(RootScreenName.FILTER);
         }}
       >
         {t('common:components.BUTTON_FILTER')}

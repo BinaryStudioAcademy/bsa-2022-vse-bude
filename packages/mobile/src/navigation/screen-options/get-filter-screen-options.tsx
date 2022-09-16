@@ -3,17 +3,10 @@ import { NativeStackNavigationOptions } from '@react-navigation/native-stack';
 import { ButtonText, HeaderLeft } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { t } from 'i18next';
-import { useAppSelector, useAppDispatch } from '~/hooks/hooks';
-import { selectFilters } from '~/store/selectors';
-import { products as productsApi } from '~/store/actions';
-import { validateObjectForQuery } from '~/helpers/helpers';
-import { ProductQuery } from '@vse-bude/shared';
-import { RootState } from '~/common/types/types';
 
-const getFilterScreenOptions = (): NativeStackNavigationOptions => {
-  const filters = useAppSelector(selectFilters);
-  const dispatch = useAppDispatch();
-
+const getFilterScreenOptions = (
+  onSavePress: () => void,
+): NativeStackNavigationOptions => {
   return {
     headerShown: true,
     headerTitleAlign: 'center',
@@ -24,13 +17,7 @@ const getFilterScreenOptions = (): NativeStackNavigationOptions => {
       <ButtonText
         textStyle={globalStyles.fs16}
         onPress={() => {
-          dispatch(
-            productsApi.loadProducts(
-              validateObjectForQuery<RootState['filters'], ProductQuery>(
-                filters,
-              ),
-            ),
-          );
+          onSavePress();
         }}
       >
         {t('common:components.BUTTON_SAVE')}

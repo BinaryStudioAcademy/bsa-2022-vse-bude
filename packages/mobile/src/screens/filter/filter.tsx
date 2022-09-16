@@ -1,13 +1,25 @@
 import React, { FC } from 'react';
-import { ScrollView } from 'react-native-gesture-handler';
 import {
   ScreenWrapper,
   StatusBar,
   Divider,
   View,
+  ScrollView,
 } from '~/components/components';
-import { useCustomTheme } from '~/hooks/hooks';
+import {
+  useCustomTheme,
+  useAppSelector,
+  useAppDispatch,
+  useNavigation,
+  useEffect,
+} from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
+import { getFilterScreenOptions } from '~/navigation/screen-options/get-filter-screen-options';
+import { selectFilters } from '~/store/selectors';
+import { products as productsApi } from '~/store/actions';
+import { validateObjectForQuery } from '~/helpers/helpers';
+import { ProductQuery } from '@vse-bude/shared';
+import { RootNavigationProps, RootState } from '~/common/types/types';
 import {
   ProductTypeSection,
   CategorySection,
@@ -16,6 +28,19 @@ import {
 } from './components/components';
 
 const Filter: FC = () => {
+  const navigation = useNavigation<RootNavigationProps>();
+  const filters = useAppSelector(selectFilters);
+  const dispatch = useAppDispatch();
+  const onSavePress = () => {
+    dispatch(
+      productsApi.loadProducts(
+        validateObjectForQuery<RootState['filters'], ProductQuery>(filters),
+      ),
+    );
+  };
+  useEffect(() => {
+    navigation.setOptions(getFilterScreenOptions(onSavePress));
+  }, []);
   const { colors } = useCustomTheme();
 
   return (
