@@ -16,8 +16,7 @@ interface ContributorsProps {
   contributors: Contributor[];
 }
 
-export const getStaticProps = withPublic(
-  wrapper.getServerSideProps(() => async (ctx) => {
+export const getStaticProps = wrapper.getStaticProps(() => async (ctx) => {
     const { locale } = ctx;
 
     const team = JSON.stringify(
@@ -31,8 +30,7 @@ export const getStaticProps = withPublic(
         contributors,
       },
     };
-  }),
-);
+  });
 
 const AboutUs: NextPageWithLayout = ({ contributors }: ContributorsProps) => (
   <AboutUsInfo contributors={contributors} />
