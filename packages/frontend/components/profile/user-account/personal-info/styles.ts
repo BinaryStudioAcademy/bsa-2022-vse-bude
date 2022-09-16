@@ -98,12 +98,19 @@ export const groupPhone = ({ spaces }: Theme) => css`
   padding: 0 0 ${spaces.xl1} 0;
 `;
 
+export const groupEmail = ({ spaces }: Theme) => css`
+  gap: ${spaces.md};
+`;
+
 export const phoneRow = css`
   flex-grow: 2;
 `;
 
 export const verifyButtonWrapper = ({ spaces }: Theme) => css`
   padding: 18px 0 ${spaces.xl1} 0;
+`;
+export const verifyEmailButtonWrapper = css`
+  padding: 18px 0;
 `;
 export const avatarPopoverTrigger = css`
   position: absolute;

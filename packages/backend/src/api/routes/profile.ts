@@ -10,7 +10,13 @@ import type { UploadFileRequest } from '@types';
 import { UserExistsError } from '@errors';
 
 export const initProfileRoutes = (
-  { profileService, myListService, authService, productService }: Services,
+  {
+    profileService,
+    myListService,
+    authService,
+    notificationService,
+    productService,
+  }: Services,
   path: ApiRoutes,
 ): Router => {
   const router = Router();
@@ -216,6 +222,18 @@ export const initProfileRoutes = (
 
       return await profileService.updateAvatar({ userId, req });
     }),
+  );
+
+  router.get(
+    apiPath(path, ProfileApiRoutes.GET_NOTIFICATIONS),
+    authMiddleware,
+    wrap((req: Request) => notificationService.getAll(req.userId, req.query)),
+  );
+
+  router.patch(
+    apiPath(path, ProfileApiRoutes.PATCH_NOTIFICATION),
+    authMiddleware,
+    wrap((req: Request) => notificationService.setAsViewed(req)),
   );
 
   /**

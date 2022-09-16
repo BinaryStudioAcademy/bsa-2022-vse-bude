@@ -109,10 +109,13 @@ const Product: FC<Props> = ({ product, contentContainerStyle }) => {
             ]}
           >
             <Text
+              numberOfLines={1}
+              ellipsizeMode={'tail'}
               style={[
                 globalStyles.fs16,
                 globalStyles.fontWeightBold,
                 { color: colors.titleSecondary },
+                styles.price,
               ]}
             >{`${formatPrice(price)} ${t('common:currency.UAH')}`}</Text>
             <Button

@@ -52,7 +52,7 @@
     "name": "Введіть назву продукту",
     "description": "Введіть опис продукту",
     "price": "Введіть ціну продукту",
-    "currency": "UAH",
+    "currency": "ГРН",
     "country": "Україна",
     "city": "Львів",
     "callingCode": "UA",

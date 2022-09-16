@@ -52,7 +52,6 @@ export const screens = {
     HIDE_EMAIL: 'Hide Email',
     RESET_PASSWORD: 'Reset Password',
     RESET_PASSWORD_SUCCESS: 'Password reset request successfully submitted',
-    VERIFY_EMAIL: 'Verify email',
   },
   personal_info: {
     PERSONAL_INFO: 'Personal Info',
@@ -133,20 +132,26 @@ export const screens = {
   verify: {
     VERIFY: 'Verify',
     VERIFY_PHONE: 'Verify phone',
+    VERIFY_EMAIL: 'Verify email',
     ENTER_NUMBER: 'Enter Your Phone Number',
-    PLEASE_ENTER:
-      'For further verification of account, please enter your phone here or verify it on your Personal Info page.',
+    VERIFY_PHONE_TEXT:
+      'For further verification of account, please verify phone here or do it on your Personal Info page later.',
+    VERIFY_EMAIL_TEXT:
+      'For further verification of account, please verify email here or do it on your Personal Info page later.',
     INPUT_LABEL_PHONE: 'Phone',
+    INPUT_LABEL_EMAIL: 'Email',
     VERIFY_LATER: 'Verify later',
     BACK_HOME: 'Home',
     BACK_BUTTON: 'Back',
     ENTER_CODE: 'Enter a code',
     JUST_SENT: 'We just sent a code to',
+    VERIFY_CODE_EMAIL_TEXT: 'We sent a code to',
     INPUT_LABEL_CODE: 'Enter the verification code we just sent to you',
     RESEND_CODE: 'Resend code',
     CONTINUE: 'Continue',
     VERIFIED_TITLE_PHONE: 'Your phone has been fully verified',
     VERIFIED_TITLE_EMAIL: 'Your email has been fully verified',
+    VERIFIED_FULLY: 'Your account has fully been verified',
     CODE_SENT: 'Code sent',
   },
   make_a_post: {

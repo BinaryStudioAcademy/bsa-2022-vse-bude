@@ -1,5 +1,6 @@
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { ProductCard } from 'components/product/card/component';
+import { useTranslation } from 'next-i18next';
 import { lightTheme } from 'theme';
 import { SectionLayout } from '../section-layout';
 import { lotContainer } from './styles';
@@ -12,6 +13,7 @@ const LotSection = ({
   loadMoreHref,
   loadImageHighPriority,
 }: LotSectionProps) => {
+  const { t } = useTranslation();
   if (!lots?.length) {
     return null;
   }
@@ -60,7 +62,7 @@ const LotSection = ({
                 price={item.price}
                 images={item.imageLinks}
                 type={item.type}
-                currency="UAH"
+                currency={t('public:uah')}
                 auctionDate={item.endDate}
                 loadImageHighPriority={loadImageHighPriority && index < 2}
               />

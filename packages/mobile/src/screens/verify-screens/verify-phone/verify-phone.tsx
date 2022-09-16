@@ -14,6 +14,7 @@ import {
   RootScreenName,
 } from '~/common/enums/enums';
 import {
+  PropsVerifyScreens,
   RootNavigationProps,
   VerifyPhoneRequestDto,
 } from '~/common/types/types';
@@ -38,7 +39,8 @@ import {
 } from '../components/components';
 import { styles } from './styles';
 
-const VerifyPhoneScreen: FC = () => {
+const VerifyPhoneScreen: FC<PropsVerifyScreens> = ({ route }) => {
+  const fromSignUp = route.params?.fromSignUp;
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const navigation = useNavigation<RootNavigationProps>();
@@ -58,9 +60,15 @@ const VerifyPhoneScreen: FC = () => {
   };
 
   const handleLaterPress = (): void => {
-    navigation.navigate(RootScreenName.MAIN, {
-      screen: MainScreenName.ACCOUNT_ROOT,
-    });
+    if (fromSignUp) {
+      navigation.navigate(RootScreenName.VERIFY_EMAIL, {
+        fromSignUp,
+      });
+    } else {
+      navigation.navigate(RootScreenName.MAIN, {
+        screen: MainScreenName.ACCOUNT_ROOT,
+      });
+    }
   };
 
   const onSubmit = (): void => {
@@ -68,7 +76,9 @@ const VerifyPhoneScreen: FC = () => {
       .unwrap()
       .then(() => {
         notification.success(t('verify.CODE_SENT'));
-        navigation.navigate(RootScreenName.VERIFY_CODE_PHONE);
+        navigation.navigate(RootScreenName.VERIFY_CODE_PHONE, {
+          fromSignUp: Boolean(fromSignUp),
+        });
       })
       .catch((err) => {
         // eslint-disable-next-line
@@ -90,11 +100,11 @@ const VerifyPhoneScreen: FC = () => {
             contentContainerStyle={globalStyles.mt6}
           />
           <Title
-            label={t('verify.ENTER_NUMBER')}
+            label={t('verify.VERIFY_PHONE')}
             contentContainerStyle={globalStyles.mt6}
           />
           <CustomText
-            label={t('verify.PLEASE_ENTER')}
+            label={t('verify.VERIFY_PHONE_TEXT')}
             contentContainerStyle={globalStyles.mt3}
           />
           <Input

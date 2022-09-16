@@ -9,7 +9,7 @@ export const ContentWrapper = () => (
   <Row css={styles.wrapper}>
     <div css={styles.logoLinks}>
       <Logo />
-      <Contacts email="email" phone="phone" />
+      <Contacts email="vsebude.team@gmail.com" />
       <Policy path={Routes.RULES} />
     </div>
     <Form />
