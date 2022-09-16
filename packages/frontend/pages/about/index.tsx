@@ -1,9 +1,9 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import type { ReactElement } from 'react';
-import { wrapper } from 'store';
 import type { NextPageWithLayout } from 'pages/_app';
 import { AboutUsLayout } from '@components/about';
 import { AboutUsInfo } from '@components/about/about-info/component';
+import { withPublic } from '@hocs';
 
 interface Contributor {
   name: string;
@@ -15,9 +15,7 @@ interface ContributorsProps {
   contributors: Contributor[];
 }
 
-export const getStaticProps = wrapper.getStaticProps(() => async (ctx) => {
-    const { locale } = ctx;
-
+export const getStaticProps = withPublic(async ({ locale }) => {
     const team = JSON.stringify(
       await import(`../../public/locales/${locale}/team.json`),
     );
