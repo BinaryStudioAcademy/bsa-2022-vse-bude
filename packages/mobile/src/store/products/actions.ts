@@ -3,7 +3,11 @@ import {
   createAsyncThunk,
   PrepareAction,
 } from '@reduxjs/toolkit';
-import { AsyncThunkConfig, ProductRequestDto } from '~/common/types/types';
+import {
+  AsyncThunkConfig,
+  FavoriteResponseDto,
+  ProductRequestDto,
+} from '~/common/types/types';
 import {
   AuctionPermissionsResponse,
   Bid,
@@ -106,7 +110,7 @@ const updateProductViews = createAsyncThunk<
 });
 
 const fetchFavorites = createAsyncThunk<
-  ProductDto[],
+  FavoriteResponseDto[],
   ProductRequestDto,
   AsyncThunkConfig
 >(ActionType.FETCH_FAVORITES, async (requestParams, { extra }) => {

@@ -1,6 +1,7 @@
 import { createReducer, isAnyOf } from '@reduxjs/toolkit';
 import { AllProductsDto, ProductDto } from '@vse-bude/shared';
 import { DataStatus } from '~/common/enums/enums';
+import { FavoriteResponseDto } from '~/common/types/types';
 import {
   auctionLeaveAction,
   auctionMakeBid,
@@ -27,7 +28,7 @@ type InitialState = {
   permissions: {
     isAbleToLeaveAuction: boolean;
   };
-  favorites: ProductDto[] | [];
+  favorites: FavoriteResponseDto[] | [];
   favoriteIds: Array<string>;
 };
 

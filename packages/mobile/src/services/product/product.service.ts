@@ -10,7 +10,7 @@ import {
   AllProductsDto,
   ProductDto,
 } from '@vse-bude/shared';
-import { ProductRequestDto } from '~/common/types/types';
+import { FavoriteResponseDto, ProductRequestDto } from '~/common/types/types';
 import { Http } from '~/services/http/http.service';
 
 type Constructor = {
@@ -107,7 +107,9 @@ class ProductService {
     );
   };
 
-  getFavorites(requestParams: ProductRequestDto = {}): Promise<ProductDto[]> {
+  getFavorites(
+    requestParams: ProductRequestDto = {},
+  ): Promise<FavoriteResponseDto[]> {
     return this.#http.load(
       `${this.#apiPrefix}${ApiRoutes.PRODUCTS}${ProductApiRoutes.FAVORITE}`,
       { params: requestParams },
