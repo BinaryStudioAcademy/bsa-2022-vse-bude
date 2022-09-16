@@ -22,7 +22,7 @@ export const imageWrapper = css`
   position: relative;
 
   img {
-    object-fit: contain;
+    object-fit: cover;
   }
 `;
 

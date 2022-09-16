@@ -1,9 +1,11 @@
 import { createReducer } from '@reduxjs/toolkit';
 import {
-  hideVerifyModal,
+  hideMakePostModal,
+  hideVerifyPhoneModal,
   nextVerifyModal,
   previousVerifyModal,
-  showVerifyModal,
+  showMakePostModal,
+  showVerifyPhoneModal,
 } from './actions';
 
 interface ModalsState {
@@ -11,7 +13,7 @@ interface ModalsState {
     isModalOpen: boolean;
     step: number;
   };
-  isCreatePostModalShown: boolean;
+  isCreatePostModalOpen: boolean;
 }
 
 const initialState: ModalsState = {
@@ -19,23 +21,31 @@ const initialState: ModalsState = {
     isModalOpen: false,
     step: 0,
   },
-  isCreatePostModalShown: false,
+  isCreatePostModalOpen: false,
 };
 
 export const modalsReducer = createReducer(initialState, {
-  [showVerifyModal.type]: (state) => ({
+  [showVerifyPhoneModal.type]: (state) => ({
     ...state,
     verifyPhoneModal: {
       isModalOpen: true,
       step: state.verifyPhoneModal.step,
     },
   }),
-  [hideVerifyModal.type]: (state) => ({
+  [hideVerifyPhoneModal.type]: (state) => ({
     ...state,
     verifyPhoneModal: {
       isModalOpen: false,
       step: state.verifyPhoneModal.step,
     },
+  }),
+  [showMakePostModal.type]: (state) => ({
+    ...state,
+    isCreatePostModalOpen: true,
+  }),
+  [hideMakePostModal.type]: (state) => ({
+    ...state,
+    isCreatePostModalOpen: false,
   }),
   [nextVerifyModal.type]: (state) => ({
     ...state,

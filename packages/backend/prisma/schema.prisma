@@ -3,7 +3,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  previewFeatures = ["interactiveTransactions"]
 }
 
 generator erd {
@@ -235,6 +234,7 @@ enum ProductStatus {
   FINISHED
   CLOSED
   DRAFT
+  SOLD
 }
 
 enum SocialMediaType {

@@ -10,6 +10,8 @@
   "sellerCaption": "Продавець",
   "contactSellerBtn": "Написати продавцю",
   "showImageCaption": "Переглянути повне зображення",
+  "soldCaption": "Продукт був проданий",
+  "finishedCaption": "Аукціон завершено",
   "time": {
     "hours": "год",
     "days": "днів",

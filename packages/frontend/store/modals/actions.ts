@@ -6,12 +6,20 @@ export interface VerifyAction {
   payload?: boolean | null;
 }
 
-export const showVerifyModal = createAction<string>(
-  VerifyActionTypes.SHOW_VERIFY_MODAL,
+export const showVerifyPhoneModal = createAction<string>(
+  VerifyActionTypes.SHOW_VERIFY_PHONE_MODAL,
 );
 
-export const hideVerifyModal = createAction<string>(
-  VerifyActionTypes.HIDE_VERIFY_MODAL,
+export const hideVerifyPhoneModal = createAction<string>(
+  VerifyActionTypes.HIDE_VERIFY_PHONE_MODAL,
+);
+
+export const showMakePostModal = createAction<string>(
+  VerifyActionTypes.SHOW_MAKE_POST_MODAL,
+);
+
+export const hideMakePostModal = createAction<string>(
+  VerifyActionTypes.HIDE_MAKE_POST_MODAL,
 );
 
 export const nextVerifyModal = createAction<string>(

@@ -8,5 +8,10 @@ export type ProfileLinkProps = {
 
 export type DateProps = {
   size?: 'lg';
-  time: string;
+  time: Date | string;
+};
+
+export type FilterArrowProps = {
+  isOpen: boolean;
+  onClick?: () => void;
 };

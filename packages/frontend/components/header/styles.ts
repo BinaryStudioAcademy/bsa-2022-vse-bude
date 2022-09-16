@@ -108,3 +108,7 @@ export const burgerOverlay = (theme: Theme) => css`
     right: ${theme.spaces.xl1};
   }
 `;
+
+export const searchButton = ({ spaces }: Theme) => css`
+  margin-left: ${spaces.xs};
+`;

@@ -3,14 +3,14 @@ import type { Theme } from '@emotion/react';
 import { resetButton } from 'theme';
 import { ColorPalette } from '@vse-bude/shared';
 
-export const form = () => css`
+export const form = css`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
 `;
 
-export const personalHeader = () => css`
+export const personalHeader = css`
   width: 100%;
 `;
 

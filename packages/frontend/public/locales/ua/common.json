@@ -10,18 +10,19 @@
       "profile": "Профіль"
     },
     "buttons": {
-      "create_account": "Створити Аккаунт",
-      "sign_in": "Увійти в Аккаунт",
+      "create_account": "Створити Акаунт",
+      "sign_in": "Увійти в Акаунт",
       "openMenu": "Відкрити меню",
       "closeMenu": "Закрити меню"
     },
     "popover": {
-      "personalInfo": "Мій аккаунт",
+      "personalInfo": "Мій акаунт",
       "myList": "Мій список",
       "settings": "Налаштування",
       "messages": "Повідомлення",
       "support": "Підтримка",
-      "signOut": "Вийти"
+      "signOut": "Вийти",
+      "makePost": "Створити пост"
     }
   },
   "footer": {
@@ -148,7 +149,9 @@
     "productRemovedFromFavorites": "Продукт видалено з обраних",
     "bidPlaced": "Ставка зроблена",
     "leftAuction": "Ви вийшли з аукціону",
-    "newBidPlaced": "Зроблена нова ставка на поточний товар"
+    "newBidPlaced": "Зроблена нова ставка на поточний товар",
+    "itemToArchive": "Товар доданий до архіву",
+    "itemToPosted": "Товар опубліковано"
   },
   "months": [
     "Січень",

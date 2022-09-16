@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
-import { t } from 'i18next';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { RootScreenName } from '~/common/enums/enums';
 import { RootNavigationParamList } from '~/common/types/types';
-import { useAppSelector } from '~/hooks/hooks';
+import { useAppSelector, useTranslation } from '~/hooks/hooks';
 import { selectCurrentUser } from '~/store/selectors';
 import {
   MessagesScreen,
@@ -35,6 +34,7 @@ const Stack = createNativeStackNavigator<RootNavigationParamList>();
 
 const Navigation: FC = () => {
   const user = useAppSelector(selectCurrentUser);
+  const { t } = useTranslation();
 
   return (
     <NativeStack.Navigator screenOptions={mainScreenOptions}>
