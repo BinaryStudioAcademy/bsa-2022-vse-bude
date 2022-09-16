@@ -1,6 +1,5 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import type { ReactElement } from 'react';
-import { withPublic } from '@hocs';
 import { wrapper } from 'store';
 import type { NextPageWithLayout } from 'pages/_app';
 import { AboutUsLayout } from '@components/about';
