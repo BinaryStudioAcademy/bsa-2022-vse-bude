@@ -2,17 +2,19 @@ import React, { ReactElement } from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {
   FormControl,
+  FormControlErrors,
   FormControlPath,
   FormControlValues,
 } from '~/common/types/types';
 import { useState, useCustomTheme, useFormControl } from '~/hooks/hooks';
-import { Text, View } from '~/components/components';
+import { Text, View, AlertIcon } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 
 type Props<T extends FormControlValues> = {
   label?: string;
   name: FormControlPath<T>;
+  errors: FormControlErrors<T>;
   control: FormControl<T>;
   items: Array<{
     label: string;
@@ -27,6 +29,7 @@ type Props<T extends FormControlValues> = {
 const DropDown = <T extends FormControlValues>({
   label,
   name,
+  errors,
   control,
   items,
   zIndex,
@@ -37,6 +40,7 @@ const DropDown = <T extends FormControlValues>({
   const { field } = useFormControl({ name, control });
   const { colors } = useCustomTheme();
   const [open, setOpen] = useState(false);
+  const error = errors[name]?.message as string;
 
   return (
     <View style={styles.container}>
@@ -88,6 +92,23 @@ const DropDown = <T extends FormControlValues>({
         disabled={disabled}
         placeholder={placeholder}
       />
+      {Boolean(error) && (
+        <View
+          style={[
+            globalStyles.mt2,
+            globalStyles.fs12,
+            globalStyles.flexDirectionRow,
+            globalStyles.alignItemsCenter,
+          ]}
+        >
+          <AlertIcon style={[globalStyles.mr2, { color: colors.error }]} />
+          <Text
+            style={[styles.label, globalStyles.fs12, { color: colors.error }]}
+          >
+            {error}
+          </Text>
+        </View>
+      )}
     </View>
   );
 };

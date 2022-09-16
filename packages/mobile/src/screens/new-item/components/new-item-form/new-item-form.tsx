@@ -40,7 +40,7 @@ const NewItemForm: FC = () => {
       category: '',
       title: '',
       description: '',
-      condition: '',
+      condition: undefined,
       currency: t('common:currency.UAH'),
       price: 0,
       country: '',
@@ -72,6 +72,7 @@ const NewItemForm: FC = () => {
           label={t('make_a_post.CATEGORY')}
           placeholder={t('make_a_post.CATEGORY_PLACEHOLDER')}
           name="category"
+          errors={errors}
           control={control}
           items={formattedCategories}
           zIndex={19}
@@ -102,9 +103,11 @@ const NewItemForm: FC = () => {
         label={t('make_a_post.CONDITION')}
         placeholder={t('make_a_post.CONDITION_PLACEHOLDER')}
         name="condition"
+        errors={errors}
         control={control}
         items={CONDITION}
         zIndex={19}
+        requiredMark={true}
       />
       <View
         style={[
@@ -151,7 +154,6 @@ const NewItemForm: FC = () => {
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
-        requiredMark={true}
       />
       <Input
         label={t('verification.PHONE_NUMBER')}
@@ -160,7 +162,6 @@ const NewItemForm: FC = () => {
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
-        requiredMark={true}
         isPopover={true}
         popoverText={t('make_a_post.PHONE_POPOVER')}
       />

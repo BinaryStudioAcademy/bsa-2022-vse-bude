@@ -124,6 +124,7 @@ export const screens = {
     MAX_DESCRIPTION_POST_LENGTH: `The description length must not exceed ${MAX_DESCRIPTION_POST_LENGTH} characters`,
     EMPTY_PRODUCT: 'Fill the title please!',
     EMPTY_DESCRIPTION: 'Fill the description please!',
+    EMPTY_CONDITION: 'Please select the condition!',
     MIN_PRICE: `The price cannot be lower than ${MIN_PRICE}`,
     MIN_BID: `The bid cannot be lower than ${MIN_BID}`,
     NUMBER_PRICE: 'The price must be a number',

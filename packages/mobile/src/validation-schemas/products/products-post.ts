@@ -1,6 +1,6 @@
 import * as Joi from 'joi';
 import i18next from 'i18next';
-import { Condition, IPostForms, PLACE } from '@vse-bude/shared';
+import { IPostForms, PLACE } from '@vse-bude/shared';
 import { PHONE_NUMBER_REGEX } from '~/common/regexp/regexp';
 import {
   MAX_COUNTRY_LENGTH,
@@ -28,7 +28,11 @@ const productsPostSchema = Joi.object<IPostForms>({
       'string.max': i18next.t('errors.MAX_DESCRIPTION_POST_LENGTH'),
       'string.empty': i18next.t('errors.EMPTY_DESCRIPTION'),
     }),
-  condition: Joi.string().valid(Condition.NEW, Condition.USED),
+  condition: Joi.any()
+    .required()
+    .messages({
+      'any.required': i18next.t('errors.EMPTY_CONDITION'),
+    }),
   currency: Joi.any().empty(''),
   price: Joi.number()
     .min(MIN_PRICE)
@@ -38,13 +42,13 @@ const productsPostSchema = Joi.object<IPostForms>({
     }),
   phone: Joi.string()
     .trim()
-    .required()
+    .empty('')
     .pattern(PHONE_NUMBER_REGEX)
     .messages({
-      'string.empty': i18next.t('errors.EMPTY_PHONE'),
       'string.pattern.base': i18next.t('errors.WRONG_FORMAT_PHONE'),
     }),
   country: Joi.string()
+    .trim()
     .required()
     .max(MAX_COUNTRY_LENGTH)
     .pattern(PLACE)
@@ -54,11 +58,11 @@ const productsPostSchema = Joi.object<IPostForms>({
       'string.pattern.base': i18next.t('errors.PLACE_NAME'),
     }),
   city: Joi.string()
-    .required()
+    .trim()
+    .empty('')
     .max(MAX_CITY_LENGTH)
     .pattern(PLACE)
     .messages({
-      'string.empty': i18next.t('errors.EMPTY_CITY'),
       'string.max': i18next.t('errors.MAX_CITY_LENGTH'),
       'string.pattern.base': i18next.t('errors.PLACE_NAME'),
     }),
