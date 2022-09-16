@@ -10,6 +10,8 @@ export const IconButton = ({
   size = 'md',
   cssExtend,
   onClick,
+  onMouseEnter,
+  onMouseLeave,
   type = 'button',
   ariaLabel,
   disabled = false,
@@ -18,6 +20,8 @@ export const IconButton = ({
     aria-label={ariaLabel}
     css={[styles.iconButton, cssExtend]}
     onClick={onClick}
+    onMouseEnter={onMouseEnter}
+    onMouseLeave={onMouseLeave}
     data-size={size}
     data-bg-color={backgroundColor}
     type={type}

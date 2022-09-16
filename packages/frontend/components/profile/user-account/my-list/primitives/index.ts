@@ -7,3 +7,4 @@ export { ItemDate } from './date';
 export { ItemDescription } from './item-description';
 export { Views } from './views';
 export { FilterArrow } from './filter-arrow';
+export { Tooltip } from './tooltip';

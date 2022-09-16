@@ -16,7 +16,8 @@
     "sold": "Sold",
     "edit": "edited",
     "publish": "Publish",
-    "unarchive": "Unarchive"
+    "unarchive": "Unarchive",
+    "tooltip-xmark": "archive"
   },
   "months": {
     "january": "January",
@@ -53,11 +54,7 @@
   "modal": {
     "header": "Move the product to the archive?",
     "buttons": {
-      "clear": "Clear",
       "add": "Archive"
-    },
-    "placeholders": {
-      "reason": "You can add a reason"
     }
   }
 }

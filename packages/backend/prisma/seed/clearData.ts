@@ -12,4 +12,5 @@ export const clearData = async (prismaClient: PrismaClient): Promise<void> => {
   await prismaClient.product.deleteMany({});
   await prismaClient.user.deleteMany({});
   await prismaClient.news.deleteMany({});
+  await prismaClient.order.deleteMany({});
 };
