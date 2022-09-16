@@ -78,7 +78,13 @@ const Auth: FC = () => {
       .unwrap()
       .then((resp) => {
         if (resp.phone) {
-          navigation.navigate(RootScreenName.VERIFY_PHONE);
+          navigation.navigate(RootScreenName.VERIFY_PHONE, {
+            fromSignUp: true,
+          });
+        } else {
+          navigation.navigate(RootScreenName.VERIFY_EMAIL, {
+            fromSignUp: true,
+          });
         }
       })
       .catch((err) => {

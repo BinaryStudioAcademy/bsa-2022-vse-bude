@@ -1,6 +1,7 @@
 import { FullUserProfileDto } from '@vse-bude/shared';
 import { createReducer, isAnyOf } from '@reduxjs/toolkit';
 import { DataStatus } from '~/common/enums/enums';
+import { auth as authActions } from '~/store/actions';
 import { getPersonalInfo, updatePersonalInfo, updateAvatar } from './actions';
 
 type State = {
@@ -15,8 +16,8 @@ const initialState: State = {
 
 const reducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(updateAvatar.fulfilled, (state) => {
-      state.dataStatus = DataStatus.FULFILLED;
+    .addCase(authActions.logOut.fulfilled, (state) => {
+      state.user = null;
     })
     .addMatcher(
       isAnyOf(
