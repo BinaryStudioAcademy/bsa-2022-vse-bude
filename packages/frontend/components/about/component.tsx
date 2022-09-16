@@ -14,6 +14,8 @@ export const AboutUsLayout: FC<AboutUsPageProps> = ({ children }) => {
         <div css={styles.wrapper}>
           <h3 css={styles.pageHeader}>{t('aboutUsPage')}</h3>
           <p>{t('aboutProject')}</p>
+          <p>{t('aboutProjectDescription')}</p>
+          <p>{t('aboutProjectEnding')}</p>
           <Flex css={styles.pageContent}>{children}</Flex>
         </div>
       </Container>

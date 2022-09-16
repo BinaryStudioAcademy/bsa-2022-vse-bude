@@ -11,7 +11,7 @@
         "role": "Full Stack Developer"
       },
       {
-        "name": "Mykhailo Benedyk",
+        "name": "Misha Benedyk",
         "photo":
           "/images/team/Misha.jpg",
         "role": "Full Meow Stack"
@@ -23,10 +23,22 @@
         "role": "Developer"
       },
       {
+        "name": "Ivan Nikolaiev",
+        "photo":
+          "/images/team/Ivan.jpg",
+        "role": "Developer"
+      },
+      {
+        "name": "Valeriy Mishchenko",
+        "photo":
+          "/images/team/Valeriy.jpg",
+        "role": "Developer"
+      },
+      {
         "name": "Nadiia Prokhorchuk",
         "photo":
           "/images/team/Nadiia.jpg",
-        "role": "Frontend"
+        "role": "Developer"
       },
       {
         "name": "Olda Yarotska",
@@ -38,12 +50,12 @@
         "name": "Yevhenii Moroziuk",
         "photo":
           "/images/team/Yevhenii.jpg",
-        "role": "JS Coach"
+        "role": "Black Humor Lead"
       },
       {
         "name": "Vitalii Yarmus",
         "photo":
           "/images/team/Vitalii.jpg",
-        "role": "JS Coach, Lecturer"
+        "role": "DevOps"
       }
 ]

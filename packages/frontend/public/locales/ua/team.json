@@ -11,7 +11,7 @@
         "role": "Full Stack Developer"
       },
       {
-        "name": "Михайло Бенедюк",
+        "name": "Міша Бенедюк",
         "photo":
           "/images/team/Misha.jpg",
         "role": "developer"
@@ -23,10 +23,22 @@
         "role": "Developer"
       },
       {
+        "name": "Іван Ніколаєв",
+        "photo":
+          "/images/team/Ivan.jpg",
+        "role": "Developer"
+      },
+      {
+        "name": "Міщенко Валерій",
+        "photo":
+          "/images/team/Valeriy.jpg",
+        "role": "Developer"
+      },
+      {
         "name": "Надія Прохорчук",
         "photo":
           "/images/team/Nadiia.jpg",
-        "role": "Frontend"
+        "role": "Developer"
       },
       {
         "name": "Ольга Яротська",
@@ -38,12 +50,12 @@
         "name": "Євгеній Морозюк",
         "photo":
           "/images/team/Yevhenii.jpg",
-        "role": "JS Coach"
+        "role": "Black Humor Lead"
       },
       {
         "name": "Віталій Ярмус",
         "photo":
           "/images/team/Vitalii.jpg",
-        "role": "JS Coach, Lecturer"
+        "role": "DevOps"
       }
 ]
