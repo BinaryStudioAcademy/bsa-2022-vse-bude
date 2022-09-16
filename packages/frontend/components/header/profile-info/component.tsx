@@ -2,6 +2,7 @@ import { useAuth } from '@hooks';
 import { Popover, Avatar, Icon, InternalLink } from '@primitives';
 import { useRouter } from 'next/router';
 import { IconName, IconColor, Routes } from '@enums';
+import { Notification } from '@components/primitives/notification';
 import * as styles from './styles';
 import { DownArrow } from './sub-components/dropdown';
 import { PopoverContent } from './sub-components/popover-content';
@@ -21,7 +22,13 @@ export const ProfileInfo = ({ load }: ProfileInfoProps) => {
 
   const newNotifications = true;
 
-  const renderNotifications = () => <div>Notifications!</div>;
+  const renderNotifications = () => (
+    <div>
+      <Notification />
+      <Notification />
+      <Notification />
+    </div>
+  );
 
   return (
     <div css={styles.profileInfo} profile-load={load.toString()}>
