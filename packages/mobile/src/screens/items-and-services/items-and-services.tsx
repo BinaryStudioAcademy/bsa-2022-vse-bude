@@ -1,4 +1,5 @@
 import React from 'react';
+import { useAppSelector, useCustomTheme } from '~/hooks/hooks';
 import {
   ScreenWrapper,
   Product,
@@ -6,14 +7,13 @@ import {
   StatusBar,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { useAppSelector, useCustomTheme } from '~/hooks/hooks';
 import { selectProducts } from '~/store/selectors';
 import { styles } from './styles';
 import { ListHeader } from './components/components';
 
 const ItemsAndServices = () => {
-  const { colors } = useCustomTheme();
   const { items } = useAppSelector(selectProducts);
+  const { colors } = useCustomTheme();
 
   return (
     <ScreenWrapper>
