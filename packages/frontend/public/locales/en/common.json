@@ -23,6 +23,10 @@
       "support": "Support",
       "signOut": "Sign Out",
       "makePost": "Make a Post"
+    },
+    "notifications": {
+      "noNotification": "No unread messages",
+      "loadMore":"Load more"
     }
   },
   "footer": {
@@ -181,15 +185,7 @@
     "November",
     "December"
   ],
-  "days": [
-    "Su",
-    "Mo",
-    "Tu",
-    "We",
-    "Th",
-    "Fr",
-    "Sa"
-  ],
+  "days": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
   "modal": {
     "confirm": {
       "confirm": "Confirm",

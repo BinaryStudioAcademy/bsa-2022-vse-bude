@@ -1,11 +1,14 @@
-import { useAuth } from '@hooks';
+import { useAppDispatch, useAuth, useTypedSelector } from '@hooks';
 import { Popover, Avatar, Icon, InternalLink } from '@primitives';
 import { useRouter } from 'next/router';
 import { IconName, IconColor, Routes } from '@enums';
-import { Notification } from '@components/primitives/notification';
+import { useEffect } from 'react';
+import { fetchUserNotifications } from '@store';
+import { NOTIFICATIONS_FILTER } from '@vse-bude/shared';
 import * as styles from './styles';
 import { DownArrow } from './sub-components/dropdown';
 import { PopoverContent } from './sub-components/popover-content';
+import NotificationsWrapper from './notifications-wrapper/component';
 
 interface ProfileInfoProps {
   load: boolean;
@@ -14,21 +17,25 @@ interface ProfileInfoProps {
 export const ProfileInfo = ({ load }: ProfileInfoProps) => {
   const router = useRouter();
   const { user, loading } = useAuth();
+  const dispatch = useAppDispatch();
 
   const handleClick = (e) => {
     e.preventDefault();
     router.push(`${Routes.PROFILE}/${user.id}`);
   };
+  useEffect(() => {
+    dispatch(
+      fetchUserNotifications({
+        limit: NOTIFICATIONS_FILTER.NOTIFICATIONS_LIMIT_DEFAULT,
+        viewed: false,
+      }),
+    );
+  }, [dispatch]);
 
-  const newNotifications = true;
-
-  const renderNotifications = () => (
-    <div>
-      <Notification />
-      <Notification />
-      <Notification />
-    </div>
-  );
+  const renderNotifications = () => <NotificationsWrapper viewed={false} />;
+  const {
+    notifications: { count },
+  } = useTypedSelector((store) => store.profile);
 
   return (
     <div css={styles.profileInfo} profile-load={load.toString()}>
@@ -48,7 +55,7 @@ export const ProfileInfo = ({ load }: ProfileInfoProps) => {
               icon={IconName.BELL}
               size="md"
               color={IconColor.BLACK}
-              cssExtend={[newNotifications && styles.newNotifications]}
+              cssExtend={[count && styles.newNotifications]}
             />
           }
         >

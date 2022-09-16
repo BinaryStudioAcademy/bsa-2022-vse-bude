@@ -23,6 +23,10 @@
       "support": "Підтримка",
       "signOut": "Вийти",
       "makePost": "Створити пост"
+    },
+    "notifications":{
+      "noNotification":"Немає непрочитаних повідомлень",
+      "loadMore": "Завантажити ще"
     }
   },
   "footer": {

@@ -1,18 +1,16 @@
 import { css, type Theme } from '@emotion/react';
 
-export const wrapper = ({ spaces, radiuses }: Theme) =>
+export const wrapper = ({ spaces, radiuses, colors }: Theme) =>
   css`
     width: 300px;
     margin-bottom: ${spaces.md};
     padding: ${spaces.sm} ${spaces.md};
-    border: 1px solid;
-    border-radius: ${radiuses.sm};
+    border: 1px solid ${colors.backgroundDark};
+    border-radius: ${radiuses.xs};
   `;
 export const titleWrapper = ({ spaces }: Theme) =>
   css`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    position: relative;
     margin: 0 0 ${spaces.sm};
   `;
 export const time = ({
@@ -21,11 +19,13 @@ export const time = ({
   lineHeights,
   colors,
 }: Theme) => css`
+  display: block;
+  text-align: right;
   font-family: inherit;
   font-size: ${fontSizes.caption};
   font-weight: ${fontWeights.caption};
   line-height: ${lineHeights.caption};
-  color: ${colors.text};
+  color: ${colors.textLight};
 `;
 export const title = ({
   fontSizes,
@@ -53,4 +53,8 @@ export const description = ({
   line-height: ${lineHeights.body2};
   color: ${colors.text};
 `;
-export const viewBtn = css``;
+export const viewBtn = ({ spaces }: Theme) => css`
+  right: -${spaces.sm};
+  top: -${spaces.xs};
+  position: absolute;
+`;
