@@ -9,6 +9,7 @@ export const button = ({
   fontWeights,
   radiuses,
   heights,
+  spaces,
 }: Theme) => css`
   ${resetButton};
   display: flex;
@@ -20,11 +21,14 @@ export const button = ({
   cursor: pointer;
   flex: 1;
   height: ${heights.buttonXs};
-  min-width: 100px;
+  min-width: 120px;
   width: fit-content;
   border-radius: ${radiuses.xxs};
   font-size: ${fontSizes.smallButton};
   transition: 200ms linear;
+  white-space: nowrap;
+  padding: 0 ${spaces.xs};
+  box-sizing: content-box;
 
   &[data-selected='selected'] {
     border: 1px solid ${colors.primaryLight};
