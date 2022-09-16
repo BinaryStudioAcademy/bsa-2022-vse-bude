@@ -21,6 +21,7 @@ import {
   Filter,
 } from '~/screens/screens';
 import { HeaderLeft } from '~/components/components';
+import { VerifyEmailScreen } from '~/screens/verify-screens/verify-screens';
 import { HomeWithMenuNavigation } from './drawer/drawer.navigation';
 import {
   mainScreenOptions,
@@ -96,6 +97,10 @@ const Navigation: FC = () => {
             <Stack.Screen
               name={RootScreenName.VERIFIED_PHONE}
               component={VerifiedPhoneScreen}
+            />
+            <Stack.Screen
+              name={RootScreenName.VERIFY_EMAIL}
+              component={VerifyEmailScreen}
             />
             <Stack.Screen
               name={RootScreenName.VERIFY_CODE_EMAIL}

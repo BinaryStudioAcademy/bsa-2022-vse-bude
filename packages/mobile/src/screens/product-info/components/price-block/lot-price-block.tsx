@@ -169,6 +169,7 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
             errors={errors}
             placeholder={placeholderText}
             editable={canUserMakeBid}
+            contentContainerStyle={styles.input}
           />
           <View
             style={[

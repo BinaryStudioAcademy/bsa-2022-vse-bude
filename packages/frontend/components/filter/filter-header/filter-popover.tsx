@@ -21,7 +21,7 @@ import type { FilterPopoverProps, PriceOption, SortByOption } from './types';
 export function FilterPopover({ filter, setFilter }: FilterPopoverProps) {
   const { t } = useTranslation();
 
-  const categories = useTypedSelector((state) => state.category.list);
+  const categories = useTypedSelector((state) => state.category.listInUse);
 
   const [category, setCategory] = useState<SelectOption>(null);
   const [sortBy, setSortBy] = useState<SortByOption>(null);
@@ -34,11 +34,9 @@ export function FilterPopover({ filter, setFilter }: FilterPopoverProps) {
         item.value.sortBy === filter?.sortBy,
     );
     sortBuyCurrent ? setSortBy(sortBuyCurrent) : setSortBy(null);
-    setPrice({
-      [MIN_PRICE_NAME]: filter?.priceGt || ITEM_FILTER.PRICE_GT_DEFAULT,
-      [MAX_PRICE_NAME]: filter?.priceLt || ITEM_FILTER.PRICE_LT_DEFAULT,
-    });
+  }, [filter?.order, filter?.sortBy, t]);
 
+  useEffect(() => {
     const currentCategory = categories.find(
       (item) => item.id === filter?.categoryId,
     );
@@ -49,7 +47,14 @@ export function FilterPopover({ filter, setFilter }: FilterPopoverProps) {
           value: currentCategory.id,
         })
       : setCategory(null);
-  }, [categories, t, filter]);
+  }, [categories, filter?.categoryId]);
+
+  useEffect(() => {
+    setPrice({
+      [MIN_PRICE_NAME]: filter?.priceGt || ITEM_FILTER.PRICE_GT_DEFAULT,
+      [MAX_PRICE_NAME]: filter?.priceLt || ITEM_FILTER.PRICE_LT_DEFAULT,
+    });
+  }, [filter?.priceGt, filter?.priceLt]);
 
   const priceHandler = ({ target }) => {
     const { value, name } = target;
@@ -104,6 +109,7 @@ export function FilterPopover({ filter, setFilter }: FilterPopoverProps) {
         <div css={styles.popover}>
           <h5 css={styles.popoverHeadline}>{t('items-page:label.category')}</h5>
           <Select
+            cssDropdownExtend={styles.dropdown}
             options={categories.map((item: CategoryDto) => ({
               title: item.title,
               value: item.id,

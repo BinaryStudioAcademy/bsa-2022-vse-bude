@@ -25,6 +25,9 @@ const user = createReducer<UserDto>(null, {
   [phoneVerification.fulfilled.type]: (state) => {
     state.phoneVerified = true;
   },
+  [emailVerification.fulfilled.type]: (state) => {
+    state.emailVerified = true;
+  },
   [updateUserAvatar.fulfilled.type]: (state, { payload }) => {
     state.avatar = payload.avatar;
   },

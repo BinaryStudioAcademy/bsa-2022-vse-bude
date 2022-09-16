@@ -4,6 +4,7 @@ import {
   useAppDispatch,
   useAppSelector,
   useEffect,
+  useNavigation,
 } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
 import {
@@ -26,6 +27,8 @@ import {
   selectPopularProducts,
   selectPopularLots,
 } from '~/store/selectors';
+import { RootNavigationProps } from '~/common/types/types';
+import { RootScreenName } from '~/common/enums/enums';
 import {
   Category,
   Flag,
@@ -36,6 +39,7 @@ import {
 import { styles } from './styles';
 
 const Home: FC = () => {
+  const navigation = useNavigation<RootNavigationProps>();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const auctionProducts = useAppSelector(selectPopularLots);
@@ -57,6 +61,10 @@ const Home: FC = () => {
     );
     dispatch(categoriesActions.loadAllCategories());
   }, []);
+
+  const onSeeAllPress = () => {
+    navigation.navigate(RootScreenName.ITEMS_AND_SERVICES);
+  };
 
   return (
     <ScreenWrapper>
@@ -110,9 +118,7 @@ const Home: FC = () => {
             sectionTitle={t('home.POPULAR_LOTS')}
             seeAllTitle={t('home.SEE_ALL_LOTS')}
             data={auctionProducts}
-            onSeeAllPress={() => {
-              // TODO
-            }}
+            onSeeAllPress={onSeeAllPress}
             contentContainerStyle={[globalStyles.mt6]}
           />
         </HomeScreenWrapper>
@@ -158,9 +164,7 @@ const Home: FC = () => {
             sectionTitle={t('home.POPULAR_ITEMS')}
             seeAllTitle={t('home.SEE_ALL_ITEMS')}
             data={sellingProducts}
-            onSeeAllPress={() => {
-              // TODO
-            }}
+            onSeeAllPress={onSeeAllPress}
             contentContainerStyle={globalStyles.mt6}
           />
         </HomeScreenWrapper>

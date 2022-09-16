@@ -24,7 +24,8 @@
     "validation": {
       "required": "Bid field is required",
       "min": "Bid amount is too low",
-      "numeric": "Bid amount must be a number"
+      "numeric": "Bid amount must be a number",
+      "safe": "Bid amount is too big"
     }
   },
   "leave": {
