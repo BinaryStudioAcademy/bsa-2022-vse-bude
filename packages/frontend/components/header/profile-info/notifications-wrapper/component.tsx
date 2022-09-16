@@ -7,7 +7,7 @@ import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 import * as styles from './styles';
 
-export default function NotificationsWrapper({ viewed }: { viewed: string }) {
+export default function NotificationsWrapper({ viewed }: { viewed: boolean }) {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const {

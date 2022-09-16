@@ -1,8 +1,4 @@
-import type {
-  ProductRepository,
-  NotificationRepository,
-  BidRepository,
-} from '@repositories';
+import type { ProductRepository, BidRepository } from '@repositories';
 import {
   ProductNotFoundError,
   UnauthorizedError,
@@ -36,6 +32,7 @@ import { NotVerifiedError } from 'error/user/not-verified';
 import { lang } from '@lang';
 import type { AllProductsResponse } from '@types';
 import type { ProductById } from 'common/types/product';
+import type { NotificationService } from '@services';
 
 export class ProductService {
   private _productRepository: ProductRepository;
@@ -48,7 +45,7 @@ export class ProductService {
 
   private _auctionScheduler: AuctionScheduler;
 
-  private _notificationRepository: NotificationRepository;
+  private _notificationService: NotificationService;
 
   constructor(
     productRepository: ProductRepository,
@@ -56,14 +53,14 @@ export class ProductService {
     s3StorageService: S3StorageService,
     bidRepository: BidRepository,
     auctionScheduler: AuctionScheduler,
-    notificationRepository: NotificationRepository,
+    notificationService: NotificationService,
   ) {
     this._productRepository = productRepository;
     this._verifyService = verifyService;
     this._s3StorageService = s3StorageService;
     this._bidRepository = bidRepository;
     this._auctionScheduler = auctionScheduler;
-    this._notificationRepository = notificationRepository;
+    this._notificationService = notificationService;
   }
 
   public async getAll(query: ProductQuery): Promise<AllProductsResponse> {
@@ -162,7 +159,7 @@ export class ProductService {
     );
 
     if (lastBid && lastBid.bidderId === userId) {
-      await this._notificationRepository.create({
+      await this._notificationService.create({
         type: NotificationType.AUCTION_LEFT,
         userId: product.authorId,
         title: lang('notifications:title.AUCTION_LEFT', {}, 'en'),
@@ -324,7 +321,7 @@ export class ProductService {
       ProductStatus.FINISHED,
     );
 
-    await this._notificationRepository.create({
+    await this._notificationService.create({
       type: NotificationType.PRODUCT_SOLD,
       userId: product.authorId,
       title: lang('notifications:title.PRODUCT_SOLD', {}, 'en'),

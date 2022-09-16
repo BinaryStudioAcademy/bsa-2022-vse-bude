@@ -5,7 +5,6 @@ import type {
   ProductRepository as ProductRepositoryType,
   UserRepository as UserRepositoryType,
   BidRepository as BidRepositoryType,
-  NotificationRepository as NotificationRepositoryType,
 } from '@repositories';
 import type { Product, User } from '@prisma/client';
 import { emailService } from '@services';
@@ -17,6 +16,7 @@ import { prismaClient as database } from '../data/db';
 import { ProductNotSoldBuilder } from '../email/product-not-sold-builder';
 import { ProductSoldAuthorBuilder } from '../email/product-sold-author-builder';
 import { ProductSoldWinnerBuilder } from '../email/product-sold-winner-builder';
+import { NotificationService } from '../services/notification';
 import { BaseCommand } from './base-command';
 
 export class AuctionNotificationsCommand extends BaseCommand {
@@ -26,7 +26,7 @@ export class AuctionNotificationsCommand extends BaseCommand {
 
   private _bidRepository: BidRepositoryType;
 
-  private _notificationRepository: NotificationRepositoryType;
+  private _notificationService: NotificationService;
 
   private limit = 20;
 
@@ -39,7 +39,9 @@ export class AuctionNotificationsCommand extends BaseCommand {
     this._prodRepository = new ProductRepository(database);
     this._userRepository = new UserRepository(database);
     this._bidRepository = new BidRepository(database);
-    this._notificationRepository = new NotificationRepository(database);
+    this._notificationService = new NotificationService(
+      new NotificationRepository(database),
+    );
   }
 
   async execute(): Promise<void> {
@@ -50,8 +52,8 @@ export class AuctionNotificationsCommand extends BaseCommand {
 
       const bidders = await this._bidRepository.getBidders(this._product.id);
 
-      bidders.forEach(async (bidder) => {
-        await this._notificationRepository.create({
+      for (const bidder of bidders) {
+        await this._notificationService.create({
           type: NotificationType.AUCTION_ENDED,
           userId: bidder,
           title: lang('notifications:title.AUCTION_ENDED', {}, 'en'),
@@ -62,9 +64,9 @@ export class AuctionNotificationsCommand extends BaseCommand {
           ),
           productId: this._product.id,
         });
-      });
+      }
 
-      await this._notificationRepository.create({
+      await this._notificationService.create({
         type: NotificationType.AUCTION_ENDED,
         userId: this._product.authorId,
         title: lang('notifications:title.AUCTION_ENDED', {}, 'en'),

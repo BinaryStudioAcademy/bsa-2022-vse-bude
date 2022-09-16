@@ -93,5 +93,8 @@
       "maxSize": "The file size should not exceed 10MB",
       "fileType": "The file type should be .jpg or .png"
     }
+  },
+  "tooltip": {
+    "verify": "To continue verifying your account, please save the changes"
   }
 }

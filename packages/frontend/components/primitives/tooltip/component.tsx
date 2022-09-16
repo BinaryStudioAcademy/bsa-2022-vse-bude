@@ -93,6 +93,29 @@ export const Tooltip = ({
     }
   }, [isVisible, calcBodyCoords]);
 
+  const setTooltipPosition = useCallback(() => {
+    if (bodyRef.current) {
+      const [bodyTop, bodyLeft, arrowLeft] = calcBodyCoords();
+
+      bodyRef.current.style.top = `${bodyTop - tooltipOffset}px`;
+      bodyRef.current.style.left = `${bodyLeft}px`;
+
+      arrowRef.current.style.left = `${arrowLeft}px`;
+    }
+  }, [calcBodyCoords]);
+
+  const handleWindowSizeChange = useCallback(() => {
+    setTooltipPosition();
+  }, [setTooltipPosition]);
+
+  useEffect(() => {
+    window.addEventListener('resize', handleWindowSizeChange);
+
+    return () => {
+      window.removeEventListener('resize', handleWindowSizeChange);
+    };
+  }, [handleWindowSizeChange]);
+
   const handleMouseEnter = () => {
     setIsVisible(true);
     if (timerRef.current) {

@@ -1,14 +1,11 @@
-import type {
-  BidRepository,
-  NotificationRepository,
-  ProductRepository,
-} from '@repositories';
+import type { BidRepository, ProductRepository } from '@repositories';
 import type { CreateBidDto } from '@types';
 import { AuctionEndedError, ProductNotFoundError } from '@errors';
 import { toUtc } from '@helpers';
 import { UPDATE_PRODUCT_PRICE, NotificationType } from '@vse-bude/shared';
 import type { Bid } from '@prisma/client';
 import { lang } from '@lang';
+import type { NotificationService } from '@services';
 import { LowBidPriceError } from '../error/product/low-bid-price-error';
 import { eventListener } from '../events';
 
@@ -17,16 +14,16 @@ export class BidService {
 
   private _productRepository: ProductRepository;
 
-  private _notificationRepository: NotificationRepository;
+  private _notificationService: NotificationService;
 
   constructor(
     bidRepository: BidRepository,
     productRepository: ProductRepository,
-    notificationRepository: NotificationRepository,
+    notificationService: NotificationService,
   ) {
     this._bidRepository = bidRepository;
     this._productRepository = productRepository;
-    this._notificationRepository = notificationRepository;
+    this._notificationService = notificationService;
   }
 
   public async createBid(dto: CreateBidDto): Promise<Bid> {
@@ -58,7 +55,7 @@ export class BidService {
       bidderId: bid.bidderId,
     });
 
-    await this._notificationRepository.create({
+    await this._notificationService.create({
       type: NotificationType.BID_PLACED,
       userId: product.authorId,
       title: lang('notifications:title.BID_PLACED', {}, 'en'),
@@ -67,7 +64,7 @@ export class BidService {
     });
 
     if (lastBid && lastBid.bidderId !== bid.bidderId) {
-      await this._notificationRepository.create({
+      await this._notificationService.create({
         type: NotificationType.OUTBID,
         userId: lastBid.bidderId,
         title: lang('notifications:title.OUTBID', {}, 'en'),
