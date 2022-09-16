@@ -35,6 +35,7 @@ import {
   ProductPriceBlock,
   SellerInfo,
 } from './components/components';
+import { styles } from './styles';
 
 const ProductInfo: FC = () => {
   const { colors } = useCustomTheme();
@@ -66,7 +67,11 @@ const ProductInfo: FC = () => {
   }, [id, user, dispatch]);
 
   if (!product) {
-    return <Spinner />;
+    return (
+      <View style={[globalStyles.flex1, globalStyles.justifyContentCenter]}>
+        <Spinner />
+      </View>
+    );
   }
   const {
     title,
@@ -81,7 +86,7 @@ const ProductInfo: FC = () => {
   const isAuction = type == ProductType.AUCTION;
 
   return (
-    <ScreenWrapper style={{ marginTop: -25 }}>
+    <ScreenWrapper style={styles.wrapper}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={[globalStyles.px5, globalStyles.mb5, globalStyles.py6]}

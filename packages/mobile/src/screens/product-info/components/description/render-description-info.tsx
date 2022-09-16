@@ -26,6 +26,8 @@ const RenderDescriptionInfo: FC<DescriptionInfoProps> = ({
       >
         <DotSvg />
         <Text
+          numberOfLines={1}
+          ellipsizeMode={'tail'}
           style={[
             globalStyles.fs14,
             styles.titleText,
