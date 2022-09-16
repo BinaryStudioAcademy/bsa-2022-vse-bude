@@ -3,7 +3,7 @@ import {
   ProductNotFoundError,
   UnauthorizedError,
   AuctionEndedError,
-  AlreadyLeaveAuctionError,
+  AlreadyLeftAuctionError,
 } from '@errors';
 import type { Request } from 'express';
 import { getFilenameFromUrl, getUserIdFromRequest, toUtc } from '@helpers';
@@ -156,7 +156,7 @@ export class ProductService {
     const bidders = await this._bidRepository.getBidders(productId);
 
     if (!bidders.includes(userId)) {
-      throw new AlreadyLeaveAuctionError();
+      throw new AlreadyLeftAuctionError();
     }
 
     await this._bidRepository.retrieve(

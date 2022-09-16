@@ -1,7 +1,7 @@
 import { HttpError, HttpStatusCode } from '@vse-bude/shared';
 import { lang } from '../../lang';
 
-class AlreadyLeaveAuctionError extends HttpError {
+class AlreadyLeftAuctionError extends HttpError {
   constructor() {
     super({
       status: HttpStatusCode.BAD_REQUEST,
@@ -10,4 +10,4 @@ class AlreadyLeaveAuctionError extends HttpError {
   }
 }
 
-export { AlreadyLeaveAuctionError };
+export { AlreadyLeftAuctionError };
