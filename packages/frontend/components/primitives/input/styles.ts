@@ -170,9 +170,9 @@ export const passwordVisibilityIcon = css`
   color: ${ColorPalette.GRAY_300};
 `;
 export const infoIco = ({ fontSizes, spaces }: Theme) => css`
-  position: absolute;
-  top: 2px;
-  margin-left: ${spaces.xs};
+  position: relative;
+  bottom: 2px;
+  margin: 0 ${spaces.xs};
   font-size: ${fontSizes.caption} !important;
 `;
 export const tooltipText = ({ fontSizes, colors, lineHeights }: Theme) => css`
