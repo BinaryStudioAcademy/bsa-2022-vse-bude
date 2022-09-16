@@ -1,5 +1,5 @@
 enum FilterLotType {
-  ALL = 'ALL',
+  ALL = '',
   AUCTION = 'AUCTION',
   SELLING = 'SELLING',
 }

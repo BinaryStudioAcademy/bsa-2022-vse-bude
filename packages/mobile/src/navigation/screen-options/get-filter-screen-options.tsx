@@ -6,10 +6,12 @@ import { t } from 'i18next';
 import { useAppSelector, useAppDispatch } from '~/hooks/hooks';
 import { selectFilters } from '~/store/selectors';
 import { products as productsApi } from '~/store/actions';
+import { validateObjectForQuery } from '~/helpers/helpers';
+import { ProductQuery } from '@vse-bude/shared';
+import { RootState } from '~/common/types/types';
 
 const getFilterScreenOptions = (): NativeStackNavigationOptions => {
-  const { priceGt, priceLt, categoryId, order, sortBy } =
-    useAppSelector(selectFilters);
+  const filters = useAppSelector(selectFilters);
   const dispatch = useAppDispatch();
 
   return {
@@ -23,13 +25,11 @@ const getFilterScreenOptions = (): NativeStackNavigationOptions => {
         textStyle={globalStyles.fs16}
         onPress={() => {
           dispatch(
-            productsApi.loadProducts({
-              priceGt,
-              priceLt,
-              categoryId,
-              order,
-              sortBy,
-            }),
+            productsApi.loadProducts(
+              validateObjectForQuery<RootState['filters'], ProductQuery>(
+                filters,
+              ),
+            ),
           );
         }}
       >

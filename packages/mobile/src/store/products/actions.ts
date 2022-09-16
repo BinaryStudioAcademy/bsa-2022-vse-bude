@@ -17,7 +17,7 @@ import { ActionType } from './common';
 
 const loadProducts = createAsyncThunk<
   AllProductsDto,
-  ProductQuery & Record<string, unknown>,
+  Readonly<ProductQuery>,
   AsyncThunkConfig
 >(ActionType.PRODUCTS_FETCH, async (requestParams, { extra }) => {
   const { productApi } = extra;
@@ -27,7 +27,7 @@ const loadProducts = createAsyncThunk<
 
 const loadPopularProducts = createAsyncThunk<
   ProductDto[],
-  ProductQuery & Record<string, unknown>,
+  Readonly<ProductQuery>,
   AsyncThunkConfig
 >(ActionType.POPULAR_PRODUCTS_FETCH, async (requestParams, { extra }) => {
   const { productApi } = extra;
@@ -37,7 +37,7 @@ const loadPopularProducts = createAsyncThunk<
 
 const loadPopularLots = createAsyncThunk<
   ProductDto[],
-  ProductQuery & Record<string, unknown>,
+  Readonly<ProductQuery>,
   AsyncThunkConfig
 >(ActionType.POPULAR_LOTS_FETCH, async (requestParams, { extra }) => {
   const { productApi } = extra;
