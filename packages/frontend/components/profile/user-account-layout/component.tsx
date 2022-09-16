@@ -11,12 +11,12 @@ import { DashboardLink } from './dashboard-link';
 import type { AccountPageProps } from './types';
 import { getLinksData } from './account-links-data';
 import * as styles from './styles';
+import { isInAccount } from './utils';
 
 export const AccountLayout: FC<AccountPageProps> = ({ children }) => {
-  const { query, pathname } = useRouter();
+  const { query, asPath } = useRouter();
   const { t } = useTranslation();
   const { user: authUser } = useAuth();
-
   const dispatch = useAppDispatch();
 
   const openMakeAPostModal = () => {
@@ -29,7 +29,8 @@ export const AccountLayout: FC<AccountPageProps> = ({ children }) => {
         <div css={styles.wrapper}>
           <h3 css={styles.pageHeader}>{t('account:accountPage')}</h3>
           <Flex css={styles.pageContent}>
-            {authUser?.id === query.id && (
+            {(authUser?.id === query?.id ||
+              isInAccount({ id: authUser?.id, path: asPath })) && (
               <div css={styles.linksContainer}>
                 <button
                   onClick={() => openMakeAPostModal()}
@@ -44,9 +45,9 @@ export const AccountLayout: FC<AccountPageProps> = ({ children }) => {
                     </div>
                   </Flex>
                 </button>
-                {getLinksData(query.id as string).map((link, idx) => {
+                {getLinksData(authUser?.id as string).map((link, idx) => {
                   const { iconPath, label, path } = link;
-                  const location = pathname === link.path;
+                  const location = asPath === link.path;
                   const tLabel = t(label);
 
                   return (

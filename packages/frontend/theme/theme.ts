@@ -61,6 +61,7 @@ const fontWeights = {
   button: '700',
   caption: '400',
   cell: '600',
+  modal: '600',
 };
 
 const lineHeights = {
@@ -107,6 +108,7 @@ const radiuses = {
   md: '10px',
   lg: '50px',
   circle: '50%',
+  cardTub: '15px',
 };
 
 const heights = {

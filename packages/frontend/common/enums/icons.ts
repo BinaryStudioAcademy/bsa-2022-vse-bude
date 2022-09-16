@@ -30,8 +30,9 @@ export enum IconName {
   XMARK = 'xmark',
   CALENDAR = 'calendar',
   TRASH = 'trash',
-  FILTER = 'filter',
   SUCCESS = 'circle-check',
+  FILTER = 'filter',
+  PENCIL = 'pencil',
   SEARCH = 'search',
 }
 
@@ -69,5 +70,7 @@ export const IconNameToClassName = {
   [IconName.TRASH]: 'fa-regular fa-trash-can',
   [IconName.FILTER]: 'fa-solid fa-filter',
   [IconName.SUCCESS]: 'fa-regular fa-circle-check',
+  [IconName.FILTER]: 'fa-solid fa-filter',
+  [IconName.PENCIL]: 'fa-solid fa-pencil',
   [IconName.SEARCH]: 'fa-solid fa-search',
 };

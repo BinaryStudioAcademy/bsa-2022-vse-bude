@@ -1,13 +1,63 @@
 {
+  "breadcrumbs": {
+    "home": "Головна",
+    "profile": "Профіль",
+    "myList": "Мій Список"
+  },
+  "pageName": "Мій список",
   "card": {
     "currency_uah": "ГРН",
     "seller": "Продавець",
     "buyer": "Покупець",
-    "posted": "Розміщено",
-    "drafted": "",
-    "purchased": "Продбано",
-    "sold": "Придбано",
+    "posted": "Розміщені",
+    "drafted": "Проекти",
+    "purchased": "Придбані",
+    "sold": "Продані",
+    "archived": "Архівні",
     "edit": "змінено",
-    "publish": "Публікувати"
+    "publish": "Публікувати",
+    "unarchive": "Публікувати"
+  },
+  "months": {
+    "january": "Січня",
+    "february": "Лютого",
+    "march": "Березня",
+    "april": "Квітня",
+    "may": "Травня",
+    "june": "Червня",
+    "july": "Липня",
+    "august": "Серпня",
+    "september": "Вересня",
+    "october": "Жовтня",
+    "november": "Листопада",
+    "december": "Грудня"
+  },
+  "filter": {
+    "button": {
+      "all": "Всі",
+      "fixedPrice": "Фіксована Ціна",
+      "auction": "Аукціон"
+    },
+    "checkbox": {
+      "all": "Всі",
+      "purchased": "Придбані",
+      "sold": "Продані",
+      "posted": "Розміщені",
+      "drafts": "Проекти",
+      "archived": "Архівні"
+    },
+    "badges": {
+      "allTypes": "Всі типи"
+    }
+  },
+  "modal": {
+    "header": "Перемістити товар до архіву?",
+    "buttons": {
+      "clear": "Очистити",
+      "add": "Архівувати"
+    },
+    "placeholders": {
+      "reason": "Ви можете додати причину"
+    }
   }
 }
