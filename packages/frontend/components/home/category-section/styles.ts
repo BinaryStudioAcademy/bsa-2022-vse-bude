@@ -82,13 +82,18 @@ export const categoryItemTitle = ({
   }
 `;
 
-export const imageWrapper = () => css`
+export const imageWrapper = ({ breakpoints }: Theme) => css`
   position: relative;
   height: 90%;
   width: 90%;
 
   img {
     object-fit: scale-down;
+  }
+
+  @media (min-width: ${breakpoints.xl}px) {
+    height: 100%;
+    width: 100%;
   }
 `;
 
