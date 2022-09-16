@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import {
   ScreenWrapper,
   StatusBar,
@@ -31,16 +31,16 @@ const Filter: FC = () => {
   const navigation = useNavigation<RootNavigationProps>();
   const filters = useAppSelector(selectFilters);
   const dispatch = useAppDispatch();
-  const onSavePress = () => {
+  const onSavePress = useCallback(() => {
     dispatch(
       productsApi.loadProducts(
         validateObjectForQuery<RootState['filters'], ProductQuery>(filters),
       ),
     );
-  };
+  }, [filters]);
   useEffect(() => {
     navigation.setOptions(getFilterScreenOptions(onSavePress));
-  }, []);
+  }, [filters]);
   const { colors } = useCustomTheme();
 
   return (

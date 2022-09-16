@@ -46,7 +46,7 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadProducts.fulfilled, (state, { payload }) => {
       state.dataStatus = DataStatus.FULFILLED;
       state.products = {
-        items: [...state.products.items, ...payload.items],
+        items: payload.items,
         count: payload.count,
       };
     })

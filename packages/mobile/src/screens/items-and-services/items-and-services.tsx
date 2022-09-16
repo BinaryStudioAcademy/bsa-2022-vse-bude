@@ -6,22 +6,12 @@ import {
   StatusBar,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import {
-  useAppSelector,
-  useAppDispatch,
-  useCustomTheme,
-  useEffect,
-} from '~/hooks/hooks';
+import { useAppSelector, useCustomTheme } from '~/hooks/hooks';
 import { selectProducts } from '~/store/selectors';
-import { products } from '~/store/actions';
 import { styles } from './styles';
 import { ListHeader } from './components/components';
 
 const ItemsAndServices = () => {
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(products.loadProducts({ limit: 20 }));
-  }, []);
   const { colors } = useCustomTheme();
   const { items } = useAppSelector(selectProducts);
 
