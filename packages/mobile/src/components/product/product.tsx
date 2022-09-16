@@ -109,7 +109,8 @@ const Product: FC<Props> = ({ product, contentContainerStyle }) => {
             ]}
           >
             <Text
-              numberOfLines={3}
+              numberOfLines={1}
+              ellipsizeMode={'tail'}
               style={[
                 globalStyles.fs16,
                 globalStyles.fontWeightBold,
