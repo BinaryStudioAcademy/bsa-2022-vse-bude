@@ -2,13 +2,13 @@
     {
         "name": "Yevhenii Bieliaiev",
         "photo": "/images/team/Eugene.png",
-        "role": "Full Stack Developer"
+        "role": "Full-Stack Developer"
       },
       {
         "name": "Danylo Strelets",
         "photo":
           "/images/team/Danya.jpg",
-        "role": "Full Stack Developer"
+        "role": "Full-Stack Developer"
       },
       {
         "name": "Misha Benedyk",
@@ -33,6 +33,12 @@
         "photo":
           "/images/team/Valeriy.jpg",
         "role": "Developer"
+      },
+      {
+        "name": "Dmitriy Uvin",
+        "photo":
+          "/images/team/Dmitriy.jpg",
+        "role": "Full-Stack Web Developer"
       },
       {
         "name": "Nadiia Prokhorchuk",
