@@ -16,18 +16,18 @@ interface ContributorsProps {
 }
 
 export const getStaticProps = withPublic(async ({ locale }) => {
-    const team = JSON.stringify(
-      await import(`../../public/locales/${locale}/team.json`),
-    );
-    const contributors = JSON.parse(team).default;
+  const team = JSON.stringify(
+    await import(`../../public/locales/${locale}/team.json`),
+  );
+  const contributors = JSON.parse(team).default;
 
-    return {
-      props: {
-        ...(await serverSideTranslations(locale, ['about', 'common'])),
-        contributors,
-      },
-    };
-  });
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['about', 'common'])),
+      contributors,
+    },
+  };
+});
 
 const AboutUs: NextPageWithLayout = ({ contributors }: ContributorsProps) => (
   <AboutUsInfo contributors={contributors} />
