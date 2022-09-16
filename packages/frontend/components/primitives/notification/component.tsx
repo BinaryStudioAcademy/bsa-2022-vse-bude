@@ -4,9 +4,11 @@ import { updateNotificationView } from '@store';
 import type { NotificationDto } from '@vse-bude/shared';
 import dayjs from 'dayjs';
 import { Flex } from 'grapefruit-ui';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { IconButton } from '../icon-button';
 import { Loader } from '../loader';
+import { Tooltip } from '../tooltip';
 import * as styles from './styles';
 
 export const Notification = ({
@@ -16,8 +18,9 @@ export const Notification = ({
 }) => {
   const { push } = useRouter();
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
   const { updateViewLoading } = useTypedSelector((state) => state.profile);
-  const { title, createdAt, description, id, productId, userId, viewed } =
+  const { title, createdAt, description, id, productId, viewed } =
     notificationData;
 
   return (
@@ -26,19 +29,21 @@ export const Notification = ({
         <h5 css={styles.title}> {title} </h5>
 
         <div css={styles.viewBtn}>
-          {updateViewLoading ? (
+          {updateViewLoading === id ? (
             <Loader size="extraSmall" />
           ) : (
             <>
               {viewed ? (
                 <IconButton
-                  ariaLabel="viewed"
+                  ariaLabel={t('common:header.notifications.ariaLabel.viewed')}
                   icon={IconName.CHECK}
                   color={IconColor.YELLOW}
                 />
               ) : (
                 <IconButton
-                  ariaLabel="remove"
+                  ariaLabel={t(
+                    'common:header.notifications.ariaLabel.setViewed',
+                  )}
                   icon={IconName.XMARK}
                   color={IconColor.GRAY}
                   onClick={() => dispatch(updateNotificationView(id))}
@@ -51,21 +56,30 @@ export const Notification = ({
       <p css={styles.description}>{description}</p>
       <Flex justify={'space-between'} align={'center'}>
         <Flex>
-          {userId && (
+          {/* TODO: add author link */}
+          {/* {userId && (
             <IconButton
               ariaLabel="user info"
               icon={IconName.USER}
               color={IconColor.GRAY}
               onClick={() => push(`${Routes.PROFILE}/${userId}`)}
             />
-          )}
+          )} */}
           {productId && (
-            <IconButton
-              ariaLabel="go to product"
-              icon={IconName.SHOPPING_BAG}
-              color={IconColor.GRAY}
-              onClick={() => push(`${Routes.ITEMS}/${productId}`)}
-            />
+            <Tooltip
+              trigger={
+                <IconButton
+                  ariaLabel={t(
+                    'common:header.notifications.tooltip.productBtn',
+                  )}
+                  icon={IconName.SHOPPING_BAG}
+                  color={IconColor.GRAY}
+                  onClick={() => push(`${Routes.ITEMS}/${productId}`)}
+                />
+              }
+            >
+              {t('common:header.notifications.tooltip.productBtn')}
+            </Tooltip>
           )}
         </Flex>
         <span css={styles.time}>{` ${dayjs(createdAt).hour()}:${dayjs(

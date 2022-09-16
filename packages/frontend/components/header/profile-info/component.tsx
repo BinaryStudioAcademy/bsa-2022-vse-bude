@@ -27,7 +27,7 @@ export const ProfileInfo = ({ load }: ProfileInfoProps) => {
     dispatch(
       fetchUserNotifications({
         limit: NOTIFICATIONS_FILTER.NOTIFICATIONS_LIMIT_DEFAULT,
-        viewed: false,
+        viewed: 'false',
       }),
     );
   }, [dispatch]);

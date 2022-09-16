@@ -15,6 +15,7 @@ import {
   fetchUserNotifications,
   updateNotificationView,
   loadMoreUserNotifications,
+  setUpdateViewLoading,
 } from './actions';
 
 interface ProfileState {
@@ -25,7 +26,7 @@ interface ProfileState {
   saveLoader: boolean;
   error: string;
   loadMoreLoading: boolean;
-  updateViewLoading: boolean;
+  updateViewLoading: string;
 }
 
 const NOTIFICATION_INITIAL_STATE: AllNotificationsResponse = {
@@ -39,7 +40,7 @@ const initialState: ProfileState = {
   isEditing: false,
   loading: false,
   loadMoreLoading: false,
-  updateViewLoading: false,
+  updateViewLoading: null,
   saveLoader: false,
   error: null,
 };
@@ -107,11 +108,11 @@ const profileSlice = createSlice({
       state.loadMoreLoading = false;
       state.error = payload;
     },
-    [updateNotificationView.pending.type]: (state) => {
-      state.updateViewLoading = true;
+    [setUpdateViewLoading.type]: (state, { payload }) => {
+      state.updateViewLoading = payload;
     },
     [updateNotificationView.fulfilled.type]: (state, { payload }) => {
-      state.updateViewLoading = false;
+      state.updateViewLoading = null;
       state.notifications.notifications =
         state.notifications.notifications?.filter(
           (item) => payload.id !== item.id,
@@ -120,7 +121,7 @@ const profileSlice = createSlice({
     },
 
     [updateNotificationView.rejected.type]: (state) => {
-      state.updateViewLoading = false;
+      state.updateViewLoading = null;
     },
 
     [updateUserProfile.fulfilled.type]: (state, { payload }) => {

@@ -1,4 +1,4 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import type {
   Http,
   NotificationQuery,
@@ -94,6 +94,13 @@ export const loadMoreUserNotifications = createAsyncThunk(
 
 export const updateNotificationView = createAsyncThunk(
   ProfileActions.SET_NOTIFICATION_VIEWED,
-  async (id: string, { rejectWithValue }) =>
-    setViewedNotification(id).catch((e) => rejectWithValue(e.message)),
+  async (id: string, { rejectWithValue, dispatch }) => {
+    dispatch(setUpdateViewLoading(id));
+
+    return setViewedNotification(id).catch((e) => rejectWithValue(e.message));
+  },
+);
+
+export const setUpdateViewLoading = createAction<string>(
+  ProfileActions.SET_NOTIFICATION_VIEWED_LOADING,
 );

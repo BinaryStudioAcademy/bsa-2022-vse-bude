@@ -26,7 +26,14 @@
     },
     "notifications":{
       "noNotification":"Немає непрочитаних повідомлень",
-      "loadMore": "Завантажити ще"
+      "loadMore": "Завантажити ще",
+      "tooltip": {
+        "productBtn": "Перейти до цього товару"
+      },
+      "ariaLabel":{
+        "viewed": "переглянуто",
+        "setViewed": "зробити прочитаним"
+      }
     }
   },
   "footer": {

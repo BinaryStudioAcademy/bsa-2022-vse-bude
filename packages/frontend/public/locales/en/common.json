@@ -26,7 +26,14 @@
     },
     "notifications": {
       "noNotification": "No unread messages",
-      "loadMore":"Load more"
+      "loadMore":"Load more",
+      "tooltip":{
+        "productBtn": "Go to this product"
+      },
+      "ariaLabel": {
+        "viewed": "viewed",
+        "setViewed": "set as viewed"
+      }
     }
   },
   "footer": {

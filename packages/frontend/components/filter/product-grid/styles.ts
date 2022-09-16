@@ -12,7 +12,7 @@ export const productGrid = ({ spaces }: Theme) => css`
   flex: 1;
   display: grid;
   grid-gap: ${spaces.sm};
-  grid-template-columns: repeat(auto-fill, minmax(1fr, 360px));
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
 
   & li {
     list-style: none;

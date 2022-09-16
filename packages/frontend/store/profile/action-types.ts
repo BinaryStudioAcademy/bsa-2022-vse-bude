@@ -6,4 +6,5 @@ export enum ProfileActions {
   FETCH_NOTIFICATIONS = 'profile/fetch-notification',
   UPLOAD_NOTIFICATIONS = 'profile/upload-notification',
   SET_NOTIFICATION_VIEWED = 'profile/view-notification',
+  SET_NOTIFICATION_VIEWED_LOADING = 'profile/view-notification-loading',
 }
