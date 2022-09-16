@@ -40,7 +40,7 @@ const Filter: FC = () => {
   }, [filters]);
   useEffect(() => {
     navigation.setOptions(getFilterScreenOptions(onSavePress));
-  }, []);
+  }, [filters]);
   const { colors } = useCustomTheme();
 
   return (

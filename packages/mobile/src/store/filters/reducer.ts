@@ -27,7 +27,7 @@ const initialState: InitialState = {
   categoryId: undefined,
   priceGt: MINIMUM_SLIDER_PRICE,
   priceLt: MAXIMUM_SLIDER_PRICE,
-  sortBy: SortBy.DATE,
+  sortBy: SortBy.PRICE,
   order: Order.ASC,
 };
 
