@@ -212,3 +212,25 @@ export const arrow = ({ colors, radiuses, spaces }: Theme) => css`
     background-color: ${colors.backgroundDark};
   }
 `;
+
+export const tooltip = ({
+  fontSizes,
+  fontWeights,
+  lineHeights,
+  colors,
+  spaces,
+  radiuses,
+}: Theme) =>
+  css`
+    position: absolute;
+    top: -30px;
+    right: -20px;
+    padding: ${spaces.xs};
+    border: 1px solid ${colors.backgroundDark};
+    border-radius: ${radiuses.xxs};
+    background-color: ${colors.background};
+    font-size: ${fontSizes.body2};
+    line-height: ${lineHeights.body2};
+    font-weight: ${fontWeights.body1};
+    color: ${colors.text};
+  `;

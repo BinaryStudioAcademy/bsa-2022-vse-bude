@@ -4,7 +4,7 @@ import type { Dispatch } from '@reduxjs/toolkit';
 import { filterByType, resetStatuses, filterByStatus } from '@store';
 import type { FilterButtonProps, CheckboxProps, FilterStatuses } from './types';
 
-export const ALL = 'all';
+export const ALL = 'ALL';
 
 export const filterButtons = ({
   t,
@@ -14,8 +14,7 @@ export const filterButtons = ({
   dispatch: Dispatch;
 }): FilterButtonProps[] => [
   {
-    name: 'all',
-    type: 'type',
+    name: 'ALL',
     text: t('my-list:filter.button.all'),
     onClick: () =>
       dispatch(
@@ -26,8 +25,7 @@ export const filterButtons = ({
       ),
   },
   {
-    name: 'fixedPrice',
-    type: 'type',
+    name: 'SELLING',
     text: t('my-list:filter.button.fixedPrice'),
     onClick: () =>
       dispatch(
@@ -38,8 +36,7 @@ export const filterButtons = ({
       ),
   },
   {
-    name: 'auction',
-    type: 'type',
+    name: 'AUCTION',
     text: t('my-list:filter.button.auction'),
     onClick: () =>
       dispatch(
@@ -89,7 +86,7 @@ export const checkboxes = ({
       dispatch(
         filterByStatus({
           statusName: 'sold',
-          statusValue: t('my-list:filter.checkbox.posted'),
+          statusValue: t('my-list:filter.checkbox.sold'),
         }),
       );
     },
