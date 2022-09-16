@@ -59,8 +59,8 @@ const NewAuctionForm: FC = () => {
     //TODO save as draft
   };
 
-  const onSubmit = (payload: ICreateAuction): void => {
-    //TODO make a post
+  const onSubmit = (): void => {
+    //TODO make a post payload: ICreateAuction
   };
 
   return (
