@@ -65,6 +65,7 @@ export const categoryItemTitle = ({
   font-weight: ${fontWeights.toggle};
   line-height: ${lineHeights.toggle};
   text-align: center;
+  margin-bottom: ${spaces.sm};
 
   @media (min-width: ${breakpoints.md}px) {
     text-align: left;
@@ -83,10 +84,11 @@ export const categoryItemTitle = ({
 
 export const imageWrapper = () => css`
   position: relative;
-  height: 100%;
+  height: 90%;
+  width: 90%;
 
   img {
-    object-fit: contain;
+    object-fit: scale-down;
   }
 `;
 
