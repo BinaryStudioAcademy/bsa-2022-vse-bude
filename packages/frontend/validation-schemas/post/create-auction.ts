@@ -48,7 +48,7 @@ export const createAuctionSchema = (t: TFunction) =>
       .trim()
       .required()
       .messages({
-        'string.empty': t('create-post:validation.title.empty'),
+        'string.empty': t('create-post:validation.country.empty'),
       }),
     title: Joi.string()
       .trim()

@@ -1,14 +1,14 @@
 import { useAppDispatch, useAuth, useMounted, useTypedSelector } from '@hooks';
 import { Modal } from '@primitives';
 import { useEffect, useState } from 'react';
-import { hideVerifyPhoneModal } from 'store/modals/actions';
+import { hideVerifyEmailModal } from 'store/modals/actions';
 import { EnterCodeModal } from './enter-code/component';
-import { EnterPhoneModal } from './enter-phone/component';
+import { EnterEmailModal } from './enter-email/component';
 import { SuccessModal } from './success-verification/component';
 
-const VerificationModal = () => {
+const EmailVerificationModal = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const { step } = useTypedSelector((state) => state.modals.verifyPhoneModal);
+  const { step } = useTypedSelector((state) => state.modals.verifyEmailModal);
   const dispatch = useAppDispatch();
   const { hasToken } = useAuth();
   const isMounted = useMounted();
@@ -16,18 +16,21 @@ const VerificationModal = () => {
 
   useEffect(() => {
     setIsVisible(true);
-  }, []);
+    window.onpopstate = () => {
+      dispatch(hideVerifyEmailModal());
+    };
+  }, [dispatch]);
 
   const closeModal = () => {
-    dispatch(hideVerifyPhoneModal());
+    dispatch(hideVerifyEmailModal());
   };
 
   const renderContent = (param) => {
     switch (param) {
       case 0:
-        return <EnterPhoneModal phone={user.phone} />;
+        return <EnterEmailModal email={user.email} />;
       case 1:
-        return <EnterCodeModal phone={user.phone} />;
+        return <EnterCodeModal email={user.email} />;
       case 2:
         return <SuccessModal />;
       default:
@@ -42,4 +45,4 @@ const VerificationModal = () => {
   return <>{isMounted && hasToken && renderModal()}</>;
 };
 
-export default VerificationModal;
+export default EmailVerificationModal;

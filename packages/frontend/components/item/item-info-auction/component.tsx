@@ -116,7 +116,6 @@ export const ItemInfoAuction = ({
     await dispatch(auctionPermissions(reqData));
     onCancel();
   };
-
   const renderEditButton = () => (
     <Button
       onClick={() => push(`${Routes.ITEMS}${ItemRoutes.EDIT}/${item.id}`)}

@@ -39,7 +39,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     return {
       props: {
-        ...(await serverSideTranslations(locale, ['home', 'common'])),
+        ...(await serverSideTranslations(locale, ['home', 'common', 'public'])),
         auctionProducts,
         sellingProducts,
       },
