@@ -11,7 +11,7 @@ import {
 } from '~/common/constants/constants';
 
 const productsPostSchema = Joi.object<IPostForms>({
-  category: Joi.string().empty(''),
+  category: Joi.any().empty(''),
   title: Joi.string()
     .trim()
     .required()

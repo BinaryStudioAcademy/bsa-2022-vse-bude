@@ -16,7 +16,7 @@ type Props<T extends FormControlValues> = {
   name: FormControlPath<T>;
   errors: FormControlErrors<T>;
   control: FormControl<T>;
-  items: Array<{
+  initialItems: Array<{
     label: string;
     value: string;
   }>;
@@ -31,7 +31,7 @@ const DropDown = <T extends FormControlValues>({
   name,
   errors,
   control,
-  items,
+  initialItems,
   zIndex,
   disabled,
   placeholder,
@@ -40,6 +40,8 @@ const DropDown = <T extends FormControlValues>({
   const { field } = useFormControl({ name, control });
   const { colors } = useCustomTheme();
   const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(field.value);
+  const [items, setItems] = useState(initialItems);
   const error = errors[name]?.message as string;
 
   return (
@@ -75,10 +77,12 @@ const DropDown = <T extends FormControlValues>({
       <DropDownPicker
         listMode="SCROLLVIEW"
         open={open}
-        value={field.value}
+        value={value}
         items={items}
         setOpen={setOpen}
-        setValue={field.onChange}
+        // setValue={setValue}
+        setItems={setItems}
+        setValue={(value) => field.onChange(setValue(value))}
         textStyle={[
           disabled ? { color: colors.placeholder } : { color: colors.text },
           globalStyles.fs14,

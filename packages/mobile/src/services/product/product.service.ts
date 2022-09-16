@@ -8,6 +8,8 @@ import {
   ProductApiRoutes,
   ProductDto,
   AllProductsDto,
+  ICreateAuction,
+  IPostForms,
 } from '@vse-bude/shared';
 import { ProductRequestDto } from '~/common/types/types';
 
@@ -106,6 +108,17 @@ class ProductService {
       },
     );
   };
+
+  saveProduct(
+    _payload: ICreateAuction | IPostForms,
+  ): Promise<ICreateAuction | IPostForms> {
+    return this.#http.load(`${this.#apiPrefix}${ApiRoutes.PRODUCTS}`, {
+      method: HttpMethod.POST,
+      contentType: HttpContentType.APPLICATION_JSON,
+      payload: JSON.stringify(_payload),
+      hasAuth: true,
+    });
+  }
 }
 
 export { ProductService };

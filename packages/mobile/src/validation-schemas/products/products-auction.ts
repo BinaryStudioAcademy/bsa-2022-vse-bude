@@ -12,7 +12,7 @@ import {
 } from '~/common/constants/constants';
 
 const productsAuctionSchema = Joi.object<ICreateAuction>({
-  category: Joi.string().empty(''),
+  category: Joi.any().empty(''),
   title: Joi.string()
     .trim()
     .required()
@@ -48,6 +48,7 @@ const productsAuctionSchema = Joi.object<ICreateAuction>({
       'number.base': i18next.t('errors.NUMBER_BID'),
       'number.min': i18next.t('errors.MIN_BID'),
     }),
+  endDate: Joi.date(),
   phone: Joi.string()
     .trim()
     .empty('')

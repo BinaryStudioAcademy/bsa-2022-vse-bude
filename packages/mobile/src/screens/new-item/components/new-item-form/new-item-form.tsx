@@ -74,7 +74,7 @@ const NewItemForm: FC = () => {
           name="category"
           errors={errors}
           control={control}
-          items={formattedCategories}
+          initialItems={formattedCategories}
           zIndex={19}
         />
       )}
@@ -105,7 +105,7 @@ const NewItemForm: FC = () => {
         name="condition"
         errors={errors}
         control={control}
-        items={CONDITION}
+        initialItems={CONDITION}
         zIndex={19}
         requiredMark={true}
       />

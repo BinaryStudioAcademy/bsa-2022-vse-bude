@@ -59,7 +59,7 @@ const NewAuctionForm: FC = () => {
     //TODO save as draft
   };
 
-  const onSubmit = (): void => {
+  const onSubmit = (payload: ICreateAuction): void => {
     //TODO make a post
   };
 
@@ -79,7 +79,7 @@ const NewAuctionForm: FC = () => {
           name="category"
           errors={errors}
           control={control}
-          items={formattedCategories}
+          initialItems={formattedCategories}
           zIndex={19}
         />
       )}
@@ -110,7 +110,7 @@ const NewAuctionForm: FC = () => {
         name="condition"
         errors={errors}
         control={control}
-        items={CONDITION}
+        initialItems={CONDITION}
         zIndex={19}
         requiredMark={true}
       />
