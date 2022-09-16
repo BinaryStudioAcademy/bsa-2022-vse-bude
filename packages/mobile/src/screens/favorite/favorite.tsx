@@ -1,47 +1,65 @@
-import React, { FC, useEffect } from 'react';
-import { FavoriteResponseDto } from '~/common/types/types';
+import React, { FC, useEffect, useState } from 'react';
+import { useIsFocused } from '@react-navigation/native';
 import { useAppDispatch, useAppSelector } from '~/hooks/hooks';
-import { selectFavorites } from '~/store/selectors';
+import { favoritesMapper } from '~/helpers/helpers';
+import { selectCurrentUser, selectFavorites } from '~/store/selectors';
 import { products as productsActions } from '~/store/actions';
-import { ScreenWrapper, FlatList } from '~/components/components';
-import { ProductStatus } from '@vse-bude/shared';
+import {
+  ScreenWrapper,
+  FlatList,
+  Spinner,
+  Text,
+  View,
+} from '~/components/components';
+import { globalStyles } from '~/styles/styles';
 import { FavoriteCard } from './components/favorite-card';
 
-export type RenderFavorites = {
-  description: string;
-  imageLinks: string[];
-  price: string | number;
-  status: ProductStatus;
-  title: string;
-  id: string;
-};
-
 const Favorite: FC = () => {
-  const favorites = useAppSelector(selectFavorites);
+  const [isLoading, setIsLoading] = useState(false);
+  const user = useAppSelector(selectCurrentUser);
+  const storedFavorites = useAppSelector(selectFavorites);
   const dispatch = useAppDispatch();
+  const isFocused = useIsFocused();
 
   useEffect(() => {
-    dispatch(productsActions.fetchFavorites({ limit: 20 }));
-  }, [dispatch]);
+    if (isFocused && user) {
+      setIsLoading(true);
+      dispatch(productsActions.fetchFavorites({ limit: 10 }))
+        .unwrap()
+        .finally(() => setIsLoading(false));
+    }
+  }, [dispatch, isFocused]);
 
-  const mapper = (arr: FavoriteResponseDto[]) => {
-    const result: RenderFavorites[] = [];
-    arr.map((item) => {
-      result.push(Object.assign({}, item.product, { id: item.productId }));
-    });
+  const favorites = favoritesMapper(storedFavorites);
 
-    return result;
-  };
-
-  const favProduct = mapper(favorites);
+  if (isLoading) {
+    return (
+      <ScreenWrapper style={globalStyles.justifyContentCenter}>
+        <Spinner />
+      </ScreenWrapper>
+    );
+  }
 
   return (
     <ScreenWrapper>
-      <FlatList
-        data={favProduct}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <FavoriteCard product={item} />}
-      />
+      {storedFavorites ? (
+        <FlatList
+          data={favorites}
+          contentContainerStyle={[globalStyles.px4, globalStyles.mt3]}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => <FavoriteCard product={item} />}
+        />
+      ) : (
+        <View
+          style={[
+            globalStyles.mt7,
+            globalStyles.justifyContentCenter,
+            globalStyles.flex1,
+          ]}
+        >
+          <Text>Your favorites would be place here</Text>
+        </View>
+      )}
     </ScreenWrapper>
   );
 };

@@ -20,11 +20,11 @@ import {
 } from './actions';
 
 type InitialState = {
-  currentProduct: ProductDto | null;
+  dataStatus: DataStatus;
   products: AllProductsDto;
+  currentProduct: ProductDto | null;
   popularProducts: ProductDto[] | [];
   popularLots: ProductDto[] | [];
-  dataStatus: DataStatus;
   permissions: {
     isAbleToLeaveAuction: boolean;
   };
@@ -33,11 +33,11 @@ type InitialState = {
 };
 
 const initialState: InitialState = {
+  dataStatus: DataStatus.IDLE,
   products: { items: [], count: 0 },
+  currentProduct: null,
   popularProducts: [],
   popularLots: [],
-  currentProduct: null,
-  dataStatus: DataStatus.IDLE,
   permissions: {
     isAbleToLeaveAuction: false,
   },
