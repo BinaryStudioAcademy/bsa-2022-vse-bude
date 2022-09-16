@@ -1,5 +1,4 @@
-﻿import { useWindowSize } from '@hooks';
-import { Fragment, useRef, useEffect, useState, useCallback } from 'react';
+﻿import { Fragment, useRef, useEffect, useState, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import * as styles from './styles';
 import type { TooltipProps } from './types';
@@ -15,7 +14,7 @@ export const Tooltip = ({
 }: TooltipProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
-  
+
   const bodyRef = useRef<HTMLDivElement>();
   const arrowRef = useRef<HTMLDivElement>();
   const triggerWrapperRef = useRef<HTMLSpanElement>();
