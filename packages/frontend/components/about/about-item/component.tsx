@@ -14,7 +14,7 @@ const AboutItem = ({ image, name, role }: AboutItemProps) => (
         css={styles.avatar}
         style={{ width: '150px', height: '150px' }}
         src={image}
-        alt={'avatar image'}
+        alt={name}
         height={150}
         width={150}
         quality={100}

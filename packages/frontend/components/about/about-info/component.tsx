@@ -1,16 +1,9 @@
-import { useRouter } from 'next/router';
 import { AboutItem } from '../about-item/component';
 import { NestedLayout } from './common';
 import * as styles from './styles';
+import type { ContributorsProps } from './types';
 
-export const AboutUsInfo = () => {
-  const { locale } = useRouter();
-  let contributors;
-  locale == 'en'
-    ? (contributors = require('../../../public/locales/en/team.json'))
-    : (contributors = require('../../../public/locales/ua/team.json'));
-
-  return (
+export const AboutUsInfo = ({ contributors }: ContributorsProps) => (
     <NestedLayout>
       <div css={styles.wrapper}>
         {contributors.map((contributor, key) => (
@@ -24,4 +17,3 @@ export const AboutUsInfo = () => {
       </div>
     </NestedLayout>
   );
-};
