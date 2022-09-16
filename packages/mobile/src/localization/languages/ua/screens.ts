@@ -222,7 +222,7 @@ export const screens = {
     PRICE: 'Ціна',
     SORT_BY: 'Сортувати за',
     CHEAP_TO_EXPANSIVE: 'Від дешевих до дорогих',
-    EXPANSIVE_TO_CHEAP: 'Від дороших до дешевих',
+    EXPANSIVE_TO_CHEAP: 'Від дорогих до дешевих',
     NEW_TO_OLD: 'Від нових до старих',
     OLD_TO_NEW: 'Від старих до нових',
     MOST_VIEWS: 'Найбільше переглядів',

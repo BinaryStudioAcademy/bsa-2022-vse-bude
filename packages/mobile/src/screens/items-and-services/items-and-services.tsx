@@ -40,18 +40,18 @@ const ItemsAndServices = () => {
         barStyle="dark-content"
         translucent={false}
       />
-        <FlatList
-          ListHeaderComponent={ListHeader}
-          style={globalStyles.px4}
-          data={items}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <Product
-              contentContainerStyle={[styles.productWrapper, globalStyles.mt4]}
-              product={item}
-            />
-          )}
-        />
+      <FlatList
+        ListHeaderComponent={ListHeader}
+        style={globalStyles.px4}
+        data={items}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <Product
+            contentContainerStyle={[styles.productWrapper, globalStyles.mt4]}
+            product={item}
+          />
+        )}
+      />
     </ScreenWrapper>
   );
 };
