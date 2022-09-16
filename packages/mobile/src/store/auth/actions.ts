@@ -10,7 +10,6 @@ import { StorageKey } from '~/common/enums/enums';
 import { AsyncThunkConfig } from '~/common/types/types';
 import { notification } from '~/services/services';
 import { t } from 'i18next';
-import { personalInfoActions } from '../actions';
 import { ActionType } from './common';
 
 const signUp = createAsyncThunk<UserDto, UserSignUpDto, AsyncThunkConfig>(
@@ -52,9 +51,9 @@ const getCurrentUser = createAsyncThunk<UserDto, undefined, AsyncThunkConfig>(
 
 const logOut = createAsyncThunk<null, undefined, AsyncThunkConfig>(
   ActionType.LOG_OUT,
-  async (_, { extra, dispatch }) => {
+  async (_, { extra }) => {
     const { storage } = extra;
-    dispatch(personalInfoActions.resetPersonalInfo());
+
     storage.removeItem(StorageKey.ACCESS_TOKEN);
     storage.removeItem(StorageKey.REFRESH_TOKEN);
 

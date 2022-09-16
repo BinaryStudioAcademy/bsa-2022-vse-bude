@@ -66,11 +66,7 @@ const VerifyCodeEmailScreen: FC<PropsVerifyScreens> = ({ route }) => {
 
   useEffect(() => {
     const subscription = watch((value) => {
-      if (value?.code?.match(VERIFICATION_CODE_REGEX)) {
-        return setIsCorrectCode(true);
-      }
-
-      return setIsCorrectCode(false);
+      setIsCorrectCode(Boolean(value?.code?.match(VERIFICATION_CODE_REGEX)));
     });
 
     return () => subscription.unsubscribe();
@@ -97,7 +93,7 @@ const VerifyCodeEmailScreen: FC<PropsVerifyScreens> = ({ route }) => {
       .unwrap()
       .then(() => {
         navigation.navigate(RootScreenName.VERIFIED_EMAIL, {
-          fromSignUp: fromSignUp || false,
+          fromSignUp: Boolean(fromSignUp),
         });
       })
       .catch((err) => {

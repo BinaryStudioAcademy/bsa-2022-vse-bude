@@ -1,4 +1,4 @@
-import { createAsyncThunk, createAction } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Asset } from 'react-native-image-picker';
 import { FullUserProfileDto, UpdateFullUserProfileDto } from '@vse-bude/shared';
 import {
@@ -40,6 +40,4 @@ const updateAvatar = createAsyncThunk<
   return response;
 });
 
-const resetPersonalInfo = createAction(ActionType.RESET_PERSONAL_INFO);
-
-export { getPersonalInfo, updatePersonalInfo, updateAvatar, resetPersonalInfo };
+export { getPersonalInfo, updatePersonalInfo, updateAvatar };

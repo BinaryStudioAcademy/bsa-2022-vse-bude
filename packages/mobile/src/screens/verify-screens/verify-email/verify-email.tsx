@@ -62,7 +62,7 @@ const VerifyEmailScreen: FC<PropsVerifyScreens> = ({ route }) => {
 
   const onSubmit = (): void => {
     navigation.navigate(RootScreenName.VERIFY_CODE_EMAIL, {
-      fromSignUp: fromSignUp || false,
+      fromSignUp: Boolean(fromSignUp),
     });
   };
 

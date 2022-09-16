@@ -33,7 +33,7 @@ const VerifiedPhoneScreen: FC<PropsVerifyScreens> = ({ route }) => {
   const dataStatusAuth = useAppSelector(selectAuthDataStatus);
   const isLoading = dataStatusAuth === DataStatus.PENDING;
   const verifiedTitle =
-    user?.emailVerified && user.phoneVerified
+    user?.emailVerified && user?.phoneVerified
       ? t('verify.VERIFIED_FULLY')
       : t('verify.VERIFIED_TITLE_PHONE');
 

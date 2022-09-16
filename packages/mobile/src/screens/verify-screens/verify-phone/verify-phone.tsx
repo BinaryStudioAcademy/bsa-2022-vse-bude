@@ -78,7 +78,7 @@ const VerifyPhoneScreen: FC<PropsVerifyScreens> = ({ route }) => {
       .then(() => {
         notification.success(t('verify.CODE_SENT'));
         navigation.navigate(RootScreenName.VERIFY_CODE_PHONE, {
-          fromSignUp: fromSignUp || false,
+          fromSignUp: Boolean(fromSignUp),
         });
       })
       .catch((err) => {
