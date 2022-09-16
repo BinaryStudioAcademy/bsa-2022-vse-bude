@@ -17,7 +17,7 @@ export const body = ({
   breakpoints,
 }: Theme) => css`
   position: absolute;
-  z-index: 101;
+  z-index: 98;
   animation: fade-in 0.15s ease-in-out;
   max-width: 30%;
   border-radius: ${radiuses.xs};
