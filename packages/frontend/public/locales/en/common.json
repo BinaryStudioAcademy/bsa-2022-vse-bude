@@ -134,6 +134,19 @@
       "tooltip": "Please firstly save new profile data for verify phone",
       "prevPageLabel": "Go to previous step"
     },
+    "enterEmail": {
+      "headline": "Verify",
+      "description": "For further verification of account, please enter your email here or verify it on your Personal Info page",
+      "input": "Email",
+      "button": {
+        "verify": "Verify"
+      },
+      "link": {
+        "later": "Verify later"
+      },
+      "tooltip": "Please firstly save new profile data for verify email",
+      "prevPageLabel": "Go to previous step"
+    },
     "enterCode": {
       "headline": "Verify",
       "description": "We just sent a code to",

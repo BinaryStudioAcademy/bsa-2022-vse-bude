@@ -130,9 +130,8 @@ export const showBtn = () => css`
   background-color: transparent;
 `;
 
-export const searchWrapper = ({ radiuses, shadows }: Theme) => css`
+export const searchWrapper = ({ radiuses }: Theme) => css`
   position: relative;
-  box-shadow: ${shadows.upper};
   border-radius: ${radiuses.lg};
 `;
 
@@ -141,11 +140,9 @@ export const searchInput = ({
   fontSizes,
   lineHeights,
   radiuses,
-  shadows,
   spaces,
 }: Theme) => css`
   transition: 200ms linear;
-  box-shadow: ${shadows.bottom};
   width: 100%;
   height: 30px;
   border: ${colors.backgroundDark} 1px solid;

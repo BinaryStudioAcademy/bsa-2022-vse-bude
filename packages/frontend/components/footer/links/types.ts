@@ -1,5 +1,5 @@
 export interface ContactsProps {
-  phone: string;
+  phone?: string;
   email: string;
 }
 
