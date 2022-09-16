@@ -138,7 +138,7 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
       />
       {!isEmailVerified && (
         <VerifyField
-          title={t('verification.VERIFY_EMAIL')}
+          title={t('verify.VERIFY_EMAIL')}
           onPress={handleVerifyEmailPress}
         />
       )}
