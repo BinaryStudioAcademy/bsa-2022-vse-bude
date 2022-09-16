@@ -53,6 +53,7 @@ const logOut = createAsyncThunk<null, undefined, AsyncThunkConfig>(
   ActionType.LOG_OUT,
   async (_, { extra }) => {
     const { storage } = extra;
+
     storage.removeItem(StorageKey.ACCESS_TOKEN);
     storage.removeItem(StorageKey.REFRESH_TOKEN);
 

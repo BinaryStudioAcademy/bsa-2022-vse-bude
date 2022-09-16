@@ -22,6 +22,7 @@ import { BidService } from './bid';
 import { MyListService } from './my-list';
 import { OrderService } from './order';
 import { PaymentService } from './payment';
+import { NotificationService } from './notification';
 
 const emailProvider = new SendInBlueEmailProvider();
 export const emailService = new EmailService(emailProvider);
@@ -48,6 +49,10 @@ export const initServices = (repositories: Repositories): any => {
 
   const auctionScheduler = new AuctionScheduler(repositories.productRepository);
 
+  const norificationService = new NotificationService(
+    repositories.notificationRepository,
+  );
+
   return {
     categoryService: new CategoryService(repositories.categoryRepository),
     productService: new ProductService(
@@ -56,6 +61,7 @@ export const initServices = (repositories: Repositories): any => {
       s3StorageService,
       repositories.bidRepository,
       auctionScheduler,
+      norificationService,
     ),
     newsService: new NewsService(repositories.newsRepository),
     healthService: new HealthService(repositories.healthRepository),
@@ -80,6 +86,7 @@ export const initServices = (repositories: Repositories): any => {
     bidService: new BidService(
       repositories.bidRepository,
       repositories.productRepository,
+      norificationService,
     ),
     myListService: new MyListService({
       myListRepository: repositories.myListRepository,
@@ -94,6 +101,7 @@ export const initServices = (repositories: Repositories): any => {
       repositories.productRepository,
     ),
     auctionScheduler: auctionScheduler,
+    notificationService: norificationService,
   };
 };
 
@@ -115,4 +123,5 @@ export {
   type OrderService,
   type PaymentService,
   type AuctionScheduler,
+  type NotificationService,
 };

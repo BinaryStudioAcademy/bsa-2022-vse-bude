@@ -9,6 +9,7 @@ enum RootScreenName {
   SUPPORT = 'Support',
   WELCOME = 'Welcome',
   VERIFY_PHONE = 'Verify phone',
+  VERIFY_EMAIL = 'Verify email',
   VERIFY_CODE_PHONE = 'Verify code phone',
   VERIFIED_PHONE = 'Verified phone',
   VERIFY_CODE_EMAIL = 'Verify code email',

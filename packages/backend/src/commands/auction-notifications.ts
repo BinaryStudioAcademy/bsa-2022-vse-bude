@@ -1,4 +1,6 @@
+import { NotificationType } from '@vse-bude/shared';
 import { isProduction, logger } from '@helpers';
+import { lang } from '@lang';
 import type {
   ProductRepository as ProductRepositoryType,
   UserRepository as UserRepositoryType,
@@ -9,10 +11,12 @@ import { emailService } from '@services';
 import { ProductRepository } from '../repositories/product';
 import { UserRepository } from '../repositories/user';
 import { BidRepository } from '../repositories/bid';
+import { NotificationRepository } from '../repositories/notification';
 import { prismaClient as database } from '../data/db';
 import { ProductNotSoldBuilder } from '../email/product-not-sold-builder';
 import { ProductSoldAuthorBuilder } from '../email/product-sold-author-builder';
 import { ProductSoldWinnerBuilder } from '../email/product-sold-winner-builder';
+import { NotificationService } from '../services/notification';
 import { BaseCommand } from './base-command';
 
 export class AuctionNotificationsCommand extends BaseCommand {
@@ -21,6 +25,8 @@ export class AuctionNotificationsCommand extends BaseCommand {
   private _userRepository: UserRepositoryType;
 
   private _bidRepository: BidRepositoryType;
+
+  private _notificationService: NotificationService;
 
   private limit = 20;
 
@@ -33,6 +39,9 @@ export class AuctionNotificationsCommand extends BaseCommand {
     this._prodRepository = new ProductRepository(database);
     this._userRepository = new UserRepository(database);
     this._bidRepository = new BidRepository(database);
+    this._notificationService = new NotificationService(
+      new NotificationRepository(database),
+    );
   }
 
   async execute(): Promise<void> {
@@ -40,6 +49,30 @@ export class AuctionNotificationsCommand extends BaseCommand {
     try {
       await this.handleParticipants(this._product);
       await this._prodRepository.markProductNotified(this._product.id);
+
+      const bidders = await this._bidRepository.getBidders(this._product.id);
+
+      for (const bidder of bidders) {
+        await this._notificationService.create({
+          type: NotificationType.AUCTION_ENDED,
+          userId: bidder,
+          title: lang('notifications:title.AUCTION_ENDED', {}, 'en'),
+          description: lang(
+            'notifications:description.AUCTION_ENDED',
+            {},
+            'en',
+          ),
+          productId: this._product.id,
+        });
+      }
+
+      await this._notificationService.create({
+        type: NotificationType.AUCTION_ENDED,
+        userId: this._product.authorId,
+        title: lang('notifications:title.AUCTION_ENDED', {}, 'en'),
+        description: lang('notifications:description.AUCTION_ENDED', {}, 'en'),
+        productId: this._product.id,
+      });
     } catch (e) {
       logger.error(`Command ${this.commandAlias} failed with error!`);
       logger.error(e);

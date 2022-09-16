@@ -12,3 +12,4 @@ export * from './bid';
 export * from './event';
 export * from './order';
 export * from './payment';
+export * from './notifications';

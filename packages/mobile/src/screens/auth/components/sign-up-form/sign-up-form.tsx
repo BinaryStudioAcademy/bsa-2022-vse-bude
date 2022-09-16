@@ -1,9 +1,11 @@
 import React from 'react';
 import { UserSignUpDto } from '@vse-bude/shared';
 import { View, Input, PrimaryButton } from '~/components/components';
-import { useAppForm, useTranslation } from '~/hooks/hooks';
+import { useAppForm, useTranslation, useAppSelector } from '~/hooks/hooks';
 import { signUp } from '~/validation-schemas/validation-schemas';
 import { globalStyles } from '~/styles/styles';
+import { selectAuthDataStatus } from '~/store/selectors';
+import { DataStatus } from '~/common/enums/enums';
 import { DEFAULT_SIGN_UP_PAYLOAD } from './common/constants';
 
 type Props = {
@@ -12,6 +14,8 @@ type Props = {
 
 const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
   const { t } = useTranslation();
+  const dataStatusAuth = useAppSelector(selectAuthDataStatus);
+  const isLoading = dataStatusAuth === DataStatus.PENDING;
   const { control, errors, handleSubmit } = useAppForm<UserSignUpDto>({
     defaultValues: DEFAULT_SIGN_UP_PAYLOAD,
     validationSchema: signUp,
@@ -72,6 +76,7 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
         <PrimaryButton
           label={t('verification.CREATE_ACCOUNT')}
           onPress={handleSubmit(onSubmit)}
+          disabled={isLoading}
         />
       </View>
     </View>
