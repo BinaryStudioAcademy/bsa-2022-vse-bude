@@ -3,11 +3,13 @@ import { ListRenderItem } from 'react-native';
 import { FlatList, Image, Text, View } from '~/components/components';
 import { ProductDto } from '@vse-bude/shared';
 import { globalStyles } from '~/styles/styles';
+import { images } from '~/assets/images/images';
 import { styles } from './styles';
 
 type ImageCarouselProps = Pick<ProductDto, 'imageLinks'>;
 
 const ImageCarousel: FC<ImageCarouselProps> = ({ imageLinks }) => {
+  const isImageAvailable = imageLinks.length > 0;
   const totalCount = imageLinks.length;
   const renderImage: ListRenderItem<string> = ({ item, index }) => (
     <View style={styles.imgContainer}>
@@ -20,16 +22,22 @@ const ImageCarousel: FC<ImageCarouselProps> = ({ imageLinks }) => {
   );
 
   return (
-    <FlatList
-      horizontal={true}
-      snapToInterval={0}
-      snapToAlignment="center"
-      showsHorizontalScrollIndicator={false}
-      data={imageLinks}
-      keyExtractor={(item, index) => `${item}_${index}`}
-      style={[globalStyles.mt6, globalStyles.mb6]}
-      renderItem={renderImage}
-    />
+    <>
+      {isImageAvailable ? (
+        <FlatList
+          horizontal={true}
+          snapToInterval={0}
+          snapToAlignment="center"
+          showsHorizontalScrollIndicator={false}
+          data={imageLinks}
+          keyExtractor={(item, index) => `${item}_${index}`}
+          style={[globalStyles.mt6, globalStyles.mb6]}
+          renderItem={renderImage}
+        />
+      ) : (
+        <Image source={images.no_image_available} style={styles.image} />
+      )}
+    </>
   );
 };
 
