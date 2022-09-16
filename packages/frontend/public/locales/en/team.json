@@ -1,67 +1,62 @@
 [
-    {
-        "name": "Yevhenii Bieliaiev",
-        "photo": "/images/team/Eugene.png",
-        "role": "Full-Stack Developer"
-      },
-      {
-        "name": "Danylo Strelets",
-        "photo":
-          "/images/team/Danya.jpg",
-        "role": "Full-Stack Developer"
-      },
-      {
-        "name": "Misha Benedyk",
-        "photo":
-          "/images/team/Misha.jpg",
-        "role": "Full Meow Stack"
-      },
-      {
-        "name": "Dmytro Kolisnyk",
-        "photo":
-          "/images/team/Dmytro.png",
-        "role": "Developer"
-      },
-      {
-        "name": "Ivan Nikolaiev",
-        "photo":
-          "/images/team/Ivan.jpg",
-        "role": "Developer"
-      },
-      {
-        "name": "Valeriy Mishchenko",
-        "photo":
-          "/images/team/Valeriy.jpg",
-        "role": "Developer"
-      },
-      {
-        "name": "Dmitriy Uvin",
-        "photo":
-          "/images/team/Dmitriy.jpg",
-        "role": "Full-Stack Web Developer"
-      },
-      {
-        "name": "Nadiia Prokhorchuk",
-        "photo":
-          "/images/team/Nadiia.jpg",
-        "role": "Developer"
-      },
-      {
-        "name": "Olda Yarotska",
-        "photo":
-          "/images/team/Olga.jpg",
-        "role": "QA"
-      },
-      {
-        "name": "Yevhenii Moroziuk",
-        "photo":
-          "/images/team/Yevhenii.jpg",
-        "role": "Black Humor Lead"
-      },
-      {
-        "name": "Vitalii Yarmus",
-        "photo":
-          "/images/team/Vitalii.jpg",
-        "role": "DevOps"
-      }
+  {
+    "name": "Yevhenii Bieliaiev",
+    "photo": "/images/team/Eugene.png",
+    "role": "Full-Stack Developer"
+  },
+  {
+    "name": "Danylo Strelets",
+    "photo": "/images/team/Danya.jpg",
+    "role": "Full-Stack Developer"
+  },
+  {
+    "name": "Misha Benedyk",
+    "photo": "/images/team/Misha.jpg",
+    "role": "Full Meow Stack"
+  },
+  {
+    "name": "Dmytro Kolisnyk",
+    "photo": "/images/team/Dmytro.png",
+    "role": "Developer"
+  },
+  {
+    "name": "Ivan Nikolaiev",
+    "photo": "/images/team/Ivan.jpg",
+    "role": "Developer"
+  },
+  {
+    "name": "Valeriy Mishchenko",
+    "photo": "/images/team/Valeriy.jpg",
+    "role": "Developer"
+  },
+  {
+    "name": "Dmitriy Uvin",
+    "photo": "/images/team/Dmitriy.jpg",
+    "role": "Full-Stack Web Developer"
+  },
+  {
+    "name": "Nadiia Prokhorchuk",
+    "photo": "/images/team/Nadiia.jpg",
+    "role": "Developer"
+  },
+  {
+    "name": "Olda Yarotska",
+    "photo": "/images/team/Olga.jpg",
+    "role": "QA"
+  },
+  {
+    "name": "Hanna Kovalenko",
+    "photo": "/images/team/Hanna.jpg",
+    "role": "QA"
+  },
+  {
+    "name": "Yevhenii Moroziuk",
+    "photo": "/images/team/Yevhenii.jpg",
+    "role": "Black Humor Lead"
+  },
+  {
+    "name": "Vitalii Yarmus",
+    "photo": "/images/team/Vitalii.jpg",
+    "role": "DevOps"
+  }
 ]
