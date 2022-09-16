@@ -1,14 +1,18 @@
+import { NotificationType } from '@vse-bude/shared';
 import { isProduction, logger } from '@helpers';
+import { lang } from '@lang';
 import type {
   ProductRepository as ProductRepositoryType,
   UserRepository as UserRepositoryType,
   BidRepository as BidRepositoryType,
+  NotificationRepository as NotificationRepositoryType,
 } from '@repositories';
 import type { Product, User } from '@prisma/client';
 import { emailService } from '@services';
 import { ProductRepository } from '../repositories/product';
 import { UserRepository } from '../repositories/user';
 import { BidRepository } from '../repositories/bid';
+import { NotificationRepository } from '../repositories/notification';
 import { prismaClient as database } from '../data/db';
 import { ProductNotSoldBuilder } from '../email/product-not-sold-builder';
 import { ProductSoldAuthorBuilder } from '../email/product-sold-author-builder';
@@ -22,6 +26,8 @@ export class AuctionNotificationsCommand extends BaseCommand {
 
   private _bidRepository: BidRepositoryType;
 
+  private _notificationRepository: NotificationRepositoryType;
+
   private limit = 20;
 
   private _product: Product;
@@ -33,6 +39,7 @@ export class AuctionNotificationsCommand extends BaseCommand {
     this._prodRepository = new ProductRepository(database);
     this._userRepository = new UserRepository(database);
     this._bidRepository = new BidRepository(database);
+    this._notificationRepository = new NotificationRepository(database);
   }
 
   async execute(): Promise<void> {
@@ -40,6 +47,30 @@ export class AuctionNotificationsCommand extends BaseCommand {
     try {
       await this.handleParticipants(this._product);
       await this._prodRepository.markProductNotified(this._product.id);
+
+      const bidders = await this._bidRepository.getBidders(this._product.id);
+
+      bidders.forEach(async (bidder) => {
+        await this._notificationRepository.create({
+          type: NotificationType.AUCTION_ENDED,
+          userId: bidder,
+          title: lang('notifications:title.AUCTION_ENDED', {}, 'en'),
+          description: lang(
+            'notifications:description.AUCTION_ENDED',
+            {},
+            'en',
+          ),
+          productId: this._product.id,
+        });
+      });
+
+      await this._notificationRepository.create({
+        type: NotificationType.AUCTION_ENDED,
+        userId: this._product.authorId,
+        title: lang('notifications:title.AUCTION_ENDED', {}, 'en'),
+        description: lang('notifications:description.AUCTION_ENDED', {}, 'en'),
+        productId: this._product.id,
+      });
     } catch (e) {
       logger.error(`Command ${this.commandAlias} failed with error!`);
       logger.error(e);

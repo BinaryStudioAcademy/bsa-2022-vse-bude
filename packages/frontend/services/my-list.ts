@@ -1,7 +1,33 @@
-import type { Http } from '@vse-bude/shared';
-import { ApiRoutes, AccountApiRoutes } from '@vse-bude/shared';
+import type {
+  Http,
+  ProductDto,
+  ProductToArchive,
+  ProductPost,
+} from '@vse-bude/shared';
+import {
+  ApiRoutes,
+  AccountApiRoutes,
+  ProfileApiRoutes,
+} from '@vse-bude/shared';
+import { http } from '@helpers';
 
 export const getMyListSSR = (params: { http: Http }) =>
   params.http.get({
     url: `${ApiRoutes.PROFILE}${AccountApiRoutes.MY_LIST}`,
+  });
+
+export const addProductToArchive = ({
+  data,
+}: {
+  data: ProductToArchive;
+}): Promise<ProductDto> =>
+  http.put({
+    url: `${ApiRoutes.PROFILE}${ProfileApiRoutes.ADD_TO_ARCHIVE}`,
+    body: data,
+  });
+
+export const addProductToPosted = ({ data }: { data: ProductPost }) =>
+  http.put({
+    url: `${ApiRoutes.PROFILE}${ProfileApiRoutes.ADD_TO_POSTED}`,
+    body: data,
   });

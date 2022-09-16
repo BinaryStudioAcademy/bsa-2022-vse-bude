@@ -8,6 +8,7 @@ import * as styles from './styles';
 export function Select<T>({
   options,
   error,
+  cssDropdownExtend,
   value = '',
   setValue,
   ...props
@@ -17,12 +18,15 @@ export function Select<T>({
   return (
     <Dropdown
       cssExtend={
-        error ? [styles.dropdown, styles.dropdownError] : [styles.dropdown]
+        error
+          ? [cssDropdownExtend || styles.dropdown, styles.dropdownError]
+          : [cssDropdownExtend || styles.dropdown]
       }
       onChildrenClick={() => setIsOpen(!isOpen)}
       options={options.map((item) => ({
         value: item.title,
         onClick: () => setValue(item),
+        cssExtend: styles.option,
       }))}
     >
       <div css={styles.inputWrapper}>

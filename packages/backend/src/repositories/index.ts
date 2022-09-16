@@ -9,6 +9,7 @@ import { UserProfileRepository } from './profile';
 import { BidRepository } from './bid';
 import { MyListRepository } from './my-list';
 import { OrderRepository } from './order';
+import { NotificationRepository } from './notification';
 
 export const initRepositories = (prismaClient: PrismaClient): any => ({
   userRepository: new UserRepository(prismaClient),
@@ -21,6 +22,7 @@ export const initRepositories = (prismaClient: PrismaClient): any => ({
   bidRepository: new BidRepository(prismaClient),
   myListRepository: new MyListRepository(prismaClient),
   orderRepository: new OrderRepository(prismaClient),
+  notificationRepository: new NotificationRepository(prismaClient),
 });
 
 export type Repositories = ReturnType<typeof initRepositories>;
@@ -36,4 +38,5 @@ export {
   type BidRepository,
   type MyListRepository,
   type OrderRepository,
+  type NotificationRepository,
 };
