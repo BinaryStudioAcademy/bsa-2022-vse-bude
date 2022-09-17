@@ -140,8 +140,8 @@ export const initProductRoutes = (
     apiPath(path, ProductApiRoutes.SEARCH),
     wrap((req) => {
       const { query } = req;
-      
-return productService.search({ q: query.q as string });
+
+      return productService.search({ q: query.q as string });
     }),
   );
 

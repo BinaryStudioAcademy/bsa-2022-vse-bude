@@ -6,6 +6,7 @@ import {
 } from '@providers';
 import { isProduction } from '@helpers';
 import { AuctionScheduler } from '@scheduler';
+import type { ServicesInit } from '@types';
 import { CategoryService } from './category';
 import { ProductService } from './product';
 import { AuthService } from './auth';
@@ -23,7 +24,6 @@ import { MyListService } from './my-list';
 import { OrderService } from './order';
 import { PaymentService } from './payment';
 import { NotificationService } from './notification';
-import type { ServicesInit } from '@types';
 
 const emailProvider = new SendInBlueEmailProvider();
 export const emailService = new EmailService(emailProvider);

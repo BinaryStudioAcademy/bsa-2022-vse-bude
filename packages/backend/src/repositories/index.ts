@@ -1,4 +1,5 @@
 import type { PrismaClient } from '@prisma/client';
+import type { RepositoriesInit } from '@types';
 import { UserRepository } from './user';
 import { CategoryRepository } from './category';
 import { ProductRepository } from './product';
@@ -10,7 +11,6 @@ import { BidRepository } from './bid';
 import { MyListRepository } from './my-list';
 import { OrderRepository } from './order';
 import { NotificationRepository } from './notification';
-import type { RepositoriesInit } from '@types';
 
 export const initRepositories = (
   prismaClient: PrismaClient,
