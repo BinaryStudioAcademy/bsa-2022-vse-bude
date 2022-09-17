@@ -2,15 +2,22 @@ import { t } from 'i18next';
 import { notification } from '~/services/services';
 import { AppDispatch } from '~/common/types/types';
 import { Middleware, AnyAction } from '@reduxjs/toolkit';
+import { auth as authActions } from '~/store/actions';
+import { ExceptionName } from '@vse-bude/shared';
+import { store } from '../store';
 
 const errorHandler: Middleware =
   () => (next: AppDispatch) => (action: AnyAction) => {
     if (action.error) {
       const {
-        error: { message },
+        error: { name, message },
       } = action;
 
       notification.error(message, t('common:common.ERROR'));
+
+      if (name === ExceptionName.INVALID_CREDENTIALS) {
+        store.dispatch(authActions.logOut());
+      }
     }
 
     return next(action);
