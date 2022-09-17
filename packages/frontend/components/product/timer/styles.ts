@@ -7,7 +7,7 @@ export const timerBadge = ({ spaces, radiuses }: Theme) => css`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: ${spaces.sm} ${spaces.md};
+  padding: ${spaces.xs} ${spaces.sm};
   border: 1px solid ${ColorPalette.GRAY_200};
   box-shadow: 0 2px 4px 0 #dedede40;
   border-radius: ${radiuses.lg};

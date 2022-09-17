@@ -5,7 +5,7 @@ import { PhoneVerification } from 'components/auth/verification/phone-verificati
 import { useTranslation } from 'next-i18next';
 import Image from 'next/future/image';
 import hand from 'public/images/mocup_hand2.png';
-import { previousVerifyModal } from 'store/modals/actions';
+import { previousVerifyPhoneModal } from 'store/modals/actions';
 import { useEffect } from 'react';
 import * as styles from '../styles';
 import { phoneCodeResend } from '../../../store/auth';
@@ -24,7 +24,7 @@ const EnterCodeModal = ({ phone }: ModalProps) => {
 
   const previousModal = (e) => {
     e.preventDefault();
-    dispatch(previousVerifyModal());
+    dispatch(previousVerifyPhoneModal());
   };
 
   return (

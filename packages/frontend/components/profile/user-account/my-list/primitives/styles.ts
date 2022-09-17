@@ -12,6 +12,7 @@ export const itemImage = ({ radiuses }: Theme) => css`
   border-radius: ${radiuses.xs};
   width: 110px;
   height: 110px;
+  object-fit: cover;
 `;
 
 export const itemTitle = ({
