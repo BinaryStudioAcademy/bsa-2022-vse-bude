@@ -18,10 +18,12 @@ export class LangService {
     return this._locale;
   }
 
-  private getPath(key: string): string {
+  private getPath(key: string, locale?: string): string {
     const namespace = key.split(':')[0];
 
-    return path.resolve(`${localesDir}/${this._locale}/${namespace}.json`);
+    return path.resolve(
+      `${localesDir}/${locale || this._locale}/${namespace}.json`,
+    );
   }
 
   private readTranslations(localePath: string): string {
@@ -37,8 +39,12 @@ export class LangService {
     return parts[0] ?? '';
   }
 
-  public translate(key: string): null | string {
-    const langPath = this.getPath(key);
+  public translate(
+    key: string,
+    interpolatedFields?: Record<string, string | number>,
+    locale?: string,
+  ): null | string {
+    const langPath = this.getPath(key, locale);
 
     if (!fs.existsSync(langPath)) {
       return null;
@@ -51,7 +57,13 @@ export class LangService {
       return null;
     }
 
-    return this.getValue(translations, resultKey.split('.'), 0) ?? null;
+    const value = this.getValue(translations, resultKey.split('.'), 0) ?? null;
+
+    if (interpolatedFields && value) {
+      return this.interpolate(value, interpolatedFields);
+    }
+
+    return value;
   }
 
   private getValue(obj: any, keys: string[], currentKey: number): string {
@@ -60,5 +72,20 @@ export class LangService {
     }
 
     return obj[keys[currentKey]];
+  }
+
+  private interpolate(
+    line: string,
+    fields: Record<string, string | number>,
+  ): string {
+    let interpolatedLine = line;
+    Object.keys(fields).forEach((key) => {
+      interpolatedLine = interpolatedLine.replace(
+        `{{${key}}}`,
+        `${fields[key]}`,
+      );
+    });
+
+    return interpolatedLine;
   }
 }

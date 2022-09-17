@@ -3,14 +3,14 @@ import type { Theme } from '@emotion/react';
 import { resetButton } from 'theme';
 import { ColorPalette } from '@vse-bude/shared';
 
-export const form = () => css`
+export const form = css`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
 `;
 
-export const personalHeader = () => css`
+export const personalHeader = css`
   width: 100%;
 `;
 
@@ -98,12 +98,19 @@ export const groupPhone = ({ spaces }: Theme) => css`
   padding: 0 0 ${spaces.xl1} 0;
 `;
 
+export const groupEmail = ({ spaces }: Theme) => css`
+  gap: ${spaces.md};
+`;
+
 export const phoneRow = css`
   flex-grow: 2;
 `;
 
 export const verifyButtonWrapper = ({ spaces }: Theme) => css`
   padding: 18px 0 ${spaces.xl1} 0;
+`;
+export const verifyEmailButtonWrapper = css`
+  padding: 18px 0;
 `;
 export const avatarPopoverTrigger = css`
   position: absolute;

@@ -27,6 +27,9 @@
     },
     "status": {
       "empty": "Поле status не може бути порожнім"
+    },
+    "condition": {
+      "empty": "Поле condition не може бути порожнім"
     }
   },
   "condition": {

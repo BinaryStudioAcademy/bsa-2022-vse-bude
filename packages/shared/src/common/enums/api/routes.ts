@@ -12,6 +12,7 @@ export enum ApiRoutes {
   CREATE_POST = '/post',
   BIDS = '/bids',
   ORDERS = '/orders',
+  ITEMS = '/items',
 }
 
 export enum AuthApiRoutes {
@@ -35,6 +36,7 @@ export enum VerifyApiRoutes {
 export enum ProductApiRoutes {
   ID = '/:id',
   EDIT_ID = '/edit/:id',
+  EDIT = 'edit',
   VIEWS = '/views',
   FAVORITE = '/favorite',
   FAVORITE_IDS = '/favorite-ids',
@@ -45,6 +47,7 @@ export enum ProductApiRoutes {
   SIMILAR = '/similar',
   POPULAR_LOTS = '/popular-lots',
   POPULAR_PRODUCTS = '/popular-products',
+  SEARCH = '/search',
 }
 
 export enum ProfileApiRoutes {
@@ -52,6 +55,10 @@ export enum ProfileApiRoutes {
   GET_FULL_USER_DATA = '/full-data',
   UPDATE_DATA = '/save',
   UPDATE_AVATAR = '/update-avatar',
+  ADD_TO_ARCHIVE = '/add-to-archive',
+  ADD_TO_POSTED = '/add-to-posted',
+  GET_NOTIFICATIONS = '/notifications',
+  PATCH_NOTIFICATION = '/notifications/:id',
 }
 
 export enum AccountApiRoutes {

@@ -5,17 +5,18 @@ import {
 } from '@react-navigation/drawer';
 import { RootScreenName } from '~/common/enums/enums';
 import { MainNavigation } from '../tabs/tabs.navigation';
+import { DrawerContent } from './components/components';
 
 const HomeWithMenuNavigation: FC = () => {
   const Drawer = createDrawerNavigator();
 
   const options: DrawerNavigationOptions = {
     headerShown: false,
-    swipeEdgeWidth: 200,
+    swipeEdgeWidth: 100,
   };
 
   return (
-    <Drawer.Navigator screenOptions={options}>
+    <Drawer.Navigator screenOptions={options} drawerContent={DrawerContent}>
       <Drawer.Screen name={RootScreenName.MAIN} component={MainNavigation} />
     </Drawer.Navigator>
   );

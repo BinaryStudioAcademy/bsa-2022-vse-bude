@@ -14,6 +14,8 @@
   "BID_PRICE_IS_TOO_LOW": "Bid price is too low!",
   "CODE_NOT_FOUND": "Code not found!",
   "PRODUCT_NOT_FOUND": "Product not found!",
+  "PRODUCT_UNAVAILABLE": "Product unavailable!",
+  "ALREADY_LEAVE_AUCTION": "You have already left the auction!",
   "mailing": {
     "verification": {
       "subject": "Email confirmation",

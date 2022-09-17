@@ -17,7 +17,7 @@ export const sectionHeader = ({
   color: ${colors.text};
 `;
 
-export const nestedLayout = () => css`
+export const nestedLayout = css`
   display: flex;
   flex-direction: column;
   align-items: center;

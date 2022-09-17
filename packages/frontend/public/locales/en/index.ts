@@ -10,6 +10,7 @@ import itemsPage from './items-page.json';
 import rules from './rules.json';
 import myList from './my-list.json';
 import checkout from './checkout.json';
+import about from './about.json';
 
 export const en = {
   home,
@@ -24,4 +25,5 @@ export const en = {
   item,
   rules,
   checkout,
+  about,
 };

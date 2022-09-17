@@ -13,6 +13,7 @@ export const common = {
     CHOOSE_FROM_GALLERY: 'Обрати з галереї',
     OPEN_CAMERA: 'Відкрити камеру',
     REMOVE_PHOTO: 'Видалити фото',
+    BUTTON_FILTER: 'Фільтр',
   },
   common: {
     HOME: 'Головна',
@@ -42,5 +43,17 @@ export const common = {
     MY_LIST: 'Мій список',
     ACCOUNT: 'Акаунт',
     LOG_IN: 'Увійти',
+  },
+  drawer_menu: {
+    CATEGORIES: 'Категорії',
+    ITEMS: 'Продукти',
+    SERVICES: 'Послуги',
+    CLOTHING: 'Одяг',
+    ART: 'Арт та Декор',
+    HOME_APPLIANCE: 'Все для Дому',
+    TOYS: 'Іграшки',
+    MANICURE: 'Манікюр',
+    HAIR_CUT: 'Зачіска',
+    CAR_WASH: 'Мийка Машини',
   },
 };

@@ -10,10 +10,12 @@
   "sellerCaption": "Продавець",
   "contactSellerBtn": "Написати продавцю",
   "showImageCaption": "Переглянути повне зображення",
+  "soldCaption": "Продукт був проданий",
+  "finishedCaption": "Аукціон завершено",
   "time": {
     "hours": "год",
     "days": "днів",
-    "minutes": "мін",
+    "minutes": "хв",
     "seconds": "сек"
   },
   "similarItems": "Схожі товари",
@@ -22,7 +24,8 @@
     "validation": {
       "required": "Ставка є обов'язковим полем",
       "min": "Занадто мала сума ставки",
-      "numeric": "Ставка повинна бути числом"
+      "numeric": "Ставка повинна бути числом",
+      "safe": "Занадто велика сума ставки"
     }
   },
   "leave": {

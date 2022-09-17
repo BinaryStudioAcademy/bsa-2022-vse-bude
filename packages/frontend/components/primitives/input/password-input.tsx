@@ -37,7 +37,7 @@ const PasswordInputInner = (
           <Icon
             icon={passwordIcon}
             cssExtend={styles.passwordVisibilityIcon}
-            color={IconColor.YELLOW}
+            color={IconColor.GRAY}
           />
         </button>
       </div>

@@ -4,10 +4,7 @@ import { Flex } from 'grapefruit-ui';
 import { useTypedSelector } from '@hooks';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
-import { Select } from '@components/primitives/select';
-import type { SelectOption } from '@components/primitives/select/types';
 import * as styles from './styles';
-import { SellerFields } from './form-utils';
 import type { ContactBlockProps } from './types';
 
 export default function ContactBlock({
@@ -18,10 +15,10 @@ export default function ContactBlock({
   const currentProduct = useTypedSelector((state) => state.product.currentItem);
   const [showPhone, setShowPhone] = useState(!currentProduct?.phone);
   const { t } = useTranslation();
-  const [seller, setSeller] = useState<SelectOption>({
-    value: SellerFields(t).USER.value,
-    title: SellerFields(t).USER.title,
-  });
+  // const [seller, setSeller] = useState<SelectOption>({
+  //   value: SellerFields(t).USER.value,
+  //   title: SellerFields(t).USER.title,
+  // });
 
   const setShowPhoneWrapper = (value) => {
     if (!value) {
@@ -37,7 +34,7 @@ export default function ContactBlock({
   return (
     <>
       <SectionHeader>{t('create-post:headline.contact')}</SectionHeader>
-      <Flex css={styles.groupInputs}>
+      {/* <Flex css={styles.groupInputs}>
         <div css={styles.selectRow}>
           <Select
             label={t('create-post:label.seller')}
@@ -61,7 +58,7 @@ export default function ContactBlock({
             />
           )}
         </div>
-      </Flex>
+      </Flex> */}
       <Flex css={styles.groupInputs}>
         <div css={styles.inputRow}>
           <Input
@@ -113,7 +110,7 @@ export default function ContactBlock({
           label={t('create-post:label.checkbox')}
         />
       </Flex>
-      {seller.value === SellerFields(t).OTHER.value && (
+      {/* {seller.value === SellerFields(t).OTHER.value && (
         <>
           <div css={styles.inputRow}>
             <Input
@@ -152,7 +149,7 @@ export default function ContactBlock({
             />
           </div>
         </>
-      )}
+      )} */}
     </>
   );
 }

@@ -9,8 +9,9 @@ import { PersonalInfoApi } from './personal-info-api/personal-info-api.service';
 import { ProductService } from './product/product.service';
 import { PushNotificationService } from './push-notifications/push-notifications';
 import { AppService } from './app/app.service';
-import { PhoneVerificationApi } from './phone-verification-api/phone-verification-api.service';
+import { VerificationApi } from './verification-api/verification-api.service';
 import { CategoryService } from './categories/categories';
+import { SocketService } from './socket/socket';
 
 const storage = new Storage({
   storage: new MMKV(),
@@ -35,7 +36,7 @@ const productApi = new ProductService({
   apiPrefix: ENV.APP.API_ORIGIN_URL,
 });
 
-const phoneVerificationApi = new PhoneVerificationApi({
+const verificationApi = new VerificationApi({
   http,
   apiPrefix: ENV.APP.API_ORIGIN_URL,
 });
@@ -52,6 +53,10 @@ const personalInfoApi = new PersonalInfoApi({
   apiPrefix: ENV.APP.API_ORIGIN_URL,
 });
 
+const socketApi = new SocketService({
+  apiPrefix: ENV.SOCKET.API_PUBLIC_WEBSOCKETS_API_URL,
+});
+
 const appService = new AppService();
 
 const pushNotification = new PushNotificationService();
@@ -63,8 +68,9 @@ export {
   notification,
   personalInfoApi,
   productApi,
-  phoneVerificationApi,
+  verificationApi,
   appService,
   categoryApi,
   pushNotification,
+  socketApi,
 };

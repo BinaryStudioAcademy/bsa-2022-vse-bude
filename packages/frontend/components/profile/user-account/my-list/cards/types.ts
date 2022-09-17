@@ -1,6 +1,6 @@
 import type { UserProfileDto } from '@vse-bude/shared';
 
-export interface ItemCard {
+export type ItemCard = {
   id: string;
   title: string;
   description: string;
@@ -14,4 +14,8 @@ export interface ItemCard {
   endDate: string;
   postDate: string;
   updatedAt: string;
-}
+};
+
+export type CardProps = {
+  data: ItemCard;
+};

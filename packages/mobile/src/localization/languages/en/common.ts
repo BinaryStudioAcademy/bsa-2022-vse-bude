@@ -13,6 +13,7 @@ export const common = {
     CHOOSE_FROM_GALLERY: 'Choose from device',
     OPEN_CAMERA: 'Open camera',
     REMOVE_PHOTO: 'Remove existing photo',
+    BUTTON_FILTER: 'Filter',
   },
   common: {
     HOME: 'Home',
@@ -42,5 +43,17 @@ export const common = {
     MY_LIST: 'My list',
     ACCOUNT: 'Account',
     LOG_IN: 'Log in',
+  },
+  drawer_menu: {
+    CATEGORIES: 'Categories',
+    ITEMS: 'Items',
+    SERVICES: 'Services',
+    CLOTHING: 'Clothing',
+    ART: 'Art/Decorations',
+    HOME_APPLIANCE: 'Home Appliance',
+    TOYS: 'Toys',
+    MANICURE: 'Manicure',
+    HAIR_CUT: 'Hair Cut',
+    CAR_WASH: 'Car Wash',
   },
 };

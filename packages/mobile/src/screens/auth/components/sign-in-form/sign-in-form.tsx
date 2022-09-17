@@ -4,13 +4,21 @@ import {
   Input,
   PrimaryButton,
   ButtonText,
+  Divider,
+  Text,
 } from '~/components/components';
 import { UserSignInDto } from '@vse-bude/shared';
-import { useAppForm, useTranslation, useNavigation } from '~/hooks/hooks';
+import {
+  useAppForm,
+  useTranslation,
+  useNavigation,
+  useAppSelector,
+} from '~/hooks/hooks';
 import { signIn } from '~/validation-schemas/validation-schemas';
 import { globalStyles } from '~/styles/styles';
-import { RootScreenName } from '~/common/enums/enums';
+import { DataStatus, RootScreenName } from '~/common/enums/enums';
 import { RootNavigationProps } from '~/common/types/types';
+import { selectAuthDataStatus } from '~/store/selectors';
 import { DEFAULT_SIGN_IN_PAYLOAD } from './common/constants';
 
 type Props = {
@@ -18,6 +26,8 @@ type Props = {
 };
 
 const SignInForm: FC<Props> = ({ onSubmit }) => {
+  const dataStatusAuth = useAppSelector(selectAuthDataStatus);
+  const isLoading = dataStatusAuth === DataStatus.PENDING;
   const { control, errors, handleSubmit } = useAppForm<UserSignInDto>({
     defaultValues: DEFAULT_SIGN_IN_PAYLOAD,
     validationSchema: signIn,
@@ -48,18 +58,27 @@ const SignInForm: FC<Props> = ({ onSubmit }) => {
         isSecure={true}
       />
       <View style={globalStyles.mt5}>
+        <PrimaryButton
+          label={t('verification.SIGN_IN')}
+          onPress={handleSubmit(onSubmit)}
+          disabled={isLoading}
+        />
+      </View>
+      <Divider contentContainerStyle={{ marginVertical: 20 }} />
+      <View
+        style={[
+          globalStyles.flexDirectionRow,
+          globalStyles.justifyContentCenter,
+        ]}
+      >
+        <Text>{t('verification.FORGOT_PASSWORD')}?</Text>
         <ButtonText
           onPress={navigateResetPassword}
-          contentContainerStyle={{ alignSelf: 'flex-end' }}
+          contentContainerStyle={{ alignSelf: 'flex-end', marginLeft: 10 }}
+          textStyle={globalStyles.fs16}
         >
-          {t('verification.FORGOT_PASSWORD')}
+          {t('verification.FORGOT_PASSWORD_BUTTON')}
         </ButtonText>
-      </View>
-      <View style={globalStyles.mt5}>
-        <PrimaryButton
-          label={t('verification.SING_IN')}
-          onPress={handleSubmit(onSubmit)}
-        />
       </View>
     </View>
   );

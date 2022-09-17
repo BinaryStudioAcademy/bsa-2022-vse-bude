@@ -23,7 +23,7 @@ export const controls = css`
 `;
 
 export const favouriteButton = ({ spaces, colors }: Theme) => css`
-  color: ${colors.accent};
+  color: ${colors.primary};
   margin-left: ${spaces.md};
   width: 45px;
   height: 45px;
@@ -33,5 +33,17 @@ export const price = ({ spaces, breakpoints }: Theme) => css`
   margin-bottom: ${spaces.lg};
   @media (max-width: ${breakpoints.md}px) {
     text-align: center;
+  }
+`;
+
+export const sold = ({ colors, fontSizes, fontWeights, spaces }: Theme) => css`
+  display: flex;
+  align-items: center;
+  color: ${colors.accent};
+  font-size: ${fontSizes.h6};
+  font-weight: ${fontWeights.h6};
+
+  i {
+    margin-right: ${spaces.xs};
   }
 `;

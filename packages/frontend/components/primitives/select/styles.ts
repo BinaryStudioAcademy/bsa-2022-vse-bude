@@ -7,6 +7,12 @@ export const dropdown = css`
   width: 100%;
 `;
 
+export const option = ({ fontSizes, lineHeights }: Theme) => css`
+  font-family: inherit;
+  font-size: ${fontSizes.body2};
+  line-height: ${lineHeights.body2};
+`;
+
 export const dropdownError = ({ spaces }: Theme) => css`
   top: calc(100% - ${spaces.md});
 `;

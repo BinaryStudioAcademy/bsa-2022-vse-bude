@@ -28,7 +28,9 @@ interface ProductDto {
   condition: Condition;
   category: CategoryDto;
   views: number;
+  authorId: string;
   author: UserProfileDto;
+  winnerId: string;
   winner: UserProfileDto;
   updatedAt: string;
   postDate: string;

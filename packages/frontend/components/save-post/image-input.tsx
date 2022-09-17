@@ -69,6 +69,7 @@ function ImageInput({ images, setImages }: ImageInputProps) {
       const preview = reader.result as string;
       setImagePreviews((prev) => [...prev, preview]);
     };
+
     reader.readAsDataURL(croppedImage);
 
     setCurrentImage(undefined);
@@ -78,9 +79,9 @@ function ImageInput({ images, setImages }: ImageInputProps) {
     setCurrentImage(undefined);
   };
 
-  const onImageDelete = (img: string) => {
-    setImagePreviews(imagePreviews.filter((item) => item !== img));
-    setImages(images.filter((item) => item !== img));
+  const onImageDelete = (prevImg: string, image: string | File) => {
+    setImagePreviews(imagePreviews.filter((item) => item !== prevImg));
+    setImages(images.filter((item) => item !== image));
   };
 
   useEffect(() => {
@@ -123,7 +124,7 @@ function ImageInput({ images, setImages }: ImageInputProps) {
                 color={IconColor.ORANGE}
                 backgroundColor={'lightgray'}
                 size="sm"
-                onClick={() => onImageDelete(item)}
+                onClick={() => onImageDelete(item, images[indx])}
               />
               <Image fill src={item} alt="image preview" />
             </div>
@@ -146,9 +147,7 @@ function ImageInput({ images, setImages }: ImageInputProps) {
 
                 <p css={styles.photosLabel}>
                   {t('create-post:label.photosMain')}
-                  <label htmlFor="post-photo">
-                    {t('create-post:label.photosCaption')}
-                  </label>
+                  <span>{t('create-post:label.photosCaption')}</span>
                 </p>
               </div>
             </div>

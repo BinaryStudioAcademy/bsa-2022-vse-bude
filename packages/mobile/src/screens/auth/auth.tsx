@@ -25,7 +25,6 @@ import { globalStyles } from '~/styles/styles';
 import { notification } from '~/services/services';
 import {
   ResetPasswordHeader,
-  SignInUpHeader,
   SignInForm,
   SignUpForm,
   Header,
@@ -45,7 +44,7 @@ const Auth: FC = () => {
   const getScreenLabel = (screenName: string): string => {
     switch (screenName) {
       case RootScreenName.SIGN_IN:
-        return t('verification.SING_IN');
+        return t('verification.SIGN_IN');
       case RootScreenName.SIGN_UP:
         return t('verification.CREATE_ACCOUNT');
       case RootScreenName.FORGOT_PASSWORD:
@@ -71,7 +70,13 @@ const Auth: FC = () => {
       .unwrap()
       .then((resp) => {
         if (resp.phone) {
-          navigation.navigate(RootScreenName.VERIFY_PHONE);
+          navigation.navigate(RootScreenName.VERIFY_PHONE, {
+            fromSignUp: true,
+          });
+        } else {
+          navigation.navigate(RootScreenName.VERIFY_EMAIL, {
+            fromSignUp: true,
+          });
         }
       })
       .catch((err) => {
@@ -132,7 +137,7 @@ const Auth: FC = () => {
         >
           {getScreenLabel(name)}
         </Text>
-        {isResetPassword ? <ResetPasswordHeader /> : <SignInUpHeader />}
+        {isResetPassword && <ResetPasswordHeader />}
         {getScreen(name)}
       </ScrollView>
     </ScreenWrapper>

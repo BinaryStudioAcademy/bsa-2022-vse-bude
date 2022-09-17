@@ -23,6 +23,7 @@ export enum UserPersonalInfoValidationMessage {
   IS_URI = 'personal-info:validation.socialNetworks.uri',
   URI_MAX_SYMBOLS = 'personal-info:validation.socialNetworks.maxSymbols',
   URI_BAD_REQUEST = 'personal-info:validation.socialNetworks.netType',
+  NET_TYPE_IS_EXISTS = 'personal-info:validation.socialNetworks.netTypeExists',
 
   MIN_SYMBOLS = 'personal-info:validation.password.minSymbols',
   MAX_SYMBOLS = 'personal-info:validation.password.maxSymbols',
@@ -34,4 +35,7 @@ export enum UserPersonalInfoValidationMessage {
 
   USER_NOT_EXISTS = 'personal-info:validation.notExists.user',
   PHONE_EXISTS = 'personal-info:validation.exists.phone',
+
+  CANCELLED_EXISTS = 'my-list:errors.cancelledExists',
+  POSTED_EXISTS = 'my-list:errors.postedExists',
 }

@@ -2,12 +2,13 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["interactiveTransactions"]
 }
 
 generator erd {
-  provider = "prisma-erd-generator"
+  provider                  = "prisma-erd-generator"
+  includeRelationFromFields = true
 }
 
 datasource db {
@@ -16,29 +17,30 @@ datasource db {
 }
 
 model User {
-  id            String         @id @default(uuid()) @db.Uuid
-  email         String         @unique @db.VarChar(256)
-  phone         String?        @unique @db.VarChar(32)
-  firstName     String         @db.VarChar(256)
-  lastName      String         @db.VarChar(256)
-  avatar        String?        @db.VarChar(2048)
-  role          Role           @default(USER)
-  settings      UserSettings?
-  refreshTokens RefreshToken[]
-  address       Address?
-  socialMedia   SocialMedia[]
-  ownProducts   Product[]      @relation("ownProducts")
-  wonProducts   Product[]      @relation("wonProducts")
-  orders        Order[]
-  bids          Bid[]
-  chats         ChatMember[]
-  messages      Message[]
-  createdAt     DateTime       @default(now())
-  passwordHash  String         @db.VarChar(256)
-  phoneVerified Boolean        @default(false)
-  emailVerified Boolean        @default(false)
-  updatedAt     DateTime       @updatedAt
-  favoriteProducts  FavoriteProducts[]
+  id               String             @id @default(uuid()) @db.Uuid
+  email            String             @unique @db.VarChar(256)
+  phone            String?            @unique @db.VarChar(32)
+  firstName        String             @db.VarChar(256)
+  lastName         String             @db.VarChar(256)
+  avatar           String?            @db.VarChar(2048)
+  role             Role               @default(USER)
+  settings         UserSettings?
+  refreshTokens    RefreshToken[]
+  address          Address?
+  socialMedia      SocialMedia[]
+  ownProducts      Product[]          @relation("ownProducts")
+  wonProducts      Product[]          @relation("wonProducts")
+  orders           Order[]
+  bids             Bid[]
+  chats            ChatMember[]
+  messages         Message[]
+  createdAt        DateTime           @default(now())
+  passwordHash     String             @db.VarChar(256)
+  phoneVerified    Boolean            @default(false)
+  emailVerified    Boolean            @default(false)
+  updatedAt        DateTime           @updatedAt
+  favoriteProducts FavoriteProducts[]
+  notifications    Notification[]
 }
 
 model UserSettings {
@@ -53,17 +55,17 @@ model UserSettings {
 }
 
 model Address {
-  id            String   @id @default(uuid()) @db.Uuid
-  country       String?  @db.VarChar(256)
-  region        String?  @db.VarChar(512)
-  city          String?  @db.VarChar(512)
-  address       String?  @db.VarChar(1024)
-  zip           String?  @db.VarChar(32)
-  deliveryData  String?  @db.VarChar(1024)
-  user          User?    @relation(fields: [userId], references: [id])
-  userId        String?  @unique @db.Uuid
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id           String   @id @default(uuid()) @db.Uuid
+  country      String?  @db.VarChar(256)
+  region       String?  @db.VarChar(512)
+  city         String?  @db.VarChar(512)
+  address      String?  @db.VarChar(1024)
+  zip          String?  @db.VarChar(32)
+  deliveryData String?  @db.VarChar(1024)
+  user         User?    @relation(fields: [userId], references: [id])
+  userId       String?  @unique @db.Uuid
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
 
 model SocialMedia {
@@ -83,68 +85,69 @@ model Category {
   title     String    @db.VarChar(512)
   products  Product[]
   createdAt DateTime  @default(now())
-  image     String?   @db.VarChar(2048) @default("")
+  image     String?   @default("") @db.VarChar(2048)
   updatedAt DateTime  @updatedAt
 
   @@unique([title])
 }
 
 model Product {
-  id              String        @id @default(uuid()) @db.Uuid
-  title           String        @db.VarChar(512)
-  description     String
-  price           Decimal       @db.Money
-  recommendedPrice Decimal?     @db.Money
-  minimalBid      Decimal?      @db.Money
-  imageLinks      String[]      @db.VarChar(2048)
-  country         String?        @db.VarChar(512)
-  city            String?       @db.VarChar(512)
-  phone           String?       @db.VarChar(32)
-  type            ProductType
-  status          ProductStatus
-  condition       Condition     @default(NEW)
-  endDate         DateTime?
-  postDate        DateTime?
-  cancelReason   String?
-  author          User          @relation(name: "ownProducts", fields: [authorId], references: [id])
-  authorId        String        @db.Uuid
-  category        Category?     @relation(fields: [categoryId], references: [id])
-  categoryId      String?       @db.Uuid
-  winner          User?         @relation(name: "wonProducts", fields: [winnerId], references: [id])
-  winnerId        String?       @db.Uuid
-  socialMedia     SocialMedia[]
-  bids            Bid[]
-  orders          Order[]
-  chat            Chat?
-  views           Int           @default(0)
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
-  inFavorites     FavoriteProducts[]
-  participantsNotified  Boolean @default(false)
+  id                   String             @id @default(uuid()) @db.Uuid
+  title                String             @db.VarChar(512)
+  description          String
+  price                Decimal            @db.Money
+  recommendedPrice     Decimal?           @db.Money
+  minimalBid           Decimal?           @db.Money
+  imageLinks           String[]           @db.VarChar(2048)
+  country              String?            @db.VarChar(512)
+  city                 String?            @db.VarChar(512)
+  phone                String?            @db.VarChar(32)
+  type                 ProductType
+  status               ProductStatus
+  condition            Condition          @default(NEW)
+  endDate              DateTime?
+  postDate             DateTime?
+  cancelReason         String?
+  author               User               @relation(name: "ownProducts", fields: [authorId], references: [id])
+  authorId             String             @db.Uuid
+  category             Category?          @relation(fields: [categoryId], references: [id])
+  categoryId           String?            @db.Uuid
+  winner               User?              @relation(name: "wonProducts", fields: [winnerId], references: [id])
+  winnerId             String?            @db.Uuid
+  socialMedia          SocialMedia[]
+  bids                 Bid[]
+  orders               Order[]
+  chat                 Chat?
+  views                Int                @default(0)
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+  inFavorites          FavoriteProducts[]
+  participantsNotified Boolean            @default(false)
+  notifications        Notification[]
 }
 
 model Bid {
-  id        String   @id @default(uuid()) @db.Uuid
-  bidder    User     @relation(fields: [bidderId], references: [id])
-  bidderId  String   @db.Uuid
-  product   Product  @relation(fields: [productId], references: [id])
-  productId String   @db.Uuid
-  price     Decimal  @db.Money
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        String    @id @default(uuid()) @db.Uuid
+  bidder    User      @relation(fields: [bidderId], references: [id])
+  bidderId  String    @db.Uuid
+  product   Product   @relation(fields: [productId], references: [id])
+  productId String    @db.Uuid
+  price     Decimal   @db.Money
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   deletedAt DateTime? @db.Timestamp(0)
 }
 
 model Order {
-  id        String   @id @default(uuid()) @db.Uuid
-  product   Product  @relation(fields: [productId], references: [id])
-  productId String   @db.Uuid
-  buyer     User     @relation(fields: [buyerId], references: [id])
-  buyerId   String   @db.Uuid
-  cost      Decimal  @db.Money
+  id        String      @id @default(uuid()) @db.Uuid
+  product   Product     @relation(fields: [productId], references: [id])
+  productId String      @db.Uuid
+  buyer     User        @relation(fields: [buyerId], references: [id])
+  buyerId   String      @db.Uuid
+  cost      Decimal     @db.Money
   status    OrderStatus
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
 }
 
 model Chat {
@@ -189,22 +192,36 @@ model RefreshToken {
 }
 
 model News {
-  id          String     @id @default(uuid()) @db.Uuid
+  id          String   @id @default(uuid()) @db.Uuid
   title       String
   content     String
   description String
   image       String
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model FavoriteProducts {
-  userId      String  @db.Uuid
-  user        User    @relation(fields: [userId], references: [id])
-  productId   String  @db.Uuid
-  product     Product @relation(fields: [productId], references: [id])
+  userId    String  @db.Uuid
+  user      User    @relation(fields: [userId], references: [id])
+  productId String  @db.Uuid
+  product   Product @relation(fields: [productId], references: [id])
 
   @@id([userId, productId])
+}
+
+model Notification {
+  id          String           @id @default(uuid()) @db.Uuid
+  userId      String           @db.Uuid
+  user        User             @relation(fields: [userId], references: [id])
+  productId   String?          @db.Uuid
+  product     Product?         @relation(fields: [productId], references: [id], onDelete: SetNull)
+  type        NotificationType
+  title       String
+  description String
+  link        String?
+  viewed      Boolean          @default(false)
+  createdAt                DateTime   @default(now())
 }
 
 enum Role {
@@ -234,6 +251,7 @@ enum ProductStatus {
   FINISHED
   CLOSED
   DRAFT
+  SOLD
 }
 
 enum SocialMediaType {
@@ -253,4 +271,13 @@ enum OrderStatus {
   PAID
   DELIVERED
   CANCELLED
+}
+
+enum NotificationType {
+  PRODUCT_SOLD
+  AUCTION_ENDED
+  OUTBID
+  BID_PLACED
+  AUCTION_LEFT
+  INFO
 }

@@ -54,7 +54,7 @@ const Welcome: FC<Props> = ({ navigation }) => {
           />
           <SecondaryButton
             appearance={ButtonAppearance.OUTLINED}
-            label={t('verification.SING_IN')}
+            label={t('verification.SIGN_IN')}
             onPress={() => {
               navigation.navigate(RootScreenName.SIGN_IN);
             }}
