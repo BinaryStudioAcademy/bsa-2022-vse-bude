@@ -23,11 +23,12 @@ import { MyListService } from './my-list';
 import { OrderService } from './order';
 import { PaymentService } from './payment';
 import { NotificationService } from './notification';
+import type { ServicesInit } from '@types';
 
 const emailProvider = new SendInBlueEmailProvider();
 export const emailService = new EmailService(emailProvider);
 
-export const initServices = (repositories: Repositories): any => {
+export const initServices = (repositories: Repositories): ServicesInit => {
   const hashService: HashService = new HashService();
   const redisService: RedisStorageService = new RedisStorageService(
     isProduction,
@@ -125,4 +126,6 @@ export {
   type PaymentService,
   type AuctionScheduler,
   type NotificationService,
+  type SMSSenderService,
+  type RedisStorageService,
 };

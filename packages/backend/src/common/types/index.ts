@@ -9,3 +9,4 @@ export * from './order';
 export * from './my-list-items';
 export * from './product';
 export * from './verification-code';
+export * from './initialization';

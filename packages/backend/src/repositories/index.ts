@@ -10,8 +10,11 @@ import { BidRepository } from './bid';
 import { MyListRepository } from './my-list';
 import { OrderRepository } from './order';
 import { NotificationRepository } from './notification';
+import type { RepositoriesInit } from '@types';
 
-export const initRepositories = (prismaClient: PrismaClient): any => ({
+export const initRepositories = (
+  prismaClient: PrismaClient,
+): RepositoriesInit => ({
   userRepository: new UserRepository(prismaClient),
   categoryRepository: new CategoryRepository(prismaClient),
   productRepository: new ProductRepository(prismaClient),
