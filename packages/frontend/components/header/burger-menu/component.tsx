@@ -43,7 +43,7 @@ export const BurgerMenu = ({ user, categories, onClose }: BurgerMenuProps) => {
           variant={pathname === Routes.NEWS ? 'primary' : 'default'}
         />
         <InternalLink
-          href={Routes.DEFAULT}
+          href={Routes.ABOUT}
           label={t('common:header.nav.about_us')}
           variant={pathname === Routes.ABOUT ? 'primary' : 'default'}
         />

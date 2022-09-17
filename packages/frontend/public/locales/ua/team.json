@@ -1,0 +1,67 @@
+[
+  {
+    "name": "Євгеній Бєляєв",
+    "photo": "/images/team/Eugene.png",
+    "role": "Full-Stack Developer"
+  },
+  {
+    "name": "Данило Стрелець",
+    "photo": "/images/team/Danya.jpg",
+    "role": "Full-Stack Developer"
+  },
+  {
+    "name": "Міша Бенедик",
+    "photo": "/images/team/Misha.jpg",
+    "role": "developer"
+  },
+  {
+    "name": "Дмитро Колісник",
+    "photo": "/images/team/Dmytro.png",
+    "role": "Developer"
+  },
+  {
+    "name": "Іван Ніколаєв",
+    "photo": "/images/team/Ivan.jpg",
+    "role": "Developer"
+  },
+  {
+    "name": "Міщенко Валерій",
+    "photo": "/images/team/Valeriy.jpg",
+    "role": "Developer"
+  },
+  {
+    "name": "Дмитро Увін",
+    "photo": "/images/team/Dmitriy.jpg",
+    "role": "Full-Stack Web Developer"
+  },
+  {
+    "name": "Надія Прохорчук",
+    "photo": "/images/team/Nadiia.jpg",
+    "role": "Developer"
+  },
+  {
+    "name": "Ольга Яротська",
+    "photo": "/images/team/Olga.jpg",
+    "role": "QA"
+  },
+  {
+    "name": "Ганна Коваленко",
+    "photo": "/images/team/Hanna.jpg",
+    "role": "QA"
+  },
+  {
+    "name": "Наталія Марченко",
+    "photo": "/images/team/Natalia.jpg",
+    "role": "Developer"
+  },
+  {
+    "name": "Євгеній Морозюк",
+    "photo": "/images/team/Yevhenii.jpg",
+    "role": "Black Humor Lead"
+  },
+  {
+    "name": "Віталій Ярмус",
+    "photo": "/images/team/Vitalii.jpg",
+    "role": "DevOps"
+  }
+]
