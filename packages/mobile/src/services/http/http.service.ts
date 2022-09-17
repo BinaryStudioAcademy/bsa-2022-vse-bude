@@ -127,8 +127,6 @@ class Http {
   }
 
   private async updateAuthorizationToken() {
-    //await this.getAuthorizationToken();
-
     const refreshToken = storage.getItem(StorageKey.REFRESH_TOKEN);
 
     const response = await fetch(
