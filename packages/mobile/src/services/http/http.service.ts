@@ -4,24 +4,30 @@ import {
   HttpMethod,
   HttpError,
   HttpStatusCode,
+  ApiRoutes,
+  AuthApiRoutes,
+  HttpContentType,
+  CredentialsError,
 } from '@vse-bude/shared';
 import { StorageKey } from '~/common/enums/enums';
 import { GetHeadersParams, HttpOptions } from '~/common/types/types';
 import { getQueryString } from '~/helpers/helpers';
-import { store } from '~/store/store';
-import { auth as authActions } from '~/store/actions';
 import { Storage } from '../storage/storage.service';
-import { authApi, storage } from '../services';
+import { storage } from '../services';
 
 type Constructor = {
   storage: Storage;
+  apiPrefix: string;
 };
 
 class Http {
   #storage: Storage;
 
-  constructor({ storage }: Constructor) {
+  #apiPrefix: string;
+
+  constructor({ storage, apiPrefix }: Constructor) {
     this.#storage = storage;
+    this.#apiPrefix = apiPrefix;
   }
 
   load<T = unknown>(
@@ -121,21 +127,33 @@ class Http {
   }
 
   private async updateAuthorizationToken() {
+    //await this.getAuthorizationToken();
+
     const refreshToken = storage.getItem(StorageKey.REFRESH_TOKEN);
 
-    if (refreshToken) {
-      const payload = {
-        tokenValue: refreshToken,
-      };
-      const refreshResponse = await authApi.refreshToken(payload);
+    const response = await fetch(
+      `${this.#apiPrefix}${ApiRoutes.AUTH}${AuthApiRoutes.REFRESH_TOKEN}`,
+      {
+        method: HttpMethod.POST,
+        body: JSON.stringify({ tokenValue: refreshToken }),
+        headers: {
+          [HttpHeader.CONTENT_TYPE]: HttpContentType.APPLICATION_JSON,
+        },
+      },
+    );
 
-      storage.setItem(StorageKey.ACCESS_TOKEN, refreshResponse.accessToken);
-      storage.setItem(StorageKey.REFRESH_TOKEN, refreshResponse.refreshToken);
+    if (!response.ok) {
+      storage.removeItem(StorageKey.ACCESS_TOKEN);
+      storage.removeItem(StorageKey.REFRESH_TOKEN);
 
-      if (!refreshResponse.accessToken) {
-        store.dispatch(authActions.logOut());
-      }
+      throw new CredentialsError();
     }
+
+    const { accessToken, refreshToken: newRefreshToken } =
+      await response.json();
+
+    storage.setItem(StorageKey.ACCESS_TOKEN, accessToken);
+    storage.setItem(StorageKey.REFRESH_TOKEN, newRefreshToken);
   }
 
   private parseJSON<T>(response: Response): Promise<T> {

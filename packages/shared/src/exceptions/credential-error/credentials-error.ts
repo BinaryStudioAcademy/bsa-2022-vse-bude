@@ -1,4 +1,4 @@
-import { ExceptionName } from "../../common/enums";
+import { ExceptionName } from '../../common/enums';
 
 const DEFAULT_MESSAGE = 'Unauthorized user.';
 
