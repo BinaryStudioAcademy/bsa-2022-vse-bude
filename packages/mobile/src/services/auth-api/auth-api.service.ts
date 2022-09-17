@@ -73,18 +73,6 @@ class AuthApi {
       },
     );
   }
-
-  refreshToken(_payload: { tokenValue: string }): Promise<AuthResponse> {
-    return this.#http.load(
-      `${this.#apiPrefix}${ApiRoutes.AUTH}${AuthApiRoutes.REFRESH_TOKEN}`,
-      {
-        method: HttpMethod.POST,
-        contentType: HttpContentType.APPLICATION_JSON,
-        payload: JSON.stringify(_payload),
-        hasAuth: false,
-      },
-    );
-  }
 }
 
 export { AuthApi };
