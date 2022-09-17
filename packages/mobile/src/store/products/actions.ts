@@ -161,6 +161,7 @@ const deleteFromFavorite = createAsyncThunk<
     if (user) {
       const response = await productApi.deleteFromFavorites({ productId });
       await dispatch(fetchFavoriteIds());
+      await dispatch(fetchFavorites({ limit: 10 }));
 
       return response;
     }
@@ -168,6 +169,16 @@ const deleteFromFavorite = createAsyncThunk<
     return { productId };
   },
 );
+
+const fetchGuestFavorites = createAsyncThunk<
+  ProductDto,
+  string,
+  AsyncThunkConfig
+>(ActionType.FETCH_GUEST_FAVORITES, async (productId, { extra }) => {
+  const { productApi } = extra;
+
+  return await productApi.getProductById(productId);
+});
 
 const cleanFavoriteIds = createAction(ActionType.CLEAN_FAVORITES_IDS);
 
@@ -186,4 +197,5 @@ export {
   addToFavorite,
   deleteFromFavorite,
   cleanFavoriteIds,
+  fetchGuestFavorites,
 };

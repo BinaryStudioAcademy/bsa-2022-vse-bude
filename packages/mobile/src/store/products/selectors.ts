@@ -45,6 +45,10 @@ const selectFavorites = (state: RootState) => {
   return state.products.favorites;
 };
 
+const selectGuestFavorites = (state: RootState) => {
+  return state.products.guestFavorites;
+};
+
 const selectProductsDataStatus = (state: RootState) => {
   return state.products.dataStatus;
 };
@@ -59,5 +63,6 @@ export {
   selectPopularLots,
   selectFavoriteIds,
   selectFavorites,
+  selectGuestFavorites,
   selectProductsDataStatus,
 };

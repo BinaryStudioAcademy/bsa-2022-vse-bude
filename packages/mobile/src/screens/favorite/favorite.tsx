@@ -2,35 +2,50 @@ import React, { FC, useEffect, useState } from 'react';
 import { useIsFocused } from '@react-navigation/native';
 import { useAppDispatch, useAppSelector } from '~/hooks/hooks';
 import { favoritesMapper } from '~/helpers/helpers';
-import { selectCurrentUser, selectFavorites } from '~/store/selectors';
-import { products as productsActions } from '~/store/actions';
 import {
-  ScreenWrapper,
-  FlatList,
-  Spinner,
-  Text,
-  View,
-} from '~/components/components';
+  selectCurrentUser,
+  selectFavoriteIds,
+  selectFavorites,
+  selectGuestFavorites,
+} from '~/store/selectors';
+import { products as productsActions } from '~/store/actions';
+import { ScreenWrapper, FlatList, Spinner } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
+import { guestFavoritesMapper } from '~/helpers/favorites/guest-favorites-mapper';
 import { FavoriteCard } from './components/favorite-card';
 
 const Favorite: FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const user = useAppSelector(selectCurrentUser);
   const storedFavorites = useAppSelector(selectFavorites);
+  const favoriteIds = useAppSelector(selectFavoriteIds);
+  const guestFavorites = useAppSelector(selectGuestFavorites);
   const dispatch = useAppDispatch();
   const isFocused = useIsFocused();
 
   useEffect(() => {
-    if (isFocused && user) {
+    if (isFocused) {
       setIsLoading(true);
-      dispatch(productsActions.fetchFavorites({ limit: 10 }))
-        .unwrap()
-        .finally(() => setIsLoading(false));
+      switch (Boolean(user)) {
+        case true:
+          dispatch(productsActions.fetchFavorites({ limit: 10 }))
+            .unwrap()
+            .finally(() => setIsLoading(false));
+          break;
+        case false:
+          favoriteIds.map((id) => {
+            dispatch(productsActions.fetchGuestFavorites(id))
+              .unwrap()
+              .finally(() => setIsLoading(false));
+          });
+          break;
+      }
     }
   }, [dispatch, isFocused]);
 
-  const favorites = favoritesMapper(storedFavorites);
+  const favorites = user
+    ? favoritesMapper(storedFavorites)
+    : guestFavoritesMapper(guestFavorites);
 
   if (isLoading) {
     return (
@@ -42,24 +57,12 @@ const Favorite: FC = () => {
 
   return (
     <ScreenWrapper>
-      {storedFavorites ? (
-        <FlatList
-          data={favorites}
-          contentContainerStyle={[globalStyles.px4, globalStyles.mt3]}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <FavoriteCard product={item} />}
-        />
-      ) : (
-        <View
-          style={[
-            globalStyles.mt7,
-            globalStyles.justifyContentCenter,
-            globalStyles.flex1,
-          ]}
-        >
-          <Text>Your favorites would be place here</Text>
-        </View>
-      )}
+      <FlatList
+        data={favorites}
+        contentContainerStyle={[globalStyles.px4, globalStyles.mt3]}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <FavoriteCard product={item} />}
+      />
     </ScreenWrapper>
   );
 };

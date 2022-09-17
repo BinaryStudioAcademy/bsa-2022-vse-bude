@@ -17,6 +17,7 @@ import {
   addToFavorite,
   deleteFromFavorite,
   cleanFavoriteIds,
+  fetchGuestFavorites,
 } from './actions';
 
 type InitialState = {
@@ -30,6 +31,7 @@ type InitialState = {
   };
   favorites: FavoriteResponseDto[] | [];
   favoriteIds: Array<string>;
+  guestFavorites: ProductDto[];
 };
 
 const initialState: InitialState = {
@@ -43,6 +45,7 @@ const initialState: InitialState = {
   },
   favorites: [],
   favoriteIds: [],
+  guestFavorites: [],
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -147,10 +150,17 @@ const reducer = createReducer(initialState, (builder) => {
         state.favoriteIds = state.favoriteIds.filter(
           (id) => id !== payload.productId,
         );
+        state.guestFavorites = state.guestFavorites.filter(
+          (favorite) => favorite.id !== payload.productId,
+        );
       }
     })
     .addCase(cleanFavoriteIds, (state) => {
       state.favoriteIds = [];
+    })
+    .addCase(fetchGuestFavorites.fulfilled, (state, action) => {
+      state.dataStatus = DataStatus.FULFILLED;
+      state.guestFavorites = [...state.guestFavorites, action.payload];
     })
     .addMatcher(
       isAnyOf(

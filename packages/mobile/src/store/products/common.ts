@@ -13,6 +13,7 @@ enum ActionType {
   ADD_TO_FAVORITE = 'products/add-to-favorite',
   DELETE_FROM_FAVORITE = 'products/delete-from-favorite',
   CLEAN_FAVORITES_IDS = 'products/clean-favorites-ids',
+  FETCH_GUEST_FAVORITES = 'products/fetch-guest-favorites',
 }
 
 export { ActionType };

@@ -44,7 +44,6 @@ const FavoriteCard: FC<Props> = ({ product, contentContainerStyle }) => {
     setIsLoading(true);
     dispatch(products.deleteFromFavorite(id))
       .unwrap()
-      .then(() => dispatch(products.fetchFavorites({ limit: 10 })))
       .finally(() => setIsLoading(false));
   };
 

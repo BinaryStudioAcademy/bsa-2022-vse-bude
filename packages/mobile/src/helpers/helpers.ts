@@ -12,4 +12,4 @@ export {
   updatePersonalInfoParser,
 } from './personal-info-parse/personal-info-parse';
 export { categoryForDropdown } from './category/format-category-for-dropdown';
-export { favoritesMapper } from './favorites-mapper/favorites-mapper';
+export { favoritesMapper, guestFavoritesMapper } from './favorites/favorites';
