@@ -5,6 +5,7 @@ import {
   useCustomTheme,
   useTranslation,
   useAppDispatch,
+  useEffect,
 } from '~/hooks/hooks';
 import { sortByFilterData } from '~/mock/sort-by-filter-data';
 import { filters as filtersApi } from '~/store/actions';
@@ -21,6 +22,10 @@ const SortBySection = () => {
       sortBy: FilterSortBy.CHEAP_TO_EXPANSIVE,
     },
   });
+  useEffect(() => {
+    dispatch(filtersApi.setSortBy(SortBy.PRICE));
+    dispatch(filtersApi.setOrder(Order.ASC));
+  }, []);
 
   const onChange = (value: string) => {
     switch (value) {

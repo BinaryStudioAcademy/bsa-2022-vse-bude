@@ -39,6 +39,8 @@ const selectPermission = (state: RootState) => {
 
 const auctionMakeBidStatus = (state: RootState) => state.products.dataStatus;
 
+const productsDataStatus = (state: RootState) => state.products.dataStatus;
+
 export {
   selectProductById,
   selectProducts,
@@ -48,4 +50,5 @@ export {
   selectPopularProducts,
   selectPopularLots,
   auctionMakeBidStatus,
+  productsDataStatus,
 };

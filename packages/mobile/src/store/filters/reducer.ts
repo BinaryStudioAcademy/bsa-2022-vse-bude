@@ -1,10 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { FilterLotType } from '~/common/enums/enums';
-import {
-  MINIMUM_SLIDER_PRICE,
-  MAXIMUM_SLIDER_PRICE,
-} from '~/common/constants/constants';
-import { SortBy, ProductQuery, Order } from '@vse-bude/shared';
+import { ProductQuery } from '@vse-bude/shared';
 import {
   setLotType,
   setPriceRange,
@@ -14,7 +10,7 @@ import {
 } from './auction';
 
 type InitialState = {
-  type: FilterLotType;
+  type: FilterLotType | undefined;
   categoryId: ProductQuery['categoryId'];
   priceGt: ProductQuery['priceGt'];
   priceLt: ProductQuery['priceLt'];
@@ -23,12 +19,12 @@ type InitialState = {
 };
 
 const initialState: InitialState = {
-  type: FilterLotType.ALL,
+  type: undefined,
   categoryId: undefined,
-  priceGt: MINIMUM_SLIDER_PRICE,
-  priceLt: MAXIMUM_SLIDER_PRICE,
-  sortBy: SortBy.PRICE,
-  order: Order.ASC,
+  priceGt: undefined,
+  priceLt: undefined,
+  sortBy: undefined,
+  order: undefined,
 };
 
 const reducer = createReducer(initialState, (builder) => {
