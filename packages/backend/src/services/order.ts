@@ -2,13 +2,13 @@ import {
   ProductNotFoundError,
   ProductUnavailableError,
   UnauthorizedError,
+  NotVerifiedError,
 } from '@errors';
 import type { ProductRepository, OrderRepository } from '@repositories';
 import type { OrderById, OrderQuery } from '@types';
 import type { CreateOrderDto } from '@vse-bude/shared';
 import { ProductStatus, ProductType } from '@vse-bude/shared';
 import type { Order, Product } from '@prisma/client';
-import { NotVerifiedError } from 'error/user/not-verified';
 import type { VerifyService } from './verify';
 
 export class OrderService {
@@ -66,7 +66,7 @@ export class OrderService {
     throw new UnauthorizedError();
   }
 
-  public async getById(id: string): Promise<Order & OrderById> {
+  public async getById(id: string): Promise<OrderById> {
     return this._orderRepository.getById(id);
   }
 
