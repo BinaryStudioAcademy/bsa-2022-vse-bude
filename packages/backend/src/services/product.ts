@@ -5,6 +5,7 @@ import {
   AuctionEndedError,
   FieldError,
   NotVerifiedError,
+  AlreadyLeftAuctionError,
 } from '@errors';
 import type { Request } from 'express';
 import { getFilenameFromUrl, getUserIdFromRequest, toUtc } from '@helpers';
@@ -150,6 +151,12 @@ export class ProductService {
     }
 
     const lastBid = product.bids[product.bids.length - 1];
+
+    const bidders = await this._bidRepository.getBidders(productId);
+
+    if (!bidders.includes(userId)) {
+      throw new AlreadyLeftAuctionError();
+    }
 
     await this._bidRepository.retrieve(
       userId,
