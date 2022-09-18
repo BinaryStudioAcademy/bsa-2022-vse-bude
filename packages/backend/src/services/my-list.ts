@@ -1,6 +1,5 @@
 import type { MyListRepository, OrderRepository } from '@repositories';
-import type { PrismaPromise } from '@prisma/client';
-import type { Item } from 'common/types/my-list-items';
+import type { Item } from '@types';
 import { ProductStatus } from '@prisma/client';
 import {
   HttpStatusCode,
@@ -47,23 +46,19 @@ export class MyListService {
     return [];
   }
 
-  public getSoldItems({ userId }: { userId: string }): PrismaPromise<Item[]> {
+  public getSoldItems({ userId }: { userId: string }): Promise<Item[]> {
     return this._myListRepository.getSoldItems({ userId });
   }
 
-  public getDraftedItems({
-    userId,
-  }: {
-    userId: string;
-  }): PrismaPromise<Item[]> {
+  public getDraftedItems({ userId }: { userId: string }): Promise<Item[]> {
     return this._myListRepository.getDraftedItems({ userId });
   }
 
-  public getPostedItems({ userId }: { userId: string }): PrismaPromise<Item[]> {
+  public getPostedItems({ userId }: { userId: string }): Promise<Item[]> {
     return this._myListRepository.getPostedItems({ userId });
   }
 
-  public getArchived({ userId }: { userId: string }): PrismaPromise<Item[]> {
+  public getArchived({ userId }: { userId: string }): Promise<Item[]> {
     return this._myListRepository.getArchived({ userId });
   }
 

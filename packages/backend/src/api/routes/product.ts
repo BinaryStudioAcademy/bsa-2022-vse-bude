@@ -1,9 +1,8 @@
 import type { ApiRoutes, ProductQuery } from '@vse-bude/shared';
 import type { Request } from 'express';
 import { Router } from 'express';
-import { wrap } from '@helpers';
+import { wrap, apiPath } from '@helpers';
 import type { Services } from '@services';
-import { apiPath } from '@helpers';
 import { ProductApiRoutes } from '@vse-bude/shared';
 import { authMiddleware } from '@middlewares';
 import multer from 'multer';
@@ -139,7 +138,11 @@ export const initProductRoutes = (
    */
   router.get(
     apiPath(path, ProductApiRoutes.SEARCH),
-    wrap((req) => productService.search(req.query)),
+    wrap((req) => {
+      const { query } = req;
+
+      return productService.search({ q: query.q as string });
+    }),
   );
 
   /**

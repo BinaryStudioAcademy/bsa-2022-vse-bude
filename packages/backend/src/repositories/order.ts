@@ -1,17 +1,10 @@
-import type {
-  PrismaClient,
-  Product,
-  Order,
-  Prisma,
-  PrismaPromise,
-} from '@prisma/client';
+import type { PrismaClient, Order, PrismaPromise } from '@prisma/client';
 import {
   type CreateOrderDto,
   OrderStatus,
   Order as DateOrder,
 } from '@vse-bude/shared';
-import type { PurchasedItem } from 'common/types/my-list-items';
-import type { OrderById, OrderQuery } from '@types';
+import type { OrderById, OrderQuery, PurchasedItem } from '@types';
 
 export class OrderRepository {
   private _dbClient: PrismaClient;
@@ -67,18 +60,7 @@ export class OrderRepository {
     });
   }
 
-  public getById(id: string): Prisma.Prisma__OrderClient<
-    Order & {
-      product: Product;
-      buyer: {
-        id: string;
-        email: string;
-        firstName: string;
-        lastName: string;
-        phone: string;
-      };
-    }
-  > {
+  public getById(id: string): Promise<OrderById> {
     return this._dbClient.order.findUnique({
       where: { id },
       include: {
