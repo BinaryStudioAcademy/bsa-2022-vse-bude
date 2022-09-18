@@ -1,9 +1,8 @@
 import type { ApiRoutes } from '@vse-bude/shared';
 import type { Request } from 'express';
 import { Router } from 'express';
-import { wrap } from '@helpers';
+import { wrap, apiPath } from '@helpers';
 import type { Services } from '@services';
-import { apiPath } from '@helpers';
 
 export const initNewsRoutes = (
   { newsService }: Services,

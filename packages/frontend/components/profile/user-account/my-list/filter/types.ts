@@ -1,6 +1,5 @@
 export type FilterButtonProps = {
   name: string;
-  type: 'type';
   text: string;
   onClick(): void;
 };

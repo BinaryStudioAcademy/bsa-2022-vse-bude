@@ -1,6 +1,5 @@
 import type { PrismaClient, User } from '@prisma/client';
-import type { CreateUser } from '@types';
-import type { GetUserVerifiedDto } from 'common/types/services';
+import type { CreateUser, GetUserVerifiedDto } from '@types';
 
 export class UserRepository {
   private _dbClient: PrismaClient;

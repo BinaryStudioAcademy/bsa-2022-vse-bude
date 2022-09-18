@@ -67,6 +67,10 @@ export const editDate = ({
   color: ${colors.textLight};
 `;
 
+export const archiveButtonWrapper = css`
+  position: relative;
+`;
+
 export const publishButtonWrapper = ({ spaces }: Theme) => css`
   margin-right: ${spaces.sm};
 `;

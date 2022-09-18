@@ -21,10 +21,14 @@ export const header = ({ spaces, mq }: Theme) => css`
   }
 `;
 
-export const breadcrumbsContainer = ({ mq }: Theme) => css`
+export const breadcrumbsContainer = ({ mq, maxMq }: Theme) => css`
+  display: none;
   padding: 0;
   ${mq[1]} {
     padding: 0;
+  }
+  ${maxMq[3]} {
+    display: block;
   }
 `;
 

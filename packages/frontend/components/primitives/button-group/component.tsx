@@ -15,7 +15,7 @@ export const ButtonGroup = ({
         key={button.name}
         data-selected={active === button.name ? 'selected' : 'default'}
         onClick={() => {
-          setActive(button.name);
+          setActive ? setActive(button.name) : null;
           button.onClick();
         }}
         {...props}
