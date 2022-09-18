@@ -25,9 +25,11 @@ type Props<T extends FormControlValues> = {
   errors: FormControlErrors<T>;
   placeholder?: string;
   contentContainerStyle?: StyleProp<ViewStyle>;
+  inputStyle?: StyleProp<ViewStyle>;
   isSecure?: boolean;
   editable?: boolean;
   textInputProps?: TextInputProps;
+  immutableValue?: string;
 };
 
 const Input = <T extends FormControlValues>({
@@ -37,9 +39,11 @@ const Input = <T extends FormControlValues>({
   errors,
   placeholder,
   contentContainerStyle,
+  inputStyle,
   isSecure,
   editable,
   textInputProps,
+  immutableValue,
 }: Props<T>): ReactElement => {
   const { field } = useFormControl({ name, control });
   const { colors } = useCustomTheme();
@@ -83,9 +87,24 @@ const Input = <T extends FormControlValues>({
               borderColor: error ? colors.error : colors.backgroundElements,
             },
             globalStyles.fs14,
+            inputStyle,
           ]}
           {...textInputProps}
         />
+        {immutableValue && (
+          <Text
+            style={[
+              styles.immutableValue,
+              globalStyles.fs14,
+              {
+                color: colors.text,
+                backgroundColor: colors.backgroundElements,
+              },
+            ]}
+          >
+            {immutableValue}
+          </Text>
+        )}
         {isSecure && (
           <Pressable style={styles.eyeIconWrapper} onPress={onSecureChange}>
             {secured ? <EyeOffIcon size={22} /> : <EyeIcon size={22} />}
