@@ -1,6 +1,6 @@
 import type { CategoryRepository } from '@repositories';
 import type { CategoryResponseDto } from '@vse-bude/shared';
-import { lang } from '../lang';
+import { lang } from '@lang';
 
 export class CategoryService {
   private _categoryRepository: CategoryRepository;

@@ -1,12 +1,15 @@
 import type { BidRepository, ProductRepository } from '@repositories';
 import type { CreateBidDto } from '@types';
-import { AuctionEndedError, ProductNotFoundError } from '@errors';
+import {
+  AuctionEndedError,
+  ProductNotFoundError,
+  LowBidPriceError,
+} from '@errors';
 import { toUtc } from '@helpers';
 import { UPDATE_PRODUCT_PRICE, NotificationType } from '@vse-bude/shared';
 import type { Bid } from '@prisma/client';
 import { lang } from '@lang';
 import type { NotificationService } from '@services';
-import { LowBidPriceError } from '../error/product/low-bid-price-error';
 import { eventListener } from '../events';
 
 export class BidService {

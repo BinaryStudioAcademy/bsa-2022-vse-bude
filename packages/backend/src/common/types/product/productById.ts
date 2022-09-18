@@ -3,6 +3,8 @@ import type {
   Prisma,
   ProductStatus,
   ProductType,
+  SocialMedia,
+  Bid,
 } from '@prisma/client';
 
 export type ProductById = {
@@ -23,11 +25,26 @@ export type ProductById = {
   postDate: Date | null;
   cancelReason: string | null;
   authorId: string;
+  author?: Author;
   categoryId: string | null;
+  category?: {
+    id: string;
+    title: string;
+  };
   winnerId: string | null;
   views: number;
+  bids?: Bid[];
   createdAt: Date;
   updatedAt: Date;
   participantsNotified: boolean;
-  currentPrice: number;
+  currentPrice?: number;
+};
+
+type Author = {
+  id: string;
+  phone: string;
+  socialMedia: SocialMedia[];
+  firstName: string;
+  lastName: string;
+  avatar: string;
 };
