@@ -10,7 +10,7 @@ export const button = ({
   radiuses,
   heights,
   spaces,
-  maxMq
+  maxMq,
 }: Theme) => css`
   ${resetButton};
   display: flex;
