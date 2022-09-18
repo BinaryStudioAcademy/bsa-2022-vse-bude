@@ -5,10 +5,10 @@ import { Flex } from 'grapefruit-ui';
 import dynamic from 'next/dynamic';
 import { Button, Avatar } from '@primitives';
 import { fetchFullUserProfile, setIsEditing, resetIsEditing } from '@store';
+import { useEffect } from 'react';
 import { NestedLayout } from '../common';
 import * as styles from './styles';
 import { ProfileData } from './primitives';
-import { useEffect } from 'react';
 
 const EditForm = dynamic(() => import('./edit-form'));
 const ChangeAvatar = dynamic(() => import('./change-avatar'));
@@ -23,9 +23,9 @@ export const PersonalInfo = () => {
     shallowEqual,
   );
 
-  useEffect(()=> {
+  useEffect(() => {
     dispatch(resetIsEditing());
-  },[dispatch]);
+  }, [dispatch]);
 
   const onGetFullProfile = () => dispatch(fetchFullUserProfile());
 
