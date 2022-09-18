@@ -19,7 +19,7 @@ type InitialState = {
 };
 
 const initialState: InitialState = {
-  type: undefined,
+  type: FilterLotType.ALL,
   categoryId: undefined,
   priceGt: undefined,
   priceLt: undefined,

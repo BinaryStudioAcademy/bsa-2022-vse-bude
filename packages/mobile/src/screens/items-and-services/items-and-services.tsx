@@ -38,7 +38,7 @@ const ItemsAndServices = () => {
         removeObjectFalsyFields<RootState['filters'], ProductQuery>(filters),
       ),
     );
-  }, []);
+  }, [filters]);
   const isLoading = dataStatus === DataStatus.PENDING;
 
   return (

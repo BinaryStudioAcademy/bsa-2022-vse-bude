@@ -12,6 +12,7 @@ import {
   categories as categoriesApi,
   filters as filtersApi,
 } from '~/store/actions';
+import { RootState } from '~/common/types/types';
 import { SectionTitle } from '../components';
 
 const CategorySection = () => {
@@ -22,17 +23,14 @@ const CategorySection = () => {
   useEffect(() => {
     dispatch(categoriesApi.loadAllCategories());
   }, []);
-  const onFilterSelect = (id: string) => {
+  const onFilterSelect = (id: RootState['filters']['categoryId']) => {
     dispatch(filtersApi.setCategory(id));
   };
-  const isLoading = categories.length < 1;
 
   return (
     <View>
       <SectionTitle title={t('filter.CATEGORY')} style={globalStyles.mt5} />
-      {isLoading ? (
-        <Spinner />
-      ) : (
+      {categories ? (
         <View style={globalStyles.mt5}>
           {categories.map((item) => {
             const { title, id } = item;
@@ -49,6 +47,8 @@ const CategorySection = () => {
             );
           })}
         </View>
+      ) : (
+        <Spinner />
       )}
     </View>
   );
