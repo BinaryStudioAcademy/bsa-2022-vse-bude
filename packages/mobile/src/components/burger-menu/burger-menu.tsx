@@ -3,11 +3,11 @@ import { View, TouchableOpacity } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 
-type Props = {
-  onPress: () => void;
-};
+const BurgerMenu: FC = () => {
+  const onPress = () => {
+    // TODO
+  };
 
-const BurgerMenu: FC<Props> = ({ onPress }) => {
   return (
     <TouchableOpacity
       style={[styles.wrapper, globalStyles.justifyContentSpaceBetween]}
