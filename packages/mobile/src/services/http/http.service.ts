@@ -1,5 +1,10 @@
 import i18next from 'i18next';
-import { HttpHeader, HttpMethod, HttpError } from '@vse-bude/shared';
+import {
+  HttpHeader,
+  HttpMethod,
+  HttpError,
+  HttpAcceptLanguage,
+} from '@vse-bude/shared';
 import { StorageKey } from '~/common/enums/enums';
 import { GetHeadersParams, HttpOptions } from '~/common/types/types';
 import { getQueryString } from '~/helpers/helpers';
@@ -26,13 +31,11 @@ class Http {
       contentType,
       hasAuth = true,
       params,
-      locale,
     } = options;
 
     const headers = this.getHeaders({
       contentType,
       hasAuth,
-      locale,
     });
 
     return fetch(this.getUrl(url, params), {
@@ -52,16 +55,14 @@ class Http {
   private getHeaders({
     contentType,
     hasAuth,
-    locale,
   }: GetHeadersParams): Headers {
     const headers = new Headers();
 
+    const locale = <HttpAcceptLanguage>i18next.resolvedLanguage;
+    headers.append(HttpHeader.ACCEPT_LANGUAGE, locale);
+
     if (contentType) {
       headers.append(HttpHeader.CONTENT_TYPE, contentType);
-    }
-
-    if (locale) {
-      headers.append(HttpHeader.ACCEPT_LANGUAGE, locale);
     }
 
     if (hasAuth) {
