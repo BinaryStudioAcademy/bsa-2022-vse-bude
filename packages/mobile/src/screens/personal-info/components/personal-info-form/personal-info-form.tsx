@@ -106,7 +106,7 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
   };
 
   const handleVerifyEmailPress = () => {
-    navigation.navigate(RootScreenName.VERIFY_CODE_EMAIL);
+    navigation.navigate(RootScreenName.VERIFY_EMAIL);
   };
 
   return (
