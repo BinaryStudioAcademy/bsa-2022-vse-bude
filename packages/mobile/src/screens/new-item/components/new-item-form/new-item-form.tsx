@@ -62,7 +62,7 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
       price: 0,
       country: personalInfo.userAddress?.country || '',
       city: personalInfo.userAddress?.city || '',
-      phone: personalInfo.phone || '',
+      phone: personalInfo.phone?.slice(4) || '',
     },
     validationSchema: productsPostSchema,
   });
@@ -216,13 +216,14 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
       />
       <Input
         label={t('verification.PHONE_NUMBER')}
-        placeholder="+380"
+        immutableValue="+380"
         name="phone"
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
         isPopover={true}
         popoverText={t('make_a_post.PHONE_POPOVER')}
+        inputStyle={{ paddingLeft: 46 }}
       />
       <ButtonsContainer>
         <View style={styles.buttonContainer}>

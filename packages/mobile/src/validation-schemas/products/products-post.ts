@@ -1,7 +1,7 @@
 import * as Joi from 'joi';
 import i18next from 'i18next';
 import { IPostForms, PLACE } from '@vse-bude/shared';
-import { PHONE_NUMBER_REGEX } from '~/common/regexp/regexp';
+import { SHORT_PHONE_NUMBER_REGEX } from '~/common/regexp/regexp';
 import {
   MAX_COUNTRY_LENGTH,
   MAX_CITY_LENGTH,
@@ -43,7 +43,7 @@ const productsPostSchema = Joi.object<IPostForms>({
   phone: Joi.string()
     .trim()
     .empty('')
-    .pattern(PHONE_NUMBER_REGEX)
+    .pattern(SHORT_PHONE_NUMBER_REGEX)
     .messages({
       'string.pattern.base': i18next.t('errors.WRONG_FORMAT_PHONE'),
     }),

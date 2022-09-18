@@ -49,6 +49,12 @@ const makeAuctionParser: MakeAuctionParser = ({ data, images, status }) => {
       return;
     }
 
+    if (key === 'phone') {
+      formData.append('phone', data[key] ? `+380${data[key]}` : '');
+
+      return;
+    }
+
     formData.append(key, data[key as keyof ICreateAuction] || '');
   });
 
@@ -74,6 +80,12 @@ const makePostParser: MakePostParser = ({ data, images, status }) => {
   formData.append('status', status);
 
   Object.keys(data).forEach((key) => {
+    if (key === 'phone') {
+      formData.append('phone', data[key] ? `+380${data[key]}` : '');
+
+      return;
+    }
+
     formData.append(key, data[key as keyof ICreatePost] || '');
   });
 

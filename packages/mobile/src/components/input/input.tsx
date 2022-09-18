@@ -37,6 +37,7 @@ type Props<T extends FormControlValues> = {
   numberOfLines?: number;
   isPopover?: boolean;
   popoverText?: string;
+  immutableValue?: string;
 };
 
 const Input = <T extends FormControlValues>({
@@ -55,6 +56,7 @@ const Input = <T extends FormControlValues>({
   numberOfLines = 1,
   isPopover,
   popoverText,
+  immutableValue,
 }: Props<T>): ReactElement => {
   const { field } = useFormControl({ name, control });
   const { colors } = useCustomTheme();
@@ -141,6 +143,20 @@ const Input = <T extends FormControlValues>({
           ]}
           {...textInputProps}
         />
+        {immutableValue && (
+          <Text
+            style={[
+              styles.immutableValue,
+              globalStyles.fs14,
+              {
+                color: colors.text,
+                backgroundColor: colors.backgroundElements,
+              },
+            ]}
+          >
+            {immutableValue}
+          </Text>
+        )}
         {isSecure && (
           <Pressable style={styles.eyeIconWrapper} onPress={onSecureChange}>
             {secured ? <EyeOffIcon size={22} /> : <EyeIcon size={22} />}
