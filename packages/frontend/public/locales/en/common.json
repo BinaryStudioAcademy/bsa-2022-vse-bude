@@ -194,15 +194,7 @@
     "November",
     "December"
   ],
-  "days": [
-    "Su",
-    "Mo",
-    "Tu",
-    "We",
-    "Th",
-    "Fr",
-    "Sa"
-  ],
+  "days": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
   "modal": {
     "confirm": {
       "confirm": "Confirm",

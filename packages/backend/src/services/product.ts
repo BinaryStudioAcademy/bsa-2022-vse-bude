@@ -3,6 +3,9 @@ import {
   ProductNotFoundError,
   UnauthorizedError,
   AuctionEndedError,
+  FieldError,
+  NotVerifiedError,
+  AlreadyLeftAuctionError,
 } from '@errors';
 import type { Request } from 'express';
 import { getFilenameFromUrl, getUserIdFromRequest, toUtc } from '@helpers';
@@ -24,15 +27,12 @@ import type {
   AuctionScheduler,
   VerifyService,
   S3StorageService,
+  NotificationService,
 } from '@services';
 import { productMapper, auctionPermissionsMapper } from '@mappers';
-import { FieldError } from 'error/product/field-error';
 import { createPostSchema, updatePostSchema } from 'validation/product/schemas';
-import { NotVerifiedError } from 'error/user/not-verified';
 import { lang } from '@lang';
-import type { AllProductsResponse } from '@types';
-import type { ProductById } from 'common/types/product';
-import type { NotificationService } from '@services';
+import type { AllProductsResponse, ProductById } from '@types';
 
 export class ProductService {
   private _productRepository: ProductRepository;
@@ -140,7 +140,7 @@ export class ProductService {
   public async leaveAuction(
     userId: string,
     productId: string,
-  ): Promise<object> {
+  ): Promise<ProductById> {
     const product = await this._productRepository.getById(productId);
     if (!product) {
       throw new ProductNotFoundError();
@@ -151,6 +151,12 @@ export class ProductService {
     }
 
     const lastBid = product.bids[product.bids.length - 1];
+
+    const bidders = await this._bidRepository.getBidders(productId);
+
+    if (!bidders.includes(userId)) {
+      throw new AlreadyLeftAuctionError();
+    }
 
     await this._bidRepository.retrieve(
       userId,
@@ -207,7 +213,7 @@ export class ProductService {
     req,
     userId,
     fieldsData,
-  }: CreateProduct): Promise<Product> {
+  }: CreateProduct): Promise<ProductById> {
     const { error } = createPostSchema.validate(req.body);
     if (error) {
       throw new FieldError(error.message);
@@ -247,7 +253,7 @@ export class ProductService {
     productId,
     userId,
     fieldsData,
-  }: UpdateProduct): Promise<Product> {
+  }: UpdateProduct): Promise<ProductById> {
     fieldsData.images = fieldsData.images
       ? [].concat(fieldsData.images)
       : undefined;

@@ -10,6 +10,7 @@ import { seedUserSettings } from './controllers/create/userSettings';
 import { seedChatMember } from './controllers/create/chatMember';
 import { seedMessage } from './controllers/create/message';
 import { seedNews } from './controllers/create/news';
+import { seedOrders } from './controllers/create/orders';
 
 export const createData = async (prismaClient: PrismaClient): Promise<void> => {
   await seedUsers(prismaClient);
@@ -32,4 +33,5 @@ export const createData = async (prismaClient: PrismaClient): Promise<void> => {
   await seedChatMember(prismaClient, existingUsers, existingChats);
   await seedMessage(prismaClient, existingUsers, existingChats);
   await seedNews(prismaClient);
+  await seedOrders(prismaClient, existingUsers, existingProducts);
 };

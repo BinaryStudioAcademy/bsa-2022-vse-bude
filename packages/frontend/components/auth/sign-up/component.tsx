@@ -6,8 +6,9 @@ import { useTranslation } from 'next-i18next';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useAppDispatch, useTypedSelector } from '@hooks';
 import { signUpSchema } from 'validation-schemas/user/sign-up';
+import { useEffect } from 'react';
 import { form, headline, inputWrapper } from '../layout/styles';
-import { signUpUser } from '../../../store/auth';
+import { clearAuthError, signUpUser } from '../../../store/auth';
 
 export const SignUpForm = () => {
   const { t } = useTranslation();
@@ -43,6 +44,13 @@ export const SignUpForm = () => {
 
     return false;
   };
+
+  useEffect(
+    () => () => {
+      dispatch(clearAuthError());
+    },
+    [dispatch],
+  );
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} css={form}>

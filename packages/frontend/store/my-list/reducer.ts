@@ -98,6 +98,10 @@ const myListSlice = createSlice({
       });
     },
 
+    setDefaultBadges: (state, action: PayloadAction<Badges[]>) => {
+      state.badges = action.payload;
+    },
+
     resetBadges: (state, action: PayloadAction<Badges>) => {
       if (action.payload.type === 'status') {
         for (const key in state.filterStatus) {
@@ -211,6 +215,7 @@ export const {
   filterByType,
   filterByStatus,
   resetStatuses,
+  setDefaultBadges,
   resetBadges,
   setVisabilityCancelModal,
   setItemId,

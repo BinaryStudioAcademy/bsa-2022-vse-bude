@@ -16,10 +16,7 @@ import { getEnv, logger } from '@helpers';
 import { ProductStatus } from '@prisma/client';
 import type { OrderRepository, ProductRepository } from '@repositories';
 import { UnauthorizedError } from '@errors';
-import {
-  TransactionResponseStatus,
-  TransactionStatus,
-} from 'common/enums/services/payment';
+import { TransactionResponseStatus, TransactionStatus } from '@enums';
 import crypto from 'crypto';
 
 export class PaymentService {

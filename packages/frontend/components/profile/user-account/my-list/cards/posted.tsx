@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { IconButton } from '@primitives';
 import { IconColor, IconName } from '@enums';
 import { useTranslation } from 'next-i18next';
@@ -13,11 +14,13 @@ import {
   ItemDescription,
   ItemDate,
   Views,
+  Tooltip,
 } from '../primitives';
 import type { CardProps } from './types';
 import * as styles from './styles';
 
 export const Posted = ({ data }: CardProps) => {
+  const [showTooltip, setShowTooltip] = useState(false);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { id, title, imageLinks, price, description, views, postDate } = data;
@@ -61,15 +64,21 @@ export const Posted = ({ data }: CardProps) => {
               cssExtend={styles.iconButton}
               onClick={onEditClick}
             />
-
-            <IconButton
-              ariaLabel="cancel"
-              backgroundColor="darkgray"
-              color={IconColor.ORANGE}
-              icon={IconName.XMARK}
-              size="sm"
-              onClick={onOpenCancelModal}
-            />
+            <div css={styles.archiveButtonWrapper}>
+              {showTooltip ? (
+                <Tooltip>{t('my-list:card.tooltip-xmark')}</Tooltip>
+              ) : null}
+              <IconButton
+                ariaLabel="cancel"
+                backgroundColor="darkgray"
+                color={IconColor.ORANGE}
+                icon={IconName.XMARK}
+                size="sm"
+                onClick={onOpenCancelModal}
+                onMouseEnter={() => setShowTooltip(true)}
+                onMouseLeave={() => setShowTooltip(false)}
+              />
+            </div>
           </div>
         </div>
       </div>

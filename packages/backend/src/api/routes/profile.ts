@@ -2,8 +2,7 @@ import type { Services } from '@services';
 import { type Request, Router } from 'express';
 import type { ApiRoutes } from '@vse-bude/shared';
 import { ProfileApiRoutes, AccountApiRoutes } from '@vse-bude/shared';
-import { wrap } from '@helpers';
-import { apiPath } from '@helpers';
+import { wrap, apiPath } from '@helpers';
 import { authMiddleware, uploadImage } from '@middlewares';
 import { profileValidation } from '@validation';
 import type { UploadFileRequest } from '@types';
@@ -269,7 +268,7 @@ export const initProfileRoutes = (
     authMiddleware,
     wrap(async (req: Request) => {
       const { userId } = req;
-      const { itemId, cancelReason, endDate } = req.body;
+      const { itemId, endDate } = req.body;
       await profileService.getUser({
         userId,
       });
@@ -277,7 +276,6 @@ export const initProfileRoutes = (
 
       return await myListService.addItemToArchive({
         itemId,
-        cancelReason,
         endDate,
       });
     }),
