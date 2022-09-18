@@ -1,4 +1,4 @@
-import { ApiRoutes, CategoryDto, HttpAcceptLanguage } from '@vse-bude/shared';
+import { ApiRoutes, CategoryDto } from '@vse-bude/shared';
 
 import { Http } from '~/services/http/http.service';
 
@@ -17,10 +17,8 @@ class CategoryService {
     this.#apiPrefix = apiPrefix;
   }
 
-  getAllCategories(currentLang: HttpAcceptLanguage): Promise<CategoryDto[]> {
-    return this.#http.load(`${this.#apiPrefix}${ApiRoutes.CATEGORIES}`, {
-      locale: currentLang,
-    });
+  getAllCategories(): Promise<CategoryDto[]> {
+    return this.#http.load(`${this.#apiPrefix}${ApiRoutes.CATEGORIES}`);
   }
 }
 

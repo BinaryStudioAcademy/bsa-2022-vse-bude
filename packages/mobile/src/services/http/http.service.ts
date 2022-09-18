@@ -52,10 +52,7 @@ class Http {
     return `${url}${params ? `${getQueryString(params)}` : ''}`;
   }
 
-  private getHeaders({
-    contentType,
-    hasAuth,
-  }: GetHeadersParams): Headers {
+  private getHeaders({ contentType, hasAuth }: GetHeadersParams): Headers {
     const headers = new Headers();
 
     const locale = <HttpAcceptLanguage>i18next.resolvedLanguage;
