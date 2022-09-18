@@ -1,11 +1,11 @@
-import type { MyListRepository } from '@repositories';
+import type { MyListRepository, OrderRepository } from '@repositories';
 import type { PrismaPromise } from '@prisma/client';
-import type { Items } from 'common/types/items';
-import type { SoldItems } from 'common/types/items/getItems';
+import type { Item } from 'common/types/my-list-items';
 import { ProductStatus } from '@prisma/client';
 import {
   HttpStatusCode,
   UserPersonalInfoValidationMessage,
+  ProductStatus as ItemStatus,
 } from '@vse-bude/shared';
 import { ProfileError } from '@errors';
 import { lang } from '@lang';
@@ -13,31 +13,57 @@ import { lang } from '@lang';
 export class MyListService {
   private _myListRepository: MyListRepository;
 
-  constructor({ myListRepository }: { myListRepository: MyListRepository }) {
+  private _orderRepository: OrderRepository;
+
+  constructor({
+    myListRepository,
+    orderRepository,
+  }: {
+    myListRepository: MyListRepository;
+    orderRepository: OrderRepository;
+  }) {
     this._myListRepository = myListRepository;
+    this._orderRepository = orderRepository;
   }
 
-  public getPurchasedItems({ userId }: { userId: string }): Promise<object[]> {
-    return this._myListRepository.getPurchasedItems({ userId });
-  }
-
-  public getSoldItems({
+  public async getPurchasedItems({
     userId,
   }: {
     userId: string;
-  }): PrismaPromise<SoldItems[]> {
+  }): Promise<Item[]> {
+    const items = await this._orderRepository.getPurchasedItems({ userId });
+    if (items.length) {
+      return items.map((item) => {
+        const { product, updatedAt } = item;
+
+        return {
+          ...product,
+          status: ItemStatus.PURCHASED,
+          endDate: updatedAt,
+        };
+      });
+    }
+
+    return [];
+  }
+
+  public getSoldItems({ userId }: { userId: string }): PrismaPromise<Item[]> {
     return this._myListRepository.getSoldItems({ userId });
   }
 
-  public getDraftedItems({ userId }: { userId: string }): Promise<Items[]> {
+  public getDraftedItems({
+    userId,
+  }: {
+    userId: string;
+  }): PrismaPromise<Item[]> {
     return this._myListRepository.getDraftedItems({ userId });
   }
 
-  public getPostedItems({ userId }: { userId: string }): Promise<Items[]> {
+  public getPostedItems({ userId }: { userId: string }): PrismaPromise<Item[]> {
     return this._myListRepository.getPostedItems({ userId });
   }
 
-  public getArchived({ userId }: { userId: string }): Promise<Items[]> {
+  public getArchived({ userId }: { userId: string }): PrismaPromise<Item[]> {
     return this._myListRepository.getArchived({ userId });
   }
 
@@ -47,7 +73,7 @@ export class MyListService {
   }: {
     itemId: string;
     postDate: string;
-  }): Promise<Items> {
+  }): Promise<Item> {
     const item = await this._myListRepository.checkWithStatus({
       itemId,
       status: ProductStatus.ACTIVE,
@@ -64,13 +90,11 @@ export class MyListService {
 
   public async addItemToArchive({
     itemId,
-    cancelReason,
     endDate,
   }: {
     itemId: string;
-    cancelReason: string | null;
     endDate: string;
-  }): Promise<Items> {
+  }): Promise<Item> {
     const item = await this._myListRepository.checkWithStatus({
       itemId,
       status: ProductStatus.CANCELLED,
@@ -84,7 +108,6 @@ export class MyListService {
 
     return this._myListRepository.addItemToArchive({
       itemId,
-      cancelReason,
       endDate,
     });
   }

@@ -1,5 +1,16 @@
-import type { PrismaClient, Product, Order, Prisma } from '@prisma/client';
-import { type CreateOrderDto, OrderStatus } from '@vse-bude/shared';
+import type {
+  PrismaClient,
+  Product,
+  Order,
+  Prisma,
+  PrismaPromise,
+} from '@prisma/client';
+import {
+  type CreateOrderDto,
+  OrderStatus,
+  Order as DateOrder,
+} from '@vse-bude/shared';
+import type { PurchasedItem } from 'common/types/my-list-items';
 import type { OrderById, OrderQuery } from '@types';
 
 export class OrderRepository {
@@ -14,6 +25,44 @@ export class OrderRepository {
       where: {
         buyerId,
         productId,
+      },
+    });
+  }
+
+  public getPurchasedItems({
+    userId,
+  }: {
+    userId: string;
+  }): PrismaPromise<PurchasedItem[]> {
+    return this._dbClient.order.findMany({
+      where: {
+        buyerId: userId,
+        status: OrderStatus.PAID,
+      },
+      select: {
+        product: {
+          select: {
+            id: true,
+            title: true,
+            imageLinks: true,
+            price: true,
+            type: true,
+            status: true,
+            winnerId: true,
+            author: {
+              select: {
+                id: true,
+                avatar: true,
+                firstName: true,
+                lastName: true,
+              },
+            },
+          },
+        },
+        updatedAt: true,
+      },
+      orderBy: {
+        updatedAt: DateOrder.DESC,
       },
     });
   }

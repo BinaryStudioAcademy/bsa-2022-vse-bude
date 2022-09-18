@@ -1,13 +1,16 @@
-import type { PrismaClient, PrismaPromise } from '@prisma/client';
+import type { Prisma, PrismaClient, PrismaPromise } from '@prisma/client';
 import { ProductStatus } from '@prisma/client';
 import { Order } from '@vse-bude/shared';
-import type { Items } from 'common/types/items';
-import type { SoldItems } from 'common/types/items/getItems';
+import type { Item } from 'common/types/my-list-items';
 
 export class MyListRepository {
   private _dbClient: PrismaClient;
 
-  private _deleteBids({ itemId }: { itemId: string }): Promise<object> {
+  private _deleteBids({
+    itemId,
+  }: {
+    itemId: string;
+  }): PrismaPromise<Prisma.BatchPayload> {
     return this._dbClient.bid.deleteMany({
       where: {
         productId: itemId,
@@ -19,45 +22,11 @@ export class MyListRepository {
     this._dbClient = prismaClient;
   }
 
-  public getPurchasedItems({ userId }: { userId: string }): Promise<object[]> {
-    return this._dbClient.product.findMany({
-      where: {
-        winnerId: userId,
-        status: ProductStatus.FINISHED,
-      },
-      select: {
-        id: true,
-        title: true,
-        imageLinks: true,
-        price: true,
-        type: true,
-        status: true,
-        winnerId: true,
-        author: {
-          select: {
-            id: true,
-            avatar: true,
-            firstName: true,
-            lastName: true,
-          },
-        },
-        endDate: true,
-      },
-      orderBy: {
-        endDate: Order.DESC,
-      },
-    });
-  }
-
-  public getSoldItems({
-    userId,
-  }: {
-    userId: string;
-  }): PrismaPromise<SoldItems[]> {
+  public getSoldItems({ userId }: { userId: string }): PrismaPromise<Item[]> {
     return this._dbClient.product.findMany({
       where: {
         authorId: userId,
-        status: ProductStatus.FINISHED,
+        status: ProductStatus.SOLD,
       },
       select: {
         id: true,
@@ -83,11 +52,7 @@ export class MyListRepository {
     });
   }
 
-  public getPostedItems({
-    userId,
-  }: {
-    userId: string;
-  }): PrismaPromise<Items[]> {
+  public getPostedItems({ userId }: { userId: string }): PrismaPromise<Item[]> {
     return this._dbClient.product.findMany({
       where: {
         authorId: userId,
@@ -98,27 +63,9 @@ export class MyListRepository {
         title: true,
         description: true,
         price: true,
-        recommendedPrice: true,
-        minimalBid: true,
         imageLinks: true,
-        country: true,
-        city: true,
-        phone: true,
-        socialMedia: {
-          select: {
-            id: true,
-            socialMedia: true,
-            link: true,
-          },
-        },
         type: true,
         status: true,
-        category: {
-          select: {
-            id: true,
-            title: true,
-          },
-        },
         views: true,
         postDate: true,
       },
@@ -128,7 +75,11 @@ export class MyListRepository {
     });
   }
 
-  public getDraftedItems({ userId }: { userId: string }): Promise<Items[]> {
+  public getDraftedItems({
+    userId,
+  }: {
+    userId: string;
+  }): PrismaPromise<Item[]> {
     return this._dbClient.product.findMany({
       where: {
         authorId: userId,
@@ -139,27 +90,9 @@ export class MyListRepository {
         title: true,
         description: true,
         price: true,
-        recommendedPrice: true,
-        minimalBid: true,
         imageLinks: true,
-        country: true,
-        city: true,
-        phone: true,
-        socialMedia: {
-          select: {
-            id: true,
-            socialMedia: true,
-            link: true,
-          },
-        },
         type: true,
         status: true,
-        category: {
-          select: {
-            id: true,
-            title: true,
-          },
-        },
         updatedAt: true,
       },
       orderBy: {
@@ -168,7 +101,7 @@ export class MyListRepository {
     });
   }
 
-  public getArchived({ userId }: { userId: string }): Promise<Items[]> {
+  public getArchived({ userId }: { userId: string }): PrismaPromise<Item[]> {
     return this._dbClient.product.findMany({
       where: {
         authorId: userId,
@@ -179,27 +112,9 @@ export class MyListRepository {
         title: true,
         description: true,
         price: true,
-        recommendedPrice: true,
-        minimalBid: true,
         imageLinks: true,
-        country: true,
-        city: true,
-        phone: true,
-        socialMedia: {
-          select: {
-            id: true,
-            socialMedia: true,
-            link: true,
-          },
-        },
         type: true,
         status: true,
-        category: {
-          select: {
-            id: true,
-            title: true,
-          },
-        },
         views: true,
         endDate: true,
       },
@@ -215,7 +130,7 @@ export class MyListRepository {
   }: {
     itemId: string;
     postDate: string;
-  }): Promise<Items> {
+  }): PrismaPromise<Item> {
     return this._dbClient.product.update({
       where: {
         id: itemId,
@@ -229,27 +144,9 @@ export class MyListRepository {
         title: true,
         description: true,
         price: true,
-        recommendedPrice: true,
-        minimalBid: true,
         imageLinks: true,
-        country: true,
-        city: true,
-        phone: true,
-        socialMedia: {
-          select: {
-            id: true,
-            socialMedia: true,
-            link: true,
-          },
-        },
         type: true,
         status: true,
-        category: {
-          select: {
-            id: true,
-            title: true,
-          },
-        },
         views: true,
         postDate: true,
       },
@@ -258,13 +155,11 @@ export class MyListRepository {
 
   public addItemToArchive({
     itemId,
-    cancelReason,
     endDate,
   }: {
     itemId: string;
-    cancelReason: string | null;
     endDate: string;
-  }): Promise<Items> {
+  }): PrismaPromise<Item> {
     this._deleteBids({ itemId });
 
     return this._dbClient.product.update({
@@ -273,7 +168,6 @@ export class MyListRepository {
       },
       data: {
         status: ProductStatus.CANCELLED,
-        cancelReason,
         endDate,
       },
       select: {
@@ -281,27 +175,9 @@ export class MyListRepository {
         title: true,
         description: true,
         price: true,
-        recommendedPrice: true,
-        minimalBid: true,
         imageLinks: true,
-        country: true,
-        city: true,
-        phone: true,
-        socialMedia: {
-          select: {
-            id: true,
-            socialMedia: true,
-            link: true,
-          },
-        },
         type: true,
         status: true,
-        category: {
-          select: {
-            id: true,
-            title: true,
-          },
-        },
         views: true,
         endDate: true,
       },
@@ -314,7 +190,7 @@ export class MyListRepository {
   }: {
     itemId: string;
     status: ProductStatus;
-  }): Promise<object> {
+  }): Promise<{ title: string }> {
     return this._dbClient.product.findFirst({
       where: {
         id: itemId,

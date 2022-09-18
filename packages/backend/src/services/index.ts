@@ -90,6 +90,7 @@ export const initServices = (repositories: Repositories): any => {
     ),
     myListService: new MyListService({
       myListRepository: repositories.myListRepository,
+      orderRepository: repositories.orderRepository,
     }),
     orderService: new OrderService(
       repositories.orderRepository,
