@@ -11,8 +11,6 @@ import {
   AllProductsDto,
   UpdateProductPriceEvent,
   ProductDto,
-  ICreateAuction,
-  IPostForms,
 } from '@vse-bude/shared';
 import { ActionType } from './common';
 
@@ -106,17 +104,15 @@ const updateProductViews = createAsyncThunk<
   return response;
 });
 
-const saveProduct = createAsyncThunk<
-  null,
-  ICreateAuction | IPostForms,
-  AsyncThunkConfig
->(ActionType.SAVE_PRODUCT, async (payload, { extra }) => {
-  const { productApi } = extra;
+const saveProduct = createAsyncThunk<null, FormData, AsyncThunkConfig>(
+  ActionType.SAVE_PRODUCT,
+  async (payload, { extra }) => {
+    const { productApi } = extra;
+    await productApi.saveProduct(payload);
 
-  await productApi.saveProduct(payload);
-
-  return null;
-});
+    return null;
+  },
+);
 
 export {
   loadProducts,

@@ -1,5 +1,10 @@
 import React, { FC } from 'react';
-import { ICreateAuction } from '@vse-bude/shared';
+import { Asset } from 'react-native-image-picker';
+import {
+  FullUserProfileDto,
+  ICreateAuction,
+  ProductStatus,
+} from '@vse-bude/shared';
 import {
   DropDown,
   Input,
@@ -13,7 +18,12 @@ import {
   useAppSelector,
   useTranslation,
   useCustomTheme,
+  useState,
+  useAppDispatch,
+  useEffect,
+  useNavigation,
 } from '~/hooks/hooks';
+import { products as productsActions } from '~/store/actions';
 import { CONDITION } from '~/mock/new-item';
 import { globalStyles } from '~/styles/styles';
 import { DatePicker } from '~/components/date-time-picker/date-time-picker';
@@ -23,12 +33,20 @@ import { ButtonsContainer } from '~/screens/components/components';
 import { selectCategories, selectDataStatusProducts } from '~/store/selectors';
 import { DataStatus } from '~/common/enums/enums';
 import { productsAuctionSchema } from '~/validation-schemas/validation-schemas';
+import { notification } from '~/services/services';
+import { makeAuctionParser } from '~/helpers/helpers';
 import { AddPhotos } from '../add-photos/add-photos';
 
 import { useStyles } from './styles';
 
-const NewAuctionForm: FC = () => {
+type Props = {
+  personalInfo: FullUserProfileDto;
+};
+
+const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const navigation = useNavigation();
   const { colors } = useCustomTheme();
   const styles = useStyles();
   const categories = useAppSelector(selectCategories);
@@ -42,25 +60,66 @@ const NewAuctionForm: FC = () => {
       category: '',
       title: '',
       description: '',
-      condition: undefined,
+      condition: '',
       recommendedPriceCurrency: t('common:currency.UAH'),
       recommendedPrice: 0,
       minimalBidCurrency: t('common:currency.UAH'),
       minimalBid: 0,
       endDate: '',
-      country: '',
-      city: '',
-      phone: '+380',
+      country: personalInfo.userAddress?.country || '',
+      city: personalInfo.userAddress?.city || '',
+      phone: personalInfo.phone || '',
     },
     validationSchema: productsAuctionSchema,
   });
+  const [images, setImages] = useState<Asset[]>([]);
 
-  const handleSaveAsDraftPress = (): void => {
-    //TODO save as draft
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      notification.error(t('errors.CORRECTLY_FILLED'));
+    }
+  }, [errors]);
+
+  const onSubmit = (data: ICreateAuction): void => {
+    const payload = makeAuctionParser({
+      data,
+      images,
+      status: ProductStatus.ACTIVE,
+    });
+
+    if (payload) {
+      dispatch(productsActions.saveProduct(payload))
+        .unwrap()
+        .then(() => {
+          notification.success(t('make_a_post.NEW_AUCTION_CREATED'));
+          navigation.goBack();
+        })
+        .catch((err) => {
+          // eslint-disable-next-line
+          console.warn(err);
+        });
+    }
   };
 
-  const onSubmit = (): void => {
-    //TODO make a post payload: ICreateAuction
+  const handleSaveAsDraftPress = (data: ICreateAuction): void => {
+    const payload = makeAuctionParser({
+      data,
+      images,
+      status: ProductStatus.DRAFT,
+    });
+
+    if (payload) {
+      dispatch(productsActions.saveProduct(payload))
+        .unwrap()
+        .then(() => {
+          notification.success(t('make_a_post.NEW_DRAFT_CREATED'));
+          navigation.goBack();
+        })
+        .catch((err) => {
+          // eslint-disable-next-line
+          console.warn(err);
+        });
+    }
   };
 
   return (
@@ -68,7 +127,7 @@ const NewAuctionForm: FC = () => {
       <Text style={[globalStyles.fs14, globalStyles.mt5, styles.title]}>
         {t('make_a_post.DOWNLOAD_PHOTOS')}
       </Text>
-      <AddPhotos />
+      <AddPhotos images={images} setImages={setImages} />
       <Text style={[globalStyles.fs14, globalStyles.mt5, styles.title]}>
         {t('make_a_post.DESCRIPTION')}
       </Text>
@@ -174,6 +233,7 @@ const NewAuctionForm: FC = () => {
         placeholder={'-/-/-'}
         mode={DateTimeType.DATE}
         contentContainerStyle={globalStyles.mt5}
+        requiredMark={true}
       />
       <Text style={[globalStyles.fs14, globalStyles.mt6, styles.title]}>
         {t('make_a_post.CONTACT')}
@@ -197,7 +257,7 @@ const NewAuctionForm: FC = () => {
       />
       <Input
         label={t('verification.PHONE_NUMBER')}
-        placeholder={t('verification.PHONE_NUMBER_HINT')}
+        placeholder="+380"
         name="phone"
         control={control}
         errors={errors}
@@ -211,7 +271,7 @@ const NewAuctionForm: FC = () => {
             label={t('make_a_post.SAVE_AS_DRAFT_BUTTON')}
             appearance={ButtonAppearance.OUTLINED}
             textColor={colors.text}
-            onPress={handleSaveAsDraftPress}
+            onPress={handleSubmit(handleSaveAsDraftPress)}
             disabled={isLoading}
           />
         </View>

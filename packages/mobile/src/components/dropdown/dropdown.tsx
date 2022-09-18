@@ -40,7 +40,7 @@ const DropDown = <T extends FormControlValues>({
   const { field } = useFormControl({ name, control });
   const { colors } = useCustomTheme();
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(field.value);
+  const [itemValue, setItemValue] = useState(field.value);
   const [items, setItems] = useState(initialItems);
   const error = errors[name]?.message as string;
 
@@ -77,12 +77,12 @@ const DropDown = <T extends FormControlValues>({
       <DropDownPicker
         listMode="SCROLLVIEW"
         open={open}
-        value={value}
+        value={itemValue}
         items={items}
         setOpen={setOpen}
-        // setValue={setValue}
         setItems={setItems}
-        setValue={(value) => field.onChange(setValue(value))}
+        setValue={setItemValue}
+        onChangeValue={field.onChange}
         textStyle={[
           disabled ? { color: colors.placeholder } : { color: colors.text },
           globalStyles.fs14,

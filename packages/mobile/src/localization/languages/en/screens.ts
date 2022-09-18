@@ -124,10 +124,12 @@ export const screens = {
     EMPTY_PRODUCT: 'Fill the title please!',
     EMPTY_DESCRIPTION: 'Fill the description please!',
     EMPTY_CONDITION: 'Please select the condition!',
+    EMPTY_DATE: 'Please select the end date!',
     MIN_PRICE: `The price cannot be lower than ${MIN_PRICE}`,
     MIN_BID: `The bid cannot be lower than ${MIN_BID}`,
     NUMBER_PRICE: 'The price must be a number',
     NUMBER_BID: 'The bid must be a number',
+    TO_MANY_IMAGES: 'Ви не можете завантажити більше 30 зображень!',
   },
   verify: {
     VERIFY: 'Verify',
@@ -204,6 +206,9 @@ export const screens = {
     SAVE_AS_DRAFT_BUTTON: 'Save as draft',
     MAKE_POST_BUTTON: 'Make a post',
     MAKE_AUCTION_BUTTON: 'Make an auction',
+    NEW_AUCTION_CREATED: 'A new auction has been created!',
+    NEW_POST_CREATED: 'A new post has been created!',
+    NEW_DRAFT_CREATED: 'A new draft has been created!',
   },
   home: {
     HELP_UKRAINE: 'Help Ukraine',

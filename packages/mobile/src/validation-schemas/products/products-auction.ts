@@ -12,7 +12,7 @@ import {
 } from '~/common/constants/constants';
 
 const productsAuctionSchema = Joi.object<ICreateAuction>({
-  category: Joi.any().empty(''),
+  category: Joi.string().empty(''),
   title: Joi.string()
     .trim()
     .required()
@@ -29,10 +29,10 @@ const productsAuctionSchema = Joi.object<ICreateAuction>({
       'string.max': i18next.t('errors.MAX_DESCRIPTION_POST_LENGTH'),
       'string.empty': i18next.t('errors.EMPTY_DESCRIPTION'),
     }),
-  condition: Joi.any()
+  condition: Joi.string()
     .required()
     .messages({
-      'any.required': i18next.t('errors.EMPTY_CONDITION'),
+      'string.empty': i18next.t('errors.EMPTY_CONDITION'),
     }),
   recommendedPriceCurrency: Joi.any().empty(''),
   recommendedPrice: Joi.number()
@@ -48,7 +48,14 @@ const productsAuctionSchema = Joi.object<ICreateAuction>({
       'number.base': i18next.t('errors.NUMBER_BID'),
       'number.min': i18next.t('errors.MIN_BID'),
     }),
-  endDate: Joi.date(),
+  endDate: Joi.date()
+    .iso()
+    .required()
+    .messages({
+      'date.format': i18next.t('errors.EMPTY_DATE'),
+      'string.empty': i18next.t('errors.EMPTY_DATE'),
+      'any.required': i18next.t('errors.EMPTY_DATE'),
+    }),
   phone: Joi.string()
     .trim()
     .empty('')

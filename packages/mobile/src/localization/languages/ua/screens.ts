@@ -123,10 +123,12 @@ export const screens = {
     EMPTY_PRODUCT: 'Будь ласка, введіть назву товару!',
     EMPTY_DESCRIPTION: 'Будь ласка, введіть опис товару!',
     EMPTY_CONDITION: 'Будь ласка, виберіть стан товару!',
+    EMPTY_DATE: 'Будь ласка, виберіть кінцеву дату!',
     MIN_PRICE: `Ціна не може бути нижча за ${MIN_PRICE}`,
     MIN_BID: `Ставка не може бути нижча за ${MIN_BID}`,
     NUMBER_PRICE: 'Ціна має бути числом',
     NUMBER_BID: 'Ставка має бути числом',
+    TO_MANY_IMAGES: 'You cannot upload more than 30 images!',
   },
   verify: {
     VERIFY: 'Підтвердити',
@@ -203,6 +205,9 @@ export const screens = {
     SAVE_AS_DRAFT_BUTTON: 'Зберегти як чернетку',
     MAKE_POST_BUTTON: 'Створити публікацію',
     MAKE_AUCTION_BUTTON: 'Створити аукціон',
+    NEW_AUCTION_CREATED: 'Новий аукціон створено!',
+    NEW_POST_CREATED: 'Нову публікацію створено!',
+    NEW_DRAFT_CREATED: 'Нову чернетку створено!',
   },
   home: {
     HELP_UKRAINE: 'Допоможи Україні',

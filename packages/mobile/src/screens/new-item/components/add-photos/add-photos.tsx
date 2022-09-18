@@ -1,5 +1,5 @@
-import React, { FC, useState, useCallback } from 'react';
-import { image as imageService } from '~/services/services';
+import React, { FC, useCallback, Dispatch, SetStateAction } from 'react';
+import { Asset } from 'react-native-image-picker';
 import {
   View,
   ImageIcon,
@@ -15,25 +15,28 @@ import { globalStyles } from '~/styles/styles';
 import { ColorPalette } from '@vse-bude/shared';
 import { styles } from './styles';
 
-const AddPhotos: FC = () => {
+type Props = {
+  images: Asset[];
+  setImages: Dispatch<SetStateAction<Asset[]>>;
+};
+
+const AddPhotos: FC<Props> = ({ images, setImages }) => {
   const { t } = useTranslation();
-  const [images, setImages] = useState<string[]>([]);
 
   const onGalleryOpen = useCallback(async () => {
     const file = await pickImageLibrary();
     if (!file) {
       return;
     }
-    const link = await imageService.uploadImage(file);
 
-    setImages((state) => [...state, link]);
+    setImages((state) => [...state, file]);
   }, []);
 
   const deleteImage = (index: number) => {
     setImages((state) => state.filter((_, idx) => idx !== index));
   };
 
-  const renderImage = (image: string, index: number) => {
+  const renderImage = (image: Asset, index: number) => {
     return (
       <View
         key={index}
@@ -45,7 +48,7 @@ const AddPhotos: FC = () => {
           globalStyles.mr5,
         ]}
       >
-        <Image source={{ width: 80, height: 80, uri: image }} />
+        <Image source={{ width: 80, height: 80, uri: image.uri }} />
 
         <TouchableOpacity
           style={[

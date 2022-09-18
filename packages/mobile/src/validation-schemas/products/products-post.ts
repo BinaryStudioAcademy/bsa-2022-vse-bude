@@ -11,7 +11,7 @@ import {
 } from '~/common/constants/constants';
 
 const productsPostSchema = Joi.object<IPostForms>({
-  category: Joi.any().empty(''),
+  category: Joi.string().empty(''),
   title: Joi.string()
     .trim()
     .required()
@@ -28,10 +28,10 @@ const productsPostSchema = Joi.object<IPostForms>({
       'string.max': i18next.t('errors.MAX_DESCRIPTION_POST_LENGTH'),
       'string.empty': i18next.t('errors.EMPTY_DESCRIPTION'),
     }),
-  condition: Joi.any()
+  condition: Joi.string()
     .required()
     .messages({
-      'any.required': i18next.t('errors.EMPTY_CONDITION'),
+      'string.empty': i18next.t('errors.EMPTY_CONDITION'),
     }),
   currency: Joi.any().empty(''),
   price: Joi.number()
