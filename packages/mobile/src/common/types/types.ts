@@ -33,5 +33,9 @@ export type {
   VerifyEmailRequestDto,
   PropsVerifyScreens,
 } from './verify/verify';
-export type { ProductRequestDto } from './product/product';
+export type {
+  ProductRequestDto,
+  FavoriteResponseDto,
+  FavoritesMappedData,
+} from './product/product';
 export type { UpdateAvatarResponseDto } from './personal-info/personal-info';

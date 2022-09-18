@@ -6,11 +6,11 @@ import {
   HttpContentType,
   HttpMethod,
   ProductApiRoutes,
-  ProductDto,
+  ProductIdRequest,
   AllProductsDto,
+  ProductDto,
 } from '@vse-bude/shared';
-import { ProductRequestDto } from '~/common/types/types';
-
+import { FavoriteResponseDto, ProductRequestDto } from '~/common/types/types';
 import { Http } from '~/services/http/http.service';
 
 type Constructor = {
@@ -106,6 +106,47 @@ class ProductService {
       },
     );
   };
+
+  getFavorites(
+    requestParams: ProductRequestDto = {},
+  ): Promise<FavoriteResponseDto[]> {
+    return this.#http.load(
+      `${this.#apiPrefix}${ApiRoutes.PRODUCTS}${ProductApiRoutes.FAVORITE}`,
+      { params: requestParams },
+    );
+  }
+
+  getFavoritesIds(): Promise<string[]> {
+    return this.#http.load(
+      `${this.#apiPrefix}${ApiRoutes.PRODUCTS}${ProductApiRoutes.FAVORITE_IDS}`,
+    );
+  }
+
+  addToFavorites(payload: ProductIdRequest): Promise<ProductIdRequest> {
+    return this.#http.load(
+      `${this.#apiPrefix}${ApiRoutes.PRODUCTS}${ProductApiRoutes.FAVORITE}`,
+      {
+        method: HttpMethod.POST,
+        contentType: HttpContentType.APPLICATION_JSON,
+        payload: JSON.stringify(payload),
+        hasAuth: true,
+      },
+    );
+  }
+
+  deleteFromFavorites(
+    payload: Record<string, string>,
+  ): Promise<ProductIdRequest> {
+    return this.#http.load(
+      `${this.#apiPrefix}${ApiRoutes.PRODUCTS}${ProductApiRoutes.FAVORITE}`,
+      {
+        method: HttpMethod.DELETE,
+        contentType: HttpContentType.APPLICATION_JSON,
+        params: payload,
+        hasAuth: true,
+      },
+    );
+  }
 }
 
 export { ProductService };

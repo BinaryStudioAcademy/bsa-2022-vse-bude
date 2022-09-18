@@ -1,16 +1,35 @@
 import React, { FC } from 'react';
-import { PrimaryButton, StarIcon, Text, View } from '~/components/components';
-import { useCustomTheme, useTranslation } from '~/hooks/hooks';
 import { ColorPalette, ProductDto } from '@vse-bude/shared';
+import { DataStatus } from '~/common/enums/enums';
+import { selectProductsDataStatus } from '~/store/selectors';
+import { useAppSelector, useCustomTheme, useTranslation } from '~/hooks/hooks';
+import {
+  Pressable,
+  PrimaryButton,
+  StarSvg,
+  Text,
+  View,
+} from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { PriceWrapper } from './price-wrapper';
 import { styles } from './styles';
 
-type ProductPriceBlockProps = Pick<ProductDto, 'price'>;
+type ProductPriceBlockProps = {
+  product: Pick<ProductDto, 'price' | 'id'>;
+  isFavorite: boolean;
+  onFavoritePress: (id: string) => void;
+};
 
-const ProductPriceBlock: FC<ProductPriceBlockProps> = ({ price }) => {
+const ProductPriceBlock: FC<ProductPriceBlockProps> = ({
+  product,
+  isFavorite,
+  onFavoritePress,
+}) => {
   const { colors } = useCustomTheme();
   const { t, i18n } = useTranslation();
+  const { price, id } = product;
+  const dataStatus = useAppSelector(selectProductsDataStatus);
+  const isLoading = dataStatus == DataStatus.PENDING;
 
   const priceText =
     i18n.language === 'ua'
@@ -35,13 +54,19 @@ const ProductPriceBlock: FC<ProductPriceBlockProps> = ({ price }) => {
           <View style={styles.btnWidth}>
             <PrimaryButton label={t('common:components.BUTTON_BUY')} />
           </View>
-          <View style={[globalStyles.ml5, styles.iconBorder]}>
-            <StarIcon
-              size={25}
+          <Pressable
+            onPress={() => onFavoritePress(id)}
+            style={[globalStyles.ml5, styles.iconBorder]}
+            disabled={isLoading}
+          >
+            <StarSvg
               color={ColorPalette.YELLOW_200}
+              width={30}
+              height={30}
+              fill={isFavorite ? ColorPalette.YELLOW_200 : 'none'}
               style={styles.icon}
             />
-          </View>
+          </Pressable>
         </View>
       </>
     </PriceWrapper>

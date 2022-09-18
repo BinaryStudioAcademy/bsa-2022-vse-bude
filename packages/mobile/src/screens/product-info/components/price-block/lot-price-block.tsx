@@ -15,21 +15,22 @@ import {
 } from '~/hooks/hooks';
 import {
   PrimaryButton,
-  StarIcon,
   Text,
   View,
   PlusSvg,
   Input,
   CrossIcon,
   Spinner,
+  Pressable,
+  StarSvg,
 } from '~/components/components';
 import { getBidValidationSchema } from '~/validation-schemas/bid/make-bid';
 import { globalStyles } from '~/styles/styles';
 import { products as productsActions } from '~/store/actions';
 import { selectCurrentUser } from '~/store/selectors';
 import {
-  auctionMakeBidStatus,
   selectPermission,
+  selectProductsDataStatus,
 } from '~/store/products/selectors';
 import { TouchableHighlight } from 'react-native';
 import { notification, socketApi } from '~/services/services';
@@ -39,19 +40,21 @@ import { PriceWrapper } from './price-wrapper';
 import { styles } from './styles';
 import { AuctionLeaveModal } from './auction-leave-modal';
 
-type LotPriceBlockProps = Pick<
-  ProductDto,
-  'id' | 'currentPrice' | 'minimalBid'
->;
+type LotPriceBlockProps = {
+  product: Pick<ProductDto, 'currentPrice' | 'minimalBid' | 'id'>;
+  isFavorite: boolean;
+  onFavoritePress: (id: string) => void;
+};
 
 const LotPriceBlock: FC<LotPriceBlockProps> = ({
-  id,
-  currentPrice,
-  minimalBid,
+  product,
+  isFavorite,
+  onFavoritePress,
 }) => {
   const { colors } = useCustomTheme();
   const { t, i18n } = useTranslation();
   const dispatch = useAppDispatch();
+  const { minimalBid, currentPrice, id } = product;
   const { control, errors, handleSubmit, setValue } = useAppForm({
     defaultValues: DEFAULT_BID_VALUE,
     validationSchema: getBidValidationSchema(Number(minimalBid)),
@@ -59,7 +62,7 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
   const { isAbleToLeaveAuction } = useAppSelector(selectPermission);
   const user = useAppSelector(selectCurrentUser);
   const [confirmModalVisible, setModalVisible] = useState(false);
-  const dataAuctionMakeBidStatus = useAppSelector(auctionMakeBidStatus);
+  const dataAuctionMakeBidStatus = useAppSelector(selectProductsDataStatus);
   const isLoading = [dataAuctionMakeBidStatus].includes(DataStatus.PENDING);
   const canUserMakeBid = Boolean(
     user && user?.phoneVerified && user?.emailVerified && !isLoading,
@@ -202,13 +205,19 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
                 disabled={!canUserMakeBid}
               />
             </View>
-            <View style={[globalStyles.ml5, styles.iconBorder]}>
-              <StarIcon
-                size={25}
+            <Pressable
+              onPress={() => onFavoritePress(id)}
+              style={[globalStyles.ml5, styles.iconBorder]}
+              disabled={isLoading}
+            >
+              <StarSvg
                 color={ColorPalette.YELLOW_200}
+                width={30}
+                height={30}
+                fill={isFavorite ? ColorPalette.YELLOW_200 : 'none'}
                 style={styles.icon}
               />
-            </View>
+            </Pressable>
           </View>
         </>
       </PriceWrapper>

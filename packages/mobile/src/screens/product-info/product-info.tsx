@@ -1,13 +1,19 @@
 import React, { FC, useEffect } from 'react';
 import { RouteProp } from '@react-navigation/native';
 import { RootNavigationParamList } from '~/common/types/types';
+import { RootScreenName } from '~/common/enums/enums';
 import {
   ProductType,
   UpdateProductPriceEvent,
   UPDATE_PRODUCT_PRICE,
 } from '@vse-bude/shared';
 import { products as productsActions } from '~/store/actions';
-import { selectCurrentProduct } from '~/store/products/selectors';
+import {
+  selectCurrentUser,
+  selectFavoriteIds,
+  selectCurrentProduct,
+} from '~/store/selectors';
+import { notification, socketApi } from '~/services/services';
 import {
   useAppDispatch,
   useAppSelector,
@@ -15,7 +21,6 @@ import {
   useRoute,
   useTranslation,
 } from '~/hooks/hooks';
-import { RootScreenName } from '~/common/enums/enums';
 import {
   ScreenWrapper,
   View,
@@ -26,8 +31,6 @@ import {
   Countdown,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { selectCurrentUser } from '~/store/selectors';
-import { notification, socketApi } from '~/services/services';
 import {
   Description,
   ImageCarousel,
@@ -42,11 +45,13 @@ const ProductInfo: FC = () => {
   const { t } = useTranslation();
   const product = useAppSelector(selectCurrentProduct);
   const user = useAppSelector(selectCurrentUser);
+  const favoriteIds = useAppSelector(selectFavoriteIds);
   const route =
     useRoute<
       RouteProp<Pick<RootNavigationParamList, RootScreenName.ITEM_INFO>>
     >();
   const id = route.params?.itemId;
+  const isFavorite = favoriteIds.includes(id);
 
   useEffect(() => {
     dispatch(productsActions.loadProductInfo(id));
@@ -62,23 +67,23 @@ const ProductInfo: FC = () => {
 
     if (user) {
       dispatch(productsActions.auctionPermissions(id));
+      dispatch(productsActions.fetchFavoriteIds());
     }
   }, [id, user, dispatch]);
 
   if (!product) {
     return <Spinner />;
   }
-  const {
-    title,
-    currentPrice,
-    price,
-    minimalBid,
-    type,
-    imageLinks,
-    views,
-    author,
-  } = product;
+  const { title, type, imageLinks, views, author } = product;
   const isAuction = type == ProductType.AUCTION;
+
+  const handleToggleFavorite = (productId: string) => {
+    if (isFavorite) {
+      return dispatch(productsActions.deleteFromFavorite(productId));
+    }
+
+    return dispatch(productsActions.addToFavorite(productId));
+  };
 
   return (
     <ScreenWrapper>
@@ -121,12 +126,16 @@ const ProductInfo: FC = () => {
       </ScrollView>
       {isAuction ? (
         <LotPriceBlock
-          id={id}
-          currentPrice={currentPrice}
-          minimalBid={minimalBid}
+          product={product}
+          isFavorite={isFavorite}
+          onFavoritePress={handleToggleFavorite}
         />
       ) : (
-        <ProductPriceBlock price={price} />
+        <ProductPriceBlock
+          product={product}
+          isFavorite={isFavorite}
+          onFavoritePress={handleToggleFavorite}
+        />
       )}
     </ScreenWrapper>
   );

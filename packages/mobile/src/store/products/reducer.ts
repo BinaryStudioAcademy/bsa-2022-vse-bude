@@ -1,6 +1,7 @@
-import { createReducer } from '@reduxjs/toolkit';
+import { createReducer, isAnyOf } from '@reduxjs/toolkit';
 import { AllProductsDto, ProductDto } from '@vse-bude/shared';
 import { DataStatus } from '~/common/enums/enums';
+import { FavoriteResponseDto } from '~/common/types/types';
 import {
   auctionLeaveAction,
   auctionMakeBid,
@@ -11,38 +12,44 @@ import {
   loadProducts,
   updateCurrentItemPrice,
   updateProductViews,
+  fetchFavorites,
+  fetchFavoriteIds,
+  addToFavorite,
+  deleteFromFavorite,
+  cleanFavoriteIds,
+  fetchGuestFavorites,
 } from './actions';
 
 type InitialState = {
-  currentProduct: ProductDto | null;
+  dataStatus: DataStatus;
   products: AllProductsDto;
+  currentProduct: ProductDto | null;
   popularProducts: ProductDto[] | [];
   popularLots: ProductDto[] | [];
-  dataStatus: DataStatus;
   permissions: {
     isAbleToLeaveAuction: boolean;
   };
+  favorites: FavoriteResponseDto[] | [];
+  favoriteIds: Array<string>;
+  guestFavorites: ProductDto[];
 };
 
 const initialState: InitialState = {
+  dataStatus: DataStatus.IDLE,
   products: { items: [], count: 0 },
+  currentProduct: null,
   popularProducts: [],
   popularLots: [],
-  currentProduct: null,
-  dataStatus: DataStatus.IDLE,
   permissions: {
     isAbleToLeaveAuction: false,
   },
+  favorites: [],
+  favoriteIds: [],
+  guestFavorites: [],
 };
 
 const reducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(loadProducts.pending, (state) => {
-      state.dataStatus = DataStatus.PENDING;
-    })
-    .addCase(loadProducts.rejected, (state) => {
-      state.dataStatus = DataStatus.REJECTED;
-    })
     .addCase(loadProducts.fulfilled, (state, { payload }) => {
       state.dataStatus = DataStatus.FULFILLED;
       state.products = {
@@ -50,31 +57,13 @@ const reducer = createReducer(initialState, (builder) => {
         count: payload.count,
       };
     })
-    .addCase(loadPopularProducts.pending, (state) => {
-      state.dataStatus = DataStatus.PENDING;
-    })
-    .addCase(loadPopularProducts.rejected, (state) => {
-      state.dataStatus = DataStatus.REJECTED;
-    })
     .addCase(loadPopularProducts.fulfilled, (state, action) => {
       state.dataStatus = DataStatus.FULFILLED;
       state.popularProducts = [...state.popularProducts, ...action.payload];
     })
-    .addCase(loadPopularLots.pending, (state) => {
-      state.dataStatus = DataStatus.PENDING;
-    })
-    .addCase(loadPopularLots.rejected, (state) => {
-      state.dataStatus = DataStatus.REJECTED;
-    })
     .addCase(loadPopularLots.fulfilled, (state, action) => {
       state.dataStatus = DataStatus.FULFILLED;
       state.popularLots = [...state.popularLots, ...action.payload];
-    })
-    .addCase(loadProductInfo.pending, (state) => {
-      state.dataStatus = DataStatus.PENDING;
-    })
-    .addCase(loadProductInfo.rejected, (state) => {
-      state.dataStatus = DataStatus.REJECTED;
     })
     .addCase(loadProductInfo.fulfilled, (state, action) => {
       state.dataStatus = DataStatus.FULFILLED;
@@ -103,9 +92,6 @@ const reducer = createReducer(initialState, (builder) => {
           : product.price,
       );
     })
-    .addCase(auctionLeaveAction.rejected, (state) => {
-      state.dataStatus = DataStatus.REJECTED;
-    })
     .addCase(auctionMakeBid.fulfilled, (state, action) => {
       state.dataStatus = DataStatus.FULFILLED;
       state.products.items.map((product) =>
@@ -126,9 +112,6 @@ const reducer = createReducer(initialState, (builder) => {
         isAbleToLeaveAuction: true,
       };
     })
-    .addCase(auctionMakeBid.rejected, (state) => {
-      state.dataStatus = DataStatus.REJECTED;
-    })
     .addCase(updateCurrentItemPrice, (state, action) => {
       state.dataStatus = DataStatus.FULFILLED;
       if (state.currentProduct) {
@@ -140,18 +123,79 @@ const reducer = createReducer(initialState, (builder) => {
           : product.price,
       );
     })
-    .addCase(updateProductViews.pending, (state) => {
-      state.dataStatus = DataStatus.PENDING;
-    })
-    .addCase(updateProductViews.rejected, (state) => {
-      state.dataStatus = DataStatus.REJECTED;
-    })
     .addCase(updateProductViews.fulfilled, (state, action) => {
       state.dataStatus = DataStatus.FULFILLED;
       state.currentProduct
         ? (state.currentProduct.views = action.payload.views)
         : undefined;
-    });
+    })
+    .addCase(fetchFavorites.fulfilled, (state, action) => {
+      state.dataStatus = DataStatus.FULFILLED;
+      state.favorites = [...action.payload];
+    })
+    .addCase(fetchFavoriteIds.fulfilled, (state, action) => {
+      state.dataStatus = DataStatus.FULFILLED;
+      state.favoriteIds = [...action.payload];
+    })
+    .addCase(addToFavorite.fulfilled, (state, { payload }) => {
+      state.dataStatus = DataStatus.FULFILLED;
+      const isAlreadyFavorite = state.favoriteIds.includes(payload.productId);
+      if (!isAlreadyFavorite && payload.productId) {
+        state.favoriteIds = [...state.favoriteIds, payload.productId];
+      }
+    })
+    .addCase(deleteFromFavorite.fulfilled, (state, { payload }) => {
+      state.dataStatus = DataStatus.FULFILLED;
+      if (payload.productId) {
+        state.favoriteIds = state.favoriteIds.filter(
+          (id) => id !== payload.productId,
+        );
+        state.guestFavorites = state.guestFavorites.filter(
+          (favorite) => favorite.id !== payload.productId,
+        );
+      }
+    })
+    .addCase(cleanFavoriteIds, (state) => {
+      state.favoriteIds = [];
+    })
+    .addCase(fetchGuestFavorites.fulfilled, (state, action) => {
+      state.dataStatus = DataStatus.FULFILLED;
+      state.guestFavorites = [...state.guestFavorites, action.payload];
+    })
+    .addMatcher(
+      isAnyOf(
+        loadProducts.pending,
+        loadPopularProducts.pending,
+        loadPopularLots.pending,
+        loadProductInfo.pending,
+        updateProductViews.pending,
+        fetchFavorites.pending,
+        fetchFavoriteIds.pending,
+        addToFavorite.pending,
+        deleteFromFavorite.pending,
+      ),
+      (state) => {
+        state.dataStatus = DataStatus.PENDING;
+      },
+    )
+    .addMatcher(
+      isAnyOf(
+        loadProducts.rejected,
+        loadPopularProducts.rejected,
+        loadPopularLots.rejected,
+        loadProductInfo.rejected,
+        auctionLeaveAction.rejected,
+        auctionMakeBid.rejected,
+        updateProductViews.rejected,
+        fetchFavorites.rejected,
+        fetchFavoriteIds.rejected,
+        addToFavorite.rejected,
+        deleteFromFavorite.rejected,
+      ),
+      (state) => {
+        state.dataStatus = DataStatus.REJECTED;
+      },
+    );
 });
 
 export { reducer };
