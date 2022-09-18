@@ -4,6 +4,8 @@ import {
   Product,
   FlatList,
   StatusBar,
+  Header,
+  ButtonText,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import {
@@ -11,9 +13,11 @@ import {
   useAppDispatch,
   useCustomTheme,
   useEffect,
+  useTranslation,
 } from '~/hooks/hooks';
 import { selectProducts } from '~/store/selectors';
 import { products } from '~/store/actions';
+import { CommonHeaderLeftComponents } from '~/common/enums/enums';
 import { styles } from './styles';
 import { ListHeader } from './components/components';
 
@@ -24,9 +28,24 @@ const ItemsAndServices = () => {
   }, []);
   const { colors } = useCustomTheme();
   const { items } = useAppSelector(selectProducts);
+  const { t } = useTranslation();
 
   return (
     <ScreenWrapper>
+      <Header
+        commonLeftSideComponents={CommonHeaderLeftComponents.BURGER_MENU}
+        RightSideComponent={() => (
+          <ButtonText
+            textStyle={globalStyles.fs16}
+            onPress={() => {
+              // TODO
+            }}
+          >
+            {t('common:components.BUTTON_FILTER')}
+          </ButtonText>
+        )}
+      />
+
       <StatusBar
         backgroundColor={colors.backgroundSecondary}
         barStyle="dark-content"

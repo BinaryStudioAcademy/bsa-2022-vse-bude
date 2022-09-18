@@ -26,7 +26,6 @@ import {
   mainScreenOptions,
   baseScreenOptions,
   verifyScreenOptions,
-  getItemsScreenOptions,
 } from './screen-options/screen-options';
 
 const NativeStack = createNativeStackNavigator<RootNavigationParamList>();
@@ -51,7 +50,7 @@ const Navigation: FC = () => {
           }}
         />
       </NativeStack.Group>
-      <NativeStack.Group screenOptions={getItemsScreenOptions}>
+      <NativeStack.Group>
         <NativeStack.Screen
           name={RootScreenName.ITEMS_AND_SERVICES}
           component={ItemsAndServices}

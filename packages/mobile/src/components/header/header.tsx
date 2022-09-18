@@ -55,7 +55,7 @@ const Header: FC<Props> = ({
         style,
       ]}
     >
-      <View style={globalStyles.flex1}>
+      <View style={styles.leftElement}>
         {isArrowBackPresent && <HeaderLeft />}
         {isBurgerMenuPresent && <BurgerMenu />}
         {LeftSideComponent && <LeftSideComponent />}
@@ -70,7 +70,7 @@ const Header: FC<Props> = ({
       >
         {titleShown && (title || route.name)}
       </Text>
-      <View style={[globalStyles.alignItemsEnd, globalStyles.flex1]}>
+      <View style={[globalStyles.alignItemsEnd, styles.rightElement]}>
         {RightSideComponent && <RightSideComponent />}
       </View>
     </View>
