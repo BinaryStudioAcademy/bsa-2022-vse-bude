@@ -24,7 +24,7 @@ const Favorite: FC = () => {
   const isFocused = useIsFocused();
 
   useEffect(() => {
-    if (isFocused) {
+    if (isFocused && favoriteIds.length) {
       setIsLoading(true);
       switch (Boolean(user)) {
         case true:
