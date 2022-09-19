@@ -27,5 +27,5 @@ export const ua = {
   rules,
   checkout,
   about,
-  errors
+  errors,
 };

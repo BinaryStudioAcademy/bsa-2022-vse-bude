@@ -27,5 +27,5 @@ export const en = {
   rules,
   checkout,
   about,
-  errors
+  errors,
 };
