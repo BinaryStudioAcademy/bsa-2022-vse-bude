@@ -176,11 +176,6 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
               globalStyles.alignItemsCenter,
             ]}
           >
-            {/* {isLoading && (
-              <View>
-                <Spinner isOverflow={true} />
-              </View>
-            )} */}
             {!!isAbleToLeaveAuction && user && (
               <TouchableHighlight
                 onPress={openModal}
