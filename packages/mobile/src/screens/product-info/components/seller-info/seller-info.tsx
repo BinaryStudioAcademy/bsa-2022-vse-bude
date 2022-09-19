@@ -8,7 +8,7 @@ import { styles } from './styles';
 
 const SellerInfo = ({ author }: { author: UserProfileDto }) => {
   const { t } = useTranslation();
-  const { firstName, avatar, phone, socialMedia } = author;
+  const { firstName, lastName, avatar, phone, socialMedia } = author;
 
   return (
     <View
@@ -52,7 +52,7 @@ const SellerInfo = ({ author }: { author: UserProfileDto }) => {
                 globalStyles.fs14,
               ]}
             >
-              {firstName}
+              {firstName} {lastName}
             </Text>
           </View>
         </View>
