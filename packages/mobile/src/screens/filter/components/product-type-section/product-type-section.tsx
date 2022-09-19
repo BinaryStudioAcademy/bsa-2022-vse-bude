@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 import { View } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { useAppDispatch, useAppSelector } from '~/hooks/hooks';
+import { useAppDispatch, useAppSelector, useId } from '~/hooks/hooks';
 import { lotTypeFilterData } from '~/mock/mock';
 import { FilterLotType } from '~/common/enums/enums';
 import { filters as filtersApi } from '~/store/actions';
@@ -29,7 +29,7 @@ const ProductTypeSection: FC<Props> = ({ contentContainerStyle }) => {
         return (
           <ProductTypeSelector
             title={title}
-            key={name}
+            key={useId()}
             isSelected={isSelected}
             onPress={() => onPress(name)}
           />
