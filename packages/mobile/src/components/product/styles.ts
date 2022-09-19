@@ -25,6 +25,9 @@ const styles = StyleSheet.create({
     height: 2,
     marginVertical: 13,
   },
+  price: {
+    width: 120,
+  },
   timeWindow: {
     position: 'absolute',
     bottom: -10,

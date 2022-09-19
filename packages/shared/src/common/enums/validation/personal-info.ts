@@ -35,4 +35,7 @@ export enum UserPersonalInfoValidationMessage {
 
   USER_NOT_EXISTS = 'personal-info:validation.notExists.user',
   PHONE_EXISTS = 'personal-info:validation.exists.phone',
+
+  CANCELLED_EXISTS = 'my-list:errors.cancelledExists',
+  POSTED_EXISTS = 'my-list:errors.postedExists',
 }

@@ -33,6 +33,9 @@ const profileSlice = createSlice({
     setIsEditing: (state) => {
       state.isEditing = !state.isEditing;
     },
+    resetIsEditing: (state) => {
+      state.isEditing = false;
+    },
   },
   extraReducers: {
     [fetchUserProfileSSR.pending.type]: (state) => {
@@ -104,6 +107,6 @@ const profileSlice = createSlice({
 
 export const profileReducer = profileSlice.reducer;
 
-export const { setIsEditing } = profileSlice.actions;
+export const { setIsEditing, resetIsEditing } = profileSlice.actions;
 
 export type { ProfileState };

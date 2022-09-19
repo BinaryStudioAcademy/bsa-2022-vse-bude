@@ -35,9 +35,7 @@ export const ProductTimer = ({ date }: TimerProps) => {
       <div css={timerIcon}>
         <Icon icon={IconName.STOPWATCH} color={IconColor.BLACK} />
       </div>
-      <div css={timerValue} suppressHydrationWarning={true}>
-        {timerValue}
-      </div>
+      <div suppressHydrationWarning={true}>{timerValue}</div>
     </div>
   );
 };

@@ -6,4 +6,5 @@ export enum ProductStatus {
   CLOSED = 'CLOSED',
   DRAFT = 'DRAFT',
   SOLD = 'SOLD',
+  PURCHASED = 'PURCHASED',
 }

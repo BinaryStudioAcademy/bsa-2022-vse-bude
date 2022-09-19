@@ -1,4 +1,5 @@
 import type { PrismaClient } from '@prisma/client';
+import type { RepositoriesInit } from '@types';
 import { UserRepository } from './user';
 import { CategoryRepository } from './category';
 import { ProductRepository } from './product';
@@ -9,8 +10,11 @@ import { UserProfileRepository } from './profile';
 import { BidRepository } from './bid';
 import { MyListRepository } from './my-list';
 import { OrderRepository } from './order';
+import { NotificationRepository } from './notification';
 
-export const initRepositories = (prismaClient: PrismaClient): any => ({
+export const initRepositories = (
+  prismaClient: PrismaClient,
+): RepositoriesInit => ({
   userRepository: new UserRepository(prismaClient),
   categoryRepository: new CategoryRepository(prismaClient),
   productRepository: new ProductRepository(prismaClient),
@@ -21,6 +25,7 @@ export const initRepositories = (prismaClient: PrismaClient): any => ({
   bidRepository: new BidRepository(prismaClient),
   myListRepository: new MyListRepository(prismaClient),
   orderRepository: new OrderRepository(prismaClient),
+  notificationRepository: new NotificationRepository(prismaClient),
 });
 
 export type Repositories = ReturnType<typeof initRepositories>;
@@ -36,4 +41,5 @@ export {
   type BidRepository,
   type MyListRepository,
   type OrderRepository,
+  type NotificationRepository,
 };

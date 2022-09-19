@@ -15,6 +15,7 @@
   "CODE_NOT_FOUND": "Код не знайдено!",
   "PRODUCT_NOT_FOUND": "Продукт не знайдений!",
   "PRODUCT_UNAVAILABLE": "Продукт недоступний!",
+  "ALREADY_LEAVE_AUCTION": "Ви вже вийшли з аукціону!",
   "mailing": {
     "verification": {
       "subject": "Підтвердження електронної пошти",

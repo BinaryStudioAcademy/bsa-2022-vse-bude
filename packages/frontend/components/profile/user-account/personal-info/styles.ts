@@ -3,14 +3,14 @@ import type { Theme } from '@emotion/react';
 import { resetButton } from 'theme';
 import { ColorPalette } from '@vse-bude/shared';
 
-export const form = () => css`
+export const form = css`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
 `;
 
-export const personalHeader = () => css`
+export const personalHeader = css`
   width: 100%;
 `;
 
@@ -67,13 +67,16 @@ export const marginBottom = ({ spaces }: Theme) => css`
   margin-bottom: ${spaces.xl11};
 `;
 
-export const sections = ({ mq }: Theme) => css`
+export const sections = ({ mq, maxMq }: Theme) => css`
   width: 450px;
   ${mq[1]} {
     width: 500px;
   }
   ${mq[4]} {
     width: 700px;
+  }
+  ${maxMq[0]} {
+    width: 100%;
   }
 `;
 
@@ -84,8 +87,12 @@ export const sectionRow = ({ spaces }: Theme) => css`
   }
 `;
 
-export const groupInputs = ({ spaces }: Theme) => css`
+export const groupInputs = ({ spaces, maxMq }: Theme) => css`
   gap: ${spaces.md};
+  ${maxMq[0]} {
+    flex-direction: column;
+    gap: 0;
+  }
 `;
 
 export const inputRow = ({ spaces }: Theme) => css`
@@ -98,12 +105,20 @@ export const groupPhone = ({ spaces }: Theme) => css`
   padding: 0 0 ${spaces.xl1} 0;
 `;
 
+export const groupEmail = ({ spaces }: Theme) => css`
+  margin-bottom: ${spaces.md};
+  gap: ${spaces.md};
+`;
+
 export const phoneRow = css`
   flex-grow: 2;
 `;
 
 export const verifyButtonWrapper = ({ spaces }: Theme) => css`
   padding: 18px 0 ${spaces.xl1} 0;
+`;
+export const verifyEmailButtonWrapper = css`
+  padding: 18px 0;
 `;
 export const avatarPopoverTrigger = css`
   position: absolute;

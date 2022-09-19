@@ -12,6 +12,8 @@ export type IconButtonProps = {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   type?: 'button' | 'submit';
   disabled?: boolean;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 };
 
 export type BackgroundColorProp = 'lightgray' | 'darkgray' | 'transparent';

@@ -4,8 +4,8 @@ import { shallowEqual } from 'react-redux';
 import { Flex } from 'grapefruit-ui';
 import dynamic from 'next/dynamic';
 import { Button, Avatar } from '@primitives';
-import { fetchFullUserProfile } from '@store';
-import { setIsEditing } from '@store';
+import { fetchFullUserProfile, setIsEditing, resetIsEditing } from '@store';
+import { useEffect } from 'react';
 import { NestedLayout } from '../common';
 import * as styles from './styles';
 import { ProfileData } from './primitives';
@@ -16,13 +16,17 @@ const ChangeAvatar = dynamic(() => import('./change-avatar'));
 export const PersonalInfo = () => {
   const { t } = useTranslation();
   const { user: authUser } = useAuth();
+  const dispatch = useAppDispatch();
 
   const { user, loading, isEditing } = useTypedSelector(
     (state) => state.profile,
     shallowEqual,
   );
 
-  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(resetIsEditing());
+  }, [dispatch]);
+
   const onGetFullProfile = () => dispatch(fetchFullUserProfile());
 
   const isAuthUser = authUser?.id === user?.id;

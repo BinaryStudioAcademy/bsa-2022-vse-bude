@@ -34,11 +34,9 @@ export function FilterPopover({ filter, setFilter }: FilterPopoverProps) {
         item.value.sortBy === filter?.sortBy,
     );
     sortBuyCurrent ? setSortBy(sortBuyCurrent) : setSortBy(null);
-    setPrice({
-      [MIN_PRICE_NAME]: filter?.priceGt || ITEM_FILTER.PRICE_GT_DEFAULT,
-      [MAX_PRICE_NAME]: filter?.priceLt || ITEM_FILTER.PRICE_LT_DEFAULT,
-    });
+  }, [filter?.order, filter?.sortBy, t]);
 
+  useEffect(() => {
     const currentCategory = categories.find(
       (item) => item.id === filter?.categoryId,
     );
@@ -49,7 +47,14 @@ export function FilterPopover({ filter, setFilter }: FilterPopoverProps) {
           value: currentCategory.id,
         })
       : setCategory(null);
-  }, [categories, t, filter]);
+  }, [categories, filter?.categoryId]);
+
+  useEffect(() => {
+    setPrice({
+      [MIN_PRICE_NAME]: filter?.priceGt || ITEM_FILTER.PRICE_GT_DEFAULT,
+      [MAX_PRICE_NAME]: filter?.priceLt || ITEM_FILTER.PRICE_LT_DEFAULT,
+    });
+  }, [filter?.priceGt, filter?.priceLt]);
 
   const priceHandler = ({ target }) => {
     const { value, name } = target;
