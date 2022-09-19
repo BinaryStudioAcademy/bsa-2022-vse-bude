@@ -1,4 +1,5 @@
-import { Button, Modal } from '@primitives';
+import { useTypedSelector } from '@hooks';
+import { Button, Loader, Modal } from '@primitives';
 import { useTranslation } from 'next-i18next';
 import { actionBtns, header, mainText } from './styles';
 
@@ -14,16 +15,26 @@ const ConfirmationModal = ({
   onConfirm,
 }: ConfirmationModalProps) => {
   const { t } = useTranslation('common');
+  const { loadingAuctionLeave } = useTypedSelector((state) => state.product);
 
   return (
     <Modal visible={true}>
       <div css={header}>{t('modal.confirm.header')}</div>
       <div css={mainText}>{text}</div>
       <div css={actionBtns}>
-        <Button onClick={onConfirm} variant="danger" size="small">
-          {t('modal.confirm.confirm')}
+        <Button
+          disabled={loadingAuctionLeave}
+          onClick={onConfirm}
+          variant={loadingAuctionLeave ? 'filled' : 'danger'}
+          size="small"
+        >
+          {loadingAuctionLeave ? (
+            <Loader size="extraSmall" />
+          ) : (
+            t('modal.confirm.confirm')
+          )}
         </Button>
-        <Button onClick={onClose} size="small">
+        <Button disabled={loadingAuctionLeave} onClick={onClose} size="small">
           {t('modal.confirm.cancel')}
         </Button>
       </div>

@@ -27,14 +27,12 @@ export const ProfileInfo = ({ load }: ProfileInfoProps) => {
     dispatch(
       fetchUserNotifications({
         limit: NOTIFICATIONS_FILTER.NOTIFICATIONS_LIMIT_DEFAULT,
-        viewed: false,
       }),
     );
   }, [dispatch]);
 
-  const renderNotifications = () => <NotificationsWrapper viewed={false} />;
   const {
-    notifications: { count },
+    notifications: { countOfUnread },
   } = useTypedSelector((store) => store.profile);
 
   return (
@@ -55,11 +53,11 @@ export const ProfileInfo = ({ load }: ProfileInfoProps) => {
               icon={IconName.BELL}
               size="md"
               color={IconColor.BLACK}
-              cssExtend={[count && styles.newNotifications]}
+              cssExtend={[countOfUnread && styles.newNotifications]}
             />
           }
         >
-          {() => renderNotifications()}
+          {(handleClose) => <NotificationsWrapper handleClose={handleClose} />}
         </Popover>
       </div>
       <Avatar

@@ -24,7 +24,7 @@ export const Notification = ({
     notificationData;
 
   return (
-    <div css={styles.wrapper}>
+    <div data-variant={viewed ? 'read' : 'unread'} css={styles.wrapper}>
       <div css={styles.titleWrapper}>
         <h5 css={styles.title}> {title} </h5>
 
@@ -44,6 +44,7 @@ export const Notification = ({
                   ariaLabel={t(
                     'common:header.notifications.ariaLabel.setViewed',
                   )}
+                  disabled={!!updateViewLoading}
                   icon={IconName.XMARK}
                   color={IconColor.GRAY}
                   onClick={() => dispatch(updateNotificationView(id))}
@@ -82,11 +83,14 @@ export const Notification = ({
             </Tooltip>
           )}
         </Flex>
-        <span css={styles.time}>{` ${dayjs(createdAt).hour()}:${dayjs(
-          createdAt,
-        ).minute()} ${dayjs(createdAt).month()}.${dayjs(
-          createdAt,
-        ).day()}.${dayjs(createdAt).year()}`}</span>
+        <p css={styles.time}>
+          <span>
+            {`${dayjs(createdAt).hour()}:${dayjs(createdAt).minute()}`}
+          </span>
+          {`${('0' + dayjs(createdAt).month()).slice(-2)}.${(
+            '0' + dayjs(createdAt).day()
+          ).slice(-2)}.${dayjs(createdAt).year()}`}
+        </p>
       </Flex>
     </div>
   );

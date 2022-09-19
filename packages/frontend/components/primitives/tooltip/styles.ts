@@ -15,9 +15,10 @@ export const body = ({
   radiuses,
   fontSizes,
   breakpoints,
+  zIndex,
 }: Theme) => css`
   position: absolute;
-  z-index: 1000;
+  z-index: ${zIndex.tooltip};
   animation: fade-in 0.15s ease-in-out;
   max-width: 30%;
   border-radius: ${radiuses.xs};

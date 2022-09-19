@@ -16,21 +16,20 @@ export class NotificationRepository {
   public async getAll(
     userId: string,
     query: NotificationQuery,
-  ): Promise<[Notification[], number]> {
+  ): Promise<[Notification[], number, number]> {
     const {
       limit = NOTIFICATIONS_FILTER.NOTIFICATIONS_LIMIT_DEFAULT,
       from = NOTIFICATIONS_FILTER.NOTIFICATIONS_FROM_DEFAULT,
       viewed,
     } = query;
-
-    const viewedValue = viewed ? viewed === 'true' : undefined;
+    console.log(viewed);
 
     return this._dbClient.$transaction([
       this._dbClient.notification.findMany({
         take: +limit,
         skip: +from,
         where: {
-          viewed: viewedValue,
+          viewed,
           userId,
         },
         orderBy: {
@@ -39,7 +38,14 @@ export class NotificationRepository {
       }),
       this._dbClient.notification.count({
         where: {
-          viewed: viewedValue,
+          viewed,
+          userId,
+        },
+      }),
+
+      this._dbClient.notification.count({
+        where: {
+          viewed: false,
           userId,
         },
       }),

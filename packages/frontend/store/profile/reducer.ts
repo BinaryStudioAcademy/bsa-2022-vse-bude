@@ -32,6 +32,7 @@ interface ProfileState {
 const NOTIFICATION_INITIAL_STATE: AllNotificationsResponse = {
   notifications: null,
   count: 0,
+  countOfUnread: 0,
 };
 
 const initialState: ProfileState = {
@@ -114,10 +115,10 @@ const profileSlice = createSlice({
     [updateNotificationView.fulfilled.type]: (state, { payload }) => {
       state.updateViewLoading = null;
       state.notifications.notifications =
-        state.notifications.notifications?.filter(
-          (item) => payload.id !== item.id,
+        state.notifications.notifications?.map((item) =>
+          payload.id === item.id ? payload : item,
         );
-      state.notifications.count = state.notifications.count - 1;
+      state.notifications.countOfUnread = state.notifications.countOfUnread - 1;
     },
 
     [updateNotificationView.rejected.type]: (state) => {

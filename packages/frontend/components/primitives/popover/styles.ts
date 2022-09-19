@@ -5,11 +5,17 @@ export const absolute = css`
   position: absolute;
 `;
 
-export const popover = ({ colors, radiuses, shadows, borders }: Theme) => css`
+export const popover = ({
+  colors,
+  radiuses,
+  shadows,
+  borders,
+  zIndex,
+}: Theme) => css`
   position: fixed;
   box-shadow: ${shadows.dropdown};
   border: ${borders.dropdown};
   border-radius: ${radiuses.xs};
   background-color: ${colors.background};
-  z-index: 999;
+  z-index: ${zIndex.popover};
 `;

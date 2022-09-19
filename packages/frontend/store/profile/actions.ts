@@ -83,18 +83,18 @@ export const updateUserAvatar = createAsyncThunk(
 );
 export const fetchUserNotifications = createAsyncThunk(
   ProfileActions.FETCH_NOTIFICATIONS,
-  async (filter: NotificationQuery, { rejectWithValue }) =>
+  (filter: NotificationQuery, { rejectWithValue }) =>
     getUserNotifications(filter).catch((e) => rejectWithValue(e.message)),
 );
 export const loadMoreUserNotifications = createAsyncThunk(
   ProfileActions.UPLOAD_NOTIFICATIONS,
-  async (filter: NotificationQuery, { rejectWithValue }) =>
+  (filter: NotificationQuery, { rejectWithValue }) =>
     getUserNotifications(filter).catch((e) => rejectWithValue(e.message)),
 );
 
 export const updateNotificationView = createAsyncThunk(
   ProfileActions.SET_NOTIFICATION_VIEWED,
-  async (id: string, { rejectWithValue, dispatch }) => {
+  (id: string, { rejectWithValue, dispatch }) => {
     dispatch(setUpdateViewLoading(id));
 
     return setViewedNotification(id).catch((e) => rejectWithValue(e.message));

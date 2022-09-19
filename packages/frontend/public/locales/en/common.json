@@ -22,18 +22,21 @@
       "messages": "Messages",
       "support": "Support",
       "signOut": "Sign Out",
-      "makePost": "Make a Post"
+      "makePost": "Make a Post",
+      "notifications": "Notifications"
     },
     "notifications": {
-      "noNotification": "No unread messages",
-      "loadMore":"Load more",
-      "tooltip":{
+      "noNotification": "No notifications yet",
+      "loadMore": "Load more",
+      "tooltip": {
         "productBtn": "Go to this product"
       },
       "ariaLabel": {
         "viewed": "viewed",
-        "setViewed": "set as viewed"
-      }
+        "setViewed": "set as viewed",
+        "toNotifications": "Go to all notifications"
+      },
+      "toNotificationsBtn": "Go to all notifications"
     }
   },
   "footer": {
@@ -205,7 +208,15 @@
     "November",
     "December"
   ],
-  "days": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+  "days": [
+    "Su",
+    "Mo",
+    "Tu",
+    "We",
+    "Th",
+    "Fr",
+    "Sa"
+  ],
   "modal": {
     "confirm": {
       "confirm": "Confirm",

@@ -1,64 +1,68 @@
 import { Button, Flex, Loader } from '@components/primitives';
 import { Notification } from '@components/primitives/notification';
-import { useAppDispatch, useTypedSelector } from '@hooks';
-import { loadMoreUserNotifications } from '@store';
-import { NOTIFICATIONS_FILTER } from '@vse-bude/shared';
+import { useTypedSelector } from '@hooks';
 import { useTranslation } from 'next-i18next';
-import { useState } from 'react';
+import { NOTIFICATIONS_FILTER } from '@vse-bude/shared';
+import { useRouter } from 'next/router';
+import { ProfileRoutes, Routes } from '@enums';
 import * as styles from './styles';
 
-export default function NotificationsWrapper({ viewed }: { viewed: boolean }) {
-  const dispatch = useAppDispatch();
+export default function NotificationsWrapper({
+  handleClose,
+}: {
+  handleClose: () => void;
+}) {
   const { t } = useTranslation();
+  const { push } = useRouter();
   const {
-    notifications: { notifications, count },
-    loadMoreLoading,
     loading,
+    notifications: { notifications },
   } = useTypedSelector((store) => store.profile);
-  const [page, setPage] = useState(1);
-  const totalNotifications =
-    page * NOTIFICATIONS_FILTER.NOTIFICATIONS_LIMIT_DEFAULT;
-  page * NOTIFICATIONS_FILTER.NOTIFICATIONS_LIMIT_DEFAULT;
+  const onClickHandler = () => {
+    push(Routes.PROFILE + ProfileRoutes.NOTIFICATIONS);
+    handleClose();
+  };
 
-  return (
-    <div css={styles.notificationsWrapper}>
-      {loading ? (
+  if (loading) {
+    return (
+      <div css={styles.notificationsWrapper}>
         <Flex justify={'center'}>
           <Loader />
         </Flex>
-      ) : (
+      </div>
+    );
+  }
+
+  return (
+    <div css={styles.notificationsWrapper}>
+      {notifications?.length > 0 ? (
         <>
-          {notifications?.length > 0 ? (
-            notifications.map((item) => (
-              <Notification notificationData={item} key={item.id} />
-            ))
-          ) : (
-            <p>{t('common:header.notifications.noNotification')}</p>
-          )}
-          {count > totalNotifications && (
-            <Flex justify={'center'}>
-              {loadMoreLoading ? (
-                <Loader size="small" />
-              ) : (
-                <Button
-                  onClick={() => {
-                    dispatch(
-                      loadMoreUserNotifications({
-                        from: totalNotifications,
-                        limit: NOTIFICATIONS_FILTER.NOTIFICATIONS_LIMIT_DEFAULT,
-                        viewed,
-                      }),
-                    );
-                    setPage(page + 1);
-                  }}
-                  size="small"
-                >
-                  {t('common:header.notifications.loadMore')}
-                </Button>
+          {notifications
+            .filter(
+              (_, index) =>
+                index < NOTIFICATIONS_FILTER.NOTIFICATIONS_LIMIT_DEFAULT,
+            )
+            .map((item) => (
+              <div key={item.id} css={styles.notificationWrapper}>
+                <Notification notificationData={item} />
+              </div>
+            ))}
+          <Flex justify={'center'}>
+            <Button
+              aria-label={t(
+                'common:header.notifications.ariaLabel.toNotifications',
               )}
-            </Flex>
-          )}
+              size="small"
+              onClick={onClickHandler}
+            >
+              {t('common:header.notifications.toNotificationsBtn')}
+            </Button>
+          </Flex>
         </>
+      ) : (
+        <p css={styles.noNotifications}>
+          {t('common:header.notifications.noNotification')}
+        </p>
       )}
     </div>
   );

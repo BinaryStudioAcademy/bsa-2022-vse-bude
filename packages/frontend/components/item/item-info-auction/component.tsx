@@ -74,9 +74,10 @@ export const ItemInfoAuction = ({
   const minBidAmount = +item.currentPrice + +item.minimalBid;
 
   const {
+    loading,
     permissions: { isAbleToLeaveAuction },
   } = useTypedSelector((state) => state.product);
-  const { loading } = useTypedSelector((state) => state.product);
+
   const isAuthor = user?.id === item.author.id;
   const {
     register,

@@ -22,18 +22,21 @@
       "messages": "Повідомлення",
       "support": "Підтримка",
       "signOut": "Вийти",
-      "makePost": "Створити пост"
+      "makePost": "Створити пост",
+      "notifications": "Сповіщення"
     },
-    "notifications":{
-      "noNotification":"Немає непрочитаних повідомлень",
+    "notifications": {
+      "noNotification": "Сповіщень поки немає",
       "loadMore": "Завантажити ще",
       "tooltip": {
         "productBtn": "Перейти до цього товару"
       },
-      "ariaLabel":{
+      "ariaLabel": {
         "viewed": "переглянуто",
-        "setViewed": "зробити прочитаним"
-      }
+        "setViewed": "зробити прочитаним",
+        "toNotifications": "Усі сповіщення"
+      },
+      "toNotificationsBtn": "Усі сповіщення"
     }
   },
   "footer": {
