@@ -24,8 +24,6 @@ export const EmailVerification = ({ showDescription }: Props) => {
 
   const { t } = useTranslation();
 
-  console.log(t('auth:emailText'));
-
   const {
     register,
     handleSubmit,
