@@ -94,7 +94,7 @@ const ProductInfo: FC = () => {
       />
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={[globalStyles.px5, globalStyles.mb5]}
+        style={[globalStyles.px5, globalStyles.py6, globalStyles.mb6]}
       >
         {isAuction && <Countdown endDate={product.endDate} />}
         <Text
