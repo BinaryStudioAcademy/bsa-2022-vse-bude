@@ -52,7 +52,7 @@ const SellerInfo = ({ author }: { author: UserProfileDto }) => {
                 globalStyles.fs14,
               ]}
             >
-              {firstName} {lastName}
+              {`${firstName} ${lastName}`}
             </Text>
           </View>
         </View>
