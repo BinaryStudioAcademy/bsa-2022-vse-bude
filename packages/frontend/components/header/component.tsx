@@ -14,7 +14,7 @@ import {
 import { useRouter } from 'next/router';
 import { fetchCategories } from 'store/category';
 import type { HttpAcceptLanguage } from '@vse-bude/shared';
-import dynamic from 'next/dynamic';
+import Search from './search/component';
 import { ProfileInfo } from './profile-info';
 import { Navigation } from './navigation/component';
 import { BurgerMenu } from './burger-menu/component';
@@ -23,10 +23,8 @@ import * as styles from './styles';
 interface RequestOptions {
   locale?: HttpAcceptLanguage;
 }
-const Search = dynamic(() => import('@components/primitives/search/component'));
 
 export const Header = () => {
-  const [searchQuery, setSearchQuery] = useState('');
   const [show, setShow] = useState(false);
   const { user, loading } = useAuth();
   const isMounted = useMounted();
@@ -100,25 +98,11 @@ export const Header = () => {
               <>
                 <Suspense fallback={<Loader size="extraSmall" />}>
                   {size.width > 600 ? (
-                    <Search
-                      value={searchQuery}
-                      setValue={setSearchQuery}
-                      setSearchOpen={setSearchOpen}
-                      placeholder={t(
-                        'common:components.input.searchProductsPlaceholder',
-                      )}
-                    />
+                    <Search setSearchOpen={setSearchOpen} />
                   ) : (
                     <>
                       {searchOpen ? (
-                        <Search
-                          value={searchQuery}
-                          setValue={setSearchQuery}
-                          setSearchOpen={setSearchOpen}
-                          placeholder={t(
-                            'common:components.input.searchProductsPlaceholder',
-                          )}
-                        />
+                        <Search setSearchOpen={setSearchOpen} />
                       ) : (
                         <IconButton
                           cssExtend={styles.searchButton}
