@@ -9,7 +9,6 @@ import { styles } from './styles';
 type ImageCarouselProps = Pick<ProductDto, 'imageLinks'>;
 
 const ImageCarousel: FC<ImageCarouselProps> = ({ imageLinks }) => {
-  const isImageAvailable = imageLinks.length > 0;
   const totalCount = imageLinks.length;
   const renderImage: ListRenderItem<string> = ({ item, index }) => (
     <View style={styles.imgContainer}>
@@ -22,22 +21,19 @@ const ImageCarousel: FC<ImageCarouselProps> = ({ imageLinks }) => {
   );
 
   return (
-    <>
-      {isImageAvailable ? (
-        <FlatList
-          horizontal={true}
-          snapToInterval={0}
-          snapToAlignment="center"
-          showsHorizontalScrollIndicator={false}
-          data={imageLinks}
-          keyExtractor={(item, index) => `${item}_${index}`}
-          style={[globalStyles.mt6, globalStyles.mb6]}
-          renderItem={renderImage}
-        />
-      ) : (
+    <FlatList
+      ListEmptyComponent={
         <Image source={images.no_image_available} style={styles.image} />
-      )}
-    </>
+      }
+      horizontal={true}
+      snapToInterval={0}
+      snapToAlignment="center"
+      showsHorizontalScrollIndicator={false}
+      data={imageLinks}
+      keyExtractor={(item, index) => `${item}_${index}`}
+      style={[globalStyles.mt6, globalStyles.mb6]}
+      renderItem={renderImage}
+    />
   );
 };
 
