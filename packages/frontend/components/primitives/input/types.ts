@@ -11,19 +11,19 @@ interface BaseInputProps {
 
 export interface SearchProps
   extends Omit<React.HTMLProps<HTMLInputElement>, 'onChange'>,
-  BaseInputProps {
+    BaseInputProps {
   onChange: (value: string, e) => void;
 }
 
 export interface PasswordProps
   extends React.HTMLProps<HTMLInputElement>,
-  BaseInputProps,
-  InputStylingProps { }
+    BaseInputProps,
+    InputStylingProps {}
 
 export interface InputProps
   extends React.HTMLProps<HTMLInputElement>,
-  BaseInputProps,
-  InputStylingProps {
+    BaseInputProps,
+    InputStylingProps {
   type: 'text' | 'email' | 'number';
   labelRequiredMark?: boolean;
   tooltip?: string;
@@ -32,5 +32,5 @@ export interface InputProps
 
 export interface InputDateProps
   extends ReactDatePickerProps,
-  BaseInputProps,
-  InputStylingProps { }
+    BaseInputProps,
+    InputStylingProps {}
