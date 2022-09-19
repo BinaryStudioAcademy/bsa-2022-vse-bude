@@ -15,11 +15,8 @@ const styles = StyleSheet.create({
   btnWidth: {
     width: 97,
   },
-  minBid: {
-    paddingVertical: 14,
-    paddingHorizontal: 18,
-    backgroundColor: ColorPalette.GRAY_100,
-    borderRadius: 7,
+  maxInputWidth: {
+    maxWidth: 150,
   },
   btnIcon: {
     position: 'absolute',

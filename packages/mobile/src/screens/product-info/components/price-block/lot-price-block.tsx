@@ -169,6 +169,7 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
             errors={errors}
             placeholder={placeholderText}
             editable={canUserMakeBid}
+            contentContainerStyle={styles.maxInputWidth}
           />
           <View
             style={[
@@ -176,7 +177,11 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
               globalStyles.alignItemsCenter,
             ]}
           >
-            {isLoading && <Spinner />}
+            {isLoading && (
+              <View>
+                <Spinner isOverflow={true} />
+              </View>
+            )}
             {!!isAbleToLeaveAuction && user && (
               <TouchableHighlight
                 onPress={openModal}
