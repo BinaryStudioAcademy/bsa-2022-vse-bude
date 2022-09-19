@@ -19,6 +19,7 @@ const storage = new Storage({
 
 const http = new Http({
   storage,
+  apiPrefix: ENV.APP.API_ORIGIN_URL,
 });
 
 const authApi = new AuthApi({
