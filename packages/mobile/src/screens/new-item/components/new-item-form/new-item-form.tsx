@@ -222,7 +222,7 @@ const NewItemForm: FC = () => {
       />
       <Input
         label={t('make_a_post.SITE')}
-        placeholder={t('make_a_post.SITE')}
+        placeholder={t('make_a_post.SITE_PLACEHOLDER')}
         name="site"
         control={control}
         errors={errors}

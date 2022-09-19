@@ -175,6 +175,7 @@ export const screens = {
     FACEBOOK: 'Facebook',
     FACEBOOK_PLACEHOLDER: 'Enter your nickname',
     SITE: 'Site',
+    SITE_PLACEHOLDER: 'Enter site address',
   },
   home: {
     HELP_UKRAINE: 'Help Ukraine',
