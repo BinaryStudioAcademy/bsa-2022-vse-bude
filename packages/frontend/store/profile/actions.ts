@@ -1,10 +1,16 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import type { Http, UpdateFullUserProfileDto } from '@vse-bude/shared';
+import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
+import type {
+  Http,
+  NotificationQuery,
+  UpdateFullUserProfileDto,
+} from '@vse-bude/shared';
 import {
   getUserProfileSSR,
   getFullUserProfile,
   updateUserData,
   updateAvatar,
+  getUserNotifications,
+  setViewedNotification,
 } from '@services';
 import { addToast } from 'store/toast/actions';
 import { ProfileActions } from './action-types';
@@ -74,4 +80,27 @@ export const updateUserAvatar = createAsyncThunk(
 
         return rejectWithValue(e.message);
       }),
+);
+export const fetchUserNotifications = createAsyncThunk(
+  ProfileActions.FETCH_NOTIFICATIONS,
+  (filter: NotificationQuery, { rejectWithValue }) =>
+    getUserNotifications(filter).catch((e) => rejectWithValue(e.message)),
+);
+export const loadMoreUserNotifications = createAsyncThunk(
+  ProfileActions.UPLOAD_NOTIFICATIONS,
+  (filter: NotificationQuery, { rejectWithValue }) =>
+    getUserNotifications(filter).catch((e) => rejectWithValue(e.message)),
+);
+
+export const updateNotificationView = createAsyncThunk(
+  ProfileActions.SET_NOTIFICATION_VIEWED,
+  (id: string, { rejectWithValue, dispatch }) => {
+    dispatch(setUpdateViewLoading(id));
+
+    return setViewedNotification(id).catch((e) => rejectWithValue(e.message));
+  },
+);
+
+export const setUpdateViewLoading = createAction<string>(
+  ProfileActions.SET_NOTIFICATION_VIEWED_LOADING,
 );

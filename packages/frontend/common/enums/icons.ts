@@ -34,6 +34,7 @@ export enum IconName {
   FILTER = 'filter',
   PENCIL = 'pencil',
   SEARCH = 'search',
+  SHOPPING_BAG = 'shoping-bag',
 }
 
 export const IconNameToClassName = {
@@ -73,4 +74,5 @@ export const IconNameToClassName = {
   [IconName.FILTER]: 'fa-solid fa-filter',
   [IconName.PENCIL]: 'fa-solid fa-pencil',
   [IconName.SEARCH]: 'fa-solid fa-search',
+  [IconName.SHOPPING_BAG]: 'fa-sharp fa-solid fa-bags-shopping',
 };

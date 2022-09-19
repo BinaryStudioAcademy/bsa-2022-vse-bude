@@ -25,6 +25,7 @@ export enum ProfileRoutes {
   ACCOUNT_SETTINGS = '/settings',
   MESSAGES = '/messages',
   SUPPORT = '/support',
+  NOTIFICATIONS = '/notifications',
 }
 
 export enum ItemRoutes {

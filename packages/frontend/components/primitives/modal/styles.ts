@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import type { Theme } from '@emotion/react';
 
-export const modalWrapper = ({ opacities }: Theme) => css`
+export const modalWrapper = ({ opacities, zIndex }: Theme) => css`
   position: fixed;
-  z-index: 100;
+  z-index: ${zIndex.modalWrapper};
   top: 0;
   bottom: 0;
   left: 0;
