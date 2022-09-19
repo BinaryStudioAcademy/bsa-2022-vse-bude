@@ -74,17 +74,22 @@ const SellerInfo = ({ author }: { author: UserProfileDto }) => {
               globalStyles.alignItemsCenter,
             ]}
           >
-            <PhoneIcon size={15} color={ColorPalette.YELLOW_200} />
-            <Text
-              style={[
-                globalStyles.px3,
-                globalStyles.fs14,
-                globalStyles.fontWeightMedium,
-              ]}
-            >
-              {phone}
-            </Text>
+            {phone && (
+              <>
+                <PhoneIcon size={15} color={ColorPalette.YELLOW_200} />
+                <Text
+                  style={[
+                    globalStyles.px3,
+                    globalStyles.fs14,
+                    globalStyles.fontWeightMedium,
+                  ]}
+                >
+                  {phone}
+                </Text>
+              </>
+            )}
           </View>
+
           {socialMedia.map((media, index) => (
             <SocialButton
               key={index}
