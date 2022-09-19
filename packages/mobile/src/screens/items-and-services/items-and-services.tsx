@@ -17,7 +17,7 @@ import {
 } from '~/hooks/hooks';
 import { selectProducts } from '~/store/selectors';
 import { products } from '~/store/actions';
-import { CommonHeaderLeftComponents } from '~/common/enums/enums';
+import { commonHeaderLeftComponent } from '~/common/enums/enums';
 import { styles } from './styles';
 import { ListHeader } from './components/components';
 
@@ -33,8 +33,8 @@ const ItemsAndServices = () => {
   return (
     <ScreenWrapper>
       <Header
-        commonLeftSideComponents={CommonHeaderLeftComponents.BURGER_MENU}
-        RightSideComponent={() => (
+        commonHeaderLeft={commonHeaderLeftComponent.BURGER_MENU}
+        HeaderRight={() => (
           <ButtonText
             textStyle={globalStyles.fs16}
             onPress={() => {

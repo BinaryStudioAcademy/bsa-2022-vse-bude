@@ -1,8 +1,13 @@
 import React, { FC, FunctionComponent, useEffect } from 'react';
-import { Text, View, HeaderLeft, BurgerMenu } from '~/components/components';
+import {
+  Text,
+  View,
+  HeaderLeft as ArrowBack,
+  BurgerMenu,
+} from '~/components/components';
 import { useCustomTheme, useNavigation, useRoute } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
-import { CommonHeaderLeftComponents } from '~/common/enums/enums';
+import { commonHeaderLeftComponent } from '~/common/enums/enums';
 import { getTitle } from '~/helpers/helpers';
 import {
   MainNavigationParamList,
@@ -15,17 +20,17 @@ import { StyleProp, ViewStyle } from 'react-native';
 import { styles } from './styles';
 
 type Props = {
-  commonLeftSideComponents?: CommonHeaderLeftComponents;
-  LeftSideComponent?: FunctionComponent;
-  RightSideComponent?: FunctionComponent;
+  commonHeaderLeft?: commonHeaderLeftComponent;
+  HeaderLeft?: FunctionComponent;
+  HeaderRight?: FunctionComponent;
   style?: StyleProp<ViewStyle>;
   titleShown?: boolean;
 };
 
 const Header: FC<Props> = ({
-  commonLeftSideComponents,
-  LeftSideComponent,
-  RightSideComponent,
+  commonHeaderLeft,
+  HeaderLeft,
+  HeaderRight,
   style,
   titleShown = true,
 }) => {
@@ -39,10 +44,9 @@ const Header: FC<Props> = ({
       headerShown: false,
     });
   }, []);
-  const isArrowBackPresent =
-    commonLeftSideComponents === CommonHeaderLeftComponents.ARROW_BACK;
-  const isBurgerMenuPresent =
-    commonLeftSideComponents === CommonHeaderLeftComponents.BURGER_MENU;
+  const isArrowBack = commonHeaderLeft === commonHeaderLeftComponent.ARROW_BACK;
+  const isBurgerMenu =
+    commonHeaderLeft === commonHeaderLeftComponent.BURGER_MENU;
 
   return (
     <View
@@ -56,9 +60,9 @@ const Header: FC<Props> = ({
       ]}
     >
       <View style={styles.leftElement}>
-        {isArrowBackPresent && <HeaderLeft />}
-        {isBurgerMenuPresent && <BurgerMenu />}
-        {LeftSideComponent && <LeftSideComponent />}
+        {isArrowBack && <ArrowBack />}
+        {isBurgerMenu && <BurgerMenu />}
+        {HeaderLeft && <HeaderLeft />}
       </View>
       <Text
         style={[
@@ -71,7 +75,7 @@ const Header: FC<Props> = ({
         {titleShown && (title || route.name)}
       </Text>
       <View style={[globalStyles.alignItemsEnd, styles.rightElement]}>
-        {RightSideComponent && <RightSideComponent />}
+        {HeaderRight && <HeaderRight />}
       </View>
     </View>
   );
