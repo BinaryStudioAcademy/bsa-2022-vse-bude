@@ -1,1 +1,1 @@
-export const MAX_PRICE = 1000000000;
+export const MAX_PRICE = 40000;
