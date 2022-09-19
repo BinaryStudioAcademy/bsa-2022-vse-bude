@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
   useAppSelector,
   useCustomTheme,
@@ -21,7 +21,7 @@ import {
 import { products as productActions } from '~/store/actions';
 import { removeObjectFalsyFields } from '~/helpers/helpers';
 import { RootState } from '~/common/types/types';
-import { ProductQuery } from '@vse-bude/shared';
+import { ProductQuery, ProductDto } from '@vse-bude/shared';
 import { DataStatus } from '~/common/enums/enums';
 import { styles } from './styles';
 import { ListHeader } from './components/components';
@@ -40,6 +40,15 @@ const ItemsAndServices = () => {
     );
   }, [filters]);
   const isLoading = dataStatus === DataStatus.PENDING;
+  const renderItem = useCallback(
+    ({ item }: { item: ProductDto }) => (
+      <Product
+        contentContainerStyle={[styles.productWrapper, globalStyles.mt4]}
+        product={item}
+      />
+    ),
+    [],
+  );
 
   return (
     <ScreenWrapper>
@@ -56,12 +65,7 @@ const ItemsAndServices = () => {
           style={globalStyles.px4}
           data={items}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <Product
-              contentContainerStyle={[styles.productWrapper, globalStyles.mt4]}
-              product={item}
-            />
-          )}
+          renderItem={renderItem}
         />
       )}
     </ScreenWrapper>
