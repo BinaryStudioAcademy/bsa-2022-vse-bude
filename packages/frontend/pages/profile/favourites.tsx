@@ -34,9 +34,9 @@ export const getServerSideProps = withProtected(
 );
 
 const FavouritesPage = () => (
-    <Layout>
-      <FavouritesItems />
-    </Layout>
-  );
+  <Layout>
+    <FavouritesItems />
+  </Layout>
+);
 
 export default FavouritesPage;
