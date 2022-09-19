@@ -6,6 +6,10 @@ const selectProducts = (state: RootState): AllProductsDto => {
   return state.products.products;
 };
 
+const selectDataStatusProducts = (state: RootState) => {
+  return state.products.dataStatus;
+};
+
 const selectProductById = createSelector(
   [selectProducts, (state: RootState, productId: string) => productId],
 
@@ -48,4 +52,5 @@ export {
   selectPopularProducts,
   selectPopularLots,
   auctionMakeBidStatus,
+  selectDataStatusProducts,
 };
