@@ -15,8 +15,9 @@ const styles = StyleSheet.create({
   btnWidth: {
     width: 97,
   },
-  maxInputWidth: {
-    maxWidth: 150,
+  input: {
+    maxWidth: 140,
+    marginRight: 5,
   },
   btnIcon: {
     position: 'absolute',
@@ -61,10 +62,6 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     borderColor: ColorPalette.GRAY_200,
     borderWidth: 1,
-  },
-  input: {
-    maxWidth: 140,
-    marginRight: 5,
   },
   buttonsBlock: {
     flex: 1,
