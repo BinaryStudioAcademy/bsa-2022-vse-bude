@@ -7,10 +7,9 @@ import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { emailCodeResend, emailVerification } from 'store/auth';
 import { RESEND_VERIFICATION_CODE_LIMIT_SEC } from 'common/constants/app';
-import { getErrorKey } from 'helpers/validation';
 import { inputWrapper } from '../layout/styles';
 import { verifyEntity, verifyForm, verifyInput, verifyText } from '../styles';
-import { verifyCodeSchema } from './validation';
+import { createVerifyCodeSchema } from './validation';
 import { ResendCodeButton } from './resend-code';
 import { resendButton } from './styles';
 
@@ -23,12 +22,16 @@ export const EmailVerification = ({ showDescription }: Props) => {
 
   const dispatch = useAppDispatch();
 
+  const { t } = useTranslation();
+
+  console.log(t('auth:emailText'));
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<EmailVerifyDto>({
-    resolver: joiResolver(verifyCodeSchema),
+    resolver: joiResolver(createVerifyCodeSchema(t)),
   });
   const onSubmit: SubmitHandler<EmailVerifyDto> = (data) => {
     dispatch(emailVerification(data));
@@ -37,8 +40,6 @@ export const EmailVerification = ({ showDescription }: Props) => {
   const onResendCode = () => {
     dispatch(emailCodeResend());
   };
-
-  const { t } = useTranslation();
 
   return (
     <form css={verifyForm} onSubmit={handleSubmit(onSubmit)}>
@@ -59,7 +60,7 @@ export const EmailVerification = ({ showDescription }: Props) => {
           variant="primary"
           type="text"
           name="code"
-          error={t(getErrorKey('code', errors.code?.type) as any)}
+          error={errors.code?.message}
         />
         <Error text={error} />
       </div>
