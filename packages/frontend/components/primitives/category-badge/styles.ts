@@ -15,6 +15,9 @@ export const badge = ({
   radiuses,
   colors,
 }: Theme) => css`
+  display: flex;
+  justify-content: center;
+  gap: ${spaces.xs};
   padding: ${spaces.xs} ${spaces.md};
   margin: 0 ${spaces.md} 0 0;
   border: none;
@@ -32,10 +35,7 @@ export const badge = ({
 `;
 
 export const cross = (theme: Theme) => css`
-  display: inline-block;
   & > i {
-    position: relative;
-    left: 3px;
     font-size: ${theme.fontSizes.body2} !important;
   }
 `;

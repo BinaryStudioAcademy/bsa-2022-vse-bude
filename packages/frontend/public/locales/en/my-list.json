@@ -1,4 +1,10 @@
 {
+  "breadcrumbs": {
+    "home": "Home",
+    "profile": "Account",
+    "myList": "My List"
+  },
+  "pageName": "My List",
   "card": {
     "currency_uah": "UAH",
     "seller": "Seller",
@@ -6,8 +12,49 @@
     "posted": "Posted",
     "drafted": "Draft",
     "purchased": "Purchased",
+    "archived": "Archived",
     "sold": "Sold",
     "edit": "edited",
-    "publish": "Publish"
+    "publish": "Publish",
+    "unarchive": "Unarchive",
+    "tooltip-xmark": "archive"
+  },
+  "months": {
+    "january": "January",
+    "february": "February",
+    "march": "March",
+    "april": "April",
+    "may": "May",
+    "june": "June",
+    "july": "July",
+    "august": "August",
+    "september": "September",
+    "october": "October",
+    "november": "November",
+    "december": "December"
+  },
+  "filter": {
+    "button": {
+      "all": "All",
+      "fixedPrice": "Fixed Price",
+      "auction": "Auction"
+    },
+    "checkbox": {
+      "all": "All",
+      "purchased": "Purchased",
+      "sold": "Sold",
+      "posted": "Posted",
+      "drafts": "Drafts",
+      "archived": "Archived"
+    },
+    "badges": {
+      "allTypes": "All Type"
+    }
+  },
+  "modal": {
+    "header": "Move the product to the archive?",
+    "buttons": {
+      "add": "Archive"
+    }
   }
 }

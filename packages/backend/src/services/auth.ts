@@ -4,14 +4,16 @@ import type {
   UserSignUpDto,
   AuthResponse,
   UpdatePassword,
+  UserResponseDto,
 } from '@vse-bude/shared';
 import {
   HttpStatusCode,
   UserPersonalInfoValidationMessage,
+  AuthApiRoutes,
 } from '@vse-bude/shared';
 import { sign as jwtSign, type UserSessionJwtPayload } from 'jsonwebtoken';
-import { getEnv } from '@helpers';
 import {
+  getEnv,
   fromMilliToSeconds,
   fromMinToSeconds,
   fromSecondsToDate,
@@ -20,10 +22,11 @@ import {
   UserNotFoundError,
   UserExistsError,
   ProfileError,
-  WrongPasswordError,
   UnauthorizedError,
   WrongRefreshTokenError,
   ExpiredRefreshTokenError,
+  WrongPasswordOrEmailError,
+  ResetPassLinkInvalid,
 } from '@errors';
 import type {
   CreateRefreshToken,
@@ -38,11 +41,9 @@ import {
   type EmailService,
 } from '@services';
 import { authResponseMap, userMap } from '@mappers';
-import { AuthApiRoutes } from '@vse-bude/shared';
 import { lang } from '@lang';
 import type { User } from '@prisma/client';
 import { ResetPasswordMailBuilder } from '../email/reset-password-mail-builder';
-import { ResetPassLinkInvalid } from '../error/reset-password/reset-pass-link-invalid';
 import type { RedisStorageService } from './redis-storage';
 
 export class AuthService {
@@ -127,7 +128,7 @@ export class AuthService {
   async signIn(signInDto: UserSignInDto): Promise<AuthResponse> {
     const user = await this._userRepository.getByEmail(signInDto.email);
     if (!user) {
-      throw new UserNotFoundError();
+      throw new WrongPasswordOrEmailError();
     }
 
     if (
@@ -136,7 +137,7 @@ export class AuthService {
         signInDto.password,
       )
     ) {
-      throw new WrongPasswordError();
+      throw new WrongPasswordOrEmailError();
     }
 
     const tokenData = this.getTokenData(user.id);
@@ -150,7 +151,7 @@ export class AuthService {
     return authResponseMap(tokenData, user);
   }
 
-  async getCurrentUser(userId: string): Promise<object> {
+  async getCurrentUser(userId: string): Promise<UserResponseDto> {
     const user = await this._userRepository.getById(userId);
 
     return userMap(user);

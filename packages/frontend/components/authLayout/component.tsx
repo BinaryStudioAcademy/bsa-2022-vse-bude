@@ -1,7 +1,7 @@
 import Image from 'next/future/image';
 import { Button } from '@primitives';
 import { useTranslation } from 'next-i18next';
-import postStamp from '../../public/images/postStamp.png';
+import postStamp from '../../public/images/postStamp.jpg';
 import logoImg from '../../public/images/logo.png';
 import * as styles from './styles';
 import type { LayoutProps } from './types';

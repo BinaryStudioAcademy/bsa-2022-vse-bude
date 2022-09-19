@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
-import { t } from 'i18next';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { RootScreenName } from '~/common/enums/enums';
 import { RootNavigationParamList } from '~/common/types/types';
-import { useAppSelector } from '~/hooks/hooks';
+import { useAppSelector, useTranslation } from '~/hooks/hooks';
 import { selectCurrentUser } from '~/store/selectors';
 import {
   MessagesScreen,
@@ -21,6 +20,7 @@ import {
   ItemsAndServices,
 } from '~/screens/screens';
 import { HeaderLeft } from '~/components/components';
+import { VerifyEmailScreen } from '~/screens/verify-screens/verify-screens';
 import { HomeWithMenuNavigation } from './drawer/drawer.navigation';
 import {
   mainScreenOptions,
@@ -34,6 +34,7 @@ const Stack = createNativeStackNavigator<RootNavigationParamList>();
 
 const Navigation: FC = () => {
   const user = useAppSelector(selectCurrentUser);
+  const { t } = useTranslation();
 
   return (
     <NativeStack.Navigator screenOptions={mainScreenOptions}>
@@ -89,6 +90,10 @@ const Navigation: FC = () => {
             <Stack.Screen
               name={RootScreenName.VERIFIED_PHONE}
               component={VerifiedPhoneScreen}
+            />
+            <Stack.Screen
+              name={RootScreenName.VERIFY_EMAIL}
+              component={VerifyEmailScreen}
             />
             <Stack.Screen
               name={RootScreenName.VERIFY_CODE_EMAIL}

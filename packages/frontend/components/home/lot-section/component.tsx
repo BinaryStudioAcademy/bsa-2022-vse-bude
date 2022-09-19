@@ -1,5 +1,6 @@
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { ProductCard } from 'components/product/card/component';
+import { useTranslation } from 'next-i18next';
 import { lightTheme } from 'theme';
 import { SectionLayout } from '../section-layout';
 import { lotContainer } from './styles';
@@ -12,6 +13,7 @@ const LotSection = ({
   loadMoreHref,
   loadImageHighPriority,
 }: LotSectionProps) => {
+  const { t } = useTranslation();
   if (!lots?.length) {
     return null;
   }
@@ -27,7 +29,7 @@ const LotSection = ({
           aria-label="items-carousel"
           options={{
             role: 'region',
-            fixedWidth: 360,
+            fixedWidth: 300,
             focus: 0,
             pagination: false,
             trimSpace: true,
@@ -39,13 +41,13 @@ const LotSection = ({
             mediaQuery: 'max',
             breakpoints: {
               [lightTheme.breakpoints.sm]: {
-                fixedWidth: 300,
+                fixedWidth: 250,
               },
               [lightTheme.breakpoints.md]: {
                 arrows: false,
               },
               [lightTheme.breakpoints.xl]: {
-                fixedWidth: 340,
+                fixedWidth: 275,
               },
             },
           }}
@@ -60,7 +62,7 @@ const LotSection = ({
                 price={item.price}
                 images={item.imageLinks}
                 type={item.type}
-                currency="UAH"
+                currency={t('public:uah')}
                 auctionDate={item.endDate}
                 loadImageHighPriority={loadImageHighPriority && index < 2}
               />

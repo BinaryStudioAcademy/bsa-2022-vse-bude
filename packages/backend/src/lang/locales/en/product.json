@@ -28,6 +28,9 @@
     },
     "status": {
       "empty": "Field status cannot be empty"
+    },
+    "condition": {
+      "empty": "Field condition cannot be empty"
     }
   },
   "condition": {

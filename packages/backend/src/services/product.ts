@@ -1,8 +1,11 @@
-import type { ProductRepository } from '@repositories';
+import type { ProductRepository, BidRepository } from '@repositories';
 import {
   ProductNotFoundError,
   UnauthorizedError,
   AuctionEndedError,
+  FieldError,
+  NotVerifiedError,
+  AlreadyLeftAuctionError,
 } from '@errors';
 import type { Request } from 'express';
 import { getFilenameFromUrl, getUserIdFromRequest, toUtc } from '@helpers';
@@ -17,22 +20,19 @@ import type {
   ProductSearchResponse,
   ProductSearchQuery,
 } from '@vse-bude/shared';
-import { ProductType } from '@vse-bude/shared';
+import { ProductType, NotificationType } from '@vse-bude/shared';
 import { ProductStatus } from '@prisma/client';
 import type { Product, Bid } from '@prisma/client';
 import type {
   AuctionScheduler,
   VerifyService,
   S3StorageService,
+  NotificationService,
 } from '@services';
-import type { BidRepository } from '@repositories';
 import { productMapper, auctionPermissionsMapper } from '@mappers';
-import { FieldError } from 'error/product/field-error';
 import { createPostSchema, updatePostSchema } from 'validation/product/schemas';
-import { NotVerifiedError } from 'error/user/not-verified';
 import { lang } from '@lang';
-import type { AllProductsResponse } from '@types';
-import type { ProductById } from 'common/types/product';
+import type { AllProductsResponse, ProductById } from '@types';
 
 export class ProductService {
   private _productRepository: ProductRepository;
@@ -45,18 +45,22 @@ export class ProductService {
 
   private _auctionScheduler: AuctionScheduler;
 
+  private _notificationService: NotificationService;
+
   constructor(
     productRepository: ProductRepository,
     verifyService: VerifyService,
     s3StorageService: S3StorageService,
     bidRepository: BidRepository,
     auctionScheduler: AuctionScheduler,
+    notificationService: NotificationService,
   ) {
     this._productRepository = productRepository;
     this._verifyService = verifyService;
     this._s3StorageService = s3StorageService;
     this._bidRepository = bidRepository;
     this._auctionScheduler = auctionScheduler;
+    this._notificationService = notificationService;
   }
 
   public async getAll(query: ProductQuery): Promise<AllProductsResponse> {
@@ -136,7 +140,7 @@ export class ProductService {
   public async leaveAuction(
     userId: string,
     productId: string,
-  ): Promise<object> {
+  ): Promise<ProductById> {
     const product = await this._productRepository.getById(productId);
     if (!product) {
       throw new ProductNotFoundError();
@@ -146,11 +150,29 @@ export class ProductService {
       throw new AuctionEndedError();
     }
 
+    const lastBid = product.bids[product.bids.length - 1];
+
+    const bidders = await this._bidRepository.getBidders(productId);
+
+    if (!bidders.includes(userId)) {
+      throw new AlreadyLeftAuctionError();
+    }
+
     await this._bidRepository.retrieve(
       userId,
       productId,
       new Date(Date.now()).toISOString(),
     );
+
+    if (lastBid && lastBid.bidderId === userId) {
+      await this._notificationService.create({
+        type: NotificationType.AUCTION_LEFT,
+        userId: product.authorId,
+        title: lang('notifications:title.AUCTION_LEFT', {}, 'en'),
+        description: lang('notifications:description.AUCTION_LEFT', {}, 'en'),
+        productId: productId,
+      });
+    }
 
     return this.getById(productId);
   }
@@ -191,7 +213,7 @@ export class ProductService {
     req,
     userId,
     fieldsData,
-  }: CreateProduct): Promise<Product> {
+  }: CreateProduct): Promise<ProductById> {
     const { error } = createPostSchema.validate(req.body);
     if (error) {
       throw new FieldError(error.message);
@@ -231,7 +253,7 @@ export class ProductService {
     productId,
     userId,
     fieldsData,
-  }: UpdateProduct): Promise<Product> {
+  }: UpdateProduct): Promise<ProductById> {
     fieldsData.images = fieldsData.images
       ? [].concat(fieldsData.images)
       : undefined;
@@ -288,11 +310,11 @@ export class ProductService {
     userId,
     productId,
   }: BuyProduct): Promise<string | undefined> {
-    const isActive = await this._productRepository.checkStatus(
+    const product = await this._productRepository.checkStatus(
       productId,
       ProductStatus.ACTIVE,
     );
-    if (!isActive) {
+    if (!product) {
       return undefined;
     }
     const isUserVerified = await this._verifyService.isUserVerified(userId);
@@ -304,6 +326,14 @@ export class ProductService {
       userId,
       ProductStatus.FINISHED,
     );
+
+    await this._notificationService.create({
+      type: NotificationType.PRODUCT_SOLD,
+      userId: product.authorId,
+      title: lang('notifications:title.PRODUCT_SOLD', {}, 'en'),
+      description: lang('notifications:description.PRODUCT_SOLD', {}, 'en'),
+      productId: productId,
+    });
 
     return productId;
   }

@@ -1,10 +1,8 @@
 import type {
-  Bid,
   FavoriteProducts,
   Prisma,
   PrismaClient,
   Product,
-  SocialMedia,
 } from '@prisma/client';
 import { ProductStatus, ProductType } from '@prisma/client';
 import type {
@@ -13,14 +11,12 @@ import type {
   ProductSearchResponse,
 } from '@vse-bude/shared';
 import type { Decimal } from '@prisma/client/runtime';
-import { Order } from '@vse-bude/shared';
-import { ITEM_FILTER } from '@vse-bude/shared';
+import type { ProductById } from '@types';
+import { Order, ITEM_FILTER } from '@vse-bude/shared';
 import { toUtc } from '@helpers';
 
 export class ProductRepository {
   private _dbClient: PrismaClient;
-
-  private _limit = 20;
 
   constructor(prismaClient: PrismaClient) {
     this._dbClient = prismaClient;
@@ -76,34 +72,21 @@ export class ProductRepository {
         "Product"."title"
       FROM
         "Product"
-      WHERE 
+      WHERE
         (SIMILARITY("Product"."title", ${q}) > 0.2
-      OR 
+      OR
         "Product"."title" ILIKE ${q + '%'}
-      OR 
+      OR
         "Product"."title" ILIKE ${'%' + q + '%'})
       AND
         "Product"."status" = CAST(${ProductStatus.ACTIVE} AS "ProductStatus")
-      ORDER BY 
+      ORDER BY
         SIMILARITY("Product"."title", ${q}) DESC
       LIMIT 10;
     `;
   }
 
-  public getById(id: string): Prisma.Prisma__ProductClient<
-    Product & {
-      author: {
-        id: string;
-        phone: string;
-        socialMedia: SocialMedia[];
-        firstName: string;
-        lastName: string;
-        avatar: string;
-      };
-      category: { id: string; title: string };
-      bids: Bid[];
-    }
-  > {
+  public getById(id: string): Promise<ProductById> {
     return this._dbClient.product.findUnique({
       where: {
         id,

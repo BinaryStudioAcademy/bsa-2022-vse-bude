@@ -1,14 +1,34 @@
 import { useTypedSelector } from '@hooks';
 import dynamic from 'next/dynamic';
 
-const VerificationModal = dynamic(
-  () => import('@components/verification/component'),
+const PhoneVerificationModal = dynamic(
+  () => import('@components/phone-verification/component'),
+);
+
+const EmailVerificationModal = dynamic(
+  () => import('@components/email-verification/component'),
+);
+
+const PostTypeModal = dynamic(
+  () => import('@components/make-a-post/type-of-post/component'),
 );
 
 export const Modals = () => {
-  const { isModalOpen } = useTypedSelector(
-    (state) => state.modals.verifyPhoneModal,
+  const isPhoneVerificationModalOpen = useTypedSelector(
+    (state) => state.modals.verifyPhoneModal.isModalOpen,
+  );
+  const isEmailVerificationModalOpen = useTypedSelector(
+    (state) => state.modals.verifyEmailModal.isModalOpen,
+  );
+  const isCreatePostModalOpen = useTypedSelector(
+    (state) => state.modals.isCreatePostModalOpen,
   );
 
-  return <>{isModalOpen && <VerificationModal />}</>;
+  return (
+    <>
+      {isPhoneVerificationModalOpen && <PhoneVerificationModal />}
+      {isEmailVerificationModalOpen && <EmailVerificationModal />}
+      {isCreatePostModalOpen && <PostTypeModal />}
+    </>
+  );
 };

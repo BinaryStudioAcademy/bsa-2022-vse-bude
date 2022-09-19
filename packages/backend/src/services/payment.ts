@@ -1,4 +1,9 @@
-import { ApiRoutes, OrderApiRoutes, OrderStatus } from '@vse-bude/shared';
+import {
+  ApiRoutes,
+  OrderApiRoutes,
+  OrderStatus,
+  ProductType,
+} from '@vse-bude/shared';
 import type {
   OrderDto,
   MerchantSignatureData,
@@ -11,10 +16,7 @@ import { getEnv, logger } from '@helpers';
 import { ProductStatus } from '@prisma/client';
 import type { OrderRepository, ProductRepository } from '@repositories';
 import { UnauthorizedError } from '@errors';
-import {
-  TransactionResponseStatus,
-  TransactionStatus,
-} from 'common/enums/services/payment';
+import { TransactionResponseStatus, TransactionStatus } from '@enums';
 import crypto from 'crypto';
 
 export class PaymentService {
@@ -63,13 +65,12 @@ export class PaymentService {
 
     logger.log({ orderReference, transactionStatus, reason, reasonCode });
 
-    const { productId, createdAt } = await this._orderRepository.getById(
-      orderReference,
-    );
+    const { productId, createdAt, product } =
+      await this._orderRepository.getById(orderReference);
 
     if (transactionStatus === TransactionStatus.APPROVED) {
       await this._productRepository.update(productId, {
-        status: ProductStatus.FINISHED,
+        status: ProductStatus.SOLD,
       });
 
       await this._orderRepository.updateStatus(
@@ -90,9 +91,17 @@ export class PaymentService {
     ].includes(transactionStatus as TransactionStatus);
 
     if (isTransactionDeclined) {
-      await this._productRepository.update(productId, {
-        status: ProductStatus.ACTIVE,
-      });
+      if (product.type === ProductType.SELLING) {
+        await this._productRepository.update(productId, {
+          status: ProductStatus.ACTIVE,
+        });
+      }
+
+      if (product.type === ProductType.AUCTION) {
+        await this._productRepository.update(productId, {
+          status: ProductStatus.FINISHED,
+        });
+      }
 
       await this._orderRepository.updateStatus(
         orderReference,

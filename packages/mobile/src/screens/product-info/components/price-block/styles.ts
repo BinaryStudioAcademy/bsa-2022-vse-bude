@@ -62,6 +62,10 @@ const styles = StyleSheet.create({
     borderColor: ColorPalette.GRAY_200,
     borderWidth: 1,
   },
+  input: {
+    maxWidth: 140,
+    marginRight: 5,
+  },
   buttonsBlock: {
     flex: 1,
     paddingTop: 5,
