@@ -45,7 +45,7 @@ const Button: FC<ButtonProps> = ({
         android_ripple={rippleConfig}
       >
         {isLoading ? (
-          <Spinner isOverflow={true} />
+          <Spinner />
         ) : (
           <>
             {iconLeft && <View style={globalStyles.mr1}>{iconLeft}</View>}
