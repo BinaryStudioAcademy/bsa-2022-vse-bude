@@ -1,11 +1,16 @@
-import React, { FC, FunctionComponent, useEffect } from 'react';
+import React, { FC } from 'react';
 import {
   Text,
   View,
   HeaderLeft as ArrowBack,
   BurgerMenu,
 } from '~/components/components';
-import { useCustomTheme, useNavigation, useRoute } from '~/hooks/hooks';
+import {
+  useCustomTheme,
+  useNavigation,
+  useRoute,
+  useEffect,
+} from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
 import { commonHeaderLeftComponent } from '~/common/enums/enums';
 import { getTitle } from '~/helpers/helpers';
@@ -21,8 +26,8 @@ import { styles } from './styles';
 
 type Props = {
   commonHeaderLeft?: commonHeaderLeftComponent;
-  HeaderLeft?: FunctionComponent;
-  HeaderRight?: FunctionComponent;
+  HeaderLeft?: FC;
+  HeaderRight?: FC;
   style?: StyleProp<ViewStyle>;
   titleShown?: boolean;
 };
