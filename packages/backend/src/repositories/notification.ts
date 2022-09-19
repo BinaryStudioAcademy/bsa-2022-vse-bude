@@ -22,7 +22,6 @@ export class NotificationRepository {
       from = NOTIFICATIONS_FILTER.NOTIFICATIONS_FROM_DEFAULT,
       viewed,
     } = query;
-    console.log(viewed);
 
     return this._dbClient.$transaction([
       this._dbClient.notification.findMany({
