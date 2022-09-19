@@ -43,6 +43,12 @@ const DropDown = <T extends FormControlValues>({
   const { colors } = useCustomTheme();
   const [open, setOpen] = useState(false);
 
+  const handleChange = (value: string | null) => {
+    if (value && onChange) {
+      onChange(value);
+    }
+  };
+
   return (
     <View style={styles.container}>
       {!!label && (
@@ -80,9 +86,7 @@ const DropDown = <T extends FormControlValues>({
         zIndex={zIndex}
         disabled={disabled}
         placeholder={placeholder}
-        onChangeValue={
-          onChange ? (value) => onChange(value as string) : undefined
-        }
+        onChangeValue={handleChange}
       />
     </View>
   );

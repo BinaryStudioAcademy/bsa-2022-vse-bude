@@ -4,7 +4,7 @@ import {
 } from '~/common/constants/constants';
 
 const checkSliderPriceValidity = (price: string) => {
-  const priceAsNumber = +price.replace(/\D/gi, '');
+  const priceAsNumber = Number(price.replace(/\D/gi, ''));
   if (priceAsNumber < MINIMUM_SLIDER_PRICE) {
     return MINIMUM_SLIDER_PRICE;
   }
