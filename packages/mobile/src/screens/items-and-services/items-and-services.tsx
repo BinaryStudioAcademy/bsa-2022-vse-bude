@@ -1,9 +1,10 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import {
   useAppSelector,
   useCustomTheme,
   useEffect,
   useAppDispatch,
+  useCallback,
 } from '~/hooks/hooks';
 import {
   ScreenWrapper,
@@ -49,6 +50,7 @@ const ItemsAndServices = () => {
     ),
     [],
   );
+  const keyExtractor = useCallback((item: ProductDto) => item.id, []);
 
   return (
     <ScreenWrapper>
@@ -64,7 +66,7 @@ const ItemsAndServices = () => {
           ListHeaderComponent={ListHeader}
           style={globalStyles.px4}
           data={items}
-          keyExtractor={(item) => item.id}
+          keyExtractor={keyExtractor}
           renderItem={renderItem}
         />
       )}
