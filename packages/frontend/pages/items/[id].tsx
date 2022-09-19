@@ -93,7 +93,7 @@ const ItemPage = () => {
             name: item.category?.title,
             route: encodeURI(
               `${Routes.ITEMS}?filter=${JSON.stringify({
-                category: item.category.id,
+                categoryId: item.category.id,
               })}`,
             ),
           },

@@ -5,7 +5,6 @@ export const pageNameWrapper = ({ spaces }: Theme) => css`
   margin: ${spaces.sm} 0 ${spaces.lg};
 `;
 export const notificationsWrapper = ({ spaces }: Theme) => css`
-  flex: 1;
   display: grid;
   grid-gap: ${spaces.sm};
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
