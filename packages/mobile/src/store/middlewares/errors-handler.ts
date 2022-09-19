@@ -1,9 +1,9 @@
 import { t } from 'i18next';
+import { ExceptionName } from '@vse-bude/shared';
+import { Middleware, AnyAction } from '@reduxjs/toolkit';
 import { notification } from '~/services/services';
 import { AppDispatch } from '~/common/types/types';
-import { Middleware, AnyAction } from '@reduxjs/toolkit';
 import { auth as authActions } from '~/store/actions';
-import { ExceptionName } from '@vse-bude/shared';
 
 type HandleErrorParams = {
   dispatch: AppDispatch;
