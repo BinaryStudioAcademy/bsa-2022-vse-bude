@@ -6,4 +6,4 @@ export { FontFamily, FontSize } from './fonts/fonts';
 export { DateTimeFormat } from './date-time-format/date-time-format';
 export { DateFormat } from './date/date-format';
 export { AppLinkingPrefixes } from './app-linking/app-linking-prefixes';
-export { commonHeaderLeftComponent } from './header/header';
+export { CommonHeaderLeftComponent } from './header/header';

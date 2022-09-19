@@ -12,7 +12,7 @@ import {
   useEffect,
 } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
-import { commonHeaderLeftComponent } from '~/common/enums/enums';
+import { CommonHeaderLeftComponent } from '~/common/enums/enums';
 import { getTitle } from '~/helpers/helpers';
 import {
   MainNavigationParamList,
@@ -25,16 +25,14 @@ import { StyleProp, ViewStyle } from 'react-native';
 import { styles } from './styles';
 
 type Props = {
-  commonHeaderLeft?: commonHeaderLeftComponent;
-  HeaderLeft?: FC;
+  headerLeft?: FC | CommonHeaderLeftComponent;
   HeaderRight?: FC;
   style?: StyleProp<ViewStyle>;
   titleShown?: boolean;
 };
 
 const Header: FC<Props> = ({
-  commonHeaderLeft,
-  HeaderLeft,
+  headerLeft,
   HeaderRight,
   style,
   titleShown = true,
@@ -49,9 +47,19 @@ const Header: FC<Props> = ({
       headerShown: false,
     });
   }, []);
-  const isArrowBack = commonHeaderLeft === commonHeaderLeftComponent.ARROW_BACK;
-  const isBurgerMenu =
-    commonHeaderLeft === commonHeaderLeftComponent.BURGER_MENU;
+
+  let HeaderLeft;
+  switch (headerLeft) {
+    case CommonHeaderLeftComponent.ARROW_BACK:
+      HeaderLeft = ArrowBack;
+      break;
+    case CommonHeaderLeftComponent.BURGER_MENU:
+      HeaderLeft = BurgerMenu;
+      break;
+    default:
+      HeaderLeft = headerLeft as FC;
+      break;
+  }
 
   return (
     <View
@@ -64,11 +72,7 @@ const Header: FC<Props> = ({
         style,
       ]}
     >
-      <View style={styles.leftElement}>
-        {isArrowBack && <ArrowBack />}
-        {isBurgerMenu && <BurgerMenu />}
-        {HeaderLeft && <HeaderLeft />}
-      </View>
+      <View style={styles.leftElement}>{headerLeft && <HeaderLeft />}</View>
       <Text
         style={[
           styles.title,

@@ -1,1 +1,1 @@
-export { commonHeaderLeftComponent } from './common-header-left-component';
+export { CommonHeaderLeftComponent } from './common-header-left-component';
