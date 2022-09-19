@@ -3,6 +3,7 @@ import { ListRenderItem } from 'react-native';
 import { FlatList, Image, Text, View } from '~/components/components';
 import { ProductDto } from '@vse-bude/shared';
 import { globalStyles } from '~/styles/styles';
+import { images } from '~/assets/images/images';
 import { styles } from './styles';
 
 type ImageCarouselProps = Pick<ProductDto, 'imageLinks'>;
@@ -21,6 +22,9 @@ const ImageCarousel: FC<ImageCarouselProps> = ({ imageLinks }) => {
 
   return (
     <FlatList
+      ListEmptyComponent={
+        <Image source={images.no_image_available} style={styles.image} />
+      }
       horizontal={true}
       snapToInterval={0}
       snapToAlignment="center"

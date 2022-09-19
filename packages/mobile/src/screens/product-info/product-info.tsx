@@ -24,6 +24,7 @@ import {
   ScrollView,
   Spinner,
   Countdown,
+  StatusBar,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { selectCurrentUser } from '~/store/selectors';
@@ -85,45 +86,48 @@ const ProductInfo: FC = () => {
   const isAuction = type == ProductType.AUCTION;
 
   return (
-    <View style={globalStyles.flex1}>
+    <ScreenWrapper>
+      <StatusBar
+        backgroundColor={colors.backgroundSecondary}
+        translucent={false}
+        barStyle="dark-content"
+      />
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={[globalStyles.px5]}
+        style={[globalStyles.px5, globalStyles.mb5]}
       >
-        <ScreenWrapper>
-          {isAuction && <Countdown endDate={product.endDate} />}
+        {isAuction && <Countdown endDate={product.endDate} />}
+        <Text
+          style={[
+            isAuction && globalStyles.mt6,
+            globalStyles.fs36,
+            globalStyles.fontWeightExtraBold,
+            { color: colors.text },
+          ]}
+        >
+          {title}
+        </Text>
+        <View
+          style={[
+            globalStyles.flexDirectionRow,
+            globalStyles.alignItemsCenter,
+            globalStyles.mt2,
+          ]}
+        >
+          <EyeIcon size={15} color={colors.icon} />
           <Text
             style={[
-              isAuction && globalStyles.mt6,
-              globalStyles.fs36,
-              globalStyles.fontWeightExtraBold,
-              { color: colors.text },
+              globalStyles.px3,
+              globalStyles.fs12,
+              { color: colors.icon },
             ]}
           >
-            {title}
+            {views}
           </Text>
-          <View
-            style={[
-              globalStyles.flexDirectionRow,
-              globalStyles.alignItemsCenter,
-              globalStyles.mt2,
-            ]}
-          >
-            <EyeIcon size={15} color={colors.icon} />
-            <Text
-              style={[
-                globalStyles.px3,
-                globalStyles.fs12,
-                { color: colors.icon },
-              ]}
-            >
-              {views}
-            </Text>
-          </View>
-          {imageLinks && <ImageCarousel imageLinks={imageLinks} />}
-          <Description product={product} />
-          <SellerInfo author={author} />
-        </ScreenWrapper>
+        </View>
+        {imageLinks && <ImageCarousel imageLinks={imageLinks} />}
+        <Description product={product} />
+        <SellerInfo author={author} />
       </ScrollView>
       {isAuction ? (
         <LotPriceBlock
@@ -134,7 +138,7 @@ const ProductInfo: FC = () => {
       ) : (
         <ProductPriceBlock price={price} />
       )}
-    </View>
+    </ScreenWrapper>
   );
 };
 
