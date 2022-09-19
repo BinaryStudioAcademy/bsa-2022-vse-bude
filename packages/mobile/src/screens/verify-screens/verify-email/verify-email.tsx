@@ -65,18 +65,22 @@ const VerifyEmailScreen: FC<PropsVerifyScreens> = ({ route }) => {
   };
 
   const onSubmit = (): void => {
-    dispatch(verifyActions.getVerificationCodeEmail())
-      .unwrap()
-      .then(() => {
-        notification.success(t('verify.CODE_SENT'));
-        navigation.navigate(RootScreenName.VERIFY_CODE_EMAIL, {
-          fromSignUp: Boolean(fromSignUp),
+    if (!fromSignUp) {
+      dispatch(verifyActions.getVerificationCodeEmail())
+        .unwrap()
+        .then(() => {
+          notification.success(t('verify.CODE_SENT'));
+          navigation.navigate(RootScreenName.VERIFY_CODE_EMAIL);
+        })
+        .catch((err) => {
+          // eslint-disable-next-line
+          console.warn(err);
         });
-      })
-      .catch((err) => {
-        // eslint-disable-next-line
-        console.warn(err);
+    } else {
+      navigation.navigate(RootScreenName.VERIFY_CODE_EMAIL, {
+        fromSignUp: Boolean(fromSignUp),
       });
+    }
   };
 
   return (
