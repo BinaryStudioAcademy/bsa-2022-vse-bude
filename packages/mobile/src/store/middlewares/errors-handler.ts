@@ -4,10 +4,15 @@ import { AppDispatch } from '~/common/types/types';
 import { Middleware, AnyAction } from '@reduxjs/toolkit';
 import { auth as authActions } from '~/store/actions';
 import { ExceptionName } from '@vse-bude/shared';
-import { store } from '../store';
+
+type HandleErrorParams = {
+  dispatch: AppDispatch;
+};
 
 const errorHandler: Middleware =
-  () => (next: AppDispatch) => (action: AnyAction) => {
+  ({ dispatch }: HandleErrorParams) =>
+  (next: AppDispatch) =>
+  (action: AnyAction) => {
     if (action.error) {
       const {
         error: { name, message },
@@ -16,7 +21,7 @@ const errorHandler: Middleware =
       notification.error(message, t('common:common.ERROR'));
 
       if (name === ExceptionName.INVALID_CREDENTIALS) {
-        store.dispatch(authActions.logOut());
+        dispatch(authActions.logOut());
       }
     }
 
