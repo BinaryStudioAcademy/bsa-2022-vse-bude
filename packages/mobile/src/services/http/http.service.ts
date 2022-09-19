@@ -87,38 +87,6 @@ class Http {
     return config;
   }
 
-    return this.parseJSON<T>(result);
-  }
-
-  private getRefreshedAuthReqConfig(config: {
-    method?: HttpMethod;
-    headers?: Headers;
-    body?: BodyInit_;
-  }) {
-    const token = this.#storage.getItem(StorageKey.ACCESS_TOKEN);
-    if (config.headers) {
-      config.headers.set(HttpHeader.AUTHORIZATION, `Bearer ${token}`);
-    }
-
-    return config;
-  }
-
-    return this.parseJSON<T>(result);
-  }
-
-  private getRefreshedAuthReqConfig(config: {
-    method?: HttpMethod;
-    headers?: Headers;
-    body?: BodyInit_;
-  }) {
-    const token = this.#storage.getItem(StorageKey.ACCESS_TOKEN);
-    if (config.headers) {
-      config.headers.set(HttpHeader.AUTHORIZATION, `Bearer ${token}`);
-    }
-
-    return config;
-  }
-
   private getUrl(url: string, params?: Record<string, unknown>): string {
     return `${url}${params ? `${getQueryString(params)}` : ''}`;
   }
