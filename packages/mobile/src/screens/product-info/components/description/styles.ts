@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   title: {
-    flex: 1,
+    width: '42%',
     alignSelf: 'flex-start',
   },
   titleText: {
@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   description: {
-    flex: 2,
+    flex: 1,
   },
 });
 

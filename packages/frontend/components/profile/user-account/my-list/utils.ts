@@ -9,7 +9,7 @@ type FilterStatuses = {
   archived: boolean;
 };
 
-type FilteredProducts = {
+export type FilteredProducts = {
   purchased: ProductDto[] | null;
   sold: ProductDto[] | null;
   posted: ProductDto[] | null;
@@ -21,12 +21,10 @@ export const filterCallback = ({
   itemsList,
   filterStatus,
   filterType,
-  userId,
 }: {
   itemsList: ProductDto[];
   filterStatus: FilterStatuses;
   filterType: string;
-  userId: string;
 }): FilteredProducts => {
   let items = [...itemsList];
 
@@ -36,11 +34,9 @@ export const filterCallback = ({
 
   let filteredItems: FilteredProducts = items.reduce(
     (prev, item) => {
-      if (item.status === ProductStatus.FINISHED && item?.winnerId === userId)
-        prev.purchased.push(item);
+      if (item.status === ProductStatus.PURCHASED) prev.purchased.push(item);
 
-      if (item.status === ProductStatus.FINISHED && item?.authorId === userId)
-        prev.sold.push(item);
+      if (item.status === ProductStatus.SOLD) prev.sold.push(item);
 
       if (item.status === ProductStatus.ACTIVE) prev.posted.push(item);
 

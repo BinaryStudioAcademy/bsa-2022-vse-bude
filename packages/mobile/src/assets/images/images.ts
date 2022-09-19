@@ -14,5 +14,6 @@ const images = {
   list_item_image: require('~/assets/images/list-item-image.png'),
   list_item_avatar: require('~/assets/images/list-item-avatar.png'),
   list_item_organization: require('~/assets/images/list-item-organization.png'),
+  no_image_available: require('./no-image-available.png'),
 };
 export { images };

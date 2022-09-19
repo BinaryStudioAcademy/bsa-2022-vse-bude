@@ -6,6 +6,7 @@ import {
 } from '@providers';
 import { isProduction } from '@helpers';
 import { AuctionScheduler } from '@scheduler';
+import type { ServicesInit } from '@types';
 import { CategoryService } from './category';
 import { ProductService } from './product';
 import { AuthService } from './auth';
@@ -27,7 +28,7 @@ import { NotificationService } from './notification';
 const emailProvider = new SendInBlueEmailProvider();
 export const emailService = new EmailService(emailProvider);
 
-export const initServices = (repositories: Repositories): any => {
+export const initServices = (repositories: Repositories): ServicesInit => {
   const hashService: HashService = new HashService();
   const redisService: RedisStorageService = new RedisStorageService(
     isProduction,
@@ -90,6 +91,7 @@ export const initServices = (repositories: Repositories): any => {
     ),
     myListService: new MyListService({
       myListRepository: repositories.myListRepository,
+      orderRepository: repositories.orderRepository,
     }),
     orderService: new OrderService(
       repositories.orderRepository,
@@ -124,4 +126,6 @@ export {
   type PaymentService,
   type AuctionScheduler,
   type NotificationService,
+  type SMSSenderService,
+  type RedisStorageService,
 };

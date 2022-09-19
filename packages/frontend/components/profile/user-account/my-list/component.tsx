@@ -1,5 +1,5 @@
 import { useAppDispatch, useAuth, useTypedSelector } from '@hooks';
-import { useMemo } from 'react';
+import { useMemo, useEffect } from 'react';
 import { useTranslation } from 'next-i18next';
 import type { RootState } from '@types';
 import {
@@ -10,7 +10,7 @@ import {
   Modal,
 } from '@components/primitives';
 import { IconColor, IconName } from '@enums';
-import { resetBadges } from '@store';
+import { resetBadges, setDefaultBadges, resetFilter } from '@store';
 import { SubPageName } from '../common';
 import { Posted, Drafted, Purchased, Sold, Archived } from './cards';
 import { FilterArrow } from './primitives';
@@ -23,20 +23,19 @@ import { filterCallback } from './utils';
 
 export const MyListInfo = () => {
   const { t } = useTranslation();
-  const { badges, showCancelModal } = useTypedSelector(
-    (state: RootState) => state.myList,
-  );
+  const { itemsList, filterType, filterStatus, badges, showCancelModal } =
+    useTypedSelector((state: RootState) => state.myList);
   const dispatch = useAppDispatch();
   const { user } = useAuth();
 
-  const { itemsList, filterType, filterStatus } = useTypedSelector(
-    (state: RootState) => state.myList,
-  );
+  useEffect(() => {
+    dispatch(setDefaultBadges([null, null]));
+    dispatch(resetFilter());
+  }, [dispatch]);
 
   const filteredItems = useMemo(
-    () =>
-      filterCallback({ itemsList, filterType, userId: user.id, filterStatus }),
-    [itemsList, filterType, filterStatus, user.id],
+    () => filterCallback({ itemsList, filterType, filterStatus }),
+    [itemsList, filterType, filterStatus],
   );
 
   const onRemoveBadge = ({

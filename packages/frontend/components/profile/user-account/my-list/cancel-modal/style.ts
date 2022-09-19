@@ -17,7 +17,9 @@ export const header = ({
   fontWeights,
   lineHeights,
   colors,
+  spaces,
 }: Theme) => css`
+  margin-bottom: ${spaces.md};
   font-size: ${fontSizes.body1};
   line-height: ${lineHeights.body1};
   font-weight: ${fontWeights.modal};
@@ -29,11 +31,6 @@ export const closeButton = css`
   z-index: 2;
   top: -20px;
   right: -20px;
-`;
-
-export const inputRow = ({ spaces }: Theme) => css`
-  padding-top: ${spaces.md};
-  margin-bottom: ${spaces.md};
 `;
 
 export const actionButtons = ({ spaces }: Theme) => css`

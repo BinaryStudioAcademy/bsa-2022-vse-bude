@@ -17,19 +17,28 @@ export const cardContent = ({ spaces, maxMq }: Theme) => css`
   ${maxMq[4]} {
     padding: ${spaces.md} ${spaces.md};
   }
+  ${maxMq[0]} {
+    flex-direction: column;
+  }
 `;
 
-export const leftContent = css`
+export const leftContent = ({ maxMq }: Theme) => css`
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: center;
+  ${maxMq[0]} {
+    align-items: unset;
+  }
 `;
 
-export const rightContent = css`
+export const rightContent = ({ maxMq }: Theme) => css`
   display: flex;
   flex-direction: column;
   width: 230px;
+  ${maxMq[0]} {
+    margin-top: 5px;
+  }
 `;
 
 export const details = ({ colors, spaces }: Theme) => css`
@@ -65,6 +74,10 @@ export const editDate = ({
   line-height: ${lineHeights.caption};
   font-weight: ${fontWeights.body2};
   color: ${colors.textLight};
+`;
+
+export const archiveButtonWrapper = css`
+  position: relative;
 `;
 
 export const publishButtonWrapper = ({ spaces }: Theme) => css`
