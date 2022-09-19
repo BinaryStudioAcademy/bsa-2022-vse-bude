@@ -1,7 +1,7 @@
-import type { Prisma, PrismaClient, PrismaPromise } from '@prisma/client';
+import type { Prisma, PrismaClient, FavoriteProducts } from '@prisma/client';
 import { ProductStatus } from '@prisma/client';
 import { Order } from '@vse-bude/shared';
-import type { Item } from 'common/types/my-list-items';
+import type { Item, ProductById } from '@types';
 
 export class MyListRepository {
   private _dbClient: PrismaClient;
@@ -10,7 +10,7 @@ export class MyListRepository {
     itemId,
   }: {
     itemId: string;
-  }): PrismaPromise<Prisma.BatchPayload> {
+  }): Promise<Prisma.BatchPayload> {
     return this._dbClient.bid.deleteMany({
       where: {
         productId: itemId,
@@ -22,7 +22,7 @@ export class MyListRepository {
     this._dbClient = prismaClient;
   }
 
-  public getSoldItems({ userId }: { userId: string }): PrismaPromise<Item[]> {
+  public getSoldItems({ userId }: { userId: string }): Promise<Item[]> {
     return this._dbClient.product.findMany({
       where: {
         authorId: userId,
@@ -44,15 +44,15 @@ export class MyListRepository {
             lastName: true,
           },
         },
-        endDate: true,
+        updatedAt: true,
       },
       orderBy: {
-        endDate: Order.DESC,
+        updatedAt: Order.DESC,
       },
     });
   }
 
-  public getPostedItems({ userId }: { userId: string }): PrismaPromise<Item[]> {
+  public getPostedItems({ userId }: { userId: string }): Promise<Item[]> {
     return this._dbClient.product.findMany({
       where: {
         authorId: userId,
@@ -75,11 +75,7 @@ export class MyListRepository {
     });
   }
 
-  public getDraftedItems({
-    userId,
-  }: {
-    userId: string;
-  }): PrismaPromise<Item[]> {
+  public getDraftedItems({ userId }: { userId: string }): Promise<Item[]> {
     return this._dbClient.product.findMany({
       where: {
         authorId: userId,
@@ -101,7 +97,7 @@ export class MyListRepository {
     });
   }
 
-  public getArchived({ userId }: { userId: string }): PrismaPromise<Item[]> {
+  public getArchived({ userId }: { userId: string }): Promise<Item[]> {
     return this._dbClient.product.findMany({
       where: {
         authorId: userId,
@@ -116,10 +112,10 @@ export class MyListRepository {
         type: true,
         status: true,
         views: true,
-        endDate: true,
+        updatedAt: true,
       },
       orderBy: {
-        endDate: Order.DESC,
+        updatedAt: Order.DESC,
       },
     });
   }
@@ -130,7 +126,7 @@ export class MyListRepository {
   }: {
     itemId: string;
     postDate: string;
-  }): PrismaPromise<Item> {
+  }): Promise<Item> {
     return this._dbClient.product.update({
       where: {
         id: itemId,
@@ -155,11 +151,11 @@ export class MyListRepository {
 
   public addItemToArchive({
     itemId,
-    endDate,
+    updatedAt,
   }: {
     itemId: string;
-    endDate: string;
-  }): PrismaPromise<Item> {
+    updatedAt: string;
+  }): Promise<Item> {
     this._deleteBids({ itemId });
 
     return this._dbClient.product.update({
@@ -168,7 +164,7 @@ export class MyListRepository {
       },
       data: {
         status: ProductStatus.CANCELLED,
-        endDate,
+        updatedAt,
       },
       select: {
         id: true,
@@ -179,7 +175,7 @@ export class MyListRepository {
         type: true,
         status: true,
         views: true,
-        endDate: true,
+        updatedAt: true,
       },
     });
   }
@@ -198,6 +194,21 @@ export class MyListRepository {
       },
       select: {
         title: true,
+      },
+    });
+  }
+
+  public getFavourites({ userId }: { userId: string }): Promise<
+    (FavoriteProducts & {
+      product: ProductById;
+    })[]
+  > {
+    return this._dbClient.favoriteProducts.findMany({
+      where: {
+        userId,
+      },
+      include: {
+        product: true,
       },
     });
   }

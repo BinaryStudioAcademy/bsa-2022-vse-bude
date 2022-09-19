@@ -13,7 +13,7 @@ import * as styles from './styles';
 
 export const Sold = ({ data }: CardProps) => {
   const { t } = useTranslation();
-  const { title, imageLinks, price, winner, endDate } = data;
+  const { title, imageLinks, price, winner, updatedAt } = data;
   const { id, avatar, firstName, lastName } = winner;
 
   return (
@@ -21,7 +21,7 @@ export const Sold = ({ data }: CardProps) => {
       <div css={styles.cardContent}>
         <div css={styles.leftContent}>
           <ItemImage src={imageLinks[0]} title={title} />
-          <ItemDate size="lg" time={endDate} />
+          <ItemDate size="lg" time={updatedAt} />
         </div>
 
         <div css={styles.rightContent}>

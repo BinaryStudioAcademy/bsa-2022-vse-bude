@@ -3,7 +3,12 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { HydrateAction } from '@types';
 import type { ProductDto } from '@vse-bude/shared';
 import { HYDRATE } from 'next-redux-wrapper';
-import { fetchMyListSSR, addItemToArchive, addItemToPosted } from './actions';
+import {
+  fetchMyListSSR,
+  addItemToArchive,
+  addItemToPosted,
+  fetchFavouritesSSR,
+} from './actions';
 
 interface MyListState {
   itemsList: ProductDto[] | null;
@@ -141,6 +146,19 @@ const myListSlice = createSlice({
       state.error = payload;
     },
 
+    [fetchFavouritesSSR.pending.type]: (state) => {
+      state.loading = true;
+    },
+    [fetchFavouritesSSR.fulfilled.type]: (state, { payload }) => {
+      state.loading = false;
+      state.itemsList = payload;
+    },
+    [fetchFavouritesSSR.rejected.type]: (state, { payload }) => {
+      state.loading = false;
+      state.itemsList = null;
+      state.error = payload;
+    },
+
     [addItemToArchive.pending.type]: (state) => {
       state.loading = true;
     },
@@ -156,10 +174,10 @@ const myListSlice = createSlice({
       ];
       state.itemsList.push(payload);
       state.itemsList = state.itemsList.sort((itemA, itemB) => {
-        if (itemB.endDate > itemA.endDate) {
+        if (itemB.updatedAt > itemA.updatedAt) {
           return 1;
         }
-        if (itemB.endDate < itemA.endDate) {
+        if (itemB.updatedAt < itemA.updatedAt) {
           return -1;
         }
 

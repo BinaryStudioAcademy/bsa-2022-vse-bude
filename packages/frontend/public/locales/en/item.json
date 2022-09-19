@@ -35,7 +35,7 @@
   },
   "buttons": {
     "editBtn": "Edit",
-    "placeBid": "Place Bid",
+    "placeBid": "Place a Bid",
     "buyBtn": "Buy",
     "tooltips": {
       "favBtn": "You can add product to your favorites list for a quick availability!",

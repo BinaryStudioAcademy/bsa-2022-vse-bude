@@ -102,6 +102,19 @@ export const initProfileRoutes = (
     }),
   );
 
+  router.get(
+    apiPath(path, AccountApiRoutes.FAVOURITES_LIST),
+    authMiddleware,
+    wrap(async (req: Request) => {
+      const { userId } = req;
+      await profileService.getUser({
+        userId,
+      });
+
+      return await myListService.getFavourites({ userId });
+    }),
+  );
+
   /**
    * @openapi
    * /profile/save:
@@ -268,7 +281,7 @@ export const initProfileRoutes = (
     authMiddleware,
     wrap(async (req: Request) => {
       const { userId } = req;
-      const { itemId, endDate } = req.body;
+      const { itemId, updatedAt } = req.body;
       await profileService.getUser({
         userId,
       });
@@ -276,7 +289,7 @@ export const initProfileRoutes = (
 
       return await myListService.addItemToArchive({
         itemId,
-        endDate,
+        updatedAt,
       });
     }),
   );

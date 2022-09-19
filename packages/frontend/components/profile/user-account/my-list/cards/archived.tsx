@@ -19,7 +19,7 @@ import * as styles from './styles';
 
 export const Archived = ({ data }: CardProps) => {
   const { t } = useTranslation();
-  const { id, title, imageLinks, price, description, endDate } = data;
+  const { id, title, imageLinks, price, description, updatedAt } = data;
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -40,7 +40,7 @@ export const Archived = ({ data }: CardProps) => {
       <div css={styles.cardContent}>
         <div css={styles.leftContent}>
           <ItemImage src={imageLinks[0]} title={title} />
-          <ItemDate time={endDate} />
+          <ItemDate time={updatedAt} />
         </div>
 
         <div css={styles.rightContent}>

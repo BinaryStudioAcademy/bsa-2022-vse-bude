@@ -1,5 +1,6 @@
 import type { MyListRepository, OrderRepository } from '@repositories';
-import type { Item } from '@types';
+import type { Item, ProductById } from '@types';
+import type { FavoriteProducts } from '@prisma/client';
 import { ProductStatus } from '@prisma/client';
 import {
   HttpStatusCode,
@@ -85,10 +86,10 @@ export class MyListService {
 
   public async addItemToArchive({
     itemId,
-    endDate,
+    updatedAt,
   }: {
     itemId: string;
-    endDate: string;
+    updatedAt: string;
   }): Promise<Item> {
     const item = await this._myListRepository.checkWithStatus({
       itemId,
@@ -103,7 +104,15 @@ export class MyListService {
 
     return this._myListRepository.addItemToArchive({
       itemId,
-      endDate,
+      updatedAt,
     });
+  }
+
+  public getFavourites({ userId }: { userId: string }): Promise<
+    (FavoriteProducts & {
+      product: ProductById;
+    })[]
+  > {
+    return this._myListRepository.getFavourites({ userId });
   }
 }

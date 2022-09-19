@@ -16,7 +16,7 @@ export const CancelModal = () => {
     event.preventDefault();
     const reqDto: ProductToArchive = {
       itemId,
-      endDate: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
     };
     dispatch(addItemToArchive({ data: reqDto }));
     dispatch(setVisabilityCancelModal());
