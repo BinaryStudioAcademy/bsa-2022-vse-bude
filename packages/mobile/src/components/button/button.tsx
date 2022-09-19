@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Pressable, View } from 'react-native';
 
 import { ButtonAppearance } from '~/common/enums/enums';
-import { Text } from '~/components/components';
+import { Spinner, Text } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 import { ButtonProps } from './common/types/types';
@@ -18,6 +18,7 @@ const Button: FC<ButtonProps> = ({
   compact,
   iconLeft,
   iconRight,
+  isLoading,
 }) => {
   const { containerStyle, buttonStyle, textStyle, rippleConfig } =
     useButtonStyle({
@@ -43,13 +44,19 @@ const Button: FC<ButtonProps> = ({
         ]}
         android_ripple={rippleConfig}
       >
-        {iconLeft && <View style={globalStyles.mr1}>{iconLeft}</View>}
-        <Text
-          style={[globalStyles.fontWeightSemiBold, styles.label, textStyle]}
-        >
-          {label}
-        </Text>
-        {iconRight && <View style={globalStyles.ml1}>{iconRight}</View>}
+        {isLoading ? (
+          <Spinner isOverflow={true} />
+        ) : (
+          <>
+            {iconLeft && <View style={globalStyles.mr1}>{iconLeft}</View>}
+            <Text
+              style={[globalStyles.fontWeightSemiBold, styles.label, textStyle]}
+            >
+              {label}
+            </Text>
+            {iconRight && <View style={globalStyles.ml1}>{iconRight}</View>}
+          </>
+        )}
       </Pressable>
     </View>
   );

@@ -67,11 +67,7 @@ const ProductInfo: FC = () => {
   }, [id, user, dispatch]);
 
   if (!product) {
-    return (
-      <View style={[globalStyles.flex1, globalStyles.justifyContentCenter]}>
-        <Spinner />
-      </View>
-    );
+    return <Spinner isOverflow={true} />;
   }
   const {
     title,
