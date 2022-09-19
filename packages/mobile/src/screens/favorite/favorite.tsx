@@ -48,11 +48,7 @@ const Favorite: FC = () => {
     : guestFavoritesMapper(guestFavorites);
 
   if (isLoading) {
-    return (
-      <ScreenWrapper style={globalStyles.justifyContentCenter}>
-        <Spinner />
-      </ScreenWrapper>
-    );
+    return <Spinner isOverflow={true} />;
   }
 
   return (

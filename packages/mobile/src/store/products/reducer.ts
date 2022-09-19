@@ -160,7 +160,10 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(fetchGuestFavorites.fulfilled, (state, action) => {
       state.dataStatus = DataStatus.FULFILLED;
-      state.guestFavorites = [...state.guestFavorites, action.payload];
+      const favorites = state.guestFavorites.filter(
+        (item) => item.id !== action.payload.id,
+      );
+      state.guestFavorites = [...favorites, action.payload];
     })
     .addMatcher(
       isAnyOf(

@@ -6,6 +6,7 @@ import { useAppSelector, useCustomTheme, useTranslation } from '~/hooks/hooks';
 import {
   Pressable,
   PrimaryButton,
+  Spinner,
   StarSvg,
   Text,
   View,
@@ -59,13 +60,19 @@ const ProductPriceBlock: FC<ProductPriceBlockProps> = ({
             style={[globalStyles.ml5, styles.iconBorder]}
             disabled={isLoading}
           >
-            <StarSvg
-              color={ColorPalette.YELLOW_200}
-              width={30}
-              height={30}
-              fill={isFavorite ? ColorPalette.YELLOW_200 : 'none'}
-              style={styles.icon}
-            />
+            {isLoading ? (
+              <View style={globalStyles.py1}>
+                <Spinner />
+              </View>
+            ) : (
+              <StarSvg
+                color={ColorPalette.YELLOW_200}
+                width={30}
+                height={30}
+                fill={isFavorite ? ColorPalette.YELLOW_200 : 'none'}
+                style={styles.icon}
+              />
+            )}
           </Pressable>
         </View>
       </>
