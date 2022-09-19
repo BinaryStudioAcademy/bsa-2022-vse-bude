@@ -17,19 +17,28 @@ export const cardContent = ({ spaces, maxMq }: Theme) => css`
   ${maxMq[4]} {
     padding: ${spaces.md} ${spaces.md};
   }
+  ${maxMq[0]} {
+    flex-direction: column;
+  }
 `;
 
-export const leftContent = css`
+export const leftContent = ({ maxMq }: Theme) => css`
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: center;
+  ${maxMq[0]} {
+    align-items: unset;
+  }
 `;
 
-export const rightContent = css`
+export const rightContent = ({ maxMq }: Theme) => css`
   display: flex;
   flex-direction: column;
   width: 230px;
+  ${maxMq[0]} {
+    margin-top: 5px;
+  }
 `;
 
 export const details = ({ colors, spaces }: Theme) => css`
