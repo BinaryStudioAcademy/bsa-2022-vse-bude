@@ -181,11 +181,7 @@ export const ItemInfoAuction = ({
       <div css={styles.priceTimerWrapper}>
         <CountDownTimer targetDate={targetDate} />
         <div css={styles.priceWrapper}>
-          <ItemPrice
-            currency={t('public:uah')}
-            amount={item.currentPrice}
-            cssExtended={styles.price}
-          />
+          <ItemPrice amount={item.currentPrice} cssExtended={styles.price} />
           <span>{t('item:currentBid')}</span>
         </div>
       </div>
@@ -206,9 +202,7 @@ export const ItemInfoAuction = ({
                 error={errors.price?.message}
               />
               <span>{t('item:bidInputCaption')} </span>
-              <span>
-                {t('public:uah')} {minBidAmount}
-              </span>
+              <span>{t('public:uah', { value: minBidAmount })}</span>
             </div>
           )}
 

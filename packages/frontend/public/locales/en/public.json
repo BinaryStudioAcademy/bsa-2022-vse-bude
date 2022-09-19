@@ -1,4 +1,4 @@
 {
   "bet": "Bet",
-  "uah": "UAH"
+  "uah": "UAH {{value}}"
 }
