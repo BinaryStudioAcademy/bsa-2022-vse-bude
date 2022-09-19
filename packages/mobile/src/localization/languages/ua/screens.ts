@@ -188,9 +188,6 @@ export const screens = {
     HEADER: 'Який тип продажу ви оберете?',
     AUCTION: 'Аукціон',
     DIRECT_SALE: 'Продаж',
-    VERIFY_MESSAGE_START: 'Для продовження, будь ласка ',
-    VERIFY_LINK: 'підтвердьте ',
-    VERIFY_MESSAGE_END: 'свої облікові дані',
   },
   product_info: {
     TITLE: 'Деталі продукту',

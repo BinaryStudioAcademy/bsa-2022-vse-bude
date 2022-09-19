@@ -10,7 +10,6 @@ import {
   Image,
   View,
   PrimaryButton,
-  Pressable,
 } from '~/components/components';
 import { useAppSelector, useNavigation, useTranslation } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
@@ -33,10 +32,6 @@ const TypeOfPostScreen: FC = () => {
     navigation.navigate(RootScreenName.NEW_AUCTION);
   };
 
-  const handleNavigateToPersonalInfo = () => {
-    navigation.navigate(RootScreenName.PERSONAL_INFO);
-  };
-
   return (
     <ScreenWrapper style={styles.screen}>
       <Text
@@ -51,21 +46,6 @@ const TypeOfPostScreen: FC = () => {
       <View style={globalStyles.py7}>
         <Image source={images.chooseTypeThumb} style={styles.image} />
       </View>
-      {!isAbleToMakePost && (
-        <View
-          style={[
-            globalStyles.flexDirectionRow,
-            globalStyles.py3,
-            styles.verifyMessage,
-          ]}
-        >
-          <Text>{t('type_of_post.VERIFY_MESSAGE_START')}</Text>
-          <Pressable onPress={handleNavigateToPersonalInfo}>
-            <Text style={styles.link}>{t('type_of_post.VERIFY_LINK')}</Text>
-          </Pressable>
-          <Text>{t('type_of_post.VERIFY_MESSAGE_END')}</Text>
-        </View>
-      )}
       <View style={globalStyles.mt5}>
         <PrimaryButton
           label={t('type_of_post.AUCTION')}

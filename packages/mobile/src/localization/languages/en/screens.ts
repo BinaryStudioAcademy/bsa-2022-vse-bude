@@ -189,9 +189,6 @@ export const screens = {
     HEADER: 'What type a post do you create?',
     AUCTION: 'Auction',
     DIRECT_SALE: 'Direct Sale',
-    VERIFY_MESSAGE_START: 'To continue, please ',
-    VERIFY_LINK: 'verify ',
-    VERIFY_MESSAGE_END: 'your credentials',
   },
   product_info: {
     TITLE: 'Product details',
