@@ -139,17 +139,17 @@ export const searchInput = ({
   colors,
   fontSizes,
   lineHeights,
+  heights,
   radiuses,
   spaces,
 }: Theme) => css`
   transition: 200ms linear;
   width: 100%;
-  height: 30px;
-  border: ${colors.backgroundDark} 1px solid;
+  height: ${heights.controlSm};
+  border: none;
   border-radius: ${radiuses.lg};
-  box-sizing: border-box;
   padding: 0 ${spaces.lg};
-  background-color: ${colors.background};
+  background-color: ${colors.backgroundLight};
   font-size: ${fontSizes.toggle};
   line-height: ${lineHeights.toggle};
   font-family: inherit;

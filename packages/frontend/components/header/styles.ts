@@ -7,7 +7,7 @@ export const header = (theme: Theme) => css`
   z-index: ${theme.zIndex.header};
   top: 0;
   padding: ${theme.spaces.lg} 0;
-  background-color: ${theme.colors.backgroundLight};
+  background-color: ${theme.colors.white};
   height: ${theme.heights.header};
   box-shadow: 0px 6px 10px 0px #dedede80;
 
@@ -21,6 +21,10 @@ export const header = (theme: Theme) => css`
 
   .header-content {
     margin-left: ${theme.spaces.xl5};
+  }
+
+  .header-btn-group {
+    margin-left: ${theme.spaces.lg};
   }
 
   .burger-menu-wrapper {
@@ -45,7 +49,8 @@ export const header = (theme: Theme) => css`
   }
 
   @media (max-width: ${theme.breakpoints.lg}px) {
-    .header-content {
+    .header-content,
+    .header-btn-group {
       display: none;
     }
 
