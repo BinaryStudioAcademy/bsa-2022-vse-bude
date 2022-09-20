@@ -13,16 +13,11 @@ import {
 } from '@hooks';
 import { useRouter } from 'next/router';
 import { fetchCategories } from 'store/category';
-import type { HttpAcceptLanguage } from '@vse-bude/shared';
 import Search from './search/component';
 import { ProfileInfo } from './profile-info';
 import { Navigation } from './navigation/component';
 import { BurgerMenu } from './burger-menu/component';
 import * as styles from './styles';
-
-interface RequestOptions {
-  locale?: HttpAcceptLanguage;
-}
 
 export const Header = () => {
   const [show, setShow] = useState(false);
@@ -38,11 +33,7 @@ export const Header = () => {
 
   useEffect(() => {
     if (!categories.length) {
-      const category: RequestOptions = {
-        locale: locale as HttpAcceptLanguage,
-      };
-
-      dispatch(fetchCategories({ locale: category.locale }));
+      dispatch(fetchCategories());
     }
   }, [dispatch, locale, categories]);
 
