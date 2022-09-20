@@ -15,7 +15,7 @@ import { styles } from './styles';
 type Props<T extends FormControlValues> = {
   label?: string;
   name: FormControlPath<T>;
-  errors: FormControlErrors<T>;
+  errors?: FormControlErrors<T>;
   control: FormControl<T>;
   items: Array<{
     label: string;
@@ -41,7 +41,6 @@ const DropDown = <T extends FormControlValues>({
   placeholder,
   backgroundColor,
   dropDownDirection,
-  onChange,
   required,
 }: Props<T>): ReactElement => {
   const { field } = useFormControl({ name, control });
@@ -49,13 +48,7 @@ const DropDown = <T extends FormControlValues>({
   const [open, setOpen] = useState(false);
   const [itemValue, setItemValue] = useState(field.value);
   const [innerItems, setInnerItems] = useState(items);
-  const error = errors[name]?.message as string;
-
-  const handleChange = (value: string | null) => {
-    if (value && onChange) {
-      onChange(value);
-    }
-  };
+  const error = errors ? (errors[name]?.message as string) : false;
 
   return (
     <View style={styles.container}>
@@ -112,7 +105,6 @@ const DropDown = <T extends FormControlValues>({
         zIndex={zIndex}
         disabled={disabled}
         placeholder={placeholder}
-        onChangeValue={handleChange}
       />
       {Boolean(error) && (
         <View

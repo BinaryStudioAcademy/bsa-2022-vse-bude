@@ -6,6 +6,7 @@ import {
   useTranslation,
   useAppDispatch,
   useEffect,
+  useFormControl,
 } from '~/hooks/hooks';
 import { sortByFilterData } from '~/mock/sort-by-filter-data';
 import { filters as filtersApi } from '~/store/actions';
@@ -22,12 +23,11 @@ const SortBySection = () => {
       sortBy: FilterSortBy.CHEAP_TO_EXPANSIVE,
     },
   });
-  useEffect(() => {
-    dispatch(filtersApi.setSortBy(SortBy.PRICE));
-    dispatch(filtersApi.setOrder(Order.ASC));
-  }, []);
+  const {
+    field: { value },
+  } = useFormControl({ name: 'sortBy', control });
 
-  const onChange = (value: string) => {
+  useEffect(() => {
     switch (value) {
       case FilterSortBy.CHEAP_TO_EXPANSIVE:
         dispatch(filtersApi.setSortBy(SortBy.PRICE));
@@ -54,7 +54,7 @@ const SortBySection = () => {
         dispatch(filtersApi.setOrder(Order.DESC));
         break;
     }
-  };
+  }, [value]);
 
   return (
     <View>
@@ -68,7 +68,6 @@ const SortBySection = () => {
         zIndex={19}
         backgroundColor={colors.placeholderLight}
         dropDownDirection={'TOP'}
-        onChange={onChange}
       />
     </View>
   );
