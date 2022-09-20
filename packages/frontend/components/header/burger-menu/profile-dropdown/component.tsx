@@ -32,6 +32,7 @@ export const ProfileDropdown = ({
       key: 'Make a post',
       onClick: () => handleMakePostClick(),
       cssExtend: styles.option,
+      disabled: !user?.emailVerified || !user?.phoneVerified,
     },
     {
       value: t('common:header.popover.personalInfo'),
