@@ -29,7 +29,9 @@ export const getStaticProps = withPublic(async ({ locale }) => {
 });
 
 const AboutUs: NextPageWithLayout = ({ contributors }: ContributorsProps) => (
-  <AboutUsLayout><AboutUsInfo contributors={contributors} /></AboutUsLayout>
+  <AboutUsLayout>
+    <AboutUsInfo contributors={contributors} />
+  </AboutUsLayout>
 );
 
 export default AboutUs;
