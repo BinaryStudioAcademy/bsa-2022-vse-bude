@@ -32,10 +32,9 @@ type Props<T extends FormControlValues> = {
   isSecure?: boolean;
   editable?: boolean;
   textInputProps?: TextInputProps;
-  requiredMark?: boolean;
+  required?: boolean;
   multiline?: boolean;
   numberOfLines?: number;
-  isPopover?: boolean;
   popoverText?: string;
   immutableValue?: string;
 };
@@ -51,10 +50,9 @@ const Input = <T extends FormControlValues>({
   isSecure,
   editable,
   textInputProps,
-  requiredMark = false,
+  required = false,
   multiline = false,
   numberOfLines = 1,
-  isPopover,
   popoverText,
   immutableValue,
 }: Props<T>): ReactElement => {
@@ -86,7 +84,7 @@ const Input = <T extends FormControlValues>({
           >
             {label}
           </Text>
-          {requiredMark && (
+          {required && (
             <Text
               style={[
                 styles.required,
@@ -100,7 +98,7 @@ const Input = <T extends FormControlValues>({
               *
             </Text>
           )}
-          {isPopover && (
+          {popoverText && (
             <Popover
               popoverStyle={styles.popover}
               from={

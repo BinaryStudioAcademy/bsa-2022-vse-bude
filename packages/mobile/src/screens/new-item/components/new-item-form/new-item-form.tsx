@@ -24,7 +24,6 @@ import {
   useNavigation,
 } from '~/hooks/hooks';
 import { products as productsActions } from '~/store/actions';
-import { CONDITION } from '~/mock/new-item';
 import { globalStyles } from '~/styles/styles';
 import { categoryForDropdown } from '~/helpers/category/format-category-for-dropdown';
 import { ButtonsContainer } from '~/screens/components/components';
@@ -33,6 +32,7 @@ import { selectCategories, selectDataStatusProducts } from '~/store/selectors';
 import { productsPostSchema } from '~/validation-schemas/validation-schemas';
 import { notification } from '~/services/services';
 import { makePostParser } from '~/helpers/helpers';
+import { CONDITION } from '~/common/constants/constants';
 import { AddPhotos } from '../add-photos/add-photos';
 import { useStyles } from './styles';
 
@@ -62,7 +62,7 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
       price: 0,
       country: personalInfo.userAddress?.country || '',
       city: personalInfo.userAddress?.city || '',
-      phone: personalInfo.phone?.slice(4) || '',
+      phone: personalInfo.phone?.replace(/\s/g, '').slice(4) || '',
     },
     validationSchema: productsPostSchema,
   });
@@ -133,7 +133,7 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
           name="category"
           errors={errors}
           control={control}
-          initialItems={formattedCategories}
+          items={formattedCategories}
           zIndex={19}
         />
       )}
@@ -144,7 +144,7 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
-        requiredMark={true}
+        required={true}
       />
       <Input
         label={t('make_a_post.DESCRIPTION')}
@@ -156,7 +156,7 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
         inputStyle={styles.textArea}
         multiline={true}
         numberOfLines={6}
-        requiredMark={true}
+        required={true}
       />
       <DropDown
         label={t('make_a_post.CONDITION')}
@@ -164,9 +164,9 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
         name="condition"
         errors={errors}
         control={control}
-        initialItems={CONDITION}
+        items={CONDITION}
         zIndex={19}
-        requiredMark={true}
+        required={true}
       />
       <View
         style={[
@@ -189,8 +189,7 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
           control={control}
           errors={errors}
           contentContainerStyle={[globalStyles.mt5, { width: '65%' }]}
-          requiredMark={true}
-          isPopover={true}
+          required={true}
           popoverText={t('make_a_post.PRICE_POPOVER')}
         />
       </View>
@@ -204,7 +203,7 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
-        requiredMark={true}
+        required={true}
       />
       <Input
         label={t('personal_info.CITY')}
@@ -221,7 +220,6 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
-        isPopover={true}
         popoverText={t('make_a_post.PHONE_POPOVER')}
         inputStyle={{ paddingLeft: 46 }}
       />

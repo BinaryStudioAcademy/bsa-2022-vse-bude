@@ -24,7 +24,7 @@ import {
   useNavigation,
 } from '~/hooks/hooks';
 import { products as productsActions } from '~/store/actions';
-import { CONDITION } from '~/mock/new-item';
+import { CONDITION } from '~/common/constants/constants';
 import { globalStyles } from '~/styles/styles';
 import { DatePicker } from '~/components/date-time-picker/date-time-picker';
 import { ButtonAppearance, DateTimeType } from '~/common/enums/ui/ui';
@@ -68,7 +68,7 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
       endDate: '',
       country: personalInfo.userAddress?.country || '',
       city: personalInfo.userAddress?.city || '',
-      phone: personalInfo.phone?.slice(4) || '',
+      phone: personalInfo.phone?.replace(/\s/g, '').slice(4) || '',
     },
     validationSchema: productsAuctionSchema,
   });
@@ -138,7 +138,7 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
           name="category"
           errors={errors}
           control={control}
-          initialItems={formattedCategories}
+          items={formattedCategories}
           zIndex={19}
         />
       )}
@@ -149,7 +149,7 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
-        requiredMark={true}
+        required={true}
       />
       <Input
         label={t('make_a_post.DESCRIPTION')}
@@ -161,7 +161,7 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
         inputStyle={styles.textArea}
         multiline={true}
         numberOfLines={6}
-        requiredMark={true}
+        required={true}
       />
       <DropDown
         label={t('make_a_post.CONDITION')}
@@ -169,9 +169,9 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
         name="condition"
         errors={errors}
         control={control}
-        initialItems={CONDITION}
+        items={CONDITION}
         zIndex={19}
-        requiredMark={true}
+        required={true}
       />
       <View
         style={[
@@ -194,8 +194,7 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
           control={control}
           errors={errors}
           contentContainerStyle={[globalStyles.mt5, { width: '65%' }]}
-          requiredMark={true}
-          isPopover={true}
+          required={true}
           popoverText={t('make_a_post.RECOMMENDED_PRICE_POPOVER')}
         />
       </View>
@@ -220,8 +219,7 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
           control={control}
           errors={errors}
           contentContainerStyle={[globalStyles.mt5, { width: '65%' }]}
-          requiredMark={true}
-          isPopover={true}
+          required={true}
           popoverText={t('make_a_post.MINIMAL_BID_POPOVER')}
         />
       </View>
@@ -233,7 +231,7 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
         placeholder={'-/-/-'}
         mode={DateTimeType.DATE}
         contentContainerStyle={globalStyles.mt5}
-        requiredMark={true}
+        required={true}
       />
       <Text style={[globalStyles.fs14, globalStyles.mt6, styles.title]}>
         {t('make_a_post.CONTACT')}
@@ -245,7 +243,7 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
-        requiredMark={true}
+        required={true}
       />
       <Input
         label={t('personal_info.CITY')}
@@ -262,7 +260,6 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
-        isPopover={true}
         popoverText={t('make_a_post.PHONE_POPOVER')}
         inputStyle={{ paddingLeft: 46 }}
       />

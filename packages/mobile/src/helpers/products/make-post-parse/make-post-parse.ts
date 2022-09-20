@@ -1,12 +1,10 @@
 import { Asset } from 'react-native-image-picker';
-import i18n from 'i18next';
 import {
   ICreateAuction,
   ICreatePost,
   ProductStatus,
   ProductType,
 } from '@vse-bude/shared';
-import { notification } from '~/services/services';
 
 type PropsAuction = {
   data: ICreateAuction;
@@ -24,12 +22,6 @@ type MakeAuctionParser = (props: PropsAuction) => FormData | undefined;
 type MakePostParser = (props: PropsPost) => FormData | undefined;
 
 const makeAuctionParser: MakeAuctionParser = ({ data, images, status }) => {
-  if (images.length > 30) {
-    notification.error(i18n.t('errors.TO_MANY_IMAGES'));
-
-    return;
-  }
-
   const formData = new FormData();
 
   if (images.length) {
@@ -62,12 +54,6 @@ const makeAuctionParser: MakeAuctionParser = ({ data, images, status }) => {
 };
 
 const makePostParser: MakePostParser = ({ data, images, status }) => {
-  if (images.length > 30) {
-    notification.error(i18n.t('errors.TO_MANY_IMAGES'));
-
-    return;
-  }
-
   const formData = new FormData();
 
   if (images.length) {

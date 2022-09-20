@@ -1,5 +1,6 @@
-import React, { FC, useCallback, Dispatch, SetStateAction } from 'react';
+import React, { FC, Dispatch, SetStateAction } from 'react';
 import { Asset } from 'react-native-image-picker';
+import { notification } from '~/services/services';
 import {
   View,
   ImageIcon,
@@ -23,14 +24,20 @@ type Props = {
 const AddPhotos: FC<Props> = ({ images, setImages }) => {
   const { t } = useTranslation();
 
-  const onGalleryOpen = useCallback(async () => {
+  const onGalleryOpen = async () => {
+    if (images.length >= 30) {
+      notification.error(t('errors.TO_MANY_IMAGES'));
+
+      return;
+    }
+
     const file = await pickImageLibrary();
     if (!file) {
       return;
     }
 
     setImages((state) => [...state, file]);
-  }, []);
+  };
 
   const deleteImage = (index: number) => {
     setImages((state) => state.filter((_, idx) => idx !== index));

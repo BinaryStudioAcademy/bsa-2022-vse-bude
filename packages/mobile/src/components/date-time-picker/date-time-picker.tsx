@@ -34,7 +34,7 @@ type Props<T extends FormControlValues> = {
   errors: FormControlErrors<T>;
   contentContainerStyle?: StyleProp<ViewStyle>;
   mode: DateTimeType;
-  requiredMark: boolean;
+  required?: boolean;
 };
 
 const DatePicker = <T extends FormControlValues>({
@@ -45,7 +45,7 @@ const DatePicker = <T extends FormControlValues>({
   mode,
   label,
   contentContainerStyle,
-  requiredMark,
+  required,
 }: Props<T>): ReactElement => {
   const [open, setOpen] = useState(false);
   const {
@@ -81,7 +81,7 @@ const DatePicker = <T extends FormControlValues>({
           <Text style={[styles.label, globalStyles.mb2, globalStyles.fs12]}>
             {label}
           </Text>
-          {requiredMark && (
+          {required && (
             <Text
               style={[
                 styles.required,

@@ -49,7 +49,7 @@ const NewItemScreen: FC = () => {
   };
 
   if (!personalInfo) {
-    return <Spinner isOverflow />;
+    return <Spinner isOverflow={true} />;
   }
 
   const getScreen = (screen: string): ReactElement | null => {

@@ -16,14 +16,14 @@ type Props<T extends FormControlValues> = {
   name: FormControlPath<T>;
   errors: FormControlErrors<T>;
   control: FormControl<T>;
-  initialItems: Array<{
+  items: Array<{
     label: string;
     value: string;
   }>;
   zIndex: number;
   disabled?: boolean;
   placeholder?: string;
-  requiredMark?: boolean;
+  required?: boolean;
 };
 
 const DropDown = <T extends FormControlValues>({
@@ -31,17 +31,17 @@ const DropDown = <T extends FormControlValues>({
   name,
   errors,
   control,
-  initialItems,
+  items,
   zIndex,
   disabled,
   placeholder,
-  requiredMark,
+  required,
 }: Props<T>): ReactElement => {
   const { field } = useFormControl({ name, control });
   const { colors } = useCustomTheme();
   const [open, setOpen] = useState(false);
   const [itemValue, setItemValue] = useState(field.value);
-  const [items, setItems] = useState(initialItems);
+  const [innerItems, setInnerItems] = useState(items);
   const error = errors[name]?.message as string;
 
   return (
@@ -58,7 +58,7 @@ const DropDown = <T extends FormControlValues>({
           >
             {label}
           </Text>
-          {requiredMark && (
+          {required && (
             <Text
               style={[
                 styles.required,
@@ -78,9 +78,9 @@ const DropDown = <T extends FormControlValues>({
         listMode="SCROLLVIEW"
         open={open}
         value={itemValue}
-        items={items}
+        items={innerItems}
         setOpen={setOpen}
-        setItems={setItems}
+        setItems={setInnerItems}
         setValue={setItemValue}
         onChangeValue={field.onChange}
         textStyle={[
