@@ -28,6 +28,7 @@ const loadProducts = createAsyncThunk<
 
   return productApi.getProducts(requestParams);
 });
+
 const loadPopularProducts = createAsyncThunk<
   ProductDto[],
   ProductRequestDto,
@@ -37,6 +38,7 @@ const loadPopularProducts = createAsyncThunk<
 
   return productApi.getPopularProducts(requestParams);
 });
+
 const loadPopularLots = createAsyncThunk<
   ProductDto[],
   ProductRequestDto,
@@ -46,6 +48,7 @@ const loadPopularLots = createAsyncThunk<
 
   return productApi.getPopularLots(requestParams);
 });
+
 const loadProductInfo = createAsyncThunk<ProductDto, string, AsyncThunkConfig>(
   ActionType.PRODUCT_FETCH_INFO,
   async (productId, { extra }) => {
@@ -55,6 +58,7 @@ const loadProductInfo = createAsyncThunk<ProductDto, string, AsyncThunkConfig>(
     return response;
   },
 );
+
 const auctionPermissions = createAsyncThunk<
   AuctionPermissionsResponse,
   string,
@@ -65,6 +69,7 @@ const auctionPermissions = createAsyncThunk<
 
   return response;
 });
+
 const auctionMakeBid = createAsyncThunk<
   Bid,
   CreateBidRequest,
@@ -75,6 +80,7 @@ const auctionMakeBid = createAsyncThunk<
 
   return result;
 });
+
 const auctionLeaveAction = createAsyncThunk<
   ProductDto,
   string,
@@ -85,11 +91,13 @@ const auctionLeaveAction = createAsyncThunk<
 
   return result;
 });
+
 const updateCurrentItemPrice = createAction<
   PrepareAction<UpdateProductPriceEvent>
 >(ActionType.UPDATE_CURRENT_ITEM_PRICE, (payload) => {
   return { payload };
 });
+
 const updateProductViews = createAsyncThunk<
   ProductDto,
   string,
@@ -100,6 +108,17 @@ const updateProductViews = createAsyncThunk<
 
   return response;
 });
+
+const saveProduct = createAsyncThunk<null, FormData, AsyncThunkConfig>(
+  ActionType.SAVE_PRODUCT,
+  async (payload, { extra }) => {
+    const { productApi } = extra;
+    await productApi.saveProduct(payload);
+
+    return null;
+  },
+);
+
 const fetchFavorites = createAsyncThunk<
   FavoriteResponseDto[],
   ProductRequestDto,
@@ -109,6 +128,7 @@ const fetchFavorites = createAsyncThunk<
 
   return await productApi.getFavorites(requestParams);
 });
+
 const fetchFavoriteIds = createAsyncThunk<
   string[],
   undefined,
@@ -118,6 +138,7 @@ const fetchFavoriteIds = createAsyncThunk<
 
   return await productApi.getFavoritesIds();
 });
+
 const addToFavorite = createAsyncThunk<
   ProductIdRequest,
   string,
@@ -137,6 +158,7 @@ const addToFavorite = createAsyncThunk<
     return { productId };
   },
 );
+
 const deleteFromFavorite = createAsyncThunk<
   ProductIdRequest,
   string,
@@ -180,6 +202,7 @@ export {
   auctionLeaveAction,
   updateCurrentItemPrice,
   updateProductViews,
+  saveProduct,
   fetchFavorites,
   fetchFavoriteIds,
   addToFavorite,

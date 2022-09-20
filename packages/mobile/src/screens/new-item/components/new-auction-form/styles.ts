@@ -13,38 +13,15 @@ const useStyles = () => {
         title: {
           color: colors.subtitle,
         },
-        popover: {
+        currencyField: {
+          width: '30%',
+        },
+        textArea: {
           padding: 10,
+          textAlignVertical: 'top',
         },
-        leftWrap: {
-          width: '60%',
-          paddingRight: 10,
-          marginBottom: 0,
-          zIndex: 5,
-        },
-        leftInput: {
-          marginTop: 5,
-          width: '60%',
-          paddingRight: 10,
-        },
-        rightWrap: {
-          width: '40%',
-        },
-        rightInput: {
-          top: 0,
-          width: '40%',
-          marginTop: -10,
-        },
-        tooltipIcon: {
-          marginLeft: 5,
-        },
-        oneHalfItem: {
-          width: '50%',
-          paddingRight: 5,
-        },
-        twoHalfItem: {
-          width: '50%',
-          paddingLeft: 5,
+        buttonContainer: {
+          width: 170,
         },
       }),
     [dark, colors],

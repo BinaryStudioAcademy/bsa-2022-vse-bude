@@ -17,11 +17,11 @@ export const Navigation = ({ categories }: NavigationProps) => {
   return (
     <nav css={styles.wrapper}>
       <CategoriesList categories={categories} />
-      <InternalLink
+      {/* <InternalLink
         href={Routes.NEWS}
         label={t('common:header.nav.news')}
         variant={pathname === Routes.NEWS ? 'primary' : 'default'}
-      />
+      /> */}
       <InternalLink
         href={Routes.ABOUT}
         label={t('common:header.nav.about_us')}

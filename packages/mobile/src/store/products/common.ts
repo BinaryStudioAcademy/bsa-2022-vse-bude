@@ -8,6 +8,7 @@ enum ActionType {
   PLACE_BID = 'product/place-bid',
   UPDATE_CURRENT_ITEM_PRICE = 'product/update-current-item-price',
   AUCTION_LEAVE = 'product/auction-leave',
+  SAVE_PRODUCT = 'product/save',
   FETCH_FAVORITES = 'products/fetch-favorites',
   FETCH_FAVORITES_IDS = 'products/fetch-favorites-ids',
   ADD_TO_FAVORITE = 'products/add-to-favorite',

@@ -1,44 +1,128 @@
 import React, { FC } from 'react';
-import { ColorPalette, IPostForms } from '@vse-bude/shared';
+import { Asset } from 'react-native-image-picker';
+import {
+  FullUserProfileDto,
+  ICreatePost,
+  ProductStatus,
+} from '@vse-bude/shared';
 import {
   DropDown,
   Input,
-  InfoIcon,
   Text,
-  TouchableOpacity,
   View,
-  Popover,
+  SecondaryButton,
+  PrimaryButton,
 } from '~/components/components';
-import { useAppForm, useAppSelector, useTranslation } from '~/hooks/hooks';
-import { CALLING_CODE, CITIES, COUNTRIES, CURRENCY } from '~/mock/new-item';
+import {
+  useAppForm,
+  useAppSelector,
+  useTranslation,
+  useCustomTheme,
+  useState,
+  useAppDispatch,
+  useEffect,
+  useNavigation,
+} from '~/hooks/hooks';
+import { products as productsActions } from '~/store/actions';
 import { globalStyles } from '~/styles/styles';
-import { selectCategories } from '~/store/categories/selectors';
 import { categoryForDropdown } from '~/helpers/category/format-category-for-dropdown';
+import { ButtonsContainer } from '~/screens/components/components';
+import { ButtonAppearance, DataStatus } from '~/common/enums/enums';
+import { selectCategories, selectDataStatusProducts } from '~/store/selectors';
+import { productsPostSchema } from '~/validation-schemas/validation-schemas';
+import { notification } from '~/services/services';
+import { makePostParser } from '~/helpers/helpers';
+import { CONDITION } from '~/common/constants/products';
 import { AddPhotos } from '../add-photos/add-photos';
-
 import { useStyles } from './styles';
 
-const NewItemForm: FC = () => {
+type Props = {
+  personalInfo: FullUserProfileDto;
+};
+
+const NewItemForm: FC<Props> = ({ personalInfo }) => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const navigation = useNavigation();
+  const { colors } = useCustomTheme();
   const styles = useStyles();
   const categories = useAppSelector(selectCategories);
+  const dataStatusProducts = useAppSelector(selectDataStatusProducts);
+  const isLoading = dataStatusProducts === DataStatus.PENDING;
   const formattedCategories =
     categories && categories.length ? categoryForDropdown(categories) : null;
 
-  const { control, errors } = useAppForm<IPostForms>({
+  const { control, errors, handleSubmit } = useAppForm<ICreatePost>({
     defaultValues: {
-      currency: 'UAH',
-      country: 'Ukraine',
-      callingCode: 'UA',
+      category: '',
+      title: '',
+      description: '',
+      condition: '',
+      currency: t('common:currency.UAH'),
+      price: 0,
+      country: personalInfo.userAddress?.country || '',
+      city: personalInfo.userAddress?.city || '',
+      phone: personalInfo.phone?.replace(/\s/g, '').slice(4) || '',
     },
+    validationSchema: productsPostSchema,
   });
+
+  const [images, setImages] = useState<Asset[]>([]);
+
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      notification.error(t('errors.CORRECTLY_FILLED'));
+    }
+  }, [errors]);
+
+  const onSubmit = (data: ICreatePost): void => {
+    const payload = makePostParser({
+      data,
+      images,
+      status: ProductStatus.ACTIVE,
+    });
+
+    if (payload) {
+      dispatch(productsActions.saveProduct(payload))
+        .unwrap()
+        .then(() => {
+          notification.success(t('make_a_post.NEW_POST_CREATED'));
+          navigation.goBack();
+        })
+        .catch((err) => {
+          // eslint-disable-next-line
+          console.warn(err);
+        });
+    }
+  };
+
+  const handleSaveAsDraftPress = (data: ICreatePost): void => {
+    const payload = makePostParser({
+      data,
+      images,
+      status: ProductStatus.DRAFT,
+    });
+
+    if (payload) {
+      dispatch(productsActions.saveProduct(payload))
+        .unwrap()
+        .then(() => {
+          notification.success(t('make_a_post.NEW_DRAFT_CREATED'));
+          navigation.goBack();
+        })
+        .catch((err) => {
+          // eslint-disable-next-line
+          console.warn(err);
+        });
+    }
+  };
 
   return (
     <View>
       <Text style={[globalStyles.fs14, globalStyles.mt5, styles.title]}>
         {t('make_a_post.DOWNLOAD_PHOTOS')}
       </Text>
-      <AddPhotos />
+      <AddPhotos images={images} setImages={setImages} />
       <Text style={[globalStyles.fs14, globalStyles.mt5, styles.title]}>
         {t('make_a_post.DESCRIPTION')}
       </Text>
@@ -47,6 +131,7 @@ const NewItemForm: FC = () => {
           label={t('make_a_post.CATEGORY')}
           placeholder={t('make_a_post.CATEGORY_PLACEHOLDER')}
           name="category"
+          errors={errors}
           control={control}
           items={formattedCategories}
           zIndex={19}
@@ -59,6 +144,7 @@ const NewItemForm: FC = () => {
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
+        required={true}
       />
       <Input
         label={t('make_a_post.DESCRIPTION')}
@@ -67,167 +153,94 @@ const NewItemForm: FC = () => {
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
+        inputStyle={styles.textArea}
+        multiline={true}
+        numberOfLines={6}
+        required={true}
       />
-
+      <DropDown
+        label={t('make_a_post.CONDITION')}
+        placeholder={t('make_a_post.CONDITION_PLACEHOLDER')}
+        name="condition"
+        errors={errors}
+        control={control}
+        items={CONDITION}
+        zIndex={19}
+        required={true}
+      />
       <View
         style={[
-          styles.row,
-          globalStyles.mt5,
-          globalStyles.alignItemsCenter,
           globalStyles.flexDirectionRow,
-        ]}
-      >
-        <View style={[styles.leftWrap, globalStyles.flexDirectionRow]}>
-          <Popover
-            popoverStyle={styles.popover}
-            from={
-              <TouchableOpacity style={globalStyles.flexDirectionRow}>
-                <Text style={[globalStyles.fs12]}>
-                  {t('make_a_post.PRICE')}
-                </Text>
-                <InfoIcon
-                  size={13}
-                  color={ColorPalette.YELLOW_200}
-                  style={styles.tooltipIcon}
-                />
-              </TouchableOpacity>
-            }
-          >
-            <Text>{t('make_a_post.PRICE_TOOLTIP')}</Text>
-          </Popover>
-        </View>
-        <View style={styles.rightWrap}>
-          <Text style={[globalStyles.fs12]}>{t('make_a_post.CURRENCY')}</Text>
-        </View>
-      </View>
-
-      <View
-        style={[
-          styles.row,
-          globalStyles.alignItemsCenter,
-          globalStyles.flexDirectionRow,
+          globalStyles.justifyContentSpaceBetween,
         ]}
       >
         <Input
-          placeholder={t('make_a_post.PRICE_PLACEHOLDER')}
+          label={t('make_a_post.CURRENCY')}
+          name="currency"
+          control={control}
+          errors={errors}
+          editable={false}
+          contentContainerStyle={[styles.currencyField, globalStyles.mt5]}
+        />
+        <Input
+          label={t('make_a_post.PRICE')}
+          placeholder="0"
           name="price"
           control={control}
           errors={errors}
-          contentContainerStyle={styles.leftInput}
+          contentContainerStyle={[globalStyles.mt5, { width: '65%' }]}
+          required={true}
+          popoverText={t('make_a_post.PRICE_POPOVER')}
         />
-
-        <View style={styles.rightInput}>
-          <DropDown
-            name="currency"
-            control={control}
-            items={CURRENCY}
-            zIndex={25}
-          />
-        </View>
       </View>
-
       <Text style={[globalStyles.fs14, globalStyles.mt6, styles.title]}>
         {t('make_a_post.CONTACT')}
       </Text>
-      <DropDown
-        label={t('make_a_post.COUNTRY')}
+      <Input
+        label={t('personal_info.COUNTRY')}
+        placeholder={t('personal_info.COUNTRY_HINT')}
         name="country"
         control={control}
-        items={COUNTRIES}
-        zIndex={20}
-        disabled={true}
-        placeholder={t('make_a_post.COUNTRY_PLACEHOLDER')}
+        errors={errors}
+        contentContainerStyle={globalStyles.mt5}
+        required={true}
       />
-      <DropDown
-        label={t('make_a_post.CITY')}
-        name="city"
-        control={control}
-        items={CITIES}
-        zIndex={15}
-        placeholder={t('make_a_post.CITY_PLACEHOLDER')}
-      />
-      <View
-        style={[
-          styles.row,
-          globalStyles.mt5,
-          globalStyles.alignItemsCenter,
-          globalStyles.flexDirectionRow,
-        ]}
-      >
-        <View style={[styles.leftWrap, globalStyles.flexDirectionRow]}>
-          <Popover
-            popoverStyle={styles.popover}
-            from={
-              <TouchableOpacity style={globalStyles.flexDirectionRow}>
-                <Text style={[globalStyles.fs12]}>
-                  {t('make_a_post.MOBILE_PHONE')}
-                </Text>
-                <InfoIcon
-                  size={13}
-                  color={ColorPalette.YELLOW_200}
-                  style={styles.tooltipIcon}
-                />
-              </TouchableOpacity>
-            }
-          >
-            <Text>{t('make_a_post.PHONE_TOOLTIP')}</Text>
-          </Popover>
-        </View>
-        <View style={styles.rightWrap}>
-          <Text style={[globalStyles.fs12]}>
-            {t('make_a_post.CALLING_CODE')}
-          </Text>
-        </View>
-      </View>
-
-      <View
-        style={[
-          styles.row,
-          globalStyles.alignItemsCenter,
-          globalStyles.flexDirectionRow,
-        ]}
-      >
-        <Input
-          placeholder={'+380 ()'}
-          name="phone"
-          control={control}
-          errors={errors}
-          contentContainerStyle={styles.leftInput}
-        />
-
-        <View style={styles.rightInput}>
-          <DropDown
-            name="callingCode"
-            control={control}
-            items={CALLING_CODE}
-            zIndex={10}
-          />
-        </View>
-      </View>
       <Input
-        label={t('make_a_post.INSTAGRAM')}
-        placeholder={t('make_a_post.INSTAGRAM_PLACEHOLDER')}
-        name="instagram"
+        label={t('personal_info.CITY')}
+        placeholder={t('personal_info.CITY_HINT')}
+        name="city"
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
       />
       <Input
-        label={t('make_a_post.FACEBOOK')}
-        placeholder={t('make_a_post.FACEBOOK_PLACEHOLDER')}
-        name="facebook"
+        label={t('verification.PHONE_NUMBER')}
+        immutableValue="+380"
+        name="phone"
         control={control}
         errors={errors}
-        contentContainerStyle={[globalStyles.mt5]}
+        contentContainerStyle={globalStyles.mt5}
+        popoverText={t('make_a_post.PHONE_POPOVER')}
+        inputStyle={{ paddingLeft: 46 }}
       />
-      <Input
-        label={t('make_a_post.SITE')}
-        placeholder={t('make_a_post.SITE')}
-        name="site"
-        control={control}
-        errors={errors}
-        contentContainerStyle={[globalStyles.mt5, globalStyles.mb5]}
-      />
+      <ButtonsContainer>
+        <View style={styles.buttonContainer}>
+          <SecondaryButton
+            label={t('make_a_post.SAVE_AS_DRAFT_BUTTON')}
+            appearance={ButtonAppearance.OUTLINED}
+            textColor={colors.text}
+            onPress={handleSubmit(handleSaveAsDraftPress)}
+            disabled={isLoading}
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <PrimaryButton
+            label={t('make_a_post.MAKE_POST_BUTTON')}
+            onPress={handleSubmit(onSubmit)}
+            disabled={isLoading}
+          />
+        </View>
+      </ButtonsContainer>
     </View>
   );
 };

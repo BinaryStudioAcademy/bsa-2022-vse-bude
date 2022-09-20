@@ -61,6 +61,7 @@ export const productCard = ({
   radiuses,
   breakpoints,
 }: Theme) => css`
+  max-width: 100%;
   border: 1px solid transparent;
   padding: ${spaces.lg} ${spaces.xl};
   border-radius: ${radiuses.xs};
