@@ -5,6 +5,7 @@ const userPaths = [
   `${Routes.PROFILE}${ProfileRoutes.ACCOUNT_SETTINGS}`,
   `${Routes.PROFILE}${ProfileRoutes.MESSAGES}`,
   `${Routes.PROFILE}${ProfileRoutes.SUPPORT}`,
+  `${Routes.PROFILE}${ProfileRoutes.NOTIFICATIONS}`,
 ];
 
 export const isInAccount = ({

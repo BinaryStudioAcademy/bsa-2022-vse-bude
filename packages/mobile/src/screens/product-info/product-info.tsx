@@ -73,7 +73,7 @@ const ProductInfo: FC = () => {
   }, [id, user, dispatch]);
 
   if (!product) {
-    return <Spinner />;
+    return <Spinner isOverflow={true} />;
   }
   const { title, type, imageLinks, views, author } = product;
   const isAuction = type == ProductType.AUCTION;
@@ -95,7 +95,7 @@ const ProductInfo: FC = () => {
       />
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={[globalStyles.px5, globalStyles.py5]}
+        style={[globalStyles.px5, globalStyles.py6, globalStyles.mb6]}
       >
         {isAuction && <Countdown endDate={product.endDate} />}
         <Text

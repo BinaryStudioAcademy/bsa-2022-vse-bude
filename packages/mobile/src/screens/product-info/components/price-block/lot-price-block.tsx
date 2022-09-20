@@ -20,7 +20,6 @@ import {
   PlusSvg,
   Input,
   CrossIcon,
-  Spinner,
   Pressable,
   StarSvg,
 } from '~/components/components';
@@ -180,7 +179,6 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
               globalStyles.alignItemsCenter,
             ]}
           >
-            {isLoading && <Spinner />}
             {!!isAbleToLeaveAuction && user && (
               <TouchableHighlight
                 onPress={openModal}
@@ -200,6 +198,7 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
             <View style={styles.btnWidth}>
               <PlusSvg style={styles.btnIcon} />
               <PrimaryButton
+                isLoading={isLoading}
                 onPress={handleSubmit(handleMakeBidPress)}
                 label={`${t('common:components.BUTTON_BID')}`}
                 disabled={!canUserMakeBid}

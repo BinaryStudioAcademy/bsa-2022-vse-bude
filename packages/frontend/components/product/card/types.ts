@@ -6,8 +6,6 @@ export interface ProductCardProps {
   description: string;
   type: string;
   price: number;
-  currency: string;
-  isFavorite?: boolean;
   data: {
     id: string;
   };
