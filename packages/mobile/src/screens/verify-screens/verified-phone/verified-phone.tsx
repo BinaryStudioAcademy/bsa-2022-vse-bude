@@ -14,6 +14,7 @@ import {
 } from '~/components/components';
 import { images } from '~/assets/images/images';
 import { globalStyles } from '~/styles/styles';
+import { Header } from '~/screens/components/components';
 import { PropsVerifyScreens, RootNavigationProps } from '~/common/types/types';
 import {
   DataStatus,
@@ -21,7 +22,7 @@ import {
   RootScreenName,
 } from '~/common/enums/enums';
 import { selectAuthDataStatus, selectCurrentUser } from '~/store/selectors';
-import { Header, Title, VerifyImage, Wrapper } from '../components/components';
+import { Title, VerifyImage, Wrapper } from '../components/components';
 import { styles } from './styles';
 
 const VerifiedPhoneScreen: FC<PropsVerifyScreens> = ({ route }) => {
@@ -55,7 +56,7 @@ const VerifiedPhoneScreen: FC<PropsVerifyScreens> = ({ route }) => {
 
   return (
     <Wrapper>
-      <Header hideButton={true} />
+      <Header title={t('verify.VERIFY')} hideButton={true} />
       <KeyboardAvoiding>
         <View style={globalStyles.px5}>
           <VerifyImage

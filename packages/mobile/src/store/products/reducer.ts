@@ -11,6 +11,7 @@ import {
   loadProducts,
   updateCurrentItemPrice,
   updateProductViews,
+  saveProduct,
 } from './actions';
 
 type InitialState = {
@@ -151,6 +152,15 @@ const reducer = createReducer(initialState, (builder) => {
       state.currentProduct
         ? (state.currentProduct.views = action.payload.views)
         : undefined;
+    })
+    .addCase(saveProduct.pending, (state) => {
+      state.dataStatus = DataStatus.PENDING;
+    })
+    .addCase(saveProduct.fulfilled, (state) => {
+      state.dataStatus = DataStatus.FULFILLED;
+    })
+    .addCase(saveProduct.rejected, (state) => {
+      state.dataStatus = DataStatus.REJECTED;
     });
 });
 

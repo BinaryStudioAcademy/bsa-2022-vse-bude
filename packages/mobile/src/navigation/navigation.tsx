@@ -28,6 +28,7 @@ import {
   baseScreenOptions,
   verifyScreenOptions,
   getItemsScreenOptions,
+  createPostScreenOptions,
 } from './screen-options/screen-options';
 
 const NativeStack = createNativeStackNavigator<RootNavigationParamList>();
@@ -109,18 +110,12 @@ const Navigation: FC = () => {
           <Stack.Screen
             name={RootScreenName.NEW_ITEM}
             component={NewItemScreen}
-            options={{
-              title: t('make_a_post.TITLE'),
-              headerLeft: HeaderLeft,
-            }}
+            options={createPostScreenOptions}
           />
           <Stack.Screen
             name={RootScreenName.NEW_AUCTION}
             component={NewItemScreen}
-            options={{
-              title: t('make_a_post.AUCTION_TITLE'),
-              headerLeft: HeaderLeft,
-            }}
+            options={createPostScreenOptions}
           />
           <Stack.Screen
             name={RootScreenName.TYPE_OF_NEW_POST}

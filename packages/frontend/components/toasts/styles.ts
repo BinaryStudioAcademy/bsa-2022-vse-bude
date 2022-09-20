@@ -3,13 +3,13 @@ import { css } from '@emotion/react';
 
 export const TRANSITION_TIMEOUT = 300;
 
-export const toastStack = () => css`
+export const toastStack = ({ zIndex }: Theme) => css`
   position: fixed;
   top: 0;
   right: 0;
   height: auto;
   padding: 30px;
-  z-index: 1000;
+  z-index: ${zIndex.toast};
   overflow: hidden;
   :empty {
     display: none;

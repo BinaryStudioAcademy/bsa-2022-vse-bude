@@ -10,7 +10,7 @@ import {
   Modal,
 } from '@components/primitives';
 import { IconColor, IconName } from '@enums';
-import { resetBadges, setDefaultBadges } from '@store';
+import { resetBadges, setDefaultBadges, resetFilter } from '@store';
 import { SubPageName } from '../common';
 import { Posted, Drafted, Purchased, Sold, Archived } from './cards';
 import { FilterArrow } from './primitives';
@@ -30,6 +30,7 @@ export const MyListInfo = () => {
 
   useEffect(() => {
     dispatch(setDefaultBadges([null, null]));
+    dispatch(resetFilter());
   }, [dispatch]);
 
   const filteredItems = useMemo(

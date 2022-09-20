@@ -1,4 +1,8 @@
-import { HttpContentType, HttpMethod } from '@vse-bude/shared';
+import {
+  HttpAcceptLanguage,
+  HttpContentType,
+  HttpMethod,
+} from '@vse-bude/shared';
 
 type HttpOptions = {
   method?: HttpMethod;
@@ -6,6 +10,7 @@ type HttpOptions = {
   payload?: BodyInit_ | null;
   hasAuth?: boolean;
   params?: Record<string, unknown>;
+  locale?: HttpAcceptLanguage;
 };
 
 export type { HttpOptions };

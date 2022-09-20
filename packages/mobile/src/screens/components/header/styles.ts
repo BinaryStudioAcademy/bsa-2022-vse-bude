@@ -13,7 +13,10 @@ const styles = StyleSheet.create({
     lineHeight: 22,
   },
   section: {
-    width: width / 3,
+    width: width / 4,
+  },
+  centerSection: {
+    width: width / 2,
   },
 });
 
