@@ -8,15 +8,11 @@ export const productGridWrapper = ({ spaces }: Theme) => css`
   margin-bottom: ${spaces.xl3};
 `;
 
-export const productGrid = ({ spaces, mq }: Theme) => css`
+export const productGrid = ({ spaces }: Theme) => css`
   flex: 1;
   display: grid;
   grid-gap: ${spaces.sm};
-  justify-content: center;
-  grid-template-columns: repeat(auto-fit, 292px);
-  ${mq[2]} {
-    grid-template-columns: repeat(auto-fit, 312px);
-  }
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
 
   & li {
     list-style: none;

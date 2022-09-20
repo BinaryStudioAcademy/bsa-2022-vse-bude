@@ -12,11 +12,11 @@ export const SECONDS_IN_ONE_DAY = 86400000; // +1 day
 
 const InputDate = ({
   value,
-  setValue,
-  variant,
+  variant = 'primary',
   error,
   id,
   label,
+  showTimeInput,
   ...props
 }: InputDateProps) => {
   const { locale } = useRouter();
@@ -41,16 +41,16 @@ const InputDate = ({
           {label}
         </label>
       )}
-      <div css={styles.inputValueWrapper}>
+      <div css={[styles.inputValueWrapper, styles.datePickerWrapper]}>
         <DatePicker
           onFocus={(e) => e.target.blur()}
-          onChange={setValue}
-          selected={value}
+          selected={new Date(value)}
           css={styles.input}
-          placeholderText="-/-/-"
+          placeholderText={showTimeInput ? 'mm/dd/yyyy hh:mm' : 'mm/dd/yyyy'}
           id={id}
-          locale={customLocale}
-          minDate={Date.now() + SECONDS_IN_ONE_DAY}
+          showTimeInput={showTimeInput}
+          locale={customLocale as any}
+          minDate={new Date(new Date().getTime() + SECONDS_IN_ONE_DAY)}
           calendarStartDay={locale === 'ua' ? 1 : 0}
           {...props}
         />

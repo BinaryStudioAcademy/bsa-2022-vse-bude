@@ -13,3 +13,4 @@ export {
 } from './personal-info-parse/personal-info-parse';
 export { categoryForDropdown } from './category/format-category-for-dropdown';
 export { getTitle } from './screen/screen';
+export * from './products/products';

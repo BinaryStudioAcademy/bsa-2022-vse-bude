@@ -33,11 +33,10 @@ import {
 } from '~/store/selectors';
 import { notification } from '~/services/services';
 import { codeSchema } from '~/validation-schemas/validation-schemas';
+import { ButtonsContainer, Header } from '~/screens/components/components';
 import { VERIFICATION_CODE_REGEX } from '~/common/regexp/regexp';
 import {
-  ButtonsContainer,
   CustomText,
-  Header,
   Title,
   VerifyImage,
   Wrapper,
@@ -105,6 +104,7 @@ const VerifyCodePhoneScreen: FC<PropsVerifyScreens> = ({ route }) => {
   return (
     <Wrapper>
       <Header
+        title={t('verify.VERIFY')}
         labelButton={t('verify.BACK_BUTTON')}
         onPress={handleBackButtonPress}
       />

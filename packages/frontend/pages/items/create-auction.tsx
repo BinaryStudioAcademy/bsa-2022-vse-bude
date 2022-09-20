@@ -38,6 +38,7 @@ export const getServerSideProps = withPublic(
           'rules',
           'item',
           'public',
+          'auth',
         ])),
       },
     };

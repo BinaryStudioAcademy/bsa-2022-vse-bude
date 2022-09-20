@@ -67,13 +67,16 @@ export const marginBottom = ({ spaces }: Theme) => css`
   margin-bottom: ${spaces.xl11};
 `;
 
-export const sections = ({ mq }: Theme) => css`
+export const sections = ({ mq, maxMq }: Theme) => css`
   width: 450px;
   ${mq[1]} {
     width: 500px;
   }
   ${mq[4]} {
     width: 700px;
+  }
+  ${maxMq[0]} {
+    width: 100%;
   }
 `;
 
@@ -84,8 +87,12 @@ export const sectionRow = ({ spaces }: Theme) => css`
   }
 `;
 
-export const groupInputs = ({ spaces }: Theme) => css`
+export const groupInputs = ({ spaces, maxMq }: Theme) => css`
   gap: ${spaces.md};
+  ${maxMq[0]} {
+    flex-direction: column;
+    gap: 0;
+  }
 `;
 
 export const inputRow = ({ spaces }: Theme) => css`
@@ -99,6 +106,7 @@ export const groupPhone = ({ spaces }: Theme) => css`
 `;
 
 export const groupEmail = ({ spaces }: Theme) => css`
+  margin-bottom: ${spaces.md};
   gap: ${spaces.md};
 `;
 

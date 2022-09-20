@@ -8,6 +8,7 @@ enum ActionType {
   PLACE_BID = 'product/place-bid',
   UPDATE_CURRENT_ITEM_PRICE = 'product/update-current-item-price',
   AUCTION_LEAVE = 'product/auction-leave',
+  SAVE_PRODUCT = 'product/save',
 }
 
 export { ActionType };

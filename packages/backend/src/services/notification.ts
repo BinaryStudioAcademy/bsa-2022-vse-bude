@@ -20,10 +20,8 @@ export class NotificationService {
     userId: string,
     query: NotificationQuery,
   ): Promise<AllNotificationsResponse> {
-    const [notifications, count] = await this._notificationRepository.getAll(
-      userId,
-      query,
-    );
+    const [notifications, count, countOfUnread] =
+      await this._notificationRepository.getAll(userId, query);
 
     notifications.forEach((notification) => {
       if (notification.type !== NotificationType.INFO) {
@@ -36,7 +34,7 @@ export class NotificationService {
       }
     });
 
-    return { notifications, count };
+    return { notifications, count, countOfUnread };
   }
 
   public create(notification: CreateNotificationDto): Promise<Notification> {
