@@ -37,11 +37,11 @@ export const BurgerMenu = ({ user, categories, onClose }: BurgerMenuProps) => {
       <nav className="burger-navigation">
         {user && <ProfileDropdown user={user} onCloseParent={onClose} />}
         <CategoriesList categories={categories} />
-        <InternalLink
+        {/* <InternalLink
           href={Routes.DEFAULT}
           label={t('common:header.nav.news')}
           variant={pathname === Routes.NEWS ? 'primary' : 'default'}
-        />
+        /> */}
         <InternalLink
           href={Routes.ABOUT}
           label={t('common:header.nav.about_us')}
