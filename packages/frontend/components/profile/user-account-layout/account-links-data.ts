@@ -18,6 +18,11 @@ export const getLinksData = (userId: string): LinkData[] => [
     path: `${Routes.PROFILE}${ProfileRoutes.ACCOUNT_SETTINGS}`,
   },
   {
+    iconPath: IconName.BELL,
+    label: 'account:notifications',
+    path: `${Routes.PROFILE}${ProfileRoutes.NOTIFICATIONS}`,
+  },
+  {
     iconPath: IconName.MESSAGE,
     label: 'account:messages',
     path: `${Routes.PROFILE}${ProfileRoutes.MESSAGES}`,

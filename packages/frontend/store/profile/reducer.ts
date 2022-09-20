@@ -1,6 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { HydrateAction } from '@types';
-import type { FullUserProfileDto, UserProfileDto } from '@vse-bude/shared';
+import type {
+  AllNotificationsResponse,
+  FullUserProfileDto,
+  UserProfileDto,
+} from '@vse-bude/shared';
 import { HYDRATE } from 'next-redux-wrapper';
 import { phoneVerification } from '../auth';
 import {
@@ -8,20 +12,36 @@ import {
   fetchFullUserProfile,
   updateUserProfile,
   updateUserAvatar,
+  fetchUserNotifications,
+  updateNotificationView,
+  loadMoreUserNotifications,
+  setUpdateViewLoading,
 } from './actions';
 
 interface ProfileState {
   user: UserProfileDto | FullUserProfileDto | null;
+  notifications: AllNotificationsResponse;
   isEditing: boolean;
   loading: boolean;
   saveLoader: boolean;
   error: string;
+  loadMoreLoading: boolean;
+  updateViewLoading: string;
 }
+
+const NOTIFICATION_INITIAL_STATE: AllNotificationsResponse = {
+  notifications: null,
+  count: 0,
+  countOfUnread: 0,
+};
 
 const initialState: ProfileState = {
   user: null,
+  notifications: NOTIFICATION_INITIAL_STATE,
   isEditing: false,
   loading: false,
+  loadMoreLoading: false,
+  updateViewLoading: null,
   saveLoader: false,
   error: null,
 };
@@ -63,6 +83,49 @@ const profileSlice = createSlice({
       state.loading = false;
       state.user = null;
       state.error = payload;
+    },
+    [fetchUserNotifications.pending.type]: (state) => {
+      state.loading = true;
+    },
+    [fetchUserNotifications.fulfilled.type]: (state, { payload }) => {
+      state.loading = false;
+      state.notifications = payload;
+    },
+
+    [fetchUserNotifications.rejected.type]: (state, { payload }) => {
+      state.loading = false;
+      state.notifications = NOTIFICATION_INITIAL_STATE;
+      state.error = payload;
+    },
+    [loadMoreUserNotifications.pending.type]: (state) => {
+      state.loadMoreLoading = true;
+    },
+    [loadMoreUserNotifications.fulfilled.type]: (state, { payload }) => {
+      state.loadMoreLoading = false;
+      state.notifications.notifications = [
+        ...state.notifications.notifications,
+        ...payload.notifications,
+      ];
+    },
+
+    [loadMoreUserNotifications.rejected.type]: (state, { payload }) => {
+      state.loadMoreLoading = false;
+      state.error = payload;
+    },
+    [setUpdateViewLoading.type]: (state, { payload }) => {
+      state.updateViewLoading = payload;
+    },
+    [updateNotificationView.fulfilled.type]: (state, { payload }) => {
+      state.updateViewLoading = null;
+      state.notifications.notifications =
+        state.notifications.notifications?.map((item) =>
+          payload.id === item.id ? payload : item,
+        );
+      state.notifications.countOfUnread = state.notifications.countOfUnread - 1;
+    },
+
+    [updateNotificationView.rejected.type]: (state) => {
+      state.updateViewLoading = null;
     },
 
     [updateUserProfile.fulfilled.type]: (state, { payload }) => {

@@ -95,9 +95,9 @@ export function FilterPopover({ filter, setFilter }: FilterPopoverProps) {
       bodyWrapperCssExtend={styles.popoverWrapper}
       trigger={
         <div css={styles.iconWrapper}>
-          <Icon color={IconColor.BLACK} icon={IconName.FILTER} size={'md'} />
+          <Icon color={IconColor.GRAY} icon={IconName.FILTER} size={'md'} />
           <Icon
-            color={IconColor.BLACK}
+            color={IconColor.GRAY}
             icon={IconName.ANGLE_DOWN}
             size={'xs'}
             cssExtend={styles.downIcon}

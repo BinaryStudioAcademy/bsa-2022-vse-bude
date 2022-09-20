@@ -22,7 +22,21 @@
       "messages": "Messages",
       "support": "Support",
       "signOut": "Sign Out",
-      "makePost": "Make a Post"
+      "makePost": "Make a Post",
+      "notifications": "Notifications"
+    },
+    "notifications": {
+      "noNotification": "No notifications yet",
+      "loadMore": "Load more",
+      "tooltip": {
+        "productBtn": "Go to this product"
+      },
+      "ariaLabel": {
+        "viewed": "viewed",
+        "setViewed": "set as viewed",
+        "toNotifications": "Go to all notifications"
+      },
+      "toNotificationsBtn": "Go to all notifications"
     }
   },
   "footer": {

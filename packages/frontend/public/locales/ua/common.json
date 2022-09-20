@@ -22,7 +22,21 @@
       "messages": "Повідомлення",
       "support": "Підтримка",
       "signOut": "Вийти",
-      "makePost": "Створити пост"
+      "makePost": "Створити пост",
+      "notifications": "Сповіщення"
+    },
+    "notifications": {
+      "noNotification": "Сповіщень поки немає",
+      "loadMore": "Завантажити ще",
+      "tooltip": {
+        "productBtn": "Перейти до цього товару"
+      },
+      "ariaLabel": {
+        "viewed": "переглянуто",
+        "setViewed": "зробити прочитаним",
+        "toNotifications": "Усі сповіщення"
+      },
+      "toNotificationsBtn": "Усі сповіщення"
     }
   },
   "footer": {

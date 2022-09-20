@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 
 export const burgerOverlay = (theme: Theme) => css`
   position: fixed;
-  z-index: 999;
+  z-index: ${theme.zIndex.burgerOverlay};
   top: 0;
   display: flex;
   flex-direction: column;

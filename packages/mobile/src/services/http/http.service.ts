@@ -8,6 +8,7 @@ import {
   AuthApiRoutes,
   HttpContentType,
   CredentialsError,
+  HttpAcceptLanguage,
 } from '@vse-bude/shared';
 import { StorageKey } from '~/common/enums/enums';
 import { GetHeadersParams, HttpOptions } from '~/common/types/types';
@@ -92,6 +93,9 @@ class Http {
 
   private getHeaders({ contentType, hasAuth }: GetHeadersParams): Headers {
     const headers = new Headers();
+
+    const locale = <HttpAcceptLanguage>i18next.resolvedLanguage;
+    headers.append(HttpHeader.ACCEPT_LANGUAGE, locale);
 
     if (contentType) {
       headers.append(HttpHeader.CONTENT_TYPE, contentType);
