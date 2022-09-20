@@ -5,22 +5,20 @@ export const profileWrapper = ({ spaces }: Theme) => css`
   margin-top: ${spaces.lg};
 `;
 
-export const cell = ({
+export const name = ({
   fontSizes,
   lineHeights,
   fontWeights,
   colors,
   spaces,
 }: Theme) => css`
-  padding-bottom: ${spaces.xs};
   font-size: ${fontSizes.cell};
   line-height: ${lineHeights.cell};
   font-weight: ${fontWeights.cell};
   color: ${colors.text};
-`;
-
-export const name = ({ spaces }: Theme) => css`
-  padding-left: ${spaces.xs};
+  &:first-of-type {
+    margin-right: ${spaces.sm};
+  }
 `;
 
 export const section = ({ spaces }: Theme) => css`

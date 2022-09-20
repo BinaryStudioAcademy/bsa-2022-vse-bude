@@ -40,7 +40,9 @@ export const itemStatus = ({
   fontWeights,
   lineHeights,
   colors,
+  spaces,
 }: Theme) => css`
+  margin-right: ${spaces.sm};
   font-size: ${fontSizes.toggle};
   line-height: ${lineHeights.toggle};
   font-weight: ${fontWeights.toggle};
@@ -168,6 +170,7 @@ export const dateWrapper = ({ spaces }: Theme) => css`
   flex-direction: column;
   align-items: center;
   margin-right: ${spaces.xs};
+  margin-bottom: ${spaces.xs};
   &[data-size='lg'] {
     width: 110px;
   }

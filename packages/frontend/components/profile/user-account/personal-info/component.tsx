@@ -51,7 +51,7 @@ export const PersonalInfo = () => {
               isLarge={true}
               loading={loading}
             />
-            {isAuthUser && <ChangeAvatar isAvatarExist={user.avatar} />}
+            {isAuthUser && <ChangeAvatar />}
           </div>
         </div>
         {!isEditing && isAuthUser && (

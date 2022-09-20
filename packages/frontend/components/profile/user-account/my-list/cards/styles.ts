@@ -32,12 +32,12 @@ export const leftContent = ({ maxMq }: Theme) => css`
   }
 `;
 
-export const rightContent = ({ maxMq }: Theme) => css`
+export const rightContent = ({ maxMq, spaces }: Theme) => css`
   display: flex;
   flex-direction: column;
   width: 230px;
   ${maxMq[0]} {
-    margin-top: 5px;
+    margin-top: ${spaces.xs};
   }
 `;
 
@@ -76,7 +76,7 @@ export const editDate = ({
   color: ${colors.textLight};
 `;
 
-export const archiveButtonWrapper = css`
+export const buttonWrapper = css`
   position: relative;
 `;
 

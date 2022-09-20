@@ -34,6 +34,8 @@ export enum IconName {
   FILTER = 'filter',
   PENCIL = 'pencil',
   SEARCH = 'search',
+  DELETE = 'delete',
+  ITEM_CARD = 'item-card',
 }
 
 export const IconNameToClassName = {
@@ -73,4 +75,6 @@ export const IconNameToClassName = {
   [IconName.FILTER]: 'fa-solid fa-filter',
   [IconName.PENCIL]: 'fa-solid fa-pencil',
   [IconName.SEARCH]: 'fa-solid fa-search',
+  [IconName.DELETE]: 'fa-regular fa-trash-can',
+  [IconName.ITEM_CARD]: 'fa-regular fa-clipboard',
 };

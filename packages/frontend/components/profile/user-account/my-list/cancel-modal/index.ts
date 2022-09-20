@@ -1,1 +1,0 @@
-export { CancelModal } from './component';
