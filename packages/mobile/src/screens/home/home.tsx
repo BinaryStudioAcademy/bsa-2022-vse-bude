@@ -139,7 +139,7 @@ const Home: FC = () => {
           </Text>
           <View
             style={[
-              styles.imgWrapper,
+              styles.contentWrapper,
               globalStyles.justifyContentSpaceBetween,
               globalStyles.alignItemsCenter,
               globalStyles.flexDirectionRow,

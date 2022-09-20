@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   },
   organizationsWrapper: {
     width: '100%',
-    minHeight: 300,
+    minHeight: 250,
     marginTop: 30,
     backgroundColor: ColorPalette.GREEN_200,
     paddingHorizontal: 16,
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     width: '30%',
     height: 50,
   },
-  imgWrapper: {
+  contentWrapper: {
     flexWrap: 'wrap',
   },
 });

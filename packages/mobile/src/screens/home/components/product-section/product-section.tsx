@@ -10,6 +10,7 @@ import { globalStyles } from '~/styles/styles';
 import { ProductDto } from '@vse-bude/shared';
 import { StyleProp, ViewStyle } from 'react-native';
 import { useCustomTheme } from '~/hooks/hooks';
+import { styles } from '../../styles';
 
 type Props = {
   sectionTitle: string;
@@ -35,6 +36,7 @@ const ProductsSection: FC<Props> = ({
           globalStyles.flexDirectionRow,
           globalStyles.alignItemsCenter,
           globalStyles.justifyContentSpaceBetween,
+          styles.contentWrapper,
         ]}
       >
         <Text
@@ -46,7 +48,12 @@ const ProductsSection: FC<Props> = ({
         >
           {sectionTitle}
         </Text>
-        <ButtonText onPress={onSeeAllPress}>{seeAllTitle}</ButtonText>
+        <ButtonText
+          contentContainerStyle={globalStyles.mt4}
+          onPress={onSeeAllPress}
+        >
+          {seeAllTitle}
+        </ButtonText>
       </View>
       <FlatList
         keyExtractor={(item) => item.id}
