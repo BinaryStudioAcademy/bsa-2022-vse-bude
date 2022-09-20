@@ -236,7 +236,7 @@ export const screens = {
     LOCATION: 'Місцезнаходження',
     DESCRIPTION: 'Опис',
     CURRENT_BID: 'Поточна ставка',
-    MIN_UAH: 'Мін ГРН',
+    MIN: 'Мін:',
     BID_SAVED: 'Ставка успішно розміщена',
     LEAVE_TEXT: 'Вийти з аукціону',
     LEAVE_MODAL_TEXT:

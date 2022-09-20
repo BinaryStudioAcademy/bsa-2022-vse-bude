@@ -237,7 +237,7 @@ export const screens = {
     LOCATION: 'Location',
     DESCRIPTION: 'Description',
     CURRENT_BID: 'Current bid',
-    MIN_UAH: 'Min UAH',
+    MIN: 'Min:',
     BID_SAVED: 'Bid successfully placed',
     LEAVE_TEXT: 'Leave Auction',
     LEAVE_MODAL_TEXT:
