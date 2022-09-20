@@ -32,7 +32,7 @@ const VerifiedEmailScreen: FC = () => {
 
   const handleContinuePress = (): void => {
     navigation.navigate(RootScreenName.MAIN, {
-      screen: MainScreenName.ACCOUNT_ROOT,
+      screen: MainScreenName.HOME,
     });
   };
 

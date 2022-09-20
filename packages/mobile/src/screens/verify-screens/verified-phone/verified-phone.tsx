@@ -38,7 +38,7 @@ const VerifiedPhoneScreen: FC<PropsVerifyScreens> = ({ route }) => {
       });
     } else {
       navigation.navigate(RootScreenName.MAIN, {
-        screen: MainScreenName.ACCOUNT_ROOT,
+        screen: MainScreenName.HOME,
       });
     }
   };
