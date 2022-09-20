@@ -3,11 +3,7 @@ import type { Http } from '@vse-bude/shared';
 import { getAllCategories, getAllCategoriesSSR } from 'services/category';
 import { CategoryActions } from './action-types';
 
-interface RequestOptions {
-  limit?: number;
-}
-
-interface RequestOptionsSSR extends RequestOptions {
+interface RequestOptionsSSR {
   httpSSR: Http;
 }
 
@@ -18,6 +14,6 @@ export const fetchCategories = createAsyncThunk(
 
 export const fetchCategoriesSSR = createAsyncThunk(
   CategoryActions.FETCH_CATEGORIES,
-  async ({ httpSSR, limit }: RequestOptionsSSR, { rejectWithValue }) =>
-    getAllCategoriesSSR({ httpSSR, limit }).catch(() => rejectWithValue([])),
+  async ({ httpSSR }: RequestOptionsSSR, { rejectWithValue }) =>
+    getAllCategoriesSSR({ httpSSR }).catch(() => rejectWithValue([])),
 );

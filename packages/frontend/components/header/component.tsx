@@ -13,6 +13,7 @@ import {
 } from '@hooks';
 import { useRouter } from 'next/router';
 import { fetchCategories } from 'store/category';
+import { shallowEqual } from 'react-redux';
 import Search from './search/component';
 import { ProfileInfo } from './profile-info';
 import { Navigation } from './navigation/component';
@@ -28,7 +29,10 @@ export const Header = () => {
   const dispatch = useAppDispatch();
   const [searchOpen, setSearchOpen] = useState(false);
 
-  const categories = useTypedSelector((state) => state.category.listInUse);
+  const categories = useTypedSelector(
+    (state) => state.category.listInUse,
+    shallowEqual,
+  );
   const size = useWindowSize();
 
   useEffect(() => {
