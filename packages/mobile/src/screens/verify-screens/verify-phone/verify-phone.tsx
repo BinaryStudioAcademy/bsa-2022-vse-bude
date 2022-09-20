@@ -30,10 +30,9 @@ import { phone } from '~/validation-schemas/validation-schemas';
 import { globalStyles } from '~/styles/styles';
 import { selectVerifyDataStatus, selectUserPhone } from '~/store/selectors';
 import { notification } from '~/services/services';
+import { ButtonsContainer, Header } from '~/screens/components/components';
 import {
-  ButtonsContainer,
   CustomText,
-  Header,
   Title,
   VerifyImage,
   Wrapper,
@@ -90,6 +89,7 @@ const VerifyPhoneScreen: FC<PropsVerifyScreens> = ({ route }) => {
   return (
     <Wrapper>
       <Header
+        title={t('verify.VERIFY')}
         labelButton={t('verify.BACK_HOME')}
         onPress={handleBackButtonPress}
       />

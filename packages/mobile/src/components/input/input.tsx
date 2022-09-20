@@ -13,6 +13,9 @@ import {
   EyeIcon,
   EyeOffIcon,
   Pressable,
+  Popover,
+  TouchableOpacity,
+  InfoIcon,
 } from '~/components/components';
 import { useCustomTheme, useFormControl, useState } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
@@ -29,6 +32,10 @@ type Props<T extends FormControlValues> = {
   isSecure?: boolean;
   editable?: boolean;
   textInputProps?: TextInputProps;
+  required?: boolean;
+  multiline?: boolean;
+  numberOfLines?: number;
+  popoverText?: string;
   immutableValue?: string;
 };
 
@@ -43,6 +50,10 @@ const Input = <T extends FormControlValues>({
   isSecure,
   editable,
   textInputProps,
+  required = false,
+  multiline = false,
+  numberOfLines = 1,
+  popoverText,
   immutableValue,
 }: Props<T>): ReactElement => {
   const { field } = useFormControl({ name, control });
@@ -57,16 +68,53 @@ const Input = <T extends FormControlValues>({
   return (
     <View style={contentContainerStyle}>
       {!!label && (
-        <Text
+        <View
           style={[
-            styles.label,
-            globalStyles.mb2,
-            globalStyles.fs12,
-            { color: colors.titlePrimary },
+            globalStyles.flexDirectionRow,
+            globalStyles.mb1,
+            { height: 16 },
           ]}
         >
-          {label}
-        </Text>
+          <Text
+            style={[
+              styles.label,
+              globalStyles.fs12,
+              { color: colors.titlePrimary },
+            ]}
+          >
+            {label}
+          </Text>
+          {required && (
+            <Text
+              style={[
+                styles.required,
+                globalStyles.ml1,
+                globalStyles.fs22,
+                {
+                  color: colors.accent,
+                },
+              ]}
+            >
+              *
+            </Text>
+          )}
+          {popoverText && (
+            <Popover
+              popoverStyle={styles.popover}
+              from={
+                <TouchableOpacity style={globalStyles.flexDirectionRow}>
+                  <InfoIcon
+                    size={13}
+                    color={colors.accent}
+                    style={styles.popoverIcon}
+                  />
+                </TouchableOpacity>
+              }
+            >
+              <Text style={[globalStyles.fs12]}>{popoverText}</Text>
+            </Popover>
+          )}
+        </View>
       )}
       <View>
         <TextInput
@@ -79,6 +127,8 @@ const Input = <T extends FormControlValues>({
           secureTextEntry={secured}
           selectTextOnFocus={isSecure}
           editable={editable}
+          multiline={multiline}
+          numberOfLines={numberOfLines}
           style={[
             styles.input,
             {

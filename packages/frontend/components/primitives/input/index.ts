@@ -1,6 +1,4 @@
-import { Input } from './input';
-import { PasswordInput } from './password-input';
-import { SearchInput } from './search-input';
-import { InputDate } from './date-input';
-
-export { Input, PasswordInput, SearchInput, InputDate };
+export { Input } from './input';
+export { PasswordInput } from './password-input';
+export { SearchInput } from './search-input';
+export { InputDate } from './date-input';

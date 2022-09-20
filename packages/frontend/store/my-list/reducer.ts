@@ -119,6 +119,16 @@ const myListSlice = createSlice({
       }
     },
 
+    resetFilter(state) {
+      state.filterType = '';
+      for (const key in state.filterStatus) {
+        if (key !== 'all') {
+          state.filterStatus[key] = false;
+        }
+      }
+      state.filterStatus.all = true;
+    },
+
     setVisabilityCancelModal: (state) => {
       state.showCancelModal = !state.showCancelModal;
     },
@@ -217,6 +227,7 @@ export const {
   resetStatuses,
   setDefaultBadges,
   resetBadges,
+  resetFilter,
   setVisabilityCancelModal,
   setItemId,
 } = myListSlice.actions;

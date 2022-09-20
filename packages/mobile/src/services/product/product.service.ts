@@ -106,6 +106,15 @@ class ProductService {
       },
     );
   };
+
+  saveProduct(_payload: FormData): Promise<ProductDto> {
+    return this.#http.load(`${this.#apiPrefix}${ApiRoutes.PRODUCTS}`, {
+      method: HttpMethod.POST,
+      contentType: HttpContentType.FORM_DATA,
+      payload: _payload,
+      hasAuth: true,
+    });
+  }
 }
 
 export { ProductService };

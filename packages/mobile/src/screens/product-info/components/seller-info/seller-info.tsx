@@ -15,6 +15,7 @@ const SellerInfo = ({ author }: { author: UserProfileDto }) => {
       style={[
         styles.wrapper,
         globalStyles.mt5,
+        globalStyles.mb6,
         globalStyles.px6,
         globalStyles.py6,
       ]}
@@ -68,23 +69,28 @@ const SellerInfo = ({ author }: { author: UserProfileDto }) => {
           {t('screens:words.CONTACT')}
         </Text>
         <View style={[globalStyles.ml2, styles.info]}>
-          <View
-            style={[
-              globalStyles.flexDirectionRow,
-              globalStyles.alignItemsCenter,
-            ]}
-          >
-            <PhoneIcon size={15} color={ColorPalette.YELLOW_200} />
-            <Text
+          {phone && (
+            <View
               style={[
-                globalStyles.px3,
-                globalStyles.fs14,
-                globalStyles.fontWeightMedium,
+                globalStyles.flexDirectionRow,
+                globalStyles.alignItemsCenter,
+                globalStyles.mt1,
+                globalStyles.mb3,
               ]}
             >
-              {phone}
-            </Text>
-          </View>
+              <PhoneIcon size={15} color={ColorPalette.YELLOW_200} />
+              <Text
+                style={[
+                  globalStyles.px3,
+                  globalStyles.fs14,
+                  globalStyles.fontWeightMedium,
+                ]}
+              >
+                {phone}
+              </Text>
+            </View>
+          )}
+
           {socialMedia.map((media, index) => (
             <SocialButton
               key={index}
