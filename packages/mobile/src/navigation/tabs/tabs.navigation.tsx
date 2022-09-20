@@ -5,8 +5,9 @@ import {
 } from '@react-navigation/bottom-tabs';
 import { MainScreenName } from '~/common/enums/enums';
 import { AppIcon, MainNavigationParamList } from '~/common/types/types';
-import { Home, Favorite, MyList, Account } from '~/screens/screens';
+import { selectCurrentUser } from '~/store/selectors';
 import { useAppSelector, useCustomTheme, useTranslation } from '~/hooks/hooks';
+import { Home, Favorite, MyList, Account } from '~/screens/screens';
 import {
   HomeIcon,
   ListIcon,
@@ -15,8 +16,8 @@ import {
   Text,
   UserIcon,
 } from '~/components/components';
-import { selectCurrentUser } from '~/store/selectors';
 import { WelcomeNavigation } from '../welcome/welcome.navigation';
+import { favoriteScreenOptions } from '../screen-options/screen-options';
 
 const Tabs = createBottomTabNavigator<MainNavigationParamList>();
 
@@ -41,11 +42,13 @@ const MainNavigation: FC = () => {
   const getTabOptions = (
     label: string,
     tabBarIcon: AppIcon,
+    title?: string,
   ): BottomTabNavigationOptions => ({
     tabBarIcon,
     tabBarLabel: ({ color }) => (
       <Text style={{ fontSize: 12, color }}>{label}</Text>
     ),
+    title,
   });
 
   return (
@@ -55,11 +58,17 @@ const MainNavigation: FC = () => {
         component={Home}
         options={getTabOptions(t('common:tab_navigation.HOME'), HomeIcon)}
       />
-      <Tabs.Screen
-        name={MainScreenName.FAVORITE}
-        component={Favorite}
-        options={getTabOptions(t('common:tab_navigation.FAVORITE'), StarIcon)}
-      />
+      <Tabs.Group screenOptions={favoriteScreenOptions}>
+        <Tabs.Screen
+          name={MainScreenName.FAVORITE}
+          component={Favorite}
+          options={getTabOptions(
+            t('common:tab_navigation.FAVORITE'),
+            StarIcon,
+            t('favorite.TITLE'),
+          )}
+        />
+      </Tabs.Group>
       <Tabs.Screen
         name={MainScreenName.MY_LIST}
         component={MyList}

@@ -214,4 +214,7 @@ export const screens = {
   items_and_services: {
     TITLE: 'Items & Services',
   },
+  favorite: {
+    TITLE: 'Favourites',
+  },
 };
