@@ -24,13 +24,6 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
   return (
     <View style={globalStyles.py5}>
       <Input
-        label={t('verification.EMAIL')}
-        placeholder={t('verification.EMAIL_HINT')}
-        name="email"
-        control={control}
-        errors={errors}
-      />
-      <Input
         label={t('verification.NAME')}
         placeholder={t('verification.NAME_HINT')}
         name="firstName"
@@ -45,6 +38,13 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
+      />
+      <Input
+        label={t('verification.EMAIL')}
+        placeholder={t('verification.EMAIL_HINT')}
+        name="email"
+        control={control}
+        errors={errors}
       />
       <Input
         label={t('verification.PHONE_NUMBER')}
