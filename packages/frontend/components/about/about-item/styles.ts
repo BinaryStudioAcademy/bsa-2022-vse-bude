@@ -22,8 +22,9 @@ export const nameStyle = ({ lineHeights, fontWeights }: Theme) => css`
   font-weight: ${fontWeights.h3};
 `;
 
-export const roleStyle = ({ lineHeights, fontWeights, colors }: Theme) => css`
-  line-height: ${lineHeights.h3};
+export const roleStyle = ({ lineHeights, fontWeights, colors, fontSizes }: Theme) => css`
+  font-size: ${fontSizes.body2};
+  line-height: ${lineHeights.h4};
   font-weight: ${fontWeights.body1};
   color: ${colors.accent};
 `;
