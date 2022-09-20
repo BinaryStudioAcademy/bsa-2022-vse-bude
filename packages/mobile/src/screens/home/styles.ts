@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     width: '30%',
     height: 50,
   },
-  contentWrapper: {
+  imgWrapper: {
     flexWrap: 'wrap',
   },
 });

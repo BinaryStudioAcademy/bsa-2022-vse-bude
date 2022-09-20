@@ -10,7 +10,7 @@ import { globalStyles } from '~/styles/styles';
 import { ProductDto } from '@vse-bude/shared';
 import { StyleProp, ViewStyle } from 'react-native';
 import { useCustomTheme } from '~/hooks/hooks';
-import { styles } from '../../styles';
+import { styles } from './styles';
 
 type Props = {
   sectionTitle: string;
@@ -36,7 +36,7 @@ const ProductsSection: FC<Props> = ({
           globalStyles.flexDirectionRow,
           globalStyles.alignItemsCenter,
           globalStyles.justifyContentSpaceBetween,
-          styles.contentWrapper,
+          styles.titleWrapper,
         ]}
       >
         <Text
