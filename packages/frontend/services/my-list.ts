@@ -37,6 +37,7 @@ export const deleteProduct = ({
   productId,
 }: {
   productId: string;
-}): Promise<DeleteProduct> => http.delete({
+}): Promise<DeleteProduct> =>
+  http.delete({
     url: `${ApiRoutes.PROFILE}${ProfileApiRoutes.DELETE_ITEM}?productId=${productId}`,
   });

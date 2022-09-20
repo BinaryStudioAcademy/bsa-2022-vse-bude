@@ -8,6 +8,6 @@ export const ItemType = ({ type }: { type: string }): JSX.Element => {
     type === ProductType.SELLING
       ? t('my-list:card.fixedPrice')
       : t('my-list:card.auction');
-  
-return <span css={styles.itemStatus}>{typeText}</span>;
+
+  return <span css={styles.itemStatus}>{typeText}</span>;
 };
