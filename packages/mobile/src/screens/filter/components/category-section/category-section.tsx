@@ -7,6 +7,7 @@ import {
   useAppSelector,
   useEffect,
   useTranslation,
+  useMemo,
 } from '~/hooks/hooks';
 import {
   categories as categoriesApi,
@@ -26,27 +27,28 @@ const CategorySection = () => {
   const onFilterSelect = (id: RootState['filters']['categoryId']) => {
     dispatch(filtersApi.setCategory(id));
   };
+  const renderedItems = useMemo(() => {
+    return categories.map((item) => {
+      const { title, id } = item;
+      const isSelected = id === categoryId;
+
+      return (
+        <RadioButton
+          key={id}
+          label={title}
+          isSelected={isSelected}
+          onPress={() => onFilterSelect(id)}
+          style={globalStyles.mt4}
+        />
+      );
+    });
+  }, [categories, categoryId]);
 
   return (
     <View>
       <SectionTitle title={t('filter.CATEGORY')} style={globalStyles.mt5} />
       {categories ? (
-        <View style={globalStyles.mt5}>
-          {categories.map((item) => {
-            const { title, id } = item;
-            const isSelected = id === categoryId;
-
-            return (
-              <RadioButton
-                key={id}
-                label={title}
-                isSelected={isSelected}
-                onPress={() => onFilterSelect(id)}
-                style={globalStyles.mt4}
-              />
-            );
-          })}
-        </View>
+        <View style={globalStyles.mt5}>{renderedItems}</View>
       ) : (
         <Spinner />
       )}

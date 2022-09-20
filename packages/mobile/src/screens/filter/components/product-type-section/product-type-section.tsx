@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 import { View } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { useAppDispatch, useAppSelector, useId } from '~/hooks/hooks';
+import { useAppDispatch, useAppSelector, useMemo } from '~/hooks/hooks';
 import { lotTypeFilterData } from '~/mock/mock';
 import { FilterLotType } from '~/common/enums/enums';
 import { filters as filtersApi } from '~/store/actions';
@@ -21,20 +21,24 @@ const ProductTypeSection: FC<Props> = ({ contentContainerStyle }) => {
     dispatch(filtersApi.setLotType(filterName));
   };
 
+  const renderedItems = useMemo(() => {
+    return lotTypeFilterData.map(({ title, name }) => {
+      const isSelected = type === name;
+
+      return (
+        <ProductTypeSelector
+          title={title}
+          key={name}
+          isSelected={isSelected}
+          onPress={() => onPress(name)}
+        />
+      );
+    });
+  }, [type]);
+
   return (
     <View style={[globalStyles.flexDirectionRow, contentContainerStyle]}>
-      {lotTypeFilterData.map(({ title, name }) => {
-        const isSelected = type === name;
-
-        return (
-          <ProductTypeSelector
-            title={title}
-            key={useId()}
-            isSelected={isSelected}
-            onPress={() => onPress(name)}
-          />
-        );
-      })}
+      {renderedItems}
     </View>
   );
 };
