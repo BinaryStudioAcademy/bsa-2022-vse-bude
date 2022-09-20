@@ -24,6 +24,7 @@ import {
   Image,
 } from '~/components/components';
 import { WelcomeNavigation } from '../welcome/welcome.navigation';
+import { styles } from './styles';
 
 const Tabs = createBottomTabNavigator<MainNavigationParamList>();
 
@@ -63,10 +64,7 @@ const MainNavigation: FC = () => {
 
   const userIcon = personalInfo?.avatar
     ? () => (
-        <Image
-          source={{ uri: personalInfo?.avatar }}
-          style={{ width: 26, height: 26, borderRadius: 13 }}
-        />
+        <Image source={{ uri: personalInfo?.avatar }} style={styles.avatar} />
       )
     : UserIcon;
 
