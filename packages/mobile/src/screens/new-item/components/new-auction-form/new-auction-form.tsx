@@ -24,7 +24,6 @@ import {
   useNavigation,
 } from '~/hooks/hooks';
 import { products as productsActions } from '~/store/actions';
-import { CONDITION } from '~/common/constants/constants';
 import { globalStyles } from '~/styles/styles';
 import { DatePicker } from '~/components/date-time-picker/date-time-picker';
 import { ButtonAppearance, DateTimeType } from '~/common/enums/ui/ui';
@@ -35,6 +34,7 @@ import { DataStatus } from '~/common/enums/enums';
 import { productsAuctionSchema } from '~/validation-schemas/validation-schemas';
 import { notification } from '~/services/services';
 import { makeAuctionParser } from '~/helpers/helpers';
+import { CONDITION } from '~/common/constants/products';
 import { AddPhotos } from '../add-photos/add-photos';
 
 import { useStyles } from './styles';

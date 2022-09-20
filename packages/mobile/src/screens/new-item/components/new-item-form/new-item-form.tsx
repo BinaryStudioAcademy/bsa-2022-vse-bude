@@ -32,7 +32,7 @@ import { selectCategories, selectDataStatusProducts } from '~/store/selectors';
 import { productsPostSchema } from '~/validation-schemas/validation-schemas';
 import { notification } from '~/services/services';
 import { makePostParser } from '~/helpers/helpers';
-import { CONDITION } from '~/common/constants/constants';
+import { CONDITION } from '~/common/constants/products';
 import { AddPhotos } from '../add-photos/add-photos';
 import { useStyles } from './styles';
 

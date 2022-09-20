@@ -25,4 +25,4 @@ export {
   ANDROID_PN_DEFAULT_CHANNEL_ID,
   CHANEL_NAME,
 } from './push';
-export * from './products';
+export { CONDITION } from './products';
