@@ -213,7 +213,4 @@ export const screens = {
   items_and_services: {
     TITLE: 'Товари & Послуги',
   },
-  favorite: {
-    TITLE: 'Вибрані',
-  },
 };

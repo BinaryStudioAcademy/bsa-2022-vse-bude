@@ -65,7 +65,7 @@ const MainNavigation: FC = () => {
           options={getTabOptions(
             t('common:tab_navigation.FAVORITE'),
             StarIcon,
-            t('favorite.TITLE'),
+            t('common:tab_navigation.FAVORITE'),
           )}
         />
       </Tabs.Group>
