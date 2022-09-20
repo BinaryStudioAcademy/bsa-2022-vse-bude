@@ -10,7 +10,6 @@ const MyList: FC = () => {
 
   return (
     <ScreenWrapper style={styles.screen}>
-      <Text>My list screen</Text>
       <ListItem />
     </ScreenWrapper>
   );
