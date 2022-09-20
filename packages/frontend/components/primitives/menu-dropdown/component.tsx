@@ -38,16 +38,18 @@ export const Dropdown = ({
           ref={ref}
           css={[styles.dropdownContent, cssExtend]}
           style={
-            (size.height < 600 && options.length > 10)
+            size.height < 600 && options.length > 10
               ? { maxHeight: '400px', overflowY: 'hidden' }
               : {}
           }
         >
-          <div style={
-            (size.height < 600 && options.length > 10)
-            ? {  overflowY: 'scroll' }
-            : {}
-          }>
+          <div
+            style={
+              size.height < 600 && options.length > 10
+                ? { overflowY: 'scroll' }
+                : {}
+            }
+          >
             {options.map((item) => {
               const {
                 value,
@@ -83,7 +85,7 @@ export const Dropdown = ({
                 </button>
               );
             })}
-          </div>       
+          </div>
         </div>
       )}
     </div>
