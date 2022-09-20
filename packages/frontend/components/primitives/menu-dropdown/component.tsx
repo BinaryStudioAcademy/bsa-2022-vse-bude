@@ -38,46 +38,52 @@ export const Dropdown = ({
           ref={ref}
           css={[styles.dropdownContent, cssExtend]}
           style={
-            size.height < 600
-              ? { paddingTop: '180px', maxHeight: '400px', overflowY: 'scroll' }
+            (size.height < 600 && options.length > 10)
+              ? { maxHeight: '400px', overflowY: 'hidden' }
               : {}
           }
         >
-          {options.map((item) => {
-            const {
-              value,
-              key,
-              onClick: callbackFn,
-              disabled,
-              icon,
-              cssExtend: optionCss,
-            } = item;
+          <div style={
+            (size.height < 600 && options.length > 10)
+            ? {  overflowY: 'scroll' }
+            : {}
+          }>
+            {options.map((item) => {
+              const {
+                value,
+                key,
+                onClick: callbackFn,
+                disabled,
+                icon,
+                cssExtend: optionCss,
+              } = item;
 
-            const onClick = (e) => {
-              callbackFn();
-              handleClick(e);
-            };
+              const onClick = (e) => {
+                callbackFn();
+                handleClick(e);
+              };
 
-            return (
-              <button
-                key={key || value}
-                css={[styles.dropdownItem, optionCss]}
-                onClick={onClick}
-                disabled={disabled}
-                data-variant={icon && 'icon'}
-              >
-                {icon && (
-                  <Icon
-                    icon={icon.icon}
-                    color={icon.color}
-                    cssExtend={icon.cssExtend}
-                    size={icon.size}
-                  />
-                )}
-                {value}
-              </button>
-            );
-          })}
+              return (
+                <button
+                  key={key || value}
+                  css={[styles.dropdownItem, optionCss]}
+                  onClick={onClick}
+                  disabled={disabled}
+                  data-variant={icon && 'icon'}
+                >
+                  {icon && (
+                    <Icon
+                      icon={icon.icon}
+                      color={icon.color}
+                      cssExtend={icon.cssExtend}
+                      size={icon.size}
+                    />
+                  )}
+                  {value}
+                </button>
+              );
+            })}
+          </div>       
         </div>
       )}
     </div>
