@@ -190,7 +190,6 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
           errors={errors}
           contentContainerStyle={[globalStyles.mt5, { width: '65%' }]}
           required={true}
-          popoverText={t('make_a_post.PRICE_POPOVER')}
         />
       </View>
       <Text style={[globalStyles.fs14, globalStyles.mt6, styles.title]}>
@@ -220,7 +219,6 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
-        popoverText={t('make_a_post.PHONE_POPOVER')}
         inputStyle={{ paddingLeft: 46 }}
       />
       <ButtonsContainer>
