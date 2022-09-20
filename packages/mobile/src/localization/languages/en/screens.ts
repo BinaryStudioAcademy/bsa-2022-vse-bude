@@ -193,7 +193,7 @@ export const screens = {
     TITLE: 'Make a Post',
     HEADER: 'What type a post do you create?',
     AUCTION: 'Auction',
-    DIRECT_SALE: 'Direct Sale',
+    FIXED_PRICE: 'Fixed Price',
   },
   product_info: {
     TITLE: 'Product details',
