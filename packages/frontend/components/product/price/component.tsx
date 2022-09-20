@@ -5,5 +5,7 @@ import { price } from './styles';
 export const Price = ({ amount }: PriceProps) => {
   const { t } = useTranslation();
 
-  return <span css={price}>{t('public:uah', { value: amount })}</span>;
+  return (
+    <span css={price}>{t('items-page:currency.uah', { value: amount })}</span>
+  );
 };

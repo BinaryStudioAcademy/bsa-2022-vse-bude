@@ -41,6 +41,6 @@
     "goToPage": "Goto Page "
   },
   "currency": {
-    "UAH": "UAH"
+    "uah": "UAH {{value}}"
   }
 }
