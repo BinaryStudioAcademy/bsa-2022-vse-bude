@@ -228,6 +228,7 @@ export default function ProductForm({ edit }: { edit: boolean }) {
               error={errors.endDate?.message}
               selected={endDate}
               value={endDate}
+              showTimeInput
               onChange={(date) => {
                 setEndDate(date);
                 field.onChange(date);

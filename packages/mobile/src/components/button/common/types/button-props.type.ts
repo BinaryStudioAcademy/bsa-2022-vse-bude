@@ -10,6 +10,7 @@ type ButtonProps = Omit<PressableProps, 'style'> & {
   compact?: boolean;
   iconLeft?: ReactNode;
   iconRight?: ReactNode;
+  isLoading?: boolean;
 };
 
 export type { ButtonProps };

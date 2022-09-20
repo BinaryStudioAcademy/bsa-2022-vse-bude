@@ -22,6 +22,7 @@ interface ProductState {
   currentItem?: ProductDto;
   similarProducts: ProductDto[];
   loading: boolean;
+  loadingAuctionLeave: boolean;
   currentProduct: ProductDto;
   searchedProducts: ProductDto[];
   permissions: {
@@ -34,6 +35,7 @@ const initialState: ProductState = {
   count: null,
   similarProducts: [],
   loading: false,
+  loadingAuctionLeave: false,
   currentProduct: null,
   currentItem: null,
   searchedProducts: [],
@@ -87,6 +89,13 @@ const productSlice = createSlice({
 
     [auctionLeaveAction.fulfilled.type](state, { payload }) {
       state.currentItem.currentPrice = payload.currentPrice;
+      state.loadingAuctionLeave = false;
+    },
+    [auctionLeaveAction.rejected.type](state) {
+      state.loadingAuctionLeave = false;
+    },
+    [auctionLeaveAction.pending.type](state) {
+      state.loadingAuctionLeave = true;
     },
 
     [fetchProducts.pending.type](state) {

@@ -1,18 +1,24 @@
 import { css } from '@emotion/react';
 import type { Theme } from '@emotion/react';
 
-export const itemImageWrapper = ({ spaces, radiuses }: Theme) => css`
+export const itemImageWrapper = ({ spaces, radiuses, maxMq }: Theme) => css`
   margin-right: ${spaces.sm};
   margin-bottom: ${spaces.md};
   border-radius: ${radiuses.xs};
+  ${maxMq[0]} {
+    margin-right: 0;
+  }
 `;
 
-export const itemImage = ({ radiuses }: Theme) => css`
+export const itemImage = ({ radiuses, maxMq }: Theme) => css`
   display: block;
   border-radius: ${radiuses.xs};
   width: 110px;
   height: 110px;
   object-fit: cover;
+  ${maxMq[0]} {
+    width: 100%;
+  }
 `;
 
 export const itemTitle = ({
