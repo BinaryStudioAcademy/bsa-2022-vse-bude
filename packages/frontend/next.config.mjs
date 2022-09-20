@@ -7,7 +7,13 @@ const { i18n } = i18nConfig;
 const nextConfig = {
   i18n,
   images: {
-    domains: ['vse-bude.fra1.digitaloceanspaces.com'],
+    domains: [
+      'gingkodesign.com',
+      'cloudflare-ipfs.com',
+      'loremflickr.com',
+      'picsum.photos',
+      'vse-bude.fra1.digitaloceanspaces.com',
+    ],
   },
   compiler: {
     emotion: true,
