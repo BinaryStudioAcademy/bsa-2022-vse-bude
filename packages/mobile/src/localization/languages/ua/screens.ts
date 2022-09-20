@@ -208,6 +208,7 @@ export const screens = {
     NEW_AUCTION_CREATED: 'Новий аукціон створено!',
     NEW_POST_CREATED: 'Нову публікацію створено!',
     NEW_DRAFT_CREATED: 'Нову чернетку створено!',
+    HIDE_PHONE: 'Приховати номер телефону',
   },
   home: {
     HELP_UKRAINE: 'Допоможи Україні',

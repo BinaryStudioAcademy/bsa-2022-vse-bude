@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { Asset } from 'react-native-image-picker';
 import {
+  ColorPalette,
   FullUserProfileDto,
   ICreateAuction,
   ProductStatus,
@@ -12,6 +13,8 @@ import {
   View,
   PrimaryButton,
   SecondaryButton,
+  CheckBox,
+  Pressable,
 } from '~/components/components';
 import {
   useAppForm,
@@ -22,6 +25,7 @@ import {
   useAppDispatch,
   useEffect,
   useNavigation,
+  useRef,
 } from '~/hooks/hooks';
 import { products as productsActions } from '~/store/actions';
 import { globalStyles } from '~/styles/styles';
@@ -54,31 +58,49 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
   const isLoading = dataStatusProducts === DataStatus.PENDING;
   const formattedCategories =
     categories && categories.length ? categoryForDropdown(categories) : null;
+  const phone = personalInfo.phone?.replace(/\s/g, '').slice(4);
 
-  const { control, errors, handleSubmit } = useAppForm<ICreateAuction>({
-    defaultValues: {
-      category: '',
-      title: '',
-      description: '',
-      condition: '',
-      recommendedPriceCurrency: t('common:currency.UAH'),
-      recommendedPrice: 0,
-      minimalBidCurrency: t('common:currency.UAH'),
-      minimalBid: 0,
-      endDate: '',
-      country: personalInfo.userAddress?.country || '',
-      city: personalInfo.userAddress?.city || '',
-      phone: personalInfo.phone?.replace(/\s/g, '').slice(4) || '',
-    },
-    validationSchema: productsAuctionSchema,
-  });
+  const { control, errors, handleSubmit, setValue } =
+    useAppForm<ICreateAuction>({
+      defaultValues: {
+        category: '',
+        title: '',
+        description: '',
+        condition: '',
+        recommendedPriceCurrency: t('common:currency.UAH'),
+        recommendedPrice: 0,
+        minimalBidCurrency: t('common:currency.UAH'),
+        minimalBid: 0,
+        endDate: '',
+        country: personalInfo.userAddress?.country || '',
+        city: personalInfo.userAddress?.city || '',
+        phone: phone || '',
+      },
+      validationSchema: productsAuctionSchema,
+    });
   const [images, setImages] = useState<Asset[]>([]);
+  const [hiddenPhone, setHiddenPhone] = useState(Boolean(false));
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
       notification.error(t('errors.CORRECTLY_FILLED'));
     }
   }, [errors]);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+
+      return;
+    }
+
+    if (hiddenPhone) {
+      setValue('phone', '');
+    } else {
+      setValue('phone', phone || '');
+    }
+  }, [hiddenPhone]);
 
   const onSubmit = (data: ICreateAuction): void => {
     const payload = makeAuctionParser({
@@ -263,6 +285,26 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
         popoverText={t('make_a_post.PHONE_POPOVER')}
         inputStyle={{ paddingLeft: 46 }}
       />
+      <View style={[globalStyles.mt3]}>
+        <Pressable
+          style={[
+            globalStyles.flexDirectionRow,
+            globalStyles.alignItemsCenter,
+            { alignSelf: 'flex-start' },
+          ]}
+          onPress={() => setHiddenPhone(!hiddenPhone)}
+        >
+          <CheckBox
+            tintColors={{
+              true: ColorPalette.YELLOW_100,
+              false: ColorPalette.YELLOW_100,
+            }}
+            disabled={true}
+            value={hiddenPhone}
+          />
+          <Text style={globalStyles.fs14}>{t('make_a_post.HIDE_PHONE')}</Text>
+        </Pressable>
+      </View>
       <ButtonsContainer>
         <View style={styles.buttonContainer}>
           <SecondaryButton

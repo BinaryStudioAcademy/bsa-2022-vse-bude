@@ -209,6 +209,7 @@ export const screens = {
     NEW_AUCTION_CREATED: 'A new auction has been created!',
     NEW_POST_CREATED: 'A new post has been created!',
     NEW_DRAFT_CREATED: 'A new draft has been created!',
+    HIDE_PHONE: 'Hide phone number',
   },
   home: {
     HELP_UKRAINE: 'Help Ukraine',
