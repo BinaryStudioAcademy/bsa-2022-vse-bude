@@ -27,6 +27,7 @@ export const getServerSideProps = withPublic(
           'common',
           'account',
           'personal-info',
+          'auth',
         ])),
       },
     };
