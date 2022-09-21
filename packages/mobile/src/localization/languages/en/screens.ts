@@ -64,7 +64,7 @@ export const screens = {
     CITY_HINT: 'Enter city',
     ZIP_CODE: 'ZIP Code',
     ZIP_CODE_HINT: 'Enter ZIP Code',
-    DELIVERY_DATA: 'Delivery data',
+    DELIVERY_DATA: 'Place of delivery',
     DELIVERY_DATA_HINT: 'Enter delivery address',
     SOCIAL_NETWORKS: 'Social networks',
     INSTAGRAM_HINT: 'Enter you Instagram',

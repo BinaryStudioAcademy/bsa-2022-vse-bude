@@ -212,17 +212,17 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
         contentContainerStyle={globalStyles.mt5}
       />
       <Input
-        label="Linkedin"
-        placeholder={t('personal_info.LINKEDIN_HINT')}
-        name="linkedin"
+        label="Facebook"
+        placeholder={t('personal_info.FACEBOOK_HINT')}
+        name="facebook"
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
       />
       <Input
-        label="Facebook"
-        placeholder={t('personal_info.FACEBOOK_HINT')}
-        name="facebook"
+        label="Linkedin"
+        placeholder={t('personal_info.LINKEDIN_HINT')}
+        name="linkedin"
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}

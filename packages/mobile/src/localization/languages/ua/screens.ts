@@ -63,7 +63,7 @@ export const screens = {
     CITY_HINT: 'Введіть місто',
     ZIP_CODE: 'Поштовий індекс',
     ZIP_CODE_HINT: 'Введіть поштовий індекс',
-    DELIVERY_DATA: 'Дані про доставку',
+    DELIVERY_DATA: 'Місце доставки',
     DELIVERY_DATA_HINT: 'Введіть адресу доставки',
     SOCIAL_NETWORKS: 'Соціальні мережі',
     INSTAGRAM_HINT: 'Введіть свій Instagram',
