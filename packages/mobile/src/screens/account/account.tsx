@@ -15,6 +15,7 @@ import {
   Logo,
   TouchableOpacity,
   PlusIcon,
+  ListIcon,
 } from '~/components/components';
 import {
   useAppDispatch,
@@ -48,6 +49,9 @@ const Account: FC = () => {
   const handleSupportPress = () => {
     navigation.navigate(RootScreenName.SUPPORT);
   };
+  const handleMyListPress = () => {
+    navigation.navigate(RootScreenName.MY_LIST);
+  };
   const handleLogOut = () => {
     dispatch(authActions.logOut());
   };
@@ -77,6 +81,10 @@ const Account: FC = () => {
         <TouchableOpacity onPress={handleSupportPress} style={styles.row}>
           <SupportIcon size={30} style={styles.icon} />
           <Text style={styles.btnText}>{t('account.SUPPORT')}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleMyListPress} style={styles.row}>
+          <ListIcon size={30} style={styles.icon} />
+          <Text style={styles.btnText}>{t('account.MY_LIST')}</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.logOutWrapper}>

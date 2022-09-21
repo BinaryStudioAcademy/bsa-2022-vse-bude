@@ -22,6 +22,7 @@ type RootNavigationParamList = {
   [RootScreenName.TYPE_OF_NEW_POST]: undefined;
   [RootScreenName.MAIN_WITH_MENU]: undefined;
   [RootScreenName.ITEMS_AND_SERVICES]: undefined;
+  [RootScreenName.MY_LIST]: undefined;
 };
 
 export type { RootNavigationParamList };

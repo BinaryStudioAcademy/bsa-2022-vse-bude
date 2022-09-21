@@ -20,6 +20,7 @@ enum RootScreenName {
   NEW_AUCTION = 'Make an Auction Post',
   MAIN_WITH_MENU = 'Menu',
   ITEMS_AND_SERVICES = 'Items and services',
+  MY_LIST = 'My list ',
 }
 
 export { RootScreenName };

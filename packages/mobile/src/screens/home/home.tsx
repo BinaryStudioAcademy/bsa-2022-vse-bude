@@ -71,8 +71,8 @@ const Home: FC = () => {
       <ScrollView>
         <StatusBar
           backgroundColor={ColorPalette.WHITE_100}
-          translucent={true}
-          barStyle="light-content"
+          translucent={false}
+          barStyle="dark-content"
         />
         <HomeScreenWrapper>
           <View

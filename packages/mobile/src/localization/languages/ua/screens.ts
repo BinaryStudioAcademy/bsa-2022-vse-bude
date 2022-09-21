@@ -75,6 +75,7 @@ export const screens = {
     MESSAGES: 'Повідомлення',
     SUPPORT: 'Підтримка',
     SIGN_OUT: 'Вийти',
+    MY_LIST: 'Мій список',
   },
   errors: {
     UNKNOWN_ERROR: 'Щось трапилось :(',
