@@ -90,7 +90,7 @@
       "empty": "Description cannot be empty"
     },
     "price": {
-      "base": "Wrong price format",
+      "base": "Price cannot be empty",
       "empty": "Price cannot be empty"
     },
     "country": {

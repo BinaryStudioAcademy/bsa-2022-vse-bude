@@ -17,6 +17,7 @@ const InputDate = ({
   id,
   label,
   showTimeInput,
+  labelRequiredMark,
   ...props
 }: InputDateProps) => {
   const { locale } = useRouter();
@@ -39,6 +40,7 @@ const InputDate = ({
       {label && (
         <label data-variant={variant} css={styles.label} htmlFor={id}>
           {label}
+          {labelRequiredMark && <span>*</span>}
         </label>
       )}
       <div css={[styles.inputValueWrapper, styles.datePickerWrapper]}>

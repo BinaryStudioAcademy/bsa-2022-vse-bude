@@ -174,10 +174,9 @@ export default function ProductForm({ edit }: { edit: boolean }) {
           <div css={styles.inputRow}>
             <Input
               error={errors.recommendedPrice?.message}
-              required
               labelRequiredMark
               id="post-price"
-              type="text"
+              type="number"
               name="price"
               variant="primary"
               label={t('create-post:label.recommendedPrice')}
@@ -203,10 +202,9 @@ export default function ProductForm({ edit }: { edit: boolean }) {
           <div css={styles.inputRow}>
             <Input
               error={errors.minimalBid?.message}
-              required
               labelRequiredMark
               id="post-price"
-              type="text"
+              type="number"
               name="price"
               variant="primary"
               label={t('create-post:label.minimalBid')}
@@ -221,6 +219,7 @@ export default function ProductForm({ edit }: { edit: boolean }) {
           name="endDate"
           render={({ field }) => (
             <InputDate
+              labelRequiredMark
               required
               variant="primary"
               label={t('create-post:label.endDate')}

@@ -80,7 +80,7 @@ export const createAuctionSchema = (t: TFunction) =>
       .required()
       .messages({
         'number.base': t('create-post:validation.price.base'),
-        'number.empty': t('create-post:validation.price.empty'),
+        'number.required': t('create-post:validation.price.empty'),
       }),
     minimalBid: Joi.number()
       .min(1)
