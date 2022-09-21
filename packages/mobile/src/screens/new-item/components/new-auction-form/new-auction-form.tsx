@@ -195,7 +195,6 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
           errors={errors}
           contentContainerStyle={[globalStyles.mt5, { width: '65%' }]}
           required={true}
-          popoverText={t('make_a_post.RECOMMENDED_PRICE_POPOVER')}
         />
       </View>
       <View
@@ -220,7 +219,6 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
           errors={errors}
           contentContainerStyle={[globalStyles.mt5, { width: '65%' }]}
           required={true}
-          popoverText={t('make_a_post.MINIMAL_BID_POPOVER')}
         />
       </View>
       <DatePicker
@@ -260,7 +258,6 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
-        popoverText={t('make_a_post.PHONE_POPOVER')}
         inputStyle={{ paddingLeft: 46 }}
       />
       <ButtonsContainer>
