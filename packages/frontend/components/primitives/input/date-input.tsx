@@ -8,7 +8,7 @@ import * as styles from './styles';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
-export const SECONDS_IN_ONE_HOUR = 60 * 60; // +1 day
+export const MILISECONDS_IN_ONE_DAY = 1000 * 60 * 60 * 24; // +1 day
 
 const InputDate = ({
   value,
@@ -53,7 +53,7 @@ const InputDate = ({
           showTimeInput={showTimeInput}
           locale={customLocale as any}
           dateFormat={showTimeInput ? 'dd/MM/yyyy HH:mm' : 'dd/MM/yyyy'}
-          minDate={new Date(new Date().getTime() + SECONDS_IN_ONE_HOUR)}
+          minDate={new Date(new Date().getTime() + MILISECONDS_IN_ONE_DAY)}
           calendarStartDay={locale === 'ua' ? 1 : 0}
           timeInputLabel={t('components.datePicker.time')}
           {...props}
