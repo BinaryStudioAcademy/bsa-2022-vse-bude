@@ -15,7 +15,7 @@
     "deleteImage": "Delete image"
   },
   "caption": {
-    "uploadPhotos": "You can add to 30 pics"
+    "uploadPhotos": "You can add from 2 up to 30 pics"
   },
   "tooltip": {
     "price": "Make sure that you enter the correct price in digits!",
@@ -90,7 +90,7 @@
       "empty": "Description cannot be empty"
     },
     "price": {
-      "base": "Wrong price format",
+      "base": "Price cannot be empty",
       "empty": "Price cannot be empty"
     },
     "country": {

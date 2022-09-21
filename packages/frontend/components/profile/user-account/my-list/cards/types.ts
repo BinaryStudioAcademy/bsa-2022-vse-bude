@@ -6,6 +6,7 @@ export type ItemCard = {
   description: string;
   imageLinks: string[];
   price: number;
+  type: string;
   author: UserProfileDto;
   winner: UserProfileDto;
   views: number;

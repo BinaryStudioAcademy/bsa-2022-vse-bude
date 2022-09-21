@@ -14,7 +14,7 @@ import { inputWrapper } from '../layout/styles';
 import { verifyForm, verifyInput } from '../styles';
 import { phoneCodeResend, phoneVerification } from '../../../store/auth';
 import { RESEND_VERIFICATION_CODE_LIMIT_SEC } from '../../../common/constants/app';
-import { verifyCodeSchema } from './validation';
+import { createVerifyCodeSchema } from './validation';
 import { ResendCodeButton } from './resend-code';
 import { resendButton } from './styles';
 
@@ -24,25 +24,26 @@ export const PhoneVerification = () => {
 
   const dispatch = useAppDispatch();
 
+  const { t } = useTranslation();
+
   const {
     register,
     handleSubmit,
-    // formState: { errors },
+    formState: { errors },
   } = useForm<PhoneVerifyDto>({
-    resolver: joiResolver(verifyCodeSchema),
+    resolver: joiResolver(createVerifyCodeSchema(t)),
   });
 
   const onSubmit: SubmitHandler<PhoneVerifyDto> = (data) => {
     dispatch(phoneVerification(data));
   };
 
-  const { t } = useTranslation();
   const onResendCode = () => {
     dispatch(phoneCodeResend());
   };
 
   return (
-    <form css={verifyForm} onSubmit={handleSubmit(onSubmit)}>
+    <form noValidate css={verifyForm} onSubmit={handleSubmit(onSubmit)}>
       <div css={inputWrapper}>
         <Input
           {...register('code')}
@@ -51,7 +52,7 @@ export const PhoneVerification = () => {
           variant="primary"
           type="text"
           name="code"
-          // error={t(getErrorKey('code', errors.code?.type))}
+          error={errors.code?.message}
         />
         <Error text={error} />
       </div>

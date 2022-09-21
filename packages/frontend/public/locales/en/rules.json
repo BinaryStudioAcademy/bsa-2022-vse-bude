@@ -1,6 +1,93 @@
 {
   "generalRules": {
-    "title": "Rules",
-    "policy": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatibus, recusandae esse. Iure consequuntur voluptatem animi impedit, voluptates minus maiores id consectetur, soluta incidunt non ducimus itaque aspernatur sunt! Reiciendis voluptatibus necessitatibus animi illum tempore enim odio ab ipsam porro numquam in, delectus saepe dolore. Quae, ut. Quam distinctio vero voluptas rem veniam incidunt, eligendi ipsa odit magni molestiae modi ullam minus delectus, ducimus doloribus, vitae nihil fugiat et quasi sequi. Nihil culpa laboriosam aliquam nostrum. Possimus delectus culpa commodi libero, iste laborum facilis consectetur esse maxime repellat voluptatibus consequuntur, ducimus accusamus, nihil perspiciatis corporis quasi doloremque tempore vel iure nesciunt natus omnis eligendi! Nostrum numquam ut vitae quibusdam velit, laborum amet rerum id dolorem nisi asperiores magnam fugit? Vitae ab alias, labore nostrum aliquam, enim illum pariatur ratione est iure rerum officiis, eos culpa in temporibus possimus tempore beatae libero laboriosam? Aliquam corrupti quasi veritatis eveniet. Sed consectetur incidunt accusantium quibusdam omnis quaerat numquam aliquam nihil labore sint. Sequi assumenda voluptates adipisci ipsum debitis eaque unde iusto mollitia. Temporibus aperiam unde, ullam, quibusdam doloremque est quo magni voluptatem corrupti minus officiis maxime doloribus cupiditate officia ducimus optio eius porro, culpa ad. Minus vero laboriosam adipisci saepe rerum ullam tempore repellat?"
+    "title": "Privacy Policy",
+    "headline": {
+      "forWho": "To whom does the policy apply?",
+      "whatWeGet": "What information do we collect?",
+      "cookie": "Cookies",
+      "why": "Why do we collect information?",
+      "howWeSave": "How do we save information?",
+      "thirdParties": "To which third parties do we provide data?",
+      "yourRights": "Your rights",
+      "emailMessages": "Consent to send messages",
+      "rulesChanges": "Privacy Policy Changes",
+      "otherConditions": "Other conditions"
+    },
+    "paragraphs": {
+      "main": {
+        "first": "Welcome to the Privacy Policy of the website https://vse-bude.com.ua. The Privacy Policy outlined below will inform you about the main issues regarding the protection and processing of your personal data.",
+        "second": "This Policy was developed in accordance with the requirements of the General Data Protection Regulation (GDPR; Regulation (EU) 2016/679), the Law of Ukraine 'On the Protection of Personal Data' and other normative acts of Ukrainian legislation that regulate legal relations, related to the collection, processing, and storage of personal data, as well as the right of citizens to non-interference in personal life and the right to self-expression."
+      },
+      "forWho": {
+        "first": "This Policy applies to all persons who, in the process of using the site, provided their own personal data. Personal data is information or a set of information about a natural person who is identified or can be specifically identified.",
+        "second": "The site is NOT intended for children under the age of 18, and we do not knowingly collect personal data from children under the age of 18 without parental consent. If you are under 18, please do not submit your personal data."
+      },
+      "whatWeGet": {
+        "list": {
+          "first": "Full name (surname, first name)",
+          "second": "phone number",
+          "third": "email address",
+          "fourth": "URL of your pages in social networks.",
+          "fifth": "specified place of residence",
+          "sixth": "Profile Photo"
+        },
+        "first": "The owner (controller) and administrator (processor/operator) of your personal data is Binary Studio LLC."
+      },
+      "cookie": {
+        "first": "During the operation of the site, we may collect certain information using technologies such as cookies. With the help of cookies, the web server stores preferences and settings on your computer, mobile phone or other device(s), which is then automatically restored the next time you visit the site, making its use more convenient."
+      },
+      "why": {
+        "first": "The personal data provided by you will be used in the process of preparing for and directly conducting on the website a charity online auction to help the Ukraine, including:",
+        "list": {
+          "first": "to send notifications/messages regarding user registration by the auction participant, including sending a message with a one-time password for authorization on the site;",
+          "second": "to inform about the status of lots and auction results;",
+          "third": "to initiate user communication for the purpose of selling the lot by transferring the contact information of the auction winner to the owner of the lot."
+        }
+      },
+      "howWeSave": {
+        "first": "All received information will be stored and processed in our cloud-based database.",
+        "second": "We retain your data for as long as necessary for the purposes specified in this Privacy Policy. Sometimes we may retain your data for a longer period as permitted or required by law.",
+        "third": "We take all necessary measures to protect your information from unauthorized access, modification, disclosure or destruction. At the same time, we draw your attention to the fact that none of the existing methods of data transmission can be completely secure. Therefore, despite all security measures taken, we cannot guarantee complete security of information and data."
+      },
+      "thirdParties": {
+        "first": "Your personal information will be shown on the information page of the lot/product.",
+        "second": "We may also disclose and/or transfer personal data to third parties in the following cases:",
+        "list": {
+          "first": "Obtaining your consent to such disclosure/transfer;",
+          "second": "In case of involvement of third parties that provide technical support and/or services for the improvement of the site under the terms of the contract and under the condition of non-disclosure of personal data;",
+          "third": "In the interests of national security, economic well-being and human rights, in particular, but not limited to reasonable requests by government authorities that have the right to submit applications and receive such data;",
+          "fourth": "For the administration of justice, execution of a court act, an act of another body or an official, subject to execution in accordance with the legislation of Ukraine on executive proceedings;"
+        }
+      },
+      "yourRights": {
+        "first": "As a subject of personal data, you have the following rights:",
+        "second": "To obtain access, make changes or additions to your personal data, withdraw the consent to the processing of personal data that you have given us in accordance with this Policy, or in case of any comments, wishes or claims regarding your personal data , which are processed by us, please contact: ",
+        "list": {
+          "first": "to know about the sources of collection, the location of your personal data, the purpose of their processing, the location or place of residence (residence) of the owner or manager of personal data or to give an appropriate order to obtain this information to persons authorized by him, except for cases established by law;",
+          "second": "receive information about the conditions for providing access to personal data, in particular information about third parties to whom your personal data is transferred;",
+          "third": "to access your personal data;",
+          "fourth": "to receive no later than thirty calendar days from the date of receipt of the request, except in cases provided by law, an answer on whether your personal data is being processed, as well as to receive the content of such personal data;",
+          "fifth": "present a reasoned demand to the owner of personal data with an objection to the processing of his personal data;",
+          "sixth": "to protect your personal data from illegal processing and accidental loss, destruction, damage due to intentional concealment, failure to provide or untimely provision of them, as well as protection from providing information that is unreliable or dishonors honor, dignity and business reputation of an individual;",
+          "seventh": "apply complaints about the processing of your personal data to the Commissioner or to the court;",
+          "eight": "apply legal remedies in case of violation of the legislation on the protection of personal data;",
+          "ninth": "make a reservation regarding the limitation of the right to process your personal data when giving consent;",
+          "tenth": "know the mechanism of automatic processing of personal data;",
+          "eleventh": "withdraw consent to the processing of personal data;",
+          "twelveth": "to correct your personal data and make additions to them;"
+        }
+      },
+      "emailMessages": {
+        "first": "By accepting the terms of this Policy, you automatically agree to receive from us the messages described in clause 4 of this Policy. You can opt out of such mailing by sending a written message to the email address: "
+      },
+      "rulesChanges": {
+        "first": "We will notify you of any changes by posting the new Privacy Policy on this page. We will notify you by email and/or a prominent notice on our site before the changes take effect and update the 'effective date' in at the top of this Privacy Policy.",
+        "second": "We recommend that you periodically review this Privacy Policy for any changes. Changes to this Privacy Policy are effective upon posting on this page."
+      },
+      "otherConditions": {
+        "first": "In the event that any provision of the Privacy Policy, including any provision, clause or part thereof, is held to be inconsistent with the law or invalid, then the other provisions which are not inconsistent with the law shall remain in full force and effect and are valid, and any invalid or unenforceable provision shall be deemed modified, corrected to the extent necessary to ensure its validity and enforceability."
+      }
+    },
+    "updatedAt": "Last updated:"
   }
 }

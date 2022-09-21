@@ -164,6 +164,17 @@
 .fa-search::before {
   content: '\f002';
 }
+.fa-bags-shopping::before {
+  content: '\f290';
+}
+
+.fa-trash-can::before {
+  content: '\f2ed';
+}
+
+.fa-clipboard::before {
+  content: '\f328';
+}
 
 :root,
 :host {

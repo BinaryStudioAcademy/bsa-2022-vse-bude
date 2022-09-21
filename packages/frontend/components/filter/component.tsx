@@ -10,6 +10,7 @@ import { FilterHeader } from './filter-header';
 import { Pagination } from './pagination';
 import { ProductsLoader } from './products-loader';
 import { deepEquals, getFilterDefinition, removeFilterFields } from './helpers';
+import * as styles from './styles';
 
 export const Filter = () => {
   const { query, push } = useRouter();
@@ -45,14 +46,14 @@ export const Filter = () => {
         filter={removeFilterFields(filter, ['from', 'limit'])}
         setFilter={setFilter}
       />
-      <Container>
+      <Container css={styles.container}>
         {loading ? (
           <ProductsLoader />
         ) : (
-          <>
+          <div css={styles.productGridWrapper}>
             <ProductGrid />
             <Pagination filter={filter} setFilter={setFilter} />
-          </>
+          </div>
         )}
       </Container>
     </>

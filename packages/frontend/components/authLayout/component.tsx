@@ -31,7 +31,9 @@ export const AuthLayout = ({ children }: LayoutProps) => {
               <h6 css={styles.headline}>{t('auth:layout.title')}</h6>
               <p css={styles.text}>{t('auth:layout.description')}</p>
               <div css={styles.controlsWrapper}>
-                <span css={styles.price}>360 {t('public:uah')}</span>
+                <span css={styles.price}>
+                  {t('public:uah', { value: 360 })}
+                </span>
                 <Button>{t('public:bet')}</Button>
               </div>
             </div>

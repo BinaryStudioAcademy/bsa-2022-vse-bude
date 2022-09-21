@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get('screen').width - 40,
     height: 300,
     borderRadius: 6,
+    resizeMode: 'contain',
   },
   itemsCount: {
     flexDirection: 'row',

@@ -1,4 +1,4 @@
-﻿import type { Theme } from '@emotion/react';
+import type { Theme } from '@emotion/react';
 import { css } from '@emotion/react';
 
 export const arrow = ({ colors }: Theme) => css`
@@ -15,9 +15,10 @@ export const body = ({
   radiuses,
   fontSizes,
   breakpoints,
+  zIndex,
 }: Theme) => css`
   position: absolute;
-  z-index: 98;
+  z-index: ${zIndex.tooltip};
   animation: fade-in 0.15s ease-in-out;
   max-width: 30%;
   border-radius: ${radiuses.xs};

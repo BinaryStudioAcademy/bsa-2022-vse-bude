@@ -4,12 +4,12 @@ import { CategoryDto } from '@vse-bude/shared';
 import { loadAllCategories } from './action';
 
 type InitialState = {
-  categories: CategoryDto[] | null;
+  categories: CategoryDto[] | [];
   dataStatus: DataStatus;
 };
 
 const initialState: InitialState = {
-  categories: null,
+  categories: [],
   dataStatus: DataStatus.IDLE,
 };
 

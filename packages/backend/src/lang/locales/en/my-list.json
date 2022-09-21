@@ -1,6 +1,7 @@
 {
   "errors": {
     "cancelledExists": "The product has already added to the archive",
-    "postedExistes": "The product has already posted"
+    "postedExistes": "The product has already posted",
+    "deleteStatus": "Can not delete this product type"
   }
 }

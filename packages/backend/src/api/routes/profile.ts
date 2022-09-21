@@ -202,12 +202,10 @@ export const initProfileRoutes = (
         userAddress,
       });
 
-      await profileService.updateUserSocialMedia({
+      const links = await profileService.updateUserSocialMedia({
         userId,
         socialMedia,
       });
-
-      const links = await profileService.getSocialMedia({ userId });
 
       if (newPassword) {
         await profileService.changePassword({
@@ -242,7 +240,7 @@ export const initProfileRoutes = (
     wrap((req: Request) => notificationService.getAll(req.userId, req.query)),
   );
 
-  router.patch(
+  router.put(
     apiPath(path, ProfileApiRoutes.PATCH_NOTIFICATION),
     authMiddleware,
     wrap((req: Request) => notificationService.setAsViewed(req)),
@@ -337,6 +335,52 @@ export const initProfileRoutes = (
         itemId,
         postDate,
       });
+    }),
+  );
+
+  /**
+   * @openapi
+   * /profile/delete-item:
+   *   delete:
+   *     description: Remove a user's product
+   *     security:
+   *       - Bearer: []
+   *     tags: [Profile]
+   *     parameters:
+   *       - in: path
+   *         name: DeleteProduct
+   *         required: true
+   *         type: string
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               $ref: "#/definitions/DeleteProduct"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
+  router.delete(
+    apiPath(path, `${ProfileApiRoutes.DELETE_ITEM}`),
+    authMiddleware,
+    wrap(async (req: Request) => {
+      const itemId = <string>req.query.productId;
+      await productService.getById(itemId);
+      const productId = await myListService.deleteProduct({
+        productId: itemId,
+      });
+
+      return {
+        productId,
+      };
     }),
   );
 

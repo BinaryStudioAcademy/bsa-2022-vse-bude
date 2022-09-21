@@ -39,7 +39,7 @@ export default function Login() {
   return (
     <div css={styles.contentWrapper}>
       <div css={styles.formWrapper}>
-        <form onSubmit={handleSubmit(onSubmit)} css={styles.form}>
+        <form noValidate onSubmit={handleSubmit(onSubmit)} css={styles.form}>
           <p css={styles.headline}>{t('auth:sign-in.loginHeadline')}</p>
           <div css={styles.inputWrapper}>
             <Input

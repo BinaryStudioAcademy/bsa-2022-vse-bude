@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import { IconButton, Button } from '@primitives';
 import { IconColor, IconName } from '@enums';
@@ -5,7 +6,7 @@ import type { ProductPost } from '@vse-bude/shared';
 import { ApiRoutes, ProductApiRoutes } from '@vse-bude/shared';
 import { useRouter } from 'next/router';
 import { useAppDispatch } from '@hooks';
-import { addItemToPosted } from '@store';
+import { addItemToPosted, setVisabilityDeleteModal, setItemId } from '@store';
 import {
   ItemImage,
   ItemHeader,
@@ -13,13 +14,18 @@ import {
   ItemStatus,
   ItemDescription,
   ItemDate,
+  Tooltip,
+  ItemType,
 } from '../primitives';
 import type { CardProps } from './types';
 import * as styles from './styles';
 
 export const Archived = ({ data }: CardProps) => {
+  const [showDeleteTooltip, setShowDeleteTooltip] = useState(false);
+  const [showSeeItemTooltip, setSeeItemTooltip] = useState(false);
   const { t } = useTranslation();
-  const { id, title, imageLinks, price, description, updatedAt } = data;
+  const { id, title, imageLinks, price, description, updatedAt, type } = data;
+
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -33,6 +39,15 @@ export const Archived = ({ data }: CardProps) => {
 
   const onEditClick = () => {
     router.push(`${ApiRoutes.ITEMS}/${ProductApiRoutes.EDIT}/${id}`);
+  };
+
+  const onOpenDeleteModal = () => {
+    dispatch(setVisabilityDeleteModal());
+    dispatch(setItemId(id));
+  };
+
+  const onSeeItemClick = () => {
+    router.push(`${ApiRoutes.ITEMS}/${id}`);
   };
 
   return (
@@ -49,7 +64,8 @@ export const Archived = ({ data }: CardProps) => {
             <ItemDescription description={description} />
             <div css={styles.saleDetails}>
               <Price price={price} />
-              <ItemStatus status={'Archived'} />
+              <ItemStatus status={t('my-list:card.archived')} />
+              <ItemType type={type} />
             </div>
           </div>
 
@@ -65,8 +81,42 @@ export const Archived = ({ data }: CardProps) => {
               color={IconColor.GRAY}
               icon={IconName.PENCIL}
               size="sm"
+              cssExtend={styles.iconButton}
               onClick={onEditClick}
             />
+
+            <div css={styles.buttonWrapper}>
+              {showDeleteTooltip ? (
+                <Tooltip>{t('my-list:card.tooltip-delete')}</Tooltip>
+              ) : null}
+              <IconButton
+                ariaLabel="delete"
+                backgroundColor="darkgray"
+                color={IconColor.GRAY}
+                icon={IconName.DELETE}
+                size="sm"
+                cssExtend={styles.iconButton}
+                onClick={onOpenDeleteModal}
+                onMouseEnter={() => setShowDeleteTooltip(true)}
+                onMouseLeave={() => setShowDeleteTooltip(false)}
+              />
+            </div>
+
+            <div css={styles.buttonWrapper}>
+              {showSeeItemTooltip ? (
+                <Tooltip>{t('my-list:card.tooltip-seeItem')}</Tooltip>
+              ) : null}
+              <IconButton
+                ariaLabel="delete"
+                backgroundColor="darkgray"
+                color={IconColor.GRAY}
+                icon={IconName.ITEM_CARD}
+                size="sm"
+                onClick={onSeeItemClick}
+                onMouseEnter={() => setSeeItemTooltip(true)}
+                onMouseLeave={() => setSeeItemTooltip(false)}
+              />
+            </div>
           </div>
         </div>
       </div>

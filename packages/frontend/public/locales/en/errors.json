@@ -1,0 +1,11 @@
+{
+  "404": {
+    "description": "Ooops, page not found"
+  },
+  "500": {
+    "description": "Ooops, something went wrong"
+  },
+  "buttons": {
+    "goToHome": "Go to home page"
+  }
+}

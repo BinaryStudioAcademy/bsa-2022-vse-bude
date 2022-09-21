@@ -13,20 +13,14 @@ import {
 } from '@hooks';
 import { useRouter } from 'next/router';
 import { fetchCategories } from 'store/category';
-import type { HttpAcceptLanguage } from '@vse-bude/shared';
-import dynamic from 'next/dynamic';
+import { shallowEqual } from 'react-redux';
+import Search from './search/component';
 import { ProfileInfo } from './profile-info';
 import { Navigation } from './navigation/component';
 import { BurgerMenu } from './burger-menu/component';
 import * as styles from './styles';
 
-interface RequestOptions {
-  locale?: HttpAcceptLanguage;
-}
-const Search = dynamic(() => import('@components/primitives/search/component'));
-
 export const Header = () => {
-  const [searchQuery, setSearchQuery] = useState('');
   const [show, setShow] = useState(false);
   const { user, loading } = useAuth();
   const isMounted = useMounted();
@@ -35,16 +29,15 @@ export const Header = () => {
   const dispatch = useAppDispatch();
   const [searchOpen, setSearchOpen] = useState(false);
 
-  const categories = useTypedSelector((state) => state.category.listInUse);
+  const categories = useTypedSelector(
+    (state) => state.category.listInUse,
+    shallowEqual,
+  );
   const size = useWindowSize();
 
   useEffect(() => {
     if (!categories.length) {
-      const category: RequestOptions = {
-        locale: locale as HttpAcceptLanguage,
-      };
-
-      dispatch(fetchCategories({ locale: category.locale }));
+      dispatch(fetchCategories());
     }
   }, [dispatch, locale, categories]);
 
@@ -100,25 +93,11 @@ export const Header = () => {
               <>
                 <Suspense fallback={<Loader size="extraSmall" />}>
                   {size.width > 600 ? (
-                    <Search
-                      value={searchQuery}
-                      setValue={setSearchQuery}
-                      setSearchOpen={setSearchOpen}
-                      placeholder={t(
-                        'common:components.input.searchProductsPlaceholder',
-                      )}
-                    />
+                    <Search setSearchOpen={setSearchOpen} />
                   ) : (
                     <>
                       {searchOpen ? (
-                        <Search
-                          value={searchQuery}
-                          setValue={setSearchQuery}
-                          setSearchOpen={setSearchOpen}
-                          placeholder={t(
-                            'common:components.input.searchProductsPlaceholder',
-                          )}
-                        />
+                        <Search setSearchOpen={setSearchOpen} />
                       ) : (
                         <IconButton
                           cssExtend={styles.searchButton}
@@ -132,9 +111,13 @@ export const Header = () => {
                     </>
                   )}
                   {user || loading ? (
-                    <div className="header-content">{renderProfileInfo()}</div>
+                    <div className="header-btn-group">
+                      {renderProfileInfo()}
+                    </div>
                   ) : (
-                    <div className="header-content">{renderAuthButtons()}</div>
+                    <div className="header-btn-group">
+                      {renderAuthButtons()}
+                    </div>
                   )}
                 </Suspense>
               </>

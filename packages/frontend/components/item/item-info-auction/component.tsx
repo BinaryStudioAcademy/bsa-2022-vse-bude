@@ -74,9 +74,10 @@ export const ItemInfoAuction = ({
   const minBidAmount = +item.currentPrice + +item.minimalBid;
 
   const {
+    loading,
     permissions: { isAbleToLeaveAuction },
   } = useTypedSelector((state) => state.product);
-  const { loading } = useTypedSelector((state) => state.product);
+
   const isAuthor = user?.id === item.author.id;
   const {
     register,
@@ -180,11 +181,7 @@ export const ItemInfoAuction = ({
       <div css={styles.priceTimerWrapper}>
         <CountDownTimer targetDate={targetDate} />
         <div css={styles.priceWrapper}>
-          <ItemPrice
-            currency={t('public:uah')}
-            amount={item.currentPrice}
-            cssExtended={styles.price}
-          />
+          <ItemPrice amount={item.currentPrice} cssExtended={styles.price} />
           <span>{t('item:currentBid')}</span>
         </div>
       </div>
@@ -192,6 +189,7 @@ export const ItemInfoAuction = ({
       <ItemInfo item={item} />
       {!isSold && (
         <form
+          noValidate
           onSubmit={handleSubmit(onMakeBid)}
           css={[styles.controls, isAuthor && styles.editButton]}
         >
@@ -205,9 +203,7 @@ export const ItemInfoAuction = ({
                 error={errors.price?.message}
               />
               <span>{t('item:bidInputCaption')} </span>
-              <span>
-                {t('public:uah')} {minBidAmount}
-              </span>
+              <span>{t('public:uah', { value: minBidAmount })}</span>
             </div>
           )}
 

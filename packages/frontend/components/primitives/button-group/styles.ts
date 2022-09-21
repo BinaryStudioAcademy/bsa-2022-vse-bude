@@ -10,6 +10,7 @@ export const button = ({
   radiuses,
   heights,
   spaces,
+  maxMq,
 }: Theme) => css`
   ${resetButton};
   display: flex;
@@ -29,6 +30,10 @@ export const button = ({
   white-space: nowrap;
   padding: 0 ${spaces.xs};
   box-sizing: content-box;
+
+  ${maxMq[0]} {
+    padding: ${spaces.xs};
+  }
 
   &[data-selected='selected'] {
     border: 1px solid ${colors.primaryLight};
@@ -65,8 +70,11 @@ export const button = ({
   }
 `;
 
-export const wrapper = ({ colors, radiuses }: Theme) => css`
+export const wrapper = ({ colors, radiuses, maxMq }: Theme) => css`
   display: flex;
   background-color: ${colors.backgroundDark};
   border-radius: ${radiuses.xxs};
+  ${maxMq[0]} {
+    flex-direction: column;
+  }
 `;

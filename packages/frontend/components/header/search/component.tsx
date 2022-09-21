@@ -1,13 +1,17 @@
 import { Routes } from '@enums';
+import debounce from 'lodash/debounce';
 import { useAppDispatch, useOutsideClick, useTypedSelector } from '@hooks';
 import { useRouter } from 'next/router';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { actionSearch, clearSearch } from 'store/product';
-import { SearchInput } from '../input';
+import { useTranslation } from 'next-i18next';
+import { SearchInput } from '../../primitives/input';
 import * as styles from './styles';
 import type { SearchProps } from './types';
 
-const Search = ({ value, setValue, setSearchOpen, ...props }: SearchProps) => {
+const Search = ({ setSearchOpen }: SearchProps) => {
+  const [value, setValue] = useState('');
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { searchedProducts } = useTypedSelector((state) => state.product);
   const { push } = useRouter();
@@ -16,23 +20,22 @@ const Search = ({ value, setValue, setSearchOpen, ...props }: SearchProps) => {
     setSearchOpen(false);
     dispatch(clearSearch());
   }, [setSearchOpen, dispatch]);
+
   const ref = useOutsideClick(handleClickOutside);
 
-  const debounce =
-    (cb, delay = 100) =>
-    (...args) => {
-      setTimeout(() => {
-        cb(...args);
-      }, delay);
-    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const handleSearch = useCallback(
+    debounce((value: string) => {
+      if (value) {
+        dispatch(actionSearch(value));
+      }
+    }, 300),
+    [dispatch],
+  );
 
-  const handleSearch = debounce((value) => {
-    dispatch(actionSearch(value));
-  });
-
-  const callback = async ({ target }) => {
-    setValue(target.value);
-    handleSearch(target.value);
+  const handleChange = (newValue: string) => {
+    setValue(newValue);
+    handleSearch(newValue);
   };
 
   const redirectToItem = async (productId: string) => {
@@ -50,13 +53,12 @@ const Search = ({ value, setValue, setSearchOpen, ...props }: SearchProps) => {
     <div ref={ref} css={styles.searchWrapper}>
       <SearchInput
         value={value}
-        setValue={setValue}
-        onChange={callback}
-        placeholder={props.placeholder}
-      ></SearchInput>
-      <div css={styles.searchContent}>
-        {searchedProducts.length > 0 &&
-          searchedProducts.map((product, key) => (
+        onChange={handleChange}
+        placeholder={t('common:components.input.searchProductsPlaceholder')}
+      />
+      {!!searchedProducts.length && (
+        <div css={styles.searchContent}>
+          {searchedProducts.map((product, key) => (
             <button
               css={styles.searchItem}
               onClick={() => redirectToItem(product.id)}
@@ -65,8 +67,10 @@ const Search = ({ value, setValue, setSearchOpen, ...props }: SearchProps) => {
               {product.title}
             </button>
           ))}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
+
 export default Search;

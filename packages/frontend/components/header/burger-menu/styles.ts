@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 
 export const burgerOverlay = (theme: Theme) => css`
   position: fixed;
-  z-index: 999;
+  z-index: ${theme.zIndex.burgerOverlay};
   top: 0;
   display: flex;
   flex-direction: column;
@@ -12,7 +12,8 @@ export const burgerOverlay = (theme: Theme) => css`
   gap: ${theme.spaces.md};
   width: 100%;
   padding: ${theme.spaces.xl1};
-  background-color: ${theme.colors.backgroundLight};
+  background-color: ${theme.colors.white};
+  box-shadow: ${theme.shadows.bottom};
 
   .burger-navigation,
   .burger-buttons-wrapper {

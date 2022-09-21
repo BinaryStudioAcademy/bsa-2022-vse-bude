@@ -59,6 +59,7 @@ export enum ProfileApiRoutes {
   ADD_TO_POSTED = '/add-to-posted',
   GET_NOTIFICATIONS = '/notifications',
   PATCH_NOTIFICATION = '/notifications/:id',
+  DELETE_ITEM = '/delete-item',
 }
 
 export enum AccountApiRoutes {

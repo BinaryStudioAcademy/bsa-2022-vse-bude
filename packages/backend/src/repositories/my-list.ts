@@ -1,4 +1,9 @@
-import type { Prisma, PrismaClient, FavoriteProducts } from '@prisma/client';
+import type {
+  Prisma,
+  PrismaClient,
+  Product,
+  FavoriteProducts,
+} from '@prisma/client';
 import { ProductStatus } from '@prisma/client';
 import { Order } from '@vse-bude/shared';
 import type { Item, ProductById } from '@types';
@@ -209,6 +214,14 @@ export class MyListRepository {
       },
       include: {
         product: true,
+      },
+    });
+  }
+
+  public deleteProduct({ productId }: { productId: string }): Promise<Product> {
+    return this._dbClient.product.delete({
+      where: {
+        id: productId,
       },
     });
   }

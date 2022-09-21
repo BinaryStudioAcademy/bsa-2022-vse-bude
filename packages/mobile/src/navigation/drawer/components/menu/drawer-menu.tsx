@@ -1,6 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { DrawerItem } from '@react-navigation/drawer';
-import { useCustomTheme, useTranslation } from '~/hooks/hooks';
+import {
+  useCustomTheme,
+  useTranslation,
+  useAppSelector,
+  useMemo,
+  useState,
+  useNavigation,
+} from '~/hooks/hooks';
 import {
   Logo,
   View,
@@ -8,18 +15,42 @@ import {
   ListIcon,
   ArrowUpIcon,
   ArrowDownIcon,
+  Spinner,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
+import {
+  selectCategories,
+  selectCategoriesDataStatus,
+} from '~/store/selectors';
+import { DataStatus, RootScreenName } from '~/common/enums/enums';
+import { RootNavigationProps } from '~/common/types/types';
 import { styles } from './styles';
 
 const DrawerMenu = () => {
   const [isNestedVisible, setIsNestedVisible] = useState(false);
+  const navigation = useNavigation<RootNavigationProps>();
+  const categories = useAppSelector(selectCategories);
+  const dataStatus = useAppSelector(selectCategoriesDataStatus);
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
 
   const handlePress = () => {
-    return;
+    navigation.navigate(RootScreenName.ITEMS_AND_SERVICES);
   };
+
+  const renderedItems = useMemo(() => {
+    return categories.map(({ title, id }) => {
+      return (
+        <DrawerItem
+          key={id}
+          label={title}
+          onPress={handlePress}
+          labelStyle={styles.label}
+        />
+      );
+    });
+  }, [categories]);
+  const isLoading = dataStatus === DataStatus.PENDING;
 
   return (
     <View>
@@ -49,42 +80,7 @@ const DrawerMenu = () => {
         ]}
       >
         <Text style={styles.subtitle}>{t('common:drawer_menu.ITEMS')}</Text>
-        <DrawerItem
-          label={t('common:drawer_menu.CLOTHING')}
-          onPress={handlePress}
-          labelStyle={styles.label}
-        />
-        <DrawerItem
-          label={t('common:drawer_menu.ART')}
-          onPress={handlePress}
-          labelStyle={styles.label}
-        />
-        <DrawerItem
-          label={t('common:drawer_menu.HOME_APPLIANCE')}
-          onPress={handlePress}
-          labelStyle={styles.label}
-        />
-        <DrawerItem
-          label={t('common:drawer_menu.TOYS')}
-          onPress={handlePress}
-          labelStyle={styles.label}
-        />
-        <Text style={styles.subtitle}>{t('common:drawer_menu.SERVICES')}</Text>
-        <DrawerItem
-          label={t('common:drawer_menu.MANICURE')}
-          onPress={handlePress}
-          labelStyle={styles.label}
-        />
-        <DrawerItem
-          label={t('common:drawer_menu.HAIR_CUT')}
-          onPress={handlePress}
-          labelStyle={styles.label}
-        />
-        <DrawerItem
-          label={t('common:drawer_menu.CAR_WASH')}
-          onPress={handlePress}
-          labelStyle={styles.label}
-        />
+        {isLoading ? <Spinner /> : renderedItems}
       </View>
     </View>
   );

@@ -1,12 +1,13 @@
 import { css } from '@emotion/react';
 import type { Theme } from '@emotion/react';
 
-export const btnWrapper = ({ spaces }: Theme) => css`
+export const btnWrapper = css`
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: fit-content;
-  margin: 0 auto ${spaces.xl11};
+  margin: 0 auto;
+  height: 100px;
   & li {
     display: inline-block;
   }

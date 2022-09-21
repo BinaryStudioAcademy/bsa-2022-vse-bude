@@ -139,17 +139,17 @@ export const searchInput = ({
   colors,
   fontSizes,
   lineHeights,
+  heights,
   radiuses,
   spaces,
 }: Theme) => css`
   transition: 200ms linear;
   width: 100%;
-  height: 30px;
-  border: ${colors.backgroundDark} 1px solid;
+  height: ${heights.controlSm};
+  border: none;
   border-radius: ${radiuses.lg};
-  box-sizing: border-box;
   padding: 0 ${spaces.lg};
-  background-color: ${colors.background};
+  background-color: ${colors.backgroundLight};
   font-size: ${fontSizes.toggle};
   line-height: ${lineHeights.toggle};
   font-family: inherit;
@@ -211,4 +211,108 @@ export const iconWrapper = css`
   transform: translateY(-50%);
   pointer-events: none;
   opacity: 0.5;
+`;
+
+export const datePickerWrapper = ({
+  spaces,
+  radiuses,
+  colors,
+  shadows,
+}: Theme) => css`
+  .react-datepicker {
+    position: relative;
+    top: 5px;
+    border: none;
+    border-radius: 10px;
+    background-color: ${colors.background};
+    box-shadow: ${shadows.bottom};
+    overflow: hidden;
+
+    &-popper {
+      z-index: 4;
+    }
+
+    &__header {
+      border: none;
+      border-radius: ${radiuses.sm} ${radiuses.sm} 0 0;
+      padding: ${spaces.sm} 0 0 0;
+      background-color: ${colors.backgroundLight};
+    }
+
+    &__month {
+      display: flex;
+      flex-direction: column;
+      margin: 0 10px 10px;
+
+      &-container {
+        border: none;
+        border-radius: ${radiuses.sm};
+        box-sizing: border-box;
+        background-color: ${colors.background};
+      }
+    }
+
+    &__week {
+      display: flex;
+      margin-bottom: ${spaces.xs};
+    }
+
+    &__day {
+      margin: 0;
+
+      &--disabled {
+        color: ${colors.disabled};
+      }
+
+      &:not(:nth-of-type(7n)) {
+        margin-right: ${spaces.sm};
+      }
+
+      &-names {
+        display: flex;
+        margin: ${spaces.sm};
+      }
+
+      &-name {
+        display: flex;
+        justify-content: center;
+        margin: 0;
+
+        &:not(:last-of-type) {
+          margin-right: ${spaces.sm};
+        }
+      }
+
+      &--keyboard-selected,
+      &--selected {
+        background-color: ${colors.primaryLight};
+
+        &:hover {
+          background-color: ${colors.primaryLightHover}!important;
+        }
+      }
+
+      &--today {
+        font-weight: bold;
+      }
+
+      &:hover:not(.react-datepicker__day--disabled) {
+        text-decoration: underline;
+      }
+    }
+
+    input[type='time'] {
+      border: ${colors.backgroundDark} 1px solid;
+      border-radius: ${radiuses.sm};
+      padding: 0 ${spaces.sm};
+      background-color: ${colors.background};
+      font-family: inherit;
+      color: ${colors.text};
+
+      ::placeholder {
+        opacity: 0.3;
+        color: ${colors.text};
+      }
+    }
+  }
 `;

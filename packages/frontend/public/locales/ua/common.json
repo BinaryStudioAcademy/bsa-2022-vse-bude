@@ -22,7 +22,21 @@
       "messages": "Повідомлення",
       "support": "Підтримка",
       "signOut": "Вийти",
-      "makePost": "Створити пост"
+      "makePost": "Створити пост",
+      "notifications": "Сповіщення"
+    },
+    "notifications": {
+      "noNotification": "Сповіщень поки немає",
+      "loadMore": "Завантажити ще",
+      "tooltip": {
+        "productBtn": "Перейти до цього товару"
+      },
+      "ariaLabel": {
+        "viewed": "переглянуто",
+        "setViewed": "зробити прочитаним",
+        "toNotifications": "Усі сповіщення"
+      },
+      "toNotificationsBtn": "Усі сповіщення"
     }
   },
   "footer": {
@@ -79,6 +93,9 @@
     "input": {
       "searchProductsPlaceholder": "Пошук продуктів"
     },
+    "makePostBtn": {
+      "unverified": "Вам потрібно підтвердити свій обліковий запис, щоб створити пост"
+    },
     "modal": {
       "closeLabel": "Закрити модальне вікно"
     },
@@ -96,6 +113,9 @@
     },
     "badge": {
       "removeLabel": "Видалити фільтр {{param}}"
+    },
+    "datePicker": {
+      "time": "Час"
     }
   },
   "verify": {
@@ -163,7 +183,8 @@
     "leftAuction": "Ви вийшли з аукціону",
     "newBidPlaced": "Зроблена нова ставка на поточний товар",
     "itemToArchive": "Товар доданий до архіву",
-    "itemToPosted": "Товар опубліковано"
+    "itemToPosted": "Товар опубліковано",
+    "itemDeleted": "Товар видалено"
   },
   "months": [
     "Січень",
@@ -179,7 +200,15 @@
     "Листопад",
     "Грудень"
   ],
-  "days": ["нд", "пн", "вт", "ср", "чт", "пт", "сб"],
+  "days": [
+    "нд",
+    "пн",
+    "вт",
+    "ср",
+    "чт",
+    "пт",
+    "сб"
+  ],
   "modal": {
     "confirm": {
       "confirm": "Підтвердити",

@@ -1,13 +1,14 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type { HydrateAction } from '@types';
-import type { ProductDto } from '@vse-bude/shared';
+import type { ProductDto, DeleteProduct } from '@vse-bude/shared';
 import { HYDRATE } from 'next-redux-wrapper';
 import {
   fetchMyListSSR,
   addItemToArchive,
   addItemToPosted,
   fetchFavouritesSSR,
+  deleteItem,
 } from './actions';
 
 interface MyListState {
@@ -23,6 +24,7 @@ interface MyListState {
   };
   badges: Badges[];
   showCancelModal: boolean;
+  showDeleteModal: boolean;
   itemId: string;
   loading: boolean;
   error: string;
@@ -56,6 +58,7 @@ const initialState: MyListState = {
   },
   badges: [],
   showCancelModal: false,
+  showDeleteModal: false,
   itemId: null,
   loading: false,
   error: null,
@@ -124,8 +127,22 @@ const myListSlice = createSlice({
       }
     },
 
+    resetFilter(state) {
+      state.filterType = '';
+      for (const key in state.filterStatus) {
+        if (key !== 'all') {
+          state.filterStatus[key] = false;
+        }
+      }
+      state.filterStatus.all = true;
+    },
+
     setVisabilityCancelModal: (state) => {
       state.showCancelModal = !state.showCancelModal;
+    },
+
+    setVisabilityDeleteModal: (state) => {
+      state.showDeleteModal = !state.showDeleteModal;
     },
 
     setItemId: (state, action: PayloadAction<string | null>) => {
@@ -219,6 +236,27 @@ const myListSlice = createSlice({
       state.error = payload;
     },
 
+    [deleteItem.pending.type]: (state) => {
+      state.loading = true;
+    },
+    [deleteItem.fulfilled.type]: (
+      state,
+      { payload }: { payload: DeleteProduct },
+    ) => {
+      state.loading = false;
+      const index = state.itemsList.findIndex(
+        (item) => item.id === payload.productId,
+      );
+      state.itemsList = [
+        ...state.itemsList.slice(0, index),
+        ...state.itemsList.slice(index + 1),
+      ];
+    },
+    [deleteItem.rejected.type]: (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
+    },
+
     [HYDRATE](state, { payload }: HydrateAction) {
       if (payload.myList.itemsList) {
         state.itemsList = payload.myList.itemsList;
@@ -235,7 +273,9 @@ export const {
   resetStatuses,
   setDefaultBadges,
   resetBadges,
+  resetFilter,
   setVisabilityCancelModal,
+  setVisabilityDeleteModal,
   setItemId,
 } = myListSlice.actions;
 

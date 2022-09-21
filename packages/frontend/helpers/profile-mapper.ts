@@ -117,6 +117,8 @@ export const updateDtoMapper = ({
     if (addressDto[key]) {
       mappedAddress[key] = addressDto[key] ? addressDto[key] : null;
       isAddressNull = false;
+    } else {
+      mappedAddress[key] = '';
     }
   });
 

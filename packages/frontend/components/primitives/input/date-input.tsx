@@ -8,15 +8,16 @@ import * as styles from './styles';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
-export const SECONDS_IN_ONE_DAY = 86400000; // +1 day
+export const MILISECONDS_IN_ONE_DAY = 1000 * 60 * 60 * 24; // +1 day
 
 const InputDate = ({
   value,
-  setValue,
-  variant,
+  variant = 'primary',
   error,
   id,
   label,
+  showTimeInput,
+  labelRequiredMark,
   ...props
 }: InputDateProps) => {
   const { locale } = useRouter();
@@ -30,7 +31,7 @@ const InputDate = ({
       month: (n) => months[n],
     },
     formatLong: {
-      date: () => 'mm/dd/yyyy',
+      date: () => 'dd/mm/yyyy',
     },
   };
 
@@ -39,19 +40,22 @@ const InputDate = ({
       {label && (
         <label data-variant={variant} css={styles.label} htmlFor={id}>
           {label}
+          {labelRequiredMark && <span>*</span>}
         </label>
       )}
-      <div css={styles.inputValueWrapper}>
+      <div css={[styles.inputValueWrapper, styles.datePickerWrapper]}>
         <DatePicker
           onFocus={(e) => e.target.blur()}
-          onChange={setValue}
-          selected={value}
+          selected={new Date(value)}
           css={styles.input}
-          placeholderText="-/-/-"
+          placeholderText={'-/-/- -:-'}
           id={id}
-          locale={customLocale}
-          minDate={Date.now() + SECONDS_IN_ONE_DAY}
+          showTimeInput={showTimeInput}
+          locale={customLocale as any}
+          dateFormat={showTimeInput ? 'dd/MM/yyyy HH:mm' : 'dd/MM/yyyy'}
+          minDate={new Date(new Date().getTime() + MILISECONDS_IN_ONE_DAY)}
           calendarStartDay={locale === 'ua' ? 1 : 0}
+          timeInputLabel={t('components.datePicker.time')}
           {...props}
         />
         <div css={styles.iconWrapper}>

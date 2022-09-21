@@ -21,7 +21,6 @@ import {
   PlusSvg,
   Input,
   CrossIcon,
-  Spinner,
 } from '~/components/components';
 import { getBidValidationSchema } from '~/validation-schemas/bid/make-bid';
 import { globalStyles } from '~/styles/styles';
@@ -50,7 +49,7 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
   minimalBid,
 }) => {
   const { colors } = useCustomTheme();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { control, errors, handleSubmit, setValue } = useAppForm({
     defaultValues: DEFAULT_BID_VALUE,
@@ -116,19 +115,9 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
     setModalVisible(true);
   };
 
-  const priceText =
-    i18n.language === 'ua'
-      ? `${currentPrice} ${t('screens:welcome.UAH')}`
-      : `${t('screens:welcome.UAH')} ${currentPrice}`;
-
-  const placeholderText =
-    i18n.language === 'ua'
-      ? `${Number(minimalBid) + Number(currentPrice)} ${t(
-          'screens:product_info.MIN_UAH',
-        )}`
-      : `${t('screens:product_info.MIN_UAH')} ${
-          Number(minimalBid) + Number(currentPrice)
-        }`;
+  const placeholderText = `${t('screens:product_info.MIN')} ${
+    Number(minimalBid) + Number(currentPrice)
+  } ${t('common:currency.UAH')}`;
 
   return (
     <>
@@ -158,7 +147,7 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
             { color: colors.titleSecondary },
           ]}
         >
-          {priceText}
+          {`${currentPrice} ${t('common:currency.UAH')}`}
         </Text>
       </View>
       <PriceWrapper>
@@ -177,7 +166,6 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
               globalStyles.alignItemsCenter,
             ]}
           >
-            {isLoading && <Spinner />}
             {!!isAbleToLeaveAuction && user && (
               <TouchableHighlight
                 onPress={openModal}
@@ -197,6 +185,7 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
             <View style={styles.btnWidth}>
               <PlusSvg style={styles.btnIcon} />
               <PrimaryButton
+                isLoading={isLoading}
                 onPress={handleSubmit(handleMakeBidPress)}
                 label={`${t('common:components.BUTTON_BID')}`}
                 disabled={!canUserMakeBid}

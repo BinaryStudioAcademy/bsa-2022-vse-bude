@@ -3,6 +3,7 @@ import type {
   ProductDto,
   ProductToArchive,
   ProductPost,
+  DeleteProduct,
 } from '@vse-bude/shared';
 import {
   ApiRoutes,
@@ -35,4 +36,13 @@ export const addProductToPosted = ({ data }: { data: ProductPost }) =>
 export const getFavouritesSSR = (params: { http: Http }) =>
   params.http.get({
     url: `${ApiRoutes.PROFILE}${AccountApiRoutes.FAVOURITES_LIST}`,
+  });
+
+export const deleteProduct = ({
+  productId,
+}: {
+  productId: string;
+}): Promise<DeleteProduct> =>
+  http.delete({
+    url: `${ApiRoutes.PROFILE}${ProfileApiRoutes.DELETE_ITEM}?productId=${productId}`,
   });

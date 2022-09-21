@@ -11,6 +11,7 @@ export const Tooltip = ({
   children,
   refNode = 'current',
   hideTimeoutMs = 100,
+  style,
 }: TooltipProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
@@ -151,6 +152,7 @@ export const Tooltip = ({
   return (
     <Fragment>
       <span
+        style={style}
         ref={triggerWrapperRef}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
