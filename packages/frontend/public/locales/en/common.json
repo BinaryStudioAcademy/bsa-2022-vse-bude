@@ -104,10 +104,10 @@
       "btn": {
         "auction": "Auction",
         "or": "or",
-        "directSale": "Direct Sale",
+        "directSale": "Fixed Price",
         "tooltip": {
           "auction": "You need to verify you phone number to choose \"Auction\"",
-          "directSale": "You need to verify you phone number to choose \"Direct Sale\""
+          "directSale": "You need to verify you phone number to choose \"Fixed Price\""
         }
       }
     },
@@ -135,7 +135,8 @@
     "leftAuction": "You left the auction",
     "newBidPlaced": "New bid was placed to current product",
     "itemToArchive": "Product was added to archive",
-    "itemToPosted": "Product has been posted"
+    "itemToPosted": "Product has been posted",
+    "itemDeleted": "Product deleted"
   },
   "verify": {
     "enterPhone": {

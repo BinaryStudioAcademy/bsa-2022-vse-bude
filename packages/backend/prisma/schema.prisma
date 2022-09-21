@@ -153,7 +153,7 @@ model Order {
 model Chat {
   id        String       @id @default(uuid()) @db.Uuid
   title     String       @db.VarChar(256)
-  product   Product      @relation(fields: [productId], references: [id])
+  product   Product      @relation(fields: [productId], references: [id], onDelete: Cascade)
   productId String       @unique @db.Uuid
   members   ChatMember[]
   messages  Message[]
@@ -166,7 +166,7 @@ model ChatMember {
   id        String   @id @default(uuid()) @db.Uuid
   user      User     @relation(fields: [userId], references: [id])
   userId    String   @db.Uuid
-  chat      Chat     @relation(fields: [chatId], references: [id])
+  chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
   chatId    String   @db.Uuid
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -176,7 +176,7 @@ model Message {
   id        String   @id @default(uuid()) @db.Uuid
   sender    User     @relation(fields: [senderId], references: [id])
   senderId  String   @db.Uuid
-  chat      Chat     @relation(fields: [chatId], references: [id])
+  chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
   chatId    String   @db.Uuid
   text      String
   createdAt DateTime @default(now())
@@ -205,7 +205,7 @@ model FavoriteProducts {
   userId    String  @db.Uuid
   user      User    @relation(fields: [userId], references: [id])
   productId String  @db.Uuid
-  product   Product @relation(fields: [productId], references: [id])
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@id([userId, productId])
 }

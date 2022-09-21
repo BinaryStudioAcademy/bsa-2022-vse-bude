@@ -1,13 +1,18 @@
 import React, { FC } from 'react';
 import { View, TouchableOpacity } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
+import { useNavigation } from '~/hooks/hooks';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { DrawerNavigationParamList } from '~/common/types/types';
 import { styles } from './styles';
 
-type Props = {
-  onPress: () => void;
-};
+const BurgerMenu: FC = () => {
+  const navigation =
+    useNavigation<DrawerNavigationProp<DrawerNavigationParamList>>();
+  const onPress = () => {
+    navigation.toggleDrawer();
+  };
 
-const BurgerMenu: FC<Props> = ({ onPress }) => {
   return (
     <TouchableOpacity
       style={[styles.wrapper, globalStyles.justifyContentSpaceBetween]}

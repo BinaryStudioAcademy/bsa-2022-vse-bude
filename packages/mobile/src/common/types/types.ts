@@ -11,6 +11,8 @@ export type {
   RootNavigationProps,
   MainNavigationProps,
   MainNavigationParamList,
+  DrawerNavigationParamList,
+  DrawerNavigationProps,
 } from './navigation/navigation';
 export type { ValidationSchema } from './validation/validation';
 export type {

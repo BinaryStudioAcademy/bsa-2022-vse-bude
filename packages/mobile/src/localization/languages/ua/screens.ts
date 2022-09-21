@@ -237,13 +237,15 @@ export const screens = {
     LOCATION: 'Місцезнаходження',
     DESCRIPTION: 'Опис',
     CURRENT_BID: 'Поточна ставка',
-    MIN_UAH: 'Мін грн',
+    MIN: 'Мін:',
     BID_SAVED: 'Ставка успішно розміщена',
     LEAVE_TEXT: 'Вийти з аукціону',
     LEAVE_MODAL_TEXT:
       'Ви впевнені, що покидаєте аукціон? Усі ставки будуть видалені!',
     LEAVE_SUCCESS: 'Ви успішно покинули аукціон',
     NEW_BID: 'Аукціон оновився',
+    NEW: 'новий',
+    USED: 'вживаний',
   },
   items_and_services: {
     TITLE: 'Товари & Послуги',

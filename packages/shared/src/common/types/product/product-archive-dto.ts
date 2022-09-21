@@ -1,4 +1,4 @@
 export type ProductToArchive = {
   itemId: string;
-  endDate: string;
+  updatedAt: string;
 };

@@ -38,4 +38,5 @@ export enum UserPersonalInfoValidationMessage {
 
   CANCELLED_EXISTS = 'my-list:errors.cancelledExists',
   POSTED_EXISTS = 'my-list:errors.postedExists',
+  DELETE_TYPE = 'my-list:errors.deleteStatus',
 }

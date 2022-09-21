@@ -168,6 +168,14 @@
   content: '\f290';
 }
 
+.fa-trash-can::before {
+  content: '\f2ed';
+}
+
+.fa-clipboard::before {
+  content: '\f328';
+}
+
 :root,
 :host {
   --fa-font-brands: normal 400 1em/1 'Font Awesome 6 Brands';

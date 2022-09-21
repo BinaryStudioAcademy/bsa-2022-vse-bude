@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { ColorPalette, ProductDto } from '@vse-bude/shared';
 import { DataStatus } from '~/common/enums/enums';
-import { selectProductsDataStatus } from '~/store/selectors';
+import { selectProductsDataStatus, selectCurrentUser } from '~/store/selectors';
 import { useAppSelector, useCustomTheme, useTranslation } from '~/hooks/hooks';
 import {
   Pressable,
@@ -29,15 +29,12 @@ const ProductPriceBlock: FC<ProductPriceBlockProps> = ({
   onFavoritePress,
 }) => {
   const { colors } = useCustomTheme();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { price, id } = product;
   const dataStatus = useAppSelector(selectProductsDataStatus);
   const isLoading = dataStatus == DataStatus.PENDING;
-
-  const priceText =
-    i18n.language === 'ua'
-      ? `${price} ${t('screens:welcome.UAH')}`
-      : `${t('screens:welcome.UAH')} ${price}`;
+  const user = useAppSelector(selectCurrentUser);
+  const canUserMakeBid = Boolean(user?.phoneVerified && user?.emailVerified);
 
   return (
     <PriceWrapper>
@@ -49,13 +46,16 @@ const ProductPriceBlock: FC<ProductPriceBlockProps> = ({
             { color: colors.text },
           ]}
         >
-          {priceText}
+          {`${price} ${t('common:currency.UAH')}`}
         </Text>
         <View
           style={[globalStyles.flexDirectionRow, globalStyles.alignItemsCenter]}
         >
           <View style={styles.btnWidth}>
-            <PrimaryButton label={t('common:components.BUTTON_BUY')} />
+            <PrimaryButton
+              label={t('common:components.BUTTON_BUY')}
+              disabled={!canUserMakeBid}
+            />
           </View>
           <Pressable
             onPress={() => onFavoritePress(id)}

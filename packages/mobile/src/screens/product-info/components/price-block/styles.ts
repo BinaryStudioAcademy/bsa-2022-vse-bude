@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     width: 97,
   },
   input: {
-    maxWidth: 140,
+    maxWidth: 150,
     marginRight: 5,
   },
   btnIcon: {
