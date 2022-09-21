@@ -14,7 +14,7 @@ import {
   LogOutIcon,
   Logo,
   TouchableOpacity,
-  PlusIcon,
+  PlusCircleIcon,
 } from '~/components/components';
 import {
   useAppDispatch,
@@ -59,7 +59,7 @@ const Account: FC = () => {
       </View>
       <View style={styles.btnWrapper}>
         <TouchableOpacity onPress={handleCreateNewItemPress} style={styles.row}>
-          <PlusIcon size={30} style={styles.icon} />
+          <PlusCircleIcon size={30} style={styles.icon} />
           <Text style={styles.btnText}>{t('type_of_post.TITLE')}</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={handlePersonalInfoPress} style={styles.row}>

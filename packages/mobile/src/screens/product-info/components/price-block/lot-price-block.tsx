@@ -18,9 +18,9 @@ import {
   StarIcon,
   Text,
   View,
-  PlusSvg,
   Input,
   CrossIcon,
+  PlusIcon,
 } from '~/components/components';
 import { getBidValidationSchema } from '~/validation-schemas/bid/make-bid';
 import { globalStyles } from '~/styles/styles';
@@ -183,8 +183,8 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
               </TouchableHighlight>
             )}
             <View style={styles.btnWidth}>
-              <PlusSvg style={styles.btnIcon} />
               <PrimaryButton
+                iconLeft={<PlusIcon size={10} color={colors.whiteColor} />}
                 isLoading={isLoading}
                 onPress={handleSubmit(handleMakeBidPress)}
                 label={`${t('common:components.BUTTON_BID')}`}
