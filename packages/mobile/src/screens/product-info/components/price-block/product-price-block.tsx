@@ -18,12 +18,14 @@ import { styles } from './styles';
 type ProductPriceBlockProps = {
   product: Pick<ProductDto, 'price' | 'id'>;
   isFavorite: boolean;
+  makeFavoritePending: boolean;
   onFavoritePress: (id: string) => void;
 };
 
 const ProductPriceBlock: FC<ProductPriceBlockProps> = ({
   product,
   isFavorite,
+  makeFavoritePending,
   onFavoritePress,
 }) => {
   const { colors } = useCustomTheme();
@@ -60,7 +62,7 @@ const ProductPriceBlock: FC<ProductPriceBlockProps> = ({
             style={[globalStyles.ml5, styles.iconBorder]}
             disabled={isLoading}
           >
-            {isLoading ? (
+            {makeFavoritePending ? (
               <View style={globalStyles.py1}>
                 <Spinner />
               </View>

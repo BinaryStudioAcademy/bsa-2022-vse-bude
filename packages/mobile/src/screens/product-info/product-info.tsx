@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { RouteProp } from '@react-navigation/native';
 import { RootNavigationParamList } from '~/common/types/types';
 import { DataStatus, RootScreenName } from '~/common/enums/enums';
@@ -56,6 +56,7 @@ const ProductInfo: FC = () => {
     >();
   const id = route.params?.itemId;
   const isFavorite = favoriteIds.includes(id);
+  const [makeFavoritePending, setMakeFavoritePending] = useState(false);
 
   useEffect(() => {
     dispatch(productsActions.loadProductInfo(id));
@@ -81,12 +82,17 @@ const ProductInfo: FC = () => {
   const { title, type, imageLinks, views, author } = product;
   const isAuction = type == ProductType.AUCTION;
 
-  const handleToggleFavorite = (productId: string) => {
+  const handleToggleFavorite = async (productId: string) => {
+    setMakeFavoritePending(true);
     if (isFavorite) {
-      return dispatch(productsActions.deleteFromFavorite(productId));
+      return await dispatch(productsActions.deleteFromFavorite(productId))
+        .unwrap()
+        .finally(() => setMakeFavoritePending(false));
     }
 
-    return dispatch(productsActions.addToFavorite(productId));
+    return await dispatch(productsActions.addToFavorite(productId))
+      .unwrap()
+      .finally(() => setMakeFavoritePending(false));
   };
 
   return (
@@ -137,12 +143,14 @@ const ProductInfo: FC = () => {
         <LotPriceBlock
           product={product}
           isFavorite={isFavorite}
+          makeFavoritePending={makeFavoritePending}
           onFavoritePress={handleToggleFavorite}
         />
       ) : (
         <ProductPriceBlock
           product={product}
           isFavorite={isFavorite}
+          makeFavoritePending={makeFavoritePending}
           onFavoritePress={handleToggleFavorite}
         />
       )}

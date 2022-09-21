@@ -22,6 +22,7 @@ import {
   CrossIcon,
   Pressable,
   StarSvg,
+  Spinner,
 } from '~/components/components';
 import { getBidValidationSchema } from '~/validation-schemas/bid/make-bid';
 import { globalStyles } from '~/styles/styles';
@@ -42,12 +43,14 @@ import { AuctionLeaveModal } from './auction-leave-modal';
 type LotPriceBlockProps = {
   product: Pick<ProductDto, 'currentPrice' | 'minimalBid' | 'id'>;
   isFavorite: boolean;
+  makeFavoritePending: boolean;
   onFavoritePress: (id: string) => void;
 };
 
 const LotPriceBlock: FC<LotPriceBlockProps> = ({
   product,
   isFavorite,
+  makeFavoritePending,
   onFavoritePress,
 }) => {
   const { colors } = useCustomTheme();
@@ -198,7 +201,6 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
             <View style={styles.btnWidth}>
               <PlusSvg style={styles.btnIcon} />
               <PrimaryButton
-                isLoading={isLoading}
                 onPress={handleSubmit(handleMakeBidPress)}
                 label={`${t('common:components.BUTTON_BID')}`}
                 disabled={!canUserMakeBid}
@@ -209,13 +211,19 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
               style={[globalStyles.ml5, styles.iconBorder]}
               disabled={isLoading}
             >
-              <StarSvg
-                color={ColorPalette.YELLOW_200}
-                width={30}
-                height={30}
-                fill={isFavorite ? ColorPalette.YELLOW_200 : 'none'}
-                style={styles.icon}
-              />
+              {makeFavoritePending ? (
+                <View style={globalStyles.py1}>
+                  <Spinner />
+                </View>
+              ) : (
+                <StarSvg
+                  color={ColorPalette.YELLOW_200}
+                  width={30}
+                  height={30}
+                  fill={isFavorite ? ColorPalette.YELLOW_200 : 'none'}
+                  style={styles.icon}
+                />
+              )}
             </Pressable>
           </View>
         </>

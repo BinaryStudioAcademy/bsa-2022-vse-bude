@@ -182,10 +182,6 @@ const reducer = createReducer(initialState, (builder) => {
         loadPopularLots.pending,
         loadProductInfo.pending,
         updateProductViews.pending,
-        fetchFavorites.pending,
-        fetchFavoriteIds.pending,
-        addToFavorite.pending,
-        deleteFromFavorite.pending,
       ),
       (state) => {
         state.dataStatus = DataStatus.PENDING;

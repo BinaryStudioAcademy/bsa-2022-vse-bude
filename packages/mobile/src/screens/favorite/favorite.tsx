@@ -9,7 +9,13 @@ import {
   selectGuestFavorites,
 } from '~/store/selectors';
 import { products as productsActions } from '~/store/actions';
-import { ScreenWrapper, FlatList, Spinner } from '~/components/components';
+import {
+  ScreenWrapper,
+  FlatList,
+  Spinner,
+  Text,
+  View,
+} from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { guestFavoritesMapper } from '~/helpers/favorites/guest-favorites-mapper';
 import { FavoriteCard } from './components/favorite-card';
@@ -28,7 +34,7 @@ const Favorite: FC = () => {
       setIsLoading(true);
       switch (Boolean(user)) {
         case true:
-          dispatch(productsActions.fetchFavorites({ limit: 10 }))
+          dispatch(productsActions.fetchFavorites({ limit: 20 }))
             .unwrap()
             .finally(() => setIsLoading(false));
           break;
@@ -51,7 +57,19 @@ const Favorite: FC = () => {
     return <Spinner isOverflow={true} />;
   }
 
-  return (
+  return !favorites.length ? (
+    <View
+      style={[
+        globalStyles.flex1,
+        globalStyles.justifyContentCenter,
+        globalStyles.px4,
+      ]}
+    >
+      <Text style={{ textAlign: 'center' }}>
+        Oops... Seems you have no favourite items.
+      </Text>
+    </View>
+  ) : (
     <ScreenWrapper>
       <FlatList
         data={favorites}
