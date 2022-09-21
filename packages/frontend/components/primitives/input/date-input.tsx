@@ -8,7 +8,7 @@ import * as styles from './styles';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
-export const SECONDS_IN_ONE_DAY = 86400000; // +1 day
+export const SECONDS_IN_ONE_HOUR = 60 * 60; // +1 day
 
 const InputDate = ({
   value,
@@ -31,7 +31,7 @@ const InputDate = ({
       month: (n) => months[n],
     },
     formatLong: {
-      date: () => 'mm/dd/yyyy',
+      date: () => 'dd/mm/yyyy',
     },
   };
 
@@ -48,12 +48,14 @@ const InputDate = ({
           onFocus={(e) => e.target.blur()}
           selected={new Date(value)}
           css={styles.input}
-          placeholderText={showTimeInput ? 'mm/dd/yyyy hh:mm' : 'mm/dd/yyyy'}
+          placeholderText={'-/-/- -:-'}
           id={id}
           showTimeInput={showTimeInput}
           locale={customLocale as any}
-          minDate={new Date(new Date().getTime() + SECONDS_IN_ONE_DAY)}
+          dateFormat={showTimeInput ? 'dd/MM/yyyy HH:mm' : 'dd/MM/yyyy'}
+          minDate={new Date(new Date().getTime() + SECONDS_IN_ONE_HOUR)}
           calendarStartDay={locale === 'ua' ? 1 : 0}
+          timeInputLabel={t('components.datePicker.time')}
           {...props}
         />
         <div css={styles.iconWrapper}>

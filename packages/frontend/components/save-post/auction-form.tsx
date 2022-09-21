@@ -229,6 +229,7 @@ export default function ProductForm({ edit }: { edit: boolean }) {
               value={endDate}
               showTimeInput
               onChange={(date) => {
+                console.log(date);
                 setEndDate(date);
                 field.onChange(date);
               }}

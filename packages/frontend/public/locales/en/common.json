@@ -113,6 +113,9 @@
     },
     "badge": {
       "removeLabel": "Remove filter {{param}}"
+    },
+    "datePicker": {
+      "time": "Time"
     }
   },
   "notifications": {
