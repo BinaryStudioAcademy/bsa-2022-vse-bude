@@ -14,7 +14,7 @@ const ProductPriceBlock: FC<ProductPriceBlockProps> = ({ price }) => {
   const { t, i18n } = useTranslation();
   const user = useAppSelector(selectCurrentUser);
   const canUserMakeBid = Boolean(
-    user && user?.phoneVerified && user?.emailVerified,
+    user?.phoneVerified && user?.emailVerified,
   );
 
   const priceText =
