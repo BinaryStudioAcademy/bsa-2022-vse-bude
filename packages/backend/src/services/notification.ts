@@ -41,12 +41,25 @@ export class NotificationService {
     return this._notificationRepository.create(notification);
   }
 
-  public setAsViewed(req: Request): Promise<Notification> {
+  public async setAsViewed(req: Request): Promise<Notification> {
     const {
       userId,
       params: { id },
     } = req;
 
-    return this._notificationRepository.setAsViewed(id, userId);
+    const notification = await this._notificationRepository.setAsViewed(
+      id,
+      userId,
+    );
+
+    if (notification?.type !== NotificationType.INFO) {
+      notification.title =
+        lang(`notifications:title.${notification.type}`) || notification.title;
+      notification.description =
+        lang(`notifications:description.${notification.type}`) ||
+        notification.description;
+    }
+
+    return notification;
   }
 }
