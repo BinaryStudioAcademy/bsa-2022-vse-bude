@@ -10,7 +10,7 @@ export const title = ({
   font-size: ${fontSizes.h3};
   font-weight: ${fontWeights.h3};
   line-height: ${lineHeights.h3};
-  margin: ${spaces.xl3} 0 ${spaces.xl};
+  margin: ${spaces.xl9} 0 ${spaces.xl3};
 `;
 export const headline = ({
   fontSizes,
