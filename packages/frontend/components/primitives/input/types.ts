@@ -33,4 +33,6 @@ export interface InputProps
 export interface InputDateProps
   extends ReactDatePickerProps,
     BaseInputProps,
-    InputStylingProps {}
+    InputStylingProps {
+  labelRequiredMark?: boolean;
+}

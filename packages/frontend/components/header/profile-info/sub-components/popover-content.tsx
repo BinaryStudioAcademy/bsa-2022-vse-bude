@@ -45,7 +45,7 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
         <Icon icon={IconName.LIST} color={IconColor.YELLOW} />
         <span>{t('common:header.popover.myList')}</span>
       </button>
-      <button
+      {/* <button
         css={styles.popoverContentItem}
         onClick={handleClick}
         path-label={`${Routes.PROFILE}${ProfileRoutes.ACCOUNT_SETTINGS}`}
@@ -53,7 +53,7 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
       >
         <Icon icon={IconName.SETTINGS} color={IconColor.YELLOW} />
         <span>{t('common:header.popover.settings')}</span>
-      </button>
+      </button> */}
       <button
         css={styles.popoverContentItem}
         onClick={handleClick}
@@ -63,7 +63,7 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
         <Icon icon={IconName.BELL} color={IconColor.YELLOW} />
         <span>{t('common:header.popover.notifications')}</span>
       </button>
-      <button
+      {/* <button
         css={styles.popoverContentItem}
         onClick={handleClick}
         path-label={`${Routes.PROFILE}${ProfileRoutes.MESSAGES}`}
@@ -71,10 +71,12 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
       >
         <Icon icon={IconName.MESSAGE} color={IconColor.YELLOW} />
         <span>{t('common:header.popover.messages')}</span>
-      </button>
+    </button> */}
       <button
         css={styles.popoverContentItem}
-        onClick={handleClick}
+        onClick={() =>
+          (location.href = 'mailto:vsebude.team@gmail.com?subject=Support')
+        }
         path-label={`${Routes.PROFILE}${ProfileRoutes.SUPPORT}`}
         data-variant="icon"
       >
