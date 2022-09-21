@@ -26,11 +26,11 @@ export const getServerSideProps = wrapper.getServerSideProps(
       [auctionProducts, sellingProducts] = await Promise.all([
         getPopularLots({
           httpSSR,
-          limit: 4,
+          limit: 8,
         }),
         getPopularProducts({
           httpSSR,
-          limit: 4,
+          limit: 8,
         }),
       ]);
     } catch (err) {

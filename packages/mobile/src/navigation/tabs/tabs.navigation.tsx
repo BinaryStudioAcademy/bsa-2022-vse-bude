@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,
@@ -6,7 +6,14 @@ import {
 import { MainScreenName } from '~/common/enums/enums';
 import { AppIcon, MainNavigationParamList } from '~/common/types/types';
 import { Home, Favorite, ItemsAndServices, Account } from '~/screens/screens';
-import { useAppSelector, useCustomTheme, useTranslation } from '~/hooks/hooks';
+import { personalInfoActions } from '~/store/actions';
+import { selectCurrentUser, selectPersonalInfo } from '~/store/selectors';
+import {
+  useAppDispatch,
+  useAppSelector,
+  useCustomTheme,
+  useTranslation,
+} from '~/hooks/hooks';
 import {
   HomeIcon,
   LogInIcon,
@@ -16,11 +23,12 @@ import {
   ListIcon,
   ButtonText,
   BurgerMenu,
+  Image,
 } from '~/components/components';
-import { selectCurrentUser } from '~/store/selectors';
 import { globalStyles } from '~/styles/styles';
 import { StyleProp, ViewStyle } from 'react-native';
 import { WelcomeNavigation } from '../welcome/welcome.navigation';
+import { styles } from './styles';
 
 const Tabs = createBottomTabNavigator<MainNavigationParamList>();
 type TabOptions = {
@@ -36,7 +44,13 @@ type TabOptions = {
 const MainNavigation: FC = () => {
   const { dark, colors } = useCustomTheme();
   const user = useAppSelector(selectCurrentUser);
+  const personalInfo = useAppSelector(selectPersonalInfo);
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
+
+  useEffect(() => {
+    dispatch(personalInfoActions.getPersonalInfo());
+  }, []);
 
   const screenOptions: BottomTabNavigationOptions = {
     headerShown: false,
@@ -75,6 +89,12 @@ const MainNavigation: FC = () => {
     headerShown,
     headerStyle,
   });
+
+  const userIcon = personalInfo?.avatar
+    ? () => (
+        <Image source={{ uri: personalInfo?.avatar }} style={styles.avatar} />
+      )
+    : UserIcon;
 
   return (
     <Tabs.Navigator screenOptions={screenOptions}>

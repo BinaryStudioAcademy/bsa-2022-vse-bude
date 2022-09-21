@@ -28,7 +28,7 @@ export const common = {
     INVALID_BID: 'Введіть число',
   },
   currency: {
-    UAH: 'ГРН',
+    UAH: 'грн',
   },
   time: {
     DAYS: 'дні',

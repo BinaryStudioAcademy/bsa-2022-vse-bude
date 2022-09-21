@@ -92,6 +92,8 @@ export const initServices = (repositories: Repositories): ServicesInit => {
     myListService: new MyListService({
       myListRepository: repositories.myListRepository,
       orderRepository: repositories.orderRepository,
+      s3StorageService,
+      productRepository: repositories.productRepository,
     }),
     orderService: new OrderService(
       repositories.orderRepository,

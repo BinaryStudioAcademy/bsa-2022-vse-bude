@@ -1,12 +1,6 @@
 import React, { FC } from 'react';
+import { useNavigation, useTranslation, useAppSelector } from '~/hooks/hooks';
 import {
-  useCustomTheme,
-  useNavigation,
-  useTranslation,
-  useAppSelector,
-} from '~/hooks/hooks';
-import {
-  ArrowRightIcon,
   KeyboardAvoiding,
   PrimaryButton,
   Spinner,
@@ -14,6 +8,7 @@ import {
 } from '~/components/components';
 import { images } from '~/assets/images/images';
 import { globalStyles } from '~/styles/styles';
+import { Header } from '~/screens/components/components';
 import { PropsVerifyScreens, RootNavigationProps } from '~/common/types/types';
 import {
   DataStatus,
@@ -21,14 +16,13 @@ import {
   RootScreenName,
 } from '~/common/enums/enums';
 import { selectAuthDataStatus, selectCurrentUser } from '~/store/selectors';
-import { Header, Title, VerifyImage, Wrapper } from '../components/components';
+import { Title, VerifyImage, Wrapper } from '../components/components';
 import { styles } from './styles';
 
 const VerifiedPhoneScreen: FC<PropsVerifyScreens> = ({ route }) => {
   const fromSignUp = route.params?.fromSignUp;
   const { t } = useTranslation();
   const navigation = useNavigation<RootNavigationProps>();
-  const { colors } = useCustomTheme();
   const user = useAppSelector(selectCurrentUser);
   const dataStatusAuth = useAppSelector(selectAuthDataStatus);
   const isLoading = dataStatusAuth === DataStatus.PENDING;
@@ -44,7 +38,7 @@ const VerifiedPhoneScreen: FC<PropsVerifyScreens> = ({ route }) => {
       });
     } else {
       navigation.navigate(RootScreenName.MAIN, {
-        screen: MainScreenName.ACCOUNT_ROOT,
+        screen: MainScreenName.HOME,
       });
     }
   };
@@ -55,7 +49,7 @@ const VerifiedPhoneScreen: FC<PropsVerifyScreens> = ({ route }) => {
 
   return (
     <Wrapper>
-      <Header hideButton={true} />
+      <Header title={t('verify.VERIFY')} hideButton={true} />
       <KeyboardAvoiding>
         <View style={globalStyles.px5}>
           <VerifyImage
@@ -71,7 +65,6 @@ const VerifiedPhoneScreen: FC<PropsVerifyScreens> = ({ route }) => {
             <PrimaryButton
               label={t('verify.CONTINUE')}
               onPress={handleContinuePress}
-              iconRight={<ArrowRightIcon size={24} color={colors.whiteColor} />}
             />
           </View>
         </View>

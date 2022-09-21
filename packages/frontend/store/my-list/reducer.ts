@@ -1,9 +1,14 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type { HydrateAction } from '@types';
-import type { ProductDto } from '@vse-bude/shared';
+import type { ProductDto, DeleteProduct } from '@vse-bude/shared';
 import { HYDRATE } from 'next-redux-wrapper';
-import { fetchMyListSSR, addItemToArchive, addItemToPosted } from './actions';
+import {
+  fetchMyListSSR,
+  addItemToArchive,
+  addItemToPosted,
+  deleteItem,
+} from './actions';
 
 interface MyListState {
   itemsList: ProductDto[] | null;
@@ -18,6 +23,7 @@ interface MyListState {
   };
   badges: Badges[];
   showCancelModal: boolean;
+  showDeleteModal: boolean;
   itemId: string;
   loading: boolean;
   error: string;
@@ -51,6 +57,7 @@ const initialState: MyListState = {
   },
   badges: [],
   showCancelModal: false,
+  showDeleteModal: false,
   itemId: null,
   loading: false,
   error: null,
@@ -133,6 +140,10 @@ const myListSlice = createSlice({
       state.showCancelModal = !state.showCancelModal;
     },
 
+    setVisabilityDeleteModal: (state) => {
+      state.showDeleteModal = !state.showDeleteModal;
+    },
+
     setItemId: (state, action: PayloadAction<string | null>) => {
       state.itemId = action.payload;
     },
@@ -166,10 +177,10 @@ const myListSlice = createSlice({
       ];
       state.itemsList.push(payload);
       state.itemsList = state.itemsList.sort((itemA, itemB) => {
-        if (itemB.endDate > itemA.endDate) {
+        if (itemB.updatedAt > itemA.updatedAt) {
           return 1;
         }
-        if (itemB.endDate < itemA.endDate) {
+        if (itemB.updatedAt < itemA.updatedAt) {
           return -1;
         }
 
@@ -211,6 +222,27 @@ const myListSlice = createSlice({
       state.error = payload;
     },
 
+    [deleteItem.pending.type]: (state) => {
+      state.loading = true;
+    },
+    [deleteItem.fulfilled.type]: (
+      state,
+      { payload }: { payload: DeleteProduct },
+    ) => {
+      state.loading = false;
+      const index = state.itemsList.findIndex(
+        (item) => item.id === payload.productId,
+      );
+      state.itemsList = [
+        ...state.itemsList.slice(0, index),
+        ...state.itemsList.slice(index + 1),
+      ];
+    },
+    [deleteItem.rejected.type]: (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
+    },
+
     [HYDRATE](state, { payload }: HydrateAction) {
       if (payload.myList.itemsList) {
         state.itemsList = payload.myList.itemsList;
@@ -229,6 +261,7 @@ export const {
   resetBadges,
   resetFilter,
   setVisabilityCancelModal,
+  setVisabilityDeleteModal,
   setItemId,
 } = myListSlice.actions;
 

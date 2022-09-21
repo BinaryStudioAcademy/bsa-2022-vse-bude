@@ -53,16 +53,16 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
     reset({
       'phone': !user.phone ? '' : user.phone,
       'email': !user.email ? '' : user.email,
+      'country': !user.userAddress?.country
+        ? t('personal-info:defaultCountry')
+        : user.userAddress?.country,
       'password': '',
       'repeatPassword': '',
       'newPassword': '',
     });
-  }, [isSubmit, reset, user.phone, user.email]);
+  }, [isSubmit, reset, user.phone, user.email, user.userAddress?.country, t]);
 
   const onResetHandler = () => {
-    reset(profileMapper({ user }), {
-      keepDefaultValues: true,
-    });
     dispatch(setIsEditing());
   };
 
@@ -303,18 +303,6 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
 
             <div css={styles.inputRow}>
               <Input
-                id="linkedin-profile"
-                type="text"
-                variant="primary"
-                label={t('personal-info:label.linkedin')}
-                placeholder={t('personal-info:placeholder.linkedin')}
-                {...register('linkedin')}
-                error={errors.linkedin?.message}
-              />
-            </div>
-
-            <div css={styles.inputRow}>
-              <Input
                 id="facebook-profile"
                 type="text"
                 variant="primary"
@@ -322,6 +310,18 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
                 placeholder={t('personal-info:placeholder.facebook')}
                 {...register('facebook')}
                 error={errors.facebook?.message}
+              />
+            </div>
+
+            <div css={styles.inputRow}>
+              <Input
+                id="linkedin-profile"
+                type="text"
+                variant="primary"
+                label={t('personal-info:label.linkedin')}
+                placeholder={t('personal-info:placeholder.linkedin')}
+                {...register('linkedin')}
+                error={errors.linkedin?.message}
               />
             </div>
           </Column>

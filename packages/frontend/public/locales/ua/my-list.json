@@ -13,11 +13,15 @@
     "drafted": "Проекти",
     "purchased": "Придбані",
     "sold": "Продані",
+    "fixedPrice": "Продаж",
+    "auction": "Аукціон",
     "archived": "Архівні",
     "edit": "змінено",
     "publish": "Публікувати",
     "unarchive": "Публікувати",
-    "tooltip-xmark": "архівувати"
+    "tooltip-xmark": "архівувати",
+    "tooltip-delete": "видалити",
+    "tooltip-seeItem": "переглянути"
   },
   "months": {
     "january": "Січня",
@@ -53,8 +57,10 @@
   },
   "modal": {
     "header": "Перемістити товар до архіву?",
+    "header_delete": "Бажаєте видалити товар?",
     "buttons": {
-      "add": "Архівувати"
+      "add": "Архівувати",
+      "delete": "Видалити"
     }
   }
 }

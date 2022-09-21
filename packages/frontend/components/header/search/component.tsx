@@ -56,9 +56,9 @@ const Search = ({ setSearchOpen }: SearchProps) => {
         onChange={handleChange}
         placeholder={t('common:components.input.searchProductsPlaceholder')}
       />
-      <div css={styles.searchContent}>
-        {searchedProducts.length > 0 &&
-          searchedProducts.map((product, key) => (
+      {!!searchedProducts.length && (
+        <div css={styles.searchContent}>
+          {searchedProducts.map((product, key) => (
             <button
               css={styles.searchItem}
               onClick={() => redirectToItem(product.id)}
@@ -67,7 +67,8 @@ const Search = ({ setSearchOpen }: SearchProps) => {
               {product.title}
             </button>
           ))}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

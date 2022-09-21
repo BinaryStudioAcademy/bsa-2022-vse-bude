@@ -5,6 +5,7 @@ import {
   useCustomTheme,
   useNavigation,
   useTranslation,
+  useAppDispatch,
 } from '~/hooks/hooks';
 import {
   ButtonAppearance,
@@ -26,10 +27,11 @@ import {
 import { images } from '~/assets/images/images';
 import { globalStyles } from '~/styles/styles';
 import { selectVerifyDataStatus, selectUserEmail } from '~/store/selectors';
+import { verifyActions } from '~/store/actions';
+import { notification } from '~/services/services';
+import { ButtonsContainer, Header } from '~/screens/components/components';
 import {
-  ButtonsContainer,
   CustomText,
-  Header,
   Title,
   VerifyImage,
   Wrapper,
@@ -39,6 +41,7 @@ import { styles } from './styles';
 const VerifyEmailScreen: FC<PropsVerifyScreens> = ({ route }) => {
   const fromSignUp = route.params?.fromSignUp;
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
   const navigation = useNavigation<RootNavigationProps>();
   const { colors } = useCustomTheme();
   const userEmail = useAppSelector(selectUserEmail);
@@ -61,14 +64,28 @@ const VerifyEmailScreen: FC<PropsVerifyScreens> = ({ route }) => {
   };
 
   const onSubmit = (): void => {
-    navigation.navigate(RootScreenName.VERIFY_CODE_EMAIL, {
-      fromSignUp: Boolean(fromSignUp),
-    });
+    if (!fromSignUp) {
+      dispatch(verifyActions.getVerificationCodeEmail())
+        .unwrap()
+        .then(() => {
+          notification.success(t('verify.CODE_SENT'));
+          navigation.navigate(RootScreenName.VERIFY_CODE_EMAIL);
+        })
+        .catch((err) => {
+          // eslint-disable-next-line
+          console.warn(err);
+        });
+    } else {
+      navigation.navigate(RootScreenName.VERIFY_CODE_EMAIL, {
+        fromSignUp: Boolean(fromSignUp),
+      });
+    }
   };
 
   return (
     <Wrapper>
       <Header
+        title={t('verify.VERIFY')}
         labelButton={t('verify.BACK_HOME')}
         onPress={handleBackButtonPress}
       />
