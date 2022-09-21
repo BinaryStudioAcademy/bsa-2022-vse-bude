@@ -101,7 +101,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
 
   return (
     <NestedLayout>
-      <form css={styles.form} onSubmit={handleSubmit(onSave)}>
+      <form noValidate css={styles.form} onSubmit={handleSubmit(onSave)}>
         <div css={styles.actionWrapper}>
           <Flex justify={'flex-end'} css={styles.buttons}>
             <Button
