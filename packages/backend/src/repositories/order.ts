@@ -60,6 +60,23 @@ export class OrderRepository {
     });
   }
 
+  public getPurchasedItemById({ productId }: { productId: string }): Promise<{
+    product: {
+      title: string;
+    };
+  }> {
+    return this._dbClient.order.findFirst({
+      where: { productId, status: OrderStatus.PAID },
+      select: {
+        product: {
+          select: {
+            title: true,
+          },
+        },
+      },
+    });
+  }
+
   public getById(id: string): Promise<OrderById> {
     return this._dbClient.order.findUnique({
       where: { id },

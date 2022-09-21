@@ -4,6 +4,7 @@ import {
   getMyListSSR,
   addProductToArchive,
   addProductToPosted,
+  deleteProduct,
 } from '@services';
 import { addToast } from 'store/toast/actions';
 import { MyListActions } from './action-types';
@@ -58,6 +59,32 @@ export const addItemToPosted = createAsyncThunk(
           addToast({
             level: 'success',
             description: (t) => t('common:notifications.itemToPosted'),
+          }),
+        );
+
+        return data;
+      })
+      .catch((e) => {
+        dispatch(
+          addToast({
+            level: 'error',
+            description: e.message,
+          }),
+        );
+
+        return rejectWithValue(e.message);
+      }),
+);
+
+export const deleteItem = createAsyncThunk(
+  MyListActions.DELETE_PRODUCT,
+  async ({ productId }: { productId: string }, { rejectWithValue, dispatch }) =>
+    deleteProduct({ productId })
+      .then((data) => {
+        dispatch(
+          addToast({
+            level: 'success',
+            description: (t) => t('common:notifications.itemDeleted'),
           }),
         );
 

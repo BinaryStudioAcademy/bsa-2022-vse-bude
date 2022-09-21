@@ -10,3 +10,4 @@ export * from './all-products-dto';
 export * from './product-archive-dto';
 export * from './product-post-dto';
 export * from './product-search';
+export * from './delete-product';

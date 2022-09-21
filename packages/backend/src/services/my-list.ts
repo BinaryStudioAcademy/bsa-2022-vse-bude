@@ -1,4 +1,8 @@
-import type { MyListRepository, OrderRepository } from '@repositories';
+import type {
+  MyListRepository,
+  OrderRepository,
+  ProductRepository,
+} from '@repositories';
 import type { Item } from '@types';
 import { ProductStatus } from '@prisma/client';
 import {
@@ -8,21 +12,32 @@ import {
 } from '@vse-bude/shared';
 import { ProfileError } from '@errors';
 import { lang } from '@lang';
+import type { S3StorageService } from './s3-storage';
 
 export class MyListService {
   private _myListRepository: MyListRepository;
 
   private _orderRepository: OrderRepository;
 
+  private _productRepository: ProductRepository;
+
+  private _s3StorageService: S3StorageService;
+
   constructor({
     myListRepository,
     orderRepository,
+    s3StorageService,
+    productRepository,
   }: {
     myListRepository: MyListRepository;
     orderRepository: OrderRepository;
+    s3StorageService: S3StorageService;
+    productRepository: ProductRepository;
   }) {
     this._myListRepository = myListRepository;
     this._orderRepository = orderRepository;
+    this._s3StorageService = s3StorageService;
+    this._productRepository = productRepository;
   }
 
   public async getPurchasedItems({
@@ -38,7 +53,7 @@ export class MyListService {
         return {
           ...product,
           status: ItemStatus.PURCHASED,
-          endDate: updatedAt,
+          updatedAt,
         };
       });
     }
@@ -85,16 +100,16 @@ export class MyListService {
 
   public async addItemToArchive({
     itemId,
-    endDate,
+    updatedAt,
   }: {
     itemId: string;
-    endDate: string;
+    updatedAt: string;
   }): Promise<Item> {
     const item = await this._myListRepository.checkWithStatus({
       itemId,
       status: ProductStatus.CANCELLED,
     });
-    if (item) {
+    if (item?.title) {
       throw new ProfileError({
         status: HttpStatusCode.BAD_REQUEST,
         message: lang(UserPersonalInfoValidationMessage.POSTED_EXISTS),
@@ -103,7 +118,46 @@ export class MyListService {
 
     return this._myListRepository.addItemToArchive({
       itemId,
-      endDate,
+      updatedAt,
     });
+  }
+
+  public async deleteProduct({
+    productId,
+  }: {
+    productId: string;
+  }): Promise<string> {
+    const isSold = await this._myListRepository.checkWithStatus({
+      itemId: productId,
+      status: ItemStatus.SOLD,
+    });
+    if (isSold?.title) {
+      throw new ProfileError({
+        status: HttpStatusCode.BAD_REQUEST,
+        message: lang(UserPersonalInfoValidationMessage.DELETE_TYPE),
+      });
+    }
+
+    const isPurchased = await this._orderRepository.getPurchasedItemById({
+      productId,
+    });
+    if (isPurchased?.product.title) {
+      throw new ProfileError({
+        status: HttpStatusCode.BAD_REQUEST,
+        message: lang(UserPersonalInfoValidationMessage.DELETE_TYPE),
+      });
+    }
+
+    const product = await this._productRepository.getById(productId);
+    if (product.imageLinks.length) {
+      const requests = product.imageLinks.map((link) =>
+        this._s3StorageService.deleteImage(link),
+      );
+      Promise.all(requests);
+    }
+
+    await this._myListRepository.deleteProduct({ productId });
+
+    return productId;
   }
 }

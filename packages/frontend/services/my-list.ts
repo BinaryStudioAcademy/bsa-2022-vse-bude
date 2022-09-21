@@ -3,6 +3,7 @@ import type {
   ProductDto,
   ProductToArchive,
   ProductPost,
+  DeleteProduct,
 } from '@vse-bude/shared';
 import {
   ApiRoutes,
@@ -30,4 +31,13 @@ export const addProductToPosted = ({ data }: { data: ProductPost }) =>
   http.put({
     url: `${ApiRoutes.PROFILE}${ProfileApiRoutes.ADD_TO_POSTED}`,
     body: data,
+  });
+
+export const deleteProduct = ({
+  productId,
+}: {
+  productId: string;
+}): Promise<DeleteProduct> =>
+  http.delete({
+    url: `${ApiRoutes.PROFILE}${ProfileApiRoutes.DELETE_ITEM}?productId=${productId}`,
   });

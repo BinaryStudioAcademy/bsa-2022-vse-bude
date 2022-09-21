@@ -2,7 +2,11 @@ import { useState } from 'react';
 import { IconButton } from '@primitives';
 import { IconColor, IconName } from '@enums';
 import { useTranslation } from 'next-i18next';
-import { setVisabilityCancelModal, setItemId } from '@store';
+import {
+  setVisabilityCancelModal,
+  setVisabilityDeleteModal,
+  setItemId,
+} from '@store';
 import { useAppDispatch } from '@hooks';
 import { ApiRoutes, ProductApiRoutes } from '@vse-bude/shared';
 import { useRouter } from 'next/router';
@@ -15,15 +19,19 @@ import {
   ItemDate,
   Views,
   Tooltip,
+  ItemType,
 } from '../primitives';
 import type { CardProps } from './types';
 import * as styles from './styles';
 
 export const Posted = ({ data }: CardProps) => {
-  const [showTooltip, setShowTooltip] = useState(false);
+  const [showArchiveTooltip, setShowArchiveTooltip] = useState(false);
+  const [showDeleteTooltip, setShowDeleteTooltip] = useState(false);
+  const [showSeeItemTooltip, setSeeItemTooltip] = useState(false);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const { id, title, imageLinks, price, description, views, postDate } = data;
+  const { id, title, imageLinks, price, description, views, postDate, type } =
+    data;
   const router = useRouter();
 
   const onOpenCancelModal = () => {
@@ -31,8 +39,17 @@ export const Posted = ({ data }: CardProps) => {
     dispatch(setItemId(id));
   };
 
+  const onOpenDeleteModal = () => {
+    dispatch(setVisabilityDeleteModal());
+    dispatch(setItemId(id));
+  };
+
   const onEditClick = () => {
     router.push(`${ApiRoutes.ITEMS}/${ProductApiRoutes.EDIT}/${id}`);
+  };
+
+  const onSeeItemClick = () => {
+    router.push(`${ApiRoutes.ITEMS}/${id}`);
   };
 
   return (
@@ -40,6 +57,7 @@ export const Posted = ({ data }: CardProps) => {
       <div css={styles.cardContent}>
         <div css={styles.leftContent}>
           <ItemImage src={imageLinks[0]} title={title} />
+          <ItemDate time={postDate} />
         </div>
 
         <div css={styles.rightContent}>
@@ -49,11 +67,11 @@ export const Posted = ({ data }: CardProps) => {
             <div css={styles.saleDetails}>
               <Price price={price} />
               <ItemStatus status={t('my-list:card.posted')} />
+              <ItemType type={type} />
             </div>
           </div>
 
           <div css={styles.postedFooter}>
-            <ItemDate time={postDate} />
             <Views views={views} />
             <IconButton
               ariaLabel="edit"
@@ -64,8 +82,8 @@ export const Posted = ({ data }: CardProps) => {
               cssExtend={styles.iconButton}
               onClick={onEditClick}
             />
-            <div css={styles.archiveButtonWrapper}>
-              {showTooltip ? (
+            <div css={styles.buttonWrapper}>
+              {showArchiveTooltip ? (
                 <Tooltip>{t('my-list:card.tooltip-xmark')}</Tooltip>
               ) : null}
               <IconButton
@@ -74,9 +92,43 @@ export const Posted = ({ data }: CardProps) => {
                 color={IconColor.ORANGE}
                 icon={IconName.XMARK}
                 size="sm"
+                cssExtend={styles.iconButton}
                 onClick={onOpenCancelModal}
-                onMouseEnter={() => setShowTooltip(true)}
-                onMouseLeave={() => setShowTooltip(false)}
+                onMouseEnter={() => setShowArchiveTooltip(true)}
+                onMouseLeave={() => setShowArchiveTooltip(false)}
+              />
+            </div>
+
+            <div css={styles.buttonWrapper}>
+              {showDeleteTooltip ? (
+                <Tooltip>{t('my-list:card.tooltip-delete')}</Tooltip>
+              ) : null}
+              <IconButton
+                ariaLabel="delete"
+                backgroundColor="darkgray"
+                color={IconColor.GRAY}
+                icon={IconName.DELETE}
+                size="sm"
+                cssExtend={styles.iconButton}
+                onClick={onOpenDeleteModal}
+                onMouseEnter={() => setShowDeleteTooltip(true)}
+                onMouseLeave={() => setShowDeleteTooltip(false)}
+              />
+            </div>
+
+            <div css={styles.buttonWrapper}>
+              {showSeeItemTooltip ? (
+                <Tooltip>{t('my-list:card.tooltip-seeItem')}</Tooltip>
+              ) : null}
+              <IconButton
+                ariaLabel="delete"
+                backgroundColor="darkgray"
+                color={IconColor.GRAY}
+                icon={IconName.ITEM_CARD}
+                size="sm"
+                onClick={onSeeItemClick}
+                onMouseEnter={() => setSeeItemTooltip(true)}
+                onMouseLeave={() => setSeeItemTooltip(false)}
               />
             </div>
           </div>
