@@ -23,16 +23,7 @@ export class NotificationService {
     const [notifications, count, countOfUnread] =
       await this._notificationRepository.getAll(userId, query);
 
-    notifications.forEach((notification) => {
-      if (notification.type !== NotificationType.INFO) {
-        notification.title =
-          lang(`notifications:title.${notification.type}`) ||
-          notification.title;
-        notification.description =
-          lang(`notifications:description.${notification.type}`) ||
-          notification.description;
-      }
-    });
+    notifications.forEach((notification) => this.localize(notification));
 
     return { notifications, count, countOfUnread };
   }
@@ -52,6 +43,10 @@ export class NotificationService {
       userId,
     );
 
+    return this.localize(notification);
+  }
+
+  private localize(notification: Notification): Notification{
     if (notification?.type !== NotificationType.INFO) {
       notification.title =
         lang(`notifications:title.${notification.type}`) || notification.title;
