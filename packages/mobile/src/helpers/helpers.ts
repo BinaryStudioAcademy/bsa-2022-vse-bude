@@ -13,3 +13,4 @@ export {
 } from './personal-info-parse/personal-info-parse';
 export { categoryForDropdown } from './category/format-category-for-dropdown';
 export * from './products/products';
+export { removeObjectFalsyFields } from './remove-object-falsy-fields/remove-object-falsy-fields';

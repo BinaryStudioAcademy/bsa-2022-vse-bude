@@ -29,6 +29,7 @@ import {
 } from '~/store/selectors';
 import { RootNavigationProps } from '~/common/types/types';
 import { RootScreenName } from '~/common/enums/enums';
+import { setProductType, resetFilter } from '~/store/filters/auction';
 import {
   Category,
   Flag,
@@ -62,7 +63,14 @@ const Home: FC = () => {
     dispatch(categoriesActions.loadAllCategories());
   }, []);
 
-  const onSeeAllPress = () => {
+  const onSeeAllProductsPress = () => {
+    dispatch(resetFilter());
+    dispatch(setProductType(ProductType.SELLING));
+    navigation.navigate(RootScreenName.ITEMS_AND_SERVICES);
+  };
+  const onSeeAllLotsPress = () => {
+    dispatch(resetFilter());
+    dispatch(setProductType(ProductType.AUCTION));
     navigation.navigate(RootScreenName.ITEMS_AND_SERVICES);
   };
 
@@ -105,20 +113,13 @@ const Home: FC = () => {
             showsHorizontalScrollIndicator={false}
             data={categories}
             keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <Category
-                categoryId={item.id}
-                onPress={() => {
-                  // TODO
-                }}
-              />
-            )}
+            renderItem={({ item }) => <Category categoryId={item.id} />}
           />
           <ProductsSection
             sectionTitle={t('home.POPULAR_LOTS')}
             seeAllTitle={t('home.SEE_ALL_LOTS')}
             data={auctionProducts}
-            onSeeAllPress={onSeeAllPress}
+            onSeeAllPress={onSeeAllLotsPress}
             contentContainerStyle={[globalStyles.mt6]}
           />
         </HomeScreenWrapper>
@@ -164,7 +165,7 @@ const Home: FC = () => {
             sectionTitle={t('home.POPULAR_ITEMS')}
             seeAllTitle={t('home.SEE_ALL_ITEMS')}
             data={sellingProducts}
-            onSeeAllPress={onSeeAllPress}
+            onSeeAllPress={onSeeAllProductsPress}
             contentContainerStyle={globalStyles.mt6}
           />
         </HomeScreenWrapper>

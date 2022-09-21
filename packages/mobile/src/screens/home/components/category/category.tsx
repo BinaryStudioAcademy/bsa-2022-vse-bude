@@ -1,19 +1,28 @@
 import React, { FC } from 'react';
 import { Text, Image, TouchableOpacity } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { useAppSelector } from '~/hooks/hooks';
+import { useAppSelector, useAppDispatch, useNavigation } from '~/hooks/hooks';
 import { selectCategoryById } from '~/store/selectors';
+import { RootNavigationProps } from '~/common/types/types';
+import { setCategory, resetFilter } from '~/store/filters/auction';
+import { RootScreenName } from '~/common/enums/enums';
 import { styles } from './styles';
 
 type Props = {
   categoryId: string;
-  onPress: () => void;
 };
 
-const Category: FC<Props> = ({ categoryId, onPress }) => {
-  const { image, title } = useAppSelector((state) =>
+const Category: FC<Props> = ({ categoryId }) => {
+  const { image, title, id } = useAppSelector((state) =>
     selectCategoryById(state, categoryId),
   );
+  const dispatch = useAppDispatch();
+  const navigation = useNavigation<RootNavigationProps>();
+  const onPress = () => {
+    dispatch(resetFilter());
+    dispatch(setCategory(id));
+    navigation.navigate(RootScreenName.ITEMS_AND_SERVICES);
+  };
 
   return (
     <TouchableOpacity
