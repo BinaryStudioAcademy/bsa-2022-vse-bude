@@ -75,7 +75,7 @@ const Product: FC<Props> = ({ product, contentContainerStyle }) => {
               />
             )}
           </View>
-          <View>
+          <View style={[globalStyles.flex1]}>
             <Text
               style={[
                 globalStyles.fs16,
@@ -99,33 +99,35 @@ const Product: FC<Props> = ({ product, contentContainerStyle }) => {
               </Text>
             )}
           </View>
-          <View style={[styles.divider, { backgroundColor: colors.line }]} />
-          <View
-            style={[
-              globalStyles.flexDirectionRow,
-              globalStyles.alignItemsCenter,
-              globalStyles.justifyContentSpaceBetween,
-              globalStyles.flex1,
-            ]}
-          >
-            <Text
-              numberOfLines={1}
-              ellipsizeMode={'tail'}
+          <View>
+            <View style={[styles.divider, { backgroundColor: colors.line }]} />
+            <View
               style={[
-                globalStyles.fs16,
-                globalStyles.fontWeightBold,
-                { color: colors.titleSecondary },
-                styles.price,
+                globalStyles.flexDirectionRow,
+                globalStyles.alignItemsCenter,
+                globalStyles.justifyContentSpaceBetween,
+                globalStyles.flex1,
               ]}
-            >{`${formatPrice(price)} ${t('common:currency.UAH')}`}</Text>
-            <Button
-              label={
-                isAuction
-                  ? t('common:components.BUTTON_BID')
-                  : t('common:components.BUTTON_BUY')
-              }
-              onPress={handleOpenProductInfo}
-            ></Button>
+            >
+              <Text
+                numberOfLines={1}
+                ellipsizeMode={'tail'}
+                style={[
+                  globalStyles.fs16,
+                  globalStyles.fontWeightBold,
+                  { color: colors.titleSecondary },
+                  styles.price,
+                ]}
+              >{`${formatPrice(price)} ${t('common:currency.UAH')}`}</Text>
+              <Button
+                label={
+                  isAuction
+                    ? t('common:components.BUTTON_BID')
+                    : t('common:components.BUTTON_BUY')
+                }
+                onPress={handleOpenProductInfo}
+              ></Button>
+            </View>
           </View>
         </TouchableOpacity>
       )}
