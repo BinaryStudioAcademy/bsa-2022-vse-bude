@@ -1,12 +1,6 @@
 import React, { FC } from 'react';
+import { useNavigation, useTranslation, useAppSelector } from '~/hooks/hooks';
 import {
-  useCustomTheme,
-  useNavigation,
-  useTranslation,
-  useAppSelector,
-} from '~/hooks/hooks';
-import {
-  ArrowRightIcon,
   KeyboardAvoiding,
   PrimaryButton,
   Spinner,
@@ -29,7 +23,6 @@ const VerifiedPhoneScreen: FC<PropsVerifyScreens> = ({ route }) => {
   const fromSignUp = route.params?.fromSignUp;
   const { t } = useTranslation();
   const navigation = useNavigation<RootNavigationProps>();
-  const { colors } = useCustomTheme();
   const user = useAppSelector(selectCurrentUser);
   const dataStatusAuth = useAppSelector(selectAuthDataStatus);
   const isLoading = dataStatusAuth === DataStatus.PENDING;
@@ -45,7 +38,7 @@ const VerifiedPhoneScreen: FC<PropsVerifyScreens> = ({ route }) => {
       });
     } else {
       navigation.navigate(RootScreenName.MAIN, {
-        screen: MainScreenName.ACCOUNT_ROOT,
+        screen: MainScreenName.HOME,
       });
     }
   };
@@ -72,7 +65,6 @@ const VerifiedPhoneScreen: FC<PropsVerifyScreens> = ({ route }) => {
             <PrimaryButton
               label={t('verify.CONTINUE')}
               onPress={handleContinuePress}
-              iconRight={<ArrowRightIcon size={24} color={colors.whiteColor} />}
             />
           </View>
         </View>
