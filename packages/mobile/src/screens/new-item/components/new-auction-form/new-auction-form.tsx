@@ -281,6 +281,7 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
         name="phone"
         control={control}
         errors={errors}
+        editable={!hiddenPhone}
         contentContainerStyle={globalStyles.mt5}
         popoverText={t('make_a_post.PHONE_POPOVER')}
         inputStyle={{ paddingLeft: 46 }}
