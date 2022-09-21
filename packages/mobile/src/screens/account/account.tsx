@@ -70,6 +70,10 @@ const Account: FC = () => {
           <UserIcon size={30} style={styles.icon} />
           <Text style={styles.btnText}>{t('account.PERSONAL_INFO')}</Text>
         </TouchableOpacity>
+        <TouchableOpacity onPress={handleMyListPress} style={styles.row}>
+          <ListIcon size={30} style={styles.icon} />
+          <Text style={styles.btnText}>{t('account.MY_LIST')}</Text>
+        </TouchableOpacity>
         <TouchableOpacity onPress={handleSettingsPress} style={styles.row}>
           <SettingsIcon size={30} style={styles.icon} />
           <Text style={styles.btnText}>{t('account.SETTINGS')}</Text>
@@ -81,10 +85,6 @@ const Account: FC = () => {
         <TouchableOpacity onPress={handleSupportPress} style={styles.row}>
           <SupportIcon size={30} style={styles.icon} />
           <Text style={styles.btnText}>{t('account.SUPPORT')}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleMyListPress} style={styles.row}>
-          <ListIcon size={30} style={styles.icon} />
-          <Text style={styles.btnText}>{t('account.MY_LIST')}</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.logOutWrapper}>

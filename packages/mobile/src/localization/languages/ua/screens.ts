@@ -74,7 +74,7 @@ export const screens = {
   },
   account: {
     ACCOUNT: 'Акаунт',
-    PERSONAL_INFO: 'Персональна інформація',
+    PERSONAL_INFO: 'Особисті дані',
     SETTINGS: 'Налаштування',
     MESSAGES: 'Повідомлення',
     SUPPORT: 'Підтримка',
@@ -225,7 +225,7 @@ export const screens = {
     POPULAR_ITEMS: 'Популярні товари з фіксованою ціною',
   },
   type_of_post: {
-    TITLE: 'Створити публікацію',
+    TITLE: 'Створити пост',
     HEADER: 'Який тип продажу ви оберете?',
     AUCTION: 'Аукціон',
     FIXED_PRICE: 'Фіксована ціна',
