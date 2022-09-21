@@ -58,7 +58,7 @@ const TypeOfPostScreen: FC = () => {
       </View>
       <View style={globalStyles.mt5}>
         <PrimaryButton
-          label={t('type_of_post.DIRECT_SALE')}
+          label={t('type_of_post.FIXED_PRICE')}
           onPress={handleMakePost}
           disabled={!isAbleToMakePost}
         />

@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
-import type { Theme } from '@emotion/react';
 
-export const loaderWrapper = ({ spaces }: Theme) => css`
+export const loaderWrapper = css`
   width: fit-content;
-  margin: 0 auto ${spaces.xl3};
+  margin: 0 auto;
 `;

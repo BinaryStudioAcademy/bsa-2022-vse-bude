@@ -52,7 +52,7 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
     firstName: parsedPersonalInfo.firstName,
     lastName: parsedPersonalInfo.lastName,
     email: parsedPersonalInfo.email,
-    phone: parsedPersonalInfo.phone,
+    phone: parsedPersonalInfo.phone?.slice(4) || '',
     country: parsedPersonalInfo.country,
     region: parsedPersonalInfo.region,
     city: parsedPersonalInfo.city,
@@ -72,6 +72,10 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
     });
 
   const { isDirty } = useFormState({ control });
+
+  useEffect(() => {
+    reset({ ...DEFAULT_VALUES });
+  }, [personalInfo]);
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
@@ -106,7 +110,7 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
   };
 
   const handleVerifyEmailPress = () => {
-    navigation.navigate(RootScreenName.VERIFY_CODE_EMAIL);
+    navigation.navigate(RootScreenName.VERIFY_EMAIL);
   };
 
   return (
@@ -144,11 +148,12 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
       )}
       <Input
         label={t('verification.PHONE_NUMBER')}
-        placeholder={t('verification.PHONE_NUMBER_HINT')}
+        immutableValue="+380"
         name="phone"
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
+        inputStyle={{ paddingLeft: 46 }}
       />
       {isVerifyPhoneFieldVisible && (
         <VerifyField
@@ -207,17 +212,17 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
         contentContainerStyle={globalStyles.mt5}
       />
       <Input
-        label="Linkedin"
-        placeholder={t('personal_info.LINKEDIN_HINT')}
-        name="linkedin"
+        label="Facebook"
+        placeholder={t('personal_info.FACEBOOK_HINT')}
+        name="facebook"
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
       />
       <Input
-        label="Facebook"
-        placeholder={t('personal_info.FACEBOOK_HINT')}
-        name="facebook"
+        label="Linkedin"
+        placeholder={t('personal_info.LINKEDIN_HINT')}
+        name="linkedin"
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}

@@ -10,9 +10,9 @@ export const common = {
     BUTTON_BUY: 'Buy',
     BUTTON_CONTACT_SELLER: 'Contact the seller',
     UPLOAD_PHOTO: 'Upload Photo',
-    CHOOSE_FROM_GALLERY: 'Choose from device',
+    CHOOSE_FROM_GALLERY: 'Open the gallery',
     OPEN_CAMERA: 'Open camera',
-    REMOVE_PHOTO: 'Remove existing photo',
+    REMOVE_PHOTO: 'Delete the photo',
     BUTTON_FILTER: 'Filter',
   },
   common: {
