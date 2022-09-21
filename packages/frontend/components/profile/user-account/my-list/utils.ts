@@ -22,10 +22,20 @@ export const filterCallback = ({
   filterStatus,
   filterType,
 }: {
-  itemsList: ProductDto[];
+  itemsList: ProductDto[] | null;
   filterStatus: FilterStatuses;
   filterType: string;
 }): FilteredProducts => {
+  if (itemsList === null) {
+    return {
+      purchased: null,
+      sold: null,
+      posted: null,
+      drafts: null,
+      archive: null,
+    };
+  }
+
   let items = [...itemsList];
 
   if (filterType) {
