@@ -25,7 +25,7 @@ const getItemsScreenOptions = ({
     headerTitleAlign: 'center',
     title: getTitle(route.name),
     headerTitleStyle: { fontSize: 16 },
-    headerLeft: () => <BurgerMenu />,
+    headerLeft: BurgerMenu,
     headerRight: () => (
       <ButtonText
         textStyle={globalStyles.fs16}
