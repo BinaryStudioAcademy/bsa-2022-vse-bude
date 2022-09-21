@@ -26,7 +26,7 @@ export const dropdownArrow = ({
   border-radius: ${radiuses.circle};
   width: ${widths.checkbox};
   height: ${heights.checkbox};
-  padding: ${spaces.xs};
+  padding: ${spaces.md};
   background-color: ${colors.backgroundLight};
   cursor: pointer;
   :hover {

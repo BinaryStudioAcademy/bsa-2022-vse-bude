@@ -23,16 +23,7 @@ export class NotificationService {
     const [notifications, count, countOfUnread] =
       await this._notificationRepository.getAll(userId, query);
 
-    notifications.forEach((notification) => {
-      if (notification.type !== NotificationType.INFO) {
-        notification.title =
-          lang(`notifications:title.${notification.type}`) ||
-          notification.title;
-        notification.description =
-          lang(`notifications:description.${notification.type}`) ||
-          notification.description;
-      }
-    });
+    notifications.forEach((notification) => this.localize(notification));
 
     return { notifications, count, countOfUnread };
   }
@@ -41,12 +32,29 @@ export class NotificationService {
     return this._notificationRepository.create(notification);
   }
 
-  public setAsViewed(req: Request): Promise<Notification> {
+  public async setAsViewed(req: Request): Promise<Notification> {
     const {
       userId,
       params: { id },
     } = req;
 
-    return this._notificationRepository.setAsViewed(id, userId);
+    const notification = await this._notificationRepository.setAsViewed(
+      id,
+      userId,
+    );
+
+    return this.localize(notification);
+  }
+
+  private localize(notification: Notification): Notification {
+    if (notification?.type !== NotificationType.INFO) {
+      notification.title =
+        lang(`notifications:title.${notification.type}`) || notification.title;
+      notification.description =
+        lang(`notifications:description.${notification.type}`) ||
+        notification.description;
+    }
+
+    return notification;
   }
 }
