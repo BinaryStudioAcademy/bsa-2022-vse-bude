@@ -36,7 +36,8 @@ export const ResetPassword = () => {
       <div css={inputWrapper}>
         <PasswordInput
           {...register('password')}
-          label={t('sign-in.password')}
+          label={t('reset-password.password')}
+          placeholder={t('reset-password.passwordPlaceholder')}
           variant="primary"
           name="password"
           // error={lang(getErrorKey('password', errors.password?.type))}
@@ -46,6 +47,7 @@ export const ResetPassword = () => {
         <PasswordInput
           {...register('repeatPassword')}
           label={t('sign-up.passwordRepeat')}
+          placeholder={t('sign-up.passwordRepeatPlaceholder')}
           variant="primary"
           name="repeatPassword"
           // error={lang(getErrorKey('password', errors.password?.type))}
