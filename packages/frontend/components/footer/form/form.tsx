@@ -24,7 +24,7 @@ export const Form = () => {
   };
 
   return (
-    <form css={styles.footerForm}>
+    <form noValidate css={styles.footerForm}>
       <div css={styles.footerFormRow}>
         <ColumnHeader>{t('common:footer.contactUs')}</ColumnHeader>
         <span css={styles.footerFormDescription}>
