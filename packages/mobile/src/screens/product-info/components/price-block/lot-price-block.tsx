@@ -49,7 +49,7 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
   minimalBid,
 }) => {
   const { colors } = useCustomTheme();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { control, errors, handleSubmit, setValue } = useAppForm({
     defaultValues: DEFAULT_BID_VALUE,
@@ -115,19 +115,9 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
     setModalVisible(true);
   };
 
-  const priceText =
-    i18n.language === 'ua'
-      ? `${currentPrice} ${t('screens:welcome.UAH')}`
-      : `${t('screens:welcome.UAH')} ${currentPrice}`;
-
-  const placeholderText =
-    i18n.language === 'ua'
-      ? `${Number(minimalBid) + Number(currentPrice)} ${t(
-          'screens:product_info.MIN_UAH',
-        )}`
-      : `${t('screens:product_info.MIN_UAH')} ${
-          Number(minimalBid) + Number(currentPrice)
-        }`;
+  const placeholderText = `${t('screens:product_info.MIN')} ${
+    Number(minimalBid) + Number(currentPrice)
+  } ${t('common:currency.UAH')}`;
 
   return (
     <>
@@ -157,7 +147,7 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
             { color: colors.titleSecondary },
           ]}
         >
-          {priceText}
+          {`${currentPrice} ${t('common:currency.UAH')}`}
         </Text>
       </View>
       <PriceWrapper>
