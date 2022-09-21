@@ -26,7 +26,7 @@ export const screens = {
     TITLE: 'Марка "Русский военный корабль"',
     DESCRIPTION: 'Марка була випущена Укрпоштою у 2022. Вислів став відомим...',
     BET: 'Ставка',
-    UAH: 'ГРН',
+    UAH: 'грн',
   },
   verification: {
     SIGN_IN: 'Увійти',
@@ -186,8 +186,9 @@ export const screens = {
     MAX_RANGE: 'Кінець діапазону',
     MAX_RANGE_PLACEHOLDER: 'Максимальна ціна',
     CURRENCY: 'Валюта',
-    CONTACT: 'Контактна інформація',
+    CONTACTS: 'Контакти',
     COUNTRY: 'Країна',
+    DEFAULT_COUNTRY: 'Україна',
     COUNTRY_PLACEHOLDER: 'Оберіть країну',
     CITY: 'Місто',
     CITY_PLACEHOLDER: 'Оберіть місто',
@@ -237,7 +238,7 @@ export const screens = {
     LOCATION: 'Місцезнаходження',
     DESCRIPTION: 'Опис',
     CURRENT_BID: 'Поточна ставка',
-    MIN_UAH: 'Мін ГРН',
+    MIN_UAH: 'Мін грн',
     BID_SAVED: 'Ставка успішно розміщена',
     LEAVE_TEXT: 'Вийти з аукціону',
     LEAVE_MODAL_TEXT:

@@ -72,12 +72,14 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
         minimalBidCurrency: t('common:currency.UAH'),
         minimalBid: 0,
         endDate: '',
-        country: personalInfo.userAddress?.country || '',
+        country:
+          personalInfo.userAddress?.country || t('make_a_post.DEFAULT_COUNTRY'),
         city: personalInfo.userAddress?.city || '',
         phone: phone || '',
       },
       validationSchema: productsAuctionSchema,
     });
+
   const [images, setImages] = useState<Asset[]>([]);
   const [hiddenPhone, setHiddenPhone] = useState(Boolean(false));
   const isFirstRender = useRef(true);
@@ -217,7 +219,6 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
           errors={errors}
           contentContainerStyle={[globalStyles.mt5, { width: '65%' }]}
           required={true}
-          popoverText={t('make_a_post.RECOMMENDED_PRICE_POPOVER')}
         />
       </View>
       <View
@@ -242,7 +243,6 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
           errors={errors}
           contentContainerStyle={[globalStyles.mt5, { width: '65%' }]}
           required={true}
-          popoverText={t('make_a_post.MINIMAL_BID_POPOVER')}
         />
       </View>
       <DatePicker
@@ -256,7 +256,7 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
         required={true}
       />
       <Text style={[globalStyles.fs14, globalStyles.mt6, styles.title]}>
-        {t('make_a_post.CONTACT')}
+        {t('make_a_post.CONTACTS')}
       </Text>
       <Input
         label={t('personal_info.COUNTRY')}
@@ -283,7 +283,6 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
         errors={errors}
         editable={!hiddenPhone}
         contentContainerStyle={globalStyles.mt5}
-        popoverText={t('make_a_post.PHONE_POPOVER')}
         inputStyle={{ paddingLeft: 46 }}
       />
       <View style={[globalStyles.mt3]}>
