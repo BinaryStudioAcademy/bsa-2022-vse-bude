@@ -21,9 +21,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(updateAvatar.fulfilled, (state, action) => {
       state.dataStatus = DataStatus.FULFILLED;
-      state.user
-        ? (state.user.avatar = action.payload.avatar?.toString())
-        : null;
+      if (state.user) {
+        state.user.avatar = action.payload.avatar?.toString();
+      }
     })
     .addMatcher(
       isAnyOf(
