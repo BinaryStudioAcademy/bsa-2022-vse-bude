@@ -58,7 +58,7 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
   const isLoading = dataStatusProducts === DataStatus.PENDING;
   const formattedCategories =
     categories && categories.length ? categoryForDropdown(categories) : null;
-  const phone = personalInfo.phone?.replace(/\s/g, '').slice(4);
+  const phone = personalInfo.phone?.replace(/\s/g, '')?.slice(4) ?? '';
 
   const { control, errors, handleSubmit, setValue } =
     useAppForm<ICreateAuction>({
@@ -75,7 +75,7 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
         country:
           personalInfo.userAddress?.country || t('make_a_post.DEFAULT_COUNTRY'),
         city: personalInfo.userAddress?.city || '',
-        phone: phone || '',
+        phone: phone,
       },
       validationSchema: productsAuctionSchema,
     });
@@ -145,6 +145,8 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
         });
     }
   };
+
+  const toggleHidePhone = () => setHiddenPhone(!hiddenPhone);
 
   return (
     <View>
@@ -292,7 +294,7 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
             globalStyles.alignItemsCenter,
             { alignSelf: 'flex-start' },
           ]}
-          onPress={() => setHiddenPhone(!hiddenPhone)}
+          onPress={toggleHidePhone}
         >
           <CheckBox
             tintColors={{

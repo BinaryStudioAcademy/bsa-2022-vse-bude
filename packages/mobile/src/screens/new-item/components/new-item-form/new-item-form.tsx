@@ -55,7 +55,7 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
   const isLoading = dataStatusProducts === DataStatus.PENDING;
   const formattedCategories =
     categories && categories.length ? categoryForDropdown(categories) : null;
-  const phone = personalInfo.phone?.replace(/\s/g, '').slice(4);
+  const phone = personalInfo.phone?.replace(/\s/g, '')?.slice(4) ?? '';
 
   const { control, errors, handleSubmit, setValue } = useAppForm<ICreatePost>({
     defaultValues: {
@@ -68,7 +68,7 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
       country:
         personalInfo.userAddress?.country || t('make_a_post.DEFAULT_COUNTRY'),
       city: personalInfo.userAddress?.city || '',
-      phone: phone || '',
+      phone: phone,
     },
     validationSchema: productsPostSchema,
   });
@@ -138,6 +138,8 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
         });
     }
   };
+
+  const toggleHidePhone = () => setHiddenPhone(!hiddenPhone);
 
   return (
     <View>
@@ -251,7 +253,7 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
             globalStyles.alignItemsCenter,
             { alignSelf: 'flex-start' },
           ]}
-          onPress={() => setHiddenPhone(!hiddenPhone)}
+          onPress={toggleHidePhone}
         >
           <CheckBox
             tintColors={{
