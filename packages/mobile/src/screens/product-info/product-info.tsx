@@ -23,6 +23,7 @@ import {
   ScrollView,
   Spinner,
   Countdown,
+  StatusBar,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import {
@@ -88,9 +89,14 @@ const ProductInfo: FC = () => {
 
   return (
     <ScreenWrapper>
+      <StatusBar
+        backgroundColor={colors.backgroundSecondary}
+        translucent={false}
+        barStyle="dark-content"
+      />
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={[globalStyles.px5, globalStyles.mb5]}
+        style={[globalStyles.px5, globalStyles.py6, globalStyles.mb6]}
       >
         {isAuction && <Countdown endDate={product.endDate} />}
         <Text

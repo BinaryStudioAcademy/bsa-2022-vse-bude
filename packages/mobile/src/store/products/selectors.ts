@@ -2,12 +2,11 @@ import { createSelector } from '@reduxjs/toolkit';
 import { ProductDto, AllProductsDto, ProductType } from '@vse-bude/shared';
 import { RootState } from '~/common/types/types';
 
+const selectDataStatusProducts = (state: RootState) =>
+  state.products.dataStatus;
+
 const selectProducts = (state: RootState): AllProductsDto => {
   return state.products.products;
-};
-
-const selectDataStatusProducts = (state: RootState) => {
-  return state.products.dataStatus;
 };
 
 const selectProductById = createSelector(

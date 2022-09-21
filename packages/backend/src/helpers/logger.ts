@@ -1,33 +1,7 @@
 import winston from 'winston';
+import DailyRotateFile from 'winston-daily-rotate-file';
 import { getEnv } from '@helpers';
-import type {
-  ConsoleTransportInstance,
-  FileTransportInstance,
-} from 'winston/lib/winston/transports';
-import fs from 'fs';
-import path from 'path';
-
-function checkFileSize(fileSizeBytes: number, filename: string): void {
-  const filepathAbsolute = path.resolve(filename);
-
-  try {
-    const size = fs.statSync(filepathAbsolute).size;
-
-    if (size <= fileSizeBytes) {
-      return;
-    }
-
-    let data = fs.readFileSync(filepathAbsolute, 'utf8');
-
-    while (Buffer.byteLength(data) > fileSizeBytes) {
-      data = data.split('\n').slice(1).join('\n');
-    }
-
-    fs.writeFileSync(filepathAbsolute, data);
-  } catch (e) {
-    console.log(e);
-  }
-}
+import type { ConsoleTransportInstance } from 'winston/lib/winston/transports';
 
 const levels = {
   error: 0,
@@ -44,13 +18,13 @@ const colors = {
 class Logger {
   private _logger: winston.Logger;
 
-  private _errorFilename = 'logs/error.log';
+  private _errorFileFolder = 'logs/error';
 
-  private _logFilename = 'logs/all.log';
+  private _logFileFolder = 'logs/all';
 
-  private _errorFileSize = 5242880; // 5mb
+  private _errorFileSize = 1048576; // 1mb
 
-  private _logFileSize = 5242880; // 5mb
+  private _logFileSize = 1048576; // 1mb
 
   constructor() {
     const env = getEnv('NODE_ENV') || 'development';
@@ -61,50 +35,44 @@ class Logger {
       levels,
       transports,
     });
-
-    this.createLogFiles();
   }
 
   log(message: string | Record<string, unknown>): void {
     this._logger.info(message);
-    this.checkLogFileSize();
   }
 
   warn(message: string | Record<string, unknown>): void {
     this._logger.warn(message);
-    this.checkLogFileSize();
   }
 
   error(message: string | Record<string, unknown> | Error): void {
     this._logger.error(message);
-    this.checkLogFileSize();
-    this.checkErrorFileSize();
-  }
-
-  private checkLogFileSize(): void {
-    checkFileSize(this._logFileSize, this._logFilename);
-  }
-
-  private checkErrorFileSize(): void {
-    checkFileSize(this._errorFileSize, this._errorFilename);
   }
 
   private createTransports(
     env: string,
-  ): (ConsoleTransportInstance | FileTransportInstance)[] {
+  ): (ConsoleTransportInstance | DailyRotateFile)[] {
     const formats = this.getFormats();
     const transports: (
       | winston.transports.ConsoleTransportInstance
-      | winston.transports.FileTransportInstance
+      | DailyRotateFile
     )[] = [
-      new winston.transports.File({
-        filename: this._logFilename,
+      new DailyRotateFile({
+        filename: '%DATE%.log',
+        datePattern: 'YYYY-MM-DD-HH-MM',
         format: formats.fileFormat,
+        maxSize: this._logFileSize,
+        maxFiles: 3,
+        dirname: this._logFileFolder,
       }),
-      new winston.transports.File({
-        filename: this._errorFilename,
+      new DailyRotateFile({
+        filename: '%DATE%.log',
+        datePattern: 'YYYY-MM-DD-HH',
         level: 'error',
         format: formats.fileFormat,
+        maxSize: this._errorFileSize,
+        maxFiles: 3,
+        dirname: this._errorFileFolder,
       }),
     ];
 
@@ -157,18 +125,6 @@ class Logger {
 
     return info;
   };
-
-  private createLogFiles(): void {
-    const errorFilePath = path.resolve(this._errorFilename);
-    const logFilePath = path.resolve(this._logFilename);
-
-    try {
-      fs.writeFileSync(errorFilePath, '', { flag: 'a+' });
-      fs.writeFileSync(logFilePath, '', { flag: 'a+' });
-    } catch (e) {
-      console.log(e);
-    }
-  }
 }
 
 const logger = new Logger();

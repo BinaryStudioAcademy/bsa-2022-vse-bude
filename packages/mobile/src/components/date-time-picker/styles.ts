@@ -17,6 +17,9 @@ const useStyles = () => {
           lineHeight: 14,
           color: colors.titlePrimary,
         },
+        required: {
+          marginTop: -4,
+        },
         input: {
           paddingVertical: 15,
           paddingLeft: 15,

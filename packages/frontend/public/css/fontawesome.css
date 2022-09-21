@@ -164,6 +164,9 @@
 .fa-search::before {
   content: '\f002';
 }
+.fa-bags-shopping::before {
+  content: '\f290';
+}
 
 :root,
 :host {

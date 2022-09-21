@@ -22,7 +22,8 @@ const SocialButton: FC<SocialButtonProps> = ({ type, link }) => {
       style={[
         globalStyles.alignItemsCenter,
         globalStyles.flexDirectionRow,
-        globalStyles.mt4,
+        globalStyles.mt1,
+        globalStyles.mb3,
       ]}
     >
       {type == SocialMediaType.FACEBOOK ? (

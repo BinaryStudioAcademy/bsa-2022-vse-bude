@@ -1,19 +1,34 @@
 import i18next from 'i18next';
-import { HttpHeader, HttpMethod, HttpError } from '@vse-bude/shared';
+import {
+  HttpHeader,
+  HttpMethod,
+  HttpError,
+  HttpStatusCode,
+  ApiRoutes,
+  AuthApiRoutes,
+  HttpContentType,
+  CredentialsError,
+  HttpAcceptLanguage,
+} from '@vse-bude/shared';
 import { StorageKey } from '~/common/enums/enums';
 import { GetHeadersParams, HttpOptions } from '~/common/types/types';
 import { getQueryString } from '~/helpers/helpers';
 import { Storage } from '../storage/storage.service';
+import { storage } from '../services';
 
 type Constructor = {
   storage: Storage;
+  apiPrefix: string;
 };
 
 class Http {
   #storage: Storage;
 
-  constructor({ storage }: Constructor) {
+  #apiPrefix: string;
+
+  constructor({ storage, apiPrefix }: Constructor) {
     this.#storage = storage;
+    this.#apiPrefix = apiPrefix;
   }
 
   load<T = unknown>(
@@ -33,14 +48,43 @@ class Http {
       hasAuth,
     });
 
-    return fetch(this.getUrl(url, params), {
+    return this.makeRequest(this.getUrl(url, params), {
       method,
       headers,
       body: payload,
-    })
-      .then(this.checkStatus)
-      .then((res) => this.parseJSON<T>(res))
-      .catch(this.throwError);
+    });
+  }
+
+  private async makeRequest<T = unknown>(
+    url: string,
+    config: { method: HttpMethod; headers: Headers; body: BodyInit_ },
+  ): Promise<T> {
+    const result = await fetch(url, config);
+
+    if (result.status === HttpStatusCode.UNAUTHORIZED) {
+      await this.updateAuthorizationToken();
+      const updatedConfig = this.getRefreshedAuthReqConfig(config);
+
+      return await fetch(url, updatedConfig)
+        .then(this.checkStatus)
+        .then((res) => this.parseJSON<T>(res))
+        .catch(this.throwError);
+    }
+
+    return this.parseJSON<T>(result);
+  }
+
+  private getRefreshedAuthReqConfig(config: {
+    method?: HttpMethod;
+    headers?: Headers;
+    body?: BodyInit_;
+  }) {
+    const token = this.#storage.getItem(StorageKey.ACCESS_TOKEN);
+    if (config.headers) {
+      config.headers.set(HttpHeader.AUTHORIZATION, `Bearer ${token}`);
+    }
+
+    return config;
   }
 
   private getUrl(url: string, params?: Record<string, unknown>): string {
@@ -49,6 +93,9 @@ class Http {
 
   private getHeaders({ contentType, hasAuth }: GetHeadersParams): Headers {
     const headers = new Headers();
+
+    const locale = <HttpAcceptLanguage>i18next.resolvedLanguage;
+    headers.append(HttpHeader.ACCEPT_LANGUAGE, locale);
 
     if (contentType) {
       headers.append(HttpHeader.CONTENT_TYPE, contentType);
@@ -81,6 +128,34 @@ class Http {
     }
 
     return response;
+  }
+
+  private async updateAuthorizationToken() {
+    const refreshToken = storage.getItem(StorageKey.REFRESH_TOKEN);
+
+    const response = await fetch(
+      `${this.#apiPrefix}${ApiRoutes.AUTH}${AuthApiRoutes.REFRESH_TOKEN}`,
+      {
+        method: HttpMethod.POST,
+        body: JSON.stringify({ tokenValue: refreshToken }),
+        headers: {
+          [HttpHeader.CONTENT_TYPE]: HttpContentType.APPLICATION_JSON,
+        },
+      },
+    );
+
+    if (!response.ok) {
+      storage.removeItem(StorageKey.ACCESS_TOKEN);
+      storage.removeItem(StorageKey.REFRESH_TOKEN);
+
+      throw new CredentialsError();
+    }
+
+    const { accessToken, refreshToken: newRefreshToken } =
+      await response.json();
+
+    storage.setItem(StorageKey.ACCESS_TOKEN, accessToken);
+    storage.setItem(StorageKey.REFRESH_TOKEN, newRefreshToken);
   }
 
   private parseJSON<T>(response: Response): Promise<T> {

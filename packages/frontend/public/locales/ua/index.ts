@@ -11,6 +11,7 @@ import rules from './rules.json';
 import myList from './my-list.json';
 import checkout from './checkout.json';
 import about from './about.json';
+import errors from './errors.json';
 
 export const ua = {
   home,
@@ -26,4 +27,5 @@ export const ua = {
   rules,
   checkout,
   about,
+  errors,
 };

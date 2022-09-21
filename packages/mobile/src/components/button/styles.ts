@@ -9,8 +9,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   label: {
-    textTransform: 'capitalize',
     textAlignVertical: 'center',
+    textAlign: 'center',
     includeFontPadding: false,
   },
 });

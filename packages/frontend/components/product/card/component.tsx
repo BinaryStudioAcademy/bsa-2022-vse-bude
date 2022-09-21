@@ -94,7 +94,7 @@ export const ProductCard = (props: ProductCardProps) => {
       </div>
       <div css={productFooter}>
         <div className="productPrice">
-          <Price amount={props.price} currency={props.currency} />
+          <Price amount={props.price} />
         </div>
         <div className="productAction">{renderButton()}</div>
       </div>

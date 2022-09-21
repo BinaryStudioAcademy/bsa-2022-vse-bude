@@ -1,17 +1,17 @@
 import React, { FC } from 'react';
-import { useCustomTheme, useTranslation } from '~/hooks/hooks';
+import { useCustomTheme } from '~/hooks/hooks';
 import { View, HeaderButton, Text } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 
 type Props = {
+  title: string;
   labelButton?: string;
   onPress?: () => void;
   hideButton?: boolean;
 };
 
-const Header: FC<Props> = ({ labelButton, onPress, hideButton }) => {
-  const { t } = useTranslation();
+const Header: FC<Props> = ({ title, labelButton, onPress, hideButton }) => {
   const { colors } = useCustomTheme();
   const isButtonVisible = !hideButton && onPress && labelButton;
 
@@ -35,7 +35,7 @@ const Header: FC<Props> = ({ labelButton, onPress, hideButton }) => {
             />
           )}
         </View>
-        <View style={styles.section}>
+        <View style={styles.centerSection}>
           <Text
             style={[
               globalStyles.fs17,
@@ -44,7 +44,7 @@ const Header: FC<Props> = ({ labelButton, onPress, hideButton }) => {
               { color: colors.text },
             ]}
           >
-            {t('verify.VERIFY')}
+            {title}
           </Text>
         </View>
         <View style={styles.section} />

@@ -24,7 +24,7 @@ const CategorySection = () => {
 
   const redirectToCategory = (category: string) => {
     const filters = {
-      category: category,
+      categoryId: category,
     };
 
     return encodeURI(`${Routes.ITEMS}?filter=${JSON.stringify(filters)}`);
