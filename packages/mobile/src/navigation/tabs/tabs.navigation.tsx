@@ -144,7 +144,7 @@ const MainNavigation: FC = () => {
           component={Account}
           options={getTabOptions({
             label: t('common:tab_navigation.ACCOUNT'),
-            tabBarIcon: UserIcon,
+            tabBarIcon: userIcon,
           })}
         />
       ) : (
