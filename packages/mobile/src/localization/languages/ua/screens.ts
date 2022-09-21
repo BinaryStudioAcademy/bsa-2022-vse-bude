@@ -227,7 +227,7 @@ export const screens = {
     TITLE: 'Створити публікацію',
     HEADER: 'Який тип продажу ви оберете?',
     AUCTION: 'Аукціон',
-    DIRECT_SALE: 'Продаж',
+    FIXED_PRICE: 'Фіксована ціна',
   },
   product_info: {
     TITLE: 'Деталі продукту',
