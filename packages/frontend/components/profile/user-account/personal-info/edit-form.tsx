@@ -53,14 +53,14 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
     reset({
       'phone': !user.phone ? '' : user.phone,
       'email': !user.email ? '' : user.email,
-      'country': !user.userAddress.country
+      'country': !user.userAddress?.country
         ? t('personal-info:defaultCountry')
-        : user.userAddress.country,
+        : user.userAddress?.country,
       'password': '',
       'repeatPassword': '',
       'newPassword': '',
     });
-  }, [isSubmit, reset, user.phone, user.email, user.userAddress.country, t]);
+  }, [isSubmit, reset, user.phone, user.email, user.userAddress?.country, t]);
 
   const onResetHandler = () => {
     dispatch(setIsEditing());
