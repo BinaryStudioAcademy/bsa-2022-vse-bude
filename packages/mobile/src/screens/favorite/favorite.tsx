@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useIsFocused } from '@react-navigation/native';
-import { useAppDispatch, useAppSelector } from '~/hooks/hooks';
+import { useAppDispatch, useAppSelector, useCustomTheme } from '~/hooks/hooks';
 import { favoritesMapper } from '~/helpers/helpers';
 import {
   selectCurrentUser,
@@ -15,13 +15,16 @@ import {
   Spinner,
   Text,
   View,
+  StatusBar,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { guestFavoritesMapper } from '~/helpers/favorites/guest-favorites-mapper';
 import { FavoriteCard } from './components/favorite-card';
+import { styles } from './styles';
 
 const Favorite: FC = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const { colors } = useCustomTheme();
   const user = useAppSelector(selectCurrentUser);
   const storedFavorites = useAppSelector(selectFavorites);
   const favoriteIds = useAppSelector(selectFavoriteIds);
@@ -65,15 +68,20 @@ const Favorite: FC = () => {
         globalStyles.px4,
       ]}
     >
-      <Text style={{ textAlign: 'center' }}>
+      <Text style={styles.text}>
         Oops... Seems you have no favourite items.
       </Text>
     </View>
   ) : (
     <ScreenWrapper>
+      <StatusBar
+        backgroundColor={colors.backgroundSecondary}
+        translucent={false}
+        barStyle="dark-content"
+      />
       <FlatList
         data={favorites}
-        contentContainerStyle={[globalStyles.px4, globalStyles.mt3]}
+        contentContainerStyle={[globalStyles.px4]}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <FavoriteCard product={item} />}
       />
