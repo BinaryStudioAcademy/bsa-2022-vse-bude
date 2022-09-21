@@ -13,9 +13,7 @@ const ProductPriceBlock: FC<ProductPriceBlockProps> = ({ price }) => {
   const { colors } = useCustomTheme();
   const { t, i18n } = useTranslation();
   const user = useAppSelector(selectCurrentUser);
-  const canUserMakeBid = Boolean(
-    user?.phoneVerified && user?.emailVerified,
-  );
+  const canUserMakeBid = Boolean(user?.phoneVerified && user?.emailVerified);
 
   const priceText =
     i18n.language === 'ua'
