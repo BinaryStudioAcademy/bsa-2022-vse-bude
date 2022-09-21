@@ -1,13 +1,19 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import { MainScreenName } from '~/common/enums/enums';
 import { AppIcon, MainNavigationParamList } from '~/common/types/types';
-import { selectCurrentUser } from '~/store/selectors';
-import { useAppSelector, useCustomTheme, useTranslation } from '~/hooks/hooks';
 import { Home, Favorite, MyList, Account } from '~/screens/screens';
+import { personalInfoActions } from '~/store/actions';
+import { selectCurrentUser, selectPersonalInfo } from '~/store/selectors';
+import {
+  useAppDispatch,
+  useAppSelector,
+  useCustomTheme,
+  useTranslation,
+} from '~/hooks/hooks';
 import {
   HomeIcon,
   ListIcon,
@@ -15,16 +21,24 @@ import {
   StarIcon,
   Text,
   UserIcon,
+  Image,
 } from '~/components/components';
 import { WelcomeNavigation } from '../welcome/welcome.navigation';
 import { favoriteScreenOptions } from '../screen-options/screen-options';
+import { styles } from './styles';
 
 const Tabs = createBottomTabNavigator<MainNavigationParamList>();
 
 const MainNavigation: FC = () => {
   const { dark, colors } = useCustomTheme();
   const user = useAppSelector(selectCurrentUser);
+  const personalInfo = useAppSelector(selectPersonalInfo);
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
+
+  useEffect(() => {
+    dispatch(personalInfoActions.getPersonalInfo());
+  }, []);
 
   const screenOptions: BottomTabNavigationOptions = {
     headerShown: false,
@@ -50,6 +64,12 @@ const MainNavigation: FC = () => {
     ),
     title,
   });
+
+  const userIcon = personalInfo?.avatar
+    ? () => (
+        <Image source={{ uri: personalInfo?.avatar }} style={styles.avatar} />
+      )
+    : UserIcon;
 
   return (
     <Tabs.Navigator screenOptions={screenOptions}>
@@ -78,7 +98,7 @@ const MainNavigation: FC = () => {
         <Tabs.Screen
           name={MainScreenName.ACCOUNT_ROOT}
           component={Account}
-          options={getTabOptions(t('common:tab_navigation.ACCOUNT'), UserIcon)}
+          options={getTabOptions(t('common:tab_navigation.ACCOUNT'), userIcon)}
         />
       ) : (
         <Tabs.Screen

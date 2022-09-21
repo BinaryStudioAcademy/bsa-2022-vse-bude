@@ -61,6 +61,16 @@ export const makePostButton = ({ colors, radiuses, spaces }: Theme) => css`
       transform: rotate(calc(45deg + 90deg));
     }
   }
+
+  &:disabled {
+    background: ${colors.disabled};
+    cursor: auto;
+    &:hover {
+      i {
+        transform: none;
+      }
+    }
+  }
 `;
 
 export const makePostLabel = ({

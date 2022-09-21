@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { RouteProp } from '@react-navigation/native';
 import { RootNavigationParamList } from '~/common/types/types';
-import { RootScreenName } from '~/common/enums/enums';
+import { DataStatus, RootScreenName } from '~/common/enums/enums';
 import {
   ProductType,
   UpdateProductPriceEvent,
@@ -12,6 +12,7 @@ import {
   selectCurrentUser,
   selectFavoriteIds,
   selectCurrentProduct,
+  selectProductsDataStatus,
 } from '~/store/selectors';
 import { notification, socketApi } from '~/services/services';
 import {
@@ -45,6 +46,8 @@ const ProductInfo: FC = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const product = useAppSelector(selectCurrentProduct);
+  const dataStatusProduct = useAppSelector(selectProductsDataStatus);
+  const isLoading = dataStatusProduct === DataStatus.PENDING;
   const user = useAppSelector(selectCurrentUser);
   const favoriteIds = useAppSelector(selectFavoriteIds);
   const route =
@@ -72,7 +75,7 @@ const ProductInfo: FC = () => {
     }
   }, [id, user, dispatch]);
 
-  if (!product) {
+  if (!product || isLoading) {
     return <Spinner isOverflow={true} />;
   }
   const { title, type, imageLinks, views, author } = product;

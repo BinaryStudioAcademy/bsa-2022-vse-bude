@@ -1,12 +1,6 @@
 import React, { FC } from 'react';
+import { useNavigation, useTranslation, useAppSelector } from '~/hooks/hooks';
 import {
-  useCustomTheme,
-  useNavigation,
-  useTranslation,
-  useAppSelector,
-} from '~/hooks/hooks';
-import {
-  ArrowRightIcon,
   KeyboardAvoiding,
   PrimaryButton,
   Spinner,
@@ -28,7 +22,6 @@ import { styles } from './styles';
 const VerifiedEmailScreen: FC = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<RootNavigationProps>();
-  const { colors } = useCustomTheme();
   const user = useAppSelector(selectCurrentUser);
   const dataStatusAuth = useAppSelector(selectAuthDataStatus);
   const isLoading = dataStatusAuth === DataStatus.PENDING;
@@ -39,7 +32,7 @@ const VerifiedEmailScreen: FC = () => {
 
   const handleContinuePress = (): void => {
     navigation.navigate(RootScreenName.MAIN, {
-      screen: MainScreenName.ACCOUNT_ROOT,
+      screen: MainScreenName.HOME,
     });
   };
 
@@ -65,7 +58,6 @@ const VerifiedEmailScreen: FC = () => {
             <PrimaryButton
               label={t('verify.CONTINUE')}
               onPress={handleContinuePress}
-              iconRight={<ArrowRightIcon size={24} color={colors.whiteColor} />}
             />
           </View>
         </View>

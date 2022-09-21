@@ -111,9 +111,13 @@ export const Header = () => {
                     </>
                   )}
                   {user || loading ? (
-                    <div className="header-content">{renderProfileInfo()}</div>
+                    <div className="header-btn-group">
+                      {renderProfileInfo()}
+                    </div>
                   ) : (
-                    <div className="header-content">{renderAuthButtons()}</div>
+                    <div className="header-btn-group">
+                      {renderAuthButtons()}
+                    </div>
                   )}
                 </Suspense>
               </>

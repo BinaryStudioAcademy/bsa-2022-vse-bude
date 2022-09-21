@@ -60,7 +60,8 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
       condition: '',
       currency: t('common:currency.UAH'),
       price: 0,
-      country: personalInfo.userAddress?.country || '',
+      country:
+        personalInfo.userAddress?.country || t('make_a_post.DEFAULT_COUNTRY'),
       city: personalInfo.userAddress?.city || '',
       phone: personalInfo.phone?.replace(/\s/g, '').slice(4) || '',
     },
@@ -190,11 +191,10 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
           errors={errors}
           contentContainerStyle={[globalStyles.mt5, { width: '65%' }]}
           required={true}
-          popoverText={t('make_a_post.PRICE_POPOVER')}
         />
       </View>
       <Text style={[globalStyles.fs14, globalStyles.mt6, styles.title]}>
-        {t('make_a_post.CONTACT')}
+        {t('make_a_post.CONTACTS')}
       </Text>
       <Input
         label={t('personal_info.COUNTRY')}
@@ -220,7 +220,6 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
-        popoverText={t('make_a_post.PHONE_POPOVER')}
         inputStyle={{ paddingLeft: 46 }}
       />
       <ButtonsContainer>

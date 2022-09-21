@@ -12,7 +12,8 @@ export const burgerOverlay = (theme: Theme) => css`
   gap: ${theme.spaces.md};
   width: 100%;
   padding: ${theme.spaces.xl1};
-  background-color: ${theme.colors.backgroundLight};
+  background-color: ${theme.colors.white};
+  box-shadow: ${theme.shadows.bottom};
 
   .burger-navigation,
   .burger-buttons-wrapper {
