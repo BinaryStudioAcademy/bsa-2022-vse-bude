@@ -47,21 +47,28 @@ export const ProfileDropdown = ({
       cssExtend: styles.option,
     },
     {
-      value: t('common:header.popover.settings'),
-      key: 'Settings',
-      onClick: () => push(`${Routes.PROFILE}${ProfileRoutes.ACCOUNT_SETTINGS}`),
+      value: t('common:header.popover.notifications'),
+      key: 'Notifications',
+      onClick: () => push(`${Routes.PROFILE}${ProfileRoutes.NOTIFICATIONS}`),
       cssExtend: styles.option,
     },
-    {
-      value: t('common:header.popover.messages'),
-      key: 'Messages',
-      onClick: () => push(`${Routes.PROFILE}${ProfileRoutes.MESSAGES}`),
-      cssExtend: styles.option,
-    },
+    // {
+    //   value: t('common:header.popover.settings'),
+    //   key: 'Settings',
+    //   onClick: () => push(`${Routes.PROFILE}${ProfileRoutes.ACCOUNT_SETTINGS}`),
+    //   cssExtend: styles.option,
+    // },
+    // {
+    //   value: t('common:header.popover.messages'),
+    //   key: 'Messages',
+    //   onClick: () => push(`${Routes.PROFILE}${ProfileRoutes.MESSAGES}`),
+    //   cssExtend: styles.option,
+    // },
     {
       value: t('common:header.popover.support'),
       key: 'Support',
-      onClick: () => push(`${Routes.PROFILE}${ProfileRoutes.SUPPORT}`),
+      onClick: () =>
+        (location.href = 'mailto:vsebude.team@gmail.com?subject=Support'),
       cssExtend: styles.option,
     },
   ];
