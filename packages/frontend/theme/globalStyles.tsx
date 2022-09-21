@@ -31,6 +31,7 @@ export const globalStyles = (theme: Theme) => css`
   html,
   body {
     height: 100%;
+    overflow: overlay;
     background: ${theme.colors.background};
     color: ${theme.colors.text};
     font-family: 'Raleway', sans-serif;
