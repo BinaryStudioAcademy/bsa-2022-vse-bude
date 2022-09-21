@@ -48,11 +48,12 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
       />
       <Input
         label={t('verification.PHONE_NUMBER')}
-        placeholder={t('verification.PHONE_NUMBER_HINT')}
+        immutableValue="+380"
         name="phone"
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
+        inputStyle={{ paddingLeft: 46 }}
       />
       <Input
         label={t('verification.PASSWORD')}
