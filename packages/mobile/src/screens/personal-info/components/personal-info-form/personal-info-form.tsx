@@ -74,6 +74,10 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
   const { isDirty } = useFormState({ control });
 
   useEffect(() => {
+    reset({ ...DEFAULT_VALUES });
+  }, [personalInfo]);
+
+  useEffect(() => {
     if (Object.keys(errors).length > 0) {
       notification.error(t('errors.CORRECTLY_FILLED'));
     }
@@ -106,7 +110,7 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
   };
 
   const handleVerifyEmailPress = () => {
-    navigation.navigate(RootScreenName.VERIFY_CODE_EMAIL);
+    navigation.navigate(RootScreenName.VERIFY_EMAIL);
   };
 
   return (
