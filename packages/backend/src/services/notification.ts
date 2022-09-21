@@ -46,7 +46,7 @@ export class NotificationService {
     return this.localize(notification);
   }
 
-  private localize(notification: Notification): Notification{
+  private localize(notification: Notification): Notification {
     if (notification?.type !== NotificationType.INFO) {
       notification.title =
         lang(`notifications:title.${notification.type}`) || notification.title;
