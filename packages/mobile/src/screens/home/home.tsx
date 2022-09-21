@@ -63,7 +63,7 @@ const Home: FC = () => {
   }, []);
 
   const onSeeAllPress = () => {
-    navigation.navigate(RootScreenName.ITEMS_AND_SERVICES);
+    navigation.navigate(RootScreenName.PRODUCTS);
   };
 
   return (

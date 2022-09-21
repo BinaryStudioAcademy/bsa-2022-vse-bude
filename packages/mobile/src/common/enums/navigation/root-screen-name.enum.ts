@@ -19,7 +19,7 @@ enum RootScreenName {
   TYPE_OF_NEW_POST = 'Type of post',
   NEW_AUCTION = 'Make an Auction Post',
   MAIN_WITH_MENU = 'Menu',
-  ITEMS_AND_SERVICES = 'Items and services',
+  PRODUCTS = 'PRODUCTS',
   MY_LIST = 'My list ',
 }
 
