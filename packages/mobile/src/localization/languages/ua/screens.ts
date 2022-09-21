@@ -217,11 +217,11 @@ export const screens = {
     TOYS: 'Іграшки',
     HOME_DECORS: 'Домашній Декор',
     APPLIANCES: 'Побутова Техніка',
-    POPULAR_LOTS: 'Популярні Лоти',
+    POPULAR_LOTS: 'Популярні товари аукціону',
     SEE_ALL_LOTS: 'Переглягути Усі Лоти',
     SEE_ALL_ITEMS: 'Переглягути Усі Товари',
     CHARITY_ORGANIZATIONS: 'Благодійні Організації',
-    POPULAR_ITEMS: 'Популярні Товари',
+    POPULAR_ITEMS: 'Популярні товари з фіксованою ціною',
   },
   type_of_post: {
     TITLE: 'Створити публікацію',

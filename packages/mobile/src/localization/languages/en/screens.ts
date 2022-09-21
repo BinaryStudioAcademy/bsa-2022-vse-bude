@@ -218,11 +218,11 @@ export const screens = {
     TOYS: 'Toys',
     HOME_DECORS: 'Home Decors',
     APPLIANCES: 'Appliances',
-    POPULAR_LOTS: 'Popular Lots',
+    POPULAR_LOTS: 'Popular Auction Items',
     SEE_ALL_LOTS: 'See All Lots',
     SEE_ALL_ITEMS: 'See All Items',
     CHARITY_ORGANIZATIONS: 'Charity Organizations',
-    POPULAR_ITEMS: 'Popular Items',
+    POPULAR_ITEMS: 'Popular Fixed Price Items',
   },
   type_of_post: {
     TITLE: 'Make a Post',
