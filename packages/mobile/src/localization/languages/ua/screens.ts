@@ -244,7 +244,7 @@ export const screens = {
     LEAVE_SUCCESS: 'Ви успішно покинули аукціон',
     NEW_BID: 'Аукціон оновився',
     NEW: 'новий',
-    USED: 'б/у',
+    USED: 'вживаний',
   },
   items_and_services: {
     TITLE: 'Товари & Послуги',
