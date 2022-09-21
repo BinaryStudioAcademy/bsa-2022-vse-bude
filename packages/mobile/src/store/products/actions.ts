@@ -104,6 +104,16 @@ const updateProductViews = createAsyncThunk<
   return response;
 });
 
+const saveProduct = createAsyncThunk<null, FormData, AsyncThunkConfig>(
+  ActionType.SAVE_PRODUCT,
+  async (payload, { extra }) => {
+    const { productApi } = extra;
+    await productApi.saveProduct(payload);
+
+    return null;
+  },
+);
+
 export {
   loadProducts,
   loadPopularProducts,
@@ -114,4 +124,5 @@ export {
   auctionLeaveAction,
   updateCurrentItemPrice,
   updateProductViews,
+  saveProduct,
 };

@@ -10,7 +10,7 @@ import {
   FormControlValues,
 } from '~/common/types/types';
 
-import { useFormControl, useState } from '~/hooks/hooks';
+import { useFormControl, useState, useCustomTheme } from '~/hooks/hooks';
 import { ColorPalette } from '@vse-bude/shared';
 import { globalStyles } from '~/styles/styles';
 import { StyleProp, ViewStyle } from 'react-native';
@@ -22,6 +22,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  AlertIcon,
 } from '../components';
 import { useStyles } from './styles';
 
@@ -33,21 +34,26 @@ type Props<T extends FormControlValues> = {
   errors: FormControlErrors<T>;
   contentContainerStyle?: StyleProp<ViewStyle>;
   mode: DateTimeType;
+  required?: boolean;
 };
 
 const DatePicker = <T extends FormControlValues>({
   placeholder,
   name,
+  errors,
   control,
   mode,
   label,
   contentContainerStyle,
+  required,
 }: Props<T>): ReactElement => {
   const [open, setOpen] = useState(false);
   const {
     field: { value, onChange },
   } = useFormControl({ name, control });
   const styles = useStyles();
+  const { colors } = useCustomTheme();
+  const error = errors[name]?.message as string;
 
   const today = dayjs();
   const tomorrow = today.add(1, 'day');
@@ -71,9 +77,25 @@ const DatePicker = <T extends FormControlValues>({
           setOpen(true);
         }}
       >
-        <Text style={[styles.label, globalStyles.mb2, globalStyles.fs12]}>
-          {label}
-        </Text>
+        <View style={globalStyles.flexDirectionRow}>
+          <Text style={[styles.label, globalStyles.mb2, globalStyles.fs12]}>
+            {label}
+          </Text>
+          {required && (
+            <Text
+              style={[
+                styles.required,
+                globalStyles.ml1,
+                globalStyles.fs22,
+                {
+                  color: colors.accent,
+                },
+              ]}
+            >
+              *
+            </Text>
+          )}
+        </View>
         {textValue ? (
           <Text style={[styles.input, globalStyles.fs14]}>{textValue}</Text>
         ) : (
@@ -88,6 +110,23 @@ const DatePicker = <T extends FormControlValues>({
           style={styles.inputIcon}
         />
       </TouchableOpacity>
+      {Boolean(error) && (
+        <View
+          style={[
+            globalStyles.mt2,
+            globalStyles.fs12,
+            globalStyles.flexDirectionRow,
+            globalStyles.alignItemsCenter,
+          ]}
+        >
+          <AlertIcon style={[globalStyles.mr2, { color: colors.error }]} />
+          <Text
+            style={[styles.label, globalStyles.fs12, { color: colors.error }]}
+          >
+            {error}
+          </Text>
+        </View>
+      )}
       {open && (
         <DateTimePicker
           value={value ? new Date(value) : tomorrow.toDate()}

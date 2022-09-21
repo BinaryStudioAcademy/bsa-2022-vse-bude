@@ -71,7 +71,7 @@ export const filterBreadcrumbsPath = (
     name: category?.title,
     route: encodeURI(
       `${Routes.ITEMS}?filter=${JSON.stringify({
-        category: category?.id,
+        categoryId: category?.id,
       })}`,
     ),
   },

@@ -141,6 +141,15 @@ const borders = {
   dropdown: `2px solid ${colors.backgroundLight}`,
 };
 
+const zIndex = {
+  toast: 1000,
+  tooltip: 999,
+  popover: 998,
+  burgerOverlay: 997,
+  modalWrapper: 100,
+  header: 99,
+};
+
 const opacities = {
   lg: 0.2,
   md: 0.4,
@@ -187,6 +196,7 @@ const lightTheme = {
   breakpoints,
   mq,
   maxMq,
+  zIndex,
 };
 
 const darkTheme = {
@@ -205,6 +215,7 @@ const darkTheme = {
   breakpoints,
   mq,
   maxMq,
+  zIndex,
 };
 
 export { lightTheme, darkTheme };

@@ -67,7 +67,6 @@ export const AccountLayout: FC<AccountPageProps> = ({ children }) => {
                 })}
               </div>
             )}
-
             {children}
           </Flex>
         </div>

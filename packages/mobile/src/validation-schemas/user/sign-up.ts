@@ -1,7 +1,7 @@
 import * as Joi from 'joi';
 import { UserSignUpDto } from '@vse-bude/shared';
 import i18next from 'i18next';
-import { PHONE_NUMBER_REGEX } from '~/common/regexp/regexp';
+import { SHORT_PHONE_NUMBER_REGEX } from '~/common/regexp/regexp';
 import {
   emailValidator,
   nameValidator,
@@ -34,7 +34,7 @@ const signUp = Joi.object<UserSignUpDto>({
   phone: Joi.string()
     .trim()
     .empty('')
-    .pattern(PHONE_NUMBER_REGEX)
+    .pattern(SHORT_PHONE_NUMBER_REGEX)
     .messages({
       'string.pattern.base': i18next.t('errors.WRONG_FORMAT_PHONE'),
     }),

@@ -56,6 +56,12 @@ export const popoverContentItem = ({
   line-height: ${lineHeights.body1};
   font-weight: ${fontWeights.body1};
   color: ${colors.text};
+  display: flex;
+  align-items: center;
+
+  i {
+    width: ${spaces.lg};
+  }
 
   :hover {
     background-color: ${colors.backgroundLight};

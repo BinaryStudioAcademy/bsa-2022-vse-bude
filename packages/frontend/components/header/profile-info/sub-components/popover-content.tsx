@@ -57,6 +57,15 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
       <button
         css={styles.popoverContentItem}
         onClick={handleClick}
+        path-label={`${Routes.PROFILE}${ProfileRoutes.NOTIFICATIONS}`}
+        data-variant="icon"
+      >
+        <Icon icon={IconName.BELL} color={IconColor.YELLOW} />
+        <span>{t('common:header.popover.notifications')}</span>
+      </button>
+      <button
+        css={styles.popoverContentItem}
+        onClick={handleClick}
         path-label={`${Routes.PROFILE}${ProfileRoutes.MESSAGES}`}
         data-variant="icon"
       >

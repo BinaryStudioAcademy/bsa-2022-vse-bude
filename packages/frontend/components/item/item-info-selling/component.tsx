@@ -32,11 +32,7 @@ export const ItemInfoSelling = ({
   return (
     <div css={styles.wrapper}>
       <ItemTitle title={item.title} views={item.views} />
-      <ItemPrice
-        amount={item.price}
-        currency={t('public:uah')}
-        cssExtended={styles.price}
-      />
+      <ItemPrice amount={item.price} cssExtended={styles.price} />
       <ItemInfo item={item} />
       <div css={styles.controls}>
         {isAuthor ? (

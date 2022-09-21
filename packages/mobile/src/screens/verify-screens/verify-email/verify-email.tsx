@@ -29,10 +29,9 @@ import { globalStyles } from '~/styles/styles';
 import { selectVerifyDataStatus, selectUserEmail } from '~/store/selectors';
 import { verifyActions } from '~/store/actions';
 import { notification } from '~/services/services';
+import { ButtonsContainer, Header } from '~/screens/components/components';
 import {
-  ButtonsContainer,
   CustomText,
-  Header,
   Title,
   VerifyImage,
   Wrapper,
@@ -86,6 +85,7 @@ const VerifyEmailScreen: FC<PropsVerifyScreens> = ({ route }) => {
   return (
     <Wrapper>
       <Header
+        title={t('verify.VERIFY')}
         labelButton={t('verify.BACK_HOME')}
         onPress={handleBackButtonPress}
       />

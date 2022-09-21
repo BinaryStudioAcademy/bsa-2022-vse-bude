@@ -52,7 +52,7 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
     firstName: parsedPersonalInfo.firstName,
     lastName: parsedPersonalInfo.lastName,
     email: parsedPersonalInfo.email,
-    phone: parsedPersonalInfo.phone,
+    phone: parsedPersonalInfo.phone?.slice(4) || '',
     country: parsedPersonalInfo.country,
     region: parsedPersonalInfo.region,
     city: parsedPersonalInfo.city,
@@ -148,11 +148,12 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
       )}
       <Input
         label={t('verification.PHONE_NUMBER')}
-        placeholder={t('verification.PHONE_NUMBER_HINT')}
+        immutableValue="+380"
         name="phone"
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
+        inputStyle={{ paddingLeft: 46 }}
       />
       {isVerifyPhoneFieldVisible && (
         <VerifyField

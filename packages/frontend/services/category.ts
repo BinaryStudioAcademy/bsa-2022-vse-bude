@@ -1,28 +1,17 @@
 import { http } from '@helpers';
-import type { Http, HttpAcceptLanguage } from '@vse-bude/shared';
+import type { Http } from '@vse-bude/shared';
 import { ApiRoutes } from '@vse-bude/shared';
 
-interface CategoryOptions {
-  limit: number;
-  locale?: HttpAcceptLanguage;
-}
-
-interface CategoryOptionsSSR extends CategoryOptions {
+interface CategoryOptionsSSR {
   httpSSR: Http;
 }
 
-export const getAllCategories = ({ locale }: CategoryOptions) =>
+export const getAllCategories = () =>
   http.get({
     url: `${ApiRoutes.CATEGORIES}`,
-    options: {
-      acceptLanguage: locale,
-    },
   });
 
-export const getAllCategoriesSSR = ({ httpSSR, locale }: CategoryOptionsSSR) =>
+export const getAllCategoriesSSR = ({ httpSSR }: CategoryOptionsSSR) =>
   httpSSR.get({
     url: `${ApiRoutes.CATEGORIES}`,
-    options: {
-      acceptLanguage: locale,
-    },
   });

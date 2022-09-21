@@ -66,6 +66,10 @@ const Auth: FC = () => {
   };
 
   const handleSignUp = (payload: UserSignUpDto): void => {
+    if (payload?.phone) {
+      payload.phone = `+380${payload.phone}`;
+    }
+
     dispatch(authActions.signUp(payload))
       .unwrap()
       .then((resp) => {

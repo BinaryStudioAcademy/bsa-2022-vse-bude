@@ -1,46 +1,134 @@
 import React, { FC } from 'react';
-import { ColorPalette, ICreateAuction } from '@vse-bude/shared';
+import { Asset } from 'react-native-image-picker';
+import {
+  FullUserProfileDto,
+  ICreateAuction,
+  ProductStatus,
+} from '@vse-bude/shared';
 import {
   DropDown,
   Input,
-  InfoIcon,
   Text,
-  TouchableOpacity,
   View,
-  Popover,
+  PrimaryButton,
+  SecondaryButton,
 } from '~/components/components';
-import { useAppForm, useAppSelector, useTranslation } from '~/hooks/hooks';
-import { CALLING_CODE, CITIES, COUNTRIES } from '~/mock/new-item';
+import {
+  useAppForm,
+  useAppSelector,
+  useTranslation,
+  useCustomTheme,
+  useState,
+  useAppDispatch,
+  useEffect,
+  useNavigation,
+} from '~/hooks/hooks';
+import { products as productsActions } from '~/store/actions';
 import { globalStyles } from '~/styles/styles';
-
 import { DatePicker } from '~/components/date-time-picker/date-time-picker';
-import { DateTimeType } from '~/common/enums/ui/ui';
-import { selectCategories } from '~/store/categories/selectors';
+import { ButtonAppearance, DateTimeType } from '~/common/enums/ui/ui';
 import { categoryForDropdown } from '~/helpers/category/format-category-for-dropdown';
+import { ButtonsContainer } from '~/screens/components/components';
+import { selectCategories, selectDataStatusProducts } from '~/store/selectors';
+import { DataStatus } from '~/common/enums/enums';
+import { productsAuctionSchema } from '~/validation-schemas/validation-schemas';
+import { notification } from '~/services/services';
+import { makeAuctionParser } from '~/helpers/helpers';
+import { CONDITION } from '~/common/constants/products';
 import { AddPhotos } from '../add-photos/add-photos';
 
 import { useStyles } from './styles';
 
-const NewAuctionForm: FC = () => {
+type Props = {
+  personalInfo: FullUserProfileDto;
+};
+
+const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const navigation = useNavigation();
+  const { colors } = useCustomTheme();
   const styles = useStyles();
   const categories = useAppSelector(selectCategories);
+  const dataStatusProducts = useAppSelector(selectDataStatusProducts);
+  const isLoading = dataStatusProducts === DataStatus.PENDING;
   const formattedCategories =
     categories && categories.length ? categoryForDropdown(categories) : null;
 
-  const { control, errors } = useAppForm<ICreateAuction>({
+  const { control, errors, handleSubmit } = useAppForm<ICreateAuction>({
     defaultValues: {
-      country: 'Ukraine',
-      callingCode: 'UA',
+      category: '',
+      title: '',
+      description: '',
+      condition: '',
+      recommendedPriceCurrency: t('common:currency.UAH'),
+      recommendedPrice: 0,
+      minimalBidCurrency: t('common:currency.UAH'),
+      minimalBid: 0,
+      endDate: '',
+      country:
+        personalInfo.userAddress?.country || t('make_a_post.DEFAULT_COUNTRY'),
+      city: personalInfo.userAddress?.city || '',
+      phone: personalInfo.phone?.replace(/\s/g, '').slice(4) || '',
     },
+    validationSchema: productsAuctionSchema,
   });
+  const [images, setImages] = useState<Asset[]>([]);
+
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      notification.error(t('errors.CORRECTLY_FILLED'));
+    }
+  }, [errors]);
+
+  const onSubmit = (data: ICreateAuction): void => {
+    const payload = makeAuctionParser({
+      data,
+      images,
+      status: ProductStatus.ACTIVE,
+    });
+
+    if (payload) {
+      dispatch(productsActions.saveProduct(payload))
+        .unwrap()
+        .then(() => {
+          notification.success(t('make_a_post.NEW_AUCTION_CREATED'));
+          navigation.goBack();
+        })
+        .catch((err) => {
+          // eslint-disable-next-line
+          console.warn(err);
+        });
+    }
+  };
+
+  const handleSaveAsDraftPress = (data: ICreateAuction): void => {
+    const payload = makeAuctionParser({
+      data,
+      images,
+      status: ProductStatus.DRAFT,
+    });
+
+    if (payload) {
+      dispatch(productsActions.saveProduct(payload))
+        .unwrap()
+        .then(() => {
+          notification.success(t('make_a_post.NEW_DRAFT_CREATED'));
+          navigation.goBack();
+        })
+        .catch((err) => {
+          // eslint-disable-next-line
+          console.warn(err);
+        });
+    }
+  };
 
   return (
     <View>
       <Text style={[globalStyles.fs14, globalStyles.mt5, styles.title]}>
         {t('make_a_post.DOWNLOAD_PHOTOS')}
       </Text>
-      <AddPhotos />
+      <AddPhotos images={images} setImages={setImages} />
       <Text style={[globalStyles.fs14, globalStyles.mt5, styles.title]}>
         {t('make_a_post.DESCRIPTION')}
       </Text>
@@ -49,12 +137,12 @@ const NewAuctionForm: FC = () => {
           label={t('make_a_post.CATEGORY')}
           placeholder={t('make_a_post.CATEGORY_PLACEHOLDER')}
           name="category"
+          errors={errors}
           control={control}
           items={formattedCategories}
           zIndex={19}
         />
       )}
-
       <Input
         label={t('make_a_post.TITLE_NAME')}
         placeholder={t('make_a_post.TITLE_NAME_PLACEHOLDER')}
@@ -62,8 +150,78 @@ const NewAuctionForm: FC = () => {
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
+        required={true}
       />
-
+      <Input
+        label={t('make_a_post.DESCRIPTION')}
+        placeholder={t('make_a_post.DESCRIPTION_PLACEHOLDER')}
+        name="description"
+        control={control}
+        errors={errors}
+        contentContainerStyle={globalStyles.mt5}
+        inputStyle={styles.textArea}
+        multiline={true}
+        numberOfLines={6}
+        required={true}
+      />
+      <DropDown
+        label={t('make_a_post.CONDITION')}
+        placeholder={t('make_a_post.CONDITION_PLACEHOLDER')}
+        name="condition"
+        errors={errors}
+        control={control}
+        items={CONDITION}
+        zIndex={19}
+        required={true}
+      />
+      <View
+        style={[
+          globalStyles.flexDirectionRow,
+          globalStyles.justifyContentSpaceBetween,
+        ]}
+      >
+        <Input
+          label={t('make_a_post.CURRENCY')}
+          name="recommendedPriceCurrency"
+          control={control}
+          errors={errors}
+          editable={false}
+          contentContainerStyle={[styles.currencyField, globalStyles.mt5]}
+        />
+        <Input
+          label={t('make_a_post.RECOMMENDED_PRICE')}
+          placeholder="0"
+          name="recommendedPrice"
+          control={control}
+          errors={errors}
+          contentContainerStyle={[globalStyles.mt5, { width: '65%' }]}
+          required={true}
+        />
+      </View>
+      <View
+        style={[
+          globalStyles.flexDirectionRow,
+          globalStyles.justifyContentSpaceBetween,
+        ]}
+      >
+        <Input
+          label={t('make_a_post.CURRENCY')}
+          name="minimalBidCurrency"
+          control={control}
+          errors={errors}
+          editable={false}
+          contentContainerStyle={[styles.currencyField, globalStyles.mt5]}
+        />
+        <Input
+          label={t('make_a_post.MINIMAL_BID')}
+          placeholder="0"
+          name="minimalBid"
+          control={control}
+          errors={errors}
+          contentContainerStyle={[globalStyles.mt5, { width: '65%' }]}
+          required={true}
+        />
+      </View>
       <DatePicker
         label={t('make_a_post.ENDING_DATE')}
         name="endDate"
@@ -72,187 +230,55 @@ const NewAuctionForm: FC = () => {
         placeholder={'-/-/-'}
         mode={DateTimeType.DATE}
         contentContainerStyle={globalStyles.mt5}
+        required={true}
       />
-
-      <DatePicker
-        label={t('make_a_post.ENDING_TIME')}
-        name="endDate"
-        control={control}
-        errors={errors}
-        placeholder={'-:-'}
-        mode={DateTimeType.TIME}
-        contentContainerStyle={globalStyles.mt5}
-      />
-
-      <Input
-        label={t('make_a_post.DESCRIPTION')}
-        placeholder={t('make_a_post.DESCRIPTION_PLACEHOLDER')}
-        name="description"
-        control={control}
-        errors={errors}
-        contentContainerStyle={globalStyles.mt5}
-      />
-      <View
-        style={[
-          styles.row,
-          globalStyles.mt5,
-          globalStyles.alignItemsCenter,
-          globalStyles.flexDirectionRow,
-        ]}
-      >
-        <Popover
-          popoverStyle={styles.popover}
-          from={
-            <TouchableOpacity style={globalStyles.flexDirectionRow}>
-              <Text style={[globalStyles.fs12]}>
-                {t('make_a_post.STARTING_BID_PRICE')}
-              </Text>
-              <InfoIcon
-                size={13}
-                color={ColorPalette.YELLOW_200}
-                style={styles.tooltipIcon}
-              />
-            </TouchableOpacity>
-          }
-        >
-          <Text>{t('make_a_post.STARTING_BID_PRICE')}</Text>
-        </Popover>
-      </View>
-
-      <Input
-        placeholder={t('make_a_post.STARTING_PRICE_PLACEHOLDER')}
-        name="recommendedPrice"
-        control={control}
-        errors={errors}
-        contentContainerStyle={globalStyles.mt2}
-      />
-      <View
-        style={[
-          styles.row,
-          globalStyles.alignItemsCenter,
-          globalStyles.flexDirectionRow,
-        ]}
-      >
-        <Input
-          label={t('make_a_post.MIN_RANGE')}
-          placeholder={t('make_a_post.MIN_RANGE_PLACEHOLDER')}
-          name="minimalBid"
-          control={control}
-          errors={errors}
-          contentContainerStyle={[globalStyles.mt5, styles.oneHalfItem]}
-        />
-        <Input
-          label={t('make_a_post.MAX_RANGE')}
-          placeholder={t('make_a_post.MAX_RANGE_PLACEHOLDER')}
-          name="recommendedPrice"
-          control={control}
-          errors={errors}
-          contentContainerStyle={[globalStyles.mt5, styles.twoHalfItem]}
-        />
-      </View>
-
       <Text style={[globalStyles.fs14, globalStyles.mt6, styles.title]}>
-        {t('make_a_post.CONTACT')}
+        {t('make_a_post.CONTACTS')}
       </Text>
-      <DropDown
-        label={t('make_a_post.COUNTRY')}
+      <Input
+        label={t('personal_info.COUNTRY')}
+        placeholder={t('personal_info.COUNTRY_HINT')}
         name="country"
         control={control}
-        items={COUNTRIES}
-        zIndex={20}
-        disabled={true}
-        placeholder={t('make_a_post.COUNTRY_PLACEHOLDER')}
+        errors={errors}
+        contentContainerStyle={globalStyles.mt5}
+        required={true}
       />
-      <DropDown
-        label={t('make_a_post.CITY')}
-        name="city"
-        control={control}
-        items={CITIES}
-        zIndex={15}
-        placeholder={t('make_a_post.CITY_PLACEHOLDER')}
-      />
-      <View
-        style={[
-          styles.row,
-          globalStyles.mt5,
-          globalStyles.alignItemsCenter,
-          globalStyles.flexDirectionRow,
-        ]}
-      >
-        <View style={[styles.leftWrap, globalStyles.flexDirectionRow]}>
-          <Popover
-            popoverStyle={styles.popover}
-            from={
-              <TouchableOpacity style={globalStyles.flexDirectionRow}>
-                <Text style={[globalStyles.fs12]}>
-                  {t('make_a_post.MOBILE_PHONE')}
-                </Text>
-                <InfoIcon
-                  size={13}
-                  color={ColorPalette.YELLOW_200}
-                  style={styles.tooltipIcon}
-                />
-              </TouchableOpacity>
-            }
-          >
-            <Text>{t('make_a_post.PHONE_TOOLTIP')}</Text>
-          </Popover>
-        </View>
-        <View style={styles.rightWrap}>
-          <Text style={[globalStyles.fs12]}>
-            {t('make_a_post.CALLING_CODE')}
-          </Text>
-        </View>
-      </View>
-
-      <View
-        style={[
-          styles.row,
-          globalStyles.alignItemsCenter,
-          globalStyles.flexDirectionRow,
-        ]}
-      >
-        <Input
-          placeholder={'+380 ()'}
-          name="phone"
-          control={control}
-          errors={errors}
-          contentContainerStyle={styles.leftInput}
-        />
-
-        <View style={styles.rightInput}>
-          <DropDown
-            name="callingCode"
-            control={control}
-            items={CALLING_CODE}
-            zIndex={10}
-          />
-        </View>
-      </View>
       <Input
-        label={t('make_a_post.INSTAGRAM')}
-        placeholder={t('make_a_post.INSTAGRAM_PLACEHOLDER')}
-        name="instagram"
+        label={t('personal_info.CITY')}
+        placeholder={t('personal_info.CITY_HINT')}
+        name="city"
         control={control}
         errors={errors}
         contentContainerStyle={globalStyles.mt5}
       />
       <Input
-        label={t('make_a_post.FACEBOOK')}
-        placeholder={t('make_a_post.FACEBOOK_PLACEHOLDER')}
-        name="facebook"
+        label={t('verification.PHONE_NUMBER')}
+        immutableValue="+380"
+        name="phone"
         control={control}
         errors={errors}
-        contentContainerStyle={[globalStyles.mt5]}
+        contentContainerStyle={globalStyles.mt5}
+        inputStyle={{ paddingLeft: 46 }}
       />
-      <Input
-        label={t('make_a_post.SITE')}
-        placeholder={t('make_a_post.SITE')}
-        name="site"
-        control={control}
-        errors={errors}
-        contentContainerStyle={[globalStyles.mt5, globalStyles.mb5]}
-      />
+      <ButtonsContainer>
+        <View style={styles.buttonContainer}>
+          <SecondaryButton
+            label={t('make_a_post.SAVE_AS_DRAFT_BUTTON')}
+            appearance={ButtonAppearance.OUTLINED}
+            textColor={colors.text}
+            onPress={handleSubmit(handleSaveAsDraftPress)}
+            disabled={isLoading}
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <PrimaryButton
+            label={t('make_a_post.MAKE_AUCTION_BUTTON')}
+            onPress={handleSubmit(onSubmit)}
+            disabled={isLoading}
+          />
+        </View>
+      </ButtonsContainer>
     </View>
   );
 };

@@ -21,7 +21,6 @@ import {
   PlusSvg,
   Input,
   CrossIcon,
-  Spinner,
 } from '~/components/components';
 import { getBidValidationSchema } from '~/validation-schemas/bid/make-bid';
 import { globalStyles } from '~/styles/styles';
@@ -177,7 +176,6 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
               globalStyles.alignItemsCenter,
             ]}
           >
-            {isLoading && <Spinner />}
             {!!isAbleToLeaveAuction && user && (
               <TouchableHighlight
                 onPress={openModal}
@@ -197,6 +195,7 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
             <View style={styles.btnWidth}>
               <PlusSvg style={styles.btnIcon} />
               <PrimaryButton
+                isLoading={isLoading}
                 onPress={handleSubmit(handleMakeBidPress)}
                 label={`${t('common:components.BUTTON_BID')}`}
                 disabled={!canUserMakeBid}

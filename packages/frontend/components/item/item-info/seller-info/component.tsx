@@ -1,4 +1,4 @@
-﻿import { Button, Avatar, Icon, Anchor } from '@primitives';
+﻿import { Avatar, Icon, Anchor } from '@primitives';
 import { IconColor, IconName, Routes } from '@enums';
 import type { UserProfileDto } from '@vse-bude/shared';
 import Router from 'next/router';
@@ -11,7 +11,7 @@ interface SellerInfoProps {
   onContactSeller: () => void;
 }
 
-export const SellerInfo = ({ seller, onContactSeller }: SellerInfoProps) => {
+export const SellerInfo = ({ seller }: SellerInfoProps) => {
   const { t } = useTranslation('item');
   const handleAvatarClick = () => {
     Router.push(`${Routes.PROFILE}/${seller.id}`);
@@ -21,14 +21,14 @@ export const SellerInfo = ({ seller, onContactSeller }: SellerInfoProps) => {
     <div css={styles.sellerInfoWrapper}>
       <div css={styles.title}>
         <h6>{t('sellerCaption')}</h6>
-        <Button
+        {/* <Button
           variant="outlined"
           size="small"
           width="180"
           onClick={onContactSeller}
         >
           <span css={styles.contactSeller}>{t('contactSellerBtn')}</span>
-        </Button>
+        </Button> */}
       </div>
       <div css={styles.seller}>
         <Avatar

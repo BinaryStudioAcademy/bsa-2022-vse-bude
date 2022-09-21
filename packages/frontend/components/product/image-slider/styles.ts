@@ -8,7 +8,7 @@ export const imageSliderBlock = css`
   }
 
   img {
-    object-fit: cover;
+    object-fit: contain;
     width: 100%;
   }
 `;
