@@ -87,7 +87,7 @@
     },
     "phone": {
       "pattern": "Wrong phone format",
-      "empty": "Description cannot be empty"
+      "empty": "Phone cannot be empty"
     },
     "price": {
       "base": "Wrong price format",

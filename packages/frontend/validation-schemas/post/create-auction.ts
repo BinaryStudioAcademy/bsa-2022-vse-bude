@@ -74,6 +74,7 @@ export const createAuctionSchema = (t: TFunction) =>
       .pattern(/^\d{9}$/)
       .messages({
         'string.pattern.base': t('create-post:validation.phone.pattern'),
+        'string.empty': t('create-post:validation.phone.empty'),
       }),
     recommendedPrice: Joi.number()
       .min(1)

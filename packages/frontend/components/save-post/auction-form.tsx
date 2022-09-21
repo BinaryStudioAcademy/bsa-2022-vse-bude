@@ -265,7 +265,8 @@ export default function ProductForm({ edit }: { edit: boolean }) {
           )}
         </div>
         <Button
-          onClick={() => setStatus(PostStatuses.CREATE)}
+          onClick={() => {setStatus(PostStatuses.CREATE); console.log(errors);
+          }}
           disabled={isLoading}
           type="submit"
         >
