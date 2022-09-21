@@ -18,4 +18,8 @@ const selectCategoryById = createSelector(
   },
 );
 
-export { selectCategories, selectCategoryById };
+const selectCategoriesDataStatus = (state: RootState) => {
+  return state.categories.dataStatus;
+};
+
+export { selectCategories, selectCategoryById, selectCategoriesDataStatus };
