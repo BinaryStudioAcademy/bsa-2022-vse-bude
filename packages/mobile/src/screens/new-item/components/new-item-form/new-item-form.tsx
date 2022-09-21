@@ -60,7 +60,8 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
       condition: '',
       currency: t('common:currency.UAH'),
       price: 0,
-      country: personalInfo.userAddress?.country || '',
+      country:
+        personalInfo.userAddress?.country || t('make_a_post.DEFAULT_COUNTRY'),
       city: personalInfo.userAddress?.city || '',
       phone: personalInfo.phone?.replace(/\s/g, '').slice(4) || '',
     },
@@ -193,7 +194,7 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
         />
       </View>
       <Text style={[globalStyles.fs14, globalStyles.mt6, styles.title]}>
-        {t('make_a_post.CONTACT')}
+        {t('make_a_post.CONTACTS')}
       </Text>
       <Input
         label={t('personal_info.COUNTRY')}
