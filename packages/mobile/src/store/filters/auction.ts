@@ -12,5 +12,13 @@ const setCategory = createAction<ProductQuery['categoryId']>(
   ActionType.SET_CATEGORY,
 );
 const setOrder = createAction<ProductQuery['order']>(ActionType.SET_ORDER);
+const resetFilters = createAction(ActionType.RESET);
 
-export { setLotType, setPriceRange, setSortBy, setCategory, setOrder };
+export {
+  setLotType,
+  setPriceRange,
+  setSortBy,
+  setCategory,
+  setOrder,
+  resetFilters,
+};

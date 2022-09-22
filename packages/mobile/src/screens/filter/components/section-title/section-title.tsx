@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
+import { StyleProp, TextStyle } from 'react-native';
 import { Text } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { useCustomTheme } from '~/hooks/hooks';
-import { StyleProp, TextStyle } from 'react-native';
 
 type Props = {
   title: string;

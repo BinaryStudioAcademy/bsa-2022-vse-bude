@@ -10,6 +10,7 @@ import { useState, useCustomTheme, useFormControl } from '~/hooks/hooks';
 import { Text, View, AlertIcon } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { ColorValue } from 'react-native';
+import { DropDownDirection } from '~/common/enums/enums';
 import { styles } from './styles';
 
 type Props<T extends FormControlValues> = {
@@ -25,7 +26,7 @@ type Props<T extends FormControlValues> = {
   disabled?: boolean;
   placeholder?: string;
   backgroundColor?: ColorValue;
-  dropDownDirection?: 'DEFAULT' | 'TOP' | 'BOTTOM' | 'AUTO';
+  dropDownDirection?: DropDownDirection;
   onChange?: (value: string) => void;
   required?: boolean;
 };

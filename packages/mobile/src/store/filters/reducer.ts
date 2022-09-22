@@ -7,6 +7,7 @@ import {
   setSortBy,
   setCategory,
   setOrder,
+  resetFilters,
 } from './auction';
 
 type InitialState = {
@@ -44,6 +45,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setOrder, (state, action) => {
       state.order = action.payload;
+    })
+    .addCase(resetFilters, () => {
+      return { ...initialState };
     });
 });
 

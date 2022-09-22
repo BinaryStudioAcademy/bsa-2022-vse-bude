@@ -10,8 +10,8 @@ import {
   useMemo,
 } from '~/hooks/hooks';
 import {
-  categories as categoriesApi,
-  filters as filtersApi,
+  categories as categoriesActions,
+  filters as filtersActions,
 } from '~/store/actions';
 import { RootState } from '~/common/types/types';
 import { SectionTitle } from '../components';
@@ -22,10 +22,10 @@ const CategorySection = () => {
   const categories = useAppSelector(selectCategories);
   const { categoryId } = useAppSelector(selectFilters);
   useEffect(() => {
-    dispatch(categoriesApi.loadAllCategories());
+    dispatch(categoriesActions.loadAllCategories());
   }, []);
   const onFilterSelect = (id: RootState['filters']['categoryId']) => {
-    dispatch(filtersApi.setCategory(id));
+    dispatch(filtersActions.setCategory(id));
   };
   const renderedItems = useMemo(() => {
     return categories.map((item) => {

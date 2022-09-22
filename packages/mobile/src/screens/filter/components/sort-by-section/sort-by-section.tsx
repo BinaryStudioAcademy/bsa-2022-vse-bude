@@ -10,7 +10,7 @@ import {
 } from '~/hooks/hooks';
 import { sortByFilterData } from '~/mock/sort-by-filter-data';
 import { filters as filtersApi } from '~/store/actions';
-import { FilterSortBy } from '~/common/enums/enums';
+import { DropDownDirection, FilterSortBy } from '~/common/enums/enums';
 import { Order, SortBy } from '@vse-bude/shared';
 import { SectionTitle } from '../components';
 
@@ -20,7 +20,7 @@ const SortBySection = () => {
   const { colors } = useCustomTheme();
   const { control } = useAppForm({
     defaultValues: {
-      sortBy: FilterSortBy.CHEAP_TO_EXPANSIVE,
+      sortBy: FilterSortBy.CHEAP_TO_EXPENSIVE,
     },
   });
   const {
@@ -29,11 +29,11 @@ const SortBySection = () => {
 
   useEffect(() => {
     switch (value) {
-      case FilterSortBy.CHEAP_TO_EXPANSIVE:
+      case FilterSortBy.CHEAP_TO_EXPENSIVE:
         dispatch(filtersApi.setSortBy(SortBy.PRICE));
         dispatch(filtersApi.setOrder(Order.ASC));
         break;
-      case FilterSortBy.EXPANSIVE_TO_CHEAP:
+      case FilterSortBy.EXPENSIVE_TO_CHEAP:
         dispatch(filtersApi.setSortBy(SortBy.PRICE));
         dispatch(filtersApi.setOrder(Order.DESC));
         break;
@@ -61,13 +61,13 @@ const SortBySection = () => {
       <SectionTitle title={t('filter.SORT_BY')} />
       <DropDown
         label={''}
-        placeholder={FilterSortBy.CHEAP_TO_EXPANSIVE}
+        placeholder={FilterSortBy.CHEAP_TO_EXPENSIVE}
         name={'sortBy'}
         control={control}
         items={sortByFilterData}
         zIndex={19}
         backgroundColor={colors.placeholderLight}
-        dropDownDirection={'TOP'}
+        dropDownDirection={DropDownDirection.TOP}
       />
     </View>
   );

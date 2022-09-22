@@ -13,7 +13,7 @@ type Props = {
 };
 
 const RadioButton: FC<Props> = ({
-  isSelected = true,
+  isSelected = false,
   size = 18,
   label,
   onPress,

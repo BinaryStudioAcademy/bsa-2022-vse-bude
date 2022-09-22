@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC } from 'react';
 import {
   ScreenWrapper,
   StatusBar,
@@ -6,20 +6,8 @@ import {
   View,
   ScrollView,
 } from '~/components/components';
-import {
-  useCustomTheme,
-  useAppSelector,
-  useAppDispatch,
-  useNavigation,
-  useEffect,
-} from '~/hooks/hooks';
+import { useCustomTheme } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
-import { getFilterScreenOptions } from '~/navigation/screen-options/get-filter-screen-options';
-import { selectFilters } from '~/store/selectors';
-import { products as productsApi } from '~/store/actions';
-import { removeObjectFalsyFields } from '~/helpers/helpers';
-import { ProductQuery } from '@vse-bude/shared';
-import { RootNavigationProps, RootState } from '~/common/types/types';
 import {
   ProductTypeSection,
   CategorySection,
@@ -28,19 +16,6 @@ import {
 } from './components/components';
 
 const Filter: FC = () => {
-  const navigation = useNavigation<RootNavigationProps>();
-  const filters = useAppSelector(selectFilters);
-  const dispatch = useAppDispatch();
-  const onSavePress = useCallback(() => {
-    dispatch(
-      productsApi.loadProducts(
-        removeObjectFalsyFields<RootState['filters'], ProductQuery>(filters),
-      ),
-    );
-  }, [filters]);
-  useEffect(() => {
-    navigation.setOptions(getFilterScreenOptions(onSavePress));
-  }, [filters]);
   const { colors } = useCustomTheme();
 
   return (

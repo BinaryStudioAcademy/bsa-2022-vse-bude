@@ -28,6 +28,7 @@ import {
   baseScreenOptions,
   verifyScreenOptions,
   createPostScreenOptions,
+  filterScreenOptions,
 } from './screen-options/screen-options';
 
 const NativeStack = createNativeStackNavigator<RootNavigationParamList>();
@@ -52,7 +53,11 @@ const Navigation: FC = () => {
           }}
         />
       </NativeStack.Group>
-      <NativeStack.Screen name={RootScreenName.FILTER} component={Filter} />
+      <NativeStack.Screen
+        name={RootScreenName.FILTER}
+        component={Filter}
+        options={filterScreenOptions}
+      />
       {user && (
         <NativeStack.Group screenOptions={baseScreenOptions}>
           <Stack.Screen

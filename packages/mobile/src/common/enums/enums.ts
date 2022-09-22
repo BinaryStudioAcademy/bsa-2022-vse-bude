@@ -7,3 +7,4 @@ export { DateTimeFormat } from './date-time-format/date-time-format';
 export { DateFormat } from './date/date-format';
 export { AppLinkingPrefixes } from './app-linking/app-linking-prefixes';
 export { FilterLotType, FilterSortBy } from './filter/filter';
+export { DropDownDirection } from './drop-down/drop-down';
