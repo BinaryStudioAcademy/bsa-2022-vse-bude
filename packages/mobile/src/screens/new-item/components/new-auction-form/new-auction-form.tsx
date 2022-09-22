@@ -257,7 +257,7 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
         control={control}
         errors={errors}
         placeholder={t('make_a_post.ENDING_DATE_PLACEHOLDER')}
-        mode={DateTimeType.DATE}
+        mode={DateTimeType.DATE_TIME}
         contentContainerStyle={globalStyles.mt5}
         required={true}
       />

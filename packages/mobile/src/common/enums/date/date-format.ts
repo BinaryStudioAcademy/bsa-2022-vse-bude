@@ -1,5 +1,5 @@
 enum DateFormat {
-  DATE_TIME = 'DD.MM.YYYY HH:mm',
+  DATE = 'DD.MM.YYYY',
 }
 
 export { DateFormat };
