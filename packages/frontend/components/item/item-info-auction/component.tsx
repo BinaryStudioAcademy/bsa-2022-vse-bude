@@ -58,7 +58,7 @@ export const ItemInfoAuction = ({
       if (data.bidderId !== user?.id || !user) {
         dispatch(
           addToast({
-            level: 'success',
+            level: 'info',
             description: (t) => t('common:notifications.newBidPlaced'),
           }),
         );

@@ -9,17 +9,14 @@ const ToastStack = () => {
 
   return (
     <TransitionGroup css={styles.toastStack}>
-      {toast.map(({ id, level, title, description }) => (
+      {toast.map(({ id, level, description }) => (
         <CSSTransition
           key={id}
           timeout={styles.TRANSITION_TIMEOUT}
           classNames="toast"
         >
           <article css={styles.toast} data-variant={level}>
-            <header>
-              <Icon {...iconsProps[level]} />
-              <h5>{title}</h5>
-            </header>
+            <Icon {...iconsProps[level]} />
             <p>{description}</p>
           </article>
         </CSSTransition>

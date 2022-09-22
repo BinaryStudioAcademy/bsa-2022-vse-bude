@@ -135,6 +135,7 @@ const shadows = {
   bottom: '2px 5px 10px 0px #c3c3c340',
   dropdown:
     '-3px 0px 9px rgba(222, 222, 222, 0.25), 2px 2px 8px rgba(222, 222, 222, 0.25);',
+  toast: 'rgba(100, 100, 111, 0.2) 0px 7px 20px 0px;',
 };
 
 const borders = {
