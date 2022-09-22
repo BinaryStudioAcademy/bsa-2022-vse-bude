@@ -7,6 +7,7 @@ import {
   useMemo,
   useState,
   useNavigation,
+  useAppDispatch,
 } from '~/hooks/hooks';
 import {
   Logo,
@@ -22,19 +23,23 @@ import {
   selectCategories,
   selectCategoriesDataStatus,
 } from '~/store/selectors';
+import { filters as filtersActions } from '~/store/actions';
 import { DataStatus, RootScreenName } from '~/common/enums/enums';
-import { RootNavigationProps } from '~/common/types/types';
+import { RootNavigationProps, RootState } from '~/common/types/types';
 import { styles } from './styles';
 
 const DrawerMenu = () => {
   const [isNestedVisible, setIsNestedVisible] = useState(false);
+  const dispatch = useAppDispatch();
   const navigation = useNavigation<RootNavigationProps>();
   const categories = useAppSelector(selectCategories);
   const dataStatus = useAppSelector(selectCategoriesDataStatus);
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
 
-  const handlePress = () => {
+  const handlePress = (id: RootState['filters']['categoryId']) => {
+    dispatch(filtersActions.resetFilters());
+    dispatch(filtersActions.setCategory(id));
     navigation.navigate(RootScreenName.PRODUCTS);
   };
 
@@ -44,7 +49,7 @@ const DrawerMenu = () => {
         <DrawerItem
           key={id}
           label={title}
-          onPress={handlePress}
+          onPress={() => handlePress(id)}
           labelStyle={styles.label}
         />
       );
