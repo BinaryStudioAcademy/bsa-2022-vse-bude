@@ -101,7 +101,12 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
 
   return (
     <NestedLayout>
-      <form noValidate css={styles.form} onSubmit={handleSubmit(onSave)}>
+      <form
+        css={styles.form}
+        onSubmit={handleSubmit(onSave)}
+        autoComplete="new-password"
+        noValidate
+      >
         <div css={styles.actionWrapper}>
           <Flex justify={'flex-end'} css={styles.buttons}>
             <Button
@@ -294,10 +299,12 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
                 id="instagram-profile"
                 type="text"
                 variant="primary"
+                name="instagram"
                 label={t('personal-info:label.instagram')}
                 placeholder={t('personal-info:placeholder.instagram')}
                 {...register('instagram')}
                 error={errors.instagram?.message}
+                autoComplete="off"
               />
             </div>
 
@@ -305,11 +312,13 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
               <Input
                 id="facebook-profile"
                 type="text"
+                name="facebook"
                 variant="primary"
                 label={t('personal-info:label.facebook')}
                 placeholder={t('personal-info:placeholder.facebook')}
                 {...register('facebook')}
                 error={errors.facebook?.message}
+                autoComplete="off"
               />
             </div>
 
@@ -317,11 +326,13 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
               <Input
                 id="linkedin-profile"
                 type="text"
+                name="linkedin"
                 variant="primary"
                 label={t('personal-info:label.linkedin')}
                 placeholder={t('personal-info:placeholder.linkedin')}
                 {...register('linkedin')}
                 error={errors.linkedin?.message}
+                autoComplete="off"
               />
             </div>
           </Column>
@@ -341,6 +352,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
                 onPaste={onPastHandler}
                 {...register('password')}
                 error={errors.password?.message}
+                autoComplete="off"
               />
             </div>
             <div css={styles.inputRow}>
@@ -354,6 +366,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
                 onPaste={onPastHandler}
                 {...register('newPassword')}
                 error={errors.newPassword?.message}
+                autoComplete="new-password"
               />
             </div>
             <div css={styles.inputRow}>
@@ -367,6 +380,7 @@ const EditPersonalInfo = ({ user }: { user: FullUserProfileDto }) => {
                 onPaste={onPastHandler}
                 {...register('repeatPassword')}
                 error={errors.repeatPassword?.message}
+                autoComplete="new-password"
               />
             </div>
           </Column>

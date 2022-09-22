@@ -1,7 +1,7 @@
 enum MainScreenName {
   HOME = 'Home',
   FAVORITE = 'Favorite',
-  PRODUCTS = 'PRODUCTS',
+  PRODUCTS = 'Products',
   ACCOUNT_ROOT = 'Account',
   LOG_IN = 'Log In',
 }

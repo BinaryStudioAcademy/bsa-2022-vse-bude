@@ -29,7 +29,6 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
         name="firstName"
         control={control}
         errors={errors}
-        contentContainerStyle={globalStyles.mt5}
       />
       <Input
         label={t('verification.LAST_NAME')}
@@ -45,6 +44,7 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
         name="email"
         control={control}
         errors={errors}
+        contentContainerStyle={globalStyles.mt5}
       />
       <Input
         label={t('verification.PHONE_NUMBER')}
