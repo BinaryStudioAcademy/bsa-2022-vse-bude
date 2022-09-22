@@ -27,11 +27,11 @@ export const getLinksData = (userId: string): LinkData[] => [
   //   label: 'account:messages',
   //   path: `${Routes.PROFILE}${ProfileRoutes.MESSAGES}`,
   // },
-  {
-    iconPath: IconName.SUPPORT,
-    label: 'account:support',
-    path: `${Routes.PROFILE}${ProfileRoutes.SUPPORT}`,
-  },
+  // {
+  //   iconPath: IconName.SUPPORT,
+  //   label: 'account:support',
+  //   path: `${Routes.PROFILE}${ProfileRoutes.SUPPORT}`,
+  // },
   {
     iconPath: IconName.SIGN_OUT,
     label: 'account:signOut',
