@@ -80,6 +80,7 @@ export default function DescriptionBlock({
           label={t('create-post:label.condition')}
           placeholder={t('create-post:placeholder.condition')}
           error={errors.condition?.message}
+          cssDropdownExtend={styles.conditionSelect}
         />
       </div>
     </>

@@ -41,7 +41,7 @@
     "site": "Site",
     "checkbox": "Hide phone number",
     "minimalBid": "Minimal bid",
-    "recommendedPrice": "Recommended price",
+    "recommendedPrice": "Starting Bid price",
     "endDate": "End date",
     "username": "Name",
     "seller": "Seller",
@@ -62,7 +62,7 @@
     "facebook": "Enter your nickname",
     "site": "Enter site address",
     "minimalBid": "Enter minimal bid",
-    "recommendedPrice": "Enter recommended price",
+    "recommendedPrice": "Enter starting Bid price",
     "username": "Enter user`s name",
     "condition": "Select condition of item"
   },

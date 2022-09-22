@@ -29,6 +29,11 @@ export const inputRow = ({ spaces }: Theme) => css`
   margin-bottom: ${spaces.md};
   flex-grow: 1;
 `;
+export const conditionSelect = css`
+  top: 100%;
+  z-index: 2;
+  width: fit-content;
+`;
 
 export const selectRow = ({ spaces }: Theme) => css`
   margin-bottom: ${spaces.md};
@@ -153,15 +158,22 @@ export const photosLabel = ({
   colors,
 }: Theme) => css`
   flex-grow: 1;
-  transition: 200ms linear;
   font-family: inherit;
   font-size: ${fontSizes.label};
   font-weight: ${fontWeights.label};
   line-height: ${lineHeights.label};
   color: ${colors.backgroundDark};
-  cursor: pointer;
-  & span {
+  & button {
+    transition: 200ms linear;
+    font-family: inherit;
+    font-size: ${fontSizes.label};
+    font-weight: ${fontWeights.label};
+    line-height: ${lineHeights.label};
     color: ${colors.primaryLight};
+    background-color: transparent;
+    text-align: left;
+    border: none;
+    cursor: pointer;
     &:hover {
       color: ${colors.primaryLightHover};
     }
