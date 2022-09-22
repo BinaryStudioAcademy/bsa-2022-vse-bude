@@ -203,17 +203,25 @@ export class MyListRepository {
     });
   }
 
-  public getFavourites({ userId }: { userId: string }): Promise<
-    (FavoriteProducts & {
-      product: ProductById;
-    })[]
-  > {
+  public getFavourites({ userId }: { userId: string }): Promise<{product: Item}[]> {
     return this._dbClient.favoriteProducts.findMany({
       where: {
         userId,
       },
-      include: {
-        product: true,
+      select: {
+        product: {
+          select: {
+            id: true,
+            title: true,
+            description: true,
+            price: true,
+            type: true,
+            status: true,
+            endDate: true,
+            updatedAt: true,
+            imageLinks: true,
+          },
+        },
       },
     });
   }

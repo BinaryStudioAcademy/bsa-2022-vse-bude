@@ -1,10 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { addToast } from 'store/toast/actions';
+import type { Http } from '@vse-bude/shared';
 import {
   addToFavorites,
   deleteFromFavorites,
   fetchFavoriteProductsIds,
-} from '../../services/product';
+  getFavouritesSSR,
+} from '@services';
 import { FavoriteProductActions } from './action-types';
 
 export const getFavoriteIds = createAsyncThunk(
@@ -69,4 +71,19 @@ export const deleteProductFromFavorites = createAsyncThunk(
       return rejectWithValue(e.message);
     }
   },
+);
+
+export const fetchFavouritesSSR = createAsyncThunk(
+  FavoriteProductActions.FETCH_FAVOURITES,
+  async (params: { http: Http }, { rejectWithValue, dispatch }) =>
+    getFavouritesSSR(params).catch((e) => {
+      dispatch(
+        addToast({
+          level: 'error',
+          description: e.message,
+        }),
+      );
+
+      return rejectWithValue(e.message);
+    }),
 );

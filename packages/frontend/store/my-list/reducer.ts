@@ -7,7 +7,6 @@ import {
   fetchMyListSSR,
   addItemToArchive,
   addItemToPosted,
-  fetchFavouritesSSR,
   deleteItem,
 } from './actions';
 
@@ -158,19 +157,6 @@ const myListSlice = createSlice({
       state.itemsList = payload;
     },
     [fetchMyListSSR.rejected.type]: (state, { payload }) => {
-      state.loading = false;
-      state.itemsList = null;
-      state.error = payload;
-    },
-
-    [fetchFavouritesSSR.pending.type]: (state) => {
-      state.loading = true;
-    },
-    [fetchFavouritesSSR.fulfilled.type]: (state, { payload }) => {
-      state.loading = false;
-      state.itemsList = payload;
-    },
-    [fetchFavouritesSSR.rejected.type]: (state, { payload }) => {
       state.loading = false;
       state.itemsList = null;
       state.error = payload;

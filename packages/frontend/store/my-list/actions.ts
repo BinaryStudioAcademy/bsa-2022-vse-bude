@@ -4,7 +4,6 @@ import {
   getMyListSSR,
   addProductToArchive,
   addProductToPosted,
-  getFavouritesSSR,
   deleteProduct,
 } from '@services';
 import { addToast } from 'store/toast/actions';
@@ -103,19 +102,4 @@ export const deleteItem = createAsyncThunk(
 
         return rejectWithValue(e.message);
       }),
-);
-
-export const fetchFavouritesSSR = createAsyncThunk(
-  MyListActions.FETCH_FAVOURITES,
-  async (params: { http: Http }, { rejectWithValue, dispatch }) =>
-    getFavouritesSSR(params).catch((e) => {
-      dispatch(
-        addToast({
-          level: 'error',
-          description: e.message,
-        }),
-      );
-
-      return rejectWithValue(e.message);
-    }),
 );

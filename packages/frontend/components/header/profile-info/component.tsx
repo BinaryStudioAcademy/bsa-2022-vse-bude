@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { IconName, IconColor, Routes } from '@enums';
 import { useEffect } from 'react';
 import { fetchUserNotifications } from '@store';
-import { NOTIFICATIONS_FILTER } from '@vse-bude/shared';
+import { NOTIFICATIONS_FILTER, AccountApiRoutes } from '@vse-bude/shared';
 import * as styles from './styles';
 import { DownArrow } from './sub-components/dropdown';
 import { PopoverContent } from './sub-components/popover-content';
@@ -39,7 +39,10 @@ export const ProfileInfo = ({ load }: ProfileInfoProps) => {
     <div css={styles.profileInfo} profile-load={load.toString()}>
       <div css={styles.iconsWrapper}>
         {/* change link */}
-        <InternalLink href={Routes.DEFAULT} cssExtend={styles.icons}>
+        <InternalLink
+          href={`${Routes.PROFILE}${AccountApiRoutes.FAVOURITES_LIST}`}
+          cssExtend={styles.icons}
+        >
           <Icon
             icon={IconName.STAR_OUTLINED}
             size="md"

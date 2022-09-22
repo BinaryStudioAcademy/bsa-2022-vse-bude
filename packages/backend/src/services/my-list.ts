@@ -123,12 +123,18 @@ export class MyListService {
     });
   }
 
-  public getFavourites({ userId }: { userId: string }): Promise<
-    (FavoriteProducts & {
-      product: ProductById;
-    })[]
-  > {
-    return this._myListRepository.getFavourites({ userId });
+  public async getFavourites({ userId }: { userId: string }): Promise<Item[] | []> {
+    const items = await this._myListRepository.getFavourites({ userId });
+    if (items.length) {
+      const mapped = items.reduce((prev, item) => {
+        const favItem = { ...item.product };
+        prev.push(favItem);
+        return prev;
+      }, []);
+      return mapped;
+    }
+
+    return [];
   }
 
   public async deleteProduct({
