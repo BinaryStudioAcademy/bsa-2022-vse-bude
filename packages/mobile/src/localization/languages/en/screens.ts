@@ -253,4 +253,22 @@ export const screens = {
   items_and_services: {
     TITLE: 'Items & Services',
   },
+  filter: {
+    TITLE: 'Filter',
+    TYPE: 'Type',
+    ALL: 'All',
+    FIXED_PRICE: 'Fixed price',
+    AUCTION: 'Auction',
+    CATEGORY: 'Category',
+    PRICE: 'Price',
+    SORT: 'Sort by',
+    CHEAP_TO_EXPENSIVE: 'Cheap to expensive',
+    EXPENSIVE_TO_CHEAP: 'Expensive to cheap',
+    NEW_TO_OLD: 'New to old',
+    OLD_TO_NEW: 'Old to new',
+    MOST_VIEWS: 'Most views ',
+    LEAST_VIEWS: 'Least views',
+    SUBMIT: 'SUBMIT',
+    CANCEL: 'CANCEL',
+  },
 };

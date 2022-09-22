@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useAppForm, useTranslation, useState } from '~/hooks/hooks';
 import { resetPassword } from '~/validation-schemas/validation-schemas';
-import { ResetPasswordLink, ColorPalette } from '@vse-bude/shared';
+import { ResetPasswordLink } from '@vse-bude/shared';
 import {
   View,
   PrimaryButton,
@@ -42,14 +42,7 @@ const ResetPassword: FC<Props> = ({ onSubmit }) => {
           globalStyles.mt5,
         ]}
       >
-        <CheckBox
-          tintColors={{
-            true: ColorPalette.YELLOW_100,
-            false: ColorPalette.YELLOW_100,
-          }}
-          value={hiddenEmail}
-          onValueChange={setHiddenEmail}
-        />
+        <CheckBox value={hiddenEmail} onValueChange={setHiddenEmail} />
         <Text style={globalStyles.fs14}>{t('verification.HIDE_EMAIL')}</Text>
       </View>
 

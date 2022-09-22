@@ -11,6 +11,7 @@ export type ThemeColors = {
   backgroundElements: string;
   line: string;
   placeholder: string;
+  placeholderLight: ColorValue;
   subtitle: string;
   buttonPrimaryBackground: ColorValue;
   buttonPrimaryText: string;

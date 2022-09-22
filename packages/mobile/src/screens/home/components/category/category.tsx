@@ -11,9 +11,8 @@ type Props = {
 };
 
 const Category: FC<Props> = ({ categoryId, onPress }) => {
-  const { image, title } = useAppSelector((state) =>
-    selectCategoryById(state, categoryId),
-  );
+  const { image, title } =
+    useAppSelector((state) => selectCategoryById(state, categoryId)) ?? {};
 
   return (
     <TouchableOpacity
@@ -30,7 +29,7 @@ const Category: FC<Props> = ({ categoryId, onPress }) => {
       <Text style={[styles.title, globalStyles.fs14]} numberOfLines={3}>
         {title}
       </Text>
-      <Image style={styles.image} source={{ uri: image }} />
+      {image && <Image style={styles.image} source={{ uri: image }} />}
     </TouchableOpacity>
   );
 };

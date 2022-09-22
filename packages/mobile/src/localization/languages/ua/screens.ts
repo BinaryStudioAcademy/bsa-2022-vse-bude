@@ -252,4 +252,22 @@ export const screens = {
   items_and_services: {
     TITLE: 'Товари & Послуги',
   },
+  filter: {
+    TITLE: 'Фільтр',
+    ALL: 'Усі',
+    TYPE: 'Тип лоту',
+    FIXED_PRICE: 'Фіксована ціна',
+    AUCTION: 'Аукціон',
+    CATEGORY: 'Категорія',
+    PRICE: 'Ціна',
+    SORT: 'Сортувати',
+    CHEAP_TO_EXPENSIVE: 'Від дешевих до дорогих',
+    EXPENSIVE_TO_CHEAP: 'Від дорогих до дешевих',
+    NEW_TO_OLD: 'Від нових до старих',
+    OLD_TO_NEW: 'Від старих до нових',
+    MOST_VIEWS: 'Найбільше переглядів',
+    LEAST_VIEWS: 'Найменше переглядів',
+    SUBMIT: 'ЗАСТОСУВАТИ',
+    CANCEL: 'СКИНУТИ',
+  },
 };

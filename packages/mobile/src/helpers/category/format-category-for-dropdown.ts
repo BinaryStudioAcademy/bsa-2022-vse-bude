@@ -1,19 +1,21 @@
-import { CategoryDto } from '@vse-bude/shared';
+import { CategoryResponseDto } from '@vse-bude/shared';
 
 const categoryForDropdown = (
-  array: CategoryDto[],
+  array: CategoryResponseDto[] | null,
 ): Array<{
   label: string;
   value: string;
-}> => {
-  const categories = array.map((item) => {
+}> | null => {
+  if (!array?.length) {
+    return null;
+  }
+
+  return array?.map((item) => {
     return {
-      'label': item.title,
-      'value': item.id,
+      label: item.title,
+      value: item.id,
     };
   });
-
-  return categories;
 };
 
 export { categoryForDropdown };
