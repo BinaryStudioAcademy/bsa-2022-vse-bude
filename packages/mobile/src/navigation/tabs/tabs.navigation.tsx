@@ -53,8 +53,10 @@ const MainNavigation: FC = () => {
   const navigation = useNavigation<RootNavigationProps>();
 
   useEffect(() => {
-    dispatch(personalInfoActions.getPersonalInfo());
-  }, []);
+    if (user) {
+      dispatch(personalInfoActions.getPersonalInfo());
+    }
+  }, [user]);
 
   const screenOptions: BottomTabNavigationOptions = {
     headerShown: false,
