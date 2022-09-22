@@ -82,6 +82,12 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
   }, [errors]);
 
   const onSubmit = (data: ICreateAuction): void => {
+    if (images.length < 2) {
+      notification.error(t('errors.FEW_IMAGES'));
+
+      return;
+    }
+
     const payload = makeAuctionParser({
       data,
       images,

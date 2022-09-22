@@ -129,7 +129,8 @@ export const screens = {
     MIN_BID: `The bid cannot be lower than ${MIN_BID}`,
     NUMBER_PRICE: 'The price must be a number',
     NUMBER_BID: 'The bid must be a number',
-    TO_MANY_IMAGES: 'Ви не можете завантажити більше 30 зображень!',
+    TO_MANY_IMAGES: 'You cannot upload more than 30 images!',
+    FEW_IMAGES: 'You must upload at least 2 images!',
   },
   verify: {
     VERIFY: 'Verify',
