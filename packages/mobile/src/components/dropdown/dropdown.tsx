@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import DropDownPicker from 'react-native-dropdown-picker';
+import DropDownPicker, { ItemType } from 'react-native-dropdown-picker';
 import {
   FormControl,
   FormControlErrors,
@@ -17,16 +17,13 @@ type Props<T extends FormControlValues> = {
   name: FormControlPath<T>;
   errors?: FormControlErrors<T>;
   control: FormControl<T>;
-  items: Array<{
-    label: string;
-    value: string;
-  }>;
+  items: Array<Pick<ItemType<string>, 'label' | 'value'>>;
   zIndex: number;
   disabled?: boolean;
   placeholder?: string;
   backgroundColor?: ColorValue;
   dropDownDirection?: 'DEFAULT' | 'TOP' | 'BOTTOM' | 'AUTO';
-  onChange?: (value: string) => void;
+  onSelectItem?: (value: ItemType<string>) => void;
   required?: boolean;
 };
 
@@ -42,6 +39,7 @@ const DropDown = <T extends FormControlValues>({
   backgroundColor,
   dropDownDirection,
   required,
+  onSelectItem,
 }: Props<T>): ReactElement => {
   const { field } = useFormControl({ name, control });
   const { colors } = useCustomTheme();
@@ -89,6 +87,7 @@ const DropDown = <T extends FormControlValues>({
         setItems={setInnerItems}
         setValue={setItemValue}
         onChangeValue={field.onChange}
+        onSelectItem={onSelectItem}
         textStyle={[
           disabled ? { color: colors.placeholder } : { color: colors.text },
           globalStyles.fs14,

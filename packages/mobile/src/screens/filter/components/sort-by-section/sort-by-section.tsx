@@ -1,75 +1,81 @@
-import React from 'react';
-import { DropDown, View } from '~/components/components';
+import React, { useCallback } from 'react';
+
+import { Order, SortBy, ProductQuery } from '@vse-bude/shared';
+import { DropDown } from '~/components/components';
 import {
   useAppForm,
   useCustomTheme,
   useTranslation,
   useAppDispatch,
-  useEffect,
-  useFormControl,
+  useMemo,
 } from '~/hooks/hooks';
-import { sortByFilterData } from '~/mock/sort-by-filter-data';
-import { filters as filtersApi } from '~/store/actions';
-import { FilterSortBy } from '~/common/enums/enums';
-import { Order, SortBy } from '@vse-bude/shared';
+import { filters as filtersActions } from '~/store/actions';
+import { FilterSort } from '~/common/enums/enums';
+import { DropDownItemType } from '~/common/types/types';
 import { SectionTitle } from '../components';
 
-const SortBySection = () => {
+const FilterSortOrderMap = new Map<
+  FilterSort,
+  Pick<ProductQuery, 'sortBy' | 'order'>
+>([
+  [FilterSort.EXPENSIVE_TO_CHEAP, { sortBy: SortBy.PRICE, order: Order.DESC }],
+  [FilterSort.CHEAP_TO_EXPENSIVE, { sortBy: SortBy.PRICE, order: Order.ASC }],
+  [FilterSort.NEW_TO_OLD, { sortBy: SortBy.DATE, order: Order.DESC }],
+  [FilterSort.OLD_TO_NEW, { sortBy: SortBy.DATE, order: Order.ASC }],
+  [FilterSort.MOST_VIEWS, { sortBy: SortBy.VIEWS, order: Order.DESC }],
+  [FilterSort.LEAST_VIEWS, { sortBy: SortBy.VIEWS, order: Order.ASC }],
+]);
+
+const SortBySection: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { colors } = useCustomTheme();
+
+  const dropdownItems = useMemo(
+    () => [
+      { label: t('filter.NEW_TO_OLD'), value: FilterSort.NEW_TO_OLD },
+      { label: t('filter.OLD_TO_NEW'), value: FilterSort.OLD_TO_NEW },
+      {
+        label: t('filter.CHEAP_TO_EXPENSIVE'),
+        value: FilterSort.CHEAP_TO_EXPENSIVE,
+      },
+      {
+        label: t('filter.EXPENSIVE_TO_CHEAP'),
+        value: FilterSort.EXPENSIVE_TO_CHEAP,
+      },
+      { label: t('filter.MOST_VIEWS'), value: FilterSort.MOST_VIEWS },
+      { label: t('filter.LEAST_VIEWS'), value: FilterSort.LEAST_VIEWS },
+    ],
+    [],
+  );
+
   const { control } = useAppForm({
     defaultValues: {
-      sortBy: FilterSortBy.CHEAP_TO_EXPANSIVE,
+      sort: FilterSort.NEW_TO_OLD,
     },
   });
-  const {
-    field: { value },
-  } = useFormControl({ name: 'sortBy', control });
 
-  useEffect(() => {
-    switch (value) {
-      case FilterSortBy.CHEAP_TO_EXPANSIVE:
-        dispatch(filtersApi.setSortBy(SortBy.PRICE));
-        dispatch(filtersApi.setOrder(Order.ASC));
-        break;
-      case FilterSortBy.EXPANSIVE_TO_CHEAP:
-        dispatch(filtersApi.setSortBy(SortBy.PRICE));
-        dispatch(filtersApi.setOrder(Order.DESC));
-        break;
-      case FilterSortBy.NEW_TO_OLD:
-        dispatch(filtersApi.setSortBy(SortBy.DATE));
-        dispatch(filtersApi.setOrder(Order.DESC));
-        break;
-      case FilterSortBy.OLD_TO_NEW:
-        dispatch(filtersApi.setSortBy(SortBy.DATE));
-        dispatch(filtersApi.setOrder(Order.ASC));
-        break;
-      case FilterSortBy.MOST_VIEWS:
-        dispatch(filtersApi.setSortBy(SortBy.VIEWS));
-        dispatch(filtersApi.setOrder(Order.ASC));
-        break;
-      case FilterSortBy.LEAST_VIEWS:
-        dispatch(filtersApi.setSortBy(SortBy.VIEWS));
-        dispatch(filtersApi.setOrder(Order.DESC));
-        break;
-    }
-  }, [value]);
+  const handleSelect = useCallback((item: DropDownItemType<string>) => {
+    const { value = FilterSort.NEW_TO_OLD } =
+      item as DropDownItemType<FilterSort>;
+    const { sortBy, order } = FilterSortOrderMap.get(value) ?? {};
+
+    dispatch(filtersActions.update({ sortBy, order }));
+  }, []);
 
   return (
-    <View>
-      <SectionTitle title={t('filter.SORT_BY')} />
+    <>
+      <SectionTitle title={t('filter.SORT')} />
       <DropDown
-        label={''}
-        placeholder={FilterSortBy.CHEAP_TO_EXPANSIVE}
-        name={'sortBy'}
+        name="sort"
         control={control}
-        items={sortByFilterData}
+        items={dropdownItems}
+        onSelectItem={handleSelect}
         zIndex={19}
-        backgroundColor={colors.placeholderLight}
-        dropDownDirection={'TOP'}
+        backgroundColor={colors.backgroundElements}
+        dropDownDirection="TOP"
       />
-    </View>
+    </>
   );
 };
 

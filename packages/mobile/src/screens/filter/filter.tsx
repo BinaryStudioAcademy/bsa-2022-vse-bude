@@ -1,10 +1,14 @@
 import React, { FC, useCallback } from 'react';
+import { ProductQuery } from '@vse-bude/shared';
+
 import {
   ScreenWrapper,
   StatusBar,
   Divider,
-  View,
   ScrollView,
+  Spinner,
+  View,
+  Button,
 } from '~/components/components';
 import {
   useCustomTheme,
@@ -12,56 +16,116 @@ import {
   useAppDispatch,
   useNavigation,
   useEffect,
+  useSafeAreaInsets,
+  useTranslation,
 } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
-import { getFilterScreenOptions } from '~/navigation/screen-options/get-filter-screen-options';
-import { selectFilters } from '~/store/selectors';
-import { products as productsApi } from '~/store/actions';
+import { selectCategoriesDataStatus, selectFilters } from '~/store/selectors';
+import {
+  products as productsActions,
+  categories as categoriesApi,
+  filters as filtersActions,
+} from '~/store/actions';
 import { removeObjectFalsyFields } from '~/helpers/helpers';
-import { ProductQuery } from '@vse-bude/shared';
 import { RootNavigationProps, RootState } from '~/common/types/types';
+import { ButtonAppearance, DataStatus } from '~/common/enums/enums';
+import { SPACERS } from '~/styles/spacers/spacers';
 import {
   ProductTypeSection,
   CategorySection,
   PriceRangeSection,
   SortBySection,
 } from './components/components';
+import { styles } from './style';
 
-const Filter: FC = () => {
+const FilterScreen: FC = () => {
   const navigation = useNavigation<RootNavigationProps>();
-  const filters = useAppSelector(selectFilters);
+  const { colors } = useCustomTheme();
   const dispatch = useAppDispatch();
-  const onSavePress = useCallback(() => {
+  const { bottom: bottomInset } = useSafeAreaInsets();
+  const { t } = useTranslation();
+
+  const filters = useAppSelector(selectFilters);
+  const categoriesDataStatus = useAppSelector(selectCategoriesDataStatus);
+
+  const loading = categoriesDataStatus === DataStatus.PENDING;
+
+  const handleFiltersSubmitPress = useCallback(() => {
     dispatch(
-      productsApi.loadProducts(
+      productsActions.loadProducts(
         removeObjectFalsyFields<RootState['filters'], ProductQuery>(filters),
       ),
     );
+    navigation.goBack();
   }, [filters]);
+
+  const handleCancelPress = () => {
+    dispatch(filtersActions.reset());
+  };
+
   useEffect(() => {
-    navigation.setOptions(getFilterScreenOptions(onSavePress));
-  }, [filters]);
-  const { colors } = useCustomTheme();
+    dispatch(categoriesApi.loadAllCategories());
+  }, []);
 
   return (
     <ScreenWrapper>
       <StatusBar backgroundColor={colors.backgroundSecondary} />
 
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        style={{ backgroundColor: colors.backgroundSecondary }}
-      >
-        <View style={[globalStyles.py6, globalStyles.px5]}>
+      {loading ? (
+        <Spinner isOverflow={true} />
+      ) : (
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={[
+            styles.filtersContainer,
+            globalStyles.py6,
+            globalStyles.px5,
+          ]}
+        >
           <ProductTypeSection />
-          <Divider contentContainerStyle={globalStyles.mt5} />
+          <Divider
+            contentContainerStyle={[globalStyles.mt6, globalStyles.mb6]}
+          />
           <CategorySection />
-          <Divider contentContainerStyle={globalStyles.mt5} />
+          <Divider
+            contentContainerStyle={[globalStyles.mt6, globalStyles.mb6]}
+          />
           <PriceRangeSection />
+          <Divider
+            contentContainerStyle={[globalStyles.mt6, globalStyles.mb6]}
+          />
           <SortBySection />
-        </View>
-      </ScrollView>
+        </ScrollView>
+      )}
+      <View
+        style={[
+          styles.footer,
+          globalStyles.flexDirectionRow,
+          globalStyles.justifyContentSpaceBetween,
+          globalStyles.alignItemsCenter,
+          globalStyles.flex1,
+          globalStyles.px3,
+          {
+            paddingBottom: bottomInset + SPACERS.spacer3,
+            paddingTop: SPACERS.spacer3,
+          },
+        ]}
+      >
+        <Button
+          label={t('filter.CANCEL')}
+          appearance={ButtonAppearance.TRANSPARENT}
+          contentContainerStyle={globalStyles.flex1}
+          onPress={handleCancelPress}
+        />
+        <Button
+          label={t('filter.SUBMIT')}
+          appearance={ButtonAppearance.TRANSPARENT}
+          contentContainerStyle={globalStyles.flex1}
+          onPress={handleFiltersSubmitPress}
+        />
+      </View>
     </ScreenWrapper>
   );
 };
 
-export { Filter };
+export { FilterScreen };

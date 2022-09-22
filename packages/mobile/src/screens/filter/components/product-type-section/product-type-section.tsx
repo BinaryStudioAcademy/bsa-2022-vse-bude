@@ -1,45 +1,44 @@
 import React, { FC } from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
+import { ProductType } from '@vse-bude/shared';
+
 import { View } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { useAppDispatch, useAppSelector, useMemo } from '~/hooks/hooks';
-import { lotTypeFilterData } from '~/mock/mock';
-import { FilterLotType } from '~/common/enums/enums';
-import { filters as filtersApi } from '~/store/actions';
+import { useAppDispatch, useAppSelector, useTranslation } from '~/hooks/hooks';
+import { filters as filtersActions } from '~/store/actions';
 import { selectFilters } from '~/store/selectors';
-import { ProductTypeSelector } from '../components';
+import { ProductTypeSelector, SectionTitle } from '../components';
 
-type Props = {
-  contentContainerStyle?: StyleProp<ViewStyle>;
-};
-
-const ProductTypeSection: FC<Props> = ({ contentContainerStyle }) => {
-  const { type } = useAppSelector(selectFilters);
+const ProductTypeSection: FC = () => {
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
-  const onPress = (filterName: FilterLotType) => {
-    dispatch(filtersApi.setLotType(filterName));
+  const { type } = useAppSelector(selectFilters);
+
+  const handleSelect = (value?: ProductType) => {
+    dispatch(filtersActions.update({ type: value }));
   };
 
-  const renderedItems = useMemo(() => {
-    return lotTypeFilterData.map(({ title, name }) => {
-      const isSelected = type === name;
-
-      return (
-        <ProductTypeSelector
-          title={title}
-          key={name}
-          isSelected={isSelected}
-          onPress={() => onPress(name)}
-        />
-      );
-    });
-  }, [type]);
-
   return (
-    <View style={[globalStyles.flexDirectionRow, contentContainerStyle]}>
-      {renderedItems}
-    </View>
+    <>
+      <SectionTitle title={t('filter.TYPE')} />
+      <View style={[globalStyles.flexDirectionRow, globalStyles.mt4]}>
+        <ProductTypeSelector
+          title={t('filter.ALL')}
+          isSelected={!type}
+          onPress={() => handleSelect()}
+        />
+        <ProductTypeSelector
+          title={t('filter.FIXED_PRICE')}
+          isSelected={type === ProductType.SELLING}
+          onPress={() => handleSelect(ProductType.SELLING)}
+        />
+        <ProductTypeSelector
+          title={t('filter.AUCTION')}
+          isSelected={type === ProductType.AUCTION}
+          onPress={() => handleSelect(ProductType.AUCTION)}
+        />
+      </View>
+    </>
   );
 };
 

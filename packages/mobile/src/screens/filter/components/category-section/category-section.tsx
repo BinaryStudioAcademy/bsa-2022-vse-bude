@@ -1,58 +1,46 @@
-import React from 'react';
-import { View, RadioButton, Spinner } from '~/components/components';
-import { globalStyles } from '~/styles/styles';
-import { selectCategories, selectFilters } from '~/store/selectors';
-import {
-  useAppDispatch,
-  useAppSelector,
-  useEffect,
-  useTranslation,
-  useMemo,
-} from '~/hooks/hooks';
-import {
-  categories as categoriesApi,
-  filters as filtersApi,
-} from '~/store/actions';
-import { RootState } from '~/common/types/types';
-import { SectionTitle } from '../components';
+import React, { useCallback } from 'react';
+import { ProductQuery } from '@vse-bude/shared';
 
-const CategorySection = () => {
+import { View } from '~/components/components';
+import { globalStyles } from '~/styles/styles';
+import { selectCategoriesNonEmpty, selectFilters } from '~/store/selectors';
+import { useAppDispatch, useAppSelector, useTranslation } from '~/hooks/hooks';
+import { filters as filtersActions } from '~/store/actions';
+import { SectionTitle, CategoryListItem } from '../components';
+
+const CategorySection: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const categories = useAppSelector(selectCategories);
-  const { categoryId } = useAppSelector(selectFilters);
-  useEffect(() => {
-    dispatch(categoriesApi.loadAllCategories());
-  }, []);
-  const onFilterSelect = (id: RootState['filters']['categoryId']) => {
-    dispatch(filtersApi.setCategory(id));
-  };
-  const renderedItems = useMemo(() => {
-    return categories.map((item) => {
-      const { title, id } = item;
-      const isSelected = id === categoryId;
 
-      return (
-        <RadioButton
-          key={id}
-          label={title}
-          isSelected={isSelected}
-          onPress={() => onFilterSelect(id)}
-          style={globalStyles.mt4}
-        />
+  const categories = useAppSelector(selectCategoriesNonEmpty);
+  const { categoryId: selectedCategoryId } = useAppSelector(selectFilters);
+
+  const handleSelect = useCallback(
+    (id: ProductQuery['categoryId']) => {
+      dispatch(
+        filtersActions.update({
+          categoryId: id === selectedCategoryId ? undefined : id,
+        }),
       );
-    });
-  }, [categories, categoryId]);
+    },
+    [selectedCategoryId],
+  );
 
   return (
-    <View>
-      <SectionTitle title={t('filter.CATEGORY')} style={globalStyles.mt5} />
-      {categories ? (
-        <View style={globalStyles.mt5}>{renderedItems}</View>
-      ) : (
-        <Spinner />
-      )}
-    </View>
+    <>
+      <SectionTitle title={t('filter.CATEGORY')} />
+      <View style={globalStyles.mt4}>
+        {categories.map(({ id }, idx) => (
+          <CategoryListItem
+            key={id}
+            categoryId={id}
+            selected={selectedCategoryId === id}
+            onSelect={handleSelect}
+            contentContainerStyle={idx > 0 && globalStyles.mt3}
+          />
+        ))}
+      </View>
+    </>
   );
 };
 

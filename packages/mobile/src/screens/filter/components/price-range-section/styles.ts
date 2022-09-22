@@ -1,26 +1,20 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { ColorPalette } from '@vse-bude/shared';
-import { globalStyles } from '~/styles/styles';
 import { ThemeColors } from '~/common/types/types';
-
-const { width } = Dimensions.get('window');
+import { FontFamily } from '~/common/enums/enums';
+import { SPACERS } from '~/styles/spacers/spacers';
 
 const createStyles = (colors: ThemeColors) => {
   const styles = StyleSheet.create({
     sliderMarker: {
-      height: 15,
-      width: 15,
+      height: SPACERS.spacer6,
+      width: SPACERS.spacer6,
       borderRadius: 50,
-      backgroundColor: colors.placeholderLight,
+      backgroundColor: colors.primary,
     },
     divider: {
       width: 25,
-      paddingHorizontal: 5,
-    },
-    pressedSliderMarker: {
-      height: 20,
-      width: 20,
-      borderRadius: 20,
+      paddingHorizontal: 8,
     },
     selectedSlider: {
       backgroundColor: ColorPalette.YELLOW_200,
@@ -28,18 +22,16 @@ const createStyles = (colors: ThemeColors) => {
     trackSlider: {
       backgroundColor: colors.placeholderLight,
     },
-    sliderWidth: {
-      width: width * 0.9,
-    },
     input: {
-      width: '33%',
-      height: 35,
-      backgroundColor: colors.placeholderLight,
+      flex: 1,
+      height: 46,
+      fontFamily: FontFamily.RALEWAY_REGULAR,
+      fontSize: 16,
+      color: colors.text,
+      backgroundColor: colors.backgroundElements,
       justifyContent: 'center',
-      fontSize: 14,
-      borderRadius: 2,
-      paddingHorizontal: 10,
-      ...globalStyles.fontWeightRegular,
+      borderRadius: 10,
+      paddingHorizontal: 16,
     },
   });
 

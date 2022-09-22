@@ -1,10 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AsyncThunkConfig } from '~/common/types/types';
-import { CategoryDto } from '@vse-bude/shared';
+import { CategoryResponseDto } from '@vse-bude/shared';
 import { ActionType } from './common';
 
 const loadAllCategories = createAsyncThunk<
-  CategoryDto[],
+  CategoryResponseDto[],
   undefined,
   AsyncThunkConfig
 >(ActionType.CATEGORIES_FETCH, async (_, { extra }) => {

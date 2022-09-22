@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { ColorValue, PressableProps } from 'react-native';
+import { ColorValue, PressableProps, StyleProp, ViewStyle } from 'react-native';
 import { ButtonAppearance } from '~/common/enums/enums';
 
 type ButtonProps = Omit<PressableProps, 'style'> & {
@@ -11,6 +11,7 @@ type ButtonProps = Omit<PressableProps, 'style'> & {
   iconLeft?: ReactNode;
   iconRight?: ReactNode;
   isLoading?: boolean;
+  contentContainerStyle?: StyleProp<ViewStyle>;
 };
 
 export type { ButtonProps };

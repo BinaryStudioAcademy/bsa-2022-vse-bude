@@ -1,10 +1,10 @@
 import { createReducer } from '@reduxjs/toolkit';
+import { CategoryResponseDto } from '@vse-bude/shared';
 import { DataStatus } from '~/common/enums/enums';
-import { CategoryDto } from '@vse-bude/shared';
 import { loadAllCategories } from './action';
 
 type InitialState = {
-  categories: CategoryDto[] | [];
+  categories: CategoryResponseDto[] | [];
   dataStatus: DataStatus;
 };
 

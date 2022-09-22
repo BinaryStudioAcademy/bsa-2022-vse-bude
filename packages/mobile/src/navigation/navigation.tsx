@@ -17,7 +17,7 @@ import {
   VerifiedPhoneScreen,
   VerifiedEmailScreen,
   TypeOfPostScreen,
-  Filter,
+  FilterScreen,
   MyList,
 } from '~/screens/screens';
 import { HeaderLeft } from '~/components/components';
@@ -31,7 +31,6 @@ import {
 } from './screen-options/screen-options';
 
 const NativeStack = createNativeStackNavigator<RootNavigationParamList>();
-const Stack = createNativeStackNavigator<RootNavigationParamList>();
 
 const Navigation: FC = () => {
   const user = useAppSelector(selectCurrentUser);
@@ -44,7 +43,7 @@ const Navigation: FC = () => {
         component={HomeWithMenuNavigation}
       />
       <NativeStack.Group screenOptions={baseScreenOptions}>
-        <Stack.Screen
+        <NativeStack.Screen
           name={RootScreenName.ITEM_INFO}
           component={ProductInfo}
           options={{
@@ -52,66 +51,81 @@ const Navigation: FC = () => {
           }}
         />
       </NativeStack.Group>
-      <NativeStack.Screen name={RootScreenName.FILTER} component={Filter} />
+      <NativeStack.Screen
+        name={RootScreenName.FILTER}
+        component={FilterScreen}
+        options={{
+          presentation: 'modal',
+          animation: 'fade_from_bottom',
+          headerShown: true,
+          headerTitleAlign: 'center',
+          title: t('filter.TITLE'),
+          headerTitleStyle: { fontSize: 16 },
+          headerLeft: HeaderLeft,
+        }}
+      />
       {user && (
         <NativeStack.Group screenOptions={baseScreenOptions}>
-          <Stack.Screen
+          <NativeStack.Screen
             name={RootScreenName.PERSONAL_INFO}
             component={PersonalInfoScreen}
             options={{
               title: t('personal_info.PERSONAL_INFO'),
             }}
           />
-          <Stack.Screen
+          <NativeStack.Screen
             name={RootScreenName.SETTINGS}
             component={SettingsScreen}
           />
-          <Stack.Screen
+          <NativeStack.Screen
             name={RootScreenName.MESSAGES}
             component={MessagesScreen}
           />
-          <Stack.Screen
+          <NativeStack.Screen
             name={RootScreenName.SUPPORT}
             component={SupportScreen}
           />
-          <Stack.Screen name={RootScreenName.MY_LIST} component={MyList} />
+          <NativeStack.Screen
+            name={RootScreenName.MY_LIST}
+            component={MyList}
+          />
           <NativeStack.Group screenOptions={verifyScreenOptions}>
-            <Stack.Screen
+            <NativeStack.Screen
               name={RootScreenName.VERIFY_PHONE}
               component={VerifyPhoneScreen}
             />
-            <Stack.Screen
+            <NativeStack.Screen
               name={RootScreenName.VERIFY_CODE_PHONE}
               component={VerifyCodePhoneScreen}
             />
-            <Stack.Screen
+            <NativeStack.Screen
               name={RootScreenName.VERIFIED_PHONE}
               component={VerifiedPhoneScreen}
             />
-            <Stack.Screen
+            <NativeStack.Screen
               name={RootScreenName.VERIFY_EMAIL}
               component={VerifyEmailScreen}
             />
-            <Stack.Screen
+            <NativeStack.Screen
               name={RootScreenName.VERIFY_CODE_EMAIL}
               component={VerifyCodeEmailScreen}
             />
-            <Stack.Screen
+            <NativeStack.Screen
               name={RootScreenName.VERIFIED_EMAIL}
               component={VerifiedEmailScreen}
             />
           </NativeStack.Group>
-          <Stack.Screen
+          <NativeStack.Screen
             name={RootScreenName.NEW_ITEM}
             component={NewItemScreen}
             options={createPostScreenOptions}
           />
-          <Stack.Screen
+          <NativeStack.Screen
             name={RootScreenName.NEW_AUCTION}
             component={NewItemScreen}
             options={createPostScreenOptions}
           />
-          <Stack.Screen
+          <NativeStack.Screen
             name={RootScreenName.TYPE_OF_NEW_POST}
             component={TypeOfPostScreen}
             options={{

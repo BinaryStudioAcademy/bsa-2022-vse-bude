@@ -1,10 +1,11 @@
-export { useColorScheme } from 'react-native';
+export { useColorScheme, useWindowDimensions } from 'react-native';
 export {
   useState,
   useEffect,
   useMemo,
   useLayoutEffect,
   useCallback,
+  useRef,
 } from 'react';
 export {
   useNavigation,

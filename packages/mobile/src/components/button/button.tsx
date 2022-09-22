@@ -19,6 +19,7 @@ const Button: FC<ButtonProps> = ({
   iconLeft,
   iconRight,
   isLoading,
+  contentContainerStyle,
 }) => {
   const { containerStyle, buttonStyle, textStyle, rippleConfig } =
     useButtonStyle({
@@ -30,7 +31,10 @@ const Button: FC<ButtonProps> = ({
     });
 
   return (
-    <View pointerEvents="box-none" style={[styles.wrapper, containerStyle]}>
+    <View
+      pointerEvents="box-none"
+      style={[styles.wrapper, containerStyle, contentContainerStyle]}
+    >
       <Pressable
         disabled={disabled}
         onPress={onPress}

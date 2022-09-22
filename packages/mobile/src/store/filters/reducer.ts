@@ -1,30 +1,18 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { FilterLotType } from '~/common/enums/enums';
-import { ProductQuery } from '@vse-bude/shared';
+import { Order, ProductQuery, SortBy } from '@vse-bude/shared';
 import {
   setLotType,
   setPriceRange,
   setSortBy,
   setCategory,
   setOrder,
-} from './auction';
+  update,
+  reset,
+} from './action';
 
-type InitialState = {
-  type: FilterLotType | undefined;
-  categoryId: ProductQuery['categoryId'];
-  priceGt: ProductQuery['priceGt'];
-  priceLt: ProductQuery['priceLt'];
-  sortBy: ProductQuery['sortBy'];
-  order: ProductQuery['order'];
-};
-
-const initialState: InitialState = {
-  type: FilterLotType.ALL,
-  categoryId: undefined,
-  priceGt: undefined,
-  priceLt: undefined,
-  sortBy: undefined,
-  order: undefined,
+const initialState: ProductQuery = {
+  sortBy: SortBy.DATE,
+  order: Order.DESC,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -44,6 +32,12 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setOrder, (state, action) => {
       state.order = action.payload;
+    })
+    .addCase(update, (state, action) => {
+      return { ...state, ...action.payload };
+    })
+    .addCase(reset, () => {
+      return initialState;
     });
 });
 

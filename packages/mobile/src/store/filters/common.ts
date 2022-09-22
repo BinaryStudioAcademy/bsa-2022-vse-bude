@@ -4,6 +4,8 @@ enum ActionType {
   SET_SORT_BY = 'filter/set-sort-by',
   SET_CATEGORY = 'filter/set-category',
   SET_ORDER = 'filter/set-order',
+  RESET = 'filter/reset',
+  UPDATE = 'filter/update',
 }
 
 export { ActionType };

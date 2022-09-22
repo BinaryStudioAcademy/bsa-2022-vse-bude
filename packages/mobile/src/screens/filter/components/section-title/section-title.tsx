@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
+import { StyleProp, TextStyle } from 'react-native';
 import { Text } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { useCustomTheme } from '~/hooks/hooks';
-import { StyleProp, TextStyle } from 'react-native';
 
 type Props = {
   title: string;
@@ -15,9 +15,8 @@ const SectionTitle: FC<Props> = ({ title, style }) => {
   return (
     <Text
       style={[
-        globalStyles.fs14,
-        globalStyles.fontWeightMedium,
-        { color: colors.subtitle },
+        globalStyles.fontWeightSemiBold,
+        { color: colors.titlePrimary },
         style,
       ]}
     >

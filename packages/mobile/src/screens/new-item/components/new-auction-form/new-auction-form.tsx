@@ -22,18 +22,18 @@ import {
   useAppDispatch,
   useEffect,
   useNavigation,
+  useMemo,
 } from '~/hooks/hooks';
 import { products as productsActions } from '~/store/actions';
 import { globalStyles } from '~/styles/styles';
 import { DatePicker } from '~/components/date-time-picker/date-time-picker';
 import { ButtonAppearance, DateTimeType } from '~/common/enums/ui/ui';
-import { categoryForDropdown } from '~/helpers/category/format-category-for-dropdown';
 import { ButtonsContainer } from '~/screens/components/components';
 import { selectCategories, selectDataStatusProducts } from '~/store/selectors';
 import { DataStatus } from '~/common/enums/enums';
 import { productsAuctionSchema } from '~/validation-schemas/validation-schemas';
 import { notification } from '~/services/services';
-import { makeAuctionParser } from '~/helpers/helpers';
+import { categoryForDropdown, makeAuctionParser } from '~/helpers/helpers';
 import { CONDITION } from '~/common/constants/products';
 import { AddPhotos } from '../add-photos/add-photos';
 
@@ -52,8 +52,11 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
   const categories = useAppSelector(selectCategories);
   const dataStatusProducts = useAppSelector(selectDataStatusProducts);
   const isLoading = dataStatusProducts === DataStatus.PENDING;
-  const formattedCategories =
-    categories && categories.length ? categoryForDropdown(categories) : null;
+
+  const formattedCategories = useMemo(
+    () => categoryForDropdown(categories),
+    [categories],
+  );
 
   const { control, errors, handleSubmit } = useAppForm<ICreateAuction>({
     defaultValues: {

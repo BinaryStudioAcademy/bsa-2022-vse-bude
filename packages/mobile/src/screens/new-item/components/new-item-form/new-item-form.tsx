@@ -22,6 +22,7 @@ import {
   useAppDispatch,
   useEffect,
   useNavigation,
+  useMemo,
 } from '~/hooks/hooks';
 import { products as productsActions } from '~/store/actions';
 import { globalStyles } from '~/styles/styles';
@@ -49,8 +50,10 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
   const categories = useAppSelector(selectCategories);
   const dataStatusProducts = useAppSelector(selectDataStatusProducts);
   const isLoading = dataStatusProducts === DataStatus.PENDING;
-  const formattedCategories =
-    categories && categories.length ? categoryForDropdown(categories) : null;
+  const formattedCategories = useMemo(
+    () => categoryForDropdown(categories),
+    [categories],
+  );
 
   const { control, errors, handleSubmit } = useAppForm<ICreatePost>({
     defaultValues: {

@@ -18,5 +18,5 @@ export {
 export { NewItemScreen } from '~/screens/new-item/new-item';
 export { TypeOfPostScreen } from '~/screens/type-of-post/type-of-post';
 export { ProductInfo } from '~/screens/product-info/product-info';
-export { Filter } from './filter/filter';
+export { FilterScreen } from './filter/filter';
 export { ItemsAndServices } from './items-and-services/items-and-services';
