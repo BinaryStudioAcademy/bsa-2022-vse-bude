@@ -132,11 +132,11 @@ export class MyListService {
       const mapped = items.reduce((prev, item) => {
         const favItem = { ...item.product };
         prev.push(favItem);
-        
-return prev;
+
+        return prev;
       }, []);
-      
-return mapped;
+
+      return mapped;
     }
 
     return [];
