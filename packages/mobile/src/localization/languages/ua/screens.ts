@@ -197,8 +197,8 @@ export const screens = {
     COUNTRY: 'Країна',
     DEFAULT_COUNTRY: 'Україна',
     COUNTRY_PLACEHOLDER: 'Оберіть країну',
-    CITY: 'Місто',
-    CITY_PLACEHOLDER: 'Оберіть місто',
+    CITY: 'Населений пункт',
+    CITY_PLACEHOLDER: 'Введіть населений пункт',
     MOBILE_PHONE: 'Телефон',
     PHONE_POPOVER:
       'Ваш номер телефону необхідно ввести у міжнародному форматі: +380123456789. Переконайтеся, що номер телефону правильний!',

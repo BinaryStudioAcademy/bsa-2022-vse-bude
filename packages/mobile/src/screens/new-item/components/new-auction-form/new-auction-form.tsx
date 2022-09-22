@@ -274,8 +274,8 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
         required={true}
       />
       <Input
-        label={t('personal_info.CITY')}
-        placeholder={t('personal_info.CITY_HINT')}
+        label={t('make_a_post.CITY')}
+        placeholder={t('make_a_post.CITY_PLACEHOLDER')}
         name="city"
         control={control}
         errors={errors}
