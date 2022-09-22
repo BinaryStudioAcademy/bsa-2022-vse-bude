@@ -60,8 +60,8 @@ const Auth: FC = () => {
       .then(() => {
         navigation.navigate(MainScreenName.HOME);
       })
-      .catch((err) => {
-        notification.error(JSON.stringify(err.message));
+      .catch(() => {
+        notification.error(t('errors.WRONG_EMAIL_OR_PASSWORD'));
       });
   };
 

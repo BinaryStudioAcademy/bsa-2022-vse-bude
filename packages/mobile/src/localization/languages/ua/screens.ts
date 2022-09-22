@@ -129,6 +129,7 @@ export const screens = {
     NUMBER_PRICE: 'Ціна має бути числом',
     NUMBER_BID: 'Ставка має бути числом',
     TO_MANY_IMAGES: 'Ви не можете завантажити більше 30 зображень!',
+    WRONG_EMAIL_OR_PASSWORD: 'Неправильний пароль або email',
   },
   verify: {
     VERIFY: 'Підтвердити',

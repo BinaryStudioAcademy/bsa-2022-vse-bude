@@ -130,6 +130,7 @@ export const screens = {
     NUMBER_PRICE: 'The price must be a number',
     NUMBER_BID: 'The bid must be a number',
     TO_MANY_IMAGES: 'Ви не можете завантажити більше 30 зображень!',
+    WRONG_EMAIL_OR_PASSWORD: 'Incorrect password or email',
   },
   verify: {
     VERIFY: 'Verify',
