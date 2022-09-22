@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     color: ColorPalette.WHITE_100,
   },
   link: {
+    textTransform: 'capitalize',
     color: ColorPalette.YELLOW_200,
   },
 });
