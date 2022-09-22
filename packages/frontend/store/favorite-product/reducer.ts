@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
+import type { HydrateAction } from '@types';
+import { HYDRATE } from 'next-redux-wrapper';
+import type { ProductDto } from '@vse-bude/shared';
 import {
   addProductToFavorites,
   deleteProductFromFavorites,
   getFavoriteIds,
   fetchFavouritesSSR,
 } from './actions';
-import type { HydrateAction } from '@types';
-import { HYDRATE } from 'next-redux-wrapper';
-import type { ProductDto } from '@vse-bude/shared';
 
 interface FavoriteProductState {
   favouritesList: ProductDto[];

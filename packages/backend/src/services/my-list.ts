@@ -1,10 +1,9 @@
-import type { FavoriteProducts } from '@prisma/client';
 import type {
   MyListRepository,
   OrderRepository,
   ProductRepository,
 } from '@repositories';
-import type { Item, ProductById } from '@types';
+import type { Item } from '@types';
 import { ProductStatus } from '@prisma/client';
 import {
   HttpStatusCode,
@@ -123,15 +122,21 @@ export class MyListService {
     });
   }
 
-  public async getFavourites({ userId }: { userId: string }): Promise<Item[] | []> {
+  public async getFavourites({
+    userId,
+  }: {
+    userId: string;
+  }): Promise<Item[] | []> {
     const items = await this._myListRepository.getFavourites({ userId });
     if (items.length) {
       const mapped = items.reduce((prev, item) => {
         const favItem = { ...item.product };
         prev.push(favItem);
-        return prev;
+        
+return prev;
       }, []);
-      return mapped;
+      
+return mapped;
     }
 
     return [];

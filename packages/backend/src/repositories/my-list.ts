@@ -1,12 +1,7 @@
-import type {
-  Prisma,
-  PrismaClient,
-  Product,
-  FavoriteProducts,
-} from '@prisma/client';
+import type { Prisma, PrismaClient, Product } from '@prisma/client';
 import { ProductStatus } from '@prisma/client';
 import { Order } from '@vse-bude/shared';
-import type { Item, ProductById } from '@types';
+import type { Item } from '@types';
 
 export class MyListRepository {
   private _dbClient: PrismaClient;
@@ -203,7 +198,11 @@ export class MyListRepository {
     });
   }
 
-  public getFavourites({ userId }: { userId: string }): Promise<{product: Item}[]> {
+  public getFavourites({
+    userId,
+  }: {
+    userId: string;
+  }): Promise<{ product: Item }[]> {
     return this._dbClient.favoriteProducts.findMany({
       where: {
         userId,

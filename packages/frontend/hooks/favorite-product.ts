@@ -1,4 +1,4 @@
-import { RootState } from '@types';
+import type { RootState } from '@types';
 import { useMemo } from 'react';
 import { useTypedSelector } from './store';
 
