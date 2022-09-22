@@ -20,7 +20,11 @@ const Filter: FC = () => {
 
   return (
     <ScreenWrapper>
-      <StatusBar backgroundColor={colors.backgroundSecondary} />
+      <StatusBar
+        barStyle="dark-content"
+        translucent={false}
+        backgroundColor={colors.backgroundSecondary}
+      />
 
       <ScrollView
         showsVerticalScrollIndicator={false}
