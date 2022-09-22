@@ -35,7 +35,7 @@ const DrawerMenu = () => {
   const { t } = useTranslation();
 
   const handlePress = () => {
-    navigation.navigate(RootScreenName.ITEMS_AND_SERVICES);
+    navigation.navigate(RootScreenName.PRODUCTS);
   };
 
   const renderedItems = useMemo(() => {

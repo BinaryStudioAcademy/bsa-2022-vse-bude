@@ -80,6 +80,7 @@ export const screens = {
     MESSAGES: 'Messages',
     SUPPORT: 'Support',
     SIGN_OUT: 'Sign Out',
+    MY_LIST: 'My list',
   },
   errors: {
     UNKNOWN_ERROR: 'Something went wrong',

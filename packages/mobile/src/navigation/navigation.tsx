@@ -17,7 +17,7 @@ import {
   VerifiedPhoneScreen,
   VerifiedEmailScreen,
   TypeOfPostScreen,
-  ItemsAndServices,
+  MyList,
 } from '~/screens/screens';
 import { HeaderLeft } from '~/components/components';
 import { VerifyEmailScreen } from '~/screens/verify-screens/verify-screens';
@@ -26,7 +26,6 @@ import {
   mainScreenOptions,
   baseScreenOptions,
   verifyScreenOptions,
-  getItemsScreenOptions,
   createPostScreenOptions,
 } from './screen-options/screen-options';
 
@@ -52,12 +51,6 @@ const Navigation: FC = () => {
           }}
         />
       </NativeStack.Group>
-      <NativeStack.Group screenOptions={getItemsScreenOptions}>
-        <NativeStack.Screen
-          name={RootScreenName.ITEMS_AND_SERVICES}
-          component={ItemsAndServices}
-        />
-      </NativeStack.Group>
       {user && (
         <NativeStack.Group screenOptions={baseScreenOptions}>
           <Stack.Screen
@@ -79,6 +72,7 @@ const Navigation: FC = () => {
             name={RootScreenName.SUPPORT}
             component={SupportScreen}
           />
+          <Stack.Screen name={RootScreenName.MY_LIST} component={MyList} />
           <NativeStack.Group screenOptions={verifyScreenOptions}>
             <Stack.Screen
               name={RootScreenName.VERIFY_PHONE}
