@@ -74,11 +74,12 @@ export const screens = {
   },
   account: {
     ACCOUNT: 'Акаунт',
-    PERSONAL_INFO: 'Персональна інформація',
+    PERSONAL_INFO: 'Особисті дані',
     SETTINGS: 'Налаштування',
     MESSAGES: 'Повідомлення',
     SUPPORT: 'Підтримка',
     SIGN_OUT: 'Вийти',
+    MY_LIST: 'Мій список',
   },
   errors: {
     UNKNOWN_ERROR: 'Щось трапилось :(',
@@ -229,7 +230,7 @@ export const screens = {
     POPULAR_ITEMS: 'Популярні товари з фіксованою ціною',
   },
   type_of_post: {
-    TITLE: 'Створити публікацію',
+    TITLE: 'Створити пост',
     HEADER: 'Який тип продажу ви оберете?',
     AUCTION: 'Аукціон',
     FIXED_PRICE: 'Фіксована ціна',
@@ -246,7 +247,7 @@ export const screens = {
     BID_SAVED: 'Ставка успішно розміщена',
     LEAVE_TEXT: 'Вийти з аукціону',
     LEAVE_MODAL_TEXT:
-      'Ви впевнені, що покидаєте аукціон? Усі ставки будуть видалені!',
+      'Ви впевнені, що бажаєте покинути аукціон? Усі ставки будуть видалені!',
     LEAVE_SUCCESS: 'Ви успішно покинули аукціон',
     NEW_BID: 'Аукціон оновився',
     NEW: 'новий',

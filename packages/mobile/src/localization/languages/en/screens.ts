@@ -80,6 +80,7 @@ export const screens = {
     MESSAGES: 'Messages',
     SUPPORT: 'Support',
     SIGN_OUT: 'Sign Out',
+    MY_LIST: 'My list',
   },
   errors: {
     UNKNOWN_ERROR: 'Something went wrong',
@@ -247,8 +248,8 @@ export const screens = {
     BID_SAVED: 'Bid successfully placed',
     LEAVE_TEXT: 'Leave Auction',
     LEAVE_MODAL_TEXT:
-      'Are you sure to leave the auction? All bids will be deleted!',
-    LEAVE_SUCCESS: 'You have successfully leave the auction',
+      'Are you sure you want to leave the auction? All bids will be deleted!',
+    LEAVE_SUCCESS: 'You have successfully left the auction',
     NEW_BID: 'New bid placed',
     NEW: 'new',
     USED: 'used',

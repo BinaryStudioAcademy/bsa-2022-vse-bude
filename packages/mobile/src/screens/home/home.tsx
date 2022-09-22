@@ -63,7 +63,7 @@ const Home: FC = () => {
   }, []);
 
   const onSeeAllPress = () => {
-    navigation.navigate(RootScreenName.ITEMS_AND_SERVICES);
+    navigation.navigate(RootScreenName.PRODUCTS);
   };
 
   return (
@@ -71,8 +71,8 @@ const Home: FC = () => {
       <ScrollView>
         <StatusBar
           backgroundColor={ColorPalette.WHITE_100}
-          translucent={true}
-          barStyle="light-content"
+          translucent={false}
+          barStyle="dark-content"
         />
         <HomeScreenWrapper>
           <View

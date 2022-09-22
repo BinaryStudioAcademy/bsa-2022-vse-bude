@@ -15,7 +15,6 @@ import {
 import { selectProducts } from '~/store/selectors';
 import { products } from '~/store/actions';
 import { styles } from './styles';
-import { ListHeader } from './components/components';
 
 const ItemsAndServices = () => {
   const dispatch = useAppDispatch();
@@ -33,7 +32,6 @@ const ItemsAndServices = () => {
         translucent={false}
       />
       <FlatList
-        ListHeaderComponent={ListHeader}
         style={globalStyles.px4}
         data={items}
         keyExtractor={(item) => item.id}

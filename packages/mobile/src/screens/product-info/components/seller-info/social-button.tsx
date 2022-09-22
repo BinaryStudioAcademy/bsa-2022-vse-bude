@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { Linking } from 'react-native';
 import {
   FacebookIcon,
   GlobeIcon,
@@ -17,8 +18,13 @@ type SocialButtonProps = {
 };
 
 const SocialButton: FC<SocialButtonProps> = ({ type, link }) => {
+  const handlePressSocial = (): void => {
+    Linking.openURL(link);
+  };
+
   return (
     <Pressable
+      onPress={handlePressSocial}
       style={[
         globalStyles.alignItemsCenter,
         globalStyles.flexDirectionRow,
@@ -43,7 +49,7 @@ const SocialButton: FC<SocialButtonProps> = ({ type, link }) => {
           styles.link,
         ]}
       >
-        {link}
+        {type}
       </Text>
     </Pressable>
   );

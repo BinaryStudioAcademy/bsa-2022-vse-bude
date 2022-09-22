@@ -40,7 +40,7 @@ export const common = {
   tab_navigation: {
     HOME: 'Home',
     FAVORITE: 'Favourite',
-    MY_LIST: 'My list',
+    PRODUCTS: 'Products',
     ACCOUNT: 'Account',
     LOG_IN: 'Log in',
   },
