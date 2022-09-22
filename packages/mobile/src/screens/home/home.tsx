@@ -29,7 +29,7 @@ import {
   selectPopularLots,
 } from '~/store/selectors';
 import { RootNavigationProps } from '~/common/types/types';
-import { FilterLotType, RootScreenName } from '~/common/enums/enums';
+import { RootScreenName } from '~/common/enums/enums';
 import {
   Category,
   Flag,
@@ -65,12 +65,12 @@ const Home: FC = () => {
 
   const onSeeAllLotsPress = () => {
     dispatch(filtersActions.resetFilters());
-    dispatch(filtersActions.setLotType(FilterLotType.AUCTION));
+    dispatch(filtersActions.setLotType(ProductType.AUCTION));
     navigation.navigate(RootScreenName.PRODUCTS);
   };
   const onSeeAllItemsPress = () => {
     dispatch(filtersActions.resetFilters());
-    dispatch(filtersActions.setLotType(FilterLotType.SELLING));
+    dispatch(filtersActions.setLotType(ProductType.SELLING));
     navigation.navigate(RootScreenName.PRODUCTS);
   };
 
@@ -113,14 +113,7 @@ const Home: FC = () => {
             showsHorizontalScrollIndicator={false}
             data={categories}
             keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <Category
-                categoryId={item.id}
-                onPress={() => {
-                  // TODO
-                }}
-              />
-            )}
+            renderItem={({ item }) => <Category categoryId={item.id} />}
           />
           <ProductsSection
             sectionTitle={t('home.POPULAR_LOTS')}

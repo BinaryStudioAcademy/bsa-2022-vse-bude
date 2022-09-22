@@ -4,9 +4,9 @@ import { View } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { useAppDispatch, useAppSelector, useMemo } from '~/hooks/hooks';
 import { lotTypeFilterData } from '~/mock/mock';
-import { FilterLotType } from '~/common/enums/enums';
 import { filters as filtersApi } from '~/store/actions';
 import { selectFilters } from '~/store/selectors';
+import { ProductType } from '@vse-bude/shared';
 import { ProductTypeSelector } from '../components';
 
 type Props = {
@@ -17,7 +17,7 @@ const ProductTypeSection: FC<Props> = ({ contentContainerStyle }) => {
   const { type } = useAppSelector(selectFilters);
   const dispatch = useAppDispatch();
 
-  const onPress = (filterName: FilterLotType) => {
+  const onPress = (filterName: ProductType | undefined) => {
     dispatch(filtersApi.setLotType(filterName));
   };
 

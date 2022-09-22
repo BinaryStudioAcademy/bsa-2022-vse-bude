@@ -1,9 +1,10 @@
 import { createAction } from '@reduxjs/toolkit';
-import { FilterLotType } from '~/common/enums/enums';
-import { ProductQuery } from '@vse-bude/shared';
+import { ProductQuery, ProductType } from '@vse-bude/shared';
 import { ActionType } from './common';
 
-const setLotType = createAction<FilterLotType>(ActionType.SET_LOT_TYPE_FILTER);
+const setLotType = createAction<ProductType | undefined>(
+  ActionType.SET_LOT_TYPE_FILTER,
+);
 const setPriceRange = createAction<ProductQuery['priceGt'][]>(
   ActionType.SET_PRICE_RANGE,
 );

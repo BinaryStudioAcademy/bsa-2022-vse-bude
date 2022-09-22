@@ -1,5 +1,4 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { FilterLotType } from '~/common/enums/enums';
 import { ProductQuery } from '@vse-bude/shared';
 import {
   setLotType,
@@ -10,17 +9,8 @@ import {
   resetFilters,
 } from './auction';
 
-type InitialState = {
-  type: FilterLotType | undefined;
-  categoryId: ProductQuery['categoryId'];
-  priceGt: ProductQuery['priceGt'];
-  priceLt: ProductQuery['priceLt'];
-  sortBy: ProductQuery['sortBy'];
-  order: ProductQuery['order'];
-};
-
-const initialState: InitialState = {
-  type: FilterLotType.ALL,
+const initialState: ProductQuery = {
+  type: undefined,
   categoryId: undefined,
   priceGt: undefined,
   priceLt: undefined,
