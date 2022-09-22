@@ -35,6 +35,11 @@
     "role": "Full-Stack Web Developer"
   },
   {
+    "name": "Наталія Марченко",
+    "photo": "/images/team/Natalia.jpg",
+    "role": "Developer"
+  },
+  {
     "name": "Надія Прохорчук",
     "photo": "/images/team/Nadiia.jpg",
     "role": "Developer"
@@ -50,9 +55,9 @@
     "role": "QA"
   },
   {
-    "name": "Наталія Марченко",
-    "photo": "/images/team/Natalia.jpg",
-    "role": "Developer"
+    "name": "Юрій Радков",
+    "photo": "/images/team/Yurii.jpg",
+    "role": "QA"
   },
   {
     "name": "Євгеній Морозюк",

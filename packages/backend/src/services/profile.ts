@@ -193,11 +193,14 @@ export class UserProfileService {
   }: {
     userId: string;
     socialMedia: SocialMedia[];
-  }): Promise<void> {
-    await this._userProfileRepository.updateUserSocialMedia({
+  }): Promise<SocialNet[]> {
+    const nets = this._userProfileRepository.updateUserSocialMedia({
       userId,
       socialMedia,
     });
+    const mappedNets = (await Promise.all(nets)).filter((net) => net);
+
+    return mappedNets;
   }
 
   public async changePassword({

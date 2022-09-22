@@ -1,4 +1,9 @@
-import type { Prisma, PrismaClient, PrismaPromise } from '@prisma/client';
+import type {
+  Prisma,
+  PrismaClient,
+  PrismaPromise,
+  Product,
+} from '@prisma/client';
 import { ProductStatus } from '@prisma/client';
 import { Order } from '@vse-bude/shared';
 import type { Item } from 'common/types/my-list-items';
@@ -44,10 +49,10 @@ export class MyListRepository {
             lastName: true,
           },
         },
-        endDate: true,
+        updatedAt: true,
       },
       orderBy: {
-        endDate: Order.DESC,
+        updatedAt: Order.DESC,
       },
     });
   }
@@ -116,10 +121,10 @@ export class MyListRepository {
         type: true,
         status: true,
         views: true,
-        endDate: true,
+        updatedAt: true,
       },
       orderBy: {
-        endDate: Order.DESC,
+        updatedAt: Order.DESC,
       },
     });
   }
@@ -155,10 +160,10 @@ export class MyListRepository {
 
   public addItemToArchive({
     itemId,
-    endDate,
+    updatedAt,
   }: {
     itemId: string;
-    endDate: string;
+    updatedAt: string;
   }): PrismaPromise<Item> {
     this._deleteBids({ itemId });
 
@@ -168,7 +173,7 @@ export class MyListRepository {
       },
       data: {
         status: ProductStatus.CANCELLED,
-        endDate,
+        updatedAt,
       },
       select: {
         id: true,
@@ -179,7 +184,7 @@ export class MyListRepository {
         type: true,
         status: true,
         views: true,
-        endDate: true,
+        updatedAt: true,
       },
     });
   }
@@ -198,6 +203,14 @@ export class MyListRepository {
       },
       select: {
         title: true,
+      },
+    });
+  }
+
+  public deleteProduct({ productId }: { productId: string }): Promise<Product> {
+    return this._dbClient.product.delete({
+      where: {
+        id: productId,
       },
     });
   }

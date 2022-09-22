@@ -114,7 +114,7 @@ const updatePersonalInfoParser: UpdatePersonalInfoParser = (
     firstName,
     lastName,
     email,
-    phone: phone || null,
+    phone: phone ? `+380${phone}` : null,
     userAddress,
     socialMedia,
     password,

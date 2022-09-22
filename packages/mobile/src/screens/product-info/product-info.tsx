@@ -7,7 +7,6 @@ import {
   UPDATE_PRODUCT_PRICE,
 } from '@vse-bude/shared';
 import { products as productsActions } from '~/store/actions';
-import { selectCurrentProduct } from '~/store/products/selectors';
 import {
   useAppDispatch,
   useAppSelector,
@@ -15,7 +14,7 @@ import {
   useRoute,
   useTranslation,
 } from '~/hooks/hooks';
-import { RootScreenName } from '~/common/enums/enums';
+import { DataStatus, RootScreenName } from '~/common/enums/enums';
 import {
   ScreenWrapper,
   View,
@@ -27,7 +26,11 @@ import {
   StatusBar,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { selectCurrentUser } from '~/store/selectors';
+import {
+  selectCurrentProduct,
+  selectCurrentUser,
+  selectDataStatusProducts,
+} from '~/store/selectors';
 import { notification, socketApi } from '~/services/services';
 import {
   Description,
@@ -42,6 +45,8 @@ const ProductInfo: FC = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const product = useAppSelector(selectCurrentProduct);
+  const dataStatusProduct = useAppSelector(selectDataStatusProducts);
+  const isLoading = dataStatusProduct === DataStatus.PENDING;
   const user = useAppSelector(selectCurrentUser);
   const route =
     useRoute<
@@ -66,9 +71,10 @@ const ProductInfo: FC = () => {
     }
   }, [id, user, dispatch]);
 
-  if (!product) {
+  if (!product || isLoading) {
     return <Spinner isOverflow={true} />;
   }
+
   const {
     title,
     currentPrice,

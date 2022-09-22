@@ -19,6 +19,12 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(authActions.logOut.fulfilled, (state) => {
       state.user = null;
     })
+    .addCase(updateAvatar.fulfilled, (state, action) => {
+      state.dataStatus = DataStatus.FULFILLED;
+      if (state.user) {
+        state.user.avatar = action.payload.avatar?.toString();
+      }
+    })
     .addMatcher(
       isAnyOf(
         getPersonalInfo.pending,

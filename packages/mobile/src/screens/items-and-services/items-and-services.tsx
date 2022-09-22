@@ -25,7 +25,6 @@ import { RootState } from '~/common/types/types';
 import { ProductQuery, ProductDto } from '@vse-bude/shared';
 import { DataStatus } from '~/common/enums/enums';
 import { styles } from './styles';
-import { ListHeader } from './components/components';
 
 const ItemsAndServices = () => {
   const dispatch = useAppDispatch();
@@ -63,7 +62,6 @@ const ItemsAndServices = () => {
         <Spinner />
       ) : (
         <FlatList
-          ListHeaderComponent={ListHeader}
           style={globalStyles.px4}
           data={items}
           keyExtractor={keyExtractor}

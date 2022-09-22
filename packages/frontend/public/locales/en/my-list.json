@@ -14,10 +14,14 @@
     "purchased": "Purchased",
     "archived": "Archived",
     "sold": "Sold",
+    "fixedPrice": "Fixed Price",
+    "auction": "Auction",
     "edit": "edited",
     "publish": "Publish",
     "unarchive": "Unarchive",
-    "tooltip-xmark": "archive"
+    "tooltip-xmark": "archive",
+    "tooltip-delete": "delete",
+    "tooltip-seeItem": "view"
   },
   "months": {
     "january": "January",
@@ -53,8 +57,10 @@
   },
   "modal": {
     "header": "Move the product to the archive?",
+    "header_delete": "Want to delete the product?",
     "buttons": {
-      "add": "Archive"
+      "add": "Archive",
+      "delete": "Delete"
     }
   }
 }

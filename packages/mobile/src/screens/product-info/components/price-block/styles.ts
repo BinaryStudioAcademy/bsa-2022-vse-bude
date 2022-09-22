@@ -16,14 +16,8 @@ const styles = StyleSheet.create({
     width: 97,
   },
   input: {
-    maxWidth: 140,
+    maxWidth: 150,
     marginRight: 5,
-  },
-  btnIcon: {
-    position: 'absolute',
-    top: 17.5,
-    left: 14,
-    zIndex: 10,
   },
   iconBorder: {
     width: 44,

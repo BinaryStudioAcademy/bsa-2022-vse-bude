@@ -1,4 +1,4 @@
-﻿import type { Theme } from '@emotion/react';
+import type { Theme } from '@emotion/react';
 import { css } from '@emotion/react';
 
 export const arrow = ({ colors }: Theme) => css`

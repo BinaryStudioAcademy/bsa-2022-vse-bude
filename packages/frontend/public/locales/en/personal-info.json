@@ -21,7 +21,7 @@
     "delete": "Delete the Photo"
   },
   "label": {
-    "deliveryData": "Delivery data",
+    "deliveryData": "Place of delivery",
     "firstName": "First name",
     "lastName": "Last name",
     "email": "Email",
@@ -96,5 +96,6 @@
   },
   "tooltip": {
     "verify": "To continue verifying your account, please save the changes"
-  }
+  },
+  "defaultCountry": "Ukraine"
 }

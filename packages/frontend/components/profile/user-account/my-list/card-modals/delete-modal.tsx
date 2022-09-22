@@ -1,29 +1,24 @@
 import { Button, IconButton } from '@components/primitives';
 import { useAppDispatch, useTypedSelector } from '@hooks';
-import { addItemToArchive, setVisabilityCancelModal, setItemId } from '@store';
+import { setVisabilityDeleteModal, setItemId, deleteItem } from '@store';
 import { useTranslation } from 'next-i18next';
 import { IconColor, IconName } from '@enums';
 import type { RootState } from '@types';
-import type { ProductToArchive } from '@vse-bude/shared';
 import * as styles from './style';
 
-export const CancelModal = () => {
+export const DeleteModal = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const itemId = useTypedSelector((state: RootState) => state.myList.itemId);
 
-  const onAddToArchive = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const onDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    const reqDto: ProductToArchive = {
-      itemId,
-      endDate: new Date().toISOString(),
-    };
-    dispatch(addItemToArchive({ data: reqDto }));
-    dispatch(setVisabilityCancelModal());
+    dispatch(deleteItem({ productId: itemId }));
+    dispatch(setVisabilityDeleteModal());
   };
 
   const onCloseModal = () => {
-    dispatch(setVisabilityCancelModal());
+    dispatch(setVisabilityDeleteModal());
     dispatch(setItemId(null));
   };
 
@@ -38,14 +33,14 @@ export const CancelModal = () => {
         cssExtend={styles.closeButton}
         backgroundColor="darkgray"
       />
-      <form>
+      <form noValidate>
         <div css={styles.modalHeader}>
-          <span css={styles.header}>{t('my-list:modal.header')}</span>
+          <span css={styles.header}>{t('my-list:modal.header_delete')}</span>
         </div>
 
         <div css={styles.actionButtons}>
-          <Button size="small" type="button" onClick={onAddToArchive}>
-            {t('my-list:modal.buttons.add')}
+          <Button size="small" type="button" onClick={onDelete}>
+            {t('my-list:modal.buttons.delete')}
           </Button>
         </div>
       </form>

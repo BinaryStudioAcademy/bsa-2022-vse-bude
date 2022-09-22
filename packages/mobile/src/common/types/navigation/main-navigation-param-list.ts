@@ -4,7 +4,7 @@ type MainNavigationParamList = {
   [MainScreenName.HOME]: undefined;
   [MainScreenName.LOG_IN]: undefined;
   [MainScreenName.ACCOUNT_ROOT]: undefined;
-  [MainScreenName.MY_LIST]: undefined;
+  [MainScreenName.PRODUCTS]: undefined;
   [MainScreenName.FAVORITE]: undefined;
 };
 

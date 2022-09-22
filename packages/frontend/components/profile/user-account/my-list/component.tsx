@@ -15,7 +15,7 @@ import { SubPageName } from '../common';
 import { Posted, Drafted, Purchased, Sold, Archived } from './cards';
 import { FilterArrow } from './primitives';
 import { Filter } from './filter';
-import { CancelModal } from './cancel-modal';
+import { CancelModal, DeleteModal } from './card-modals';
 import { ProductSection } from './product-section';
 import * as styles from './styles';
 import { breadcrumbsPaths } from './components-data';
@@ -23,8 +23,14 @@ import { filterCallback } from './utils';
 
 export const MyListInfo = () => {
   const { t } = useTranslation();
-  const { itemsList, filterType, filterStatus, badges, showCancelModal } =
-    useTypedSelector((state: RootState) => state.myList);
+  const {
+    itemsList,
+    filterType,
+    filterStatus,
+    badges,
+    showCancelModal,
+    showDeleteModal,
+  } = useTypedSelector((state: RootState) => state.myList);
   const dispatch = useAppDispatch();
   const { user } = useAuth();
 
@@ -130,6 +136,10 @@ export const MyListInfo = () => {
 
       <Modal visible={showCancelModal}>
         <CancelModal />
+      </Modal>
+
+      <Modal visible={showDeleteModal}>
+        <DeleteModal />
       </Modal>
     </div>
   );

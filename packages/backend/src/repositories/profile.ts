@@ -217,7 +217,7 @@ export class UserProfileRepository {
     });
   }
 
-  public updateAddress({
+  public async updateAddress({
     userId,
     data,
   }: {
@@ -225,24 +225,41 @@ export class UserProfileRepository {
     data: UserAddressDto;
   }): Promise<AddressDto> {
     const { country, region, city, zip, deliveryData } = data;
-
-    return this._dbClient.address.upsert({
+    const addressDB = await this._dbClient.address.findFirst({
       where: {
         userId,
       },
-      update: {
+    });
+    if (addressDB) {
+      return this._dbClient.address.update({
+        where: {
+          userId,
+        },
+        data: {
+          country,
+          region,
+          city,
+          zip,
+          deliveryData,
+        },
+        select: {
+          country: true,
+          region: true,
+          city: true,
+          zip: true,
+          deliveryData: true,
+        },
+      });
+    }
+
+    return this._dbClient.address.create({
+      data: {
         country,
         region,
         city,
         zip,
         deliveryData,
-      },
-      create: {
-        country,
-        region,
-        city,
-        zip,
-        deliveryData,
+        userId,
       },
       select: {
         country: true,
@@ -261,19 +278,23 @@ export class UserProfileRepository {
     userId: string;
     socialMedia: SocialMedia[];
   }): Promise<SocialNet>[] {
-    return socialMedia.map((net) => {
+    return socialMedia.map(async (net) => {
       const { id, link, socialMedia } = net;
       if (id && link) {
-        return this._updateSocialMediaLinks({ id, link });
+        return await this._updateSocialMediaLinks({ id, link });
       } else if (!id && link) {
         this._isSocialNetTypeExists({
           userId,
           socialMedia,
         });
 
-        return this._createSocialMediaLinks({ link, socialMedia, userId });
+        return await this._createSocialMediaLinks({
+          link,
+          socialMedia,
+          userId,
+        });
       } else if (id && !link) {
-        return this._deleteSocialMediaLinks({ id });
+        await this._deleteSocialMediaLinks({ id });
       }
     });
   }

@@ -1,4 +1,6 @@
+import { NavigatorScreenParams } from '@react-navigation/native';
 import { RootScreenName } from '~/common/enums/enums';
+import { DrawerNavigationParamList } from './drawer-navigation-param-list';
 
 type RootNavigationParamList = {
   [RootScreenName.MAIN]: { screen: string } | undefined;
@@ -20,9 +22,10 @@ type RootNavigationParamList = {
   [RootScreenName.NEW_AUCTION]: undefined;
   [RootScreenName.ITEM_INFO]: { itemId: string };
   [RootScreenName.TYPE_OF_NEW_POST]: undefined;
-  [RootScreenName.MAIN_WITH_MENU]: undefined;
   [RootScreenName.FILTER]: undefined;
-  [RootScreenName.ITEMS_AND_SERVICES]: undefined;
+  [RootScreenName.MAIN_WITH_MENU]: NavigatorScreenParams<DrawerNavigationParamList>;
+  [RootScreenName.PRODUCTS]: undefined;
+  [RootScreenName.MY_LIST]: undefined;
 };
 
 export type { RootNavigationParamList };

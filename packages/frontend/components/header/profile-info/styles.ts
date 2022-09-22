@@ -26,7 +26,7 @@ export const dropdownArrow = ({
   border-radius: ${radiuses.circle};
   width: ${widths.checkbox};
   height: ${heights.checkbox};
-  padding: ${spaces.xs};
+  padding: ${spaces.md};
   background-color: ${colors.backgroundLight};
   cursor: pointer;
   :hover {
@@ -56,6 +56,12 @@ export const popoverContentItem = ({
   line-height: ${lineHeights.body1};
   font-weight: ${fontWeights.body1};
   color: ${colors.text};
+  display: flex;
+  align-items: center;
+
+  i {
+    width: ${spaces.lg};
+  }
 
   :hover {
     background-color: ${colors.backgroundLight};

@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 import { updateProduct } from 'services/product';
 import { createPost } from 'services/post';
 import { ProductType } from '@vse-bude/shared';
-import { Routes } from '@enums';
+import { ProfileRoutes, Routes } from '@enums';
 import type { SelectOption } from '@components/primitives/select/types';
 import { initialProductFormState, ConditionFields } from './form-utils';
 import ImageInput from './image-input';
@@ -78,10 +78,10 @@ export default function ProductForm({ edit }: { edit: boolean }) {
 
       if (edit) {
         const editInfo = await updateProduct(query.id as string, formData);
-        if (editInfo) push(`${Routes.ITEMS}/${query.id}`);
+        editInfo && push(`${Routes.PROFILE}/${ProfileRoutes.LIST}`);
       } else {
         const { id } = await createPost(formData);
-        push(`${Routes.ITEMS}/${id}`);
+        id && push(`${Routes.PROFILE}/${ProfileRoutes.LIST}`);
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -139,7 +139,7 @@ export default function ProductForm({ edit }: { edit: boolean }) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form noValidate onSubmit={handleSubmit(onSubmit)}>
       <ImageInput images={images} setImages={setImages} />
       <Column css={styles.sectionRow}>
         <DescriptionBlock
@@ -166,10 +166,10 @@ export default function ProductForm({ edit }: { edit: boolean }) {
           <div css={styles.inputRow}>
             <Input
               error={errors.price?.message}
-              required
+              labelRequiredMark
               tooltip={t('create-post:tooltip.price')}
               id="post-price"
-              type="text"
+              type="number"
               name="price"
               variant="primary"
               label={t('create-post:label.price')}

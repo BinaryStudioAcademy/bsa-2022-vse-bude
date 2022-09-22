@@ -47,6 +47,7 @@ export const makePostButton = ({ colors, radiuses, spaces }: Theme) => css`
   background: ${colors.primary};
   cursor: pointer;
   padding: 0 6px;
+  width: 100%;
 
   i {
     margin-right: ${spaces.md};
@@ -59,6 +60,16 @@ export const makePostButton = ({ colors, radiuses, spaces }: Theme) => css`
     background: ${colors.primaryLightHover};
     i {
       transform: rotate(calc(45deg + 90deg));
+    }
+  }
+
+  &:disabled {
+    background: ${colors.disabled};
+    cursor: auto;
+    &:hover {
+      i {
+        transform: none;
+      }
     }
   }
 `;

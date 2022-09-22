@@ -13,22 +13,10 @@ export const ProfileData = ({ user }: { user: UserProfileDto }) => {
         <h4 css={styles.sectionHeader}>
           {t('personal-info:headline.personalInfo')}
         </h4>
-        <table>
-          <tbody>
-            <tr>
-              <td css={styles.cell}>
-                {t('personal-info:label.firstName') + ':'}
-              </td>
-              <td css={[styles.cell, styles.name]}>{firstName}</td>
-            </tr>
-            <tr>
-              <td css={styles.cell}>
-                {t('personal-info:label.lastName') + ':'}
-              </td>
-              <td css={[styles.cell, styles.name]}>{lastName}</td>
-            </tr>
-          </tbody>
-        </table>
+        <div>
+          <span css={styles.name}>{firstName}</span>
+          <span css={styles.name}>{lastName}</span>
+        </div>
       </div>
 
       <div css={styles.section}>

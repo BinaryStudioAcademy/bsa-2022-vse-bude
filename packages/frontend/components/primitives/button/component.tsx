@@ -12,6 +12,7 @@ export const Button = ({
   ...props
 }: ButtonProps) => (
   <Tooltip
+    style={{ cursor: 'pointer' }}
     trigger={
       <button
         css={styles.button}

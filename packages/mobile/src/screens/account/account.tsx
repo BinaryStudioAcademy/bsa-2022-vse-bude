@@ -14,7 +14,8 @@ import {
   LogOutIcon,
   Logo,
   TouchableOpacity,
-  PlusIcon,
+  ListIcon,
+  PlusCircleIcon,
 } from '~/components/components';
 import {
   useAppDispatch,
@@ -48,6 +49,9 @@ const Account: FC = () => {
   const handleSupportPress = () => {
     navigation.navigate(RootScreenName.SUPPORT);
   };
+  const handleMyListPress = () => {
+    navigation.navigate(RootScreenName.MY_LIST);
+  };
   const handleLogOut = () => {
     dispatch(authActions.logOut());
   };
@@ -59,12 +63,16 @@ const Account: FC = () => {
       </View>
       <View style={styles.btnWrapper}>
         <TouchableOpacity onPress={handleCreateNewItemPress} style={styles.row}>
-          <PlusIcon size={30} style={styles.icon} />
+          <PlusCircleIcon size={30} style={styles.icon} />
           <Text style={styles.btnText}>{t('type_of_post.TITLE')}</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={handlePersonalInfoPress} style={styles.row}>
           <UserIcon size={30} style={styles.icon} />
           <Text style={styles.btnText}>{t('account.PERSONAL_INFO')}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleMyListPress} style={styles.row}>
+          <ListIcon size={30} style={styles.icon} />
+          <Text style={styles.btnText}>{t('account.MY_LIST')}</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleSettingsPress} style={styles.row}>
           <SettingsIcon size={30} style={styles.icon} />

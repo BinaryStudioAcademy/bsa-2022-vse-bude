@@ -2,6 +2,7 @@ export { ItemImage } from './item-image';
 export { ItemHeader } from './item-title';
 export { Price } from './price';
 export { ItemStatus } from './item-status';
+export { ItemType } from './item-type';
 export { ProfileLink } from './profile-link';
 export { ItemDate } from './date';
 export { ItemDescription } from './item-description';
