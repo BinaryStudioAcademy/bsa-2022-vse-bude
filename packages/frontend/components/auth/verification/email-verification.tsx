@@ -40,7 +40,7 @@ export const EmailVerification = ({ showDescription }: Props) => {
   };
 
   return (
-    <form css={verifyForm} onSubmit={handleSubmit(onSubmit)}>
+    <form noValidate css={verifyForm} onSubmit={handleSubmit(onSubmit)}>
       <div css={inputWrapper}>
         {showDescription && (
           <div css={verifyText}>

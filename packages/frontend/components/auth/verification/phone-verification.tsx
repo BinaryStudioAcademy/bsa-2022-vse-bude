@@ -43,7 +43,7 @@ export const PhoneVerification = () => {
   };
 
   return (
-    <form css={verifyForm} onSubmit={handleSubmit(onSubmit)}>
+    <form noValidate css={verifyForm} onSubmit={handleSubmit(onSubmit)}>
       <div css={inputWrapper}>
         <Input
           {...register('code')}

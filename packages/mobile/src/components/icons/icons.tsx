@@ -86,8 +86,12 @@ const ClockIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="clock" {...iconProps} />
 );
 
-const PlusIcon: AppIcon = (iconProps) => (
+const PlusCircleIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="plus-circle" {...iconProps} />
+);
+
+const PlusIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="plus" {...iconProps} />
 );
 
 const ImageIcon: AppIcon = (iconProps) => (
@@ -154,6 +158,7 @@ export {
   CrossIcon,
   EyeIcon,
   EyeOffIcon,
+  PlusCircleIcon,
   PlusIcon,
   ImageIcon,
   InfoIcon,

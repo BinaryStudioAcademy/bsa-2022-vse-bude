@@ -27,7 +27,7 @@ export const ForgotPassword = () => {
   const { t } = useTranslation('auth');
 
   return (
-    <form css={verifyForm} onSubmit={handleSubmit(onSubmit)}>
+    <form noValidate css={verifyForm} onSubmit={handleSubmit(onSubmit)}>
       <div css={inputWrapper}>
         <div css={verifyText}>
           <span>{t('forgot-password.emailAddressPasswordResetText')}</span>

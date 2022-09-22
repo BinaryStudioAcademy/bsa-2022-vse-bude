@@ -17,9 +17,9 @@ import {
   PrimaryButton,
   Text,
   View,
-  PlusSvg,
   Input,
   CrossIcon,
+  PlusIcon,
   Pressable,
   StarSvg,
   Spinner,
@@ -189,8 +189,9 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
               </TouchableHighlight>
             )}
             <View style={styles.btnWidth}>
-              <PlusSvg style={styles.btnIcon} />
               <PrimaryButton
+                iconLeft={<PlusIcon size={10} color={colors.whiteColor} />}
+                isLoading={isLoading}
                 onPress={handleSubmit(handleMakeBidPress)}
                 label={`${t('common:components.BUTTON_BID')}`}
                 disabled={!canUserMakeBid}

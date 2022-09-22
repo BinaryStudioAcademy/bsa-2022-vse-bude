@@ -12,21 +12,21 @@ export const getLinksData = (userId: string): LinkData[] => [
     label: 'account:myList',
     path: `${Routes.PROFILE}${ProfileRoutes.LIST}`,
   },
-  {
-    iconPath: IconName.SETTINGS,
-    label: 'account:settings',
-    path: `${Routes.PROFILE}${ProfileRoutes.ACCOUNT_SETTINGS}`,
-  },
+  // {
+  //   iconPath: IconName.SETTINGS,
+  //   label: 'account:settings',
+  //   path: `${Routes.PROFILE}${ProfileRoutes.ACCOUNT_SETTINGS}`,
+  // },
   {
     iconPath: IconName.BELL,
     label: 'account:notifications',
     path: `${Routes.PROFILE}${ProfileRoutes.NOTIFICATIONS}`,
   },
-  {
-    iconPath: IconName.MESSAGE,
-    label: 'account:messages',
-    path: `${Routes.PROFILE}${ProfileRoutes.MESSAGES}`,
-  },
+  // {
+  //   iconPath: IconName.MESSAGE,
+  //   label: 'account:messages',
+  //   path: `${Routes.PROFILE}${ProfileRoutes.MESSAGES}`,
+  // },
   {
     iconPath: IconName.SUPPORT,
     label: 'account:support',

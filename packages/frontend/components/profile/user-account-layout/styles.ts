@@ -47,6 +47,7 @@ export const makePostButton = ({ colors, radiuses, spaces }: Theme) => css`
   background: ${colors.primary};
   cursor: pointer;
   padding: 0 6px;
+  width: 100%;
 
   i {
     margin-right: ${spaces.md};

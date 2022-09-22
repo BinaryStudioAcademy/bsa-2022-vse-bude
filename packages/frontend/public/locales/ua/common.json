@@ -113,6 +113,9 @@
     },
     "badge": {
       "removeLabel": "Видалити фільтр {{param}}"
+    },
+    "datePicker": {
+      "time": "Час"
     }
   },
   "verify": {
