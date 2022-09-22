@@ -4,7 +4,7 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import { MainScreenName } from '~/common/enums/enums';
-import { AppIcon, MainNavigationParamList } from '~/common/types/types';
+import { MainNavigationParamList } from '~/common/types/types';
 import { Home, Favorite, ItemsAndServices, Account } from '~/screens/screens';
 import { personalInfoActions } from '~/store/actions';
 import { selectCurrentUser, selectPersonalInfo } from '~/store/selectors';
@@ -26,19 +26,18 @@ import {
   Image,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { StyleProp, ViewStyle } from 'react-native';
 import { WelcomeNavigation } from '../welcome/welcome.navigation';
 import { styles } from './styles';
 
 const Tabs = createBottomTabNavigator<MainNavigationParamList>();
 type TabOptions = {
   label: string;
-  tabBarIcon: AppIcon;
-  headerLeft?: FC | undefined;
-  headerRight?: FC | undefined;
-  title?: string | undefined;
-  headerShown?: boolean;
-  headerStyle?: StyleProp<ViewStyle> | undefined;
+  tabBarIcon: BottomTabNavigationOptions['tabBarIcon'];
+  headerLeft?: BottomTabNavigationOptions['headerLeft'];
+  headerRight?: BottomTabNavigationOptions['headerRight'];
+  title?: BottomTabNavigationOptions['title'];
+  headerShown?: BottomTabNavigationOptions['headerShown'];
+  headerStyle?: BottomTabNavigationOptions['headerStyle'];
 };
 
 const MainNavigation: FC = () => {
