@@ -1,5 +1,5 @@
 import { ValidationRanges } from '@vse-bude/shared';
-import { SECONDS_IN_ONE_DAY } from '@components/primitives/input/date-input';
+import { MILISECONDS_IN_ONE_DAY } from '@components/primitives/input/date-input';
 import Joi from 'joi';
 import type { TFunction } from 'next-i18next';
 
@@ -80,7 +80,7 @@ export const createAuctionSchema = (t: TFunction) =>
       .required()
       .messages({
         'number.base': t('create-post:validation.price.base'),
-        'number.empty': t('create-post:validation.price.empty'),
+        'number.required': t('create-post:validation.price.empty'),
       }),
     minimalBid: Joi.number()
       .min(1)
@@ -90,7 +90,7 @@ export const createAuctionSchema = (t: TFunction) =>
         'number.empty': t('create-post:validation.price.empty'),
       }),
     endDate: Joi.date()
-      .min(Date.now() + SECONDS_IN_ONE_DAY)
+      .min(Date.now() + MILISECONDS_IN_ONE_DAY)
       .required()
       .messages({
         'date.min': t('create-post:validation.date.base'),

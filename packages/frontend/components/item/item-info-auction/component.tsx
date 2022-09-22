@@ -189,6 +189,7 @@ export const ItemInfoAuction = ({
       <ItemInfo item={item} />
       {!isSold && (
         <form
+          noValidate
           onSubmit={handleSubmit(onMakeBid)}
           css={[styles.controls, isAuthor && styles.editButton]}
         >

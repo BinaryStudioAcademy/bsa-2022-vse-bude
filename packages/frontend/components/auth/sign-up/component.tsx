@@ -53,7 +53,7 @@ export const SignUpForm = () => {
   );
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} css={form}>
+    <form noValidate onSubmit={handleSubmit(onSubmit)} css={form}>
       <div css={inputWrapper}>
         <p css={headline}>{t('auth:sign-up.createAccount')}</p>
 

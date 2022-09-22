@@ -18,10 +18,10 @@ export const getStaticProps = withPublic(
 );
 
 const RulesPage = () => {
-  const { t } = useTranslation('rules');
+  const { t } = useTranslation();
 
   return (
-    <Layout title={t('generalRules.title')}>
+    <Layout title={t('rules:generalRules.title')}>
       <RulesPageInner />
     </Layout>
   );

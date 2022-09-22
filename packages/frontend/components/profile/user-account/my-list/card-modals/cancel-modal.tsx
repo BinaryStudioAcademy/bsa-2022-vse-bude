@@ -38,7 +38,7 @@ export const CancelModal = () => {
         cssExtend={styles.closeButton}
         backgroundColor="darkgray"
       />
-      <form>
+      <form noValidate>
         <div css={styles.modalHeader}>
           <span css={styles.header}>{t('my-list:modal.header')}</span>
         </div>

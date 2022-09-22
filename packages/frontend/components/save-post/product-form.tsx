@@ -139,7 +139,7 @@ export default function ProductForm({ edit }: { edit: boolean }) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form noValidate onSubmit={handleSubmit(onSubmit)}>
       <ImageInput images={images} setImages={setImages} />
       <Column css={styles.sectionRow}>
         <DescriptionBlock
@@ -166,10 +166,10 @@ export default function ProductForm({ edit }: { edit: boolean }) {
           <div css={styles.inputRow}>
             <Input
               error={errors.price?.message}
-              required
+              labelRequiredMark
               tooltip={t('create-post:tooltip.price')}
               id="post-price"
-              type="text"
+              type="number"
               name="price"
               variant="primary"
               label={t('create-post:label.price')}

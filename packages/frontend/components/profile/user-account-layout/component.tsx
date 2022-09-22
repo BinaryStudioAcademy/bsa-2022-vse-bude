@@ -24,6 +24,19 @@ export const AccountLayout: FC<AccountPageProps> = ({ children }) => {
     dispatch(showMakePostModal());
   };
 
+  const getClickHandler = (label: string) => {
+    if (label === 'account:signOut') {
+      return () => dispatch(logoutUser());
+    }
+
+    if (label === 'account:support') {
+      return () =>
+        (location.href = 'mailto:vsebude.team@gmail.com?subject=Support');
+    }
+
+    return null;
+  };
+
   return (
     <Layout>
       <Container>
@@ -65,11 +78,7 @@ export const AccountLayout: FC<AccountPageProps> = ({ children }) => {
                       label={tLabel}
                       location={location}
                       path={path}
-                      onClick={
-                        label === 'account:signOut'
-                          ? () => dispatch(logoutUser())
-                          : null
-                      }
+                      onClick={getClickHandler(label)}
                     />
                   );
                 })}
