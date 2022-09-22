@@ -64,12 +64,12 @@ const Home: FC = () => {
   }, []);
 
   const onSeeAllLotsPress = () => {
-    dispatch(filtersActions.setLotType(ProductType.AUCTION));
+    dispatch(filtersActions.update({ type: ProductType.AUCTION }));
     navigation.navigate(RootScreenName.PRODUCTS);
   };
 
   const onSeeAllItemsPress = () => {
-    dispatch(filtersActions.setLotType(ProductType.SELLING));
+    dispatch(filtersActions.update({ type: ProductType.SELLING }));
     navigation.navigate(RootScreenName.PRODUCTS);
   };
 

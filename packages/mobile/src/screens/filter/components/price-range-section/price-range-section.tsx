@@ -40,7 +40,7 @@ const PriceRangeSection: React.FC = () => {
   );
 
   const updateFilters = useCallback(() => {
-    dispatch(filtersActions.setPriceRange(range));
+    dispatch(filtersActions.update({ priceGt: range[0], priceLt: range[1] }));
   }, [range]);
 
   const handleMinPriceChange = useCallback((value: string): void => {
