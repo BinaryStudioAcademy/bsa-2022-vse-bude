@@ -120,8 +120,31 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
 
   return (
     <View>
-      <Text style={[globalStyles.fs14, globalStyles.mt5, styles.title]}>
-        {t('make_a_post.DOWNLOAD_PHOTOS')}
+      <View
+        style={[
+          globalStyles.flexDirectionRow,
+          globalStyles.mt5,
+          { height: 16 },
+        ]}
+      >
+        <Text style={[globalStyles.fs14, styles.title]}>
+          {t('make_a_post.DOWNLOAD_PHOTOS')}
+        </Text>
+        <Text
+          style={[
+            styles.required,
+            globalStyles.ml1,
+            globalStyles.fs22,
+            {
+              color: colors.accent,
+            },
+          ]}
+        >
+          *
+        </Text>
+      </View>
+      <Text style={[globalStyles.fs12, globalStyles.mt1, styles.title]}>
+        {t('make_a_post.SUBTITLE_PHOTOS')}
       </Text>
       <AddPhotos images={images} setImages={setImages} />
       <Text style={[globalStyles.fs14, globalStyles.mt5, styles.title]}>
@@ -198,10 +221,10 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
       </Text>
       <Input
         label={t('personal_info.COUNTRY')}
-        placeholder={t('personal_info.COUNTRY_HINT')}
         name="country"
         control={control}
         errors={errors}
+        editable={false}
         contentContainerStyle={globalStyles.mt5}
         required={true}
       />

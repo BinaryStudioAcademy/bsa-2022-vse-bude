@@ -125,8 +125,31 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
 
   return (
     <View>
-      <Text style={[globalStyles.fs14, globalStyles.mt5, styles.title]}>
-        {t('make_a_post.DOWNLOAD_PHOTOS')}
+      <View
+        style={[
+          globalStyles.flexDirectionRow,
+          globalStyles.mt5,
+          { height: 16 },
+        ]}
+      >
+        <Text style={[globalStyles.fs14, styles.title]}>
+          {t('make_a_post.DOWNLOAD_PHOTOS')}
+        </Text>
+        <Text
+          style={[
+            styles.required,
+            globalStyles.ml1,
+            globalStyles.fs22,
+            {
+              color: colors.accent,
+            },
+          ]}
+        >
+          *
+        </Text>
+      </View>
+      <Text style={[globalStyles.fs12, globalStyles.mt1, styles.title]}>
+        {t('make_a_post.SUBTITLE_PHOTOS')}
       </Text>
       <AddPhotos images={images} setImages={setImages} />
       <Text style={[globalStyles.fs14, globalStyles.mt5, styles.title]}>
@@ -145,7 +168,7 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
       )}
       <Input
         label={t('make_a_post.TITLE_NAME')}
-        placeholder={t('make_a_post.TITLE_NAME_PLACEHOLDER')}
+        placeholder={t('make_a_post.TITLE_NAME_PLACEHOLDER_AUCTION')}
         name="title"
         control={control}
         errors={errors}
@@ -154,7 +177,7 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
       />
       <Input
         label={t('make_a_post.DESCRIPTION')}
-        placeholder={t('make_a_post.DESCRIPTION_PLACEHOLDER')}
+        placeholder={t('make_a_post.DESCRIPTION_PLACEHOLDER_AUCTION')}
         name="description"
         control={control}
         errors={errors}
@@ -227,7 +250,7 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
         name="endDate"
         control={control}
         errors={errors}
-        placeholder={'-/-/-'}
+        placeholder={t('make_a_post.ENDING_DATE_PLACEHOLDER')}
         mode={DateTimeType.DATE}
         contentContainerStyle={globalStyles.mt5}
         required={true}
@@ -237,10 +260,10 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
       </Text>
       <Input
         label={t('personal_info.COUNTRY')}
-        placeholder={t('personal_info.COUNTRY_HINT')}
         name="country"
         control={control}
         errors={errors}
+        editable={false}
         contentContainerStyle={globalStyles.mt5}
         required={true}
       />
