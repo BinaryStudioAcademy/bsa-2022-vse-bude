@@ -117,9 +117,9 @@ export default function ProductForm({ edit }: { edit: boolean }) {
           case 'phone':
             setValue('phone', currentProduct.phone.replace('+380', ''));
             break;
-          case 'currency':
-            setValue('currency', 'UAH');
-            break;
+          // case 'currency':
+          //   setValue('currency', 'UAH');
+          //   break;
           default:
             setValue(item as 'title', currentProduct[item]);
         }

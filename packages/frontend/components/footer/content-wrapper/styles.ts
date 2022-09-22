@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import type { Theme } from '@emotion/react';
 
-export const wrapper = () => css`
+export const wrapper = css`
   justify-content: space-between;
 `;
 
@@ -10,7 +10,8 @@ export const logoLinks = ({ mq }: Theme) => css`
   flex-direction: column;
   flex-wrap: nowrap;
 
-  ${mq[3]} {
+
+  ${mq[4]} {
     flex-direction: row;
   }
 `;
