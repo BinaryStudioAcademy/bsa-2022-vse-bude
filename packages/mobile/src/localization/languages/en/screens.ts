@@ -43,7 +43,7 @@ export const screens = {
     LAST_NAME: 'Last name',
     LAST_NAME_HINT: 'Enter your last name',
     CREATE_ACCOUNT: 'Create account',
-    PHONE_NUMBER: 'Phone',
+    PHONE_NUMBER: 'Phone number',
     GOOGLE_BUTTON: 'Sign in with Google',
     FORGOT_PASSWORD: 'Forgot Password',
     FORGOT_PASSWORD_BUTTON: 'Restore',
