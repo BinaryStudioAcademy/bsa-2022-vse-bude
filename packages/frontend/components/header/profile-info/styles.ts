@@ -67,10 +67,6 @@ export const popoverContentItem = ({
     background-color: ${colors.backgroundLight};
   }
 
-  :last-child {
-    color: ${colors.primaryLight};
-  }
-
   & span {
     float: left;
   }
@@ -82,6 +78,9 @@ export const popoverContentItem = ({
       margin-right: ${spaces.md};
       color: ${colors.primaryLight};
     }
+  }
+  &:disabled {
+    background-color: ${colors.backgroundLight};
   }
 `;
 
@@ -118,4 +117,10 @@ export const icons = css`
 
 export const popoverTriggerWrapper = ({ spaces }: Theme) => css`
   height: ${spaces.xl3};
+`;
+export const xmarkIcon = css`
+  transform: rotate(45deg);
+`;
+export const lastLink = ({ colors }: Theme) => css`
+  color: ${colors.primaryLight};
 `;

@@ -85,10 +85,13 @@ export const Notification = ({
         </Flex>
         <p css={styles.time}>
           <span>
-            {`${dayjs(createdAt).hour()}:${dayjs(createdAt).minute()}`}
+            {`${dayjs(createdAt).hour()}:${(
+              '0' + dayjs(createdAt).minute()
+            ).slice(-2)}`}
           </span>
-          {`${('0' + dayjs(createdAt).month()).slice(-2)}.${(
-            '0' + dayjs(createdAt).day()
+          {`${('0' + dayjs(createdAt).date()).slice(-2)}.${(
+            '0' +
+            (dayjs(createdAt).month() + 1)
           ).slice(-2)}.${dayjs(createdAt).year()}`}
         </p>
       </Flex>

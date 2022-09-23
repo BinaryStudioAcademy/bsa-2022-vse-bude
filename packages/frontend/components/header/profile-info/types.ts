@@ -1,5 +1,6 @@
 import type { Interpolation } from '@emotion/styled';
 import type { Theme } from '@emotion/react';
+import type { UserDto } from '@vse-bude/shared';
 
 export interface DropdownProfileProps {
   style?: Interpolation<Theme>;
@@ -9,4 +10,5 @@ export interface DropdownProfileProps {
 
 export interface PopoverContentProps {
   handleClose?: () => void;
+  user: UserDto;
 }
