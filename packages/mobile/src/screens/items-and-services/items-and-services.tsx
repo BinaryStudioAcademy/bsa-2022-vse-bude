@@ -1,4 +1,6 @@
 import React from 'react';
+import { ProductQuery, ProductDto } from '@vse-bude/shared';
+
 import {
   useAppSelector,
   useCustomTheme,
@@ -10,8 +12,8 @@ import {
   ScreenWrapper,
   Product,
   FlatList,
-  StatusBar,
   Spinner,
+  FocusAwareStatusBar,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import {
@@ -22,7 +24,6 @@ import {
 import { products as productActions } from '~/store/actions';
 import { removeObjectFalsyFields } from '~/helpers/helpers';
 import { RootState } from '~/common/types/types';
-import { ProductQuery, ProductDto } from '@vse-bude/shared';
 import { DataStatus } from '~/common/enums/enums';
 import { styles } from './styles';
 
@@ -53,11 +54,7 @@ const ItemsAndServices = () => {
 
   return (
     <ScreenWrapper>
-      <StatusBar
-        backgroundColor={colors.backgroundSecondary}
-        barStyle="dark-content"
-        translucent={false}
-      />
+      <FocusAwareStatusBar backgroundColor={colors.backgroundSecondary} />
       {isLoading ? (
         <Spinner />
       ) : (

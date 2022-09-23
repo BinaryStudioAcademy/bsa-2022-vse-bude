@@ -10,9 +10,6 @@ const styles = StyleSheet.create({
     marginRight: 10,
     color: ColorPalette.BLACK_100,
   },
-  categories: {
-    marginTop: 30,
-  },
   organizationTitle: {
     color: ColorPalette.WHITE_100,
   },

@@ -28,7 +28,7 @@ import { NewAuctionForm } from './components/new-auction-form/new-auction-form';
 const NewItemScreen: FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const { dark, colors } = useCustomTheme();
+  const { colors } = useCustomTheme();
   const { name } = useRoute();
   const navigation = useNavigation<RootNavigationProps>();
   const headerTitle =
@@ -67,11 +67,7 @@ const NewItemScreen: FC = () => {
 
   return (
     <ScreenWrapper>
-      <StatusBar
-        backgroundColor={colors.backgroundSecondary}
-        translucent={true}
-        barStyle={dark ? 'light-content' : 'dark-content'}
-      />
+      <StatusBar backgroundColor={colors.backgroundSecondary} />
       <Header
         title={headerTitle}
         labelButton={t('verify.BACK_BUTTON')}

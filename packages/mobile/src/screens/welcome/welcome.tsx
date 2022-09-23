@@ -9,9 +9,9 @@ import {
   View,
   FlagBackgroundView,
   ScreenWrapper,
-  StatusBar,
   LogoWhite,
   SecondaryButton,
+  FocusAwareStatusBar,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { Stamp } from './components/components';
@@ -27,7 +27,7 @@ const Welcome: FC<Props> = ({ navigation }) => {
 
   return (
     <ScreenWrapper>
-      <StatusBar
+      <FocusAwareStatusBar
         backgroundColor={ColorPalette.BLUE_100}
         translucent={true}
         barStyle="light-content"

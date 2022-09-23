@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
-import { Pressable, View } from 'react-native';
 
 import { ButtonAppearance } from '~/common/enums/enums';
-import { Spinner, Text } from '~/components/components';
+import { Text, View, Spinner, Pressable } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { styles } from './styles';
 import { ButtonProps } from './common/types/types';
