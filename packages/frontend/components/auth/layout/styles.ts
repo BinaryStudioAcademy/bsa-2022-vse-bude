@@ -12,9 +12,20 @@ export const formWrapper = () => css`
   justify-content: center;
   flex-grow: 1;
 `;
-export const form = () => css`
-  width: 100%;
-  min-width: 327px;
+export const form = ({ breakpoints }: Theme) => css`
+  width: 375px;
+
+  @media (max-width: ${breakpoints.lg}px) {
+    width: 300px;
+  }
+
+  @media (max-width: ${breakpoints.md}px) {
+    width: 240px;
+  }
+
+  @media (max-width: ${breakpoints.sm}px) {
+    width: 327px;
+  }
 `;
 export const linkText = ({ fontSizes, colors, lineHeights }: Theme) => css`
   text-align: center;

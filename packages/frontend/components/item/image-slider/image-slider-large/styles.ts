@@ -69,8 +69,9 @@ export const image = css`
   max-width: 100%;
 `;
 
-export const pickedImage = ({ opacities }: Theme) => css`
+export const pickedImage = ({ opacities, colors }: Theme) => css`
   opacity: ${opacities.sm};
+  border: 1px solid ${colors.accent};
 `;
 
 export const focusedImageWrapper = ({ spaces, breakpoints }: Theme) => css`
@@ -96,7 +97,7 @@ export const focusedImageWrapper = ({ spaces, breakpoints }: Theme) => css`
   }
 
   img {
-    object-fit: cover;
+    object-fit: contain;
   }
 `;
 
