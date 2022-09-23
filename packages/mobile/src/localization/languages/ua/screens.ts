@@ -256,6 +256,7 @@ export const screens = {
   },
   items_and_services: {
     TITLE: 'Товари & Послуги',
+    END_COLLECTION: 'Ви дійшли до кінця колекції',
   },
   filter: {
     TITLE: 'Фільтр',
