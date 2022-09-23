@@ -64,13 +64,13 @@ export const ProfileDropdown = ({
     //   onClick: () => push(`${Routes.PROFILE}${ProfileRoutes.MESSAGES}`),
     //   cssExtend: styles.option,
     // },
-    {
-      value: t('common:header.popover.support'),
-      key: 'Support',
-      onClick: () =>
-        (location.href = 'mailto:vsebude.team@gmail.com?subject=Support'),
-      cssExtend: styles.option,
-    },
+    // {
+    //   value: t('common:header.popover.support'),
+    //   key: 'Support',
+    //   onClick: () =>
+    //     (location.href = 'mailto:vsebude.team@gmail.com?subject=Support'),
+    //   cssExtend: styles.option,
+    // },
   ];
 
   return (
