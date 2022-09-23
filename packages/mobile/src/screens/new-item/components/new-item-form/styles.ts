@@ -13,6 +13,9 @@ const useStyles = () => {
         title: {
           color: colors.subtitle,
         },
+        required: {
+          marginTop: -4,
+        },
         currencyField: {
           width: '30%',
         },

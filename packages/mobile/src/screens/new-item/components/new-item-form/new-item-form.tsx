@@ -22,6 +22,7 @@ import {
   useAppDispatch,
   useEffect,
   useNavigation,
+  useMemo,
 } from '~/hooks/hooks';
 import { products as productsActions } from '~/store/actions';
 import { globalStyles } from '~/styles/styles';
@@ -49,8 +50,10 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
   const categories = useAppSelector(selectCategories);
   const dataStatusProducts = useAppSelector(selectDataStatusProducts);
   const isLoading = dataStatusProducts === DataStatus.PENDING;
-  const formattedCategories =
-    categories && categories.length ? categoryForDropdown(categories) : null;
+  const formattedCategories = useMemo(
+    () => categoryForDropdown(categories),
+    [categories],
+  );
 
   const { control, errors, handleSubmit } = useAppForm<ICreatePost>({
     defaultValues: {
@@ -77,6 +80,12 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
   }, [errors]);
 
   const onSubmit = (data: ICreatePost): void => {
+    if (images.length < 2) {
+      notification.error(t('errors.FEW_IMAGES'));
+
+      return;
+    }
+
     const payload = makePostParser({
       data,
       images,
@@ -120,8 +129,31 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
 
   return (
     <View>
-      <Text style={[globalStyles.fs14, globalStyles.mt5, styles.title]}>
-        {t('make_a_post.DOWNLOAD_PHOTOS')}
+      <View
+        style={[
+          globalStyles.flexDirectionRow,
+          globalStyles.mt5,
+          { height: 16 },
+        ]}
+      >
+        <Text style={[globalStyles.fs14, styles.title]}>
+          {t('make_a_post.DOWNLOAD_PHOTOS')}
+        </Text>
+        <Text
+          style={[
+            styles.required,
+            globalStyles.ml1,
+            globalStyles.fs22,
+            {
+              color: colors.accent,
+            },
+          ]}
+        >
+          *
+        </Text>
+      </View>
+      <Text style={[globalStyles.fs12, globalStyles.mt1, styles.title]}>
+        {t('make_a_post.SUBTITLE_PHOTOS')}
       </Text>
       <AddPhotos images={images} setImages={setImages} />
       <Text style={[globalStyles.fs14, globalStyles.mt5, styles.title]}>
@@ -198,16 +230,16 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
       </Text>
       <Input
         label={t('personal_info.COUNTRY')}
-        placeholder={t('personal_info.COUNTRY_HINT')}
         name="country"
         control={control}
         errors={errors}
+        editable={false}
         contentContainerStyle={globalStyles.mt5}
         required={true}
       />
       <Input
-        label={t('personal_info.CITY')}
-        placeholder={t('personal_info.CITY_HINT')}
+        label={t('make_a_post.CITY')}
+        placeholder={t('make_a_post.CITY_PLACEHOLDER')}
         name="city"
         control={control}
         errors={errors}

@@ -72,7 +72,7 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
         <Icon icon={IconName.MESSAGE} color={IconColor.YELLOW} />
         <span>{t('common:header.popover.messages')}</span>
     </button> */}
-      <button
+      {/* <button
         css={styles.popoverContentItem}
         onClick={() =>
           (location.href = 'mailto:vsebude.team@gmail.com?subject=Support')
@@ -82,7 +82,7 @@ export const PopoverContent = ({ handleClose }: PopoverContentProps) => {
       >
         <Icon icon={IconName.SUPPORT} color={IconColor.YELLOW} />
         <span>{t('common:header.popover.support')}</span>
-      </button>
+      </button> */}
       <button
         css={styles.popoverContentItem}
         onClick={() => {

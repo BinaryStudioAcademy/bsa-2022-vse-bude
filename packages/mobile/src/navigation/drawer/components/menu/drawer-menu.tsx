@@ -19,7 +19,7 @@ import {
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import {
-  selectCategories,
+  selectCategoriesNonEmpty,
   selectCategoriesDataStatus,
 } from '~/store/selectors';
 import { DataStatus, RootScreenName } from '~/common/enums/enums';
@@ -29,7 +29,7 @@ import { styles } from './styles';
 const DrawerMenu = () => {
   const [isNestedVisible, setIsNestedVisible] = useState(false);
   const navigation = useNavigation<RootNavigationProps>();
-  const categories = useAppSelector(selectCategories);
+  const categories = useAppSelector(selectCategoriesNonEmpty);
   const dataStatus = useAppSelector(selectCategoriesDataStatus);
   const { colors } = useCustomTheme();
   const { t } = useTranslation();

@@ -10,13 +10,7 @@ import {
   useAppDispatch,
 } from '~/hooks/hooks';
 import { formatPrice, getTimeToEvent } from '~/helpers/helpers';
-import {
-  Button,
-  Image,
-  Text,
-  TouchableOpacity,
-  View,
-} from '~/components/components';
+import { Image, Text, TouchableOpacity, View } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { StyleProp, ViewStyle } from 'react-native';
 import { products } from '~/store/actions';
@@ -119,14 +113,6 @@ const Product: FC<Props> = ({ product, contentContainerStyle }) => {
                   styles.price,
                 ]}
               >{`${formatPrice(price)} ${t('common:currency.UAH')}`}</Text>
-              <Button
-                label={
-                  isAuction
-                    ? t('common:components.BUTTON_BID')
-                    : t('common:components.BUTTON_BUY')
-                }
-                onPress={handleOpenProductInfo}
-              ></Button>
             </View>
           </View>
         </TouchableOpacity>

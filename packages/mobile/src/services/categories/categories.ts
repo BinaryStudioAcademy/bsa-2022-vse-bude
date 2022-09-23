@@ -1,4 +1,4 @@
-import { ApiRoutes, CategoryDto } from '@vse-bude/shared';
+import { ApiRoutes, CategoryResponseDto } from '@vse-bude/shared';
 
 import { Http } from '~/services/http/http.service';
 
@@ -17,7 +17,7 @@ class CategoryService {
     this.#apiPrefix = apiPrefix;
   }
 
-  getAllCategories(): Promise<CategoryDto[]> {
+  getAllCategories(): Promise<CategoryResponseDto[]> {
     return this.#http.load(`${this.#apiPrefix}${ApiRoutes.CATEGORIES}`);
   }
 }

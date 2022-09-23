@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import DropDownPicker from 'react-native-dropdown-picker';
+import DropDownPicker, { ItemType } from 'react-native-dropdown-picker';
 import {
   FormControl,
   FormControlErrors,
@@ -9,20 +9,21 @@ import {
 import { useState, useCustomTheme, useFormControl } from '~/hooks/hooks';
 import { Text, View, AlertIcon } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
+import { ColorValue } from 'react-native';
 import { styles } from './styles';
 
 type Props<T extends FormControlValues> = {
   label?: string;
   name: FormControlPath<T>;
-  errors: FormControlErrors<T>;
+  errors?: FormControlErrors<T>;
   control: FormControl<T>;
-  items: Array<{
-    label: string;
-    value: string;
-  }>;
+  items: Array<Pick<ItemType<string>, 'label' | 'value'>>;
   zIndex: number;
   disabled?: boolean;
   placeholder?: string;
+  backgroundColor?: ColorValue;
+  dropDownDirection?: 'DEFAULT' | 'TOP' | 'BOTTOM' | 'AUTO';
+  onSelectItem?: (value: ItemType<string>) => void;
   required?: boolean;
 };
 
@@ -35,14 +36,17 @@ const DropDown = <T extends FormControlValues>({
   zIndex,
   disabled,
   placeholder,
+  backgroundColor,
+  dropDownDirection,
   required,
+  onSelectItem,
 }: Props<T>): ReactElement => {
   const { field } = useFormControl({ name, control });
   const { colors } = useCustomTheme();
   const [open, setOpen] = useState(false);
   const [itemValue, setItemValue] = useState(field.value);
   const [innerItems, setInnerItems] = useState(items);
-  const error = errors[name]?.message as string;
+  const error = errors ? (errors[name]?.message as string) : false;
 
   return (
     <View style={styles.container}>
@@ -83,6 +87,7 @@ const DropDown = <T extends FormControlValues>({
         setItems={setInnerItems}
         setValue={setItemValue}
         onChangeValue={field.onChange}
+        onSelectItem={onSelectItem}
         textStyle={[
           disabled ? { color: colors.placeholder } : { color: colors.text },
           globalStyles.fs14,
@@ -90,8 +95,12 @@ const DropDown = <T extends FormControlValues>({
         placeholderStyle={[{ color: colors.placeholder }, globalStyles.fs14]}
         style={[
           styles.dropDown,
-          { backgroundColor: colors.backgroundElements },
+          { backgroundColor: backgroundColor || colors.backgroundElements },
         ]}
+        dropDownContainerStyle={[
+          { backgroundColor: backgroundColor || colors.backgroundElements },
+        ]}
+        dropDownDirection={dropDownDirection || 'AUTO'}
         zIndex={zIndex}
         disabled={disabled}
         placeholder={placeholder}

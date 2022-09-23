@@ -21,8 +21,9 @@
   },
   "dependencies": {
     "@hookform/resolvers": "2.9.5",
+    "@ptomasroos/react-native-multi-slider": "2.2.2",
     "@react-native-community/checkbox": "0.5.12",
-    "@react-native-community/datetimepicker": "6.3.2",
+    "@react-native-community/datetimepicker": "6.3.4",
     "@react-native-community/push-notification-ios": "1.10.1",
     "@react-navigation/bottom-tabs": "6.3.2",
     "@react-navigation/drawer": "6.4.4",
@@ -47,6 +48,7 @@
     "react-native-image-picker": "4.10.0",
     "react-native-linear-gradient": "2.6.2",
     "react-native-mmkv": "2.4.3",
+    "react-native-modal-datetime-picker": "14.0.0",
     "react-native-permissions": "3.6.1",
     "react-native-popover-view": "5.1.2",
     "react-native-push-notification": "8.1.1",
