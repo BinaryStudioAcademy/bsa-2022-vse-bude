@@ -22,6 +22,7 @@ export const Sold = ({ data }: CardProps) => {
   const [showSeeItemTooltip, setSeeItemTooltip] = useState(false);
   const router = useRouter();
   const { t } = useTranslation();
+
   const {
     id: itemId,
     title,
@@ -31,6 +32,7 @@ export const Sold = ({ data }: CardProps) => {
     updatedAt,
     type,
   } = data;
+
   const { id, avatar, firstName, lastName } = winner;
 
   const onSeeItemClick = () => {
@@ -43,6 +45,7 @@ export const Sold = ({ data }: CardProps) => {
         <div css={styles.leftContent}>
           <ItemImage src={imageLinks[0]} title={title} />
           <ItemDate size="lg" time={updatedAt} />
+
           <div css={styles.buttonWrapper}>
             {showSeeItemTooltip ? (
               <Tooltip>{t('my-list:card.tooltip-seeItem')}</Tooltip>

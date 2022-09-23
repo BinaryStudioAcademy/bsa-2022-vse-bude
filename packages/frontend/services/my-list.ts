@@ -33,6 +33,11 @@ export const addProductToPosted = ({ data }: { data: ProductPost }) =>
     body: data,
   });
 
+export const getFavouritesSSR = (params: { http: Http }) =>
+  params.http.get({
+    url: `${ApiRoutes.PROFILE}${AccountApiRoutes.FAVOURITES_LIST}`,
+  });
+
 export const deleteProduct = ({
   productId,
 }: {

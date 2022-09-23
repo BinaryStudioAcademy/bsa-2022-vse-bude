@@ -7,8 +7,6 @@ export type ItemCard = {
   imageLinks: string[];
   price: number;
   type: string;
-  recommendedPrice?: number;
-  minimalBid?: number;
   author: UserProfileDto;
   winner: UserProfileDto;
   views: number;

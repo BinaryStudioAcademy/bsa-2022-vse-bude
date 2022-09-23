@@ -65,6 +65,7 @@ export enum ProfileApiRoutes {
 export enum AccountApiRoutes {
   PERSONAL_INFO = '/personal-info',
   MY_LIST = '/my-list',
+  FAVOURITES_LIST = '/favourites-list',
 }
 
 export enum OrderApiRoutes {

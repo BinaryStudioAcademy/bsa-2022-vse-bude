@@ -104,6 +104,44 @@ export const initProfileRoutes = (
 
   /**
    * @openapi
+   * /profile/favourites-list:
+   *   get:
+   *     description: Get user's favourites items data
+   *     security:
+   *       - Bearer: []
+   *     tags: [Items]
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: Ok
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               $ref: "#/definitions/MyListItem"
+   *       4**:
+   *         description: Something went wrong
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: "#/definitions/Response400"
+   */
+  router.get(
+    apiPath(path, AccountApiRoutes.FAVOURITES_LIST),
+    authMiddleware,
+    wrap(async (req: Request) => {
+      const { userId } = req;
+      await profileService.getUser({
+        userId,
+      });
+
+      return await myListService.getFavourites({ userId });
+    }),
+  );
+
+  /**
+   * @openapi
    * /profile/save:
    *   put:
    *     description: Updates user profile data

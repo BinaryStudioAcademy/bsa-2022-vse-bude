@@ -3,7 +3,7 @@ import { createWrapper } from 'next-redux-wrapper';
 import { authReducer } from './auth';
 import { categoryReducer } from './category';
 import { productReducer } from './product';
-import { favoriteProductReducer } from './favorite-product';
+import { favouritesReducer } from './favorite-product';
 import { profileReducer } from './profile/reducer';
 import { modalsReducer } from './modals/reducer';
 import { toastReducer } from './toast/reducers';
@@ -18,7 +18,7 @@ const makeStore = () =>
       category: categoryReducer,
       product: productReducer,
       toast: toastReducer,
-      favoriteProduct: favoriteProductReducer,
+      favoriteProduct: favouritesReducer,
       modals: modalsReducer,
       myList: myListReducer,
       checkout: checkoutReducer,

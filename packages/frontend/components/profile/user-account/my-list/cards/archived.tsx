@@ -25,6 +25,7 @@ export const Archived = ({ data }: CardProps) => {
   const [showSeeItemTooltip, setSeeItemTooltip] = useState(false);
   const { t } = useTranslation();
   const { id, title, imageLinks, price, description, updatedAt, type } = data;
+
   const dispatch = useAppDispatch();
   const router = useRouter();
 
