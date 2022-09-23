@@ -3,8 +3,11 @@ import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-import { MainScreenName } from '~/common/enums/enums';
-import { MainNavigationParamList } from '~/common/types/types';
+import { MainScreenName, RootScreenName } from '~/common/enums/enums';
+import {
+  MainNavigationParamList,
+  RootNavigationProps,
+} from '~/common/types/types';
 import { Home, Favorite, ItemsAndServices, Account } from '~/screens/screens';
 import { personalInfoActions } from '~/store/actions';
 import { selectCurrentUser, selectPersonalInfo } from '~/store/selectors';
@@ -13,6 +16,7 @@ import {
   useAppSelector,
   useCustomTheme,
   useTranslation,
+  useNavigation,
 } from '~/hooks/hooks';
 import {
   HomeIcon,
@@ -46,10 +50,13 @@ const MainNavigation: FC = () => {
   const personalInfo = useAppSelector(selectPersonalInfo);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
+  const navigation = useNavigation<RootNavigationProps>();
 
   useEffect(() => {
-    dispatch(personalInfoActions.getPersonalInfo());
-  }, []);
+    if (user) {
+      dispatch(personalInfoActions.getPersonalInfo());
+    }
+  }, [user]);
 
   const screenOptions: BottomTabNavigationOptions = {
     headerShown: false,
@@ -129,7 +136,7 @@ const MainNavigation: FC = () => {
             <ButtonText
               textStyle={globalStyles.fs16}
               onPress={() => {
-                //TODO
+                navigation.navigate(RootScreenName.FILTER);
               }}
             >
               {t('common:components.BUTTON_FILTER')}

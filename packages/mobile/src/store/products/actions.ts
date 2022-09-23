@@ -3,7 +3,7 @@ import {
   createAsyncThunk,
   PrepareAction,
 } from '@reduxjs/toolkit';
-import { AsyncThunkConfig, ProductRequestDto } from '~/common/types/types';
+import { AsyncThunkConfig } from '~/common/types/types';
 import {
   AuctionPermissionsResponse,
   Bid,
@@ -11,12 +11,13 @@ import {
   AllProductsDto,
   UpdateProductPriceEvent,
   ProductDto,
+  ProductQuery,
 } from '@vse-bude/shared';
 import { ActionType } from './common';
 
 const loadProducts = createAsyncThunk<
   AllProductsDto,
-  ProductRequestDto,
+  Readonly<ProductQuery>,
   AsyncThunkConfig
 >(ActionType.PRODUCTS_FETCH, async (requestParams, { extra }) => {
   const { productApi } = extra;
@@ -26,7 +27,7 @@ const loadProducts = createAsyncThunk<
 
 const loadPopularProducts = createAsyncThunk<
   ProductDto[],
-  ProductRequestDto,
+  Readonly<ProductQuery>,
   AsyncThunkConfig
 >(ActionType.POPULAR_PRODUCTS_FETCH, async (requestParams, { extra }) => {
   const { productApi } = extra;
@@ -36,7 +37,7 @@ const loadPopularProducts = createAsyncThunk<
 
 const loadPopularLots = createAsyncThunk<
   ProductDto[],
-  ProductRequestDto,
+  Readonly<ProductQuery>,
   AsyncThunkConfig
 >(ActionType.POPULAR_LOTS_FETCH, async (requestParams, { extra }) => {
   const { productApi } = extra;

@@ -21,9 +21,10 @@ import { organizations } from '~/mock/mock';
 import {
   products as productsActions,
   categories as categoriesActions,
+  filters as filtersActions,
 } from '~/store/actions';
 import {
-  selectCategories,
+  selectCategoriesNonEmpty,
   selectPopularProducts,
   selectPopularLots,
 } from '~/store/selectors';
@@ -44,7 +45,7 @@ const Home: FC = () => {
   const dispatch = useAppDispatch();
   const auctionProducts = useAppSelector(selectPopularLots);
   const sellingProducts = useAppSelector(selectPopularProducts);
-  const categories = useAppSelector(selectCategories);
+  const categories = useAppSelector(selectCategoriesNonEmpty);
 
   useEffect(() => {
     dispatch(
@@ -62,7 +63,13 @@ const Home: FC = () => {
     dispatch(categoriesActions.loadAllCategories());
   }, []);
 
-  const onSeeAllPress = () => {
+  const onSeeAllLotsPress = () => {
+    dispatch(filtersActions.update({ type: ProductType.AUCTION }));
+    navigation.navigate(RootScreenName.PRODUCTS);
+  };
+
+  const onSeeAllItemsPress = () => {
+    dispatch(filtersActions.update({ type: ProductType.SELLING }));
     navigation.navigate(RootScreenName.PRODUCTS);
   };
 
@@ -118,7 +125,7 @@ const Home: FC = () => {
             sectionTitle={t('home.POPULAR_LOTS')}
             seeAllTitle={t('home.SEE_ALL_LOTS')}
             data={auctionProducts}
-            onSeeAllPress={onSeeAllPress}
+            onSeeAllPress={onSeeAllLotsPress}
             contentContainerStyle={[globalStyles.mt6]}
           />
         </HomeScreenWrapper>
@@ -164,7 +171,7 @@ const Home: FC = () => {
             sectionTitle={t('home.POPULAR_ITEMS')}
             seeAllTitle={t('home.SEE_ALL_ITEMS')}
             data={sellingProducts}
-            onSeeAllPress={onSeeAllPress}
+            onSeeAllPress={onSeeAllItemsPress}
             contentContainerStyle={globalStyles.mt6}
           />
         </HomeScreenWrapper>

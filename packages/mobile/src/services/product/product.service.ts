@@ -7,9 +7,9 @@ import {
   HttpMethod,
   ProductApiRoutes,
   ProductDto,
+  ProductQuery,
   AllProductsDto,
 } from '@vse-bude/shared';
-import { ProductRequestDto } from '~/common/types/types';
 
 import { Http } from '~/services/http/http.service';
 
@@ -28,14 +28,16 @@ class ProductService {
     this.#apiPrefix = apiPrefix;
   }
 
-  getProducts(requestParams: ProductRequestDto = {}): Promise<AllProductsDto> {
+  getProducts(
+    requestParams: Readonly<ProductQuery> = {},
+  ): Promise<AllProductsDto> {
     return this.#http.load(`${this.#apiPrefix}${ApiRoutes.PRODUCTS}`, {
       params: requestParams,
     });
   }
 
   getPopularProducts(
-    requestParams: ProductRequestDto = {},
+    requestParams: Readonly<ProductQuery> = {},
   ): Promise<ProductDto[]> {
     return this.#http.load(
       `${this.#apiPrefix}${ApiRoutes.PRODUCTS}${
@@ -47,7 +49,9 @@ class ProductService {
     );
   }
 
-  getPopularLots(requestParams: ProductRequestDto = {}): Promise<ProductDto[]> {
+  getPopularLots(
+    requestParams: Readonly<ProductQuery> = {},
+  ): Promise<ProductDto[]> {
     return this.#http.load(
       `${this.#apiPrefix}${ApiRoutes.PRODUCTS}${ProductApiRoutes.POPULAR_LOTS}`,
       {
