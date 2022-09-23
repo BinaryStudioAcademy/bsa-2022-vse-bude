@@ -82,18 +82,6 @@ export const SignUpForm = () => {
       </div>
       <div css={inputWrapper}>
         <Input
-          {...register('phone')}
-          label={t('auth:sign-up.phone')}
-          placeholder={t('auth:sign-up.phonePlaceholder')}
-          variant="primary"
-          type="text"
-          name="phone"
-          disabled={isLoading}
-          error={errors.phone?.message}
-        />
-      </div>
-      <div css={inputWrapper}>
-        <Input
           {...register('email')}
           label={t('auth:sign-up.email')}
           placeholder={t('auth:sign-up.emailPlaceholder')}
@@ -102,6 +90,18 @@ export const SignUpForm = () => {
           name="email"
           disabled={isLoading}
           error={errors.email?.message}
+        />
+      </div>
+      <div css={inputWrapper}>
+        <Input
+          {...register('phone')}
+          label={t('auth:sign-up.phone')}
+          placeholder={t('auth:sign-up.phonePlaceholder')}
+          variant="primary"
+          type="text"
+          name="phone"
+          disabled={isLoading}
+          error={errors.phone?.message}
         />
       </div>
       <div css={inputWrapper}>
