@@ -10,14 +10,14 @@
     "link": "See All Categories"
   },
   "popularLots": {
-    "title": "Popular Lots",
+    "title": "Popular Auction Items",
     "link": "See All Lots"
   },
   "charityOrganizations": {
     "title": "Charity Organizations"
   },
   "popularItems": {
-    "title": "Popular products",
+    "title": "Popular Fixed Price Items",
     "link": "See All Products"
   }
 }
