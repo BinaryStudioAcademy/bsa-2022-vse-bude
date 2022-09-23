@@ -6,6 +6,7 @@ export {
   getTimeToEvent,
   formatToDateTime,
   getTimezoneOffset,
+  getTextValueDate,
 } from './date/date';
 export {
   personalInfoParser,
