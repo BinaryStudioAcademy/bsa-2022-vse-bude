@@ -14,9 +14,9 @@ import {
   ScreenWrapper,
   Product,
   FlatList,
-  StatusBar,
   Spinner,
   RefreshControl,
+  FocusAwareStatusBar,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import {
@@ -115,11 +115,7 @@ const ItemsAndServices = () => {
 
   return (
     <ScreenWrapper>
-      <StatusBar
-        backgroundColor={colors.backgroundSecondary}
-        barStyle="dark-content"
-        translucent={false}
-      />
+      <FocusAwareStatusBar backgroundColor={colors.backgroundSecondary} />
       <FlatList
         style={globalStyles.px4}
         data={items}

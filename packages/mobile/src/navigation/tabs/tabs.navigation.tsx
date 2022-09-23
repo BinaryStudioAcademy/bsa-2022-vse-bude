@@ -3,6 +3,7 @@ import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
+
 import { MainScreenName, RootScreenName } from '~/common/enums/enums';
 import {
   MainNavigationParamList,
@@ -12,9 +13,9 @@ import { Home, Favorite, ItemsAndServices, Account } from '~/screens/screens';
 import { personalInfoActions } from '~/store/actions';
 import { selectCurrentUser, selectPersonalInfo } from '~/store/selectors';
 import {
-  useAppDispatch,
-  useAppSelector,
   useCustomTheme,
+  useAppSelector,
+  useAppDispatch,
   useTranslation,
   useNavigation,
 } from '~/hooks/hooks';
@@ -28,21 +29,20 @@ import {
   ButtonText,
   BurgerMenu,
   Image,
+  SearchIcon,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
+import { Flag } from '~/screens/home/components/components';
+import { TabBarButton } from '../components/components';
 import { WelcomeNavigation } from '../welcome/welcome.navigation';
 import { styles } from './styles';
 
+const renderTabBarLabel =
+  (label: string): BottomTabNavigationOptions['tabBarLabel'] =>
+  ({ color }) =>
+    <Text style={{ fontSize: 12, color }}>{label}</Text>;
+
 const Tabs = createBottomTabNavigator<MainNavigationParamList>();
-type TabOptions = {
-  label: string;
-  tabBarIcon: BottomTabNavigationOptions['tabBarIcon'];
-  headerLeft?: BottomTabNavigationOptions['headerLeft'];
-  headerRight?: BottomTabNavigationOptions['headerRight'];
-  title?: BottomTabNavigationOptions['title'];
-  headerShown?: BottomTabNavigationOptions['headerShown'];
-  headerStyle?: BottomTabNavigationOptions['headerStyle'];
-};
 
 const MainNavigation: FC = () => {
   const { dark, colors } = useCustomTheme();
@@ -74,27 +74,8 @@ const MainNavigation: FC = () => {
     headerRightContainerStyle: { paddingEnd: 15 },
     headerTitleStyle: { fontSize: 16 },
     headerTitleAlign: 'center',
+    tabBarButton: TabBarButton,
   };
-
-  const getTabOptions = ({
-    label,
-    tabBarIcon,
-    headerLeft,
-    headerRight,
-    title,
-    headerShown = false,
-    headerStyle,
-  }: TabOptions): BottomTabNavigationOptions => ({
-    tabBarIcon,
-    tabBarLabel: ({ color }) => (
-      <Text style={{ fontSize: 12, color }}>{label}</Text>
-    ),
-    headerLeft,
-    headerRight,
-    title,
-    headerShown,
-    headerStyle,
-  });
 
   const userIcon = personalInfo?.avatar
     ? () => (
@@ -107,28 +88,52 @@ const MainNavigation: FC = () => {
       <Tabs.Screen
         name={MainScreenName.HOME}
         component={Home}
-        options={getTabOptions({
-          label: t('common:tab_navigation.HOME'),
+        options={{
+          tabBarLabel: renderTabBarLabel(t('common:tab_navigation.HOME')),
           tabBarIcon: HomeIcon,
           headerLeft: BurgerMenu,
+          headerRight: ({ tintColor }) => (
+            <SearchIcon color={tintColor} size={26} />
+          ),
           headerShown: true,
           headerStyle: { backgroundColor: colors.whiteColor },
-          title: '',
-        })}
+          headerTitleAlign: 'left',
+          headerTitleContainerStyle: [
+            globalStyles.flexDirectionRow,
+            globalStyles.alignItemsCenter,
+          ],
+          headerShadowVisible: true,
+          headerTitle: ({ allowFontScaling }) => (
+            <>
+              <Text
+                style={[
+                  globalStyles.fs22,
+                  globalStyles.fontWeightExtraBold,
+                  globalStyles.mr3,
+                ]}
+                allowFontScaling={allowFontScaling}
+              >
+                {t('home.HELP_UKRAINE')}
+              </Text>
+              <Flag />
+            </>
+          ),
+        }}
       />
       <Tabs.Screen
         name={MainScreenName.FAVORITE}
         component={Favorite}
-        options={getTabOptions({
-          label: t('common:tab_navigation.FAVORITE'),
+        options={{
+          tabBarLabel: renderTabBarLabel(t('common:tab_navigation.FAVORITE')),
           tabBarIcon: StarIcon,
-        })}
+          tabBarButton: (props) => <TabBarButton disabled={true} {...props} />,
+        }}
       />
       <Tabs.Screen
         name={MainScreenName.PRODUCTS}
         component={ItemsAndServices}
-        options={getTabOptions({
-          label: t('common:tab_navigation.PRODUCTS'),
+        options={{
+          tabBarLabel: renderTabBarLabel(t('common:tab_navigation.PRODUCTS')),
           tabBarIcon: ListIcon,
           headerShown: true,
           title: t('items_and_services.TITLE'),
@@ -142,25 +147,25 @@ const MainNavigation: FC = () => {
               {t('common:components.BUTTON_FILTER')}
             </ButtonText>
           ),
-        })}
+        }}
       />
       {user ? (
         <Tabs.Screen
           name={MainScreenName.ACCOUNT_ROOT}
           component={Account}
-          options={getTabOptions({
-            label: t('common:tab_navigation.ACCOUNT'),
+          options={{
+            tabBarLabel: renderTabBarLabel(t('common:tab_navigation.ACCOUNT')),
             tabBarIcon: userIcon,
-          })}
+          }}
         />
       ) : (
         <Tabs.Screen
           name={MainScreenName.ACCOUNT_ROOT}
           component={WelcomeNavigation}
-          options={getTabOptions({
-            label: t('common:tab_navigation.LOG_IN'),
+          options={{
+            tabBarLabel: renderTabBarLabel(t('common:tab_navigation.LOG_IN')),
             tabBarIcon: LogInIcon,
-          })}
+          }}
         />
       )}
     </Tabs.Navigator>

@@ -19,7 +19,7 @@ import {
   Text,
   ScrollView,
   ScreenWrapper,
-  StatusBar,
+  FocusAwareStatusBar,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { notification } from '~/services/services';
@@ -115,7 +115,7 @@ const Auth: FC = () => {
 
   return (
     <ScreenWrapper>
-      <StatusBar
+      <FocusAwareStatusBar
         backgroundColor={ColorPalette.BLUE_100}
         translucent={true}
         barStyle="light-content"
