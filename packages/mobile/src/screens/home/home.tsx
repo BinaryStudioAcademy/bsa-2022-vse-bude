@@ -64,11 +64,13 @@ const Home: FC = () => {
   }, []);
 
   const onSeeAllLotsPress = () => {
+    dispatch(filtersActions.reset());
     dispatch(filtersActions.update({ type: ProductType.AUCTION }));
     navigation.navigate(RootScreenName.PRODUCTS);
   };
 
   const onSeeAllItemsPress = () => {
+    dispatch(filtersActions.reset());
     dispatch(filtersActions.update({ type: ProductType.SELLING }));
     navigation.navigate(RootScreenName.PRODUCTS);
   };
@@ -112,14 +114,7 @@ const Home: FC = () => {
             showsHorizontalScrollIndicator={false}
             data={categories}
             keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <Category
-                categoryId={item.id}
-                onPress={() => {
-                  // TODO
-                }}
-              />
-            )}
+            renderItem={({ item }) => <Category categoryId={item.id} />}
           />
           <ProductsSection
             sectionTitle={t('home.POPULAR_LOTS')}

@@ -1,20 +1,29 @@
 import React, { FC } from 'react';
 import { Text, Image, TouchableOpacity } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { useAppSelector } from '~/hooks/hooks';
+import { useAppSelector, useAppDispatch, useNavigation } from '~/hooks/hooks';
 import { selectCategoryById } from '~/store/selectors';
+import { filters as filtersActions } from '~/store/actions';
+import { RootScreenName } from '~/common/enums/enums';
+import { RootNavigationProps } from '~/common/types/types';
 import { CATEGORY_IMAGES_BY_ID } from '~/mock/category-image-by-id';
 import { images } from '~/assets/images/images';
 import { styles } from './styles';
 
 type Props = {
   categoryId: string;
-  onPress: () => void;
 };
 
-const Category: FC<Props> = ({ categoryId, onPress }) => {
+const Category: FC<Props> = ({ categoryId }) => {
   const { image, title } =
     useAppSelector((state) => selectCategoryById(state, categoryId)) ?? {};
+  const dispatch = useAppDispatch();
+  const navigation = useNavigation<RootNavigationProps>();
+  const onPress = () => {
+    dispatch(filtersActions.reset());
+    dispatch(filtersActions.update({ categoryId }));
+    navigation.navigate(RootScreenName.PRODUCTS);
+  };
 
   return (
     <TouchableOpacity
