@@ -257,6 +257,7 @@ export const screens = {
   },
   items_and_services: {
     TITLE: 'Items & Services',
+    END_COLLECTION: 'You have reached the end of the collection',
   },
   filter: {
     TITLE: 'Filter',

@@ -19,10 +19,20 @@ const loadProducts = createAsyncThunk<
   AllProductsDto,
   Readonly<ProductQuery>,
   AsyncThunkConfig
->(ActionType.PRODUCTS_FETCH, async (requestParams, { extra }) => {
+>(ActionType.PRODUCTS_FETCH, async (requestParams, { extra, getState }) => {
   const { productApi } = extra;
 
-  return productApi.getProducts(requestParams);
+  const { items, count } = await productApi.getProducts(requestParams);
+
+  if (requestParams.from === 0) {
+    return { items, count };
+  }
+
+  const {
+    products: { products },
+  } = getState();
+
+  return { items: [...products.items, ...items], count };
 });
 
 const loadPopularProducts = createAsyncThunk<

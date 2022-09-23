@@ -1,5 +1,4 @@
-import React, { FC, useCallback } from 'react';
-import { ProductQuery } from '@vse-bude/shared';
+import React, { FC } from 'react';
 
 import {
   ScreenWrapper,
@@ -20,14 +19,12 @@ import {
   useTranslation,
 } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
-import { selectCategoriesDataStatus, selectFilters } from '~/store/selectors';
+import { selectCategoriesDataStatus } from '~/store/selectors';
 import {
-  products as productsActions,
   categories as categoriesApi,
   filters as filtersActions,
 } from '~/store/actions';
-import { removeObjectFalsyFields } from '~/helpers/helpers';
-import { RootNavigationProps, RootState } from '~/common/types/types';
+import { RootNavigationProps } from '~/common/types/types';
 import { ButtonAppearance, DataStatus } from '~/common/enums/enums';
 import { SPACERS } from '~/styles/spacers/spacers';
 import {
@@ -44,20 +41,13 @@ const FilterScreen: FC = () => {
   const dispatch = useAppDispatch();
   const { bottom: bottomInset } = useSafeAreaInsets();
   const { t } = useTranslation();
-
-  const filters = useAppSelector(selectFilters);
   const categoriesDataStatus = useAppSelector(selectCategoriesDataStatus);
 
   const loading = categoriesDataStatus === DataStatus.PENDING;
 
-  const handleFiltersSubmitPress = useCallback(() => {
-    dispatch(
-      productsActions.loadProducts(
-        removeObjectFalsyFields<RootState['filters'], ProductQuery>(filters),
-      ),
-    );
+  const handleFiltersSubmitPress = (): void => {
     navigation.goBack();
-  }, [filters]);
+  };
 
   const handleCancelPress = () => {
     dispatch(filtersActions.reset());
