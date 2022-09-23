@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import { updateProduct } from 'services/product';
 import { createPost } from 'services/post';
 import { ProductType } from '@vse-bude/shared';
-import { Routes } from '@enums';
+import { ProfileRoutes, Routes } from '@enums';
 import type { SelectOption } from '@components/primitives/select/types';
 import { createAuctionSchema } from 'validation-schemas/post';
 import { initialAuctionFormState, ConditionFields } from './form-utils';
@@ -82,10 +82,10 @@ export default function ProductForm({ edit }: { edit: boolean }) {
 
       if (edit) {
         const editInfo = await updateProduct(query.id as string, formData);
-        if (editInfo) push(`${Routes.ITEMS}/${query.id}`);
+        editInfo && push(`${Routes.PROFILE}/${ProfileRoutes.LIST}`);
       } else {
         const { id } = await createPost(formData);
-        push(`${Routes.ITEMS}/${id}`);
+        id && push(`${Routes.PROFILE}/${ProfileRoutes.LIST}`);
       }
     } catch (error) {
       if (error instanceof Error) {

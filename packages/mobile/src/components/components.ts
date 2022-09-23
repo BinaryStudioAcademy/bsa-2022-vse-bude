@@ -11,7 +11,8 @@ export {
 } from 'react-native';
 export { SafeAreaView } from 'react-native-safe-area-context';
 export { default as Popover } from 'react-native-popover-view';
-export { default as DateTimePicker } from '@react-native-community/datetimepicker';
+export { default as DateTimePickerModal } from 'react-native-modal-datetime-picker';
+export { default as Slider } from '@ptomasroos/react-native-multi-slider';
 
 export * from './icons/icons';
 export * from './svg/svg';
@@ -36,7 +37,7 @@ export { PrimaryButton } from './primary-button/primary-button';
 export { SecondaryButton } from './secondary-button/secondary-button';
 export { BuildInfo } from './build-info/build-info';
 export { ScrollView } from './scroll-view/scroll-view';
-export { default as CheckBox } from '@react-native-community/checkbox';
 export { Countdown } from './countdown/countdown';
 export { Product } from './product/product';
 export { BurgerMenu } from './burger-menu/burger-menu';
+export { CheckBox } from './checkbox/checkbox';

@@ -5,6 +5,6 @@ export const footerLogo = ({ spaces, mq }: Theme) => css`
   margin-bottom: ${spaces.xl};
 
   ${mq[3]} {
-    margin-right: 115px;
+    margin-right: 90px;
   }
 `;

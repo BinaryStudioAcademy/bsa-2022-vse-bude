@@ -7,6 +7,7 @@ import {
   useMemo,
   useState,
   useNavigation,
+  useAppDispatch,
 } from '~/hooks/hooks';
 import {
   Logo,
@@ -19,23 +20,28 @@ import {
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import {
-  selectCategories,
+  selectCategoriesNonEmpty,
   selectCategoriesDataStatus,
 } from '~/store/selectors';
 import { DataStatus, RootScreenName } from '~/common/enums/enums';
 import { RootNavigationProps } from '~/common/types/types';
+import { filters as filtersActions } from '~/store/actions';
+import { ProductQuery } from '@vse-bude/shared';
 import { styles } from './styles';
 
 const DrawerMenu = () => {
   const [isNestedVisible, setIsNestedVisible] = useState(false);
   const navigation = useNavigation<RootNavigationProps>();
-  const categories = useAppSelector(selectCategories);
+  const categories = useAppSelector(selectCategoriesNonEmpty);
   const dataStatus = useAppSelector(selectCategoriesDataStatus);
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
 
-  const handlePress = () => {
-    navigation.navigate(RootScreenName.ITEMS_AND_SERVICES);
+  const handlePress = (categoryId: ProductQuery['categoryId']) => {
+    dispatch(filtersActions.reset());
+    dispatch(filtersActions.update({ categoryId }));
+    navigation.navigate(RootScreenName.PRODUCTS);
   };
 
   const renderedItems = useMemo(() => {
@@ -44,7 +50,7 @@ const DrawerMenu = () => {
         <DrawerItem
           key={id}
           label={title}
-          onPress={handlePress}
+          onPress={() => handlePress(id)}
           labelStyle={styles.label}
         />
       );

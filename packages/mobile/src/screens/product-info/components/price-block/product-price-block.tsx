@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { ColorPalette, ProductDto } from '@vse-bude/shared';
 import { DataStatus } from '~/common/enums/enums';
-import { selectProductsDataStatus, selectCurrentUser } from '~/store/selectors';
+import { productsDataStatus, selectCurrentUser } from '~/store/selectors';
 import { useAppSelector, useCustomTheme, useTranslation } from '~/hooks/hooks';
 import {
   Pressable,
@@ -31,7 +31,7 @@ const ProductPriceBlock: FC<ProductPriceBlockProps> = ({
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
   const { price, id } = product;
-  const dataStatus = useAppSelector(selectProductsDataStatus);
+  const dataStatus = useAppSelector(productsDataStatus);
   const isLoading = dataStatus == DataStatus.PENDING;
   const user = useAppSelector(selectCurrentUser);
   const canUserMakeBid = Boolean(user?.phoneVerified && user?.emailVerified);

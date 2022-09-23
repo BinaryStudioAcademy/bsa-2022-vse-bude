@@ -49,9 +49,7 @@ const selectGuestFavorites = (state: RootState) => {
   return state.products.guestFavorites;
 };
 
-const selectProductsDataStatus = (state: RootState) => {
-  return state.products.dataStatus;
-};
+const productsDataStatus = (state: RootState) => state.products.dataStatus;
 
 export {
   selectProductById,
@@ -64,5 +62,5 @@ export {
   selectFavoriteIds,
   selectFavorites,
   selectGuestFavorites,
-  selectProductsDataStatus,
+  productsDataStatus,
 };

@@ -14,6 +14,7 @@ import {
   LogOutIcon,
   Logo,
   TouchableOpacity,
+  ListIcon,
   PlusCircleIcon,
 } from '~/components/components';
 import {
@@ -48,6 +49,9 @@ const Account: FC = () => {
   const handleSupportPress = () => {
     navigation.navigate(RootScreenName.SUPPORT);
   };
+  const handleMyListPress = () => {
+    navigation.navigate(RootScreenName.MY_LIST);
+  };
   const handleLogOut = () => {
     dispatch(authActions.logOut());
   };
@@ -65,6 +69,10 @@ const Account: FC = () => {
         <TouchableOpacity onPress={handlePersonalInfoPress} style={styles.row}>
           <UserIcon size={30} style={styles.icon} />
           <Text style={styles.btnText}>{t('account.PERSONAL_INFO')}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleMyListPress} style={styles.row}>
+          <ListIcon size={30} style={styles.icon} />
+          <Text style={styles.btnText}>{t('account.MY_LIST')}</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleSettingsPress} style={styles.row}>
           <SettingsIcon size={30} style={styles.icon} />

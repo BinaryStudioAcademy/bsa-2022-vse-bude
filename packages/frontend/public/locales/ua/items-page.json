@@ -40,6 +40,6 @@
     "goToPage": "Йти до сторінки "
   },
   "currency": {
-    "uah": "{{value}} ГРН"
+    "uah": "{{value}} грн"
   }
 }

@@ -12,7 +12,7 @@ import {
   selectCurrentUser,
   selectFavoriteIds,
   selectCurrentProduct,
-  selectProductsDataStatus,
+  productsDataStatus,
 } from '~/store/selectors';
 import { notification, socketApi } from '~/services/services';
 import {
@@ -46,7 +46,7 @@ const ProductInfo: FC = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const product = useAppSelector(selectCurrentProduct);
-  const dataStatusProduct = useAppSelector(selectProductsDataStatus);
+  const dataStatusProduct = useAppSelector(productsDataStatus);
   const isLoading = dataStatusProduct === DataStatus.PENDING;
   const user = useAppSelector(selectCurrentUser);
   const favoriteIds = useAppSelector(selectFavoriteIds);

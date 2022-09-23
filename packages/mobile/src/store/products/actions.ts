@@ -3,11 +3,7 @@ import {
   createAsyncThunk,
   PrepareAction,
 } from '@reduxjs/toolkit';
-import {
-  AsyncThunkConfig,
-  FavoriteResponseDto,
-  ProductRequestDto,
-} from '~/common/types/types';
+import { AsyncThunkConfig, FavoriteResponseDto } from '~/common/types/types';
 import {
   AuctionPermissionsResponse,
   Bid,
@@ -15,13 +11,14 @@ import {
   AllProductsDto,
   UpdateProductPriceEvent,
   ProductDto,
+  ProductQuery,
   ProductIdRequest,
 } from '@vse-bude/shared';
 import { ActionType } from './common';
 
 const loadProducts = createAsyncThunk<
   AllProductsDto,
-  ProductRequestDto,
+  Readonly<ProductQuery>,
   AsyncThunkConfig
 >(ActionType.PRODUCTS_FETCH, async (requestParams, { extra }) => {
   const { productApi } = extra;
@@ -31,7 +28,7 @@ const loadProducts = createAsyncThunk<
 
 const loadPopularProducts = createAsyncThunk<
   ProductDto[],
-  ProductRequestDto,
+  Readonly<ProductQuery>,
   AsyncThunkConfig
 >(ActionType.POPULAR_PRODUCTS_FETCH, async (requestParams, { extra }) => {
   const { productApi } = extra;
@@ -41,7 +38,7 @@ const loadPopularProducts = createAsyncThunk<
 
 const loadPopularLots = createAsyncThunk<
   ProductDto[],
-  ProductRequestDto,
+  Readonly<ProductQuery>,
   AsyncThunkConfig
 >(ActionType.POPULAR_LOTS_FETCH, async (requestParams, { extra }) => {
   const { productApi } = extra;
@@ -121,7 +118,7 @@ const saveProduct = createAsyncThunk<null, FormData, AsyncThunkConfig>(
 
 const fetchFavorites = createAsyncThunk<
   FavoriteResponseDto[],
-  ProductRequestDto,
+  Readonly<ProductQuery>,
   AsyncThunkConfig
 >(ActionType.FETCH_FAVORITES, async (requestParams, { extra }) => {
   const { productApi } = extra;

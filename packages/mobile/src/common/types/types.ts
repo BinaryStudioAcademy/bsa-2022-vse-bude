@@ -4,6 +4,8 @@ export {
   Rect as PopoverRect,
   Size as PopoverSize,
 } from 'react-native-popover-view';
+export type { ItemType as DropDownItemType } from 'react-native-dropdown-picker';
+
 export type { RootState, AppDispatch, AsyncThunkConfig } from './app/app';
 export type { HttpOptions, GetHeadersParams } from './http/http';
 export type {
@@ -35,9 +37,8 @@ export type {
   VerifyEmailRequestDto,
   PropsVerifyScreens,
 } from './verify/verify';
+export type { UpdateAvatarResponseDto } from './personal-info/personal-info';
 export type {
-  ProductRequestDto,
   FavoriteResponseDto,
   FavoritesMappedData,
 } from './product/product';
-export type { UpdateAvatarResponseDto } from './personal-info/personal-info';

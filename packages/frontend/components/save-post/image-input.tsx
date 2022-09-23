@@ -3,7 +3,7 @@ import Image from 'next/future/image';
 import { IconColor, IconName } from '@enums';
 import { useTranslation } from 'next-i18next';
 import dynamic from 'next/dynamic';
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { allowedImgExtension } from 'common/enums/allowedImgExtension';
 import { MAX_IMAGE_SIZE } from '@vse-bude/shared';
 import { useDropzone } from 'react-dropzone';
@@ -91,6 +91,8 @@ function ImageInput({ images, setImages }: ImageInputProps) {
       setImagePreviews(images as string[]);
   }, [images]);
 
+  const inputRef = useRef<HTMLInputElement>();
+
   return (
     <Column css={styles.sectionRow}>
       {currentImage && (
@@ -107,6 +109,7 @@ function ImageInput({ images, setImages }: ImageInputProps) {
       <p css={styles.photosCaption}>{t('create-post:caption.uploadPhotos')}</p>
       <div data-variant={getVariant()} css={styles.photosWrapper}>
         <input
+          ref={inputRef}
           css={styles.photosInput}
           id="post-photo"
           type="file"
@@ -147,7 +150,12 @@ function ImageInput({ images, setImages }: ImageInputProps) {
 
                 <p css={styles.photosLabel}>
                   {t('create-post:label.photosMain')}
-                  <span>{t('create-post:label.photosCaption')}</span>
+                  <button
+                    type="button"
+                    onClick={() => inputRef.current.click()}
+                  >
+                    {t('create-post:label.photosCaption')}
+                  </button>
                 </p>
               </div>
             </div>

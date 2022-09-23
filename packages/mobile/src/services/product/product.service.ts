@@ -6,11 +6,12 @@ import {
   HttpContentType,
   HttpMethod,
   ProductApiRoutes,
-  ProductIdRequest,
+  ProductQuery,
   AllProductsDto,
   ProductDto,
+  ProductIdRequest,
 } from '@vse-bude/shared';
-import { FavoriteResponseDto, ProductRequestDto } from '~/common/types/types';
+import { FavoriteResponseDto } from '~/common/types/types';
 import { Http } from '~/services/http/http.service';
 
 type Constructor = {
@@ -28,14 +29,16 @@ class ProductService {
     this.#apiPrefix = apiPrefix;
   }
 
-  getProducts(requestParams: ProductRequestDto = {}): Promise<AllProductsDto> {
+  getProducts(
+    requestParams: Readonly<ProductQuery> = {},
+  ): Promise<AllProductsDto> {
     return this.#http.load(`${this.#apiPrefix}${ApiRoutes.PRODUCTS}`, {
       params: requestParams,
     });
   }
 
   getPopularProducts(
-    requestParams: ProductRequestDto = {},
+    requestParams: Readonly<ProductQuery> = {},
   ): Promise<ProductDto[]> {
     return this.#http.load(
       `${this.#apiPrefix}${ApiRoutes.PRODUCTS}${
@@ -47,7 +50,9 @@ class ProductService {
     );
   }
 
-  getPopularLots(requestParams: ProductRequestDto = {}): Promise<ProductDto[]> {
+  getPopularLots(
+    requestParams: Readonly<ProductQuery> = {},
+  ): Promise<ProductDto[]> {
     return this.#http.load(
       `${this.#apiPrefix}${ApiRoutes.PRODUCTS}${ProductApiRoutes.POPULAR_LOTS}`,
       {
@@ -117,7 +122,7 @@ class ProductService {
   }
 
   getFavorites(
-    requestParams: ProductRequestDto = {},
+    requestParams: Readonly<ProductQuery> = {},
   ): Promise<FavoriteResponseDto[]> {
     return this.#http.load(
       `${this.#apiPrefix}${ApiRoutes.PRODUCTS}${ProductApiRoutes.FAVORITE}`,

@@ -40,7 +40,7 @@ export const common = {
   tab_navigation: {
     HOME: 'Головна',
     FAVORITE: 'Вибране',
-    MY_LIST: 'Мій список',
+    PRODUCTS: 'Товари',
     ACCOUNT: 'Акаунт',
     LOG_IN: 'Увійти',
   },

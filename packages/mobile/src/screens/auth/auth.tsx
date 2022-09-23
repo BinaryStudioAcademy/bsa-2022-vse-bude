@@ -46,7 +46,7 @@ const Auth: FC = () => {
       case RootScreenName.SIGN_IN:
         return t('verification.SIGN_IN');
       case RootScreenName.SIGN_UP:
-        return t('verification.CREATE_ACCOUNT');
+        return t('verification.CREATE_ACCOUNT_WELCOME');
       case RootScreenName.FORGOT_PASSWORD:
         return t('verification.FORGOT_PASSWORD');
       default:

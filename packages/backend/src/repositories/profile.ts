@@ -259,6 +259,7 @@ export class UserProfileRepository {
         city,
         zip,
         deliveryData,
+        userId,
       },
       select: {
         country: true,

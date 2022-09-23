@@ -41,7 +41,7 @@
     "site": "Site",
     "checkbox": "Hide phone number",
     "minimalBid": "Minimal bid",
-    "recommendedPrice": "Recommended price",
+    "recommendedPrice": "Starting Bid price",
     "endDate": "End date",
     "username": "Name",
     "seller": "Seller",
@@ -50,11 +50,11 @@
   "placeholder": {
     "category": "Select the category",
     "name": "Enter title",
-    "description": "Enter your product description",
+    "description": "Enter  description",
     "price": "Enter your price",
     "currency": "UAH",
     "country": "Ukraine",
-    "city": "Lviv",
+    "city": "Enter city",
     "callingCode": "UA",
     "phone": "()",
     "instagram": "Enter your nickname",
@@ -62,9 +62,9 @@
     "facebook": "Enter your nickname",
     "site": "Enter site address",
     "minimalBid": "Enter minimal bid",
-    "recommendedPrice": "Enter recommended price",
+    "recommendedPrice": "Enter starting Bid price",
     "username": "Enter user`s name",
-    "condition": "Select condition of item"
+    "condition": "Select condition"
   },
   "validation": {
     "link": {

@@ -47,7 +47,7 @@ const Welcome: FC<Props> = ({ navigation }) => {
         </View>
         <View style={styles.buttonsWrapper}>
           <SecondaryButton
-            label={t('verification.CREATE_ACCOUNT')}
+            label={t('verification.CREATE_ACCOUNT_WELCOME')}
             onPress={() => {
               navigation.navigate(RootScreenName.SIGN_UP);
             }}

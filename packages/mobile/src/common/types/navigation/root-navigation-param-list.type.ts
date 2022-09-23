@@ -22,8 +22,10 @@ type RootNavigationParamList = {
   [RootScreenName.NEW_AUCTION]: undefined;
   [RootScreenName.ITEM_INFO]: { itemId: string };
   [RootScreenName.TYPE_OF_NEW_POST]: undefined;
+  [RootScreenName.FILTER]: undefined;
   [RootScreenName.MAIN_WITH_MENU]: NavigatorScreenParams<DrawerNavigationParamList>;
-  [RootScreenName.ITEMS_AND_SERVICES]: undefined;
+  [RootScreenName.PRODUCTS]: undefined;
+  [RootScreenName.MY_LIST]: undefined;
 };
 
 export type { RootNavigationParamList };
