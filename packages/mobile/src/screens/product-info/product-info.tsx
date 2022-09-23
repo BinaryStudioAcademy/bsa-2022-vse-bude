@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import React, { FC, useEffect } from 'react';
 import { RouteProp } from '@react-navigation/native';
 import { RootNavigationParamList } from '~/common/types/types';
@@ -26,7 +27,6 @@ import {
   selectCurrentUser,
   selectDataStatusProducts,
 } from '~/store/selectors';
-import dayjs from 'dayjs';
 import {
   Description,
   ImageCarousel,
