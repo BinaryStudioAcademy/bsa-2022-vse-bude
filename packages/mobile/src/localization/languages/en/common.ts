@@ -18,6 +18,9 @@ export const common = {
   common: {
     HOME: 'Home',
     ERROR: 'Error',
+    ENGLISH: 'English',
+    UKRAINIAN: 'Ukrainian',
+    LANGUAGE: 'Language',
   },
   permission: {
     STORAGE_DENIED: 'Storage permission denied',

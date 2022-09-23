@@ -12,8 +12,8 @@ const HomeWithMenuNavigation: FC = () => {
 
   const options: DrawerNavigationOptions = {
     headerShown: false,
-    swipeEdgeWidth: 100,
     swipeEnabled: false,
+    drawerStyle: { width: '80%' },
   };
 
   return (

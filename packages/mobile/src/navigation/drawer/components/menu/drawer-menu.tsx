@@ -1,5 +1,8 @@
 import React from 'react';
+import Color from 'color';
 import { DrawerItem } from '@react-navigation/drawer';
+import { ColorPalette, ProductQuery } from '@vse-bude/shared';
+
 import {
   useCustomTheme,
   useTranslation,
@@ -9,16 +12,7 @@ import {
   useNavigation,
   useAppDispatch,
 } from '~/hooks/hooks';
-import {
-  Logo,
-  View,
-  Text,
-  ListIcon,
-  ArrowUpIcon,
-  ArrowDownIcon,
-  Spinner,
-} from '~/components/components';
-import { globalStyles } from '~/styles/styles';
+import { ListIcon, Spinner } from '~/components/components';
 import {
   selectCategoriesNonEmpty,
   selectCategoriesDataStatus,
@@ -26,11 +20,10 @@ import {
 import { DataStatus, RootScreenName } from '~/common/enums/enums';
 import { RootNavigationProps } from '~/common/types/types';
 import { filters as filtersActions } from '~/store/actions';
-import { ProductQuery } from '@vse-bude/shared';
 import { styles } from './styles';
 
-const DrawerMenu = () => {
-  const [isNestedVisible, setIsNestedVisible] = useState(false);
+const DrawerMenu: React.FC = () => {
+  const [isNestedVisible, setIsNestedVisible] = useState(true);
   const navigation = useNavigation<RootNavigationProps>();
   const categories = useAppSelector(selectCategoriesNonEmpty);
   const dataStatus = useAppSelector(selectCategoriesDataStatus);
@@ -44,51 +37,40 @@ const DrawerMenu = () => {
     navigation.navigate(RootScreenName.PRODUCTS);
   };
 
+  const toggleVisible = () => setIsNestedVisible((current) => !current);
+
   const renderedItems = useMemo(() => {
+    if (!isNestedVisible) {
+      return null;
+    }
+
     return categories.map(({ title, id }) => {
       return (
         <DrawerItem
           key={id}
           label={title}
           onPress={() => handlePress(id)}
-          labelStyle={styles.label}
+          style={styles.categoryItem}
+          pressColor={Color(ColorPalette.YELLOW_100).alpha(0.1).rgb().string()}
         />
       );
     });
-  }, [categories]);
+  }, [categories, isNestedVisible]);
+
   const isLoading = dataStatus === DataStatus.PENDING;
 
   return (
-    <View>
-      <View style={[globalStyles.alignItemsCenter, globalStyles.py6]}>
-        <Logo width={150} height={50} />
-      </View>
+    <>
       <DrawerItem
-        icon={() => <ListIcon color={colors.accent} size={20} />}
-        label={() => (
-          <View style={globalStyles.flexDirectionRow}>
-            <Text style={styles.title}>
-              {t('common:drawer_menu.CATEGORIES')}
-            </Text>
-            {isNestedVisible ? (
-              <ArrowUpIcon size={20} color={colors.accent} />
-            ) : (
-              <ArrowDownIcon size={20} color={colors.accent} />
-            )}
-          </View>
-        )}
-        onPress={() => setIsNestedVisible(!isNestedVisible)}
+        icon={ListIcon}
+        activeTintColor={colors.accent}
+        inactiveTintColor={isNestedVisible ? colors.accent : undefined}
+        pressColor={Color(ColorPalette.YELLOW_100).alpha(0.1).rgb().string()}
+        label={t('common:drawer_menu.CATEGORIES')}
+        onPress={toggleVisible}
       />
-      <View
-        style={[
-          !isNestedVisible ? { display: 'none' } : { display: 'flex' },
-          globalStyles.ml5,
-        ]}
-      >
-        <Text style={styles.subtitle}>{t('common:drawer_menu.ITEMS')}</Text>
-        {isLoading ? <Spinner /> : renderedItems}
-      </View>
-    </View>
+      {isLoading ? <Spinner /> : renderedItems}
+    </>
   );
 };
 
