@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import { useAppDispatch } from '@hooks';
 import { showMakePostModal } from 'store/modals/actions';
+import { logoutUser } from 'store/auth';
 import * as styles from './styles';
 
 interface ProfileDropdownProps {
@@ -25,12 +26,16 @@ export const ProfileDropdown = ({
     dispatch(showMakePostModal());
     onCloseParent();
   };
+  const handleLogoutClick = () => {
+    dispatch(logoutUser());
+    onCloseParent();
+  };
 
   const options = [
     {
       value: t('common:header.popover.makePost'),
       key: 'Make a post',
-      onClick: () => handleMakePostClick(),
+      onClick: handleMakePostClick,
       cssExtend: styles.option,
       disabled: !user?.emailVerified || !user?.phoneVerified,
     },
@@ -71,6 +76,12 @@ export const ProfileDropdown = ({
     //     (location.href = 'mailto:vsebude.team@gmail.com?subject=Support'),
     //   cssExtend: styles.option,
     // },
+    {
+      value: t('common:header.popover.signOut'),
+      key: 'signOut',
+      onClick: handleLogoutClick,
+      cssExtend: styles.option,
+    },
   ];
 
   return (

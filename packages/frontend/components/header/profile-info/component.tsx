@@ -73,7 +73,9 @@ export const ProfileInfo = ({ load }: ProfileInfoProps) => {
         )}
         triggerWrapperCssExtend={styles.popoverTriggerWrapper}
       >
-        {(handleClose) => <PopoverContent handleClose={handleClose} />}
+        {(handleClose) => (
+          <PopoverContent user={user} handleClose={handleClose} />
+        )}
       </Popover>
     </div>
   );

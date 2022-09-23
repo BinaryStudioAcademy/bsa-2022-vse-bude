@@ -7,7 +7,10 @@ export const wrapper = css`
   transform: translateX(-50%);
 `;
 
-export const option = ({ fontSizes, lineHeights }: Theme) => css`
+export const option = ({ fontSizes, lineHeights, colors }: Theme) => css`
   font-size: ${fontSizes.body2};
   line-height: ${lineHeights.body2};
+  &:last-child {
+    color: ${colors.primaryLight};
+  }
 `;
