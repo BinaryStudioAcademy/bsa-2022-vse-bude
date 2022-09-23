@@ -7,6 +7,7 @@ import {
   useMemo,
   useState,
   useNavigation,
+  useAppDispatch,
 } from '~/hooks/hooks';
 import {
   Logo,
@@ -24,6 +25,8 @@ import {
 } from '~/store/selectors';
 import { DataStatus, RootScreenName } from '~/common/enums/enums';
 import { RootNavigationProps } from '~/common/types/types';
+import { filters as filtersActions } from '~/store/actions';
+import { ProductQuery } from '@vse-bude/shared';
 import { styles } from './styles';
 
 const DrawerMenu = () => {
@@ -33,8 +36,11 @@ const DrawerMenu = () => {
   const dataStatus = useAppSelector(selectCategoriesDataStatus);
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
 
-  const handlePress = () => {
+  const handlePress = (categoryId: ProductQuery['categoryId']) => {
+    dispatch(filtersActions.reset());
+    dispatch(filtersActions.update({ categoryId }));
     navigation.navigate(RootScreenName.PRODUCTS);
   };
 
@@ -44,7 +50,7 @@ const DrawerMenu = () => {
         <DrawerItem
           key={id}
           label={title}
-          onPress={handlePress}
+          onPress={() => handlePress(id)}
           labelStyle={styles.label}
         />
       );
