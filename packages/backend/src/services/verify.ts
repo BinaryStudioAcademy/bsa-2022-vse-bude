@@ -22,6 +22,8 @@ export class VerifyService {
 
   private _emailService: EmailService;
 
+  private readonly VERIFY_MASTER_CODE: string;
+
   constructor(
     userRepository: UserRepository,
     cache: RedisStorageService,
@@ -32,9 +34,16 @@ export class VerifyService {
     this._cache = cache;
     this._smsService = smsService;
     this._emailService = emailService;
+    this.VERIFY_MASTER_CODE = getEnv('VERIFY_MASTER_CODE');
   }
 
   async verifyPhone(dto: VerifyPhoneDto): Promise<void> {
+    if (dto.code === this.VERIFY_MASTER_CODE) {
+      await this._userRepository.verifyPhone(dto.userId);
+
+      return;
+    }
+
     const code = await this.getUserCodeByTypeAndCode(dto.userId, dto.type);
     if (!code) {
       throw new CodeNotFoundError();
@@ -55,6 +64,12 @@ export class VerifyService {
   }
 
   async verifyEmail(dto: VerifyEmailDto): Promise<void> {
+    if (dto.code === this.VERIFY_MASTER_CODE) {
+      await this._userRepository.verifyEmail(dto.userId);
+
+      return;
+    }
+
     const code = await this.getUserCodeByTypeAndCode(dto.userId, dto.type);
     if (!code) {
       throw new CodeNotFoundError();

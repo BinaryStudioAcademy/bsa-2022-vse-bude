@@ -29,6 +29,8 @@ type WayForPayEnvKeys =
   | 'WAY_FOR_PAY_MERCHANT_ACCOUNT'
   | 'WAY_FOR_PAY_MERCHANT_SECRET_KEY';
 
+type VerifyMasterCode = 'VERIFY_MASTER_CODE';
+
 type EnvKeys =
   | ProcessEnvKey
   | AuthEnvKeys
@@ -37,7 +39,8 @@ type EnvKeys =
   | EmailEnvKey
   | S3StorageEnvKey
   | AppEnvKeys
-  | WayForPayEnvKeys;
+  | WayForPayEnvKeys
+  | VerifyMasterCode;
 
 export const getEnv = (key: EnvKeys): string => process.env[key];
 
