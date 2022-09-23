@@ -50,11 +50,11 @@
   "placeholder": {
     "category": "Select the category",
     "name": "Enter title",
-    "description": "Enter your product description",
+    "description": "Enter  description",
     "price": "Enter your price",
     "currency": "UAH",
     "country": "Ukraine",
-    "city": "Lviv",
+    "city": "Enter city",
     "callingCode": "UA",
     "phone": "()",
     "instagram": "Enter your nickname",
@@ -64,7 +64,7 @@
     "minimalBid": "Enter minimal bid",
     "recommendedPrice": "Enter starting Bid price",
     "username": "Enter user`s name",
-    "condition": "Select condition of item"
+    "condition": "Select condition"
   },
   "validation": {
     "link": {

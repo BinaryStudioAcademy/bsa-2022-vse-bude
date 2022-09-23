@@ -1,28 +1,25 @@
-import dayjs from 'dayjs';
-import { DateTimePickerEvent } from '@react-native-community/datetimepicker';
-
 import React, { ReactElement } from 'react';
-
+import dayjs from 'dayjs';
+import { useFormControl, useState, useCustomTheme } from '~/hooks/hooks';
 import {
   FormControl,
   FormControlErrors,
   FormControlPath,
   FormControlValues,
 } from '~/common/types/types';
-
-import { useFormControl, useState, useCustomTheme } from '~/hooks/hooks';
 import { ColorPalette } from '@vse-bude/shared';
 import { globalStyles } from '~/styles/styles';
 import { StyleProp, ViewStyle } from 'react-native';
-import { DateTimeFormat, DateTimeType } from '~/common/enums/ui/ui';
+import { DateTimeType } from '~/common/enums/ui/ui';
+import { getTextValueDate } from '~/helpers/helpers';
 import {
   CalendarIcon,
   ClockIcon,
-  DateTimePicker,
   Text,
   TouchableOpacity,
   View,
   AlertIcon,
+  DateTimePickerModal,
 } from '../components';
 import { useStyles } from './styles';
 
@@ -47,7 +44,7 @@ const DatePicker = <T extends FormControlValues>({
   contentContainerStyle,
   required,
 }: Props<T>): ReactElement => {
-  const [open, setOpen] = useState(false);
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const {
     field: { value, onChange },
   } = useFormControl({ name, control });
@@ -57,26 +54,27 @@ const DatePicker = <T extends FormControlValues>({
 
   const today = dayjs();
   const tomorrow = today.add(1, 'day');
-  const date = value ? dayjs(value).format(DateTimeFormat.DATE_ONLY) : null;
-  const time = value ? dayjs(value).format(DateTimeFormat.TIME_ONLY) : null;
-  const textValue = mode === 'date' ? date : time;
+
+  const textValue = getTextValueDate(value, mode);
+
   const Icon = mode === 'time' ? ClockIcon : CalendarIcon;
 
-  const handleOnChange = (
-    _event: DateTimePickerEvent,
-    selectedDate: Date | undefined,
-  ): void => {
-    setOpen(false);
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (selectedDate: Date | undefined) => {
     onChange(selectedDate);
+    hideDatePicker();
   };
 
   return (
     <View style={contentContainerStyle}>
-      <TouchableOpacity
-        onPress={() => {
-          setOpen(true);
-        }}
-      >
+      <TouchableOpacity onPress={showDatePicker}>
         <View style={globalStyles.flexDirectionRow}>
           <Text style={[styles.label, globalStyles.mb2, globalStyles.fs12]}>
             {label}
@@ -127,14 +125,14 @@ const DatePicker = <T extends FormControlValues>({
           </Text>
         </View>
       )}
-      {open && (
-        <DateTimePicker
-          value={value ? new Date(value) : tomorrow.toDate()}
-          mode={mode}
-          onChange={handleOnChange}
-          minimumDate={tomorrow.toDate()}
-        />
-      )}
+      <DateTimePickerModal
+        date={value ? new Date(value) : tomorrow.toDate()}
+        isVisible={isDatePickerVisible}
+        mode={mode}
+        onConfirm={handleConfirm}
+        onCancel={hideDatePicker}
+        minimumDate={tomorrow.toDate()}
+      />
     </View>
   );
 };

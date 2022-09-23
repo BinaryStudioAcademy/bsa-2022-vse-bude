@@ -6,6 +6,8 @@ import { selectCategoryById } from '~/store/selectors';
 import { filters as filtersActions } from '~/store/actions';
 import { RootScreenName } from '~/common/enums/enums';
 import { RootNavigationProps } from '~/common/types/types';
+import { CATEGORY_IMAGES_BY_ID } from '~/mock/category-image-by-id';
+import { images } from '~/assets/images/images';
 import { styles } from './styles';
 
 type Props = {
@@ -38,7 +40,14 @@ const Category: FC<Props> = ({ categoryId }) => {
       <Text style={[styles.title, globalStyles.fs14]} numberOfLines={3}>
         {title}
       </Text>
-      {image && <Image style={styles.image} source={{ uri: image }} />}
+      {image && (
+        <Image
+          style={styles.image}
+          source={
+            CATEGORY_IMAGES_BY_ID[categoryId] || images.no_image_available
+          }
+        />
+      )}
     </TouchableOpacity>
   );
 };
