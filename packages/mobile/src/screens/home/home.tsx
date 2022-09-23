@@ -1,4 +1,7 @@
 import React, { FC } from 'react';
+import { batch } from 'react-redux';
+import { ProductType } from '@vse-bude/shared';
+
 import {
   useTranslation,
   useAppDispatch,
@@ -12,11 +15,8 @@ import {
   FlatList,
   View,
   Text,
-  SearchInput,
-  StatusBar,
   ScreenWrapper,
 } from '~/components/components';
-import { ColorPalette, ProductType } from '@vse-bude/shared';
 import { organizations } from '~/mock/mock';
 import {
   products as productsActions,
@@ -32,7 +32,6 @@ import { RootNavigationProps } from '~/common/types/types';
 import { RootScreenName } from '~/common/enums/enums';
 import {
   Category,
-  Flag,
   Organization,
   ProductsSection,
   HomeScreenWrapper,
@@ -48,19 +47,21 @@ const Home: FC = () => {
   const categories = useAppSelector(selectCategoriesNonEmpty);
 
   useEffect(() => {
-    dispatch(
-      productsActions.loadPopularProducts({
-        limit: 10,
-        type: ProductType.AUCTION,
-      }),
-    );
-    dispatch(
-      productsActions.loadPopularLots({
-        limit: 10,
-        type: ProductType.SELLING,
-      }),
-    );
-    dispatch(categoriesActions.loadAllCategories());
+    batch(() => {
+      dispatch(
+        productsActions.loadPopularProducts({
+          limit: 10,
+          type: ProductType.AUCTION,
+        }),
+      );
+      dispatch(
+        productsActions.loadPopularLots({
+          limit: 10,
+          type: ProductType.SELLING,
+        }),
+      );
+      dispatch(categoriesActions.loadAllCategories());
+    });
   }, []);
 
   const onSeeAllLotsPress = () => {
@@ -77,39 +78,9 @@ const Home: FC = () => {
 
   return (
     <ScreenWrapper>
-      <ScrollView>
-        <StatusBar
-          backgroundColor={ColorPalette.WHITE_100}
-          translucent={false}
-          barStyle="dark-content"
-        />
+      <ScrollView contentContainerStyle={globalStyles.py5}>
         <HomeScreenWrapper>
-          <View
-            style={[
-              styles.header,
-              globalStyles.flexDirectionRow,
-              globalStyles.alignItemsCenter,
-            ]}
-          >
-            <Text
-              style={[
-                styles.title,
-                globalStyles.fs36,
-                globalStyles.fontWeightExtraBold,
-              ]}
-            >
-              {t('home.HELP_UKRAINE')}
-            </Text>
-            <Flag />
-          </View>
-          <SearchInput
-            placeHolder={t('home.SEARCH_PLACEHOLDER')}
-            onValueChange={() => {
-              //TODO
-            }}
-          />
           <FlatList
-            style={styles.categories}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             data={categories}

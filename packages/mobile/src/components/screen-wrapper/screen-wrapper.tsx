@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
-import { StatusBar } from 'react-native';
 import {
   SafeAreaView,
   NativeSafeAreaViewProps,
 } from 'react-native-safe-area-context';
 import { useCustomTheme } from '~/hooks/hooks';
 import { globalStyles } from '~/styles/styles';
+import { FocusAwareStatusBar } from '../components';
 
 const ScreenWrapper: FC<NativeSafeAreaViewProps> = ({
   style,
@@ -23,7 +23,7 @@ const ScreenWrapper: FC<NativeSafeAreaViewProps> = ({
       ]}
       {...restProps}
     >
-      <StatusBar
+      <FocusAwareStatusBar
         barStyle={dark ? 'light-content' : 'dark-content'}
         backgroundColor={colors.background}
       />

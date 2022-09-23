@@ -89,11 +89,7 @@ const ProductInfo: FC = () => {
 
   return (
     <ScreenWrapper>
-      <StatusBar
-        backgroundColor={colors.backgroundSecondary}
-        translucent={false}
-        barStyle="dark-content"
-      />
+      <StatusBar backgroundColor={colors.backgroundSecondary} />
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={[globalStyles.px5, globalStyles.py6, globalStyles.mb6]}
