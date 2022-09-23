@@ -1,9 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { RouteProp } from '@react-navigation/native';
 import { RootNavigationParamList } from '~/common/types/types';
-import {
-  ProductType,
-} from '@vse-bude/shared';
+import { ProductType } from '@vse-bude/shared';
 import { products as productsActions } from '~/store/actions';
 import {
   useAppDispatch,
