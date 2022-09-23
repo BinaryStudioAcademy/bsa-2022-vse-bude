@@ -14,6 +14,7 @@ import { Image, Text, TouchableOpacity, View } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
 import { StyleProp, ViewStyle } from 'react-native';
 import { products } from '~/store/actions';
+import { images } from '~/assets/images/images';
 import { styles } from './styles';
 import { TimeWindow } from './components/components';
 
@@ -42,6 +43,8 @@ const Product: FC<Props> = ({ product, contentContainerStyle }) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const navigation = useNavigation<NavigationProp<RootNavigationParamList>>();
+  const imageSrc =
+    imageLinks?.length > 0 ? { uri: imageLinks[0] } : images.no_image_available;
 
   const handleOpenProductInfo = () => {
     dispatch(products.loadProductInfo(id));
@@ -60,7 +63,7 @@ const Product: FC<Props> = ({ product, contentContainerStyle }) => {
           ]}
         >
           <View style={styles.imgWrapper}>
-            <Image source={{ uri: imageLinks[0] }} style={styles.img} />
+            <Image source={imageSrc} style={styles.img} />
 
             {isAuction && (
               <TimeWindow
