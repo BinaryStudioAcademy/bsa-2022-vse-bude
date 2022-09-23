@@ -7,9 +7,16 @@ import { selectCurrentUser } from '~/store/selectors';
 import { PriceWrapper } from './price-wrapper';
 import { styles } from './styles';
 
-type ProductPriceBlockProps = Pick<ProductDto, 'price'>;
+type ProductPriceBlockProps = Pick<ProductDto, 'price'> & {
+  isAuthor: boolean;
+  isSold: boolean;
+};
 
-const ProductPriceBlock: FC<ProductPriceBlockProps> = ({ price }) => {
+const ProductPriceBlock: FC<ProductPriceBlockProps> = ({
+  price,
+  isAuthor,
+  isSold,
+}) => {
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
   const user = useAppSelector(selectCurrentUser);
@@ -27,23 +34,28 @@ const ProductPriceBlock: FC<ProductPriceBlockProps> = ({ price }) => {
         >
           {`${price} ${t('common:currency.UAH')}`}
         </Text>
-        <View
-          style={[globalStyles.flexDirectionRow, globalStyles.alignItemsCenter]}
-        >
-          <View style={styles.btnWidth}>
-            <PrimaryButton
-              label={t('common:components.BUTTON_BUY')}
-              disabled={!canUserMakeBid}
-            />
+        {!isAuthor && (
+          <View
+            style={[
+              globalStyles.flexDirectionRow,
+              globalStyles.alignItemsCenter,
+            ]}
+          >
+            <View style={styles.btnWidth}>
+              <PrimaryButton
+                label={t('common:components.BUTTON_BUY')}
+                disabled={!canUserMakeBid || isSold}
+              />
+            </View>
+            <View style={[globalStyles.ml5, styles.iconBorder]}>
+              <StarIcon
+                size={25}
+                color={ColorPalette.YELLOW_200}
+                style={styles.icon}
+              />
+            </View>
           </View>
-          <View style={[globalStyles.ml5, styles.iconBorder]}>
-            <StarIcon
-              size={25}
-              color={ColorPalette.YELLOW_200}
-              style={styles.icon}
-            />
-          </View>
-        </View>
+        )}
       </>
     </PriceWrapper>
   );
