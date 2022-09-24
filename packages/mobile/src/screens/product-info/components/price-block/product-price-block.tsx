@@ -1,17 +1,38 @@
 import React, { FC } from 'react';
-import { PrimaryButton, StarIcon, Text, View } from '~/components/components';
-import { useAppSelector, useCustomTheme, useTranslation } from '~/hooks/hooks';
 import { ColorPalette, ProductDto } from '@vse-bude/shared';
+import { DataStatus } from '~/common/enums/enums';
+import { productsDataStatus, selectCurrentUser } from '~/store/selectors';
+import { useAppSelector, useCustomTheme, useTranslation } from '~/hooks/hooks';
+import {
+  Pressable,
+  PrimaryButton,
+  Spinner,
+  StarSvg,
+  Text,
+  View,
+} from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import { selectCurrentUser } from '~/store/selectors';
 import { PriceWrapper } from './price-wrapper';
 import { styles } from './styles';
 
-type ProductPriceBlockProps = Pick<ProductDto, 'price'>;
+type ProductPriceBlockProps = {
+  product: Pick<ProductDto, 'price' | 'id'>;
+  isFavorite: boolean;
+  makeFavoritePending: boolean;
+  onFavoritePress: (id: string) => void;
+};
 
-const ProductPriceBlock: FC<ProductPriceBlockProps> = ({ price }) => {
+const ProductPriceBlock: FC<ProductPriceBlockProps> = ({
+  product,
+  isFavorite,
+  makeFavoritePending,
+  onFavoritePress,
+}) => {
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
+  const { price, id } = product;
+  const dataStatus = useAppSelector(productsDataStatus);
+  const isLoading = dataStatus == DataStatus.PENDING;
   const user = useAppSelector(selectCurrentUser);
   const canUserMakeBid = Boolean(user?.phoneVerified && user?.emailVerified);
 
@@ -36,13 +57,25 @@ const ProductPriceBlock: FC<ProductPriceBlockProps> = ({ price }) => {
               disabled={!canUserMakeBid}
             />
           </View>
-          <View style={[globalStyles.ml5, styles.iconBorder]}>
-            <StarIcon
-              size={25}
-              color={ColorPalette.YELLOW_200}
-              style={styles.icon}
-            />
-          </View>
+          <Pressable
+            onPress={() => onFavoritePress(id)}
+            style={[globalStyles.ml5, styles.iconBorder]}
+            disabled={isLoading}
+          >
+            {makeFavoritePending ? (
+              <View style={globalStyles.py1}>
+                <Spinner />
+              </View>
+            ) : (
+              <StarSvg
+                color={ColorPalette.YELLOW_200}
+                width={30}
+                height={30}
+                fill={isFavorite ? ColorPalette.YELLOW_200 : 'none'}
+                style={styles.icon}
+              />
+            )}
+          </Pressable>
         </View>
       </>
     </PriceWrapper>

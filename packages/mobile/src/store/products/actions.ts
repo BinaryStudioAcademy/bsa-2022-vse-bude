@@ -3,7 +3,7 @@ import {
   createAsyncThunk,
   PrepareAction,
 } from '@reduxjs/toolkit';
-import { AsyncThunkConfig } from '~/common/types/types';
+import { AsyncThunkConfig, FavoriteResponseDto } from '~/common/types/types';
 import {
   AuctionPermissionsResponse,
   Bid,
@@ -12,6 +12,7 @@ import {
   UpdateProductPriceEvent,
   ProductDto,
   ProductQuery,
+  ProductIdRequest,
 } from '@vse-bude/shared';
 import { ActionType } from './common';
 
@@ -115,6 +116,79 @@ const saveProduct = createAsyncThunk<null, FormData, AsyncThunkConfig>(
   },
 );
 
+const fetchFavorites = createAsyncThunk<
+  FavoriteResponseDto[],
+  Readonly<ProductQuery>,
+  AsyncThunkConfig
+>(ActionType.FETCH_FAVORITES, async (requestParams, { extra }) => {
+  const { productApi } = extra;
+
+  return await productApi.getFavorites(requestParams);
+});
+
+const fetchFavoriteIds = createAsyncThunk<
+  string[],
+  undefined,
+  AsyncThunkConfig
+>(ActionType.FETCH_FAVORITES_IDS, async (_, { extra }) => {
+  const { productApi } = extra;
+
+  return await productApi.getFavoritesIds();
+});
+
+const addToFavorite = createAsyncThunk<
+  ProductIdRequest,
+  string,
+  AsyncThunkConfig
+>(
+  ActionType.ADD_TO_FAVORITE,
+  async (productId, { extra, getState, dispatch }) => {
+    const { productApi } = extra;
+    const user = getState().auth.user;
+    if (user) {
+      const response = await productApi.addToFavorites({ productId });
+      await dispatch(fetchFavoriteIds());
+
+      return response;
+    }
+
+    return { productId };
+  },
+);
+
+const deleteFromFavorite = createAsyncThunk<
+  ProductIdRequest,
+  string,
+  AsyncThunkConfig
+>(
+  ActionType.DELETE_FROM_FAVORITE,
+  async (productId, { extra, getState, dispatch }) => {
+    const { productApi } = extra;
+    const user = getState().auth.user;
+    if (user) {
+      const response = await productApi.deleteFromFavorites({ productId });
+      await dispatch(fetchFavoriteIds());
+      await dispatch(fetchFavorites({ limit: 10 }));
+
+      return response;
+    }
+
+    return { productId };
+  },
+);
+
+const fetchGuestFavorites = createAsyncThunk<
+  ProductDto,
+  string,
+  AsyncThunkConfig
+>(ActionType.FETCH_GUEST_FAVORITES, async (productId, { extra }) => {
+  const { productApi } = extra;
+
+  return await productApi.getProductById(productId);
+});
+
+const cleanFavoriteIds = createAction(ActionType.CLEAN_FAVORITES_IDS);
+
 export {
   loadProducts,
   loadPopularProducts,
@@ -126,4 +200,10 @@ export {
   updateCurrentItemPrice,
   updateProductViews,
   saveProduct,
+  fetchFavorites,
+  fetchFavoriteIds,
+  addToFavorite,
+  deleteFromFavorite,
+  cleanFavoriteIds,
+  fetchGuestFavorites,
 };

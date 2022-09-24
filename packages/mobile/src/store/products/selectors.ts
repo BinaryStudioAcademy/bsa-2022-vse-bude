@@ -2,9 +2,6 @@ import { createSelector } from '@reduxjs/toolkit';
 import { ProductDto, AllProductsDto, ProductType } from '@vse-bude/shared';
 import { RootState } from '~/common/types/types';
 
-const selectDataStatusProducts = (state: RootState) =>
-  state.products.dataStatus;
-
 const selectProducts = (state: RootState): AllProductsDto => {
   return state.products.products;
 };
@@ -40,7 +37,17 @@ const selectPermission = (state: RootState) => {
   return state.products.permissions;
 };
 
-const auctionMakeBidStatus = (state: RootState) => state.products.dataStatus;
+const selectFavoriteIds = (state: RootState) => {
+  return state.products.favoriteIds;
+};
+
+const selectFavorites = (state: RootState) => {
+  return state.products.favorites;
+};
+
+const selectGuestFavorites = (state: RootState) => {
+  return state.products.guestFavorites;
+};
 
 const productsDataStatus = (state: RootState) => state.products.dataStatus;
 
@@ -52,7 +59,8 @@ export {
   selectPermission,
   selectPopularProducts,
   selectPopularLots,
-  auctionMakeBidStatus,
+  selectFavoriteIds,
+  selectFavorites,
+  selectGuestFavorites,
   productsDataStatus,
-  selectDataStatusProducts,
 };

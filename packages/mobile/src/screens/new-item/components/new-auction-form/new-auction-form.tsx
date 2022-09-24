@@ -29,7 +29,7 @@ import { globalStyles } from '~/styles/styles';
 import { DatePicker } from '~/components/date-time-picker/date-time-picker';
 import { ButtonAppearance, DateTimeType } from '~/common/enums/ui/ui';
 import { ButtonsContainer } from '~/screens/components/components';
-import { selectCategories, selectDataStatusProducts } from '~/store/selectors';
+import { selectCategories, productsDataStatus } from '~/store/selectors';
 import { DataStatus } from '~/common/enums/enums';
 import { productsAuctionSchema } from '~/validation-schemas/validation-schemas';
 import { notification } from '~/services/services';
@@ -50,7 +50,7 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
   const { colors } = useCustomTheme();
   const styles = useStyles();
   const categories = useAppSelector(selectCategories);
-  const dataStatusProducts = useAppSelector(selectDataStatusProducts);
+  const dataStatusProducts = useAppSelector(productsDataStatus);
   const isLoading = dataStatusProducts === DataStatus.PENDING;
 
   const formattedCategories = useMemo(

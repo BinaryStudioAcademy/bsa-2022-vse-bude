@@ -16,3 +16,4 @@ export { categoryForDropdown } from './category/format-category-for-dropdown';
 export { checkSliderPriceValidity } from './price/check-slider-price-validity';
 export { removeObjectFalsyFields } from './remove-object-falsy-fields/remove-object-falsy-fields';
 export * from './products/products';
+export { favoritesMapper, guestFavoritesMapper } from './favorites/favorites';

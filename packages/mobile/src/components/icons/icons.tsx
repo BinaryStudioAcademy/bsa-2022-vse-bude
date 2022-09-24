@@ -134,6 +134,10 @@ const CalendarIcon: AppIcon = (iconProps) => (
   <FeatherIcon name="calendar" {...iconProps} />
 );
 
+const TrashCanIcon: AppIcon = (iconProps) => (
+  <FeatherIcon name="trash" {...iconProps} />
+);
+
 export {
   HomeIcon,
   StarIcon,
@@ -168,4 +172,5 @@ export {
   CalendarIcon,
   ArrowUpIcon,
   ArrowDownIcon,
+  TrashCanIcon,
 };

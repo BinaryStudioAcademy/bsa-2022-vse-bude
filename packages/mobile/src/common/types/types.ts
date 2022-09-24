@@ -38,3 +38,7 @@ export type {
   PropsVerifyScreens,
 } from './verify/verify';
 export type { UpdateAvatarResponseDto } from './personal-info/personal-info';
+export type {
+  FavoriteResponseDto,
+  FavoritesMappedData,
+} from './product/product';

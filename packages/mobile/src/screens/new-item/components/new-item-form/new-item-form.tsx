@@ -29,7 +29,7 @@ import { globalStyles } from '~/styles/styles';
 import { categoryForDropdown } from '~/helpers/category/format-category-for-dropdown';
 import { ButtonsContainer } from '~/screens/components/components';
 import { ButtonAppearance, DataStatus } from '~/common/enums/enums';
-import { selectCategories, selectDataStatusProducts } from '~/store/selectors';
+import { selectCategories, productsDataStatus } from '~/store/selectors';
 import { productsPostSchema } from '~/validation-schemas/validation-schemas';
 import { notification } from '~/services/services';
 import { makePostParser } from '~/helpers/helpers';
@@ -48,7 +48,7 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
   const { colors } = useCustomTheme();
   const styles = useStyles();
   const categories = useAppSelector(selectCategories);
-  const dataStatusProducts = useAppSelector(selectDataStatusProducts);
+  const dataStatusProducts = useAppSelector(productsDataStatus);
   const isLoading = dataStatusProducts === DataStatus.PENDING;
   const formattedCategories = useMemo(
     () => categoryForDropdown(categories),

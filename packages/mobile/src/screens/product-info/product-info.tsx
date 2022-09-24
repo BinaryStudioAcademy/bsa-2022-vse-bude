@@ -1,6 +1,7 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { RouteProp } from '@react-navigation/native';
 import { RootNavigationParamList } from '~/common/types/types';
+import { DataStatus, RootScreenName } from '~/common/enums/enums';
 import {
   ProductType,
   UpdateProductPriceEvent,
@@ -8,13 +9,19 @@ import {
 } from '@vse-bude/shared';
 import { products as productsActions } from '~/store/actions';
 import {
+  selectCurrentUser,
+  selectFavoriteIds,
+  selectCurrentProduct,
+  productsDataStatus,
+} from '~/store/selectors';
+import { notification, socketApi } from '~/services/services';
+import {
   useAppDispatch,
   useAppSelector,
   useCustomTheme,
   useRoute,
   useTranslation,
 } from '~/hooks/hooks';
-import { DataStatus, RootScreenName } from '~/common/enums/enums';
 import {
   ScreenWrapper,
   View,
@@ -26,12 +33,6 @@ import {
   StatusBar,
 } from '~/components/components';
 import { globalStyles } from '~/styles/styles';
-import {
-  selectCurrentProduct,
-  selectCurrentUser,
-  selectDataStatusProducts,
-} from '~/store/selectors';
-import { notification, socketApi } from '~/services/services';
 import {
   Description,
   ImageCarousel,
@@ -45,14 +46,17 @@ const ProductInfo: FC = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const product = useAppSelector(selectCurrentProduct);
-  const dataStatusProduct = useAppSelector(selectDataStatusProducts);
+  const dataStatusProduct = useAppSelector(productsDataStatus);
   const isLoading = dataStatusProduct === DataStatus.PENDING;
   const user = useAppSelector(selectCurrentUser);
+  const favoriteIds = useAppSelector(selectFavoriteIds);
   const route =
     useRoute<
       RouteProp<Pick<RootNavigationParamList, RootScreenName.ITEM_INFO>>
     >();
   const id = route.params?.itemId;
+  const isFavorite = favoriteIds.includes(id);
+  const [makeFavoritePending, setMakeFavoritePending] = useState(false);
 
   useEffect(() => {
     dispatch(productsActions.loadProductInfo(id));
@@ -68,24 +72,28 @@ const ProductInfo: FC = () => {
 
     if (user) {
       dispatch(productsActions.auctionPermissions(id));
+      dispatch(productsActions.fetchFavoriteIds());
     }
   }, [id, user, dispatch]);
 
   if (!product || isLoading) {
     return <Spinner isOverflow={true} />;
   }
-
-  const {
-    title,
-    currentPrice,
-    price,
-    minimalBid,
-    type,
-    imageLinks,
-    views,
-    author,
-  } = product;
+  const { title, type, imageLinks, views, author } = product;
   const isAuction = type == ProductType.AUCTION;
+
+  const handleToggleFavorite = async (productId: string) => {
+    setMakeFavoritePending(true);
+    if (isFavorite) {
+      return await dispatch(productsActions.deleteFromFavorite(productId))
+        .unwrap()
+        .finally(() => setMakeFavoritePending(false));
+    }
+
+    return await dispatch(productsActions.addToFavorite(productId))
+      .unwrap()
+      .finally(() => setMakeFavoritePending(false));
+  };
 
   return (
     <ScreenWrapper>
@@ -129,12 +137,18 @@ const ProductInfo: FC = () => {
       </ScrollView>
       {isAuction ? (
         <LotPriceBlock
-          id={id}
-          currentPrice={currentPrice}
-          minimalBid={minimalBid}
+          product={product}
+          isFavorite={isFavorite}
+          makeFavoritePending={makeFavoritePending}
+          onFavoritePress={handleToggleFavorite}
         />
       ) : (
-        <ProductPriceBlock price={price} />
+        <ProductPriceBlock
+          product={product}
+          isFavorite={isFavorite}
+          makeFavoritePending={makeFavoritePending}
+          onFavoritePress={handleToggleFavorite}
+        />
       )}
     </ScreenWrapper>
   );
