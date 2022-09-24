@@ -22,7 +22,7 @@ import {
   selectAuthDataStatus,
 } from '~/store/selectors';
 import { personalInfoActions, auth as authActions } from '~/store/actions';
-import { personalInfoSchema } from '~/validation-schemas/validation-schemas';
+import { getPersonalInfoSchema } from '~/validation-schemas/validation-schemas';
 import { notification } from '~/services/services';
 import {
   personalInfoParser,
@@ -68,7 +68,7 @@ const PersonalInfoForm: React.FC<Props> = ({ personalInfo }) => {
   const { control, errors, handleSubmit, reset } =
     useAppForm<SaveUserProfileDto>({
       defaultValues: DEFAULT_VALUES,
-      validationSchema: personalInfoSchema,
+      validationSchema: getPersonalInfoSchema(t),
     });
 
   const { isDirty } = useFormState({ control });

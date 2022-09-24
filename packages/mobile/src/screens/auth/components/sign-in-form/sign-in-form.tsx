@@ -14,7 +14,7 @@ import {
   useNavigation,
   useAppSelector,
 } from '~/hooks/hooks';
-import { signIn } from '~/validation-schemas/validation-schemas';
+import { getSignInSchema } from '~/validation-schemas/validation-schemas';
 import { globalStyles } from '~/styles/styles';
 import { DataStatus, RootScreenName } from '~/common/enums/enums';
 import { RootNavigationProps } from '~/common/types/types';
@@ -26,13 +26,13 @@ type Props = {
 };
 
 const SignInForm: FC<Props> = ({ onSubmit }) => {
+  const { t } = useTranslation();
   const dataStatusAuth = useAppSelector(selectAuthDataStatus);
   const isLoading = dataStatusAuth === DataStatus.PENDING;
   const { control, errors, handleSubmit } = useAppForm<UserSignInDto>({
     defaultValues: DEFAULT_SIGN_IN_PAYLOAD,
-    validationSchema: signIn,
+    validationSchema: getSignInSchema(t),
   });
-  const { t } = useTranslation();
   const { navigate } = useNavigation<RootNavigationProps>();
 
   const navigateResetPassword = () => {

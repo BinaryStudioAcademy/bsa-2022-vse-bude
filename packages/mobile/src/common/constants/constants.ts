@@ -26,4 +26,3 @@ export {
   CHANEL_NAME,
 } from './push';
 export { MINIMUM_SLIDER_PRICE, MAXIMUM_SLIDER_PRICE } from './slider-price';
-export { CONDITION } from './products';

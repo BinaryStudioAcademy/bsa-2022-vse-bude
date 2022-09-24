@@ -165,6 +165,7 @@ const MainNavigation: FC = () => {
           options={{
             tabBarLabel: renderTabBarLabel(t('common:tab_navigation.LOG_IN')),
             tabBarIcon: LogInIcon,
+            unmountOnBlur: true,
           }}
         />
       )}

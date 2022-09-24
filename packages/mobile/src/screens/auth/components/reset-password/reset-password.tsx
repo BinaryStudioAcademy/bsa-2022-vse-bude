@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { useAppForm, useTranslation, useState } from '~/hooks/hooks';
-import { resetPassword } from '~/validation-schemas/validation-schemas';
+import { getResetPasswordSchema } from '~/validation-schemas/validation-schemas';
 import { ResetPasswordLink } from '@vse-bude/shared';
 import {
   View,
@@ -21,7 +21,7 @@ const ResetPassword: FC<Props> = ({ onSubmit }) => {
   const { t } = useTranslation();
   const { control, errors, handleSubmit } = useAppForm<ResetPasswordLink>({
     defaultValues: DEFAULT_RESET_PASSWORD_PAYLOAD,
-    validationSchema: resetPassword,
+    validationSchema: getResetPasswordSchema(t),
   });
 
   return (

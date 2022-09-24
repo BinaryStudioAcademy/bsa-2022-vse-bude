@@ -31,10 +31,13 @@ import { ButtonAppearance, DateTimeType } from '~/common/enums/ui/ui';
 import { ButtonsContainer } from '~/screens/components/components';
 import { selectCategories, selectDataStatusProducts } from '~/store/selectors';
 import { DataStatus } from '~/common/enums/enums';
-import { productsAuctionSchema } from '~/validation-schemas/validation-schemas';
+import { getProductsAuctionSchema } from '~/validation-schemas/validation-schemas';
 import { notification } from '~/services/services';
-import { categoryForDropdown, makeAuctionParser } from '~/helpers/helpers';
-import { CONDITION } from '~/common/constants/products';
+import {
+  categoryForDropdown,
+  getConditions,
+  makeAuctionParser,
+} from '~/helpers/helpers';
 import { AddPhotos } from '../add-photos/add-photos';
 
 import { useStyles } from './styles';
@@ -74,9 +77,10 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
       city: personalInfo.userAddress?.city || '',
       phone: personalInfo.phone?.replace(/\s/g, '').slice(4) || '',
     },
-    validationSchema: productsAuctionSchema,
+    validationSchema: getProductsAuctionSchema(t),
   });
   const [images, setImages] = useState<Asset[]>([]);
+  const conditions = getConditions(t);
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
@@ -202,7 +206,7 @@ const NewAuctionForm: FC<Props> = ({ personalInfo }) => {
         name="condition"
         errors={errors}
         control={control}
-        items={CONDITION}
+        items={conditions}
         zIndex={19}
         required={true}
       />

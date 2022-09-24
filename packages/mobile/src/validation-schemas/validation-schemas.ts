@@ -1,5 +1,12 @@
-export { signUp, signIn, resetPassword } from './user/user';
-export { personalInfoSchema } from './personal-info/personal-info';
-export { phone } from './phone/phone';
-export { codeSchema } from './code/code';
-export { productsAuctionSchema, productsPostSchema } from './products/products';
+export {
+  getSignUpSchema,
+  getSignInSchema,
+  getResetPasswordSchema,
+} from './user/user';
+export { getPersonalInfoSchema } from './personal-info/personal-info';
+export { getPhoneSchema } from './phone/phone';
+export { getCodeSchema } from './code/code';
+export {
+  getProductsAuctionSchema,
+  getProductsPostSchema,
+} from './products/products';

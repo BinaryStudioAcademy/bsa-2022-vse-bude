@@ -1,3 +1,3 @@
-export { signUp } from './sign-up';
-export { signIn } from './sign-in';
-export { resetPassword } from './reset-password';
+export { getSignUpSchema } from './sign-up';
+export { getSignInSchema } from './sign-in';
+export { getResetPasswordSchema } from './reset-password';
