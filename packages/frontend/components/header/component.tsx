@@ -1,4 +1,11 @@
-import { Button, Container, Flex, IconButton, Loader } from '@primitives';
+import {
+  Button,
+  Container,
+  FlagsDropdown,
+  Flex,
+  IconButton,
+  Loader,
+} from '@primitives';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { Fragment, useState, useEffect, Suspense } from 'react';
@@ -36,10 +43,8 @@ export const Header = () => {
   const size = useWindowSize();
 
   useEffect(() => {
-    if (!categories.length) {
-      dispatch(fetchCategories());
-    }
-  }, [dispatch, locale, categories]);
+    dispatch(fetchCategories());
+  }, [dispatch, locale]);
 
   const renderAuthButtons = () => (
     <div className="buttons-wrapper">
@@ -87,11 +92,13 @@ export const Header = () => {
               <Navigation categories={categories || []} />
             </div>
           </Flex>
-
           <Flex align="center">
             {isMounted && (
               <>
                 <Suspense fallback={<Loader size="extraSmall" />}>
+                  <div css={styles.flagsDropdown}>
+                    <FlagsDropdown />
+                  </div>
                   {size.width > 600 ? (
                     <Search setSearchOpen={setSearchOpen} />
                   ) : (

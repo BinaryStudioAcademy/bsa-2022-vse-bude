@@ -117,3 +117,6 @@ export const burgerOverlay = (theme: Theme) => css`
 export const searchButton = ({ spaces }: Theme) => css`
   margin-left: ${spaces.xs};
 `;
+export const flagsDropdown = ({ spaces }: Theme) => css`
+  margin-right: ${spaces.md};
+`;

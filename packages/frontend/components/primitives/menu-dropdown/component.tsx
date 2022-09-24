@@ -1,6 +1,7 @@
 import { useOutsideClick, useWindowSize } from '@hooks';
 import { useCallback, useState } from 'react';
 import { Icon } from '@primitives';
+import Image from 'next/future/image';
 import * as styles from './styles';
 import type { DropdownProps } from './types';
 
@@ -58,6 +59,7 @@ export const Dropdown = ({
                 disabled,
                 icon,
                 cssExtend: optionCss,
+                image,
               } = item;
 
               const onClick = (e) => {
@@ -81,7 +83,7 @@ export const Dropdown = ({
                       size={icon.size}
                     />
                   )}
-                  {value}
+                  {image ? <Image {...image} /> : value}
                 </button>
               );
             })}
