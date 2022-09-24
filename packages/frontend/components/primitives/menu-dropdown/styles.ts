@@ -95,3 +95,6 @@ export const dropdownItem = ({
 export const icon = ({ colors }: Theme) => css`
   color: ${colors.extraDark};
 `;
+export const image = css`
+  object-fit: cover;
+`;

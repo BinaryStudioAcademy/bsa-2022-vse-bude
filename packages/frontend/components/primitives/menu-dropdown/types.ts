@@ -1,4 +1,5 @@
 import type { Interpolation, Theme } from '@emotion/react';
+import type { ImageProps } from 'next/future/image';
 import type { IconProps } from '../icon/types';
 
 export type DropdownProps = {
@@ -15,4 +16,9 @@ export type DropdownOptionProps = {
   icon?: IconProps;
   disabled?: boolean;
   cssExtend?: Interpolation<Theme>;
+  image?: DropdownImage;
 };
+
+interface DropdownImage extends ImageProps {
+  css: Interpolation<Theme>;
+}
