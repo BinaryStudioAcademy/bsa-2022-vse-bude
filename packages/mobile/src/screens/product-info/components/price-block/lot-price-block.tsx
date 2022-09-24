@@ -41,12 +41,14 @@ import { AuctionLeaveModal } from './auction-leave-modal';
 type LotPriceBlockProps = Pick<
   ProductDto,
   'id' | 'currentPrice' | 'minimalBid'
->;
+> & { isAuthor: boolean; isSold: boolean };
 
 const LotPriceBlock: FC<LotPriceBlockProps> = ({
   id,
   currentPrice,
   minimalBid,
+  isAuthor,
+  isSold,
 }) => {
   const { colors } = useCustomTheme();
   const { t } = useTranslation();
@@ -160,45 +162,47 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
             editable={canUserMakeBid}
             contentContainerStyle={styles.input}
           />
-          <View
-            style={[
-              globalStyles.flexDirectionRow,
-              globalStyles.alignItemsCenter,
-            ]}
-          >
-            {!!isAbleToLeaveAuction && user && (
-              <TouchableHighlight
-                onPress={openModal}
-                style={[
-                  globalStyles.justifyContentCenter,
-                  globalStyles.alignItemsCenter,
-                  globalStyles.flexDirectionRow,
-                  globalStyles.mr3,
-                  globalStyles.ml3,
-                  styles.iconBorder,
-                  styles.leaveBtn,
-                ]}
-              >
-                <CrossIcon color={ColorPalette.WHITE_100} size={25} />
-              </TouchableHighlight>
-            )}
-            <View style={styles.btnWidth}>
-              <PrimaryButton
-                iconLeft={<PlusIcon size={10} color={colors.whiteColor} />}
-                isLoading={isLoading}
-                onPress={handleSubmit(handleMakeBidPress)}
-                label={`${t('common:components.BUTTON_BID')}`}
-                disabled={!canUserMakeBid}
-              />
+          {!isAuthor && (
+            <View
+              style={[
+                globalStyles.flexDirectionRow,
+                globalStyles.alignItemsCenter,
+              ]}
+            >
+              {!!isAbleToLeaveAuction && user && (
+                <TouchableHighlight
+                  onPress={openModal}
+                  style={[
+                    globalStyles.justifyContentCenter,
+                    globalStyles.alignItemsCenter,
+                    globalStyles.flexDirectionRow,
+                    globalStyles.mr3,
+                    globalStyles.ml3,
+                    styles.iconBorder,
+                    styles.leaveBtn,
+                  ]}
+                >
+                  <CrossIcon color={ColorPalette.WHITE_100} size={25} />
+                </TouchableHighlight>
+              )}
+              <View style={styles.btnWidth}>
+                <PrimaryButton
+                  iconLeft={<PlusIcon size={10} color={colors.whiteColor} />}
+                  isLoading={isLoading}
+                  onPress={handleSubmit(handleMakeBidPress)}
+                  label={`${t('common:components.BUTTON_BID')}`}
+                  disabled={!canUserMakeBid || isSold}
+                />
+              </View>
+              <View style={[globalStyles.ml5, styles.iconBorder]}>
+                <StarIcon
+                  size={25}
+                  color={ColorPalette.YELLOW_200}
+                  style={styles.icon}
+                />
+              </View>
             </View>
-            <View style={[globalStyles.ml5, styles.iconBorder]}>
-              <StarIcon
-                size={25}
-                color={ColorPalette.YELLOW_200}
-                style={styles.icon}
-              />
-            </View>
-          </View>
+          )}
         </>
       </PriceWrapper>
 

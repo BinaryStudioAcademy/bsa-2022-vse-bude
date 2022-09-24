@@ -1,18 +1,14 @@
+import dayjs from 'dayjs';
 import React, { FC, useEffect } from 'react';
 import { RouteProp } from '@react-navigation/native';
 import { RootNavigationParamList } from '~/common/types/types';
-import {
-  ProductType,
-  UpdateProductPriceEvent,
-  UPDATE_PRODUCT_PRICE,
-} from '@vse-bude/shared';
+import { ProductType } from '@vse-bude/shared';
 import { products as productsActions } from '~/store/actions';
 import {
   useAppDispatch,
   useAppSelector,
   useCustomTheme,
   useRoute,
-  useTranslation,
 } from '~/hooks/hooks';
 import { DataStatus, RootScreenName } from '~/common/enums/enums';
 import {
@@ -31,7 +27,6 @@ import {
   selectCurrentUser,
   selectDataStatusProducts,
 } from '~/store/selectors';
-import { notification, socketApi } from '~/services/services';
 import {
   Description,
   ImageCarousel,
@@ -43,7 +38,6 @@ import {
 const ProductInfo: FC = () => {
   const { colors } = useCustomTheme();
   const dispatch = useAppDispatch();
-  const { t } = useTranslation();
   const product = useAppSelector(selectCurrentProduct);
   const dataStatusProduct = useAppSelector(selectDataStatusProducts);
   const isLoading = dataStatusProduct === DataStatus.PENDING;
@@ -57,19 +51,7 @@ const ProductInfo: FC = () => {
   useEffect(() => {
     dispatch(productsActions.loadProductInfo(id));
     dispatch(productsActions.updateProductViews(id));
-
-    const socket = socketApi.getAuctionItemIo(id);
-    socket.on(UPDATE_PRODUCT_PRICE, (data: UpdateProductPriceEvent) => {
-      dispatch(productsActions.updateCurrentItemPrice(data));
-      if (data.bidderId !== user?.id || !user) {
-        notification.info(t('screens:product_info.NEW_BID'));
-      }
-    });
-
-    if (user) {
-      dispatch(productsActions.auctionPermissions(id));
-    }
-  }, [id, user, dispatch]);
+  }, [id, dispatch]);
 
   if (!product || isLoading) {
     return <Spinner isOverflow={true} />;
@@ -86,6 +68,9 @@ const ProductInfo: FC = () => {
     author,
   } = product;
   const isAuction = type == ProductType.AUCTION;
+  const isAuthor = user?.id === product.author.id;
+  const today = dayjs();
+  const isSold = today.diff(product.endDate) > 0 ? true : false;
 
   return (
     <ScreenWrapper>
@@ -132,9 +117,11 @@ const ProductInfo: FC = () => {
           id={id}
           currentPrice={currentPrice}
           minimalBid={minimalBid}
+          isAuthor={isAuthor}
+          isSold={isSold}
         />
       ) : (
-        <ProductPriceBlock price={price} />
+        <ProductPriceBlock price={price} isAuthor={isAuthor} isSold={isSold} />
       )}
     </ScreenWrapper>
   );
