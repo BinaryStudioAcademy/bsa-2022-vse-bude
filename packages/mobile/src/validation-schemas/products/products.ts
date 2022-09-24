@@ -1,2 +1,2 @@
-export { productsAuctionSchema } from './products-auction';
-export { productsPostSchema } from './products-post';
+export { getProductsAuctionSchema } from './products-auction';
+export { getProductsPostSchema } from './products-post';

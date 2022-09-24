@@ -26,7 +26,7 @@ import {
 } from '~/components/components';
 import { verifyActions } from '~/store/actions';
 import { images } from '~/assets/images/images';
-import { phone } from '~/validation-schemas/validation-schemas';
+import { getPhoneSchema } from '~/validation-schemas/validation-schemas';
 import { globalStyles } from '~/styles/styles';
 import { selectVerifyDataStatus, selectUserPhone } from '~/store/selectors';
 import { notification } from '~/services/services';
@@ -52,7 +52,7 @@ const VerifyPhoneScreen: FC<PropsVerifyScreens> = ({ route }) => {
     defaultValues: {
       phone: userPhone,
     },
-    validationSchema: phone,
+    validationSchema: getPhoneSchema(t),
   });
 
   const handleBackButtonPress = (): void => {

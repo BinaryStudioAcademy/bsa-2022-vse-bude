@@ -32,7 +32,7 @@ import {
   selectUserPhone,
 } from '~/store/selectors';
 import { notification } from '~/services/services';
-import { codeSchema } from '~/validation-schemas/validation-schemas';
+import { getCodeSchema } from '~/validation-schemas/validation-schemas';
 import { ButtonsContainer, Header } from '~/screens/components/components';
 import { VERIFICATION_CODE_REGEX } from '~/common/regexp/regexp';
 import {
@@ -59,7 +59,7 @@ const VerifyCodePhoneScreen: FC<PropsVerifyScreens> = ({ route }) => {
     defaultValues: {
       code: '',
     },
-    validationSchema: codeSchema,
+    validationSchema: getCodeSchema(t),
   });
   const [isCorrectCode, setIsCorrectCode] = useState(false);
 

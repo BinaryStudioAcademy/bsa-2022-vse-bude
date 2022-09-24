@@ -30,10 +30,9 @@ import { categoryForDropdown } from '~/helpers/category/format-category-for-drop
 import { ButtonsContainer } from '~/screens/components/components';
 import { ButtonAppearance, DataStatus } from '~/common/enums/enums';
 import { selectCategories, selectDataStatusProducts } from '~/store/selectors';
-import { productsPostSchema } from '~/validation-schemas/validation-schemas';
+import { getProductsPostSchema } from '~/validation-schemas/validation-schemas';
 import { notification } from '~/services/services';
-import { makePostParser } from '~/helpers/helpers';
-import { CONDITION } from '~/common/constants/products';
+import { getConditions, makePostParser } from '~/helpers/helpers';
 import { AddPhotos } from '../add-photos/add-photos';
 import { useStyles } from './styles';
 
@@ -68,10 +67,11 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
       city: personalInfo.userAddress?.city || '',
       phone: personalInfo.phone?.replace(/\s/g, '').slice(4) || '',
     },
-    validationSchema: productsPostSchema,
+    validationSchema: getProductsPostSchema(t),
   });
 
   const [images, setImages] = useState<Asset[]>([]);
+  const conditions = getConditions(t);
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
@@ -197,7 +197,7 @@ const NewItemForm: FC<Props> = ({ personalInfo }) => {
         name="condition"
         errors={errors}
         control={control}
-        items={CONDITION}
+        items={conditions}
         zIndex={19}
         required={true}
       />

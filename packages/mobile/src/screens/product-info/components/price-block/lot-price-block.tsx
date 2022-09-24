@@ -53,7 +53,7 @@ const LotPriceBlock: FC<LotPriceBlockProps> = ({
   const dispatch = useAppDispatch();
   const { control, errors, handleSubmit, setValue } = useAppForm({
     defaultValues: DEFAULT_BID_VALUE,
-    validationSchema: getBidValidationSchema(Number(minimalBid)),
+    validationSchema: getBidValidationSchema(Number(minimalBid), t),
   });
   const { isAbleToLeaveAuction } = useAppSelector(selectPermission);
   const user = useAppSelector(selectCurrentUser);

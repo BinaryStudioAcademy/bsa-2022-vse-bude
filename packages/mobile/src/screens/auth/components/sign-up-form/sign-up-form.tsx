@@ -2,7 +2,7 @@ import React from 'react';
 import { UserSignUpDto } from '@vse-bude/shared';
 import { View, Input, PrimaryButton } from '~/components/components';
 import { useAppForm, useTranslation, useAppSelector } from '~/hooks/hooks';
-import { signUp } from '~/validation-schemas/validation-schemas';
+import { getSignUpSchema } from '~/validation-schemas/validation-schemas';
 import { globalStyles } from '~/styles/styles';
 import { selectAuthDataStatus } from '~/store/selectors';
 import { DataStatus } from '~/common/enums/enums';
@@ -18,7 +18,7 @@ const SignUpForm: React.FC<Props> = ({ onSubmit }) => {
   const isLoading = dataStatusAuth === DataStatus.PENDING;
   const { control, errors, handleSubmit } = useAppForm<UserSignUpDto>({
     defaultValues: DEFAULT_SIGN_UP_PAYLOAD,
-    validationSchema: signUp,
+    validationSchema: getSignUpSchema(t),
   });
 
   return (
